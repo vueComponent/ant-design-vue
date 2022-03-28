@@ -119,7 +119,7 @@
 @padding-xss: 4px; // more small
 
 // vertical padding for all form controls
-@control-padding-horizontal: @padding-sm;
+@control-padding-horizontal: 10px;
 @control-padding-horizontal-sm: @padding-xs;
 
 // vertical margins
@@ -428,7 +428,7 @@
 @input-height-base: @height-base;
 @input-height-lg: @height-lg;
 @input-height-sm: @height-sm;
-@input-padding-horizontal: 9px;
+@input-padding-horizontal: @control-padding-horizontal - 1px;
 @input-padding-horizontal-base: @input-padding-horizontal;
 @input-padding-horizontal-sm: @control-padding-horizontal-sm - 1px;
 @input-padding-horizontal-lg: @input-padding-horizontal;
@@ -470,11 +470,11 @@
 // Select
 // ---
 @select-border-color: @ayla-color-line-1;
-@select-item-selected-color: @text-color;
-@select-item-selected-font-weight: 600;
+@select-item-selected-color: @ayla-color-primary-6;
+@select-item-selected-font-weight: @ayla-font-weight-regular;
 @select-dropdown-bg: @component-background;
-@select-item-selected-bg: @primary-1;
-@select-item-active-bg: @item-hover-bg;
+@select-item-selected-bg: @component-background;
+@select-item-active-bg: @ayla-color-fill-2;
 @select-dropdown-vertical-padding: @dropdown-vertical-padding;
 @select-dropdown-font-size: @dropdown-font-size;
 @select-dropdown-line-height: @dropdown-line-height;

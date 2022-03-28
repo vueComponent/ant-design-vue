@@ -1,6 +1,5 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
-// @import './ayla-variable.less';
 
 @theme: default;
 
@@ -13,152 +12,11 @@
 // [CSS-VARIABLE-REPLACE-BEGIN: html-variables]
 // [CSS-VARIABLE-REPLACE-END: html-variables]
 
-// ========= Primary Color =========
-@ayla-color-primary-7: #57852e;
-@ayla-color-primary-6: #699937;
-@ayla-color-primary-5: #7dad41;
-@ayla-color-primary-3: #b1d182;
-@ayla-color-primary-2: #d1e5b7;
-@ayla-color-primary-1: #f5f9ef;
-
-// ========= Line Color =========
-@ayla-color-line-4: #737b82;
-@ayla-color-line-3: #9ea6ad;
-@ayla-color-line-2: #cfd2d6;
-@ayla-color-line-1: #f1f2f3;
-
-// ========= Fill Color =========
-@ayla-color-fill-6: #737b82;
-@ayla-color-fill-5: #9ea6ad;
-@ayla-color-fill-4: #cfd2d6;
-@ayla-color-fill-3: #f1f2f3;
-@ayla-color-fill-2: #f8f8f9;
-@ayla-color-fill-1: #ffffff;
-
-// ========= Text Color =========
-@ayla-color-text-5: #2d3134;
-@ayla-color-text-4: #737b82;
-@ayla-color-text-3: #9ea6ad;
-@ayla-color-text-2: #cfd2d6;
-@ayla-color-text-1: #ffffff;
-
-// ========= Success Color =========
-@ayla-color-success-7: #03812e;
-@ayla-color-success-6: #04ac3d;
-@ayla-color-success-5: #43c16e;
-@ayla-color-success-3: #81d69e;
-@ayla-color-success-2: #c0eacf;
-@ayla-color-success-1: #f3fff7;
-
-// ========= Warning Color =========
-@ayla-color-warning-7: #d25f00;
-@ayla-color-warning-6: #ff7d00;
-@ayla-color-warning-5: #ff9a2e;
-@ayla-color-warning-3: #ffcf8b;
-@ayla-color-warning-2: #fff7e8;
-@ayla-color-warning-1: #fff7e8;
-
-// ========= Danger Color =========
-@ayla-color-danger-7: #a51f27;
-@ayla-color-danger-6: #dc2934;
-@ayla-color-danger-5: #e55e67;
-@ayla-color-danger-3: #ee9499;
-@ayla-color-danger-2: #f6c9cc;
-@ayla-color-danger-1: #fff4f5;
-
-// ========= Fonts =========
-@ayla-font-family: 'PingFang SC', 'PingFang HK', 'SF Pro', 'HarmonyOS Sans SC', 'HarmonyOS Sans TC',
-  'HarmonyOS Sans', 'Source Han Sans CN', 'Source Han Sans HK', Roboto, sans-serif;
-@ayla-font-weight-regular: 400;
-@ayla-font-weight-medium: 500;
-
-// ========= Container =========
-@ayla-rounded-none: 0;
-@ayla-rounded-sm: 2px;
-@ayla-rounded: 4px;
-@ayla-rounded-lg: 6px;
-@ayla-rounded-full: 9999px;
-
-// ========= Shadows =========
-@ayla-shadow-1: 0px 4px 10px rgba(0, 0, 0, 0.1);
-@ayla-shadow-2: 0px 8px 20px rgba(0, 0, 0, 0.1);
-
-:root {
-  // ========= Primary Color =========
-  --ayla-color-primary-7: @ayla-color-primary-7;
-  --ayla-color-primary-6: @ayla-color-primary-6;
-  --ayla-color-primary-5: @ayla-color-primary-5;
-  --ayla-color-primary-3: @ayla-color-primary-3;
-  --ayla-color-primary-2: @ayla-color-primary-2;
-  --ayla-color-primary-1: @ayla-color-primary-1;
-
-  // ========= Line Color =========
-  --ayla-color-line-4: @ayla-color-line-4;
-  --ayla-color-line-3: @ayla-color-line-3;
-  --ayla-color-line-2: @ayla-color-line-2;
-  --ayla-color-line-1: @ayla-color-line-1;
-
-  // ========= Fill Color =========
-  --ayla-color-fill-6: @ayla-color-fill-6;
-  --ayla-color-fill-5: @ayla-color-fill-5;
-  --ayla-color-fill-4: @ayla-color-fill-4;
-  --ayla-color-fill-3: @ayla-color-fill-3;
-  --ayla-color-fill-2: @ayla-color-fill-2;
-  --ayla-color-fill-1: @ayla-color-fill-1;
-
-  // ========= Text Color =========
-  --ayla-color-text-5: @ayla-color-text-5;
-  --ayla-color-text-4: @ayla-color-text-4;
-  --ayla-color-text-3: @ayla-color-text-3;
-  --ayla-color-text-2: @ayla-color-text-2;
-  --ayla-color-text-1: @ayla-color-text-1;
-
-  // ========= Success Color =========
-  --ayla-color-success-7: @ayla-color-success-7;
-  --ayla-color-success-6: @ayla-color-success-6;
-  --ayla-color-success-5: @ayla-color-success-5;
-  --ayla-color-success-3: @ayla-color-success-3;
-  --ayla-color-success-2: @ayla-color-success-2;
-  --ayla-color-success-1: @ayla-color-success-1;
-
-  // ========= Warning Color =========
-  --ayla-color-warning-7: @ayla-color-warning-7;
-  --ayla-color-warning-6: @ayla-color-warning-6;
-  --ayla-color-warning-5: @ayla-color-warning-5;
-  --ayla-color-warning-3: @ayla-color-warning-3;
-  --ayla-color-warning-2: @ayla-color-warning-2;
-  --ayla-color-warning-1: @ayla-color-warning-1;
-
-  // ========= Danger Color =========
-  --ayla-color-danger-7: @ayla-color-danger-7;
-  --ayla-color-danger-6: @ayla-color-danger-6;
-  --ayla-color-danger-5: @ayla-color-danger-5;
-  --ayla-color-danger-3: @ayla-color-danger-3;
-  --ayla-color-danger-2: @ayla-color-danger-2;
-  --ayla-color-danger-1: @ayla-color-danger-1;
-
-  // ========= Fonts =========
-  --ayla-font-family: @ayla-font-family;
-  --ayla-font-weight-regular: @ayla-font-weight-regular;
-  --ayla-font-weight-medium: @ayla-font-weight-medium;
-
-  // ========= Container =========
-  --ayla-rounded-none: @ayla-rounded-none;
-  --ayla-rounded-sm: @ayla-rounded-sm;
-  --ayla-rounded: @ayla-rounded;
-  --ayla-rounded-lg: @ayla-rounded-lg;
-  --ayla-rounded-full: @ayla-rounded-full;
-
-  // ========= Shadows =========
-  --ayla-shadow-1: @ayla-shadow-1;
-  --ayla-shadow-2: @ayla-shadow-2;
-}
-
 // -------- Colors -----------
 // >>> Primary
-@primary-color: @ayla-color-primary-6;
-@primary-color-hover: @ayla-color-primary-5;
-@primary-color-active: @ayla-color-primary-7;
+@primary-color: @blue-6;
+@primary-color-hover: color(~`colorPalette('@{primary-color}', 5) `);
+@primary-color-active: color(~`colorPalette('@{primary-color}', 7) `);
 @primary-color-outline: fade(@primary-color, @outline-fade);
 
 @processing-color: @blue-6;
@@ -169,28 +27,28 @@
 @info-color-deprecated-border: color(~`colorPalette('@{info-color}', 3) `);
 
 // >>> Success
-@success-color: @ayla-color-success-6;
-@success-color-hover: @ayla-color-success-5;
-@success-color-active: @ayla-color-success-7;
+@success-color: @green-6;
+@success-color-hover: color(~`colorPalette('@{success-color}', 5) `);
+@success-color-active: color(~`colorPalette('@{success-color}', 7) `);
 @success-color-outline: fade(@success-color, @outline-fade);
-@success-color-deprecated-bg: #81d69e;
-@success-color-deprecated-border: #81d69e;
+@success-color-deprecated-bg: color(~`colorPalette('@{success-color}', 1) `);
+@success-color-deprecated-border: color(~`colorPalette('@{success-color}', 3) `);
 
 // >>> Warning
-@warning-color: @ayla-color-warning-6;
-@warning-color-hover: @ayla-color-warning-5;
-@warning-color-active: @ayla-color-warning-7;
+@warning-color: @gold-6;
+@warning-color-hover: color(~`colorPalette('@{warning-color}', 5) `);
+@warning-color-active: color(~`colorPalette('@{warning-color}', 7) `);
 @warning-color-outline: fade(@warning-color, @outline-fade);
-@warning-color-deprecated-bg: #ffcf8b;
-@warning-color-deprecated-border: #ffcf8b;
+@warning-color-deprecated-bg: color(~`colorPalette('@{warning-color}', 1) `);
+@warning-color-deprecated-border: color(~`colorPalette('@{warning-color}', 3) `);
 
 // >>> Error
-@error-color: @ayla-color-danger-6;
-@error-color-hover: @ayla-color-danger-5;
-@error-color-active: @ayla-color-danger-7;
+@error-color: @red-5;
+@error-color-hover: color(~`colorPalette('@{error-color}', 5) `);
+@error-color-active: color(~`colorPalette('@{error-color}', 7) `);
 @error-color-outline: fade(@error-color, @outline-fade);
-@error-color-deprecated-bg: #ee9499;
-@error-color-deprecated-border: #ee9499;
+@error-color-deprecated-bg: color(~`colorPalette('@{error-color}', 1) `);
+@error-color-deprecated-border: color(~`colorPalette('@{error-color}', 3) `);
 
 @highlight-color: @red-5;
 @normal-color: #d9d9d9;
@@ -222,16 +80,16 @@
 // Popover background color
 @popover-background: @component-background;
 @popover-customize-border-color: @border-color-split;
-@font-family: @ayla-font-family;
+@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-@text-color: @ayla-color-text-5;
-@text-color-secondary: #737b82;
-@text-color-ash: #cfd2d6;
+@text-color: fade(@black, 85%);
+@text-color-secondary: fade(@black, 45%);
 @text-color-inverse: @white;
 @icon-color: inherit;
 @icon-color-hover: fade(@black, 75%);
-// 修改heading-color颜色
-@heading-color: #2d3134;
+@heading-color: fade(@black, 85%);
 @text-color-dark: fade(@white, 85%);
 @text-color-secondary-dark: fade(@white, 65%);
 @text-selection-bg: @primary-color;
@@ -249,8 +107,6 @@
 @line-height-base: 1.5715;
 @border-radius-base: 2px;
 @border-radius-sm: @border-radius-base;
-@border-radius-md: @border-radius-base + 2px;
-@border-radius-lg: @border-radius-base + 4px;
 
 // vertical paddings
 @padding-lg: 24px; // containers
@@ -260,7 +116,7 @@
 @padding-xss: 4px; // more small
 
 // vertical padding for all form controls
-@control-padding-horizontal: 10px;
+@control-padding-horizontal: @padding-sm;
 @control-padding-horizontal-sm: @padding-xs;
 
 // vertical margins
@@ -376,13 +232,13 @@
 
 @btn-font-size-lg: @font-size-lg;
 @btn-font-size-sm: @font-size-base;
-@btn-padding-horizontal-base: 14px;
-@btn-padding-horizontal-lg: 14px;
-@btn-padding-horizontal-sm: 9px;
+@btn-padding-horizontal-base: @padding-md - 1px;
+@btn-padding-horizontal-lg: @btn-padding-horizontal-base;
+@btn-padding-horizontal-sm: @padding-xs - 1px;
 
-@btn-height-base: 32px;
-@btn-height-lg: 40px;
-@btn-height-sm: 24px;
+@btn-height-base: @height-base;
+@btn-height-lg: @height-lg;
+@btn-height-sm: @height-sm;
 
 @btn-line-height: @line-height-base;
 
@@ -497,15 +353,15 @@
 // Grid system
 @grid-columns: 24;
 
-// Layout 修改背景色、
-@layout-body-background: #f1f2f3;
-@layout-header-background: #ffffff;
-@layout-header-height: 56px;
-@layout-header-padding: 0 30px;
-@layout-header-color: #172b4d;
+// Layout
+@layout-body-background: #f0f2f5;
+@layout-header-background: #001529;
+@layout-header-height: 64px;
+@layout-header-padding: 0 50px;
+@layout-header-color: @text-color;
 @layout-footer-padding: 24px 50px;
 @layout-footer-background: @layout-body-background;
-@layout-sider-background: #1d1f21;
+@layout-sider-background: @layout-header-background;
 @layout-trigger-height: 48px;
 @layout-trigger-background: #002140;
 @layout-trigger-color: #fff;
@@ -589,8 +445,8 @@
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
 @input-icon-color: @input-color;
-@input-border-color: @ayla-color-line-1;
-@input-bg: @ayla-color-fill-2;
+@input-border-color: @border-color-base;
+@input-bg: @component-background;
 @input-number-hover-border-color: @input-hover-border-color;
 @input-number-handler-active-bg: #f4f4f4;
 @input-number-handler-hover-bg: @primary-5;
@@ -610,17 +466,17 @@
 
 // Select
 // ---
-@select-border-color: @ayla-color-line-1;
-@select-item-selected-color: @ayla-color-primary-6;
-@select-item-selected-font-weight: @ayla-font-weight-regular;
+@select-border-color: @border-color-base;
+@select-item-selected-color: @text-color;
+@select-item-selected-font-weight: 600;
 @select-dropdown-bg: @component-background;
-@select-item-selected-bg: @component-background;
-@select-item-active-bg: @ayla-color-fill-2;
+@select-item-selected-bg: @primary-1;
+@select-item-active-bg: @item-hover-bg;
 @select-dropdown-vertical-padding: @dropdown-vertical-padding;
 @select-dropdown-font-size: @dropdown-font-size;
 @select-dropdown-line-height: @dropdown-line-height;
 @select-dropdown-height: 32px;
-@select-background: @ayla-color-fill-2;
+@select-background: @component-background;
 @select-clear-background: @select-background;
 @select-selection-item-bg: @background-color-base;
 @select-selection-item-border-color: @border-color-split;
@@ -730,7 +586,7 @@
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
 @menu-item-group-height: @line-height-base;
-@menu-collapsed-width: 48px;
+@menu-collapsed-width: 80px;
 @menu-bg: @component-background;
 @menu-popup-bg: @component-background;
 @menu-item-color: @text-color;
@@ -743,21 +599,21 @@
 @menu-item-group-title-color: @text-color-secondary;
 @menu-item-vertical-margin: 4px;
 @menu-item-font-size: @font-size-base;
-@menu-item-boundary-margin: 4px;
-@menu-item-padding-horizontal: 25px;
+@menu-item-boundary-margin: 8px;
+@menu-item-padding-horizontal: 20px;
 @menu-item-padding: 0 @menu-item-padding-horizontal;
 @menu-horizontal-line-height: 46px;
-@menu-icon-margin-right: 16px;
+@menu-icon-margin-right: 10px;
 @menu-icon-size: @menu-item-font-size;
 @menu-icon-size-lg: @font-size-lg;
 @menu-item-group-title-font-size: @menu-item-font-size;
 
 // dark theme
-@menu-dark-color: @text-color-ash;
+@menu-dark-color: @text-color-secondary-dark;
 @menu-dark-danger-color: @error-color;
-@menu-dark-bg: #1d1f21;
-@menu-dark-arrow-color: @text-color-ash;
-@menu-dark-inline-submenu-bg: #1d1f21;
+@menu-dark-bg: @layout-header-background;
+@menu-dark-arrow-color: #fff;
+@menu-dark-inline-submenu-bg: #000c17;
 @menu-dark-highlight-color: #fff;
 @menu-dark-item-active-bg: @primary-color;
 @menu-dark-item-active-danger-bg: @error-color;
@@ -773,23 +629,23 @@
 // Table
 // --
 @table-bg: @component-background;
-@table-header-bg: @ayla-color-fill-2;
+@table-header-bg: @background-color-light;
 @table-header-color: @heading-color;
 @table-header-sort-bg: @background-color-base;
 @table-body-sort-bg: #fafafa;
-@table-row-hover-bg: @ayla-color-fill-2;
+@table-row-hover-bg: @background-color-light;
 @table-selected-row-color: inherit;
 @table-selected-row-bg: @primary-1;
 @table-body-selected-sort-bg: @table-selected-row-bg;
 @table-selected-row-hover-bg: darken(@table-selected-row-bg, 2%);
 @table-expanded-row-bg: #fbfbfb;
-@table-padding-vertical: 13px;
-@table-padding-horizontal: 20px;
+@table-padding-vertical: 16px;
+@table-padding-horizontal: 16px;
 @table-padding-vertical-md: (@table-padding-vertical * 3 / 4);
 @table-padding-horizontal-md: (@table-padding-horizontal / 2);
 @table-padding-vertical-sm: (@table-padding-vertical / 2);
 @table-padding-horizontal-sm: (@table-padding-horizontal / 2);
-@table-border-color: @ayla-color-line-1;
+@table-border-color: @border-color-split;
 @table-border-radius-base: @border-radius-base;
 @table-footer-bg: @background-color-light;
 @table-footer-color: @heading-color;
@@ -980,13 +836,13 @@
 
 // Pagination
 // ---
-@pagination-item-bg: @ayla-color-fill-2;
+@pagination-item-bg: @component-background;
 @pagination-item-size: @height-base;
 @pagination-item-size-sm: 24px;
 @pagination-font-family: @font-family;
-@pagination-font-weight-active: @ayla-font-weight-regular;
-@pagination-item-bg-active: @ayla-color-primary-6;
-@pagination-item-link-bg: @ayla-color-fill-2;
+@pagination-font-weight-active: 500;
+@pagination-item-bg-active: @component-background;
+@pagination-item-link-bg: @component-background;
 @pagination-item-disabled-color-active: @disabled-color;
 @pagination-item-disabled-bg-active: @disabled-active-bg;
 @pagination-item-input-bg: @component-background;

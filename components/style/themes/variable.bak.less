@@ -1,8 +1,8 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
-// @import './ayla-variable.less';
+@import './ayla-variable.less';
 
-@theme: default;
+@theme: variable;
 
 // The prefix to use on all css classes from ant.
 @ant-prefix: ant;
@@ -10,187 +10,103 @@
 // An override for the html selector for theme prefixes
 @html-selector: html;
 
-// [CSS-VARIABLE-REPLACE-BEGIN: html-variables]
-// [CSS-VARIABLE-REPLACE-END: html-variables]
+@base-primary: @blue-6;
 
-// ========= Primary Color =========
-@ayla-color-primary-7: #57852e;
-@ayla-color-primary-6: #699937;
-@ayla-color-primary-5: #7dad41;
-@ayla-color-primary-3: #b1d182;
-@ayla-color-primary-2: #d1e5b7;
-@ayla-color-primary-1: #f5f9ef;
-
-// ========= Line Color =========
-@ayla-color-line-4: #737b82;
-@ayla-color-line-3: #9ea6ad;
-@ayla-color-line-2: #cfd2d6;
-@ayla-color-line-1: #f1f2f3;
-
-// ========= Fill Color =========
-@ayla-color-fill-6: #737b82;
-@ayla-color-fill-5: #9ea6ad;
-@ayla-color-fill-4: #cfd2d6;
-@ayla-color-fill-3: #f1f2f3;
-@ayla-color-fill-2: #f8f8f9;
-@ayla-color-fill-1: #ffffff;
-
-// ========= Text Color =========
-@ayla-color-text-5: #2d3134;
-@ayla-color-text-4: #737b82;
-@ayla-color-text-3: #9ea6ad;
-@ayla-color-text-2: #cfd2d6;
-@ayla-color-text-1: #ffffff;
-
-// ========= Success Color =========
-@ayla-color-success-7: #03812e;
-@ayla-color-success-6: #04ac3d;
-@ayla-color-success-5: #43c16e;
-@ayla-color-success-3: #81d69e;
-@ayla-color-success-2: #c0eacf;
-@ayla-color-success-1: #f3fff7;
-
-// ========= Warning Color =========
-@ayla-color-warning-7: #d25f00;
-@ayla-color-warning-6: #ff7d00;
-@ayla-color-warning-5: #ff9a2e;
-@ayla-color-warning-3: #ffcf8b;
-@ayla-color-warning-2: #fff7e8;
-@ayla-color-warning-1: #fff7e8;
-
-// ========= Danger Color =========
-@ayla-color-danger-7: #a51f27;
-@ayla-color-danger-6: #dc2934;
-@ayla-color-danger-5: #e55e67;
-@ayla-color-danger-3: #ee9499;
-@ayla-color-danger-2: #f6c9cc;
-@ayla-color-danger-1: #fff4f5;
-
-// ========= Fonts =========
-@ayla-font-family: 'PingFang SC', 'PingFang HK', 'SF Pro', 'HarmonyOS Sans SC', 'HarmonyOS Sans TC',
-  'HarmonyOS Sans', 'Source Han Sans CN', 'Source Han Sans HK', Roboto, sans-serif;
-@ayla-font-weight-regular: 400;
-@ayla-font-weight-medium: 500;
-
-// ========= Container =========
-@ayla-rounded-none: 0;
-@ayla-rounded-sm: 2px;
-@ayla-rounded: 4px;
-@ayla-rounded-lg: 6px;
-@ayla-rounded-full: 9999px;
-
-// ========= Shadows =========
-@ayla-shadow-1: 0px 4px 10px rgba(0, 0, 0, 0.1);
-@ayla-shadow-2: 0px 8px 20px rgba(0, 0, 0, 0.1);
-
-:root {
+html {
   // ========= Primary Color =========
-  --ayla-color-primary-7: @ayla-color-primary-7;
-  --ayla-color-primary-6: @ayla-color-primary-6;
-  --ayla-color-primary-5: @ayla-color-primary-5;
-  --ayla-color-primary-3: @ayla-color-primary-3;
-  --ayla-color-primary-2: @ayla-color-primary-2;
-  --ayla-color-primary-1: @ayla-color-primary-1;
+  --@{ant-prefix}-primary-color: @base-primary;
+  --@{ant-prefix}-primary-color-hover: color(~`colorPalette('@{base-primary}', 5) `);
+  --@{ant-prefix}-primary-color-active: color(~`colorPalette('@{base-primary}', 7) `);
+  --@{ant-prefix}-primary-color-outline: fade(@base-primary, @outline-fade);
 
-  // ========= Line Color =========
-  --ayla-color-line-4: @ayla-color-line-4;
-  --ayla-color-line-3: @ayla-color-line-3;
-  --ayla-color-line-2: @ayla-color-line-2;
-  --ayla-color-line-1: @ayla-color-line-1;
+  // Legacy
+  @legacy-primary-1: color(~`colorPalette('@{base-primary}', 1) `);
 
-  // ========= Fill Color =========
-  --ayla-color-fill-6: @ayla-color-fill-6;
-  --ayla-color-fill-5: @ayla-color-fill-5;
-  --ayla-color-fill-4: @ayla-color-fill-4;
-  --ayla-color-fill-3: @ayla-color-fill-3;
-  --ayla-color-fill-2: @ayla-color-fill-2;
-  --ayla-color-fill-1: @ayla-color-fill-1;
+  --@{ant-prefix}-primary-1: @legacy-primary-1;
+  --@{ant-prefix}-primary-2: color(~`colorPalette('@{base-primary}', 2) `);
+  --@{ant-prefix}-primary-3: color(~`colorPalette('@{base-primary}', 3) `);
+  --@{ant-prefix}-primary-4: color(~`colorPalette('@{base-primary}', 4) `);
+  --@{ant-prefix}-primary-5: color(~`colorPalette('@{base-primary}', 5) `);
+  --@{ant-prefix}-primary-6: @base-primary;
+  --@{ant-prefix}-primary-7: color(~`colorPalette('@{base-primary}', 7) `);
 
-  // ========= Text Color =========
-  --ayla-color-text-5: @ayla-color-text-5;
-  --ayla-color-text-4: @ayla-color-text-4;
-  --ayla-color-text-3: @ayla-color-text-3;
-  --ayla-color-text-2: @ayla-color-text-2;
-  --ayla-color-text-1: @ayla-color-text-1;
+  // Deprecated
+  --@{ant-prefix}-primary-color-deprecated-pure: ~'';
+  --@{ant-prefix}-primary-color-deprecated-l-35: lighten(@base-primary, 35%);
+  --@{ant-prefix}-primary-color-deprecated-l-20: lighten(@base-primary, 20%);
+  --@{ant-prefix}-primary-color-deprecated-t-20: tint(@base-primary, 20%);
+  --@{ant-prefix}-primary-color-deprecated-t-50: tint(@base-primary, 50%);
+  --@{ant-prefix}-primary-color-deprecated-f-12: fade(@base-primary, 12%);
+  --@{ant-prefix}-primary-color-active-deprecated-f-30: fade(@legacy-primary-1, 30%);
+  --@{ant-prefix}-primary-color-active-deprecated-d-02: darken(@legacy-primary-1, 2%);
 
   // ========= Success Color =========
-  --ayla-color-success-7: @ayla-color-success-7;
-  --ayla-color-success-6: @ayla-color-success-6;
-  --ayla-color-success-5: @ayla-color-success-5;
-  --ayla-color-success-3: @ayla-color-success-3;
-  --ayla-color-success-2: @ayla-color-success-2;
-  --ayla-color-success-1: @ayla-color-success-1;
+  --@{ant-prefix}-success-color: @green-6;
+  --@{ant-prefix}-success-color-hover: color(~`colorPalette('@{green-6}', 5) `);
+  --@{ant-prefix}-success-color-active: color(~`colorPalette('@{green-6}', 7) `);
+  --@{ant-prefix}-success-color-outline: fade(@green-6, @outline-fade);
+  --@{ant-prefix}-success-color-deprecated-bg: ~`colorPalette('@{green-6}', 1) `;
+  --@{ant-prefix}-success-color-deprecated-border: ~`colorPalette('@{green-6}', 3) `;
+
+  // ========== Error Color ==========
+  --@{ant-prefix}-error-color: @red-6;
+  --@{ant-prefix}-error-color-hover: color(~`colorPalette('@{red-5}', 5) `);
+  --@{ant-prefix}-error-color-active: color(~`colorPalette('@{red-5}', 7) `);
+  --@{ant-prefix}-error-color-outline: fade(@red-5, @outline-fade);
+  --@{ant-prefix}-error-color-deprecated-bg: ~`colorPalette('@{red-5}', 1) `;
+  --@{ant-prefix}-error-color-deprecated-border: ~`colorPalette('@{red-5}', 3) `;
 
   // ========= Warning Color =========
-  --ayla-color-warning-7: @ayla-color-warning-7;
-  --ayla-color-warning-6: @ayla-color-warning-6;
-  --ayla-color-warning-5: @ayla-color-warning-5;
-  --ayla-color-warning-3: @ayla-color-warning-3;
-  --ayla-color-warning-2: @ayla-color-warning-2;
-  --ayla-color-warning-1: @ayla-color-warning-1;
+  --@{ant-prefix}-warning-color: @gold-6;
+  --@{ant-prefix}-warning-color-hover: color(~`colorPalette('@{gold-6}', 5) `);
+  --@{ant-prefix}-warning-color-active: color(~`colorPalette('@{gold-6}', 7) `);
+  --@{ant-prefix}-warning-color-outline: fade(@gold-6, @outline-fade);
+  --@{ant-prefix}-warning-color-deprecated-bg: ~`colorPalette('@{gold-6}', 1) `;
+  --@{ant-prefix}-warning-color-deprecated-border: ~`colorPalette('@{gold-6}', 3) `;
 
-  // ========= Danger Color =========
-  --ayla-color-danger-7: @ayla-color-danger-7;
-  --ayla-color-danger-6: @ayla-color-danger-6;
-  --ayla-color-danger-5: @ayla-color-danger-5;
-  --ayla-color-danger-3: @ayla-color-danger-3;
-  --ayla-color-danger-2: @ayla-color-danger-2;
-  --ayla-color-danger-1: @ayla-color-danger-1;
-
-  // ========= Fonts =========
-  --ayla-font-family: @ayla-font-family;
-  --ayla-font-weight-regular: @ayla-font-weight-regular;
-  --ayla-font-weight-medium: @ayla-font-weight-medium;
-
-  // ========= Container =========
-  --ayla-rounded-none: @ayla-rounded-none;
-  --ayla-rounded-sm: @ayla-rounded-sm;
-  --ayla-rounded: @ayla-rounded;
-  --ayla-rounded-lg: @ayla-rounded-lg;
-  --ayla-rounded-full: @ayla-rounded-full;
-
-  // ========= Shadows =========
-  --ayla-shadow-1: @ayla-shadow-1;
-  --ayla-shadow-2: @ayla-shadow-2;
+  // ========== Info Color ===========
+  --@{ant-prefix}-info-color: @base-primary;
+  --@{ant-prefix}-info-color-deprecated-bg: ~`colorPalette('@{base-primary}', 1) `;
+  --@{ant-prefix}-info-color-deprecated-border: ~`colorPalette('@{base-primary}', 3) `;
 }
 
 // -------- Colors -----------
 // >>> Primary
-@primary-color: @ayla-color-primary-6;
-@primary-color-hover: @ayla-color-primary-5;
-@primary-color-active: @ayla-color-primary-7;
-@primary-color-outline: fade(@primary-color, @outline-fade);
+@primary-color: var(--ayla-color-primary-6);
+@primary-color-hover: var(--ayla-color-primary-5);
+@primary-color-active: var(--ayla-color-primary-7);
+@primary-color-outline: ~'var(--@{ant-prefix}-primary-color-outline)';
 
-@processing-color: @blue-6;
+@processing-color: @primary-color;
 
 // >>> Info
-@info-color: @primary-color;
-@info-color-deprecated-bg: color(~`colorPalette('@{info-color}', 1) `);
-@info-color-deprecated-border: color(~`colorPalette('@{info-color}', 3) `);
+@info-color: ~'var(--@{ant-prefix}-info-color)';
+@info-color-deprecated-bg: ~'var(--@{ant-prefix}-info-color-deprecated-bg)';
+@info-color-deprecated-border: ~'var(--@{ant-prefix}-info-color-deprecated-border)';
 
-// >>> Success
-@success-color: @ayla-color-success-6;
-@success-color-hover: @ayla-color-success-5;
-@success-color-active: @ayla-color-success-7;
-@success-color-outline: fade(@success-color, @outline-fade);
-@success-color-deprecated-bg: #81d69e;
-@success-color-deprecated-border: #81d69e;
+// >>> Success 修改
+@success-color: #04ac3d;
+@success-color-hover: #43c16e;
+@success-color-active: #03812e;
+@success-color-outline: ~'var(--@{ant-prefix}-success-color-outline)';
+@success-color-deprecated-bg: ~'var(--@{ant-prefix}-success-color-deprecated-bg)';
+@success-color-deprecated-border: ~'var(--@{ant-prefix}-success-color-deprecated-border)';
 
 // >>> Warning
-@warning-color: @ayla-color-warning-6;
-@warning-color-hover: @ayla-color-warning-5;
-@warning-color-active: @ayla-color-warning-7;
-@warning-color-outline: fade(@warning-color, @outline-fade);
-@warning-color-deprecated-bg: #ffcf8b;
-@warning-color-deprecated-border: #ffcf8b;
+@warning-color: #ff7d00;
+@warning-color-hover: #ff9a2e;
+@warning-color-active: #d25f00;
+@warning-color-outline: ~'var(--@{ant-prefix}-warning-color-outline)';
+@warning-color-deprecated-bg: ~'var(--@{ant-prefix}-warning-color-deprecated-bg)';
+@warning-color-deprecated-border: ~'var(--@{ant-prefix}-warning-color-deprecated-border)';
 
 // >>> Error
-@error-color: @ayla-color-danger-6;
-@error-color-hover: @ayla-color-danger-5;
-@error-color-active: @ayla-color-danger-7;
-@error-color-outline: fade(@error-color, @outline-fade);
-@error-color-deprecated-bg: #ee9499;
-@error-color-deprecated-border: #ee9499;
+@error-color: #dc2934;
+@error-color-hover: #e55e67;
+@error-color-active: #a51f27;
+@error-color-outline: ~'var(--@{ant-prefix}-error-color-outline)';
+@error-color-deprecated-bg: ~'var(--@{ant-prefix}-error-color-deprecated-bg)';
+@error-color-deprecated-border: ~'var(--@{ant-prefix}-error-color-deprecated-border)';
 
 @highlight-color: @red-5;
 @normal-color: #d9d9d9;
@@ -199,15 +115,13 @@
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.
-@primary-1: color(~`colorPalette('@{primary-color}', 1) `); // replace tint(@primary-color, 90%)
-@primary-2: color(~`colorPalette('@{primary-color}', 2) `); // replace tint(@primary-color, 80%)
-@primary-3: color(~`colorPalette('@{primary-color}', 3) `); // unused
-@primary-4: color(~`colorPalette('@{primary-color}', 4) `); // unused
-@primary-5: color(
-  ~`colorPalette('@{primary-color}', 5) `
-); // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
-@primary-6: @primary-color; // color used to control the text color of active buttons, don't use, use @primary-color
-@primary-7: color(~`colorPalette('@{primary-color}', 7) `); // replace shade(@primary-color, 5%)
+@primary-1: ~'var(--@{ant-prefix}-primary-1)'; // replace tint(@primary-color, 90%)
+@primary-2: ~'var(--@{ant-prefix}-primary-2)'; // replace tint(@primary-color, 80%)
+@primary-3: ~'var(--@{ant-prefix}-primary-3)'; // unused
+@primary-4: ~'var(--@{ant-prefix}-primary-4)'; // unused
+@primary-5: ~'var(--@{ant-prefix}-primary-5)'; // color used to control the text color in many active and hover states, replace tint(@primary-color, 20%)
+@primary-6: ~'var(--@{ant-prefix}-primary-6)'; // color used to control the text color of active buttons, don't use, use @primary-color
+@primary-7: ~'var(--@{ant-prefix}-primary-7)'; // replace shade(@primary-color, 5%)
 @primary-8: color(~`colorPalette('@{primary-color}', 8) `); // unused
 @primary-9: color(~`colorPalette('@{primary-color}', 9) `); // unused
 @primary-10: color(~`colorPalette('@{primary-color}', 10) `); // unused
@@ -222,9 +136,10 @@
 // Popover background color
 @popover-background: @component-background;
 @popover-customize-border-color: @border-color-split;
-@font-family: @ayla-font-family;
+@font-family: var(--ayla-font-family);
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-@text-color: @ayla-color-text-5;
+// 修改text-color/text-color-secondary颜色
+@text-color: #2d3134;
 @text-color-secondary: #737b82;
 @text-color-ash: #cfd2d6;
 @text-color-inverse: @white;
@@ -260,7 +175,7 @@
 @padding-xss: 4px; // more small
 
 // vertical padding for all form controls
-@control-padding-horizontal: 10px;
+@control-padding-horizontal: @padding-sm;
 @control-padding-horizontal-sm: @padding-xs;
 
 // vertical margins
@@ -285,8 +200,8 @@
 
 // LINK
 @link-color: @primary-color;
-@link-hover-color: color(~`colorPalette('@{link-color}', 5) `);
-@link-active-color: color(~`colorPalette('@{link-color}', 7) `);
+@link-hover-color: @primary-color-hover;
+@link-active-color: @primary-color-active;
 @link-decoration: none;
 @link-hover-decoration: none;
 @link-focus-decoration: none;
@@ -497,7 +412,7 @@
 // Grid system
 @grid-columns: 24;
 
-// Layout 修改背景色、
+// Layout 修改body、header
 @layout-body-background: #f1f2f3;
 @layout-header-background: #ffffff;
 @layout-header-height: 56px;
@@ -589,8 +504,8 @@
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
 @input-icon-color: @input-color;
-@input-border-color: @ayla-color-line-1;
-@input-bg: @ayla-color-fill-2;
+@input-border-color: @border-color-base;
+@input-bg: @component-background;
 @input-number-hover-border-color: @input-hover-border-color;
 @input-number-handler-active-bg: #f4f4f4;
 @input-number-handler-hover-bg: @primary-5;
@@ -610,17 +525,17 @@
 
 // Select
 // ---
-@select-border-color: @ayla-color-line-1;
-@select-item-selected-color: @ayla-color-primary-6;
-@select-item-selected-font-weight: @ayla-font-weight-regular;
+@select-border-color: @border-color-base;
+@select-item-selected-color: @text-color;
+@select-item-selected-font-weight: 600;
 @select-dropdown-bg: @component-background;
-@select-item-selected-bg: @component-background;
-@select-item-active-bg: @ayla-color-fill-2;
+@select-item-selected-bg: @primary-1;
+@select-item-active-bg: @item-hover-bg;
 @select-dropdown-vertical-padding: @dropdown-vertical-padding;
 @select-dropdown-font-size: @dropdown-font-size;
 @select-dropdown-line-height: @dropdown-line-height;
 @select-dropdown-height: 32px;
-@select-background: @ayla-color-fill-2;
+@select-background: @component-background;
 @select-clear-background: @select-background;
 @select-selection-item-bg: @background-color-base;
 @select-selection-item-border-color: @border-color-split;
@@ -725,7 +640,7 @@
 @progress-text-font-size: 1em;
 @progress-text-color: @text-color; // This is for circle text color, should be renamed better
 @progress-circle-text-font-size: 1em;
-// Menu
+// Menu 修改
 // ---
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
@@ -752,7 +667,7 @@
 @menu-icon-size-lg: @font-size-lg;
 @menu-item-group-title-font-size: @menu-item-font-size;
 
-// dark theme
+// dark theme 修改
 @menu-dark-color: @text-color-ash;
 @menu-dark-danger-color: @error-color;
 @menu-dark-bg: #1d1f21;
@@ -773,23 +688,23 @@
 // Table
 // --
 @table-bg: @component-background;
-@table-header-bg: @ayla-color-fill-2;
+@table-header-bg: @background-color-light;
 @table-header-color: @heading-color;
 @table-header-sort-bg: @background-color-base;
 @table-body-sort-bg: #fafafa;
-@table-row-hover-bg: @ayla-color-fill-2;
+@table-row-hover-bg: @background-color-light;
 @table-selected-row-color: inherit;
 @table-selected-row-bg: @primary-1;
 @table-body-selected-sort-bg: @table-selected-row-bg;
-@table-selected-row-hover-bg: darken(@table-selected-row-bg, 2%);
+@table-selected-row-hover-bg: ~'var(--@{ant-prefix}-primary-color-active-deprecated-d-02)';
 @table-expanded-row-bg: #fbfbfb;
-@table-padding-vertical: 13px;
-@table-padding-horizontal: 20px;
+@table-padding-vertical: 16px;
+@table-padding-horizontal: 16px;
 @table-padding-vertical-md: (@table-padding-vertical * 3 / 4);
 @table-padding-horizontal-md: (@table-padding-horizontal / 2);
 @table-padding-vertical-sm: (@table-padding-vertical / 2);
 @table-padding-horizontal-sm: (@table-padding-horizontal / 2);
-@table-border-color: @ayla-color-line-1;
+@table-border-color: @border-color-split;
 @table-border-radius-base: @border-radius-base;
 @table-footer-bg: @background-color-light;
 @table-footer-color: @heading-color;
@@ -825,10 +740,10 @@
 @picker-bg: @component-background;
 @picker-basic-cell-hover-color: @item-hover-bg;
 @picker-basic-cell-active-with-range-color: @primary-1;
-@picker-basic-cell-hover-with-range-color: lighten(@primary-color, 35%);
+@picker-basic-cell-hover-with-range-color: ~'var(--@{ant-prefix}-primary-color-deprecated-l-35)';
 @picker-basic-cell-disabled-bg: rgba(0, 0, 0, 0.04);
 @picker-border-color: @border-color-split;
-@picker-date-hover-range-border-color: lighten(@primary-color, 20%);
+@picker-date-hover-range-border-color: ~'var(--@{ant-prefix}-primary-color-deprecated-l-20)';
 @picker-date-hover-range-color: @picker-basic-cell-hover-with-range-color;
 @picker-time-panel-column-width: 56px;
 @picker-time-panel-column-height: 224px;
@@ -844,7 +759,7 @@
 @calendar-input-bg: @input-bg;
 @calendar-border-color: @border-color-inverse;
 @calendar-item-active-bg: @item-active-bg;
-@calendar-column-active-bg: fade(@calendar-item-active-bg, 20%);
+@calendar-column-active-bg: ~'var(--@{ant-prefix}-primary-color-active-deprecated-f-30)';
 @calendar-full-bg: @calendar-bg;
 @calendar-full-panel-bg: @calendar-full-bg;
 
@@ -980,13 +895,13 @@
 
 // Pagination
 // ---
-@pagination-item-bg: @ayla-color-fill-2;
+@pagination-item-bg: @component-background;
 @pagination-item-size: @height-base;
 @pagination-item-size-sm: 24px;
 @pagination-font-family: @font-family;
-@pagination-font-weight-active: @ayla-font-weight-regular;
-@pagination-item-bg-active: @ayla-color-primary-6;
-@pagination-item-link-bg: @ayla-color-fill-2;
+@pagination-font-weight-active: 500;
+@pagination-item-bg-active: @component-background;
+@pagination-item-link-bg: @component-background;
 @pagination-item-disabled-color-active: @disabled-color;
 @pagination-item-disabled-bg-active: @disabled-active-bg;
 @pagination-item-input-bg: @component-background;
@@ -1007,7 +922,7 @@
 // Breadcrumb
 // ---
 @breadcrumb-base-color: @text-color-secondary;
-@breadcrumb-last-item-color: @text-color;
+@breadcrumb-last-item-color: @text-color-ash;
 @breadcrumb-font-size: @font-size-base;
 @breadcrumb-icon-font-size: @font-size-base;
 @breadcrumb-link-color: @text-color-secondary;
@@ -1026,14 +941,14 @@
 @slider-handle-background-color: @component-background;
 @slider-handle-color: @primary-3;
 @slider-handle-color-hover: @primary-4;
-@slider-handle-color-focus: tint(@primary-color, 20%);
-@slider-handle-color-focus-shadow: fade(@primary-color, 12%);
+@slider-handle-color-focus: ~'var(--@{ant-prefix}-primary-color-deprecated-t-20)';
+@slider-handle-color-focus-shadow: ~'var(--@{ant-prefix}-primary-color-deprecated-f-12)';
 @slider-handle-color-tooltip-open: @primary-color;
 @slider-handle-size: 14px;
 @slider-handle-margin-top: -5px;
 @slider-handle-shadow: 0;
 @slider-dot-border-color: @border-color-split;
-@slider-dot-border-color-active: tint(@primary-color, 50%);
+@slider-dot-border-color-active: ~'var(--@{ant-prefix}-primary-color-deprecated-t-50)';
 @slider-disabled-color: @disabled-color;
 @slider-disabled-background-color: @component-background;
 
@@ -1073,7 +988,7 @@
 @transfer-disabled-bg: @disabled-bg;
 @transfer-list-height: 200px;
 @transfer-item-hover-bg: @item-hover-bg;
-@transfer-item-selected-hover-bg: darken(@item-active-bg, 2%);
+@transfer-item-selected-hover-bg: ~'var(--@{ant-prefix}-primary-color-active-deprecated-d-02)';
 @transfer-item-padding-vertical: 6px;
 @transfer-list-search-icon-top: 12px;
 
@@ -1087,17 +1002,17 @@
 
 // Alert
 // ---
-@alert-success-border-color: ~`colorPalette('@{success-color}', 3) `;
-@alert-success-bg-color: ~`colorPalette('@{success-color}', 1) `;
+@alert-success-border-color: @success-color-deprecated-border;
+@alert-success-bg-color: @success-color-deprecated-bg;
 @alert-success-icon-color: @success-color;
-@alert-info-border-color: ~`colorPalette('@{info-color}', 3) `;
-@alert-info-bg-color: ~`colorPalette('@{info-color}', 1) `;
+@alert-info-border-color: @info-color-deprecated-border;
+@alert-info-bg-color: @info-color-deprecated-bg;
 @alert-info-icon-color: @info-color;
-@alert-warning-border-color: ~`colorPalette('@{warning-color}', 3) `;
-@alert-warning-bg-color: ~`colorPalette('@{warning-color}', 1) `;
+@alert-warning-border-color: @warning-color-deprecated-border;
+@alert-warning-bg-color: @warning-color-deprecated-bg;
 @alert-warning-icon-color: @warning-color;
-@alert-error-border-color: ~`colorPalette('@{error-color}', 3) `;
-@alert-error-bg-color: ~`colorPalette('@{error-color}', 1) `;
+@alert-error-border-color: @error-color-deprecated-border;
+@alert-error-bg-color: @error-color-deprecated-bg;
 @alert-error-icon-color: @error-color;
 @alert-message-color: @heading-color;
 @alert-text-color: @text-color;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="155px" height="104px" viewBox="0 0 155 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Layout</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-823.000000, -102.000000)">
+            <g id="Layout" transform="translate(823.000000, 102.000000)">
+                <path d="M0,7 L21,7 L21,104 L2,104 C0.8954305,104 1.3527075e-16,103.104569 0,102 L0,7 L0,7 Z" id="矩形" fill="#BAE7FF"></path>
+                <path d="M71.5,-70.5 L81.5,-70.5 C82.6045695,-70.5 83.5,-69.6045695 83.5,-68.5 L83.5,81.5 C83.5,82.6045695 82.6045695,83.5 81.5,83.5 L71.5,83.5 L71.5,83.5 L71.5,-70.5 Z" id="矩形复制-40" fill="#E5F7FF" transform="translate(77.500000, 6.500000) rotate(-90.000000) translate(-77.500000, -6.500000) "></path>
+                <rect id="矩形" stroke="#D9D9D9" x="0.5" y="0.5" width="154" height="103" rx="2"></rect>
+                <rect id="矩形" fill="#F5F5F5" x="31" y="34" width="114" height="60"></rect>
+                <rect id="矩形" fill="#BAE7FF" x="31" y="23" width="43" height="5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

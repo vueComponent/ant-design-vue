@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150px" height="92px" viewBox="0 0 150 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>AutoComplete</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-827.000000, -339.000000)">
+            <g id="AutoComplete" transform="translate(827.000000, 339.000000)">
+                <g id="3.DataEntry/Input/Default/Basic-#" fill-rule="nonzero">
+                    <g id="9.Box/1.Cards/4.Border">
+                        <g id="Z/Shape/RectangleRC/2px/RC-A">
+                            <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="148" height="30" rx="1"></rect>
+                            <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="149" height="31" rx="2"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="矩形复制-145" fill="#F5F5F5" x="9" y="11" width="56" height="10"></rect>
+                <rect id="矩形" fill="#F5F5F5" x="0" y="36" width="149" height="56" rx="2"></rect>
+                <rect id="矩形复制-146" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="9" y="48" width="56" height="8"></rect>
+                <rect id="矩形复制-147" fill="#BAE7FF" x="0" y="64" width="149" height="24"></rect>
+                <rect id="矩形复制-148" fill="#699937" x="9" y="72" width="69" height="8"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

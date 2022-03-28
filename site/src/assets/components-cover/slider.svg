@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150px" height="14px" viewBox="0 0 150 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>3.DataEntry/Silder/Basic#</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-2027.000000, -147.000000)">
+            <g id="3.DataEntry/Silder/Basic#" transform="translate(2027.000000, 147.000000)">
+                <rect id="Rectangle-20" fill-opacity="0.04" fill="#000000" fill-rule="evenodd" x="0" y="5" width="150" height="4" rx="2"></rect>
+                <path d="M1,7 C1,5.8954305 1.89453347,5 3.00606883,5 L73.9939312,5 C75.1018524,5 76,5.88772964 76,7 L76,7 C76,8.1045695 75.1054665,9 73.9939312,9 L3.00606883,9 C1.89814761,9 1,8.11227036 1,7 L1,7 Z" id="Rectangle-20-Copy-3" fill="#699937" fill-rule="nonzero" opacity="0.45"></path>
+                <g id="Group" stroke-width="1" fill-rule="evenodd" transform="translate(74.000000, 0.000000)">
+                    <circle id="Oval" fill="#FFFFFF" fill-rule="nonzero" cx="7" cy="7" r="7"></circle>
+                    <circle id="Oval-2" fill="#699937" fill-rule="nonzero" opacity="0.45" cx="7" cy="7" r="7"></circle>
+                    <circle id="Oval-2" fill="#FFFFFF" fill-rule="nonzero" cx="7" cy="7" r="5"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

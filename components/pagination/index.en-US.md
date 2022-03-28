@@ -3,7 +3,7 @@ category: Components
 type: Navigation
 title: Pagination
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/1vqv2bj68/Pagination.svg
+cover: src/assets/components-cover/pagination.svg
 ---
 
 A long list can be divided into several pages using `Pagination`, and only one page will be loaded at a time.

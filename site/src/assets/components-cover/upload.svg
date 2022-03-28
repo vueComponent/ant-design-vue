@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160px" height="59px" viewBox="0 0 160 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Upload</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-2013.000000, -355.000000)">
+            <g id="Upload" transform="translate(2013.000000, 355.000000)">
+                <g id="Z/Z-Space/typo14pt#" transform="translate(0.000000, 39.000000)" fill="#000000" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20" opacity="0.45">
+                    <text id="✏️Text">
+                        <tspan x="0" y="13">Support：.rar .zip .doc .jpg...</tspan>
+                    </text>
+                </g>
+                <g id="1.Button/1.Default/2.Icon.2.Secondary-#">
+                    <g id="9.Box/1.Cards/4.Border" fill-rule="nonzero">
+                        <g id="Z/Shape/RectangleRC/2px/RC-A">
+                            <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="97" height="30" rx="1"></rect>
+                            <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="98" height="31" rx="2"></rect>
+                        </g>
+                    </g>
+                    <text id="✏️Text" opacity="0.65" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                        <tspan x="40" y="20">Upload</tspan>
+                    </text>
+                    <g id="7.Icon/interface/19.upload" transform="translate(16.000000, 8.000000)" fill="#000000" fill-rule="evenodd" stroke-width="1">
+                        <g id="upload">
+                            <rect id="Rectangle" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                            <path d="M6.25,4.9640625 L7.4046875,4.9640625 L7.4046875,10.25 C7.4046875,10.31875 7.4609375,10.375 7.5296875,10.375 L8.4671875,10.375 C8.5359375,10.375 8.5921875,10.31875 8.5921875,10.25 L8.5921875,4.9640625 L9.75,4.9640625 C9.8546875,4.9640625 9.9125,4.84375 9.8484375,4.7625 L8.0984375,2.546875 C8.0484375,2.4828125 7.9515625,2.4828125 7.9015625,2.546875 L6.1515625,4.7609375 C6.0875,4.84375 6.1453125,4.9640625 6.25,4.9640625 L6.25,4.9640625 Z M13.71875,9.78125 L12.78125,9.78125 C12.7125,9.78125 12.65625,9.8375 12.65625,9.90625 L12.65625,12.3125 L3.34375,12.3125 L3.34375,9.90625 C3.34375,9.8375 3.2875,9.78125 3.21875,9.78125 L2.28125,9.78125 C2.2125,9.78125 2.15625,9.8375 2.15625,9.90625 L2.15625,13 C2.15625,13.2765625 2.3796875,13.5 2.65625,13.5 L13.34375,13.5 C13.6203125,13.5 13.84375,13.2765625 13.84375,13 L13.84375,9.90625 C13.84375,9.8375 13.7875,9.78125 13.71875,9.78125 Z" id="Shape" fill-rule="nonzero" opacity="0.65"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="91px" height="105px" viewBox="0 0 91 105" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Anchor</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Anchor" transform="translate(1.000000, 0.000000)">
+            <path d="M3,0 C3.55228475,0 4,0.44771525 4,1 L4,104 C4,104.552285 3.55228475,105 3,105 C2.44771525,105 2,104.552285 2,104 L2,1 C2,0.44771525 2.44771525,0 3,0 Z" id="Rectangle-26" fill-opacity="0.09" fill="#000000" fill-rule="nonzero"></path>
+            <g id="Level-B/Anchor" transform="translate(0.000000, 8.000000)">
+                <g id="Text" transform="translate(19.000000, 0.000000)" fill="#699937" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal">
+                    <text id="||||||||||||||||||||">
+                        <tspan x="0" y="15">||||||||||||||||||||||||||</tspan>
+                    </text>
+                </g>
+                <circle id="Oval-Copy-3" stroke="#699937" stroke-width="2" fill="#FFFFFF" fill-rule="nonzero" cx="3" cy="11" r="3"></circle>
+            </g>
+            <g id="Level-A/Normal" transform="translate(20.000000, 46.000000)" fill="#000000" fill-opacity="0.65" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal">
+                <g id="Text">
+                    <text id="||||||||||||||||||||">
+                        <tspan x="0" y="15">|||||||||||||||||||||||</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="Level-A/Normal复制" transform="translate(20.000000, 84.000000)" fill="#000000" fill-opacity="0.65" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal">
+                <g id="Text">
+                    <text id="||||||||||||||||||">
+                        <tspan x="0" y="15">||||||||||||||||||</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

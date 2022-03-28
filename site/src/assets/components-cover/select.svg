@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="112px" viewBox="0 0 120 112" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Select</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-2283.000000, -98.000000)">
+            <g id="Select" transform="translate(2283.000000, 98.000000)">
+                <g id="3.DataEntry/Selecte/Default/Unselected">
+                    <rect id="BG/fill" fill="#FFFFFF" fill-rule="nonzero" x="1" y="1" width="118" height="30" rx="2"></rect>
+                    <rect id="outline" stroke="#000000" opacity="0.15" fill-rule="nonzero" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                    <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                        <tspan x="12" y="20">|||||||||||||||||||||||||</tspan>
+                    </text>
+                    <g id="7.Icon/arrow/4.down" transform="translate(98.000000, 9.000000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                        <path d="M12.0859375,3.5 L11.0605469,3.5 C10.9908203,3.5 10.9251953,3.53417969 10.8841797,3.59023438 L7,8.94414063 L3.11582031,3.59023438 C3.07480469,3.53417969 3.00917969,3.5 2.93945312,3.5 L1.9140625,3.5 C1.82519531,3.5 1.77324219,3.60117188 1.82519531,3.67363281 L6.64589844,10.3195313 C6.82089844,10.5601563 7.17910156,10.5601563 7.35273437,10.3195313 L12.1734375,3.67363281 C12.2267578,3.60117187 12.1748047,3.5 12.0859375,3.5 Z" id="fill"></path>
+                    </g>
+                </g>
+                <g id="3.DataEntry/Input/Default/Basic-#" transform="translate(0.000000, 40.000000)">
+                    <rect id="BG/fill" fill="#FFFFFF" fill-rule="nonzero" x="1" y="1" width="118" height="30" rx="2"></rect>
+                    <rect id="outline" stroke="#000000" opacity="0.15" fill-rule="nonzero" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                    <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                        <tspan x="12" y="20">|||||||||||||||||||||||||</tspan>
+                    </text>
+                </g>
+                <g id="7.Icon/arrow/4.down" transform="translate(99.000000, 52.000000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                    <path d="M11.0859375,0.5 L10.0605469,0.5 C9.99082031,0.5 9.92519531,0.534179688 9.88417969,0.590234375 L6,5.94414063 L2.11582031,0.590234375 C2.07480469,0.534179688 2.00917969,0.5 1.93945313,0.5 L0.9140625,0.5 C0.825195313,0.5 0.773242188,0.601171875 0.825195313,0.673632813 L5.64589844,7.31953125 C5.82089844,7.56015625 6.17910156,7.56015625 6.35273438,7.31953125 L11.1734375,0.673632812 C11.2267578,0.601171875 11.1748047,0.5 11.0859375,0.5 Z" id="fill"></path>
+                </g>
+                <g id="3.DataEntry/Selecte/Default/Unselected" transform="translate(0.000000, 80.000000)">
+                    <rect id="BG/fill" fill="#FFFFFF" fill-rule="nonzero" x="1" y="1" width="118" height="30" rx="2"></rect>
+                    <rect id="outline" stroke="#000000" opacity="0.15" fill-rule="nonzero" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                    <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                        <tspan x="12" y="20">|||||||||||||||||||||||||</tspan>
+                    </text>
+                    <g id="7.Icon/arrow/4.down" transform="translate(98.000000, 9.000000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                        <path d="M12.0859375,3.5 L11.0605469,3.5 C10.9908203,3.5 10.9251953,3.53417969 10.8841797,3.59023438 L7,8.94414063 L3.11582031,3.59023438 C3.07480469,3.53417969 3.00917969,3.5 2.93945312,3.5 L1.9140625,3.5 C1.82519531,3.5 1.77324219,3.60117188 1.82519531,3.67363281 L6.64589844,10.3195313 C6.82089844,10.5601563 7.17910156,10.5601563 7.35273437,10.3195313 L12.1734375,3.67363281 C12.2267578,3.60117187 12.1748047,3.5 12.0859375,3.5 Z" id="fill"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

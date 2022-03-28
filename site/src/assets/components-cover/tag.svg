@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192px" height="56px" viewBox="0 0 192 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Tag</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tag">
+            <g id="编组-3">
+                <rect id="矩形" stroke="#D9D9D9" fill="#FAFAFA" x="0.5" y="0.5" width="46" height="21" rx="2"></rect>
+                <text id="Tag-1" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20" fill="#000000" fill-opacity="0.85">
+                    <tspan x="8" y="14">Tag 1</tspan>
+                </text>
+            </g>
+            <g id="编组-3备份-2" transform="translate(0.000000, 34.000000)">
+                <rect id="矩形" stroke="#D9D9D9" fill="#FAFAFA" x="0.5" y="0.5" width="64" height="21" rx="2"></rect>
+                <text id="Tag-2" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20" fill="#000000" fill-opacity="0.85">
+                    <tspan x="8" y="14">Tag 2</tspan>
+                </text>
+            </g>
+            <g id="编组-3备份-3" transform="translate(73.000000, 34.000000)">
+                <rect id="矩形" stroke="#D9D9D9" fill="#FAFAFA" x="0.5" y="0.5" width="118" height="21" rx="2"></rect>
+                <text id="Prevent-Default" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20" fill="#000000" fill-opacity="0.85">
+                    <tspan x="8" y="14">Prevent Default</tspan>
+                </text>
+            </g>
+            <g id="编组-3备份" transform="translate(55.000000, 0.000000)">
+                <rect id="矩形" stroke="#D9D9D9" fill="#FAFAFA" x="0.5" y="0.5" width="39" height="21" rx="2"></rect>
+                <text id="Link" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20" fill="#000000" fill-opacity="0.85">
+                    <tspan x="8" y="14">Link</tspan>
+                </text>
+            </g>
+            <g id="close" transform="translate(45.000000, 39.000000)" fill-rule="nonzero">
+                <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="12" height="12"></rect>
+                <path d="M6.60703125,6 L9.68320312,2.33320313 C9.73476562,2.27226563 9.69140625,2.1796875 9.61171875,2.1796875 L8.6765625,2.1796875 C8.62148437,2.1796875 8.56875,2.20429688 8.53242187,2.24648438 L5.9953125,5.27109375 L3.45820312,2.24648437 C3.42304687,2.20429687 3.3703125,2.1796875 3.3140625,2.1796875 L2.37890625,2.1796875 C2.29921875,2.1796875 2.25585938,2.27226563 2.30742188,2.33320312 L5.38359375,6 L2.30742188,9.66679687 C2.25585938,9.72773438 2.29921875,9.8203125 2.37890625,9.8203125 L3.3140625,9.8203125 C3.36914062,9.8203125 3.421875,9.79570312 3.45820312,9.75351562 L5.9953125,6.72890625 L8.53242187,9.75351562 C8.56757812,9.79570312 8.6203125,9.8203125 8.6765625,9.8203125 L9.61171875,9.8203125 C9.69140625,9.8203125 9.73476562,9.72773438 9.68320312,9.66679687 L6.60703125,6 Z" id="路径" fill="#898989"></path>
+            </g>
+            <g id="close备份" transform="translate(172.000000, 39.000000)" fill-rule="nonzero">
+                <rect id="矩形" fill="#000000" opacity="0" x="0" y="0" width="12" height="12"></rect>
+                <path d="M6.60703125,6 L9.68320312,2.33320313 C9.73476562,2.27226563 9.69140625,2.1796875 9.61171875,2.1796875 L8.6765625,2.1796875 C8.62148437,2.1796875 8.56875,2.20429688 8.53242187,2.24648438 L5.9953125,5.27109375 L3.45820312,2.24648437 C3.42304687,2.20429687 3.3703125,2.1796875 3.3140625,2.1796875 L2.37890625,2.1796875 C2.29921875,2.1796875 2.25585938,2.27226563 2.30742188,2.33320312 L5.38359375,6 L2.30742188,9.66679687 C2.25585938,9.72773438 2.29921875,9.8203125 2.37890625,9.8203125 L3.3140625,9.8203125 C3.36914062,9.8203125 3.421875,9.79570312 3.45820312,9.75351562 L5.9953125,6.72890625 L8.53242187,9.75351562 C8.56757812,9.79570312 8.6203125,9.8203125 8.6765625,9.8203125 L9.61171875,9.8203125 C9.69140625,9.8203125 9.73476562,9.72773438 9.68320312,9.66679687 L6.60703125,6 Z" id="路径" fill="#898989"></path>
+            </g>
+        </g>
+    </g>
+</svg>

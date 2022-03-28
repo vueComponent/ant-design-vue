@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150px" height="62px" viewBox="0 0 150 62" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Skeleton</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-2508.000000, -123.000000)" fill="#F5F5F5">
+            <g id="Skeleton" transform="translate(2508.000000, 123.000000)">
+                <rect id="矩形复制-81" x="0" y="28" width="150" height="6"></rect>
+                <rect id="矩形复制-143" x="0" y="14" width="150" height="6"></rect>
+                <rect id="矩形复制-144" x="0" y="0" width="150" height="6"></rect>
+                <rect id="矩形复制-82" x="0" y="42" width="150" height="6"></rect>
+                <rect id="矩形复制-83" x="0" y="56" width="80" height="6"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

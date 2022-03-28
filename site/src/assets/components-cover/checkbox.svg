@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="104px" height="75px" viewBox="0 0 104 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>CheckBox</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CheckBox" transform="translate(-23.000000, -25.000000)">
+            <g transform="translate(24.000000, 25.000000)">
+                <g id="3.DataEntry/Checkbox#">
+                    <g id="Group">
+                        <g id="7.Icon/control/checkbox/Checked-">
+                            <g id="icon/z/checkboxChecked-Copy" fill="#699937" fill-rule="nonzero">
+                                <rect id="box" x="0" y="0" width="14" height="14" rx="1"></rect>
+                            </g>
+                            <g id="check" transform="translate(2.625000, 2.625000)">
+                                <rect id="Rectangle" fill="#000000" opacity="0" x="0" y="0" width="8.75" height="8.75"></rect>
+                                <path d="M8.28125,1.23046875 L7.59863281,1.23046875 C7.50292969,1.23046875 7.41210938,1.27441406 7.35351563,1.34960938 L3.32714844,6.45019531 L1.39648438,4.00390625 C1.33691406,3.92871094 1.24707031,3.88476562 1.15136719,3.88476562 L0.46875,3.88476562 C0.403320313,3.88476562 0.3671875,3.95996094 0.407226563,4.01074219 L3.08203125,7.39941406 C3.20703125,7.55761719 3.44726563,7.55761719 3.57324219,7.39941406 L8.34277344,1.35546875 C8.3828125,1.30566406 8.34667969,1.23046875 8.28125,1.23046875 Z" id="Path" stroke="#FFFFFF" stroke-width="0.833333333" fill="#FFFFFF"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g id="Group" transform="translate(0.000000, 30.000000)" fill="#FFFFFF" fill-rule="nonzero" stroke="#D9D9D9">
+                    <g id="7.Icon/control/checkbox/Checked-">
+                        <g id="icon/z/checkboxChecked-Copy">
+                            <rect id="box" x="0" y="0" width="14" height="14" rx="1"></rect>
+                        </g>
+                    </g>
+                </g>
+                <g id="Group复制" transform="translate(0.000000, 60.000000)" fill="#F5F5F5" fill-rule="nonzero" stroke="#D9D9D9">
+                    <g id="7.Icon/control/checkbox/Checked-">
+                        <g id="icon/z/checkboxChecked-Copy">
+                            <rect id="box" x="0" y="0" width="14" height="14" rx="1"></rect>
+                        </g>
+                    </g>
+                </g>
+                <rect id="矩形复制-55" fill="#EBEBEB" x="23" y="30" width="80" height="14"></rect>
+                <rect id="矩形复制-55备份-4" fill="#EBEBEB" x="23" y="0" width="80" height="14"></rect>
+                <rect id="矩形复制-55备份" fill="#EBEBEB" x="23" y="60" width="80" height="14"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="32px" viewBox="0 0 120 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>InputNumber</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-1081.000000, -369.000000)">
+            <g id="InputNumber" transform="translate(1081.000000, 369.000000)">
+                <g id="3.DataEntry/Input/Default/Basic-#">
+                    <g id="9.Box/1.Cards/4.Border" fill-rule="nonzero">
+                        <g id="Z/Shape/RectangleRC/2px/RC-A">
+                            <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="118" height="30" rx="1"></rect>
+                            <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                        </g>
+                    </g>
+                    <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                        <tspan x="12" y="20">Number</tspan>
+                    </text>
+                </g>
+                <g id="Group" transform="translate(103.000000, 0.000000)" fill="#000000" fill-rule="nonzero">
+                    <g id="Z/Divider" opacity="0.09">
+                        <rect id="divider/fill" x="0" y="0" width="1" height="32"></rect>
+                    </g>
+                    <g id="Z/Divider" transform="translate(1.000000, 15.000000)" opacity="0.09">
+                        <rect id="divider/fill" x="0" y="0" width="16" height="1"></rect>
+                    </g>
+                    <g id="7.Icon/arrow/3.up" transform="translate(3.000000, 2.000000)" opacity="0.65">
+                        <path d="M10.4355469,8.85117187 L6.30351562,3.1546875 C6.15351562,2.9484375 5.84648437,2.9484375 5.69765625,3.1546875 L1.56445312,8.85117187 C1.51992187,8.91328125 1.56328125,9 1.640625,9 L2.51953125,9 C2.57929687,9 2.63554687,8.97070312 2.67070312,8.92265625 L6,4.33359375 L9.32929687,8.92265625 C9.36445312,8.97070312 9.42070312,9 9.48046875,9 L10.359375,9 C10.4355469,9 10.4800781,8.91328125 10.4355469,8.85117187 L10.4355469,8.85117187 Z" id="fill"></path>
+                    </g>
+                    <g id="7.Icon/arrow/4.down" transform="translate(3.000000, 18.000000)" opacity="0.65">
+                        <path d="M10.359375,3 L9.48046875,3 C9.42070312,3 9.36445312,3.02929688 9.32929687,3.07734375 L6,7.66640625 L2.67070313,3.07734375 C2.63554688,3.02929688 2.57929687,3 2.51953125,3 L1.640625,3 C1.56445313,3 1.51992188,3.08671875 1.56445313,3.14882813 L5.69648437,8.8453125 C5.84648437,9.0515625 6.15351562,9.0515625 6.30234375,8.8453125 L10.434375,3.14882812 C10.4800781,3.08671875 10.4355469,3 10.359375,3 Z" id="fill"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

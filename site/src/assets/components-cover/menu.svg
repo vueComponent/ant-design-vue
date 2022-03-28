@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="104px" viewBox="0 0 80 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Menu</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-622.000000, -332.000000)">
+            <g id="Menu" transform="translate(622.000000, 332.000000)">
+                <rect id="矩形复制-41" fill="#F5F5F5" x="0" y="0" width="80" height="104"></rect>
+                <rect id="矩形" fill="#BAE7FF" x="0" y="28" width="78" height="24"></rect>
+                <rect id="矩形复制-51" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="10" y="12" width="34" height="8"></rect>
+                <rect id="矩形复制-53" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="10" y="60" width="34" height="8"></rect>
+                <rect id="矩形复制-54" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="10" y="84" width="34" height="8"></rect>
+                <rect id="矩形" fill="#699937" x="77" y="28" width="3" height="24"></rect>
+                <rect id="矩形复制-52" fill="#699937" x="18" y="36" width="34" height="8"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

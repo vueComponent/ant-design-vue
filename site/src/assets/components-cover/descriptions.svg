@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="187px" height="74px" viewBox="0 0 187 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Descriptions</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-90.000000, -577.000000)">
+            <g id="Descriptions" transform="translate(90.000000, 577.000000)">
+                <rect id="矩形复制-57" fill="#EBEBEB" x="0" y="0" width="65" height="10"></rect>
+                <g id="编组-33" transform="translate(0.000000, 26.000000)">
+                    <rect id="矩形复制-61" fill="#EBEBEB" x="0" y="6" width="28" height="10"></rect>
+                    <rect id="矩形复制-60" fill="#F5F5F5" x="44" y="6" width="43" height="10"></rect>
+                    <text id="：" font-family="PingFangSC-Regular, PingFang SC" font-size="16" font-weight="normal" fill="#000000" fill-opacity="0.85">
+                        <tspan x="30" y="17">：</tspan>
+                    </text>
+                </g>
+                <g id="编组-33复制-2" transform="translate(112.000000, 26.000000)">
+                    <rect id="矩形复制-61" fill="#EBEBEB" x="0" y="6" width="28" height="10"></rect>
+                    <rect id="矩形复制-60" fill="#F5F5F5" x="44" y="6" width="31" height="10"></rect>
+                    <text id="：" font-family="PingFangSC-Regular, PingFang SC" font-size="16" font-weight="normal" fill="#000000" fill-opacity="0.85">
+                        <tspan x="30" y="17">：</tspan>
+                    </text>
+                </g>
+                <g id="编组-33复制" transform="translate(0.000000, 52.000000)">
+                    <rect id="矩形复制-61" fill="#EBEBEB" x="0" y="6" width="19" height="10"></rect>
+                    <rect id="矩形复制-60" fill="#F5F5F5" x="35" y="6" width="40" height="10"></rect>
+                    <text id="：" font-family="PingFangSC-Regular, PingFang SC" font-size="16" font-weight="normal" fill="#000000" fill-opacity="0.85">
+                        <tspan x="21" y="17">：</tspan>
+                    </text>
+                </g>
+                <g id="编组-33复制-3" transform="translate(112.000000, 52.000000)">
+                    <rect id="矩形复制-61" fill="#EBEBEB" x="0" y="6" width="19" height="10"></rect>
+                    <rect id="矩形复制-60" fill="#F5F5F5" x="35" y="6" width="40" height="10"></rect>
+                    <text id="：" font-family="PingFangSC-Regular, PingFang SC" font-size="16" font-weight="normal" fill="#000000" fill-opacity="0.85">
+                        <tspan x="21" y="17">：</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="108px" viewBox="0 0 200 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Notification</title>
+    <defs>
+        <rect id="path-1" x="0" y="4.54747351e-13" width="188" height="95.2" rx="2.24"></rect>
+        <filter x="-5.3%" y="-8.4%" width="110.6%" height="121.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Notification" transform="translate(-14.000000, -49.000000)">
+            <g transform="translate(20.000000, 53.000000)">
+                <g id="Rectangle-166-Copy-8">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <g id="Skeleton" transform="translate(13.000000, 35.000000)" fill="#F5F5F5">
+                    <rect id="矩形复制-81" x="0" y="28" width="87" height="6"></rect>
+                    <rect id="矩形复制-143" x="0" y="14" width="160" height="6"></rect>
+                    <rect id="矩形复制-144" x="0" y="0" width="160" height="6"></rect>
+                </g>
+                <rect id="矩形" fill-opacity="0.5" fill="#000000" x="13" y="11" width="69" height="10"></rect>
+                <g id="1.Button/3.Small/1.Text.1.Primary" transform="translate(145.600000, 72.800000)">
+                    <g id="1.Button/3.Small/1.Text.2.Secondary#">
+                        <g id="9.Box/1.Cards/8.Primary" fill-rule="nonzero">
+                            <g id="Z/Shape/RectangleRC/2px/RC-A">
+                                <rect id="BG/fill" fill="#FFFFFF" x="0.56" y="0.56" width="23.7540299" height="12.32" rx="0.56"></rect>
+                                <rect id="outline" stroke="#000000" stroke-width="0.56" opacity="0.15" x="0.28" y="0.28" width="24.3140299" height="12.88" rx="1.12"></rect>
+                            </g>
+                        </g>
+                        <text id="✏️Text" font-family="PingFangSC-Regular, PingFang SC" font-size="7.84" font-weight="normal" fill="#FFFFFF">
+                            <tspan x="3.68" y="9.6">确 认</tspan>
+                        </text>
+                    </g>
+                </g>
+                <g id="7.Icon/suggested/4.close" transform="translate(165.600000, 11.200000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                    <path d="M4.93325,4.48 L7.230125,1.742125 C7.268625,1.696625 7.23625,1.6275 7.17675,1.6275 L6.4785,1.6275 C6.437375,1.6275 6.398,1.645875 6.370875,1.677375 L4.4765,3.93575 L2.582125,1.677375 C2.555875,1.645875 2.5165,1.6275 2.4745,1.6275 L1.77625,1.6275 C1.71675,1.6275 1.684375,1.696625 1.722875,1.742125 L4.01975,4.48 L1.722875,7.217875 C1.684375,7.263375 1.71675,7.3325 1.77625,7.3325 L2.4745,7.3325 C2.515625,7.3325 2.555,7.314125 2.582125,7.282625 L4.4765,5.02425 L6.370875,7.282625 C6.397125,7.314125 6.4365,7.3325 6.4785,7.3325 L7.17675,7.3325 C7.23625,7.3325 7.268625,7.263375 7.230125,7.217875 L4.93325,4.48 Z" id="fill"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,8 +1,8 @@
 export default {
   // Options.jsx
-  items_per_page: '条/页',
-  jump_to: '跳至',
-  jump_to_confirm: '确定',
+  items_per_page: '条 / 页',
+  jump_to: '跳转至',
+  jump_to_confirm: '跳转',
   page: '页',
 
   // Pagination.jsx

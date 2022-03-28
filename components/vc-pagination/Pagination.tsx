@@ -364,7 +364,7 @@ export default defineComponent({
     let firstPager = null;
     let lastPager = null;
     let gotoButton = null;
-    const goButton = showQuickJumper && showQuickJumper.goButton;
+    const goButton = showQuickJumper && showQuickJumper.goButton !== false;
     const pageBufferSize = showLessItems ? 1 : 2;
 
     const prevPage = stateCurrent - 1 > 0 ? stateCurrent - 1 : 0;

@@ -42,8 +42,8 @@
     vertical-align: middle;
     list-style: none;
     background-color: @pagination-item-bg;
-    border: @border-width-base @border-style-base @border-color-base;
-    border-radius: @border-radius-base;
+    border: @border-width-base @border-style-base @ayla-color-line-1;
+    border-radius: @ayla-rounded;
     outline: 0;
     cursor: pointer;
     user-select: none;
@@ -81,15 +81,21 @@
 
     &-active {
       font-weight: @pagination-font-weight-active;
-      background: @pagination-item-bg-active;
-      border-color: @primary-color;
+      background: @ayla-color-primary-6;
+      border-color: @ayla-color-primary-6;
 
       a {
-        color: @primary-color;
+        color: @ayla-color-text-1;
       }
 
       &:hover {
-        border-color: @primary-5;
+        border-color: @ayla-color-primary-5;
+        background: @ayla-color-primary-5;
+      }
+
+      &:active {
+        border-color: @ayla-color-primary-7;
+        background: @ayla-color-primary-7;
       }
 
       &:focus-visible {
@@ -97,7 +103,7 @@
       }
 
       &:hover a {
-        color: @primary-5;
+        color: @ayla-color-text-1;
       }
 
       &:focus-visible a {
@@ -212,8 +218,8 @@
       font-size: 12px;
       text-align: center;
       background-color: @pagination-item-link-bg;
-      border: @border-width-base @border-style-base @border-color-base;
-      border-radius: @border-radius-base;
+      border: @border-width-base @border-style-base @ayla-color-line-1;
+      border-radius: @ayla-rounded;
       outline: none;
       transition: all 0.3s;
     }
@@ -270,12 +276,15 @@
     &-size-changer.@{ant-prefix}-select {
       display: inline-block;
       width: auto;
+      &:not(.@{ant-prefix}-select-customize-input) .@{ant-prefix}-select-selector {
+        border-radius: @ayla-rounded;
+      }
     }
 
     &-quick-jumper {
       display: inline-block;
       height: @input-height-base;
-      margin-left: @margin-xs;
+      margin-left: 16px;
       line-height: @input-height-base;
       vertical-align: top;
 
@@ -285,6 +294,32 @@
         width: 50px;
         height: @input-height-base;
         margin: 0 8px;
+        border-radius: @ayla-rounded;
+      }
+
+      &-button {
+        padding: 0 13px;
+        background-color: @ayla-color-primary-6;
+        border-width: 0;
+        border-radius: @ayla-rounded;
+        cursor: pointer;
+        color: @ayla-color-text-1;
+        box-shadow: none;
+        outline: 0;
+        margin-left: 16px;
+        transition: all 0.3s @ease-in-out;
+
+        &:hover {
+          background-color: @ayla-color-primary-5;
+        }
+
+        // &:focus {
+        //   background-color: @ayla-color-primary-7;
+        // }
+
+        &:active {
+          background-color: @ayla-color-primary-7;
+        }
       }
     }
   }

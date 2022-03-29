@@ -291,6 +291,8 @@
       input {
         .input();
 
+        padding: 4px 5px;
+        text-align: center;
         width: 50px;
         height: @input-height-base;
         margin: 0 8px;
@@ -300,7 +302,7 @@
       &-button {
         padding: 0 13px;
         background-color: @ayla-color-primary-6;
-        border-width: 0;
+        border: 1px solid @ayla-color-primary-6;
         border-radius: @ayla-rounded;
         cursor: pointer;
         color: @ayla-color-text-1;
@@ -311,6 +313,7 @@
 
         &:hover {
           background-color: @ayla-color-primary-5;
+          border-color: @ayla-color-primary-5;
         }
 
         // &:focus {
@@ -319,6 +322,7 @@
 
         &:active {
           background-color: @ayla-color-primary-7;
+          border-color: @ayla-color-primary-7;
         }
       }
     }
@@ -485,6 +489,23 @@
 
     .@{pagination-prefix-cls}-simple-pager {
       color: @disabled-color;
+    }
+
+    .@{pagination-prefix-cls}-options-quick-jumper {
+      &-button {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+          pointer-events: none;
+          cursor: not-allowed;
+          color: @btn-disable-color;
+          background-color: @btn-disable-bg;
+          border-color: @btn-disable-border;
+          text-shadow: none;
+          box-shadow: none;
+        }
+      }
     }
   }
 }

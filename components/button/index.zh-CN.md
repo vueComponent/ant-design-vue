@@ -37,6 +37,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
 | --- | --- | --- | --- | --- |
 | block | 将按钮宽度调整为其父宽度的选项 | boolean | `false` |  |
 | danger | 设置危险按钮 | boolean | `false` | 2.2.0 |
+| success | 设置正确按钮 | boolean | `false` | 2.2.0 |
 | disabled | 按钮失效状态 | boolean | `false` |  |
 | ghost | 幽灵属性，使按钮背景透明 | boolean | `false` |  |
 | href | 点击跳转的地址，指定此属性 button 的行为和 a 链接一致 | string | - |  |

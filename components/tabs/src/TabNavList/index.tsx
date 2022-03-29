@@ -70,7 +70,7 @@ export default defineComponent({
     const tabsWrapperRef = ref<HTMLDivElement>();
     const tabListRef = ref<HTMLDivElement>();
     const operationsRef = ref<{ $el: HTMLDivElement }>();
-    const innerAddButtonRef = ref<HTMLButtonElement>();
+    const innerAddButtonRef = ref();
     const [setRef, btnRefs] = useRefs();
     const tabPositionTopOrBottom = computed(
       () => props.tabPosition === 'top' || props.tabPosition === 'bottom',
@@ -89,8 +89,6 @@ export default defineComponent({
 
     const [wrapperScrollWidth, setWrapperScrollWidth] = useState<number>(0);
     const [wrapperScrollHeight, setWrapperScrollHeight] = useState<number>(0);
-    const [wrapperContentWidth, setWrapperContentWidth] = useState<number>(0);
-    const [wrapperContentHeight, setWrapperContentHeight] = useState<number>(0);
     const [wrapperWidth, setWrapperWidth] = useState<number>(null);
     const [wrapperHeight, setWrapperHeight] = useState<number>(null);
     const [addWidth, setAddWidth] = useState<number>(0);
@@ -232,25 +230,24 @@ export default defineComponent({
       let basicSize: number;
       let tabContentSize: number;
       let addSize: number;
-
+      const tabOffsetsValue = tabOffsets.value;
       if (['top', 'bottom'].includes(props.tabPosition)) {
         unit = 'width';
         basicSize = wrapperWidth.value;
-        tabContentSize = wrapperContentWidth.value;
+        tabContentSize = wrapperScrollWidth.value;
         addSize = addWidth.value;
         position = props.rtl ? 'right' : 'left';
         transformSize = Math.abs(transformLeft.value);
       } else {
         unit = 'height';
         basicSize = wrapperHeight.value;
-        tabContentSize = wrapperContentHeight.value;
+        tabContentSize = wrapperScrollWidth.value;
         addSize = addHeight.value;
         position = 'top';
         transformSize = -transformTop.value;
       }
-
       let mergedBasicSize = basicSize;
-      if (tabContentSize + addSize > basicSize) {
+      if (tabContentSize + addSize > basicSize && tabContentSize < basicSize) {
         mergedBasicSize = basicSize - addSize;
       }
 
@@ -262,7 +259,7 @@ export default defineComponent({
       const len = tabsVal.length;
       let endIndex = len;
       for (let i = 0; i < len; i += 1) {
-        const offset = tabOffsets.value.get(tabsVal[i].key) || DEFAULT_SIZE;
+        const offset = tabOffsetsValue.get(tabsVal[i].key) || DEFAULT_SIZE;
         if (offset[position] + offset[unit] > transformSize + mergedBasicSize) {
           endIndex = i - 1;
           break;
@@ -270,7 +267,7 @@ export default defineComponent({
       }
       let startIndex = 0;
       for (let i = len - 1; i >= 0; i -= 1) {
-        const offset = tabOffsets.value.get(tabsVal[i].key) || DEFAULT_SIZE;
+        const offset = tabOffsetsValue.get(tabsVal[i].key) || DEFAULT_SIZE;
         if (offset[position] < transformSize) {
           startIndex = i + 1;
           break;
@@ -284,11 +281,9 @@ export default defineComponent({
       // Update wrapper records
       const offsetWidth = tabsWrapperRef.value?.offsetWidth || 0;
       const offsetHeight = tabsWrapperRef.value?.offsetHeight || 0;
-      const newAddWidth = innerAddButtonRef.value?.offsetWidth || 0;
-      const newAddHeight = innerAddButtonRef.value?.offsetHeight || 0;
-      const newOperationWidth = operationsRef.value?.$el.offsetWidth || 0;
-      const newOperationHeight = operationsRef.value?.$el.offsetHeight || 0;
-
+      const addDom = innerAddButtonRef.value?.$el || {};
+      const newAddWidth = addDom.offsetWidth || 0;
+      const newAddHeight = addDom.offsetHeight || 0;
       setWrapperWidth(offsetWidth);
       setWrapperHeight(offsetHeight);
       setAddWidth(newAddWidth);
@@ -299,14 +294,6 @@ export default defineComponent({
 
       setWrapperScrollWidth(newWrapperScrollWidth);
       setWrapperScrollHeight(newWrapperScrollHeight);
-
-      const isOperationHidden = operationsRef.value?.$el.className.includes(
-        operationsHiddenClassName.value,
-      );
-      setWrapperContentWidth(newWrapperScrollWidth - (isOperationHidden ? 0 : newOperationWidth));
-      setWrapperContentHeight(
-        newWrapperScrollHeight - (isOperationHidden ? 0 : newOperationHeight),
-      );
 
       // Update buttons records
       setTabSizes(() => {
@@ -475,7 +462,6 @@ export default defineComponent({
       });
       return (
         <div
-          ref={ref}
           role="tablist"
           class={classNames(`${pre}-nav`, className)}
           style={style}

@@ -136,7 +136,8 @@ const OptionList = defineComponent({
         baseProps.toggleOpen(false);
       }
     };
-    const getLabel = (item: Record<string, any>) => item.label;
+    const getLabel = (item: Record<string, any>) =>
+      typeof item.label === 'function' ? item.label() : item.label;
     function renderItem(index: number) {
       const item = memoFlattenOptions.value[index];
       if (!item) return null;
@@ -275,8 +276,9 @@ const OptionList = defineComponent({
             virtual={virtual}
             v-slots={{
               default: (item, itemIndex) => {
-                const { group, groupOption, data, label, value } = item;
+                const { group, groupOption, data, value } = item;
                 const { key } = data;
+                const label = typeof item.label === 'function' ? item.label() : item.label;
                 // Group
                 if (group) {
                   return (

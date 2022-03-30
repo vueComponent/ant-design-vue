@@ -64,6 +64,7 @@ export type OnInternalSelect = (value: RawValueType, info: { selected: boolean }
 export type RawValueType = string | number;
 export interface LabelInValueType {
   label: any;
+  originLabel?: any;
   value: RawValueType;
   /** @deprecated `key` is useless since it should always same as `value` */
   key?: Key;
@@ -283,7 +284,7 @@ export default defineComponent({
 
       return mergedValues.value.map(item => ({
         ...item,
-        label: item.label ?? item.value,
+        label: (typeof item.label === 'function' ? item.label() : item.label) ?? item.value,
       }));
     });
 
@@ -391,7 +392,15 @@ export default defineComponent({
         (labeledValues.length !== mergedValues.value.length ||
           labeledValues.some((newVal, index) => mergedValues.value[index]?.value !== newVal?.value))
       ) {
-        const returnValues = props.labelInValue ? labeledValues : labeledValues.map(v => v.value);
+        const returnValues = props.labelInValue
+          ? labeledValues.map(v => {
+              return {
+                ...v,
+                originLabel: v.label,
+                label: typeof v.label === 'function' ? v.label() : v.label,
+              };
+            })
+          : labeledValues.map(v => v.value);
         const returnOptions = labeledValues.map(v =>
           injectPropsWithOption(getMixedOption(v.value)),
         );
@@ -426,10 +435,12 @@ export default defineComponent({
     const triggerSelect = (val: RawValueType, selected: boolean) => {
       const getSelectEnt = (): [RawValueType | LabelInValueType, DefaultOptionType] => {
         const option = getMixedOption(val);
+        const originLabel = option?.[mergedFieldNames.value.label];
         return [
           props.labelInValue
             ? {
-                label: option?.[mergedFieldNames.value.label],
+                label: typeof originLabel === 'function' ? originLabel() : originLabel,
+                originLabel,
                 value: val,
                 key: option.key ?? val,
               }

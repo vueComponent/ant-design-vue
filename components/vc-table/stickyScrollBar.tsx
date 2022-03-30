@@ -13,7 +13,10 @@ interface StickyScrollBarProps {
   onScroll: (params: { scrollLeft?: number }) => void;
   offsetScroll: number;
   container: HTMLElement | Window;
-  scrollBodySizeInfo: { scrollWidth: number; clientWidth: number };
+  scrollBodySizeInfo: {
+    scrollWidth: number;
+    clientWidth: number;
+  };
 }
 
 export default defineComponent<StickyScrollBarProps>({
@@ -40,7 +43,7 @@ export default defineComponent<StickyScrollBarProps>({
 
     const [scrollState, setScrollState] = useLayoutState({
       scrollLeft: 0,
-      isHiddenScrollBar: false,
+      isHiddenScrollBar: true,
     });
 
     const refState = ref({
@@ -135,13 +138,17 @@ export default defineComponent<StickyScrollBarProps>({
       onResizeListener = addEventListenerWrap(window, 'resize', onContainerScroll, false);
     });
 
-    watch(
-      [scrollBarWidth, isActive],
-      () => {
-        onContainerScroll();
-      },
-      { immediate: true },
-    );
+    onMounted(() => {
+      setTimeout(() => {
+        watch(
+          [scrollBarWidth, isActive],
+          () => {
+            onContainerScroll();
+          },
+          { immediate: true, flush: 'post' },
+        );
+      });
+    });
 
     watch(
       () => props.container,

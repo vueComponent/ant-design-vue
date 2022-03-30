@@ -109,13 +109,18 @@
       .@{form-item-prefix-cls}-subtitle {
         color: @ayla-color-text-4;
         font-weight: @ayla-font-weight-regular;
+        margin-left: 4px;
 
-        &-brackets-wrapped + .@{form-item-prefix-cls}-description-icon {
+        &-brackets-wrapped {
+          margin-left: 0;
+        }
+
+        &-brackets-wrapped + .@{form-item-prefix-cls}-label-tooltip-icon {
           margin-left: 0;
         }
       }
 
-      .@{form-item-prefix-cls}-description-icon {
+      .@{form-item-prefix-cls}-label-tooltip-icon {
         color: @ayla-color-text-4;
         font-weight: @ayla-font-weight-regular;
         margin-left: 6px;

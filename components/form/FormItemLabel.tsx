@@ -53,7 +53,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
     mergedLabelCol.class,
     {
       [`${labelClsBasic}-wrap`]: !!labelWrap.value,
-      [`${prefixCls}-item-label-extra-right`]: !!props.labelExtraRight,
+      [`${prefixCls}-item-label-extra-right`]: props.labelExtra && props.labelExtraRight,
     },
   );
 
@@ -92,9 +92,9 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
       <>
         {labelChildren}
         <span
-          class={`${prefixCls}-item-subtitle ${
-            isWrappedByChineseBrackets ? `${prefixCls}-item-subtitle-brackets-wrapped` : ''
-          }`}
+          class={classNames(`${prefixCls}-item-subtitle`, {
+            [`${prefixCls}-item-subtitle-brackets-wrapped`]: isWrappedByChineseBrackets,
+          })}
         >
           {props.subtitle}
         </span>
@@ -108,7 +108,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
       <>
         {labelChildren}
         <Tooltip
-          class={`${prefixCls}-item-labelTooltip-icon`}
+          class={`${prefixCls}-item-label-tooltip-icon`}
           placement="right"
           title={props.labelTooltip}
         >

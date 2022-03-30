@@ -22,6 +22,7 @@ import { useInjectHover } from '../context/HoverContext';
 import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
+import eagerComputed from '../../_util/eagerComputed';
 
 /** Check if cell is in hover range */
 function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {
@@ -120,7 +121,7 @@ export default defineComponent<CellProps>({
         (props.additionalProps?.rowspan as number)
       );
     });
-    const hovering = computed(() => {
+    const hovering = eagerComputed(() => {
       const { index } = props;
       return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
     });

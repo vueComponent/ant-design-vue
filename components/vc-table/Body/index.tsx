@@ -46,12 +46,16 @@ export default defineComponent<BodyProps<any>>({
     );
     const startRow = ref(-1);
     const endRow = ref(-1);
+    let timeoutId: any;
     useProvideHover({
       startRow,
       endRow,
       onHover: (start, end) => {
-        startRow.value = start;
-        endRow.value = end;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          startRow.value = start;
+          endRow.value = end;
+        }, 100);
       },
     });
     return () => {

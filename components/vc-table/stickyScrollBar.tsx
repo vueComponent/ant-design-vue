@@ -1,13 +1,5 @@
 import type { Ref } from 'vue';
-import {
-  watchEffect,
-  getCurrentInstance,
-  defineComponent,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from 'vue';
+import { watchEffect, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import addEventListenerWrap from '../vc-util/Dom/addEventListener';
 import { getOffset } from '../vc-util/Dom/css';
 import classNames from '../_util/classNames';
@@ -34,7 +26,6 @@ export default defineComponent<StickyScrollBarProps>({
     const bodyScrollWidth = ref(0);
     const bodyWidth = ref(0);
     const scrollBarWidth = ref(0);
-    const instance = getCurrentInstance();
     watchEffect(
       () => {
         bodyScrollWidth.value = props.scrollBodySizeInfo.scrollWidth || 0;
@@ -120,7 +111,6 @@ export default defineComponent<StickyScrollBarProps>({
           isHiddenScrollBar: false,
         }));
       }
-      instance.update?.();
     };
 
     const setScrollLeft = (left: number) => {

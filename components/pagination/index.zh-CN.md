@@ -4,7 +4,7 @@ subtitle: 分页
 type: 导航
 title: Pagination
 cols: 1
-cover: src/assets/components-cover/pagination.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/pagination.svg
 ---
 
 采用分页的形式分隔长列表，每次只加载一个页面。

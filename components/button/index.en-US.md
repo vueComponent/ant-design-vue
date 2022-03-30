@@ -2,7 +2,7 @@
 category: Components
 type: General
 title: Button
-cover: src/assets/components-cover/button.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/button.svg
 ---
 
 To trigger an operation.

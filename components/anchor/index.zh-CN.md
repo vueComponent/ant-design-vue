@@ -4,7 +4,7 @@ subtitle: 锚点
 cols: 2
 type: 其他
 title: Anchor
-cover: src/assets/components-cover/anchor.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/anchor.svg
 ---
 
 用于跳转到页面指定位置。

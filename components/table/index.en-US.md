@@ -3,7 +3,7 @@ category: Components
 cols: 1
 type: Data Display
 title: Table
-cover: src/assets/components-cover/table.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/table.svg
 ---
 
 A table displays rows of data.

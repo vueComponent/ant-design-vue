@@ -3,7 +3,7 @@ category: Components
 subtitle: 固钉
 type: 导航
 title: Affix
-cover: src/assets/components-cover/affix.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/affix.svg
 ---
 
 将页面元素钉在可视范围。

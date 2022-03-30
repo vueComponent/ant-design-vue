@@ -3,7 +3,7 @@ category: Components
 type: 通用
 title: Button
 subtitle: 按钮
-cover: src/assets/components-cover/button.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/button.svg
 ---
 
 按钮用于开始一个即时操作。

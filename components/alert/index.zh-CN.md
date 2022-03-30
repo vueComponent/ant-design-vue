@@ -3,7 +3,7 @@ category: Components
 type: 反馈
 title: Alert
 subtitle: 警告提示
-cover: src/assets/components-cover/alert.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/alert.svg
 ---
 
 警告提示，展现需要关注的信息。

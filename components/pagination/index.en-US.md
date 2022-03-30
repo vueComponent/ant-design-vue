@@ -3,7 +3,7 @@ category: Components
 type: Navigation
 title: Pagination
 cols: 1
-cover: src/assets/components-cover/pagination.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/pagination.svg
 ---
 
 A long list can be divided into several pages using `Pagination`, and only one page will be loaded at a time.

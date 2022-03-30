@@ -2,7 +2,7 @@
 category: Components
 type: Data Entry
 title: Input
-cover: src/assets/components-cover/input.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/input.svg
 ---
 
 A basic widget for getting the user input is a text field. Keyboard and mouse can be used for providing or changing data.

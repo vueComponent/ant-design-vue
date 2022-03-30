@@ -4,7 +4,7 @@ cols: 1
 type: 数据展示
 title: Table
 subtitle: 表格
-cover: src/assets/components-cover/table.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/table.svg
 ---
 
 展示行列数据。

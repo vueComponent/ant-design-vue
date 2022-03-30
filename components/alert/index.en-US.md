@@ -2,7 +2,7 @@
 category: Components
 type: Feedback
 title: Alert
-cover: src/assets/components-cover/alert.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/alert.svg
 ---
 
 Alert component for feedback.

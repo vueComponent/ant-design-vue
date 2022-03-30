@@ -3,7 +3,7 @@ category: Components
 type: 数据录入
 title: Input
 subtitle: 输入框
-cover: src/assets/components-cover/input.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/input.svg
 ---
 
 通过鼠标或键盘输入内容，是最基础的表单域的包装。

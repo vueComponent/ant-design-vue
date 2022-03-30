@@ -3,7 +3,7 @@ category: Components
 type: Other
 cols: 2
 title: Anchor
-cover: src/assets/components-cover/anchor.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/anchor.svg
 ---
 
 Hyperlinks to scroll on one page.

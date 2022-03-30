@@ -2,7 +2,7 @@
 category: Components
 type: Navigation
 title: Affix
-cover: src/assets/components-cover/affix.svg
+cover: https://raw.githubusercontent.com/ayla-web/ayla-antd/ayla/site/src/assets/components-cover/affix.svg
 ---
 
 Wrap Affix around another component to make it stick the viewport.

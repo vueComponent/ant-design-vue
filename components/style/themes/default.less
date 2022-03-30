@@ -247,10 +247,10 @@
 @heading-5-size: ceil(@font-size-base * 1.14);
 // https://github.com/ant-design/ant-design/issues/20210
 @line-height-base: 1.5715;
-@border-radius-base: 2px;
-@border-radius-sm: @border-radius-base;
-@border-radius-md: @border-radius-base + 2px;
-@border-radius-lg: @border-radius-base + 4px;
+@border-radius-base: @ayla-rounded;
+@border-radius-sm: @ayla-rounded-sm;
+@border-radius-md: @ayla-rounded;
+@border-radius-lg: @ayla-rounded-lg;
 
 // vertical paddings
 @padding-lg: 24px; // containers
@@ -551,14 +551,14 @@
 
 // Form
 // ---
-@label-required-color: @highlight-color;
-@label-color: @heading-color;
+@label-required-color: @ayla-color-danger-6;
+@label-color: @ayla-color-text-5;
 @form-warning-input-bg: @input-bg;
-@form-item-margin-bottom: 24px;
+@form-item-margin-bottom: 30px;
 @form-item-trailing-colon: true;
-@form-vertical-label-padding: 0 0 8px;
+@form-vertical-label-padding: 0 0 5px;
 @form-vertical-label-margin: 0;
-@form-item-label-font-size: @font-size-base;
+@form-item-label-font-size: @font-size-sm;
 @form-item-label-height: @input-height-base;
 @form-item-label-colon-margin-right: 8px;
 @form-item-label-colon-margin-left: 2px;
@@ -586,7 +586,7 @@
 @input-padding-vertical-lg: (
     ceil(((@input-height-lg - @font-size-lg * @line-height-base) / 2) * 10) / 10
   ) - @border-width-base;
-@input-placeholder-color: hsv(0, 0, 75%);
+@input-placeholder-color: @ayla-color-text-3;
 @input-color: @text-color;
 @input-icon-color: @input-color;
 @input-border-color: @ayla-color-line-1;
@@ -657,15 +657,15 @@
 // Tooltip
 // ---
 // Tooltip max width
-@tooltip-max-width: 250px;
+@tooltip-max-width: 422px;
 // Tooltip text color
 @tooltip-color: #fff;
 // Tooltip background color
 @tooltip-bg: rgba(0, 0, 0, 0.75);
 // Tooltip arrow width
-@tooltip-arrow-width: 5px;
+@tooltip-arrow-width: 6px;
 // Tooltip distance with trigger
-@tooltip-distance: @tooltip-arrow-width - 1px + 4px;
+@tooltip-distance: @tooltip-arrow-width - 1px + 6px;
 // Tooltip arrow color
 @tooltip-arrow-color: @tooltip-bg;
 

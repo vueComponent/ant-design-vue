@@ -42,8 +42,15 @@
   .@{form-item-prefix-cls} {
     flex-direction: column;
 
-    &-label > label {
-      height: auto;
+    &-label {
+      > label {
+        height: auto;
+        display: flex;
+        align-items: flex-end;
+      }
+      &.@{form-item-prefix-cls}-label-extra-right > label {
+        justify-content: space-between;
+      }
     }
   }
 }

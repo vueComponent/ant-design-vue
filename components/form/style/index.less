@@ -84,6 +84,7 @@
     white-space: nowrap;
     text-align: right;
     vertical-align: middle;
+    font-weight: @ayla-font-weight-medium;
 
     &-left {
       text-align: left;
@@ -101,10 +102,30 @@
       align-items: center;
       max-width: 100%;
       height: @form-item-label-height;
+      line-height: @form-item-label-font-size;
       color: @label-color;
       font-size: @form-item-label-font-size;
 
-      > .@{iconfont-css-prefix} {
+      .@{form-item-prefix-cls}-subtitle {
+        color: @ayla-color-text-4;
+        font-weight: @ayla-font-weight-regular;
+
+        &-brackets-wrapped + .@{form-item-prefix-cls}-description-icon {
+          margin-left: 0;
+        }
+      }
+
+      .@{form-item-prefix-cls}-description-icon {
+        color: @ayla-color-text-4;
+        font-weight: @ayla-font-weight-regular;
+        margin-left: 6px;
+      }
+
+      .@{form-item-prefix-cls}-label-extra {
+        margin-left: 8px;
+      }
+
+      .@{iconfont-css-prefix} {
         font-size: @form-item-label-font-size;
         vertical-align: top;
       }
@@ -112,10 +133,11 @@
       // Required mark
       &.@{form-item-prefix-cls}-required:not(.@{form-item-prefix-cls}-required-mark-optional)::before {
         display: inline-block;
-        margin-right: 4px;
+        margin-right: 3px;
+        margin-top: 1px;
         color: @label-required-color;
         font-size: @form-item-label-font-size;
-        font-family: SimSun, sans-serif;
+        // font-family: SimSun, sans-serif;
         line-height: 1;
         content: '*';
 

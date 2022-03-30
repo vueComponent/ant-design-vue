@@ -85,6 +85,10 @@ export const formItemProps = {
   htmlFor: PropTypes.string,
   prefixCls: PropTypes.string,
   label: PropTypes.any,
+  subtitle: PropTypes.string,
+  labelTooltip: PropTypes.string,
+  labelExtra: PropTypes.any,
+  labelExtraRight: PropTypes.looseBool,
   help: PropTypes.any,
   extra: PropTypes.any,
   labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
@@ -416,6 +420,10 @@ export default defineComponent({
                   requiredMark={formContext.requiredMark.value}
                   prefixCls={prefixCls.value}
                   onClick={onLabelClick}
+                  subtitle={props.subtitle}
+                  labelTooltip={props.labelTooltip}
+                  labelExtra={props.labelExtra ?? slots.labelExtra?.()}
+                  labelExtraRight={props.labelExtraRight}
                   label={props.label ?? slots.label?.()}
                 />
                 {/* Input Group */}

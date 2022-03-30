@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="68px" viewBox="0 0 120 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>TimePicker</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-1801.000000, -350.000000)">
+            <g id="TimePicker" transform="translate(1801.000000, 350.000000)">
+                <g id="3.DataEntry/TimePicker/Default">
+                    <g id="3.DataEntry/Selecte/Default/Unselected">
+                        <g id="3.DataEntry/Input/Default/Basic-#">
+                            <g id="9.Box/1.Cards/4.Border" fill-rule="nonzero">
+                                <g id="Z/Shape/RectangleRC/2px/RC-A">
+                                    <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="118" height="30" rx="1"></rect>
+                                    <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                                </g>
+                            </g>
+                            <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                                <tspan x="12" y="20">Default Size</tspan>
+                            </text>
+                        </g>
+                        <g id="7.Icon/suggested/18.time/outline" transform="translate(98.000000, 9.000000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                            <path d="M7,0.875 C10.3824219,0.875 13.125,3.61757813 13.125,7 C13.125,10.3824219 10.3824219,13.125 7,13.125 C3.61757813,13.125 0.875,10.3824219 0.875,7 C0.875,3.61757813 3.61757813,0.875 7,0.875 Z M7,1.9140625 C4.19179688,1.9140625 1.9140625,4.19179688 1.9140625,7 C1.9140625,9.80820312 4.19179688,12.0859375 7,12.0859375 C9.80820312,12.0859375 12.0859375,9.80820312 12.0859375,7 C12.0859375,4.19179688 9.80820312,1.9140625 7,1.9140625 Z M7.32949219,3.828125 C7.38964844,3.828125 7.43886719,3.87734375 7.43886719,3.9375 L7.43886719,3.9375 L7.43886719,7.32128906 L9.38847656,8.73085938 C9.43769531,8.76503906 9.44863281,8.83339844 9.41308594,8.88398438 L9.41308594,8.88398438 L9.02207031,9.4171875 C8.98652344,9.46503906 8.91816406,9.47597656 8.86894531,9.44042969 L8.86894531,9.44042969 L6.60761719,7.79160156 C6.57890625,7.77109375 6.5625,7.73828125 6.5625,7.70273438 L6.5625,7.70273438 L6.5625,3.9375 C6.5625,3.87734375 6.61171875,3.828125 6.671875,3.828125 L6.671875,3.828125 Z" id="fill"></path>
+                        </g>
+                    </g>
+                </g>
+                <g id="3.DataEntry/TimePicker/Small" transform="translate(0.000000, 44.000000)">
+                    <g id="3.DataEntry/Selecte/Small/Unselected">
+                        <g id="3.DataEntry/Input/Small/Basic-#">
+                            <g id="9.Box/1.Cards/4.Border" fill-rule="nonzero">
+                                <g id="Z/Shape/RectangleRC/2px/RC-A">
+                                    <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="118" height="22" rx="1"></rect>
+                                    <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="119" height="23" rx="2"></rect>
+                                </g>
+                            </g>
+                            <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" line-spacing="20" fill="#000000">
+                                <tspan x="8" y="15">Small Size</tspan>
+                            </text>
+                        </g>
+                        <g id="7.Icon/suggested/18.time/outline" transform="translate(100.000000, 6.000000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                            <path d="M6,0.75 C8.89921875,0.75 11.25,3.10078125 11.25,6 C11.25,8.89921875 8.89921875,11.25 6,11.25 C3.10078125,11.25 0.75,8.89921875 0.75,6 C0.75,3.10078125 3.10078125,0.75 6,0.75 Z M6,1.640625 C3.59296875,1.640625 1.640625,3.59296875 1.640625,6 C1.640625,8.40703125 3.59296875,10.359375 6,10.359375 C8.40703125,10.359375 10.359375,8.40703125 10.359375,6 C10.359375,3.59296875 8.40703125,1.640625 6,1.640625 Z M6.28242188,3.28125 C6.33398438,3.28125 6.37617188,3.3234375 6.37617188,3.375 L6.37617188,3.375 L6.37617188,6.27539063 L8.04726563,7.48359375 C8.08945313,7.51289063 8.09882813,7.57148438 8.06835938,7.61484375 L8.06835938,7.61484375 L7.73320313,8.071875 C7.70273438,8.11289063 7.64414063,8.12226563 7.60195313,8.09179688 L7.60195313,8.09179688 L5.66367188,6.67851563 C5.6390625,6.6609375 5.625,6.6328125 5.625,6.60234375 L5.625,6.60234375 L5.625,3.375 C5.625,3.3234375 5.6671875,3.28125 5.71875,3.28125 L5.71875,3.28125 Z" id="fill"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -17,17 +17,31 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
 
 <template>
   <a-form :layout="formState.layout" :model="formState" v-bind="formItemLayout">
-    <a-form-item label="Form Layout">
+    <a-form-item label="Form Layout" required>
       <a-radio-group v-model:value="formState.layout">
         <a-radio-button value="horizontal">Horizontal</a-radio-button>
         <a-radio-button value="vertical">Vertical</a-radio-button>
         <a-radio-button value="inline">Inline</a-radio-button>
       </a-radio-group>
     </a-form-item>
-    <a-form-item label="Field A">
+    <a-form-item
+      label="属性类型"
+      label-extra-right
+      subtitle="（我是备注）"
+      description="属性一般是设备的运行状态，如当前温度等；服务是设备可被调用的方法，支持定义参数，如执行某项任务；事件则是设备上报的通知，如告警，需要被及时处理。"
+    >
+      <template #labelExtra>
+        <a-button size="small" type="primary">点击</a-button>
+      </template>
       <a-input v-model:value="formState.fieldA" placeholder="input placeholder" />
     </a-form-item>
-    <a-form-item label="Field B">
+    <a-form-item
+      label="属性名称"
+      description="字符长度限制：30字符；字符类型限制：支持中文、字母、数字、-、_和小数点，必须以中文、字母或数字开头。"
+    >
+      <template #labelExtra>
+        <a-avatar size="small" src="https://joeschmoe.io/api/v1/random" />
+      </template>
       <a-input v-model:value="formState.fieldB" placeholder="input placeholder" />
     </a-form-item>
     <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
@@ -55,7 +69,7 @@ export default defineComponent({
       const { layout } = formState;
       return layout === 'horizontal'
         ? {
-            labelCol: { span: 4 },
+            labelCol: { span: 9 },
             wrapperCol: { span: 14 },
           }
         : {};

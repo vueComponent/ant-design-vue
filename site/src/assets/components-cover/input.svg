@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="76px" viewBox="0 0 120 76" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Input</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-843.000000, -1266.000000)">
+            <g id="Input" transform="translate(843.000000, 1266.000000)">
+                <g id="3.DataEntry/Input/Default/Basic-#">
+                    <g id="9.Box/1.Cards/4.Border" fill-rule="nonzero">
+                        <g id="Z/Shape/RectangleRC/2px/RC-A">
+                            <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="118" height="30" rx="1"></rect>
+                            <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                        </g>
+                    </g>
+                    <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                        <tspan x="12" y="20">Default Size</tspan>
+                    </text>
+                </g>
+                <g id="3.DataEntry/Input/Default/IconRight" transform="translate(0.000000, 44.000000)">
+                    <g id="3.DataEntry/Input/Default/Basic-#">
+                        <g id="9.Box/1.Cards/4.Border" fill-rule="nonzero">
+                            <g id="Z/Shape/RectangleRC/2px/RC-A">
+                                <rect id="BG/fill" fill="#FFFFFF" x="1" y="1" width="118" height="30" rx="1"></rect>
+                                <rect id="outline" stroke="#000000" stroke-width="1" opacity="0.15" x="0.5" y="0.5" width="119" height="31" rx="2"></rect>
+                            </g>
+                        </g>
+                        <text id="✏️Text" opacity="0.25" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000">
+                            <tspan x="12" y="20">Default Size</tspan>
+                        </text>
+                    </g>
+                    <g id="7.Icon/interface/16.search" transform="translate(96.000000, 8.000000)" fill="#000000" fill-rule="nonzero" opacity="0.65">
+                        <path d="M9.5,1.75 C6.8765625,1.75 4.75,3.8765625 4.75,6.5 C4.75,7.5984375 5.1234375,8.609375 5.7484375,9.4140625 L1.7859375,13.3765625 C1.7375,13.425 1.7375,13.5046875 1.7859375,13.553125 L2.446875,14.2140625 C2.4953125,14.2625 2.575,14.2625 2.6234375,14.2140625 L6.5859375,10.2515625 C7.390625,10.8765625 8.4015625,11.25 9.5,11.25 C12.1234375,11.25 14.25,9.1234375 14.25,6.5 C14.25,3.8765625 12.1234375,1.75 9.5,1.75 Z M12.01875,9.01875 C11.346875,9.6921875 10.4515625,10.0625 9.5,10.0625 C8.5484375,10.0625 7.653125,9.6921875 6.98125,9.01875 C6.3078125,8.346875 5.9375,7.4515625 5.9375,6.5 C5.9375,5.5484375 6.3078125,4.653125 6.98125,3.98125 C7.653125,3.3078125 8.5484375,2.9375 9.5,2.9375 C10.4515625,2.9375 11.346875,3.3078125 12.01875,3.98125 C12.6921875,4.653125 13.0625,5.5484375 13.0625,6.5 C13.0625,7.4515625 12.6921875,8.346875 12.01875,9.01875 Z" id="fill"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

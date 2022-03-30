@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="56px" viewBox="0 0 80 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 48</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-1820.000000, -126.000000)">
+            <g id="编组-48" transform="translate(1821.000000, 126.000000)">
+                <g id="3.DataEntry/Switch/Small/on#" transform="translate(-1.000000, 0.000000)">
+                    <path d="M0,8 L0,8 C0,3.581722 3.57465974,0 8.00493448,0 L19.9950655,0 C24.4160688,0 28,3.59071231 28,8 L28,8 C28,12.418278 24.4253403,16 19.9950655,16 L8.00493448,16 C3.58393124,16 0,12.4211798 0,8 L0,8 Z" id="Rectangle-77-Copy-11" fill="#699937" fill-rule="nonzero"></path>
+                    <path d="M20,14 C23.3137085,14 26,11.3137085 26,8 C26,4.6862915 23.3137085,2 20,2 C16.6862915,2 14,4.6862915 14,8 C14,11.3137085 16.6862915,14 20,14 Z" id="Oval-1-Copy-15" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g>
+                <g id="3.DataEntry/Switch/Small/on.disable#" transform="translate(51.000000, 0.000000)">
+                    <path d="M0,8 L0,8 C0,3.581722 3.57465974,0 8.00493448,0 L19.9950655,0 C24.4160688,0 28,3.59071231 28,8 L28,8 C28,12.418278 24.4253403,16 19.9950655,16 L8.00493448,16 C3.58393124,16 0,12.4211798 0,8 L0,8 Z" id="Rectangle-77-Copy-12" fill="#699937" fill-rule="nonzero" opacity="0.35"></path>
+                    <path d="M20,14 C23.3137085,14 26,11.3137085 26,8 C26,4.6862915 23.3137085,2 20,2 C16.6862915,2 14,4.6862915 14,8 C14,11.3137085 16.6862915,14 20,14 Z" id="Oval-1-Copy-18" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g>
+                <g id="3.DataEntry/Switch/Small/off#" transform="translate(-1.000000, 40.000000)">
+                    <path d="M0,8 L0,8 C0,3.581722 3.57465974,0 8.00493448,0 L19.9950655,0 C24.4160688,0 28,3.59071231 28,8 L28,8 C28,12.418278 24.4253403,16 19.9950655,16 L8.00493448,16 C3.58393124,16 0,12.4211798 0,8 L0,8 Z" id="Rectangle-77-Copy-11" fill="#000000" fill-rule="nonzero" opacity="0.25"></path>
+                    <path d="M8,14 C11.3137085,14 14,11.3137085 14,8 C14,4.6862915 11.3137085,2 8,2 C4.6862915,2 2,4.6862915 2,8 C2,11.3137085 4.6862915,14 8,14 Z" id="Oval-1-Copy-15" fill="#FFFFFF" fill-rule="evenodd"></path>
+                </g>
+                <g id="3.DataEntry/Switch/Small/off.disable#" transform="translate(51.000000, 40.000000)" fill-rule="nonzero">
+                    <path d="M0,8 L0,8 C0,3.581722 3.57465974,0 8.00493448,0 L19.9950655,0 C24.4160688,0 28,3.59071231 28,8 L28,8 C28,12.418278 24.4253403,16 19.9950655,16 L8.00493448,16 C3.58393124,16 0,12.4211798 0,8 L0,8 Z" id="Rectangle-77-Copy-11" fill="#000000" opacity="0.15"></path>
+                    <path d="M8,14 C11.3137085,14 14,11.3137085 14,8 C14,4.6862915 11.3137085,2 8,2 C4.6862915,2 2,4.6862915 2,8 C2,11.3137085 4.6862915,14 8,14 Z" id="Oval-1-Copy-15" fill="#FFFFFF" opacity="0.85"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

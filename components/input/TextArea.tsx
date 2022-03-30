@@ -268,7 +268,7 @@ export default defineComponent({
         if (typeof showCount.value === 'object') {
           dataCount = showCount.value.formatter({ count: valueLength, maxlength });
         } else {
-          dataCount = `${valueLength}${hasMaxLength.value ? ` / ${maxlength}` : ''}`;
+          dataCount = `${valueLength}${hasMaxLength.value ? `/${maxlength}` : ''}`;
         }
         textareaNode = (
           <div

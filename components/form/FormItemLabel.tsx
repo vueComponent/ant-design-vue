@@ -8,11 +8,17 @@ import defaultLocale from '../locale/default';
 import classNames from '../_util/classNames';
 import type { VueNode } from '../_util/type';
 import type { FunctionalComponent, HTMLAttributes } from 'vue';
+import Tooltip from '../tooltip/Tooltip';
+import { QuestionCircleOutlined } from '@ant-design/icons-vue';
 
 export interface FormItemLabelProps {
   colon?: boolean;
   htmlFor?: string;
   label?: VueNode;
+  subtitle?: string;
+  labelTooltip?: string;
+  labelExtra?: VueNode;
+  labelExtraRight?: boolean;
   labelAlign?: FormLabelAlign;
   labelCol?: ColProps & HTMLAttributes;
   requiredMark?: RequiredMark;
@@ -47,6 +53,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
     mergedLabelCol.class,
     {
       [`${labelClsBasic}-wrap`]: !!labelWrap.value,
+      [`${prefixCls}-item-label-extra-right`]: !!props.labelExtraRight,
     },
   );
 
@@ -77,6 +84,52 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
       </>
     );
   }
+
+  // Add subtitle if have
+  if (props.subtitle) {
+    const isWrappedByChineseBrackets = /^（.*）$/.test(props.subtitle);
+    labelChildren = (
+      <>
+        {labelChildren}
+        <span
+          class={`${prefixCls}-item-subtitle ${
+            isWrappedByChineseBrackets ? `${prefixCls}-item-subtitle-brackets-wrapped` : ''
+          }`}
+        >
+          {props.subtitle}
+        </span>
+      </>
+    );
+  }
+
+  // Add label tooltip if have
+  if (props.labelTooltip) {
+    labelChildren = (
+      <>
+        {labelChildren}
+        <Tooltip
+          class={`${prefixCls}-item-labelTooltip-icon`}
+          placement="right"
+          title={props.labelTooltip}
+        >
+          <QuestionCircleOutlined />
+        </Tooltip>
+      </>
+    );
+  }
+
+  // Add label extra if have
+  const labelExtra = props.labelExtra ?? slots.labelExtra?.();
+  if (labelExtra) {
+    labelChildren = (
+      <>
+        <span class={`${prefixCls}-item-label-content`}>{labelChildren}</span>
+        {/* {labelExtra} */}
+        <span class={`${prefixCls}-item-label-extra`}>{labelExtra}</span>
+      </>
+    );
+  }
+
   const labelClassName = classNames({
     [`${prefixCls}-item-required`]: required,
     [`${prefixCls}-item-required-mark-optional`]: requiredMark === 'optional',

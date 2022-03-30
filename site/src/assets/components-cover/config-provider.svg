@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150px" height="93px" viewBox="0 0 150 93" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ConfigProvider</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-348.000000, -798.000000)">
+            <g id="ConfigProvider" transform="translate(348.000000, 798.000000)">
+                <rect id="矩形复制-81" fill="#699937" x="0" y="0" width="25" height="6"></rect>
+                <rect id="矩形复制-163" fill="#699937" x="100" y="0" width="25" height="6"></rect>
+                <rect id="矩形复制-167" fill="#699937" x="0" y="70" width="61" height="6"></rect>
+                <rect id="矩形复制-165" fill="#699937" x="108" y="14" width="29" height="6"></rect>
+                <rect id="矩形复制-164" fill="#52C216" x="133" y="0" width="17" height="6"></rect>
+                <rect id="矩形复制-169" fill="#52C216" x="69" y="70" width="17" height="6"></rect>
+                <rect id="矩形复制-170" fill="#52C216" x="21" y="84" width="17" height="6"></rect>
+                <rect id="矩形复制-162" fill="#EBEBEB" x="33" y="0" width="59" height="6"></rect>
+                <rect id="矩形复制-82" fill="#EBEBEB" x="0" y="14" width="100" height="6"></rect>
+                <rect id="矩形复制-83" fill="#EBEBEB" x="0" y="28" width="43" height="6"></rect>
+                <rect id="矩形复制-168" fill="#EBEBEB" x="94" y="70" width="52" height="6"></rect>
+                <rect id="矩形复制-171" fill="#EBEBEB" x="46" y="84" width="52" height="6"></rect>
+                <rect id="矩形复制-166" fill="#EBEBEB" x="51" y="28" width="74" height="6"></rect>
+                <text id="&lt;" font-family="PingFangSC-Medium, PingFang SC" font-size="10" font-weight="400" fill="#000000" fill-opacity="0.65">
+                    <tspan x="10" y="90">&lt;</tspan>
+                </text>
+                <text id="&lt;复制" transform="translate(105.500000, 86.000000) scale(-1, 1) translate(-105.500000, -86.000000) " font-family="PingFangSC-Medium, PingFang SC" font-size="10" font-weight="400" fill="#000000" fill-opacity="0.65">
+                    <tspan x="102" y="90">&lt;</tspan>
+                </text>
+                <text id="//…" font-family="PingFangSC-Medium, PingFang SC" font-size="10" font-weight="400" fill="#000000" fill-opacity="0.65">
+                    <tspan x="0" y="55">//…</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

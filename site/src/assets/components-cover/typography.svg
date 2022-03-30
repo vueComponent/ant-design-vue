@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150px" height="105px" viewBox="0 0 150 105" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Typography</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-348.000000, -102.000000)">
+            <g id="Typography" transform="translate(348.000000, 102.000000)">
+                <rect id="矩形复制-90" fill="#F5F5F5" x="6" y="7" width="137" height="90"></rect>
+                <rect id="矩形" fill="#E0E0E0" x="0" y="19" width="150" height="1"></rect>
+                <rect id="矩形复制-89" fill="#E0E0E0" transform="translate(19.000000, 52.500000) rotate(-270.000000) translate(-19.000000, -52.500000) " x="-33" y="52" width="104" height="1"></rect>
+                <rect id="矩形复制-91" fill="#E0E0E0" transform="translate(131.000000, 52.500000) rotate(-270.000000) translate(-131.000000, -52.500000) " x="79" y="52" width="104" height="1"></rect>
+                <rect id="矩形复制-88" fill="#E0E0E0" x="0" y="84" width="150" height="1"></rect>
+                <text id="Aa" font-family="PingFangSC-Medium, PingFang SC" font-size="48" font-weight="400" fill="#699937">
+                    <tspan x="24" y="70">Aa</tspan>
+                </text>
+                <rect id="矩形" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="53" y="32" width="70" height="6"></rect>
+                <rect id="矩形复制-92" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="87" y="43" width="36" height="6"></rect>
+                <rect id="矩形复制-93" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="87" y="53" width="36" height="6"></rect>
+                <rect id="矩形复制-94" fill="#F5F5F5" style="mix-blend-mode: multiply;" x="87" y="64" width="36" height="6"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

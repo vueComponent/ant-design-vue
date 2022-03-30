@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="93px" height="82px" viewBox="0 0 93 82" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 47</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="CheckBox备份" transform="translate(-178.000000, -21.000000)">
+            <g id="编组-47" transform="translate(178.000000, 21.000000)">
+                <g id="Radio/Selected/Normal">
+                    <g id="Group" transform="translate(0.000000, 3.000000)">
+                        <circle id="Oval-1-Copy-2" stroke="#699937" fill="#FFFFFF" cx="8" cy="8" r="7.5"></circle>
+                        <circle id="Oval-1-Copy-5" fill="#699937" cx="8" cy="8" r="4"></circle>
+                    </g>
+                    <text id="Text" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000" fill-opacity="0.65">
+                        <tspan x="24" y="15">|||||||||||||||||||||||||</tspan>
+                    </text>
+                </g>
+                <g id="Radio/Default/Disabled" transform="translate(0.000000, 60.000000)">
+                    <circle id="Oval-1-Copy-3" stroke="#D9D9D9" fill="#F5F5F5" cx="8" cy="11" r="7.5"></circle>
+                    <text id="Text" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000" fill-opacity="0.25">
+                        <tspan x="24" y="15">|||||||||||||||||||||||||</tspan>
+                    </text>
+                </g>
+                <g id="Radio/Default/Normal" transform="translate(0.000000, 30.000000)">
+                    <circle id="Oval-1" stroke="#D9D9D9" fill="#FFFFFF" cx="8" cy="11" r="7.5"></circle>
+                    <text id="Text" font-family="PingFangSC-Regular, PingFang SC" font-size="14" font-weight="normal" line-spacing="22" fill="#000000" fill-opacity="0.65">
+                        <tspan x="24" y="15">|||||||||||||||||||||||||</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

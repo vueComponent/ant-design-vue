@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="155px" height="104px" viewBox="0 0 155 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 3</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ant-Design-组件缩略图" transform="translate(-585.000000, -562.000000)">
+            <g id="编组-3" transform="translate(585.000000, 562.000000)">
+                <rect id="矩形复制-70" fill="#EBEBEB" x="8" y="8" width="31" height="6"></rect>
+                <rect id="矩形复制-73" fill="#F5F5F5" x="8" y="35" width="75" height="6"></rect>
+                <rect id="矩形复制-74" fill="#F5F5F5" x="8" y="49" width="129" height="6"></rect>
+                <rect id="矩形复制-75" fill="#F5F5F5" x="8" y="63" width="129" height="6"></rect>
+                <rect id="矩形复制-67" fill="#699937" x="123" y="89" width="24" height="10" rx="1.2"></rect>
+                <rect id="矩形复制-67" stroke="#D9D9D9" stroke-width="0.5" x="95.25" y="89.25" width="23.5" height="9.5" rx="1.2"></rect>
+                <rect id="矩形复制-71" fill="#E8E8E8" x="0" y="22" width="155" height="1"></rect>
+                <rect id="矩形复制-72" fill="#E8E8E8" x="0" y="83" width="155" height="1"></rect>
+                <g id="close复制" opacity="0.45" transform="translate(139.000000, 7.000000)" fill="#000000" fill-rule="nonzero">
+                    <rect id="矩形" opacity="0" x="0" y="0" width="8" height="8"></rect>
+                    <path d="M4.4046875,4 L6.45546875,1.55546875 C6.48984375,1.51484375 6.4609375,1.453125 6.4078125,1.453125 L5.784375,1.453125 C5.74765625,1.453125 5.7125,1.46953125 5.68828125,1.49765625 L3.996875,3.5140625 L2.30546875,1.49765625 C2.28203125,1.46953125 2.246875,1.453125 2.209375,1.453125 L1.5859375,1.453125 C1.5328125,1.453125 1.50390625,1.51484375 1.53828125,1.55546875 L3.5890625,4 L1.53828125,6.44453125 C1.50390625,6.48515625 1.5328125,6.546875 1.5859375,6.546875 L2.209375,6.546875 C2.24609375,6.546875 2.28125,6.53046875 2.30546875,6.50234375 L3.996875,4.4859375 L5.68828125,6.50234375 C5.71171875,6.53046875 5.746875,6.546875 5.784375,6.546875 L6.4078125,6.546875 C6.4609375,6.546875 6.48984375,6.48515625 6.45546875,6.44453125 L4.4046875,4 Z" id="路径"></path>
+                </g>
+                <rect id="矩形复制-69" stroke="#D9D9D9" x="0.5" y="0.5" width="154" height="103" rx="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

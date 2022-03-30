@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SizeType } from '../config-provider';
 
-export type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text';
+export type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text' | 'success';
 export type ButtonShape = 'default' | 'circle' | 'round';
 
 export type ButtonHTMLType = 'submit' | 'button' | 'reset';
@@ -32,6 +32,7 @@ export const buttonProps = () => ({
   ghost: { type: Boolean, default: undefined },
   block: { type: Boolean, default: undefined },
   danger: { type: Boolean, default: undefined },
+  success: { type: Boolean, default: undefined },
   icon: PropTypes.any,
   href: String,
   target: String,

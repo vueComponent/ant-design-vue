@@ -314,6 +314,112 @@
   .button-variant-other(@btn-default-color, @btn-default-bg, @btn-default-border);
   border-style: dashed;
 }
+
+// success button style
+.btn-success() {
+  .button-variant-primary(@btn-success-color, @btn-success-bg, @success-color-hover, @success-color-active);
+}
+.btn-success-default() {
+  .button-color(@success-color, @btn-default-bg, @success-color);
+
+  &:hover,
+  &:focus {
+    & when (@theme = dark) {
+      .button-color(
+        ~`colorPalette('@{success-color}', 7) `; @btn-default-bg; ~`colorPalette('@{success-color}', 7)
+          `
+      );
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(
+        ~`colorPalette('@{success-color}', 5) `; @btn-default-bg; ~`colorPalette('@{success-color}', 5)
+          `
+      );
+    }
+    & when (@theme = variable) {
+      .button-color(@success-color-hover, @btn-default-bg, @success-color-hover);
+    }
+  }
+
+  &:active {
+    & when (@theme = dark) {
+      .button-color(
+        ~`colorPalette('@{error-color}', 5) `; @btn-default-bg; ~`colorPalette('@{error-color}', 5)
+          `
+      );
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(
+        ~`colorPalette('@{error-color}', 7) `; @btn-default-bg; ~`colorPalette('@{error-color}', 7)
+          `
+      );
+    }
+    & when (@theme = variable) {
+      .button-color(@error-color-active, @btn-default-bg, @error-color-active);
+    }
+  }
+  .button-disabled();
+}
+.btn-success-link() {
+  .button-variant-other(@success-color, transparent, transparent);
+  box-shadow: none;
+
+  &:hover,
+  &:focus {
+    & when (@theme = dark) {
+      .button-color(~`colorPalette('@{success-color}', 7) `; transparent; transparent);
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(~`colorPalette('@{success-color}', 5) `; transparent; transparent);
+    }
+    & when (@theme = variable) {
+      .button-color(@success-color-hover; transparent; transparent);
+    }
+  }
+
+  &:active {
+    & when (@theme = dark) {
+      .button-color(~`colorPalette('@{success-color}', 5) `; transparent; transparent);
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(~`colorPalette('@{success-color}', 7) `; transparent; transparent);
+    }
+    & when (@theme = variable) {
+      .button-color(@success-color-active; transparent; transparent);
+    }
+  }
+  .button-disabled(@disabled-color; transparent; transparent);
+}
+.btn-success-text() {
+  .button-variant-other(@success-color, transparent, transparent);
+  box-shadow: none;
+
+  &:hover,
+  &:focus {
+    & when (@theme = dark) {
+      .button-color(~`colorPalette('@{success-color}', 7) `; @btn-text-hover-bg; transparent);
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(~`colorPalette('@{success-color}', 5) `; @btn-text-hover-bg; transparent);
+    }
+    & when (@theme = variable) {
+      .button-color(@success-color-hover; @btn-text-hover-bg; transparent);
+    }
+  }
+
+  &:active {
+    & when (@theme = dark) {
+      .button-color(~`colorPalette('@{success-color}', 5) `; fadein(@btn-text-hover-bg, 1%); transparent);
+    }
+    & when (not (@theme = dark) and not (@theme = variable)) {
+      .button-color(~`colorPalette('@{success-color}', 7) `; fadein(@btn-text-hover-bg, 1%); transparent);
+    }
+    & when (@theme = variable) {
+      .button-color(@success-color-active; fadein(@btn-text-hover-bg, 1%); transparent);
+    }
+  }
+  .button-disabled(@disabled-color; transparent; transparent);
+}
 // danger button style
 .btn-danger() {
   .button-variant-primary(@btn-danger-color, @btn-danger-bg, @error-color-hover, @error-color-active);

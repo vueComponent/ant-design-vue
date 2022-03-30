@@ -70,9 +70,8 @@ export default defineComponent({
         immediate: true,
       },
     );
-
     const classes = computed(() => {
-      const { type, shape = 'default', ghost, block, danger } = props;
+      const { type, shape = 'default', ghost, block, danger, success } = props;
       const pre = prefixCls.value;
 
       const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
@@ -89,6 +88,7 @@ export default defineComponent({
         [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
         [`${pre}-block`]: block,
         [`${pre}-dangerous`]: !!danger,
+        [`${pre}-successof`]: !!success,
         [`${pre}-rtl`]: direction.value === 'rtl',
       };
     });

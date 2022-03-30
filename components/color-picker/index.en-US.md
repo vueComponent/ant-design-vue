@@ -8,7 +8,7 @@
 | disabled | whether disabled picker | boolean | false |
 | format | Color format | 'HEXA' \|'RGBA' \|'HSVA' \|'HSLA' \|'CMYK' | 'HEXA' |
 | getPopupContainer | to set the container of the floating layer, while the default is to create a div element in body | Function(triggerNode) | () => document.body |
-| locale | locale package | [default setting](https://github.com/vueComponent/ant-design-vue/blob/next/components/color-picker/locale) | - |
+| locale | locale package | [default setting](https://github.com/vueComponent/ant-design-vue/blob/main/components/color-picker/locale) | - |
 | size | size of pickr | 'large'\|'small'\|'default' | 'default' |
 | value | color value | string | - |
 

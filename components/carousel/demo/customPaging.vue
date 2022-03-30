@@ -32,7 +32,7 @@ Custom paging display
 import { defineComponent } from 'vue';
 
 const baseUrl =
-  'https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/';
+  'https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/';
 export default defineComponent({
   setup() {
     const getImgUrl = (i: number) => {

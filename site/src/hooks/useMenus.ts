@@ -54,8 +54,8 @@ const useMenus = (): {
     //     category: 'docs',
     //     target: '_blank',
     //     path: globalConfig.isZhCN.value
-    //       ? 'https://github.com/vueComponent/ant-design-vue/blob/next/CHANGELOG.zh-CN.md'
-    //       : 'https://github.com/vueComponent/ant-design-vue/blob/next/CHANGELOG.en-US.md',
+    //       ? 'https://github.com/vueComponent/ant-design-vue/blob/main/CHANGELOG.zh-CN.md'
+    //       : 'https://github.com/vueComponent/ant-design-vue/blob/main/CHANGELOG.en-US.md',
     //   } as any);
     // }
     return ms;

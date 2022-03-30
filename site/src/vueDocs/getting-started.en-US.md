@@ -97,7 +97,7 @@ In this way, component sub-components, such as Button and ButtonGroup, need to b
 
 ### 4. Component list
 
-[Component list](https://github.com/vueComponent/ant-design-vue/blob/next/components/components.ts)
+[Component list](https://github.com/vueComponent/ant-design-vue/blob/main/components/components.ts)
 
 ## Compatibility
 

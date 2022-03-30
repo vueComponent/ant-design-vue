@@ -35,4 +35,4 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/%24C9tmj978R/Carousel.svg
 | next()                         | 切换到下一面板                                    |      |
 | prev()                         | 切换到上一面板                                    |      |
 
-更多属性可参考源码：[carousel props](https://github.com/vueComponent/ant-design-vue/blob/next/components/carousel/index.tsx)
+更多属性可参考源码：[carousel props](https://github.com/vueComponent/ant-design-vue/blob/main/components/carousel/index.tsx)

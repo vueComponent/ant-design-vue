@@ -34,4 +34,4 @@ A carousel component. Scales with its container.
 | next() | Change current slide to next slide |  |
 | prev() | Change current slide to previous slide |  |
 
-For more info on the props, refer to the [carousel props](https://github.com/vueComponent/ant-design-vue/blob/next/components/carousel/index.tsx)
+For more info on the props, refer to the [carousel props](https://github.com/vueComponent/ant-design-vue/blob/main/components/carousel/index.tsx)

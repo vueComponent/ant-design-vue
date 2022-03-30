@@ -8,7 +8,7 @@
 | disabled | 是否禁用 | boolean | false |
 | format | 定义返回的颜色格式 | 'HEXA' \|'RGBA' \|'HSVA' \|'HSLA' \|'CMYK' | 'HEXA' |
 | getPopupContainer | 浮层渲染父节点，默认渲染到 body 上 | Function(triggerNode) | () => document.body |
-| locale | 语言包 | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/next/components/color-picker/locale) | - |
+| locale | 语言包 | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/main/components/color-picker/locale) | - |
 | size | 取色器尺寸 | 'large'\|'small'\|'default' | 'default' |
 | value | 颜色值 | string | - |
 

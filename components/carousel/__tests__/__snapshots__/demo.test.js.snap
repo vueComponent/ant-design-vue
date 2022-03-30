@@ -253,56 +253,56 @@ exports[`renders ./components/carousel/demo/customPaging.vue correctly 1`] = `
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
         <div class="slick-slide slick-cloned" tabindex="-1" data-index="-1" aria-hidden="true" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract04.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract04.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="0" aria-hidden="false" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract01.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract01.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract02.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract02.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract03.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract03.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract04.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract04.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract01.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract01.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract02.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract02.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract03.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract03.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract04.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract04.jpg"></div>
           </div>
         </div>
       </div>
     </div><button type="button" data-role="none" class="slick-arrow slick-next" style="display: block;"> Next</button>
     <ul style="display: block;" class="slick-dots slick-dots-bottom slick-dots slick-thumb">
-      <li class="slick-active"><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract01.jpg"></a></li>
-      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract02.jpg"></a></li>
-      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract03.jpg"></a></li>
-      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/abstract04.jpg"></a></li>
+      <li class="slick-active"><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract01.jpg"></a></li>
+      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract02.jpg"></a></li>
+      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract03.jpg"></a></li>
+      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/main/components/carousel/demo/abstract04.jpg"></a></li>
     </ul>
   </div>
 </div>

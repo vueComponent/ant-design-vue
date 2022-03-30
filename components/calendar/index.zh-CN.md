@@ -30,7 +30,7 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/dPQmLq08DI/Calendar.svg
 | disabledDate | 不可选择的日期 | (currentDate: dayjs) => boolean | 无 |  |
 | fullscreen | 是否全屏显示 | boolean | true |  |
 | headerRender | 自定义头部内容 | v-slot:headerRender="{value: dayjs, type: string, onChange: f(), onTypeChange: f()}" | - |  |
-| locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/next/components/date-picker/locale/example.json) |  |
+| locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/main/components/date-picker/locale/example.json) |  |
 | mode | 初始模式，`month/year` | string | month |  |
 | monthCellRender | 作用域插槽，自定义渲染月单元格，返回内容会被追加到单元格 | v-slot:monthCellRender="{current: dayjs}" | 无 |  |
 | monthFullCellRender | 作用域插槽，自定义渲染月单元格，返回内容覆盖单元格 | v-slot:monthFullCellRender="{current: dayjs}" | 无 |  |

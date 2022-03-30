@@ -328,7 +328,7 @@ export default defineComponent({
         if (typeof showCount === 'object') {
           dataCount = showCount.formatter({ count: valueLength, maxlength });
         } else {
-          dataCount = `${valueLength}${hasMaxLength ? ` / ${maxlength}` : ''}`;
+          dataCount = `${valueLength}${hasMaxLength ? `/${maxlength}` : ''}`;
         }
         return (
           <>

@@ -48,17 +48,24 @@
   }
 
   &-textarea-show-count {
+    position: relative;
     // https://github.com/ant-design/ant-design/issues/33049
     > .@{input-prefix-cls} {
       height: 100%;
     }
 
     &::after {
-      float: right;
-      color: @text-color-secondary;
       white-space: nowrap;
       content: attr(data-count);
       pointer-events: none;
+      color: @ayla-color-text-3;
+      background-color: @input-bg;
+      font-size: 12px;
+      position: absolute;
+      bottom: 7px;
+      right: 10px;
+      line-height: 17px;
+      -webkit-font-smoothing: antialiased;
     }
   }
 }

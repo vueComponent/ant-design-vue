@@ -28,7 +28,7 @@
     width: 180px;
     height: @transfer-list-height;
     border: @border-width-base @border-style-base @border-color-base;
-    border-radius: @border-radius-base;
+    border-radius: @border-radius-md;
 
     &-with-pagination {
       width: 250px;
@@ -143,6 +143,9 @@
             color: @link-hover-color;
           }
         }
+        .ant-checkbox::after {
+          border-radius: @border-radius-md;
+        }
       }
 
       &-item:not(&-item-disabled) {
@@ -209,6 +212,9 @@
       .@{iconfont-css-prefix} {
         font-size: 12px;
       }
+    }
+    .ant-btn-icon-only.ant-btn-sm {
+      border-radius: @border-radius-md;
     }
   }
 

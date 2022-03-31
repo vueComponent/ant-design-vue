@@ -45,7 +45,7 @@ export default defineComponent({
     const innerLoading: Ref<Loading> = ref(false);
     const hasTwoCNChar = ref(false);
 
-    const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
+    const autoInsertSpace = computed(() => autoInsertSpaceInButton.value === true);
 
     // =============== Update Loading ===============
     const loadingOrDelay = computed(() =>

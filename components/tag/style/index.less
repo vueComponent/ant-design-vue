@@ -99,6 +99,26 @@
       background: @@darkColor;
       border-color: @@darkColor;
     }
+    &-@{color} when(@color = red) {
+      color: @ayla-color-danger-6;
+      background-color: @ayla-color-danger-1;
+      border-color: @ayla-color-danger-5;
+    }
+    &-@{color} when(@color = green) {
+      color: @ayla-color-success-6;
+      background-color: @ayla-color-success-1;
+      border-color: @ayla-color-success-5;
+    }
+    &-@{color} when(@color = orange) {
+      color: @ayla-color-gold-6;
+      background-color: @ayla-color-gold-1;
+      border-color: @ayla-color-gold-5;
+    }
+    &-@{color} when(@color = blue) {
+      color: @ayla-color-blue-6;
+      background-color: @ayla-color-blue-1;
+      border-color: @ayla-color-blue-5;
+    }
   }
 
   .make-status-color-classes(@status, @cssVariableType) {

@@ -10,6 +10,16 @@
 
 ---
 
+## 3.1.0-rc.6
+
+`2022-04-01`
+
+- 🌟 Optimize `Table` performance, reduce the number of render times when hovering [900464](https://github.com/vueComponent/ant-design-vue/commit/900464473823277e4b06ace1c1ddc69ab3ef21d9)
+- 🐞 Fix `Tabs` not folding when setting addIcon [669b22](https://github.com/vueComponent/ant-design-vue/commit/669b22a54b33892c193dfd36150ae1ac2fb350dd)
+- 🐞 Fix `Mentions` component cannot be selected [#5432](https://github.com/vueComponent/ant-design-vue/issues/5432)
+- 🐞 Fix component focus and blur events do not carry event parameters, resulting in popover error [#5434](https://github.com/vueComponent/ant-design-vue/issues/5434)
+- 🐞 Fix `Select.Option`, when setting Tooltip, error is reported [#5307](https://github.com/vueComponent/ant-design-vue/issues/5307
+
 ## 3.1.0-rc.5
 
 `2022-03-28`

@@ -10,6 +10,16 @@
 
 ---
 
+## 3.1.0-rc.6
+
+`2022-04-01`
+
+- 🌟 优化 `Table` 性能，减少 hover 时 render 次数 [900464](https://github.com/vueComponent/ant-design-vue/commit/900464473823277e4b06ace1c1ddc69ab3ef21d9)
+- 🐞 修复 `Tabs` 在设置 addIcon 时，未折叠问题 [669b22](https://github.com/vueComponent/ant-design-vue/commit/669b22a54b33892c193dfd36150ae1ac2fb350dd)
+- 🐞 修复 `Mentions` 组件无法选中问题 [#5432](https://github.com/vueComponent/ant-design-vue/issues/5432)
+- 🐞 修复组件 focus、blur 事件未携带 event 参数，导致 popover 报错 [#5434](https://github.com/vueComponent/ant-design-vue/issues/5434)
+- 🐞 修复 `Select.Option`，设置 Tooltip 时，报错问题 [#5307](https://github.com/vueComponent/ant-design-vue/issues/5307)
+
 ## 3.1.0-rc.5
 
 `2022-03-28`

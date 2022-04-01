@@ -1,4 +1,4 @@
-import { warning } from '../../vc-util/warning';
+import { note } from '../../vc-util/warning';
 import type { Key, DataEntity, DataNode, GetCheckDisabled, BasicDataNode } from '../interface';
 
 interface ConductReturnType {
@@ -211,7 +211,7 @@ export function conductCheck<TreeDataType extends BasicDataNode = DataNode>(
     }),
   );
 
-  warning(
+  note(
     !warningMissKeys.length,
     `Tree missing follow keys: ${warningMissKeys
       .slice(0, 100)

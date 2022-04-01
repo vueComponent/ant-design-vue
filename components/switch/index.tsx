@@ -115,8 +115,8 @@ const Switch = defineComponent({
       formItemContext.onFieldChange();
     };
 
-    const handleBlur = () => {
-      emit('blur');
+    const handleBlur = (e: FocusEvent) => {
+      emit('blur', e);
     };
 
     const handleClick = (e: MouseEvent) => {

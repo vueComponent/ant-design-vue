@@ -74,8 +74,8 @@ export const inputNumberProps = () => ({
       (value: ValueType, info: { offset: ValueType; type: 'up' | 'down' }) => void
     >,
   },
-  onBlur: { type: Function as PropType<(e: InputEvent) => void> },
-  onFocus: { type: Function as PropType<(e: InputEvent) => void> },
+  onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
+  onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
 });
 
 export default defineComponent({
@@ -417,11 +417,11 @@ export default defineComponent({
     };
 
     // >>> Focus & Blur
-    const onBlur = () => {
+    const onBlur = (e: FocusEvent) => {
       flushInputValue(false);
       focus.value = false;
       userTypingRef.value = false;
-      emit('blur');
+      emit('blur', e);
     };
 
     // ========================== Controlled ==========================
@@ -557,9 +557,9 @@ export default defineComponent({
               value={inputValue.value}
               disabled={disabled}
               readonly={readonly}
-              onFocus={() => {
+              onFocus={(e: FocusEvent) => {
                 focus.value = true;
-                emit('focus');
+                emit('focus', e);
               }}
               onInput={onInternalInput}
               onBlur={onBlur}

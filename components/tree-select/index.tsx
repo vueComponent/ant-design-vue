@@ -159,8 +159,8 @@ const TreeSelect = defineComponent({
       emit('update:searchValue', value);
       emit('search', value);
     };
-    const handleBlur = () => {
-      emit('blur');
+    const handleBlur = (e: FocusEvent) => {
+      emit('blur', e);
       formItemContext.onFieldBlur();
     };
     return () => {

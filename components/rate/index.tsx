@@ -119,13 +119,13 @@ const Rate = defineComponent({
       changeValue(isReset ? 0 : newValue);
       state.cleanedValue = isReset ? newValue : null;
     };
-    const onFocus = () => {
+    const onFocus = (e: FocusEvent) => {
       state.focused = true;
-      emit('focus');
+      emit('focus', e);
     };
-    const onBlur = () => {
+    const onBlur = (e: FocusEvent) => {
       state.focused = false;
-      emit('blur');
+      emit('blur', e);
       formItemContext.onFieldBlur();
     };
     const onKeyDown = (event: KeyboardEvent) => {

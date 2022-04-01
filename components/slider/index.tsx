@@ -113,8 +113,8 @@ const Slider = defineComponent({
       emit('change', val);
       formItemContext.onFieldChange();
     };
-    const handleBlur = () => {
-      emit('blur');
+    const handleBlur = (e: FocusEvent) => {
+      emit('blur', e);
     };
     expose({
       focus,

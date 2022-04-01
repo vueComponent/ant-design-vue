@@ -95,11 +95,11 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           emit('update:open', open);
           emit('openChange', open);
         };
-        const onFocus = () => {
-          emit('focus');
+        const onFocus = (e: FocusEvent) => {
+          emit('focus', e);
         };
-        const onBlur = () => {
-          emit('blur');
+        const onBlur = (e: FocusEvent) => {
+          emit('blur', e);
           formItemContext.onFieldBlur();
         };
         const onPanelChange = (date: DateType, mode: PanelMode | null) => {

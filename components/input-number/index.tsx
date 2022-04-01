@@ -64,14 +64,14 @@ const InputNumber = defineComponent({
       emit('change', val);
       formItemContext.onFieldChange();
     };
-    const handleBlur = () => {
+    const handleBlur = (e: FocusEvent) => {
       focused.value = false;
-      emit('blur');
+      emit('blur', e);
       formItemContext.onFieldBlur();
     };
-    const handleFocus = () => {
+    const handleFocus = (e: FocusEvent) => {
       focused.value = true;
-      emit('focus');
+      emit('focus', e);
     };
     onMounted(() => {
       nextTick(() => {

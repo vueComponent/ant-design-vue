@@ -215,10 +215,8 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (props.autofocus) {
-          focus();
-        }
+      if (props.autofocus) {
+        focus();
       }
     });
     expose({

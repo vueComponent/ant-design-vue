@@ -20,6 +20,7 @@ export const getTransitionProps = (transitionName: string, opt: TransitionProps 
   }
   const transitionProps: TransitionProps = transitionName
     ? {
+        name: transitionName,
         appear: true,
         // type: 'animation',
         // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
@@ -40,6 +41,7 @@ export const getTransitionProps = (transitionName: string, opt: TransitionProps 
 export const getTransitionGroupProps = (transitionName: string, opt: TransitionProps = {}) => {
   const transitionProps: TransitionGroupProps = transitionName
     ? {
+        name: transitionName,
         appear: true,
         // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         appearActiveClass: `${transitionName}`,

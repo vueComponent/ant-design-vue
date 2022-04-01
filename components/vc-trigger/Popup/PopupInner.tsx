@@ -95,6 +95,8 @@ export default defineComponent({
         const originFn = m[eventName];
         m[eventName] = node => {
           goNextStatus();
+          // 结束后，强制 stable
+          status.value = 'stable';
           originFn?.(node);
         };
       });

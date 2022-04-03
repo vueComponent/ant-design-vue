@@ -14,7 +14,7 @@ function convertNodeToOption<OptionType extends BaseOptionType = DefaultOptionTy
     children: { default?: () => any };
     key: string | number;
   };
-  const child = children.default;
+  const child = children?.default;
   return {
     key,
     value: value !== undefined ? value : key,

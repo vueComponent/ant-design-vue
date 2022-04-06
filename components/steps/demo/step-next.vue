@@ -85,4 +85,9 @@ export default defineComponent({
 .steps-action {
   margin-top: 24px;
 }
+
+[data-theme='dark'] .steps-content {
+  background-color: #2f2f2f;
+  border: 1px dashed #404040;
+}
 </style>

@@ -238,14 +238,12 @@ exports[`renders ./components/grid/demo/playfround.vue correctly 1`] = `
   &lt;a-col :span="6"/&gt;
   &lt;a-col :span="6"/&gt;
   &lt;a-col :span="6"/&gt;
-&lt;/a-row&gt;
-    </pre><pre>&lt;a-row :gutter="[16,16]"&gt;
+&lt;/a-row&gt;</pre><br><pre>&lt;a-row :gutter="[16,16]"&gt;
   &lt;a-col :span="6"/&gt;
   &lt;a-col :span="6"/&gt;
   &lt;a-col :span="6"/&gt;
   &lt;a-col :span="6"/&gt;
-&lt;/a-row&gt;
-    </pre>
+&lt;/a-row&gt;</pre>
 </div>
 `;
 

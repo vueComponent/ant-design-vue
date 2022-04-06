@@ -67,13 +67,9 @@ A simple playground for column count and gutter.
         <div>Column</div>
       </a-col>
     </a-row>
-    <pre
-      >{{ rowColHtml }}
-    </pre>
+    <pre>{{ rowColHtml }}</pre>
     <br />
-    <pre
-      >{{ rowColHtml }}
-    </pre>
+    <pre>{{ rowColHtml }}</pre>
   </div>
 </template>
 <script lang="ts">

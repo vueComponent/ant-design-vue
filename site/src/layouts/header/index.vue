@@ -164,7 +164,6 @@ export default defineComponent({
 .alert-banner {
   position: relative;
   z-index: 100;
-  min-width: 1000px;
   padding: 16px;
   line-height: 28px;
   color: #8590a6;

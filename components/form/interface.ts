@@ -52,24 +52,36 @@ type Validator = (
 export interface ValidatorRule {
   warningOnly?: boolean;
   message?: string | VueNode;
+  /** custom validate function (Note: callback must be called) */
   validator: Validator;
 }
 
 interface BaseRule {
   warningOnly?: boolean;
+  /** validate the value from a list of possible values */
   enum?: StoreValue[];
+  /** validate the exact length of a field */
   len?: number;
+  /** validate the max length of a field */
   max?: number;
+  /** validation error message */
   message?: string | VueNode;
+  /** validate the min length of a field */
   min?: number;
+  /** validate from a regular expression */
   pattern?: RegExp;
+  /** indicates whether field is required */
   required?: boolean;
+  /** transform a value before validation */
   transform?: (value: StoreValue) => StoreValue;
+  /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
   type?: RuleType;
+  /** treat required fields that only contain whitespace as errors */
   whitespace?: boolean;
-
   /** Customize rule level `validateTrigger`. Must be subset of Field `validateTrigger` */
   validateTrigger?: string | string[];
+  /** Check trigger timing */
+  trigger?: 'blur' | 'change' | ['change', 'blur'];
 }
 
 type AggregationRule = BaseRule & Partial<ValidatorRule>;

@@ -11,10 +11,9 @@ export default function useHeights<T>(
   onItemRemove?: ((item: T) => void) | null,
 ): [(item: T, instance: HTMLElement) => void, () => void, CacheMap, Ref<Symbol>] {
   const instance = new Map<VNodeProps['key'], HTMLElement>();
-  let heights = new Map();
+  const heights = new Map();
   const updatedMark = ref(Symbol('update'));
   watch(mergedData, () => {
-    heights = new Map();
     updatedMark.value = Symbol('update');
   });
   let heightUpdateId = 0;

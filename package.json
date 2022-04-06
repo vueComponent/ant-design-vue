@@ -56,7 +56,7 @@
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
     "vue-tsc": "vue-tsc --noEmit",
-    "site": "npm run routes && ./node_modules/vite/bin/vite.js build site --base=https://next.antdv.com/",
+    "site": "npm run routes && ./node_modules/vite/bin/vite.js build site --base=https://www.antdv.com/",
     "pub:site": "npm run site && node site/scripts/pushToOSS.js",
     "prepare": "husky install",
     "version": "node ./scripts/generate-version",

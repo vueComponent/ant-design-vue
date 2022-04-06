@@ -70,6 +70,7 @@ A simple playground for column count and gutter.
     <pre
       >{{ rowColHtml }}
     </pre>
+    <br />
     <pre
       >{{ rowColHtml }}
     </pre>
@@ -137,5 +138,8 @@ export default defineComponent({
   border-radius: 6px;
   font-size: 13px;
   padding: 8px 16px;
+}
+[data-theme='dark'] #components-grid-demo-playground pre {
+  background: #2f2f2f;
 }
 </style>

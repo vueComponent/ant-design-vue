@@ -37,7 +37,7 @@ And, setup your vue project configuration.
 #### Install
 
 ```bash
-$ npm i --save ant-design-vue@next
+$ npm i --save ant-design-vue
 ```
 
 #### Component Registration

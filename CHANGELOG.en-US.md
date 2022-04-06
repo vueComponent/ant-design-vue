@@ -10,6 +10,14 @@
 
 ---
 
+## 3.1.0
+
+`2022-04-06`
+
+### 🔥🔥🔥 3.1.0 official version released 🔥🔥🔥
+
+- 🐞 Fix `Select.Option` child element is empty, the error is reported [272430](https://github.com/vueComponent/ant-design-vue/commit/272430ba06e44e06eb07694d6aef4d474fb741cb)
+
 ## 3.1.0-rc.6
 
 `2022-04-01`

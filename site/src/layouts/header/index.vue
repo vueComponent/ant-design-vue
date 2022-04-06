@@ -16,6 +16,18 @@
 
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
     </div>
+    <div v-if="visibleAlertBanner" class="alert-banner">
+      <template v-if="isZhCN">
+        Ant Design Vue 3 已正式发布，并成为默认文档。
+        <a href="https://www.antdv.com/docs/vue/migration-v3-cn">升级文档</a>
+      </template>
+      <template v-else>
+        Ant Design Vue 3 is now the new default version!
+        <a href="https://www.antdv.com/docs/vue/migration-v3">Update Doc</a>
+      </template>
+
+      <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
+    </div>
     <a-popover
       v-model:visible="menuVisible"
       overlay-class-name="popover-menu"
@@ -54,6 +66,7 @@ import Logo from './Logo.vue';
 import Menu from './Menu.vue';
 import { UnorderedListOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import SearchBox from './SearchBox.vue';
+import { version } from 'ant-design-vue';
 export default defineComponent({
   components: {
     Logo,
@@ -121,6 +134,12 @@ export default defineComponent({
     watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
+    const visibleAlertBanner = ref(!localStorage.getItem('v3'));
+    watch(visibleAlertBanner, () => {
+      if (!visibleAlertBanner.value) {
+        localStorage.setItem('v3', version);
+      }
+    });
     return {
       isZhCN: globalConfig.isZhCN,
       isMobile: globalConfig.isMobile,
@@ -134,13 +153,15 @@ export default defineComponent({
       colProps,
       menuVisible,
       onTriggerSearching,
+      visibleAlertBanner,
     };
   },
 });
 </script>
 <style lang="less" src="./index.less"></style>
 <style scope>
-.adblock-banner {
+.adblock-banner,
+.alert-banner {
   position: relative;
   z-index: 100;
   min-width: 1000px;
@@ -149,6 +170,18 @@ export default defineComponent({
   color: #8590a6;
   text-align: center;
   background-color: #ebebeb;
+}
+.alert-banner {
+  background-color: var(--ant-primary-color);
+  color: #fff;
+  padding: 5px;
+}
+.alert-banner a {
+  color: #fff;
+  text-decoration: underline;
+}
+.alert-banner .close-icon {
+  top: 12px;
 }
 .close-icon {
   position: absolute;

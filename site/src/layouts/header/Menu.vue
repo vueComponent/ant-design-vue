@@ -8,11 +8,14 @@
       key="version"
       class="version"
       size="small"
+      :dropdown-match-select-width="false"
       :default-value="antdVersion"
-      :get-popup-container="trigger => trigger.parentNode"
     >
       <a-select-option :value="antdVersion">{{ antdVersion }}</a-select-option>
-      <a-select-option value="1.x" @click="changeVersion">1.x</a-select-option>
+      <a-select-option value="2.x" @click="changeVersion('2x')">
+        2.x (Not Recommended)
+      </a-select-option>
+      <a-select-option value="1.x" @click="changeVersion('1x')">1.x (For Vue 2)</a-select-option>
     </a-select>
     <a-button
       key="lang-button"
@@ -66,8 +69,8 @@ export default defineComponent({
         );
     };
 
-    const changeVersion = () => {
-      location.href = `https://1x.antdv.com${route.fullPath}`;
+    const changeVersion = v => {
+      location.href = `https://${v}.antdv.com${route.fullPath}`;
     };
     return {
       onLangChange,

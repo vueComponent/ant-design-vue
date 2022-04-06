@@ -70,6 +70,7 @@ Just add the `rules` attribute for `Form` component, pass validation rules, and 
 import { Dayjs } from 'dayjs';
 import { defineComponent, reactive, ref, toRaw } from 'vue';
 import type { UnwrapRef } from 'vue';
+import type { Rule } from 'ant-design-vue/es/form';
 
 interface FormState {
   name: string;
@@ -92,7 +93,7 @@ export default defineComponent({
       resource: '',
       desc: '',
     });
-    const rules = {
+    const rules: Record<string, Rule[]> = {
       name: [
         { required: true, message: 'Please input Activity name', trigger: 'blur' },
         { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },

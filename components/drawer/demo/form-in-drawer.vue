@@ -108,6 +108,7 @@ Use form in drawer with submit button.
 <script lang="ts">
 import { PlusOutlined } from '@ant-design/icons-vue';
 import { defineComponent, reactive, ref } from 'vue';
+import type { Rule } from 'ant-design-vue/es/form';
 export default defineComponent({
   components: {
     PlusOutlined,
@@ -123,7 +124,7 @@ export default defineComponent({
       description: '',
     });
 
-    const rules = {
+    const rules: Record<string, Rule[]> = {
       name: [{ required: true, message: 'Please enter user name' }],
       url: [{ required: true, message: 'please enter url' }],
       owner: [{ required: true, message: 'Please select an owner' }],

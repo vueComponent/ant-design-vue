@@ -45,7 +45,7 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
   </a-form>
 </template>
 <script lang="ts">
-import type { RuleObject } from 'ant-design-vue/es/form';
+import type { Rule } from 'ant-design-vue/es/form';
 import { defineComponent, reactive, ref } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 interface FormState {
@@ -61,7 +61,7 @@ export default defineComponent({
       checkPass: '',
       age: undefined,
     });
-    let checkAge = async (_rule: RuleObject, value: number) => {
+    let checkAge = async (_rule: Rule, value: number) => {
       if (!value) {
         return Promise.reject('Please input the age');
       }
@@ -75,7 +75,7 @@ export default defineComponent({
         }
       }
     };
-    let validatePass = async (_rule: RuleObject, value: string) => {
+    let validatePass = async (_rule: Rule, value: string) => {
       if (value === '') {
         return Promise.reject('Please input the password');
       } else {
@@ -85,7 +85,7 @@ export default defineComponent({
         return Promise.resolve();
       }
     };
-    let validatePass2 = async (_rule: RuleObject, value: string) => {
+    let validatePass2 = async (_rule: Rule, value: string) => {
       if (value === '') {
         return Promise.reject('Please input the password again');
       } else if (value !== formState.pass) {
@@ -95,7 +95,7 @@ export default defineComponent({
       }
     };
 
-    const rules = {
+    const rules: Record<string, Rule[]> = {
       pass: [{ required: true, validator: validatePass, trigger: 'change' }],
       checkPass: [{ validator: validatePass2, trigger: 'change' }],
       age: [{ validator: checkAge, trigger: 'change' }],

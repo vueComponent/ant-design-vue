@@ -81,7 +81,7 @@ interface BaseRule {
   /** Customize rule level `validateTrigger`. Must be subset of Field `validateTrigger` */
   validateTrigger?: string | string[];
   /** Check trigger timing */
-  trigger?: 'blur' | 'change' | ['change', 'blur'];
+  trigger?: 'blur' | 'change' | Array<'change' | 'blur'>;
 }
 
 type AggregationRule = BaseRule & Partial<ValidatorRule>;

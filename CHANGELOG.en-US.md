@@ -10,6 +10,13 @@
 
 ---
 
+## 3.1.1
+
+`2022-04-06`
+
+- 🌟 Optimize `Form` rule type hints [#5439](https://github.com/vueComponent/ant-design-vue/issues/5439)
+- 🐞 Fix the problem of incorrect height calculation when virtual scroll related components dynamically update content [4a4670](https://github.com/vueComponent/ant-design-vue/commit/4a4670bdce9e1043348fd741ec7a262ba2413a3a)
+
 ## 3.1.0
 
 `2022-04-06`

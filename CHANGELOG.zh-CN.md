@@ -10,6 +10,13 @@
 
 ---
 
+## 3.1.1
+
+`2022-04-06`
+
+- 🌟 优化 `Form` rule 类型提示 [#5439](https://github.com/vueComponent/ant-design-vue/issues/5439)
+- 🐞 修复虚拟滚动相关组件动态更新内容时，高度计算错误问题 [4a4670](https://github.com/vueComponent/ant-design-vue/commit/4a4670bdce9e1043348fd741ec7a262ba2413a3a)
+
 ## 3.1.0
 
 `2022-04-06`

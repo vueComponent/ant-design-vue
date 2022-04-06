@@ -281,7 +281,9 @@ exports[`renders ./components/select/demo/option-label-prop.vue correctly 1`] = 
   <!---->
   <div class="ant-space-item"><span>Note: v-slot:option support from v2.2.5</span></div>
   <!---->
-</div><br><br>
+</div>
+<br>
+<br>
 <div class="ant-space ant-space-vertical" style="width: 100%;">
   <div class="ant-space-item" style="margin-bottom: 8px;">
     <div style="width: 100%;" class="ant-select ant-select-multiple ant-select-show-search">
@@ -456,7 +458,9 @@ exports[`renders ./components/select/demo/select-users.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/size.vue correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="middle"><span class="ant-radio-button-inner"></span></span><span>Middle</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div><br><br>
+<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="middle"><span class="ant-radio-button-inner"></span></span><span>Middle</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div>
+<br>
+<br>
 <div class="ant-space ant-space-vertical">
   <div class="ant-space-item" style="margin-bottom: 8px;">
     <div style="width: 200px;" class="ant-select ant-select-single ant-select-show-arrow">

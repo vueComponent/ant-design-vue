@@ -5,7 +5,6 @@ exports[`renders ./components/image/demo/basic.vue correctly 1`] = `
   <!---->
   <!---->
 </div>
-<!---->
 `;
 
 exports[`renders ./components/image/demo/controlled-preview.vue correctly 1`] = `
@@ -25,7 +24,6 @@ exports[`renders ./components/image/demo/fallback.vue correctly 1`] = `
   <!---->
   <!---->
 </div>
-<!---->
 `;
 
 exports[`renders ./components/image/demo/placeholder.vue correctly 1`] = `
@@ -56,13 +54,10 @@ exports[`renders ./components/image/demo/preview-group.vue correctly 1`] = `
   <!---->
   <!---->
 </div>
-<!---->
 <div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://aliyuncdn.antdv.com/logo.png">
   <!---->
   <!---->
 </div>
-<!---->
-<!---->
 `;
 
 exports[`renders ./components/image/demo/preview-group-visible.vue correctly 1`] = `
@@ -70,7 +65,6 @@ exports[`renders ./components/image/demo/preview-group-visible.vue correctly 1`]
   <!---->
   <!---->
 </div>
-<!---->
 <div style="display: none;">
   <div class="ant-image"><img class="ant-image-img" src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp">
     <!---->

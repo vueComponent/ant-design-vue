@@ -569,7 +569,7 @@ exports[`renders ./components/tree/demo/virtual-scroll.vue correctly 1`] = `
       </div>
     </div>
     <div class="ant-tree-list-scrollbar ant-tree-list-scrollbar-show" style="width: 8px; top: 0px; bottom: 0px; right: 0px; position: absolute; display: none;">
-      <div class="ant-tree-list-scrollbar-thumb" style="width: 100%; height: 20px; top: 0px; left: 0px; position: absolute; border-radius: 99px; cursor: pointer; user-select: none; background: rgba(0, 0, 0, 0.5);"></div>
+      <div class="ant-tree-list-scrollbar-thumb" style="width: 100%; height: 20px; top: 0px; left: 0px; position: absolute; background: rgba(0, 0, 0, 0.5); border-radius: 99px; cursor: pointer; user-select: none;"></div>
     </div>
   </div>
 </div>

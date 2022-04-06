@@ -120,12 +120,19 @@ exports[`renders ./components/input/demo/search-input-loading.vue correctly 1`] 
 
 exports[`renders ./components/input/demo/show-count.vue correctly 1`] = `
 <span class="ant-input-affix-wrapper"><!----><input maxlength="20" type="text" class="ant-input"><span class="ant-input-suffix"><!----><span class="ant-input-show-count-suffix">10 / 20</span>
-<!----></span></span><br><br>
+<!----></span></span>
+<br>
+<br>
 <div class="ant-input-textarea ant-input-textarea-show-count" data-count="10 / 100"><textarea class="ant-input"></textarea></div>
 `;
 
 exports[`renders ./components/input/demo/size.vue correctly 1`] = `<div class="components-input-demo-size"><input placeholder="large size" type="text" class="ant-input ant-input-lg"><input placeholder="default size" type="text" class="ant-input"><input placeholder="small size" type="text" class="ant-input ant-input-sm"></div>`;
 
-exports[`renders ./components/input/demo/textarea.vue correctly 1`] = `<textarea placeholder="Basic usage" rows="4" class="ant-input"></textarea><br><br><textarea rows="4" placeholder="maxLength is 6" class="ant-input"></textarea>`;
+exports[`renders ./components/input/demo/textarea.vue correctly 1`] = `
+<textarea placeholder="Basic usage" rows="4" class="ant-input"></textarea>
+<br>
+<br>
+<textarea rows="4" placeholder="maxLength is 6" class="ant-input"></textarea>
+`;
 
-exports[`renders ./components/input/demo/tooltip.vue correctly 1`] = `<!----><input placeholder="Input a number" type="text" max-length="25" style="width: 120px;" class="ant-input">`;
+exports[`renders ./components/input/demo/tooltip.vue correctly 1`] = `<input placeholder="Input a number" type="text" max-length="25" style="width: 120px;" class="ant-input">`;

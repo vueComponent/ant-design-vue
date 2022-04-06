@@ -422,7 +422,8 @@ exports[`renders ./components/progress/demo/steps.vue correctly 1`] = `
     <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="50%">50%</span>
   </div>
-</div><br>
+</div>
+<br>
 <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
   <div class="ant-progress-steps-outer">
     <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
@@ -431,7 +432,8 @@ exports[`renders ./components/progress/demo/steps.vue correctly 1`] = `
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="30%">30%</span>
   </div>
-</div><br>
+</div>
+<br>
 <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-small ant-progress-status-success">
   <div class="ant-progress-steps-outer">
     <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>

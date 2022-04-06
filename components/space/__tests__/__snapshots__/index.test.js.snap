@@ -11,4 +11,4 @@ exports[`Space should render correct with children 1`] = `
 </div>
 `;
 
-exports[`Space should render width empty children 1`] = `<!---->`;
+exports[`Space should render width empty children 1`] = `""`;

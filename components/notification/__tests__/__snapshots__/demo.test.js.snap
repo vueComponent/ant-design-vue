@@ -43,7 +43,10 @@ exports[`renders ./components/notification/demo/placement.vue correctly 1`] = `
 exports[`renders ./components/notification/demo/update.vue correctly 1`] = `
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open the notification box (update by key)</span>
-</button><br><br><button class="ant-btn ant-btn-primary" type="button">
+</button>
+<br>
+<br>
+<button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open the notification box (update by reactive)</span>
 </button>
 `;

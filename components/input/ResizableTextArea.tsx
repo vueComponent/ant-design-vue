@@ -1,4 +1,4 @@
-import type { CSSProperties, VNode } from 'vue';
+import type { VNode } from 'vue';
 import {
   onMounted,
   getCurrentInstance,
@@ -110,13 +110,13 @@ const ResizableTextArea = defineComponent({
       const cls = classNames(prefixCls, attrs.class, {
         [`${prefixCls}-disabled`]: disabled,
       });
-      const style = {
-        ...(attrs.style as CSSProperties),
-        ...textareaStyles.value,
-        ...(resizeStatus.value === RESIZE_STATUS_RESIZING
+      const style = [
+        attrs.style,
+        textareaStyles.value,
+        resizeStatus.value === RESIZE_STATUS_RESIZING
           ? { overflowX: 'hidden', overflowY: 'hidden' }
-          : null),
-      };
+          : null,
+      ];
       const textareaProps: any = {
         ...otherProps,
         ...attrs,

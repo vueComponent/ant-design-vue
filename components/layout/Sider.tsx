@@ -193,13 +193,15 @@ export default defineComponent({
               </div>
             )
           : null;
-      const divStyle = {
-        ...(attrs.style as CSSProperties),
-        flex: `0 0 ${siderWidth}`,
-        maxWidth: siderWidth, // Fix width transition bug in IE11
-        minWidth: siderWidth, // https://github.com/ant-design/ant-design/issues/6349
-        width: siderWidth,
-      };
+      const divStyle = [
+        attrs.style,
+        {
+          flex: `0 0 ${siderWidth}`,
+          maxWidth: siderWidth, // Fix width transition bug in IE11
+          minWidth: siderWidth, // https://github.com/ant-design/ant-design/issues/6349
+          width: siderWidth,
+        },
+      ];
       const siderCls = classNames(
         pre,
         `${pre}-${theme}`,

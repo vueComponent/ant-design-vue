@@ -144,13 +144,16 @@ export default defineComponent({
       } = props as PopupInnerProps;
       const statusValue = status.value;
       // ======================== Render ========================
-      const mergedStyle: CSSProperties = {
-        ...stretchStyle.value,
-        zIndex,
-        opacity: statusValue === 'motion' || statusValue === 'stable' || !visible.value ? null : 0,
-        pointerEvents: statusValue === 'stable' ? null : 'none',
-        ...(attrs.style as object),
-      };
+      const mergedStyle: CSSProperties[] = [
+        {
+          ...stretchStyle.value,
+          zIndex,
+          opacity:
+            statusValue === 'motion' || statusValue === 'stable' || !visible.value ? null : 0,
+          pointerEvents: statusValue === 'stable' ? null : 'none',
+        },
+        attrs.style,
+      ];
 
       let childNode: any = flattenChildren(slots.default?.({ visible: props.visible }));
 

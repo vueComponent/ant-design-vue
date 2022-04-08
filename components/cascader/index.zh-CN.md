@@ -31,7 +31,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
 | dropdownClassName | 自定义浮层类名 | string | - | 3.0 |
 | dropdownStyle | 自定义浮层样式 | CSSProperties | {} | 3.0 |
 | expandIcon | 自定义次级菜单展开图标 | slot | - | 3.0 |
-| expandTrigger | 次级菜单的展开方式，可选 'click' 和 'hover' | string | 'click' |  |
+| expandTrigger | 次级菜单的展开方式 | `click` \| `hover` | 'click' |  |
 | fieldNames | 自定义 options 中 label name children 的字段 | object | `{ label: 'label', value: 'value', children: 'children' }` |  |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |  |
 | loadData | 用于动态加载选项，无法与 `showSearch` 一起使用 | `(selectedOptions) => void` | - |  |
@@ -42,12 +42,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
 | open | 控制浮层显隐 | boolean | - | 3.0 |
 | options | 可选项数据源 | [Option](#option)\[] | - |  |
 | placeholder | 输入框占位文本 | string | '请选择' |  |
-| placement | 浮层预设位置：`bottomLeft` `bottomRight` `topLeft` `topRight` | string | `bottomLeft` | 3.0 |
+| placement | 浮层预设位置 | `bottomLeft` \| `bottomRight` \| `topLeft` \| `topRight` | `bottomLeft` | 3.0 |
 | searchValue | 设置搜索的值，需要与 `showSearch` 配合使用 | string | - | 3.0 |
 | showSearch | 在选择框中显示搜索框 | boolean \| [object](#showsearch) | false |  |
-| size | 输入框大小，可选 `large` `default` `small` | string | `default` |  |
+| size | 输入框大小 | `large` \| `default` \| `small` | `default` |  |
 | suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |  |
-| tagRender | 自定义 tag 内容，多选时生效 | (props) => ReactNode | - | 3.0 |
+| tagRender | 自定义 tag 内容，多选时生效 | slot | - | 3.0 |
 | value(v-model) | 指定选中项 | string\[] \| number\[] | - |  |
 
 ### showSearch

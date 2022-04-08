@@ -29,7 +29,7 @@ Cascade selection box.
 | dropdownClassName | additional className of popup overlay | string | - | 3.0 |
 | dropdownStyle | additional style of popup overlay | CSSProperties | {} | 3.0 |
 | expandIcon | Customize the current item expand icon | slot | - | 3.0 |
-| expandTrigger | expand current item when click or hover, one of 'click' 'hover' | string | 'click' |  |
+| expandTrigger | expand current item when click or hover | `click` \| `hover` | 'click' |  |
 | fieldNames | custom field name for label and value and children | object | `{ label: 'label', value: 'value', children: 'children' }` |  |
 | getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | Function(triggerNode) | () => document.body |  |
 | loadData | To load option lazily, and it cannot work with `showSearch` | `(selectedOptions) => void` | - |  |
@@ -40,10 +40,10 @@ Cascade selection box.
 | open | set visible of cascader popup | boolean | - | 3.0 |
 | options | data options of cascade | [Option](#option)\[] | - |  |
 | placeholder | input placeholder | string | 'Please select' |  |
-| placement | use preset popup align config from builtinPlacements：`bottomLeft` `bottomRight` `topLeft` `topRight` | string | `bottomLeft` | 3.0 |
+| placement | Use preset popup align config from builtinPlacements | `bottomLeft` \| `bottomRight` \| `topLeft` \| `topRight` | `bottomLeft` | 3.0 |
 | searchValue | Set search value，Need work with `showSearch` | string | - | 3.0 |
 | showSearch | Whether show search input in single mode. | boolean \| [object](#showsearch) | false |  |
-| size | input size, one of `large` `default` `small` | string | `default` |  |
+| size | input size | `large` \| `default` \| `small` | `default` |  |
 | suffixIcon | The custom suffix icon | string \| VNode \| slot | - |  |
 | tagRender | Customize tag render when `multiple` | slot | - | 3.0 |
 | value(v-model) | selected value | string\[] \| number\[] | - |  |

@@ -203,11 +203,7 @@ const Avatar = defineComponent({
           {...attrs}
           ref={avatarNodeRef}
           class={classString}
-          style={{
-            ...sizeStyle,
-            ...responsiveSizeStyle(!!icon),
-            ...(attrs.style as CSSProperties),
-          }}
+          style={[sizeStyle, responsiveSizeStyle(!!icon), attrs.style]}
         >
           {childrenToRender}
         </span>

@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue';
+import type { PropType } from 'vue';
 import { computed, defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
@@ -108,10 +108,7 @@ export default defineComponent({
         'aria-valuenow': value,
         'aria-disabled': !!disabled,
       };
-      const elStyle = {
-        ...(attrs.style as CSSProperties),
-        ...positionStyle.value,
-      };
+      const elStyle = [attrs.style, positionStyle.value];
       let mergedTabIndex = tabindex || 0;
       if (disabled || tabindex === null) {
         mergedTabIndex = null;

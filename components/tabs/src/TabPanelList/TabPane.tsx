@@ -63,7 +63,7 @@ export default defineComponent({
           tabindex={active ? 0 : -1}
           aria-labelledby={id && `${id}-tab-${tabKey}`}
           aria-hidden={!active}
-          style={{ ...mergedStyle.value, ...(attrs.style as any) }}
+          style={[mergedStyle.value, attrs.style]}
           class={[`${prefixCls}-tabpane`, active && `${prefixCls}-tabpane-active`, attrs.class]}
         >
           {(active || visited.value || forceRender) && slots.default?.()}

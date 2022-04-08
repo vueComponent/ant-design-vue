@@ -137,7 +137,7 @@ export default defineComponent({
               v-show={visible}
               key="dialog-element"
               role="document"
-              style={{ ...contentStyleRef.value, ...(attrs.style as any) }}
+              style={[contentStyleRef.value, attrs.style]}
               class={[prefixCls, attrs.class]}
               onMousedown={onMousedown}
               onMouseup={onMouseup}

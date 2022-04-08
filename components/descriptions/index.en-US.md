@@ -23,8 +23,8 @@ Commonly displayed on the details page.
 | contentStyle | Customize content style | CSSProperties | - | 2.2.0 |  |  |
 | extra | The action area of the description list, placed at the top-right | string \| VNode \| slot | - | 2.0.0 |  |  |
 | labelStyle | Customize label style | CSSProperties | - | 2.2.0 |  |  |
-| layout | Define description layout | \`horizontal | vertical\` | `horizontal` |  |  |
-| size | set the size of the list. Can be set to `middle`,`small`, or not filled | \`default | middle | small\` | `default` |  |
+| layout | Define description layout | `horizontal` \| `vertical` | `horizontal` |  |  |
+| size | set the size of the list. Can be set to `middle`,`small`, or not filled | `default` \| `middle` \| `small` | `default` |  |
 | title | The title of the description list, placed at the top | string \| VNode \| slot | - |  |  |  |
 
 ### Item props

@@ -22,7 +22,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
 | defaultValue | 默认值 | string |  |
 | filterOption | 自定义过滤逻辑 | false \| (input: string, option: OptionProps) => boolean |  |
 | getPopupContainer | 指定建议框挂载的 HTML 节点 | () => HTMLElement |  |
-| notFoundContent | 当下拉列表为空时显示的内容 | ReactNode | 'Not Found' |
+| notFoundContent | 当下拉列表为空时显示的内容 | string \| slot | 'Not Found' |
 | placement | 弹出层展示位置 | `top` \| `bottom` | `bottom` |
 | prefix | 设置触发关键字 | string \| string\[] | '@' |
 | split | 设置选中项前后分隔符 | string | ' ' |

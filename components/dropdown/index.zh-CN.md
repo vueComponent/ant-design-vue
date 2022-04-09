@@ -27,7 +27,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 | overlay(v-slot) | 菜单 | [Menu](/components/menu-cn) | - |  |
 | overlayClassName | 下拉根元素的类名称 | string | - |  |
 | overlayStyle | 下拉根元素的样式 | object | - |  |
-| placement | 菜单弹出位置：`bottomLeft` `bottom` `bottomRight` `topLeft` `top` `topRight` | String | `bottomLeft` |  |
+| placement | 菜单弹出位置 | `bottomLeft` \| `bottom` \| `bottomRight` \| `topLeft` \| `top` \| `topRight` | `bottomLeft` |  |
 | trigger | 触发下拉的行为, 移动端不支持 hover | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
 | visible(v-model) | 菜单是否显示 | boolean | - |  |
 
@@ -51,7 +51,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 | icon | 右侧的 icon | VNode \| slot | - | 1.5.0 |
 | loading | 设置按钮载入状态 | boolean \| { delay: number } | false | 3.0 |
 | overlay(v-slot) | 菜单 | [Menu](/components/menu-cn/) | - |  |
-| placement | 菜单弹出位置：`bottomLeft` `bottom` `bottomRight` `topLeft` `top` `topRight` | String | `bottomLeft` |  |
+| placement | 菜单弹出位置 | `bottomLeft` \| `bottom` \| `bottomRight` \| `topLeft` \| `top` \| `topRight` | `bottomLeft` |  |
 | size | 按钮大小，和 [Button](/components/button-cn/) 一致 | string | 'default' |  |
 | trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
 | type | 按钮类型，和 [Button](/components/button-cn/) 一致 | string | 'default' |  |

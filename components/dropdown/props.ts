@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import buttonTypes from '../button/buttonTypes';
 import type { MouseEventHandler } from '../_util/EventInterface';
 
-type Align = {
+export type Align = {
   points?: [string, string];
   offset?: [number, number];
   targetOffset?: [number, number];
@@ -17,6 +17,8 @@ type Align = {
   useCssTransform?: boolean;
 };
 
+export type Trigger = 'click' | 'hover' | 'contextmenu';
+
 export type DropdownArrowOptions = {
   pointAtCenter?: boolean;
 };
@@ -26,9 +28,7 @@ const dropdownProps = () => ({
     default: undefined,
   },
   trigger: {
-    type: [Array, String] as PropType<
-      ('click' | 'hover' | 'contextmenu')[] | 'click' | 'hover' | 'contextmenu'
-    >,
+    type: [Array, String] as PropType<Trigger[] | Trigger>,
   },
   overlay: PropTypes.any,
   visible: { type: Boolean, default: undefined },

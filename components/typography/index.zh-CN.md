@@ -117,9 +117,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
 | tooltip | 是否展示提示文本 | boolean | true |  |
 | triggerType | Edit mode trigger - icon, text or both (not specifying icon as trigger hides it) | Array&lt;`icon`\|`text`> | \[`icon`] |  |
 | onCancel | 按 ESC 退出编辑状态时触发 | function | - |  |
-| onCancel | 按 ESC 退出编辑状态时触发 | function | - |  |
 | onChange | 文本域编辑时触发 | function(event) | - |  |
-| onEnd | 按 ENTER 结束编辑状态时触发 | function | - |  |
 | onEnd | 按 ENTER 结束编辑状态时触发 | function | - |  |
 | onStart | 进入编辑中状态时触发 | function | - |  |
 

@@ -16,8 +16,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/9nepwjaLa/Result.svg
 
 | 参数 | 说明 | 类型 | 默认值 |  |  |  |  |  |  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| extra | 操作区 | #extra | - |  |  |  |  |  |  |
-| icon | 自定义 icon | #icon | - |  |  |  |  |  |  |
-| status | 结果的状态,决定图标和颜色 | \`'success' | 'error' | 'info' | 'warning' | '404' | '403' | '500'\` | 'info' |
-| subTitle | subTitle 文字 | string \| VNode \| #subTitle | - |  |  |  |  |  |  |
-| title | title 文字 | string \| VNode \| #title | - |  |  |  |  |  |  |
+| extra | 操作区 | slot | - |  |  |  |  |  |  |
+| icon | 自定义 icon | slot | - |  |  |  |  |  |  |
+| status | 结果的状态,决定图标和颜色 | `success` \| `error` \| `info` \| `warning` \| `404` \| `403` \| `500` | 'info' |
+| subTitle | subTitle 文字 | string \| VNode \| slot | - |  |  |  |  |  |  |
+| title | title 文字 | string \| VNode \| slot | - |  |  |  |  |  |  |

@@ -14,16 +14,16 @@ Rate component.
 
 ## API
 
-| Property | Description | type | Default |
-| --- | --- | --- | --- |
-| allowClear | whether to allow clear when click again | boolean | true |
-| allowHalf | whether to allow semi selection | boolean | false |
-| autofocus | get focus when component mounted | boolean | false |
-| character | custom character of rate | String or slot="character" | `<StarOutlined />` |
-| count | star count | number | 5 |
-| disabled | read only, unable to interact | boolean | false |
-| tooltips | Customize tooltip by each character | string\[] | - |
-| value(v-model) | current value | number | - |
+| Property       | Description                             | type           | Default            |
+| -------------- | --------------------------------------- | -------------- | ------------------ |
+| allowClear     | whether to allow clear when click again | boolean        | true               |
+| allowHalf      | whether to allow semi selection         | boolean        | false              |
+| autofocus      | get focus when component mounted        | boolean        | false              |
+| character      | custom character of rate                | string \| slot | `<StarOutlined />` |
+| count          | star count                              | number         | 5                  |
+| disabled       | read only, unable to interact           | boolean        | false              |
+| tooltips       | Customize tooltip by each character     | string[]       | -                  |
+| value(v-model) | current value                           | number         | -                  |
 
 ### events
 

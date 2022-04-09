@@ -17,13 +17,13 @@ cover: https://gw.alipayobjects.com/zos/alicdn/cH1BOLfxC/Tag.svg
 
 ### Tag
 
-| 参数             | 说明             | 类型                | 默认值 | 版本  |
-| ---------------- | ---------------- | ------------------- | ------ | ----- |
-| closable         | 标签是否可以关闭 | boolean             | false  |       |
-| closeIcon        | 自定义关闭按钮   | VNode \| #closeIcon | -      | 2.0.0 |
-| color            | 标签色           | string              | -      |       |
-| icon             | 设置图标         | VNode \| #icon      | -      | 2.0.0 |
-| visible(v-model) | 是否显示标签     | boolean             | `true` |       |
+| 参数             | 说明             | 类型          | 默认值 | 版本  |
+| ---------------- | ---------------- | ------------- | ------ | ----- |
+| closable         | 标签是否可以关闭 | boolean       | false  |       |
+| closeIcon        | 自定义关闭按钮   | VNode \| slot | -      | 2.0.0 |
+| color            | 标签色           | string        | -      |       |
+| icon             | 设置图标         | VNode \| slot | -      | 2.0.0 |
+| visible(v-model) | 是否显示标签     | boolean       | `true` |       |
 
 ### 事件
 

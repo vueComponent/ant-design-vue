@@ -156,13 +156,12 @@ const InternalTabs = defineComponent({
     const rtl = computed(() => direction.value === 'rtl');
     const mergedAnimated = computed<AnimatedConfig>(() => {
       const { animated, tabPosition } = props;
-      const isDoAnimate = ['top', 'bottom'].includes(tabPosition);
-      if (animated === false) {
+      if (animated === false || ['left', 'right'].includes(tabPosition)) {
         return {
           inkBar: false,
           tabPane: false,
         };
-      } else if (animated === true && isDoAnimate) {
+      } else if (animated === true) {
         return {
           inkBar: true,
           tabPane: true,
@@ -171,7 +170,7 @@ const InternalTabs = defineComponent({
         return {
           inkBar: true,
           tabPane: false,
-          ...(typeof animated === 'object' && isDoAnimate ? animated : {}),
+          ...(typeof animated === 'object' ? animated : {}),
         };
       }
     });

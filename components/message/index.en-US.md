@@ -27,7 +27,7 @@ This components provides some static methods, with usage and arguments as follow
 | --- | --- | --- | --- |
 | content | content of the message | string\| VNode \| () => VNode | - |
 | duration | time(seconds) before auto-dismiss, don't dismiss if set to 0 | number | 1.5 |
-| onClose | Specify a function that will be called when the message is closed | Function | - |
+| onClose | Specify a function that will be called when the message is closed | function | - |
 
 `afterClose` can be called in then-able interface:
 
@@ -55,7 +55,6 @@ The properties of config are as follows:
 | key | The unique identifier of the Message | string\|number | - |  |
 | style | Customized inline style | CSSProperties | - |  |
 | onClick | Specify a function that will be called when the message is clicked | function | - |  |
-| onClose | Specify a function that will be called when the message is closed | function | - |  |
 | onClose | Specify a function that will be called when the message is closed | function | - |  |
 
 ### Global static methods

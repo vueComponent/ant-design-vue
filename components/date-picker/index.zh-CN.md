@@ -119,15 +119,15 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| defaultPickerValue | 默认面板日期 | [dayjs](https://day.js.org/)] | - |  |
+| defaultPickerValue | 默认面板日期 | [dayjs](https://day.js.org/) | - |  |
 | disabledTime | 不可选择的时间 | function(date) | - |  |
 | format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format)，支持[自定义格式](#components-date-picker-demo-format) | string \| (value: dayjs) => string \| (string \| (value: dayjs) => string)\[] | `YYYY-MM-DD` |  |
 | renderExtraFooter | 在面板中添加额外的页脚 | v-slot:renderExtraFooter="mode" | - |  |
 | showNow | 当设定了 `showTime` 的时候，面板是否显示“此刻”按钮 | boolean | - |  |
 | showTime | 增加时间选择功能 | Object \| boolean | [TimePicker Options](/components/time-picker/#API) |  |
-| showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/)] | dayjs() |  |
+| showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/) | dayjs() |  |
 | showToday | 是否展示“今天”按钮 | boolean | true |  |
-| value(v-model) | 日期 | [dayjs](https://day.js.org/)] | - |  |
+| value(v-model) | 日期 | [dayjs](https://day.js.org/) | - |  |
 
 ### DatePicker 事件
 

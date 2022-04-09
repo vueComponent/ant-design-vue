@@ -22,7 +22,7 @@ Ant Design has 3 types of Tabs for different situations.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | activeKey(v-model) | Current TabPane's key | string | - |  |
-| animated | Whether to change tabs with animation. Only works while `tabPosition="top"\|"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |  |
+| animated | Whether to change tabs with animation. Only works while tabPosition=`"top"` \| `"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |  |
 | destroyInactiveTabPane | Whether destroy inactive TabPane when change tab | boolean | false |  |
 | hideAdd | Hide plus icon or not. Only works while `type="editable-card"` | boolean | `false` | } |
 | size | preset tab bar size | `large` \| `default` \| `small` | `default` |  |

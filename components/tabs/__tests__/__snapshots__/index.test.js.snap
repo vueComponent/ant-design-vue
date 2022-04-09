@@ -11,7 +11,7 @@ exports[`Tabs tabPosition remove card 1`] = `
           <!---->
         </div>
         <!---->
-        <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"></div>
+        <div class="ant-tabs-ink-bar"></div>
       </div>
     </div>
     <div class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden">

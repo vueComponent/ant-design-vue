@@ -48,7 +48,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/xS9YEJhfe/Input.svg
 | 参数 | 说明 | 类型 | 默认值 | 版本 |  |
 | --- | --- | --- | --- | --- | --- |
 | allowClear | 可以点击清除图标删除内容 | boolean |  | 1.5.0 |  |
-| autosize | 自适应内容高度，可设置为 \`true | false` 或对象：`{ minRows: 2, maxRows: 6 }\` | boolean\|object | false |  |
+| autosize | 自适应内容高度，可设置为 `true | false` 或对象：`{ minRows: 2, maxRows: 6 }` | boolean\|object | false |  |
 | defaultValue | 输入框默认内容 | string |  |  |  |
 | showCount | 是否展示字数 | boolean | false |  |  |
 | value(v-model) | 输入框内容 | string |  |  |  |

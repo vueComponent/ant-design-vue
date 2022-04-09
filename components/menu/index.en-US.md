@@ -49,7 +49,7 @@ More layouts with navigation: [Layout](/components/layout).
 | style | style of the root node | object |  |
 | subMenuCloseDelay | delay time to hide submenu when mouse leave, unit: second | number | 0.1 |
 | subMenuOpenDelay | delay time to show submenu when mouse enter, unit: second | number | 0 |
-| theme | color theme of the menu | string: `light` `dark` | `light` |
+| theme | color theme of the menu | `light` `dark` | `light` |
 | triggerSubMenuAction | method of trigger submenu | `click` \| `hover` | `hover` |
 
 ### Menu Events

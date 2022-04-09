@@ -49,7 +49,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | selectedKeys(v-model) | 当前选中的菜单项 key 数组 | string\[] |  |
 | subMenuCloseDelay | 用户鼠标离开子菜单后关闭延时，单位：秒 | number | 0.1 |
 | subMenuOpenDelay | 用户鼠标进入子菜单后开启延时，单位：秒 | number | 0 |
-| theme | 主题颜色 | string: `light` `dark` | `light` |
+| theme | 主题颜色 | `light` \| `dark` | `light` |
 | triggerSubMenuAction | 修改 Menu 子菜单的触发方式 | `click` \| `hover` | `hover` |
 
 ### Menu 事件
@@ -63,12 +63,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 
 ### Menu.Item
 
-| 参数     | 说明                     | 类型        | 默认值 | 版本  |
-| -------- | ------------------------ | ----------- | ------ | ----- |
-| disabled | 是否禁用                 | boolean     | false  |       |
-| icon     | 菜单图标                 | slot        |        | 2.8.0 |
-| key      | item 的唯一标志          | string      |        |       |
-| title    | 设置收缩时展示的悬浮标题 | string/slot |        |       |
+| 参数     | 说明                     | 类型           | 默认值 | 版本  |
+| -------- | ------------------------ | -------------- | ------ | ----- |
+| disabled | 是否禁用                 | boolean        | false  |       |
+| icon     | 菜单图标                 | slot           |        | 2.8.0 |
+| key      | item 的唯一标志          | string         |        |       |
+| title    | 设置收缩时展示的悬浮标题 | string \| slot |        |       |
 
 ### Menu.SubMenu
 
@@ -94,9 +94,9 @@ Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
 
 ### Menu.ItemGroup
 
-| 参数  | 说明     | 类型                     | 默认值 |
-| ----- | -------- | ------------------------ | ------ |
-| title | 分组标题 | string\|\|function\|slot |        |
+| 参数  | 说明     | 类型         | 默认值 |
+| ----- | -------- | ------------ | ------ |
+| title | 分组标题 | string\|slot |        |
 
 Menu.ItemGroup 的子元素必须是 `MenuItem`.
 

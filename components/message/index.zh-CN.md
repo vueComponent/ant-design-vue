@@ -28,7 +28,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/hAkKTIW0K/Message.svg
 | --- | --- | --- | --- |
 | content | 提示内容 | string\| VNode \| () => VNode | - |
 | duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number | 3 |
-| onClose | 关闭时触发的回调函数 | Function | - |
+| onClose | 关闭时触发的回调函数 | function | - |
 
 组件同时提供 promise 接口
 
@@ -58,7 +58,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/hAkKTIW0K/Message.svg
 | key | 当前提示的唯一标志 | string \| number | - |  |
 | style | 自定义内联样式 | CSSProperties | - |  |
 | onClick | 点击 message 时触发的回调函数 | function | - |  |
-| onClose | 关闭时触发的回调函数 | Function | - |  |
 | onClose | 关闭时触发的回调函数 | function | - |  |
 
 ### 全局方法

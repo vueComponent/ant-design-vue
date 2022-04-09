@@ -24,8 +24,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/MjtG9_FOI/Descriptions.svg
 | contentStyle | 自定义内容样式 | CSSProperties | - | 2.2.0 |  |  |
 | extra | 描述列表的操作区域，显示在右上方 | string \| VNode \| slot | - | 2.0.0 |  |  |
 | labelStyle | 自定义标签样式 | CSSProperties | - | 2.2.0 |  |  |
-| layout | 描述布局 | \`horizontal | vertical\` | `horizontal` |  |  |
-| size | 设置列表的大小。可以设置为 `middle` 、`small`, 或不填（只有设置 `bordered={true}` 生效） | \`default | middle | small\` | `default` |  |
+| layout | 描述布局 | `horizontal` \| `vertical` | `horizontal` |  |  |
+| size | 设置列表的大小。可以设置为 `middle` 、`small`, 或不填（只有设置 `bordered={true}` 生效） | `default` \| `middle` \| `small` | `default` |  |
 | title | 描述列表的标题，显示在最顶部 | string \| VNode \| slot | - |  |  |  |
 
 ### Item props

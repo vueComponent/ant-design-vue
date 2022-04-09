@@ -41,7 +41,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| visibleChange | 菜单显示状态改变时调用，参数为 visible。。点击菜单按钮导致的消失不会触发 | function(visible) |
+| visibleChange | 菜单显示状态改变时调用，参数为 visible。点击菜单按钮导致的消失不会触发 | function(visible) |
 
 ### Dropdown.Button
 
@@ -62,4 +62,4 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | click | 点击左侧按钮的回调，和 [Button](/components/button-cn/) 一致 | Function |
-| visibleChange | 菜单显示状态改变时调用，参数为 visible。。点击菜单按钮导致的消失不会触发 | function(visible) |
+| visibleChange | 菜单显示状态改变时调用，参数为 visible。点击菜单按钮导致的消失不会触发 | function(visible) |

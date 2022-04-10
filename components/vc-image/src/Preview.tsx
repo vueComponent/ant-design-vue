@@ -61,7 +61,7 @@ const Preview = defineComponent({
   props: previewProps,
   emits: ['close', 'afterClose'],
   setup(props, { emit, attrs }) {
-    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right } = props.icons;
+    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right } = reactive(props.icons);
 
     const scale = ref(1);
     const rotate = ref(0);

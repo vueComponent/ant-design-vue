@@ -1,6 +1,6 @@
-import { PropType, Ref, ComputedRef } from 'vue';
+import type { PropType, Ref, ComputedRef } from 'vue';
 import { ref, provide, defineComponent, inject, watch, reactive, computed, watchEffect } from 'vue';
-import { ImagePreviewType, mergeDefaultValue } from './Image';
+import { type ImagePreviewType, mergeDefaultValue } from './Image';
 import Preview from './Preview';
 import type { PreviewProps } from './Preview';
 
@@ -102,7 +102,7 @@ const Group = defineComponent({
         ),
     );
 
-    const setPreviewUrls = (id: number, url: string, canPreview: boolean = true) => {
+    const setPreviewUrls = (id: number, url: string, canPreview = true) => {
       previewUrls.set(id, {
         url,
         canPreview,
@@ -118,7 +118,7 @@ const Group = defineComponent({
       isShowPreview.value = val;
     };
 
-    const registerImage = (id: number, url: string, canPreview: boolean = true) => {
+    const registerImage = (id: number, url: string, canPreview = true) => {
       const unRegister = () => {
         previewUrls.delete(id);
       };

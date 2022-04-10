@@ -24,6 +24,7 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
 | preview | 预览参数，为 `false` 时禁用 | boolean \| [previewType](#previewType) | true | 2.0.0 |
 | src | 图片地址 | string | - | 2.0.0 |
 | width | 图像宽度 | string \| number | - | 2.0.0 |
+| onError | 加载错误回调 | (event: Event) => void | - |  |
 
 ### previewType
 
@@ -32,6 +33,10 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
   visible?: boolean;
   onVisibleChange?: (visible, prevVisible) => void;
   getContainer: string | HTMLElement | (() => HTMLElement);
+  src?: string;
+  mask?: VNode;
+  maskClassName?: string;
+  current?: number;
 }
 ```
 

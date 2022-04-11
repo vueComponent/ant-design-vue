@@ -1,5 +1,5 @@
-import type { ImgHTMLAttributes, CSSProperties, PropType, VNode } from 'vue';
-import { ref, watch, defineComponent, computed, onMounted, onBeforeUnmount } from 'vue';
+import type { ImgHTMLAttributes, CSSProperties, PropType } from 'vue';
+import { ref, watch, defineComponent, computed, onMounted, onUnmounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
@@ -20,7 +20,6 @@ export type ImagePreviewType = Omit<
   visible?: boolean;
   onVisibleChange?: (value: boolean, prevValue: boolean) => void;
   getContainer?: GetContainer | false;
-  mask?: VNode | VNode[];
   maskClassName?: string;
   icons?: PreviewProps['icons'];
 };
@@ -191,7 +190,7 @@ const ImageInternal = defineComponent({
         { flush: 'post', immediate: true },
       );
     });
-    onBeforeUnmount(unRegister);
+    onUnmounted(unRegister);
     const toSizePx = (l: number | string) => {
       if (isNumber(l)) return l + 'px';
       return l;
@@ -217,7 +216,7 @@ const ImageInternal = defineComponent({
         class: cls,
         style,
       } = attrs as ImgHTMLAttributes;
-      const { icons, mask: previewMask, src: previewSrc, ...dialogProps } = preview.value;
+      const { icons, src: previewSrc, ...dialogProps } = preview.value;
 
       const wrappperClass = cn(prefixCls, wrapperClassName, {
         [`${prefixCls}-error`]: isError.value,
@@ -248,7 +247,7 @@ const ImageInternal = defineComponent({
           <div
             class={wrappperClass}
             onClick={
-              props.preview && !Object.is(previewVisible.value, false) && !isError.value
+              canPreview.value && !Object.is(previewVisible.value, false)
                 ? onPreview
                 : e => {
                     emit('click', e);
@@ -276,8 +275,8 @@ const ImageInternal = defineComponent({
               </div>
             )}
             {/* Preview Click Mask */}
-            {previewMask && canPreview.value && (
-              <div class={`${prefixCls}-mask`}>{previewMask}</div>
+            {slots.previewMask && canPreview.value && (
+              <div class={`${prefixCls}-mask`}>{slots.previewMask()}</div>
             )}
           </div>
           {!isPreviewGroup.value && canPreview.value && (

@@ -26,7 +26,6 @@ export interface PreviewProps extends Omit<IDialogChildProps, 'onClose' | 'mask'
   onClose?: (e: Element) => void;
   src?: string;
   alt?: string;
-  mask?: VNode;
   rootClassName?: string;
   icons?: {
     rotateLeft?: VNode;
@@ -50,9 +49,6 @@ export const previewProps = {
   icons: {
     type: Object as PropType<PreviewProps['icons']>,
     default: () => ({} as PreviewProps['icons']),
-  },
-  mask: {
-    type: Object as PropType<PreviewProps['mask']>,
   },
 };
 const Preview = defineComponent({

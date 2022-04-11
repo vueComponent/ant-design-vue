@@ -21,7 +21,6 @@ const Image = defineComponent<ImageProps>({
 
     const mergedPreview = computed(() => {
       const { preview } = props;
-      const imageLocale = configProvider.locale?.Image || defaultLocale.Image;
 
       if (preview === false) {
         return preview;
@@ -29,14 +28,6 @@ const Image = defineComponent<ImageProps>({
       const _preview = typeof preview === 'object' ? preview : {};
 
       return {
-        mask: slots.previewMask ? (
-          slots.previewMask()
-        ) : (
-          <div class={`${prefixCls.value}-mask-info`}>
-            <EyeOutlined />
-            {imageLocale?.preview}
-          </div>
-        ),
         icons,
         ..._preview,
         transitionName: getTransitionName(rootPrefixCls.value, 'zoom', _preview.transitionName),
@@ -49,11 +40,23 @@ const Image = defineComponent<ImageProps>({
     });
 
     return () => {
+      const imageLocale = configProvider.locale?.Image || defaultLocale.Image;
+
       return (
         <ImageInternal
           {...{ ...attrs, ...props, prefixCls: prefixCls.value }}
           preview={mergedPreview.value}
-          v-slots={slots}
+          v-slots={{
+            ...slots,
+            previewMask:
+              slots.previewMask ??
+              (() => (
+                <div class={`${prefixCls.value}-mask-info`}>
+                  <EyeOutlined />
+                  {imageLocale?.preview}
+                </div>
+              )),
+          }}
         ></ImageInternal>
       );
     };

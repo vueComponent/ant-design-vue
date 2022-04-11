@@ -97,6 +97,7 @@ const Preview = defineComponent({
       scale.value = 1;
       rotate.value = 0;
       setPosition(initialPosition);
+      emit('afterClose');
     };
 
     const onZoomIn = () => {

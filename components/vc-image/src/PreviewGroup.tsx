@@ -1,5 +1,5 @@
 import type { PropType, Ref, ComputedRef } from 'vue';
-import { ref, provide, defineComponent, inject, watch, reactive, computed, watchEffect } from 'vue';
+import { ref, provide, defineComponent, inject, watch, reactive, computed } from 'vue';
 import { type ImagePreviewType, mergeDefaultValue } from './Image';
 import Preview from './Preview';
 import type { PreviewProps } from './Preview';
@@ -135,17 +135,20 @@ const Group = defineComponent({
       mousePosition.value = null;
     };
 
+    const onPreviewAfterClose = () => {
+      if (!isShowPreview.value && isControlled.value) {
+        setCurrent(currentControlledKey.value);
+      }
+    };
+
     watch(previewVisible, () => {
       isShowPreview.value = !!previewVisible.value;
     });
     watch(isShowPreview, (val, preVal) => {
       onPreviewVisibleChange.value(val, preVal);
     });
-
-    watchEffect(() => {
-      if (!isShowPreview.value && isControlled.value) {
-        setCurrent(currentControlledKey.value);
-      }
+    watch(currentControlledKey, val => {
+      setCurrent(val);
     });
 
     context.provide({
@@ -170,6 +173,7 @@ const Group = defineComponent({
             visible={isShowPreview.value}
             prefixCls={props.previewPrefixCls}
             onClose={onPreviewClose}
+            onAfterClose={onPreviewAfterClose}
             mousePosition={mousePosition.value}
             src={canPreviewUrls.value.get(current.value)}
             icons={props.icons}

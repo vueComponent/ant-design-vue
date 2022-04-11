@@ -32,7 +32,7 @@ const Image = defineComponent<ImageProps>({
         mask: slots.previewMask ? (
           slots.previewMask()
         ) : (
-          <div class={`${prefixCls}-mask-info`}>
+          <div class={`${prefixCls.value}-mask-info`}>
             <EyeOutlined />
             {imageLocale?.preview}
           </div>

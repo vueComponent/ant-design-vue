@@ -50,6 +50,7 @@ export const context = {
       setShowPreview: () => {},
       setMousePosition: () => {},
       registerImage: null,
+      rootClassName: '',
     });
   },
 };
@@ -148,6 +149,7 @@ const Group = defineComponent({
       },
       {
         immediate: true,
+        flush: 'post',
       },
     );
     watchEffect(

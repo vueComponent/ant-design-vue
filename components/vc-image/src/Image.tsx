@@ -42,6 +42,7 @@ export const imageProps = () => ({
   src: String,
   wrapperClassName: String,
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  rootClassName: String,
   prefixCls: String,
   previewPrefixCls: String,
   placeholder: PropTypes.any,
@@ -209,6 +210,7 @@ const ImageInternal = defineComponent({
         src: imgSrc,
         placeholder,
         wrapperStyle,
+        rootClassName,
       } = props;
       const {
         width,
@@ -224,7 +226,7 @@ const ImageInternal = defineComponent({
       } = attrs as ImgHTMLAttributes;
       const { icons, maskClassName, src: previewSrc, ...dialogProps } = preview.value;
 
-      const wrappperClass = cn(prefixCls, wrapperClassName, {
+      const wrappperClass = cn(prefixCls, wrapperClassName, rootClassName, {
         [`${prefixCls}-error`]: isError.value,
       });
       const mergedSrc = isError.value && fallback ? fallback : previewSrc ?? imgSrc;
@@ -297,6 +299,7 @@ const ImageInternal = defineComponent({
               alt={alt}
               getContainer={getPreviewContainer.value}
               icons={icons}
+              rootClassName={rootClassName}
             />
           )}
         </>

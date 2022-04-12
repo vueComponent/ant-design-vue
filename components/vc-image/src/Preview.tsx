@@ -46,6 +46,7 @@ export const previewProps = {
   ...dialogPropTypes(),
   src: String,
   alt: String,
+  rootClassName: String,
   icons: {
     type: Object as PropType<PreviewProps['icons']>,
     default: () => ({} as PreviewProps['icons']),
@@ -271,6 +272,8 @@ const Preview = defineComponent({
     });
 
     return () => {
+      const { visible, prefixCls, rootClassName } = props;
+
       return (
         <Dialog
           {...attrs}
@@ -278,11 +281,12 @@ const Preview = defineComponent({
           maskTransitionName="fade"
           closable={false}
           keyboard
-          prefixCls={props.prefixCls}
+          prefixCls={prefixCls}
           onClose={onClose}
           afterClose={onAfterClose}
-          visible={props.visible}
+          visible={visible}
           wrapClassName={wrapClassName}
+          rootClassName={rootClassName}
           getContainer={props.getContainer}
         >
           <ul class={`${props.prefixCls}-operations`}>

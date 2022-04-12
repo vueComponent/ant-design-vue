@@ -63,7 +63,7 @@ export default function useTreeData(
               rootPId: null,
               ...(simpleModeValue !== true ? simpleModeValue : {}),
             })
-          : toRaw(treeData.value);
+          : toRaw(treeData.value).slice();
       } else {
         mergedTreeData.value = convertChildrenToData(toRaw(children.value));
       }

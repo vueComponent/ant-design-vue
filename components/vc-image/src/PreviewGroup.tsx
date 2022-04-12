@@ -1,5 +1,5 @@
 import type { PropType, Ref, ComputedRef } from 'vue';
-import { ref, provide, defineComponent, inject, watch, reactive, computed } from 'vue';
+import { ref, provide, defineComponent, inject, watch, reactive, computed, watchEffect } from 'vue';
 import { type ImagePreviewType, mergeDefaultValue } from './Image';
 import Preview from './Preview';
 import type { PreviewProps } from './Preview';
@@ -81,7 +81,7 @@ const Group = defineComponent({
         : defaultValues;
     });
     const previewUrls = reactive<Map<number, PreviewUrl>>(new Map());
-    const current = ref(preview.value.current);
+    const current = ref<number>();
 
     const previewVisible = computed(() => preview.value.visible);
     const onPreviewVisibleChange = computed(() => preview.value.onVisibleChange);
@@ -135,12 +135,6 @@ const Group = defineComponent({
       mousePosition.value = null;
     };
 
-    const onPreviewAfterClose = () => {
-      if (!isShowPreview.value && isControlled.value) {
-        setCurrent(currentControlledKey.value);
-      }
-    };
-
     watch(previewVisible, () => {
       isShowPreview.value = !!previewVisible.value;
     });
@@ -150,6 +144,16 @@ const Group = defineComponent({
     watch(currentControlledKey, val => {
       setCurrent(val);
     });
+    watchEffect(
+      () => {
+        if (!isShowPreview.value && isControlled.value) {
+          setCurrent(currentControlledKey.value);
+        }
+      },
+      {
+        flush: 'post',
+      },
+    );
 
     context.provide({
       isPreviewGroup: ref(true),
@@ -173,7 +177,6 @@ const Group = defineComponent({
             visible={isShowPreview.value}
             prefixCls={props.previewPrefixCls}
             onClose={onPreviewClose}
-            onAfterClose={onPreviewAfterClose}
             mousePosition={mousePosition.value}
             src={canPreviewUrls.value.get(current.value)}
             icons={props.icons}

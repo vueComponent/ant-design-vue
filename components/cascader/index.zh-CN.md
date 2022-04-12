@@ -24,6 +24,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
 | --- | --- | --- | --- | --- |
 | allowClear | 是否支持清除 | boolean | true |  |
 | autofocus | 自动获取焦点 | boolean | false |  |
+| bordered | 是否有边框 | boolean | true | 3.2 |
+| clearIcon | 自定义的选择框清空图标 | slot | - | 3.2 |
 | changeOnSelect | （单选时生效）当此项为 true 时，点选每级菜单选项值都会发生变化，具体见上面的演示 | boolean | false |  |
 | defaultValue | 默认的选中项 | string\[] \| number\[] | \[] |  |
 | disabled | 禁用 | boolean | false |  |
@@ -43,6 +45,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
 | options | 可选项数据源 | [Option](#option)\[] | - |  |
 | placeholder | 输入框占位文本 | string | '请选择' |  |
 | placement | 浮层预设位置 | `bottomLeft` \| `bottomRight` \| `topLeft` \| `topRight` | `bottomLeft` | 3.0 |
+| removeIcon | 自定义的多选框清除图标 | slot | - | 3.2 |
 | searchValue | 设置搜索的值，需要与 `showSearch` 配合使用 | string | - | 3.0 |
 | showSearch | 在选择框中显示搜索框 | boolean \| [object](#showsearch) | false |  |
 | size | 输入框大小 | `large` \| `default` \| `small` | `default` |  |

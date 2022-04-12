@@ -1,16 +1,21 @@
 /* eslint-disable default-case */
-import Column from './Column';
 import type { DefaultOptionType, SingleValueType } from '../Cascader';
-import { isLeaf, toPathKey, toPathKeys, toPathValueStr } from '../utils/commonUtil';
+import {
+  isLeaf,
+  toPathKey,
+  toPathKeys,
+  toPathValueStr,
+  scrollIntoParentView,
+} from '../utils/commonUtil';
 import useActive from './useActive';
 import useKeyboard from './useKeyboard';
 import { toPathOptions } from '../utils/treeUtil';
-import { computed, defineComponent, ref, shallowRef, watchEffect } from 'vue';
+import { computed, defineComponent, onMounted, ref, shallowRef, watch, watchEffect } from 'vue';
 import { useBaseProps } from '../../vc-select';
 import { useInjectCascader } from '../context';
 import type { Key } from '../../_util/type';
 import type { EventHandler } from '../../_util/EventInterface';
-
+import Column, { FIX_LABEL } from './Column';
 export default defineComponent({
   name: 'OptionList',
   inheritAttrs: false,
@@ -149,18 +154,29 @@ export default defineComponent({
       }
     };
 
-    useKeyboard(
-      context,
-      mergedOptions,
-      fieldNames,
-      activeValueCells,
-      onPathOpen,
-      containerRef,
-      onKeyboardSelect,
-    );
+    useKeyboard(context, mergedOptions, fieldNames, activeValueCells, onPathOpen, onKeyboardSelect);
     const onListMouseDown: EventHandler = event => {
       event.preventDefault();
     };
+    onMounted(() => {
+      watch(
+        activeValueCells,
+        cells => {
+          for (let i = 0; i < cells.length; i += 1) {
+            const cellPath = cells.slice(0, i + 1);
+            const cellKeyPath = toPathKey(cellPath);
+            const ele = containerRef.value?.querySelector<HTMLElement>(
+              `li[data-path-key="${cellKeyPath.replace(/\\{0,2}"/g, '\\"')}"]`, // matches unescaped double quotes
+            );
+            if (ele) {
+              scrollIntoParentView(ele);
+            }
+          }
+        },
+        { flush: 'post', immediate: true },
+      );
+    });
+
     return () => {
       // ========================== Render ==========================
       const {
@@ -173,8 +189,8 @@ export default defineComponent({
 
       const emptyList: DefaultOptionType[] = [
         {
-          [fieldNames.value.label as 'label']: notFoundContent,
           [fieldNames.value.value as 'value']: '__EMPTY__',
+          [FIX_LABEL as 'label']: notFoundContent,
           disabled: true,
         },
       ];

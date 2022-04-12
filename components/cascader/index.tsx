@@ -15,7 +15,8 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
-import { getTransitionName } from '../_util/transition';
+import type { SelectCommonPlacement } from '../_util/transition';
+import { getTransitionDirection, getTransitionName } from '../_util/transition';
 import { useInjectFormItemContext } from '../form';
 import type { ValueType } from '../vc-cascader/Cascader';
 
@@ -96,7 +97,7 @@ export function cascaderProps<DataNodeType extends CascaderOptionType = Cascader
     multiple: { type: Boolean, default: undefined },
     size: String as PropType<SizeType>,
     bordered: { type: Boolean, default: undefined },
-
+    placement: { type: String as PropType<SelectCommonPlacement> },
     suffixIcon: PropTypes.any,
     options: Array as PropType<DataNodeType[]>,
     'onUpdate:value': Function as PropType<(value: ValueType) => void>,
@@ -191,7 +192,17 @@ const Cascader = defineComponent({
       emit('blur', ...args);
       formItemContext.onFieldBlur();
     };
-
+    const mergedShowArrow = computed(() =>
+      props.showArrow !== undefined ? props.showArrow : props.loading || !props.multiple,
+    );
+    const placement = computed(() => {
+      if (props.placement !== undefined) {
+        return props.placement;
+      }
+      return direction.value === 'rtl'
+        ? ('bottomRight' as SelectCommonPlacement)
+        : ('bottomLeft' as SelectCommonPlacement);
+    });
     return () => {
       const {
         notFoundContent = slots.notFoundContent?.(),
@@ -225,6 +236,7 @@ const Cascader = defineComponent({
           ...props,
           multiple,
           prefixCls: prefixCls.value,
+          showArrow: mergedShowArrow.value,
         },
         slots,
       );
@@ -245,6 +257,7 @@ const Cascader = defineComponent({
             attrs.class,
           ]}
           direction={direction.value}
+          placement={placement.value}
           notFoundContent={mergedNotFoundContent}
           allowClear={allowClear}
           showSearch={mergedShowSearch.value}
@@ -257,7 +270,11 @@ const Cascader = defineComponent({
           dropdownClassName={mergedDropdownClassName.value}
           dropdownPrefixCls={cascaderPrefixCls.value}
           choiceTransitionName={getTransitionName(rootPrefixCls.value, '', choiceTransitionName)}
-          transitionName={getTransitionName(rootPrefixCls.value, 'slide-up', transitionName)}
+          transitionName={getTransitionName(
+            rootPrefixCls.value,
+            getTransitionDirection(placement.value),
+            transitionName,
+          )}
           getPopupContainer={getPopupContainer.value}
           customSlots={{
             ...slots,
@@ -265,6 +282,7 @@ const Cascader = defineComponent({
           }}
           displayRender={props.displayRender || slots.displayRender}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
+          showArrow={props.showArrow}
           onChange={handleChange}
           onBlur={handleBlur}
           v-slots={slots}

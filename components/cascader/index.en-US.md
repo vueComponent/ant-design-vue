@@ -23,6 +23,8 @@ Cascade selection box.
 | --- | --- | --- | --- | --- |
 | allowClear | whether allow clear | boolean | true |  |
 | autofocus | get focus when component mounted | boolean | false |  |
+| bordered | Whether has border style | boolean | true | 3.2 |
+| clearIcon | The custom clear icon | slot | - | 3.2 |
 | changeOnSelect | (Work on single select) change value on each selection if set to true, see above demo for details | boolean | false |  |
 | disabled | whether disabled select | boolean | false |  |
 | displayRender | render function of displaying selected options, you can use #displayRender="{labels, selectedOptions}". | `({labels, selectedOptions}) => VNode` | `labels => labels.join(' / ')` |  |
@@ -41,6 +43,7 @@ Cascade selection box.
 | options | data options of cascade | [Option](#option)\[] | - |  |
 | placeholder | input placeholder | string | 'Please select' |  |
 | placement | Use preset popup align config from builtinPlacements | `bottomLeft` \| `bottomRight` \| `topLeft` \| `topRight` | `bottomLeft` | 3.0 |
+| removeIcon | The custom remove icon | slot | - | 3.2 |
 | searchValue | Set search value，Need work with `showSearch` | string | - | 3.0 |
 | showSearch | Whether show search input in single mode. | boolean \| [object](#showsearch) | false |  |
 | size | input size | `large` \| `default` \| `small` | `default` |  |

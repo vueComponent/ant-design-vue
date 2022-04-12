@@ -9,7 +9,7 @@ import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
 import useId from '../vc-select/hooks/useId';
 import useMergedState from '../_util/hooks/useMergedState';
-import { fillFieldNames, toPathKey, toPathKeys } from './utils/commonUtil';
+import { fillFieldNames, toPathKey, toPathKeys, SHOW_PARENT, SHOW_CHILD } from './utils/commonUtil';
 import useEntities from './hooks/useEntities';
 import useSearchConfig from './hooks/useSearchConfig';
 import useSearchOptions from './hooks/useSearchOptions';
@@ -23,6 +23,7 @@ import { BaseSelect } from '../vc-select';
 import devWarning from '../vc-util/devWarning';
 import useMaxLevel from '../vc-tree/useMaxLevel';
 
+export { SHOW_PARENT, SHOW_CHILD };
 export interface ShowSearchType<OptionType extends BaseOptionType = DefaultOptionType> {
   filter?: (inputValue: string, options: OptionType[], fieldNames: FieldNames) => boolean;
   render?: (arg?: {
@@ -49,6 +50,7 @@ export interface InternalFieldNames extends Required<FieldNames> {
 export type SingleValueType = (string | number)[];
 
 export type ValueType = SingleValueType | SingleValueType[];
+export type ShowCheckedStrategy = typeof SHOW_PARENT | typeof SHOW_CHILD;
 
 export interface BaseOptionType {
   disabled?: boolean;
@@ -73,14 +75,11 @@ function baseCascaderProps<OptionType extends BaseOptionType = DefaultOptionType
     value: { type: [String, Number, Array] as PropType<ValueType> },
     defaultValue: { type: [String, Number, Array] as PropType<ValueType> },
     changeOnSelect: { type: Boolean, default: undefined },
-    onChange: Function as PropType<
-      (value: ValueType, selectedOptions?: OptionType[] | OptionType[][]) => void
-    >,
     displayRender: Function as PropType<
       (opt: { labels: string[]; selectedOptions?: OptionType[] }) => any
     >,
     checkable: { type: Boolean, default: undefined },
-
+    showCheckedStrategy: { type: String as PropType<ShowCheckedStrategy>, default: SHOW_PARENT },
     // Search
     showSearch: {
       type: [Boolean, Object] as PropType<boolean | ShowSearchType<OptionType>>,
@@ -184,7 +183,7 @@ function toRawValues(value: ValueType): SingleValueType[] {
     return value;
   }
 
-  return value.length === 0 ? [] : [value];
+  return (value.length === 0 ? [] : [value]).map(val => (Array.isArray(val) ? val : [val]));
 }
 
 export default defineComponent({
@@ -215,10 +214,10 @@ export default defineComponent({
 
     /** Convert path key back to value format */
     const getValueByKeyPath = (pathKeys: Key[]): SingleValueType[] => {
-      const ketPathEntities = pathKeyEntities.value;
+      const keyPathEntities = pathKeyEntities.value;
 
       return pathKeys.map(pathKey => {
-        const { nodes } = ketPathEntities[pathKey];
+        const { nodes } = keyPathEntities[pathKey];
 
         return nodes.map(node => node[mergedFieldNames.value.value]);
       });
@@ -275,12 +274,12 @@ export default defineComponent({
       }
 
       const keyPathValues = toPathKeys(existValues);
-      const ketPathEntities = pathKeyEntities.value;
+      const keyPathEntities = pathKeyEntities.value;
 
       const { checkedKeys, halfCheckedKeys } = conductCheck(
         keyPathValues,
         true,
-        ketPathEntities,
+        keyPathEntities,
         maxLevel.value,
         levelEntities.value,
       );
@@ -295,7 +294,11 @@ export default defineComponent({
 
     const deDuplicatedValues = computed(() => {
       const checkedKeys = toPathKeys(checkedValues.value);
-      const deduplicateKeys = formatStrategyValues(checkedKeys, pathKeyEntities.value);
+      const deduplicateKeys = formatStrategyValues(
+        checkedKeys,
+        pathKeyEntities.value,
+        props.showCheckedStrategy,
+      );
       return [...missingCheckedValues.value, ...getValueByKeyPath(deduplicateKeys)];
     });
 
@@ -330,6 +333,7 @@ export default defineComponent({
 
     // =========================== Select ===========================
     const onInternalSelect = (valuePath: SingleValueType) => {
+      setSearchValue('');
       if (!multiple.value) {
         triggerChange(valuePath);
       } else {
@@ -379,7 +383,11 @@ export default defineComponent({
           }
 
           // Roll up to parent level keys
-          const deDuplicatedKeys = formatStrategyValues(checkedKeys, pathKeyEntities.value);
+          const deDuplicatedKeys = formatStrategyValues(
+            checkedKeys,
+            pathKeyEntities.value,
+            props.showCheckedStrategy,
+          );
           nextCheckedValues = getValueByKeyPath(deDuplicatedKeys);
         }
 
@@ -537,7 +545,7 @@ export default defineComponent({
     return () => {
       const emptyOptions = !(mergedSearchValue.value ? searchOptions.value : mergedOptions.value)
         .length;
-
+      const { dropdownMatchSelectWidth = false } = props;
       const dropdownStyle: CSSProperties =
         // Search to match width
         (mergedSearchValue.value && mergedSearchConfig.value.matchInputWidth) ||
@@ -555,7 +563,7 @@ export default defineComponent({
           ref={selectRef}
           id={mergedId}
           prefixCls={props.prefixCls}
-          dropdownMatchSelectWidth={false}
+          dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           dropdownStyle={{ ...mergedDropdownStyle.value, ...dropdownStyle }}
           // Value
           displayValues={displayValues.value}

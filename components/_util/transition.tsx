@@ -13,6 +13,17 @@ import {
   Transition as T,
   TransitionGroup as TG,
 } from 'vue';
+import { tuple } from './type';
+
+const SelectPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
+export type SelectCommonPlacement = typeof SelectPlacements[number];
+
+const getTransitionDirection = (placement: SelectCommonPlacement | undefined) => {
+  if (placement !== undefined && (placement === 'topLeft' || placement === 'topRight')) {
+    return `slide-down`;
+  }
+  return `slide-up`;
+};
 
 export const getTransitionProps = (transitionName: string, opt: TransitionProps = {}) => {
   if (process.env.NODE_ENV === 'test') {
@@ -176,6 +187,6 @@ const getTransitionName = (rootPrefixCls: string, motion: string, transitionName
   return `${rootPrefixCls}-${motion}`;
 };
 
-export { Transition, TransitionGroup, collapseMotion, getTransitionName };
+export { Transition, TransitionGroup, collapseMotion, getTransitionName, getTransitionDirection };
 
 export default Transition;

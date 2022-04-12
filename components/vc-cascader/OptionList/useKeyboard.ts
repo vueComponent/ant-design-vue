@@ -3,9 +3,9 @@ import type { Key } from '../../_util/type';
 import type { Ref, SetupContext } from 'vue';
 import { computed, ref, watchEffect } from 'vue';
 import type { DefaultOptionType, InternalFieldNames, SingleValueType } from '../Cascader';
-import { toPathKey } from '../utils/commonUtil';
 import { useBaseProps } from '../../vc-select';
 import KeyCode from '../../_util/KeyCode';
+import { SEARCH_MARK } from '../hooks/useSearchOptions';
 
 export default (
   context: SetupContext,
@@ -13,7 +13,7 @@ export default (
   fieldNames: Ref<InternalFieldNames>,
   activeValueCells: Ref<Key[]>,
   setActiveValueCells: (activeValueCells: Key[]) => void,
-  containerRef: Ref<HTMLElement>,
+  // containerRef: Ref<HTMLElement>,
   onKeyBoardSelect: (valueCells: SingleValueType, option: DefaultOptionType) => void,
 ) => {
   const baseProps = useBaseProps();
@@ -32,7 +32,7 @@ export default (
 
     const len = activeValueCells.value.length;
     // Fill validate active value cells and index
-    for (let i = 0; i < len; i += 1) {
+    for (let i = 0; i < len && currentOptions; i += 1) {
       // Mark the active index for current options
       const nextActiveIndex = currentOptions.findIndex(
         option => option[fieldNames.value.value] === activeValueCells.value[i],
@@ -65,9 +65,6 @@ export default (
   // Update active value cells and scroll to target element
   const internalSetActiveValueCells = (next: Key[]) => {
     setActiveValueCells(next);
-
-    const ele = containerRef.value?.querySelector(`li[data-path-key="${toPathKey(next)}"]`);
-    ele?.scrollIntoView?.({ block: 'nearest' });
   };
 
   // Same options offset
@@ -165,10 +162,18 @@ export default (
         // >>> Select
         case KeyCode.ENTER: {
           if (validActiveValueCells.value.length) {
-            onKeyBoardSelect(
-              validActiveValueCells.value,
-              lastActiveOptions.value[lastActiveIndex.value],
-            );
+            const option = lastActiveOptions.value[lastActiveIndex.value];
+
+            // Search option should revert back of origin options
+            const originOptions: DefaultOptionType[] = option?.[SEARCH_MARK] || [];
+            if (originOptions.length) {
+              onKeyBoardSelect(
+                originOptions.map(opt => opt[fieldNames.value.value]),
+                originOptions[originOptions.length - 1],
+              );
+            } else {
+              onKeyBoardSelect(validActiveValueCells.value, option);
+            }
           }
           break;
         }

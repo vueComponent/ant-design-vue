@@ -51,10 +51,11 @@ export default (
         labels: valueOptions.map(({ option, value }) => option?.[fieldNames.value.label] ?? value),
         selectedOptions: valueOptions.map(({ option }) => option),
       });
-
+      const value = toPathKey(valueCells);
       return {
         label,
-        value: toPathKey(valueCells),
+        value,
+        key: value,
         valueCells,
       };
     });

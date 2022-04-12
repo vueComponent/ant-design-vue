@@ -39,6 +39,7 @@ export default (
         if (
           // If is leaf option
           !children ||
+          children.length === 0 ||
           // If is changeOnSelect
           changeOnSelect.value
         ) {

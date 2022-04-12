@@ -1,21 +1,27 @@
 import type { Key } from '../../_util/type';
-import type { SingleValueType, DefaultOptionType, InternalFieldNames } from '../Cascader';
+import type {
+  SingleValueType,
+  DefaultOptionType,
+  InternalFieldNames,
+  ShowCheckedStrategy,
+} from '../Cascader';
 import type { OptionsInfo } from '../hooks/useEntities';
+import { SHOW_CHILD } from './commonUtil';
 
 export function formatStrategyValues(
   pathKeys: Key[],
   keyPathEntities: OptionsInfo['pathKeyEntities'],
+  showCheckedStrategy: ShowCheckedStrategy,
 ) {
   const valueSet = new Set(pathKeys);
 
   return pathKeys.filter(key => {
     const entity = keyPathEntities[key];
     const parent = entity ? entity.parent : null;
-
-    if (parent && !parent.node.disabled && valueSet.has(parent.key)) {
-      return false;
-    }
-    return true;
+    const children = entity ? entity.children : null;
+    return showCheckedStrategy === SHOW_CHILD
+      ? !(children && children.some(child => child.key && valueSet.has(child.key)))
+      : !(parent && !parent.node.disabled && valueSet.has(parent.key));
   });
 }
 

@@ -4,7 +4,7 @@ import type { DefaultOptionType, SingleValueType } from '../Cascader';
 import { SEARCH_MARK } from '../hooks/useSearchOptions';
 import type { Key } from '../../_util/type';
 import { useInjectCascader } from '../context';
-
+export const FIX_LABEL = '__cascader_fix_label__';
 export interface ColumnProps {
   prefixCls: string;
   multiple?: boolean;
@@ -58,7 +58,7 @@ export default function Column({
       {options.map(option => {
         const { disabled } = option;
         const searchOptions = option[SEARCH_MARK];
-        const label = option[fieldNames.value.label];
+        const label = option[FIX_LABEL] ?? option[fieldNames.value.label];
         const value = option[fieldNames.value.value];
 
         const isMergedLeaf = isLeaf(option, fieldNames.value);
@@ -132,6 +132,10 @@ export default function Column({
                 triggerOpenPath();
               }
             }}
+            onMousedown={e => {
+              // Prevent selector from blurring
+              e.preventDefault();
+            }}
           >
             {multiple && (
               <Checkbox
@@ -145,7 +149,7 @@ export default function Column({
                 }}
               />
             )}
-            <div class={`${menuItemPrefixCls}-content`}>{option[fieldNames.value.label]}</div>
+            <div class={`${menuItemPrefixCls}-content`}>{label}</div>
             {!isLoading && expandIcon && !isMergedLeaf && (
               <div class={`${menuItemPrefixCls}-expand-icon`}>{expandIcon}</div>
             )}

@@ -1,5 +1,14 @@
 import type { Ref } from 'vue';
-import { watchEffect, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import {
+  nextTick,
+  onActivated,
+  watchEffect,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
 import addEventListenerWrap from '../vc-util/Dom/addEventListener';
 import { getOffset } from '../vc-util/Dom/css';
 import classNames from '../_util/classNames';
@@ -136,6 +145,11 @@ export default defineComponent<StickyScrollBarProps>({
       onMouseUpListener = addEventListenerWrap(document.body, 'mouseup', onMouseUp, false);
       onMouseMoveListener = addEventListenerWrap(document.body, 'mousemove', onMouseMove, false);
       onResizeListener = addEventListenerWrap(window, 'resize', onContainerScroll, false);
+    });
+    onActivated(() => {
+      nextTick(() => {
+        onContainerScroll();
+      });
     });
 
     onMounted(() => {

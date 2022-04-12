@@ -538,6 +538,7 @@ export default defineComponent({
         'loadingIcon',
         'customSlots',
 
+        'showCheckedStrategy',
         // Children
         'children',
       ]);

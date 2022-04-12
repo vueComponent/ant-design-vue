@@ -24,6 +24,7 @@ export const inputNumberProps = () => ({
   addonAfter: PropTypes.any,
   prefix: PropTypes.any,
   'update:value': baseProps.onChange,
+  valueModifiers: Object,
 });
 
 export type InputNumberProps = Partial<ExtractPropTypes<ReturnType<typeof inputNumberProps>>>;
@@ -91,6 +92,7 @@ const InputNumber = defineComponent({
         addonBefore = slots.addonBefore?.(),
         addonAfter = slots.addonAfter?.(),
         prefix = slots.prefix?.(),
+        valueModifiers = {},
         ...others
       } = { ...(attrs as HTMLAttributes), ...props };
 
@@ -112,6 +114,7 @@ const InputNumber = defineComponent({
         <VcInputNumber
           {...omit(others, ['size', 'defaultValue'])}
           ref={inputNumberRef}
+          lazy={!!valueModifiers.lazy}
           value={mergedValue.value}
           class={inputNumberClass}
           prefixCls={preCls}

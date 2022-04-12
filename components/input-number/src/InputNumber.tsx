@@ -81,7 +81,10 @@ export const inputNumberProps = () => ({
 export default defineComponent({
   name: 'InnerInputNumber',
   inheritAttrs: false,
-  props: inputNumberProps(),
+  props: {
+    ...inputNumberProps(),
+    lazy: Boolean,
+  },
   slots: ['upHandler', 'downHandler'],
   setup(props, { attrs, slots, emit, expose }) {
     const inputRef = ref<HTMLInputElement>();
@@ -509,7 +512,7 @@ export default defineComponent({
         onInput,
         onPressEnter,
         onStep,
-
+        lazy,
         class: className,
         style,
 
@@ -517,6 +520,12 @@ export default defineComponent({
       } = { ...(attrs as HTMLAttributes), ...props };
       const { upHandler, downHandler } = slots;
       const inputClassName = `${prefixCls}-input`;
+      const eventProps = {} as any;
+      if (lazy) {
+        eventProps.onChange = onInternalInput;
+      } else {
+        eventProps.onInput = onInternalInput;
+      }
       return (
         <div
           class={classNames(prefixCls, className, {
@@ -561,7 +570,7 @@ export default defineComponent({
                 focus.value = true;
                 emit('focus', e);
               }}
-              onInput={onInternalInput}
+              {...eventProps}
               onBlur={onBlur}
               onCompositionstart={onCompositionStart}
               onCompositionend={onCompositionEnd}

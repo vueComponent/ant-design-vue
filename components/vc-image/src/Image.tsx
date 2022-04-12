@@ -4,6 +4,7 @@ import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import { getOffset } from '../../vc-util/Dom/css';
+import useMergedState from '../../_util/hooks/useMergedState';
 import Preview from './Preview';
 
 import type { MouseEventHandler } from '../../_util/EventInterface';
@@ -95,9 +96,12 @@ const ImageInternal = defineComponent({
     const getPreviewContainer = computed(() => preview.value.getContainer);
 
     const isControlled = computed(() => previewVisible.value !== undefined);
-    const isShowPreview = ref(!!previewVisible.value);
+    const [isShowPreview, setShowPreview] = useMergedState(!!previewVisible.value, {
+      value: previewVisible,
+      onChange: onPreviewVisibleChange.value,
+    });
     watch(previewVisible, val => {
-      isShowPreview.value = Boolean(val);
+      setShowPreview(Boolean(val));
     });
     watch(isShowPreview, (val, preVal) => {
       onPreviewVisibleChange.value(val, preVal);
@@ -149,13 +153,13 @@ const ImageInternal = defineComponent({
       if (isPreviewGroup.value) {
         setGroupShowPreview(true);
       } else {
-        isShowPreview.value = true;
+        setShowPreview(true);
       }
       emit('click', e);
     };
 
     const onPreviewClose = () => {
-      isShowPreview.value = false;
+      setShowPreview(false);
       if (!isControlled.value) {
         mousePosition.value = null;
       }
@@ -247,7 +251,7 @@ const ImageInternal = defineComponent({
           <div
             class={wrappperClass}
             onClick={
-              canPreview.value && !Object.is(previewVisible.value, false)
+              canPreview.value
                 ? onPreview
                 : e => {
                     emit('click', e);

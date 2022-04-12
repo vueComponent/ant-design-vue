@@ -222,7 +222,7 @@ const ImageInternal = defineComponent({
         class: cls,
         style,
       } = attrs as ImgHTMLAttributes;
-      const { icons, src: previewSrc, ...dialogProps } = preview.value;
+      const { icons, maskClassName, src: previewSrc, ...dialogProps } = preview.value;
 
       const wrappperClass = cn(prefixCls, wrapperClassName, {
         [`${prefixCls}-error`]: isError.value,
@@ -282,7 +282,7 @@ const ImageInternal = defineComponent({
             )}
             {/* Preview Click Mask */}
             {slots.previewMask && canPreview.value && (
-              <div class={`${prefixCls}-mask`}>{slots.previewMask()}</div>
+              <div class={[`${prefixCls}-mask`, maskClassName]}>{slots.previewMask()}</div>
             )}
           </div>
           {!isPreviewGroup.value && canPreview.value && (

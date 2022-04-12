@@ -92,19 +92,21 @@ const ImageInternal = defineComponent({
       () => (props.placeholder && props.placeholder !== true) || slots.placeholder,
     );
     const previewVisible = computed(() => preview.value.visible);
-    const onPreviewVisibleChange = computed(() => preview.value.onVisibleChange);
     const getPreviewContainer = computed(() => preview.value.getContainer);
-
     const isControlled = computed(() => previewVisible.value !== undefined);
+
+    const onPreviewVisibleChange = (val, preval) => {
+      preview.value.onVisibleChange?.(val, preval);
+    };
     const [isShowPreview, setShowPreview] = useMergedState(!!previewVisible.value, {
       value: previewVisible,
-      onChange: onPreviewVisibleChange.value,
+      onChange: onPreviewVisibleChange,
     });
     watch(previewVisible, val => {
       setShowPreview(Boolean(val));
     });
     watch(isShowPreview, (val, preVal) => {
-      onPreviewVisibleChange.value(val, preVal);
+      onPreviewVisibleChange(val, preVal);
     });
     const status = ref<ImageStatus>(isCustomPlaceholder.value ? 'loading' : 'normal');
     watch(

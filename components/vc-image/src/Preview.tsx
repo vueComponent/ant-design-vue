@@ -6,7 +6,7 @@ import {
   reactive,
   ref,
   watch,
-  createVNode,
+  cloneVNode,
 } from 'vue';
 import type { VNode, PropType } from 'vue';
 
@@ -294,7 +294,7 @@ const Preview = defineComponent({
                 onClick={onClick}
                 key={type}
               >
-                {createVNode(IconType, { class: iconClassName })}
+                {cloneVNode(IconType, { class: iconClassName })}
               </li>
             ))}
           </ul>

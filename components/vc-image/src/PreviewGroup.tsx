@@ -141,9 +141,15 @@ const Group = defineComponent({
     watch(isShowPreview, (val, preVal) => {
       onPreviewVisibleChange.value(val, preVal);
     });
-    watch(currentControlledKey, val => {
-      setCurrent(val);
-    });
+    watch(
+      currentControlledKey,
+      val => {
+        setCurrent(val);
+      },
+      {
+        immediate: true,
+      },
+    );
     watchEffect(
       () => {
         if (!isShowPreview.value && isControlled.value) {

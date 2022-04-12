@@ -18,9 +18,7 @@ You can customize icons for different nodes.
 
 <template>
   <a-tree v-model:selectedKeys="selectedKeys" :tree-data="treeData" show-icon default-expand-all>
-    <template #switcherIcon>
-      <down-outlined />
-    </template>
+    <template #switcherIcon="{ switcherCls }"><down-outlined :class="switcherCls" /></template>
     <template #icon="{ key, selected }">
       <template v-if="key === '0-0'">
         <smile-outlined />

@@ -23,7 +23,7 @@ customize collapse/expand icon of tree node
     show-line
     :tree-data="treeData"
   >
-    <template #switcherIcon><down-outlined /></template>
+    <template #switcherIcon="{ switcherCls }"><down-outlined :class="switcherCls" /></template>
   </a-tree>
 </template>
 <script lang="ts">

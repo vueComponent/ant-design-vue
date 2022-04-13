@@ -25,6 +25,7 @@ export function dialogPropTypes() {
     maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     prefixCls: String,
     wrapClassName: String,
+    rootClassName: String,
     width: [String, Number],
     height: [String, Number],
     zIndex: Number,

@@ -3,7 +3,7 @@ import type { GenerateConfig } from '../generate';
 import { getValue, updateValues } from '../utils/miscUtil';
 import { getClosingViewDate, isSameYear, isSameMonth, isSameDecade } from '../utils/dateUtil';
 import type { Ref } from 'vue';
-import { watch, computed, ref } from 'vue';
+import { watchEffect, computed, ref } from 'vue';
 
 function getStartEndDistance<DateType>(
   startDate: DateType,
@@ -99,14 +99,10 @@ export default function useRangeViewDates<DateType>({
   const startViewDate = ref(null);
 
   const endViewDate = ref(null);
-  watch(
-    viewDates,
-    () => {
-      startViewDate.value = getViewDate(0);
-      endViewDate.value = getViewDate(1);
-    },
-    { immediate: true },
-  );
+  watchEffect(() => {
+    startViewDate.value = getViewDate(0);
+    endViewDate.value = getViewDate(1);
+  });
 
   function setViewDate(viewDate: DateType | null, index: 0 | 1) {
     if (viewDate) {

@@ -43,7 +43,7 @@ exports[`WeekPicker should support style prop 1`] = `
                     <td title="2017-08-30" class="ant-picker-cell">
                       <div class="ant-picker-cell-inner">30</div>
                     </td>
-                    <td title="2017-08-31" class="ant-picker-cell">
+                    <td title="2017-08-31" class="ant-picker-cell ant-picker-cell-end">
                       <div class="ant-picker-cell-inner">31</div>
                     </td>
                     <td title="2017-09-01" class="ant-picker-cell ant-picker-cell-start ant-picker-cell-in-view">
@@ -145,7 +145,7 @@ exports[`WeekPicker should support style prop 1`] = `
                     <td title="2017-09-29" class="ant-picker-cell ant-picker-cell-in-view">
                       <div class="ant-picker-cell-inner">29</div>
                     </td>
-                    <td title="2017-09-30" class="ant-picker-cell ant-picker-cell-in-view">
+                    <td title="2017-09-30" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
                       <div class="ant-picker-cell-inner">30</div>
                     </td>
                   </tr>

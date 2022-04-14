@@ -39,7 +39,7 @@ exports[`Calendar Calendar should support locale 1`] = `
           </thead>
           <tbody>
             <tr>
-              <td title="2018-09-30" class="ant-picker-cell">
+              <td title="2018-09-30" class="ant-picker-cell ant-picker-cell-end">
                 <div class="ant-picker-cell-inner ant-picker-calendar-date">
                   <div class="ant-picker-calendar-date-value">30</div>
                   <div class="ant-picker-calendar-date-content">

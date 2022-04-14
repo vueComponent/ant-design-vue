@@ -149,7 +149,7 @@ exports[`Picker format by locale date 1`] = `
                     <td title="2000-01-30" class="ant-picker-cell ant-picker-cell-in-view">
                       <div class="ant-picker-cell-inner">30</div>
                     </td>
-                    <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-in-view">
+                    <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
                       <div class="ant-picker-cell-inner">31</div>
                     </td>
                     <td title="2000-02-01" class="ant-picker-cell ant-picker-cell-start">
@@ -329,7 +329,7 @@ exports[`Picker format by locale dateTime 1`] = `
                       <td title="2000-01-30" class="ant-picker-cell ant-picker-cell-in-view">
                         <div class="ant-picker-cell-inner">30</div>
                       </td>
-                      <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-in-view">
+                      <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
                         <div class="ant-picker-cell-inner">31</div>
                       </td>
                       <td title="2000-02-01" class="ant-picker-cell ant-picker-cell-start">
@@ -1045,7 +1045,7 @@ exports[`Picker format by locale week 1`] = `
                     <td title="2000-01-30" class="ant-picker-cell ant-picker-cell-in-view">
                       <div class="ant-picker-cell-inner">30</div>
                     </td>
-                    <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-in-view">
+                    <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
                       <div class="ant-picker-cell-inner">31</div>
                     </td>
                     <td title="2000-02-01" class="ant-picker-cell ant-picker-cell-start">

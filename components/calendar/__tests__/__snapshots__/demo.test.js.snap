@@ -1909,7 +1909,7 @@ exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
                   </div>
                 </div>
               </td>
-              <td title="2017-01-31" class="ant-picker-cell ant-picker-cell-in-view">
+              <td title="2017-01-31" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
                 <div class="ant-picker-cell-inner ant-picker-calendar-date">
                   <div class="ant-picker-calendar-date-value">31</div>
                   <div class="ant-picker-calendar-date-content">

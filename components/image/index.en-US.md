@@ -22,7 +22,9 @@ Previewable image.
 | placeholder | Load placeholder, use default placeholder when set `true` | boolean \| slot | - | 2.0.0 |
 | preview | preview config, disabled when `false` | boolean \| [previewType](#previewType) | true | 2.0.0 |
 | src | Image path | string | - | 2.0.0 |
+| previewMask | custom mask | slot | - | 3.2.0 |
 | width | Image width | string \| number | - | 2.0.0 |
+| onError | Load failed callback | (event: Event) => void | - | 3.2.0 |
 
 ### previewType
 
@@ -31,6 +33,9 @@ Previewable image.
   visible?: boolean;
   onVisibleChange?: (visible, prevVisible) => void;
   getContainer?: string | HTMLElement | (() => HTMLElement);
+  src?: string;
+  maskClassName?: string;
+  current?: number;
 }
 ```
 

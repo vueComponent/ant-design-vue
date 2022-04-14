@@ -18,7 +18,7 @@ Preview a collection from one image.
 
 <template>
   <a-image
-    :preview="{ visible }"
+    :preview="{ visible: false }"
     :width="200"
     src="https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp"
     @click="visible = true"

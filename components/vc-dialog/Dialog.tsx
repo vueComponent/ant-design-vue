@@ -143,6 +143,7 @@ export default defineComponent({
         maskAnimation,
         zIndex,
         wrapClassName,
+        rootClassName,
         wrapStyle,
         closable,
         maskProps,
@@ -154,7 +155,7 @@ export default defineComponent({
       } = props;
       const { style, class: className } = attrs;
       return (
-        <div class={`${prefixCls}-root`} {...pickAttrs(props, { data: true })}>
+        <div class={[`${prefixCls}-root`, rootClassName]} {...pickAttrs(props, { data: true })}>
           <Mask
             prefixCls={prefixCls}
             visible={mask && visible}

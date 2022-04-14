@@ -1,47 +1,65 @@
-import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
-import RotateLeftOutlined from '@ant-design/icons-vue/RotateLeftOutlined';
-import RotateRightOutlined from '@ant-design/icons-vue/RotateRightOutlined';
-import ZoomInOutlined from '@ant-design/icons-vue/ZoomInOutlined';
-import ZoomOutOutlined from '@ant-design/icons-vue/ZoomOutOutlined';
-import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
-import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
-import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  reactive,
+  ref,
+  watch,
+  cloneVNode,
+} from 'vue';
+import type { VNode, PropType } from 'vue';
 
 import classnames from '../../_util/classNames';
 import Dialog from '../../vc-dialog';
-import getIDialogPropTypes from '../../vc-dialog/IDialogPropTypes';
+import { type IDialogChildProps, dialogPropTypes } from '../../vc-dialog/IDialogPropTypes';
 import { getOffset } from '../../vc-util/Dom/css';
 import addEventListener from '../../vc-util/Dom/addEventListener';
 import { warning } from '../../vc-util/warning';
 import useFrameSetState from './hooks/useFrameSetState';
 import getFixScaleEleTransPosition from './getFixScaleEleTransPosition';
+import type { MouseEventHandler, WheelEventHandler } from '../../_util/EventInterface';
 
 import { context } from './PreviewGroup';
 
-const IDialogPropTypes = getIDialogPropTypes();
-export type MouseEventHandler = (payload: MouseEvent) => void;
-
-export interface PreviewProps extends Omit<typeof IDialogPropTypes, 'onClose'> {
+export interface PreviewProps extends Omit<IDialogChildProps, 'onClose' | 'mask'> {
   onClose?: (e: Element) => void;
   src?: string;
   alt?: string;
+  rootClassName?: string;
+  icons?: {
+    rotateLeft?: VNode;
+    rotateRight?: VNode;
+    zoomIn?: VNode;
+    zoomOut?: VNode;
+    close?: VNode;
+    left?: VNode;
+    right?: VNode;
+  };
 }
 
 const initialPosition = {
   x: 0,
   y: 0,
 };
-const PreviewType = {
+export const previewProps = {
+  ...dialogPropTypes(),
   src: String,
   alt: String,
-  ...IDialogPropTypes,
+  rootClassName: String,
+  icons: {
+    type: Object as PropType<PreviewProps['icons']>,
+    default: () => ({} as PreviewProps['icons']),
+  },
 };
 const Preview = defineComponent({
   name: 'Preview',
   inheritAttrs: false,
-  props: PreviewType,
+  props: previewProps,
   emits: ['close', 'afterClose'],
   setup(props, { emit, attrs }) {
+    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right } = reactive(props.icons);
+
     const scale = ref(1);
     const rotate = ref(0);
     const [position, setPosition] = useFrameSetState<{
@@ -65,22 +83,22 @@ const Preview = defineComponent({
     const isMoving = ref(false);
     const groupContext = context.inject();
     const { previewUrls, current, isPreviewGroup, setCurrent } = groupContext;
-    const previewGroupCount = computed(() => Object.keys(previewUrls).length);
-    const previewUrlsKeys = computed(() => Object.keys(previewUrls));
-    const currentPreviewIndex = computed(() =>
-      previewUrlsKeys.value.indexOf(String(current.value)),
-    );
-    const combinationSrc = computed(() =>
-      isPreviewGroup.value ? previewUrls[current.value] : props.src,
-    );
+    const previewGroupCount = computed(() => previewUrls.value.size);
+    const previewUrlsKeys = computed(() => Array.from(previewUrls.value.keys()));
+    const currentPreviewIndex = computed(() => previewUrlsKeys.value.indexOf(current.value));
+    const combinationSrc = computed(() => {
+      return isPreviewGroup.value ? previewUrls.value.get(current.value) : props.src;
+    });
     const showLeftOrRightSwitches = computed(
       () => isPreviewGroup.value && previewGroupCount.value > 1,
     );
+    const lastWheelZoomDirection = ref({ wheelDirection: 0 });
 
     const onAfterClose = () => {
       scale.value = 1;
       rotate.value = 0;
       setPosition(initialPosition);
+      emit('afterClose');
     };
 
     const onZoomIn = () => {
@@ -106,7 +124,7 @@ const Preview = defineComponent({
       // Without this mask close will abnormal
       event.stopPropagation();
       if (currentPreviewIndex.value > 0) {
-        setCurrent(previewUrlsKeys.value[String(currentPreviewIndex.value - 1)]);
+        setCurrent(previewUrlsKeys.value[currentPreviewIndex.value - 1]);
       }
     };
 
@@ -115,7 +133,7 @@ const Preview = defineComponent({
       // Without this mask close will abnormal
       event.stopPropagation();
       if (currentPreviewIndex.value < previewGroupCount.value - 1) {
-        setCurrent(previewUrlsKeys.value[String(currentPreviewIndex.value + 1)]);
+        setCurrent(previewUrlsKeys.value[currentPreviewIndex.value + 1]);
       }
     };
 
@@ -126,28 +144,28 @@ const Preview = defineComponent({
     const iconClassName = `${props.prefixCls}-operations-icon`;
     const tools = [
       {
-        icon: CloseOutlined,
+        icon: close,
         onClick: onClose,
         type: 'close',
       },
       {
-        icon: ZoomInOutlined,
+        icon: zoomIn,
         onClick: onZoomIn,
         type: 'zoomIn',
       },
       {
-        icon: ZoomOutOutlined,
+        icon: zoomOut,
         onClick: onZoomOut,
         type: 'zoomOut',
         disabled: computed(() => scale.value === 1),
       },
       {
-        icon: RotateRightOutlined,
+        icon: rotateRight,
         onClick: onRotateRight,
         type: 'rotateRight',
       },
       {
-        icon: RotateLeftOutlined,
+        icon: rotateLeft,
         onClick: onRotateLeft,
         type: 'rotateLeft',
       },
@@ -175,6 +193,8 @@ const Preview = defineComponent({
     };
 
     const onMouseDown: MouseEventHandler = event => {
+      // Only allow main button
+      if (event.button !== 0) return;
       event.preventDefault();
       // Without this mask close will abnormal
       event.stopPropagation();
@@ -193,6 +213,14 @@ const Preview = defineComponent({
         });
       }
     };
+
+    const onWheelMove: WheelEventHandler = event => {
+      if (!props.visible) return;
+      event.preventDefault();
+      const wheelDirection = event.deltaY;
+      lastWheelZoomDirection.value = { wheelDirection };
+    };
+
     let removeListeners = () => {};
     onMounted(() => {
       watch(
@@ -204,6 +232,9 @@ const Preview = defineComponent({
 
           const onMouseUpListener = addEventListener(window, 'mouseup', onMouseUp, false);
           const onMouseMoveListener = addEventListener(window, 'mousemove', onMouseMove, false);
+          const onScrollWheelListener = addEventListener(window, 'wheel', onWheelMove, {
+            passive: false,
+          });
 
           try {
             // Resolve if in iframe lost event
@@ -225,6 +256,7 @@ const Preview = defineComponent({
           removeListeners = () => {
             onMouseUpListener.remove();
             onMouseMoveListener.remove();
+            onScrollWheelListener.remove();
 
             /* istanbul ignore next */
             if (onTopMouseUpListener) onTopMouseUpListener.remove();
@@ -240,6 +272,8 @@ const Preview = defineComponent({
     });
 
     return () => {
+      const { visible, prefixCls, rootClassName } = props;
+
       return (
         <Dialog
           {...attrs}
@@ -247,11 +281,12 @@ const Preview = defineComponent({
           maskTransitionName="fade"
           closable={false}
           keyboard
-          prefixCls={props.prefixCls}
+          prefixCls={prefixCls}
           onClose={onClose}
           afterClose={onAfterClose}
-          visible={props.visible}
+          visible={visible}
           wrapClassName={wrapClassName}
+          rootClassName={rootClassName}
           getContainer={props.getContainer}
         >
           <ul class={`${props.prefixCls}-operations`}>
@@ -263,7 +298,7 @@ const Preview = defineComponent({
                 onClick={onClick}
                 key={type}
               >
-                <IconType class={iconClassName} />
+                {cloneVNode(IconType, { class: iconClassName })}
               </li>
             ))}
           </ul>
@@ -291,7 +326,7 @@ const Preview = defineComponent({
               })}
               onClick={onSwitchLeft}
             >
-              <LeftOutlined />
+              {left}
             </div>
           )}
           {showLeftOrRightSwitches.value && (
@@ -302,7 +337,7 @@ const Preview = defineComponent({
               })}
               onClick={onSwitchRight}
             >
-              <RightOutlined />
+              {right}
             </div>
           )}
         </Dialog>

@@ -1,7 +1,7 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 
-function dialogPropTypes() {
+export function dialogPropTypes() {
   return {
     keyboard: { type: Boolean, default: undefined },
     mask: { type: Boolean, default: undefined },
@@ -25,6 +25,7 @@ function dialogPropTypes() {
     maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     prefixCls: String,
     wrapClassName: String,
+    rootClassName: String,
     width: [String, Number],
     height: [String, Number],
     zIndex: Number,

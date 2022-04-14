@@ -27,6 +27,8 @@ const locale: Locale = {
   nextDecade: 'Década seguinte',
   previousCentury: 'Século anterior',
   nextCentury: 'Século seguinte',
+  shortWeekDays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+  shortMonths: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
 };
 
 export default locale;

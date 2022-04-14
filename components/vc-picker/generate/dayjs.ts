@@ -28,9 +28,70 @@ dayjs.extend((_o, c) => {
 
 type IlocaleMapObject = Record<string, string>;
 const localeMap: IlocaleMapObject = {
+  // ar_EG:
+  // az_AZ:
+  // bg_BG:
+  bn_BD: 'bn-bd',
+  by_BY: 'be',
+  // ca_ES:
+  // cs_CZ:
+  // da_DK:
+  // de_DE:
+  // el_GR:
   en_GB: 'en-gb',
   en_US: 'en',
+  // es_ES:
+  // et_EE:
+  // fa_IR:
+  // fi_FI:
+  fr_BE: 'fr', // todo: dayjs has no fr_BE locale, use fr at present
+  fr_CA: 'fr-ca',
+  // fr_FR:
+  // ga_IE:
+  // gl_ES:
+  // he_IL:
+  // hi_IN:
+  // hr_HR:
+  // hu_HU:
+  hy_AM: 'hy-am',
+  // id_ID:
+  // is_IS:
+  // it_IT:
+  // ja_JP:
+  // ka_GE:
+  // kk_KZ:
+  // km_KH:
+  kmr_IQ: 'ku',
+  // kn_IN:
+  // ko_KR:
+  // ku_IQ: // previous ku in antd
+  // lt_LT:
+  // lv_LV:
+  // mk_MK:
+  // ml_IN:
+  // mn_MN:
+  // ms_MY:
+  // nb_NO:
+  // ne_NP:
+  nl_BE: 'nl-be',
+  // nl_NL:
+  // pl_PL:
+  pt_BR: 'pt-br',
+  // pt_PT:
+  // ro_RO:
+  // ru_RU:
+  // sk_SK:
+  // sl_SI:
+  // sr_RS:
+  // sv_SE:
+  // ta_IN:
+  // th_TH:
+  // tr_TR:
+  // uk_UA:
+  // ur_PK:
+  // vi_VN:
   zh_CN: 'zh-cn',
+  zh_HK: 'zh-hk',
   zh_TW: 'zh-tw',
 };
 
@@ -47,7 +108,7 @@ const parseNoMatchNotice = () => {
 const generateConfig: GenerateConfig<Dayjs> = {
   // get
   getNow: () => dayjs(),
-  getFixedDate: string => dayjs(string, 'YYYY-MM-DD'),
+  getFixedDate: string => dayjs(string, ['YYYY-M-DD', 'YYYY-MM-DD']),
   getEndDate: date => date.endOf('month'),
   getWeekDay: date => {
     const clone = date.locale('en');

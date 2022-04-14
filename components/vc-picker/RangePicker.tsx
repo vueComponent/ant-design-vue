@@ -993,7 +993,9 @@ function RangerPicker<DateType>() {
             arrowLeft >
               panelDivRef.value.offsetWidth -
                 arrowRef.value.offsetWidth -
-                (direction === 'rtl' ? 0 : arrowRef.value.offsetLeft)
+                (direction === 'rtl' || arrowRef.value.offsetLeft > arrowLeft
+                  ? 0
+                  : arrowRef.value.offsetLeft)
           ) {
             panelLeft = arrowLeft;
           }

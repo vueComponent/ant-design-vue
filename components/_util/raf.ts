@@ -20,7 +20,7 @@ export default function wrapperRaf(callback: () => void, times = 1): number {
   function callRef(leftTimes: number) {
     if (leftTimes === 0) {
       // Clean up
-      cleanup(id);
+      wrapperRaf.cancel(id);
 
       // Trigger
       callback();
@@ -29,6 +29,9 @@ export default function wrapperRaf(callback: () => void, times = 1): number {
       const realId = raf(() => {
         callRef(leftTimes - 1);
       });
+      if (rafIds.get(id)) {
+        wrapperRaf.cancel(id);
+      }
 
       // Bind real raf id
       rafIds.set(id, realId);

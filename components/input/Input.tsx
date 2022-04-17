@@ -19,7 +19,6 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { ChangeEvent, FocusEventHandler } from '../_util/EventInterface';
-import { omitBy, isUndefined } from 'lodash-es';
 
 export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
@@ -310,7 +309,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <input {...omitBy(inputProps, isUndefined)} />;
+      const inputNode = <input {...omit(inputProps, ['size'])} />;
       return withDirectives(inputNode as VNode, [[antInputDirective]]);
     };
 

@@ -106,6 +106,7 @@ const ResizableTextArea = defineComponent({
         'type',
         'lazy',
         'maxlength',
+        'valueModifiers',
       ]);
       const cls = classNames(prefixCls, attrs.class, {
         [`${prefixCls}-disabled`]: disabled,

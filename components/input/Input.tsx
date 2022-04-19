@@ -282,6 +282,7 @@ export default defineComponent({
         'htmlSize',
         'lazy',
         'showCount',
+        'valueModifiers',
       ]);
       const inputProps = {
         ...otherProps,

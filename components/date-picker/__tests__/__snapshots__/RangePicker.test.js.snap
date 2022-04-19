@@ -16,8 +16,8 @@ exports[`RangePicker customize separator 1`] = `
           <div class="ant-picker-panels">
             <div tabindex="0" class="ant-picker-panel ant-picker-panel-focused">
               <div class="ant-picker-date-panel">
-                <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn">«</button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn">‹</button>
-                  <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Sep</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2017</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn" style="visibility: hidden;">›</button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn" style="visibility: hidden;">»</button>
+                <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn"><span class="ant-picker-super-prev-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn"><span class="ant-picker-prev-icon"></span></button>
+                  <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Sep</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2017</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn" style="visibility: hidden;"><span class="ant-picker-next-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn" style="visibility: hidden;"><span class="ant-picker-super-next-icon"></span></button>
                 </div>
                 <div class="ant-picker-body">
                   <table class="ant-picker-content">
@@ -179,8 +179,8 @@ exports[`RangePicker customize separator 1`] = `
             </div>
             <div tabindex="0" class="ant-picker-panel ant-picker-panel-focused">
               <div class="ant-picker-date-panel">
-                <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn" style="visibility: hidden;">«</button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn" style="visibility: hidden;">‹</button>
-                  <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Oct</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2017</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn">›</button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn">»</button>
+                <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn" style="visibility: hidden;"><span class="ant-picker-super-prev-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn" style="visibility: hidden;"><span class="ant-picker-prev-icon"></span></button>
+                  <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Oct</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2017</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn"><span class="ant-picker-next-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn"><span class="ant-picker-super-next-icon"></span></button>
                 </div>
                 <div class="ant-picker-body">
                   <table class="ant-picker-content">

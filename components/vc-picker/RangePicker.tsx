@@ -861,6 +861,7 @@ function RangerPicker<DateType>() {
             <PickerPanel<DateType>
               {...(props as any)}
               {...panelProps}
+              {...attrs}
               dateRender={panelDateRender}
               showTime={panelShowTime}
               mode={mergedModes.value[mergedActivePickerIndex.value]}

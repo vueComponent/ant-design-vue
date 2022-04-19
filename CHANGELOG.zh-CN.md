@@ -10,6 +10,22 @@
 
 ---
 
+## 3.2.0
+
+`2022-04-19`
+
+- 🌟 `InputNumber` 支持 lazy 修饰符
+- 🌟 `Image` 新增 `previewMask` 属性, `error`事件 [#5479](https://github.com/vueComponent/ant-design-vue/issues/5479)
+- 🌟 `Modal` style 支持字符串类型 [#5449](https://github.com/vueComponent/ant-design-vue/issues/5449)
+- 🌟 `Cascader` 支持 `clearIcon`、`removeIcon` 插槽
+- 🌟 优化 `DatePicker` 面板切换逻辑 [#5488](https://github.com/vueComponent/ant-design-vue/issues/5488)
+- 🐞 修复 `Cascader` 没有自动修正弹窗位置 [#5482](https://github.com/vueComponent/ant-design-vue/issues/5482)
+- 🐞 `Tabs` left、right 方向禁止动画 [#5464](https://github.com/vueComponent/ant-design-vue/issues/5464)
+- 🐞 `TimeRangePicker` value ts type 支持 string
+- 🐞 `Tree` 支持深度监听 [#5480](https://github.com/vueComponent/ant-design-vue/issues/5480)
+- 🐞 修复 `Table` 在 keepalive 激活时未显示虚拟滚动条
+- 🐞 修复 `Input` size warning [#5508](https://github.com/vueComponent/ant-design-vue/issues/5508)
+
 ## 3.1.1
 
 `2022-04-06`

@@ -24,7 +24,12 @@ Previewable image.
 | src | Image path | string | - | 2.0.0 |
 | previewMask | custom mask | slot | - | 3.2.0 |
 | width | Image width | string \| number | - | 2.0.0 |
-| onError | Load failed callback | (event: Event) => void | - | 3.2.0 |
+
+### events
+
+| Events Name | Description          | Arguments              | Version |
+| ----------- | -------------------- | ---------------------- | ------- |
+| error       | Load failed callback | (event: Event) => void | 3.2.0   |
 
 ### previewType
 

@@ -10,6 +10,22 @@
 
 ---
 
+## 3.2.0
+
+`2022-04-19`
+
+- 🌟 `InputNumber` supports lazy modifier
+- 🌟 `Image` add `previewMask` property, `error` event [#5479](https://github.com/vueComponent/ant-design-vue/issues/5479)
+- 🌟 `Modal` style supports string type [#5449](https://github.com/vueComponent/ant-design-vue/issues/5449)
+- 🌟 `Cascader` supports `clearIcon`, `removeIcon` slots
+- 🌟 Optimize `DatePicker` panel switching logic [#5488](https://github.com/vueComponent/ant-design-vue/issues/5488)
+- 🐞 Fix `Cascader` not automatically correcting the popup position [#5482](https://github.com/vueComponent/ant-design-vue/issues/5482)
+- 🐞 `Tabs` left, right direction disable animation [#5464](https://github.com/vueComponent/ant-design-vue/issues/5464)
+- 🐞 `TimeRangePicker` value ts type supports string
+- 🐞 `Tree` supports deep monitoring [#5480](https://github.com/vueComponent/ant-design-vue/issues/5480)
+- 🐞 Fix `Table` not showing virtual scroll bar when keepalive active
+- 🐞 Fix `Input` size warning [#5508](https://github.com/vueComponent/ant-design-vue/issues/5508)
+
 ## 3.1.1
 
 `2022-04-06`

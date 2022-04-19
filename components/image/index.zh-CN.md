@@ -25,7 +25,12 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
 | src | 图片地址 | string | - | 2.0.0 |
 | previewMask | 自定义 mask | slot | - | 3.2.0 |
 | width | 图像宽度 | string \| number | - | 2.0.0 |
-| onError | 加载错误回调 | (event: Event) => void | - | 3.2.0 |
+
+### 事件
+
+| 事件名称 | 说明         | 回调参数               | 版本  |
+| -------- | ------------ | ---------------------- | ----- |
+| error    | 加载错误回调 | (event: Event) => void | 3.2.0 |
 
 ### previewType
 

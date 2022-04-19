@@ -6,8 +6,6 @@ import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import type { InputProps } from './inputProps';
 import inputProps from './inputProps';
-import PropTypes from '../_util/vue-types';
-import BaseMixin from '../_util/BaseMixin';
 import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
@@ -20,13 +18,12 @@ const defaultIconRender = (visible: boolean) =>
   visible ? <EyeOutlined /> : <EyeInvisibleOutlined />;
 export default defineComponent({
   name: 'AInputPassword',
-  mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
     ...inputProps(),
     prefixCls: String,
     inputPrefixCls: String,
-    action: PropTypes.string.def('click'),
+    action: { type: String, default: 'click' },
     visibilityToggle: { type: Boolean, default: true },
     iconRender: Function,
   },

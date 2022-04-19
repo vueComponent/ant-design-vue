@@ -14,7 +14,6 @@ import classNames from '../_util/classNames';
 import calculateNodeHeight from './calculateNodeHeight';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
-import BaseMixin from '../_util/BaseMixin';
 import antInput from '../_util/antInputDirective';
 import omit from '../_util/omit';
 import { textAreaProps } from './inputProps';
@@ -25,7 +24,6 @@ const RESIZE_STATUS_RESIZED = 2;
 
 const ResizableTextArea = defineComponent({
   name: 'ResizableTextArea',
-  mixins: [BaseMixin],
   inheritAttrs: false,
   props: textAreaProps(),
   setup(props, { attrs, emit, expose }) {

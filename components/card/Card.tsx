@@ -5,7 +5,6 @@ import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
 import { flattenChildren, isEmptyElement } from '../_util/props-util';
-import BaseMixin from '../_util/BaseMixin';
 import type { SizeType } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -51,7 +50,6 @@ export type CardProps = Partial<ExtractPropTypes<ReturnType<typeof cardProps>>>;
 
 const Card = defineComponent({
   name: 'ACard',
-  mixins: [BaseMixin],
   props: cardProps(),
   slots: ['title', 'extra', 'tabBarExtraContent', 'actions', 'cover', 'customTab'],
   setup(props, { slots }) {

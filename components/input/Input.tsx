@@ -309,7 +309,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <input {...inputProps} />;
+      const inputNode = <input {...omit(inputProps, ['size'])} />;
       return withDirectives(inputNode as VNode, [[antInputDirective]]);
     };
 

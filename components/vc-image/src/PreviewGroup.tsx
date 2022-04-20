@@ -3,6 +3,7 @@ import { ref, provide, defineComponent, inject, watch, reactive, computed, watch
 import { type ImagePreviewType, mergeDefaultValue } from './Image';
 import Preview from './Preview';
 import type { PreviewProps } from './Preview';
+import useMergedState from '../../_util/hooks/useMergedState';
 
 export interface PreviewGroupPreview
   extends Omit<ImagePreviewType, 'icons' | 'mask' | 'maskClassName'> {
@@ -85,10 +86,14 @@ const Group = defineComponent({
     const current = ref<number>();
 
     const previewVisible = computed(() => preview.value.visible);
-    const onPreviewVisibleChange = computed(() => preview.value.onVisibleChange);
     const getPreviewContainer = computed(() => preview.value.getContainer);
-
-    const isShowPreview = ref(!!previewVisible.value);
+    const onPreviewVisibleChange = (val, preval) => {
+      preview.value.onVisibleChange?.(val, preval);
+    };
+    const [isShowPreview, setShowPreview] = useMergedState(!!previewVisible.value, {
+      value: previewVisible,
+      onChange: onPreviewVisibleChange,
+    });
 
     const mousePosition = ref<{ x: number; y: number }>(null);
     const isControlled = computed(() => previewVisible.value !== undefined);
@@ -115,9 +120,6 @@ const Group = defineComponent({
     const setMousePosition = (val: null | { x: number; y: number }) => {
       mousePosition.value = val;
     };
-    const setShowPreview = (val: boolean) => {
-      isShowPreview.value = val;
-    };
 
     const registerImage = (id: number, url: string, canPreview = true) => {
       const unRegister = () => {
@@ -132,16 +134,10 @@ const Group = defineComponent({
 
     const onPreviewClose = (e: any) => {
       e?.stopPropagation();
-      isShowPreview.value = false;
-      mousePosition.value = null;
+      setShowPreview(false);
+      setMousePosition(null);
     };
 
-    watch(previewVisible, () => {
-      isShowPreview.value = !!previewVisible.value;
-    });
-    watch(isShowPreview, (val, preVal) => {
-      onPreviewVisibleChange.value(val, preVal);
-    });
     watch(
       currentControlledKey,
       val => {

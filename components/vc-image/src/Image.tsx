@@ -107,9 +107,7 @@ const ImageInternal = defineComponent({
       value: previewVisible,
       onChange: onPreviewVisibleChange,
     });
-    watch(previewVisible, val => {
-      setShowPreview(Boolean(val));
-    });
+
     watch(isShowPreview, (val, preVal) => {
       onPreviewVisibleChange(val, preVal);
     });

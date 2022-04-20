@@ -1,5 +1,5 @@
 import type { App, ExtractPropTypes, ImgHTMLAttributes, Plugin } from 'vue';
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, isVNode } from 'vue';
 import ImageInternal from '../vc-image';
 import { imageProps } from '../vc-image/src/Image';
 import defaultLocale from '../locale/en_US';
@@ -49,13 +49,17 @@ const Image = defineComponent<ImageProps>({
           v-slots={{
             ...slots,
             previewMask:
-              slots.previewMask ??
-              (() => (
-                <div class={`${prefixCls.value}-mask-info`}>
-                  <EyeOutlined />
-                  {imageLocale?.preview}
-                </div>
-              )),
+              props.previewMask === false
+                ? null
+                : isVNode(props.previewMask)
+                ? props.previewMask
+                : slots.previewMask ??
+                  (() => (
+                    <div class={`${prefixCls.value}-mask-info`}>
+                      <EyeOutlined />
+                      {imageLocale?.preview}
+                    </div>
+                  )),
           }}
         ></ImageInternal>
       );

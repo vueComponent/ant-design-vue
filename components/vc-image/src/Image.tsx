@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes, CSSProperties, PropType } from 'vue';
+import type { ImgHTMLAttributes, CSSProperties, PropType, VNode } from 'vue';
 import { ref, watch, defineComponent, computed, onMounted, onUnmounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
@@ -45,6 +45,10 @@ export const imageProps = () => ({
   rootClassName: String,
   prefixCls: String,
   previewPrefixCls: String,
+  previewMask: {
+    type: [Boolean, Object, Array] as PropType<boolean | VNode | VNode[]>,
+    default: true,
+  },
   placeholder: PropTypes.any,
   fallback: String,
   preview: {

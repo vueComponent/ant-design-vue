@@ -25,19 +25,6 @@ export type ImagePreviewType = Omit<
   icons?: PreviewProps['icons'];
 };
 
-export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 'onClick'> {
-  // Original
-  src?: string;
-  wrapperClassName?: string;
-  wrapperStyle?: CSSProperties;
-  prefixCls?: string;
-  previewPrefixCls?: string;
-  placeholder?: boolean;
-  fallback?: string;
-  preview?: boolean | ImagePreviewType;
-  onClick?: MouseEventHandler;
-  onError?: HTMLImageElement['onerror'];
-}
 export const imageProps = () => ({
   src: String,
   wrapperClassName: String,

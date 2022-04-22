@@ -44,7 +44,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | previewIcon | custom preview icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
 | progress | Custom progress bar | [ProgressProps](/components/progress/#API) (support `type="line"` only) | { strokeWidth: 2, showInfo: false } | 3.0 |  |
 | removeIcon | custom remove icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
-| showUploadList | Whether to show default upload list, could be an object to specify `showPreviewIcon` and `showRemoveIcon` individually | Boolean or { showPreviewIcon?: boolean, showRemoveIcon?: booleanshowDownloadIcon?: boolean } | true | showDownloadIcon(3.0) |  |
+| showUploadList | Whether to show default upload list, could be an object to specify `showPreviewIcon`,  `showRemoveIcon` and `showDownloadIcon` individually | Boolean or { showPreviewIcon?: boolean, showRemoveIcon?: boolean, showDownloadIcon?: boolean } | true | showDownloadIcon(3.0) |  |
 | supportServerRender | Need to be turned on while the server side is rendering. | boolean | false |  |  |
 | withCredentials | ajax upload with cookie sent | boolean | false |  |  |
 

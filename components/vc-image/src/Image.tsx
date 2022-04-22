@@ -33,7 +33,7 @@ export const imageProps = () => ({
   prefixCls: String,
   previewPrefixCls: String,
   previewMask: {
-    type: [Boolean, Function] as PropType<boolean | (() => any)>,
+    type: [Boolean, Function] as PropType<false | (() => any)>,
     default: undefined,
   },
   placeholder: PropTypes.any,

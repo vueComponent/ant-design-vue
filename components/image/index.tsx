@@ -41,24 +41,20 @@ const Image = defineComponent<ImageProps>({
 
     return () => {
       const imageLocale = configProvider.locale?.Image || defaultLocale.Image;
-
+      const defaultPreviewMask = () => (
+        <div class={`${prefixCls.value}-mask-info`}>
+          <EyeOutlined />
+          {imageLocale?.preview}
+        </div>
+      );
+      const { previewMask = slots.previewMask || defaultPreviewMask } = props;
       return (
         <ImageInternal
           {...{ ...attrs, ...props, prefixCls: prefixCls.value }}
           preview={mergedPreview.value}
           v-slots={{
             ...slots,
-            previewMask:
-              props.previewMask === false
-                ? null
-                : props.previewMask ??
-                  slots.previewMask ??
-                  (() => (
-                    <div class={`${prefixCls.value}-mask-info`}>
-                      <EyeOutlined />
-                      {imageLocale?.preview}
-                    </div>
-                  )),
+            previewMask: typeof previewMask === 'function' ? previewMask : null,
           }}
         ></ImageInternal>
       );

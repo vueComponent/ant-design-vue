@@ -25,19 +25,6 @@ export type ImagePreviewType = Omit<
   icons?: PreviewProps['icons'];
 };
 
-export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 'onClick'> {
-  // Original
-  src?: string;
-  wrapperClassName?: string;
-  wrapperStyle?: CSSProperties;
-  prefixCls?: string;
-  previewPrefixCls?: string;
-  placeholder?: boolean;
-  fallback?: string;
-  preview?: boolean | ImagePreviewType;
-  onClick?: MouseEventHandler;
-  onError?: HTMLImageElement['onerror'];
-}
 export const imageProps = () => ({
   src: String,
   wrapperClassName: String,
@@ -45,6 +32,10 @@ export const imageProps = () => ({
   rootClassName: String,
   prefixCls: String,
   previewPrefixCls: String,
+  previewMask: {
+    type: [Boolean, Function] as PropType<boolean | (() => any)>,
+    default: undefined,
+  },
   placeholder: PropTypes.any,
   fallback: String,
   preview: {
@@ -103,9 +94,7 @@ const ImageInternal = defineComponent({
       value: previewVisible,
       onChange: onPreviewVisibleChange,
     });
-    watch(previewVisible, val => {
-      setShowPreview(Boolean(val));
-    });
+
     watch(isShowPreview, (val, preVal) => {
       onPreviewVisibleChange(val, preVal);
     });

@@ -49,13 +49,16 @@ const Image = defineComponent<ImageProps>({
           v-slots={{
             ...slots,
             previewMask:
-              slots.previewMask ??
-              (() => (
-                <div class={`${prefixCls.value}-mask-info`}>
-                  <EyeOutlined />
-                  {imageLocale?.preview}
-                </div>
-              )),
+              props.previewMask === false
+                ? null
+                : props.previewMask ??
+                  slots.previewMask ??
+                  (() => (
+                    <div class={`${prefixCls.value}-mask-info`}>
+                      <EyeOutlined />
+                      {imageLocale?.preview}
+                    </div>
+                  )),
           }}
         ></ImageInternal>
       );

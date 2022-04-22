@@ -126,7 +126,10 @@ export const tableProps = () => {
       default: undefined,
     },
     direction: { type: String as PropType<TableProps['direction']>, default: undefined },
-    expandFixed: { type: Boolean as PropType<TableProps['expandFixed']>, default: undefined },
+    expandFixed: {
+      type: [Boolean, String] as PropType<TableProps['expandFixed']>,
+      default: undefined,
+    },
     expandColumnWidth: {
       type: Number as PropType<TableProps['expandColumnWidth']>,
       default: undefined,

@@ -1,4 +1,4 @@
-let raf = (callback: FrameRequestCallback) => +setTimeout(callback, 16);
+let raf = (callback: FrameRequestCallback) => setTimeout(callback, 16) as any;
 let caf = (num: number) => clearTimeout(num);
 
 if (typeof window !== 'undefined' && 'requestAnimationFrame' in window) {

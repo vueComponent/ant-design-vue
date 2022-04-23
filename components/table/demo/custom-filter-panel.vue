@@ -160,7 +160,7 @@ export default defineComponent({
     };
 
     const handleReset = clearFilters => {
-      clearFilters();
+      clearFilters({ confirm: true });
       state.searchText = '';
     };
 

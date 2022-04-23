@@ -98,7 +98,7 @@ export interface TableProps<RecordType = DefaultRecordType> {
   direction?: 'ltr' | 'rtl';
 
   // Expandable
-  expandFixed?: boolean;
+  expandFixed?: 'left' | 'right' | boolean;
   expandColumnWidth?: number;
   expandedRowKeys?: Key[];
   defaultExpandedRowKeys?: Key[];

@@ -23,6 +23,18 @@
   }
 }
 
-.dragging .@{table-prefix-cls}-resize-handle-line {
-  opacity: 1;
+.dragging {
+  .@{table-prefix-cls}-resize-handle-line {
+    opacity: 1;
+  }
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    content: ' ';
+    width: 200vw;
+    transform: translateX(-50%);
+    opacity: 0;
+  }
 }

@@ -69,7 +69,7 @@ export default defineComponent({
         } else {
           startUpdatePos.value = false;
         }
-      });
+      }, 50);
     });
 
     watchEffect(() => {

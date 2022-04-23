@@ -53,6 +53,7 @@ import omit from '../_util/omit';
 
 const OMIT_DOM_PROPS = ['inputValue'];
 
+type ArrayElementType<T> = T extends (infer E)[] ? E : T;
 export type OnActiveValue = (
   active: RawValueType,
   index: number,
@@ -121,8 +122,8 @@ export function selectProps<
     autoClearSearchValue: { type: Boolean, default: undefined },
 
     // >>> Select
-    onSelect: Function as PropType<SelectHandler<ValueType, OptionType>>,
-    onDeselect: Function as PropType<SelectHandler<ValueType, OptionType>>,
+    onSelect: Function as PropType<SelectHandler<ArrayElementType<ValueType>, OptionType>>,
+    onDeselect: Function as PropType<SelectHandler<ArrayElementType<ValueType>, OptionType>>,
 
     // >>> Options
     /**
@@ -169,6 +170,7 @@ export default defineComponent({
     autoClearSearchValue: true,
     listHeight: 200,
     listItemHeight: 20,
+    dropdownMatchSelectWidth: true,
   }),
   setup(props, { expose, attrs, slots }) {
     const mergedId = useId(toRef(props, 'id'));
@@ -442,7 +444,7 @@ export default defineComponent({
                 label: typeof originLabel === 'function' ? originLabel() : originLabel,
                 originLabel,
                 value: val,
-                key: option.key ?? val,
+                key: option?.key ?? val,
               }
             : val,
           injectPropsWithOption(option),

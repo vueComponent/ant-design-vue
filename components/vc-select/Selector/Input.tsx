@@ -101,6 +101,8 @@ const Input = defineComponent({
         inputNode,
         Object.assign(
           {
+            type: 'search',
+            ...inputProps,
             id,
             ref: inputRef,
             disabled,
@@ -108,7 +110,7 @@ const Input = defineComponent({
             autocomplete: autocomplete || 'off',
             autofocus,
             class: classNames(`${prefixCls}-selection-search-input`, inputNode?.props?.class),
-            style: { ...style, opacity: editable ? null : 0 },
+
             role: 'combobox',
             'aria-expanded': open,
             'aria-haspopup': 'listbox',
@@ -120,6 +122,7 @@ const Input = defineComponent({
             value: editable ? value : '',
             readonly: !editable,
             unselectable: !editable ? 'on' : null,
+            style: { ...style, opacity: editable ? null : 0 },
             onKeydown: (event: KeyboardEvent) => {
               onKeydown(event);
               if (onOriginKeyDown) {

@@ -4,7 +4,7 @@ exports[`renders ./components/auto-complete/demo/basic.vue correctly 1`] = `
 <div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-show-search">
   <!---->
   <!---->
-  <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" type="search"></span>
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
     <!----><span class="ant-select-selection-placeholder">input here</span>
   </div>
   <!---->
@@ -42,7 +42,7 @@ exports[`renders ./components/auto-complete/demo/non-case-sensitive.vue correctl
 <div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-show-search">
   <!---->
   <!---->
-  <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" type="search"></span>
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
     <!----><span class="ant-select-selection-placeholder">input here</span>
   </div>
   <!---->
@@ -54,7 +54,7 @@ exports[`renders ./components/auto-complete/demo/options.vue correctly 1`] = `
 <div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-show-search">
   <!---->
   <!---->
-  <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" type="search"></span>
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
     <!----><span class="ant-select-selection-placeholder">input here</span>
   </div>
   <!---->

@@ -15,7 +15,7 @@ import type {
   KeyboardEventHandler,
   MouseEventHandler,
 } from '../_util/EventInterface';
-import type { ScrollTo } from '../vc-virtual-list/List';
+import type { ScrollConfig, ScrollTo } from '../vc-virtual-list/List';
 import {
   computed,
   defineComponent,
@@ -39,6 +39,7 @@ import createRef from '../_util/createRef';
 import type { BaseOptionType } from './Select';
 import useInjectLegacySelectContext from '../vc-tree-select/LegacyContext';
 import { cloneElement } from '../_util/vnode';
+import type { AlignType } from '../vc-trigger/interface';
 
 const DEFAULT_OMIT_PROPS = [
   'value',
@@ -70,7 +71,7 @@ export type RawValueType = string | number;
 export interface RefOptionListProps {
   onKeydown: KeyboardEventHandler;
   onKeyup: KeyboardEventHandler;
-  scrollTo?: (index: number) => void;
+  scrollTo?: (index: number | ScrollConfig) => void;
 }
 
 export type CustomTagProps = {
@@ -214,7 +215,7 @@ export const baseSelectPropsWithoutPrivate = () => {
       default: undefined,
     },
     dropdownRender: { type: Function as PropType<DropdownRender> },
-    dropdownAlign: PropTypes.any,
+    dropdownAlign: Object as PropType<AlignType>,
     placement: {
       type: String as PropType<Placement>,
     },

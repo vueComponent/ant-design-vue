@@ -5,6 +5,7 @@ import type { CSSProperties, PropType } from 'vue';
 import { computed, ref, defineComponent } from 'vue';
 import type { VueNode } from '../_util/type';
 import type { DropdownRender, Placement, RenderDOMFunc } from './BaseSelect';
+import type { AlignType } from '../vc-trigger/interface';
 
 const getBuiltInPlacements = (dropdownMatchSelectWidth: number | boolean) => {
   // Enable horizontal overflow auto-adjustment when a custom dropdown width is provided
@@ -64,7 +65,7 @@ export interface SelectTriggerProps {
   dropdownMatchSelectWidth?: boolean | number;
   dropdownRender?: DropdownRender;
   getPopupContainer?: RenderDOMFunc;
-  dropdownAlign: object;
+  dropdownAlign: AlignType;
   empty: boolean;
   getTriggerDOMNode: () => any;
   onPopupVisibleChange?: (visible: boolean) => void;
@@ -76,7 +77,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
   name: 'SelectTrigger',
   inheritAttrs: false,
   props: {
-    dropdownAlign: PropTypes.object,
+    dropdownAlign: Object as PropType<AlignType>,
     visible: { type: Boolean, default: undefined },
     disabled: { type: Boolean, default: undefined },
     dropdownClassName: String,

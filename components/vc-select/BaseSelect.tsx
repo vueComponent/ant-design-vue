@@ -401,7 +401,7 @@ export default defineComponent({
           onInternalSearch('', false, false);
         }
       },
-      { immediate: true },
+      { immediate: true, flush: 'post' },
     );
 
     // ============================ Disabled ============================
@@ -608,7 +608,7 @@ export default defineComponent({
             }
           }
         },
-        { immediate: true },
+        { immediate: true, flush: 'post' },
       );
     });
 

@@ -13,6 +13,7 @@
     <width />
     <button-props />
     <fullscreen />
+    <modalRenderVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -29,6 +30,7 @@ import ConfirmPromise from './confirm-promise.vue';
 import Width from './width.vue';
 import Fullscreen from './fullscreen.vue';
 import ButtonProps from './button-props.vue';
+import modalRenderVue from './modal-render.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -49,6 +51,7 @@ export default defineComponent({
     Width,
     ButtonProps,
     Fullscreen,
+    modalRenderVue,
   },
   setup() {
     return {};

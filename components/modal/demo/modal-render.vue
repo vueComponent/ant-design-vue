@@ -4,96 +4,91 @@ order: 13
 title:
   zh-CN: 自定义渲染对话框
   en-US: Custom modal content render
-debugger: true
 ---
 
 ## zh-CN
 
-自定义渲染对话框, 可通过 `react-draggable` 来实现拖拽。
+自定义渲染对话框, 可通过 `vueuse` 来实现拖拽。
 
 ## en-US
 
-Custom modal content render. use `react-draggable` implements draggable.
+Custom modal content render. use `vueuse` implements draggable.
 
 </docs>
 
 <template>
   <div>
-    <a-button type="primary" @click="showModal">Open Draggable Modal</a-button>
-    <a-modal v-model:visible="visible" @ok="handleOk">
+    <a-button type="primary" @click="showModal">Open Modal</a-button>
+    <a-modal ref="modalRef" v-model:visible="visible" @ok="handleOk">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
       <template #title>
-        <div
-          class="drag"
-          style="width: 100%; cursor: move"
-          @mouseover="handleMouseover"
-          @mouseout="handleMouseout"
-          @focus="() => {}"
-          @blur="() => {}"
-        >
-          Draggable Modal
-        </div>
+        <div ref="modalTitleRef" style="width: 100%; cursor: move">Draggable Modal</div>
       </template>
-      <p>
-        Just don&apos;t learn physics at school and your life will be full of magic and miracles.
-      </p>
-      <br />
-      <p>Day before yesterday I saw a rabbit, and yesterday a deer, and today, you.</p>
       <template #modalRender="{ originVNode }">
-        <VueDragResize is-active drag-handle=".drag" :is-resizable="false">
-          <component :is="originVNode"></component>
-        </VueDragResize>
+        <div :style="transformStyle">
+          <component :is="originVNode" />
+        </div>
       </template>
     </a-modal>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-import type { CSSProperties } from 'vue';
-import VueDragResize from 'vue-drag-resize';
+import { defineComponent, ref, computed, CSSProperties, watch, watchEffect } from 'vue';
+import { useDraggable } from '@vueuse/core';
 export default defineComponent({
-  components: {
-    VueDragResize,
-  },
   setup() {
     const visible = ref<boolean>(false);
-    const draggleRef = ref();
-    const disabled = ref(true);
-    const bounds = ref<CSSProperties>({ left: 0, top: 0, width: 520, height: 0 });
+    const modalTitleRef = ref<HTMLElement>(null);
     const showModal = () => {
       visible.value = true;
     };
-
+    const { x, y, isDragging } = useDraggable(modalTitleRef);
     const handleOk = (e: MouseEvent) => {
       console.log(e);
       visible.value = false;
     };
+    const startX = ref<number>(0);
+    const startY = ref<number>(0);
+    const startUpdatePos = ref(false);
+    const transformX = ref(0);
+    const transformY = ref(0);
+    const preTransformX = ref(0);
+    const preTransformY = ref(0);
+    let timeoutId;
+    watch(isDragging, () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        if (isDragging.value) {
+          startX.value = x.value;
+          startY.value = y.value;
+          preTransformX.value = transformX.value;
+          preTransformY.value = transformY.value;
+          startUpdatePos.value = true;
+        } else {
+          startUpdatePos.value = false;
+        }
+      });
+    });
 
-    const onStart = (_event, uiData) => {
-      const { clientWidth, clientHeight } = window.document.documentElement;
-      const targetRect = draggleRef.value?.getBoundingClientRect();
-      if (!targetRect) {
-        return;
+    watchEffect(() => {
+      if (startUpdatePos.value) {
+        transformX.value = preTransformX.value + x.value - startX.value;
+        transformY.value = preTransformY.value + y.value - startY.value;
       }
-      bounds.value = {
-        left: `${-targetRect.left + uiData.x}px`,
-        right: `${clientWidth - (targetRect.right - uiData.x)}`,
-        top: `${-targetRect.top + uiData.y}`,
-        bottom: `${clientHeight - (targetRect.bottom - uiData.y)}`,
+    });
+    const transformStyle = computed<CSSProperties>(() => {
+      return {
+        transform: `translate(${transformX.value}px, ${transformY.value}px)`,
       };
-    };
+    });
     return {
       visible,
       showModal,
       handleOk,
-      onStart,
-      handleMouseover() {
-        if (disabled.value) {
-          disabled.value = false;
-        }
-      },
-      handleMouseout() {
-        disabled.value = true;
-      },
+      modalTitleRef,
+      transformStyle,
     };
   },
 });

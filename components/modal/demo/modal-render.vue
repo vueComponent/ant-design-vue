@@ -51,29 +51,28 @@ export default defineComponent({
     };
     const startX = ref<number>(0);
     const startY = ref<number>(0);
-    const startUpdatePos = ref(false);
+    const startedDrag = ref(false);
     const transformX = ref(0);
     const transformY = ref(0);
     const preTransformX = ref(0);
     const preTransformY = ref(0);
-    let timeoutId;
+    watch([x, y], () => {
+      if (!startedDrag.value) {
+        startX.value = x.value;
+        startY.value = y.value;
+        preTransformX.value = transformX.value;
+        preTransformY.value = transformY.value;
+      }
+      startedDrag.value = true;
+    });
     watch(isDragging, () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        if (isDragging.value) {
-          startX.value = x.value;
-          startY.value = y.value;
-          preTransformX.value = transformX.value;
-          preTransformY.value = transformY.value;
-          startUpdatePos.value = true;
-        } else {
-          startUpdatePos.value = false;
-        }
-      }, 50);
+      if (!isDragging) {
+        startedDrag.value = false;
+      }
     });
 
     watchEffect(() => {
-      if (startUpdatePos.value) {
+      if (startedDrag.value) {
         transformX.value = preTransformX.value + x.value - startX.value;
         transformY.value = preTransformY.value + y.value - startY.value;
       }

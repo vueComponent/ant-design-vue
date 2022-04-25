@@ -10,6 +10,21 @@
 
 ---
 
+## 3.2.1
+
+`2022-04-25`
+
+- 🌟 `Image` previewMask supports `false`, `function` [#5531](https://github.com/vueComponent/ant-design-vue/issues/5531)
+- 🌟 `Select` option to add title
+- 🌟 `Table` optimizes the drag handle to prevent sorting, filtering, etc. from being triggered when dragging
+- 🐞 Fix the issue of triggering search event after `Select` is selected [#5537](https://github.com/vueComponent/ant-design-vue/issues/5537)
+- 🐞 Fix SSR memory leak issue [#5502](https://github.com/vueComponent/ant-design-vue/issues/5502)
+- 🐞 Fix `Table` expandFixed ts type error [#5539](https://github.com/vueComponent/ant-design-vue/issues/5539)
+
+#### Documentation:
+
+- 🌟 Added Modal drag and drop demo [More](https://www.antdv.com/components/modal#components-modal-demo-modal-render)
+
 ## 3.2.0
 
 `2022-04-19`

@@ -10,6 +10,21 @@
 
 ---
 
+## 3.2.1
+
+`2022-04-25`
+
+- 🌟 `Image` previewMask 支持 `false`、`function` [#5531](https://github.com/vueComponent/ant-design-vue/issues/5531)
+- 🌟 `Select` option 添加 title
+- 🌟 `Table` 优化拖拽手柄，防止拖拽时触发排序、筛选等
+- 🐞 修复 `Select` 选中选项后，触发 search 事件问题 [#5537](https://github.com/vueComponent/ant-design-vue/issues/5537)
+- 🐞 修复 SSR 内存泄漏问题 [#5502](https://github.com/vueComponent/ant-design-vue/issues/5502)
+- 🐞 修复 `Table` expandFixed ts 类型错误 [#5539](https://github.com/vueComponent/ant-design-vue/issues/5539)
+
+#### 文档：
+
+- 🌟 新增 Modal 拖拽示例 [体验](https://www.antdv.com/components/modal#components-modal-demo-modal-render)
+
 ## 3.2.0
 
 `2022-04-19`

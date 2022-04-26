@@ -10,6 +10,12 @@
 
 ---
 
+## 3.2.2
+
+`2022-04-26`
+
+- 🐞 Fix `Table` ceiling infinite loop problem [#5543](https://github.com/vueComponent/ant-design-vue/issues/5543)
+
 ## 3.2.1
 
 `2022-04-25`

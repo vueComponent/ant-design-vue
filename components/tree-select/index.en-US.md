@@ -34,7 +34,7 @@ Tree selection control.
 | multiple | Support multiple or not, will be `true` when enable `treeCheckable`. | boolean | false |  |  |
 | notFoundContent | Specify content to show when no result matches | slot | `Not Found` |  |  |
 | placeholder | Placeholder of the select input | string\|slot | - |  |  |
-| replaceFields | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', label:'title', key:'key', value: 'value' } |  | 1.6.1 (3.0.0 deprecated) |
+| replaceFields | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', label:'title', value: 'value' } |  | 1.6.1 (3.0.0 deprecated) |
 | searchPlaceholder | Placeholder of the search input | string\|slot | - |  |  |
 | searchValue(v-model) | work with `search` event to make search value controlled. | string | - |  |  |
 | showCheckedStrategy | The way show selected item in box. **Default:** just show child nodes. **`TreeSelect.SHOW_ALL`:** show all checked treeNodes (include parent treeNode). **`TreeSelect.SHOW_PARENT`:** show checked treeNodes (just show parent treeNode). | enum { TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |  |  |

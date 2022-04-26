@@ -29,7 +29,6 @@ Replace the title,key and children fields in treeNode with the corresponding fie
     :field-names="{
       children: 'children',
       label: 'name',
-      key: 'key',
       value: 'value',
     }"
   ></a-tree-select>

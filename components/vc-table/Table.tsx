@@ -508,10 +508,17 @@ export default defineComponent<TableProps<DefaultRecordType>>({
     });
     onUpdated(() => {
       nextTick(() => {
-        scrollBodySizeInfo.value = {
-          scrollWidth: scrollBodyRef.value?.scrollWidth || 0,
-          clientWidth: scrollBodyRef.value?.clientWidth || 0,
-        };
+        const scrollWidth = scrollBodyRef.value?.scrollWidth || 0;
+        const clientWidth = scrollBodyRef.value?.clientWidth || 0;
+        if (
+          scrollBodySizeInfo.value.scrollWidth !== scrollWidth ||
+          scrollBodySizeInfo.value.clientWidth !== clientWidth
+        ) {
+          scrollBodySizeInfo.value = {
+            scrollWidth,
+            clientWidth,
+          };
+        }
       });
     });
 

@@ -22,7 +22,6 @@ export default defineComponent({
     // null for different theme definition
     trailColor: null,
     size: 'default',
-    gapDegree: 0,
     strokeLinecap: 'round',
   }),
   slots: ['format'],

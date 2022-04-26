@@ -83,7 +83,7 @@ The items listed above are all functions, expecting a settings object as paramet
 | okType | Button `type` of the OK button | string | `primary` |  |
 | title | Title | string\|VNode \|function(h) | - |  |
 | width | Width of the modal dialog | string\|number | 416 |  |
-| wrapClassName | The class name of the container of the modal dialog | string | - | 3.0 |
+| wrapClassName | The class name of the container of the modal dialog | string | - | 3.2.3 |
 | zIndex | The `z-index` of the Modal | number | 1000 |  |
 | onCancel | Specify a function that will be called when the user clicks the Cancel button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |  |
 | onOk | Specify a function that will be called when the user clicks the OK button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |  |

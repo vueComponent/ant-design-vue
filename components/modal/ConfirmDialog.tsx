@@ -59,6 +59,7 @@ export default defineComponent<ConfirmDialogProps>({
     'closeIcon',
     'modalRender',
     'focusTriggerAfterClose',
+    'wrapClassName',
   ] as any,
   setup(props, { attrs }) {
     const [locale] = useLocaleReceiver('Modal');

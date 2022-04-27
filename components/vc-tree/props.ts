@@ -7,15 +7,7 @@ import type {
   NodeMouseEventHandler,
   NodeMouseEventParams,
 } from './contextTypes';
-import type {
-  DataNode,
-  Key,
-  FlattenNode,
-  EventDataNode,
-  Direction,
-  FieldNames,
-  DataEntity,
-} from './interface';
+import type { DataNode, Key, FlattenNode, EventDataNode, Direction, FieldNames } from './interface';
 
 export interface CheckInfo {
   event: 'check';
@@ -32,18 +24,18 @@ export const treeNodeProps = {
   prefixCls: String,
 
   // By parent
-  expanded: { type: Boolean, default: undefined },
-  selected: { type: Boolean, default: undefined },
-  checked: { type: Boolean, default: undefined },
-  loaded: { type: Boolean, default: undefined },
-  loading: { type: Boolean, default: undefined },
-  halfChecked: { type: Boolean, default: undefined },
-  title: PropTypes.any,
-  dragOver: { type: Boolean, default: undefined },
-  dragOverGapTop: { type: Boolean, default: undefined },
-  dragOverGapBottom: { type: Boolean, default: undefined },
-  pos: String,
+  // expanded: { type: Boolean, default: undefined },
+  // selected: { type: Boolean, default: undefined },
+  // checked: { type: Boolean, default: undefined },
+  // loaded: { type: Boolean, default: undefined },
+  // loading: { type: Boolean, default: undefined },
+  // halfChecked: { type: Boolean, default: undefined },
+  // dragOver: { type: Boolean, default: undefined },
+  // dragOverGapTop: { type: Boolean, default: undefined },
+  // dragOverGapBottom: { type: Boolean, default: undefined },
+  // pos: String,
 
+  title: PropTypes.any,
   /** New added in Tree for easy data access */
   data: { type: Object as PropType<DataNode>, default: undefined as DataNode },
   parent: { type: Object as PropType<DataNode>, default: undefined as DataNode },
@@ -68,7 +60,7 @@ export type TreeNodeProps = Partial<ExtractPropTypes<typeof treeNodeProps>>;
 
 export const nodeListProps = {
   prefixCls: { type: String as PropType<string> },
-  data: { type: Array as PropType<FlattenNode[]> },
+  // data: { type: Array as PropType<FlattenNode[]> },
   motion: { type: Object as PropType<any> },
   focusable: { type: Boolean as PropType<boolean> },
   activeItem: { type: Object as PropType<FlattenNode> },
@@ -78,17 +70,17 @@ export const nodeListProps = {
   selectable: { type: Boolean as PropType<boolean> },
   disabled: { type: Boolean as PropType<boolean> },
 
-  expandedKeys: { type: Array as PropType<Key[]> },
-  selectedKeys: { type: Array as PropType<Key[]> },
-  checkedKeys: { type: Array as PropType<Key[]> },
-  loadedKeys: { type: Array as PropType<Key[]> },
-  loadingKeys: { type: Array as PropType<Key[]> },
-  halfCheckedKeys: { type: Array as PropType<Key[]> },
-  keyEntities: { type: Object as PropType<Record<Key, DataEntity<DataNode>>> },
+  // expandedKeys: { type: Array as PropType<Key[]> },
+  // selectedKeys: { type: Array as PropType<Key[]> },
+  // checkedKeys: { type: Array as PropType<Key[]> },
+  // loadedKeys: { type: Array as PropType<Key[]> },
+  // loadingKeys: { type: Array as PropType<Key[]> },
+  // halfCheckedKeys: { type: Array as PropType<Key[]> },
+  // keyEntities: { type: Object as PropType<Record<Key, DataEntity<DataNode>>> },
 
-  dragging: { type: Boolean as PropType<boolean> },
-  dragOverNodeKey: { type: [String, Number] as PropType<Key> },
-  dropPosition: { type: Number as PropType<number> },
+  // dragging: { type: Boolean as PropType<boolean> },
+  // dragOverNodeKey: { type: [String, Number] as PropType<Key> },
+  // dropPosition: { type: Number as PropType<number> },
 
   // Virtual list
   height: { type: Number as PropType<number> },

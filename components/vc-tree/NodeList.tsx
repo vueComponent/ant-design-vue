@@ -4,12 +4,14 @@
 
 import { computed, defineComponent, ref, shallowRef, watch } from 'vue';
 import VirtualList from '../vc-virtual-list';
+import omit from '../_util/omit';
+import { useInjectKeysState, useInjectTreeContext } from './contextTypes';
 import type { FlattenNode, DataEntity, DataNode, ScrollTo } from './interface';
 import MotionTreeNode from './MotionTreeNode';
 import type { NodeListProps } from './props';
 import { nodeListProps } from './props';
 import { findExpandedKeys, getExpandRange } from './utils/diffUtil';
-import { getTreeNodeProps, getKey } from './utils/treeUtil';
+import { getKey } from './utils/treeUtil';
 
 const HIDDEN_STYLE = {
   width: 0,
@@ -97,6 +99,7 @@ export default defineComponent({
     // =============================== Ref ================================
     const listRef = ref();
     const indentMeasurerRef = ref();
+    const { expandedKeys, flattenNodes } = useInjectKeysState();
     expose({
       scrollTo: scroll => {
         listRef.value.scrollTo(scroll);
@@ -104,19 +107,21 @@ export default defineComponent({
       getIndentWidth: () => indentMeasurerRef.value.offsetWidth,
     });
     // ============================== Motion ==============================
-    const transitionData = shallowRef<FlattenNode[]>(props.data);
+    const transitionData = shallowRef<FlattenNode[]>(flattenNodes.value);
     const transitionRange = shallowRef([]);
     const motionType = ref<'show' | 'hide' | null>(null);
 
     function onMotionEnd() {
-      transitionData.value = props.data;
+      transitionData.value = flattenNodes.value;
       transitionRange.value = [];
       motionType.value = null;
 
       props.onListChangeEnd();
     }
+
+    const context = useInjectTreeContext();
     watch(
-      [() => [...props.expandedKeys], () => props.data],
+      [() => expandedKeys.value.slice(), flattenNodes],
       ([expandedKeys, data], [prevExpandedKeys, prevData]) => {
         const diffExpanded = findExpandedKeys(prevExpandedKeys, expandedKeys);
         if (diffExpanded.key !== null) {
@@ -160,7 +165,7 @@ export default defineComponent({
     );
     // We should clean up motion if is changed by dragging
     watch(
-      () => props.dragging,
+      () => context.value.dragging,
       dragging => {
         if (!dragging) {
           onMotionEnd();
@@ -169,27 +174,18 @@ export default defineComponent({
     );
 
     const mergedData = computed(() =>
-      props.motion === undefined ? transitionData.value : props.data,
+      props.motion === undefined ? transitionData.value : flattenNodes.value,
     );
-
+    const onActiveChange = () => {
+      props.onActiveChange(null);
+    };
     return () => {
       const {
         prefixCls,
-        data,
         selectable,
         checkable,
-        expandedKeys,
-        selectedKeys,
-        checkedKeys,
-        loadedKeys,
-        loadingKeys,
-        halfCheckedKeys,
-        keyEntities,
         disabled,
 
-        dragging,
-        dragOverNodeKey,
-        dropPosition,
         motion,
 
         height,
@@ -204,25 +200,12 @@ export default defineComponent({
         onKeydown,
         onFocus,
         onBlur,
-        onActiveChange,
 
         onListChangeStart,
         onListChangeEnd,
 
         ...domProps
       } = { ...props, ...attrs } as NodeListProps;
-
-      const treeNodeRequiredProps = {
-        expandedKeys,
-        selectedKeys,
-        loadedKeys,
-        loadingKeys,
-        checkedKeys,
-        halfCheckedKeys,
-        dragOverNodeKey,
-        dropPosition,
-        keyEntities,
-      };
       return (
         <>
           {focused && activeItem && (
@@ -262,7 +245,7 @@ export default defineComponent({
           </div>
 
           <VirtualList
-            {...domProps}
+            {...omit(domProps, ['onActiveChange'])}
             data={mergedData.value}
             itemKey={itemKey as any}
             height={height}
@@ -293,15 +276,12 @@ export default defineComponent({
                 const mergedKey = getKey(key, pos);
                 delete restProps.key;
                 delete restProps.children;
-
-                const treeNodeProps = getTreeNodeProps(mergedKey, treeNodeRequiredProps);
                 return (
                   <MotionTreeNode
                     {...restProps}
-                    {...treeNodeProps}
+                    eventKey={mergedKey}
                     title={title}
                     active={!!activeItem && key === activeItem.key}
-                    pos={pos}
                     data={treeNode.data}
                     isStart={isStart}
                     isEnd={isEnd}
@@ -310,10 +290,7 @@ export default defineComponent({
                     motionType={motionType.value}
                     onMotionStart={onListChangeStart}
                     onMotionEnd={onMotionEnd}
-                    treeNodeRequiredProps={treeNodeRequiredProps}
-                    onMousemove={() => {
-                      onActiveChange(null);
-                    }}
+                    onMousemove={onActiveChange}
                   />
                 );
               },

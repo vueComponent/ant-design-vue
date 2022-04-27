@@ -9,6 +9,7 @@ import type { DataNode, EventDataNode, FieldNames, Key } from '../vc-tree/interf
 import type { TreeNodeProps } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { SwitcherIconProps } from './utils/iconUtil';
 import renderSwitcherIcon from './utils/iconUtil';
 import dropIndicatorRender from './utils/dropIndicator';
 import devWarning from '../vc-util/devWarning';
@@ -229,7 +230,7 @@ export default defineComponent({
         icon,
         itemHeight,
       };
-
+      const children = slots.default ? filterEmpty(slots.default()) : undefined;
       return (
         <VcTree
           {...newProps}
@@ -249,7 +250,7 @@ export default defineComponent({
           direction={direction.value}
           checkable={checkable}
           selectable={selectable}
-          switcherIcon={(nodeProps: AntTreeNodeProps) =>
+          switcherIcon={(nodeProps: SwitcherIconProps) =>
             renderSwitcherIcon(prefixCls.value, switcherIcon, showLine, nodeProps)
           }
           onCheck={handleCheck}
@@ -260,7 +261,7 @@ export default defineComponent({
             ...slots,
             checkable: () => <span class={`${prefixCls.value}-checkbox-inner`} />,
           }}
-          children={filterEmpty(slots.default?.())}
+          children={children}
         ></VcTree>
       );
     };

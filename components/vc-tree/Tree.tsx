@@ -1,5 +1,5 @@
 import type { NodeMouseEventHandler, NodeDragEventHandler } from './contextTypes';
-import { TreeContext } from './contextTypes';
+import { useProvideKeysState, TreeContext } from './contextTypes';
 import {
   getDragChildrenKeys,
   parseCheckedKeys,
@@ -11,6 +11,7 @@ import {
   posToArr,
 } from './util';
 import type { Key, FlattenNode, EventDataNode, ScrollTo, DragNodeEvent } from './interface';
+import type { TreeNodeRequiredProps } from './utils/treeUtil';
 import {
   flattenTreeData,
   convertTreeToData,
@@ -78,12 +79,12 @@ export default defineComponent({
     const destroyed = ref(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
     const indent = ref();
-    const selectedKeys = shallowRef([]);
-    const checkedKeys = shallowRef([]);
-    const halfCheckedKeys = shallowRef([]);
-    const loadedKeys = shallowRef([]);
-    const loadingKeys = shallowRef([]);
-    const expandedKeys = shallowRef([]);
+    const selectedKeys = shallowRef<Key[]>([]);
+    const checkedKeys = shallowRef<Key[]>([]);
+    const halfCheckedKeys = shallowRef<Key[]>([]);
+    const loadedKeys = shallowRef<Key[]>([]);
+    const loadingKeys = shallowRef<Key[]>([]);
+    const expandedKeys = shallowRef<Key[]>([]);
     const loadingRetryTimes: Record<Key, number> = {};
     const dragState = reactive({
       draggingNodeKey: null,
@@ -112,7 +113,10 @@ export default defineComponent({
             ? toRaw(props.treeData).slice()
             : convertTreeToData(toRaw(props.children));
       },
-      { immediate: true, deep: true },
+      {
+        immediate: true,
+        deep: true,
+      },
     );
     const keyEntities = shallowRef({});
 
@@ -131,18 +135,36 @@ export default defineComponent({
 
     let currentMouseOverDroppableNodeKey = null;
 
-    const treeNodeRequiredProps = computed(() => {
+    const treeNodeRequiredProps = computed<TreeNodeRequiredProps>(() => {
       return {
-        expandedKeys: expandedKeys.value || [],
-        selectedKeys: selectedKeys.value || [],
-        loadedKeys: loadedKeys.value || [],
-        loadingKeys: loadingKeys.value || [],
-        checkedKeys: checkedKeys.value || [],
-        halfCheckedKeys: halfCheckedKeys.value || [],
+        expandedKeysSet: expandedKeysSet.value,
+        selectedKeysSet: selectedKeysSet.value,
+        loadedKeysSet: loadedKeysSet.value,
+        loadingKeysSet: loadingKeysSet.value,
+        checkedKeysSet: checkedKeysSet.value,
+        halfCheckedKeysSet: halfCheckedKeysSet.value,
         dragOverNodeKey: dragState.dragOverNodeKey,
         dropPosition: dragState.dropPosition,
         keyEntities: keyEntities.value,
       };
+    });
+    const expandedKeysSet = computed(() => {
+      return new Set(expandedKeys.value);
+    });
+    const selectedKeysSet = computed(() => {
+      return new Set(selectedKeys.value);
+    });
+    const loadedKeysSet = computed(() => {
+      return new Set(loadedKeys.value);
+    });
+    const loadingKeysSet = computed(() => {
+      return new Set(loadingKeys.value);
+    });
+    const checkedKeysSet = computed(() => {
+      return new Set(checkedKeys.value);
+    });
+    const halfCheckedKeysSet = computed(() => {
+      return new Set(halfCheckedKeys.value);
     });
 
     watchEffect(() => {
@@ -388,7 +410,7 @@ export default defineComponent({
         allowDrop,
         flattenNodes.value,
         keyEntities.value,
-        expandedKeys.value,
+        expandedKeysSet.value,
         direction,
       );
 
@@ -485,7 +507,7 @@ export default defineComponent({
         allowDrop,
         flattenNodes.value,
         keyEntities.value,
-        expandedKeys.value,
+        expandedKeysSet.value,
         direction,
       );
 
@@ -558,7 +580,6 @@ export default defineComponent({
     const onNodeDrop = (event: DragEvent, _node, outsideTree = false) => {
       const { dragChildrenKeys, dropPosition, dropTargetKey, dropTargetPos, dropAllowed } =
         dragState;
-
       if (!dropAllowed) return;
 
       const { onDrop } = props;
@@ -735,11 +756,7 @@ export default defineComponent({
         // We need to get the latest state of loading/loaded keys
         const { loadData, onLoad } = props;
 
-        if (
-          !loadData ||
-          loadedKeys.value.indexOf(key) !== -1 ||
-          loadingKeys.value.indexOf(key) !== -1
-        ) {
+        if (!loadData || loadedKeysSet.value.has(key) || loadingKeysSet.value.has(key)) {
           return null;
         }
 
@@ -977,7 +994,7 @@ export default defineComponent({
           // >>> Expand
           case KeyCode.LEFT: {
             // Collapse if possible
-            if (expandable && expandedKeys.value.includes(activeKey.value)) {
+            if (expandable && expandedKeysSet.value.has(activeKey.value)) {
               onNodeExpand({} as MouseEvent, eventNode);
             } else if (item.parent) {
               onActiveChange(item.parent.key);
@@ -987,7 +1004,7 @@ export default defineComponent({
           }
           case KeyCode.RIGHT: {
             // Expand if possible
-            if (expandable && !expandedKeys.value.includes(activeKey.value)) {
+            if (expandable && !expandedKeysSet.value.has(activeKey.value)) {
               onNodeExpand({} as MouseEvent, eventNode);
             } else if (item.children && item.children.length) {
               onActiveChange(item.children[0].key);
@@ -1005,11 +1022,7 @@ export default defineComponent({
               eventNode.checkable !== false &&
               !eventNode.disableCheckbox
             ) {
-              onNodeCheck(
-                {} as MouseEvent,
-                eventNode,
-                !checkedKeys.value.includes(activeKey.value),
-              );
+              onNodeCheck({} as MouseEvent, eventNode, !checkedKeysSet.value.has(activeKey.value));
             } else if (
               !checkable &&
               selectable &&
@@ -1041,6 +1054,21 @@ export default defineComponent({
     onUnmounted(() => {
       window.removeEventListener('dragend', onWindowDragEnd);
       destroyed.value = true;
+    });
+    useProvideKeysState({
+      expandedKeys,
+      selectedKeys,
+      loadedKeys,
+      loadingKeys,
+      checkedKeys,
+      halfCheckedKeys,
+      expandedKeysSet,
+      selectedKeysSet,
+      loadedKeysSet,
+      loadingKeysSet,
+      checkedKeysSet,
+      halfCheckedKeysSet,
+      flattenNodes,
     });
     return () => {
       const {
@@ -1123,6 +1151,7 @@ export default defineComponent({
             dropTargetKey,
             dropPosition,
             dragOverNodeKey,
+            dragging: draggingNodeKey !== null,
             indent: indent.value,
             direction,
             dropIndicatorRender,
@@ -1160,12 +1189,10 @@ export default defineComponent({
               ref={listRef}
               prefixCls={prefixCls}
               style={style}
-              data={flattenNodes.value}
               disabled={disabled}
               selectable={selectable}
               checkable={!!checkable}
               motion={motion}
-              dragging={draggingNodeKey !== null}
               height={height}
               itemHeight={itemHeight}
               virtual={virtual}
@@ -1181,7 +1208,6 @@ export default defineComponent({
               onListChangeEnd={onListChangeEnd}
               onContextmenu={onContextmenu}
               onScroll={onScroll}
-              {...treeNodeRequiredProps.value}
               {...domProps}
             />
           </div>

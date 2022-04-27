@@ -3,8 +3,8 @@
  * When util.js imports the TreeNode for tree generate will cause treeContextTypes be empty.
  */
 
-import type { ComputedRef, InjectionKey, PropType } from 'vue';
-import { inject, computed, defineComponent, provide } from 'vue';
+import type { ComputedRef, InjectionKey, PropType, ShallowRef } from 'vue';
+import { shallowRef, inject, computed, defineComponent, provide } from 'vue';
 import type { VueNode } from '../_util/type';
 import type {
   IconType,
@@ -13,6 +13,7 @@ import type {
   EventDataNode,
   DragNodeEvent,
   Direction,
+  FlattenNode,
 } from './interface';
 
 import type { DraggableConfig } from './Tree';
@@ -60,6 +61,7 @@ export interface TreeContextProps {
     direction: Direction;
   }) => VueNode;
   dragOverNodeKey: Key | null;
+  dragging: boolean;
   direction: Direction;
 
   loadData: (treeNode: EventDataNode) => Promise<void>;
@@ -107,4 +109,41 @@ export const useInjectTreeContext = () => {
     TreeContextKey,
     computed(() => ({} as TreeContextProps)),
   );
+};
+type KeysStateKeyType = {
+  expandedKeysSet: ComputedRef<Set<Key>>;
+  selectedKeysSet: ComputedRef<Set<Key>>;
+  loadedKeysSet: ComputedRef<Set<Key>>;
+  loadingKeysSet: ComputedRef<Set<Key>>;
+  checkedKeysSet: ComputedRef<Set<Key>>;
+  halfCheckedKeysSet: ComputedRef<Set<Key>>;
+  expandedKeys: ShallowRef<Key[]>;
+  selectedKeys: ShallowRef<Key[]>;
+  loadedKeys: ShallowRef<Key[]>;
+  loadingKeys: ShallowRef<Key[]>;
+  checkedKeys: ShallowRef<Key[]>;
+  halfCheckedKeys: ShallowRef<Key[]>;
+  flattenNodes: ShallowRef<FlattenNode[]>;
+};
+const KeysStateKey: InjectionKey<KeysStateKeyType> = Symbol('KeysStateKey');
+export const useProvideKeysState = (state: KeysStateKeyType) => {
+  provide(KeysStateKey, state);
+};
+
+export const useInjectKeysState = () => {
+  return inject(KeysStateKey, {
+    expandedKeys: shallowRef<Key[]>([]),
+    selectedKeys: shallowRef<Key[]>([]),
+    loadedKeys: shallowRef<Key[]>([]),
+    loadingKeys: shallowRef<Key[]>([]),
+    checkedKeys: shallowRef<Key[]>([]),
+    halfCheckedKeys: shallowRef<Key[]>([]),
+    expandedKeysSet: computed<Set<Key>>(() => new Set()),
+    selectedKeysSet: computed<Set<Key>>(() => new Set()),
+    loadedKeysSet: computed<Set<Key>>(() => new Set()),
+    loadingKeysSet: computed<Set<Key>>(() => new Set()),
+    checkedKeysSet: computed<Set<Key>>(() => new Set()),
+    halfCheckedKeysSet: computed<Set<Key>>(() => new Set()),
+    flattenNodes: shallowRef<FlattenNode[]>([]),
+  });
 };

@@ -361,12 +361,12 @@ export function convertDataToEntities(
 }
 
 export interface TreeNodeRequiredProps<TreeDataType extends BasicDataNode = DataNode> {
-  expandedKeys: Key[];
-  selectedKeys: Key[];
-  loadedKeys: Key[];
-  loadingKeys: Key[];
-  checkedKeys: Key[];
-  halfCheckedKeys: Key[];
+  expandedKeysSet: Set<Key>;
+  selectedKeysSet: Set<Key>;
+  loadedKeysSet: Set<Key>;
+  loadingKeysSet: Set<Key>;
+  checkedKeysSet: Set<Key>;
+  halfCheckedKeysSet: Set<Key>;
   dragOverNodeKey: Key;
   dropPosition: number;
   keyEntities: Record<Key, DataEntity<TreeDataType>>;
@@ -378,12 +378,12 @@ export interface TreeNodeRequiredProps<TreeDataType extends BasicDataNode = Data
 export function getTreeNodeProps<TreeDataType extends BasicDataNode = DataNode>(
   key: Key,
   {
-    expandedKeys,
-    selectedKeys,
-    loadedKeys,
-    loadingKeys,
-    checkedKeys,
-    halfCheckedKeys,
+    expandedKeysSet,
+    selectedKeysSet,
+    loadedKeysSet,
+    loadingKeysSet,
+    checkedKeysSet,
+    halfCheckedKeysSet,
     dragOverNodeKey,
     dropPosition,
     keyEntities,
@@ -393,12 +393,12 @@ export function getTreeNodeProps<TreeDataType extends BasicDataNode = DataNode>(
 
   const treeNodeProps = {
     eventKey: key,
-    expanded: expandedKeys.indexOf(key) !== -1,
-    selected: selectedKeys.indexOf(key) !== -1,
-    loaded: loadedKeys.indexOf(key) !== -1,
-    loading: loadingKeys.indexOf(key) !== -1,
-    checked: checkedKeys.indexOf(key) !== -1,
-    halfChecked: halfCheckedKeys.indexOf(key) !== -1,
+    expanded: expandedKeysSet.has(key),
+    selected: selectedKeysSet.has(key),
+    loaded: loadedKeysSet.has(key),
+    loading: loadingKeysSet.has(key),
+    checked: checkedKeysSet.has(key),
+    halfChecked: halfCheckedKeysSet.has(key),
     pos: String(entity ? entity.pos : ''),
     parent: entity.parent,
     // [Legacy] Drag props
@@ -412,7 +412,9 @@ export function getTreeNodeProps<TreeDataType extends BasicDataNode = DataNode>(
   return treeNodeProps;
 }
 
-export function convertNodePropsToEventData(props: TreeNodeProps): EventDataNode {
+export function convertNodePropsToEventData(
+  props: TreeNodeProps & ReturnType<typeof getTreeNodeProps>,
+): EventDataNode {
   const {
     data,
     expanded,

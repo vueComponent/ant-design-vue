@@ -1,6 +1,6 @@
-import { useInjectTreeContext } from './contextTypes';
+import { useInjectKeysState, useInjectTreeContext } from './contextTypes';
 import Indent from './Indent';
-import { convertNodePropsToEventData } from './utils/treeUtil';
+import { convertNodePropsToEventData, getTreeNodeProps } from './utils/treeUtil';
 import {
   computed,
   defineComponent,
@@ -14,8 +14,8 @@ import { treeNodeProps } from './props';
 import classNames from '../_util/classNames';
 import { warning } from '../vc-util/warning';
 import type { DragNodeEvent, Key } from './interface';
-import pick from 'lodash-es/pick';
 import pickAttrs from '../_util/pickAttrs';
+import eagerComputed from '../_util/eagerComputed';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
@@ -35,8 +35,43 @@ export default defineComponent({
         key => '`v-slot:' + key + '` ',
       )}instead`,
     );
+
     const dragNodeHighlight = ref(false);
     const context = useInjectTreeContext();
+    const {
+      expandedKeysSet,
+      selectedKeysSet,
+      loadedKeysSet,
+      loadingKeysSet,
+      checkedKeysSet,
+      halfCheckedKeysSet,
+    } = useInjectKeysState();
+    const { dragOverNodeKey, dropPosition, keyEntities } = context.value;
+    const mergedTreeNodeProps = computed(() => {
+      return getTreeNodeProps(props.eventKey, {
+        expandedKeysSet: expandedKeysSet.value,
+        selectedKeysSet: selectedKeysSet.value,
+        loadedKeysSet: loadedKeysSet.value,
+        loadingKeysSet: loadingKeysSet.value,
+        checkedKeysSet: checkedKeysSet.value,
+        halfCheckedKeysSet: halfCheckedKeysSet.value,
+        dragOverNodeKey,
+        dropPosition,
+        keyEntities,
+      });
+    });
+
+    const expanded = eagerComputed(() => mergedTreeNodeProps.value.expanded);
+    const selected = eagerComputed(() => mergedTreeNodeProps.value.selected);
+    const checked = eagerComputed(() => mergedTreeNodeProps.value.checked);
+    const loaded = eagerComputed(() => mergedTreeNodeProps.value.loaded);
+    const loading = eagerComputed(() => mergedTreeNodeProps.value.loading);
+    const halfChecked = eagerComputed(() => mergedTreeNodeProps.value.halfChecked);
+    const dragOver = eagerComputed(() => mergedTreeNodeProps.value.dragOver);
+    const dragOverGapTop = eagerComputed(() => mergedTreeNodeProps.value.dragOverGapTop);
+    const dragOverGapBottom = eagerComputed(() => mergedTreeNodeProps.value.dragOverGapBottom);
+    const pos = eagerComputed(() => mergedTreeNodeProps.value.pos);
+
     const selectHandle = ref();
 
     const hasChildren = computed(() => {
@@ -48,7 +83,7 @@ export default defineComponent({
     });
 
     const isLeaf = computed(() => {
-      const { isLeaf, loaded } = props;
+      const { isLeaf } = props;
       const { loadData } = context.value;
 
       const has = hasChildren.value;
@@ -57,16 +92,14 @@ export default defineComponent({
         return false;
       }
 
-      return isLeaf || (!loadData && !has) || (loadData && loaded && !has);
+      return isLeaf || (!loadData && !has) || (loadData && loaded.value && !has);
     });
     const nodeState = computed(() => {
-      const { expanded } = props;
-
       if (isLeaf.value) {
         return null;
       }
 
-      return expanded ? ICON_OPEN : ICON_CLOSE;
+      return expanded.value ? ICON_OPEN : ICON_CLOSE;
     });
 
     const isDisabled = computed(() => {
@@ -97,24 +130,22 @@ export default defineComponent({
       return treeSelectable;
     });
     const renderArgsData = computed(() => {
+      const { data, active, checkable, disableCheckbox, disabled, selectable } = props;
       return {
-        ...pick(props, [
-          'active',
-          'checkable',
-          'checked',
-          'disableCheckbox',
-          'disabled',
-          'expanded',
-          'isLeaf',
-          'loading',
-          'selectable',
-          'selected',
-          'halfChecked',
-        ]),
-        ...props.data,
-        dataRef: props.data,
-        data: props.data,
+        active,
+        checkable,
+        disableCheckbox,
+        disabled,
+        selectable,
+        ...data,
+        dataRef: data,
+        data,
         isLeaf: isLeaf.value,
+        checked: checked.value,
+        expanded: expanded.value,
+        loading: loading.value,
+        selected: selected.value,
+        halfChecked: halfChecked.value,
       };
     });
     const instance = getCurrentInstance();
@@ -122,13 +153,16 @@ export default defineComponent({
       const { eventKey } = props;
       const { keyEntities } = context.value;
       const { parent } = keyEntities[eventKey] || {};
-      return { ...convertNodePropsToEventData(props), parent };
+      return {
+        ...convertNodePropsToEventData(Object.assign({}, props, mergedTreeNodeProps.value)),
+        parent,
+      };
     });
     const dragNodeEvent: DragNodeEvent = reactive({
       eventData,
       eventKey: computed(() => props.eventKey),
       selectHandle,
-      pos: computed(() => props.pos),
+      pos,
       key: instance.vnode.key as Key,
     });
     expose(dragNodeEvent);
@@ -148,13 +182,13 @@ export default defineComponent({
     const onCheck = (e: MouseEvent) => {
       if (isDisabled.value) return;
 
-      const { disableCheckbox, checked } = props;
+      const { disableCheckbox } = props;
       const { onNodeCheck } = context.value;
 
       if (!isCheckable.value || disableCheckbox) return;
 
       e.preventDefault();
-      const targetChecked = !checked;
+      const targetChecked = !checked.value;
       onNodeCheck(e, eventData.value, targetChecked);
     };
 
@@ -244,7 +278,7 @@ export default defineComponent({
     // Disabled item still can be switch
     const onExpand = e => {
       const { onNodeExpand } = context.value;
-      if (props.loading) return;
+      if (loading.value) return;
       onNodeExpand(e, eventData.value);
     };
 
@@ -279,18 +313,18 @@ export default defineComponent({
 
     // Load data to avoid default expanded tree without data
     const syncLoadData = () => {
-      const { expanded, loading, loaded } = props;
+      //const { expanded, loading, loaded } = props;
       const { loadData, onNodeLoad } = context.value;
 
-      if (loading) {
+      if (loading.value) {
         return;
       }
 
       // read from state to avoid loadData at same time
-      if (loadData && expanded && !isLeaf.value) {
+      if (loadData && expanded.value && !isLeaf.value) {
         // We needn't reload data when has children in sync logic
         // It's only needed in node expanded
-        if (!hasChildren.value && !loaded) {
+        if (!hasChildren.value && !loaded.value) {
           onNodeLoad(eventData.value);
         }
       }
@@ -306,7 +340,6 @@ export default defineComponent({
 
     // Switcher
     const renderSwitcher = () => {
-      const { expanded } = props;
       const { prefixCls } = context.value;
       // if switcherIconDom is null, no render switcher span
       const switcherIconDom = renderSwitcherIconDom();
@@ -320,7 +353,7 @@ export default defineComponent({
 
       const switcherCls = classNames(
         `${prefixCls}-switcher`,
-        `${prefixCls}-switcher_${expanded ? ICON_OPEN : ICON_CLOSE}`,
+        `${prefixCls}-switcher_${expanded.value ? ICON_OPEN : ICON_CLOSE}`,
       );
 
       return switcherIconDom !== false ? (
@@ -332,7 +365,7 @@ export default defineComponent({
 
     // Checkbox
     const renderCheckbox = () => {
-      const { checked, halfChecked, disableCheckbox } = props;
+      const { disableCheckbox } = props;
       const { prefixCls } = context.value;
 
       const disabled = isDisabled.value;
@@ -344,8 +377,8 @@ export default defineComponent({
         <span
           class={classNames(
             `${prefixCls}-checkbox`,
-            checked && `${prefixCls}-checkbox-checked`,
-            !checked && halfChecked && `${prefixCls}-checkbox-indeterminate`,
+            checked.value && `${prefixCls}-checkbox-checked`,
+            !checked.value && halfChecked.value && `${prefixCls}-checkbox-indeterminate`,
             (disabled || disableCheckbox) && `${prefixCls}-checkbox-disabled`,
           )}
           onClick={onCheck}
@@ -356,7 +389,6 @@ export default defineComponent({
     };
 
     const renderIcon = () => {
-      const { loading } = props;
       const { prefixCls } = context.value;
 
       return (
@@ -364,7 +396,7 @@ export default defineComponent({
           class={classNames(
             `${prefixCls}-iconEle`,
             `${prefixCls}-icon__${nodeState.value || 'docu'}`,
-            loading && `${prefixCls}-icon_loading`,
+            loading.value && `${prefixCls}-icon_loading`,
           )}
         />
       );
@@ -396,9 +428,9 @@ export default defineComponent({
         // title = slots.title ||
         //   context.value.slots?.[props.data?.slots?.title] ||
         //   context.value.slots?.title,
-        selected,
+        // selected,
         icon = slots.icon,
-        loading,
+        // loading,
         data,
       } = props;
       const title =
@@ -430,7 +462,7 @@ export default defineComponent({
         ) : (
           renderIcon()
         );
-      } else if (loadData && loading) {
+      } else if (loadData && loading.value) {
         $icon = renderIcon();
       }
 
@@ -454,7 +486,9 @@ export default defineComponent({
           class={classNames(
             `${wrapClass}`,
             `${wrapClass}-${nodeState.value || 'normal'}`,
-            !disabled && (selected || dragNodeHighlight.value) && `${prefixCls}-node-selected`,
+            !disabled &&
+              (selected.value || dragNodeHighlight.value) &&
+              `${prefixCls}-node-selected`,
           )}
           onMouseenter={onMouseEnter}
           onMouseleave={onMouseLeave}
@@ -471,17 +505,9 @@ export default defineComponent({
     return () => {
       const {
         eventKey,
-        dragOver,
-        dragOverGapTop,
-        dragOverGapBottom,
         isLeaf,
         isStart,
         isEnd,
-        expanded,
-        selected,
-        checked,
-        halfChecked,
-        loading,
         domRef,
         active,
         data,
@@ -507,17 +533,17 @@ export default defineComponent({
 
       const dragging = draggingNodeKey === eventKey;
       const ariaSelected = selectable !== undefined ? { 'aria-selected': !!selectable } : undefined;
-
+      // console.log(1);
       return (
         <div
           ref={domRef}
           class={classNames(attrs.class, `${prefixCls}-treenode`, {
             [`${prefixCls}-treenode-disabled`]: disabled,
-            [`${prefixCls}-treenode-switcher-${expanded ? 'open' : 'close'}`]: !isLeaf,
-            [`${prefixCls}-treenode-checkbox-checked`]: checked,
-            [`${prefixCls}-treenode-checkbox-indeterminate`]: halfChecked,
-            [`${prefixCls}-treenode-selected`]: selected,
-            [`${prefixCls}-treenode-loading`]: loading,
+            [`${prefixCls}-treenode-switcher-${expanded.value ? 'open' : 'close'}`]: !isLeaf,
+            [`${prefixCls}-treenode-checkbox-checked`]: checked.value,
+            [`${prefixCls}-treenode-checkbox-indeterminate`]: halfChecked.value,
+            [`${prefixCls}-treenode-selected`]: selected.value,
+            [`${prefixCls}-treenode-loading`]: loading.value,
             [`${prefixCls}-treenode-active`]: active,
             [`${prefixCls}-treenode-leaf-last`]: isEndNode,
             [`${prefixCls}-treenode-draggable`]: draggableWithoutDisabled,
@@ -525,9 +551,9 @@ export default defineComponent({
             dragging,
             'drop-target': dropTargetKey === eventKey,
             'drop-container': dropContainerKey === eventKey,
-            'drag-over': !disabled && dragOver,
-            'drag-over-gap-top': !disabled && dragOverGapTop,
-            'drag-over-gap-bottom': !disabled && dragOverGapBottom,
+            'drag-over': !disabled && dragOver.value,
+            'drag-over-gap-top': !disabled && dragOverGapTop.value,
+            'drag-over-gap-bottom': !disabled && dragOverGapBottom.value,
             'filter-node': filterTreeNode && filterTreeNode(eventData.value),
           })}
           style={attrs.style}

@@ -16,8 +16,8 @@ import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import getIcons from '../select/utils/iconUtil';
+import type { SwitcherIconProps } from '../tree/utils/iconUtil';
 import renderSwitcherIcon from '../tree/utils/iconUtil';
-import type { AntTreeNodeProps } from '../tree/Tree';
 import { warning } from '../vc-util/warning';
 import { flattenChildren } from '../_util/props-util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
@@ -239,7 +239,7 @@ const TreeSelect = defineComponent({
           multiple={multiple}
           removeIcon={removeIcon}
           clearIcon={clearIcon}
-          switcherIcon={(nodeProps: AntTreeNodeProps) =>
+          switcherIcon={(nodeProps: SwitcherIconProps) =>
             renderSwitcherIcon(treePrefixCls.value, switcherIcon, treeLine, nodeProps)
           }
           showTreeIcon={treeIcon as any}

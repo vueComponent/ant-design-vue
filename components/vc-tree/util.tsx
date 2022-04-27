@@ -98,7 +98,7 @@ export function calcDropPosition<TreeDataType extends BasicDataNode = DataNode>(
   allowDrop: AllowDrop<TreeDataType>,
   flattenedNodes: FlattenNode[],
   keyEntities: Record<Key, DataEntity<TreeDataType>>,
-  expandKeys: Key[],
+  expandKeysSet: Set<Key>,
   direction: Direction,
 ): {
   dropPosition: -1 | 0 | 1;
@@ -138,7 +138,7 @@ export function calcDropPosition<TreeDataType extends BasicDataNode = DataNode>(
   let dropLevelOffset = 0;
 
   // Only allow cross level drop when dragging on a non-expanded node
-  if (!expandKeys.includes(initialAbstractDropNodeKey)) {
+  if (!expandKeysSet.has(initialAbstractDropNodeKey)) {
     for (let i = 0; i < rawDropLevelOffset; i += 1) {
       if (isLastChild(abstractDropNodeEntity)) {
         abstractDropNodeEntity = abstractDropNodeEntity.parent;
@@ -164,10 +164,7 @@ export function calcDropPosition<TreeDataType extends BasicDataNode = DataNode>(
   ) {
     // first half of first node in first level
     dropPosition = -1;
-  } else if (
-    (abstractDragOverEntity.children || []).length &&
-    expandKeys.includes(dragOverNodeKey)
-  ) {
+  } else if ((abstractDragOverEntity.children || []).length && expandKeysSet.has(dragOverNodeKey)) {
     // drop on expanded node
     // only allow drop inside
     if (

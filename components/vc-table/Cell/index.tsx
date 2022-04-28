@@ -33,7 +33,7 @@ function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: numbe
 function isRenderCell<RecordType = DefaultRecordType>(
   data: RenderedCell<RecordType>,
 ): data is RenderedCell<RecordType> {
-  return data && typeof data === 'object' && !Array.isArray(data) && !isValidElement(data);
+  return data && typeof data === 'object' && !Array.isArray(data) && !isVNode(data);
 }
 
 export interface CellProps<RecordType = DefaultRecordType> {
@@ -245,12 +245,8 @@ export default defineComponent<CellProps>({
         }
       }
 
-      // Not crash if final `childNode` is not validate ReactNode
-      if (
-        typeof childNode === 'object' &&
-        !Array.isArray(childNode) &&
-        !isValidElement(childNode)
-      ) {
+      // Not crash if final `childNode` is not validate VueNode
+      if (typeof childNode === 'object' && !Array.isArray(childNode) && !isVNode(childNode)) {
         childNode = null;
       }
 

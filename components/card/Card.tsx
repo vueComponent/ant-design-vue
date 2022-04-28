@@ -4,7 +4,7 @@ import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
-import { flattenChildren, isEmptyElement } from '../_util/props-util';
+import { flattenChildren, isEmptyElement, filterEmptyWithUndefined } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -88,11 +88,11 @@ const Card = defineComponent({
         hoverable,
         activeTabKey,
         defaultActiveTabKey,
-        tabBarExtraContent = slots.tabBarExtraContent?.(),
-        title = slots.title?.(),
-        extra = slots.extra?.(),
-        actions = slots.actions?.(),
-        cover = slots.cover?.(),
+        tabBarExtraContent = filterEmptyWithUndefined(slots.tabBarExtraContent?.()),
+        title = filterEmptyWithUndefined(slots.title?.()),
+        extra = filterEmptyWithUndefined(slots.extra?.()),
+        actions = filterEmptyWithUndefined(slots.actions?.()),
+        cover = filterEmptyWithUndefined(slots.cover?.()),
       } = props;
       const children = flattenChildren(slots.default?.());
       const pre = prefixCls.value;

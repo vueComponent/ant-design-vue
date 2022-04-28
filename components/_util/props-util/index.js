@@ -370,6 +370,15 @@ export function filterEmpty(children = []) {
   return res.filter(c => !isEmptyElement(c));
 }
 
+export function filterEmptyWithUndefined(children) {
+  if (children) {
+    const coms = filterEmpty(children);
+    return coms.length ? coms : undefined;
+  } else {
+    return children;
+  }
+}
+
 export function mergeProps() {
   const args = [].slice.call(arguments, 0);
   const props = {};

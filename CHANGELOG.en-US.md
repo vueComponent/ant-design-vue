@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.3
+
+`2022-05-05`
+
+- 🌟 Optimize `Tree` performance [#5551](https://github.com/vueComponent/ant-design-vue/issues/5551)
+- 🐞 Fix `Progress` `type='dashboard'` invalid problem [#5549](https://github.com/vueComponent/ant-design-vue/issues/5549)
+- 🐞 Fix console warning when `Table` customRender returns `Fragment` component [#5556](https://github.com/vueComponent/ant-design-vue/issues/5556)
+- 🐞 Fix the issue of rendering redundant dom nodes when the `Card` slot is empty
+
 ## 3.2.2
 
 `2022-04-26`

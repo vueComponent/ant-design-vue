@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.3
+
+`2022-05-05`
+
+- 🌟 优化 `Tree` 性能 [#5551](https://github.com/vueComponent/ant-design-vue/issues/5551)
+- 🐞 修复 `Progress` `type='dashboard'` 失效问题 [#5549](https://github.com/vueComponent/ant-design-vue/issues/5549)
+- 🐞 修复 `Table` customRender 返回 `Fragment` 组件时，控制台 warning 问题 [#5556](https://github.com/vueComponent/ant-design-vue/issues/5556)
+- 🐞 修复 `Card` 插槽为空时，渲染多余 dom 节点问题
+
 ## 3.2.2
 
 `2022-04-26`

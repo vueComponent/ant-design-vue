@@ -128,7 +128,6 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
   };
   ```
 
-```
 
 ## Links
 
@@ -159,4 +158,3 @@ Ant Design Vue is committed to providing programmers with a ** pleasant ** devel
 ## THANK YOU
 
 [Ant Design Team](https://github.com/ant-design/ant-design/blob/master/AUTHORS.txt)
-```

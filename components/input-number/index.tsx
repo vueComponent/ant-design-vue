@@ -23,7 +23,7 @@ export const inputNumberProps = () => ({
   addonBefore: PropTypes.any,
   addonAfter: PropTypes.any,
   prefix: PropTypes.any,
-  'update:value': baseProps.onChange,
+  'onUpdate:value': baseProps.onChange,
   valueModifiers: Object,
 });
 

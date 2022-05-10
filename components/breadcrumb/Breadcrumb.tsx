@@ -152,7 +152,11 @@ export default defineComponent({
         [prefixCls.value]: true,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       };
-      return <div class={breadcrumbClassName}>{crumbs}</div>;
+      return (
+        <nav class={breadcrumbClassName}>
+          <ol>{crumbs}</ol>
+        </nav>
+      );
     };
   },
 });

@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
-import DropDown from '../dropdown/dropdown';
+import Dropdown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { MouseEventHandler } from '../_util/EventInterface';
@@ -27,18 +27,18 @@ export default defineComponent({
     const { prefixCls } = useConfigInject('breadcrumb', props);
     /**
      * if overlay is have
-     * Wrap a DropDown
+     * Wrap a Dropdown
      */
     const renderBreadcrumbNode = (breadcrumbItem: JSX.Element, prefixCls: string) => {
       const overlay = getPropsSlot(slots, props, 'overlay');
       if (overlay) {
         return (
-          <DropDown overlay={overlay} placement="bottom">
+          <Dropdown overlay={overlay} placement="bottom">
             <span class={`${prefixCls}-overlay-link`}>
               {breadcrumbItem}
               <DownOutlined />
             </span>
-          </DropDown>
+          </Dropdown>
         );
       }
       return breadcrumbItem;
@@ -66,10 +66,10 @@ export default defineComponent({
       link = renderBreadcrumbNode(link, prefixCls.value);
       if (children) {
         return (
-          <span class={cls} style={style}>
+          <li class={cls} style={style}>
             {link}
             {separator && <span class={`${prefixCls.value}-separator`}>{separator}</span>}
-          </span>
+          </li>
         );
       }
       return null;

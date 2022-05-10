@@ -57,7 +57,7 @@ export const anchorProps = () => ({
   getContainer: Function as PropType<() => AnchorContainer>,
   wrapperClass: String,
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  getCurrentAnchor: Function as PropType<() => string>,
+  getCurrentAnchor: Function as PropType<(activeLink: string) => string>,
   targetOffset: Number,
   onChange: Function as PropType<(currentActiveLink: string) => void>,
   onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
@@ -123,7 +123,7 @@ export default defineComponent({
       if (activeLink.value === link) {
         return;
       }
-      activeLink.value = typeof getCurrentAnchor === 'function' ? getCurrentAnchor() : link;
+      activeLink.value = typeof getCurrentAnchor === 'function' ? getCurrentAnchor(link) : link;
       emit('change', link);
     };
     const handleScrollTo = (link: string) => {

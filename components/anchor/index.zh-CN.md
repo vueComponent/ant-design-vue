@@ -22,7 +22,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_1-C1JwsC/Anchor.svg
 | affix | 固定模式 | boolean | true |  |
 | bounds | 锚点区域边界 | number | 5(px) |  |
 | getContainer | 指定滚动的容器 | () => HTMLElement | () => window |  |
-| getCurrentAnchor | 自定义高亮的锚点 | () => string | - | 1.5.0 |
+| getCurrentAnchor | 自定义高亮的锚点 | (activeLink: string) => string | - | activeLink(3.3) |
 | offsetBottom | 距离窗口底部达到指定偏移量后触发 | number |  |  |
 | offsetTop | 距离窗口顶部达到指定偏移量后触发 | number |  |  |
 | showInkInFixed | `:affix="false"` 时是否显示小圆点 | boolean | false |  |

@@ -2,9 +2,10 @@ import { computed, defineComponent } from 'vue';
 import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, ComputedRef } from 'vue';
 import type { SizeType } from '../config-provider';
-import UnreachableException from '../_util/unreachableException';
+import devWarning from '../vc-util/devWarning';
+import createContext from '../_util/createContext';
 
 export const buttonGroupProps = () => ({
   prefixCls: String,
@@ -14,12 +15,17 @@ export const buttonGroupProps = () => ({
 });
 
 export type ButtonGroupProps = Partial<ExtractPropTypes<ReturnType<typeof buttonGroupProps>>>;
-
+export const GroupSizeContext = createContext<{
+  size: ComputedRef<SizeType>;
+}>();
 export default defineComponent({
   name: 'AButtonGroup',
   props: buttonGroupProps(),
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('btn-group', props);
+    GroupSizeContext.useProvide({
+      size: computed(() => props.size),
+    });
     const classes = computed(() => {
       const { size } = props;
       // large => lg
@@ -37,7 +43,7 @@ export default defineComponent({
           break;
         default:
           // eslint-disable-next-line no-console
-          console.warn(new UnreachableException(size).error);
+          devWarning(!size, 'Button.Group', 'Invalid prop `size`.');
       }
       return {
         [`${prefixCls.value}`]: true,

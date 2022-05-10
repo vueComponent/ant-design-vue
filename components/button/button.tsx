@@ -18,13 +18,14 @@ import LoadingIcon from './LoadingIcon';
 
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
+import { GroupSizeContext } from './button-group';
 
 type Loading = boolean | number;
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 
-function isUnborderedButtonType(type: ButtonType | undefined) {
+function isUnBorderedButtonType(type: ButtonType | undefined) {
   return type === 'text' || type === 'link';
 }
 export { buttonProps };
@@ -37,7 +38,7 @@ export default defineComponent({
   // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
-
+    const { size: groupSize } = GroupSizeContext.useInject();
     const buttonNodeRef = ref<HTMLElement>(null);
     const delayTimeoutRef = ref(undefined);
     let isNeedInserted = false;
@@ -76,7 +77,7 @@ export default defineComponent({
       const pre = prefixCls.value;
 
       const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
-      const sizeFullname = size.value;
+      const sizeFullname = groupSize?.value || size.value;
       const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
 
       return {
@@ -85,7 +86,7 @@ export default defineComponent({
         [`${pre}-${shape}`]: shape !== 'default' && shape,
         [`${pre}-${sizeCls}`]: sizeCls,
         [`${pre}-loading`]: innerLoading.value,
-        [`${pre}-background-ghost`]: ghost && !isUnborderedButtonType(type),
+        [`${pre}-background-ghost`]: ghost && !isUnBorderedButtonType(type),
         [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
         [`${pre}-block`]: block,
         [`${pre}-dangerous`]: !!danger,
@@ -132,7 +133,7 @@ export default defineComponent({
 
     watchEffect(() => {
       devWarning(
-        !(props.ghost && isUnborderedButtonType(props.type)),
+        !(props.ghost && isUnBorderedButtonType(props.type)),
         'Button',
         "`link` or `text` button can't be a `ghost` button.",
       );
@@ -149,7 +150,7 @@ export default defineComponent({
       const { icon = slots.icon?.() } = props;
       const children = flattenChildren(slots.default?.());
 
-      isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
+      isNeedInserted = children.length === 1 && !icon && !isUnBorderedButtonType(props.type);
 
       const { type, htmlType, disabled, href, title, target, onMousedown } = props;
 
@@ -202,7 +203,7 @@ export default defineComponent({
         </button>
       );
 
-      if (isUnborderedButtonType(type)) {
+      if (isUnBorderedButtonType(type)) {
         return buttonNode;
       }
 

@@ -114,7 +114,7 @@ export default defineComponent({
         onKeyup,
       } = attrs as HTMLAttributes;
       const globalProps = Object.keys({ ...others, ...attrs }).reduce((prev, key) => {
-        if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
+        if (key.startsWith('data-') || key.startsWith('aria-') || key === 'role') {
           prev[key] = others[key];
         }
         return prev;

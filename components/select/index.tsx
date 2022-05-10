@@ -106,15 +106,18 @@ const Select = defineComponent({
 
       return mode;
     });
-    const { prefixCls, direction, configProvider, getPrefixCls } = useConfigInject('select', props);
+    const { prefixCls, direction, configProvider, size, getPrefixCls } = useConfigInject(
+      'select',
+      props,
+    );
     const rootPrefixCls = computed(() => getPrefixCls());
     const transitionName = computed(() =>
       getTransitionName(rootPrefixCls.value, 'slide-up', props.transitionName),
     );
     const mergedClassName = computed(() =>
       classNames({
-        [`${prefixCls.value}-lg`]: props.size === 'large',
-        [`${prefixCls.value}-sm`]: props.size === 'small',
+        [`${prefixCls.value}-lg`]: size.value === 'large',
+        [`${prefixCls.value}-sm`]: size.value === 'small',
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         [`${prefixCls.value}-borderless`]: !props.bordered,
       }),

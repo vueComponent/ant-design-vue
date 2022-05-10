@@ -1355,6 +1355,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
                 <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
                   <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="validate_other_select-multiple" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="validate_other_select-multiple_list" aria-autocomplete="list" aria-controls="validate_other_select-multiple_list" aria-activedescendant="validate_other_select-multiple_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
                 </div>
+                <!---->
               </div><span class="ant-select-selection-placeholder">Please select favourite colors</span>
             </div>
             <!---->

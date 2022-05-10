@@ -10,6 +10,7 @@ exports[`renders ./components/select/demo/automatic-tokenization.vue correctly 1
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
       </div>
+      <!---->
     </div><span class="ant-select-selection-placeholder">Automatic tokenization</span>
   </div>
   <!---->
@@ -107,6 +108,7 @@ exports[`renders ./components/select/demo/big-data.vue correctly 1`] = `
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
       </div>
+      <!---->
     </div>
     <!---->
   </div>
@@ -174,6 +176,7 @@ exports[`renders ./components/select/demo/hide-selected.vue correctly 1`] = `
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
       </div>
+      <!---->
     </div><span class="ant-select-selection-placeholder">Inserted are removed</span>
   </div>
   <!---->
@@ -204,6 +207,7 @@ exports[`renders ./components/select/demo/multiple.vue correctly 1`] = `
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
       </div>
+      <!---->
     </div>
     <!---->
   </div>
@@ -252,6 +256,7 @@ exports[`renders ./components/select/demo/option-label-prop.vue correctly 1`] = 
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -271,6 +276,7 @@ exports[`renders ./components/select/demo/option-label-prop.vue correctly 1`] = 
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -296,6 +302,7 @@ exports[`renders ./components/select/demo/option-label-prop.vue correctly 1`] = 
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -342,6 +349,7 @@ exports[`renders ./components/select/demo/responsive.vue correctly 1`] = `
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -366,6 +374,7 @@ exports[`renders ./components/select/demo/responsive.vue correctly 1`] = `
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1; order: 0;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -406,6 +415,7 @@ exports[`renders ./components/select/demo/responsive.vue correctly 1`] = `
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -450,6 +460,7 @@ exports[`renders ./components/select/demo/select-users.vue correctly 1`] = `
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
       </div>
+      <!---->
     </div><span class="ant-select-selection-placeholder">Select users</span>
   </div>
   <!---->
@@ -485,6 +496,7 @@ exports[`renders ./components/select/demo/size.vue correctly 1`] = `
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -505,6 +517,7 @@ exports[`renders ./components/select/demo/size.vue correctly 1`] = `
           <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
             <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
           </div>
+          <!---->
         </div>
         <!---->
       </div>
@@ -553,6 +566,7 @@ exports[`renders ./components/select/demo/tags.vue correctly 1`] = `
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
       </div>
+      <!---->
     </div><span class="ant-select-selection-placeholder">Tags Mode</span>
   </div>
   <!---->

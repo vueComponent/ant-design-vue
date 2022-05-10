@@ -1,6 +1,16 @@
 import type { Key } from '../../_util/type';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
-import { computed, defineComponent, ref, inject, watchEffect, watch, onMounted, unref } from 'vue';
+import {
+  Teleport,
+  computed,
+  defineComponent,
+  ref,
+  inject,
+  watchEffect,
+  watch,
+  onMounted,
+  unref,
+} from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import type { StoreMenuInfo } from './hooks/useMenuContext';
 import useProvideMenu, { MenuContextProvider, useProvideFirstLevel } from './hooks/useMenuContext';
@@ -421,26 +431,34 @@ export default defineComponent({
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
       return (
-        <>
-          <Overflow
-            {...attrs}
-            onMousedown={props.onMousedown}
-            prefixCls={`${prefixCls.value}-overflow`}
-            component="ul"
-            itemComponent={MenuItem}
-            class={[className.value, attrs.class]}
-            role="menu"
-            id={props.id}
-            data={wrappedChildList}
-            renderRawItem={node => node}
-            renderRawRest={omitItems => {
-              // We use origin list since wrapped list use context to prevent open
-              const len = omitItems.length;
+        <Overflow
+          {...attrs}
+          onMousedown={props.onMousedown}
+          prefixCls={`${prefixCls.value}-overflow`}
+          component="ul"
+          itemComponent={MenuItem}
+          class={[className.value, attrs.class]}
+          role="menu"
+          id={props.id}
+          data={wrappedChildList}
+          renderRawItem={node => node}
+          renderRawRest={omitItems => {
+            // We use origin list since wrapped list use context to prevent open
+            const len = omitItems.length;
 
-              const originOmitItems = len ? childList.slice(-len) : null;
+            const originOmitItems = len ? childList.slice(-len) : null;
 
-              return (
-                <>
+            return (
+              <>
+                <SubMenu
+                  eventKey={OVERFLOW_KEY}
+                  key={OVERFLOW_KEY}
+                  title={overflowedIndicator}
+                  disabled={allVisible}
+                  internalPopupClose={len === 0}
+                  v-slots={{ default: () => originOmitItems }}
+                ></SubMenu>
+                <PathContext>
                   <SubMenu
                     eventKey={OVERFLOW_KEY}
                     key={OVERFLOW_KEY}
@@ -449,34 +467,27 @@ export default defineComponent({
                     internalPopupClose={len === 0}
                     v-slots={{ default: () => originOmitItems }}
                   ></SubMenu>
-                  <PathContext>
-                    <SubMenu
-                      eventKey={OVERFLOW_KEY}
-                      key={OVERFLOW_KEY}
-                      title={overflowedIndicator}
-                      disabled={allVisible}
-                      internalPopupClose={len === 0}
-                      v-slots={{ default: () => originOmitItems }}
-                    ></SubMenu>
-                  </PathContext>
-                </>
-              );
-            }}
-            maxCount={
-              mergedMode.value !== 'horizontal' || props.disabledOverflow
-                ? Overflow.INVALIDATE
-                : Overflow.RESPONSIVE
-            }
-            ssr="full"
-            data-menu-list
-            onVisibleChange={newLastIndex => {
-              lastVisibleIndex.value = newLastIndex;
-            }}
-          />
-          <div style={{ display: 'none' }} aria-hidden>
-            <PathContext>{wrappedChildList}</PathContext>
-          </div>
-        </>
+                </PathContext>
+              </>
+            );
+          }}
+          maxCount={
+            mergedMode.value !== 'horizontal' || props.disabledOverflow
+              ? Overflow.INVALIDATE
+              : Overflow.RESPONSIVE
+          }
+          ssr="full"
+          data-menu-list
+          onVisibleChange={newLastIndex => {
+            lastVisibleIndex.value = newLastIndex;
+          }}
+        >
+          <Teleport to="body">
+            <div style={{ display: 'none' }} aria-hidden>
+              <PathContext>{wrappedChildList}</PathContext>
+            </div>
+          </Teleport>
+        </Overflow>
       );
     };
   },

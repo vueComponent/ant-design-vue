@@ -22,16 +22,9 @@ exports[`renders ./components/menu/demo/horizontal.vue correctly 1`] = `
   </li>
   <!---->
   <!---->
+  <!--teleport start-->
+  <!--teleport end-->
 </ul>
-<div style="display: none;" aria-hidden="true">
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-</div>
 `;
 
 exports[`renders ./components/menu/demo/inline.vue correctly 1`] = `
@@ -120,21 +113,9 @@ exports[`renders ./components/menu/demo/inline.vue correctly 1`] = `
   </li>
   <!---->
   <!---->
+  <!--teleport start-->
+  <!--teleport end-->
 </ul>
-<div style="display: none;" aria-hidden="true">
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-</div>
 `;
 
 exports[`renders ./components/menu/demo/inline-collapsed.vue correctly 1`] = `
@@ -200,20 +181,9 @@ exports[`renders ./components/menu/demo/inline-collapsed.vue correctly 1`] = `
     </li>
     <!---->
     <!---->
+    <!--teleport start-->
+    <!--teleport end-->
   </ul>
-  <div style="display: none;" aria-hidden="true">
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-  </div>
 </div>
 `;
 
@@ -296,21 +266,9 @@ exports[`renders ./components/menu/demo/sider-current.vue correctly 1`] = `
     </li>
     <!---->
     <!---->
+    <!--teleport start-->
+    <!--teleport end-->
   </ul>
-  <div style="display: none;" aria-hidden="true">
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-  </div>
 </div>
 `;
 
@@ -381,19 +339,9 @@ exports[`renders ./components/menu/demo/switch-mode.vue correctly 1`] = `
     </li>
     <!---->
     <!---->
+    <!--teleport start-->
+    <!--teleport end-->
   </ul>
-  <div style="display: none;" aria-hidden="true">
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-  </div>
 </div>
 `;
 
@@ -420,11 +368,9 @@ exports[`renders ./components/menu/demo/template.vue correctly 1`] = `
     </li>
     <!---->
     <!---->
+    <!--teleport start-->
+    <!--teleport end-->
   </ul>
-  <div style="display: none;" aria-hidden="true">
-    <!---->
-    <!---->
-  </div>
 </div>
 `;
 
@@ -491,19 +437,9 @@ exports[`renders ./components/menu/demo/theme.vue correctly 1`] = `
     </li>
     <!---->
     <!---->
+    <!--teleport start-->
+    <!--teleport end-->
   </ul>
-  <div style="display: none;" aria-hidden="true">
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-    <!---->
-  </div>
 </div>
 `;
 
@@ -525,17 +461,7 @@ exports[`renders ./components/menu/demo/vertical.vue correctly 1`] = `
   </li>
   <!---->
   <!---->
+  <!--teleport start-->
+  <!--teleport end-->
 </ul>
-<div style="display: none;" aria-hidden="true">
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-  <!---->
-</div>
 `;

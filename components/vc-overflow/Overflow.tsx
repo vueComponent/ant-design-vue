@@ -48,7 +48,7 @@ const Overflow = defineComponent<OverflowProps>({
   inheritAttrs: false,
   props: overflowProps() as any,
   emits: ['visibleChange'],
-  setup(props, { attrs, emit }) {
+  setup(props, { attrs, emit, slots }) {
     const fullySSR = computed(() => props.ssr === 'full');
 
     const containerWidth = ref<number>(null);
@@ -350,6 +350,7 @@ const Overflow = defineComponent<OverflowProps>({
               v-slots={{ default: () => suffix }}
             ></Item>
           )}
+          {slots.default?.()}
         </Component>
       );
       // 使用 disabled  避免结构不一致 导致子组件 rerender

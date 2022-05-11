@@ -42,6 +42,7 @@ export default defineComponent({
       forceSubMenuRender,
       motion,
       defaultMotions,
+      rootClassName,
     } = useInjectMenu();
     const forceRender = useInjectForceRender();
     const placement = computed(() =>
@@ -86,6 +87,7 @@ export default defineComponent({
               [`${prefixCls}-rtl`]: rtl.value,
             },
             popupClassName,
+            rootClassName.value,
           )}
           stretch={mode === 'horizontal' ? 'minWidth' : null}
           getPopupContainer={

@@ -1,5 +1,5 @@
 import type { Key } from '../../../_util/type';
-import type { ComputedRef, InjectionKey, PropType, Ref, UnwrapRef } from 'vue';
+import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue';
 import { defineComponent, inject, provide, toRef } from 'vue';
 import type {
   BuiltinPlacements,
@@ -13,15 +13,14 @@ import type { CSSMotionProps } from '../../../_util/transition';
 export interface StoreMenuInfo {
   eventKey: string;
   key: Key;
-  parentEventKeys: ComputedRef<string[]>;
+  parentEventKeys: Ref<string[]>;
   childrenEventKeys?: Ref<string[]>;
   isLeaf?: boolean;
-  parentKeys: ComputedRef<Key[]>;
+  parentKeys: Ref<Key[]>;
 }
 export interface MenuContextProps {
   isRootMenu: Ref<boolean>;
-
-  store: Ref<Record<string, UnwrapRef<StoreMenuInfo>>>;
+  rootClassName: Ref<string>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;

@@ -1,6 +1,7 @@
 import type { Key } from '../../_util/type';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import {
+  shallowRef,
   Teleport,
   computed,
   defineComponent,
@@ -38,10 +39,14 @@ import { cloneElement } from '../../_util/vnode';
 import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
 import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
 import collapseMotion from '../../_util/collapseMotion';
+import type { ItemType } from './hooks/useItems';
+import useItems from './hooks/useItems';
 
 export const menuProps = () => ({
   id: String,
   prefixCls: String,
+  // donot use items, now only support inner use
+  items: Array as PropType<ItemType[]>,
   disabled: Boolean,
   inlineCollapsed: Boolean,
   disabledOverflow: Boolean,
@@ -90,7 +95,7 @@ export default defineComponent({
   slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);
-    const store = ref<Record<string, StoreMenuInfo>>({});
+    const store = shallowRef<Map<string, StoreMenuInfo>>(new Map());
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
       if (siderCollapsed.value !== undefined) {
@@ -98,7 +103,7 @@ export default defineComponent({
       }
       return props.inlineCollapsed;
     });
-
+    const { itemsNodes } = useItems(props);
     const isMounted = ref(false);
     onMounted(() => {
       isMounted.value = true;
@@ -115,6 +120,11 @@ export default defineComponent({
         'Menu',
         '`inlineCollapsed` not control Menu under Sider. Should set `collapsed` on Sider instead.',
       );
+      // devWarning(
+      //   !!props.items && !slots.default,
+      //   'Menu',
+      //   '`children` will be removed in next major version. Please use `items` instead.',
+      // );
     });
 
     const activeKeys = ref([]);
@@ -124,7 +134,7 @@ export default defineComponent({
       store,
       () => {
         const newKeyMapStore = {};
-        for (const menuInfo of Object.values(store.value)) {
+        for (const menuInfo of store.value.values()) {
           newKeyMapStore[menuInfo.key] = menuInfo;
         }
         keyMapStore.value = newKeyMapStore;
@@ -322,8 +332,8 @@ export default defineComponent({
       const keys = [];
       const storeValue = store.value;
       eventKeys.forEach(eventKey => {
-        const { key, childrenEventKeys } = storeValue[eventKey];
-        keys.push(key, ...getChildrenKeys(childrenEventKeys));
+        const { key, childrenEventKeys } = storeValue.get(eventKey);
+        keys.push(key, ...getChildrenKeys(unref(childrenEventKeys)));
       });
       return keys;
     };
@@ -355,11 +365,12 @@ export default defineComponent({
     };
 
     const registerMenuInfo = (key: string, info: StoreMenuInfo) => {
-      store.value = { ...store.value, [key]: info as any };
+      store.value.set(key, info);
+      store.value = new Map(store.value);
     };
     const unRegisterMenuInfo = (key: string) => {
-      delete store.value[key];
-      store.value = { ...store.value };
+      store.value.delete(key);
+      store.value = new Map(store.value);
     };
 
     const lastVisibleIndex = ref(0);
@@ -379,7 +390,6 @@ export default defineComponent({
         : null,
     );
     useProvideMenu({
-      store,
       prefixCls,
       activeKeys,
       openKeys: mergedOpenKeys,
@@ -408,9 +418,10 @@ export default defineComponent({
       isRootMenu: ref(true),
       expandIcon,
       forceSubMenuRender: computed(() => props.forceSubMenuRender),
+      rootClassName: computed(() => ''),
     });
     return () => {
-      const childList = flattenChildren(slots.default?.());
+      const childList = itemsNodes.value || flattenChildren(slots.default?.());
       const allVisible =
         lastVisibleIndex.value >= childList.length - 1 ||
         mergedMode.value !== 'horizontal' ||

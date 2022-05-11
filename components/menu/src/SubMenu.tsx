@@ -21,6 +21,7 @@ import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import type { Key } from 'ant-design-vue/es/_util/type';
+import type { MenuTheme } from './interface';
 
 let indexGuid = 0;
 
@@ -34,6 +35,7 @@ export const subMenuProps = () => ({
   internalPopupClose: Boolean,
   eventKey: String,
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
+  theme: String as PropType<MenuTheme>,
   onMouseenter: Function as PropType<MouseEventHandler>,
   onMouseleave: Function as PropType<MouseEventHandler>,
   onTitleClick: Function as PropType<(e: MouseEvent, key: Key) => void>,
@@ -193,7 +195,7 @@ export default defineComponent({
     const popupClassName = computed(() =>
       classNames(
         prefixCls.value,
-        `${prefixCls.value}-${antdMenuTheme.value}`,
+        `${prefixCls.value}-${props.theme || antdMenuTheme.value}`,
         props.popupClassName,
       ),
     );

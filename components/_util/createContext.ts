@@ -1,12 +1,12 @@
 import { inject, provide } from 'vue';
 
-function createContext<T>() {
+function createContext<T>(defaultValue?: T) {
   const contextKey = Symbol('contextKey');
   const useProvide = (props: T) => {
     provide(contextKey, props);
   };
   const useInject = () => {
-    return inject(contextKey, undefined as T) || ({} as T);
+    return inject(contextKey, defaultValue as T) || ({} as T);
   };
   return {
     useProvide,

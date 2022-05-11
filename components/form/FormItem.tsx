@@ -7,6 +7,7 @@ import type {
   HTMLAttributes,
 } from 'vue';
 import {
+  reactive,
   watch,
   defineComponent,
   computed,
@@ -16,6 +17,10 @@ import {
   onBeforeUnmount,
   toRaw,
 } from 'vue';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import Row from '../grid/Row';
@@ -33,8 +38,10 @@ import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';
 import type { ValidationRule } from './Form';
-import { useProvideFormItemContext } from './FormItemContext';
+import type { FormItemStatusContextProps } from './FormItemContext';
+import { FormItemInputContext, useProvideFormItemContext } from './FormItemContext';
 import useDebounce from './utils/useDebounce';
+import classNames from '../_util/classNames';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
@@ -49,6 +56,13 @@ export interface FieldExpose {
   rules?: ComputedRef<ValidationRule[]>;
   validateRules: (options: ValidateOptions) => Promise<void> | Promise<RuleError[]>;
 }
+
+const iconMap: { [key: string]: any } = {
+  success: CheckCircleFilled,
+  warning: ExclamationCircleFilled,
+  error: CloseCircleFilled,
+  validating: LoadingOutlined,
+};
 
 function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
   let tempObj = obj;
@@ -391,6 +405,30 @@ export default defineComponent({
       [`${prefixCls.value}-item-is-validating`]: mergedValidateStatus.value === 'validating',
       [`${prefixCls.value}-item-hidden`]: props.hidden,
     }));
+    const formItemInputContext = reactive<FormItemStatusContextProps>({});
+    FormItemInputContext.useProvide(formItemInputContext);
+    watchEffect(() => {
+      let feedbackIcon: any;
+      if (props.hasFeedback) {
+        const IconNode = mergedValidateStatus.value && iconMap[mergedValidateStatus.value];
+        feedbackIcon = IconNode ? (
+          <span
+            class={classNames(
+              `${prefixCls.value}-item-feedback-icon`,
+              `${prefixCls.value}-item-feedback-icon-${mergedValidateStatus.value}`,
+            )}
+          >
+            <IconNode />
+          </span>
+        ) : null;
+      }
+      Object.assign(formItemInputContext, {
+        status: mergedValidateStatus.value,
+        hasFeedback: props.hasFeedback,
+        feedbackIcon,
+        isFormItemInput: true,
+      });
+    });
     return () => {
       if (props.noStyle) return slots.default?.();
       const help = props.help ?? (slots.help ? filterEmpty(slots.help()) : null);

@@ -1,8 +1,3 @@
-import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
-import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
-
 import type { ColProps } from '../grid/Col';
 import Col from '../grid/Col';
 import { useProvideForm, useInjectForm, useProvideFormItemPrefix } from './context';
@@ -27,12 +22,6 @@ export interface FormItemInputProps {
   status?: ValidateStatus;
 }
 
-const iconMap: { [key: string]: any } = {
-  success: CheckCircleFilled,
-  warning: ExclamationCircleFilled,
-  error: CloseCircleFilled,
-  validating: LoadingOutlined,
-};
 const FormItemInput = defineComponent({
   slots: ['help', 'extra', 'errors'],
   inheritAttrs: false,
@@ -66,8 +55,8 @@ const FormItemInput = defineComponent({
         wrapperCol,
         help = slots.help?.(),
         errors = slots.errors?.(),
-        hasFeedback,
-        status,
+        // hasFeedback,
+        // status,
         extra = slots.extra?.(),
       } = props;
       const baseClassName = `${prefixCls}-item`;
@@ -78,7 +67,7 @@ const FormItemInput = defineComponent({
       const className = classNames(`${baseClassName}-control`, mergedWrapperCol.class);
 
       // Should provides additional icon if `hasFeedback`
-      const IconNode = status && iconMap[status];
+      // const IconNode = status && iconMap[status];
 
       return (
         <Col
@@ -89,11 +78,11 @@ const FormItemInput = defineComponent({
               <>
                 <div class={`${baseClassName}-control-input`}>
                   <div class={`${baseClassName}-control-input-content`}>{slots.default?.()}</div>
-                  {hasFeedback && IconNode ? (
+                  {/* {hasFeedback && IconNode ? (
                     <span class={`${baseClassName}-children-icon`}>
                       <IconNode />
                     </span>
-                  ) : null}
+                  ) : null} */}
                 </div>
                 <ErrorList
                   errors={errors}

@@ -1,4 +1,4 @@
-import type { ComputedRef, InjectionKey, ConcreteComponent } from 'vue';
+import type { ComputedRef, InjectionKey, ConcreteComponent, FunctionalComponent } from 'vue';
 import {
   watch,
   computed,
@@ -10,6 +10,8 @@ import {
   defineComponent,
 } from 'vue';
 import devWarning from '../vc-util/devWarning';
+import createContext from '../_util/createContext';
+import type { ValidateStatus } from './FormItem';
 
 export type FormItemContext = {
   id: ComputedRef<string>;
@@ -103,3 +105,17 @@ export default defineComponent({
     };
   },
 });
+
+export interface FormItemStatusContextProps {
+  isFormItemInput?: boolean;
+  status?: ValidateStatus;
+  hasFeedback?: boolean;
+  feedbackIcon?: any;
+}
+
+export const FormItemInputContext = createContext<FormItemStatusContextProps>({});
+
+export const NoFormStatus: FunctionalComponent = (_, { slots }) => {
+  FormItemInputContext.useProvide({});
+  return slots.default?.();
+};

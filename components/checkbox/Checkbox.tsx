@@ -4,7 +4,7 @@ import VcCheckbox from '../vc-checkbox/Checkbox';
 import { flattenChildren } from '../_util/props-util';
 import warning from '../_util/warning';
 import type { EventHandler } from '../_util/EventInterface';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 import type { CheckboxChangeEvent, CheckboxProps } from './interface';
@@ -18,6 +18,7 @@ export default defineComponent({
   // emits: ['change', 'update:checked'],
   setup(props, { emit, attrs, slots, expose }) {
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
     const { prefixCls, direction } = useConfigInject('checkbox', props);
     const checkboxGroup = inject(CheckboxGroupContextKey, undefined);
     const uniId = Symbol('checkboxUniId');
@@ -84,12 +85,14 @@ export default defineComponent({
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-wrapper-checked`]: checkboxProps.checked,
           [`${prefixCls.value}-wrapper-disabled`]: checkboxProps.disabled,
+          [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
         },
         className,
       );
       const checkboxClass = classNames({
         [`${prefixCls.value}-indeterminate`]: indeterminate,
       });
+      const ariaChecked = indeterminate ? 'mixed' : undefined;
       return (
         <label
           class={classString}
@@ -97,7 +100,12 @@ export default defineComponent({
           onMouseenter={onMouseenter as EventHandler}
           onMouseleave={onMouseleave as EventHandler}
         >
-          <VcCheckbox {...checkboxProps} class={checkboxClass} ref={checkboxRef} />
+          <VcCheckbox
+            aria-checked={ariaChecked}
+            {...checkboxProps}
+            class={checkboxClass}
+            ref={checkboxRef}
+          />
           {children.length ? <span>{children}</span> : null}
         </label>
       );

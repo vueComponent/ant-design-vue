@@ -1,5 +1,9 @@
 import type { ShowSearchType, FieldNames, BaseOptionType, DefaultOptionType } from '../vc-cascader';
-import VcCascader, { cascaderProps as vcCascaderProps } from '../vc-cascader';
+import VcCascader, {
+  cascaderProps as vcCascaderProps,
+  SHOW_CHILD,
+  SHOW_PARENT,
+} from '../vc-cascader';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
@@ -19,6 +23,9 @@ import type { SelectCommonPlacement } from '../_util/transition';
 import { getTransitionDirection, getTransitionName } from '../_util/transition';
 import { useInjectFormItemContext } from '../form';
 import type { ValueType } from '../vc-cascader/Cascader';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import { FormItemInputContext } from '../form/FormItemContext';
 
 // Align the design since we use `rc-select` in root. This help:
 // - List search content will show all content
@@ -99,6 +106,7 @@ export function cascaderProps<DataNodeType extends CascaderOptionType = Cascader
     bordered: { type: Boolean, default: undefined },
     placement: { type: String as PropType<SelectCommonPlacement> },
     suffixIcon: PropTypes.any,
+    status: String as PropType<InputStatus>,
     options: Array as PropType<DataNodeType[]>,
     'onUpdate:value': Function as PropType<(value: ValueType) => void>,
   };
@@ -121,6 +129,8 @@ const Cascader = defineComponent({
   }),
   setup(props, { attrs, expose, slots, emit }) {
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const {
       prefixCls: cascaderPrefixCls,
       rootPrefixCls,
@@ -234,6 +244,8 @@ const Cascader = defineComponent({
       const { suffixIcon, removeIcon, clearIcon } = getIcons(
         {
           ...props,
+          hasFeedback: formItemInputContext.hasFeedback,
+          feedbackIcon: formItemInputContext.feedbackIcon,
           multiple,
           prefixCls: prefixCls.value,
           showArrow: mergedShowArrow.value,
@@ -253,7 +265,13 @@ const Cascader = defineComponent({
               [`${prefixCls.value}-sm`]: size.value === 'small',
               [`${prefixCls.value}-rtl`]: isRtl.value,
               [`${prefixCls.value}-borderless`]: !bordered,
+              [`${prefixCls.value}-in-form-item`]: formItemInputContext.isFormItemInput,
             },
+            getStatusClassNames(
+              prefixCls.value,
+              mergedStatus.value,
+              formItemInputContext.hasFeedback,
+            ),
             attrs.class,
           ]}
           direction={direction.value}
@@ -282,7 +300,7 @@ const Cascader = defineComponent({
           }}
           displayRender={props.displayRender || slots.displayRender}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
-          showArrow={props.showArrow}
+          showArrow={formItemInputContext.hasFeedback || props.showArrow}
           onChange={handleChange}
           onBlur={handleBlur}
           v-slots={slots}
@@ -292,5 +310,14 @@ const Cascader = defineComponent({
     };
   },
 });
-
-export default withInstall(Cascader);
+export default withInstall<
+  typeof Cascader & {
+    SHOW_PARENT: typeof SHOW_PARENT;
+    SHOW_CHILD: typeof SHOW_CHILD;
+  }
+>(
+  Object.assign(Cascader, {
+    SHOW_CHILD,
+    SHOW_PARENT,
+  } as any),
+);

@@ -45,9 +45,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
 | options | 可选项数据源 | [Option](#option)\[] | - |  |
 | placeholder | 输入框占位文本 | string | '请选择' |  |
 | placement | 浮层预设位置 | `bottomLeft` \| `bottomRight` \| `topLeft` \| `topRight` | `bottomLeft` | 3.0 |
+| showCheckedStrategy | 定义选中项回填的方式。`Cascader.SHOW_CHILD`: 只显示选中的子节点。`Cascader.SHOW_PARENT`: 只显示父节点（当父节点下所有子节点都选中时）。 | `Cascader.SHOW_PARENT` \| `Cascader.SHOW_CHILD` | `Cascader.SHOW_PARENT` | 3.3.0 |
 | removeIcon | 自定义的多选框清除图标 | slot | - | 3.2 |
 | searchValue | 设置搜索的值，需要与 `showSearch` 配合使用 | string | - | 3.0 |
 | showSearch | 在选择框中显示搜索框 | boolean \| [object](#showsearch) | false |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | size | 输入框大小 | `large` \| `default` \| `small` | `default` |  |
 | suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |  |
 | tagRender | 自定义 tag 内容，多选时生效 | slot | - | 3.0 |

@@ -41,18 +41,20 @@ cover: https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg
 | option | 通过 option 插槽，自定义节点 | v-slot:option="{value, label, [disabled, key, title]}" | - | 3.0 |
 | options | 自动完成的数据源 | [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
 | placeholder | 输入框提示 | string \| slot | - |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | v-model:value | 指定当前选中的条目 | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | 无 |  |
 
 ### 事件
 
 | 事件名称 | 说明 | 回调参数 | 版本 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | blur | 失去焦点时的回调 | function() |  |
 | change | 选中 option，或 input 的 value 变化时，调用此函数 | function(value) |  |
 | dropdownVisibleChange | 展开下拉菜单的回调 | function(open) |  |
 | focus | 获得焦点时的回调 | function() |  |
 | search | 搜索补全项的时候调用 | function(value) |  |
 | select | 被选中时调用，参数为选中项的 value 值 | function(value, option) |  |
+| clear | 清除内容时回调 | function | - | 3.3.0 |
 
 ## 方法
 

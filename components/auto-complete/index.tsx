@@ -7,6 +7,7 @@ import Option from './Option';
 import OptGroup from './OptGroup';
 import omit from '../_util/omit';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { InputStatus } from '../_util/statusUtils';
 
 function isSelectOptionOrSelectOptGroup(child: any): boolean {
   return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
@@ -30,6 +31,7 @@ export const autoCompleteProps = () => ({
   // optionLabelProp: PropTypes.string.def('children'),
   filterOption: { type: [Boolean, Function], default: false },
   defaultActiveFirstOption: { type: Boolean, default: true },
+  status: String as PropType<InputStatus>,
 });
 
 export type AutoCompleteProps = Partial<ExtractPropTypes<ReturnType<typeof autoCompleteProps>>>;

@@ -1,5 +1,7 @@
 import type { PickerMode } from '../vc-picker/interface';
+import type { SelectCommonPlacement } from '../_util/transition';
 import type { PickerLocale } from './generatePicker';
+import type { DirectionType } from '../config-provider';
 
 export function getPlaceholder(
   picker: PickerMode | undefined,
@@ -50,4 +52,57 @@ export function getRangePlaceholder(
     return locale!.timePickerLocale.rangePlaceholder;
   }
   return locale.lang.rangePlaceholder;
+}
+
+export function transPlacement2DropdownAlign(
+  direction: DirectionType,
+  placement?: SelectCommonPlacement,
+) {
+  const overflow = {
+    adjustX: 1,
+    adjustY: 1,
+  };
+  switch (placement) {
+    case 'bottomLeft': {
+      return {
+        points: ['tl', 'bl'],
+        offset: [0, 4],
+        overflow,
+      };
+    }
+    case 'bottomRight': {
+      return {
+        points: ['tr', 'br'],
+        offset: [0, 4],
+        overflow,
+      };
+    }
+    case 'topLeft': {
+      return {
+        points: ['bl', 'tl'],
+        offset: [0, -4],
+        overflow,
+      };
+    }
+    case 'topRight': {
+      return {
+        points: ['br', 'tr'],
+        offset: [0, -4],
+        overflow,
+      };
+    }
+    default: {
+      return direction === 'rtl'
+        ? {
+            points: ['tr', 'br'],
+            offset: [0, 4],
+            overflow,
+          }
+        : {
+            points: ['tl', 'bl'],
+            offset: [0, 4],
+            overflow,
+          };
+    }
+  }
 }

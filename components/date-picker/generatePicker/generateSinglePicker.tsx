@@ -5,7 +5,7 @@ import RCPicker from '../../vc-picker';
 import type { PanelMode, PickerMode } from '../../vc-picker/interface';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
-import { getPlaceholder } from '../util';
+import { getPlaceholder, transPlacement2DropdownAlign } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import { getTimeProps, Components } from '.';
 import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
@@ -15,7 +15,8 @@ import type { CommonProps, DatePickerProps } from './props';
 import { commonProps, datePickerProps } from './props';
 
 import devWarning from '../../vc-util/devWarning';
-import { useInjectFormItemContext } from '../../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
+import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
 
 export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -49,6 +50,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           DatePickerProps<DateType> &
           ExtraProps;
         const formItemContext = useInjectFormItemContext();
+        const formItemInputContext = FormItemInputContext.useInject();
         devWarning(
           !(props.monthCellContentRender || slots.monthCellContentRender),
           'DatePicker',
@@ -185,6 +187,12 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               : {}),
           };
           const pre = prefixCls.value;
+          const suffixNode = (
+            <>
+              {suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)}
+              {formItemInputContext.hasFeedback && formItemInputContext.feedbackIcon}
+            </>
+          );
           return (
             <RCPicker
               monthCellRender={monthCellRender}
@@ -192,10 +200,8 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               renderExtraFooter={renderExtraFooter}
               ref={pickerRef}
               placeholder={getPlaceholder(mergedPicker, locale, placeholder)}
-              suffixIcon={
-                suffixIcon ||
-                (mergedPicker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
-              }
+              suffixIcon={suffixNode}
+              dropdownAlign={transPlacement2DropdownAlign(direction.value, props.placement)}
               clearIcon={clearIcon || <CloseCircleFilled />}
               allowClear={allowClear}
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
@@ -213,6 +219,11 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
                   [`${pre}-${size.value}`]: size.value,
                   [`${pre}-borderless`]: !bordered,
                 },
+                getStatusClassNames(
+                  pre,
+                  getMergedStatus(formItemInputContext.status, props.status),
+                  formItemInputContext.hasFeedback,
+                ),
                 attrs.class,
               )}
               prefixCls={pre}

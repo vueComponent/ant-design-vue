@@ -6,7 +6,7 @@ import { RangePicker as VCRangePicker } from '../../vc-picker';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
-import { getRangePlaceholder } from '../util';
+import { getRangePlaceholder, transPlacement2DropdownAlign } from '../util';
 import { getTimeProps, Components } from '.';
 import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
@@ -16,8 +16,9 @@ import { commonProps, rangePickerProps } from './props';
 import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
-import { useInjectFormItemContext } from '../../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
 import omit from '../../_util/omit';
+import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -46,6 +47,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
     setup(_props, { expose, slots, attrs, emit }) {
       const props = _props as unknown as CommonProps<DateType> & RangePickerProps<DateType>;
       const formItemContext = useInjectFormItemContext();
+      const formItemInputContext = FormItemInputContext.useInject();
       devWarning(
         !attrs.getCalendarContainer,
         'DatePicker',
@@ -166,6 +168,12 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             : {}),
         };
         const pre = prefixCls.value;
+        const suffixNode = (
+          <>
+            {suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)}
+            {formItemInputContext.hasFeedback && formItemInputContext.feedbackIcon}
+          </>
+        );
         return (
           <VCRangePicker
             dateRender={dateRender}
@@ -178,10 +186,9 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
               )
             }
             ref={pickerRef}
+            dropdownAlign={transPlacement2DropdownAlign(direction.value, props.placement)}
             placeholder={getRangePlaceholder(picker, locale, placeholder as [string, string])}
-            suffixIcon={
-              suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
-            }
+            suffixIcon={suffixNode}
             clearIcon={clearIcon || <CloseCircleFilled />}
             allowClear={allowClear}
             transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
@@ -197,6 +204,11 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
                 [`${pre}-${size.value}`]: size.value,
                 [`${pre}-borderless`]: !bordered,
               },
+              getStatusClassNames(
+                pre,
+                getMergedStatus(formItemInputContext.status, props.status),
+                formItemInputContext.hasFeedback,
+              ),
               attrs.class,
             )}
             locale={locale!.lang}

@@ -17,7 +17,14 @@ import type { ValidateMessages } from '../form/interface';
 import type { ConfigProviderProps, Theme } from './context';
 import { configProviderProps, useProvideGlobalForm } from './context';
 
-export type { ConfigProviderProps, Theme, SizeType, Direction, CSPConfig } from './context';
+export type {
+  ConfigProviderProps,
+  Theme,
+  SizeType,
+  Direction,
+  CSPConfig,
+  DirectionType,
+} from './context';
 export const defaultPrefixCls = 'ant';
 function getGlobalPrefixCls() {
   return globalConfigForApi.prefixCls || defaultPrefixCls;

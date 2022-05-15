@@ -93,9 +93,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 | open | 控制弹层是否展开 | boolean | - |  |
 | picker | 设置选择器类型 | `date` \| `week` \| `month` \| `quarter` \| `year` | `date` | `quarter` |
 | placeholder | 输入框提示文字 | string \| \[string, string] | - |  |
+| placement | 选择框弹出的位置 | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | popupStyle | 额外的弹出日历样式 | CSSProperties | {} |  |
 | prevIcon | 自定义上一个图标 | slot | - | 3.0 |
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | `large` \| `middle` \| `small` | - |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | v-slot:suffixIcon | - |  |
 | superNextIcon | 自定义 `<<` 切换图标 | slot | - | 3.0 |
 | superPrevIcon | 自定义 `>>` 切换图标 | slot | - | 3.0 |

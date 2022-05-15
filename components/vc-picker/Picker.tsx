@@ -458,7 +458,6 @@ function Picker<DateType>() {
           direction,
           autocomplete = 'off',
         } = props;
-
         // ============================= Panel =============================
         const panelProps = {
           // Remove `picker` & `format` here since TimePicker is little different with other panel

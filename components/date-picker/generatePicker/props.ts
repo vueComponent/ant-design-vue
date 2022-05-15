@@ -2,7 +2,6 @@ import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInte
 import type { CSSProperties, PropType } from 'vue';
 import type { PickerLocale } from '.';
 import type { SizeType } from '../../config-provider';
-import type { AlignType } from '../../vc-align/interface';
 import type {
   CustomFormat,
   DisabledTime,
@@ -17,12 +16,16 @@ import type { MonthCellRender } from '../../vc-picker/panels/MonthPanel/MonthBod
 import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
 import type { RangeDateRender, RangeInfo, RangeType } from '../../vc-picker/RangePicker';
 import type { VueNode } from '../../_util/type';
+import { tuple } from '../../_util/type';
+import type { InputStatus } from '../../_util/statusUtils';
+
+const DataPickerPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
+type DataPickerPlacement = typeof DataPickerPlacements[number];
 
 function commonProps<DateType = any>() {
   return {
     id: String,
     dropdownClassName: String,
-    dropdownAlign: { type: Object as PropType<AlignType> },
     popupStyle: { type: Object as PropType<CSSProperties> },
     transitionName: String,
     placeholder: String,
@@ -82,6 +85,8 @@ function commonProps<DateType = any>() {
     mode: { type: String as PropType<PanelMode> },
     picker: { type: String as PropType<PickerMode> },
     valueFormat: String,
+    placement: String as PropType<DataPickerPlacement>,
+    status: String as PropType<InputStatus>,
   };
 }
 
@@ -89,7 +94,6 @@ export interface CommonProps<DateType> {
   id?: string;
   prefixCls?: string;
   dropdownClassName?: string;
-  dropdownAlign?: AlignType;
   popupStyle?: CSSProperties;
   transitionName?: string;
   placeholder?: string;
@@ -136,6 +140,8 @@ export interface CommonProps<DateType> {
   mode?: PanelMode;
   picker?: PickerMode;
   valueFormat?: string;
+  placement?: DataPickerPlacement;
+  status?: InputStatus;
 }
 
 function datePickerProps<DateType = any>() {

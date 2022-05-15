@@ -9,6 +9,9 @@ import type { Locale } from '../locale-provider';
 type GlobalFormCOntextProps = {
   validateMessages?: Ref<ValidateMessages>;
 };
+
+export type DirectionType = 'ltr' | 'rtl' | undefined;
+
 export const GlobalFormContextKey: InjectionKey<GlobalFormCOntextProps> =
   Symbol('GlobalFormContextKey');
 

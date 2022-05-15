@@ -34,14 +34,19 @@ export interface PushState {
 }
 
 const defaultPushState: PushState = { distance: 180 };
-
+type getContainerFunc = () => HTMLElement;
 export const drawerProps = () => ({
   autofocus: { type: Boolean, default: undefined },
   closable: { type: Boolean, default: undefined },
   closeIcon: PropTypes.any,
   destroyOnClose: { type: Boolean, default: undefined },
   forceRender: { type: Boolean, default: undefined },
-  getContainer: PropTypes.any,
+  getContainer: {
+    type: [String, Function, Boolean, Object] as PropType<
+      string | HTMLElement | getContainerFunc | false
+    >,
+    default: undefined as string | HTMLElement | getContainerFunc | false,
+  },
   maskClosable: { type: Boolean, default: undefined },
   mask: { type: Boolean, default: undefined },
   maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
@@ -108,7 +113,14 @@ const Drawer = defineComponent({
     const destroyClose = ref(false);
     const vcDrawer = ref(null);
     const parentDrawerOpts = inject('parentDrawerOpts', null);
-    const { prefixCls } = useConfigInject('drawer', props);
+    const { prefixCls, getPopupContainer, direction } = useConfigInject('drawer', props);
+    const getContainer = computed(() =>
+      // 有可能为 false，所以不能直接判断
+      props.getContainer === undefined && getPopupContainer.value
+        ? () => getPopupContainer.value(document.body)
+        : props.getContainer,
+    );
+
     devWarning(
       !props.afterVisibleChange,
       'Drawer',
@@ -366,6 +378,7 @@ const Drawer = defineComponent({
           [className]: className,
           [wrapClassName]: !!wrapClassName,
           [haveMask]: !!haveMask,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         }),
         style: drawerStyle.value,
         ref: vcDrawer,
@@ -373,6 +386,7 @@ const Drawer = defineComponent({
       return (
         <VcDrawer
           {...vcDrawerProps}
+          getContainer={getContainer.value}
           v-slots={{
             handler: props.handle ? () => props.handle : slots.handle,
             default: () => renderBody(prefixCls.value),

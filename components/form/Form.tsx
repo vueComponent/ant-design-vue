@@ -130,6 +130,7 @@ const Form = defineComponent({
     const validateMessages = computed(() => {
       return {
         ...defaultValidateMessages,
+        ...contextForm.value?.validateMessages,
         ...props.validateMessages,
       };
     });

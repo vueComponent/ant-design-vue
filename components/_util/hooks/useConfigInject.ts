@@ -4,6 +4,7 @@ import { computed, inject } from 'vue';
 import type { ConfigProviderProps, CSPConfig, Direction, SizeType } from '../../config-provider';
 import { defaultConfigProvider } from '../../config-provider';
 import type { VueNode } from '../type';
+import type { ValidateMessages } from '../../form/interface';
 
 export default (
   name: string,
@@ -20,6 +21,7 @@ export default (
   form?: ComputedRef<{
     requiredMark?: RequiredMark;
     colon?: boolean;
+    validateMessages?: ValidateMessages;
   }>;
   autoInsertSpaceInButton: ComputedRef<boolean>;
   renderEmpty?: ComputedRef<(componentName?: string) => VueNode>;

@@ -78,7 +78,11 @@ const flattenChildren = (children = [], filterEmpty = true) => {
     if (Array.isArray(child)) {
       res.push(...flattenChildren(child, filterEmpty));
     } else if (child && child.type === Fragment) {
-      res.push(...flattenChildren(child.children, filterEmpty));
+      if (child.props && child.props.skipFlatten) {
+        res.push(child);
+      } else {
+        res.push(...flattenChildren(child.children, filterEmpty));
+      }
     } else if (child && isVNode(child)) {
       if (filterEmpty && !isEmptyElement(child)) {
         res.push(child);

@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue';
-import { computed, defineComponent, ref, watch } from 'vue';
+import { Fragment, computed, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import placements from './placements';
@@ -72,10 +72,10 @@ export default defineComponent({
         getPopupContainer: () => triggerRef.value.getPopupDomNode(),
       };
       return (
-        <>
+        <Fragment skipFlatten>
           {props.arrow && <div class={`${props.prefixCls}-arrow`} />}
           {cloneElement(overlayElement, extraOverlayProps, false)}
-        </>
+        </Fragment>
       );
     };
 

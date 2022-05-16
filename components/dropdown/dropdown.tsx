@@ -144,7 +144,7 @@ const Dropdown = defineComponent({
           ...attrs,
           builtinPlacements,
           overlayClassName: overlayClassNameCustomized,
-          arrow,
+          arrow: !!arrow,
           alignPoint,
           prefixCls: prefixCls.value,
           getPopupContainer: getPopupContainer.value,

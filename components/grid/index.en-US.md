@@ -10,6 +10,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 
 ## Design concept
 
+<div class="grid-demo">
+  <img src="https://gw.alipayobjects.com/zos/bmw-prod/9189c9ef-c601-40dc-9960-c11dbb681888.svg" alt="grid design" />
+</div>
+
 In most business situations, Ant Design Vue needs to solve a lot of information storage problems within the design area, so based on 12 Grids System, we divided the design area into 24 sections.
 
 We name the divided area 'box'. We suggest four boxes for horizontal arrangement at most, one at least. Boxes are proportional to the entire screen as shown in the picture above. To ensure a high level of visual comfort, we customize the typography inside of the box based on the box unit.
@@ -37,7 +41,7 @@ Our grid systems support Flex layout to allow the elements within the parent to 
 | --- | --- | --- | --- |
 | align | the vertical alignment of the flex layout: `top` `middle` `bottom` | string | `top` |
 | gutter | spacing between grids, could be a number or a object like `{ xs: 8, sm: 16, md: 24}`. or you can use array to make horizontal and vertical spacing work at the same time `[horizontal, vertical]` (supported after `1.5.0`) | number/object/array | 0 |
-| justify | horizontal arrangement of the flex layout: `start` `end` `center` `space-around` `space-between` | string | `start` |
+| justify | horizontal arrangement of the flex layout: `start` \| `end` \| `center` \| `space-around` \| `space-between` \| `space-evenly` | string | `start` |
 | wrap | Auto wrap line | boolean | false |
 
 ### Col

@@ -9,9 +9,10 @@ import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';
 
 const RowAligns = tuple('top', 'middle', 'bottom', 'stretch');
-const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between');
+const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between', 'space-evenly');
 
-export type Gutter = number | Partial<Record<Breakpoint, number>>;
+type Gap = number | undefined;
+export type Gutter = number | undefined | Partial<Record<Breakpoint, number>>;
 
 export interface rowContextState {
   gutter?: [number, number];
@@ -68,9 +69,9 @@ const ARow = defineComponent({
     });
 
     const gutter = computed(() => {
-      const results: [number, number] = [0, 0];
+      const results: [Gap, Gap] = [undefined, undefined];
       const { gutter = 0 } = props;
-      const normalizedGutter = Array.isArray(gutter) ? gutter : [gutter, 0];
+      const normalizedGutter = Array.isArray(gutter) ? gutter : [gutter, undefined];
       normalizedGutter.forEach((g, index) => {
         if (typeof g === 'object') {
           for (let i = 0; i < responsiveArray.length; i++) {
@@ -81,7 +82,7 @@ const ARow = defineComponent({
             }
           }
         } else {
-          results[index] = g || 0;
+          results[index] = g;
         }
       });
       return results;
@@ -106,8 +107,8 @@ const ARow = defineComponent({
       const gt = gutter.value;
       // Add gutter related style
       const style: CSSProperties = {};
-      const horizontalGutter = gt[0] > 0 ? `${gt[0] / -2}px` : undefined;
-      const verticalGutter = gt[1] > 0 ? `${gt[1] / -2}px` : undefined;
+      const horizontalGutter = gt[0] != null && gt[0] > 0 ? `${gt[0] / -2}px` : undefined;
+      const verticalGutter = gt[1] != null && gt[1] > 0 ? `${gt[1] / -2}px` : undefined;
 
       if (horizontalGutter) {
         style.marginLeft = horizontalGutter;
@@ -126,7 +127,7 @@ const ARow = defineComponent({
 
     return () => {
       return (
-        <div class={classes.value} style={rowStyle.value}>
+        <div role="row" class={classes.value} style={rowStyle.value}>
           {slots.default?.()}
         </div>
       );

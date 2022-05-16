@@ -58,7 +58,6 @@ A simple playground for column count and gutter.
       >
         <div>Column</div>
       </a-col>
-
       <a-col
         v-for="item in colCounts[colCountKey]"
         :key="item.toString()"
@@ -119,23 +118,34 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-#components-grid-demo-playground :deep(.ant-col) {
+#components-grid-demo-playground [class~='ant-col'] {
   background: transparent;
   border: 0;
 }
-#components-grid-demo-playground :deep(.ant-col) > div {
-  background: #00a0e9;
+#components-grid-demo-playground [class~='ant-col'] > div {
   height: 120px;
+  font-size: 14px;
   line-height: 120px;
-  font-size: 13px;
+  background: #0092ff;
+  border-radius: 4px;
 }
 #components-grid-demo-playground pre {
+  padding: 8px 16px;
+  font-size: 13px;
   background: #f9f9f9;
   border-radius: 6px;
-  font-size: 13px;
-  padding: 8px 16px;
 }
-[data-theme='dark'] #components-grid-demo-playground pre {
-  background: #2f2f2f;
+#components-grid-demo-playground pre.demo-code {
+  direction: ltr;
+}
+#components-grid-demo-playground .ant-col {
+  padding: 0;
+}
+.code-box-demo #components-grid-demo-playground .ant-row > div {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+[data-theme='dark'] #components-grid-demo-playground [class~='ant-col'] > div {
+  background: #028ac8;
 }
 </style>

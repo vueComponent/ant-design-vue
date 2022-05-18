@@ -11,14 +11,15 @@ import {
 import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import { textAreaProps } from './inputProps';
-import type { InputFocusOptions } from './Input';
-import { fixControlledValue, resolveOnChange, triggerFocus } from './Input';
+import type { InputFocusOptions } from '../vc-input/utils/commonUtils';
+import { fixControlledValue, resolveOnChange, triggerFocus } from '../vc-input/utils/commonUtils';
 import classNames from '../_util/classNames';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { FocusEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
 import type { VueNode } from '../_util/type';
+import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 
 function fixEmojiLength(value: string, maxLength: number) {
   return [...(value || '')].slice(0, maxLength).join('');
@@ -50,6 +51,8 @@ export default defineComponent({
   props: textAreaProps(),
   setup(props, { attrs, expose, emit }) {
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const resizableTextArea = ref();
     const mergedValue = ref('');
@@ -186,12 +189,15 @@ export default defineComponent({
         ...omit(props, ['allowClear']),
         ...attrs,
         style: showCount.value ? {} : style,
-        class: {
-          [`${prefixCls.value}-borderless`]: !bordered,
-          [`${customClass}`]: customClass && !showCount.value,
-          [`${prefixCls.value}-sm`]: size.value === 'small',
-          [`${prefixCls.value}-lg`]: size.value === 'large',
-        },
+        class: [
+          {
+            [`${prefixCls.value}-borderless`]: !bordered,
+            [`${customClass}`]: customClass && !showCount.value,
+            [`${prefixCls.value}-sm`]: size.value === 'small',
+            [`${prefixCls.value}-lg`]: size.value === 'large',
+          },
+          getStatusClassNames(prefixCls.value, mergedStatus.value),
+        ],
         showCount: null,
         prefixCls: prefixCls.value,
         onInput: handleChange,
@@ -259,10 +265,11 @@ export default defineComponent({
           {...inputProps}
           value={mergedValue.value}
           v-slots={{ element: renderTextArea }}
+          status={props.status}
         />
       );
 
-      if (showCount.value) {
+      if (showCount.value || formItemInputContext.hasFeedback) {
         const valueLength = [...mergedValue.value].length;
         let dataCount: VueNode = '';
         if (typeof showCount.value === 'object') {
@@ -277,6 +284,8 @@ export default defineComponent({
               `${prefixCls.value}-textarea`,
               {
                 [`${prefixCls.value}-textarea-rtl`]: direction.value === 'rtl',
+                [`${prefixCls.value}-textarea-show-count`]: showCount.value,
+                [`${prefixCls.value}-textarea-in-form-item`]: formItemInputContext.isFormItemInput,
               },
               `${prefixCls.value}-textarea-show-count`,
               customClass,
@@ -285,6 +294,11 @@ export default defineComponent({
             data-count={typeof dataCount !== 'object' ? dataCount : undefined}
           >
             {textareaNode}
+            {formItemInputContext.hasFeedback && (
+              <span class={`${prefixCls.value}-textarea-suffix`}>
+                {formItemInputContext.feedbackIcon}
+              </span>
+            )}
           </div>
         );
       }

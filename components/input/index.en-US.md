@@ -22,13 +22,15 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | addonBefore | The label text displayed before (on the left side of) the input field. | string\|slot |  |  |
 | allowClear | allow to remove input content with clear icon | boolean |  |  |
 | bordered | Whether has border style | boolean | true | 4.5.0 |
+| clearIcon | custom clear icon when allowClear | slot | `<CloseCircleFilled />` | 3.3.0 |
 | defaultValue | The initial input content | string |  |  |
 | disabled | Whether the input is disabled. | boolean | false |  |
 | id | The ID for input | string |  |  |
 | maxlength | max length | number |  | 1.5.0 |
 | prefix | The prefix icon for the Input. | string\|slot |  |  |
 | showCount | Whether show text count | boolean | false | 3.0 |
-| size | The size of the input box. Note: in the context of a form, the `large` size is used. Available: `large` `default` `small` | string | `default` |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
+| size | The size of the input box. Note: in the context of a form, the `middle` size is used. Available: `large` `middle` `small` | string | - |  |
 | suffix | The suffix icon for the Input. | string\|slot |  |  |
 | type | The type of input, see: [MDN](https://developer.mozilla.org/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)(use `<a-textarea />` instead of `type="textarea"`) | string | `text` |  |
 | value(v-model) | The input content value | string |  |  |

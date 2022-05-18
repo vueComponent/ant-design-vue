@@ -1,6 +1,7 @@
 import type { PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import type { SizeType } from '../config-provider';
+import { FormItemInputContext } from '../form/FormItemContext';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -17,6 +18,10 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('input-group', props);
+    const formItemInputContext = FormItemInputContext.useInject();
+    FormItemInputContext.useProvide(formItemInputContext, {
+      isFormItemInput: false,
+    });
     const cls = computed(() => {
       const pre = prefixCls.value;
       return {

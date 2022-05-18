@@ -3,15 +3,19 @@ import { computed, ref, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import Input from './Input';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
-import inputProps from './inputProps';
 import Button from '../button';
 import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
 import isPlainObject from 'lodash-es/isPlainObject';
-import type { ChangeEvent, MouseEventHandler } from '../_util/EventInterface';
+import type {
+  ChangeEvent,
+  CompositionEventHandler,
+  MouseEventHandler,
+} from '../_util/EventInterface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
 import isMobile from '../_util/isMobile';
+import inputProps from './inputProps';
 
 export default defineComponent({
   name: 'AInputSearch',
@@ -29,6 +33,7 @@ export default defineComponent({
   },
   setup(props, { slots, attrs, expose, emit }) {
     const inputRef = ref();
+    const composedRef = ref(false);
     const focus = () => {
       inputRef.value?.focus();
     };
@@ -55,12 +60,28 @@ export default defineComponent({
     };
 
     const onSearch = (e: MouseEvent | KeyboardEvent) => {
-      emit('search', inputRef.value?.stateValue, e);
+      emit('search', inputRef.value?.input?.stateValue, e);
       if (!isMobile.tablet) {
         inputRef.value.focus();
       }
     };
 
+    const onPressEnter = (e: KeyboardEvent) => {
+      if (composedRef.value) {
+        return;
+      }
+      onSearch(e);
+    };
+
+    const handleOnCompositionStart: CompositionEventHandler = e => {
+      composedRef.value = true;
+      emit('compositionstart', e);
+    };
+
+    const handleOnCompositionEnd: CompositionEventHandler = e => {
+      composedRef.value = false;
+      emit('compositionend', e);
+    };
     const { prefixCls, getPrefixCls, direction, size } = useConfigInject('input-search', props);
     const inputPrefixCls = computed(() => getPrefixCls('input', props.inputPrefixCls));
     return () => {
@@ -133,7 +154,9 @@ export default defineComponent({
           ref={inputRef}
           {...omit(restProps, ['onUpdate:value', 'onSearch', 'enterButton'])}
           {...attrs}
-          onPressEnter={onSearch}
+          onPressEnter={onPressEnter}
+          onCompositionstart={handleOnCompositionStart}
+          onCompositionend={handleOnCompositionEnd}
           size={size.value}
           prefixCls={inputPrefixCls.value}
           addonAfter={button}

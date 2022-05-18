@@ -2,7 +2,7 @@ import Select from '../select';
 import { Group, Button } from '../radio';
 import type { CalendarMode } from './generateCalendar';
 import type { Ref } from 'vue';
-import { reactive, watchEffect, defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import type { Locale } from '../vc-picker/interface';
 import type { GenerateConfig } from '../vc-picker/generate';
 import { FormItemInputContext } from '../form/FormItemContext';
@@ -170,13 +170,7 @@ export default defineComponent<CalendarHeaderProps<any>>({
   setup(_props, { attrs }) {
     const divRef = ref<HTMLDivElement>(null);
     const formItemInputContext = FormItemInputContext.useInject();
-    const newFormItemInputContext = reactive({});
-    FormItemInputContext.useProvide(newFormItemInputContext);
-    watchEffect(() => {
-      Object.assign(newFormItemInputContext, formItemInputContext, {
-        isFormItemInput: false,
-      });
-    });
+    FormItemInputContext.useProvide(formItemInputContext, { isFormItemInput: false });
 
     return () => {
       const props = { ..._props, ...attrs };

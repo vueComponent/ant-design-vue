@@ -1,4 +1,4 @@
-import type { ComputedRef, InjectionKey, ConcreteComponent, FunctionalComponent } from 'vue';
+import type { ComputedRef, InjectionKey, ConcreteComponent } from 'vue';
 import {
   watch,
   computed,
@@ -115,7 +115,12 @@ export interface FormItemStatusContextProps {
 
 export const FormItemInputContext = createContext<FormItemStatusContextProps>({});
 
-export const NoFormStatus: FunctionalComponent = (_, { slots }) => {
-  FormItemInputContext.useProvide({});
-  return slots.default?.();
-};
+export const NoFormStatus = defineComponent({
+  name: 'NoFormStatus',
+  setup(_, { slots }) {
+    FormItemInputContext.useProvide({});
+    return () => {
+      return slots.default?.();
+    };
+  },
+});

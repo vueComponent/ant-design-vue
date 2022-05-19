@@ -1,6 +1,6 @@
 import type { UnwrapRef } from 'vue';
 import { reactive, toRef } from 'vue';
-import fromPairs from 'lodash/fromPairs';
+import fromPairs from 'lodash-es/fromPairs';
 
 /**
  * Reactively pick fields from a reactive object

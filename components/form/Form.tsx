@@ -130,6 +130,7 @@ const Form = defineComponent({
     const validateMessages = computed(() => {
       return {
         ...defaultValidateMessages,
+        ...contextForm.value?.validateMessages,
         ...props.validateMessages,
       };
     });
@@ -150,7 +151,7 @@ const Form = defineComponent({
       delete fields[eventKey];
     };
 
-    const getFieldsByNameList = (nameList: NamePath[]) => {
+    const getFieldsByNameList = (nameList: NamePath | NamePath[]) => {
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
       if (!provideNameList) {
@@ -162,17 +163,17 @@ const Form = defineComponent({
         );
       }
     };
-    const resetFields = (name?: NamePath) => {
+    const resetFields = (name?: NamePath | NamePath[]) => {
       if (!props.model) {
         warning(false, 'Form', 'model is required for resetFields to work.');
         return;
       }
-      getFieldsByNameList(name ? [name] : undefined).forEach(field => {
+      getFieldsByNameList(name).forEach(field => {
         field.resetField();
       });
     };
-    const clearValidate = (name?: NamePath) => {
-      getFieldsByNameList(name ? [name] : undefined).forEach(field => {
+    const clearValidate = (name?: NamePath | NamePath[]) => {
+      getFieldsByNameList(name).forEach(field => {
         field.clearValidate();
       });
     };

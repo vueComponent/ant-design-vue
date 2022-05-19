@@ -105,7 +105,7 @@ const typeToIcon = {
   warning: ExclamationCircleFilled,
   loading: LoadingOutlined,
 };
-
+export const typeList = Object.keys(typeToIcon) as NoticeType[];
 export interface MessageType extends PromiseLike<any> {
   (): void;
 }
@@ -220,9 +220,7 @@ export function attachTypeApi(originalApi: MessageApi, type: NoticeType) {
   };
 }
 
-(['success', 'info', 'warning', 'error', 'loading'] as NoticeType[]).forEach(type =>
-  attachTypeApi(api, type),
-);
+typeList.forEach(type => attachTypeApi(api, type));
 
 api.warn = api.warning;
 

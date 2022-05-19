@@ -1,0 +1,50 @@
+<docs>
+---
+order: 8
+title:
+  zh-CN: 自定义状态
+  en-US: Status
+---
+
+## zh-CN
+
+使用 `status` 为 Mentions 添加状态。可选 `error` 或者 `warning`。
+
+## en-US
+
+Add status to Mentions with `status`, which could be `error` or `warning`。
+
+</docs>
+<template>
+  <a-space direction="vertical">
+    <a-mentions v-model:value="value" autofocus status="error" @select="onSelect">
+      <a-mentions-option value="afc163">afc163</a-mentions-option>
+      <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
+      <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
+    </a-mentions>
+    <a-mentions v-model:value="value" autofocus status="warning" @select="onSelect">
+      <a-mentions-option value="afc163">afc163</a-mentions-option>
+      <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
+      <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
+    </a-mentions>
+  </a-space>
+</template>
+<script lang="ts">
+import { defineComponent, ref, watch } from 'vue';
+export default defineComponent({
+  setup() {
+    const value = ref<string>('@afc163');
+    watch(value, () => {
+      console.log('value', value);
+    });
+    const onSelect = (option: { value: string }) => {
+      console.log('select', option);
+    };
+
+    return {
+      value,
+      onSelect,
+    };
+  },
+});
+</script>

@@ -16,7 +16,7 @@ When you need to mention someone or something.
 ### Mention
 
 | Property | Description | Type | Default |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | autofocus | Auto get focus when component mounted | boolean | `false` |
 | defaultValue | Default value | string |  |
 | filterOption | Customize filter option logic | false \| (input: string, option: OptionProps) => boolean |  |
@@ -25,6 +25,7 @@ When you need to mention someone or something.
 | placement | Set popup placement | `top` \| `bottom` | `bottom` |
 | prefix | Set trigger prefix keyword | string \| string\[] | '@' |
 | split | Set split string before and after selected mention | string | ' ' |
+| status | Set validation status | 'error' \| 'warning' \| 'success' \| 'validating' | - | 3.3.0 |
 | validateSearch | Customize trigger search logic | (text: string, props: MentionsProps) => void |  |
 | value(v-model) | Set value of mentions | string |  |
 

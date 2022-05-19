@@ -1,15 +1,17 @@
 import type { App, PropType, ExtractPropTypes } from 'vue';
-import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
+import { computed, watch, ref, onMounted, defineComponent, nextTick } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import VcMentions, { Option } from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import { optionProps } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -83,6 +85,7 @@ export const mentionsProps = () => ({
   notFoundContent: PropTypes.any,
   defaultValue: String,
   id: String,
+  status: String as PropType<InputStatus>,
 });
 
 export type MentionsProps = Partial<ExtractPropTypes<ReturnType<typeof mentionsProps>>>;
@@ -98,6 +101,8 @@ const Mentions = defineComponent({
     const vcMentions = ref(null);
     const value = ref(props.value ?? props.defaultValue ?? '');
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     watch(
       () => props.value,
       val => {
@@ -174,14 +179,19 @@ const Mentions = defineComponent({
         id = formItemContext.id.value,
         ...restProps
       } = props;
+      const { hasFeedback, feedbackIcon } = formItemInputContext;
       const { class: className, ...otherAttrs } = attrs;
       const otherProps = omit(restProps, ['defaultValue', 'onUpdate:value', 'prefixCls']);
 
-      const mergedClassName = classNames(className, {
-        [`${prefixCls.value}-disabled`]: disabled,
-        [`${prefixCls.value}-focused`]: focused.value,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-      });
+      const mergedClassName = classNames(
+        {
+          [`${prefixCls.value}-disabled`]: disabled,
+          [`${prefixCls.value}-focused`]: focused.value,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        getStatusClassNames(prefixCls.value, mergedStatus.value),
+        !hasFeedback && className,
+      );
 
       const mentionsProps = {
         prefixCls: prefixCls.value,
@@ -202,12 +212,31 @@ const Mentions = defineComponent({
         value: value.value,
         id,
       };
-      return (
+      const mentions = (
         <VcMentions
           {...mentionsProps}
           v-slots={{ notFoundContent: getNotFoundContent, option: slots.option }}
         ></VcMentions>
       );
+      if (hasFeedback) {
+        return (
+          <div
+            class={classNames(
+              `${prefixCls.value}-affix-wrapper`,
+              getStatusClassNames(
+                `${prefixCls.value}-affix-wrapper`,
+                mergedStatus.value,
+                hasFeedback,
+              ),
+              className,
+            )}
+          >
+            {mentions}
+            <span class={`${prefixCls.value}-suffix`}>{feedbackIcon}</span>
+          </div>
+        );
+      }
+      return mentions;
     };
   },
 });

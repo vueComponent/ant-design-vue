@@ -17,7 +17,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
 ### Mentions
 
 | 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | autofocus | 自动获得焦点 | boolean | `false` |
 | defaultValue | 默认值 | string |  |
 | filterOption | 自定义过滤逻辑 | false \| (input: string, option: OptionProps) => boolean |  |
@@ -26,6 +26,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
 | placement | 弹出层展示位置 | `top` \| `bottom` | `bottom` |
 | prefix | 设置触发关键字 | string \| string\[] | '@' |
 | split | 设置选中项前后分隔符 | string | ' ' |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | validateSearch | 自定义触发验证逻辑 | (text: string, props: MentionsProps) => void |  |
 | value(v-model) | 设置值 | string |  |
 

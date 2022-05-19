@@ -40,7 +40,7 @@ The properties of config are as follows:
 | icon | Customized icon | VNode \| () => VNode | - |  |
 | key | The unique identifier of the Notification | string | - |  |
 | message | The title of notification box (required) | string\| VNode \| () => VNode | - |  |
-| placement | Position of Notification, can be one of `topLeft` `topRight` `bottomLeft` `bottomRight` | string | `topRight` |  |
+| placement | Position of Notification, can be one of `top` `topLeft` `topRight` `bottom` `bottomLeft` `bottomRight` | string | `topRight` | `top` `bottom` 3.3.0 |
 | style | Customized inline style | Object \| string | - |  |
 | top | Distance from the top of the viewport, when `placement` is `topRight` or `topLeft` (unit: pixels). | string | `24px` |  |
 | onClick | Specify a function that will be called when the notification is clicked | Function | - |  |

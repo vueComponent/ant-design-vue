@@ -41,7 +41,7 @@ config 参数如下：
 | icon | 自定义图标 | VNode \| () => VNode | - |  |
 | key | 当前通知唯一标志 | string | - |  |
 | message | 通知提醒标题，必选 | string \| VNode \| () => VNode | - |  |
-| placement | 弹出位置，可选 `topLeft` `topRight` `bottomLeft` `bottomRight` | string | topRight |  |
+| placement | 弹出位置，可选 `top` `topLeft` `topRight` `bottom` `bottomLeft` `bottomRight` | string | `topRight` | `top` `bottom` 3.3.0 |
 | style | 自定义内联样式 | Object \| string | - |  |
 | top | 消息从顶部弹出时，距离顶部的位置，单位像素。 | string | `24px` |  |
 | onClick | 点击通知时触发的回调函数 | Function | - |  |

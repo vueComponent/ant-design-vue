@@ -4,8 +4,7 @@ import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
-import VcSelect from '../select';
-import MiniSelect from './MiniSelect';
+import MiniSelect, { MiddleSelect } from './Select';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
@@ -145,7 +144,7 @@ export default defineComponent({
         ...getIconsProps(prefixCls.value),
         prefixCls: prefixCls.value,
         selectPrefixCls: selectPrefixCls.value,
-        selectComponentClass: selectComponentClass || (isSmall ? MiniSelect : VcSelect),
+        selectComponentClass: selectComponentClass || (isSmall ? MiniSelect : MiddleSelect),
         locale: locale.value,
         buildOptionText,
         ...attrs,

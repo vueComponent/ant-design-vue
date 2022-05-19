@@ -31,9 +31,12 @@ When a numeric value needs to be provided.
 | precision | precision of input value | number | - |  |
 | prefix | The prefix icon for the Input | slot | - | 3.0 |
 | size | height of input box | string | - |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | step | The number to which the current value is increased or decreased. It can be an integer or decimal. | number\|string | 1 |  |
 | stringMode | Set value as string to support high precision decimals. Will return string value by `change` | boolean | false | 3.0 |
 | value(v-model) | current value | number |  |  |
+| upIcon | custom up icon | slot | `<UpOutlined />` | 3.3.0 |
+| downIcon | custom up down | slot | `<DownOutlined />` | 3.3.0 |
 
 ### events
 

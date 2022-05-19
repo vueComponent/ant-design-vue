@@ -1,16 +1,22 @@
 import type { PropType, ExtractPropTypes, HTMLAttributes, App } from 'vue';
-import { watch, defineComponent, nextTick, onMounted, ref } from 'vue';
+import { watch, defineComponent, nextTick, onMounted, ref, computed } from 'vue';
 import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber, { inputNumberProps as baseInputNumberProps } from './src/InputNumber';
 import type { SizeType } from '../config-provider';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import {
+  FormItemInputContext,
+  NoFormStatus,
+  useInjectFormItemContext,
+} from '../form/FormItemContext';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { cloneElement } from '../_util/vnode';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';
 import isValidValue from '../_util/isValidValue';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
   ...baseProps,
@@ -25,6 +31,7 @@ export const inputNumberProps = () => ({
   prefix: PropTypes.any,
   'onUpdate:value': baseProps.onChange,
   valueModifiers: Object,
+  status: String as PropType<InputStatus>,
 });
 
 export type InputNumberProps = Partial<ExtractPropTypes<ReturnType<typeof inputNumberProps>>>;
@@ -37,6 +44,8 @@ const InputNumber = defineComponent({
   slots: ['addonBefore', 'addonAfter', 'prefix'],
   setup(props, { emit, expose, attrs, slots }) {
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const { prefixCls, size, direction } = useConfigInject('input-number', props);
     const mergedValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const focused = ref(false);
@@ -84,6 +93,7 @@ const InputNumber = defineComponent({
       });
     });
     return () => {
+      const { hasFeedback, isFormItemInput, feedbackIcon } = formItemInputContext;
       const {
         class: className,
         bordered,
@@ -106,7 +116,9 @@ const InputNumber = defineComponent({
           [`${preCls}-rtl`]: direction.value === 'rtl',
           [`${preCls}-readonly`]: readonly,
           [`${preCls}-borderless`]: !bordered,
+          [`${preCls}-in-form-item`]: isFormItemInput,
         },
+        getStatusClassNames(preCls, mergedStatus.value),
         className,
       );
 
@@ -123,32 +135,42 @@ const InputNumber = defineComponent({
           onBlur={handleBlur}
           onFocus={handleFocus}
           v-slots={{
-            upHandler: () => <UpOutlined class={`${preCls}-handler-up-inner`} />,
-            downHandler: () => <DownOutlined class={`${preCls}-handler-down-inner`} />,
+            upHandler: slots.upIcon
+              ? () => <span class={`${preCls}-handler-up-inner`}>{slots.upIcon()}</span>
+              : () => <UpOutlined class={`${preCls}-handler-up-inner`} />,
+            downHandler: slots.downIcon
+              ? () => <span class={`${preCls}-handler-down-inner`}>{slots.downIcon()}</span>
+              : () => <DownOutlined class={`${preCls}-handler-down-inner`} />,
           }}
         />
       );
       const hasAddon = isValidValue(addonBefore) || isValidValue(addonAfter);
-      if (isValidValue(prefix)) {
-        const affixWrapperCls = classNames(`${preCls}-affix-wrapper`, {
-          [`${preCls}-affix-wrapper-focused`]: focused.value,
-          [`${preCls}-affix-wrapper-disabled`]: props.disabled,
-          [`${preCls}-affix-wrapper-sm`]: size.value === 'small',
-          [`${preCls}-affix-wrapper-lg`]: size.value === 'large',
-          [`${preCls}-affix-wrapper-rtl`]: direction.value === 'rtl',
-          [`${preCls}-affix-wrapper-readonly`]: readonly,
-          [`${preCls}-affix-wrapper-borderless`]: !bordered,
-          // className will go to addon wrapper
-          [`${className}`]: !hasAddon && className,
-        });
+      const hasPrefix = isValidValue(prefix);
+      if (hasPrefix || hasFeedback) {
+        const affixWrapperCls = classNames(
+          `${preCls}-affix-wrapper`,
+          getStatusClassNames(`${preCls}-affix-wrapper`, mergedStatus.value, hasFeedback),
+          {
+            [`${preCls}-affix-wrapper-focused`]: focused.value,
+            [`${preCls}-affix-wrapper-disabled`]: props.disabled,
+            [`${preCls}-affix-wrapper-sm`]: size.value === 'small',
+            [`${preCls}-affix-wrapper-lg`]: size.value === 'large',
+            [`${preCls}-affix-wrapper-rtl`]: direction.value === 'rtl',
+            [`${preCls}-affix-wrapper-readonly`]: readonly,
+            [`${preCls}-affix-wrapper-borderless`]: !bordered,
+            // className will go to addon wrapper
+            [`${className}`]: !hasAddon && className,
+          },
+        );
         element = (
           <div
             class={affixWrapperCls}
             style={style}
             onMouseup={() => inputNumberRef.value!.focus()}
           >
-            <span class={`${preCls}-prefix`}>{prefix}</span>
+            {hasPrefix && <span class={`${preCls}-prefix`}>{prefix}</span>}
             {element}
+            {hasFeedback && <span class={`${preCls}-suffix`}>{feedbackIcon}</span>}
           </div>
         );
       }
@@ -172,14 +194,15 @@ const InputNumber = defineComponent({
             [`${preCls}-group-wrapper-lg`]: mergeSize === 'large',
             [`${preCls}-group-wrapper-rtl`]: direction.value === 'rtl',
           },
+          getStatusClassNames(`${prefixCls}-group-wrapper`, mergedStatus.value, hasFeedback),
           className,
         );
         element = (
           <div class={mergedGroupClassName} style={style}>
             <div class={mergedWrapperClassName}>
-              {addonBeforeNode}
+              {addonBeforeNode && <NoFormStatus>{addonBeforeNode}</NoFormStatus>}
               {element}
-              {addonAfterNode}
+              {addonAfterNode && <NoFormStatus>{addonAfterNode}</NoFormStatus>}
             </div>
           </div>
         );

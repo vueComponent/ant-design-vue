@@ -34,8 +34,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/XOS8qZ0kU/InputNumber.svg
 | precision | 数值精度 | number | - |  |
 | prefix | 带有前缀图标的 input | slot | - | 3.0 |
 | size | 输入框大小 | string | 无 |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | step | 每次改变步数，可以为小数 | number\|string | 1 |  |
 | stringMode | 字符值模式，开启后支持高精度小数。同时 `change` 事件将返回 string 类型 | boolean | false | 3.0 |
+| upIcon | 自定义上箭头图标 | slot | `<UpOutlined />` | 3.3.0 |
+| downIcon | 自定义下箭头图标 | slot | `<DownOutlined />` | 3.3.0 |
 | value(v-model) | 当前值 | number |  |  |
 
 ### 事件

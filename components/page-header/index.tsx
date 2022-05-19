@@ -14,6 +14,7 @@ import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import useDestroyed from '../_util/hooks/useDestroyed';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import Space from '../space';
 
 export const pageHeaderProps = () => ({
   backIcon: PropTypes.any,
@@ -123,7 +124,11 @@ const PageHeader = defineComponent({
               {tags && <span class={`${headingPrefixCls}-tags`}>{tags}</span>}
             </div>
           )}
-          {extra && <span class={`${headingPrefixCls}-extra`}>{extra}</span>}
+          {extra && (
+            <span class={`${headingPrefixCls}-extra`}>
+              <Space>{extra}</Space>
+            </span>
+          )}
         </div>
       );
     };

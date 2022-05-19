@@ -93,7 +93,7 @@ export default defineComponent({
       return {
         width: `${validProgress(percent)}%`,
         height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : '',
+        borderRadius: strokeLinecap === 'square' ? 0 : undefined,
         ...(backgroundProps.value as any),
       };
     });
@@ -106,7 +106,7 @@ export default defineComponent({
       return {
         width: `${validProgress(successPercent.value)}%`,
         height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : '',
+        borderRadius: strokeLinecap === 'square' ? 0 : undefined,
         backgroundColor: success?.strokeColor,
       };
     });

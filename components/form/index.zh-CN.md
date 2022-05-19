@@ -58,13 +58,17 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 
 ### 方法
 
-| 方法名 | 说明 | 参数 |  |  |
-| --- | --- | --- | --- | --- |
-| clearValidate | 移除表单项的校验结果。传入待移除的表单项的 name 属性或者 name 组成的数组，如不传则移除整个表单的校验结果 | Function(name: array \| string) |  |  |
-| resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | — |  |  |
-| scrollToField | 滚动到对应字段位置 | (name: [NamePath](#NamePath), options: \[[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |  |
-| validate | 触发表单验证, 同 validateFields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |  |
-| validateFields | 触发表单验证 | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |  |
+| 方法名 | 说明 | 参数 | 版本 |
+| --- | --- | --- | --- |
+| clearValidate | 移除表单项的校验结果。传入待移除的表单项的 name 属性或者 name 组成的数组，如不传则移除整个表单的校验结果 | (nameList?: [NamePath](#NamePath)\[]) => void |  |
+| resetFields | 对整个表单进行重置，将所有字段值重置为初始值并移除校验结果 | (nameList?: [NamePath](#NamePath)\[]) => void |  |
+| scrollToField | 滚动到对应字段位置 | (name: [NamePath](#NamePath), options: \[[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
+| validate | 触发表单验证, 同 validateFields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
+| validateFields | 触发表单验证 | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
+
+#### NamePath
+
+`string | number | (string | number)[]`
 
 ### Form.Item
 

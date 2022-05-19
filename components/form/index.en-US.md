@@ -57,13 +57,17 @@ A form consists of one or more form fields whose type includes input, textarea, 
 
 ### Methods
 
-| Method | Description | Parameters |  |
+| Method | Description | Parameters | Version |
 | --- | --- | --- | --- |
-| clearValidate | clear validation message for certain fields. The parameter is name or an array of names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string \| array) |  |
-| resetFields | reset all the fields and remove validation result | — |  |
+| clearValidate | clear validation message for certain fields. The parameter is name or an array of names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | (nameList?: [NamePath](#NamePath)\[]) => void |  |
+| resetFields | reset all the fields and remove validation result | (nameList?: [NamePath](#NamePath)\[]) => void |  |
 | scrollToField | Scroll to field position | (name: [NamePath](#NamePath), options: \[[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
 | validate | Validate fields, it is same as validateFields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
 | validateFields | Validate fields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
+
+#### NamePath
+
+`string | number | (string | number)[]`
 
 ### Form.Item
 

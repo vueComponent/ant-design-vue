@@ -56,6 +56,12 @@ Almost anything can be represented in a tree structure. Examples include directo
 | rightClick | Callback function for when the user right clicks a treeNode | function({event, node}) |
 | select | Callback function for when the user clicks a treeNode | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) |
 
+### Tree Methods
+
+| Name | Description |
+| --- | --- |
+| scrollTo({ key: string \| number; align?: 'top' \| 'bottom' \| 'auto'; offset?: number }) | Scroll to key item in virtual scroll |
+
 ### TreeNode
 
 | Property | Description | Type | Default | Version |

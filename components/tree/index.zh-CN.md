@@ -57,6 +57,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Xh-oWqg9k/Tree.svg
 | rightClick | 响应右键点击 | function({event, node}) |
 | select | 点击树节点触发 | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) |
 
+### Tree 方法
+
+| 名称 | 说明 |
+| --- | --- |
+| scrollTo({ key: string \| number; align?: 'top' \| 'bottom' \| 'auto'; offset?: number }) | 虚拟滚动下，滚动到指定 key 条目 |
+
 ### TreeNode
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

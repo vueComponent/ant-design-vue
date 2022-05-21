@@ -1,3 +1,4 @@
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
 import type { RangePickerTimeProps } from '../date-picker/generatePicker';
 import generatePicker from '../date-picker/generatePicker';
@@ -13,6 +14,7 @@ import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
+import type { InputStatus } from '../_util/statusUtils';
 
 export interface TimePickerLocale {
   placeholder?: string;
@@ -31,21 +33,9 @@ export const timePickerProps = () => ({
   secondStep: Number,
   hideDisabledOptions: { type: Boolean, default: undefined },
   popupClassName: String,
+  status: String as PropType<InputStatus>,
 });
-
-export interface CommonTimePickerProps {
-  format?: string;
-  showNow?: boolean;
-  showHour?: boolean;
-  showMinute?: boolean;
-  showSecond?: boolean;
-  use12Hours?: boolean;
-  hourStep?: number;
-  minuteStep?: number;
-  secondStep?: number;
-  hideDisabledOptions?: boolean;
-  popupClassName?: string;
-}
+type CommonTimePickerProps = Partial<ExtractPropTypes<ReturnType<typeof timePickerProps>>>;
 export type TimeRangePickerProps<DateType> = Omit<
   RangePickerTimeProps<DateType>,
   'picker' | 'defaultPickerValue' | 'defaultValue' | 'value' | 'onChange' | 'onPanelChange' | 'onOk'

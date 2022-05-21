@@ -22,9 +22,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
 | clearIcon | 自定义的清除图标 | v-slot:clearIcon | - |  |
 | clearText | 清除按钮的提示文案 | string | clear |  |
 | disabled | 禁用全部操作 | boolean | false |  |
-| disabledHours | 禁止选择部分小时选项 | function() | - |  |
-| disabledMinutes | 禁止选择部分分钟选项 | function(selectedHour) | - |  |
-| disabledSeconds | 禁止选择部分秒选项 | function(selectedHour, selectedMinute) | - |  |
+| disabledTime | 不可选择的时间 | [DisabledTime](#DisabledTime) | - | 3.3.0 |
 | format | 展示的时间格式 | string | `HH:mm:ss` |  |
 | getPopupContainer | 定义浮层的容器，默认为 body 上新建 div | function(trigger) | - |  |
 | hideDisabledOptions | 隐藏禁止选择的选项 | boolean | false |  |
@@ -33,15 +31,27 @@ cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
 | minuteStep | 分钟选项间隔 | number | 1 |  |
 | open(v-model) | 面板是否打开 | boolean | false |  |
 | placeholder | 没有值的时候显示的内容 | string \| \[string, string] | `请选择时间` |  |
+| placement | 选择框弹出的位置 | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft |  |
 | popupClassName | 弹出层类名 | string | - |  |
 | popupStyle | 弹出层样式对象 | object | - |  |
 | renderExtraFooter | 选择框底部显示自定义的内容 | v-slot:renderExtraFooter | - |  |
 | secondStep | 秒选项间隔 | number | 1 |  |
 | showNow | 面板是否显示“此刻”按钮 | boolean | - |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | v-slot:suffixIcon | - |  |
 | use12Hours | 使用 12 小时制，为 true 时 `format` 默认为 `h:mm:ss a` | boolean | false |  |
 | value(v-model) | 当前时间 | [dayjs](https://day.js.org/) | - |  |
 | valueFormat | 可选，绑定值的格式，对 value、defaultValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - |  |
+
+#### DisabledTime
+
+```typescript
+type DisabledTime = (now: Dayjs) => {
+  disabledHours?: () => number[];
+  disabledMinutes?: (selectedHour: number) => number[];
+  disabledSeconds?: (selectedHour: number, selectedMinute: number) => number[];
+};
+```
 
 ### 事件
 
@@ -61,9 +71,23 @@ cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
 
 属性与 DatePicker 的 [RangePicker](/components/date-picker/#RangePicker) 相同。还包含以下属性：
 
-| 参数  | 说明                 | 类型    | 默认值 | 版本 |
-| ----- | -------------------- | ------- | ------ | ---- |
-| order | 始末时间是否自动排序 | boolean | true   |      |
+| 参数         | 说明                 | 类型                                    | 默认值 | 版本  |
+| ------------ | -------------------- | --------------------------------------- | ------ | ----- |
+| order        | 始末时间是否自动排序 | boolean                                 | true   |       |
+| disabledTime | 不可选择的时间       | [RangeDisabledTime](#RangeDisabledTime) | -      | 3.3.0 |
+
+#### RangeDisabledTime
+
+```typescript
+type RangeDisabledTime = (
+  now: Dayjs,
+  type = 'start' | 'end',
+) => {
+  disabledHours?: () => number[];
+  disabledMinutes?: (selectedHour: number) => number[];
+  disabledSeconds?: (selectedHour: number, selectedMinute: number) => number[];
+};
+```
 
 ## FAQ
 

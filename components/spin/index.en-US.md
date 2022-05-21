@@ -18,7 +18,7 @@ When part of the page is waiting for asynchronous data or during a rendering pro
 | delay | specifies a delay in milliseconds for loading state (prevent flush) | number (milliseconds) | - |  |
 | indicator | vue node of the spinning indicator | vNode \|slot | - |  |
 | size | size of Spin, options: `small`, `default` and `large` | string | `default` |  |
-| spinning | whether Spin is spinning | boolean | true |  |
+| spinning | whether Spin is visible | boolean | true |  |
 | tip | customize description content when Spin has children | string \| slot | - | slot 3.0 |
 | wrapperClassName | className of wrapper when Spin has children | string | - |  |
 

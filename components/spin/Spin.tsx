@@ -139,7 +139,13 @@ export default defineComponent({
     };
 
     const spinElement = (
-      <div {...divProps} style={style} class={spinClassName}>
+      <div
+        {...divProps}
+        style={style}
+        class={spinClassName}
+        aria-live="polite"
+        aria-busy={sSpinning}
+      >
         {this.renderIndicator(prefixCls)}
         {tip ? <div class={`${prefixCls}-text`}>{tip}</div> : null}
       </div>

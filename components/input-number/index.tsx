@@ -94,7 +94,7 @@ const InputNumber = defineComponent({
         prefix = slots.prefix?.(),
         valueModifiers = {},
         ...others
-      } = { ...(attrs as HTMLAttributes), ...props };
+      } = { ...attrs, ...props } as InputNumberProps & HTMLAttributes;
 
       const preCls = prefixCls.value;
 

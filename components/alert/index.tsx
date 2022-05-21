@@ -168,7 +168,7 @@ const Alert = defineComponent({
           <div
             role="alert"
             {...attrs}
-            style={[attrs.style, motionStyle.value]}
+            style={[attrs.style as CSSProperties, motionStyle.value]}
             v-show={!closing.value}
             class={[attrs.class, alertCls]}
             data-show={!closing.value}

@@ -593,7 +593,7 @@ function Picker<DateType>() {
                 [`${prefixCls}-focused`]: focused.value,
                 [`${prefixCls}-rtl`]: direction === 'rtl',
               })}
-              style={attrs.style}
+              style={attrs.style as CSSProperties}
               onMousedown={onMousedown}
               onMouseup={onInternalMouseup}
               onMouseenter={onMouseenter}

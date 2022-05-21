@@ -7,7 +7,7 @@ import Menu from '../menu';
 import Dropdown from '../dropdown';
 import Search from './search';
 import ListBody from './ListBody';
-import type { VNode, VNodeTypes, ExtractPropTypes, PropType } from 'vue';
+import type { VNode, VNodeTypes, ExtractPropTypes, PropType, CSSProperties } from 'vue';
 import { watchEffect, computed, defineComponent, ref } from 'vue';
 import type { RadioChangeEvent } from '../radio/interface';
 import type { TransferDirection, TransferItem } from './index';
@@ -388,7 +388,7 @@ export default defineComponent({
       );
 
       return (
-        <div class={listCls} style={attrs.style}>
+        <div class={listCls} style={attrs.style as CSSProperties}>
           <div class={`${prefixCls}-header`}>
             {showSelectAll ? (
               <>

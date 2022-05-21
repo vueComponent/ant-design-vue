@@ -1,5 +1,5 @@
 import type { Key } from '../../../_util/type';
-import type { ComputedRef, InjectionKey, PropType, Ref, UnwrapRef } from 'vue';
+import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue';
 import { defineComponent, inject, provide, toRef } from 'vue';
 import type {
   BuiltinPlacements,
@@ -21,7 +21,7 @@ export interface StoreMenuInfo {
 export interface MenuContextProps {
   isRootMenu: Ref<boolean>;
 
-  store: Ref<Record<string, UnwrapRef<StoreMenuInfo>>>;
+  store: Ref<Record<string, StoreMenuInfo>>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;

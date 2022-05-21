@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { ref, computed, watchEffect, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
@@ -127,7 +127,7 @@ const Carousel = defineComponent({
         [`${cls}`]: !!cls,
       });
       return (
-        <div class={className} style={style}>
+        <div class={className} style={style as CSSProperties}>
           <SlickCarousel
             ref={slickRef}
             {...props}

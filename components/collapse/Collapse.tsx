@@ -8,7 +8,7 @@ import { cloneElement } from '../_util/vnode';
 import type { CollapsibleType } from './commonProps';
 import { collapseProps } from './commonProps';
 import { getDataAndAriaProps } from '../_util/util';
-import type { ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import firstNotUndefined from '../_util/firstNotUndefined';
@@ -173,7 +173,7 @@ export default defineComponent({
         <div
           class={collapseClassName}
           {...getDataAndAriaProps(attrs)}
-          style={attrs.style}
+          style={attrs.style as CSSProperties}
           role={accordion ? 'tablist' : null}
         >
           {getItems()}

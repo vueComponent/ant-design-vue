@@ -1,5 +1,5 @@
 import type { Tab, EditableConfig } from '../interface';
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent, computed, ref } from 'vue';
 import type { FocusEventHandler } from '../../../_util/EventInterface';
 import KeyCode from '../../../_util/KeyCode';
@@ -88,7 +88,7 @@ export default defineComponent({
             [`${tabPrefix}-active`]: active,
             [`${tabPrefix}-disabled`]: disabled,
           })}
-          style={attrs.style}
+          style={attrs.style as CSSProperties}
           onClick={onInternalClick}
         >
           {/* Primary Tab Button */}

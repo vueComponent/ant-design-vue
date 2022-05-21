@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'vue';
 import { watchEffect, onMounted, defineComponent, inject, onBeforeUnmount, ref } from 'vue';
 import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox/Checkbox';
@@ -93,7 +94,7 @@ export default defineComponent({
       return (
         <label
           class={classString}
-          style={style}
+          style={style as CSSProperties}
           onMouseenter={onMouseenter as EventHandler}
           onMouseleave={onMouseleave as EventHandler}
         >

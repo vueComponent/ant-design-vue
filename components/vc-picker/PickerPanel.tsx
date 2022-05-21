@@ -33,6 +33,7 @@ import getExtraFooter from './utils/getExtraFooter';
 import getRanges from './utils/getRanges';
 import { getLowerBoundTime, setDateTime, setTime } from './utils/timeUtil';
 import type { VueNode } from '../_util/type';
+import type { CSSProperties } from 'vue';
 import { computed, createVNode, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
@@ -596,7 +597,7 @@ function PickerPanel<DateType>() {
           <div
             tabindex={tabindex}
             class={classNames(classString.value, attrs.class)}
-            style={attrs.style}
+            style={attrs.style as CSSProperties}
             onKeydown={onInternalKeydown}
             onBlur={onInternalBlur}
             onMousedown={onMousedown}

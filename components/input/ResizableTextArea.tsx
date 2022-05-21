@@ -125,6 +125,9 @@ const ResizableTextArea = defineComponent({
       if (!textareaProps.autofocus) {
         delete textareaProps.autofocus;
       }
+      if (textareaProps.rows === 0) {
+        delete textareaProps.rows;
+      }
       return (
         <ResizeObserver onResize={handleResize} disabled={!(autoSize || autosize)}>
           {withDirectives((<textarea {...textareaProps} ref={textAreaRef} />) as VNode, [

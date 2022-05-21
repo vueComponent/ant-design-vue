@@ -344,7 +344,7 @@ const Transfer = defineComponent({
       const rightTitle =
         (titles && titles[1]) ?? slots.rightTitle?.() ?? (locale.titles || ['', ''])[1];
       return (
-        <div class={cls} style={style} id={id}>
+        <div class={cls} style={style as CSSProperties} id={id}>
           <List
             key="leftList"
             prefixCls={`${prefixCls.value}-list`}

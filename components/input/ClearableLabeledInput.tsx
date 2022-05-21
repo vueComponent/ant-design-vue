@@ -2,7 +2,7 @@ import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import type { PropType, VNode } from 'vue';
+import type { CSSProperties, PropType, VNode } from 'vue';
 import { ref, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import type { Direction, SizeType } from '../config-provider';
@@ -121,7 +121,7 @@ export default defineComponent({
         <span
           ref={containerRef}
           class={affixWrapperCls}
-          style={attrs.style}
+          style={attrs.style as CSSProperties}
           onMouseup={onInputMouseUp}
           hidden={hidden}
         >
@@ -173,7 +173,7 @@ export default defineComponent({
       // Need another wrapper for changing display:table to display:inline-block
       // and put style prop in wrapper
       return (
-        <span class={mergedGroupClassName} style={attrs.style} hidden={hidden}>
+        <span class={mergedGroupClassName} style={attrs.style as CSSProperties} hidden={hidden}>
           <span class={mergedWrapperClassName}>
             {addonBeforeNode}
             {cloneElement(labeledElement, { style: null })}
@@ -209,7 +209,7 @@ export default defineComponent({
         },
       );
       return (
-        <span class={affixWrapperCls} style={attrs.style} hidden={hidden}>
+        <span class={affixWrapperCls} style={attrs.style as CSSProperties} hidden={hidden}>
           {cloneElement(element, {
             style: null,
             value,

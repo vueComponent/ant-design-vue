@@ -179,7 +179,7 @@ const Notification = defineComponent<NotificationProps>({
         <div
           class={className}
           style={
-            attrs.style || {
+            (attrs.style as CSSProperties) || {
               top: '65px',
               left: '50%',
             }

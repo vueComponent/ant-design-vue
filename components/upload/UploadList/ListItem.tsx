@@ -266,7 +266,7 @@ export default defineComponent({
         );
 
       return (
-        <div class={listContainerNameClass} style={style} ref={ref}>
+        <div class={listContainerNameClass} style={style as CSSProperties} ref={ref}>
           {itemRender
             ? itemRender({
                 originNode: item,

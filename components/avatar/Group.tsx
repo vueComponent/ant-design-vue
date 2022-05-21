@@ -71,14 +71,14 @@ const Group = defineComponent({
           </Popover>,
         );
         return (
-          <div {...attrs} class={cls} style={attrs.style}>
+          <div {...attrs} class={cls} style={attrs.style as CSSProperties}>
             {childrenShow}
           </div>
         );
       }
 
       return (
-        <div {...attrs} class={cls} style={attrs.style}>
+        <div {...attrs} class={cls} style={attrs.style as CSSProperties}>
           {childrenWithProps}
         </div>
       );

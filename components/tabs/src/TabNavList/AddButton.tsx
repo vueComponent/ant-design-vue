@@ -1,4 +1,4 @@
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
 import type { EditableConfig, TabsLocale } from '../interface';
 
@@ -32,7 +32,7 @@ export default defineComponent({
           ref={domRef}
           type="button"
           class={`${prefixCls}-nav-add`}
-          style={attrs.style}
+          style={attrs.style as CSSProperties}
           aria-label={locale?.addAriaLabel || 'Add tab'}
           onClick={event => {
             editable.onEdit('add', {

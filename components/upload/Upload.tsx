@@ -315,6 +315,7 @@ export default defineComponent({
         typeof showUploadList === 'boolean' ? ({} as ShowUploadListInterface) : showUploadList;
       return showUploadList ? (
         <UploadList
+          prefixCls={prefixCls.value}
           listType={props.listType}
           items={mergedFileList.value}
           previewFile={previewFile}

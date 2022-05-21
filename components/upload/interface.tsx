@@ -27,6 +27,7 @@ export interface UploadFile<T = any> {
   status?: UploadFileStatus;
   percent?: number;
   thumbUrl?: string;
+  crossOrigin?: HTMLImageElement['crossOrigin'];
   originFileObj?: FileType;
   response?: T;
   error?: any;
@@ -49,7 +50,7 @@ export interface ShowUploadListInterface {
 export interface UploadChangeParam<T = UploadFile> {
   // https://github.com/ant-design/ant-design/issues/14420
   file: T;
-  fileList: UploadFile[];
+  fileList: T[];
   event?: { percent: number };
 }
 

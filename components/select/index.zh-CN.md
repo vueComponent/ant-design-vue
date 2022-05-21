@@ -57,14 +57,16 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | optionLabelProp | 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 `value`。 | string | `children` \| `label`(设置 options 时) |  |
 | options | options 数据，如果设置则不需要手动构造 selectOption 节点 | array&lt;{value, label, [disabled, key, title]}> | \[] |  |
 | placeholder | 选择框默认文字 | string\|slot | - |  |
+| placement | 选择框弹出的位置 | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |  |
 | searchValue | 控制搜索文本 | string | - |  |
 | showArrow | 是否显示下拉小箭头 | boolean | true |  |
 | showSearch | 使单选模式可搜索 | boolean | false |  |
 | size | 选择框大小，可选 `large` `small` | string | default |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |  |
 | tagRender | 自定义 tag 内容 render，仅在 `mode` 为 `multiple` 或 `tags` 时生效 | slot \| (props) => any | - | 3.0 |
-| tokenSeparators | 在 tags 和 multiple 模式下自动分词的分隔符 | string\[] |  |  |
+| tokenSeparators | 自动分词的分隔符，仅在 `mode="tags"` 时生效 | string\[] | - |  |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|number\|number\[] | - |  |
 | virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 3.0 |
 
@@ -114,7 +116,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 
 ### 点击 `dropdownRender` 里的内容浮层关闭怎么办？
 
-看下 [dropdownRender 例子](/components/select-cn/#components-select-demo-custom-dropdown) 里的说明。
+自定义内容点击时会关闭浮层，如果不喜欢关闭，可以添加 `@mousedown.prevent` 进行阻止。 看下 [dropdownRender 例子](/components/select-cn/#components-select-demo-custom-dropdown) 里的说明。
 
 ### 为什么 `placeholder` 不显示 ？
 

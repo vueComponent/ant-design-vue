@@ -57,14 +57,16 @@ Select component to select value from options.
 | optionLabelProp | Which prop value of option will render as content of select. | string | `children` \| `label`(when use options) |  |
 | options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] |  |
 | placeholder | Placeholder of select | string\|slot | - |  |
+| placement | The position where the selection box pops up | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | removeIcon | The custom remove icon | VNode \| slot | - |  |
 | searchValue | The current input "search" text | string | - |  |
 | showArrow | Whether to show the drop-down arrow | boolean | true |  |
 | showSearch | Whether show search input in single mode. | boolean | false |  |
 | size | Size of Select input. `default` `large` `small` | string | default |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |
 | tagRender | Customize tag render, only applies when `mode` is set to `multiple` or `tags` | slot \| (props) => any | - |  |
-| tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |  |
+| tokenSeparators | Separator used to tokenize, only applies when `mode="tags"` | string\[] | - |  |
 | value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |  |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
 
@@ -114,7 +116,7 @@ Select component to select value from options.
 
 ### The dropdown is closed when click `dropdownRender` area?
 
-See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).
+Dropdown menu will be closed if click `dropdownRender` area, you can prevent it by wrapping `@mousedown.prevent` See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).
 
 ### Why is `placeholder` not displayed?
 

@@ -9,10 +9,13 @@ import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
-import { useInjectFormItemContext } from '../form/FormItemContext';
-import { getTransitionName } from '../_util/transition';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
+import type { SelectCommonPlacement } from '../_util/transition';
+import { getTransitionDirection, getTransitionName } from '../_util/transition';
 import type { SizeType } from '../config-provider';
 import { initDefaultProps } from '../_util/props-util';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 
 type RawValue = string | number;
 
@@ -48,6 +51,8 @@ export const selectProps = () => ({
   bordered: { type: Boolean, default: true },
   transitionName: String,
   choiceTransitionName: { type: String, default: '' },
+  placement: String as PropType<SelectCommonPlacement>,
+  status: String as PropType<InputStatus>,
   'onUpdate:value': Function as PropType<(val: SelectValue) => void>,
 });
 
@@ -81,6 +86,8 @@ const Select = defineComponent({
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref<BaseSelectRef>();
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const focus = () => {
       selectRef.value?.focus();
     };
@@ -111,16 +118,33 @@ const Select = defineComponent({
       props,
     );
     const rootPrefixCls = computed(() => getPrefixCls());
+    // ===================== Placement =====================
+    const placement = computed(() => {
+      if (props.placement !== undefined) {
+        return props.placement;
+      }
+      return direction.value === 'rtl'
+        ? ('bottomRight' as SelectCommonPlacement)
+        : ('bottomLeft' as SelectCommonPlacement);
+    });
     const transitionName = computed(() =>
-      getTransitionName(rootPrefixCls.value, 'slide-up', props.transitionName),
+      getTransitionName(
+        rootPrefixCls.value,
+        getTransitionDirection(placement.value),
+        props.transitionName,
+      ),
     );
     const mergedClassName = computed(() =>
-      classNames({
-        [`${prefixCls.value}-lg`]: size.value === 'large',
-        [`${prefixCls.value}-sm`]: size.value === 'small',
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-        [`${prefixCls.value}-borderless`]: !props.bordered,
-      }),
+      classNames(
+        {
+          [`${prefixCls.value}-lg`]: size.value === 'large',
+          [`${prefixCls.value}-sm`]: size.value === 'small',
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          [`${prefixCls.value}-borderless`]: !props.bordered,
+          [`${prefixCls.value}-in-form-item`]: formItemInputContext.isFormItemInput,
+        },
+        getStatusClassNames(prefixCls.value, mergedStatus.value, formItemInputContext.hasFeedback),
+      ),
     );
     const triggerChange: SelectProps['onChange'] = (...args) => {
       emit('update:value', args[0]);
@@ -137,6 +161,12 @@ const Select = defineComponent({
       scrollTo,
     });
     const isMultiple = computed(() => mode.value === 'multiple' || mode.value === 'tags');
+    const mergedShowArrow = computed(() =>
+      props.showArrow !== undefined
+        ? props.showArrow
+        : props.loading || !(isMultiple.value || mode.value === 'combobox'),
+    );
+
     return () => {
       const {
         notFoundContent,
@@ -148,8 +178,9 @@ const Select = defineComponent({
         dropdownMatchSelectWidth,
         id = formItemContext.id.value,
         placeholder = slots.placeholder?.(),
+        showArrow,
       } = props;
-
+      const { hasFeedback, feedbackIcon } = formItemInputContext;
       const { renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider;
 
       // ===================== Empty =====================
@@ -170,6 +201,9 @@ const Select = defineComponent({
           ...props,
           multiple: isMultiple.value,
           prefixCls: prefixCls.value,
+          hasFeedback,
+          feedbackIcon,
+          showArrow: mergedShowArrow.value,
         },
         slots,
       );
@@ -182,9 +216,10 @@ const Select = defineComponent({
         'clearIcon',
         'size',
         'bordered',
+        'status',
       ]);
 
-      const rcSelectRtlDropDownClassName = classNames(dropdownClassName, {
+      const rcSelectRtlDropdownClassName = classNames(dropdownClassName, {
         [`${prefixCls.value}-dropdown-${direction.value}`]: direction.value === 'rtl',
       });
       return (
@@ -207,7 +242,7 @@ const Select = defineComponent({
           notFoundContent={mergedNotFound}
           class={[mergedClassName.value, attrs.class]}
           getPopupContainer={getPopupContainer || getContextPopupContainer}
-          dropdownClassName={rcSelectRtlDropDownClassName}
+          dropdownClassName={rcSelectRtlDropdownClassName}
           onChange={triggerChange}
           onBlur={handleBlur}
           id={id}
@@ -218,6 +253,7 @@ const Select = defineComponent({
           tagRender={props.tagRender || slots.tagRender}
           optionLabelRender={slots.optionLabel}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
+          showArrow={hasFeedback || showArrow}
         ></RcSelect>
       );
     };

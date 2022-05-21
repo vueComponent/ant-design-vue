@@ -19,10 +19,8 @@ Add status to DatePicker with `status`, which could be `error` or `warning`.
 
 <template>
   <a-space direction="vertical" style="width: 100%">
-    <a-date-picker status="error" />
-    <a-date-picker status="warning" />
-    <a-range-picker status="error" />
-    <a-date-picker status="warning" />
+    <a-select status="error" style="width: 100%" />
+    <a-select status="warning" style="width: 100%" />
   </a-space>
 </template>
 <script lang="ts">
@@ -33,3 +31,8 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+#components-select-demo-status .ant-select {
+  margin: 0;
+}
+</style>

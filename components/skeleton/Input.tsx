@@ -8,6 +8,7 @@ import omit from '../_util/omit';
 
 export interface SkeletonInputProps extends Omit<SkeletonElementProps, 'size' | 'shape'> {
   size?: 'large' | 'small' | 'default';
+  block?: boolean;
 }
 
 const SkeletonInput = defineComponent({
@@ -15,12 +16,14 @@ const SkeletonInput = defineComponent({
   props: {
     ...omit(skeletonElementProps(), ['shape']),
     size: String as PropType<'large' | 'small' | 'default'>,
+    block: Boolean,
   },
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
     const cls = computed(() =>
       classNames(prefixCls.value, `${prefixCls.value}-element`, {
         [`${prefixCls.value}-active`]: props.active,
+        [`${prefixCls.value}-block`]: props.block,
       }),
     );
     return () => {

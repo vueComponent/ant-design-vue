@@ -2,7 +2,7 @@ import type { VNodeTypes } from 'vue';
 import padStart from 'lodash-es/padStart';
 
 export type valueType = number | string;
-export type countdownValueType = valueType | string;
+export type countdownValueType = valueType | Date;
 
 export type Formatter =
   | false

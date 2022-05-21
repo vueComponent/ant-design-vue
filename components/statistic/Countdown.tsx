@@ -14,7 +14,7 @@ function getTime(value?: countdownValueType) {
 export const countdownProps = () => {
   return {
     ...statisticProps(),
-    value: [Number, String],
+    value: [Number, String, Object] as PropType<countdownValueType>,
     format: String,
     onFinish: Function as PropType<() => void>,
     onChange: Function as PropType<(value?: countdownValueType) => void>,

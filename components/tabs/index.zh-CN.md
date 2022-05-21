@@ -31,7 +31,7 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 | hideAdd | 是否隐藏加号图标，在 `type="editable-card"` 时有效 | boolean | false |  |  |
 | size | 大小，提供 `large` `default` 和 `small` 三种大小 | string | `default` |  |  |
 | tabBarGutter | tabs 之间的间隙 | number | 无 |  |  |
-| tabBarStyle | tab bar 的样式对象 | object | - |  |  |
+| tabBarStyle | tab bar 的样式对象 | CSSProperties | - |  |  |
 | tabPosition | 页签位置，可选值有 `top` `right` `bottom` `left` | string | `top` |  |  |
 | type | 页签的基本样式，可选 `line`、`card` `editable-card` 类型 | string | `line` |  |  |
 
@@ -50,7 +50,7 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | change | 切换面板的回调 | Function(activeKey) {} |
-| edit | 新增和删除页签的回调，在 `type="editable-card"` 时有效 | (targetKey, action): void |
+| edit | 新增和删除页签的回调，在 `type="editable-card"` 时有效 | (action === 'add' ? event : targetKey, action): void |
 | tabClick | tab 被点击的回调 | Function |
 | tabScroll | 滚动 TabBar 是触发 | { direction: 'left' \| 'right' \| 'top' \| 'bottom' } |
 

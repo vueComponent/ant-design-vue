@@ -1,4 +1,4 @@
-import { provide, nextTick, defineComponent, ref, watch } from 'vue';
+import { nextTick, defineComponent, ref, watch, computed } from 'vue';
 import type { PropType, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
@@ -7,6 +7,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { tuple } from '../_util/type';
 import type { RadioChangeEvent, RadioGroupButtonStyle, RadioGroupOptionType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import { useProvideRadioGroupContext } from './context';
 
 const RadioGroupSizeTypes = tuple('large', 'default', 'small');
 
@@ -74,14 +75,16 @@ export default defineComponent({
       });
     };
 
-    provide('radioGroupContext', {
-      onRadioChange,
-      stateValue,
-      props,
+    useProvideRadioGroupContext({
+      onChange: onRadioChange,
+      value: stateValue,
+      disabled: computed(() => props.disabled),
+      name: computed(() => props.name),
+      optionType: computed(() => props.optionType),
     });
 
     return () => {
-      const { options, optionType, buttonStyle, id = formItemContext.id.value } = props;
+      const { options, buttonStyle, id = formItemContext.id.value } = props;
 
       const groupPrefixCls = `${prefixCls.value}-group`;
 
@@ -92,14 +95,12 @@ export default defineComponent({
 
       let children = null;
       if (options && options.length > 0) {
-        const optionsPrefixCls =
-          optionType === 'button' ? `${prefixCls.value}-button` : prefixCls.value;
         children = options.map(option => {
           if (typeof option === 'string' || typeof option === 'number') {
             return (
               <Radio
                 key={option}
-                prefixCls={optionsPrefixCls}
+                prefixCls={prefixCls.value}
                 disabled={props.disabled}
                 value={option}
                 checked={stateValue.value === option}
@@ -112,7 +113,7 @@ export default defineComponent({
           return (
             <Radio
               key={`radio-group-value-options-${value}`}
-              prefixCls={optionsPrefixCls}
+              prefixCls={prefixCls.value}
               disabled={disabled || props.disabled}
               value={value}
               checked={stateValue.value === value}

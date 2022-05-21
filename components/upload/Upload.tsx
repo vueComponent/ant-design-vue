@@ -383,7 +383,7 @@ export default defineComponent({
               onDrop={onFileDrop}
               onDragover={onFileDrop}
               onDragleave={onFileDrop}
-              style={attrs.style}
+              style={attrs.style as CSSProperties}
             >
               <VcUpload
                 {...rcUploadProps}

@@ -1,6 +1,6 @@
 import type { Key } from '../_util/type';
 import { Teleport, computed, defineComponent, onMounted, watch, onUnmounted } from 'vue';
-import type { HTMLAttributes } from 'vue';
+import type { HTMLAttributes, CSSProperties } from 'vue';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import classNames from '../_util/classNames';
 
@@ -113,7 +113,7 @@ export default defineComponent<NoticeProps>({
           class={classNames(componentClass, className, {
             [`${componentClass}-closable`]: closable,
           })}
-          style={style}
+          style={style as CSSProperties}
           onMouseenter={clearCloseTimer}
           onMouseleave={startCloseTimer}
           onClick={onClick}

@@ -2,7 +2,7 @@ import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import type { PropType, VNode } from 'vue';
+import type { CSSProperties, PropType, VNode } from 'vue';
 import { defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import type { Direction, SizeType } from '../config-provider';
@@ -97,7 +97,7 @@ export default defineComponent({
         },
       );
       return (
-        <span className={affixWrapperCls} style={attrs.style} hidden={hidden}>
+        <span class={affixWrapperCls} style={attrs.style as CSSProperties} hidden={hidden}>
           {cloneElement(element, {
             style: null,
             value,

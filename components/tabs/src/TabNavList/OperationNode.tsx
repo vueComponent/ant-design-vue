@@ -224,7 +224,10 @@ export default defineComponent({
       );
 
       return (
-        <div class={classNames(`${prefixCls}-nav-operations`, attrs.class)} style={attrs.style}>
+        <div
+          class={classNames(`${prefixCls}-nav-operations`, attrs.class)}
+          style={attrs.style as CSSProperties}
+        >
           {moreNode}
           <AddButton prefixCls={prefixCls} locale={locale} editable={editable} />
         </div>

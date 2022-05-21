@@ -464,7 +464,7 @@ export default defineComponent({
         <div
           role="tablist"
           class={classNames(`${pre}-nav`, className)}
-          style={style}
+          style={style as CSSProperties}
           onKeydown={() => {
             // No need animation when use keyboard
             doLockAnimation();

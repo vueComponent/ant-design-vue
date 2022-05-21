@@ -194,7 +194,7 @@ export default defineComponent({
             )
           : null;
       const divStyle = [
-        attrs.style,
+        attrs.style as CSSProperties,
         {
           flex: `0 0 ${siderWidth}`,
           maxWidth: siderWidth, // Fix width transition bug in IE11

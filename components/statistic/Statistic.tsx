@@ -3,7 +3,7 @@ import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
-import type { countdownValueType } from './utils';
+import type { valueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -13,7 +13,7 @@ export const statisticProps = () => ({
   groupSeparator: String,
   format: String,
   value: {
-    type: [String, Number, Object] as PropType<countdownValueType>,
+    type: [String, Number, Object] as PropType<valueType>,
   },
   valueStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   valueRender: PropTypes.any,

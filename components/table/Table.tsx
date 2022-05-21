@@ -34,7 +34,7 @@ import scrollTo from '../_util/scrollTo';
 import defaultLocale from '../locale/en_US';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { nextTick, reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
@@ -636,7 +636,7 @@ const InteralTable = defineComponent<
       );
       const tableProps = omit(props, ['columns']);
       return (
-        <div class={wrapperClassNames} style={attrs.style}>
+        <div class={wrapperClassNames} style={attrs.style as CSSProperties}>
           <Spin spinning={false} {...spinProps}>
             {topPaginationNode}
             <RcTable

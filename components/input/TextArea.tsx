@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'vue';
 import {
   computed,
   defineComponent,
@@ -290,7 +291,7 @@ export default defineComponent({
               `${prefixCls.value}-textarea-show-count`,
               customClass,
             )}
-            style={style}
+            style={style as CSSProperties}
             data-count={typeof dataCount !== 'object' ? dataCount : undefined}
           >
             {textareaNode}

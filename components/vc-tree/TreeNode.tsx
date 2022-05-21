@@ -1,6 +1,7 @@
 import { useInjectKeysState, useInjectTreeContext } from './contextTypes';
 import Indent from './Indent';
 import { convertNodePropsToEventData, getTreeNodeProps } from './utils/treeUtil';
+import type { CSSProperties } from 'vue';
 import {
   computed,
   defineComponent,
@@ -556,7 +557,7 @@ export default defineComponent({
             'drag-over-gap-bottom': !disabled && dragOverGapBottom.value,
             'filter-node': filterTreeNode && filterTreeNode(eventData.value),
           })}
-          style={attrs.style}
+          style={attrs.style as CSSProperties}
           // Draggable config
           draggable={draggableWithoutDisabled}
           aria-grabbed={dragging}

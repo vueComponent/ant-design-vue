@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
+import type { CSSProperties } from 'vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -52,7 +53,7 @@ export default defineComponent({
           title={showTitle ? String(page) : null}
           tabindex="0"
           class={cls}
-          style={style}
+          style={style as CSSProperties}
         >
           {itemRender({
             page,

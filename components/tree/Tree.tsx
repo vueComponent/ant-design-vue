@@ -5,7 +5,7 @@ import VcTree from '../vc-tree';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import type { DataNode, EventDataNode, FieldNames, Key } from '../vc-tree/interface';
+import type { DataNode, EventDataNode, FieldNames, Key, ScrollTo } from '../vc-tree/interface';
 import type { TreeNodeProps } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -168,11 +168,15 @@ export default defineComponent({
     );
     const { prefixCls, direction, virtual } = useConfigInject('tree', props);
     const treeRef = ref();
+    const scrollTo: ScrollTo = scroll => {
+      treeRef.value?.scrollTo(scroll);
+    };
     expose({
       treeRef,
       onNodeExpand: (...args) => {
         treeRef.value?.onNodeExpand(...args);
       },
+      scrollTo,
       selectedKeys: computed(() => treeRef.value?.selectedKeys),
       checkedKeys: computed(() => treeRef.value?.checkedKeys),
       halfCheckedKeys: computed(() => treeRef.value?.halfCheckedKeys),

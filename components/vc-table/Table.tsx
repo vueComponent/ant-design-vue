@@ -837,7 +837,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
               flattenColumns.value[columnCount.value - 1].fixed === 'right',
             [attrs.class as string]: attrs.class,
           })}
-          style={attrs.style}
+          style={attrs.style as CSSProperties}
           id={id}
           ref={fullTableRef}
         >

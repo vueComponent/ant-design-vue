@@ -152,7 +152,7 @@ export default defineComponent({
             statusValue === 'motion' || statusValue === 'stable' || !visible.value ? null : 0,
           pointerEvents: statusValue === 'stable' ? null : 'none',
         },
-        attrs.style,
+        attrs.style as CSSProperties,
       ];
 
       let childNode: any = flattenChildren(slots.default?.({ visible: props.visible }));

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
@@ -66,7 +66,7 @@ export default defineComponent({
       link = renderBreadcrumbNode(link, prefixCls.value);
       if (children) {
         return (
-          <li class={cls} style={style}>
+          <li class={cls} style={style as CSSProperties}>
             {link}
             {separator && <span class={`${prefixCls.value}-separator`}>{separator}</span>}
           </li>

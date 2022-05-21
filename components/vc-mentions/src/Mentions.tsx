@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import {
   toRef,
   watchEffect,
@@ -278,7 +278,7 @@ export default defineComponent({
         onPressenter: onPressEnter,
       };
       return (
-        <div class={classNames(prefixCls, className)} style={style}>
+        <div class={classNames(prefixCls, className)} style={style as CSSProperties}>
           {withDirectives(<textarea ref={textarea} {...textareaProps} />, [[antInputDirective]])}
           {measuring && (
             <div ref={measure} class={`${prefixCls}-measure`}>

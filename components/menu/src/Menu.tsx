@@ -355,7 +355,7 @@ export default defineComponent({
         newOpenKeys.push(key);
       } else if (mergedMode.value !== 'inline') {
         // We need find all related popup to close
-        const subPathKeys = getChildrenKeys(childrenEventKeys);
+        const subPathKeys = getChildrenKeys(unref(childrenEventKeys));
         newOpenKeys = uniq(newOpenKeys.filter(k => !subPathKeys.includes(k)));
       }
 

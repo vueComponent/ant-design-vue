@@ -18,6 +18,7 @@ const editableProps = () => ({
   onChange: Function as PropType<(val: string) => void>,
   originContent: String,
   direction: String as PropType<Direction>,
+  component: String,
 });
 export type EditableProps = Partial<ExtractPropTypes<ReturnType<typeof editableProps>>>;
 const Editable = defineComponent({
@@ -112,6 +113,7 @@ const Editable = defineComponent({
       [`${props.prefixCls}`]: true,
       [`${props.prefixCls}-edit-content`]: true,
       [`${props.prefixCls}-rtl`]: props.direction === 'rtl',
+      [props.component ? `${props.prefixCls}-${props.component}` : '']: true,
     }));
     return () => (
       <div class={textAreaClassName.value}>

@@ -81,7 +81,7 @@ Basic text writing, including headings, body text, lists, and more.
 ```json
   {
     text: string,
-    onCopy: function,
+    onCopy: function(event),
     tooltip: false,
   }
 ```

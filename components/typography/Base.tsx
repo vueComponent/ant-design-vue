@@ -38,7 +38,7 @@ const isTextOverflowSupport = isStyleSupport('textOverflow');
 
 export interface CopyConfig {
   text?: string;
-  onCopy?: () => void;
+  onCopy?: (event?: MouseEvent) => void;
   tooltip?: boolean;
 }
 
@@ -248,7 +248,7 @@ const Base = defineComponent({
       state.copied = true;
       nextTick(() => {
         if (copyConfig.onCopy) {
-          copyConfig.onCopy();
+          copyConfig.onCopy(e);
         }
 
         state.copyId = setTimeout(() => {
@@ -457,6 +457,7 @@ const Base = defineComponent({
           onCancel={onEditCancel}
           onEnd={onEnd}
           direction={direction.value}
+          component={props.component}
           v-slots={{ enterIcon: slots.editableEnterIcon }}
         />
       );
@@ -517,7 +518,6 @@ const Base = defineComponent({
               'keyboard',
               'onUpdate:content',
             ]);
-
             const cssEllipsis = canUseCSSEllipsis.value;
             const cssTextOverflow = rows === 1 && cssEllipsis;
             const cssLineClamp = rows && rows > 1 && cssEllipsis;

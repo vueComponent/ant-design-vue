@@ -82,7 +82,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
 ```json
   {
     text: string,
-    onCopy: function,
+    onCopy: function(event),
     tooltip: false,
   }
 ```

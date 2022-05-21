@@ -525,11 +525,12 @@
 // Tooltip background color
 @tooltip-bg: rgba(0, 0, 0, 0.75);
 // Tooltip arrow width
-@tooltip-arrow-width: 5px;
+@tooltip-arrow-width: 8px * sqrt(2);
 // Tooltip distance with trigger
 @tooltip-distance: @tooltip-arrow-width - 1px + 4px;
 // Tooltip arrow color
 @tooltip-arrow-color: @tooltip-bg;
+@tooltip-border-radius: @border-radius-base;
 
 // Popover
 // ---
@@ -541,7 +542,7 @@
 @popover-min-width: 177px;
 @popover-min-height: 32px;
 // Popover arrow width
-@popover-arrow-width: 6px;
+@popover-arrow-width: @tooltip-arrow-width;
 // Popover arrow color
 @popover-arrow-color: @popover-bg;
 // Popover outer arrow width
@@ -677,6 +678,7 @@
 
 // Tag
 // --
+@tag-border-radius: @border-radius-base;
 @tag-default-bg: @background-color-light;
 @tag-default-color: @text-color;
 @tag-font-size: @font-size-sm;
@@ -873,7 +875,7 @@
 @breadcrumb-font-size: @font-size-base;
 @breadcrumb-icon-font-size: @font-size-base;
 @breadcrumb-link-color: @text-color-secondary;
-@breadcrumb-link-color-hover: @primary-5;
+@breadcrumb-link-color-hover: @text-color;
 @breadcrumb-separator-color: @text-color-secondary;
 @breadcrumb-separator-margin: 0 @padding-xs;
 
@@ -1071,3 +1073,11 @@
 @image-preview-operation-size: 18px;
 @image-preview-operation-color: @text-color-dark;
 @image-preview-operation-disabled-color: fade(@image-preview-operation-color, 25%);
+
+// Segmented
+// ---
+@segmented-bg: fade(@black, 4%);
+@segmented-hover-bg: fade(@black, 6%);
+@segmented-selected-bg: @white;
+@segmented-label-color: fade(@black, 65%);
+@segmented-label-hover-color: #262626;

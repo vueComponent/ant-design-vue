@@ -3,7 +3,7 @@ import { defineComponent, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue
 import omit from '../_util/omit';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Statistic, { statisticProps } from './Statistic';
-import type { countdownValueType, FormatConfig } from './utils';
+import type { countdownValueType, FormatConfig, valueType } from './utils';
 import { formatCountdown as formatCD } from './utils';
 
 const REFRESH_INTERVAL = 1000 / 30;
@@ -88,11 +88,13 @@ export default defineComponent({
       stopTimer();
     });
     return () => {
+      const value = props.value as valueType;
       return (
         <Statistic
           ref={statistic}
           {...{
             ...omit(props, ['onFinish', 'onChange']),
+            value,
             valueRender: valueRenderHtml,
             formatter: formatCountdown,
           }}

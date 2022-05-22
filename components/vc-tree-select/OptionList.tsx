@@ -181,7 +181,8 @@ export default defineComponent({
         open,
         notFoundContent = slots.notFoundContent?.(),
       } = baseProps;
-      const { listHeight, listItemHeight, virtual } = context;
+      const { listHeight, listItemHeight, virtual, dropdownMatchSelectWidth, treeExpandAction } =
+        context;
       const {
         checkable,
         treeDefaultExpandAll,
@@ -228,7 +229,7 @@ export default defineComponent({
             treeData={memoTreeData.value as TreeDataNode[]}
             height={listHeight}
             itemHeight={listItemHeight}
-            virtual={virtual}
+            virtual={virtual !== false && dropdownMatchSelectWidth !== false}
             multiple={multiple}
             icon={treeIcon}
             showIcon={showTreeIcon}
@@ -251,6 +252,7 @@ export default defineComponent({
             onExpand={onInternalExpand}
             onLoad={onTreeLoad}
             filterTreeNode={filterTreeNode}
+            expandAction={treeExpandAction}
             v-slots={{ ...slots, checkable: legacyContext.customSlots.treeCheckable }}
           />
         </div>

@@ -20,10 +20,14 @@ import type { SwitcherIconProps } from '../tree/utils/iconUtil';
 import renderSwitcherIcon from '../tree/utils/iconUtil';
 import { warning } from '../vc-util/warning';
 import { flattenChildren } from '../_util/props-util';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { BaseSelectRef } from '../vc-select';
 import type { BaseOptionType, DefaultOptionType } from '../vc-tree-select/TreeSelect';
 import type { TreeProps } from '../tree';
+import type { SelectCommonPlacement } from '../_util/transition';
+import { getTransitionDirection } from '../_util/transition';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -62,6 +66,8 @@ export function treeSelectProps<
     bordered: { type: Boolean, default: undefined },
     treeLine: { type: [Boolean, Object] as PropType<TreeProps['showLine']>, default: undefined },
     replaceFields: { type: Object as PropType<FieldNames> },
+    placement: String as PropType<SelectCommonPlacement>,
+    status: String as PropType<InputStatus>,
     'onUpdate:value': { type: Function as PropType<(value: any) => void> },
     'onUpdate:treeExpandedKeys': { type: Function as PropType<(keys: Key[]) => void> },
     'onUpdate:searchValue': { type: Function as PropType<(value: string) => void> },
@@ -107,6 +113,8 @@ const TreeSelect = defineComponent({
     });
 
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const {
       prefixCls,
       renderEmpty,
@@ -118,8 +126,21 @@ const TreeSelect = defineComponent({
       getPrefixCls,
     } = useConfigInject('select', props);
     const rootPrefixCls = computed(() => getPrefixCls());
+    // ===================== Placement =====================
+    const placement = computed(() => {
+      if (props.placement !== undefined) {
+        return props.placement;
+      }
+      return direction.value === 'rtl'
+        ? ('bottomRight' as SelectCommonPlacement)
+        : ('bottomLeft' as SelectCommonPlacement);
+    });
     const transitionName = computed(() =>
-      getTransitionName(rootPrefixCls.value, 'slide-up', props.transitionName),
+      getTransitionName(
+        rootPrefixCls.value,
+        getTransitionDirection(placement.value),
+        props.transitionName,
+      ),
     );
     const choiceTransitionName = computed(() =>
       getTransitionName(rootPrefixCls.value, '', props.choiceTransitionName),
@@ -134,6 +155,9 @@ const TreeSelect = defineComponent({
     );
 
     const isMultiple = computed(() => !!(props.treeCheckable || props.multiple));
+    const mergedShowArrow = computed(() =>
+      props.showArrow !== undefined ? props.showArrow : props.loading || !isMultiple.value,
+    );
 
     const treeSelectRef = ref();
     expose({
@@ -173,15 +197,20 @@ const TreeSelect = defineComponent({
         multiple,
         treeIcon,
         treeLine,
+        showArrow,
         switcherIcon = slots.switcherIcon?.(),
         fieldNames = props.replaceFields,
         id = formItemContext.id.value,
       } = props;
+      const { isFormItemInput, hasFeedback, feedbackIcon } = formItemInputContext;
       // ===================== Icons =====================
       const { suffixIcon, removeIcon, clearIcon } = getIcons(
         {
           ...props,
           multiple: isMultiple.value,
+          showArrow: mergedShowArrow.value,
+          hasFeedback,
+          feedbackIcon,
           prefixCls: prefixCls.value,
         },
         slots,
@@ -202,6 +231,7 @@ const TreeSelect = defineComponent({
         'clearIcon',
         'switcherIcon',
         'bordered',
+        'status',
         'onUpdate:value',
         'onUpdate:treeExpandedKeys',
         'onUpdate:searchValue',
@@ -214,7 +244,9 @@ const TreeSelect = defineComponent({
           [`${prefixCls.value}-sm`]: size.value === 'small',
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-borderless`]: !bordered,
+          [`${prefixCls.value}-in-form-item`]: isFormItemInput,
         },
+        getStatusClassNames(prefixCls.value, mergedStatus.value, hasFeedback),
         attrs.class,
       );
       const otherProps: any = {};
@@ -263,6 +295,8 @@ const TreeSelect = defineComponent({
             treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
           }}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
+          placement={placement.value}
+          showArrow={hasFeedback || showArrow}
         />
       );
     };

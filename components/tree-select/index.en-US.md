@@ -34,12 +34,14 @@ Tree selection control.
 | multiple | Support multiple or not, will be `true` when enable `treeCheckable`. | boolean | false |  |  |
 | notFoundContent | Specify content to show when no result matches | slot | `Not Found` |  |  |
 | placeholder | Placeholder of the select input | string\|slot | - |  |  |
+| placement | The position where the selection box pops up | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | replaceFields | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', label:'title', value: 'value' } |  | 1.6.1 (3.0.0 deprecated) |
 | searchPlaceholder | Placeholder of the search input | string\|slot | - |  |  |
 | searchValue(v-model) | work with `search` event to make search value controlled. | string | - |  |  |
 | showCheckedStrategy | The way show selected item in box. **Default:** just show child nodes. **`TreeSelect.SHOW_ALL`:** show all checked treeNodes (include parent treeNode). **`TreeSelect.SHOW_PARENT`:** show checked treeNodes (just show parent treeNode). | enum { TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |  |  |
 | showSearch | Whether to display a search input in the dropdown menu(valid only in the single mode) | boolean | false |  |  |
 | size | To set the size of the select input, options: `large` `small` | string | 'default' |  |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |  |
 | tagRender | Customize tag render when `multiple` | (props) => slot | - | 3.0 |  |
 | title | custom title | slot |  | 3.0.0 |  |
@@ -51,6 +53,7 @@ Tree selection control.
 | treeDefaultExpandedKeys | Default expanded treeNodes | string\[] \| number\[] | - |  |  |
 | treeExpandedKeys(v-model) | Set expanded keys | string\[] \| number\[] | - |  |  |
 | treeIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |  |  |
+| treeLoadedKeys | (Controlled) Set loaded tree nodes, work with `loadData` only | string[] | [] | 3.3.0 |
 | treeLine | Show the line. Ref [Tree - showLine](/components/tree/#components-tree-demo-line) | boolean \| object | false | 3.0 |  |
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |  |  |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |  |  |

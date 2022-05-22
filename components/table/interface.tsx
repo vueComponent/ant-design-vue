@@ -73,7 +73,7 @@ export type ColumnTitle<RecordType> = VueNode | ((props: ColumnTitleProps<Record
 
 export type FilterValue = (Key | boolean)[];
 export type FilterKey = Key[] | null;
-export type FilterSearchType = boolean | ((input: string, record: {}) => boolean);
+export type FilterSearchType = boolean | ((input: string, record: ColumnFilterItem) => boolean);
 export interface FilterConfirmProps {
   closeDropdown: boolean;
 }
@@ -89,7 +89,8 @@ export interface FilterDropdownProps<RecordType> {
   column: ColumnType<RecordType>;
 }
 
-export interface ColumnType<RecordType = DefaultRecordType> extends RcColumnType<RecordType> {
+export interface ColumnType<RecordType = DefaultRecordType>
+  extends Omit<RcColumnType<RecordType>, 'title'> {
   title?: ColumnTitle<RecordType>;
   // Sorter
   sorter?:
@@ -114,11 +115,11 @@ export interface ColumnType<RecordType = DefaultRecordType> extends RcColumnType
   defaultFilteredValue?: FilterValue | null;
   filterIcon?: VueNode | ((opt: { filtered: boolean; column: ColumnType }) => VueNode);
   filterMode?: 'menu' | 'tree';
-  filterSearch?: boolean;
+  filterSearch?: FilterSearchType;
   onFilter?: (value: string | number | boolean, record: RecordType) => boolean;
   filterDropdownVisible?: boolean;
   onFilterDropdownVisibleChange?: (visible: boolean) => void;
-
+  filterResetToDefaultFilteredValue?: boolean;
   // Responsive
   responsive?: Breakpoint[];
 }

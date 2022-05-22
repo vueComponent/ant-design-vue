@@ -157,6 +157,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | customRender | Renderer of the table cell. The return value should be a VNode | Function({text, record, index}) {} | - |  |
 | dataIndex | Display field of the data record, support nest path by string array | string \| string\[] | - |  |
 | defaultFilteredValue | Default filtered values | string\[] | - | 1.5.0 |
+| filterResetToDefaultFilteredValue | click the reset button, whether to restore the default filter | boolean | false | 3.3.0 |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
 | ellipsis | ellipsize cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is true. | boolean | false | 1.5.0 |
 | ellipsis | The ellipsis cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is `true` or `{ showTitle?: boolean }` | boolean \| {showTitle?: boolean } | false | 3.0 |
@@ -168,7 +169,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | filterMode | To specify the filter interface | 'menu' \| 'tree' | 'menu' | 3.0 |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |  |
 | filters | Filter menu config | object\[] | - |  |
-| filterSearch | Whether to be searchable for filter menu | Boolean | false | 3.0 |
+| filterSearch | Whether to be searchable for filter menu | boolean \| function(input, filter):boolean | false | boolean: 3.0 function: 3.3.0 |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |  |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |  |
 | maxWidth | Drag the maximum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | - | 3.0 |

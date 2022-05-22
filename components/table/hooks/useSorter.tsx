@@ -20,6 +20,7 @@ import type { Ref } from 'vue';
 import { computed } from 'vue';
 import useState from '../../_util/hooks/useState';
 import type { DefaultRecordType } from '../../vc-table/interface';
+import KeyCode from '../../_util/KeyCode';
 
 const ASCEND = 'ascend';
 const DESCEND = 'descend';
@@ -108,8 +109,8 @@ function collectSortStates<RecordType>(
 function injectSorter<RecordType>(
   prefixCls: string,
   columns: ColumnsType<RecordType>,
-  sorterSates: SortState<RecordType>[],
-  triggerSorter: (sorterSates: SortState<RecordType>) => void,
+  sorterStates: SortState<RecordType>[],
+  triggerSorter: (sorterStates: SortState<RecordType>) => void,
   defaultSortDirections: SortOrder[],
   tableLocale?: TableLocale,
   tableShowSorterTooltip?: boolean | TooltipProps,
@@ -126,7 +127,7 @@ function injectSorter<RecordType>(
           ? tableShowSorterTooltip
           : newColumn.showSorterTooltip;
       const columnKey = getColumnKey(newColumn, columnPos);
-      const sorterState = sorterSates.find(({ key }) => key === columnKey);
+      const sorterState = sorterStates.find(({ key }) => key === columnKey);
       const sorterOrder = sorterState ? sorterState.sortOrder : null;
       const nextSortOrder = nextSortDirection(sortDirections, sorterOrder);
       const upNode = sortDirections.includes(ASCEND) && (
@@ -182,6 +183,7 @@ function injectSorter<RecordType>(
         customHeaderCell: col => {
           const cell = (column.customHeaderCell && column.customHeaderCell(col)) || {};
           const originOnClick = cell.onClick;
+          const originOKeyDown = cell.onKeydown;
           cell.onClick = (event: MouseEvent) => {
             triggerSorter({
               column,
@@ -194,9 +196,29 @@ function injectSorter<RecordType>(
               originOnClick(event);
             }
           };
+          cell.onKeydown = (event: KeyboardEvent) => {
+            if (event.keyCode === KeyCode.ENTER) {
+              triggerSorter({
+                column,
+                key: columnKey,
+                sortOrder: nextSortOrder,
+                multiplePriority: getMultiplePriority(column),
+              });
+              originOKeyDown?.(event);
+            }
+          };
+
+          // Inform the screen-reader so it can tell the visually impaired user which column is sorted
+          if (sorterOrder) {
+            if (sorterOrder === 'ascend') {
+              cell['aria-sort'] = 'ascending';
+            } else {
+              cell['aria-sort'] = 'descending';
+            }
+          }
 
           cell.class = classNames(cell.class, `${prefixCls}-column-has-sorters`);
-
+          cell.tabindex = 0;
           return cell;
         },
       };
@@ -208,7 +230,7 @@ function injectSorter<RecordType>(
         children: injectSorter(
           prefixCls,
           newColumn.children,
-          sorterSates,
+          sorterStates,
           triggerSorter,
           defaultSortDirections,
           tableLocale,

@@ -162,6 +162,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | customRender | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引 | Function({text, record, index, column}) {} | - |  |
 | dataIndex | 列数据在数据项中对应的路径，支持通过数组查询嵌套路径 | string \| string\[] | - |  |
 | defaultFilteredValue | 默认筛选值 | string\[] | - | 1.5.0 |
+| filterResetToDefaultFilteredValue | 点击重置按钮的时候，是否恢复默认筛选值 | boolean | false | 3.3.0 |
 | defaultSortOrder | 默认排序顺序 | `ascend` \| `descend` | - |  |
 | ellipsis | 超过宽度将自动省略，暂不支持和排序筛选一起使用。<br />设置为 `true` 或 `{ showTitle?: boolean }` 时，表格布局将变成 `tableLayout="fixed"`。 | boolean \| { showTitle?: boolean } | false | 3.0 |
 | filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode | - |  |
@@ -172,7 +173,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | filterMode | 指定筛选菜单的用户界面 | 'menu' \| 'tree' | 'menu' | 3.0 |
 | filterMultiple | 是否多选 | boolean | true |  |
 | filters | 表头的筛选菜单项 | object\[] | - |  |
-| filterSearch | 筛选菜单项是否可搜索 | Boolean | false | 3.0 |
+| filterSearch | 筛选菜单项是否可搜索 | boolean \| function(input, filter):boolean | false | boolean:3.0 function:3.3.0 |
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |  |
 | key | Vue 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |  |
 | maxWidth | 拖动列最大宽度，会受到表格自动调整分配宽度影响 | number | - | 3.0 |

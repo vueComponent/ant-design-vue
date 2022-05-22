@@ -1,7 +1,7 @@
 import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
-import type { TableLocale } from '../../interface';
+import type { FilterSearchType, TableLocale } from '../../interface';
 import Input from '../../../input';
 
 export default defineComponent({
@@ -10,7 +10,7 @@ export default defineComponent({
   props: {
     value: String,
     onChange: Function as PropType<(e: InputEvent) => void>,
-    filterSearch: Boolean,
+    filterSearch: [Boolean, Function] as PropType<FilterSearchType>,
     tablePrefixCls: String,
     locale: { type: Object as PropType<TableLocale>, default: undefined as TableLocale },
   },

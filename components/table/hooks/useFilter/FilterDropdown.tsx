@@ -108,11 +108,12 @@ export interface FilterDropdownProps<RecordType> {
   filterState?: FilterState<RecordType>;
   filterMultiple: boolean;
   filterMode?: 'menu' | 'tree';
-  filterSearch?: boolean;
+  filterSearch?: FilterSearchType;
   columnKey: Key;
   triggerFilter: (filterState: FilterState<RecordType>) => void;
   locale: TableLocale;
   getPopupContainer?: GetPopupContainer;
+  filterResetToDefaultFilteredValue?: boolean;
 }
 
 export default defineComponent<FilterDropdownProps<any>>({
@@ -266,7 +267,11 @@ export default defineComponent<FilterDropdownProps<any>>({
         triggerVisible(false);
       }
       searchValue.value = '';
-      filteredKeys.value = [];
+      if (props.column.filterResetToDefaultFilteredValue) {
+        filteredKeys.value = (props.column.defaultFilteredValue || []).map(key => String(key));
+      } else {
+        filteredKeys.value = [];
+      }
     };
 
     const doFilter = ({ closeDropdown } = { closeDropdown: true }) => {
@@ -432,7 +437,17 @@ export default defineComponent<FilterDropdownProps<any>>({
         </>
       );
     };
+    const resetDisabled = computed(() => {
+      const selectedKeys = filteredKeys.value;
+      if (props.column.filterResetToDefaultFilteredValue) {
+        return isEqual(
+          (props.column.defaultFilteredValue || []).map(key => String(key)),
+          selectedKeys,
+        );
+      }
 
+      return selectedKeys.length === 0;
+    });
     return () => {
       const { tablePrefixCls, prefixCls, column, dropdownPrefixCls, locale, getPopupContainer } =
         props;
@@ -453,7 +468,6 @@ export default defineComponent<FilterDropdownProps<any>>({
       } else if (filterDropdownRef.value) {
         dropdownContent = filterDropdownRef.value;
       } else {
-        const selectedKeys = filteredKeys.value as any;
         dropdownContent = (
           <>
             {getFilterComponent()}
@@ -461,7 +475,7 @@ export default defineComponent<FilterDropdownProps<any>>({
               <Button
                 type="link"
                 size="small"
-                disabled={selectedKeys.length === 0}
+                disabled={resetDisabled.value}
                 onClick={() => onReset()}
               >
                 {locale.filterReset}

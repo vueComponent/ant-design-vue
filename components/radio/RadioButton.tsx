@@ -11,7 +11,7 @@ export default defineComponent({
     useProvideRadioOptionTypeContext('button');
     return () => {
       return (
-        <Radio {...props} prefixCls={prefixCls.value} type="radio">
+        <Radio {...props} prefixCls={prefixCls.value}>
           {slots.default?.()}
         </Radio>
       );

@@ -50,7 +50,6 @@ export const listItemProps = () => {
 };
 
 export type ListItemProps = Partial<ExtractPropTypes<ReturnType<typeof listItemProps>>>;
-
 export default defineComponent({
   name: 'ListItem',
   inheritAttrs: false,
@@ -110,7 +109,7 @@ export default defineComponent({
               src={file.thumbUrl || file.url}
               alt={file.name}
               class={`${prefixCls}-list-item-image`}
-              crossOrigin={file.crossOrigin}
+              crossorigin={file.crossOrigin}
             />
           ) : (
             iconNode

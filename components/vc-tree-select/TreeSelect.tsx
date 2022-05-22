@@ -30,7 +30,7 @@ import { conductCheck } from '../vc-tree/utils/conductUtil';
 import { warning } from '../vc-util/warning';
 import { toReactive } from '../_util/toReactive';
 import useMaxLevel from '../vc-tree/useMaxLevel';
-import type { ExpandAction } from '../tree/DirectoryTree';
+import type { ExpandAction } from '../vc-tree/props';
 
 export type OnInternalSelect = (value: RawValueType, info: { selected: boolean }) => void;
 

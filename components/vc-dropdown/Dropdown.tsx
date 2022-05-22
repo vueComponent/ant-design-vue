@@ -5,6 +5,7 @@ import Trigger from '../vc-trigger';
 import placements from './placements';
 import { cloneElement } from '../_util/vnode';
 import classNames from '../_util/classNames';
+import { skipFlattenKey } from '../_util/props-util';
 
 export default defineComponent({
   props: {
@@ -72,7 +73,7 @@ export default defineComponent({
         getPopupContainer: () => triggerRef.value.getPopupDomNode(),
       };
       return (
-        <Fragment skipFlatten>
+        <Fragment key={skipFlattenKey}>
           {props.arrow && <div class={`${props.prefixCls}-arrow`} />}
           {cloneElement(overlayElement, extraOverlayProps, false)}
         </Fragment>

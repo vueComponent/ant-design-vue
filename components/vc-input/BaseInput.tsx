@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'vue';
 import { defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
 import type { MouseEventHandler } from '../_util/EventInterface';
@@ -101,7 +102,7 @@ export default defineComponent({
         element = (
           <span
             class={affixWrapperCls}
-            style={attrs.style}
+            style={attrs.style as CSSProperties}
             hidden={!hasAddon({ addonAfter, addonBefore }) && hidden}
             onMousedown={onInputMouseDown}
             ref={containerRef}
@@ -136,7 +137,7 @@ export default defineComponent({
         // Need another wrapper for changing display:table to display:inline-block
         // and put style prop in wrapper
         return (
-          <span class={mergedGroupClassName} style={attrs.style} hidden={hidden}>
+          <span class={mergedGroupClassName} style={attrs.style as CSSProperties} hidden={hidden}>
             <span class={mergedWrapperClassName}>
               {addonBefore && <span class={addonCls}>{addonBefore}</span>}
               {cloneElement(element, { style: null, hidden: null })}

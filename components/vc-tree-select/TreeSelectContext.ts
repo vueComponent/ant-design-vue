@@ -1,6 +1,6 @@
 import type { InjectionKey } from 'vue';
 import { provide, inject } from 'vue';
-import type { ExpandAction } from '../tree/DirectoryTree';
+import type { ExpandAction } from '../vc-tree/props';
 import type { DefaultOptionType, InternalFieldName, OnInternalSelect } from './TreeSelect';
 
 export interface TreeSelectContextProps {

@@ -65,6 +65,7 @@ export default defineComponent({
     disabled: false,
     checkStrictly: false,
     draggable: false,
+    expandAction: false,
     defaultExpandParent: true,
     autoExpandParent: false,
     defaultExpandAll: false,
@@ -617,16 +618,34 @@ export default defineComponent({
 
       dragNode = null;
     };
+    const triggerExpandActionExpand: NodeMouseEventHandler = (e, treeNode) => {
+      const { expanded, key } = treeNode;
+
+      const node = flattenNodes.value.filter(nodeItem => nodeItem.key === key)[0];
+      const eventNode = convertNodePropsToEventData({
+        ...getTreeNodeProps(key, treeNodeRequiredProps.value),
+        data: node.data,
+      });
+      setExpandedKeys(expanded ? arrDel(expandedKeys.value, key) : arrAdd(expandedKeys.value, key));
+
+      onNodeExpand(e, eventNode);
+    };
 
     const onNodeClick: NodeMouseEventHandler = (e, treeNode) => {
-      const { onClick } = props;
+      const { onClick, expandAction } = props;
+      if (expandAction === 'click') {
+        triggerExpandActionExpand(e, treeNode);
+      }
       if (onClick) {
         onClick(e, treeNode);
       }
     };
 
     const onNodeDoubleClick: NodeMouseEventHandler = (e, treeNode) => {
-      const { onDblclick } = props;
+      const { onDblclick, expandAction } = props;
+      if (expandAction === 'doubleclick' || expandAction === 'dblclick') {
+        triggerExpandActionExpand(e, treeNode);
+      }
       if (onDblclick) {
         onDblclick(e, treeNode);
       }
@@ -1107,6 +1126,8 @@ export default defineComponent({
         onContextmenu,
         onScroll,
         direction,
+        rootClassName,
+        rootStyle,
       } = props;
 
       const { class: className, style } = attrs;
@@ -1179,11 +1200,12 @@ export default defineComponent({
         >
           <div
             role="tree"
-            class={classNames(prefixCls, className, {
+            class={classNames(prefixCls, className, rootClassName, {
               [`${prefixCls}-show-line`]: showLine,
               [`${prefixCls}-focused`]: focused.value,
               [`${prefixCls}-active-focused`]: activeKey.value !== null,
             })}
+            style={rootStyle}
           >
             <NodeList
               ref={listRef}

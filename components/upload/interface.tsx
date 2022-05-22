@@ -4,7 +4,7 @@ import type {
 } from '../vc-upload/interface';
 import type { ProgressProps } from '../progress';
 import type { VueNode } from '../_util/type';
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
+import type { ExtractPropTypes, PropType, CSSProperties, ImgHTMLAttributes } from 'vue';
 
 export interface FileType extends OriRcFile {
   readonly lastModifiedDate: Date;
@@ -27,7 +27,7 @@ export interface UploadFile<T = any> {
   status?: UploadFileStatus;
   percent?: number;
   thumbUrl?: string;
-  crossOrigin?: HTMLImageElement['crossOrigin'];
+  crossOrigin?: ImgHTMLAttributes['crossorigin'];
   originFileObj?: FileType;
   response?: T;
   error?: any;

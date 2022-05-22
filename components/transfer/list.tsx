@@ -15,7 +15,7 @@ import type { TransferDirection, TransferItem } from './index';
 const defaultRender = () => null;
 
 function isRenderResultPlainObject(result: VNode) {
-  return (
+  return !!(
     result &&
     !isValidElement(result) &&
     Object.prototype.toString.call(result) === '[object Object]'

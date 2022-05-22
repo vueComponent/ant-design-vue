@@ -27,6 +27,9 @@ function parsePagination(pagination) {
 
   const defaultPagination = {
     pageSize: 10,
+    simple: true,
+    showSizeChanger: false,
+    showLessItems: false,
   };
 
   if (typeof pagination === 'object') {
@@ -114,7 +117,9 @@ const ListBody = defineComponent({
       if (mergedPagination.value) {
         paginationNode = (
           <Pagination
-            simple
+            simple={mergedPagination.value.simple}
+            showSizeChanger={mergedPagination.value.showSizeChanger}
+            showLessItems={mergedPagination.value.showLessItems}
             size="small"
             disabled={globalDisabled}
             class={`${prefixCls}-pagination`}

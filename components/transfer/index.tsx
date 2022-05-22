@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { watchEffect, defineComponent, ref, watch, toRaw } from 'vue';
+import { computed, watchEffect, defineComponent, ref, watch, toRaw } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -12,8 +12,10 @@ import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';
@@ -90,6 +92,7 @@ export const transferProps = () => ({
   children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
   oneWay: { type: Boolean, default: undefined },
   pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
+  status: String as PropType<InputStatus>,
   onChange: Function as PropType<
     (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
   >,
@@ -125,6 +128,8 @@ const Transfer = defineComponent({
     const targetSelectedKeys = ref([]);
 
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     watch(
       () => props.selectedKeys,
       () => {
@@ -334,10 +339,16 @@ const Transfer = defineComponent({
       const leftActive = targetSelectedKeys.value.length > 0;
       const rightActive = sourceSelectedKeys.value.length > 0;
 
-      const cls = classNames(prefixCls.value, className, {
-        [`${prefixCls.value}-disabled`]: disabled,
-        [`${prefixCls.value}-customize-list`]: !!children,
-      });
+      const cls = classNames(
+        prefixCls.value,
+        className,
+        {
+          [`${prefixCls.value}-disabled`]: disabled,
+          [`${prefixCls.value}-customize-list`]: !!children,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        getStatusClassNames(prefixCls.value, mergedStatus.value, formItemInputContext.hasFeedback),
+      );
       const titles = props.titles;
       const leftTitle =
         (titles && titles[0]) ?? slots.leftTitle?.() ?? (locale.titles || ['', ''])[0];

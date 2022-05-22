@@ -29,11 +29,12 @@ One or more elements can be selected from either column, one click on the proper
 | oneWay | Display as single direction style | boolean | false | 3.0.0 |
 | operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '&lt;'] |  |
 | operationStyle | A custom CSS style used for rendering the operations column | CSSProperties | - | 3.0.0 |
-| pagination | Use pagination. Not work in render props | boolean \| { pageSize: number } | false | 3.0.0 |
+| pagination | Use pagination. Not work in render props | boolean \| { pageSize: number, simple: boolean, showSizeChanger?: boolean, showLessItems?: boolean } | false | 3.0.0 |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) \| slot |  |  |
 | selectedKeys(v-model) | A set of keys of selected items. | string\[] | \[] |  |
 | showSearch | If included, a search box is shown on each column. | boolean | false |  |
 | showSelectAll | Show select all checkbox on the header | boolean | true |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | targetKeys(v-model) | A set of keys of elements that are listed on the right column. | string\[] | \[] |  |
 | titles | A set of titles that are sorted from left to right. | string\[] | - |  |
 

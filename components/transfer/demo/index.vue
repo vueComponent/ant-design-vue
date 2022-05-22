@@ -8,6 +8,7 @@
     <pagination />
     <table-transfer />
     <tree-transfer />
+    <statusVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -19,6 +20,7 @@ import CustomItem from './custom-item.vue';
 import TableTransfer from './table-transfer.vue';
 import TreeTransfer from './tree-transfer.vue';
 import Pagination from './pagination.vue';
+import statusVue from './status.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -27,6 +29,7 @@ export default defineComponent({
   CN,
   US,
   components: {
+    statusVue,
     Basic,
     Oneway,
     Search,

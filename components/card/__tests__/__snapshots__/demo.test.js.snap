@@ -100,8 +100,8 @@ exports[`renders ./components/card/demo/grid-card.vue correctly 1`] = `
 
 exports[`renders ./components/card/demo/in-column.vue correctly 1`] = `
 <div style="background-color: rgb(236, 236, 236); padding: 20px;">
-  <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
-    <div class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
+  <div role="row" class="ant-row" style="margin-left: -8px; margin-right: -8px;">
+    <div role="cell" class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
       <div class="ant-card">
         <div class="ant-card-head">
           <div class="ant-card-head-wrapper">
@@ -117,7 +117,7 @@ exports[`renders ./components/card/demo/in-column.vue correctly 1`] = `
         <!---->
       </div>
     </div>
-    <div class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
+    <div role="cell" class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
       <div class="ant-card">
         <div class="ant-card-head">
           <div class="ant-card-head-wrapper">
@@ -133,7 +133,7 @@ exports[`renders ./components/card/demo/in-column.vue correctly 1`] = `
         <!---->
       </div>
     </div>
-    <div class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
+    <div role="cell" class="ant-col ant-col-8" style="padding-left: 8px; padding-right: 8px;">
       <div class="ant-card">
         <div class="ant-card-head">
           <div class="ant-card-head-wrapper">
@@ -206,43 +206,43 @@ exports[`renders ./components/card/demo/loading.vue correctly 1`] = `
   <!---->
   <div class="ant-card-body">
     <div class="ant-card-loading-content">
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-22" style="padding-left: 4px; padding-right: 4px;">
+      <div role="row" class="ant-row" style="margin-left: -4px; margin-right: -4px;">
+        <div role="cell" class="ant-col ant-col-22" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
       </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-8" style="padding-left: 4px; padding-right: 4px;">
+      <div role="row" class="ant-row" style="margin-left: -4px; margin-right: -4px;">
+        <div role="cell" class="ant-col ant-col-8" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
-        <div class="ant-col ant-col-15" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-      </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-6" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col ant-col-18" style="padding-left: 4px; padding-right: 4px;">
+        <div role="cell" class="ant-col ant-col-15" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
       </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-13" style="padding-left: 4px; padding-right: 4px;">
+      <div role="row" class="ant-row" style="margin-left: -4px; margin-right: -4px;">
+        <div role="cell" class="ant-col ant-col-6" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
-        <div class="ant-col ant-col-9" style="padding-left: 4px; padding-right: 4px;">
+        <div role="cell" class="ant-col ant-col-18" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
       </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-4" style="padding-left: 4px; padding-right: 4px;">
+      <div role="row" class="ant-row" style="margin-left: -4px; margin-right: -4px;">
+        <div role="cell" class="ant-col ant-col-13" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
-        <div class="ant-col ant-col-3" style="padding-left: 4px; padding-right: 4px;">
+        <div role="cell" class="ant-col ant-col-9" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
-        <div class="ant-col ant-col-16" style="padding-left: 4px; padding-right: 4px;">
+      </div>
+      <div role="row" class="ant-row" style="margin-left: -4px; margin-right: -4px;">
+        <div role="cell" class="ant-col ant-col-4" style="padding-left: 4px; padding-right: 4px;">
+          <div class="ant-card-loading-block"></div>
+        </div>
+        <div role="cell" class="ant-col ant-col-3" style="padding-left: 4px; padding-right: 4px;">
+          <div class="ant-card-loading-block"></div>
+        </div>
+        <div role="cell" class="ant-col ant-col-16" style="padding-left: 4px; padding-right: 4px;">
           <div class="ant-card-loading-block"></div>
         </div>
       </div>

@@ -14,50 +14,47 @@ exports[`renders ./components/mentions/demo/basic.vue correctly 1`] = `
 
 exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label for="form_item_coders" class="ant-form-item-required" title="Top coders">Top coders
+  <div role="row" class="ant-row ant-form-item">
+    <div role="cell" class="ant-col ant-col-6 ant-form-item-label"><label for="form_item_coders" class="ant-form-item-required" title="Top coders">Top coders
         <!---->
       </label></div>
-    <div class="ant-col ant-col-18 ant-form-item-control">
+    <div role="cell" class="ant-col ant-col-18 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
           <div class="ant-mentions"><textarea rows="1" id="form_item_coders"></textarea>
             <!---->
           </div>
         </div>
-        <!---->
       </div>
       <!---->
       <!---->
     </div>
   </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label for="form_item_bio" class="ant-form-item-required" title="Bio">Bio
+  <div role="row" class="ant-row ant-form-item">
+    <div role="cell" class="ant-col ant-col-6 ant-form-item-label"><label for="form_item_bio" class="ant-form-item-required" title="Bio">Bio
         <!---->
       </label></div>
-    <div class="ant-col ant-col-18 ant-form-item-control">
+    <div role="cell" class="ant-col ant-col-18 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
           <div class="ant-mentions"><textarea rows="3" placeholder="You can use @ to ref user here" id="form_item_bio"></textarea>
             <!---->
           </div>
         </div>
-        <!---->
       </div>
       <!---->
       <!---->
     </div>
   </div>
-  <div class="ant-row ant-form-item">
+  <div role="row" class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-12 ant-col-offset-5 ant-form-item-control">
+    <div role="cell" class="ant-col ant-col-12 ant-col-offset-5 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
             <!----><span>Submit</span>
           </button><button style="margin-left: 8px;" class="ant-btn" type="button">
             <!----><span>Reset</span>
           </button></div>
-        <!---->
       </div>
       <!---->
       <!---->
@@ -88,5 +85,22 @@ exports[`renders ./components/mentions/demo/readonly.vue correctly 1`] = `
   <div class="ant-mentions"><textarea rows="1" placeholder="this is readOnly a-mentions" readonly=""></textarea>
     <!---->
   </div>
+</div>
+`;
+
+exports[`renders ./components/mentions/demo/status.vue correctly 1`] = `
+<div class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div class="ant-mentions ant-mentions-focused ant-mentions-status-error"><textarea autofocus="" rows="1" status="error"></textarea>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div class="ant-mentions ant-mentions-focused ant-mentions-status-warning"><textarea autofocus="" rows="1" status="warning"></textarea>
+      <!---->
+    </div>
+  </div>
+  <!---->
 </div>
 `;

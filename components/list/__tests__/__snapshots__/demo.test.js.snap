@@ -67,9 +67,9 @@ exports[`renders ./components/list/demo/grid.vue correctly 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
+      <div role="row" class="ant-row" style="margin-left: -8px; margin-right: -8px;">
         <div style="width: 25%; max-width: 25%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -89,7 +89,7 @@ exports[`renders ./components/list/demo/grid.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 25%; max-width: 25%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -109,7 +109,7 @@ exports[`renders ./components/list/demo/grid.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 25%; max-width: 25%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -129,7 +129,7 @@ exports[`renders ./components/list/demo/grid.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 25%; max-width: 25%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -163,9 +163,9 @@ exports[`renders ./components/list/demo/resposive.vue correctly 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
+      <div role="row" class="ant-row" style="margin-left: -8px; margin-right: -8px;">
         <div style="width: 100%; max-width: 100%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -185,7 +185,7 @@ exports[`renders ./components/list/demo/resposive.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 100%; max-width: 100%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -205,7 +205,7 @@ exports[`renders ./components/list/demo/resposive.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 100%; max-width: 100%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -225,7 +225,7 @@ exports[`renders ./components/list/demo/resposive.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 100%; max-width: 100%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -245,7 +245,7 @@ exports[`renders ./components/list/demo/resposive.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 100%; max-width: 100%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">
@@ -265,7 +265,7 @@ exports[`renders ./components/list/demo/resposive.vue correctly 1`] = `
           </div>
         </div>
         <div style="width: 100%; max-width: 100%;">
-          <div class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
+          <div role="cell" class="ant-col" style="padding-left: 8px; padding-right: 8px; flex: 1 1 auto;">
             <div class="ant-list-item">
               <div class="ant-card ant-card-bordered">
                 <div class="ant-card-head">

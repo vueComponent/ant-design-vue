@@ -80,6 +80,7 @@ export default defineComponent({
     const handleBlur = (e: FocusEvent) => {
       removePasswordTimeout();
       emit('blur', e);
+      formItemContext.onFieldBlur();
     };
 
     const handleFocus = (e: FocusEvent) => {

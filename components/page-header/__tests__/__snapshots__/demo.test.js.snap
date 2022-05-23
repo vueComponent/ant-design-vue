@@ -429,7 +429,6 @@ exports[`renders ./components/page-header/demo/actions.vue correctly 1`] = `
       
       <div
         class="ant-row"
-        role="row"
         type="flex"
       >
         
@@ -933,7 +932,6 @@ exports[`renders ./components/page-header/demo/content.vue correctly 1`] = `
       
       <div
         class="ant-row content"
-        role="row"
       >
         
         <div

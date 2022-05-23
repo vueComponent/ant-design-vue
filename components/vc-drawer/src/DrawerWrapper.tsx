@@ -36,8 +36,7 @@ const DrawerWrapper = defineComponent({
     };
 
     return () => {
-      const { afterVisibleChange, getContainer, wrapperClassName, forceRender, ...otherProps } =
-        props;
+      const { getContainer, wrapperClassName, forceRender, ...otherProps } = props;
 
       let portal = null;
       if (!getContainer) {

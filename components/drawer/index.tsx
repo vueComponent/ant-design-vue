@@ -112,6 +112,29 @@ const Drawer = defineComponent({
     const sPush = ref(false);
     const destroyClose = ref(false);
     const vcDrawer = ref(null);
+    const load = ref(false);
+    const visible = ref(false);
+
+    watch(
+      () => props.visible,
+      propsVisible => {
+        if (propsVisible) {
+          load.value = true;
+        } else {
+          visible.value = false;
+        }
+      },
+      { immediate: true },
+    );
+    watch(
+      [() => props.visible, load],
+      ([propsVisible]) => {
+        if (propsVisible && load.value) {
+          visible.value = true;
+        }
+      },
+      { immediate: true },
+    );
     const parentDrawerOpts = inject('parentDrawerOpts', null);
     const { prefixCls, getPopupContainer, direction } = useConfigInject('drawer', props);
     const getContainer = computed(() =>
@@ -152,8 +175,7 @@ const Drawer = defineComponent({
     });
 
     onMounted(() => {
-      const { visible } = props;
-      if (visible && parentDrawerOpts) {
+      if (props.visible && parentDrawerOpts) {
         parentDrawerOpts.setPush();
       }
     });
@@ -165,10 +187,10 @@ const Drawer = defineComponent({
     });
 
     watch(
-      () => props.visible,
-      visible => {
+      visible,
+      () => {
         if (parentDrawerOpts) {
-          if (visible) {
+          if (visible.value) {
             parentDrawerOpts.setPush();
           } else {
             parentDrawerOpts.setPull();
@@ -187,19 +209,18 @@ const Drawer = defineComponent({
       emit('close', e);
     };
 
-    const afterVisibleChange = (visible: boolean) => {
-      props.afterVisibleChange?.(visible);
-      emit('afterVisibleChange', visible);
-    };
-    const destroyOnClose = computed(() => props.destroyOnClose && !props.visible);
-    const onDestroyTransitionEnd = () => {
-      const isDestroyOnClose = destroyOnClose.value;
-      if (!isDestroyOnClose) {
-        return;
+    const afterVisibleChange = (open: boolean) => {
+      if (!open) {
+        if (destroyClose.value === false) {
+          // set true only once
+          destroyClose.value = true;
+        }
+        if (props.destroyOnClose) {
+          load.value = false;
+        }
       }
-      if (!props.visible) {
-        destroyClose.value = true;
-      }
+      props.afterVisibleChange?.(open);
+      emit('afterVisibleChange', open);
     };
 
     const pushTransform = computed(() => {
@@ -224,8 +245,8 @@ const Drawer = defineComponent({
 
     const offsetStyle = computed(() => {
       // https://github.com/ant-design/ant-design/issues/24287
-      const { visible, mask, placement, size = 'default', width, height } = props;
-      if (!visible && !mask) {
+      const { mask, placement, size = 'default', width, height } = props;
+      if (!visible.value && !mask) {
         return {};
       }
       const val: CSSProperties = {};
@@ -290,28 +311,14 @@ const Drawer = defineComponent({
     };
 
     const renderBody = (prefixCls: string) => {
-      if (destroyClose.value && !props.visible) {
+      if (destroyClose.value && !props.forceRender && !load.value) {
         return null;
       }
-      destroyClose.value = false;
 
       const { bodyStyle, drawerStyle } = props;
 
-      const containerStyle: CSSProperties = {};
-
-      const isDestroyOnClose = destroyOnClose.value;
-      if (isDestroyOnClose) {
-        // Increase the opacity transition, delete children after closing.
-        containerStyle.opacity = 0;
-        containerStyle.transition = 'opacity .3s';
-      }
-
       return (
-        <div
-          class={`${prefixCls}-wrapper-body`}
-          style={{ ...containerStyle, ...drawerStyle }}
-          onTransitionend={onDestroyTransitionEnd}
-        >
+        <div class={`${prefixCls}-wrapper-body`} style={drawerStyle}>
           {renderHeader(prefixCls)}
           <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
             {slots.default?.()}
@@ -339,11 +346,11 @@ const Drawer = defineComponent({
       const {
         width,
         height,
-        visible,
         placement,
         mask,
         wrapClassName,
         class: className,
+        forceRender,
         ...rest
       } = props;
 
@@ -365,13 +372,15 @@ const Drawer = defineComponent({
           'onAfterVisibleChange',
           'onClose',
           'onUpdate:visible',
+          'visible',
         ]),
         ...val,
+        forceRender,
         onClose: close,
         afterVisibleChange,
         handler: false,
         prefixCls: prefixCls.value,
-        open: visible,
+        open: visible.value,
         showMask: mask,
         placement,
         class: classnames({

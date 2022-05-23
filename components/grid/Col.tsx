@@ -141,7 +141,7 @@ export default defineComponent({
     });
     return () => {
       return (
-        <div role="cell" class={classes.value} style={mergedStyle.value}>
+        <div class={classes.value} style={mergedStyle.value}>
           {slots.default?.()}
         </div>
       );

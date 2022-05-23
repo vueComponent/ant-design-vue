@@ -127,7 +127,7 @@ const ARow = defineComponent({
 
     return () => {
       return (
-        <div role="row" class={classes.value} style={rowStyle.value}>
+        <div class={classes.value} style={rowStyle.value}>
           {slots.default?.()}
         </div>
       );

@@ -801,11 +801,11 @@ exports[`renders ./components/calendar/demo/customize-header.vue correctly 1`] =
   <div class="ant-picker-calendar ant-picker-calendar-mini">
     <div style="padding: 10px;">
       <div style="margin-bottom: 10px;">Custom header</div>
-      <div role="row" class="ant-row ant-row-space-between" type="flex">
-        <div role="cell" class="ant-col">
+      <div class="ant-row ant-row-space-between" type="flex">
+        <div class="ant-col">
           <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
         </div>
-        <div role="cell" class="ant-col">
+        <div class="ant-col">
           <div class="ant-select ant-select-sm my-year-select ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
@@ -816,7 +816,7 @@ exports[`renders ./components/calendar/demo/customize-header.vue correctly 1`] =
             <!---->
           </div>
         </div>
-        <div role="cell" class="ant-col">
+        <div class="ant-col">
           <div class="ant-select ant-select-sm ant-select-single ant-select-show-arrow">
             <!---->
             <!---->

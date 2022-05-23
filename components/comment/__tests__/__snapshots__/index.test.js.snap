@@ -42,9 +42,9 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
         </div>
         <div class="ant-comment-content-detail">
           <div>
-            <div role="row" class="ant-row ant-form-item">
+            <div class="ant-row ant-form-item">
               <!---->
-              <div role="cell" class="ant-col ant-form-item-control">
+              <div class="ant-col ant-form-item-control">
                 <div class="ant-form-item-control-input">
                   <div class="ant-form-item-control-input-content"><textarea rows="4" class="ant-input"></textarea></div>
                 </div>
@@ -52,9 +52,9 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
                 <!---->
               </div>
             </div>
-            <div role="row" class="ant-row ant-form-item">
+            <div class="ant-row ant-form-item">
               <!---->
-              <div role="cell" class="ant-col ant-form-item-control">
+              <div class="ant-col ant-form-item-control">
                 <div class="ant-form-item-control-input">
                   <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="submit" ant-click-animating-without-extra-node="false">
                       <!----><span>Add Comment</span>

@@ -1,106 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/grid/demo/basic.vue correctly 1`] = `
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-12">col-12</div>
-  <div role="cell" class="ant-col ant-col-12">col-12</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-12">col-12</div>
+  <div class="ant-col ant-col-12">col-12</div>
 </div>
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-8">col-8</div>
-  <div role="cell" class="ant-col ant-col-8">col-8</div>
-  <div role="cell" class="ant-col ant-col-8">col-8</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-8">col-8</div>
+  <div class="ant-col ant-col-8">col-8</div>
+  <div class="ant-col ant-col-8">col-8</div>
 </div>
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-6">col-6</div>
-  <div role="cell" class="ant-col ant-col-6">col-6</div>
-  <div role="cell" class="ant-col ant-col-6">col-6</div>
-  <div role="cell" class="ant-col ant-col-6">col-6</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-6">col-6</div>
+  <div class="ant-col ant-col-6">col-6</div>
+  <div class="ant-col ant-col-6">col-6</div>
+  <div class="ant-col ant-col-6">col-6</div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/flex.vue correctly 1`] = `
 <div id="components-grid-demo-flex">
   <p>sub-element align left</p>
-  <div role="row" class="ant-row ant-row-start">
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
+  <div class="ant-row ant-row-start">
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element align center</p>
-  <div role="row" class="ant-row ant-row-center">
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
+  <div class="ant-row ant-row-center">
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element align right</p>
-  <div role="row" class="ant-row ant-row-end">
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
+  <div class="ant-row ant-row-end">
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element monospaced arrangement</p>
-  <div role="row" class="ant-row ant-row-space-between">
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
+  <div class="ant-row ant-row-space-between">
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element align full</p>
-  <div role="row" class="ant-row ant-row-space-around">
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
-    <div role="cell" class="ant-col ant-col-4">col-4</div>
+  <div class="ant-row ant-row-space-around">
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
   </div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
 <p>Align Top</p>
-<div role="row" class="ant-row ant-row-center ant-row-top" type="flex">
-  <div role="cell" class="ant-col ant-col-4">
+<div class="ant-row ant-row-center ant-row-top" type="flex">
+  <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-50">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-120">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-80">col-4</p>
   </div>
 </div>
 <p>Align Center</p>
-<div role="row" class="ant-row ant-row-space-around ant-row-middle" type="flex">
-  <div role="cell" class="ant-col ant-col-4">
+<div class="ant-row ant-row-space-around ant-row-middle" type="flex">
+  <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-50">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-120">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-80">col-4</p>
   </div>
 </div>
 <p>Align Bottom</p>
-<div role="row" class="ant-row ant-row-space-between ant-row-bottom" type="flex">
-  <div role="cell" class="ant-col ant-col-4">
+<div class="ant-row ant-row-space-between ant-row-bottom" type="flex">
+  <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-50">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-120">col-4</p>
   </div>
-  <div role="cell" class="ant-col ant-col-4">
+  <div class="ant-col ant-col-4">
     <p class="height-80">col-4</p>
   </div>
 </div>
@@ -108,52 +108,52 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-order.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Normal</span></div>
-<div role="row" class="ant-row" type="flex">
-  <div role="cell" class="ant-col ant-col-6 ant-col-order-4">1 col-order-4</div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-order-3">2 col-order-3</div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-order-2">3 col-order-2</div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-order-1">4 col-order-1</div>
+<div class="ant-row" type="flex">
+  <div class="ant-col ant-col-6 ant-col-order-4">1 col-order-4</div>
+  <div class="ant-col ant-col-6 ant-col-order-3">2 col-order-3</div>
+  <div class="ant-col ant-col-6 ant-col-order-2">3 col-order-2</div>
+  <div class="ant-col ant-col-6 ant-col-order-1">4 col-order-1</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Responsive</span></div>
-<div role="row" class="ant-row" type="flex">
-  <div role="cell" class="ant-col ant-col-6 ant-col-xs-order-1 ant-col-sm-order-2 ant-col-md-order-3 ant-col-lg-order-4"> 1 col-order-responsive </div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-xs-order-2 ant-col-sm-order-1 ant-col-md-order-4 ant-col-lg-order-3"> 2 col-order-responsive </div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-xs-order-3 ant-col-sm-order-4 ant-col-md-order-2 ant-col-lg-order-2"> 3 col-order-responsive </div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-xs-order-4 ant-col-sm-order-3 ant-col-md-order-1 ant-col-lg-order-1"> 4 col-order-responsive </div>
+<div class="ant-row" type="flex">
+  <div class="ant-col ant-col-6 ant-col-xs-order-1 ant-col-sm-order-2 ant-col-md-order-3 ant-col-lg-order-4"> 1 col-order-responsive </div>
+  <div class="ant-col ant-col-6 ant-col-xs-order-2 ant-col-sm-order-1 ant-col-md-order-4 ant-col-lg-order-3"> 2 col-order-responsive </div>
+  <div class="ant-col ant-col-6 ant-col-xs-order-3 ant-col-sm-order-4 ant-col-md-order-2 ant-col-lg-order-2"> 3 col-order-responsive </div>
+  <div class="ant-col ant-col-6 ant-col-xs-order-4 ant-col-sm-order-3 ant-col-md-order-1 ant-col-lg-order-1"> 4 col-order-responsive </div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/flex-stretch.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Percentage columns</span></div>
-<div role="row" class="ant-row" type="flex">
-  <div role="cell" class="ant-col" style="flex: 2 2 auto;">2 / 5</div>
-  <div role="cell" class="ant-col" style="flex: 3 3 auto;">3 / 5</div>
+<div class="ant-row" type="flex">
+  <div class="ant-col" style="flex: 2 2 auto;">2 / 5</div>
+  <div class="ant-col" style="flex: 3 3 auto;">3 / 5</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Fill rest</span></div>
-<div role="row" class="ant-row" type="flex">
-  <div role="cell" class="ant-col" style="flex: 0 0 100px;">100px</div>
-  <div role="cell" class="ant-col" style="flex-basis: auto;">auto</div>
+<div class="ant-row" type="flex">
+  <div class="ant-col" style="flex: 0 0 100px;">100px</div>
+  <div class="ant-col" style="flex-basis: auto;">auto</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Raw flex style</span></div>
-<div role="row" class="ant-row" type="flex">
-  <div role="cell" class="ant-col" style="flex: 1 1 200px;">1 1 200px</div>
-  <div role="cell" class="ant-col" style="flex: 0 1 300px;">0 1 300px</div>
+<div class="ant-row" type="flex">
+  <div class="ant-col" style="flex: 1 1 200px;">1 1 200px</div>
+  <div class="ant-col" style="flex: 0 1 300px;">0 1 300px</div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/gutter.vue correctly 1`] = `
 <div class="gutter-example">
-  <div role="row" class="ant-row" style="margin-left: -8px; margin-right: -8px;">
-    <div role="cell" class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+  <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
+    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
       <div class="gutter-box">col-6</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
       <div class="gutter-box">col-6</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
       <div class="gutter-box">col-6</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
       <div class="gutter-box">col-6</div>
     </div>
   </div>
@@ -161,16 +161,16 @@ exports[`renders ./components/grid/demo/gutter.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/grid/demo/offset.vue correctly 1`] = `
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-8">col-8</div>
-  <div role="cell" class="ant-col ant-col-8 ant-col-offset-8">col-8</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-8">col-8</div>
+  <div class="ant-col ant-col-8 ant-col-offset-8">col-8</div>
 </div>
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-6 ant-col-offset-6">col-6 col-offset-6</div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-offset-6">col-6 col-offset-6</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-6 ant-col-offset-6">col-6 col-offset-6</div>
+  <div class="ant-col ant-col-6 ant-col-offset-6">col-6 col-offset-6</div>
 </div>
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-12 ant-col-offset-6">col-12 col-offset-6</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-12 ant-col-offset-6">col-12 col-offset-6</div>
 </div>
 `;
 
@@ -208,29 +208,29 @@ exports[`renders ./components/grid/demo/playfround.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div role="row" class="ant-row" style="margin: -8px -8px -8px -8px;">
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+  <div class="ant-row" style="margin: -8px -8px -8px -8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
-    <div role="cell" class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
   </div><pre>&lt;a-row :gutter="[16,16]"&gt;
@@ -248,24 +248,24 @@ exports[`renders ./components/grid/demo/playfround.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/grid/demo/responsive.vue correctly 1`] = `
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-xs-2 ant-col-sm-4 ant-col-md-6 ant-col-lg-8 ant-col-xl-10">Col</div>
-  <div role="cell" class="ant-col ant-col-xs-20 ant-col-sm-16 ant-col-md-12 ant-col-lg-8 ant-col-xl-4">Col</div>
-  <div role="cell" class="ant-col ant-col-xs-2 ant-col-sm-4 ant-col-md-6 ant-col-lg-8 ant-col-xl-10">Col</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-xs-2 ant-col-sm-4 ant-col-md-6 ant-col-lg-8 ant-col-xl-10">Col</div>
+  <div class="ant-col ant-col-xs-20 ant-col-sm-16 ant-col-md-12 ant-col-lg-8 ant-col-xl-4">Col</div>
+  <div class="ant-col ant-col-xs-2 ant-col-sm-4 ant-col-md-6 ant-col-lg-8 ant-col-xl-10">Col</div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/responsive-more.vue correctly 1`] = `
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-xs-5 ant-col-xs-offset-1 ant-col-lg-6 ant-col-lg-offset-2">Col</div>
-  <div role="cell" class="ant-col ant-col-xs-11 ant-col-xs-offset-1 ant-col-lg-6 ant-col-lg-offset-2">Col</div>
-  <div role="cell" class="ant-col ant-col-xs-5 ant-col-xs-offset-1 ant-col-lg-6 ant-col-lg-offset-2">Col</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-xs-5 ant-col-xs-offset-1 ant-col-lg-6 ant-col-lg-offset-2">Col</div>
+  <div class="ant-col ant-col-xs-11 ant-col-xs-offset-1 ant-col-lg-6 ant-col-lg-offset-2">Col</div>
+  <div class="ant-col ant-col-xs-5 ant-col-xs-offset-1 ant-col-lg-6 ant-col-lg-offset-2">Col</div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/sort.vue correctly 1`] = `
-<div role="row" class="ant-row">
-  <div role="cell" class="ant-col ant-col-18 ant-col-push-6">col-18 col-push-6</div>
-  <div role="cell" class="ant-col ant-col-6 ant-col-pull-18">col-6 col-pull-18</div>
+<div class="ant-row">
+  <div class="ant-col ant-col-18 ant-col-push-6">col-18 col-push-6</div>
+  <div class="ant-col ant-col-6 ant-col-pull-18">col-6 col-pull-18</div>
 </div>
 `;

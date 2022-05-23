@@ -31,9 +31,9 @@ exports[`renders ./components/comment/demo/editor.vue correctly 1`] = `
         <!---->
       </div>
       <div class="ant-comment-content-detail">
-        <div role="row" class="ant-row ant-form-item">
+        <div class="ant-row ant-form-item">
           <!---->
-          <div role="cell" class="ant-col ant-form-item-control">
+          <div class="ant-col ant-form-item-control">
             <div class="ant-form-item-control-input">
               <div class="ant-form-item-control-input-content"><textarea rows="4" class="ant-input"></textarea></div>
             </div>
@@ -41,9 +41,9 @@ exports[`renders ./components/comment/demo/editor.vue correctly 1`] = `
             <!---->
           </div>
         </div>
-        <div role="row" class="ant-row ant-form-item">
+        <div class="ant-row ant-form-item">
           <!---->
-          <div role="cell" class="ant-col ant-form-item-control">
+          <div class="ant-col ant-form-item-control">
             <div class="ant-form-item-control-input">
               <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="submit">
                   <!----><span>Add Comment</span>

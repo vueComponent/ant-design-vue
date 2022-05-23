@@ -161,7 +161,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
 | ellipsis | ellipsize cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is true. | boolean | false | 1.5.0 |
 | ellipsis | The ellipsis cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is `true` or `{ showTitle?: boolean }` | boolean \| {showTitle?: boolean } | false | 3.0 |
-| filterDropdown | Customized filter overlay | VNode | - |  |
+| filterDropdown | Customized filter overlay | VNode \| (props: FilterDropdownProps) => VNode | - |  |
 | filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |  |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |  |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |  |

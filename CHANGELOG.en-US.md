@@ -10,6 +10,40 @@
 
 ---
 
+## 3.3.0-beta.1
+
+`2022-05-22`
+
+- 💄 优化部分组件箭头样式。
+
+  <img src="https://user-images.githubusercontent.com/27722486/157088587-ca49cc29-bf25-42d1-8c14-020b5501c62e.png" width="500" />
+
+- Input
+  - 🆕 新增 `clearIcon` 属性，支持自定义清除按钮。
+- Table
+  - 🆕 `column.filterSearch` 属性现在支持返回一个函数用于自定义搜索条件。
+  - ⌨️ 增加 `aria-sort` 属性以优化屏幕阅读器的使用体验。
+  - 🆕 列筛选条件重置时，支持重置为默认值而非空值。
+- 🆕 表单组件新增 `status` 属性以支持自定义状态。
+
+  包含：Transfer、AutoComplete、TreeSelect、Cascader、Select、DatePicker、Mentions、InputNumber、Input
+
+  <img src="https://user-images.githubusercontent.com/27722486/157089015-f96b0153-2cc4-4e04-94d6-e0e4b195d5d1.png" width="500" />
+
+- 🆕 InputNumber 组件支持 upIcon、downIcon 插槽用于自定义上下图标。
+- 🆕 Notification 组件弹窗位置新增支持 `top` / `bottom`。
+- 🆕 Select、Cascader、DatePicker、TimePicker 等组件新增 `placement` 用于自定义弹层方向。
+- 🆕 Skeleton.Input 添加 `block` 属性。
+- 🆕 合并 TimePicker `disabledHours`、`disabledMinutes`、`disabledSeconds` 至 `disabledTime` 以保持与 DatePicker 接口一致性。
+- 🆕 Grid 支持 `justify="space-evenly"`。
+- 💄 修改部分边框颜色和进度条的背景色为透明色以适应有色背景。
+- 🐞 修复 Typography.Title 进入编辑模式时大小不一致的问题。
+- Upload
+  - 🆕 Upload `picture-card` 模式支持配置图片的 `crossorigin` 属性。
+  - 🐞 修复 Upload `prefixCls` 对列表不生效的问题。
+  - 💄 优化 Upload 操作按钮的样式细节。
+- 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
+
 ## 3.2.3
 
 `2022-05-05`

@@ -44,6 +44,18 @@
   - 💄 优化 Upload 操作按钮的样式细节。
 - 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
 
+##3.2.4
+
+`2022-05-23`
+
+- 🐞 Fix InputNumber v-model type error [#5577](https://github.com/vueComponent/ant-design-vue/issues/5677)
+- 🌟 Select supports global size [#5590](https://github.com/vueComponent/ant-design-vue/issues/5590)
+- 🐞 Form clearValidate resetValidate support array [#5619](https://github.com/vueComponent/ant-design-vue/issues/5619)
+- 🐞 Drawer custom closeIcon does not take effect [#5616](https://github.com/vueComponent/ant-design-vue/issues/5616)
+- 🌟 Fix CountDown support dayjs [#5edca6](https://github.com/vueComponent/ant-design-vue/commit/5edca6be5a4e1aee9cde46724b14900f6c86bfb2)
+- 🌟 Tree support scrollTo [#5626](https://github.com/vueComponent/ant-design-vue/issues/5626)
+- 🐞 Tooltip disabled class name error [#5627](https://github.com/vueComponent/ant-design-vue/issues/5627)
+
 ## 3.2.3
 
 `2022-05-05`

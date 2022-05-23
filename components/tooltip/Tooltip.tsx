@@ -158,6 +158,7 @@ export default defineComponent({
             display: 'inline-block', // default inline-block is important
             ...picked,
             cursor: 'not-allowed',
+            lineHeight: 1, // use the true height of child nodes
             width: ele.props && ele.props.block ? '100%' : null,
           };
           const buttonStyle = {
@@ -172,7 +173,7 @@ export default defineComponent({
             true,
           );
           return (
-            <span style={spanStyle} class={`${prefixCls}-disabled-compatible-wrapper`}>
+            <span style={spanStyle} class={`${prefixCls.value}-disabled-compatible-wrapper`}>
               {child}
             </span>
           );

@@ -10,6 +10,18 @@
 
 ---
 
+## 3.2.4
+
+`2022-05-23`
+
+- 🐞 修复 InputNumber v-model 类型错误 [#5577](https://github.com/vueComponent/ant-design-vue/issues/5677)
+- 🌟 Select 支持全局 size [#5590](https://github.com/vueComponent/ant-design-vue/issues/5590)
+- 🐞 Form clearValidate resetValidate 支持数组 [#5619](https://github.com/vueComponent/ant-design-vue/issues/5619)
+- 🐞 Drawer 自定义 closeIcon 不生效问题 [#5616](https://github.com/vueComponent/ant-design-vue/issues/5616)
+- 🌟 修复 CountDown 支持 dayjs [#5edca6](https://github.com/vueComponent/ant-design-vue/commit/5edca6be5a4e1aee9cde46724b14900f6c86bfb2)
+- 🌟 Tree 支持 scrollTo [#5626](https://github.com/vueComponent/ant-design-vue/issues/5626)
+- 🐞 Tooltip disabled 类名错误问题 [#5627](https://github.com/vueComponent/ant-design-vue/issues/5627)
+
 ## 3.2.3
 
 `2022-05-05`

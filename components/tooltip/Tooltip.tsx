@@ -75,7 +75,7 @@ export default defineComponent({
   slots: ['title'],
   // emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
-    const { prefixCls, getTargetContainer } = useConfigInject('tooltip', props);
+    const { prefixCls, getPopupContainer } = useConfigInject('tooltip', props);
 
     const visible = ref(firstNotUndefined([props.visible, props.defaultVisible]));
 
@@ -217,7 +217,7 @@ export default defineComponent({
     };
 
     return () => {
-      const { openClassName, getPopupContainer, color, overlayClassName } = props;
+      const { openClassName, color, overlayClassName } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
 
@@ -245,12 +245,11 @@ export default defineComponent({
         formattedOverlayInnerStyle = { backgroundColor: color };
         arrowContentStyle = { backgroundColor: color };
       }
-
       const vcTooltipProps = {
         ...attrs,
         ...(props as TooltipProps),
         prefixCls: prefixCls.value,
-        getTooltipContainer: getPopupContainer || getTargetContainer.value,
+        getPopupContainer: getPopupContainer.value,
         builtinPlacements: tooltipPlacements.value,
         visible: tempVisible,
         ref: tooltip,

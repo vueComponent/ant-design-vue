@@ -339,7 +339,7 @@ const Preview = defineComponent({
           >
             <img
               onMousedown={onMouseDown}
-              onDoubleClick={onDoubleClick}
+              onDblclick={onDoubleClick}
               ref={imgRef}
               class={`${props.prefixCls}-img`}
               src={combinationSrc.value}

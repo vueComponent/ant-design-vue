@@ -10,6 +10,16 @@
 
 ---
 
+## 3.2.5
+
+`2022-05-26`
+
+- 🌟 Image 新增左右箭头切换功能 [#5642](https://github.com/vueComponent/ant-design-vue/issues/5642)
+- 🐞 修复 Steps progressDot 插槽失效问题 [#5648](https://github.com/vueComponent/ant-design-vue/issues/5648)
+- 🐞 修复 Tooltip 全局 getPopupContainer 失效问题 [#5636](https://github.com/vueComponent/ant-design-vue/issues/5636)
+- 🐞 修复 useForm help 样式问题 [#5635](https://github.com/vueComponent/ant-design-vue/issues/5635)
+- 🐞 修复 Table、Tree 拖拽样式冲突问题 [#5644](https://github.com/vueComponent/ant-design-vue/issues/5644)
+
 ## 3.2.4
 
 `2022-05-23`

@@ -10,7 +10,17 @@
 
 ---
 
-##3.2.4
+## 3.2.5
+
+`2022-05-26`
+
+- 🌟 Image Added left and right arrow switching function [#5642](https://github.com/vueComponent/ant-design-vue/issues/5642)
+- 🐞 Fix Steps progressDot slot failure [#5648](https://github.com/vueComponent/ant-design-vue/issues/5648)
+- 🐞 Fix Tooltip global getPopupContainer invalid problem [#5636](https://github.com/vueComponent/ant-design-vue/issues/5636)
+- 🐞 Fix useForm help style issue [#5635](https://github.com/vueComponent/ant-design-vue/issues/5635)
+- 🐞 Fix Table, Tree drag and drop style conflict [#5644](https://github.com/vueComponent/ant-design-vue/issues/5644)
+
+## 3.2.4
 
 `2022-05-23`
 

@@ -59,12 +59,12 @@ export default defineComponent({
         status,
         size,
         current,
-        progressDot = slots.progressDot,
         initial,
         icons,
         stepIcon = slots.stepIcon,
       } = props;
       const isNav = type === 'navigation';
+      const progressDot = props.progressDot || slots.progressDot;
       const adjustedLabelPlacement = progressDot ? 'vertical' : labelPlacement;
       const classString = classNames(prefixCls, `${prefixCls}-${direction}`, {
         [`${prefixCls}-${size}`]: size,

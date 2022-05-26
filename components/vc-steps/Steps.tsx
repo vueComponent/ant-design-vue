@@ -31,7 +31,7 @@ export default defineComponent({
     labelPlacement: PropTypes.string.def('horizontal'),
     status: PropTypes.string.def('process'),
     size: PropTypes.string.def(''),
-    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
+    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(undefined),
     initial: PropTypes.number.def(0),
     current: PropTypes.number.def(0),
     icons: PropTypes.shape({

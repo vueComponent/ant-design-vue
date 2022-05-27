@@ -45,7 +45,7 @@ export default defineComponent({
   setup(props, { slots, emit }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, direction, size } = useConfigInject('radio', props);
-    const stateValue = ref(props.value);
+    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const updatingValue = ref<boolean>(false);
     watch(
       () => props.value,

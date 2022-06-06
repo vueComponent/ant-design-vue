@@ -103,6 +103,7 @@ export const formItemProps = () => ({
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
   noStyle: Boolean,
+  contentAlign: PropTypes.oneOf(tuple('top', 'center')),
 });
 
 export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;

@@ -45,6 +45,7 @@ const FormItemInput = defineComponent({
     'help',
     'extra',
     'status',
+    'contentAlign',
   ],
   setup(props, { slots }) {
     const formContext = useInjectForm();
@@ -69,6 +70,7 @@ const FormItemInput = defineComponent({
         hasFeedback,
         status,
         extra = slots.extra?.(),
+        contentAlign,
       } = props;
       const baseClassName = `${prefixCls}-item`;
 
@@ -80,6 +82,11 @@ const FormItemInput = defineComponent({
       // Should provides additional icon if `hasFeedback`
       const IconNode = status && iconMap[status];
 
+      const inputClassName = classNames(
+        `${baseClassName}-control-input`,
+        contentAlign === 'top' && `${baseClassName}-control-input-top`,
+      );
+
       return (
         <Col
           {...mergedWrapperCol}
@@ -87,7 +94,7 @@ const FormItemInput = defineComponent({
           v-slots={{
             default: () => (
               <>
-                <div class={`${baseClassName}-control-input`}>
+                <div class={inputClassName}>
                   <div class={`${baseClassName}-control-input-content`}>{slots.default?.()}</div>
                   {hasFeedback && IconNode ? (
                     <span class={`${baseClassName}-children-icon`}>

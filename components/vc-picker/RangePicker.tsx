@@ -232,6 +232,11 @@ function RangerPicker<DateType>() {
       'direction',
       'activePickerIndex',
       'autocomplete',
+      'minuteStep',
+      'hourStep',
+      'secondStep',
+      'hideDisabledOptions',
+      'disabledMinutes',
     ] as any,
     setup(props, { attrs, expose }) {
       const needConfirmButton = computed(

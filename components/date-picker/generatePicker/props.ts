@@ -82,6 +82,13 @@ function commonProps<DateType = any>() {
     mode: { type: String as PropType<PanelMode> },
     picker: { type: String as PropType<PickerMode> },
     valueFormat: String,
+
+    /** @deprecated Please use `disabledTime` instead. */
+    disabledHours: Function as PropType<DisabledTimes['disabledHours']>,
+    /** @deprecated Please use `disabledTime` instead. */
+    disabledMinutes: Function as PropType<DisabledTimes['disabledMinutes']>,
+    /** @deprecated Please use `disabledTime` instead. */
+    disabledSeconds: Function as PropType<DisabledTimes['disabledSeconds']>,
   };
 }
 

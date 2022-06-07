@@ -187,6 +187,10 @@ function Picker<DateType>() {
       'showToday',
       'renderExtraFooter',
       'dateRender',
+      'minuteStep',
+      'hourStep',
+      'secondStep',
+      'hideDisabledOptions',
     ] as any,
     // slots: [
     //   'suffixIcon',

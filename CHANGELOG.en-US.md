@@ -564,7 +564,7 @@ Github：[https://github.com/surely-vue/table]
 
     You can reference [Customized Form Controls](#components-form-demo-customized-form-controls), but it also has some disadvantages:
 
-    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` and call the corresponding method.
+    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useInjectFormItemContext()` and call the corresponding method.
 
     2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion. For example,
 
@@ -586,7 +586,7 @@ Github：[https://github.com/surely-vue/table]
     </a-form-item>
     ```
 
-    The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
+    The second way is to wrap it with a custom component and call `useInjectFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
 
     ```html
     <script>
@@ -595,7 +595,7 @@ Github：[https://github.com/surely-vue/table]
       export default {
         name: 'custom-name',
         setup() {
-          const formItemContext = Form.useFormItemContext();
+          const formItemContext = Form.useInjectFormItemContext();
         },
       };
     </script>

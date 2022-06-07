@@ -561,7 +561,7 @@ Github：[https://github.com/surely-vue/table]
 
   - 自 3.0 版本以后，Form.Item 不再劫持子元素，而是通过 provider / inject 依赖注入的方式进行自动校验，这种方式可以提高组件性能，子元素也不会限制个数，同样子元素也可以是进一步封装的高级组件。你可以参考[自定义表单控件示例](#components-form-demo-customized-form-controls)，但它同样会有一些缺点：
 
-    1、自定义组件如果希望 Form.Item 进行校验展示，你需要 `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` 注入，并调用相应的方法。
+    1、自定义组件如果希望 Form.Item 进行校验展示，你需要 `const {id, onFieldChange, onFieldBlur} = useInjectFormItemContext()` 注入，并调用相应的方法。
 
     2、一个 Form.Item 只能收集一个表单项的数据，如果有多个表单项，会导致收集错乱。例如：
 
@@ -583,7 +583,7 @@ Github：[https://github.com/surely-vue/table]
     </a-form-item>
     ```
 
-    第二种，使用自定义组件包裹，并在自定义组件中调用 `useFormItemContext`，相当于把多个表单项合并成了一个。
+    第二种，使用自定义组件包裹，并在自定义组件中调用 `useInjectFormItemContext`，相当于把多个表单项合并成了一个。
 
     ```html
     <script>
@@ -591,7 +591,7 @@ Github：[https://github.com/surely-vue/table]
       import { Form } from 'ant-design-vue';
       export default {
         setup() {
-          const formItemContext = Form.useFormItemContext();
+          const formItemContext = Form.useInjectFormItemContext();
         },
       };
     </script>

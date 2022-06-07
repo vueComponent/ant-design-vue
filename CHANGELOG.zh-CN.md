@@ -10,6 +10,14 @@
 
 ---
 
+## 3.2.6
+
+`2022-06-07`
+
+- 🌟 `Cascader` 自定义 trigger 支持自定义组件 [#5677](https://github.com/vueComponent/ant-design-vue/issues/5677)
+- 🐞 修复 `DateRangePicker` `TimeRangePicker` 箭头没有跟随移动问题 [#71c619](https://github.com/vueComponent/ant-design-vue/commit/71c6195771c0b9ddffadd294ce01f7515c5adc40)
+- 🐞 修复 `TimeRangePicker` minSteps、hourSteps、secondStep 未生效问题 [#5671](https://github.com/vueComponent/ant-design-vue/issues/5671)
+
 ## 3.2.5
 
 `2022-05-26`

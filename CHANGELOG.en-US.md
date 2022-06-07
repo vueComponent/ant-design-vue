@@ -10,6 +10,14 @@
 
 ---
 
+## 3.2.6
+
+`2022-06-07`
+
+- 🌟 `Cascader` custom trigger supports custom components [#5677](https://github.com/vueComponent/ant-design-vue/issues/5677)
+- 🐞 Fix `DateRangePicker` `TimeRangePicker` arrow not following the movement issue [#71c619](https://github.com/vueComponent/ant-design-vue/commit/71c6195771c0b9ddffadd294ce01f7515c5adc40)
+- 🐞 Fix `TimeRangePicker` minSteps, hourSteps, secondStep not taking effect [#5671](https://github.com/vueComponent/ant-design-vue/issues/5671)
+
 ## 3.2.5
 
 `2022-05-26`

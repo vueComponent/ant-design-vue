@@ -31,8 +31,14 @@ export default defineComponent({
     const abort = (file: RcFile) => {
       uploader.value?.abort(file);
     };
+
+    const onFileDrop = e => {
+      uploader.value?.onFileDrop(e);
+    };
+
     expose({
       abort,
+      onFileDrop,
     });
     return () => {
       return <AjaxUpload {...props} {...attrs} v-slots={slots} ref={uploader} />;

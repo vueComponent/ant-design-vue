@@ -257,6 +257,7 @@ export default defineComponent({
     };
     expose({
       abort,
+      onFileDrop,
     });
     return () => {
       const {

@@ -42,5 +42,5 @@ cover: https://gw.alipayobjects.com/zos/alicdn/IxH16B9RD/Collapse.svg
 | extra       | 自定义渲染每个面板右上角的内容 | VNode \| slot          | -      | 1.5.0 |
 | forceRender | 被隐藏时是否渲染 DOM 结构      | boolean                | false  |       |
 | header      | 面板头内容                     | string\|slot           | 无     |       |
-| key         | 对应 activeKey                 | string \| number       | 无     |       |
+| panelKey    | 对应 activeKey                 | string \| number       | 无     |       |
 | showArrow   | 是否展示当前面板上的箭头       | boolean                | `true` |       |

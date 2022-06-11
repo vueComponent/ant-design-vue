@@ -199,7 +199,7 @@ exports[`renders ./components/timeline/demo/custom.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/timeline/demo/label.vue correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 20px;"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>Left</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>Right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="alternate"><span class="ant-radio-inner"></span></span><span>Alternate</span></label></div>
+<div class="ant-radio-group ant-radio-group-outline" style="margin-bottom: 20px;"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>Left</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>Right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="alternate"><span class="ant-radio-inner"></span></span><span>Alternate</span></label></div>
 <ul class="ant-timeline ant-timeline-label">
   <li class="ant-timeline-item ant-timeline-item-left">
     <div class="ant-timeline-item-label">2015-09-01</div>

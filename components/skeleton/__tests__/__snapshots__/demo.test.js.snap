@@ -124,7 +124,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
     <div class="ant-col ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div>
+          <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div>
         </div>
         <!---->
       </div>
@@ -139,7 +139,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
     <div class="ant-col ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="round"><span class="ant-radio-button-inner"></span></span><span>Round</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
+          <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="round"><span class="ant-radio-button-inner"></span></span><span>Round</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
         </div>
         <!---->
       </div>
@@ -154,7 +154,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
     <div class="ant-col ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="square"><span class="ant-radio-button-inner"></span></span><span>Square</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
+          <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="square"><span class="ant-radio-button-inner"></span></span><span>Square</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
         </div>
         <!---->
       </div>

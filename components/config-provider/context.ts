@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue';
-import { inject, provide } from 'vue';
+import { computed, inject, provide } from 'vue';
 import type { ValidateMessages } from '../form/interface';
 import type { RequiredMark } from '../form/Form';
 import type { RenderEmptyHandler } from './renderEmpty';
@@ -17,7 +17,7 @@ export const useProvideGlobalForm = (state: GlobalFormCOntextProps) => {
 };
 
 export const useInjectGlobalForm = () => {
-  return inject(GlobalFormContextKey, {});
+  return inject(GlobalFormContextKey, { validateMessages: computed(() => undefined) });
 };
 
 export const GlobalConfigContextKey: InjectionKey<GlobalFormCOntextProps> =

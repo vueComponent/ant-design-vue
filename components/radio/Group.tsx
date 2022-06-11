@@ -23,7 +23,7 @@ export type RadioGroupChildOption = {
 export const radioGroupProps = () => ({
   prefixCls: String,
   value: PropTypes.any,
-  size: PropTypes.oneOf(RadioGroupSizeTypes).def('default'),
+  size: PropTypes.oneOf(RadioGroupSizeTypes),
   options: {
     type: Array as PropType<Array<string | RadioGroupChildOption | number>>,
   },

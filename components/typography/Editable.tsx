@@ -102,7 +102,6 @@ const Editable = defineComponent({
 
     function onBlur() {
       confirmChange();
-      emit('end');
     }
 
     function confirmChange() {

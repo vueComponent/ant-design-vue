@@ -15,6 +15,7 @@ import Dialog from '../../vc-dialog';
 import { type IDialogChildProps, dialogPropTypes } from '../../vc-dialog/IDialogPropTypes';
 import { getOffset } from '../../vc-util/Dom/css';
 import addEventListener from '../../vc-util/Dom/addEventListener';
+import KeyCode from '../../_util/KeyCode';
 import { warning } from '../../vc-util/warning';
 import useFrameSetState from './hooks/useFrameSetState';
 import getFixScaleEleTransPosition from './getFixScaleEleTransPosition';
@@ -221,6 +222,32 @@ const Preview = defineComponent({
       lastWheelZoomDirection.value = { wheelDirection };
     };
 
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!props.visible || !showLeftOrRightSwitches.value) return;
+
+      event.preventDefault();
+      if (event.keyCode === KeyCode.LEFT) {
+        if (currentPreviewIndex.value > 0) {
+          setCurrent(previewUrlsKeys.value[currentPreviewIndex.value - 1]);
+        }
+      } else if (event.keyCode === KeyCode.RIGHT) {
+        if (currentPreviewIndex.value < previewGroupCount.value - 1) {
+          setCurrent(previewUrlsKeys.value[currentPreviewIndex.value + 1]);
+        }
+      }
+    };
+
+    const onDoubleClick = () => {
+      if (props.visible) {
+        if (scale.value !== 1) {
+          scale.value = 1;
+        }
+        if (position.x !== initialPosition.x || position.y !== initialPosition.y) {
+          setPosition(initialPosition);
+        }
+      }
+    };
+
     let removeListeners = () => {};
     onMounted(() => {
       watch(
@@ -235,6 +262,7 @@ const Preview = defineComponent({
           const onScrollWheelListener = addEventListener(window, 'wheel', onWheelMove, {
             passive: false,
           });
+          const onKeyDownListener = addEventListener(window, 'keydown', onKeyDown, false);
 
           try {
             // Resolve if in iframe lost event
@@ -257,6 +285,7 @@ const Preview = defineComponent({
             onMouseUpListener.remove();
             onMouseMoveListener.remove();
             onScrollWheelListener.remove();
+            onKeyDownListener.remove();
 
             /* istanbul ignore next */
             if (onTopMouseUpListener) onTopMouseUpListener.remove();
@@ -310,6 +339,7 @@ const Preview = defineComponent({
           >
             <img
               onMousedown={onMouseDown}
+              onDblclick={onDoubleClick}
               ref={imgRef}
               class={`${props.prefixCls}-img`}
               src={combinationSrc.value}

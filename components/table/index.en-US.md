@@ -82,7 +82,7 @@ Specify `dataSource` of Table as an array of data.
 | defaultExpandAllRows | Expand all rows initially | boolean | `false` |  |
 | defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |  |
 | emptyText | Customize the display content when empty data | v-slot:emptyText | - | 3.0 |
-| expandedRowKeys | Current expanded row keys | string\[] | - |  |
+| expandedRowKeys(v-model) | Current expanded row keys | string\[] | - |  |
 | expandedRowRender | Expanded container render for each row | Function({record, index, indent, expanded}):VNode\|v-slot | - |  |
 | expandFixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean \| string | false | 3.0 |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| v-slot:expandIcon="props" | - |  |

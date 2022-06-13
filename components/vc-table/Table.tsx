@@ -177,6 +177,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
     'expandIcon',
     'onExpand',
     'onExpandedRowsChange',
+    'onUpdate:expandedRowKeys',
     'defaultExpandAllRows',
     'indentSize',
     'expandIconColumnIndex',
@@ -192,7 +193,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
     'transformCellText',
   ] as any,
   slots: ['title', 'footer', 'summary', 'emptyText'],
-  emits: ['expand', 'expandedRowsChange', 'updateInternalRefs'],
+  emits: ['expand', 'expandedRowsChange', 'updateInternalRefs', 'update:expandedRowKeys'],
   setup(props, { attrs, slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
     const hasData = computed(() => !!mergedData.value.length);
@@ -289,6 +290,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
       innerExpandedKeys.value = newExpandedKeys;
 
       emit('expand', !hasKey, record);
+      emit('update:expandedRowKeys', newExpandedKeys);
       emit('expandedRowsChange', newExpandedKeys);
     };
 

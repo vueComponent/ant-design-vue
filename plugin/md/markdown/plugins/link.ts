@@ -45,10 +45,10 @@ export const linkPlugin = (md: MarkdownIt, externalAttrs: Record<string, string>
       if (cleanUrl.endsWith('.md')) {
         cleanUrl = cleanUrl.replace(/\.md$/, '.html');
       }
-      // ./foo -> ./foo.html
-      if (!cleanUrl.endsWith('.html') && !cleanUrl.endsWith('/')) {
-        cleanUrl += '.html';
-      }
+      // // ./foo -> ./foo.html
+      // if (!cleanUrl.endsWith('.html') && !cleanUrl.endsWith('/')) {
+      //   cleanUrl += '.html';
+      // }
       const parsed = new URL(url, 'http://a.com');
       url = cleanUrl + parsed.search + parsed.hash;
     }

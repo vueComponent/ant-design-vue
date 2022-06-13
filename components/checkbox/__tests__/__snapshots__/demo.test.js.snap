@@ -3,7 +3,7 @@
 exports[`renders ./components/checkbox/demo/basic.vue correctly 1`] = `<label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span>Checkbox</span></label>`;
 
 exports[`renders ./components/checkbox/demo/check-all.vue correctly 1`] = `
-<div><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-indeterminate"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span> Check all </span></label></div>
+<div><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-indeterminate"><input type="checkbox" class="ant-checkbox-input" aria-checked="mixed"><span class="ant-checkbox-inner"></span></span><span> Check all </span></label></div>
 <div class="ant-divider ant-divider-horizontal" role="separator">
   <!---->
 </div>

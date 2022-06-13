@@ -252,7 +252,7 @@ function useForm(
         if (validateInfos[name].validateStatus === 'validating') {
           const res = results.filter(result => result && result.errors.length);
           validateInfos[name].validateStatus = res.length ? 'error' : 'success';
-          validateInfos[name].help = res.length ? res.map(r => r.errors) : '';
+          validateInfos[name].help = res.length ? res.map(r => r.errors) : null;
           options?.onValidate?.(
             name,
             !res.length,
@@ -293,7 +293,7 @@ function useForm(
       validateInfos[key] &&
         Object.assign(validateInfos[key], {
           validateStatus: '',
-          help: '',
+          help: null,
         });
     });
   };

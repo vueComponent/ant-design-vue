@@ -87,6 +87,13 @@ function commonProps<DateType = any>() {
     valueFormat: String,
     placement: String as PropType<DataPickerPlacement>,
     status: String as PropType<InputStatus>,
+
+    /** @deprecated Please use `disabledTime` instead. */
+    disabledHours: Function as PropType<DisabledTimes['disabledHours']>,
+    /** @deprecated Please use `disabledTime` instead. */
+    disabledMinutes: Function as PropType<DisabledTimes['disabledMinutes']>,
+    /** @deprecated Please use `disabledTime` instead. */
+    disabledSeconds: Function as PropType<DisabledTimes['disabledSeconds']>,
   };
 }
 

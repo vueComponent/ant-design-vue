@@ -28,7 +28,7 @@ The 2.x version is a compatible version developed for compatibility with Vue 3. 
   - Deprecated `replaceFields`, use `fieldNames` instead.
 - `Table`
   - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).
-  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon`.
+  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon`.
 
 #### Component refactoring
 
@@ -49,7 +49,7 @@ Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `Dat
 - `Table`
 
   - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).
-  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` to improve ease of use , To avoid slot configuration expansion, but also to avoid the problem of slot conflicts.
+  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` to improve ease of use , To avoid slot configuration expansion, but also to avoid the problem of slot conflicts.
   - Added expandFixed to control whether the expanded icon is fixed.
   - Added the showSorterTooltip header whether to display the tooltip for the next sort.
   - Added sticky for setting sticky head and scroll bar.
@@ -72,7 +72,7 @@ Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `Dat
 
     You can reference [Customized Form Controls](#components-form-demo-customized-form-controls), but it also has some disadvantages:
 
-    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` and call the corresponding method.
+    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useInjectFormItemContext()` and call the corresponding method.
 
     2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion. For example:
 
@@ -94,7 +94,7 @@ Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `Dat
     </a-form-item>
     ```
 
-    The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
+    The second way is to wrap it with a custom component and call `useInjectFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
 
     ```html
     <script>
@@ -103,7 +103,7 @@ Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `Dat
       export default {
         name: 'custom-name',
         setup() {
-          const formItemContext = Form.useFormItemContext();
+          const formItemContext = Form.useInjectFormItemContext();
         },
       };
     </script>

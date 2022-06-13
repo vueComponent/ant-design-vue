@@ -113,9 +113,10 @@ export default defineComponent({
         onKeypress,
         onKeyup,
       } = attrs as HTMLAttributes;
-      const globalProps = Object.keys({ ...others, ...attrs }).reduce((prev, key) => {
+      const othersAndAttrs = { ...others, ...attrs };
+      const globalProps = Object.keys(othersAndAttrs).reduce((prev, key) => {
         if (key.startsWith('data-') || key.startsWith('aria-') || key === 'role') {
-          prev[key] = others[key];
+          prev[key] = othersAndAttrs[key];
         }
         return prev;
       }, {});

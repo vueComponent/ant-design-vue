@@ -205,7 +205,6 @@ const TimeBody = defineComponent({
         hideDisabledOptions,
         onSelect,
       } = props;
-
       const columns: {
         node: VueNode;
         value: number;

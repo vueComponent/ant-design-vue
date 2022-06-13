@@ -30,6 +30,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { useProvideForm } from './context';
 import type { SizeType } from '../config-provider';
 import useForm from './useForm';
+import { useInjectGlobalForm } from '../config-provider/context';
 
 export type RequiredMark = boolean | 'optional';
 export type FormLayout = 'horizontal' | 'inline' | 'vertical';
@@ -127,10 +128,11 @@ const Form = defineComponent({
       return true;
     });
     const mergedColon = computed(() => props.colon ?? contextForm.value?.colon);
+    const { validateMessages: globalValidateMessages } = useInjectGlobalForm();
     const validateMessages = computed(() => {
       return {
         ...defaultValidateMessages,
-        ...contextForm.value?.validateMessages,
+        ...globalValidateMessages.value,
         ...props.validateMessages,
       };
     });

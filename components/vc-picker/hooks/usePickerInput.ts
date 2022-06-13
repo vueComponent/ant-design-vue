@@ -1,5 +1,5 @@
 import type { ComputedRef, HTMLAttributes, Ref } from 'vue';
-import { onBeforeUnmount, watchEffect, watch, ref, computed } from 'vue';
+import { onBeforeUnmount, onMounted, watch, ref, computed } from 'vue';
 import type { FocusEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
 import { addGlobalMousedownEvent, getTargetFromEvent } from '../utils/uiUtil';
@@ -148,30 +148,26 @@ export default function usePickerInput({
   });
   const globalMousedownEvent = ref();
   // Global click handler
-  watchEffect(
-    () =>
-      globalMousedownEvent.value &&
-      globalMousedownEvent.value()(
-        (globalMousedownEvent.value = addGlobalMousedownEvent((e: MouseEvent) => {
-          const target = getTargetFromEvent(e);
+  onMounted(() => {
+    globalMousedownEvent.value = addGlobalMousedownEvent((e: MouseEvent) => {
+      const target = getTargetFromEvent(e);
 
-          if (open) {
-            const clickedOutside = isClickOutside(target);
+      if (open.value) {
+        const clickedOutside = isClickOutside(target);
 
-            if (!clickedOutside) {
-              preventBlurRef.value = true;
+        if (!clickedOutside) {
+          preventBlurRef.value = true;
 
-              // Always set back in case `onBlur` prevented by user
-              raf(() => {
-                preventBlurRef.value = false;
-              });
-            } else if (!focused.value || clickedOutside) {
-              triggerOpen(false);
-            }
-          }
-        })),
-      ),
-  );
+          // Always set back in case `onBlur` prevented by user
+          raf(() => {
+            preventBlurRef.value = false;
+          });
+        } else if (!focused.value || clickedOutside) {
+          triggerOpen(false);
+        }
+      }
+    });
+  });
   onBeforeUnmount(() => {
     globalMousedownEvent.value && globalMousedownEvent.value();
   });

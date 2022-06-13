@@ -24,7 +24,7 @@ Custom paging display
       </a>
     </template>
     <div v-for="item in 4" :key="item">
-      <img :src="baseUrl + 'abstract0' + item + '.jpg'" />
+      <img :src="getImgUrl(item - 1)" />
     </div>
   </a-carousel>
 </template>
@@ -39,7 +39,6 @@ export default defineComponent({
       return `${baseUrl}abstract0${i + 1}.jpg`;
     };
     return {
-      baseUrl,
       getImgUrl,
     };
   },

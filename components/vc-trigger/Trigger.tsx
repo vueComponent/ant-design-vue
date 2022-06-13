@@ -390,7 +390,8 @@ export default defineComponent({
     getRootDomNode() {
       const { getTriggerDOMNode } = this.$props;
       if (getTriggerDOMNode) {
-        return getTriggerDOMNode(this.triggerRef);
+        const domNode = findDOMNode(this.triggerRef);
+        return findDOMNode(getTriggerDOMNode(domNode));
       }
 
       try {

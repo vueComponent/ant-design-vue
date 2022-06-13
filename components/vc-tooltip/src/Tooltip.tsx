@@ -22,7 +22,7 @@ export default defineComponent({
     prefixCls: PropTypes.string.def('rc-tooltip'),
     mouseEnterDelay: PropTypes.number.def(0.1),
     mouseLeaveDelay: PropTypes.number.def(0.1),
-    getTooltipContainer: Function,
+    getPopupContainer: Function as PropType<(triggerNode?: HTMLElement) => HTMLElement>,
     destroyTooltipOnHide: { type: Boolean, default: false },
     align: PropTypes.object.def(() => ({})),
     arrowContent: PropTypes.any.def(null),
@@ -94,7 +94,6 @@ export default defineComponent({
         align,
         destroyTooltipOnHide,
         defaultVisible,
-        getTooltipContainer,
         ...restProps
       } = props;
       const extraProps = { ...restProps };
@@ -109,7 +108,6 @@ export default defineComponent({
         builtinPlacements: placements,
         popupPlacement: placement,
         popupAlign: align,
-        getPopupContainer: getTooltipContainer,
         afterPopupVisibleChange: afterVisibleChange,
         popupTransitionName: transitionName,
         popupAnimation: animation,

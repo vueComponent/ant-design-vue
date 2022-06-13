@@ -12,7 +12,7 @@
 
 ## 3.3.0-beta.1
 
-`2022-05-22`
+`2022-06-13`
 
 - 💄 优化部分组件箭头样式。
 
@@ -44,7 +44,35 @@
   - 💄 优化 Upload 操作按钮的样式细节。
 - 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
 
-##3.2.4
+## 3.2.7
+
+`2022-06-13`
+
+- 🌟 `Checkbox` supports adding extra properties [#5678](https://github.com/vueComponent/ant-design-vue/issues/5678)
+- 🌟 `RadioGroup` support global size [#5690](https://github.com/vueComponent/ant-design-vue/issues/5690)
+- 🌟 `Table` expandedRowKeys support v-model [#5695](https://github.com/vueComponent/ant-design-vue/issues/5695)
+- 🐞 Fix global Form message not taking effect [#5693](https://github.com/vueComponent/ant-design-vue/issues/5693)
+- 🐞 Fix `Typography` Enter key triggers end event twice, end is no longer triggered when blur [#5696](https://github.com/vueComponent/ant-design-vue/issues/5696)
+
+## 3.2.6
+
+`2022-06-07`
+
+- 🌟 `Cascader` custom trigger supports custom components [#5677](https://github.com/vueComponent/ant-design-vue/issues/5677)
+- 🐞 Fix `DateRangePicker` `TimeRangePicker` arrow not following the movement issue [#71c619](https://github.com/vueComponent/ant-design-vue/commit/71c6195771c0b9ddffadd294ce01f7515c5adc40)
+- 🐞 Fix `TimeRangePicker` minSteps, hourSteps, secondStep not taking effect [#5671](https://github.com/vueComponent/ant-design-vue/issues/5671)
+
+## 3.2.5
+
+`2022-05-26`
+
+- 🌟 Image Added left and right arrow switching function [#5642](https://github.com/vueComponent/ant-design-vue/issues/5642)
+- 🐞 Fix Steps progressDot slot failure [#5648](https://github.com/vueComponent/ant-design-vue/issues/5648)
+- 🐞 Fix Tooltip global getPopupContainer invalid problem [#5636](https://github.com/vueComponent/ant-design-vue/issues/5636)
+- 🐞 Fix useForm help style issue [#5635](https://github.com/vueComponent/ant-design-vue/issues/5635)
+- 🐞 Fix Table, Tree drag and drop style conflict [#5644](https://github.com/vueComponent/ant-design-vue/issues/5644)
+
+## 3.2.4
 
 `2022-05-23`
 
@@ -588,7 +616,7 @@ Github：[https://github.com/surely-vue/table]
 
     You can reference [Customized Form Controls](#components-form-demo-customized-form-controls), but it also has some disadvantages:
 
-    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` and call the corresponding method.
+    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useInjectFormItemContext()` and call the corresponding method.
 
     2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion. For example,
 
@@ -610,7 +638,7 @@ Github：[https://github.com/surely-vue/table]
     </a-form-item>
     ```
 
-    The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
+    The second way is to wrap it with a custom component and call `useInjectFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
 
     ```html
     <script>
@@ -619,7 +647,7 @@ Github：[https://github.com/surely-vue/table]
       export default {
         name: 'custom-name',
         setup() {
-          const formItemContext = Form.useFormItemContext();
+          const formItemContext = Form.useInjectFormItemContext();
         },
       };
     </script>

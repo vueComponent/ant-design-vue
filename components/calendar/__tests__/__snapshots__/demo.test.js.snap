@@ -21,7 +21,7 @@ exports[`renders ./components/calendar/demo/basic.vue correctly 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">
@@ -1225,7 +1225,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">
@@ -1651,7 +1651,7 @@ exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">

@@ -232,6 +232,11 @@ function RangerPicker<DateType>() {
       'direction',
       'activePickerIndex',
       'autocomplete',
+      'minuteStep',
+      'hourStep',
+      'secondStep',
+      'hideDisabledOptions',
+      'disabledMinutes',
     ] as any,
     setup(props, { attrs, expose }) {
       const needConfirmButton = computed(
@@ -986,7 +991,6 @@ function RangerPicker<DateType>() {
         ) {
           // Arrow offset
           arrowLeft = startInputDivRef.value.offsetWidth + separatorRef.value.offsetWidth;
-
           if (
             panelDivRef.value.offsetWidth &&
             arrowRef.value.offsetWidth &&
@@ -1001,7 +1005,8 @@ function RangerPicker<DateType>() {
           }
         }
 
-        const arrowPositionStyle = direction === 'rtl' ? { right: arrowLeft } : { left: arrowLeft };
+        const arrowPositionStyle =
+          direction === 'rtl' ? { right: `${arrowLeft}px` } : { left: `${arrowLeft}px` };
 
         function renderPanels() {
           let panels: VueNode;
@@ -1092,7 +1097,7 @@ function RangerPicker<DateType>() {
           return (
             <div
               class={`${prefixCls}-panel-container`}
-              style={{ marginLeft: panelLeft }}
+              style={{ marginLeft: `${panelLeft}px` }}
               ref={panelDivRef}
               onMousedown={e => {
                 e.preventDefault();

@@ -208,7 +208,7 @@ exports[`renders ./components/descriptions/demo/responsive.vue correctly 1`] = `
 
 exports[`renders ./components/descriptions/demo/size.vue correctly 1`] = `
 <div>
-  <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="default"><span class="ant-radio-inner"></span></span><span>default</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="middle"><span class="ant-radio-inner"></span></span><span>middle</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="small"><span class="ant-radio-inner"></span></span><span>small</span></label></div><br><br>
+  <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="default"><span class="ant-radio-inner"></span></span><span>default</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="middle"><span class="ant-radio-inner"></span></span><span>middle</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="small"><span class="ant-radio-inner"></span></span><span>small</span></label></div><br><br>
   <div class="ant-descriptions ant-descriptions-bordered">
     <div class="ant-descriptions-header">
       <div class="ant-descriptions-title">Custom Size</div>

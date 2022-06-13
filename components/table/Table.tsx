@@ -156,6 +156,10 @@ export const tableProps = () => {
       type: Function as PropType<TableProps['onExpandedRowsChange']>,
       default: undefined,
     },
+    'onUpdate:expandedRowKeys': {
+      type: Function as PropType<TableProps['onExpandedRowsChange']>,
+      default: undefined,
+    },
     defaultExpandAllRows: {
       type: Boolean as PropType<TableProps['defaultExpandAllRows']>,
       default: undefined,

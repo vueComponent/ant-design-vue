@@ -87,7 +87,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | defaultExpandAllRows | 初始时，是否展开所有行 | boolean | false |  |
 | defaultExpandedRowKeys | 默认展开的行 | string\[] | - |  |
 | emptyText | 自定义空数据时的显示内容 | v-slot:emptyText | - | 3.0 |
-| expandedRowKeys | 展开的行，控制属性 | string\[] | - |  |
+| expandedRowKeys(v-model) | 展开的行，控制属性 | string\[] | - |  |
 | expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| v-slot:expandedRowRender="{record, index, indent, expanded}" | - |  |
 | expandFixed | 控制展开图标是否固定，可选 true `left` `right` | boolean \| string | false | 3.0 |
 | expandIcon | 自定义展开图标 | Function(props):VNode \| v-slot:expandIcon="props" | - |  |

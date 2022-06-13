@@ -10,6 +10,16 @@
 
 ---
 
+## 3.2.7
+
+`2022-06-13`
+
+- 🌟 `Checkbox` supports adding extra properties [#5678](https://github.com/vueComponent/ant-design-vue/issues/5678)
+- 🌟 `RadioGroup` support global size [#5690](https://github.com/vueComponent/ant-design-vue/issues/5690)
+- 🌟 `Table` expandedRowKeys support v-model [#5695](https://github.com/vueComponent/ant-design-vue/issues/5695)
+- 🐞 Fix global Form message not taking effect [#5693](https://github.com/vueComponent/ant-design-vue/issues/5693)
+- 🐞 Fix `Typography` Enter key triggers end event twice, end is no longer triggered when blur [#5696](https://github.com/vueComponent/ant-design-vue/issues/5696)
+
 ## 3.2.6
 
 `2022-06-07`

@@ -10,6 +10,16 @@
 
 ---
 
+## 3.2.7
+
+`2022-06-13`
+
+- 🌟 `Checkbox` 支持添加额外属性 [#5678](https://github.com/vueComponent/ant-design-vue/issues/5678)
+- 🌟 `RadioGroup` 支持全局 size [#5690](https://github.com/vueComponent/ant-design-vue/issues/5690)
+- 🌟 `Table` expandedRowKeys 支持 v-model [#5695](https://github.com/vueComponent/ant-design-vue/issues/5695)
+- 🐞 修复全局 Form message 未生效问题 [#5693](https://github.com/vueComponent/ant-design-vue/issues/5693)
+- 🐞 修复 `Typography` 回车键触发两次 end 事件问题，blur 时不再触发 end [#5696](https://github.com/vueComponent/ant-design-vue/issues/5696)
+
 ## 3.2.6
 
 `2022-06-07`

@@ -146,8 +146,8 @@ const generateConfig: GenerateConfig<Dayjs> = {
     parse: (locale, text, formats) => {
       const localeStr = parseLocale(locale);
       for (let i = 0; i < formats.length; i += 1) {
-        const format = formats[i];
-        const formatText = text;
+        let format = formats[i];
+        let formatText = text;
         if (format.includes('wo') || format.includes('Wo')) {
           // parse Wo
           const year = formatText.split('-')[0];
@@ -162,6 +162,20 @@ const generateConfig: GenerateConfig<Dayjs> = {
           parseNoMatchNotice();
           return null;
         }
+
+        if (formatText && formatText.includes('Q')) {
+          const [year, quarter] = formatText.split('-');
+          formatText = `${year}-${
+            {
+              Q1: '01-01',
+              Q2: '04-01',
+              Q3: '07-01',
+              Q4: '10-01',
+            }[quarter]
+          }`;
+          format = 'YYYY-MM-DD';
+        }
+
         const date = dayjs(formatText, format, true).locale(localeStr);
         if (date.isValid()) {
           return date;

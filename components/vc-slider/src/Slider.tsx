@@ -70,10 +70,13 @@ const Slider = defineComponent({
       const changedValue = nextState.sValue;
       this.$emit('change', changedValue);
     },
-    onStart(position) {
+    onStart(position, force) {
       this.setState({ dragging: true });
       const { sValue } = this;
-      this.$emit('beforeChange', sValue);
+
+      if (force) {
+        this.$emit('beforeChange', sValue);
+      }
 
       const value = this.calcValueByPos(position);
 

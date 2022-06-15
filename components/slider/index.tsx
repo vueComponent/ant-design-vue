@@ -67,6 +67,7 @@ export const sliderProps = () => ({
   autofocus: { type: Boolean, default: undefined },
   handleStyle: { type: [Object, Array] as PropType<CSSProperties[] | CSSProperties> },
   trackStyle: { type: [Object, Array] as PropType<CSSProperties[] | CSSProperties> },
+  onBeforeChange: { type: Function as PropType<(value: Value) => void> },
   onChange: { type: Function as PropType<(value: Value) => void> },
   onAfterChange: { type: Function as PropType<(value: Value) => void> },
   onFocus: { type: Function as PropType<FocusEventHandler> },

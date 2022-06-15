@@ -8,17 +8,23 @@ title:
 
 ## zh-CN
 
-当 Slider 的值发生改变时，会触发 `onChange` 事件，并把改变后的值作为参数传入。在 `onmouseup` 时，会触发 `onAfterChange` 事件，并把当前值作为参数传入。
+当 Slider 的值发生改变时，会触发 `onChange` 事件，并把改变后的值作为参数传入。在 `onmousedown` 时，会触发 `onBeforeChange` 事件，并把当前值作为参数传入。在 `onmouseup` 时，会触发 `onAfterChange` 事件，并把当前值作为参数传入。
 
 ## en-US
 
-The `onChange` callback function will fire when the user changes the slider's value. The `onAfterChange` callback function will fire when `onmouseup` fired.
+The `onChange` callback function will fire when the user changes the slider's value. The `onBeforeChange` callback function will fire when `onmousedown` fired. The `onAfterChange` callback function will fire when `onmouseup` fired.
 </docs>
 
 <template>
   <div class="code-box-demo">
-    <a-slider v-model:value="value1" @afterChange="onAfterChange" />
-    <a-slider v-model:value="value2" range :step="10" @afterChange="onAfterChange" />
+    <a-slider v-model:value="value1" @beforeChange="onBeforeChange" @afterChange="onAfterChange" />
+    <a-slider
+      v-model:value="value2"
+      range
+      :step="10"
+      @beforeChange="onBeforeChange"
+      @afterChange="onAfterChange"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -29,6 +35,10 @@ export default defineComponent({
     const value1 = ref<number>(30);
     const value2 = ref<[number, number]>([20, 50]);
 
+    const onBeforeChange = (value: number) => {
+      console.log('beforeChange: ', value);
+    };
+
     const onAfterChange = (value: number) => {
       console.log('afterChange: ', value);
     };
@@ -36,6 +46,7 @@ export default defineComponent({
     return {
       value1,
       value2,
+      onBeforeChange,
       onAfterChange,
     };
   },

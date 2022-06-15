@@ -132,7 +132,7 @@ export default function createSlider(Component) {
             this.dragOffset = p - handlePosition;
             p = handlePosition;
           }
-          this.onStart(p);
+          this.onStart(p, true);
         }
       },
       onMouseDown(e) {

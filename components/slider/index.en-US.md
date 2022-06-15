@@ -40,6 +40,7 @@ To input a value in a range.
 | Events Name | Description | Arguments |  |
 | --- | --- | --- | --- |
 | change | Callback function that is fired when the user changes the slider's value. | Function(value) | NOOP |
+| beforeChange | Fire when `mousedown` is fired. | Function(value) | NOOP |
 | afterChange | Fire when `mouseup` is fired. | Function(value) | NOOP |
 
 ## Methods

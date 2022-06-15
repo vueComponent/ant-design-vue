@@ -176,9 +176,12 @@ const Range = defineComponent({
       nextBounds[index] = value;
       return nextBounds;
     },
-    onStart(position) {
+    onStart(position, force) {
       const { bounds } = this;
-      this.$emit('beforeChange', bounds);
+
+      if (force) {
+        this.$emit('beforeChange', bounds);
+      }
 
       const value = this.calcValueByPos(position);
       this.startValue = value;

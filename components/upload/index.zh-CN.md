@@ -25,7 +25,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 | beforeUpload | 上传文件之前的钩子，参数为上传的文件，若返回 `false` 则停止上传。支持返回一个 Promise 对象，Promise 对象 reject 时则停止上传，resolve 时开始上传（ resolve 传入 `File` 或 `Blob` 对象则上传 resolve 传入对象）。 | (file, fileList) => `boolean` \| `Promise` | 无 |  |
 | customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | Function | 无 |  |  |
 | data | 上传所需参数或返回上传参数的方法 | object\|(file) => object | 无 |  |  |
-| directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false |  |  |
 | directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false | 3.0 |  |
 | disabled | 是否禁用 | boolean | false |  |  |
 | downloadIcon | 自定义下载 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |

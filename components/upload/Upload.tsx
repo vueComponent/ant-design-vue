@@ -347,6 +347,7 @@ export default defineComponent({
         onError,
         onProgress,
         onSuccess,
+        ...attrs,
         ...(props as RcUploadProps),
         id: props.id ?? formItemContext.id.value,
         prefixCls: prefixCls.value,

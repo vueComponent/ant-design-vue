@@ -94,7 +94,7 @@ const columns: TableColumnType<TableDataType>[] = [
     filterMultiple: false,
     onFilter: (value: string, record: TableDataType) => record.address.indexOf(value) === 0,
     sorter: (a: TableDataType, b: TableDataType) => a.address.length - b.address.length,
-    sortDirections: ['descend', 'ascend'],
+    sortDirections: ['descend', 'ascend', null],
   },
 ];
 

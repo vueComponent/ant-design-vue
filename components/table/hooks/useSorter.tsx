@@ -48,7 +48,13 @@ function nextSortDirection(sortDirections: SortOrder[], current: SortOrder | nul
     return sortDirections[0];
   }
 
-  return sortDirections[sortDirections.indexOf(current) + 1];
+  const index = sortDirections.indexOf(current);
+
+  if (index === sortDirections.length - 1) {
+    return sortDirections[0];
+  }
+
+  return sortDirections[index + 1];
 }
 
 export interface SortState<RecordType = DefaultRecordType> {

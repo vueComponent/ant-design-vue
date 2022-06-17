@@ -11,6 +11,7 @@ describe('Table.sorter', () => {
     dataIndex: 'name',
     key: 'name',
     sorter: sorterFn,
+    sortDirections: ['ascend', 'descend', null],
   };
 
   const data = [
@@ -143,7 +144,7 @@ describe('Table.sorter', () => {
     await asyncExpect(() => {
       const sorter3 = handleChange.mock.calls[2][2];
       expect(sorter3.column).toBe(undefined);
-      expect(sorter3.order).toBe(undefined);
+      expect(sorter3.order).toBe(null);
       expect(sorter3.field).toBe('name');
       expect(sorter3.columnKey).toBe('name');
     });

@@ -342,11 +342,13 @@ export default defineComponent({
     };
     return () => {
       const { listType, disabled, type } = props;
+      const { class: className, style: styleName, ...transAttrs } = attrs;
       const rcUploadProps = {
         onBatchStart,
         onError,
         onProgress,
         onSuccess,
+        ...transAttrs,
         ...(props as RcUploadProps),
         id: props.id ?? formItemContext.id.value,
         prefixCls: prefixCls.value,

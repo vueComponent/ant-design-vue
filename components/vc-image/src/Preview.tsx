@@ -295,6 +295,14 @@ const Preview = defineComponent({
         },
         { flush: 'post', immediate: true },
       );
+      watch([lastWheelZoomDirection], () => {
+        const { wheelDirection } = lastWheelZoomDirection.value;
+        if (wheelDirection > 0) {
+          onZoomOut();
+        } else if (wheelDirection < 0) {
+          onZoomIn();
+        }
+      });
     });
     onUnmounted(() => {
       removeListeners();

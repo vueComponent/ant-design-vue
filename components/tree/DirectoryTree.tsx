@@ -239,7 +239,7 @@ export default defineComponent({
         );
       } else {
         // Single click
-        newSelectedKeys = keys;
+        newSelectedKeys = [key];
         lastSelectedKey.value = key;
         cachedSelectedKeys.value = newSelectedKeys;
         newEvent.selectedNodes = convertDirectoryKeysToNodes(

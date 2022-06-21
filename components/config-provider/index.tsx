@@ -62,6 +62,7 @@ watchEffect(() => {
 
 type GlobalConfigProviderProps = {
   prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;
+  getPopupContainer?: ConfigProviderProps['getPopupContainer'];
 };
 
 let stopWatchEffect: WatchStopHandle;

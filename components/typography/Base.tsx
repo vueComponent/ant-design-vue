@@ -30,6 +30,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import type { EventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
 import type { AutoSizeType } from '../input/inputProps';
+import useMergedState from '../_util/hooks/useMergedState';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 
@@ -130,7 +131,6 @@ const Base = defineComponent({
     const { prefixCls, direction } = useConfigInject('typography', props);
 
     const state = reactive({
-      edit: false,
       copied: false,
       ellipsisText: '',
       ellipsisContent: null,
@@ -256,14 +256,20 @@ const Base = defineComponent({
         }, 3000);
       });
     }
+
     const editable = computed(() => {
       const editable = props.editable;
-      if (!editable) return { editing: state.edit };
+      if (!editable) return { editing: false };
 
       return {
-        editing: state.edit,
         ...(typeof editable === 'object' ? editable : null),
       };
+    });
+
+    const [editing, setEditing] = useMergedState(false, {
+      value: computed(() => {
+        return editable.value.editing;
+      }),
     });
 
     function triggerEdit(edit: boolean) {
@@ -272,13 +278,17 @@ const Base = defineComponent({
         onStart();
       }
 
-      state.edit = edit;
-      nextTick(() => {
-        if (!edit) {
+      setEditing(edit);
+    }
+    watch(
+      editing,
+      val => {
+        if (!val) {
           editIcon.value?.focus();
         }
-      });
-    }
+      },
+      { flush: 'post' },
+    );
 
     // ============== Ellipsis ==============
     function resizeOnNextFrame() {
@@ -467,7 +477,7 @@ const Base = defineComponent({
     }
 
     return () => {
-      const { editing, triggerType = ['icon'] } = editable.value;
+      const { triggerType = ['icon'] } = editable.value;
       const children =
         props.ellipsis || props.editable
           ? props.content !== undefined
@@ -477,7 +487,7 @@ const Base = defineComponent({
           ? slots.default()
           : props.content;
 
-      if (editing) {
+      if (editing.value) {
         return renderEditInput();
       }
       return (

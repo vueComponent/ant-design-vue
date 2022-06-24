@@ -10,6 +10,17 @@
 
 ---
 
+## 3.2.8
+
+`2022-06-24`
+
+- 🌟 Image add scroll wheel to zoom in and out [#5703](https://github.com/vueComponent/ant-design-vue/issues/5703)
+- 🌟 ConfigProvider.config added getPopupContainer [62dc24](https://github.com/vueComponent/ant-design-vue/commit/62dc2402f37c0ca0514f5b8fbb363247f0216bb2)
+- 🐞 Upload tooltip does not show issues [#5714](https://github.com/vueComponent/ant-design-vue/issues/5714)
+- 🐞 Row gutter property type error [#5725](https://github.com/vueComponent/ant-design-vue/issues/5725)
+- 🐞 Whether Typography is editable or not, the state is not reset after switching [#5743](https://github.com/vueComponent/ant-design-vue/issues/5743)
+- 🐞 In DirectoryTree multi-selection mode, a single node should be selected when clicking (multi-selection only selects multiple nodes when pressing ctrl and shift keys) [#5732](https://github.com/vueComponent/ant-design-vue/ issues/5732)
+
 ## 3.2.7
 
 `2022-06-13`
@@ -461,7 +472,7 @@ Github：[https://github.com/surely-vue/table]
 - 🐞 Fix the problem that TreeSelect selectable and checkable cannot be closed [#4838](https://github.com/vueComponent/ant-design-vue/issues/4838)
 - 🐞 Fix the problem that Tabs cannot be scrolled on the mobile terminal [#4828](https://github.com/vueComponent/ant-design-vue/issues/4828)
 - 🐞 Fix InputNumber does not trigger inspection under form [#4831](https://github.com/vueComponent/ant-design-vue/issues/4831)
-- 🐞 Fix that when Select uses `<a-select-option>` to build a node, the automatic word segmentation fails [#4844](https://github.com/vueComponent/ant-design-vue/issues/4844)
+- 🐞 Fix that when Select uses `\<a-select-option>` to build a node, the automatic word segmentation fails [#4844](https://github.com/vueComponent/ant-design-vue/issues/4844)
 
 ## 3.0.0-alpha.8
 

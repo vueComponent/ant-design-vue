@@ -10,6 +10,17 @@
 
 ---
 
+## 3.2.8
+
+`2022-06-24`
+
+- 🌟 Image 新增滚轮放大缩小 [#5703](https://github.com/vueComponent/ant-design-vue/issues/5703)
+- 🌟 ConfigProvider.config 新增 getPopupContainer [62dc24](https://github.com/vueComponent/ant-design-vue/commit/62dc2402f37c0ca0514f5b8fbb363247f0216bb2)
+- 🐞 Upload tooltip 不展示问题 [#5714](https://github.com/vueComponent/ant-design-vue/issues/5714)
+- 🐞 Row gutter 属性类型错误 [#5725](https://github.com/vueComponent/ant-design-vue/issues/5725)
+- 🐞 Typography 是否可编辑切换后，状态未重置问题 [#5743](https://github.com/vueComponent/ant-design-vue/issues/5743)
+- 🐞 DirectoryTree 多选模式下，点击时应该选中单个节点(多选只有配合 ctrl、shift 按键时选中多个节点) [#5732](https://github.com/vueComponent/ant-design-vue/issues/5732)
+
 ## 3.2.7
 
 `2022-06-13`

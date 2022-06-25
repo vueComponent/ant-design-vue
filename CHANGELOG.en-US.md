@@ -10,6 +10,12 @@
 
 ---
 
+## 3.2.9
+
+`2022-06-25`
+
+- 🐞 Fix the flickering problem when the Select edge position is closed [8a659d](https://github.com/vueComponent/ant-design-vue/commit/8a659da84fb8c44620fa279d9d6d73d6bd93d1f7)
+
 ## 3.2.8
 
 `2022-06-24`

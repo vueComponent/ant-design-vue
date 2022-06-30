@@ -93,8 +93,8 @@ export interface ShowCountProps {
 const textAreaProps = () => ({
   ...omit(inputProps(), ['prefix', 'addonBefore', 'addonAfter', 'suffix']),
   rows: Number,
-  autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
-  autoSize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
+  autosize: { type: [Boolean, Object] as PropType<boolean | AutoSizeType>, default: undefined },
+  autoSize: { type: [Boolean, Object] as PropType<boolean | AutoSizeType>, default: undefined },
   onResize: { type: Function as PropType<(size: { width: number; height: number }) => void> },
   onCompositionstart: Function as PropType<CompositionEventHandler>,
   onCompositionend: Function as PropType<CompositionEventHandler>,

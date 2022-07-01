@@ -119,7 +119,7 @@
     .iconfont-mixin();
     position: absolute;
     top: 50%;
-    right: @control-padding-horizontal - 1px;
+    right: calc(@control-padding-horizontal + (@selection-item-padding - @font-size-sm) / 2);
     width: @font-size-sm;
     height: @font-size-sm;
     margin-top: (-@font-size-sm / 2);
@@ -151,7 +151,7 @@
   &-clear {
     position: absolute;
     top: 50%;
-    right: @control-padding-horizontal - 1px;
+    right: calc(@control-padding-horizontal + (@selection-item-padding - @font-size-sm) / 2);
     z-index: 1;
     display: inline-block;
     width: @font-size-sm;

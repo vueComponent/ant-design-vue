@@ -10,6 +10,12 @@
 
 ---
 
+## 3.3.0-beta.2
+
+`2022-07-02`
+
+- 🐞 Fix dist/antd.css file missing issue caused by 3.3.0-beta.1
+
 ## 3.3.0-beta.1
 
 `2022-07-02`

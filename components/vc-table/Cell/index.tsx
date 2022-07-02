@@ -1,7 +1,12 @@
 import classNames from '../../_util/classNames';
-import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
-import type { CSSProperties } from 'vue';
-import { computed, defineComponent, isVNode, renderSlot } from 'vue';
+import {
+  filterEmpty,
+  flattenChildren,
+  isValidElement,
+  parseStyleText,
+} from '../../_util/props-util';
+import type { CSSProperties, VNodeArrayChildren } from 'vue';
+import { Text, computed, defineComponent, isVNode, renderSlot } from 'vue';
 
 import type {
   DataIndex,
@@ -144,6 +149,18 @@ export default defineComponent<CellProps>({
       }
 
       additionalProps?.onMouseleave?.(event);
+    };
+    const getTitle = (vnodes: VNodeArrayChildren) => {
+      const vnode = filterEmpty(vnodes)[0];
+      if (isVNode(vnode)) {
+        if (vnode.type === Text) {
+          return vnode.children;
+        } else {
+          return Array.isArray(vnode.children) ? getTitle(vnode.children) : undefined;
+        }
+      } else {
+        return vnode;
+      }
     };
     return () => {
       const {
@@ -298,8 +315,8 @@ export default defineComponent<CellProps>({
       if (ellipsisConfig && (ellipsisConfig.showTitle || rowType === 'header')) {
         if (typeof childNode === 'string' || typeof childNode === 'number') {
           title = childNode.toString();
-        } else if (isVNode(childNode) && typeof childNode.children === 'string') {
-          title = childNode.children;
+        } else if (isVNode(childNode)) {
+          title = getTitle([childNode]);
         }
       }
 

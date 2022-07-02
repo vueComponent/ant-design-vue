@@ -29,7 +29,7 @@
     "typings/global.d.ts"
   ],
   "scripts": {
-    "predev": "npm run version && node node_modules/esbuild/install.js",
+    "predev": "npm run version",
     "precompile": "npm run version",
     "pretest": "npm run version",
     "predist": "npm run version",

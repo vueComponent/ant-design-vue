@@ -10,7 +10,8 @@ import Ribbon from './Ribbon';
 import { isPresetColor } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
-import type { PresetStatusColorType } from '../_util/colors';
+import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
+import type { LiteralUnion } from '../_util/type';
 
 export const badgeProps = () => ({
   /** Number to show in badge */
@@ -22,9 +23,11 @@ export const badgeProps = () => ({
   dot: { type: Boolean, default: undefined },
   prefixCls: String,
   scrollNumberPrefixCls: String,
-  status: { type: String as PropType<PresetStatusColorType> },
+  // status: { type: String as PropType<PresetStatusColorType> },
   size: { type: String as PropType<'default' | 'small'>, default: 'default' },
-  color: String,
+  color: {
+    type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
+  },
   text: PropTypes.any,
   offset: Array as unknown as PropType<[number | string, number | string]>,
   numberStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
@@ -51,11 +54,7 @@ export default defineComponent({
       ) as string | number | null;
     });
 
-    const hasStatus = computed(
-      () =>
-        (props.status !== null && props.status !== undefined) ||
-        (props.color !== null && props.color !== undefined),
-    );
+    const hasStatus = computed(() => props.color !== null && props.color !== undefined);
 
     const isZero = computed(
       () => numberedDisplayCount.value === '0' || numberedDisplayCount.value === 0,
@@ -95,7 +94,6 @@ export default defineComponent({
     // Shared styles
     const statusCls = computed(() => ({
       [`${prefixCls.value}-status-dot`]: hasStatus.value,
-      [`${prefixCls.value}-status-${props.status}`]: !!props.status,
       [`${prefixCls.value}-status-${props.color}`]: isPresetColor(props.color),
     }));
 
@@ -113,7 +111,6 @@ export default defineComponent({
       [`${prefixCls.value}-count-sm`]: props.size === 'small',
       [`${prefixCls.value}-multiple-words`]:
         !isDotRef.value && displayCount.value && displayCount.value.toString().length > 1,
-      [`${prefixCls.value}-status-${props.status}`]: !!props.status,
       [`${prefixCls.value}-status-${props.color}`]: isPresetColor(props.color),
     }));
 

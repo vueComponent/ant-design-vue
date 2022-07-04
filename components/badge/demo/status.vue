@@ -16,19 +16,19 @@ Standalone badge with status.
 </docs>
 
 <template>
-  <a-badge status="success" />
-  <a-badge status="error" />
-  <a-badge status="default" />
-  <a-badge status="processing" />
-  <a-badge status="warning" />
+  <a-badge color="success" />
+  <a-badge color="error" />
+  <a-badge color="default" />
+  <a-badge color="processing" />
+  <a-badge color="warning" />
   <br />
-  <a-badge status="success" text="Success" />
+  <a-badge text="Success" />
   <br />
-  <a-badge status="error" text="Error" />
+  <a-badge color="error" text="Error" />
   <br />
-  <a-badge status="default" text="Default" />
+  <a-badge color="default" text="Default" />
   <br />
-  <a-badge status="processing" text="Processing" />
+  <a-badge color="processing" text="Processing" />
   <br />
-  <a-badge status="warning" text="warning" />
+  <a-badge color="warning" text="warning" />
 </template>

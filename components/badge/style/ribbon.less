@@ -47,6 +47,28 @@
     }
   }
 
+  &-color {
+    &-success {
+      background-color: @success-color;
+    }
+
+    &-processing {
+      background-color: @processing-color;
+    }
+
+    &-default {
+      background-color: @normal-color;
+    }
+
+    &-error {
+      background-color: @error-color;
+    }
+
+    &-warning {
+      background-color: @warning-color;
+    }
+  }
+
   // colors
   // mixin to iterate over colors and create CSS class for each one
   .make-color-classes(@i: length(@preset-colors)) when (@i > 0) {

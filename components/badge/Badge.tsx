@@ -23,7 +23,6 @@ export const badgeProps = () => ({
   dot: { type: Boolean, default: undefined },
   prefixCls: String,
   scrollNumberPrefixCls: String,
-  // status: { type: String as PropType<PresetStatusColorType> },
   size: { type: String as PropType<'default' | 'small'>, default: 'default' },
   color: {
     type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,

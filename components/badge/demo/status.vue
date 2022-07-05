@@ -22,7 +22,7 @@ Standalone badge with status.
   <a-badge color="processing" />
   <a-badge color="warning" />
   <br />
-  <a-badge text="Success" />
+  <a-badge color="success" text="Success" />
   <br />
   <a-badge color="error" text="Error" />
   <br />

@@ -1,5 +1,5 @@
 import type { App, PropType, ExtractPropTypes } from 'vue';
-import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
+import { watch, ref, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import VcMentions, { Option } from '../vc-mentions';
@@ -155,16 +155,6 @@ const Mentions = defineComponent({
     };
 
     expose({ focus, blur });
-
-    onMounted(() => {
-      nextTick(() => {
-        if (process.env.NODE_ENV === 'test') {
-          if (props.autofocus) {
-            focus();
-          }
-        }
-      });
-    });
 
     return () => {
       const {

@@ -4,7 +4,6 @@ import {
   defineComponent,
   getCurrentInstance,
   nextTick,
-  onMounted,
   ref,
   watch,
   watchEffect,
@@ -215,13 +214,6 @@ export default defineComponent({
       );
     };
 
-    onMounted(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (props.autofocus) {
-          focus();
-        }
-      }
-    });
     expose({
       focus,
       blur,

@@ -246,11 +246,6 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (props.autofocus) {
-          focus();
-        }
-      }
       clearPasswordValueAttribute();
     });
     onBeforeUnmount(() => {

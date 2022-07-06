@@ -5,7 +5,7 @@ import type {
   TransitionGroupProps,
   TransitionProps,
 } from 'vue';
-import { nextTick, Transition as T, TransitionGroup as TG } from 'vue';
+import { nextTick, Transition, TransitionGroup } from 'vue';
 import { tuple } from './type';
 
 const SelectPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
@@ -57,9 +57,6 @@ export const getTransitionGroupProps = (transitionName: string, opt: TransitionP
     : { css: false, ...opt };
   return transitionProps;
 };
-
-let Transition = T;
-let TransitionGroup = TG;
 
 export declare type MotionEvent = (TransitionEvent | AnimationEvent) & {
   deadline?: boolean;

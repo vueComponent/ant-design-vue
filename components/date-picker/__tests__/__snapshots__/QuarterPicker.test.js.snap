@@ -7,7 +7,7 @@ exports[`QuarterPicker reset select item when popup close 1`] = `
   </div>
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-quarter-panel">

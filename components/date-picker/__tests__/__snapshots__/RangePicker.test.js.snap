@@ -9,7 +9,7 @@ exports[`RangePicker customize separator 1`] = `
   <!---->
   <div>
     <!---->
-    <div class="ant-picker-dropdown ant-picker-dropdown-range" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-picker-dropdown-range ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
       <div class="ant-picker-range-wrapper ant-picker-date-range-wrapper" style="min-width: 0px;">
         <div class="ant-picker-range-arrow" style="left: 0px;"></div>
         <div class="ant-picker-panel-container" style="margin-left: 0px;">

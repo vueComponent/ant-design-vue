@@ -1348,7 +1348,7 @@ const Select = {
                 opacity,
               }}
             >
-              {label}
+              {title || label}
             </div>
           );
         }

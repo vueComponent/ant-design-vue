@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { ref } from 'vue';
+import { sleep } from '../../../tests/utils';
 import Anchor from '..';
 
 const { Link } = Anchor;
@@ -8,7 +9,7 @@ let idCounter = 0;
 const getHashUrl = () => `Anchor-API-${idCounter++}`;
 
 describe('Anchor Render', () => {
-  it('Anchor render perfectly', async done => {
+  it('Anchor render perfectly', async () => {
     const hash = getHashUrl();
     const anchor = ref(null);
     const activeLink = ref(null);
@@ -29,17 +30,13 @@ describe('Anchor Render', () => {
       },
       { sync: false },
     );
+    await sleep();
+    wrapper.find(`a[href="#${hash}`).trigger('click');
 
-    wrapper.vm.$nextTick(() => {
-      wrapper.find(`a[href="#${hash}`).trigger('click');
-
-      setTimeout(() => {
-        expect(activeLink.value).not.toBe(hash);
-        done();
-      }, 1000);
-    });
+    await sleep();
+    expect(activeLink.value).not.toBe(hash);
   });
-  it('Anchor render perfectly for complete href - click', async done => {
+  it('Anchor render perfectly for complete href - click', async () => {
     const currentActiveLink = ref(null);
     const wrapper = mount(
       {
@@ -58,13 +55,9 @@ describe('Anchor Render', () => {
       },
       { sync: false },
     );
-
-    wrapper.vm.$nextTick(() => {
-      wrapper.find('a[href="http://www.example.com/#API"]').trigger('click');
-
-      expect(currentActiveLink.value).toBe('http://www.example.com/#API');
-      done();
-    });
+    await sleep();
+    wrapper.find('a[href="http://www.example.com/#API"]').trigger('click');
+    expect(currentActiveLink.value).toBe('http://www.example.com/#API');
   });
   /*
     it('Anchor render perfectly for complete href - scroll', done => {

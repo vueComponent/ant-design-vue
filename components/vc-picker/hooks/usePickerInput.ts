@@ -2,8 +2,9 @@ import type { ComputedRef, HTMLAttributes, Ref } from 'vue';
 import { onBeforeUnmount, onMounted, watch, ref, computed } from 'vue';
 import type { FocusEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
-import { addGlobalMousedownEvent, getTargetFromEvent } from '../utils/uiUtil';
+import { addGlobalMousedownEvent } from '../utils/uiUtil';
 import raf from '../../_util/raf';
+import getTargetFromEvent from '../../vc-util/Dom/getTargetFromEvent';
 
 export default function usePickerInput({
   open,

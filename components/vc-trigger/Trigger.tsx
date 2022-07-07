@@ -21,6 +21,7 @@ import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
 import supportsPassive from '../_util/supportsPassive';
 import { useInjectTrigger, useProvidePortal } from './context';
+import getTargetFromEvent from '../vc-util/Dom/getTargetFromEvent';
 
 function noop() {}
 function returnEmptyString() {
@@ -362,11 +363,11 @@ export default defineComponent({
       }
     },
 
-    onDocumentClick(event) {
+    onDocumentClick(event: MouseEvent) {
       if (this.$props.mask && !this.$props.maskClosable) {
         return;
       }
-      const target = event.target;
+      const target = getTargetFromEvent(event);
       const root = this.getRootDomNode();
       const popupNode = this.getPopupDomNode();
       if (

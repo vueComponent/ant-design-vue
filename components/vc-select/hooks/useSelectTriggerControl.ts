@@ -1,17 +1,16 @@
 import type { Ref } from 'vue';
 import { onBeforeUnmount, onMounted } from 'vue';
 
+import getTargetFromEvent from '../../vc-util/Dom/getTargetFromEvent';
+
 export default function useSelectTriggerControl(
   refs: Ref[],
   open: Ref<boolean>,
   triggerOpen: (open: boolean) => void,
 ) {
   function onGlobalMouseDown(event: MouseEvent) {
-    let target = event.target as HTMLElement;
+    const target = getTargetFromEvent(event);
 
-    if (target.shadowRoot && event.composed) {
-      target = (event.composedPath()[0] || target) as HTMLElement;
-    }
     const elements = [refs[0]?.value, refs[1]?.value?.getPopupElement()];
     if (
       open.value &&

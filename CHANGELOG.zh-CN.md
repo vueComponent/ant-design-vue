@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.10
+
+`2022-07-07`
+
+- 🐞 修复在 `process.env.NODE_ENV = 'test'` 下弹窗类组件无法使用问题 [#4565](https://github.com/vueComponent/ant-design-vue/issues/4565)
+- 🐞 修复 Menu 组件在快速 hover 弹出层时，弹出层直接关闭问题 [36df58](https://github.com/vueComponent/ant-design-vue/commit/36df585acf9a7d53c8b50be2ab240f54588a3b20)
+- 🐞 修复 Input autosize 类型错误 [#5766](https://github.com/vueComponent/ant-design-vue/issues/5766)
+- 🐞 修复 Table ellipsis tilte 在 fixed 下失效问题 [#5755](https://github.com/vueComponent/ant-design-vue/issues/5755)
+
 ## 3.2.9
 
 `2022-06-25`

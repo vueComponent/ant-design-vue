@@ -142,6 +142,7 @@
     "babel-plugin-import": "^1.1.1",
     "babel-plugin-inline-import-data-uri": "^1.0.1",
     "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-transform-require-context": "^0.1.1",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.2",

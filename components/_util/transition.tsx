@@ -58,8 +58,8 @@ export const getTransitionGroupProps = (transitionName: string, opt: TransitionP
   return transitionProps;
 };
 
-let Transition = T;
-let TransitionGroup = TG;
+const Transition = T;
+const TransitionGroup = TG;
 
 export declare type MotionEvent = (TransitionEvent | AnimationEvent) & {
   deadline?: boolean;

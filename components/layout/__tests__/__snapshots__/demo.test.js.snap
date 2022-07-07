@@ -103,13 +103,7 @@ exports[`renders ./components/layout/demo/fixed.vue correctly 1`] = `
     </ul>
   </header>
   <main class="ant-layout-content" style="padding: 0px 50px; margin-top: 64px;">
-    <nav class="ant-breadcrumb" style="margin: 16px 0px;">
-      <ol>
-        <li><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></li>
-        <li><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></li>
-        <li><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></li>
-      </ol>
-    </nav>
+    <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
     <div style="background: rgb(255, 255, 255); padding: 24px; min-height: 380px;">Content</div>
   </main>
   <footer class="ant-layout-footer" style="text-align: center;"> Ant Design ©2018 Created by Ant UED </footer>
@@ -272,12 +266,7 @@ exports[`renders ./components/layout/demo/side.vue correctly 1`] = `
   <section class="ant-layout">
     <header class="ant-layout-header" style="padding: 0px; background: rgb(255, 255, 255);"></header>
     <main class="ant-layout-content" style="margin: 0px 16px;">
-      <nav class="ant-breadcrumb" style="margin: 16px 0px;">
-        <ol>
-          <li><span class="ant-breadcrumb-link">User</span><span class="ant-breadcrumb-separator">/</span></li>
-          <li><span class="ant-breadcrumb-link">Bill</span><span class="ant-breadcrumb-separator">/</span></li>
-        </ol>
-      </nav>
+      <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">User</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">Bill</span><span class="ant-breadcrumb-separator">/</span></span></div>
       <div style="padding: 24px; background: rgb(255, 255, 255); min-height: 360px;"> Bill is a cat. </div>
     </main>
     <footer class="ant-layout-footer" style="text-align: center;"> Ant Design ©2018 Created by Ant UED </footer>
@@ -314,13 +303,7 @@ exports[`renders ./components/layout/demo/top.vue correctly 1`] = `
     </ul>
   </header>
   <main class="ant-layout-content" style="padding: 0px 50px;">
-    <nav class="ant-breadcrumb" style="margin: 16px 0px;">
-      <ol>
-        <li><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></li>
-        <li><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></li>
-        <li><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></li>
-      </ol>
-    </nav>
+    <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
     <div style="background: rgb(255, 255, 255); padding: 24px; min-height: 280px;">Content</div>
   </main>
   <footer class="ant-layout-footer" style="text-align: center;"> Ant Design ©2018 Created by Ant UED </footer>
@@ -356,13 +339,7 @@ exports[`renders ./components/layout/demo/top-side.vue correctly 1`] = `
     </ul>
   </header>
   <main class="ant-layout-content" style="padding: 0px 50px;">
-    <nav class="ant-breadcrumb" style="margin: 16px 0px;">
-      <ol>
-        <li><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></li>
-        <li><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></li>
-        <li><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></li>
-      </ol>
-    </nav>
+    <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
     <section class="ant-layout ant-layout-has-sider" style="padding: 24px 0px; background: rgb(255, 255, 255);">
       <aside style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255); flex: 0 0 200px;" class="ant-layout-sider ant-layout-sider-dark">
         <div class="ant-layout-sider-children">
@@ -555,13 +532,7 @@ exports[`renders ./components/layout/demo/top-side-2.vue correctly 1`] = `
       <!---->
     </aside>
     <section class="ant-layout" style="padding: 0px 24px 24px;">
-      <nav class="ant-breadcrumb" style="margin: 16px 0px;">
-        <ol>
-          <li><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></li>
-          <li><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></li>
-          <li><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></li>
-        </ol>
-      </nav>
+      <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
       <main class="ant-layout-content" style="padding: 24px; margin: 0px; min-height: 280px; background: rgb(255, 255, 255);"> Content </main>
     </section>
   </section>

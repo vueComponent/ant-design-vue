@@ -29,9 +29,9 @@ module.exports = {
   },
   testRegex: getTestRegex(libDir),
   moduleNameMapper: {
-    '/^@/(.*)$/': '<rootDir>/$1',
-    '/ant-design-vue$/': '<rootDir>/components/index.ts',
-    '/ant-design-vue/es/': '<rootDir>/components',
+    '^@/(.*)$/': '<rootDir>/$1',
+    'ant-design-vue$/': '<rootDir>/components/index.ts',
+    'ant-design-vue/es/': '<rootDir>/components',
   },
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   collectCoverage: process.env.COVERAGE === 'true',

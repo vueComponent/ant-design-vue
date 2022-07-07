@@ -9,18 +9,25 @@ const transformIgnorePatterns = [
 ];
 const testPathIgnorePatterns = ['/node_modules/', 'node'];
 
+function getTestRegex(libDir) {
+  if (libDir === 'dist') {
+    return 'demo\\.test\\.js$';
+  }
+  return '.*\\.test\\.(j|t)sx?$';
+}
 module.exports = {
+  verbose: true,
   setupFiles: ['./tests/setup.js'],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'vue', 'md', 'jpg'],
   modulePathIgnorePatterns: ['/_site/'],
   testPathIgnorePatterns: testPathIgnorePatterns,
   transform: {
-    '^.+\\.(vue|md)$': '<rootDir>/node_modules/@vue/vue3-jest',
-    '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
-    '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest',
-    '^.+\\.svg$': '<rootDir>/node_modules/jest-transform-stub',
+    '\\.(vue|md)$': '<rootDir>/node_modules/@vue/vue3-jest',
+    '\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
+    '\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest',
+    '\\.svg$': '<rootDir>/node_modules/jest-transform-stub',
   },
-  testRegex: libDir === 'dist' ? 'demo\\.test\\.js$' : '.*\\.test\\.js$',
+  testRegex: getTestRegex(libDir),
   moduleNameMapper: {
     '/^@/(.*)$/': '<rootDir>/$1',
     '/ant-design-vue$/': '<rootDir>/components/index.ts',

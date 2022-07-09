@@ -28,6 +28,26 @@
     "vetur",
     "typings/global.d.ts"
   ],
+  "exports": {
+    ".": {
+      "import": "./es/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./antd.css": "./dist/antd.css",
+    "./antd.compact.css": "./dist/antd.compact.css",
+    "./antd.compact.less": "./dist/antd.compact.less",
+    "./antd.dark.css": "./dist/antd.dark.css",
+    "./antd.dark.less": "./dist/antd.dark.less",
+    "./antd.variable.css": "./dist/antd.variable.css",
+    "./antd.variable.less": "./dist/antd.variable.less",
+    "./antd-with-locales": "./dist/antd-with-locales.js",
+    "./dist/*": "./dist/*",
+    "./es/*": "./es/*",
+    "./lib/*": "./lib/*",
+    "./typings/*": "./typings/*",
+    "./scripts/*": "./scripts/*",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "predev": "npm run version && node node_modules/esbuild/install.js",
     "precompile": "npm run version",

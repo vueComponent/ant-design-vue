@@ -10,7 +10,7 @@ import Ribbon from './Ribbon';
 import { isPresetColor } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
-import type { PresetStatusColorType } from '../_util/colors';
+import { PresetColorTypes, PresetStatusColorType, PresetStatusColorTypes } from '../_util/colors';
 
 export const badgeProps = () => ({
   /** Number to show in badge */
@@ -91,9 +91,18 @@ export default defineComponent({
       },
       { immediate: true },
     );
-
+    const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
+    const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
+    const presetColor = computed(() => {
+      const { color } = props;
+      if (!color) {
+        return false;
+      }
+      return PresetColorRegex.test(color) || PresetStatusColorRegex.test(color);
+    });
     // Shared styles
     const statusCls = computed(() => ({
+      [`${prefixCls.value}-${props.color}`]: presetColor.value,
       [`${prefixCls.value}-status-dot`]: hasStatus.value,
       [`${prefixCls.value}-status-${props.status}`]: !!props.status,
       [`${prefixCls.value}-status-${props.color}`]: isPresetColor(props.color),

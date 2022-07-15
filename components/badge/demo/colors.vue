@@ -24,6 +24,16 @@ New feature after 3.16.0. We preset a series of colorful Badge styles for use in
     </div>
   </div>
   <a-divider orientation="left">Custom</a-divider>
+  <a-badge color="success" text="success" />
+  <br />
+  <a-badge color="processing" text="processing" />
+  <br />
+  <a-badge color="error" text="error" />
+  <br />
+  <a-badge color="warning" text="warning" />
+  <br />
+  <a-badge color="default" text="default" />
+  <br />
   <a-badge color="#f50" text="#f50" />
   <br />
   <a-badge color="#2db7f5" text="#2db7f5" />

@@ -93,20 +93,7 @@
     }
 
     &-processing {
-      position: relative;
       background-color: @processing-color;
-
-      &::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 1px solid @processing-color;
-        border-radius: 50%;
-        animation: antStatusProcessing 1.2s infinite ease-in-out;
-        content: '';
-      }
     }
 
     &-default {
@@ -121,16 +108,7 @@
       background-color: @warning-color;
     }
 
-    // mixin to iterate over colors and create CSS class for each one
-    .make-color-classes(@i: length(@preset-colors)) when (@i > 0) {
-      .make-color-classes(@i - 1);
-      @color: extract(@preset-colors, @i);
-      @darkColor: '@{color}-6';
-      &-@{color} {
-        background: @@darkColor;
-      }
-    }
-    .make-color-classes();
+
 
     &-text {
       margin-left: 8px;
@@ -151,6 +129,7 @@
   }
 
   &-not-a-wrapper {
+
     .@{badge-prefix-cls}-zoom-appear,
     .@{badge-prefix-cls}-zoom-enter {
       animation: antNoWrapperZoomBadgeIn @animation-duration-slow @ease-out-back;
@@ -177,6 +156,33 @@
       transform-origin: 50% 50%;
     }
   }
+
+  // mixin to iterate over colors and create CSS class for each one
+  .make-color-classes(@i: length(@preset-colors)) when (@i > 0) {
+    .make-color-classes(@i - 1);
+    @color: extract(@preset-colors, @i);
+    @darkColor: '@{color}-6';
+
+    &-@{color} {
+      background: @@darkColor;
+    }
+  }
+
+  .make-status-color-classes(@status, @cssVariableType) {
+    @bgColor: '@{cssVariableType}-color';
+
+    &-@{status} {
+      background: @@bgColor;
+    }
+  }
+
+  .make-color-classes();
+
+  .make-status-color-classes(success, success);
+  .make-status-color-classes(processing, processing);
+  .make-status-color-classes(error, error);
+  .make-status-color-classes(warning, warning);
+  .make-status-color-classes(default, normal);
 }
 
 @keyframes antStatusProcessing {
@@ -210,7 +216,7 @@
     transition: all @animation-duration-slow @ease-in-out;
     .safari-fix-motion;
 
-    > p.@{number-prefix-cls}-only-unit {
+    >p.@{number-prefix-cls}-only-unit {
       height: @badge-height;
       margin: 0;
       .safari-fix-motion;

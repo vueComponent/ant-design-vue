@@ -25,6 +25,7 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
 | src | 图片地址 | string | - | 2.0.0 |
 | previewMask | 自定义 mask | false \| function \| slot | - | 3.2.0 |
 | width | 图像宽度 | string \| number | - | 2.0.0 |
+| showType | 自定义预览选项 | both \| text \| icon | both | 3.2.10 |
 
 ### 事件
 

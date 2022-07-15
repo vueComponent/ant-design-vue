@@ -42,6 +42,10 @@ export const imageProps = () => ({
     type: [Boolean, Object] as PropType<boolean | ImagePreviewType>,
     default: true as boolean | ImagePreviewType,
   },
+  showType: {
+    type: String as PropType<'both' | 'text' | 'icon'>,
+    default: 'both',
+  },
   onClick: {
     type: Function as PropType<MouseEventHandler>,
   },

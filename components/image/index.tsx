@@ -43,8 +43,8 @@ const Image = defineComponent<ImageProps>({
       const imageLocale = configProvider.locale?.Image || defaultLocale.Image;
       const defaultPreviewMask = () => (
         <div class={`${prefixCls.value}-mask-info`}>
-          <EyeOutlined />
-          {imageLocale?.preview}
+          {props.showType === 'icon' || props.showType === 'both' ? <EyeOutlined /> : null}
+          {props.showType === 'text' || props.showType === 'both' ? imageLocale?.preview : null}
         </div>
       );
       const { previewMask = slots.previewMask || defaultPreviewMask } = props;

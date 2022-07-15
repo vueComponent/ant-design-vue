@@ -7,6 +7,7 @@
     <previewGroupVisibleVue />
     <previewSrc />
     <controlled-preview />
+    <show-type />
   </demo-sort>
 </template>
 
@@ -18,6 +19,7 @@ import previewSrc from './preview-src.vue';
 import PreviewGroup from './preview-group.vue';
 import ControlledPreview from './controlled-preview.vue';
 import previewGroupVisibleVue from './preview-group-visible.vue';
+import showType from './show-type.vue';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -33,6 +35,7 @@ export default defineComponent({
     PreviewGroup,
     ControlledPreview,
     previewGroupVisibleVue,
+    showType,
   },
 });
 </script>

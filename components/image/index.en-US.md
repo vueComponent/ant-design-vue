@@ -24,6 +24,7 @@ Previewable image.
 | src | Image path | string | - | 2.0.0 |
 | previewMask | custom mask | false \| function \| slot | - | 3.2.0 |
 | width | Image width | string \| number | - | 2.0.0 |
+| showType | customize preview options | both \| text \| icon | both | 3.2.10 |
 
 ### events
 

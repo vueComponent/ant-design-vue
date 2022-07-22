@@ -1036,7 +1036,7 @@ export default defineComponent({
         let customHeaderCell = column.customHeaderCell;
         const isSortColumn = this.isSortColumn(column);
         if ((column.filters && column.filters.length > 0) || column.filterDropdown) {
-          const colFilters = key in filters ? filters[key] : [];
+          const colFilters = key in filters ? filters[key] || [] : [];
           filterDropdown = (
             <FilterDropdown
               locale={locale}

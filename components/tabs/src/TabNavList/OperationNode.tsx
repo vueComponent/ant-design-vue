@@ -9,7 +9,7 @@ import classNames from '../../../_util/classNames';
 import { defineComponent, watch, computed, onMounted } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 import useState from '../../../_util/hooks/useState';
-import { EllipsisOutlined } from '@ant-design/icons-vue';
+import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 
 export const operationNodeProps = {
   prefixCls: { type: String },

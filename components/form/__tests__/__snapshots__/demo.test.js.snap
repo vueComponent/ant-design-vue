@@ -902,7 +902,17 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
       <!---->
     </div>
   </div>
-  <div class="login-form-wrap"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input id="normal_login_remember" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span>Remember me</span></label><a class="login-form-forgot" href="">Forgot password</a></div>
+  <div class="ant-row ant-form-item">
+    <!---->
+    <div class="ant-col ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input id="normal_login_remember" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span>Remember me</span></label><a class="login-form-forgot" href="">Forgot password</a></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
   <div class="ant-row ant-form-item">
     <!---->
     <div class="ant-col ant-form-item-control">

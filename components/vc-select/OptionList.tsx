@@ -115,7 +115,7 @@ const OptionList = defineComponent({
         if (!baseProps.multiple && baseProps.open && props.rawValues.size === 1) {
           const value = Array.from(props.rawValues)[0];
           const index = toRaw(memoFlattenOptions.value).findIndex(
-            ({ data }) => data.value === value,
+            ({ data }) => data[props.fieldNames.value] === value,
           );
           if (index !== -1) {
             setActive(index);

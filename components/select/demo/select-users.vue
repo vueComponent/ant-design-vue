@@ -26,7 +26,7 @@ A complete multiple select sample with remote search, debounce fetch, ajax callb
     :filter-option="false"
     :not-found-content="fetching ? undefined : null"
     :options="data"
-    @search="fetchUser"
+    @on-search="fetchUser"
   >
     <template v-if="fetching" #notFoundContent>
       <a-spin size="small" />

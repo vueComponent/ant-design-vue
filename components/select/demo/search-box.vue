@@ -27,7 +27,7 @@ Search with remote data.
     :filter-option="false"
     :not-found-content="null"
     :options="data"
-    @search="handleSearch"
+    @on-search="handleSearch"
     @change="handleChange"
   ></a-select>
 </template>

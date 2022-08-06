@@ -124,8 +124,6 @@ const InputNumber = defineComponent({
         const affixWrapperCls = classNames(`${preCls}-affix-wrapper`, {
           [`${preCls}-affix-wrapper-focused`]: focused.value,
           [`${preCls}-affix-wrapper-disabled`]: props.disabled,
-          [`${preCls}-affix-wrapper-sm`]: size.value === 'small',
-          [`${preCls}-affix-wrapper-lg`]: size.value === 'large',
           [`${preCls}-affix-wrapper-rtl`]: direction.value === 'rtl',
           [`${preCls}-affix-wrapper-readonly`]: readonly,
           [`${preCls}-affix-wrapper-borderless`]: !bordered,

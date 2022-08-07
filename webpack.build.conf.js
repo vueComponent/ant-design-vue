@@ -41,13 +41,28 @@ function addLocales(webpackConfig) {
 }
 
 function externalDayjs(config) {
-  config.externals.dayjs = {
-    root: 'dayjs',
-    commonjs2: 'dayjs',
-    commonjs: 'dayjs',
-    amd: 'dayjs',
-    module: 'dayjs',
-  };
+  config.externals.push({
+    dayjs: {
+      root: 'dayjs',
+      commonjs2: 'dayjs',
+      commonjs: 'dayjs',
+      amd: 'dayjs',
+      module: 'dayjs',
+    },
+  });
+  config.externals.push(function ({ _context, request }, callback) {
+    if (/^dayjs\/plugin\//.test(request)) {
+      const name = request.replaceAll('/', '_');
+      return callback(null, {
+        root: name,
+        commonjs2: name,
+        commonjs: name,
+        amd: name,
+        module: name,
+      });
+    }
+    callback();
+  });
 }
 
 function injectWarningCondition(config) {

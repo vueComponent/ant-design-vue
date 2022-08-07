@@ -5,14 +5,7 @@ import type {
   TransitionGroupProps,
   TransitionProps,
 } from 'vue';
-import {
-  onUpdated,
-  getCurrentInstance,
-  defineComponent,
-  nextTick,
-  Transition as T,
-  TransitionGroup as TG,
-} from 'vue';
+import { nextTick, Transition, TransitionGroup } from 'vue';
 import { tuple } from './type';
 
 const SelectPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
@@ -26,9 +19,6 @@ const getTransitionDirection = (placement: SelectCommonPlacement | undefined) =>
 };
 
 export const getTransitionProps = (transitionName: string, opt: TransitionProps = {}) => {
-  if (process.env.NODE_ENV === 'test') {
-    return opt;
-  }
   const transitionProps: TransitionProps = transitionName
     ? {
         name: transitionName,
@@ -67,57 +57,6 @@ export const getTransitionGroupProps = (transitionName: string, opt: TransitionP
     : { css: false, ...opt };
   return transitionProps;
 };
-
-let Transition = T;
-let TransitionGroup = TG;
-
-if (process.env.NODE_ENV === 'test') {
-  let warn = true;
-  Transition = defineComponent({
-    name: 'TransitionForTest',
-    inheritAttrs: false,
-    setup(_props, { slots, attrs }) {
-      const instance = getCurrentInstance();
-      if (warn) {
-        console.warn('application runing at test env, you should build use production env');
-        warn = false;
-      }
-      onUpdated(() => {
-        const child = instance.subTree.children[0];
-        if (child && child.dirs && child.dirs[0]) {
-          const value = child.dirs[0].value;
-          const oldValue = child.dirs[0].oldValue;
-          if (!value && value !== oldValue) {
-            nextTick(() => {
-              if (attrs.onAfterLeave) {
-                (attrs as any).onAfterLeave(instance.vnode.el);
-              }
-            });
-          }
-        }
-      });
-      return () => {
-        return slots.default?.();
-      };
-    },
-  }) as any;
-  TransitionGroup = defineComponent({
-    name: 'TransitionGroupForTest',
-    inheritAttrs: false,
-    props: ['tag', 'class'],
-    setup(props, { slots }) {
-      return () => {
-        const { tag: Tag, ...rest } = props;
-        const children = slots.default?.() || [];
-        if (Tag) {
-          return <Tag {...rest}>{children}</Tag>;
-        } else {
-          return children;
-        }
-      };
-    },
-  });
-}
 
 export declare type MotionEvent = (TransitionEvent | AnimationEvent) & {
   deadline?: boolean;

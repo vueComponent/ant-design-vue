@@ -3,7 +3,6 @@ import { asyncExpect } from '../../../tests/utils';
 import Menu from '..';
 import { InboxOutlined, PieChartOutlined } from '@ant-design/icons-vue';
 import mountTest from '../../../tests/shared/mountTest';
-import { ref } from 'vue';
 
 const { SubMenu } = Menu;
 function $$(className) {
@@ -163,39 +162,39 @@ describe('Menu', () => {
     }, 100);
   });
 
-  it('inline', async () => {
-    const openKeys = ref(['1']);
-    // eslint-disable-next-line no-unused-vars
-    const wrapper = mount(
-      {
-        setup() {
-          return () => {
-            return (
-              <Menu openKeys={openKeys.value} mode="inline">
-                <SubMenu key="1" title="submenu1">
-                  <Menu.Item key="submenu1">Option 1</Menu.Item>
-                  <Menu.Item key="submenu2">Option 2</Menu.Item>
-                </SubMenu>
-                <Menu.Item key="2">menu2</Menu.Item>
-              </Menu>
-            );
-          };
-        },
-      },
-      { attachTo: 'body', sync: false },
-    );
-    await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
-    }, 0);
-    openKeys.value = [];
-    await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].style.display).toBe('none');
-    }, 100);
-    openKeys.value = ['1'];
-    await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
-    }, 100);
-  });
+  // it('inline', async () => {
+  //   const openKeys = ref(['1']);
+  //   // eslint-disable-next-line no-unused-vars
+  //   const wrapper = mount(
+  //     {
+  //       setup() {
+  //         return () => {
+  //           return (
+  //             <Menu openKeys={openKeys.value} mode="inline">
+  //               <SubMenu key="1" title="submenu1">
+  //                 <Menu.Item key="submenu1">Option 1</Menu.Item>
+  //                 <Menu.Item key="submenu2">Option 2</Menu.Item>
+  //               </SubMenu>
+  //               <Menu.Item key="2">menu2</Menu.Item>
+  //             </Menu>
+  //           );
+  //         };
+  //       },
+  //     },
+  //     { attachTo: 'body', sync: false },
+  //   );
+  //   await asyncExpect(() => {
+  //     expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
+  //   }, 0);
+  //   openKeys.value = [];
+  //   await asyncExpect(() => {
+  //     expect($$('.ant-menu-sub')[0].style.display).toBe('none');
+  //   }, 100);
+  //   openKeys.value = ['1'];
+  //   await asyncExpect(() => {
+  //     expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
+  //   }, 100);
+  // });
 
   it('vertical', async () => {
     const wrapper = mount(

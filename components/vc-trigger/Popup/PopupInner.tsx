@@ -150,7 +150,8 @@ export default defineComponent({
           zIndex,
           opacity:
             statusValue === 'motion' || statusValue === 'stable' || !visible.value ? null : 0,
-          pointerEvents: statusValue === 'stable' ? null : 'none',
+          // pointerEvents: statusValue === 'stable' ? null : 'none',
+          pointerEvents: !visible.value && statusValue !== 'stable' ? 'none' : null,
         },
         attrs.style as CSSProperties,
       ];

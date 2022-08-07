@@ -1,6 +1,6 @@
 // based on rc-checkbox 2.3.2
 import type { HTMLAttributes } from 'vue';
-import { nextTick, defineComponent, ref, watch, onMounted } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
@@ -37,15 +37,6 @@ export default defineComponent({
         checked.value = props.checked;
       },
     );
-    onMounted(() => {
-      nextTick(() => {
-        if (process.env.NODE_ENV === 'test') {
-          if (props.autofocus) {
-            inputRef.value?.focus();
-          }
-        }
-      });
-    });
     expose({
       focus() {
         inputRef.value?.focus();

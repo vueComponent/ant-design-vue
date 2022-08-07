@@ -1,3 +1,3 @@
 import demoTest from '../../../tests/shared/demoTest';
 
-demoTest('icon', { skip: ['custom.vue'] });
+demoTest('icon', { skip: ['custom'] });

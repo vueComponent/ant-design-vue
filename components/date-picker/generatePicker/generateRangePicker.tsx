@@ -8,7 +8,7 @@ import enUS from '../locale/en_US';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import { getRangePlaceholder, transPlacement2DropdownAlign } from '../util';
 import { getTimeProps, Components } from '.';
-import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import type { CommonProps, RangePickerProps } from './props';
@@ -58,15 +58,6 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         props,
       );
       const pickerRef = ref();
-      onMounted(() => {
-        nextTick(() => {
-          if (process.env.NODE_ENV === 'test') {
-            if (props.autofocus) {
-              pickerRef.value?.focus();
-            }
-          }
-        });
-      });
       expose({
         focus: () => {
           pickerRef.value?.focus();

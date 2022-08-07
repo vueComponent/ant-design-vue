@@ -215,17 +215,18 @@ All rights reserved.
   };
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
-    let entry = ['./index'];
-    config.externals = {
-      vue: {
-        root: 'Vue',
-        commonjs2: 'vue',
-        commonjs: 'vue',
-        amd: 'vue',
-        module: 'vue',
+    const entry = ['./index'];
+    config.externals = [
+      {
+        vue: {
+          root: 'Vue',
+          commonjs2: 'vue',
+          commonjs: 'vue',
+          amd: 'vue',
+          module: 'vue',
+        },
       },
-    };
-
+    ];
     config.optimization = {
       minimizer: [
         new TerserPlugin({

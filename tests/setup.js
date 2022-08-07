@@ -1,4 +1,5 @@
 import { config } from '@vue/test-utils';
+const util = require('util');
 
 config.global.stubs = {
   transition: false,
@@ -21,6 +22,17 @@ if (typeof window !== 'undefined') {
       })),
     });
   }
+
+  // ref: https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
+  // ref: https://github.com/jsdom/jsdom/issues/2524
+  Object.defineProperty(window, 'TextEncoder', {
+    writable: true,
+    value: util.TextEncoder,
+  });
+  Object.defineProperty(window, 'TextDecoder', {
+    writable: true,
+    value: util.TextDecoder,
+  });
 }
 
 global.ResizeObserver = require('resize-observer-polyfill');

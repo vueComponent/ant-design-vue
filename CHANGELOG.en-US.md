@@ -50,6 +50,15 @@
   - 💄 优化 Upload 操作按钮的样式细节。
 - 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
 
+## 3.2.10
+
+`2022-07-07`
+
+- 🐞 Fix the problem that the popup component cannot be used under `process.env.NODE_ENV = 'test'` [#4565](https://github.com/vueComponent/ant-design-vue/issues/4565)
+- 🐞 Fix the problem that the popup layer is directly closed when the Menu component hovers quickly [36df58](https://github.com/vueComponent/ant-design-vue/commit/36df585acf9a7d53c8b50be2ab240f54588a3b20)
+- 🐞 Fix Input autosize type error [#5766](https://github.com/vueComponent/ant-design-vue/issues/5766)
+- 🐞 Fix Table ellipsis tilte not working under fixed [#5755](https://github.com/vueComponent/ant-design-vue/issues/5755)
+
 ## 3.2.9
 
 `2022-06-25`

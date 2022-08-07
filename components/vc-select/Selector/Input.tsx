@@ -1,6 +1,6 @@
 import { cloneElement } from '../../_util/vnode';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
-import { defineComponent, getCurrentInstance, inject, onMounted, withDirectives } from 'vue';
+import { defineComponent, inject, withDirectives } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import antInput from '../../_util/antInputDirective';
 import classNames from '../../_util/classNames';
@@ -47,17 +47,6 @@ const Input = defineComponent({
   setup(props) {
     let blurTimeout = null;
     const VCSelectContainerEvent = inject('VCSelectContainerEvent') as any;
-
-    if (process.env.NODE_ENV === 'test') {
-      onMounted(() => {
-        const ins = getCurrentInstance();
-        if (props.autofocus) {
-          if (ins.vnode && ins.vnode.el) {
-            ins.vnode.el.focus();
-          }
-        }
-      });
-    }
 
     return () => {
       const {

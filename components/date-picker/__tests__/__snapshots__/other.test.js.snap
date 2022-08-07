@@ -11,7 +11,7 @@ exports[`Picker format by locale date 1`] = `
   </div>
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-date-panel">
@@ -192,7 +192,7 @@ exports[`Picker format by locale dateTime 1`] = `
   </div>
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-datetime-panel">
@@ -830,7 +830,7 @@ exports[`Picker format by locale month 1`] = `
   </div>
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-month-panel">
@@ -906,7 +906,7 @@ exports[`Picker format by locale week 1`] = `
   </div>
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-week-panel">

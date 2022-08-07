@@ -47,12 +47,12 @@ Normal login form which can contain more elements.
       </a-input-password>
     </a-form-item>
 
-    <div class="login-form-wrap">
+    <a-form-item>
       <a-form-item name="remember" no-style>
         <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
       </a-form-item>
       <a class="login-form-forgot" href="">Forgot password</a>
-    </div>
+    </a-form-item>
 
     <a-form-item>
       <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
@@ -105,13 +105,8 @@ export default defineComponent({
 #components-form-demo-normal-login .login-form {
   max-width: 300px;
 }
-#components-form-demo-normal-login .login-form-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 #components-form-demo-normal-login .login-form-forgot {
-  margin-bottom: 24px;
+  float: right;
 }
 #components-form-demo-normal-login .login-form-button {
   width: 100%;

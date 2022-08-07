@@ -106,7 +106,7 @@ export default function useScrollTo(
         });
       };
 
-      syncScroll(3);
+      syncScroll(5);
     }
   };
 }

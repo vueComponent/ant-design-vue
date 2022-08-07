@@ -66,7 +66,19 @@ $ yarn add ant-design-vue
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：引入 antd.js 前你需要自行引入 [dayjs](https://day.js.org/)。
+> 注意：引入 antd.js 前你需要自行引入 [dayjs](https://day.js.org/) 及其相关插件。
+
+如：
+
+```html
+<script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/customParseFormat.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekday.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/localeData.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekOfYear.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
+```
 
 ## 示例
 

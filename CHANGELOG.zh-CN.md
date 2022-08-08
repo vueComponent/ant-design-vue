@@ -10,6 +10,16 @@
 
 ---
 
+## 3.2.11
+
+`2022-08-08`
+
+- 🐞 修复 CDN 引入组件库时，dayjs 报错问题 [#5874](https://github.com/vueComponent/ant-design-vue/issues/5874)
+- 🐞 修复 `Dropdown` 子菜单换行问题 [#5798](https://github.com/vueComponent/ant-design-vue/issues/5798)
+- 🐞 修复图标引入打包体积增大问题 [#5822](https://github.com/vueComponent/ant-design-vue/issues/5822)
+- 🐞 修复 `Select` 自定义字段时，没有自动聚焦选中节点问题 [#5843](https://github.com/vueComponent/ant-design-vue/issues/5843)
+- 🐞 修复 `InputNumber` size=large 时， 样式未对齐问题 [#5853](https://github.com/vueComponent/ant-design-vue/issues/5853)
+
 ## 3.2.10
 
 `2022-07-07`

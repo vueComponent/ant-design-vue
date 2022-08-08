@@ -10,6 +10,16 @@
 
 ---
 
+## 3.2.11
+
+`2022-08-08`
+
+- 🐞 Fix dayjs error when CDN introduces component library [#5874](https://github.com/vueComponent/ant-design-vue/issues/5874)
+- 🐞 Fix `Dropdown` submenu wrapping issue [#5798](https://github.com/vueComponent/ant-design-vue/issues/5798)
+- 🐞 Fix the problem that the package size increases when the icon is introduced [#5822](https://github.com/vueComponent/ant-design-vue/issues/5822)
+- 🐞 Fix `Select` custom field, no auto-focus selected node issue [#5843](https://github.com/vueComponent/ant-design-vue/issues/5843)
+- 🐞 Fix `InputNumber` size=large, the style is not aligned [#5853](https://github.com/vueComponent/ant-design-vue/issues/5853)
+
 ## 3.2.10
 
 `2022-07-07`

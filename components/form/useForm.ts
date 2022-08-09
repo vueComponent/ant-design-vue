@@ -159,7 +159,6 @@ function useForm(
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
       const prop = getPropByPath(unref(modelRef), name, strict);
-      if (!prop.isValid) continue;
       values[name] = prop.v;
       const rules = filterRules(unref(rulesRef)[name], toArray(option && option.trigger));
       if (rules.length) {
@@ -320,7 +319,9 @@ function useForm(
     rulesKeys.value.forEach(key => {
       const prop = getPropByPath(model, key, false);
       const oldProp = getPropByPath(oldModel, key, false);
-      const isFirstValidation = isFirstTime && options?.immediate && prop.isValid;
+      const isFirstValidation = isFirstTime && options?.immediate;
+
+      if (!prop.isValid) return;
 
       if (isFirstValidation || !isEqual(prop.v, oldProp.v)) {
         names.push(key);

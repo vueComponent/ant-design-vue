@@ -215,7 +215,7 @@ All rights reserved.
   };
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
-    const entry = ['./index'];
+    let entry = ['./index'];
     config.externals = [
       {
         vue: {

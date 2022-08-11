@@ -10,6 +10,13 @@
 
 ---
 
+## 3.3.0-beta.3
+
+`2022-08-11`
+
+- 🌟 Merged 3.2.10 and 3.2.11 features
+- 🌟 Rate character Added slot parameters for customizing different characters
+
 ## 3.3.0-beta.2
 
 `2022-07-02`

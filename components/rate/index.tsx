@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
 import { watch, defineComponent, ref, reactive, onMounted } from 'vue';
-import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
+import { initDefaultProps, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 import { getOffsetLeft } from './util';
 import classNames from '../_util/classNames';
@@ -196,13 +196,13 @@ const Rate = defineComponent({
       if (!tooltips) return node;
       return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
     };
-    const character = getPropsSlot(slots, props, 'character') || <StarFilled />;
 
     return () => {
       const { count, allowHalf, disabled, tabindex, id = formItemContext.id.value } = props;
       const { class: className, style } = attrs;
       const stars = [];
       const disabledClass = disabled ? `${prefixCls.value}-disabled` : '';
+      const character = props.character || slots.character || (() => <StarFilled />);
       for (let index = 0; index < count; index++) {
         stars.push(
           <Star

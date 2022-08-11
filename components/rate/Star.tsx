@@ -1,6 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
-import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
 export const starProps = {
@@ -24,7 +23,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: starProps,
   emits: ['hover', 'click'],
-  setup(props, { slots, emit }) {
+  setup(props, { emit }) {
     const onHover = (e: MouseEvent) => {
       const { index } = props;
       emit('hover', e, index);
@@ -61,8 +60,17 @@ export default defineComponent({
     });
 
     return () => {
-      const { disabled, prefixCls, characterRender, index, count, value } = props;
-      const character = getPropsSlot(slots, props, 'character');
+      const { disabled, prefixCls, characterRender, character, index, count, value } = props;
+      const characterNode =
+        typeof character === 'function'
+          ? character({
+              disabled,
+              prefixCls,
+              index,
+              count,
+              value,
+            })
+          : character;
       let star = (
         <li class={cls.value}>
           <div
@@ -75,8 +83,8 @@ export default defineComponent({
             aria-setsize={count}
             tabindex={disabled ? -1 : 0}
           >
-            <div class={`${prefixCls}-first`}>{character}</div>
-            <div class={`${prefixCls}-second`}>{character}</div>
+            <div class={`${prefixCls}-first`}>{characterNode}</div>
+            <div class={`${prefixCls}-second`}>{characterNode}</div>
           </div>
         </li>
       );

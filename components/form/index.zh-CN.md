@@ -110,7 +110,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 </a-form-item>
 ```
 
-如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name=`b\`\`，你可以通过如下三种方式去解决此类问题：
+如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name="b"`，你可以通过如下三种方式去解决此类问题：
 
 第一种，使用多个 `a-form-item`:
 

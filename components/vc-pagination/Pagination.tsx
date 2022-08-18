@@ -112,6 +112,10 @@ export default defineComponent({
         const current = Math.min(this.current, newCurrent);
         newState.stateCurrent = current;
         newState.stateCurrentInputValue = current;
+        if (this.current !== current) {
+          this.__emit('update:current', current);
+          this.__emit('change', current, this.statePageSize);
+        }
       } else {
         let current = this.stateCurrent;
         if (current === 0 && newCurrent > 0) {

@@ -20,7 +20,7 @@ import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import type { Key } from 'ant-design-vue/es/_util/type';
+import type { Key } from '../../_util/type';
 import type { MenuTheme } from './interface';
 
 let indexGuid = 0;

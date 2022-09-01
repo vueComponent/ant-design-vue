@@ -53,9 +53,7 @@ Provide additional interactive capacity of editable and copyable.
     :editable="{ maxlength: 50, autoSize: { maxRows: 5, minRows: 3 } }"
   />
 
-  <a-typography-paragraph @click="handleClick" copyable>
-    This is a copyable text.
-  </a-typography-paragraph>
+  <a-typography-paragraph copyable>This is a copyable text.</a-typography-paragraph>
   <a-typography-paragraph :copyable="{ text: 'Hello, Ant Design!' }">
     Replace copy text.
   </a-typography-paragraph>
@@ -88,11 +86,6 @@ export default defineComponent({
     SmileOutlined,
     SmileFilled,
     CheckOutlined,
-  },
-  methods: {
-    handleClick(e) {
-      console.log(e);
-    },
   },
   setup() {
     const editableStr = ref('This is an editable text.');

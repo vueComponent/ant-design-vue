@@ -233,6 +233,7 @@ const Base = defineComponent({
     // ================ Copy ================
     function onCopyClick(e: MouseEvent) {
       e.preventDefault();
+      e.stopPropagation();
       const { copyable } = props;
 
       const copyConfig = {

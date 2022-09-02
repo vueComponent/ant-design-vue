@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '../../../tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Menu from '..';
 import { InboxOutlined, PieChartOutlined } from '@ant-design/icons-vue';
 import mountTest from '../../../tests/shared/mountTest';
@@ -148,18 +148,15 @@ describe('Menu', () => {
       },
       { attachTo: 'body', sync: false },
     );
-    await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
-    }, 100);
+    await sleep(100);
+    expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
     wrapper.setProps({ openKeys: [] });
-    await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none');
-    }, 500);
-
+    await sleep(100);
+    expect($$('.ant-menu-sub')[0].parentElement.style.display).toBe('none');
+    await sleep(100);
     wrapper.setProps({ openKeys: ['1'] });
-    await asyncExpect(() => {
-      expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
-    }, 100);
+    await sleep(100);
+    expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
   });
 
   // it('inline', async () => {

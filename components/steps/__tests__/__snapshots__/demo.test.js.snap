@@ -2,7 +2,7 @@
 
 exports[`renders ./components/steps/demo/clickable.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-vertical">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -98,7 +98,7 @@ exports[`renders ./components/steps/demo/clickable.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-vertical ant-steps-dot">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -160,7 +160,7 @@ exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1
 `;
 
 exports[`renders ./components/steps/demo/error.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish ant-steps-next-error">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -207,7 +207,7 @@ exports[`renders ./components/steps/demo/error.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/icon.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish ant-steps-item-custom ant-steps-item-active">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -269,7 +269,7 @@ exports[`renders ./components/steps/demo/icon.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-vertical ant-steps-small ant-steps-navigation">
+  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -310,7 +310,7 @@ exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-steps ant-steps-vertical ant-steps-navigation">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal ant-steps-navigation">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -368,7 +368,7 @@ exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-steps ant-steps-vertical ant-steps-small ant-steps-navigation">
+  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -430,7 +430,7 @@ exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical ant-steps-with-progress">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal ant-steps-with-progress">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -494,7 +494,7 @@ exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/progress-dot.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-vertical ant-steps-dot">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -617,7 +617,7 @@ exports[`renders ./components/steps/demo/progress-dot.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/simple.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -663,7 +663,7 @@ exports[`renders ./components/steps/demo/simple.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/small-size.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical ant-steps-small">
+<div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -711,7 +711,7 @@ exports[`renders ./components/steps/demo/small-size.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/step-next.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-vertical">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">

@@ -31,8 +31,8 @@ export default defineComponent({
       return (
         <span
           class={cls.value}
-          onMouseenter={props.onMouseEnter}
-          onMouseleave={props.onMouseLeave}
+          onMouseenter={props.onMouseenter}
+          onMouseleave={props.onMouseleave}
           onFocus={props.onFocus}
           onBlur={props.onBlur}
         >

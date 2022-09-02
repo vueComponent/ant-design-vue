@@ -302,11 +302,11 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
         <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-list" style="transform: translate(0px, 0px);">
             <div class="ant-tabs-tab ant-tabs-tab-active">
-              <div role="tab" aria-selected="true" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-test-tab-tab1" aria-controls="rc-tabs-test-panel-tab1"><span><span role="img" aria-label="home" class="anticon anticon-home"><svg focusable="false" class="" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path></svg></span> tab1</span></div>
+              <div role="tab" aria-selected="true" class="ant-tabs-tab-btn" tabindex="0"><span><span role="img" aria-label="home" class="anticon anticon-home"><svg focusable="false" class="" data-icon="home" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 00-44.4 0L77.5 505a63.9 63.9 0 00-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0018.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"></path></svg></span> tab1</span></div>
               <!---->
             </div>
             <div class="ant-tabs-tab">
-              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-test-tab-tab2" aria-controls="rc-tabs-test-panel-tab2">tab2</div>
+              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0">tab2</div>
               <!---->
             </div>
             <!---->
@@ -314,7 +314,7 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
           </div>
         </div>
         <div class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden">
-          <!----><button type="button" class="ant-tabs-nav-more" style="visibility: hidden; order: 1;" tabindex="-1" aria-hidden="true" aria-haspopup="listbox" aria-controls="rc-tabs-test-more-popup" id="rc-tabs-test-more" aria-expanded="false"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></button>
+          <!----><button type="button" class="ant-tabs-nav-more" style="visibility: hidden; order: 1;" tabindex="-1" aria-hidden="true" aria-haspopup="listbox" aria-controls="null-more-popup" id="null-more" aria-expanded="false"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></button>
           <!---->
         </div>
         <!---->
@@ -322,10 +322,10 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
       </div>
       <div class="ant-tabs-content-holder">
         <div class="ant-tabs-content ant-tabs-content-top">
-          <div role="tabpanel" tabindex="0" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active" id="rc-tabs-test-panel-tab1" aria-labelledby="rc-tabs-test-tab-tab1">
+          <div role="tabpanel" tabindex="0" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
             <!---->
           </div>
-          <div role="tabpanel" tabindex="-1" aria-hidden="true" style="display: none;" class="ant-tabs-tabpane" id="rc-tabs-test-panel-tab2" aria-labelledby="rc-tabs-test-tab-tab2">
+          <div role="tabpanel" tabindex="-1" aria-hidden="true" style="display: none;" class="ant-tabs-tabpane">
             <!---->
           </div>
         </div>
@@ -350,15 +350,15 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
         <div class="ant-tabs-nav-wrap">
           <div class="ant-tabs-nav-list" style="transform: translate(0px, 0px);">
             <div class="ant-tabs-tab">
-              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-test-tab-article" aria-controls="rc-tabs-test-panel-article">article</div>
+              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0">article</div>
               <!---->
             </div>
             <div class="ant-tabs-tab ant-tabs-tab-active">
-              <div role="tab" aria-selected="true" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-test-tab-app" aria-controls="rc-tabs-test-panel-app">app</div>
+              <div role="tab" aria-selected="true" class="ant-tabs-tab-btn" tabindex="0">app</div>
               <!---->
             </div>
             <div class="ant-tabs-tab">
-              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0" id="rc-tabs-test-tab-project" aria-controls="rc-tabs-test-panel-project">project</div>
+              <div role="tab" aria-selected="false" class="ant-tabs-tab-btn" tabindex="0">project</div>
               <!---->
             </div>
             <!---->
@@ -366,7 +366,7 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
           </div>
         </div>
         <div class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden">
-          <!----><button type="button" class="ant-tabs-nav-more" style="visibility: hidden; order: 1;" tabindex="-1" aria-hidden="true" aria-haspopup="listbox" aria-controls="rc-tabs-test-more-popup" id="rc-tabs-test-more" aria-expanded="false"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></button>
+          <!----><button type="button" class="ant-tabs-nav-more" style="visibility: hidden; order: 1;" tabindex="-1" aria-hidden="true" aria-haspopup="listbox" aria-controls="null-more-popup" id="null-more" aria-expanded="false"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></button>
           <!---->
         </div>
         <div class="ant-tabs-extra-content"><a href="#">More</a></div>
@@ -374,13 +374,13 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
       </div>
       <div class="ant-tabs-content-holder">
         <div class="ant-tabs-content ant-tabs-content-top">
-          <div role="tabpanel" tabindex="-1" aria-hidden="true" style="display: none;" class="ant-tabs-tabpane" id="rc-tabs-test-panel-article" aria-labelledby="rc-tabs-test-tab-article">
+          <div role="tabpanel" tabindex="-1" aria-hidden="true" style="display: none;" class="ant-tabs-tabpane">
             <!---->
           </div>
-          <div role="tabpanel" tabindex="0" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active" id="rc-tabs-test-panel-app" aria-labelledby="rc-tabs-test-tab-app">
+          <div role="tabpanel" tabindex="0" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
             <!---->
           </div>
-          <div role="tabpanel" tabindex="-1" aria-hidden="true" style="display: none;" class="ant-tabs-tabpane" id="rc-tabs-test-panel-project" aria-labelledby="rc-tabs-test-tab-project">
+          <div role="tabpanel" tabindex="-1" aria-hidden="true" style="display: none;" class="ant-tabs-tabpane">
             <!---->
           </div>
         </div>

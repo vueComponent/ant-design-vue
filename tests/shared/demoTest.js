@@ -3,7 +3,6 @@ import { mount } from '@vue/test-utils';
 import MockDate from 'mockdate';
 import dayjs from 'dayjs';
 import antd from 'ant-design-vue';
-import { sleep } from '../utils';
 
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'vue';
@@ -17,16 +16,16 @@ export default function demoTest(component, options = {}) {
     if (Array.isArray(options.skip) && options.skip.some(c => file.includes(c))) {
       testMethod = test.skip;
     }
-    testMethod(`renders ${file} correctly`, async () => {
+    testMethod(`renders ${file} correctly`, () => {
       MockDate.set(dayjs('2016-11-22').valueOf());
       const demo = require(`../.${file}`).default || require(`../.${file}`);
       document.body.innerHTML = '';
       const wrapper = mount(demo, {
         global: { plugins: [antd] },
         attachTo: document.body,
-        sync: false,
+        // sync: false,
       });
-      await sleep();
+      // await sleep();
       // should get dom from element
       // snap files copy from antd does not need to change
       // or just change a little

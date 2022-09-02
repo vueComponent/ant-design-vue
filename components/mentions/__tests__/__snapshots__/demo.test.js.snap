@@ -25,6 +25,7 @@ exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
             <!---->
           </div>
         </div>
+        <!---->
       </div>
       <!---->
       <!---->
@@ -41,6 +42,7 @@ exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
             <!---->
           </div>
         </div>
+        <!---->
       </div>
       <!---->
       <!---->
@@ -55,6 +57,7 @@ exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
           </button><button style="margin-left: 8px;" class="ant-btn" type="button">
             <!----><span>Reset</span>
           </button></div>
+        <!---->
       </div>
       <!---->
       <!---->

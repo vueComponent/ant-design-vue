@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.12
+
+`2022-09-02`
+
+- 🐞 Fix DescriptionItem labelStyle does not take effect [#5920](https://github.com/vueComponent/ant-design-vue/issues/5920)
+- 🌟 Typography copy button prevents bubbling [##5746](https://github.com/vueComponent/ant-design-vue/issues/5746)
+- 🐞 Fix table merged column scroll shadow occlusion issue [#5786](https://github.com/vueComponent/ant-design-vue/issues/5786)
+- 🐞 Fix the inconsistency between css var and ConfigProvider variables [#5929](https://github.com/vueComponent/ant-design-vue/issues/5929)
+
 ## 3.2.11
 
 `2022-08-08`

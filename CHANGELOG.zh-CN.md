@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.12
+
+`2022-09-02`
+
+- 🐞 修复 DescriptionItem labelStyle 不生效问题 [#5920](https://github.com/vueComponent/ant-design-vue/issues/5920)
+- 🌟 Typography 复制按钮阻止冒泡 [##5746](https://github.com/vueComponent/ant-design-vue/issues/5746)
+- 🐞 修复 table 合并列滚动阴影遮挡问题 [#5786](https://github.com/vueComponent/ant-design-vue/issues/5786)
+- 🐞 修复 css var 和 ConfigProvider 变量不一致问题 [#5929](https://github.com/vueComponent/ant-design-vue/issues/5929)
+
 ## 3.2.11
 
 `2022-08-08`

@@ -6,7 +6,7 @@ export default {
   },
   render() {
     const isCN = this.isCN;
-    const showPpy = moment().isBefore(moment('2021-06-15'));
+    const showJeecg = moment().isBefore(moment('2023-09-10'));
     return (
       <footer id="footer">
         <div class="footer-wrap">
@@ -80,6 +80,13 @@ export default {
             <a-col md={6} sm={24} xs={24}>
               <div class="footer-center">
                 <h2>{isCN ? '友情链接' : 'Links'}</h2>
+                {showJeecg && (
+                  <div>
+                    <a href="http://www.jeecg.com/" target="_blank">
+                      Jeecg
+                    </a>
+                  </div>
+                )}
                 <div>
                   <a href="https://cn.vuejs.org/" target="_blank">
                     Vue
@@ -95,13 +102,6 @@ export default {
                     @formily/antdv
                   </a>
                 </div>
-                {showPpy && (
-                  <div>
-                    <a href="https://www.pengpengyu.com/" target="_blank">
-                      砰砰鱼
-                    </a>
-                  </div>
-                )}
               </div>
             </a-col>
             <a-col md={6} sm={24} xs={24}>

@@ -204,11 +204,11 @@ function useForm(
     lastValidatePromise = summaryPromise;
 
     const returnPromise = summaryPromise
-      .then(() => {
+      .then((results: any[]) => {
         if (lastValidatePromise === summaryPromise) {
-          return Promise.resolve(values);
+          return Promise.resolve({ values, errorFields: results, outOfDate: false });
         }
-        return Promise.reject([]);
+        return Promise.reject({ values: [], errorFields: results, outOfDate: true });
       })
       .catch((results: any[]) => {
         const errorList = results.filter(

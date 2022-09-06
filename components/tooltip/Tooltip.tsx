@@ -235,6 +235,7 @@ export default defineComponent({
       const childCls = classNames({
         [openClassName || `${prefixCls.value}-open`]: true,
         [child.props && child.props.class]: child.props && child.props.class,
+        [child.props && child.props.className]: child.props && child.props.className,
       });
       const customOverlayClassName = classNames(overlayClassName, {
         [`${prefixCls.value}-${color}`]: color && PresetColorRegex.test(color),

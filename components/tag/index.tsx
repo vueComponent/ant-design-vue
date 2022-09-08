@@ -87,9 +87,9 @@ const Tag = defineComponent({
       const renderCloseIcon = () => {
         if (closable) {
           return closeIcon ? (
-            <div class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick}>
+            <span class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick}>
               {closeIcon}
-            </div>
+            </span>
           ) : (
             <CloseOutlined class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick} />
           );

@@ -43,10 +43,10 @@ export default defineComponent({
       const { width, height } = props;
       const contentStyle: CSSProperties = {};
       if (width !== undefined) {
-        contentStyle.width = typeof width === 'number' ? `${width}px` : width;
+        contentStyle.width = !Number.isNaN(Number(width)) ? `${width}px` : width;
       }
       if (height !== undefined) {
-        contentStyle.height = typeof height === 'number' ? `${height}px` : height;
+        contentStyle.height = !Number.isNaN(Number(height)) ? `${height}px` : height;
       }
       if (transformOrigin.value) {
         contentStyle.transformOrigin = transformOrigin.value;

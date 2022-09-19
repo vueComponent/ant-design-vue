@@ -49,6 +49,7 @@ export const cardProps = () => ({
 export type CardProps = Partial<ExtractPropTypes<ReturnType<typeof cardProps>>>;
 
 const Card = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ACard',
   props: cardProps(),
   slots: ['title', 'extra', 'tabBarExtraContent', 'actions', 'cover', 'customTab'],

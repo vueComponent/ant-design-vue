@@ -109,6 +109,7 @@ const useInjectFirstLevel = () => {
 };
 
 const MenuContextProvider = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'MenuContextProvider',
   inheritAttrs: false,
   props: {

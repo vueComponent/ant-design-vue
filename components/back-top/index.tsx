@@ -32,6 +32,7 @@ export const backTopProps = () => ({
 export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>;
 
 const BackTop = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ABackTop',
   inheritAttrs: false,
   props: backTopProps(),

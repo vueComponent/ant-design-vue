@@ -10,6 +10,7 @@ export const optionProps = {
 export type OptionProps = Partial<ExtractPropTypes<typeof optionProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Option',
   props: optionProps,
   render(_props: any, { slots }: any) {

@@ -88,6 +88,7 @@ export const mentionsProps = () => ({
 export type MentionsProps = Partial<ExtractPropTypes<ReturnType<typeof mentionsProps>>>;
 
 const Mentions = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMentions',
   inheritAttrs: false,
   props: mentionsProps(),
@@ -204,6 +205,7 @@ const Mentions = defineComponent({
 
 /* istanbul ignore next */
 export const MentionsOption = defineComponent({
+  compatConfig: { MODE: 3 },
   ...Option,
   name: 'AMentionsOption',
   props: optionProps,

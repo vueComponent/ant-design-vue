@@ -20,6 +20,7 @@ type GeneratorArgument = {
 function generator({ suffixCls, tagName, name }: GeneratorArgument) {
   return (BasicComponent: typeof Basic) => {
     const Adapter = defineComponent({
+      compatConfig: { MODE: 3 },
       name,
       props: basicProps(),
       setup(props, { slots }) {
@@ -39,6 +40,7 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
 }
 
 const Basic = defineComponent({
+  compatConfig: { MODE: 3 },
   props: basicProps(),
   setup(props, { slots }) {
     return () => createVNode(props.tagName, { class: props.prefixCls }, slots);
@@ -46,6 +48,7 @@ const Basic = defineComponent({
 });
 
 const BasicLayout = defineComponent({
+  compatConfig: { MODE: 3 },
   props: basicProps(),
   setup(props, { slots }) {
     const { direction } = useConfigInject('', props);

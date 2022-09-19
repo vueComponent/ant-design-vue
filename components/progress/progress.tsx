@@ -14,6 +14,7 @@ import { progressProps, progressStatuses } from './props';
 import type { VueNode } from '../_util/type';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AProgress',
   props: initDefaultProps(progressProps(), {
     type: 'line',

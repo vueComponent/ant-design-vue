@@ -57,6 +57,7 @@ export const context = {
 };
 
 const Group = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PreviewGroup',
   inheritAttrs: false,
   props: {

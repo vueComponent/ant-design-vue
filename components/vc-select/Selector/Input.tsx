@@ -41,6 +41,7 @@ export const inputProps = {
 export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>;
 
 const Input = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Input',
   inheritAttrs: false,
   props: inputProps,

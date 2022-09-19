@@ -5,6 +5,7 @@ import PropTypes from '../../_util/vue-types';
 import addEventListener from '../../vc-util/Dom/addEventListener';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Handle',
   inheritAttrs: false,
   props: {

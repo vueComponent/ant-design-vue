@@ -31,6 +31,7 @@ export const tagProps = () => ({
 export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<typeof tagProps>>>;
 
 const Tag = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATag',
   props: tagProps(),
   // emits: ['update:visible', 'close'],

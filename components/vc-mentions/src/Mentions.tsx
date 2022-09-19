@@ -33,6 +33,7 @@ export type MentionsProps = Partial<ExtractPropTypes<typeof vcMentionsProps>>;
 function noop() {}
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Mentions',
   inheritAttrs: false,
   props: initDefaultProps(vcMentionsProps, defaultProps),

@@ -25,6 +25,7 @@ const resetStyle = (node: HTMLSpanElement) => {
   }
 };
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'LoadingIcon',
   props: {
     prefixCls: String,

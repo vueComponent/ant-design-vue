@@ -12,6 +12,7 @@ import { getInputClassName, hasAddon, hasPrefixSuffix } from './util';
 const ClearableInputType = ['text', 'input'];
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {

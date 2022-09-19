@@ -20,6 +20,7 @@ interface ResizeObserverState {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ResizeObserver',
   props: {
     disabled: Boolean,

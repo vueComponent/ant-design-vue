@@ -40,6 +40,7 @@ function parsePagination(pagination) {
 }
 
 const ListBody = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ListBody',
   inheritAttrs: false,
   props: transferListBodyProps,

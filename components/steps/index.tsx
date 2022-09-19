@@ -49,6 +49,7 @@ export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>
 export type StepProps = Partial<ExtractPropTypes<ReturnType<typeof stepProps>>>;
 
 const Steps = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ASteps',
   inheritAttrs: false,
   props: initDefaultProps(stepsProps(), {
@@ -128,6 +129,7 @@ const Steps = defineComponent({
 
 /* istanbul ignore next */
 export const Step = defineComponent({
+  compatConfig: { MODE: 3 },
   ...VcStep,
   name: 'AStep',
   props: VcStepProps(),

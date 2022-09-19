@@ -76,6 +76,7 @@ export interface ListState {
 }
 
 const List = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'List',
   inheritAttrs: false,
   props: {

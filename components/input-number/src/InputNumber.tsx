@@ -79,6 +79,7 @@ export const inputNumberProps = () => ({
 });
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'InnerInputNumber',
   inheritAttrs: false,
   props: {

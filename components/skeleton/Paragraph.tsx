@@ -13,6 +13,7 @@ export type SkeletonParagraphProps = Partial<
 >;
 
 const SkeletonParagraph = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'SkeletonParagraph',
   props: skeletonParagraphProps(),
   setup(props) {

@@ -60,6 +60,7 @@ interface ExtraContentProps {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'TabNavList',
   inheritAttrs: false,
   props: tabNavListProps(),

@@ -23,6 +23,7 @@ const RESIZE_STATUS_RESIZING = 1;
 const RESIZE_STATUS_RESIZED = 2;
 
 const ResizableTextArea = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ResizableTextArea',
   inheritAttrs: false,
   props: textAreaProps(),

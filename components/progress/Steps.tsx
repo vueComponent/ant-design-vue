@@ -17,6 +17,7 @@ export const stepsProps = () => ({
 export type StepsProps = Partial<ExtractPropTypes<typeof stepsProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Steps',
   props: stepsProps(),
   setup(props, { slots }) {

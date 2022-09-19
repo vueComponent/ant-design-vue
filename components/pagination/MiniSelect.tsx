@@ -2,6 +2,7 @@ import { defineComponent } from 'vue';
 import VcSelect, { selectProps } from '../select';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   inheritAttrs: false,
   props: selectProps(),
   Option: VcSelect.Option,

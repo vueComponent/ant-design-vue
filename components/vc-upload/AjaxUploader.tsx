@@ -21,6 +21,7 @@ interface ParsedFileInfo {
   parsedFile: RcFile;
 }
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AjaxUploader',
   inheritAttrs: false,
   props: uploadProps(),

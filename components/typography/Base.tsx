@@ -123,6 +123,7 @@ export const baseProps = () => ({
 });
 
 const Base = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Base',
   inheritAttrs: false,
   props: baseProps(),

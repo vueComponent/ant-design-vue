@@ -5,6 +5,7 @@ import { useTransitionDuration, defaultProps } from './common';
 import { propTypes } from './types';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Line',
   props: initDefaultProps(propTypes, defaultProps),
   setup(props) {

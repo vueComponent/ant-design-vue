@@ -5,6 +5,7 @@ import type { MenuMode } from './interface';
 import SubMenuList from './SubMenuList';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'InlineSubMenuList',
   inheritAttrs: false,
   props: {

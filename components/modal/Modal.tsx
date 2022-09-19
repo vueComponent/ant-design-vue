@@ -140,6 +140,7 @@ export interface ModalLocale {
 export const destroyFns = [];
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AModal',
   inheritAttrs: false,
   props: initDefaultProps(modalProps(), {

@@ -15,6 +15,7 @@ import Mask from './Mask';
 import { getMotionName, getUUID } from './util';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Dialog',
   inheritAttrs: false,
   props: initDefaultProps(

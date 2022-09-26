@@ -128,7 +128,7 @@ describe('Typography', () => {
         expect(wrapper.find('p').text()).toEqual('...--The information is very important');
 
         wrapper.setProps({ ellipsis: { rows: 2, suffix } });
-        await wrapper.vm.nextTick();
+        await sleep(20);
         expect(wrapper.find('p').text()).toEqual('Ba...--The information is very important');
 
         wrapper.setProps({ ellipsis: { rows: 99, suffix } });

@@ -136,7 +136,7 @@ const Cascader = defineComponent({
     if (process.env.NODE_ENV !== 'production') {
       watchEffect(() => {
         devWarning(
-          !props.multiple ? !props.displayRender || !slots.displayRender : !slots.tagRender,
+          !props.multiple || !props.displayRender || !slots.displayRender,
           'Cascader',
           '`displayRender` not work on `multiple`. Please use `tagRender` instead.',
         );
@@ -280,7 +280,7 @@ const Cascader = defineComponent({
             ...slots,
             checkable: () => <span class={`${cascaderPrefixCls.value}-checkbox-inner`} />,
           }}
-          tagRender={slots.tagRender}
+          tagRender={props.tagRender || slots.tagRender}
           displayRender={props.displayRender || slots.displayRender}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
           showArrow={props.showArrow}

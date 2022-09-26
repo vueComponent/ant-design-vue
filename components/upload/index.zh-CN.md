@@ -110,6 +110,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 - 服务端上传接口实现可以参考 [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/wiki#server-side)。
 - 如果要做本地 mock 可以参考这个 [express 的例子](https://github.com/react-component/upload/blob/master/server.js)。
 
+### 手机设备如何选择相册或文件夹？
+
+你可以设置 `:accept="null"`
+
 ### 如何显示下载链接？
 
 请使用 fileList 属性设置数组项的 url 属性进行展示控制。

@@ -69,6 +69,7 @@ export const colProps = () => ({
 export type ColProps = Partial<ExtractPropTypes<ReturnType<typeof colProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ACol',
   props: colProps(),
   setup(props, { slots }) {

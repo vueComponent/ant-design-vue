@@ -37,6 +37,7 @@ function getIcon(props: AntdTreeNodeAttribute) {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ADirectoryTree',
   inheritAttrs: false,
   props: initDefaultProps(directoryTreeProps(), {

@@ -3,6 +3,7 @@ import Tooltip, { tooltipProps } from '../tooltip';
 import raf from '../_util/raf';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'SliderTooltip',
   inheritAttrs: false,
   props: tooltipProps(),

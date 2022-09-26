@@ -24,6 +24,7 @@ const ICON_CLOSE = 'close';
 const defaultTitle = '---';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'TreeNode',
   inheritAttrs: false,
   props: treeNodeProps,

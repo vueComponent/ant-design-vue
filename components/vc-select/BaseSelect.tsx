@@ -257,6 +257,7 @@ export function isMultiple(mode: Mode) {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'BaseSelect',
   inheritAttrs: false,
   props: initDefaultProps(baseSelectProps(), { showAction: [], notFoundContent: 'Not Found' }),

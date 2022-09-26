@@ -22,6 +22,7 @@ export type ProgressDotRender = (info: {
 }) => any;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Steps',
   props: {
     type: PropTypes.string.def('default'),

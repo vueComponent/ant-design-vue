@@ -26,6 +26,7 @@ export const transferListItemProps = {
 export type TransferListItemProps = Partial<ExtractPropTypes<typeof transferListItemProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ListItem',
   inheritAttrs: false,
   props: transferListItemProps,

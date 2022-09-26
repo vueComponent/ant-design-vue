@@ -56,6 +56,7 @@ export interface PopconfirmLocale {
 }
 
 const Popconfirm = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'APopconfirm',
   props: initDefaultProps(popconfirmProps(), {
     ...tooltipDefaultProps(),

@@ -5,6 +5,7 @@ import type { TableLocale } from '../../interface';
 import Input from '../../../input';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'FilterSearch',
   inheritAttrs: false,
   props: {

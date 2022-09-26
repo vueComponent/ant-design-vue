@@ -28,6 +28,7 @@ const useProvideKeyPath = (eventKey: string, key: Key, menuInfo: StoreMenuInfo) 
 
 const measure = Symbol('measure');
 export const PathContext = defineComponent({
+  compatConfig: { MODE: 3 },
   setup(_props, { slots }) {
     // 不需要响应式
     provide(measure, true);

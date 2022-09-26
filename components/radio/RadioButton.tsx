@@ -5,6 +5,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import type { RadioGroupContext } from './interface';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ARadioButton',
   props: radioProps(),
   setup(props, { slots }) {

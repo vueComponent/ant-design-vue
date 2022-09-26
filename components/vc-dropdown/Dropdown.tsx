@@ -7,6 +7,7 @@ import { cloneElement } from '../_util/vnode';
 import classNames from '../_util/classNames';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   props: {
     minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
     arrow: { type: Boolean, default: false },

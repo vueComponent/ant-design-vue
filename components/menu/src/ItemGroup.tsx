@@ -12,6 +12,7 @@ export const menuItemGroupProps = () => ({
 export type MenuItemGroupProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemGroupProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMenuItemGroup',
   inheritAttrs: false,
   props: menuItemGroupProps(),

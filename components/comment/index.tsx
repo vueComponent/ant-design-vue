@@ -22,6 +22,7 @@ export const commentProps = () => ({
 export type CommentProps = Partial<ExtractPropTypes<ReturnType<typeof commentProps>>>;
 
 const Comment = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AComment',
   props: commentProps(),
   slots: ['actions', 'author', 'avatar', 'content', 'datetime'],

@@ -16,6 +16,7 @@ export const buttonGroupProps = () => ({
 export type ButtonGroupProps = Partial<ExtractPropTypes<ReturnType<typeof buttonGroupProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AButtonGroup',
   props: buttonGroupProps(),
   setup(props, { slots }) {

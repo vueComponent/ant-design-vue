@@ -45,6 +45,7 @@ const ALL_HANDLERS = [
 ];
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Trigger',
   mixins: [BaseMixin],
   inheritAttrs: false,

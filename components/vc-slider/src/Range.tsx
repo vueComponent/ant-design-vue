@@ -53,6 +53,7 @@ const rangeProps = {
   draggableTrack: { type: Boolean, default: undefined },
 };
 const Range = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Range',
   mixins: [BaseMixin],
   inheritAttrs: false,

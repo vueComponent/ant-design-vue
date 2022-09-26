@@ -21,6 +21,7 @@ export interface TabNodeProps {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'TabNode',
   props: {
     id: { type: String as PropType<string> },

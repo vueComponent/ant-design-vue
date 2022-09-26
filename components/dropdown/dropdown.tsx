@@ -15,6 +15,7 @@ import getPlacements from '../tooltip/placements';
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
 const Dropdown = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ADropdown',
   inheritAttrs: false,
   props: initDefaultProps(dropdownProps(), {

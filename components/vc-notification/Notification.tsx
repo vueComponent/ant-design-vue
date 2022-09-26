@@ -213,6 +213,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
     document.body.appendChild(div);
   }
   const Wrapper = defineComponent({
+    compatConfig: { MODE: 3 },
     name: 'NotificationWrapper',
     setup(_props, { attrs }) {
       const notiRef = ref();

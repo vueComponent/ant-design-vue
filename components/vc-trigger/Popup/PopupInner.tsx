@@ -14,6 +14,7 @@ import { getTransitionProps } from '../../_util/transition';
 import supportsPassive from '../../_util/supportsPassive';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PopupInner',
   inheritAttrs: false,
   props: innerProps,

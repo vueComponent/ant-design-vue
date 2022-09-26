@@ -26,6 +26,7 @@ import { useInjectFormItemContext } from '../form';
 export const LIST_IGNORE = `__LIST_IGNORE_${Date.now()}__`;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AUpload',
   inheritAttrs: false,
   props: initDefaultProps(uploadProps(), {

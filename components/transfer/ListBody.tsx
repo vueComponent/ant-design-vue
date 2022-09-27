@@ -55,7 +55,7 @@ const ListBody = defineComponent({
     };
 
     const handleItemRemove = (item: TransferItem) => {
-      emit('itemRemove', item.key);
+      emit('itemRemove', [item.key]);
     };
 
     const handleScroll = (e: Event) => {

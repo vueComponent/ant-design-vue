@@ -104,6 +104,7 @@ const Select = {
     autoClearSearchValue: PropTypes.bool.def(true),
     tabIndex: PropTypes.any.def(0),
     dropdownRender: PropTypes.func.def(menu => menu),
+    virtual: PropTypes.boolean,
     // onChange: noop,
     // onFocus: noop,
     // onBlur: noop,
@@ -1670,6 +1671,7 @@ const Select = {
         onMouseenter={mouseenter}
         onMouseleave={mouseleave}
         showAction={props.showAction}
+        virtual={props.virtual}
         menuItemSelectedIcon={getComponentFromProp(this, 'menuItemSelectedIcon')}
         {...{
           directives: [

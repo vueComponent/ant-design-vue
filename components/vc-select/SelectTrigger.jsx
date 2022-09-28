@@ -59,6 +59,7 @@ export default {
     menuItemSelectedIcon: PropTypes.any,
     dropdownRender: PropTypes.func,
     ariaId: PropTypes.string,
+    virtual: PropTypes.boolean,
   },
   data() {
     return {
@@ -121,7 +122,7 @@ export default {
       const { menuSelect, menuDeselect, popupScroll } = getListeners(this);
       const props = this.$props;
 
-      const { dropdownRender, ariaId } = props;
+      const { dropdownRender, ariaId, virtual } = props;
       const dropdownMenuProps = {
         props: {
           ...newProps.props,
@@ -133,6 +134,7 @@ export default {
           dropdownMenuStyle,
           backfillValue,
           menuItemSelectedIcon,
+          virtual,
         },
         on: {
           ...newProps.on,

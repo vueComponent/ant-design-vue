@@ -46,6 +46,7 @@
 | defaultOpen | Initial open state of dropdown | boolean | - |
 | open | Controlled open state of dropdown | boolean | - |
 | loading | indicate loading state | Boolean | false |
+| virtual | Disable virtual scroll when set to false | Boolean | false |
 
 ### events
 

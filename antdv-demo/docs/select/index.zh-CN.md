@@ -17,7 +17,7 @@
 | defaultValue | 指定默认选中的条目 | string\|string\[]\|number\|number\[] | - |
 | disabled | 是否禁用 | boolean | false |
 | dropdownClassName | 下拉菜单的 className 属性 | string | - |
-| dropdownMatchSelectWidth | 下拉菜单和选择器同宽 | boolean | true |
+| dropdownMatchSelectWidth | 下拉菜单和选择器同宽 | boolean | false |
 | dropdownRender | 自定义下拉框内容 | (menuNode: VNode, props) => VNode | - |
 | dropdownStyle | 下拉菜单的 style 属性 | object | - |
 | dropdownMenuStyle | dropdown 菜单自定义样式 | object | - |

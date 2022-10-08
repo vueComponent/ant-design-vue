@@ -79,7 +79,7 @@ export default defineComponent({
     const lastSelectedKey = ref<Key>();
 
     const cachedSelectedKeys = ref<Key[]>();
-
+    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const treeRef = ref();
     expose({
       selectedKeys: computed(() => treeRef.value?.selectedKeys),
@@ -90,7 +90,9 @@ export default defineComponent({
       expandedKeys: computed(() => treeRef.value?.expandedKeys),
     });
     const getInitExpandedKeys = () => {
-      const { keyEntities } = convertDataToEntities(treeData.value);
+      const { keyEntities } = convertDataToEntities(treeData.value, {
+        fieldNames: fieldNames.value,
+      });
 
       let initExpandedKeys: any;
 
@@ -181,7 +183,6 @@ export default defineComponent({
       emit('doubleclick', event, node);
       emit('dblclick', event, node);
     };
-    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const onSelect = (
       keys: Key[],
       event: {

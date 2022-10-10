@@ -19,7 +19,7 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/aBcnbw68hP/Avatar.svg
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | alt | 图像无法显示时的替代文本 | string | - |  |
-| crossOrigin | CORS 属性设置 | `'anonymous'` \| `'use-credentials'` \| `''` | - | 3.0 |
+| crossOrigin | cors 属性设置 | `'anonymous'` \| `'use-credentials'` \| `''` | - | 3.0 |
 | draggable | 图片是否允许拖动 | boolean \| `'true'` \| `'false'` | - | 2.2.0 |
 | gap | 字符类型距离左右两侧边界单位像素 | number | 4 | 2.2.0 |
 | icon | 设置头像的图标类型，可设为 Icon 的 `type` 或 VNode | VNode \| slot | - |  |

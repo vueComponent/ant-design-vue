@@ -38,7 +38,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 | method | 上传请求的 http method | string | `post` | 1.5.0 |  |
 | multiple | 是否支持多选文件，`ie10+` 支持。开启后按住 ctrl 可选择多个文件。 | boolean | false |  |  |
 | name | 发到后台的文件参数名 | string | `file` |  |  |
-| openFileDialogOnClick | 点击打开文件对话框 | boolean | true |  |  |
 | openFileDialogOnClick | 点击打开文件对话框 | boolean | true | 3.0 |  |
 | previewFile | 自定义文件预览逻辑 | (file: File \| Blob) => Promise&lt;dataURL: string> | 无 | 1.5.0 |  |
 | previewIcon | 自定义预览 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |

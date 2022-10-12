@@ -38,7 +38,6 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | method | http method of upload request | string | `post` | 1.5.0 |  |
 | multiple | Whether to support selected multiple file. `IE10+` supported. You can select multiple files with CTRL holding down while multiple is set to be true | boolean | false |  |  |
 | name | The name of uploading file | string | `file` |  |  |
-| openFileDialogOnClick | click open file dialog | boolean | true |  |  |
 | openFileDialogOnClick | Click open file dialog | boolean | true | 3.0 |  |
 | previewFile | Customize preview file logic | (file: File \| Blob) => Promise&lt;dataURL: string> | - | 1.5.0 |  |
 | previewIcon | custom preview icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |

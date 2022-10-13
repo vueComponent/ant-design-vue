@@ -262,7 +262,7 @@
     "vue-router": "^4.0.0",
     "vue-server-renderer": "^2.6.11",
     "vue-style-loader": "^4.1.2",
-    "vue-tsc": "^0.34.15",
+    "vue-tsc": "^1.0.6",
     "vuex": "^4.0.0",
     "webpack": "^5.0.0",
     "webpack-bundle-analyzer": "^4.4.2",

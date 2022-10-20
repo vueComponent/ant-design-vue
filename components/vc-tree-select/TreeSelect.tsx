@@ -729,12 +729,15 @@ export default defineComponent({
         'switcherIcon',
         'treeMotion',
       ]);
+      const { placeholder = slots.placeholder?.() } = restProps;
       return (
         <BaseSelect
           v-slots={slots}
           ref={selectRef}
           {...attrs}
           {...restProps}
+          //  >>> Placeholder Slot
+          placeholder={placeholder}
           // >>> MISC
           id={mergedId}
           prefixCls={props.prefixCls}

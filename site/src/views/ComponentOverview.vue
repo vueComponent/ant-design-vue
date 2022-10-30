@@ -80,37 +80,50 @@ export default defineComponent({
     const inputRef = ref();
     const { dataSource } = useMenus();
     const menuItems = computed(() => {
-      return dataSource.value
-        .filter(i => i.order > -1)
-        .map(group => {
-          const components = group.children.filter(
-            (component: any) =>
-              !search.value.trim() ||
-              component.title.toLowerCase().includes(search.value.trim().toLowerCase()) ||
-              (component.subtitle || '').toLowerCase().includes(search.value.trim().toLowerCase()),
-          );
-          return { ...group, children: components };
-        })
-        .filter(i => i.children.length)
-        .concat([
-          {
-            children: [
-              {
-                category: 'Components',
-                cols: 1,
-                cover: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
-                path: 'https://surely.cool/',
-                subtitle: '更强大的表格',
-                title: 'Powerful Table',
-                type: 'Advanced And Powerful',
-                target: '_blank',
-              },
-            ],
-            enTitle: 'Advanced And Powerful',
-            title: '更强大',
-            order: 0,
-          },
-        ]);
+      return [
+        {
+          children: [
+            {
+              category: 'Components',
+              cols: 1,
+              cover: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
+              path: 'https://surely.cool/',
+              subtitle: '更强大的表格',
+              title: 'Surely Table',
+              type: 'Advanced And Powerful',
+              target: '_blank',
+            },
+            {
+              category: 'Components',
+              cols: 1,
+              cover: 'https://aliyuncdn.antdv.com/form/static/assets/landing-config.4f9d5425.png',
+              path: 'https://form.antdv.com/',
+              subtitle: '在线表单',
+              title: 'Surely Form',
+              type: 'Advanced And Powerful',
+              target: '_blank',
+            },
+          ],
+          enTitle: 'Advanced And Powerful',
+          title: '更强大',
+          order: 0,
+        },
+      ].concat(
+        dataSource.value
+          .filter(i => i.order > -1)
+          .map(group => {
+            const components = group.children.filter(
+              (component: any) =>
+                !search.value.trim() ||
+                component.title.toLowerCase().includes(search.value.trim().toLowerCase()) ||
+                (component.subtitle || '')
+                  .toLowerCase()
+                  .includes(search.value.trim().toLowerCase()),
+            );
+            return { ...group, children: components };
+          })
+          .filter(i => i.children.length),
+      );
     });
     onMounted(() => {
       inputRef.value.focus();

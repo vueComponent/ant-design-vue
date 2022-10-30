@@ -74,7 +74,7 @@ const setGlobalConfig = (params: GlobalConfigProviderProps & { theme?: Theme }) 
     Object.assign(globalConfigBySet, reactive(params));
   });
   if (params.theme) {
-    registerTheme(getGlobalPrefixCls(), params.theme);
+    registerTheme(params.prefixCls ?? getGlobalPrefixCls(), params.theme);
   }
 };
 

@@ -18,8 +18,10 @@ export const useProviderTrigger = () => {
   };
 };
 
-export const useInjectTrigger = () => {
-  return inject(TriggerContextKey, { setPortal: () => {}, popPortal: false });
+export const useInjectTrigger = (tryPopPortal?: boolean) => {
+  return tryPopPortal
+    ? inject(TriggerContextKey, { setPortal: () => {}, popPortal: false })
+    : { setPortal: () => {}, popPortal: false };
 };
 
 export interface PortalContextProps {

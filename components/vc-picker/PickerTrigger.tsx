@@ -96,6 +96,7 @@ function PickerTrigger(props: PickerTriggerProps, { slots }) {
         default: slots.default,
         popup: slots.popupElement,
       }}
+      tryPopPortal
     ></Trigger>
   );
 }

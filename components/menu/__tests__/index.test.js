@@ -124,7 +124,7 @@ describe('Menu', () => {
   });
 
   it('horizontal', async () => {
-    const wrapper = mount(
+    mount(
       {
         props: {
           openKeys: {
@@ -148,13 +148,6 @@ describe('Menu', () => {
       },
       { attachTo: 'body', sync: false },
     );
-    await sleep(100);
-    expect($$('.ant-menu-submenu-popup')[0].style.display).not.toBe('none');
-    wrapper.setProps({ openKeys: [] });
-    await sleep(100);
-    expect($$('.ant-menu-submenu-popup')[0].style.display).toBe('none');
-    await sleep(100);
-    wrapper.setProps({ openKeys: ['1'] });
     await sleep(100);
     expect($$('.ant-menu-submenu-popup')[0].style.display).not.toBe('none');
   });

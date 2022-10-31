@@ -18,6 +18,7 @@ import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { filterEmpty } from '../_util/props-util';
+import { ScrollTo } from "../vc-tree/interface";
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 
@@ -81,7 +82,11 @@ export default defineComponent({
     const cachedSelectedKeys = ref<Key[]>();
     const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const treeRef = ref();
+    const scrollTo: ScrollTo = scroll => {
+      treeRef.value?.scrollTo(scroll);
+    };
     expose({
+      scrollTo,
       selectedKeys: computed(() => treeRef.value?.selectedKeys),
       checkedKeys: computed(() => treeRef.value?.checkedKeys),
       halfCheckedKeys: computed(() => treeRef.value?.halfCheckedKeys),

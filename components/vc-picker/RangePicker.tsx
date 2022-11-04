@@ -254,6 +254,7 @@ function RangerPicker<DateType>() {
       const startInputRef = ref<HTMLInputElement>(null);
       const endInputRef = ref<HTMLInputElement>(null);
       const arrowRef = ref<HTMLDivElement>(null);
+      const panelLeft = ref(0);
 
       // ============================ Warning ============================
       if (process.env.NODE_ENV !== 'production') {
@@ -380,6 +381,32 @@ function RangerPicker<DateType>() {
         if (!mergedOpen.value && containerRef.value) {
           popupMinWidth.value = containerRef.value.offsetWidth;
         }
+        // 打开时重新计算margin距离
+        if (mergedOpen.value) {
+          setTimeout(() => {
+            panelLeft.value = 0;
+            if (
+              mergedActivePickerIndex.value &&
+              startInputDivRef.value &&
+              separatorRef.value &&
+              panelDivRef.value
+            ) {
+              const arrowLeft = startInputDivRef.value.offsetWidth + separatorRef.value.offsetWidth;
+              if (
+                panelDivRef.value.offsetWidth &&
+                arrowRef.value.offsetWidth &&
+                arrowLeft >
+                  panelDivRef.value.offsetWidth -
+                    arrowRef.value.offsetWidth -
+                    (props.direction === 'rtl' || arrowRef.value.offsetLeft > arrowLeft
+                      ? 0
+                      : arrowRef.value.offsetLeft)
+              ) {
+                panelLeft.value = arrowLeft;
+              }
+            }
+          }, 5);
+        }
       });
 
       // ============================ Trigger ============================
@@ -419,7 +446,7 @@ function RangerPicker<DateType>() {
           if (inputRef.value) {
             inputRef.value.focus();
           }
-        }, 0);
+        }, 5);
       }
 
       function triggerChange(newValue: RangeValue<DateType>, sourceIndex: 0 | 1) {
@@ -982,7 +1009,6 @@ function RangerPicker<DateType>() {
           autocomplete = 'off',
         } = props;
         let arrowLeft = 0;
-        let panelLeft = 0;
         if (
           mergedActivePickerIndex.value &&
           startInputDivRef.value &&
@@ -997,12 +1023,14 @@ function RangerPicker<DateType>() {
             arrowLeft >
               panelDivRef.value.offsetWidth -
                 arrowRef.value.offsetWidth -
-                (direction === 'rtl' || arrowRef.value.offsetLeft > arrowLeft
+                (props.direction === 'rtl' || arrowRef.value.offsetLeft > arrowLeft
                   ? 0
                   : arrowRef.value.offsetLeft)
           ) {
-            panelLeft = arrowLeft;
+            panelLeft.value = arrowLeft;
           }
+        } else {
+          panelLeft.value = 0;
         }
 
         const arrowPositionStyle =
@@ -1093,11 +1121,10 @@ function RangerPicker<DateType>() {
           if (panelRender) {
             mergedNodes = panelRender(mergedNodes);
           }
-
           return (
             <div
               class={`${prefixCls}-panel-container`}
-              style={{ marginLeft: `${panelLeft}px` }}
+              style={{ marginLeft: `${panelLeft.value}px` }}
               ref={panelDivRef}
               onMousedown={e => {
                 e.preventDefault();

@@ -446,7 +446,7 @@ function RangerPicker<DateType>() {
           if (inputRef.value) {
             inputRef.value.focus();
           }
-        }, 5);
+        }, 0);
       }
 
       function triggerChange(newValue: RangeValue<DateType>, sourceIndex: 0 | 1) {
@@ -1023,7 +1023,7 @@ function RangerPicker<DateType>() {
             arrowLeft >
               panelDivRef.value.offsetWidth -
                 arrowRef.value.offsetWidth -
-                (props.direction === 'rtl' || arrowRef.value.offsetLeft > arrowLeft
+                (direction === 'rtl' || arrowRef.value.offsetLeft > arrowLeft
                   ? 0
                   : arrowRef.value.offsetLeft)
           ) {

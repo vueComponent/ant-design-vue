@@ -13,12 +13,11 @@ import {
   convertTreeToData,
   fillFieldNames,
 } from '../vc-tree/utils/treeUtil';
-import type { DataNode, EventDataNode, Key } from '../vc-tree/interface';
+import type { DataNode, EventDataNode, Key, ScrollTo } from '../vc-tree/interface';
 import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { filterEmpty } from '../_util/props-util';
-import { ScrollTo } from "../vc-tree/interface";
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 

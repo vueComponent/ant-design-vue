@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.14
+
+`2022-11-07`
+
+- 🐞 修复自定义 `prefixCls` 时，动态主题失效问题 [#6063](https://github.com/vueComponent/ant-design-vue/issues/6063)
+- 🐞 修复 `DatePicker` 使用 select 等弹窗组件作为插槽时，报错问题 [#6062](https://github.com/vueComponent/ant-design-vue/issues/6062)
+- 🐞 修复 `DirectoryTree` 未暴露 scrollTo 方法 [#6067](https://github.com/vueComponent/ant-design-vue/issues/6067)
+- 🐞 修复 `RangePicker` 弹窗位置不改变问题 [#6073](https://github.com/vueComponent/ant-design-vue/issues/6073)
+
 ## 3.2.13
 
 `2022-10-08`

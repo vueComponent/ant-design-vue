@@ -10,6 +10,15 @@
 
 ---
 
+## 3.2.14
+
+`2022-11-07`
+
+- 🐞 Fix the problem of dynamic theme failure when custom `prefixCls` [#6063](https://github.com/vueComponent/ant-design-vue/issues/6063)
+- 🐞 Fix `DatePicker` error when using select and other popup components as slots [#6062](https://github.com/vueComponent/ant-design-vue/issues/6062)
+- 🐞 Fix `DirectoryTree` not exposing scrollTo method [#6067](https://github.com/vueComponent/ant-design-vue/issues/6067)
+- 🐞 Fix `RangePicker` popup position does not change [#6073](https://github.com/vueComponent/ant-design-vue/issues/6073)
+
 ## 3.2.13
 
 `2022-10-08`

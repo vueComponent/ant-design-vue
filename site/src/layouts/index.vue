@@ -59,6 +59,7 @@
             </a-anchor>
           </a-affix>
         </section>
+        <a-back-top />
         <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
           <a-dropdown placement="top">
             <template #overlay>

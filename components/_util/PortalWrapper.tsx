@@ -136,7 +136,7 @@ export default defineComponent({
       let init = false;
       watch(
         [() => props.visible, () => props.getContainer],
-        ([visible, getContainer], [prevVisible, prevGetContainer]) => {
+        ([visible, getContainer], [prevVisible, prevGetContainer] = []) => {
           // Update count
           if (supportDom && getParent(props.getContainer) === document.body) {
             if (visible && !prevVisible) {

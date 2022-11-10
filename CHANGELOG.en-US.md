@@ -10,6 +10,12 @@
 
 ---
 
+## 3.2.15
+
+`2022-11-10`
+
+- 🐞 Fix the problem of preview image error when `Image` is deleted dynamically
+
 ## 3.2.14
 
 `2022-11-07`

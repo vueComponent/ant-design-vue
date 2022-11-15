@@ -272,8 +272,5 @@ export function elementsContains(
   elements: (HTMLElement | undefined | null)[],
   target: HTMLElement,
 ) {
-  if (process.env.NODE_ENV === 'test') {
-    return false;
-  }
   return elements.some(ele => ele && ele.contains(target));
 }

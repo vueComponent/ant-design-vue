@@ -32,7 +32,7 @@ A long list can be divided into several pages using `Pagination`, and only one p
 | responsive | If `size` is not specified, `Pagination` would resize according to the width of the window | boolean | - | 3.1 |
 | showLessItems | Show less page items | boolean | false | 1.5.0 |
 | showQuickJumper | determine whether you can jump to pages directly | boolean | false |  |
-| showSizeChanger | determine whether `pageSize` can be changed | boolean | false |  |
+| showSizeChanger | Determine whether to show `pageSize` select, it will be true when `total > 50` | boolean | - |  |
 | showTitle | Show page item's title | boolean | true | 1.5.0 |
 | showTotal | to display the total number and range | Function(total, range) | - |  |
 | simple | whether to use simple mode | boolean | - |  |

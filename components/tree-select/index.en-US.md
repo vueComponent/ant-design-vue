@@ -23,7 +23,7 @@ Tree selection control.
 | dropdownClassName | className of dropdown menu | string | - |  |  |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |  |
 | dropdownStyle | To set the style of the dropdown menu | object | - |  |  |
-| fieldNames | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 3.0.0 |
+| fieldNames | Replace the label,value, key and children fields in treeNode with the corresponding fields in treeData | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 3.0.0 |
 | filterTreeNode | Whether to filter treeNodes by input value. The value of `treeNodeFilterProp` is used for filtering by default. | boolean\|Function(inputValue: string, treeNode: TreeNode) (should return boolean) | Function |  |  |
 | getPopupContainer | To set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. | Function(triggerNode) | () => document.body |  |  |
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{value: string, label: VNode, halfChecked: string[]}` | boolean | false |  |  |
@@ -34,7 +34,7 @@ Tree selection control.
 | multiple | Support multiple or not, will be `true` when enable `treeCheckable`. | boolean | false |  |  |
 | notFoundContent | Specify content to show when no result matches | slot | `Not Found` |  |  |
 | placeholder | Placeholder of the select input | string\|slot | - |  |  |
-| replaceFields | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', label:'title', value: 'value' } |  | 1.6.1 (3.0.0 deprecated) |
+| replaceFields | Replace the label,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', label:'title', value: 'value' } |  | 1.6.1 (3.0.0 deprecated) |
 | searchPlaceholder | Placeholder of the search input | string\|slot | - |  |  |
 | searchValue(v-model) | work with `search` event to make search value controlled. | string | - |  |  |
 | showCheckedStrategy | The way show selected item in box. **Default:** just show child nodes. **`TreeSelect.SHOW_ALL`:** show all checked treeNodes (include parent treeNode). **`TreeSelect.SHOW_PARENT`:** show checked treeNodes (just show parent treeNode). | enum { TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |  |  |

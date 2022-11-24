@@ -19,6 +19,7 @@ export const popoverProps = () => ({
 export type PopoverProps = Partial<ExtractPropTypes<ReturnType<typeof popoverProps>>>;
 
 const Popover = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'APopover',
   props: initDefaultProps(popoverProps(), {
     ...tooltipDefaultProps(),

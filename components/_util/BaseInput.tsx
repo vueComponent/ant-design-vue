@@ -2,6 +2,7 @@ import { defineComponent, ref, withDirectives } from 'vue';
 import antInput from './antInputDirective';
 import PropTypes from './vue-types';
 const BaseInput = defineComponent({
+  compatConfig: { MODE: 3 },
   props: {
     value: PropTypes.string.def(''),
   },

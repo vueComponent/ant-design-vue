@@ -21,6 +21,7 @@ function isNotGrey(color: string) {
   return true;
 }
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Wave',
   props: {
     insertExtraNode: Boolean,

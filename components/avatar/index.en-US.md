@@ -14,7 +14,7 @@ Avatars can be used to represent people or objects. It supports images, `Icon`s,
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | alt | This attribute defines the alternative text describing the image | string | - |  |
-| crossOrigin | CORS settings attributes | `'anonymous'` \| `'use-credentials'` \| `''` | - | 3.0 |
+| crossOrigin | cors settings attributes | `'anonymous'` \| `'use-credentials'` \| `''` | - | 3.0 |
 | draggable | Whether the picture is allowed to be dragged | boolean \| `'true'` \| `'false'` | - | 2.2.0 |
 | gap | Letter type unit distance between left and right sides | number | 4 | 2.2.0 |
 | icon | the `Icon` type for an icon avatar, see `Icon` Component | VNode \| slot | - |  |

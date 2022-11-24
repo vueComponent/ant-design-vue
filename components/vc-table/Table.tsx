@@ -490,11 +490,15 @@ export default defineComponent<TableProps<DefaultRecordType>>({
       }, 100);
     };
 
-    watch([horizonScroll, () => props.data, () => props.columns], () => {
-      if (horizonScroll.value) {
-        triggerOnScroll();
-      }
-    });
+    watch(
+      [horizonScroll, () => props.data, () => props.columns],
+      () => {
+        if (horizonScroll.value) {
+          triggerOnScroll();
+        }
+      },
+      { flush: 'post' },
+    );
 
     const [scrollbarSize, setScrollbarSize] = useState(0);
     useProvideSticky();

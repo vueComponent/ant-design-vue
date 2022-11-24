@@ -45,6 +45,7 @@ const ALL_HANDLERS = [
 ];
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Trigger',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -85,6 +86,8 @@ export default defineComponent({
     autoDestroy: { type: Boolean, default: false },
     mobile: Object,
     getTriggerDOMNode: Function as PropType<(d?: HTMLElement) => HTMLElement>,
+    // portal context will change
+    tryPopPortal: Boolean, // no need reactive
   },
   setup(props) {
     const align = computed(() => {
@@ -94,7 +97,7 @@ export default defineComponent({
       }
       return popupAlign;
     });
-    const { setPortal, popPortal } = useInjectTrigger();
+    const { setPortal, popPortal } = useInjectTrigger(props.tryPopPortal);
     const popupRef = ref(null);
     const setPopupRef = val => {
       popupRef.value = val;

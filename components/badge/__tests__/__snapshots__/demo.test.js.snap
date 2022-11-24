@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/badge/demo/basic.vue correctly 1`] = `
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
 <!----></span>
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="0"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">0</p></span></sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="0"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">0</p></span></sup>
 <!----></span>
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><span role="img" aria-label="clock-circle" style="color: rgb(245, 34, 45);" class="anticon anticon-clock-circle ant-scroll-number-custom-component"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><span role="img" aria-label="clock-circle" style="color: rgb(245, 34, 45);" class="anticon anticon-clock-circle ant-scroll-number-custom-component"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span>
 <!----></span>
 `;
 
 exports[`renders ./components/badge/demo/change.vue correctly 1`] = `
-<div><span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
+<div><span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
   <!----></span>
   <div class="ant-btn-group"><button class="ant-btn" type="button">
       <!----><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span>
@@ -21,7 +21,7 @@ exports[`renders ./components/badge/demo/change.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal" role="separator">
   <!---->
 </div>
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
 <!----></span>
 <button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
   <div class="ant-switch-handle">
@@ -64,7 +64,7 @@ exports[`renders ./components/badge/demo/dot.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/badge/demo/link.vue correctly 1`] = `
-<a href="#"><span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
+<a href="#"><span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
   <!----></span>
 </a>
 `;
@@ -78,13 +78,13 @@ exports[`renders ./components/badge/demo/no-wrapper.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/badge/demo/overflow.vue correctly 1`] = `
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">9</p></span><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">9</p></span></sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">9</p></span><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">9</p></span></sup>
 <!----></span>
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="100">99+</sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="100">99+</sup>
 <!----></span>
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99">10+</sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99">10+</sup>
 <!----></span>
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="1000">999+</sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="1000">999+</sup>
 <!----></span>
 `;
 
@@ -246,6 +246,6 @@ exports[`renders ./components/badge/demo/status.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/badge/demo/title.vue correctly 1`] = `
-<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="Custom hover text"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
+<span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="Custom hover text"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
 <!----></span>
 `;

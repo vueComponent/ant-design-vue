@@ -43,6 +43,7 @@ function parsePagination(pagination) {
 }
 
 const ListBody = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ListBody',
   inheritAttrs: false,
   props: transferListBodyProps,
@@ -57,7 +58,7 @@ const ListBody = defineComponent({
     };
 
     const handleItemRemove = (item: TransferItem) => {
-      emit('itemRemove', item.key);
+      emit('itemRemove', [item.key]);
     };
 
     const handleScroll = (e: Event) => {

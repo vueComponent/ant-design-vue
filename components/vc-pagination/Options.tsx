@@ -5,6 +5,7 @@ import antInput from '../_util/antInputDirective';
 import type { EventHandler } from '../_util/EventInterface';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   props: {
     disabled: { type: Boolean, default: undefined },
     changeSize: Function,

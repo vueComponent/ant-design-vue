@@ -59,6 +59,7 @@ const renderExtra = (prefixCls: string, extra: VNodeTypes) =>
   extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
 
 const Result = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AResult',
   props: resultProps(),
   slots: ['title', 'subTitle', 'icon', 'extra'],

@@ -6082,15 +6082,9 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
                 </tr>
                 <!---->
               </tbody>
-              <!---->
-            </table>
-          </div>
-          <div style="overflow: hidden; bottom: 0px;" class="ant-table-summary ant-table-sticky-holder">
-            <table style="table-layout: fixed; visibility: hidden;">
-              <colgroup></colgroup>
               <tfoot class="ant-table-summary">
                 <tr>
-                  <td colspan="2" class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-cell-fix-sticky" style="position: sticky; left: 0px;">
+                  <td colspan="2" class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
                     <!----><button type="button" role="switch" aria-checked="false" class="ant-switch">
                       <div class="ant-switch-handle">
                         <!---->
@@ -6102,7 +6096,7 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
                     <!---->Scroll Context
                     <!---->
                   </td>
-                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first ant-table-cell-fix-sticky" style="position: sticky; right: 0px;">
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
                     <!---->Fix Right
                     <!---->
                   </td>
@@ -6110,6 +6104,7 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
               </tfoot>
             </table>
           </div>
+          <!---->
           <!---->
         </div>
         <!---->
@@ -6742,12 +6737,6 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
                 </tr>
                 <!---->
               </tbody>
-              <!---->
-            </table>
-          </div>
-          <div style="overflow: hidden;" class="ant-table-summary">
-            <table style="table-layout: fixed; visibility: hidden;">
-              <colgroup></colgroup>
               <tfoot class="ant-table-summary">
                 <tr>
                   <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
@@ -6762,6 +6751,7 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
               </tfoot>
             </table>
           </div>
+          <!---->
           <!---->
         </div>
         <!---->

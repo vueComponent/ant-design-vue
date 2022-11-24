@@ -31,6 +31,7 @@ export const tagProps = () => ({
 export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<typeof tagProps>>>;
 
 const Tag = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATag',
   props: tagProps(),
   // emits: ['update:visible', 'close'],
@@ -87,9 +88,9 @@ const Tag = defineComponent({
       const renderCloseIcon = () => {
         if (closable) {
           return closeIcon ? (
-            <div class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick}>
+            <span class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick}>
               {closeIcon}
-            </div>
+            </span>
           ) : (
             <CloseOutlined class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick} />
           );

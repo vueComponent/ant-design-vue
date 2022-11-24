@@ -366,8 +366,8 @@ export function filterEmpty(children = []) {
   children.forEach(child => {
     if (Array.isArray(child)) {
       res.push(...child);
-    } else if (child && child.type === Fragment) {
-      res.push(...child.children);
+    } else if (child?.type === Fragment) {
+      res.push(...filterEmpty(child.children));
     } else {
       res.push(child);
     }

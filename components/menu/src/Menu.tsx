@@ -89,6 +89,7 @@ export type MenuProps = Partial<ExtractPropTypes<ReturnType<typeof menuProps>>>;
 
 const EMPTY_LIST: string[] = [];
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMenu',
   inheritAttrs: false,
   props: menuProps(),
@@ -348,7 +349,7 @@ export default defineComponent({
     };
 
     const onInternalOpenChange = (key: Key, open: boolean) => {
-      const childrenEventKeys = keyMapStore.value[key].childrenEventKeys;
+      const childrenEventKeys = keyMapStore.value[key]?.childrenEventKeys || [];
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
 
       if (open) {

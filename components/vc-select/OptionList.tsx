@@ -34,6 +34,7 @@ export type OptionListProps = Record<string, never>;
  * Will fallback to dom if use customize render.
  */
 const OptionList = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'OptionList',
   inheritAttrs: false,
   slots: ['option'],

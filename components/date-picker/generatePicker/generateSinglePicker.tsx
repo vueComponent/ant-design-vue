@@ -29,6 +29,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
       ...extraProps,
     };
     return defineComponent({
+      compatConfig: { MODE: 3 },
       name: displayName,
       inheritAttrs: false,
       props: comProps,

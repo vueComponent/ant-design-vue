@@ -15,6 +15,7 @@ import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 const ClearableInputType = ['text', 'input'];
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {

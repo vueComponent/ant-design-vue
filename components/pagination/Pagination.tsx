@@ -74,6 +74,7 @@ export interface PaginationLocale {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'APagination',
   inheritAttrs: false,
   props: paginationProps(),

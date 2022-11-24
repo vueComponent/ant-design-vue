@@ -19,6 +19,7 @@ export const GroupSizeContext = createContext<{
   size: ComputedRef<SizeType>;
 }>();
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AButtonGroup',
   props: buttonGroupProps(),
   setup(props, { slots }) {

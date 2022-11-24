@@ -17,6 +17,7 @@ import type { Key } from '../../_util/type';
 import type { EventHandler } from '../../_util/EventInterface';
 import Column, { FIX_LABEL } from './Column';
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'OptionList',
   inheritAttrs: false,
   setup(_props, context) {

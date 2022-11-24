@@ -68,6 +68,7 @@ export const handleGradient = (strokeColor: ProgressGradient, directionConfig: D
 };
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Line',
   props: lineProps(),
   setup(props, { slots }) {

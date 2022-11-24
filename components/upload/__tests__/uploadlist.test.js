@@ -63,7 +63,7 @@ describe('Upload List', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/7269
-  it('should remove correct item when uid is 0', done => {
+  it('should remove correct item when uid is 0', async () => {
     const list = [
       {
         uid: 0,
@@ -91,14 +91,12 @@ describe('Upload List', () => {
       sync: false,
     };
     const wrapper = mount(Upload, props);
-    setTimeout(async () => {
-      expect(wrapper.findAll('.ant-upload-list-item').length).toBe(2);
-      wrapper.findAll('.ant-upload-list-item')[0].find('.anticon-delete').trigger('click');
-      await delay(400);
-      // wrapper.update();
-      expect(wrapper.findAll('.ant-upload-list-item').length).toBe(1);
-      done();
-    }, 0);
+    await sleep();
+    expect(wrapper.findAll('.ant-upload-list-item').length).toBe(2);
+    wrapper.findAll('.ant-upload-list-item')[0].find('.anticon-delete').trigger('click');
+    await sleep(400);
+    // wrapper.update();
+    expect(wrapper.findAll('.ant-upload-list-item').length).toBe(1);
   });
 
   xit('should be uploading when upload a file', done => {

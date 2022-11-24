@@ -57,6 +57,7 @@ export const context = {
 };
 
 const Group = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PreviewGroup',
   inheritAttrs: false,
   props: {
@@ -150,7 +151,7 @@ const Group = defineComponent({
     );
     watchEffect(
       () => {
-        if (!isShowPreview.value && isControlled.value) {
+        if (isShowPreview.value && isControlled.value) {
           setCurrent(currentControlledKey.value);
         }
       },

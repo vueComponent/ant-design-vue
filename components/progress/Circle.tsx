@@ -22,6 +22,7 @@ function getStrokeColor({
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Circle',
   inheritAttrs: false,
   props: progressProps(),

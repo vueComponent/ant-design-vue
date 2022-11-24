@@ -188,7 +188,7 @@ export const tableProps = () => {
       type: [Boolean, Object] as PropType<false | TablePaginationConfig>,
       default: undefined,
     },
-    loading: { type: [Boolean, Object] as PropType<false | SpinProps>, default: undefined },
+    loading: { type: [Boolean, Object] as PropType<boolean | SpinProps>, default: undefined },
     size: { type: String as PropType<SizeType>, default: undefined },
     bordered: Boolean,
     locale: { type: Object as PropType<TableLocale>, default: undefined },

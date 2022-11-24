@@ -8,6 +8,7 @@ import PropTypes from '../_util/vue-types';
 const UNDEFINED = undefined;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Item',
   props: {
     prefixCls: String,

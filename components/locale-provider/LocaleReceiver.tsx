@@ -19,6 +19,7 @@ export interface LocaleReceiverContext {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'LocaleReceiver',
   props: {
     componentName: String as PropType<LocaleComponentName>,

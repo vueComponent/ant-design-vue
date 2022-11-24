@@ -63,6 +63,7 @@ export const mergeDefaultValue = <T extends object>(obj: T, defaultValues: objec
 };
 let uuid = 0;
 const ImageInternal = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Image',
   inheritAttrs: false,
   props: imageProps(),
@@ -186,7 +187,9 @@ const ImageInternal = defineComponent({
         { flush: 'post', immediate: true },
       );
     });
-    onUnmounted(unRegister);
+    onUnmounted(() => {
+      unRegister();
+    });
     const toSizePx = (l: number | string) => {
       if (isNumber(l)) return l + 'px';
       return l;

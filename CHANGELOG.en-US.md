@@ -57,6 +57,43 @@
   - 💄 优化 Upload 操作按钮的样式细节。
 - 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
 
+## 3.2.15
+
+`2022-11-10`
+
+- 🐞 Fix the problem of preview image error when `Image` is deleted dynamically
+
+## 3.2.14
+
+`2022-11-07`
+
+- 🐞 Fix the problem of dynamic theme failure when custom `prefixCls` [#6063](https://github.com/vueComponent/ant-design-vue/issues/6063)
+- 🐞 Fix `DatePicker` error when using select and other popup components as slots [#6062](https://github.com/vueComponent/ant-design-vue/issues/6062)
+- 🐞 Fix `DirectoryTree` not exposing scrollTo method [#6067](https://github.com/vueComponent/ant-design-vue/issues/6067)
+- 🐞 Fix `RangePicker` popup position does not change [#6073](https://github.com/vueComponent/ant-design-vue/issues/6073)
+
+## 3.2.13
+
+`2022-10-08`
+
+- 🌟 Support Vue 3 upgrade tool `@vue/compat` [#5973](https://github.com/vueComponent/ant-design-vue/issues/5973)
+- 🌟 Cascader add tagRender slot [#5954](https://github.com/vueComponent/ant-design-vue/issues/5954)
+- 🐞 Fix image flickering issue when Image preview is closed [#5955](https://github.com/vueComponent/ant-design-vue/issues/5955)
+- 🐞 Fix Tag close icon style display misplaced [#5956](https://github.com/vueComponent/ant-design-vue/issues/5956)
+- 🐞 Fix Table loading property ts type error [#5964](https://github.com/vueComponent/ant-design-vue/issues/5964)
+- 🐞 Fix Transfer deletion exception [#5975](https://github.com/vueComponent/ant-design-vue/issues/5975)
+- 🐞 Fix the scroll shadow display issue of Table fixed column [#5996](https://github.com/vueComponent/ant-design-vue/issues/5996)
+- 🐞 Fix DirectoryTree's default expansion failure issue when customizing fieldNames [#6007](https://github.com/vueComponent/ant-design-vue/issues/6007)
+
+## 3.2.12
+
+`2022-09-02`
+
+- 🐞 Fix DescriptionItem labelStyle does not take effect [#5920](https://github.com/vueComponent/ant-design-vue/issues/5920)
+- 🌟 Typography copy button prevents bubbling [##5746](https://github.com/vueComponent/ant-design-vue/issues/5746)
+- 🐞 Fix table merged column scroll shadow occlusion issue [#5786](https://github.com/vueComponent/ant-design-vue/issues/5786)
+- 🐞 Fix the inconsistency between css var and ConfigProvider variables [#5929](https://github.com/vueComponent/ant-design-vue/issues/5929)
+
 ## 3.2.11
 
 `2022-08-08`

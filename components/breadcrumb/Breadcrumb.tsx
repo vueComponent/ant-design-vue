@@ -52,6 +52,7 @@ function defaultItemRender(opt: {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ABreadcrumb',
   props: breadcrumbProps(),
   slots: ['separator', 'itemRender'],

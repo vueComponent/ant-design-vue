@@ -11,6 +11,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 export { collapsePanelProps };
 export type CollapsePanelProps = Partial<ExtractPropTypes<ReturnType<typeof collapsePanelProps>>>;
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ACollapsePanel',
   inheritAttrs: false,
   props: initDefaultProps(collapsePanelProps(), {

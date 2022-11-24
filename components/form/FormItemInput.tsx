@@ -23,6 +23,7 @@ export interface FormItemInputProps {
 }
 
 const FormItemInput = defineComponent({
+  compatConfig: { MODE: 3 },
   slots: ['help', 'extra', 'errors'],
   inheritAttrs: false,
   props: [

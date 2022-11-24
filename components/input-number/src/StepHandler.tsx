@@ -14,6 +14,7 @@ const STEP_INTERVAL = 200;
 const STEP_DELAY = 600;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'StepHandler',
   inheritAttrs: false,
   props: {

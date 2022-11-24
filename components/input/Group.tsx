@@ -6,6 +6,7 @@ import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterfa
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AInputGroup',
   props: {
     prefixCls: String,
@@ -36,8 +37,8 @@ export default defineComponent({
       return (
         <span
           class={cls.value}
-          onMouseenter={props.onMouseEnter}
-          onMouseleave={props.onMouseLeave}
+          onMouseenter={props.onMouseenter}
+          onMouseleave={props.onMouseleave}
           onFocus={props.onFocus}
           onBlur={props.onBlur}
         >

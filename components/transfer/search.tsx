@@ -17,6 +17,7 @@ export const transferSearchProps = {
 export type TransferSearchProps = Partial<ExtractPropTypes<typeof transferSearchProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Search',
   inheritAttrs: false,
   props: initDefaultProps(transferSearchProps, {

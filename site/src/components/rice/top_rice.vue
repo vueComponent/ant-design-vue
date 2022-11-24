@@ -10,10 +10,10 @@
       </a-carousel>
     </template>
     <template v-else-if="showGoogleAd">
-      <template v-if="isCN">
+      <!-- <template v-if="isCN">
         <WWAds :key="`WWAds_${$route.path}`" />
-      </template>
-      <google-ads-top v-else :key="`GoogleAdsTop_${$route.path}`" />
+      </template> -->
+      <google-ads-top :key="`GoogleAdsTop_${$route.path}`" />
     </template>
   </div>
 </template>
@@ -23,19 +23,19 @@ import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetween);
 import GoogleAdsTop from './GoogleAdsTop.vue';
-import WWAds from './WWAds.vue';
+// import WWAds from './WWAds.vue';
 const isEffective = (start, end) => {
   return dayjs().isBetween(start, end);
 };
 export default {
   components: {
     GoogleAdsTop,
-    WWAds,
+    // WWAds,
   },
   props: ['isCN', 'isMobile'],
   data() {
     return {
-      show: false,
+      show: true,
       showGoogleAd: location.host.indexOf('antdv.com') > -1,
       cnAds: [
         {

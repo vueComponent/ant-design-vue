@@ -8,6 +8,7 @@ import classNames from '../_util/classNames';
 import { skipFlattenKey } from '../_util/props-util';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   props: {
     minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
     arrow: { type: Boolean, default: false },

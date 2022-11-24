@@ -10,6 +10,7 @@ export const menuDividerProps = () => ({
 export type MenuDividerProps = Partial<ExtractPropTypes<ReturnType<typeof menuDividerProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMenuDivider',
   props: menuDividerProps(),
   setup(props) {

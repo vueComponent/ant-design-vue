@@ -15,6 +15,7 @@ import omit from '../_util/omit';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AInput',
   inheritAttrs: false,
   props: inputProps(),

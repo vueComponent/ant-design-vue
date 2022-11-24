@@ -92,6 +92,7 @@ function getAccessibilityPath(item: FlattenNode): string {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'NodeList',
   inheritAttrs: false,
   props: nodeListProps,

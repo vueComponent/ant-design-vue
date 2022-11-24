@@ -44,6 +44,7 @@ export const subMenuProps = () => ({
 export type SubMenuProps = Partial<ExtractPropTypes<ReturnType<typeof subMenuProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ASubMenu',
   inheritAttrs: false,
   props: subMenuProps(),

@@ -67,6 +67,7 @@ function getPathStyles(
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'VCCircle',
   props: initDefaultProps(propTypes, defaultProps),
   setup(props) {

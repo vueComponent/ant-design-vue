@@ -13,7 +13,7 @@ import {
   convertTreeToData,
   fillFieldNames,
 } from '../vc-tree/utils/treeUtil';
-import type { DataNode, EventDataNode, Key } from '../vc-tree/interface';
+import type { DataNode, EventDataNode, Key, ScrollTo } from '../vc-tree/interface';
 import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -37,6 +37,7 @@ function getIcon(props: AntdTreeNodeAttribute) {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ADirectoryTree',
   inheritAttrs: false,
   props: initDefaultProps(directoryTreeProps(), {
@@ -78,9 +79,13 @@ export default defineComponent({
     const lastSelectedKey = ref<Key>();
 
     const cachedSelectedKeys = ref<Key[]>();
-
+    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const treeRef = ref();
+    const scrollTo: ScrollTo = scroll => {
+      treeRef.value?.scrollTo(scroll);
+    };
     expose({
+      scrollTo,
       selectedKeys: computed(() => treeRef.value?.selectedKeys),
       checkedKeys: computed(() => treeRef.value?.checkedKeys),
       halfCheckedKeys: computed(() => treeRef.value?.halfCheckedKeys),
@@ -89,7 +94,9 @@ export default defineComponent({
       expandedKeys: computed(() => treeRef.value?.expandedKeys),
     });
     const getInitExpandedKeys = () => {
-      const { keyEntities } = convertDataToEntities(treeData.value);
+      const { keyEntities } = convertDataToEntities(treeData.value, {
+        fieldNames: fieldNames.value,
+      });
 
       let initExpandedKeys: any;
 
@@ -180,7 +187,6 @@ export default defineComponent({
       emit('doubleclick', event, node);
       emit('dblclick', event, node);
     };
-    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const onSelect = (
       keys: Key[],
       event: {

@@ -27,6 +27,7 @@ export const dividerProps = () => ({
 export type DividerProps = Partial<ExtractPropTypes<ReturnType<typeof dividerProps>>>;
 
 const Divider = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ADivider',
   props: dividerProps(),
   setup(props, { slots }) {

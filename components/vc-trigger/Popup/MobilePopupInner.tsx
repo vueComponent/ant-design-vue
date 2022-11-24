@@ -6,6 +6,7 @@ import type { MobilePopupProps } from './interface';
 import { mobileProps } from './interface';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'MobilePopupInner',
   inheritAttrs: false,
   props: mobileProps,

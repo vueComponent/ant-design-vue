@@ -16,15 +16,9 @@
 
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
     </div>
-    <div v-if="visibleAlertBanner" class="alert-banner">
-      <template v-if="isZhCN">
-        Ant Design Vue 3 已正式发布，并成为默认文档。
-        <a href="https://www.antdv.com/docs/vue/migration-v3-cn">升级文档</a>
-      </template>
-      <template v-else>
-        Ant Design Vue 3 is now the new default version!
-        <a href="https://www.antdv.com/docs/vue/migration-v3">Update Doc</a>
-      </template>
+    <div v-if="visibleAlertBanner && isZhCN" class="alert-banner">
+      Surely Form 1.0 发布，快速搭建在线问卷，无缝嵌入各种系统，限时限量加群，记得扫码哦
+      <a href="https://form.antdv.com">立即体验</a>
 
       <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
     </div>
@@ -134,10 +128,10 @@ export default defineComponent({
     watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
-    const visibleAlertBanner = ref(!localStorage.getItem('v3'));
+    const visibleAlertBanner = ref(!localStorage.getItem('surelyform'));
     watch(visibleAlertBanner, () => {
       if (!visibleAlertBanner.value) {
-        localStorage.setItem('v3', version);
+        localStorage.setItem('surelyform', version);
       }
     });
     return {

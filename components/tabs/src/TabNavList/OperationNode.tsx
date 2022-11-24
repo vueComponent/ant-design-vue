@@ -30,6 +30,7 @@ export const operationNodeProps = {
 export type OperationNodeProps = Partial<ExtractPropTypes<typeof operationNodeProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'OperationNode',
   inheritAttrs: false,
   props: operationNodeProps,

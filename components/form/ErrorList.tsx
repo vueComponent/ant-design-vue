@@ -14,6 +14,7 @@ export interface ErrorListProps {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ErrorList',
   props: ['errors', 'help', 'onDomErrorVisibleChange', 'helpStatus', 'warnings'],
   setup(props) {

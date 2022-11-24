@@ -41,6 +41,7 @@ export const AutoCompleteOption = Option;
 export const AutoCompleteOptGroup = OptGroup;
 
 const AutoComplete = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AAutoComplete',
   inheritAttrs: false,
   props: autoCompleteProps(),

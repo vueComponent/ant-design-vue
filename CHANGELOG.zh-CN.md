@@ -57,6 +57,43 @@
   - 💄 优化 Upload 操作按钮的样式细节。
 - 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
 
+## 3.2.15
+
+`2022-11-10`
+
+- 🐞 修复 `Image` 动态删除时，预览图片错误问题
+
+## 3.2.14
+
+`2022-11-07`
+
+- 🐞 修复自定义 `prefixCls` 时，动态主题失效问题 [#6063](https://github.com/vueComponent/ant-design-vue/issues/6063)
+- 🐞 修复 `DatePicker` 使用 select 等弹窗组件作为插槽时，报错问题 [#6062](https://github.com/vueComponent/ant-design-vue/issues/6062)
+- 🐞 修复 `DirectoryTree` 未暴露 scrollTo 方法 [#6067](https://github.com/vueComponent/ant-design-vue/issues/6067)
+- 🐞 修复 `RangePicker` 弹窗位置不改变问题 [#6073](https://github.com/vueComponent/ant-design-vue/issues/6073)
+
+## 3.2.13
+
+`2022-10-08`
+
+- 🌟 支持 Vue 3 升级工具 `@vue/compat` [#5973](https://github.com/vueComponent/ant-design-vue/issues/5973)
+- 🌟 Cascader 添加 tagRender 插槽 [#5954](https://github.com/vueComponent/ant-design-vue/issues/5954)
+- 🐞 修复 Image 预览关闭时，图片闪动问题 [#5955](https://github.com/vueComponent/ant-design-vue/issues/5955)
+- 🐞 修复 Tag 关闭图标样式显示错位 [#5956](https://github.com/vueComponent/ant-design-vue/issues/5956)
+- 🐞 修复 Table loading 属性 ts 类型错误 [#5964](https://github.com/vueComponent/ant-design-vue/issues/5964)
+- 🐞 修复 Transfer 删除异常问题 [#5975](https://github.com/vueComponent/ant-design-vue/issues/5975)
+- 🐞 修复 Table 固定列的滚动阴影显示问题 [#5996](https://github.com/vueComponent/ant-design-vue/issues/5996)
+- 🐞 修复 DirectoryTree 在自定义 fieldNames 时，默认展开失效问题 [#6007](https://github.com/vueComponent/ant-design-vue/issues/6007)
+
+## 3.2.12
+
+`2022-09-02`
+
+- 🐞 修复 DescriptionItem labelStyle 不生效问题 [#5920](https://github.com/vueComponent/ant-design-vue/issues/5920)
+- 🌟 Typography 复制按钮阻止冒泡 [##5746](https://github.com/vueComponent/ant-design-vue/issues/5746)
+- 🐞 修复 table 合并列滚动阴影遮挡问题 [#5786](https://github.com/vueComponent/ant-design-vue/issues/5786)
+- 🐞 修复 css var 和 ConfigProvider 变量不一致问题 [#5929](https://github.com/vueComponent/ant-design-vue/issues/5929)
+
 ## 3.2.11
 
 `2022-08-08`

@@ -32,20 +32,7 @@ exports[`renders ./components/input/demo/allow-clear.vue correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/input/demo/autosize-textarea.vue correctly 1`] = `
-<div><textarea placeholder="Autosize height based on content lines" class="ant-input" style="height: 0px; min-height: -9007199254740991px; max-height: 9007199254740991px; overflow-y: hidden; resize: none; overflow-x: hidden;"></textarea>
-  <div style="margin: 24px 0px;"></div><textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input" style="height: -20px; min-height: -8px; max-height: -20px; overflow-y: hidden; resize: none; overflow-x: hidden;"></textarea>
-</div>
-`;
-
-exports[`renders ./components/input/demo/basic.vue correctly 1`] = `
-<div class="ant-space ant-space-vertical">
-  <div class="ant-space-item" style="margin-bottom: 8px;"><input placeholder="Basic usage" type="text" class="ant-input"></div>
-  <!---->
-  <div class="ant-space-item"><input placeholder="Lazy usage" type="text" autofocus="" class="ant-input"></div>
-  <!---->
-</div>
-`;
+exports[`renders ./components/input/demo/basic.vue correctly 1`] = `<input placeholder="Basic usage" type="text" class="ant-input">`;
 
 exports[`renders ./components/input/demo/borderless.vue correctly 1`] = `<input placeholder="Borderless" type="text" class="ant-input ant-input-borderless">`;
 

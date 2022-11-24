@@ -52,6 +52,7 @@ export type DraggableConfig = {
 };
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Tree',
   inheritAttrs: false,
   slots: ['checkable', 'title', 'icon', 'titleRender'],

@@ -59,8 +59,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | placeholder | 选择框默认文字 | string\|slot | - |  |
 | removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |  |
 | searchValue | 控制搜索文本 | string | - |  |
-| showArrow | 是否显示下拉小箭头 | boolean | true |  |
-| showSearch | 使单选模式可搜索 | boolean | false |  |
+| showArrow | 是否显示下拉小箭头 | boolean | 单选为true,多选为false |  |
+| showSearch | 配置是否可搜索 | boolean | 单选为false,多选为true |  |
 | size | 选择框大小，可选 `large` `small` | string | default |  |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |  |
 | tagRender | 自定义 tag 内容 render，仅在 `mode` 为 `multiple` 或 `tags` 时生效 | slot \| (props) => any | - | 3.0 |

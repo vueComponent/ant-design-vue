@@ -1596,7 +1596,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
         <!---->
       </div>
       <div class="ant-form-item-explain ant-form-item-explain-connected">
-        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">Should be combination of numbers &amp; alphabets</div>
+        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">Should be combination of numbers &amp; alphabets</div>
       </div>
       <!---->
     </div>
@@ -1623,7 +1623,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
         <div class="ant-form-item-control-input-content"><input id="validating" placeholder="I'm the content is being validated" type="text" class="ant-input"></div><span class="ant-form-item-children-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span>
       </div>
       <div class="ant-form-item-explain ant-form-item-explain-connected">
-        <div role="alert" class="ant-form-item-explain-validating ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">The information is being validated...</div>
+        <div role="alert" class="ant-form-item-explain-validating ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">The information is being validated...</div>
       </div>
       <!---->
     </div>
@@ -1661,7 +1661,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
         <div class="ant-form-item-control-input-content"><input id="error2" placeholder="unavailable choice" type="text" class="ant-input"></div><span class="ant-form-item-children-icon"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span>
       </div>
       <div class="ant-form-item-explain ant-form-item-explain-connected">
-        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">Should be combination of numbers &amp; alphabets</div>
+        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">Should be combination of numbers &amp; alphabets</div>
       </div>
       <!---->
     </div>
@@ -1764,7 +1764,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
         </div><span class="ant-form-item-children-icon"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span>
       </div>
       <div class="ant-form-item-explain ant-form-item-explain-connected">
-        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">Something breaks the rule.</div>
+        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">Something breaks the rule.</div>
       </div>
       <!---->
     </div>
@@ -1787,7 +1787,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
         </div><span class="ant-form-item-children-icon"><span role="img" aria-label="exclamation-circle" class="anticon anticon-exclamation-circle"><svg focusable="false" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path></svg></span></span>
       </div>
       <div class="ant-form-item-explain ant-form-item-explain-connected">
-        <div role="alert" class="ant-form-item-explain-warning ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">Need to be checked</div>
+        <div role="alert" class="ant-form-item-explain-warning ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">Need to be checked</div>
       </div>
       <!---->
     </div>
@@ -1814,7 +1814,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
                 <!---->
               </div>
               <div class="ant-form-item-explain ant-form-item-explain-connected">
-                <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">Please select right date</div>
+                <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">Please select right date</div>
               </div>
               <!---->
             </div>
@@ -1928,7 +1928,7 @@ exports[`renders ./components/form/demo/validate-static.vue correctly 1`] = `
         </div><span class="ant-form-item-children-icon"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span>
       </div>
       <div class="ant-form-item-explain ant-form-item-explain-connected">
-        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 1;">Should have something</div>
+        <div role="alert" class="ant-form-item-explain-error ant-show-help-item ant-show-help-item-appear ant-show-help-item-enter ant-show-help-item-appear-prepare ant-show-help-item-enter-prepare" style="height: 0px; opacity: 0;">Should have something</div>
       </div>
       <!---->
     </div>

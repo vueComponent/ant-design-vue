@@ -32,7 +32,14 @@ exports[`renders ./components/input/demo/allow-clear.vue correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/input/demo/basic.vue correctly 1`] = `<input placeholder="Basic usage" type="text" class="ant-input">`;
+exports[`renders ./components/input/demo/basic.vue correctly 1`] = `
+<div class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;"><input placeholder="Basic usage" type="text" class="ant-input"></div>
+  <!---->
+  <div class="ant-space-item"><input placeholder="Lazy usage" type="text" autofocus="" class="ant-input"></div>
+  <!---->
+</div>
+`;
 
 exports[`renders ./components/input/demo/borderless.vue correctly 1`] = `<input placeholder="Borderless" type="text" class="ant-input ant-input-borderless">`;
 

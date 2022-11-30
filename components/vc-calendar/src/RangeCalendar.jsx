@@ -645,14 +645,19 @@ const RangeCalendar = {
       return this.disabledTime(time, 'end');
     },
 
+    /**
+     * 
+     * @param {*} month 
+     * @returns hope mode as ['month','month'] can support disable-date
+     */
     disabledStartMonth(month) {
       const { sValue } = this;
-      return month.isAfter(sValue[1], 'month');
+      return isDisabledMonthDate(month,sValue[1],this.disabledDate,'start');
     },
 
     disabledEndMonth(month) {
       const { sValue } = this;
-      return month.isBefore(sValue[0], 'month');
+      return isDisabledMonthDate(month,sValue[0],this.disabledDate,'end');
     },
   },
 

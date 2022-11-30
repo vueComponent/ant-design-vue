@@ -111,3 +111,29 @@ export function formatDate(value, format) {
 
   return value.format(format);
 }
+
+/**
+ * 
+ * @param {*} current The value accepted by the component 
+ * @param {*} checked The checked accepted by the component 
+ * @param {*} disabledMonthDateFunc 
+ * @param {*} type 'start' or 'end'
+ * @returns if without disabledMonthDateFunc,Follow the original logic,else check the disabledMonthDateFunc
+ */
+
+ export function isDisabledMonthDate(current, checked, disabledMonthDateFunc, type) {
+  if (type === 'start') {
+    console.log(disabledMonthDateFunc)
+    if (!disabledMonthDateFunc) {
+      return current.isAfter(checked, 'month');
+    } else {
+      return current.isAfter(checked, 'month') || disabledMonthDateFunc(current);
+    }
+  } else if (type === 'end') {
+    if (!disabledMonthDateFunc) {
+      return current.isBefore(checked, 'month');
+    } else {
+      return current.isBefore(checked, 'month') || disabledMonthDateFunc(current);
+    }
+  }
+}

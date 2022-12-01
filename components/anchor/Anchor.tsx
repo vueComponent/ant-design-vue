@@ -59,8 +59,10 @@ export const anchorProps = () => ({
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   getCurrentAnchor: Function as PropType<() => string>,
   targetOffset: Number,
-  onChange: Function as PropType<(currentActiveLink: string) => void>,
-  onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
+  onChange: [Function, Array] as PropType<(currentActiveLink: string) => void>,
+  onClick: [Function, Array] as PropType<
+    (e: MouseEvent, link: { title: any; href: string }) => void
+  >,
 });
 
 export type AnchorProps = Partial<ExtractPropTypes<ReturnType<typeof anchorProps>>>;

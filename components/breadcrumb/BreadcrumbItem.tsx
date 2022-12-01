@@ -12,7 +12,7 @@ export const breadcrumbItemProps = () => ({
   href: String,
   separator: PropTypes.any,
   overlay: PropTypes.any,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: [Function, Array] as PropType<MouseEventHandler>,
 });
 
 export type BreadcrumbItemProps = Partial<ExtractPropTypes<ReturnType<typeof breadcrumbItemProps>>>;

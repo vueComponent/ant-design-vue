@@ -114,16 +114,16 @@ function uploadProps<T = any>() {
         FileList: FileType[],
       ) => BeforeUploadValueType | Promise<BeforeUploadValueType>
     >,
-    onChange: Function as PropType<(info: UploadChangeParam<UploadFile<T>>) => void>,
-    'onUpdate:fileList': Function as PropType<
+    onChange: [Function, Array] as PropType<(info: UploadChangeParam<UploadFile<T>>) => void>,
+    'onUpdate:fileList': [Function, Array] as PropType<
       (fileList: UploadChangeParam<UploadFile<T>>['fileList']) => void
     >,
-    onDrop: Function as PropType<(event: DragEvent) => void>,
+    onDrop: [Function, Array] as PropType<(event: DragEvent) => void>,
     listType: String as PropType<UploadListType>,
-    onPreview: Function as PropType<(file: UploadFile<T>) => void>,
-    onDownload: Function as PropType<(file: UploadFile<T>) => void>,
-    onReject: Function as PropType<(fileList: FileType[]) => void>,
-    onRemove: Function as PropType<
+    onPreview: [Function, Array] as PropType<(file: UploadFile<T>) => void>,
+    onDownload: [Function, Array] as PropType<(file: UploadFile<T>) => void>,
+    onReject: [Function, Array] as PropType<(fileList: FileType[]) => void>,
+    onRemove: [Function, Array] as PropType<
       (file: UploadFile<T>) => void | boolean | Promise<void | boolean>
     >,
     /** @deprecated Please use `onRemove` directly */
@@ -164,9 +164,9 @@ export interface UploadState<T = any> {
 function uploadListProps<T = any>() {
   return {
     listType: String as PropType<UploadListType>,
-    onPreview: Function as PropType<(file: UploadFile<T>) => void>,
-    onDownload: Function as PropType<(file: UploadFile<T>) => void>,
-    onRemove: Function as PropType<(file: UploadFile<T>) => void | boolean>,
+    onPreview: [Function, Array] as PropType<(file: UploadFile<T>) => void>,
+    onDownload: [Function, Array] as PropType<(file: UploadFile<T>) => void>,
+    onRemove: [Function, Array] as PropType<(file: UploadFile<T>) => void | boolean>,
     items: Array as PropType<Array<UploadFile<T>>>,
     progress: Object as PropType<UploadListProgressProps>,
     prefixCls: String as PropType<string>,

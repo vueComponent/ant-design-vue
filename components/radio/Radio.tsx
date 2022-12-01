@@ -18,12 +18,12 @@ export const radioProps = () => ({
   name: String,
   id: String,
   autofocus: { type: Boolean, default: undefined },
-  onChange: Function as PropType<(event: RadioChangeEvent) => void>,
-  onFocus: Function as PropType<FocusEventHandler>,
-  onBlur: Function as PropType<FocusEventHandler>,
-  onClick: Function as PropType<MouseEventHandler>,
-  'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
-  'onUpdate:value': Function as PropType<(checked: boolean) => void>,
+  onChange: [Function, Array] as PropType<(event: RadioChangeEvent) => void>,
+  onFocus: [Function, Array] as PropType<FocusEventHandler>,
+  onBlur: [Function, Array] as PropType<FocusEventHandler>,
+  onClick: [Function, Array] as PropType<MouseEventHandler>,
+  'onUpdate:checked': [Function, Array] as PropType<(checked: boolean) => void>,
+  'onUpdate:value': [Function, Array] as PropType<(checked: boolean) => void>,
 });
 
 export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>>;

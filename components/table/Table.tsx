@@ -151,7 +151,7 @@ export const tableProps = () => {
       default: undefined,
     },
     expandIcon: { type: Function as PropType<TableProps['expandIcon']>, default: undefined },
-    onExpand: { type: Function as PropType<TableProps['onExpand']>, default: undefined },
+    onExpand: { type: [Function, Array] as PropType<TableProps['onExpand']>, default: undefined },
     onExpandedRowsChange: {
       type: Function as PropType<TableProps['onExpandedRowsChange']>,
       default: undefined,

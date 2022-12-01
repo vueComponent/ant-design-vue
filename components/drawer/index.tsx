@@ -82,9 +82,9 @@ export const drawerProps = () => ({
   handle: PropTypes.any,
   /** @deprecated Use `@afterVisibleChange` instead */
   afterVisibleChange: Function as PropType<(visible: boolean) => void>,
-  onAfterVisibleChange: Function as PropType<(visible: boolean) => void>,
-  'onUpdate:visible': Function as PropType<(visible: boolean) => void>,
-  onClose: Function as PropType<MouseEventHandler | KeyboardEventHandler>,
+  onAfterVisibleChange: [Function, Array] as PropType<(visible: boolean) => void>,
+  'onUpdate:visible': [Function, Array] as PropType<(visible: boolean) => void>,
+  onClose: [Function, Array] as PropType<MouseEventHandler | KeyboardEventHandler>,
 });
 
 export type DrawerProps = Partial<ExtractPropTypes<ReturnType<typeof drawerProps>>>;

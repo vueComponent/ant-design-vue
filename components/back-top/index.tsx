@@ -25,7 +25,7 @@ export const backTopProps = () => ({
   duration: { type: Number, default: 450 },
   target: Function as PropType<() => HTMLElement | Window | Document>,
   prefixCls: String,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: [Function, Array] as PropType<MouseEventHandler>,
   // visible: { type: Boolean, default: undefined }, // Only for test. Don't use it.
 });
 

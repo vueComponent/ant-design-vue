@@ -30,7 +30,7 @@ export default defineComponent({
     active: { type: Boolean },
     closable: { type: Boolean },
     editable: { type: Object as PropType<EditableConfig> },
-    onClick: { type: Function as PropType<(e: MouseEvent | KeyboardEvent) => void> },
+    onClick: { type: [Function, Array] as PropType<(e: MouseEvent | KeyboardEvent) => void> },
     onResize: {
       type: Function as PropType<
         (width: number, height: number, left: number, top: number) => void
@@ -38,8 +38,8 @@ export default defineComponent({
     },
     renderWrapper: { type: Function as PropType<(node: any) => any> },
     removeAriaLabel: { type: String },
-    // onRemove: { type: Function as PropType<() => void> },
-    onFocus: { type: Function as PropType<FocusEventHandler> },
+    // onRemove: { type: [Function, Array] as PropType<() => void> },
+    onFocus: { type: [Function, Array] as PropType<FocusEventHandler> },
   },
   emits: ['click', 'resize', 'remove', 'focus'],
   setup(props, { expose, attrs }) {

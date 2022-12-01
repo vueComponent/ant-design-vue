@@ -21,7 +21,7 @@ export default defineComponent({
     prefixCls: String,
     upDisabled: Boolean,
     downDisabled: Boolean,
-    onStep: { type: Function as PropType<(up: boolean) => void> },
+    onStep: { type: [Function, Array] as PropType<(up: boolean) => void> },
   },
   slots: ['upNode', 'downNode'],
   setup(props, { slots, emit }) {

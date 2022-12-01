@@ -21,11 +21,11 @@ export const menuItemProps = () => ({
   danger: Boolean,
   title: { type: [String, Boolean], default: undefined },
   icon: PropTypes.any,
-  onMouseenter: Function as PropType<MouseEventHandler>,
-  onMouseleave: Function as PropType<MouseEventHandler>,
-  onClick: Function as PropType<MouseEventHandler>,
-  onKeydown: Function as PropType<MouseEventHandler>,
-  onFocus: Function as PropType<MouseEventHandler>,
+  onMouseenter: [Function, Array] as PropType<MouseEventHandler>,
+  onMouseleave: [Function, Array] as PropType<MouseEventHandler>,
+  onClick: [Function, Array] as PropType<MouseEventHandler>,
+  onKeydown: [Function, Array] as PropType<MouseEventHandler>,
+  onFocus: [Function, Array] as PropType<MouseEventHandler>,
 });
 
 export type MenuItemProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemProps>>>;

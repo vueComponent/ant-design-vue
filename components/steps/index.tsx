@@ -30,8 +30,8 @@ export const stepsProps = () => ({
     default: undefined as boolean | ProgressDotRender,
   },
   type: String as PropType<'default' | 'navigation'>,
-  onChange: Function as PropType<(current: number) => void>,
-  'onUpdate:current': Function as PropType<(current: number) => void>,
+  onChange: [Function, Array] as PropType<(current: number) => void>,
+  'onUpdate:current': [Function, Array] as PropType<(current: number) => void>,
 });
 
 export const stepProps = () => ({
@@ -41,7 +41,7 @@ export const stepProps = () => ({
   disabled: { type: Boolean, default: undefined },
   title: PropTypes.any,
   subTitle: PropTypes.any,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: [Function, Array] as PropType<MouseEventHandler>,
 });
 
 export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>>;

@@ -41,7 +41,9 @@ export const checkboxGroupProps = () => {
     ...abstractCheckboxGroupProps(),
     defaultValue: { type: Array as PropType<Array<CheckboxValueType>> },
     value: { type: Array as PropType<Array<CheckboxValueType>> },
-    onChange: { type: Function as PropType<(checkedValue: Array<CheckboxValueType>) => void> },
+    onChange: {
+      type: [Function, Array] as PropType<(checkedValue: Array<CheckboxValueType>) => void>,
+    },
     'onUpdate:value': {
       type: Function as PropType<(checkedValue: Array<CheckboxValueType>) => void>,
     },
@@ -63,9 +65,9 @@ export const abstractCheckboxProps = () => {
     indeterminate: { type: Boolean, default: undefined },
     type: { type: String, default: 'checkbox' },
     autofocus: { type: Boolean, default: undefined },
-    onChange: Function as PropType<(e: CheckboxChangeEvent) => void>,
-    'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
-    onClick: Function as PropType<MouseEventHandler>,
+    onChange: [Function, Array] as PropType<(e: CheckboxChangeEvent) => void>,
+    'onUpdate:checked': [Function, Array] as PropType<(checked: boolean) => void>,
+    onClick: [Function, Array] as PropType<MouseEventHandler>,
     skipGroup: { type: Boolean, default: false },
   };
 };

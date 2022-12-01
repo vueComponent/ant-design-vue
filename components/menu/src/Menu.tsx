@@ -68,16 +68,16 @@ export const menuProps = () => ({
   getPopupContainer: Function as PropType<(node: HTMLElement) => HTMLElement>,
 
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
-  onOpenChange: Function as PropType<(keys: Key[]) => void>,
-  onSelect: Function as PropType<SelectEventHandler>,
-  onDeselect: Function as PropType<SelectEventHandler>,
+  onOpenChange: [Function, Array] as PropType<(keys: Key[]) => void>,
+  onSelect: [Function, Array] as PropType<SelectEventHandler>,
+  onDeselect: [Function, Array] as PropType<SelectEventHandler>,
   onClick: [Function, Array] as PropType<MenuClickEventHandler>,
-  onFocus: Function as PropType<FocusEventHandler>,
-  onBlur: Function as PropType<FocusEventHandler>,
-  onMousedown: Function as PropType<MouseEventHandler>,
-  'onUpdate:openKeys': Function as PropType<(keys: Key[]) => void>,
-  'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
-  'onUpdate:activeKey': Function as PropType<(key: Key) => void>,
+  onFocus: [Function, Array] as PropType<FocusEventHandler>,
+  onBlur: [Function, Array] as PropType<FocusEventHandler>,
+  onMousedown: [Function, Array] as PropType<MouseEventHandler>,
+  'onUpdate:openKeys': [Function, Array] as PropType<(keys: Key[]) => void>,
+  'onUpdate:selectedKeys': [Function, Array] as PropType<(keys: Key[]) => void>,
+  'onUpdate:activeKey': [Function, Array] as PropType<(key: Key) => void>,
 });
 
 export type MenuProps = Partial<ExtractPropTypes<ReturnType<typeof menuProps>>>;

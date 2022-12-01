@@ -46,10 +46,10 @@ export const paginationProps = () => ({
   role: String,
   responsive: Boolean,
   showLessItems: { type: Boolean, default: undefined },
-  onChange: Function as PropType<(page: number, pageSize: number) => void>,
-  onShowSizeChange: Function as PropType<(current: number, size: number) => void>,
-  'onUpdate:current': Function as PropType<(current: number) => void>,
-  'onUpdate:pageSize': Function as PropType<(size: number) => void>,
+  onChange: [Function, Array] as PropType<(page: number, pageSize: number) => void>,
+  onShowSizeChange: [Function, Array] as PropType<(current: number, size: number) => void>,
+  'onUpdate:current': [Function, Array] as PropType<(current: number) => void>,
+  'onUpdate:pageSize': [Function, Array] as PropType<(size: number) => void>,
 });
 
 export type PaginationPosition = 'top' | 'bottom' | 'both';

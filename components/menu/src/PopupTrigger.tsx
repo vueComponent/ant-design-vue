@@ -26,7 +26,7 @@ export default defineComponent({
     popupClassName: String,
     popupOffset: Array as PropType<number[]>,
     disabled: Boolean,
-    onVisibleChange: Function as PropType<(visible: boolean) => void>,
+    onVisibleChange: [Function, Array] as PropType<(visible: boolean) => void>,
   },
   slots: ['popup'],
   emits: ['visibleChange'],

@@ -48,7 +48,7 @@ export const selectProps = () => ({
   bordered: { type: Boolean, default: true },
   transitionName: String,
   choiceTransitionName: { type: String, default: '' },
-  'onUpdate:value': Function as PropType<(val: SelectValue) => void>,
+  'onUpdate:value': [Function, Array] as PropType<(val: SelectValue) => void>,
 });
 
 export type SelectProps = Partial<ExtractPropTypes<ReturnType<typeof selectProps>>>;

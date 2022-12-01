@@ -65,17 +65,17 @@ export const inputNumberProps = () => ({
   /** Syntactic sugar of `formatter`. Config decimal separator of display. */
   decimalSeparator: { type: String as PropType<string> },
 
-  onInput: { type: Function as PropType<(text: string) => void> },
-  onChange: { type: Function as PropType<(value: ValueType) => void> },
-  onPressEnter: { type: Function as PropType<KeyboardEventHandler> },
+  onInput: { type: [Function, Array] as PropType<(text: string) => void> },
+  onChange: { type: [Function, Array] as PropType<(value: ValueType) => void> },
+  onPressEnter: { type: [Function, Array] as PropType<KeyboardEventHandler> },
 
   onStep: {
     type: Function as PropType<
       (value: ValueType, info: { offset: ValueType; type: 'up' | 'down' }) => void
     >,
   },
-  onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
-  onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
+  onBlur: { type: [Function, Array] as PropType<(e: FocusEvent) => void> },
+  onFocus: { type: [Function, Array] as PropType<(e: FocusEvent) => void> },
 });
 
 export default defineComponent({

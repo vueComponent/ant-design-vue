@@ -44,8 +44,8 @@ export const popconfirmProps = () => ({
     default: undefined as ButtonProps & HTMLAttributes,
   },
   showCancel: { type: Boolean, default: true },
-  onConfirm: Function as PropType<(e: MouseEvent) => void>,
-  onCancel: Function as PropType<(e: MouseEvent) => void>,
+  onConfirm: [Function, Array] as PropType<(e: MouseEvent) => void>,
+  onCancel: [Function, Array] as PropType<(e: MouseEvent) => void>,
 });
 
 export type PopconfirmProps = Partial<ExtractPropTypes<ReturnType<typeof popconfirmProps>>>;

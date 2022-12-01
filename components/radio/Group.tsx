@@ -32,8 +32,8 @@ export const radioGroupProps = () => ({
   buttonStyle: { type: String as PropType<RadioGroupButtonStyle>, default: 'outline' },
   id: String,
   optionType: { type: String as PropType<RadioGroupOptionType>, default: 'default' },
-  onChange: Function as PropType<(e: RadioChangeEvent) => void>,
-  'onUpdate:value': Function as PropType<(val: any) => void>,
+  onChange: [Function, Array] as PropType<(e: RadioChangeEvent) => void>,
+  'onUpdate:value': [Function, Array] as PropType<(val: any) => void>,
 });
 
 export type RadioGroupProps = Partial<ExtractPropTypes<ReturnType<typeof radioGroupProps>>>;

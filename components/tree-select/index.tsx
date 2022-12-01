@@ -62,9 +62,9 @@ export function treeSelectProps<
     bordered: { type: Boolean, default: undefined },
     treeLine: { type: [Boolean, Object] as PropType<TreeProps['showLine']>, default: undefined },
     replaceFields: { type: Object as PropType<FieldNames> },
-    'onUpdate:value': { type: Function as PropType<(value: any) => void> },
-    'onUpdate:treeExpandedKeys': { type: Function as PropType<(keys: Key[]) => void> },
-    'onUpdate:searchValue': { type: Function as PropType<(value: string) => void> },
+    'onUpdate:value': { type: [Function, Array] as PropType<(value: any) => void> },
+    'onUpdate:treeExpandedKeys': { type: [Function, Array] as PropType<(keys: Key[]) => void> },
+    'onUpdate:searchValue': { type: [Function, Array] as PropType<(value: string) => void> },
   };
 }
 export type TreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof treeSelectProps>>>;

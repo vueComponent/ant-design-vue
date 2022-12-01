@@ -29,12 +29,12 @@ export const rateProps = () => ({
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   direction: String as PropType<Direction>,
   id: String,
-  onChange: Function as PropType<(value: number) => void>,
-  onHoverChange: Function as PropType<(value: number) => void>,
-  'onUpdate:value': Function as PropType<(value: number) => void>,
-  onFocus: Function as PropType<FocusEventHandler>,
-  onBlur: Function as PropType<FocusEventHandler>,
-  onKeydown: Function as PropType<KeyboardEventHandler>,
+  onChange: [Function, Array] as PropType<(value: number) => void>,
+  onHoverChange: [Function, Array] as PropType<(value: number) => void>,
+  'onUpdate:value': [Function, Array] as PropType<(value: number) => void>,
+  onFocus: [Function, Array] as PropType<FocusEventHandler>,
+  onBlur: [Function, Array] as PropType<FocusEventHandler>,
+  onKeydown: [Function, Array] as PropType<KeyboardEventHandler>,
 });
 
 export type RateProps = Partial<ExtractPropTypes<ReturnType<typeof rateProps>>>;

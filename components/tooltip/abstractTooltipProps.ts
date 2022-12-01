@@ -46,6 +46,6 @@ export default () => ({
     default: undefined as BuildInPlacements,
   },
   children: Array,
-  onVisibleChange: Function as PropType<(vis: boolean) => void>,
-  'onUpdate:visible': Function as PropType<(vis: boolean) => void>,
+  onVisibleChange: [Function, Array] as PropType<(vis: boolean) => void>,
+  'onUpdate:visible': [Function, Array] as PropType<(vis: boolean) => void>,
 });

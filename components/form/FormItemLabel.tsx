@@ -18,7 +18,7 @@ export interface FormItemLabelProps {
   requiredMark?: RequiredMark;
   required?: boolean;
   prefixCls: string;
-  onClick: Function;
+  onClick: [Function, Function[]];
 }
 
 const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, emit, attrs }) => {

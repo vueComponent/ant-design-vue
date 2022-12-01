@@ -13,9 +13,9 @@ export const transferListBodyProps = {
   disabled: { type: Boolean, default: undefined },
   showRemove: { type: Boolean, default: undefined },
   pagination: PropTypes.any,
-  onItemSelect: Function,
-  onScroll: Function,
-  onItemRemove: Function,
+  onItemSelect: [Function, Array],
+  onScroll: [Function, Array],
+  onItemRemove: [Function, Array],
 };
 
 export type TransferListBodyProps = Partial<ExtractPropTypes<typeof transferListBodyProps>>;

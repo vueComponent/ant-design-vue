@@ -58,15 +58,15 @@ export const formProps = () => ({
   validateOnRuleChange: { type: Boolean, default: undefined },
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: { type: [Boolean, Object] as PropType<boolean | Options> },
-  onSubmit: Function as PropType<(e: Event) => void>,
+  onSubmit: [Function, Array] as PropType<(e: Event) => void>,
   name: String,
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   size: { type: String as PropType<SizeType> },
-  onValuesChange: { type: Function as PropType<Callbacks['onValuesChange']> },
-  onFieldsChange: { type: Function as PropType<Callbacks['onFieldsChange']> },
-  onFinish: { type: Function as PropType<Callbacks['onFinish']> },
-  onFinishFailed: { type: Function as PropType<Callbacks['onFinishFailed']> },
-  onValidate: { type: Function as PropType<Callbacks['onValidate']> },
+  onValuesChange: { type: [Function, Array] as PropType<Callbacks['onValuesChange']> },
+  onFieldsChange: { type: [Function, Array] as PropType<Callbacks['onFieldsChange']> },
+  onFinish: { type: [Function, Array] as PropType<Callbacks['onFinish']> },
+  onFinishFailed: { type: [Function, Array] as PropType<Callbacks['onFinishFailed']> },
+  onValidate: { type: [Function, Array] as PropType<Callbacks['onValidate']> },
 });
 
 export type FormProps = Partial<ExtractPropTypes<ReturnType<typeof formProps>>>;

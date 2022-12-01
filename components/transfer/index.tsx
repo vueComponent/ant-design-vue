@@ -90,16 +90,16 @@ export const transferProps = () => ({
   children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
   oneWay: { type: Boolean, default: undefined },
   pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
-  onChange: Function as PropType<
+  onChange: [Function, Array] as PropType<
     (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
   >,
-  onSelectChange: Function as PropType<
+  onSelectChange: [Function, Array] as PropType<
     (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void
   >,
-  onSearch: Function as PropType<(direction: TransferDirection, value: string) => void>,
-  onScroll: Function as PropType<(direction: TransferDirection, e: UIEvent) => void>,
-  'onUpdate:targetKeys': Function as PropType<(keys: string[]) => void>,
-  'onUpdate:selectedKeys': Function as PropType<(keys: string[]) => void>,
+  onSearch: [Function, Array] as PropType<(direction: TransferDirection, value: string) => void>,
+  onScroll: [Function, Array] as PropType<(direction: TransferDirection, e: UIEvent) => void>,
+  'onUpdate:targetKeys': [Function, Array] as PropType<(keys: string[]) => void>,
+  'onUpdate:selectedKeys': [Function, Array] as PropType<(keys: string[]) => void>,
 });
 
 export type TransferProps = Partial<ExtractPropTypes<ReturnType<typeof transferProps>>>;

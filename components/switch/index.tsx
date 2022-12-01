@@ -48,8 +48,8 @@ export const switchProps = () => ({
   'onUpdate:checked': {
     type: Function as PropType<(checked: CheckedType) => void>,
   },
-  onBlur: Function as PropType<FocusEventHandler>,
-  onFocus: Function as PropType<FocusEventHandler>,
+  onBlur: [Function, Array] as PropType<FocusEventHandler>,
+  onFocus: [Function, Array] as PropType<FocusEventHandler>,
 });
 
 export type SwitchProps = Partial<ExtractPropTypes<ReturnType<typeof switchProps>>>;

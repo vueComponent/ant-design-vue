@@ -19,8 +19,8 @@ export const transferListItemProps = {
   prefixCls: String,
   disabled: { type: Boolean, default: undefined },
   showRemove: { type: Boolean, default: undefined },
-  onClick: Function,
-  onRemove: Function,
+  onClick: [Function, Array],
+  onRemove: [Function, Array],
 };
 
 export type TransferListItemProps = Partial<ExtractPropTypes<typeof transferListItemProps>>;

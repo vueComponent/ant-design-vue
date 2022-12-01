@@ -47,7 +47,7 @@ export const tabNavListProps = () => {
     onTabClick: {
       type: Function as PropType<(activeKey: Key, e: MouseEvent | KeyboardEvent) => void>,
     },
-    onTabScroll: { type: Function as PropType<OnTabScroll> },
+    onTabScroll: { type: [Function, Array] as PropType<OnTabScroll> },
   };
 };
 

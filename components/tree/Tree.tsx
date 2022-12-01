@@ -133,9 +133,9 @@ export const treeProps = () => {
     blockNode: { type: Boolean, default: undefined },
     openAnimation: PropTypes.any,
     onDoubleclick: baseTreeProps.onDblclick,
-    'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
-    'onUpdate:checkedKeys': Function as PropType<(keys: Key[]) => void>,
-    'onUpdate:expandedKeys': Function as PropType<(keys: Key[]) => void>,
+    'onUpdate:selectedKeys': [Function, Array] as PropType<(keys: Key[]) => void>,
+    'onUpdate:checkedKeys': [Function, Array] as PropType<(keys: Key[]) => void>,
+    'onUpdate:expandedKeys': [Function, Array] as PropType<(keys: Key[]) => void>,
   };
 };
 

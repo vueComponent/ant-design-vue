@@ -12,7 +12,7 @@ const checkableTagProps = () => ({
   onClick: {
     type: Function as PropType<(e: MouseEvent) => void>,
   },
-  'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
+  'onUpdate:checked': [Function, Array] as PropType<(checked: boolean) => void>,
 });
 export type CheckableTagProps = Partial<ExtractPropTypes<ReturnType<typeof checkableTagProps>>>;
 

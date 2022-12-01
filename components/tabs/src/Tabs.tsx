@@ -59,16 +59,16 @@ export const tabsProps = () => {
         (e: MouseEvent | KeyboardEvent | Key, action: 'add' | 'remove') => void
       >,
     },
-    onChange: { type: Function as PropType<(activeKey: Key) => void> },
+    onChange: { type: [Function, Array] as PropType<(activeKey: Key) => void> },
     onTabClick: {
       type: Function as PropType<(activeKey: Key, e: KeyboardEvent | MouseEvent) => void>,
     },
-    onTabScroll: { type: Function as PropType<OnTabScroll> },
-    'onUpdate:activeKey': { type: Function as PropType<(activeKey: Key) => void> },
+    onTabScroll: { type: [Function, Array] as PropType<OnTabScroll> },
+    'onUpdate:activeKey': { type: [Function, Array] as PropType<(activeKey: Key) => void> },
     // Accessibility
     locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
-    onPrevClick: Function as PropType<MouseEventHandler>,
-    onNextClick: Function as PropType<MouseEventHandler>,
+    onPrevClick: [Function, Array] as PropType<MouseEventHandler>,
+    onNextClick: [Function, Array] as PropType<MouseEventHandler>,
     tabBarExtraContent: PropTypes.any,
   };
 };

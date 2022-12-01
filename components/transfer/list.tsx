@@ -53,10 +53,10 @@ export const transferListProps = {
   selectAllLabel: PropTypes.any,
   showRemove: { type: Boolean, default: undefined },
   pagination: PropTypes.any,
-  onItemSelect: Function,
-  onItemSelectAll: Function,
-  onItemRemove: Function,
-  onScroll: Function,
+  onItemSelect: [Function, Array],
+  onItemSelectAll: [Function, Array],
+  onItemRemove: [Function, Array],
+  onScroll: [Function, Array],
 };
 
 export type TransferListProps = Partial<ExtractPropTypes<typeof transferListProps>>;

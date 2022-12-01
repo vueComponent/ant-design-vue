@@ -26,7 +26,7 @@ export const pageHeaderProps = () => ({
   extra: PropTypes.any,
   avatar: PropTypes.object,
   ghost: { type: Boolean, default: undefined },
-  onBack: Function as PropType<MouseEventHandler>,
+  onBack: [Function, Array] as PropType<MouseEventHandler>,
 });
 
 export type PageHeaderProps = Partial<ExtractPropTypes<ReturnType<typeof pageHeaderProps>>>;

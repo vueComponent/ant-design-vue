@@ -20,7 +20,7 @@ const TransButton = defineComponent({
   inheritAttrs: false,
   props: {
     noStyle: { type: Boolean, default: undefined },
-    onClick: Function,
+    onClick: [Function, Array],
     disabled: { type: Boolean, default: undefined },
     autofocus: { type: Boolean, default: undefined },
   },

@@ -16,8 +16,8 @@ export const countdownProps = () => {
     ...statisticProps(),
     value: [Number, String, Object] as PropType<countdownValueType>,
     format: String,
-    onFinish: Function as PropType<() => void>,
-    onChange: Function as PropType<(value?: countdownValueType) => void>,
+    onFinish: [Function, Array] as PropType<() => void>,
+    onChange: [Function, Array] as PropType<(value?: countdownValueType) => void>,
   };
 };
 

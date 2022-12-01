@@ -34,9 +34,9 @@ export const subMenuProps = () => ({
   internalPopupClose: Boolean,
   eventKey: String,
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
-  onMouseenter: Function as PropType<MouseEventHandler>,
-  onMouseleave: Function as PropType<MouseEventHandler>,
-  onTitleClick: Function as PropType<(e: MouseEvent, key: Key) => void>,
+  onMouseenter: [Function, Array] as PropType<MouseEventHandler>,
+  onMouseleave: [Function, Array] as PropType<MouseEventHandler>,
+  onTitleClick: [Function, Array] as PropType<(e: MouseEvent, key: Key) => void>,
 });
 
 export type SubMenuProps = Partial<ExtractPropTypes<ReturnType<typeof subMenuProps>>>;

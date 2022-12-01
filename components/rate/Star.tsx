@@ -13,8 +13,8 @@ export const starProps = {
   characterRender: Function,
   focused: { type: Boolean, default: undefined },
   count: Number,
-  onClick: Function,
-  onHover: Function,
+  onClick: [Function, Array],
+  onHover: [Function, Array],
 };
 
 export type StarProps = Partial<ExtractPropTypes<typeof starProps>>;

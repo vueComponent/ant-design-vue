@@ -42,9 +42,9 @@ export const listItemProps = () => {
       }) => VueNode
     >,
     itemRender: Function as PropType<ItemRender>,
-    onPreview: Function as PropType<(file: UploadFile, e: Event) => void>,
-    onClose: Function as PropType<(file: UploadFile) => void>,
-    onDownload: Function as PropType<(file: UploadFile) => void>,
+    onPreview: [Function, Array] as PropType<(file: UploadFile, e: Event) => void>,
+    onClose: [Function, Array] as PropType<(file: UploadFile) => void>,
+    onDownload: [Function, Array] as PropType<(file: UploadFile) => void>,
     progress: Object as PropType<UploadListProgressProps>,
   };
 };

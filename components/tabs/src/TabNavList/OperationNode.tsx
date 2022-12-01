@@ -24,7 +24,9 @@ export const operationNodeProps = {
   editable: { type: Object as PropType<EditableConfig> },
   locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
   removeAriaLabel: String,
-  onTabClick: { type: Function as PropType<(key: Key, e: MouseEvent | KeyboardEvent) => void> },
+  onTabClick: {
+    type: [Function, Array] as PropType<(key: Key, e: MouseEvent | KeyboardEvent) => void>,
+  },
 };
 
 export type OperationNodeProps = Partial<ExtractPropTypes<typeof operationNodeProps>>;

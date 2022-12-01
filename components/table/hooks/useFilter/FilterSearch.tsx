@@ -10,7 +10,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     value: String,
-    onChange: Function as PropType<(e: InputEvent) => void>,
+    onChange: [Function, Array] as PropType<(e: InputEvent) => void>,
     filterSearch: Boolean,
     tablePrefixCls: String,
     locale: { type: Object as PropType<TableLocale>, default: undefined as TableLocale },

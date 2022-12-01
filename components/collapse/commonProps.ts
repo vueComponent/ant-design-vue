@@ -30,8 +30,8 @@ const collapseProps = () => ({
   expandIconPosition: PropTypes.oneOf(tuple('left', 'right')),
   collapsible: { type: String as PropType<CollapsibleType> },
   ghost: { type: Boolean, default: undefined },
-  onChange: Function as PropType<(key: Key | Key[]) => void>,
-  'onUpdate:activeKey': Function as PropType<(key: Key | Key[]) => void>,
+  onChange: [Function, Array] as PropType<(key: Key | Key[]) => void>,
+  'onUpdate:activeKey': [Function, Array] as PropType<(key: Key | Key[]) => void>,
 });
 
 const collapsePanelProps = () => ({
@@ -51,7 +51,7 @@ const collapsePanelProps = () => ({
   panelKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   collapsible: { type: String as PropType<CollapsibleType> },
   role: String,
-  onItemClick: { type: Function as PropType<(panelKey: Key) => void> },
+  onItemClick: { type: [Function, Array] as PropType<(panelKey: Key) => void> },
 });
 
 export { collapseProps, collapsePanelProps };

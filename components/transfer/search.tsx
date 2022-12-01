@@ -11,7 +11,7 @@ export const transferSearchProps = {
   value: String,
   handleClear: Function,
   disabled: { type: Boolean, default: undefined },
-  onChange: Function,
+  onChange: [Function, Array],
 };
 
 export type TransferSearchProps = Partial<ExtractPropTypes<typeof transferSearchProps>>;

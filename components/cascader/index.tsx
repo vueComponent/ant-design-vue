@@ -100,7 +100,7 @@ export function cascaderProps<DataNodeType extends CascaderOptionType = Cascader
     placement: { type: String as PropType<SelectCommonPlacement> },
     suffixIcon: PropTypes.any,
     options: Array as PropType<DataNodeType[]>,
-    'onUpdate:value': Function as PropType<(value: ValueType) => void>,
+    'onUpdate:value': [Function, Array] as PropType<(value: ValueType) => void>,
   };
 }
 

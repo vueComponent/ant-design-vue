@@ -38,8 +38,8 @@ export const siderProps = () => ({
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   breakpoint: PropTypes.oneOf(tuple('xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl')),
   theme: PropTypes.oneOf(tuple('light', 'dark')).def('dark'),
-  onBreakpoint: Function as PropType<(broken: boolean) => void>,
-  onCollapse: Function as PropType<(collapsed: boolean, type: CollapseType) => void>,
+  onBreakpoint: [Function, Array] as PropType<(broken: boolean) => void>,
+  onCollapse: [Function, Array] as PropType<(collapsed: boolean, type: CollapseType) => void>,
 });
 
 export type SiderProps = Partial<ExtractPropTypes<ReturnType<typeof siderProps>>>;

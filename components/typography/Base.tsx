@@ -119,7 +119,7 @@ export const baseProps = () => ({
   strong: { type: Boolean, default: undefined },
   keyboard: { type: Boolean, default: undefined },
   content: String,
-  'onUpdate:content': Function as PropType<(content: string) => void>,
+  'onUpdate:content': [Function, Array] as PropType<(content: string) => void>,
 });
 
 const Base = defineComponent({

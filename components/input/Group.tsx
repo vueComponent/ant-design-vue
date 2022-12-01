@@ -11,10 +11,10 @@ export default defineComponent({
     prefixCls: String,
     size: { type: String as PropType<SizeType> },
     compact: { type: Boolean, default: undefined },
-    onMouseenter: { type: Function as PropType<MouseEventHandler> },
-    onMouseleave: { type: Function as PropType<MouseEventHandler> },
-    onFocus: { type: Function as PropType<FocusEventHandler> },
-    onBlur: { type: Function as PropType<FocusEventHandler> },
+    onMouseenter: { type: [Function, Array] as PropType<MouseEventHandler> },
+    onMouseleave: { type: [Function, Array] as PropType<MouseEventHandler> },
+    onFocus: { type: [Function, Array] as PropType<FocusEventHandler> },
+    onBlur: { type: [Function, Array] as PropType<FocusEventHandler> },
   },
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('input-group', props);

@@ -54,8 +54,8 @@ export const affixProps = () => ({
   },
   prefixCls: String,
   /** 固定状态改变时触发的回调函数 */
-  onChange: Function as PropType<AffixEmits['change']>,
-  onTestUpdatePosition: Function as PropType<AffixEmits['testUpdatePosition']>,
+  onChange: [Function, Array] as PropType<AffixEmits['change']>,
+  onTestUpdatePosition: [Function, Array] as PropType<AffixEmits['testUpdatePosition']>,
 });
 
 export type AffixProps = Partial<ExtractPropTypes<ReturnType<typeof affixProps>>>;

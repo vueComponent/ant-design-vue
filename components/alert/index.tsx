@@ -57,7 +57,7 @@ export const alertProps = () => ({
   banner: { type: Boolean, default: undefined },
   icon: PropTypes.any,
   closeIcon: PropTypes.any,
-  onClose: Function as PropType<NodeMouseEventHandler>,
+  onClose: [Function, Array] as PropType<NodeMouseEventHandler>,
 });
 
 export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;

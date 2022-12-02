@@ -309,28 +309,34 @@ export default {
       const imagesCount = images.length;
       let loadedCount = 0;
       Array.prototype.forEach.call(images, image => {
-        const handler = () => ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
-        if (!image.onclick) {
-          image.onclick = () => image.parentNode.focus();
-        } else {
-          const prevClickHandler = image.onclick;
-          image.onclick = () => {
-            prevClickHandler();
-            image.parentNode.focus();
-          };
-        }
-        if (!image.onload) {
-          if (this.$props.lazyLoad) {
-            image.onload = () => {
-              this.adaptHeight();
-              this.callbackTimers.push(setTimeout(this.onWindowResized, this.speed));
-            };
+        if (!image['__init_src__'] != image.src) {
+          image['__init_slider__'] = image.src;
+          const handler = () =>
+            ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
+          if (!image.onclick) {
+            image.onclick = () => image.parentNode.focus();
           } else {
-            image.onload = handler;
-            image.onerror = () => {
-              handler();
-              this.__emit('lazyLoadError');
+            // 解决闭包导致内存泄漏
+            image['__click__'] = image.onclick;
+            image.onclick = () => {
+              image['__click__'] && image['__click__']();
+              image.parentNode.focus();
             };
+          }
+          if (!image.onload) {
+            if (this.$props.lazyLoad) {
+              image.onload = () => {
+                this.adaptHeight();
+                this.callbackTimers.push(setTimeout(this.onWindowResized, this.speed));
+              };
+            } else {
+              image.onload = handler;
+              // 解决闭包导致内存泄漏
+              image.onerror = () => {
+                image.onload();
+                this.__emit('lazyLoadError');
+              };
+            }
           }
         }
       });

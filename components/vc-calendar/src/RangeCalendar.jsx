@@ -15,7 +15,7 @@ import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
-import { syncTime, getTodayTime, isAllowedDate } from './util/';
+import { syncTime, getTodayTime, isAllowedDate, isDisabledMonthDate } from './util/';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 
 function noop() {}

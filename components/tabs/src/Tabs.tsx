@@ -55,13 +55,13 @@ export const tabsProps = () => {
     size: { type: String as PropType<SizeType> },
     centered: Boolean,
     onEdit: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (e: MouseEvent | KeyboardEvent | Key, action: 'add' | 'remove') => void
       >,
     },
     onChange: { type: [Function, Array] as PropType<(activeKey: Key) => void> },
     onTabClick: {
-      type: Function as PropType<(activeKey: Key, e: KeyboardEvent | MouseEvent) => void>,
+      type: [Function, Array] as PropType<(activeKey: Key, e: KeyboardEvent | MouseEvent) => void>,
     },
     onTabScroll: { type: [Function, Array] as PropType<OnTabScroll> },
     'onUpdate:activeKey': { type: [Function, Array] as PropType<(activeKey: Key) => void> },

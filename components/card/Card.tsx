@@ -42,7 +42,7 @@ export const cardProps = () => ({
   defaultActiveTabKey: String,
   cover: PropTypes.any,
   onTabChange: {
-    type: Function as PropType<(key: string) => void>,
+    type: [Function, Array] as PropType<(key: string) => void>,
   },
 });
 

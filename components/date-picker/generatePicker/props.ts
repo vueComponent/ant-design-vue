@@ -47,7 +47,9 @@ function commonProps<DateType = any>() {
     panelRender: { type: Function as PropType<(originPanel: VueNode) => VueNode> },
     // // Events
     onChange: {
-      type: Function as PropType<(value: DateType | string | null, dateString: string) => void>,
+      type: [Function, Array] as PropType<
+        (value: DateType | string | null, dateString: string) => void
+      >,
     },
     'onUpdate:value': {
       type: [Function, Array] as PropType<(value: DateType | string | null) => void>,
@@ -64,7 +66,9 @@ function commonProps<DateType = any>() {
     onClick: { type: [Function, Array] as PropType<MouseEventHandler> },
     onContextmenu: { type: [Function, Array] as PropType<MouseEventHandler> },
     onKeydown: {
-      type: Function as PropType<(event: KeyboardEvent, preventDefault: () => void) => void>,
+      type: [Function, Array] as PropType<
+        (event: KeyboardEvent, preventDefault: () => void) => void
+      >,
     },
     // WAI-ARIA
     role: String,
@@ -206,7 +210,7 @@ function rangePickerProps<DateType>() {
     placeholder: Array,
     mode: { type: Array as unknown as PropType<[PanelMode, PanelMode]> },
     onChange: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (
           value: RangeValue<DateType> | RangeValue<string> | null,
           dateString: [string, string],
@@ -214,10 +218,12 @@ function rangePickerProps<DateType>() {
       >,
     },
     'onUpdate:value': {
-      type: Function as PropType<(value: RangeValue<DateType> | RangeValue<string> | null) => void>,
+      type: [Function, Array] as PropType<
+        (value: RangeValue<DateType> | RangeValue<string> | null) => void
+      >,
     },
     onCalendarChange: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (
           values: RangeValue<DateType> | RangeValue<string>,
           formatString: [string, string],
@@ -226,12 +232,14 @@ function rangePickerProps<DateType>() {
       >,
     },
     onPanelChange: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (values: RangeValue<DateType> | RangeValue<string>, modes: [PanelMode, PanelMode]) => void
       >,
     },
     onOk: {
-      type: Function as PropType<(dates: RangeValue<DateType> | RangeValue<string>) => void>,
+      type: [Function, Array] as PropType<
+        (dates: RangeValue<DateType> | RangeValue<string>) => void
+      >,
     },
   };
 }

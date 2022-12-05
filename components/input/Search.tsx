@@ -23,7 +23,7 @@ export default defineComponent({
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
     enterButton: PropTypes.any,
     onSearch: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (value: string, event?: ChangeEvent | MouseEvent | KeyboardEvent) => void
       >,
     },

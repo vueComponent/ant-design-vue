@@ -45,7 +45,7 @@ export const tabNavListProps = () => {
     renderTabBar: { type: Function as PropType<RenderTabBar> },
     locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
     onTabClick: {
-      type: Function as PropType<(activeKey: Key, e: MouseEvent | KeyboardEvent) => void>,
+      type: [Function, Array] as PropType<(activeKey: Key, e: MouseEvent | KeyboardEvent) => void>,
     },
     onTabScroll: { type: [Function, Array] as PropType<OnTabScroll> },
   };

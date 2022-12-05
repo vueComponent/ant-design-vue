@@ -22,7 +22,7 @@ export const tagProps = () => ({
   closeIcon: PropTypes.any,
   visible: { type: Boolean, default: undefined },
   onClose: {
-    type: Function as PropType<(e: MouseEvent) => void>,
+    type: [Function, Array] as PropType<(e: MouseEvent) => void>,
   },
   'onUpdate:visible': [Function, Array] as PropType<(vis: boolean) => void>,
   icon: PropTypes.any,

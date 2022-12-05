@@ -56,10 +56,10 @@ const dropdownProps = () => ({
   minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
   destroyPopupOnHide: { type: Boolean, default: undefined },
   onVisibleChange: {
-    type: Function as PropType<(val: boolean) => void>,
+    type: [Function, Array] as PropType<(val: boolean) => void>,
   },
   'onUpdate:visible': {
-    type: Function as PropType<(val: boolean) => void>,
+    type: [Function, Array] as PropType<(val: boolean) => void>,
   },
 });
 
@@ -76,7 +76,7 @@ const dropdownButtonProps = () => ({
   title: String,
   loading: buttonTypesProps.loading,
   onClick: {
-    type: Function as PropType<MouseEventHandler>,
+    type: [Function, Array] as PropType<MouseEventHandler>,
   },
 });
 

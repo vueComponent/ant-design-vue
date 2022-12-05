@@ -63,22 +63,22 @@ export const mentionsProps = () => ({
   ...baseMentionsProps,
   loading: { type: Boolean, default: undefined },
   onFocus: {
-    type: Function as PropType<(e: FocusEvent) => void>,
+    type: [Function, Array] as PropType<(e: FocusEvent) => void>,
   },
   onBlur: {
-    type: Function as PropType<(e: FocusEvent) => void>,
+    type: [Function, Array] as PropType<(e: FocusEvent) => void>,
   },
   onSelect: {
-    type: Function as PropType<(option: MentionsOptionProps, prefix: string) => void>,
+    type: [Function, Array] as PropType<(option: MentionsOptionProps, prefix: string) => void>,
   },
   onChange: {
-    type: Function as PropType<(text: string) => void>,
+    type: [Function, Array] as PropType<(text: string) => void>,
   },
   onPressenter: {
-    type: Function as PropType<KeyboardEventHandler>,
+    type: [Function, Array] as PropType<KeyboardEventHandler>,
   },
   'onUpdate:value': {
-    type: Function as PropType<(text: string) => void>,
+    type: [Function, Array] as PropType<(text: string) => void>,
   },
   notFoundContent: PropTypes.any,
   defaultValue: String,

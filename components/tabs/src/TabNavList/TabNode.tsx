@@ -32,7 +32,7 @@ export default defineComponent({
     editable: { type: Object as PropType<EditableConfig> },
     onClick: { type: [Function, Array] as PropType<(e: MouseEvent | KeyboardEvent) => void> },
     onResize: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (width: number, height: number, left: number, top: number) => void
       >,
     },

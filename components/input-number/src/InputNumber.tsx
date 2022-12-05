@@ -70,7 +70,7 @@ export const inputNumberProps = () => ({
   onPressEnter: { type: [Function, Array] as PropType<KeyboardEventHandler> },
 
   onStep: {
-    type: Function as PropType<
+    type: [Function, Array] as PropType<
       (value: ValueType, info: { offset: ValueType; type: 'up' | 'down' }) => void
     >,
   },

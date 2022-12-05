@@ -153,11 +153,11 @@ export const tableProps = () => {
     expandIcon: { type: Function as PropType<TableProps['expandIcon']>, default: undefined },
     onExpand: { type: [Function, Array] as PropType<TableProps['onExpand']>, default: undefined },
     onExpandedRowsChange: {
-      type: Function as PropType<TableProps['onExpandedRowsChange']>,
+      type: [Function, Array] as PropType<TableProps['onExpandedRowsChange']>,
       default: undefined,
     },
     'onUpdate:expandedRowKeys': {
-      type: Function as PropType<TableProps['onExpandedRowsChange']>,
+      type: [Function, Array] as PropType<TableProps['onExpandedRowsChange']>,
       default: undefined,
     },
     defaultExpandAllRows: {
@@ -194,7 +194,7 @@ export const tableProps = () => {
     locale: { type: Object as PropType<TableLocale>, default: undefined },
 
     onChange: {
-      type: Function as PropType<
+      type: [Function, Array] as PropType<
         (
           pagination: TablePaginationConfig,
           filters: Record<string, FilterValue | null>,
@@ -205,7 +205,7 @@ export const tableProps = () => {
       default: undefined,
     },
     onResizeColumn: {
-      type: Function as PropType<(w: number, col: ColumnType) => void>,
+      type: [Function, Array] as PropType<(w: number, col: ColumnType) => void>,
       default: undefined,
     },
     rowSelection: { type: Object as PropType<TableRowSelection>, default: undefined },

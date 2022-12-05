@@ -34,19 +34,19 @@ export const switchProps = () => ({
     PropTypes.looseBool,
   ]).def(false),
   onChange: {
-    type: Function as PropType<(checked: CheckedType, e: Event) => void>,
+    type: [Function, Array] as PropType<(checked: CheckedType, e: Event) => void>,
   },
   onClick: {
-    type: Function as PropType<(checked: CheckedType, e: Event) => void>,
+    type: [Function, Array] as PropType<(checked: CheckedType, e: Event) => void>,
   },
   onKeydown: {
-    type: Function as PropType<(e: Event) => void>,
+    type: [Function, Array] as PropType<(e: Event) => void>,
   },
   onMouseup: {
-    type: Function as PropType<(e: Event) => void>,
+    type: [Function, Array] as PropType<(e: Event) => void>,
   },
   'onUpdate:checked': {
-    type: Function as PropType<(checked: CheckedType) => void>,
+    type: [Function, Array] as PropType<(checked: CheckedType) => void>,
   },
   onBlur: [Function, Array] as PropType<FocusEventHandler>,
   onFocus: [Function, Array] as PropType<FocusEventHandler>,

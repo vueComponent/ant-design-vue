@@ -37,10 +37,10 @@ export const buttonProps = () => ({
   target: String,
   title: String,
   onClick: {
-    type: Function as PropType<(event: MouseEvent) => void>,
+    type: [Function, Array] as PropType<(event: MouseEvent) => void>,
   },
   onMousedown: {
-    type: Function as PropType<(event: MouseEvent) => void>,
+    type: [Function, Array] as PropType<(event: MouseEvent) => void>,
   },
 });
 

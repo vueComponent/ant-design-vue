@@ -7,10 +7,10 @@ const checkableTagProps = () => ({
   prefixCls: String,
   checked: { type: Boolean, default: undefined },
   onChange: {
-    type: Function as PropType<(checked: boolean) => void>,
+    type: [Function, Array] as PropType<(checked: boolean) => void>,
   },
   onClick: {
-    type: Function as PropType<(e: MouseEvent) => void>,
+    type: [Function, Array] as PropType<(e: MouseEvent) => void>,
   },
   'onUpdate:checked': [Function, Array] as PropType<(checked: boolean) => void>,
 });

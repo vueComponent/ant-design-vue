@@ -45,7 +45,7 @@ export const checkboxGroupProps = () => {
       type: [Function, Array] as PropType<(checkedValue: Array<CheckboxValueType>) => void>,
     },
     'onUpdate:value': {
-      type: Function as PropType<(checkedValue: Array<CheckboxValueType>) => void>,
+      type: [Function, Array] as PropType<(checkedValue: Array<CheckboxValueType>) => void>,
     },
   };
 };

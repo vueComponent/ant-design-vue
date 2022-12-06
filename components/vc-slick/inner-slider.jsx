@@ -309,8 +309,8 @@ export default {
       const imagesCount = images.length;
       let loadedCount = 0;
       Array.prototype.forEach.call(images, image => {
-        if (!image['__init_src__'] != image.src) {
-          image['__init_slider__'] = image.src;
+        if (!image['__src__'] != image.src) {
+          image['__src__'] = image.src;
           const handler = () =>
             ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
           if (!image.onclick) {

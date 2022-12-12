@@ -1,5 +1,4 @@
 // import supportsPassive from '../../../_util/supportsPassive';
-import { cloneElement as cloneVnode } from '../../_util/vnode';
 
 export function clamp(number, lowerBound, upperBound) {
   return Math.max(lowerBound, Math.min(number, upperBound));
@@ -789,27 +788,3 @@ export const slidesOnLeft = ({ slidesToShow, centerMode, rtl, centerPadding }) =
 
 export const canUseDOM = () =>
   !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-export const cloneElement = (vnode, nodeProps) => {
-  const node = cloneVnode(vnode, nodeProps);
-
-  if (!Array.isArray(vnode.children)) {
-    return node;
-  }
-
-  const children = [];
-  node.children.forEach(el => {
-    if (Array.isArray(el)) {
-      const newItem = [];
-      el.forEach(item => {
-        newItem.push(cloneElement(item));
-      });
-      children.push(newItem);
-    } else {
-      children.push(cloneElement(el));
-    }
-  });
-  node.children = children;
-
-  return node;
-};

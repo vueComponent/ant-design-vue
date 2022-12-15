@@ -1,8 +1,8 @@
 import { createVNode } from 'vue';
 import classnames from '../_util/classNames';
-import { cloneElement } from '../_util/vnode';
 import { flattenChildren } from '../_util/props-util';
 import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils';
+import { deepCloneElement } from '../_util/vnode';
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
 const getSlideClasses = spec => {
@@ -84,7 +84,6 @@ const renderSlides = function (spec, children) {
   const childrenCount = children.length;
   const startIndex = lazyStartIndex(spec);
   const endIndex = lazyEndIndex(spec);
-
   children.forEach((elem, index) => {
     let child;
     const childOnClickOptions = {
@@ -105,7 +104,7 @@ const renderSlides = function (spec, children) {
     let slideClasses = getSlideClasses({ ...spec, index });
     // push a cloned element of the desired slide
     slides.push(
-      cloneElement(child, {
+      deepCloneElement(child, {
         key: 'original' + getKey(child, index),
         tabindex: '-1',
         'data-index': index,
@@ -131,7 +130,7 @@ const renderSlides = function (spec, children) {
         }
         slideClasses = getSlideClasses({ ...spec, index: key });
         preCloneSlides.push(
-          cloneElement(child, {
+          deepCloneElement(child, {
             key: 'precloned' + getKey(child, key),
             class: classnames(slideClasses, slideClass),
             tabindex: '-1',
@@ -155,7 +154,7 @@ const renderSlides = function (spec, children) {
         }
         slideClasses = getSlideClasses({ ...spec, index: key });
         postCloneSlides.push(
-          cloneElement(child, {
+          deepCloneElement(child, {
             key: 'postcloned' + getKey(child, key),
             tabindex: '-1',
             'data-index': key,
@@ -182,6 +181,7 @@ const renderSlides = function (spec, children) {
 
 const Track = (_, { attrs, slots }) => {
   const slides = renderSlides(attrs, flattenChildren(slots?.default()));
+  // const slides = renderSlides(attrs,  slots?.default);
   const { onMouseenter, onMouseover, onMouseleave } = attrs;
   const mouseEvents = { onMouseenter, onMouseover, onMouseleave };
   const trackProps = {

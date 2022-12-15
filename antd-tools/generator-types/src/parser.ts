@@ -27,7 +27,7 @@ function readLine(input: string) {
 function splitTableLine(line: string) {
   line = line.replace(/\\\|/g, 'JOIN');
 
-  const items = line.split('|').map(item => item.trim().replace('JOIN', '|'));
+  const items = line.split('|').map(item => item.trim().replaceAll('JOIN', '|'));
 
   // remove pipe character on both sides
   items.pop();
@@ -77,11 +77,6 @@ export function mdParser(input: string): Articals {
   const artical = [];
   let start = 0;
   const end = input.length;
-  // artical.push({
-  //   type: 'title',
-  //   content: title,
-  //   level: 0,
-  // });
 
   while (start < end) {
     const target = input.substr(start);
@@ -108,6 +103,5 @@ export function mdParser(input: string): Articals {
     }
   }
 
-  // artical[0].content = title
   return artical;
 }

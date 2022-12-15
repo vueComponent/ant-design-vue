@@ -364,6 +364,7 @@ function PickerPanel<DateType>() {
           isMinuteStepValid.value ? minuteStep : 1,
           isSecondStepValid.value ? secondStep : 1,
         );
+
         const adjustedNow = setTime(
           generateConfig,
           now,
@@ -414,7 +415,6 @@ function PickerPanel<DateType>() {
           disabledDate,
           picker = 'date',
           tabindex = 0,
-          showNow,
           showTime,
           showToday,
           renderExtraFooter,
@@ -422,6 +422,14 @@ function PickerPanel<DateType>() {
           onOk,
           components,
         } = props;
+
+        let { showNow } = props;
+        const now = generateConfig.getNow();
+        // when NOW is invalid, hide NOW button
+        if (disabledDate?.(now)) {
+          showNow = false;
+        }
+
         if (operationRef && panelPosition.value !== 'right') {
           operationRef.value = {
             onKeydown: onInternalKeydown,
@@ -578,7 +586,7 @@ function PickerPanel<DateType>() {
         if (showToday && mergedMode.value === 'date' && picker === 'date' && !showTime) {
           const now = generateConfig.getNow();
           const todayCls = `${prefixCls}-today-btn`;
-          const disabled = disabledDate && disabledDate(now);
+          const disabled = disabledDate?.(now);
           todayNode = (
             <a
               class={classNames(todayCls, disabled && `${todayCls}-disabled`)}

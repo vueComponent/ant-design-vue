@@ -395,4 +395,10 @@ export default {
   //   type: 'Data Entry',
   //   title: 'ColorPicker (Beta)',
   // },
+  segmented: {
+    category: 'Components',
+    subtitle: '分段控制器',
+    type: 'Data Display',
+    title: 'Segmented',
+  },
 };

@@ -76,8 +76,6 @@ export default {
         tdProps.props = text.props || {};
         tdProps.class = text.class;
         tdProps.style = text.style;
-        colSpan = tdProps.attrs.colSpan;
-        rowSpan = tdProps.attrs.rowSpan;
         text = text.children;
       }
     }
@@ -85,6 +83,10 @@ export default {
     if (column.customCell) {
       tdProps = mergeProps(tdProps, column.customCell(record, index));
     }
+    
+    // Support `customCell` set col/row Span
+    colSpan = tdProps.attrs.colSpan;
+    rowSpan = tdProps.attrs.rowSpan;
 
     // Fix https://github.com/ant-design/ant-design/issues/1202
     if (isInvalidRenderCellText(text)) {

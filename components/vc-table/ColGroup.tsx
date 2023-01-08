@@ -13,13 +13,12 @@ function ColGroup<RecordType>({ colWidths, columns, columCount }: ColGroupProps<
 
   // Only insert col with width & additional props
   // Skip if rest col do not have any useful info
-  let mustInsert = false;
   for (let i = len - 1; i >= 0; i -= 1) {
     const width = colWidths[i];
     const column = columns && columns[i];
     const additionalProps = column && column[INTERNAL_COL_DEFINE];
 
-    if (width || additionalProps || mustInsert) {
+    if (width || additionalProps) {
       const { columnType, ...restAdditionalProps } = additionalProps || {};
       cols.unshift(
         <col
@@ -28,7 +27,6 @@ function ColGroup<RecordType>({ colWidths, columns, columCount }: ColGroupProps<
           {...restAdditionalProps}
         />,
       );
-      mustInsert = true;
     }
   }
 

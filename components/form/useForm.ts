@@ -51,7 +51,8 @@ export interface validateOptions {
   trigger?: 'change' | 'blur' | string | string[];
 }
 
-type namesType = string | string[];
+type namesType<T> = T | T[];
+
 export interface ValidateInfo {
   autoLink?: boolean;
   required?: boolean;
@@ -59,9 +60,9 @@ export interface ValidateInfo {
   help?: any;
 }
 
-export interface validateInfos {
-  [key: string]: ValidateInfo;
-}
+type validateInfos<T> = {
+  [key in keyof T]: ValidateInfo;
+};
 
 function getPropByPath(obj: Props, path: string, strict: boolean) {
   let tempObj = obj;
@@ -90,9 +91,9 @@ function getPropByPath(obj: Props, path: string, strict: boolean) {
   };
 }
 
-function useForm(
-  modelRef: Props | Ref<Props>,
-  rulesRef: Props | Ref<Props> = ref({}),
+function useForm<S extends Record<string, any>, R extends Record<string, object[]>>(
+  modelRef: S | Ref<S>,
+  rulesRef: R | Ref<R> = ref({}) as Ref<R>,
   options?: {
     immediate?: boolean;
     deep?: boolean;
@@ -101,12 +102,12 @@ function useForm(
     onValidate?: Callbacks['onValidate'];
   },
 ): {
-  modelRef: Props | Ref<Props>;
-  rulesRef: Props | Ref<Props>;
-  initialModel: Props;
-  validateInfos: validateInfos;
+  modelRef: S | Ref<S>;
+  rulesRef: R | Ref<R>;
+  initialModel: S;
+  validateInfos: validateInfos<R>;
   resetFields: (newValues?: Props) => void;
-  validate: <T = any>(names?: namesType, option?: validateOptions) => Promise<T>;
+  validate: <T = any>(names?: namesType<keyof R>, option?: validateOptions) => Promise<T>;
 
   /** This is an internal usage. Do not use in your prod */
   validateField: (
@@ -116,10 +117,10 @@ function useForm(
     option?: validateOptions,
   ) => Promise<RuleError[]>;
   mergeValidateInfo: (items: ValidateInfo | ValidateInfo[]) => ValidateInfo;
-  clearValidate: (names?: namesType) => void;
+  clearValidate: (names?: namesType<keyof R>) => void;
 } {
   const initialModel = cloneDeep(unref(modelRef));
-  const validateInfos = reactive<validateInfos>({});
+  const validateInfos = reactive({}) as validateInfos<R>;
 
   const rulesKeys = shallowRef([]);
 
@@ -129,7 +130,7 @@ function useForm(
       ...newValues,
     });
     nextTick(() => {
-      Object.keys(validateInfos).forEach(key => {
+      (Object.keys(validateInfos) as Array<keyof R>).forEach(key => {
         validateInfos[key] = {
           autoLink: false,
           required: isRequired(unref(rulesRef)[key]),
@@ -263,7 +264,7 @@ function useForm(
     return promise;
   };
 
-  const validate = (names?: namesType, option?: validateOptions): Promise<any> => {
+  const validate = (names?: namesType<keyof R>, option?: validateOptions): Promise<any> => {
     let keys = [];
     let strict = true;
     if (!names) {
@@ -280,7 +281,7 @@ function useForm(
     return promises;
   };
 
-  const clearValidate = (names?: namesType) => {
+  const clearValidate = (names?: namesType<keyof R>) => {
     let keys = [];
     if (!names) {
       keys = rulesKeys.value;
@@ -315,7 +316,7 @@ function useForm(
   };
   let oldModel = initialModel;
   let isFirstTime = true;
-  const modelFn = (model: { [x: string]: any }) => {
+  const modelFn = (model: S) => {
     const names = [];
     rulesKeys.value.forEach(key => {
       const prop = getPropByPath(model, key, false);

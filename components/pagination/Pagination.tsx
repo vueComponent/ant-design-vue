@@ -157,7 +157,7 @@ export default defineComponent({
         itemRender,
         defaultPageSize:
           props.defaultPageSize || isNaN(Number(props.pageSizeOptions?.[0]))
-            ? undefined
+            ? props.defaultPageSize
             : Number(props.pageSizeOptions?.[0]),
       };
 

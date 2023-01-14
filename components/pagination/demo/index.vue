@@ -2,6 +2,7 @@
   <demo-sort :cols="1">
     <Basic />
     <More />
+    <PageSize />
     <Changer />
     <CustomChanger />
     <Jump />
@@ -15,6 +16,7 @@
 import Basic from './basic.vue';
 import More from './more.vue';
 import Changer from './changer.vue';
+import PageSize from './pageSize.vue';
 import CustomChanger from './custom-changer.vue';
 import Jump from './jump.vue';
 import Simple from './simple.vue';
@@ -38,6 +40,7 @@ export default defineComponent({
     Mini,
     Total,
     ItemRender,
+    PageSize,
   },
   setup() {
     return {};

@@ -23,7 +23,7 @@ A long list can be divided into several pages using `Pagination`, and only one p
 | --- | --- | --- | --- | --- |
 | current(v-model) | current page number | number | - |  |
 | defaultCurrent | default initial page number | number | 1 |  |
-| defaultPageSize | default number of data items per page | number | 10 |  |
+| defaultPageSize | default number of data items per page | number | pageSizeOptions[0] |  |
 | disabled | Disable pagination | boolean | - | 1.5.0 |
 | hideOnSinglePage | Whether to hide pager on single page | boolean | false |  |
 | itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode \| v-slot | - |  |

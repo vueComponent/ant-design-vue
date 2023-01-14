@@ -18,7 +18,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/1vqv2bj68/Pagination.svg
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | current(v-model) | 当前页数 | number | - |  |
-| defaultPageSize | 默认的每页条数 | number | 10 |  |
+| defaultPageSize | 默认的每页条数 | number | pageSizeOptions[0] |  |
 | disabled | 禁用分页 | boolean | - | 1.5.0 |
 | hideOnSinglePage | 只有一页时是否隐藏分页器 | boolean | false |  |
 | itemRender | 用于自定义页码的结构，可用于优化 SEO | ({page, type: 'page' \| 'prev' \| 'next', originalElement}) => vNode \| v-slot | - |  |

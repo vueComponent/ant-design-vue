@@ -155,6 +155,7 @@ export default defineComponent({
           attrs.class,
         ),
         itemRender,
+        defaultPageSize: props.defaultPageSize || Number(props.pageSizeOptions?.[0]),
       };
 
       return <VcPagination {...paginationProps} />;

@@ -60,8 +60,8 @@ Select component to select value from options.
 | placement | The position where the selection box pops up | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | removeIcon | The custom remove icon | VNode \| slot | - |  |
 | searchValue | The current input "search" text | string | - |  |
-| showArrow | Whether to show the drop-down arrow | boolean | true |  |
-| showSearch | Whether show search input in single mode. | boolean | false |  |
+| showArrow | Whether to show the drop-down arrow | boolean | single:true, multiple:false |  |
+| showSearch | Whether select is searchable | boolean | single:false, multiple:true |  |
 | size | Size of Select input. `default` `large` `small` | string | default |  |
 | status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |

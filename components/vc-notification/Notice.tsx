@@ -46,9 +46,10 @@ export default defineComponent<NoticeProps>({
   ] as any,
   setup(props, { attrs, slots }) {
     let closeTimer: any;
-    const duration = computed(() => (props.duration === undefined ? 1.5 : props.duration));
+    let isUnMounted = false;
+    const duration = computed(() => (props.duration === undefined ? 4.5 : props.duration));
     const startCloseTimer = () => {
-      if (duration.value) {
+      if (duration.value && !isUnMounted) {
         closeTimer = setTimeout(() => {
           close();
         }, duration.value * 1000);
@@ -79,6 +80,7 @@ export default defineComponent<NoticeProps>({
       startCloseTimer();
     });
     onUnmounted(() => {
+      isUnMounted = true;
       clearCloseTimer();
     });
 

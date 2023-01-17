@@ -56,7 +56,7 @@ or use `valueFormat` to format.
       />
     </a-form-item>
     <a-form-item name="time-picker" label="TimePicker" v-bind="config">
-      <a-time-picker v-model:value="formState['time-picker']" value-format="HH:mm:ss" />
+      <a-time-picker v-model:value="formState['time-picker']" format="HH:mm:ss" value-format="HH:mm:ss" />
     </a-form-item>
     <a-form-item
       :wrapper-col="{

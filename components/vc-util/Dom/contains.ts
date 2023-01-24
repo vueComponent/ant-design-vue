@@ -1,7 +1,12 @@
-export default function contains(root: HTMLElement | null | undefined, n?: HTMLElement) {
+export default function contains(root: Node | null | undefined, n?: Node) {
   if (!root) {
     return false;
   }
 
-  return root.contains(n);
+  // Use native if support
+  if (root.contains) {
+    return root.contains(n);
+  }
+
+  return false;
 }

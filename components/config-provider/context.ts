@@ -72,6 +72,7 @@ export interface ConfigConsumerProps {
 }
 
 export const configProviderProps = () => ({
+  iconPrefixCls: String,
   getTargetContainer: {
     type: Function as PropType<() => HTMLElement>,
   },

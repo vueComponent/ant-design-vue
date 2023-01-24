@@ -31,6 +31,7 @@ export default (
   getPrefixCls: ConfigProviderProps['getPrefixCls'];
   autocomplete: ComputedRef<string>;
   csp: ComputedRef<CSPConfig>;
+  iconPrefixCls: ComputedRef<string>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -38,6 +39,7 @@ export default (
   );
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
   const direction = computed(() => props.direction ?? configProvider.direction);
+  const iconPrefixCls = computed(() => props.iconPrefixCls ?? configProvider.iconPrefixCls);
   const rootPrefixCls = computed(() => configProvider.getPrefixCls());
   const autoInsertSpaceInButton = computed(() => configProvider.autoInsertSpaceInButton);
   const renderEmpty = computed(() => configProvider.renderEmpty);
@@ -80,5 +82,6 @@ export default (
     getPrefixCls: configProvider.getPrefixCls,
     autocomplete,
     csp,
+    iconPrefixCls,
   };
 };

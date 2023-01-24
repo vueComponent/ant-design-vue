@@ -202,7 +202,7 @@ const ConfigProvider = defineComponent({
     );
   },
 });
-
+export const defaultIconPrefixCls = 'anticon';
 export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
@@ -210,6 +210,7 @@ export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
   },
   renderEmpty: defaultRenderEmpty,
   direction: 'ltr',
+  iconPrefixCls: defaultIconPrefixCls,
 });
 
 ConfigProvider.config = setGlobalConfig;

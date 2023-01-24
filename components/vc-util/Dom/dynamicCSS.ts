@@ -1,19 +1,27 @@
 import canUseDom from '../../_util/canUseDom';
+import contains from './contains';
 
-const MARK_KEY = `vc-util-key` as any;
+const APPEND_ORDER = 'data-rc-order';
+const MARK_KEY = `rc-util-key`;
+
+const containerCache = new Map<ContainerType, Node & ParentNode>();
+
+export type ContainerType = Element | ShadowRoot;
+export type Prepend = boolean | 'queue';
+export type AppendType = 'prependQueue' | 'append' | 'prepend';
+
+interface Options {
+  attachTo?: ContainerType;
+  csp?: { nonce?: string };
+  prepend?: Prepend;
+  mark?: string;
+}
 
 function getMark({ mark }: Options = {}) {
   if (mark) {
     return mark.startsWith('data-') ? mark : `data-${mark}`;
   }
   return MARK_KEY;
-}
-
-interface Options {
-  attachTo?: Element;
-  csp?: { nonce?: string };
-  prepend?: boolean;
-  mark?: string;
 }
 
 function getContainer(option: Options) {
@@ -25,25 +33,55 @@ function getContainer(option: Options) {
   return head || document.body;
 }
 
+function getOrder(prepend?: Prepend): AppendType {
+  if (prepend === 'queue') {
+    return 'prependQueue';
+  }
+
+  return prepend ? 'prepend' : 'append';
+}
+
+/**
+ * Find style which inject by rc-util
+ */
+function findStyles(container: ContainerType) {
+  return Array.from((containerCache.get(container) || container).children).filter(
+    node => node.tagName === 'STYLE',
+  ) as HTMLStyleElement[];
+}
+
 export function injectCSS(css: string, option: Options = {}) {
   if (!canUseDom()) {
     return null;
   }
 
+  const { csp, prepend } = option;
+
   const styleNode = document.createElement('style');
-  if (option.csp?.nonce) {
-    styleNode.nonce = option.csp?.nonce;
+  styleNode.setAttribute(APPEND_ORDER, getOrder(prepend));
+
+  if (csp?.nonce) {
+    styleNode.nonce = csp?.nonce;
   }
   styleNode.innerHTML = css;
 
   const container = getContainer(option);
   const { firstChild } = container;
 
-  if (option.prepend && container.prepend) {
-    // Use `prepend` first
-    container.prepend(styleNode);
-  } else if (option.prepend && firstChild) {
-    // Fallback to `insertBefore` like IE not support `prepend`
+  if (prepend) {
+    // If is queue `prepend`, it will prepend first style and then append rest style
+    if (prepend === 'queue') {
+      const existStyle = findStyles(container).filter(node =>
+        ['prepend', 'prependQueue'].includes(node.getAttribute(APPEND_ORDER)),
+      );
+      if (existStyle.length) {
+        container.insertBefore(styleNode, existStyle[existStyle.length - 1].nextSibling);
+
+        return styleNode;
+      }
+    }
+
+    // Use `insertBefore` as `prepend`
     container.insertBefore(styleNode, firstChild);
   } else {
     container.appendChild(styleNode);
@@ -52,32 +90,47 @@ export function injectCSS(css: string, option: Options = {}) {
   return styleNode;
 }
 
-const containerCache = new Map<Element, Node & ParentNode>();
-
 function findExistNode(key: string, option: Options = {}) {
   const container = getContainer(option);
 
-  return Array.from(containerCache.get(container).children).find(
-    node => node.tagName === 'STYLE' && node.getAttribute(getMark(option)) === key,
-  ) as HTMLStyleElement;
+  return findStyles(container).find(node => node.getAttribute(getMark(option)) === key);
 }
 
 export function removeCSS(key: string, option: Options = {}) {
   const existNode = findExistNode(key, option);
+  if (existNode) {
+    const container = getContainer(option);
+    container.removeChild(existNode);
+  }
+}
 
-  existNode?.parentNode?.removeChild(existNode);
+/**
+ * qiankun will inject `appendChild` to insert into other
+ */
+function syncRealContainer(container: ContainerType, option: Options) {
+  const cachedRealContainer = containerCache.get(container);
+
+  // Find real container when not cached or cached container removed
+  if (!cachedRealContainer || !contains(document, cachedRealContainer)) {
+    const placeholderStyle = injectCSS('', option);
+    const { parentNode } = placeholderStyle;
+    containerCache.set(container, parentNode);
+    container.removeChild(placeholderStyle);
+  }
+}
+
+/**
+ * manually clear container cache to avoid global cache in unit testes
+ */
+export function clearContainerCache() {
+  containerCache.clear();
 }
 
 export function updateCSS(css: string, key: string, option: Options = {}) {
   const container = getContainer(option);
 
-  // Get real parent
-  if (!containerCache.has(container)) {
-    const placeholderStyle = injectCSS('', option);
-    const { parentNode } = placeholderStyle;
-    containerCache.set(container, parentNode);
-    parentNode.removeChild(placeholderStyle);
-  }
+  // Sync real parent
+  syncRealContainer(container, option);
 
   const existNode = findExistNode(key, option);
 

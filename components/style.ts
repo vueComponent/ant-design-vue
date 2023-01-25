@@ -26,7 +26,7 @@ import './spin/style';
 import './select/style';
 import './switch/style';
 import './auto-complete/style';
-import './affix/style';
+// import './affix/style';
 import './cascader/style';
 import './back-top/style';
 import './modal/style';

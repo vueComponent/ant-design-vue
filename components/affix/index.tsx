@@ -23,7 +23,7 @@ import {
 } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
-
+import useStyle from './style';
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;
 }
@@ -74,8 +74,9 @@ export type AffixInstance = ComponentPublicInstance<AffixProps, AffixExpose>;
 const Affix = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AAffix',
+  inheritAttrs: false,
   props: affixProps(),
-  setup(props, { slots, emit, expose }) {
+  setup(props, { slots, emit, expose, attrs }) {
     const placeholderNode = ref();
     const fixedNode = ref();
     const state = reactive({
@@ -113,6 +114,15 @@ const Affix = defineComponent({
       const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
       const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
       const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
+
+      if (
+        placeholderReact.top === 0 &&
+        placeholderReact.left === 0 &&
+        placeholderReact.width === 0 &&
+        placeholderReact.height === 0
+      ) {
+        return;
+      }
       if (fixedTop !== undefined) {
         newState.affixStyle = {
           position: 'fixed',
@@ -228,11 +238,12 @@ const Affix = defineComponent({
     });
 
     const { prefixCls } = useConfigInject('affix', props);
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     return () => {
       const { affixStyle, placeholderStyle } = state;
       const className = classNames({
         [prefixCls.value]: affixStyle,
+        [hashId.value]: true,
       });
       const restProps = omit(props, [
         'prefixCls',
@@ -242,14 +253,15 @@ const Affix = defineComponent({
         'onChange',
         'onTestUpdatePosition',
       ]);
-      return (
+      return wrapSSR(
         <ResizeObserver onResize={updatePosition}>
-          <div {...restProps} style={placeholderStyle} ref={placeholderNode}>
+          <div {...restProps} {...attrs} ref={placeholderNode}>
+            {affixStyle && <div style={placeholderStyle} aria-hidden="true" />}
             <div class={className} ref={fixedNode} style={affixStyle}>
               {slots.default?.()}
             </div>
           </div>
-        </ResizeObserver>
+        </ResizeObserver>,
       );
     };
   },

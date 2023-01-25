@@ -17,6 +17,7 @@ import { tuple, withInstall } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import useStyle from './style';
 
 const iconMapFilled = {
   success: CheckCircleFilled,
@@ -69,6 +70,7 @@ const Alert = defineComponent({
   props: alertProps(),
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, direction } = useConfigInject('alert', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const closing = ref(false);
     const closed = ref(false);
     const alertNode = ref();
@@ -125,6 +127,7 @@ const Alert = defineComponent({
         [`${prefixClsValue}-banner`]: !!banner,
         [`${prefixClsValue}-closable`]: closable,
         [`${prefixClsValue}-rtl`]: direction.value === 'rtl',
+        [hashId.value]: true,
       });
 
       const closeIcon = closable ? (
@@ -164,27 +167,29 @@ const Alert = defineComponent({
           node.style.maxHeight = '0px';
         },
       });
-      return closed.value ? null : (
-        <Transition {...transitionProps}>
-          <div
-            role="alert"
-            {...attrs}
-            style={[attrs.style as CSSProperties, motionStyle.value]}
-            v-show={!closing.value}
-            class={[attrs.class, alertCls]}
-            data-show={!closing.value}
-            ref={alertNode}
-          >
-            {showIcon ? iconNode : null}
-            <div class={`${prefixClsValue}-content`}>
-              {message ? <div class={`${prefixClsValue}-message`}>{message}</div> : null}
-              {description ? (
-                <div class={`${prefixClsValue}-description`}>{description}</div>
-              ) : null}
+      return wrapSSR(
+        closed.value ? null : (
+          <Transition {...transitionProps}>
+            <div
+              role="alert"
+              {...attrs}
+              style={[attrs.style as CSSProperties, motionStyle.value]}
+              v-show={!closing.value}
+              class={[attrs.class, alertCls]}
+              data-show={!closing.value}
+              ref={alertNode}
+            >
+              {showIcon ? iconNode : null}
+              <div class={`${prefixClsValue}-content`}>
+                {message ? <div class={`${prefixClsValue}-message`}>{message}</div> : null}
+                {description ? (
+                  <div class={`${prefixClsValue}-description`}>{description}</div>
+                ) : null}
+              </div>
+              {closeIcon}
             </div>
-            {closeIcon}
-          </div>
-        </Transition>
+          </Transition>
+        ),
       );
     };
   },

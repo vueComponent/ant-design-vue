@@ -21,6 +21,7 @@ import { supportLayer } from '../util';
 import useGlobalCache from './useGlobalCache';
 import canUseDom from '../../canUseDom';
 import { removeCSS, updateCSS } from '../../../vc-util/Dom/dynamicCSS';
+import type { Ref } from 'vue';
 import { computed } from 'vue';
 import type { VueNode } from '../../type';
 
@@ -286,20 +287,20 @@ function Empty() {
  * Register a style to the global style sheet.
  */
 export default function useStyleRegister(
-  info: {
+  info: Ref<{
     theme: Theme<any, any>;
     token: any;
     path: string[];
     hashId?: string;
     layer?: string;
-  },
+  }>,
   styleFn: () => CSSInterpolation,
 ) {
   const styleContext = useStyleInject();
 
-  const tokenKey = computed(() => info.token._tokenKey as string);
+  const tokenKey = computed(() => info.value.token._tokenKey as string);
 
-  const fullPath = computed(() => [tokenKey.value, ...info.path]);
+  const fullPath = computed(() => [tokenKey.value, ...info.value.path]);
 
   // Check if need insert style
   let isMergedClientSide = isClientSide;
@@ -315,7 +316,7 @@ export default function useStyleRegister(
     () => {
       const styleObj = styleFn();
       const { hashPriority, container, transformers, linters } = styleContext;
-      const { path, hashId, layer } = info;
+      const { path, hashId, layer } = info.value;
       const [parsedStyle, effectStyle] = parseStyle(styleObj, {
         hashId,
         hashPriority,
@@ -371,17 +372,16 @@ export default function useStyleRegister(
 
   return (node: VueNode) => {
     let styleNode: VueNode;
-
     if (!styleContext.ssrInline || isMergedClientSide || !styleContext.defaultCache) {
       styleNode = <Empty />;
     } else {
       styleNode = (
         <style
           {...{
-            [ATTR_TOKEN]: cacheStyle[1],
-            [ATTR_MARK]: cacheStyle[2],
+            [ATTR_TOKEN]: cacheStyle.value[1],
+            [ATTR_MARK]: cacheStyle.value[2],
           }}
-          innerHTML={cacheStyle[0]}
+          innerHTML={cacheStyle.value[0]}
         />
       );
     }

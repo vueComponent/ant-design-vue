@@ -19,7 +19,7 @@ import type { FullToken } from './util/genComponentStyleHook';
 import genComponentStyleHook from './util/genComponentStyleHook';
 import statisticToken, { merge as mergeToken, statistic } from './util/statistic';
 import type { VueNode } from '../_util/type';
-import type { ComputedRef, InjectionKey } from 'vue';
+import type { ComputedRef, InjectionKey, Ref } from 'vue';
 import { computed, inject } from 'vue';
 
 const defaultTheme = createTheme(defaultDerivative);
@@ -89,7 +89,7 @@ export function useToken(): [
   ];
 }
 
-export type UseComponentStyleResult = [(node: VueNode) => VueNode, string];
+export type UseComponentStyleResult = [(node: VueNode) => VueNode, Ref<string>];
 
 export type GenerateStyle<
   ComponentToken extends object = AliasToken,

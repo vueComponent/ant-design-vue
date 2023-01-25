@@ -16,7 +16,17 @@ import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useProvideAnchor from './context';
+import useStyle from './style';
+import type { AnchorLinkProps } from './AnchorLink';
+import AnchorLink from './AnchorLink';
+import type { Key } from '../_util/type';
 
+export interface AnchorLinkItemProps extends AnchorLinkProps {
+  key: Key;
+  class?: String;
+  style?: CSSProperties;
+  children?: AnchorLinkItemProps[];
+}
 function getDefaultContainer() {
   return window;
 }
@@ -41,10 +51,10 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
 
 const sharpMatcherRegx = /#([\S ]+)$/;
 
-type Section = {
+interface Section {
   link: string;
   top: number;
-};
+}
 
 export type AnchorContainer = HTMLElement | Window;
 
@@ -59,6 +69,10 @@ export const anchorProps = () => ({
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   getCurrentAnchor: Function as PropType<(activeLink: string) => string>,
   targetOffset: Number,
+  items: {
+    type: Array as PropType<AnchorLinkItemProps[]>,
+    default: undefined as AnchorLinkItemProps[],
+  },
   onChange: Function as PropType<(currentActiveLink: string) => void>,
   onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
 });
@@ -79,7 +93,7 @@ export default defineComponent({
   props: anchorProps(),
   setup(props, { emit, attrs, slots, expose }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
-    const inkNodeRef = ref();
+    const spanLinkNode = ref<HTMLSpanElement>(null);
     const anchorRef = ref();
     const state = reactive<AnchorState>({
       links: [],
@@ -173,10 +187,9 @@ export default defineComponent({
       const linkNode = anchorRef.value.getElementsByClassName(
         `${prefixCls.value}-link-title-active`,
       )[0];
-      if (linkNode) {
-        (inkNodeRef.value as HTMLElement).style.top = `${
-          linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5
-        }px`;
+      if (linkNode && spanLinkNode.value) {
+        spanLinkNode.value.style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2}px`;
+        spanLinkNode.value.style.height = `${linkNode.clientHeight}px`;
       }
     };
 
@@ -224,15 +237,23 @@ export default defineComponent({
       }
       updateInk();
     });
-
+    const createNestedLink = (options?: AnchorLinkItemProps[]) =>
+      Array.isArray(options)
+        ? options.map(item => (
+            <AnchorLink {...item} key={item.key}>
+              {createNestedLink(item.children)}
+            </AnchorLink>
+          ))
+        : null;
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     return () => {
       const { offsetTop, affix, showInkInFixed } = props;
       const pre = prefixCls.value;
       const inkClass = classNames(`${pre}-ink-ball`, {
-        visible: activeLink.value,
+        [`${pre}-ink-ball-visible`]: activeLink.value,
       });
 
-      const wrapperClass = classNames(props.wrapperClass, `${pre}-wrapper`, {
+      const wrapperClass = classNames(hashId.value, props.wrapperClass, `${pre}-wrapper`, {
         [`${pre}-rtl`]: direction.value === 'rtl',
       });
 
@@ -248,19 +269,21 @@ export default defineComponent({
         <div class={wrapperClass} style={wrapperStyle} ref={anchorRef}>
           <div class={anchorClass}>
             <div class={`${pre}-ink`}>
-              <span class={inkClass} ref={inkNodeRef} />
+              <span class={inkClass} ref={spanLinkNode} />
             </div>
-            {slots.default?.()}
+            {Array.isArray(props.items) ? createNestedLink(props.items) : slots.default?.()}
           </div>
         </div>
       );
 
-      return !affix ? (
-        anchorContent
-      ) : (
-        <Affix {...attrs} offsetTop={offsetTop} target={getContainer.value}>
-          {anchorContent}
-        </Affix>
+      return wrapSSR(
+        !affix ? (
+          anchorContent
+        ) : (
+          <Affix {...attrs} offsetTop={offsetTop} target={getContainer.value}>
+            {anchorContent}
+          </Affix>
+        ),
       );
     };
   },

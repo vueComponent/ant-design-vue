@@ -24,17 +24,18 @@ For displaying anchor hyperlinks on page and jumping between them.
 | getCurrentAnchor | Customize the anchor highlight | (activeLink: string) => string | - | activeLink(3.3) |
 | offsetBottom | Pixels to offset from bottom when calculating position of scroll | number | - |  |
 | offsetTop | Pixels to offset from top when calculating position of scroll | number | 0 |  |
-| showInkInFixed | Whether show ink-balls when `：affix="false"` | boolean | false |  |
+| showInkInFixed | Whether show ink-square when `：affix="false"` | boolean | false |  |
 | targetOffset | Anchor scroll offset, default as `offsetTop`, [example](#components-anchor-demo-targetOffset) | number | `offsetTop` | 1.5.0 |
 | wrapperClass | The class name of the container | string | - |  |
 | wrapperStyle | The style of the container | object | - |  |
+| items | Data configuration option content, support nesting through children | { href, title, target, children, key }\[] | - | 4.0 |
 
 ### Events
 
 | Events Name | Description | Arguments | Version |  |
 | --- | --- | --- | --- | --- |
 | change | Listening for anchor link change | (currentActiveLink: string) => void |  | 1.5.0 |
-| click | set the handler to handle `click` event | Function(e: Event, link: Object) |  |  |
+| click | set the handler to handle `click` event | Function(e: MouseEvent, link: Object) |  |  |
 
 ### Link Props
 

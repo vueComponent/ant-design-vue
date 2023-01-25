@@ -15,10 +15,12 @@ export default process.env.NODE_ENV === 'production' ? useProdHMR : useDevHMR;
 // We have to hack handler to force mark as HRM
 if (
   process.env.NODE_ENV !== 'production' &&
-  typeof module !== 'undefined' &&
-  module &&
-  // @ts-ignore
-  module.hot
+  ((typeof module !== 'undefined' &&
+    module &&
+    // @ts-ignore
+    module.hot) ||
+    // @ts-ignore
+    import.meta.hot)
 ) {
   const win = window as any;
 
@@ -34,12 +36,6 @@ if (
     };
     // @ts-ignore
   } else if (import.meta.hot) {
-    // @ts-ignore
-    import.meta.hot.accept(() => {
-      viteHMR = true;
-      setTimeout(() => {
-        viteHMR = false;
-      }, 0);
-    });
+    viteHMR = true;
   }
 }

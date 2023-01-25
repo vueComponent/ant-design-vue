@@ -1,8 +1,8 @@
 import canUseDom from '../../_util/canUseDom';
 import contains from './contains';
 
-const APPEND_ORDER = 'data-rc-order';
-const MARK_KEY = `rc-util-key`;
+const APPEND_ORDER = 'data-vc-order';
+const MARK_KEY = `vc-util-key`;
 
 const containerCache = new Map<ContainerType, Node & ParentNode>();
 

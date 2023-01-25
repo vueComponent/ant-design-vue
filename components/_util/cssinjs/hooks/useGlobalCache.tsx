@@ -15,8 +15,8 @@ export default function useClientCache<CacheType>(
   const fullPath = computed(() => [prefix, ...keyPath.value]);
   const fullPathStr = eagerComputed(() => fullPath.value.join('_'));
   const HMRUpdate = useHMR();
-  const clearCache = () => {
-    styleContext.cache.update(fullPath.value, prevCache => {
+  const clearCache = (paths: typeof fullPath.value) => {
+    styleContext.cache.update(paths, prevCache => {
       const [times = 0, cache] = prevCache || [];
       const nextCount = times - 1;
 
@@ -28,11 +28,16 @@ export default function useClientCache<CacheType>(
       return [times - 1, cache];
     });
   };
+  watch(
+    () => fullPath.value.slice(),
+    (_, oldValue) => {
+      clearCache(oldValue);
+    },
+  );
   // Create cache
   watch(
     fullPathStr,
     () => {
-      clearCache();
       styleContext.cache.update(fullPath.value, prevCache => {
         const [times = 0, cache] = prevCache || [];
 
@@ -50,9 +55,8 @@ export default function useClientCache<CacheType>(
     },
     { immediate: true },
   );
-
   onBeforeUnmount(() => {
-    clearCache();
+    clearCache(fullPath.value);
   });
   const val = computed(() => styleContext.cache.get(fullPath.value)![1]);
   return val;

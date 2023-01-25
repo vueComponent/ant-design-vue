@@ -3,7 +3,7 @@ category: Components
 type: 反馈
 title: Alert
 subtitle: 警告提示
-cover: https://gw.alipayobjects.com/zos/alicdn/8emPa3fjl/Alert.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Ct7bT7rrTTAAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 警告提示，展现需要关注的信息。

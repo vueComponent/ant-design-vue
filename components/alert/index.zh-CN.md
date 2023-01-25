@@ -17,6 +17,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/8emPa3fjl/Alert.svg
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
+| action | 自定义操作项 | slot | - | 4.0.0 |
 | afterClose | 关闭动画结束后触发的回调函数 | () => void | - |  |
 | banner | 是否用作顶部公告 | boolean | false |  |
 | closable | 默认不显示关闭按钮 | boolean | 无 |  |

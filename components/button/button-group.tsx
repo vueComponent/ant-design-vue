@@ -1,7 +1,7 @@
 import { computed, defineComponent } from 'vue';
 import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
-
+import { useToken } from '../theme/internal';
 import type { ExtractPropTypes, PropType, ComputedRef } from 'vue';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
@@ -24,13 +24,12 @@ export default defineComponent({
   props: buttonGroupProps(),
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('btn-group', props);
+    const [, , hashId] = useToken();
     GroupSizeContext.useProvide({
       size: computed(() => props.size),
     });
     const classes = computed(() => {
       const { size } = props;
-      // large => lg
-      // small => sm
       let sizeCls = '';
       switch (size) {
         case 'large':
@@ -50,6 +49,7 @@ export default defineComponent({
         [`${prefixCls.value}`]: true,
         [`${prefixCls.value}-${sizeCls}`]: sizeCls,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [hashId.value]: true,
       };
     });
     return () => {

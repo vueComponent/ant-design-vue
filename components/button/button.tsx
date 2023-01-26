@@ -15,7 +15,7 @@ import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import LoadingIcon from './LoadingIcon';
-
+import useStyle from './style';
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
 import { GroupSizeContext } from './button-group';
@@ -39,6 +39,7 @@ export default defineComponent({
   // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const { size: groupSize } = GroupSizeContext.useInject();
     const buttonNodeRef = ref<HTMLElement>(null);
     const delayTimeoutRef = ref(undefined);
@@ -82,6 +83,7 @@ export default defineComponent({
       const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
 
       return {
+        [hashId.value]: true,
         [`${pre}`]: true,
         [`${pre}-${type}`]: type,
         [`${pre}-${shape}`]: shape !== 'default' && shape,
@@ -119,6 +121,9 @@ export default defineComponent({
       }
       emit('click', event);
     };
+    const handleMousedown = (event: Event) => {
+      emit('mousedown', event);
+    };
 
     const insertSpace = (child: VNode, needInserted: boolean) => {
       const SPACE = needInserted ? ' ' : '';
@@ -153,7 +158,7 @@ export default defineComponent({
 
       isNeedInserted = children.length === 1 && !icon && !isUnBorderedButtonType(props.type);
 
-      const { type, htmlType, disabled, href, title, target, onMousedown } = props;
+      const { type, htmlType, disabled, href, title, target } = props;
 
       const iconType = innerLoading.value ? 'loading' : icon;
       const buttonProps = {
@@ -166,7 +171,7 @@ export default defineComponent({
           { [`${prefixCls.value}-icon-only`]: children.length === 0 && !!iconType },
         ],
         onClick: handleClick,
-        onMousedown,
+        onMousedown: handleMousedown,
       };
       // https://github.com/vueComponent/ant-design-vue/issues/4930
       if (!disabled) {
@@ -189,29 +194,29 @@ export default defineComponent({
       );
 
       if (href !== undefined) {
-        return (
+        return wrapSSR(
           <a {...buttonProps} href={href} target={target} ref={buttonNodeRef}>
             {iconNode}
             {kids}
-          </a>
+          </a>,
         );
       }
 
-      const buttonNode = (
+      let buttonNode = (
         <button {...buttonProps} ref={buttonNodeRef} type={htmlType}>
           {iconNode}
           {kids}
         </button>
       );
 
-      if (isUnBorderedButtonType(type)) {
-        return buttonNode;
+      if (!isUnBorderedButtonType(type)) {
+        buttonNode = <Wave disabled={!!innerLoading.value}>{buttonNode}</Wave>;
       }
 
-      return (
+      return wrapSSR(
         <Wave ref="wave" disabled={!!innerLoading.value}>
           {buttonNode}
-        </Wave>
+        </Wave>,
       );
     };
   },

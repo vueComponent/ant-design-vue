@@ -2,7 +2,7 @@ import type { ComponentToken as AlertComponentToken } from '../../alert/style';
 import type { ComponentToken as AnchorComponentToken } from '../../anchor/style';
 import type { ComponentToken as AvatarComponentToken } from '../../avatar/style';
 import type { ComponentToken as BackTopComponentToken } from '../../back-top/style';
-// import type { ComponentToken as ButtonComponentToken } from '../../button/style';
+import type { ComponentToken as ButtonComponentToken } from '../../button/style';
 // import type { ComponentToken as FloatButtonComponentToken } from '../../float-button/style';
 // import type { ComponentToken as CalendarComponentToken } from '../../calendar/style';
 // import type { ComponentToken as CardComponentToken } from '../../card/style';
@@ -57,7 +57,7 @@ export interface ComponentTokenMap {
   Avatar?: AvatarComponentToken;
   BackTop?: BackTopComponentToken;
   Badge?: {};
-  //   Button?: ButtonComponentToken;
+  Button?: ButtonComponentToken;
   Breadcrumb?: {};
   //   Card?: CardComponentToken;
   //   Carousel?: CarouselComponentToken;

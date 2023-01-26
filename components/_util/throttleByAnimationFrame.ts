@@ -1,6 +1,10 @@
 import raf from './raf';
 
-export default function throttleByAnimationFrame<T extends unknown[]>(fn: (...args: T) => void) {
+type throttledFn = (...args: any[]) => void;
+
+type throttledCancelFn = { cancel: () => void };
+
+function throttleByAnimationFrame<T extends any[]>(fn: (...args: T) => void) {
   let requestId: number | null;
 
   const later = (args: T) => () => {
@@ -8,10 +12,7 @@ export default function throttleByAnimationFrame<T extends unknown[]>(fn: (...ar
     fn(...args);
   };
 
-  const throttled: {
-    (...args: T): void;
-    cancel: () => void;
-  } = (...args: T) => {
+  const throttled: throttledFn & throttledCancelFn = (...args: T) => {
     if (requestId == null) {
       requestId = raf(later(args));
     }
@@ -25,29 +26,4 @@ export default function throttleByAnimationFrame<T extends unknown[]>(fn: (...ar
   return throttled;
 }
 
-export function throttleByAnimationFrameDecorator() {
-  // eslint-disable-next-line func-names
-  return function (target: any, key: string, descriptor: any) {
-    const fn = descriptor.value;
-    let definingProperty = false;
-    return {
-      configurable: true,
-      get() {
-        // eslint-disable-next-line no-prototype-builtins
-        if (definingProperty || this === target.prototype || this.hasOwnProperty(key)) {
-          return fn;
-        }
-
-        const boundFn = throttleByAnimationFrame(fn.bind(this));
-        definingProperty = true;
-        Object.defineProperty(this, key, {
-          value: boundFn,
-          configurable: true,
-          writable: true,
-        });
-        definingProperty = false;
-        return boundFn;
-      },
-    };
-  };
-}
+export default throttleByAnimationFrame;

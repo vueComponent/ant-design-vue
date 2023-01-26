@@ -85,8 +85,8 @@ export default defineComponent({
       return {
         [hashId.value]: true,
         [`${pre}`]: true,
-        [`${pre}-${type}`]: type,
         [`${pre}-${shape}`]: shape !== 'default' && shape,
+        [`${pre}-${type}`]: type,
         [`${pre}-${sizeCls}`]: sizeCls,
         [`${pre}-loading`]: innerLoading.value,
         [`${pre}-background-ghost`]: ghost && !isUnBorderedButtonType(type),
@@ -177,7 +177,6 @@ export default defineComponent({
       if (!disabled) {
         delete buttonProps.disabled;
       }
-
       const iconNode =
         icon && !innerLoading.value ? (
           icon

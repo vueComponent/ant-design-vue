@@ -42,3 +42,7 @@ export const withInstall = <T>(comp: T) => {
 };
 
 export type MaybeRef<T> = T | Ref<T>;
+
+export function eventType<T>() {
+  return { type: [Function, Array] as PropType<T | T[]> };
+}

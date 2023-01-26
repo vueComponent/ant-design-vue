@@ -11,21 +11,21 @@ import {
   onDeactivated,
 } from 'vue';
 import VerticalAlignTopOutlined from '@ant-design/icons-vue/VerticalAlignTopOutlined';
-import addEventListener from '../vc-util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import { getTransitionProps, Transition } from '../_util/transition';
 import scrollTo from '../_util/scrollTo';
-import { withInstall } from '../_util/type';
+import { withInstall, eventType } from '../_util/type';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import useStyle from './style';
 
 export const backTopProps = () => ({
   visibilityHeight: { type: Number, default: 400 },
   duration: { type: Number, default: 450 },
   target: Function as PropType<() => HTMLElement | Window | Document>,
   prefixCls: String,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: eventType<MouseEventHandler>(),
   // visible: { type: Boolean, default: undefined }, // Only for test. Don't use it.
 });
 
@@ -39,6 +39,7 @@ const BackTop = defineComponent({
   // emits: ['click'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, direction } = useConfigInject('back-top', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const domRef = ref();
     const state = reactive({
       visible: false,
@@ -60,26 +61,23 @@ const BackTop = defineComponent({
     const handleScroll = throttleByAnimationFrame((e: Event | { target: any }) => {
       const { visibilityHeight } = props;
       const scrollTop = getScroll(e.target, true);
-      state.visible = scrollTop > visibilityHeight;
+      state.visible = scrollTop >= visibilityHeight;
     });
 
     const bindScrollEvent = () => {
       const { target } = props;
       const getTarget = target || getDefaultTarget;
       const container = getTarget();
-      state.scrollEvent = addEventListener(container, 'scroll', (e: Event) => {
-        handleScroll(e);
-      });
-      handleScroll({
-        target: container,
-      });
+      handleScroll({ target: container });
+      container?.addEventListener('scroll', handleScroll);
     };
 
     const scrollRemove = () => {
-      if (state.scrollEvent) {
-        state.scrollEvent.remove();
-      }
-      (handleScroll as any).cancel();
+      const { target } = props;
+      const getTarget = target || getDefaultTarget;
+      const container = getTarget();
+      handleScroll.cancel();
+      container?.removeEventListener('scroll', handleScroll);
     };
 
     watch(
@@ -124,6 +122,7 @@ const BackTop = defineComponent({
         ...attrs,
         onClick: scrollToTop,
         class: {
+          [hashId.value]: true,
           [`${prefixCls.value}`]: true,
           [`${attrs.class}`]: attrs.class,
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
@@ -131,12 +130,12 @@ const BackTop = defineComponent({
       };
 
       const transitionProps = getTransitionProps('fade');
-      return (
+      return wrapSSR(
         <Transition {...transitionProps}>
           <div v-show={state.visible} {...divProps} ref={domRef}>
             {slots.default?.() || defaultElement}
           </div>
-        </Transition>
+        </Transition>,
       );
     };
   },

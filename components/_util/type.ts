@@ -46,3 +46,7 @@ export type MaybeRef<T> = T | Ref<T>;
 export function eventType<T>() {
   return { type: [Function, Array] as PropType<T | T[]> };
 }
+
+export function objectType<T>(defaultVal?: any) {
+  return { type: Object as PropType<T>, default: defaultVal as T };
+}

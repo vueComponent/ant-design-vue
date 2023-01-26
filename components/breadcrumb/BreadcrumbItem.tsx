@@ -1,18 +1,21 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
+import type { DropdownProps } from '../dropdown/dropdown';
 import Dropdown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import { eventType, objectType } from '../_util/type';
 
 export const breadcrumbItemProps = () => ({
   prefixCls: String,
   href: String,
   separator: PropTypes.any,
+  dropdownProps: objectType<DropdownProps>(),
   overlay: PropTypes.any,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: eventType<MouseEventHandler>(),
 });
 
 export type BreadcrumbItemProps = Partial<ExtractPropTypes<ReturnType<typeof breadcrumbItemProps>>>;
@@ -24,7 +27,7 @@ export default defineComponent({
   props: breadcrumbItemProps(),
   // emits: ['click'],
   slots: ['separator', 'overlay'],
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, emit }) {
     const { prefixCls } = useConfigInject('breadcrumb', props);
     /**
      * if overlay is have
@@ -34,7 +37,7 @@ export default defineComponent({
       const overlay = getPropsSlot(slots, props, 'overlay');
       if (overlay) {
         return (
-          <Dropdown overlay={overlay} placement="bottom">
+          <Dropdown {...props.dropdownProps} overlay={overlay} placement="bottom">
             <span class={`${prefixCls}-overlay-link`}>
               {breadcrumbItem}
               <DownOutlined />
@@ -44,7 +47,9 @@ export default defineComponent({
       }
       return breadcrumbItem;
     };
-
+    const handleClick = (e: MouseEvent) => {
+      emit('click', e);
+    };
     return () => {
       const separator = getPropsSlot(slots, props, 'separator') ?? '/';
       const children = getPropsSlot(slots, props);
@@ -52,20 +57,20 @@ export default defineComponent({
       let link: JSX.Element;
       if (props.href !== undefined) {
         link = (
-          <a class={`${prefixCls.value}-link`} onClick={props.onClick} {...restAttrs}>
+          <a class={`${prefixCls.value}-link`} onClick={handleClick} {...restAttrs}>
             {children}
           </a>
         );
       } else {
         link = (
-          <span class={`${prefixCls.value}-link`} onClick={props.onClick} {...restAttrs}>
+          <span class={`${prefixCls.value}-link`} onClick={handleClick} {...restAttrs}>
             {children}
           </span>
         );
       }
       // wrap to dropDown
       link = renderBreadcrumbNode(link, prefixCls.value);
-      if (children) {
+      if (children !== undefined && children !== null) {
         return (
           <li class={cls} style={style as CSSProperties}>
             {link}

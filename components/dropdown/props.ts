@@ -3,6 +3,8 @@ import PropTypes from '../_util/vue-types';
 
 import buttonTypes from '../button/buttonTypes';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import type { MenuProps } from '../menu';
+import { objectType } from '../_util/type';
 
 export type Align = {
   points?: [string, string];
@@ -30,6 +32,7 @@ const dropdownProps = () => ({
   trigger: {
     type: [Array, String] as PropType<Trigger[] | Trigger>,
   },
+  menu: objectType<MenuProps>(),
   overlay: PropTypes.any,
   visible: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },

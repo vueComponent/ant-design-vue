@@ -2,7 +2,8 @@ import type { CSSProperties, PropType } from 'vue';
 import type { AlignType, BuildInPlacements } from '../vc-trigger/interface';
 import type { AdjustOverflow } from './placements';
 export type TriggerType = 'hover' | 'focus' | 'click' | 'contextmenu';
-
+import type { PresetColorType } from '../_util/colors';
+import type { LiteralUnion } from '../_util/type';
 export type TooltipPlacement =
   | 'top'
   | 'left'
@@ -22,9 +23,13 @@ export default () => ({
   visible: { type: Boolean, default: undefined },
   defaultVisible: { type: Boolean, default: undefined },
   placement: String as PropType<TooltipPlacement>,
-  color: String,
+  color: String as PropType<LiteralUnion<PresetColorType>>,
   transitionName: String,
   overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  overlayInnerStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: undefined as CSSProperties,
+  },
   overlayClassName: String,
   openClassName: String,
   prefixCls: String,

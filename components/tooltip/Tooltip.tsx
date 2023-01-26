@@ -1,9 +1,8 @@
-import type { ExtractPropTypes, CSSProperties } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { computed, watch, defineComponent, onMounted, ref } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
 import { getStyle, filterEmpty, isValidElement, initDefaultProps } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
@@ -13,6 +12,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import raf from '../_util/raf';
+import { parseColor } from './util';
 export type { AdjustOverflow, PlacementsConfig } from './placements';
 
 // https://github.com/react-component/tooltip
@@ -38,8 +38,6 @@ const splitObject = (obj: any, keys: string[]) => {
   });
   return { picked, omitted };
 };
-
-const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
 export const tooltipProps = () => ({
   ...abstractTooltipProps(),
@@ -76,7 +74,7 @@ export default defineComponent({
   slots: ['title'],
   // emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
-    const { prefixCls, getPopupContainer } = useConfigInject('tooltip', props);
+    const { prefixCls, getPopupContainer, direction } = useConfigInject('tooltip', props);
 
     const visible = ref(firstNotUndefined([props.visible, props.defaultVisible]));
 
@@ -216,9 +214,9 @@ export default defineComponent({
       }
       domNode.style.transformOrigin = `${transformOrigin.left} ${transformOrigin.top}`;
     };
-
+    const colorInfo = computed(() => parseColor(prefixCls.value, props.color));
     return () => {
-      const { openClassName, color, overlayClassName } = props;
+      const { openClassName, overlayClassName } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
 
@@ -237,15 +235,19 @@ export default defineComponent({
         [openClassName || `${prefixCls.value}-open`]: true,
         [child.props && child.props.class]: child.props && child.props.class,
       });
-      const customOverlayClassName = classNames(overlayClassName, {
-        [`${prefixCls.value}-${color}`]: color && PresetColorRegex.test(color),
-      });
-      let formattedOverlayInnerStyle: CSSProperties;
-      let arrowContentStyle: CSSProperties;
-      if (color && !PresetColorRegex.test(color)) {
-        formattedOverlayInnerStyle = { backgroundColor: color };
-        arrowContentStyle = { '--antd-arrow-background-color': color };
-      }
+      const customOverlayClassName = classNames(
+        overlayClassName,
+        {
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+
+        colorInfo.value.className,
+      );
+      const formattedOverlayInnerStyle = {
+        ...props.overlayInnerStyle,
+        ...colorInfo.value.overlayStyle,
+      };
+      const arrowContentStyle = colorInfo.value.arrowStyle;
       const vcTooltipProps = {
         ...attrs,
         ...(props as TooltipProps),

@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
-import type { LiteralUnion, VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 import type {
   ChangeEventHandler,
   CompositionEventHandler,
@@ -56,31 +56,28 @@ export const inputProps = () => ({
   autocomplete: String,
   type: {
     type: String as PropType<
-      LiteralUnion<
-        | 'button'
-        | 'checkbox'
-        | 'color'
-        | 'date'
-        | 'datetime-local'
-        | 'email'
-        | 'file'
-        | 'hidden'
-        | 'image'
-        | 'month'
-        | 'number'
-        | 'password'
-        | 'radio'
-        | 'range'
-        | 'reset'
-        | 'search'
-        | 'submit'
-        | 'tel'
-        | 'text'
-        | 'time'
-        | 'url'
-        | 'week',
-        string
-      >
+      | 'button'
+      | 'checkbox'
+      | 'color'
+      | 'date'
+      | 'datetime-local'
+      | 'email'
+      | 'file'
+      | 'hidden'
+      | 'image'
+      | 'month'
+      | 'number'
+      | 'password'
+      | 'radio'
+      | 'range'
+      | 'reset'
+      | 'search'
+      | 'submit'
+      | 'tel'
+      | 'text'
+      | 'time'
+      | 'url'
+      | 'week'
     >,
     default: 'text',
   },

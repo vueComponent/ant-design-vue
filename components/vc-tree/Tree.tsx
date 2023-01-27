@@ -1141,7 +1141,7 @@ export default defineComponent({
       );
 
       // It's better move to hooks but we just simply keep here
-      let draggableConfig: DraggableConfig;
+      let draggableConfig: DraggableConfig | false;
       if (draggable) {
         if (typeof draggable === 'object') {
           draggableConfig = draggable;
@@ -1152,6 +1152,8 @@ export default defineComponent({
         } else {
           draggableConfig = {};
         }
+      } else {
+        draggableConfig = false;
       }
       return (
         <TreeContext

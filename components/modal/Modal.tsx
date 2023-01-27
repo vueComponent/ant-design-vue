@@ -12,6 +12,7 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { Direction } from '../config-provider';
 import type { VueNode } from '../_util/type';
+import { objectType } from '../_util/type';
 import { canUseDocElement } from '../_util/styleChecker';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { getTransitionName } from '../_util/transition';
@@ -55,8 +56,8 @@ export const modalProps = () => ({
   icon: PropTypes.any,
   maskClosable: { type: Boolean, default: undefined },
   forceRender: { type: Boolean, default: undefined },
-  okButtonProps: Object as PropType<ButtonPropsType>,
-  cancelButtonProps: Object as PropType<ButtonPropsType>,
+  okButtonProps: objectType<ButtonPropsType>(),
+  cancelButtonProps: objectType<ButtonPropsType>(),
   destroyOnClose: { type: Boolean, default: undefined },
   wrapClassName: String,
   maskTransitionName: String,
@@ -68,8 +69,8 @@ export const modalProps = () => ({
     default: undefined,
   },
   zIndex: Number,
-  bodyStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  bodyStyle: objectType<CSSProperties>(),
+  maskStyle: objectType<CSSProperties>(),
   mask: { type: Boolean, default: undefined },
   keyboard: { type: Boolean, default: undefined },
   wrapProps: Object,

@@ -2,7 +2,7 @@ import { nextTick, defineComponent, getCurrentInstance, onMounted, onBeforeUnmou
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
 import { findDOMNode } from './props-util';
-import useConfigInject from './hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 let styleForPesudo: HTMLStyleElement;
 
 // Where el is the DOM element you'd like to test for visibility

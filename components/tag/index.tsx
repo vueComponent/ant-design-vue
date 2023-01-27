@@ -8,7 +8,7 @@ import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
 import { isPresetColor, isPresetStatusColor } from '../_util/colors';
 import type { LiteralUnion } from '../_util/type';
 import CheckableTag from './CheckableTag';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const tagProps = () => ({
   prefixCls: String,

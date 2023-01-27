@@ -6,7 +6,7 @@ import { flattenChildren } from '../_util/props-util';
 import warning from '../_util/warning';
 import type { EventHandler } from '../_util/EventInterface';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 import type { CheckboxChangeEvent, CheckboxProps } from './interface';
 import { CheckboxGroupContextKey, checkboxProps } from './interface';

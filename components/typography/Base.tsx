@@ -26,7 +26,7 @@ import {
   computed,
   toRaw,
 } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { EventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
 import type { AutoSizeType } from '../input/inputProps';

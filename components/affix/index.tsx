@@ -21,7 +21,7 @@ import {
   getFixedTop,
   getFixedBottom,
 } from './utils';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 import useStyle from './style';
 function getDefaultTarget() {

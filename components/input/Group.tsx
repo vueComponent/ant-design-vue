@@ -3,7 +3,7 @@ import { computed, defineComponent } from 'vue';
 import type { SizeType } from '../config-provider';
 import { FormItemInputContext } from '../form/FormItemContext';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },

@@ -13,7 +13,7 @@ import type { SizeType } from '../config-provider';
 import type { FieldNames, Key } from '../vc-tree-select/interface';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import getIcons from '../select/utils/iconUtil';
 import type { SwitcherIconProps } from '../tree/utils/iconUtil';
@@ -222,7 +222,7 @@ const TreeSelect = defineComponent({
       if (notFoundContent !== undefined) {
         mergedNotFound = notFoundContent;
       } else {
-        mergedNotFound = renderEmpty.value('Select');
+        mergedNotFound = renderEmpty('Select');
       }
       // ==================== Render =====================
       const selectProps = omit(props as typeof props & { itemIcon: any; switcherIcon: any }, [

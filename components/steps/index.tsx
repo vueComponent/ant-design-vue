@@ -5,7 +5,7 @@ import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps, { Step as VcStep } from '../vc-steps';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import classNames from '../_util/classNames';
 import Progress from '../progress';

@@ -1,4 +1,4 @@
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 

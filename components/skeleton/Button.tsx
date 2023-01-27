@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { initDefaultProps } from '../_util/props-util';
 import Element, { skeletonElementProps } from './Element';
 

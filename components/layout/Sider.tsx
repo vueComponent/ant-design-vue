@@ -8,7 +8,7 @@ import isNumeric from '../_util/isNumeric';
 import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { SiderCollapsedKey, SiderHookProviderKey } from './injectionKey';
 
 const dimensionMaxMap = {

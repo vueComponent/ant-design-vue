@@ -12,7 +12,7 @@ import {
 import Wave from '../_util/wave';
 import buttonProps from './buttonTypes';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import LoadingIcon from './LoadingIcon';
 import useStyle from './style';

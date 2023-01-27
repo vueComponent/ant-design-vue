@@ -1,6 +1,6 @@
 import { computed, defineComponent } from 'vue';
 import { flattenChildren } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useToken } from '../theme/internal';
 import type { ExtractPropTypes, PropType, ComputedRef } from 'vue';
 import type { SizeType } from '../config-provider';

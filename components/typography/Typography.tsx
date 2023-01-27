@@ -1,6 +1,6 @@
 import type { HTMLAttributes, PropType } from 'vue';
 import { defineComponent } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import type { Direction } from '../config-provider';
 

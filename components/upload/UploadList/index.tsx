@@ -12,7 +12,7 @@ import type { HTMLAttributes } from 'vue';
 import { computed, defineComponent, getCurrentInstance, onMounted, ref, watchEffect } from 'vue';
 import { filterEmpty, initDefaultProps, isValidElement } from '../../_util/props-util';
 import type { VueNode } from '../../_util/type';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import { getTransitionGroupProps, TransitionGroup } from '../../_util/transition';
 import collapseMotion from '../../_util/collapseMotion';
 

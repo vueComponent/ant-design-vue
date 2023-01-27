@@ -3,7 +3,7 @@ import { defineComponent, computed } from 'vue';
 import ImageInternal from '../vc-image';
 import { imageProps } from '../vc-image/src/Image';
 import defaultLocale from '../locale/en_US';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import PreviewGroup, { icons } from './PreviewGroup';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import { getTransitionName } from '../_util/transition';
@@ -40,7 +40,7 @@ const Image = defineComponent<ImageProps>({
     });
 
     return () => {
-      const imageLocale = configProvider.locale?.Image || defaultLocale.Image;
+      const imageLocale = configProvider.locale.value?.Image || defaultLocale.Image;
       const defaultPreviewMask = () => (
         <div class={`${prefixCls.value}-mask-info`}>
           <EyeOutlined />

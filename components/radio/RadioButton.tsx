@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue';
 import Radio, { radioProps } from './Radio';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useProvideRadioOptionTypeContext } from './context';
 
 export default defineComponent({

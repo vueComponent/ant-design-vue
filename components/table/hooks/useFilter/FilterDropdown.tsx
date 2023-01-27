@@ -19,7 +19,7 @@ import type { FilterState } from '.';
 import { flattenKeys } from '.';
 import { computed, defineComponent, onBeforeUnmount, ref, shallowRef, watch } from 'vue';
 import classNames from '../../../_util/classNames';
-import useConfigInject from '../../../_util/hooks/useConfigInject';
+import useConfigInject from '../../../config-provider/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';
 import type { DataNode, EventDataNode } from '../../../tree';
 import type { EventHandler } from '../../../_util/EventInterface';

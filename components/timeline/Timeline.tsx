@@ -7,7 +7,7 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import TimelineItem from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { tuple } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const timelineProps = () => ({
   prefixCls: String,

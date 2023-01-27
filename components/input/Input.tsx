@@ -5,7 +5,7 @@ import {
   NoFormStatus,
   useInjectFormItemContext,
 } from '../form/FormItemContext';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 import type { InputFocusOptions } from '../vc-input/utils/commonUtils';
 import { hasPrefixSuffix } from '../vc-input/utils/commonUtils';

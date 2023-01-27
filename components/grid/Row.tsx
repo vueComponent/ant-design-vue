@@ -4,7 +4,7 @@ import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';
 

@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import classNames from '../_util/classNames';
 

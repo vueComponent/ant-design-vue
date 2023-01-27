@@ -7,7 +7,7 @@ import type { BreadcrumbItemProps } from './BreadcrumbItem';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
 import type { VueNode } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
 export interface Route {
   path: string;

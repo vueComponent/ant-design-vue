@@ -25,7 +25,7 @@ import Row from './Row';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { flattenChildren } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const DescriptionsItemProps = {
   prefixCls: String,

@@ -13,7 +13,7 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { Direction } from '../config-provider';
 import type { VueNode } from '../_util/type';
 import { canUseDocElement } from '../_util/styleChecker';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { getTransitionName } from '../_util/transition';
 
 let mousePosition: { x: number; y: number } | null = null;

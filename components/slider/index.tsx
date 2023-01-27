@@ -6,7 +6,7 @@ import VcHandle from '../vc-slider/src/Handle';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import type { TooltipPlacement } from '../tooltip/Tooltip';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
 import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form/FormItemContext';

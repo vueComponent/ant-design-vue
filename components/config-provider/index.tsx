@@ -1,5 +1,5 @@
-import type { UnwrapRef, App, Plugin, WatchStopHandle } from 'vue';
-import { computed, reactive, provide, defineComponent, watch, watchEffect } from 'vue';
+import type { App, Plugin, WatchStopHandle } from 'vue';
+import { inject, computed, reactive, provide, defineComponent, watchEffect } from 'vue';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { Locale } from '../locale-provider';
@@ -13,9 +13,18 @@ import notification from '../notification';
 import { registerTheme } from './cssVariables';
 import defaultLocale from '../locale/default';
 import type { ValidateMessages } from '../form/interface';
-
-import type { ConfigProviderProps, Theme } from './context';
-import { configProviderProps, useProvideGlobalForm } from './context';
+import useStyle from './style';
+import useTheme from './hooks/useTheme';
+import type { ConfigProviderInnerProps, ConfigProviderProps, Theme } from './context';
+import {
+  defaultConfigProvider,
+  configProviderKey,
+  configProviderProps,
+  useProvideGlobalForm,
+  defaultIconPrefixCls,
+} from './context';
+import { useProviderSize } from './SizeContext';
+import { useProviderDisabled } from './DisabledContext';
 
 export type {
   ConfigProviderProps,
@@ -26,10 +35,14 @@ export type {
   DirectionType,
 } from './context';
 export const defaultPrefixCls = 'ant';
+export { defaultIconPrefixCls };
 function getGlobalPrefixCls() {
   return globalConfigForApi.prefixCls || defaultPrefixCls;
 }
-const globalConfigByCom = reactive<ConfigProviderProps>({});
+
+function getGlobalIconPrefixCls() {
+  return globalConfigForApi.iconPrefixCls || defaultIconPrefixCls;
+}
 const globalConfigBySet = reactive<ConfigProviderProps>({}); // 权重最大
 export const globalConfigForApi = reactive<
   ConfigProviderProps & {
@@ -37,29 +50,32 @@ export const globalConfigForApi = reactive<
   }
 >({});
 
+export const configConsumerProps = [
+  'getTargetContainer',
+  'getPopupContainer',
+  'rootPrefixCls',
+  'getPrefixCls',
+  'renderEmpty',
+  'csp',
+  'autoInsertSpaceInButton',
+  'locale',
+  'pageHeader',
+];
+
 watchEffect(() => {
-  Object.assign(globalConfigForApi, globalConfigByCom, globalConfigBySet);
+  Object.assign(globalConfigForApi, globalConfigBySet);
   globalConfigForApi.prefixCls = getGlobalPrefixCls();
+  globalConfigForApi.iconPrefixCls = getGlobalIconPrefixCls();
   globalConfigForApi.getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return suffixCls
       ? `${globalConfigForApi.prefixCls}-${suffixCls}`
       : globalConfigForApi.prefixCls;
   };
-  globalConfigForApi.getRootPrefixCls = (rootPrefixCls?: string, customizePrefixCls?: string) => {
-    // Customize rootPrefixCls is first priority
-    if (rootPrefixCls) {
-      return rootPrefixCls;
-    }
-
+  globalConfigForApi.getRootPrefixCls = () => {
     // If Global prefixCls provided, use this
     if (globalConfigForApi.prefixCls) {
       return globalConfigForApi.prefixCls;
-    }
-
-    // [Legacy] If customize prefixCls provided, we cut it to get the prefixCls
-    if (customizePrefixCls && customizePrefixCls.includes('-')) {
-      return customizePrefixCls.replace(/^(.*)-[^-]*$/, '$1');
     }
 
     // Fallback to default prefixCls
@@ -69,6 +85,7 @@ watchEffect(() => {
 
 type GlobalConfigProviderProps = {
   prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;
+  iconPrefixCls?: MaybeRef<ConfigProviderProps['iconPrefixCls']>;
   getPopupContainer?: ConfigProviderProps['getPopupContainer'];
 };
 
@@ -91,20 +108,11 @@ export const globalConfig = () => ({
     if (customizePrefixCls) return customizePrefixCls;
     return suffixCls ? `${getGlobalPrefixCls()}-${suffixCls}` : getGlobalPrefixCls();
   },
-  getRootPrefixCls: (rootPrefixCls?: string, customizePrefixCls?: string) => {
-    // Customize rootPrefixCls is first priority
-    if (rootPrefixCls) {
-      return rootPrefixCls;
-    }
-
+  getIconPrefixCls: getGlobalIconPrefixCls,
+  getRootPrefixCls: () => {
     // If Global prefixCls provided, use this
     if (globalConfigForApi.prefixCls) {
       return globalConfigForApi.prefixCls;
-    }
-
-    // [Legacy] If customize prefixCls provided, we cut it to get the prefixCls
-    if (customizePrefixCls && customizePrefixCls.includes('-')) {
-      return customizePrefixCls.replace(/^(.*)-[^-]*$/, '$1');
     }
 
     // Fallback to default prefixCls
@@ -118,55 +126,99 @@ const ConfigProvider = defineComponent({
   inheritAttrs: false,
   props: configProviderProps(),
   setup(props, { slots }) {
+    const parentContext = inject(configProviderKey, defaultConfigProvider);
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
       const { prefixCls = 'ant' } = props;
       if (customizePrefixCls) return customizePrefixCls;
-      return suffixCls ? `${prefixCls}-${suffixCls}` : prefixCls;
+      const mergedPrefixCls = prefixCls || parentContext.getPrefixCls('');
+      return suffixCls ? `${mergedPrefixCls}-${suffixCls}` : mergedPrefixCls;
     };
+    const iconPrefixCls = computed(
+      () => props.iconPrefixCls || parentContext.iconPrefixCls.value || defaultIconPrefixCls,
+    );
+    const shouldWrapSSR = computed(() => iconPrefixCls.value !== parentContext.iconPrefixCls.value);
+    const csp = computed(() => props.csp || parentContext.csp?.value);
 
+    const wrapSSR = useStyle(iconPrefixCls);
+
+    const mergedTheme = useTheme(
+      computed(() => props.theme),
+      computed(() => parentContext.theme?.value),
+    );
     const renderEmptyComponent = (name?: string) => {
       const renderEmpty = (props.renderEmpty ||
         slots.renderEmpty ||
+        parentContext.renderEmpty ||
         defaultRenderEmpty) as RenderEmptyHandler;
       return renderEmpty(name);
     };
-
-    const getPrefixClsWrapper = (suffixCls: string, customizePrefixCls?: string) => {
-      const { prefixCls } = props;
-
-      if (customizePrefixCls) return customizePrefixCls;
-
-      const mergedPrefixCls = prefixCls || getPrefixCls('');
-
-      return suffixCls ? `${mergedPrefixCls}-${suffixCls}` : mergedPrefixCls;
-    };
-
-    const configProvider = reactive({
-      ...props,
-      getPrefixCls: getPrefixClsWrapper,
+    const autoInsertSpaceInButton = computed(
+      () => props.autoInsertSpaceInButton ?? parentContext.autoInsertSpaceInButton?.value,
+    );
+    const locale = computed(() => props.locale || parentContext.locale?.value);
+    const direction = computed(() => props.direction || parentContext.direction?.value);
+    const space = computed(() => props.space ?? parentContext.space?.value);
+    const virtual = computed(() => props.virtual ?? parentContext.virtual?.value);
+    const dropdownMatchSelectWidth = computed(
+      () => props.dropdownMatchSelectWidth ?? parentContext.dropdownMatchSelectWidth?.value,
+    );
+    const getTargetContainer = computed(() =>
+      props.getTargetContainer !== undefined
+        ? props.getTargetContainer
+        : parentContext.getTargetContainer?.value,
+    );
+    const getPopupContainer = computed(() =>
+      props.getPopupContainer !== undefined
+        ? props.getPopupContainer
+        : parentContext.getPopupContainer?.value,
+    );
+    const pageHeader = computed(() =>
+      props.pageHeader !== undefined ? props.pageHeader : parentContext.pageHeader?.value,
+    );
+    const input = computed(() =>
+      props.input !== undefined ? props.input : parentContext.input?.value,
+    );
+    const pagination = computed(() =>
+      props.pagination !== undefined ? props.pagination : parentContext.pagination?.value,
+    );
+    const form = computed(() =>
+      props.form !== undefined ? props.form : parentContext.form?.value,
+    );
+    const select = computed(() =>
+      props.select !== undefined ? props.select : parentContext.select?.value,
+    );
+    const componentSize = computed(() => props.componentSize);
+    const componentDisabled = computed(() => props.componentDisabled);
+    const configProvider: ConfigProviderInnerProps = {
+      csp,
+      autoInsertSpaceInButton,
+      locale,
+      direction,
+      space,
+      virtual,
+      dropdownMatchSelectWidth,
+      getPrefixCls,
+      iconPrefixCls,
+      theme: mergedTheme,
       renderEmpty: renderEmptyComponent,
-    });
-    Object.keys(props).forEach(key => {
-      watch(
-        () => props[key],
-        () => {
-          configProvider[key] = props[key];
-        },
-      );
-    });
-    if (!props.notUpdateGlobalConfig) {
-      Object.assign(globalConfigByCom, configProvider);
-      watch(configProvider, () => {
-        Object.assign(globalConfigByCom, configProvider);
-      });
-    }
+      getTargetContainer,
+      getPopupContainer,
+      pageHeader,
+      input,
+      pagination,
+      form,
+      select,
+      componentSize,
+      componentDisabled,
+      transformCellText: computed(() => props.transformCellText),
+    };
     const validateMessagesRef = computed(() => {
       // Additional Form provider
       let validateMessages: ValidateMessages = {};
 
-      if (props.locale) {
+      if (locale.value) {
         validateMessages =
-          props.locale.Form?.defaultValidateMessages ||
+          locale.value.Form?.defaultValidateMessages ||
           defaultLocale.Form?.defaultValidateMessages ||
           {};
       }
@@ -175,24 +227,27 @@ const ConfigProvider = defineComponent({
       }
       return validateMessages;
     });
+
+    provide(configProviderKey, configProvider);
     useProvideGlobalForm({ validateMessages: validateMessagesRef });
-    provide('configProvider', configProvider);
+    useProviderSize(componentSize);
+    useProviderDisabled(componentDisabled);
 
     const renderProvider = (legacyLocale: Locale) => {
       return (
-        <LocaleProvider locale={props.locale || legacyLocale} ANT_MARK__={ANT_MARK}>
-          {slots.default?.()}
+        <LocaleProvider locale={locale.value || legacyLocale} ANT_MARK__={ANT_MARK}>
+          {shouldWrapSSR.value ? wrapSSR(slots.default?.()) : slots.default?.()}
         </LocaleProvider>
       );
     };
 
     watchEffect(() => {
-      if (props.direction) {
+      if (direction.value) {
         message.config({
-          rtl: props.direction === 'rtl',
+          rtl: direction.value === 'rtl',
         });
         notification.config({
-          rtl: props.direction === 'rtl',
+          rtl: direction.value === 'rtl',
         });
       }
     });
@@ -202,18 +257,7 @@ const ConfigProvider = defineComponent({
     );
   },
 });
-export const defaultIconPrefixCls = 'anticon';
-export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
-  getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
-    if (customizePrefixCls) return customizePrefixCls;
-    return suffixCls ? `ant-${suffixCls}` : 'ant';
-  },
-  renderEmpty: defaultRenderEmpty,
-  direction: 'ltr',
-  iconPrefixCls: defaultIconPrefixCls,
-});
 
-ConfigProvider.config = setGlobalConfig;
 ConfigProvider.install = function (app: App) {
   app.component(ConfigProvider.name, ConfigProvider);
 };

@@ -9,7 +9,7 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 
 export const paginationProps = () => ({

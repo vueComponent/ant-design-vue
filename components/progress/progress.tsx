@@ -8,7 +8,7 @@ import Line from './Line';
 import Circle from './Circle';
 import Steps from './Steps';
 import { getSuccessPercent, validProgress } from './utils';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
 import type { VueNode } from '../_util/type';

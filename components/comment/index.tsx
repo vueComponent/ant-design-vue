@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 export const commentProps = () => ({
   actions: Array,
   /** The element to display as the comment author. */

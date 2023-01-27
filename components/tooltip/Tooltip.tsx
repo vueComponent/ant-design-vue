@@ -8,7 +8,7 @@ import { getStyle, filterEmpty, isValidElement, initDefaultProps } from '../_uti
 import { cloneElement } from '../_util/vnode';
 export type { TriggerType, TooltipPlacement } from './abstractTooltipProps';
 import abstractTooltipProps from './abstractTooltipProps';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import raf from '../_util/raf';

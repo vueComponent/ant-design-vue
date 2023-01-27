@@ -2,7 +2,7 @@ import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const cardMetaProps = () => ({
   prefixCls: String,

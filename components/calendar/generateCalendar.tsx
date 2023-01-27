@@ -14,7 +14,7 @@ import CalendarHeader from './Header';
 import type { VueNode } from '../_util/type';
 import type { App } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 
 type InjectDefaultProps<Props> = Omit<

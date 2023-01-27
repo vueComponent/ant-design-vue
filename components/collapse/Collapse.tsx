@@ -13,7 +13,7 @@ import { computed, defineComponent, ref, watch } from 'vue';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { CollapsePanelProps } from './CollapsePanel';
 import collapseMotion from '../_util/collapseMotion';
 

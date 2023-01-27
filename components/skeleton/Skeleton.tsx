@@ -7,7 +7,7 @@ import type { SkeletonTitleProps } from './Title';
 import Title from './Title';
 import type { SkeletonParagraphProps } from './Paragraph';
 import Paragraph from './Paragraph';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import Element from './Element';
 
 /* This only for skeleton internal. */

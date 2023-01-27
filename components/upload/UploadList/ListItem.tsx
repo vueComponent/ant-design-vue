@@ -14,7 +14,7 @@ import type {
   UploadLocale,
 } from '../interface';
 import type { VueNode } from '../../_util/type';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import Transition, { getTransitionProps } from '../../_util/transition';
 export const listItemProps = () => {
   return {

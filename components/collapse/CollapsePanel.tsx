@@ -6,7 +6,7 @@ import { defineComponent } from 'vue';
 import Transition from '../_util/transition';
 import classNames from '../_util/classNames';
 import devWarning from '../vc-util/devWarning';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export { collapsePanelProps };
 export type CollapsePanelProps = Partial<ExtractPropTypes<ReturnType<typeof collapsePanelProps>>>;

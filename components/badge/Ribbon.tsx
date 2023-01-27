@@ -5,7 +5,7 @@ import { isPresetColor } from '../_util/colors';
 import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const ribbonProps = () => ({
   prefix: String,

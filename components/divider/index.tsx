@@ -2,7 +2,7 @@ import { flattenChildren } from '../_util/props-util';
 import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const dividerProps = () => ({
   prefixCls: String,

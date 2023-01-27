@@ -33,7 +33,7 @@ import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
 import { tuple } from '../_util/type';
 import type { InternalNamePath, Rule, RuleError, RuleObject, ValidateOptions } from './interface';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';

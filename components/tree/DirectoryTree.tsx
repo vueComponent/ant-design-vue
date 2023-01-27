@@ -16,7 +16,7 @@ import {
 import type { DataNode, EventDataNode, Key, ScrollTo } from '../vc-tree/interface';
 import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { filterEmpty } from '../_util/props-util';
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';

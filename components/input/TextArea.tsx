@@ -16,7 +16,7 @@ import { fixControlledValue, resolveOnChange, triggerFocus } from '../vc-input/u
 import classNames from '../_util/classNames';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { FocusEventHandler } from '../_util/EventInterface';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 import type { VueNode } from '../_util/type';
 import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';

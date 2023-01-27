@@ -7,7 +7,7 @@ import Wave from '../_util/wave';
 import warning from '../_util/warning';
 import { tuple, withInstall } from '../_util/type';
 import { getPropsSlot } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import type { FocusEventHandler } from '../_util/EventInterface';

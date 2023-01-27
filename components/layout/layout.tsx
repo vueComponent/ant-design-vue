@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, HTMLAttributes } from 'vue';
 import { computed, createVNode, defineComponent, provide, ref } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { SiderHookProviderKey } from './injectionKey';
 
 export const basicProps = () => ({

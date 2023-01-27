@@ -6,7 +6,7 @@ import { genCommonStyle, genLinkStyle } from '../../_style';
 import type { UseComponentStyleResult } from '../internal';
 import { mergeToken, statisticToken, useToken } from '../internal';
 import type { ComponentTokenMap, GlobalToken } from '../interface';
-import useConfigInject from 'ant-design-vue/es/_util/hooks/useConfigInject';
+import useConfigInject from 'ant-design-vue/es/config-provider/hooks/useConfigInject';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 

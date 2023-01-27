@@ -1,7 +1,7 @@
 import type { PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { SkeletonElementProps } from './Element';
 import Element, { skeletonElementProps } from './Element';
 import omit from '../_util/omit';

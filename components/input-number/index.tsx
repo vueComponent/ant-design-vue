@@ -10,7 +10,7 @@ import {
   NoFormStatus,
   useInjectFormItemContext,
 } from '../form/FormItemContext';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { cloneElement } from '../_util/vnode';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';

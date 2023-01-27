@@ -8,7 +8,7 @@ import WarningFilled from '@ant-design/icons-vue/WarningFilled';
 import noFound from './noFound';
 import serverError from './serverError';
 import unauthorized from './unauthorized';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 
 export const IconMap = {

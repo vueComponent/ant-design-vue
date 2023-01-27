@@ -25,8 +25,7 @@ import type {
   ValidateMessages,
   Rule,
 } from './interface';
-import { useInjectSize } from '../_util/hooks/useSize';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useProvideForm } from './context';
 import type { SizeType } from '../config-provider';
 import useForm from './useForm';
@@ -111,8 +110,7 @@ const Form = defineComponent({
   useForm,
   // emits: ['finishFailed', 'submit', 'finish', 'validate'],
   setup(props, { emit, slots, expose, attrs }) {
-    const size = useInjectSize(props);
-    const { prefixCls, direction, form: contextForm } = useConfigInject('form', props);
+    const { prefixCls, direction, form: contextForm, size } = useConfigInject('form', props);
     const requiredMark = computed(() => props.requiredMark === '' || props.requiredMark);
     const mergedRequiredMark = computed(() => {
       if (requiredMark.value !== undefined) {

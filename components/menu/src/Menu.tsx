@@ -15,7 +15,7 @@ import {
 import shallowEqual from '../../_util/shallowequal';
 import type { StoreMenuInfo } from './hooks/useMenuContext';
 import useProvideMenu, { MenuContextProvider, useProvideFirstLevel } from './hooks/useMenuContext';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import type {
   MenuTheme,
   MenuMode,

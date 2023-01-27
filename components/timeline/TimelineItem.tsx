@@ -4,7 +4,7 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { tuple } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const timelineItemProps = () => ({
   prefixCls: String,

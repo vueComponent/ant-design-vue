@@ -8,7 +8,7 @@ import PropTypes from '../_util/vue-types';
 import KeyCode from '../_util/KeyCode';
 import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 import Star from './Star';
 import useRefs from '../_util/hooks/useRefs';

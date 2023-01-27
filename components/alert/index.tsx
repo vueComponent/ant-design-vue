@@ -16,7 +16,7 @@ import { isValidElement } from '../_util/props-util';
 import { tuple, withInstall } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
 
 const iconMapFilled = {

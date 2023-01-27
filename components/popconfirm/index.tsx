@@ -14,7 +14,7 @@ import { withInstall } from '../_util/type';
 import useMergedState from '../_util/hooks/useMergedState';
 import devWarning from '../vc-util/devWarning';
 import KeyCode from '../_util/KeyCode';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import { getTransitionName } from '../_util/transition';
 import { cloneVNodes } from '../_util/vnode';

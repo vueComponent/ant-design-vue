@@ -6,7 +6,7 @@ import Dropdown from './dropdown';
 import { initDefaultProps } from '../_util/props-util';
 import { dropdownButtonProps } from './props';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 const ButtonGroup = Button.Group;
 
 export type DropdownButtonProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownButtonProps>>>;

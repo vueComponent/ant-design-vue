@@ -242,7 +242,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
           ? customTransitionName
           : `${rootPrefixCls}-${customTransitionName}`;
         return (
-          <ConfigProvider {...global} notUpdateGlobalConfig={true} prefixCls={rootPrefixCls}>
+          <ConfigProvider {...global} prefixCls={rootPrefixCls}>
             <Notification
               ref={notiRef}
               {...attrs}

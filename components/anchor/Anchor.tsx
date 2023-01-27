@@ -14,7 +14,7 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
 import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useProvideAnchor from './context';
 import useStyle from './style';
 import type { AnchorLinkProps } from './AnchorLink';

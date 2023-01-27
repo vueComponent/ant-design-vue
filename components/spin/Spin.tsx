@@ -4,7 +4,7 @@ import debounce from 'lodash-es/debounce';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { defaultConfigProvider } from '../config-provider';
+import { defaultConfigProvider, configProviderKey } from '../config-provider/context';
 
 export type SpinSize = 'small' | 'default' | 'large';
 export const spinProps = () => ({
@@ -43,7 +43,7 @@ export default defineComponent({
   setup() {
     return {
       originalUpdateSpinning: null,
-      configProvider: inject('configProvider', defaultConfigProvider),
+      configProvider: inject(configProviderKey, defaultConfigProvider),
     };
   },
   data() {

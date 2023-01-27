@@ -7,7 +7,7 @@ import { getTransitionProps, Transition } from '../_util/transition';
 import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, computed, ref, watch } from 'vue';
 import Ribbon from './Ribbon';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
 import useStyle from './style';
 import type { PresetColorKey } from '../theme/interface';

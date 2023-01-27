@@ -1,7 +1,7 @@
 import { computed, ref, watch, defineComponent, provide } from 'vue';
 import Checkbox from './Checkbox';
 import { useInjectFormItemContext } from '../form/FormItemContext';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { CheckboxOptionType } from './interface';
 import { CheckboxGroupContextKey, checkboxGroupProps } from './interface';
 

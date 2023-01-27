@@ -77,7 +77,7 @@ const confirm = (config: ModalFuncProps) => {
     const rootPrefixCls = global.prefixCls;
     const prefixCls = p.prefixCls || `${rootPrefixCls}-modal`;
     return (
-      <ConfigProvider {...(global as any)} notUpdateGlobalConfig={true} prefixCls={rootPrefixCls}>
+      <ConfigProvider {...(global as any)} prefixCls={rootPrefixCls}>
         <ConfirmDialog {...p} rootPrefixCls={rootPrefixCls} prefixCls={prefixCls}></ConfirmDialog>
       </ConfigProvider>
     );

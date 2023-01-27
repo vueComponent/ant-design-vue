@@ -12,7 +12,7 @@ import type {
   CompositionEventHandler,
   MouseEventHandler,
 } from '../_util/EventInterface';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 import isMobile from '../_util/isMobile';
 import inputProps from './inputProps';

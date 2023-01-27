@@ -5,7 +5,7 @@ import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, initDefaultProps } from '../_util/props-util';
 import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 import { getTransitionName } from '../_util/transition';
 import { tooltipDefaultProps } from '../tooltip/Tooltip';

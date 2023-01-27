@@ -18,7 +18,7 @@ import { computed, defineComponent, onMounted, ref, toRef } from 'vue';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useMergedState from '../_util/hooks/useMergedState';
 import devWarning from '../vc-util/devWarning';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { VueNode } from '../_util/type';
 import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form';

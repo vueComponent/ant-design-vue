@@ -3,7 +3,7 @@ import { computed, defineComponent, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox/Checkbox';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { RadioChangeEvent } from './interface';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';

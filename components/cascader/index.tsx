@@ -15,7 +15,7 @@ import { computed, defineComponent, ref, watchEffect } from 'vue';
 import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
@@ -227,7 +227,7 @@ const Cascader = defineComponent({
         ...restProps
       } = props;
       // =================== No Found ====================
-      const mergedNotFoundContent = notFoundContent || renderEmpty.value('Cascader');
+      const mergedNotFoundContent = notFoundContent || renderEmpty('Cascader');
 
       // ===================== Icon ======================
       let mergedExpandIcon = expandIcon;

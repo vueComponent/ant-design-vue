@@ -9,7 +9,7 @@ import { getPlaceholder, transPlacement2DropdownAlign } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import { getTimeProps, Components } from '.';
 import { computed, defineComponent, ref } from 'vue';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import type { CommonProps, DatePickerProps } from './props';
 import { commonProps, datePickerProps } from './props';

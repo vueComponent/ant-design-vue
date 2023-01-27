@@ -16,7 +16,7 @@ import { getTransitionProps, Transition } from '../_util/transition';
 import scrollTo from '../_util/scrollTo';
 import { withInstall, eventType } from '../_util/type';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import useStyle from './style';
 

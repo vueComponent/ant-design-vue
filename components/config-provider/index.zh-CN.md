@@ -108,3 +108,7 @@ ConfigProvider.config({
    <App />
  </ConfigProvider>
 ```
+
+#### 为什么 message.info、notification.open 或 Modal.confirm 等方法内的 VueNode 无法继承 ConfigProvider 的属性？比如 `prefixCls` 和 `theme`。
+
+静态方法是使用 Vue.render 重新渲染一个 Vue 根节点上，和主应用的 Vue 节点是脱离的。

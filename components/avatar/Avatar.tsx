@@ -7,11 +7,11 @@ import PropTypes from '../_util/vue-types';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint, ScreenSizeMap } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
-import { useInjectSize } from '../_util/hooks/useSize';
 import eagerComputed from '../_util/eagerComputed';
 import useStyle from './style';
+import { useInjectSize } from './SizeContext';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 

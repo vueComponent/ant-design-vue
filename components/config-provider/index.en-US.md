@@ -107,3 +107,7 @@ When you config `getPopupContainer` to parentNode globally, Modal will throw err
    <App />
  </ConfigProvider>
 ```
+
+#### Why can't ConfigProvider props (like `prefixCls` and `theme`) affect VueNode inside `message.info`, `notification.open`, `Modal.confirm`?
+
+antd will dynamic create Vue instance by `Vue.render` when call message methods. Whose context is different with origin code located context.

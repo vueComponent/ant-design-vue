@@ -3,7 +3,7 @@ import type { PropType, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { tuple } from '../_util/type';
 import type { RadioChangeEvent, RadioGroupButtonStyle, RadioGroupOptionType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';

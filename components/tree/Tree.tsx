@@ -8,7 +8,7 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { DataNode, EventDataNode, FieldNames, Key, ScrollTo } from '../vc-tree/interface';
 import type { TreeNodeProps } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { SwitcherIconProps } from './utils/iconUtil';
 import renderSwitcherIcon from './utils/iconUtil';
 import dropIndicatorRender from './utils/dropIndicator';

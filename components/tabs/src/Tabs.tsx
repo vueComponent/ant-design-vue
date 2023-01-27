@@ -13,7 +13,7 @@ import type {
 import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
 import { defineComponent, computed, onMounted, watchEffect, camelize } from 'vue';
 import { flattenChildren, initDefaultProps, isValidElement } from '../../_util/props-util';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import useState from '../../_util/hooks/useState';
 import isMobile from '../../vc-util/isMobile';
 import useMergedState from '../../_util/hooks/useMergedState';

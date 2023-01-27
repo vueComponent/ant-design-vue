@@ -7,7 +7,7 @@ import type { BaseOptionType, DefaultOptionType } from '../vc-select/Select';
 import type { OptionProps } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { SelectCommonPlacement } from '../_util/transition';
@@ -114,10 +114,15 @@ const Select = defineComponent({
 
       return mode;
     });
-    const { prefixCls, direction, configProvider, size, getPrefixCls } = useConfigInject(
-      'select',
-      props,
-    );
+    const {
+      prefixCls,
+      direction,
+      configProvider,
+      renderEmpty,
+      size,
+      getPrefixCls,
+      getPopupContainer,
+    } = useConfigInject('select', props);
     const rootPrefixCls = computed(() => getPrefixCls());
     // ===================== Placement =====================
     const placement = computed(() => {
@@ -173,7 +178,6 @@ const Select = defineComponent({
         notFoundContent,
         listHeight = 256,
         listItemHeight = 24,
-        getPopupContainer,
         dropdownClassName,
         virtual,
         dropdownMatchSelectWidth,
@@ -182,7 +186,7 @@ const Select = defineComponent({
         showArrow,
       } = props;
       const { hasFeedback, feedbackIcon } = formItemInputContext;
-      const { renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider;
+      const {} = configProvider;
 
       // ===================== Empty =====================
       let mergedNotFound: any;
@@ -242,7 +246,7 @@ const Select = defineComponent({
           clearIcon={clearIcon}
           notFoundContent={mergedNotFound}
           class={[mergedClassName.value, attrs.class]}
-          getPopupContainer={getPopupContainer || getContextPopupContainer}
+          getPopupContainer={getPopupContainer.value}
           dropdownClassName={rcSelectRtlDropdownClassName}
           onChange={triggerChange}
           onBlur={handleBlur}

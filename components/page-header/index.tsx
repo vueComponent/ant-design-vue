@@ -9,7 +9,7 @@ import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import useDestroyed from '../_util/hooks/useDestroyed';

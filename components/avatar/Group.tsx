@@ -5,9 +5,9 @@ import Popover from '../popover';
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
-import useProvideSize from '../_util/hooks/useSize';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
+import { useProviderSize } from './SizeContext';
 
 export const groupProps = () => ({
   prefixCls: String,
@@ -36,7 +36,7 @@ const Group = defineComponent({
     const { prefixCls, direction } = useConfigInject('avatar', props);
     const groupPrefixCls = computed(() => `${prefixCls.value}-group`);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    useProvideSize<AvatarSize>(props);
+    useProviderSize(computed(() => props.size));
     return () => {
       const {
         maxPopoverPlacement = 'top',

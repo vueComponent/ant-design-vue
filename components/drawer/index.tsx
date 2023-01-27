@@ -15,7 +15,7 @@ import classnames from '../_util/classNames';
 import VcDrawer from '../vc-drawer';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { tuple, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 import devWarning from '../vc-util/devWarning';

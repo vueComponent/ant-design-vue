@@ -13,7 +13,7 @@ import { flattenChildren } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { Key } from '../_util/type';
 import ItemMeta from './ItemMeta';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
@@ -291,7 +291,7 @@ const List = defineComponent({
           <ul class={`${prefixCls.value}-items`}>{items}</ul>
         );
       } else if (!children.length && !isLoading.value) {
-        childrenContent = renderEmptyFunc(renderEmpty.value);
+        childrenContent = renderEmptyFunc(renderEmpty);
       }
 
       const paginationPosition = paginationProps.value.position || 'bottom';

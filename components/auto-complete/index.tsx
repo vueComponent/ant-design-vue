@@ -6,7 +6,7 @@ import warning from '../_util/warning';
 import Option from './Option';
 import OptGroup from './OptGroup';
 import omit from '../_util/omit';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { InputStatus } from '../_util/statusUtils';
 
 function isSelectOptionOrSelectOptGroup(child: any): boolean {

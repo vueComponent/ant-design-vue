@@ -4,7 +4,7 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import VcMentions, { Option } from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
@@ -143,7 +143,7 @@ const Mentions = defineComponent({
       if (slots.notFoundContent) {
         return slots.notFoundContent();
       }
-      return renderEmpty.value('Select');
+      return renderEmpty('Select');
     };
 
     const getOptions = () => {

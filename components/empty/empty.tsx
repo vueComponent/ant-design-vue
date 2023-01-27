@@ -1,4 +1,4 @@
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 const Empty = () => {
   const { getPrefixCls } = useConfigInject('empty', {});

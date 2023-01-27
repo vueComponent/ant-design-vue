@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import Element, { skeletonElementProps } from './Element';
 
 export const avatarProps = () => {

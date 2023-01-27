@@ -5,17 +5,14 @@ import { generate } from '@ant-design/colors';
 import type { Theme } from './context';
 import { updateCSS } from '../vc-util/Dom/dynamicCSS';
 import canUseDom from '../_util/canUseDom';
-import devWarning from '../vc-util/devWarning';
+import warning from '../_util/warning';
 
 const dynamicStyleMark = `-ant-${Date.now()}-${Math.random()}`;
 
 export function getStyle(globalPrefixCls: string, theme: Theme) {
   const variables: Record<string, string> = {};
 
-  const formatColor = (
-    color: TinyColor,
-    updater?: (cloneColor: TinyColor) => TinyColor | undefined,
-  ) => {
+  const formatColor = (color: TinyColor, updater?: (cloneColor: TinyColor) => TinyColor) => {
     let clone = color.clone();
     clone = updater?.(clone) || clone;
     return clone.toRgbString();
@@ -30,8 +27,8 @@ export function getStyle(globalPrefixCls: string, theme: Theme) {
     variables[`${type}-color-hover`] = colorPalettes[4];
     variables[`${type}-color-active`] = colorPalettes[6];
     variables[`${type}-color-outline`] = baseColor.clone().setAlpha(0.2).toRgbString();
-    variables[`${type}-color-deprecated-bg`] = colorPalettes[1];
-    variables[`${type}-color-deprecated-border`] = colorPalettes[3];
+    variables[`${type}-color-deprecated-bg`] = colorPalettes[0];
+    variables[`${type}-color-deprecated-border`] = colorPalettes[2];
   };
 
   // ================ Primary Color ================
@@ -101,6 +98,6 @@ export function registerTheme(globalPrefixCls: string, theme: Theme) {
   if (canUseDom()) {
     updateCSS(style, `${dynamicStyleMark}-dynamic-theme`);
   } else {
-    devWarning(false, 'ConfigProvider', 'SSR do not support dynamic theme with css variables.');
+    warning(false, 'ConfigProvider', 'SSR do not support dynamic theme with css variables.');
   }
 }

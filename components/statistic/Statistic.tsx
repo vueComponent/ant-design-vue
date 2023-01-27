@@ -5,7 +5,7 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
 import type { valueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const statisticProps = () => ({
   prefixCls: String,

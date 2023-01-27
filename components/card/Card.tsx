@@ -7,7 +7,7 @@ import PropTypes from '../_util/vue-types';
 import { flattenChildren, isEmptyElement, filterEmptyWithUndefined } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 export interface CardTabListType {
   key: string;

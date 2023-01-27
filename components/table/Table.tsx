@@ -38,7 +38,7 @@ import type { CSSProperties, PropType } from 'vue';
 import { nextTick, reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import classNames from '../_util/classNames';
 import omit from '../_util/omit';
@@ -288,7 +288,7 @@ const InteralTable = defineComponent<
       configProvider,
     } = useConfigInject('table', props);
     const transformCellText = computed(
-      () => props.transformCellText || configProvider.transformCellText,
+      () => props.transformCellText || configProvider.transformCellText?.value,
     );
     const [tableLocale] = useLocaleReceiver('Table', defaultLocale.Table, toRef(props, 'locale'));
     const rawData = computed(() => props.dataSource || EMPTY_LIST);
@@ -672,7 +672,7 @@ const InteralTable = defineComponent<
               v-slots={{
                 ...slots,
                 emptyText: () =>
-                  slots.emptyText?.() || props.locale?.emptyText || renderEmpty.value('Table'),
+                  slots.emptyText?.() || props.locale?.emptyText || renderEmpty('Table'),
               }}
             />
             {bottomPaginationNode}

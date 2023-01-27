@@ -7,7 +7,7 @@ import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;

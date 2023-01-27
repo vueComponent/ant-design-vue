@@ -1,6 +1,6 @@
+import { computed } from 'vue';
 import type { GlobalToken } from '../theme/interface';
 import { useToken } from '../theme/internal';
-import useMemo from './hooks/useMemo';
 
 export type Breakpoint = 'xxxl' | 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 export type BreakpointMap = Record<Breakpoint, string>;
@@ -22,10 +22,9 @@ const getResponsiveMap = (token: GlobalToken): BreakpointMap => ({
 
 export default function useResponsiveObserver() {
   const [, token] = useToken();
-  const responsiveMap: BreakpointMap = getResponsiveMap(token.value);
 
-  // To avoid repeat create instance, we add `useMemo` here.
-  return useMemo(() => {
+  return computed(() => {
+    const responsiveMap: BreakpointMap = getResponsiveMap(token.value);
     const subscribers = new Map<Number, SubscribeFunc>();
     let subUid = -1;
     let screens = {};
@@ -82,5 +81,5 @@ export default function useResponsiveObserver() {
       },
       responsiveMap,
     };
-  }, [token]);
+  });
 }

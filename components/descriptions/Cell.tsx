@@ -11,8 +11,8 @@ interface CellProps extends HTMLAttributes {
   labelStyle?: CSSProperties;
   contentStyle?: CSSProperties;
   bordered?: boolean;
-  label?: VNodeTypes;
-  content?: VNodeTypes;
+  label?: number | VNodeTypes;
+  content?: number | VNodeTypes;
   colon?: boolean;
 }
 

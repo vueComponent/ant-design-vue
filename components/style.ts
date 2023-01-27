@@ -16,7 +16,7 @@ import './popconfirm/style';
 import './menu/style';
 import './mentions/style';
 import './dropdown/style';
-import './divider/style';
+// import './divider/style';
 import './card/style';
 import './collapse/style';
 import './carousel/style';

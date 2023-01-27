@@ -1,5 +1,5 @@
 // import './button/style';
-import './icon/style';
+// import './icon/style';
 import './radio/style';
 import './checkbox/style';
 import './grid/style';

@@ -10,7 +10,7 @@ import { renderHelper } from '../_util/util';
 import { globalConfig } from '../config-provider';
 import type { NotificationInstance as VCNotificationInstance } from '../vc-notification/Notification';
 import classNames from '../_util/classNames';
-
+import useStyle from './style';
 export type NotificationPlacement =
   | 'top'
   | 'topLeft'
@@ -163,6 +163,7 @@ function getNotificationInstance(
     {
       name: 'notification',
       prefixCls: customizePrefixCls || defaultPrefixCls,
+      useStyle,
       class: notificationClass,
       style: getPlacementStyle(placement, top, bottom),
       appContext,

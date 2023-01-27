@@ -8,6 +8,7 @@ import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 import type { Key, VueNode } from '../_util/type';
 import type { NotificationInstance } from '../vc-notification/Notification';
 import classNames from '../_util/classNames';
+import useStyle from './style';
 
 let defaultDuration = 3;
 let defaultTop: string;
@@ -80,6 +81,7 @@ function getMessageInstance(args: MessageArgsProps, callback: (i: NotificationIn
       getContainer: getContainer || args.getPopupContainer,
       maxCount,
       name: 'message',
+      useStyle,
     },
     (instance: any) => {
       if (messageInstance) {

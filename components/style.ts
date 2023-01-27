@@ -55,7 +55,7 @@ import './comment/style';
 import './empty/style';
 import './statistic/style';
 import './result/style';
-import './descriptions/style';
+// import './descriptions/style';
 import './page-header/style';
 import './form/style';
 import './space/style';

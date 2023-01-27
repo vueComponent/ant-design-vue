@@ -3,7 +3,7 @@ import { defineComponent, ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
-import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
+import useResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';
@@ -19,8 +19,8 @@ export interface rowContextState {
 }
 
 export const rowProps = () => ({
-  align: String as PropType<typeof RowAligns[number]>,
-  justify: String as PropType<typeof RowJustify[number]>,
+  align: String as PropType<(typeof RowAligns)[number]>,
+  justify: String as PropType<(typeof RowJustify)[number]>,
   prefixCls: String,
   gutter: {
     type: [Number, Array, Object] as PropType<Gutter | [Gutter, Gutter]>,
@@ -40,6 +40,8 @@ const ARow = defineComponent({
 
     let token: number;
 
+    const responsiveObserve = useResponsiveObserve();
+
     const screens = ref<ScreenMap>({
       xs: true,
       sm: true,
@@ -53,7 +55,7 @@ const ARow = defineComponent({
     const supportFlexGap = useFlexGapSupport();
 
     onMounted(() => {
-      token = ResponsiveObserve.subscribe(screen => {
+      token = responsiveObserve.value.subscribe(screen => {
         const currentGutter = props.gutter || 0;
         if (
           (!Array.isArray(currentGutter) && typeof currentGutter === 'object') ||
@@ -66,7 +68,7 @@ const ARow = defineComponent({
     });
 
     onBeforeUnmount(() => {
-      ResponsiveObserve.unsubscribe(token);
+      responsiveObserve.value.unsubscribe(token);
     });
 
     const gutter = computed(() => {

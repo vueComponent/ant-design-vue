@@ -9,7 +9,7 @@ import { convertLegacyProps } from '../button/buttonTypes';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import Button from '../button';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
+import defaultLocale from '../locale/en_US';
 import { withInstall } from '../_util/type';
 import useMergedState from '../_util/hooks/useMergedState';
 import devWarning from '../vc-util/devWarning';

@@ -6,7 +6,7 @@ import classNames from '../_util/classNames';
 import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
+import defaultLocale from '../locale/en_US';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';

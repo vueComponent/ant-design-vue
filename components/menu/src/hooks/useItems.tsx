@@ -13,24 +13,24 @@ import { ref, shallowRef, watch } from 'vue';
 import type { MenuProps } from '../Menu';
 import type { StoreMenuInfo } from './useMenuContext';
 
-interface MenuItemType extends VcMenuItemType {
+export interface MenuItemType extends VcMenuItemType {
   danger?: boolean;
   icon?: any;
   title?: string;
 }
 
-interface SubMenuType extends Omit<VcSubMenuType, 'children'> {
+export interface SubMenuType extends Omit<VcSubMenuType, 'children'> {
   icon?: any;
   theme?: 'dark' | 'light';
   children: ItemType[];
 }
 
-interface MenuItemGroupType extends Omit<VcMenuItemGroupType, 'children'> {
+export interface MenuItemGroupType extends Omit<VcMenuItemGroupType, 'children'> {
   children?: MenuItemType[];
   key?: Key;
 }
 
-interface MenuDividerType extends VcMenuDividerType {
+export interface MenuDividerType extends VcMenuDividerType {
   dashed?: boolean;
   key?: Key;
 }

@@ -41,6 +41,8 @@ import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInte
 import collapseMotion from '../../_util/collapseMotion';
 import type { ItemType } from './hooks/useItems';
 import useItems from './hooks/useItems';
+import useStyle from '../style';
+import { useInjectOverride } from './OverrideContext';
 
 export const menuProps = () => ({
   id: String,
@@ -95,7 +97,17 @@ export default defineComponent({
   props: menuProps(),
   slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit, attrs }) {
-    const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);
+    const { direction, getPrefixCls } = useConfigInject('menu', props);
+    const override = useInjectOverride();
+    const prefixCls = computed(() => {
+      return getPrefixCls('menu', props.prefixCls || override?.prefixCls?.value);
+    });
+    const [wrapSSR, hashId] = useStyle(
+      prefixCls,
+      computed(() => {
+        return !override;
+      }),
+    );
     const store = shallowRef<Map<string, StoreMenuInfo>>(new Map());
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
@@ -265,6 +277,9 @@ export default defineComponent({
         mergedMode.value = props.mode;
         mergedInlineCollapsed.value = false;
       }
+      if (override?.mode?.value) {
+        mergedMode.value = override.mode.value;
+      }
     });
 
     const isInlineMode = computed(() => mergedMode.value === 'inline');
@@ -346,6 +361,7 @@ export default defineComponent({
     const onInternalClick = (info: MenuInfo) => {
       emit('click', info);
       triggerSelection(info);
+      override?.onClick?.();
     };
 
     const onInternalOpenChange = (key: Key, open: boolean) => {
@@ -406,7 +422,7 @@ export default defineComponent({
       triggerSubMenuAction: computed(() => props.triggerSubMenuAction),
       getPopupContainer: computed(() => props.getPopupContainer),
       inlineCollapsed: mergedInlineCollapsed,
-      antdMenuTheme: computed(() => props.theme),
+      theme: computed(() => props.theme),
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions.value : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
@@ -419,7 +435,7 @@ export default defineComponent({
       isRootMenu: ref(true),
       expandIcon,
       forceSubMenuRender: computed(() => props.forceSubMenuRender),
-      rootClassName: computed(() => ''),
+      rootClassName: hashId,
     });
     return () => {
       const childList = itemsNodes.value || flattenChildren(slots.default?.());
@@ -442,14 +458,14 @@ export default defineComponent({
             ));
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
-      return (
+      return wrapSSR(
         <Overflow
           {...attrs}
           onMousedown={props.onMousedown}
           prefixCls={`${prefixCls.value}-overflow`}
           component="ul"
           itemComponent={MenuItem}
-          class={[className.value, attrs.class]}
+          class={[className.value, attrs.class, hashId.value]}
           role="menu"
           id={props.id}
           data={wrappedChildList}
@@ -499,7 +515,7 @@ export default defineComponent({
               <PathContext>{wrappedChildList}</PathContext>
             </div>
           </Teleport>
-        </Overflow>
+        </Overflow>,
       );
     };
   },

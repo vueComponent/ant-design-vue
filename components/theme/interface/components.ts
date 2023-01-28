@@ -20,7 +20,7 @@ import type { ComponentToken as DividerComponentToken } from '../../divider/styl
 // import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
 // import type { ComponentToken as ListComponentToken } from '../../list/style';
 // import type { ComponentToken as MentionsComponentToken } from '../../mentions/style';
-// import type { ComponentToken as MenuComponentToken } from '../../menu/style';
+import type { ComponentToken as MenuComponentToken } from '../../menu/style';
 import type { ComponentToken as MessageComponentToken } from '../../message/style';
 import type { ComponentToken as ModalComponentToken } from '../../modal/style';
 import type { ComponentToken as NotificationComponentToken } from '../../notification/style';
@@ -102,7 +102,7 @@ export interface ComponentTokenMap {
   //   Tabs?: TabsComponentToken;
   //   Calendar?: CalendarComponentToken;
   //   Steps?: StepsComponentToken;
-  //   Menu?: MenuComponentToken;
+  Menu?: MenuComponentToken;
   Modal?: ModalComponentToken;
   Message?: MessageComponentToken;
   //   Upload?: UploadComponentToken;

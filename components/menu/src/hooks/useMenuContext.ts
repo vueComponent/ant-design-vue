@@ -31,7 +31,7 @@ export interface MenuContextProps {
   rtl?: ComputedRef<boolean>;
 
   inlineCollapsed: Ref<boolean>;
-  antdMenuTheme?: ComputedRef<MenuTheme>;
+  theme?: ComputedRef<MenuTheme>;
 
   siderCollapsed?: ComputedRef<boolean>;
 

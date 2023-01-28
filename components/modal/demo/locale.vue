@@ -20,13 +20,7 @@ To customize the text of the buttons, you need to set `okText` and `cancelText` 
   <div>
     <a-button type="primary" @click="showModal">Modal</a-button>
     <a-button @click="confirm">Confirm</a-button>
-    <a-modal
-      v-model:visible="visible"
-      title="Modal"
-      ok-text="确认"
-      cancel-text="取消"
-      @ok="hideModal"
-    >
+    <a-modal v-model:open="open" title="Modal" ok-text="确认" cancel-text="取消" @ok="hideModal">
       <p>Bla bla ...</p>
       <p>Bla bla ...</p>
       <p>Bla bla ...</p>
@@ -39,13 +33,13 @@ import { defineComponent, ref, createVNode } from 'vue';
 import { Modal } from 'ant-design-vue';
 export default defineComponent({
   setup() {
-    const visible = ref<boolean>(false);
+    const open = ref<boolean>(false);
 
     const showModal = () => {
-      visible.value = true;
+      open.value = true;
     };
     const hideModal = () => {
-      visible.value = false;
+      open.value = false;
     };
 
     const confirm = () => {
@@ -59,7 +53,7 @@ export default defineComponent({
     };
 
     return {
-      visible,
+      open,
       showModal,
       hideModal,
       confirm,

@@ -40,7 +40,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3StSdUlSH/Modal.svg
 | okText | 确认按钮文字 | string\|slot | 确定 |  |
 | okType | 确认按钮类型 | string | primary |  |
 | title | 标题 | string\|slot | 无 |  |
-| visible(v-model) | 对话框是否可见 | boolean | 无 |  |
+| open(v-model) | 对话框是否可见 | boolean | 无 |  |
 | width | 宽度 | string\|number | 520 |  |
 | wrapClassName | 对话框外层容器的类名 | string | - |  |
 | zIndex | 设置 Modal 的 `z-index` | number | 1000 |  |
@@ -78,6 +78,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3StSdUlSH/Modal.svg
 | class | 容器类名 | string | - |  |
 | closable | 是否显示右上角的关闭按钮 | boolean | `false` |  |
 | content | 内容 | string \|VNode \|function(h) | 无 |  |
+| footer | 底部内容，当不需要默认底部按钮时，可以设为 `footer: null` | string \|VNode \|function(h) | - | 4.0.0 |
 | icon | 自定义图标（1.14.0 新增） | VNode \| ()=>VNode | - |  |
 | keyboard | 是否支持键盘 esc 关闭 | boolean | true |  |
 | mask | 是否展示遮罩 | boolean | true |  |
@@ -120,7 +121,7 @@ router.beforeEach((to, from, next) => {
 
 ## FAQ
 
-### 为什么 Modal 方法不能获取 全局注册组件、context、vuex 等内容和 ConfigProvider `locale/prefixCls` 配置， 以及不能响应式更新数据 ？
+### 为什么 Modal 方法不能获取 全局注册组件、context、vuex 等内容和 ConfigProvider `locale/prefixCls/theme` 配置， 以及不能响应式更新数据 ？
 
 直接调用 Modal 方法，组件会通过 `Vue.render` 动态创建新的 Vue 实体。其 context 与当前代码所在 context 并不相同，因而无法获取 context 信息。
 

@@ -16,8 +16,12 @@ import { objectType } from '../_util/type';
 import { canUseDocElement } from '../_util/styleChecker';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { getTransitionName } from '../_util/transition';
+import warning from '../_util/warning';
+import useStyle from './style';
 
-let mousePosition: { x: number; y: number } | null = null;
+type MousePosition = { x: number; y: number } | null;
+
+let mousePosition: MousePosition;
 // ref: https://github.com/ant-design/ant-design/issues/15795
 const getClickPosition = (e: MouseEvent) => {
   mousePosition = {
@@ -37,7 +41,9 @@ if (canUseDocElement()) {
 
 export const modalProps = () => ({
   prefixCls: String,
+  /** @deprecated Please use `open` instead. */
   visible: { type: Boolean, default: undefined },
+  open: { type: Boolean, default: undefined },
   confirmLoading: { type: Boolean, default: undefined },
   title: PropTypes.any,
   closable: { type: Boolean, default: undefined },
@@ -76,6 +82,7 @@ export const modalProps = () => ({
   wrapProps: Object,
   focusTriggerAfterClose: { type: Boolean, default: undefined },
   modalRender: Function as PropType<(arg: { originVNode: VueNode }) => VueNode>,
+  mousePosition: objectType<MousePosition>(),
 });
 
 export type ModalProps = Partial<ExtractPropTypes<ReturnType<typeof modalProps>>>;
@@ -83,8 +90,9 @@ export type ModalProps = Partial<ExtractPropTypes<ReturnType<typeof modalProps>>
 export interface ModalFuncProps {
   prefixCls?: string;
   class?: string;
-  visible?: boolean;
+  open?: boolean;
   title?: string | (() => VueNode) | VueNode;
+  footer?: string | (() => VueNode) | VueNode;
   closable?: boolean;
   content?: string | (() => VueNode) | VueNode;
   // TODO: find out exact types
@@ -123,6 +131,9 @@ export interface ModalFuncProps {
   /** @deprecated please use `appContext` instead */
   parentContext?: any;
   appContext?: any;
+
+  /** @deprecated please use `open` instead */
+  visible?: boolean;
 }
 
 type getContainerFunc = () => HTMLElement;
@@ -149,7 +160,6 @@ export default defineComponent({
     transitionName: 'zoom',
     maskTransitionName: 'fade',
     confirmLoading: false,
-    visible: false,
     okType: 'primary',
   }),
   setup(props, { emit, slots, attrs }) {
@@ -158,9 +168,15 @@ export default defineComponent({
       'modal',
       props,
     );
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    warning(
+      props.visible === undefined,
+      'Modal',
+      `\`visible\` will be removed in next major version, please use \`open\` instead.`,
+    );
     const handleCancel = (e: MouseEvent) => {
       emit('update:visible', false);
+      emit('update:open', false);
       emit('cancel', e);
       emit('change', false);
     };
@@ -196,6 +212,7 @@ export default defineComponent({
       const {
         prefixCls: customizePrefixCls,
         visible,
+        open,
         wrapClassName,
         centered,
         getContainer,
@@ -208,15 +225,16 @@ export default defineComponent({
         [`${prefixCls.value}-centered`]: !!centered,
         [`${prefixCls.value}-wrap-rtl`]: direction.value === 'rtl',
       });
-      return (
+      return wrapSSR(
         <Dialog
           {...restProps}
           {...attrs}
+          rootClassName={hashId.value}
+          class={classNames(hashId.value, attrs.class)}
           getContainer={getContainer || getPopupContainer.value}
           prefixCls={prefixCls.value}
           wrapClassName={wrapClassNameExtended}
-          visible={visible}
-          mousePosition={mousePosition}
+          visible={open ?? visible}
           onClose={handleCancel}
           focusTriggerAfterClose={focusTriggerAfterClose}
           transitionName={getTransitionName(rootPrefixCls.value, 'zoom', props.transitionName)}
@@ -225,6 +243,7 @@ export default defineComponent({
             'fade',
             props.maskTransitionName,
           )}
+          mousePosition={restProps.mousePosition ?? mousePosition}
           v-slots={{
             ...slots,
             footer: slots.footer || renderFooter,
@@ -236,7 +255,7 @@ export default defineComponent({
               );
             },
           }}
-        ></Dialog>
+        ></Dialog>,
       );
     };
   },

@@ -6,6 +6,7 @@ import type { LegacyButtonType } from '../button/buttonTypes';
 import { convertLegacyProps } from '../button/buttonTypes';
 import useDestroyed from './hooks/useDestroyed';
 import { objectType } from './type';
+import { findDOMNode } from './props-util';
 
 const actionButtonProps = {
   type: {
@@ -38,7 +39,7 @@ export default defineComponent({
     const isDestroyed = useDestroyed();
     onMounted(() => {
       if (props.autofocus) {
-        timeoutId = setTimeout(() => buttonRef.value.$el?.focus());
+        timeoutId = setTimeout(() => findDOMNode(buttonRef.value)?.focus?.());
       }
     });
     onBeforeUnmount(() => {

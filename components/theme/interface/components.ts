@@ -22,7 +22,7 @@ import type { ComponentToken as DividerComponentToken } from '../../divider/styl
 // import type { ComponentToken as MentionsComponentToken } from '../../mentions/style';
 // import type { ComponentToken as MenuComponentToken } from '../../menu/style';
 import type { ComponentToken as MessageComponentToken } from '../../message/style';
-// import type { ComponentToken as ModalComponentToken } from '../../modal/style';
+import type { ComponentToken as ModalComponentToken } from '../../modal/style';
 import type { ComponentToken as NotificationComponentToken } from '../../notification/style';
 // import type { ComponentToken as PopconfirmComponentToken } from '../../popconfirm/style';
 // import type { ComponentToken as PopoverComponentToken } from '../../popover/style';
@@ -103,7 +103,7 @@ export interface ComponentTokenMap {
   //   Calendar?: CalendarComponentToken;
   //   Steps?: StepsComponentToken;
   //   Menu?: MenuComponentToken;
-  //   Modal?: ModalComponentToken;
+  Modal?: ModalComponentToken;
   Message?: MessageComponentToken;
   //   Upload?: UploadComponentToken;
   //   Tooltip?: TooltipComponentToken;

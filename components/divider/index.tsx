@@ -3,6 +3,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useStyle from './style';
 
 export const dividerProps = () => ({
   prefixCls: String,
@@ -27,11 +28,13 @@ export const dividerProps = () => ({
 export type DividerProps = Partial<ExtractPropTypes<ReturnType<typeof dividerProps>>>;
 
 const Divider = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ADivider',
+  inheritAttrs: false,
+  compatConfig: { MODE: 3 },
   props: dividerProps(),
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls: prefixClsRef, direction } = useConfigInject('divider', props);
+    const [wrapSSR, hashId] = useStyle(prefixClsRef);
     const hasCustomMarginLeft = computed(
       () => props.orientation === 'left' && props.orientationMargin != null,
     );
@@ -43,6 +46,7 @@ const Divider = defineComponent({
       const prefixCls = prefixClsRef.value;
       return {
         [prefixCls]: true,
+        [hashId.value]: true,
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-dashed`]: !!dashed,
         [`${prefixCls}-plain`]: !!plain,
@@ -67,8 +71,9 @@ const Divider = defineComponent({
 
     return () => {
       const children = flattenChildren(slots.default?.());
-      return (
+      return wrapSSR(
         <div
+          {...attrs}
           class={[
             classString.value,
             children.length
@@ -82,7 +87,7 @@ const Divider = defineComponent({
               {children}
             </span>
           ) : null}
-        </div>
+        </div>,
       );
     };
   },

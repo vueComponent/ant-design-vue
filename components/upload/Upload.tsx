@@ -12,7 +12,7 @@ import type {
 import { uploadProps } from './interface';
 import { file2Obj, getFileItem, removeFileItem, updateFileList } from './utils';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale/default';
+import defaultLocale from '../locale/en_US';
 import type { CSSProperties } from 'vue';
 import { computed, defineComponent, onMounted, ref, toRef } from 'vue';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';

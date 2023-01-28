@@ -11,7 +11,7 @@ import type { MaybeRef } from '../_util/type';
 import message from '../message';
 import notification from '../notification';
 import { registerTheme } from './cssVariables';
-import defaultLocale from '../locale/default';
+import defaultLocale from '../locale/en_US';
 import type { ValidateMessages } from '../form/interface';
 import useStyle from './style';
 import useTheme from './hooks/useTheme';

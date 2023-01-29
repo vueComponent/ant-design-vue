@@ -79,6 +79,7 @@ const Divider = defineComponent({
             children.length
               ? `${prefixClsRef.value}-with-text ${prefixClsRef.value}-with-text${orientationPrefix.value}`
               : '',
+            attrs.class,
           ]}
           role="separator"
         >

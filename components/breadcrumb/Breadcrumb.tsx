@@ -152,8 +152,10 @@ export default defineComponent({
       const breadcrumbClassName = {
         [prefixCls.value]: true,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${attrs.class}`]: !!attrs.class,
         [hashId.value]: true,
       };
+
       return wrapSSR(
         <nav {...attrs} class={breadcrumbClassName}>
           <ol>{crumbs}</ol>

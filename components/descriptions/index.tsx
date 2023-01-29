@@ -162,10 +162,11 @@ export const descriptionsContext: InjectionKey<DescriptionsContextProp> =
 const Descriptions = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ADescriptions',
+  inheritAttrs: false,
   props: descriptionsProps(),
   slots: ['title', 'extra'],
   Item: DescriptionsItem,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('descriptions', props);
     let token: number;
     const screens = ref<ScreenMap>({});
@@ -208,6 +209,7 @@ const Descriptions = defineComponent({
 
       return wrapSSR(
         <div
+          {...attrs}
           class={[
             prefixCls.value,
             {
@@ -215,6 +217,7 @@ const Descriptions = defineComponent({
               [`${prefixCls.value}-bordered`]: !!bordered,
               [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
             },
+            attrs.class,
             hashId.value,
           ]}
         >

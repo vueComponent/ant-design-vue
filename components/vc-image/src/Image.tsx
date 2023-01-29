@@ -187,7 +187,9 @@ const ImageInternal = defineComponent({
         { flush: 'post', immediate: true },
       );
     });
-    onUnmounted(unRegister);
+    onUnmounted(() => {
+      unRegister();
+    });
     const toSizePx = (l: number | string) => {
       if (isNumber(l)) return l + 'px';
       return l;

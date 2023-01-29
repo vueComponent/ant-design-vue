@@ -59,8 +59,8 @@ Select component to select value from options.
 | placeholder | Placeholder of select | string\|slot | - |  |
 | removeIcon | The custom remove icon | VNode \| slot | - |  |
 | searchValue | The current input "search" text | string | - |  |
-| showArrow | Whether to show the drop-down arrow | boolean | true |  |
-| showSearch | Whether show search input in single mode. | boolean | false |  |
+| showArrow | Whether to show the drop-down arrow | boolean | single:true, multiple:false |  |
+| showSearch | Whether select is searchable | boolean | single:false, multiple:true |  |
 | size | Size of Select input. `default` `large` `small` | string | default |  |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |
 | tagRender | Customize tag render, only applies when `mode` is set to `multiple` or `tags` | slot \| (props) => any | - |  |

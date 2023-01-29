@@ -13,7 +13,7 @@ import {
   convertTreeToData,
   fillFieldNames,
 } from '../vc-tree/utils/treeUtil';
-import type { DataNode, EventDataNode, Key } from '../vc-tree/interface';
+import type { DataNode, EventDataNode, Key, ScrollTo } from '../vc-tree/interface';
 import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -81,7 +81,11 @@ export default defineComponent({
     const cachedSelectedKeys = ref<Key[]>();
     const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const treeRef = ref();
+    const scrollTo: ScrollTo = scroll => {
+      treeRef.value?.scrollTo(scroll);
+    };
     expose({
+      scrollTo,
       selectedKeys: computed(() => treeRef.value?.selectedKeys),
       checkedKeys: computed(() => treeRef.value?.checkedKeys),
       halfCheckedKeys: computed(() => treeRef.value?.halfCheckedKeys),

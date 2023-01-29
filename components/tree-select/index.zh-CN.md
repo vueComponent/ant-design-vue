@@ -24,7 +24,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | dropdownClassName | 下拉菜单的 className 属性 | string | - |  |  |
 | dropdownMatchSelectWidth | 下拉菜单和选择器同宽。默认将设置 `min-width`，当值小于选择框宽度时会被忽略。false 时会关闭虚拟滚动 | boolean \| number | true |  |  |
 | dropdownStyle | 下拉菜单的样式 | object | - |  |  |
-| fieldNames | 替换 treeNode 中 title,value,key,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', value: 'value' } |  | 3.0.0 |
+| fieldNames | 替换 treeNode 中 label,value,key,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', value: 'value' } |  | 3.0.0 |
 | filterTreeNode | 是否根据输入项进行筛选，默认用 treeNodeFilterProp 的值作为要筛选的 TreeNode 的属性值 | boolean\|Function(inputValue: string, treeNode: TreeNode) (函数需要返回 bool 值) | Function |  |  |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |  |  |
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 value 类型从 `string` 变为 `{value: string, label: VNode, halfChecked(treeCheckStrictly 时有效): string[] }` 的格式 | boolean | false |  |  |
@@ -35,7 +35,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | multiple | 支持多选（当设置 treeCheckable 时自动变为 true） | boolean | false |  |  |
 | notFoundContent | 当下拉列表为空时显示的内容 | slot | `Not Found` |  |  |
 | placeholder | 选择框默认文字 | string\|slot | - |  |  |
-| replaceFields | 替换 treeNode 中 title,value,key,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 1.6.1 (3.0.0 废弃) |
+| replaceFields | 替换 treeNode 中 label,value,key,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 1.6.1 (3.0.0 废弃) |
 | searchPlaceholder | 搜索框默认文字 | string\|slot | - |  |  |
 | searchValue(v-model) | 搜索框的值，可以通过 `search` 事件获取用户输入 | string | - |  |  |
 | showCheckedStrategy | 定义选中项回填的方式。`TreeSelect.SHOW_ALL`: 显示所有选中节点(包括父节点). `TreeSelect.SHOW_PARENT`: 只显示父节点(当父节点下所有子节点都选中时). 默认只显示子节点. | enum{TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |  |  |

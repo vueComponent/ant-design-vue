@@ -28,9 +28,9 @@ export type VueAttribute = {
 
 export type VueTag = {
   name: string;
-  slots?: VueSlot[];
-  events?: VueEvent[];
-  attributes?: VueAttribute[];
+  slots: VueSlot[];
+  events: VueEvent[];
+  attributes: VueAttribute[];
   description?: string;
 };
 
@@ -56,6 +56,7 @@ export type VeturResult = {
 export type Options = {
   name: string;
   path: PathLike;
+  typingsPath: PathLike;
   test: RegExp;
   version: string;
   outputDir?: string;

@@ -34,14 +34,19 @@ function parserProps(tag: VueTag, line: any) {
   });
 }
 
-export function formatter(articals: Articals, componentName: string, tagPrefix = '') {
+export function formatter(
+  articals: Articals,
+  componentName: string,
+  kebabComponentName: string,
+  tagPrefix = '',
+) {
   if (!articals.length) {
     return;
   }
 
   const tags: VueTag[] = [];
   const tag: VueTag = {
-    name: getComponentName(componentName, tagPrefix),
+    name: kebabComponentName,
     slots: [],
     events: [],
     attributes: [],
@@ -80,9 +85,13 @@ export function formatter(articals: Articals, componentName: string, tagPrefix =
     }
 
     // 额外的子组件
-    if (tableTitle.includes(componentName) && !tableTitle.includes('events')) {
+    if (
+      tableTitle.includes(componentName) &&
+      !tableTitle.includes('events') &&
+      !tableTitle.includes('()')
+    ) {
       const childTag: VueTag = {
-        name: getComponentName(tableTitle.replace('.', ''), tagPrefix),
+        name: getComponentName(tableTitle.replaceAll('.', '').replaceAll('/', ''), tagPrefix),
         slots: [],
         events: [],
         attributes: [],
@@ -93,6 +102,7 @@ export function formatter(articals: Articals, componentName: string, tagPrefix =
       tags.push(childTag);
       return;
     }
+
     // 额外的子组件事件
     if (tableTitle.includes(componentName) && tableTitle.includes('events')) {
       const childTagName = getComponentName(

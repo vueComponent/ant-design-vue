@@ -1,6 +1,6 @@
 // myName -> my-name
-export function toKebabCase(input: string): string {
-  return input.replace(/[A-Z]/g, (val, index) => (index === 0 ? '' : '-') + val.toLowerCase());
+export function toKebabCase(camel: string): string {
+  return camel.replace(/((?<=[a-z\d])[A-Z]|(?<=[A-Z\d])[A-Z](?=[a-z]))/g, '-$1').toLowerCase();
 }
 
 // name `v2.0.0` -> name

@@ -111,7 +111,7 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-#components-a-tooltip-demo-placement .ant-btn {
+:deep(#components-a-tooltip-demo-placement) .ant-btn {
   width: 70px;
   text-align: center;
   padding: 0;

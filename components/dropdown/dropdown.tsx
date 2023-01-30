@@ -10,7 +10,7 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import omit from '../_util/omit';
-import getPlacements from '../tooltip/placements';
+import getPlacements from '../_util/placements';
 
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 

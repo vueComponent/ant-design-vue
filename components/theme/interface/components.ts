@@ -41,7 +41,7 @@ import type { ComponentToken as NotificationComponentToken } from '../../notific
 // import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
 // import type { ComponentToken as TagComponentToken } from '../../tag/style';
 // import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
-// import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
+import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
 // import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
 // import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
 // import type { ComponentToken as UploadComponentToken } from '../../upload/style';
@@ -106,7 +106,7 @@ export interface ComponentTokenMap {
   Modal?: ModalComponentToken;
   Message?: MessageComponentToken;
   //   Upload?: UploadComponentToken;
-  //   Tooltip?: TooltipComponentToken;
+  Tooltip?: TooltipComponentToken;
   //   Table?: TableComponentToken;
   //   Space?: SpaceComponentToken;
   //   Progress?: ProgressComponentToken;

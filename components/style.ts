@@ -10,7 +10,7 @@ import './pagination/style';
 // import './badge/style';
 import './tabs/style';
 import './input/style';
-import './tooltip/style';
+// import './tooltip/style';
 import './popover/style';
 import './popconfirm/style';
 // import './menu/style';

@@ -62,7 +62,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-#components-a-tooltip-demo-color .ant-btn {
+:deep(#components-a-tooltip-demo-color) .ant-btn {
   margin-right: 8px;
   margin-bottom: 8px;
 }

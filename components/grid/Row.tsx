@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, CSSProperties, PropType, ComputedRef, Ref } from 'vue';
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import classNames from '../_util/classNames';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
@@ -34,8 +34,8 @@ export interface rowContextState {
 }
 
 export const rowProps = () => ({
-  align: String as PropType<(typeof RowAligns)[number] | ResponsiveAligns>,
-  justify: String as PropType<(typeof RowJustify)[number] | ResponsiveJustify>,
+  align: [String, Object] as PropType<(typeof RowAligns)[number] | ResponsiveAligns>,
+  justify: [String, Object] as PropType<(typeof RowJustify)[number] | ResponsiveJustify>,
   prefixCls: String,
   gutter: {
     type: [Number, Array, Object] as PropType<Gutter | [Gutter, Gutter]>,
@@ -69,33 +69,46 @@ const ARow = defineComponent({
       xxxl: true,
     });
 
-    const mergePropsByScreen = (prop: 'align' | 'justify') => {
+    const curScreens = ref<ScreenMap>({
+      xs: false,
+      sm: false,
+      md: false,
+      lg: false,
+      xl: false,
+      xxl: false,
+      xxxl: false,
+    });
+
+    const mergePropsByScreen = (oriProp: 'align' | 'justify') => {
       return computed(() => {
-        if (typeof props[prop] === 'string') {
-          return props[prop];
+        if (typeof props[oriProp] === 'string') {
+          return props[oriProp];
         }
-        if (typeof props[prop] !== 'object') {
+        if (typeof props[oriProp] !== 'object') {
           return '';
         }
 
         for (let i = 0; i < responsiveArray.length; i++) {
           const breakpoint: Breakpoint = responsiveArray[i];
           // if do not match, do nothing
-          if (!screen[breakpoint]) continue;
-          const curVal = props[prop][breakpoint];
+          if (!curScreens.value[breakpoint]) continue;
+          const curVal = props[oriProp][breakpoint];
           if (curVal !== undefined) {
             return curVal;
           }
         }
+        return '';
       });
     };
 
     const mergeAlign = mergePropsByScreen('align');
     const mergeJustify = mergePropsByScreen('justify');
+
     const supportFlexGap = useFlexGapSupport();
 
     onMounted(() => {
       token = responsiveObserve.value.subscribe(screen => {
+        curScreens.value = screen;
         const currentGutter = props.gutter || 0;
         if (
           (!Array.isArray(currentGutter) && typeof currentGutter === 'object') ||

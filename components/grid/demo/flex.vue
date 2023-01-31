@@ -71,7 +71,7 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
 </template>
 
 <style lang="less" scoped>
-#components-grid-demo-flex :deep(.ant-row) {
+:deep(#components-grid-demo-flex) [class~='ant-row'] {
   background: rgba(128, 128, 128, 0.08);
 }
 </style>

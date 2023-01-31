@@ -22,6 +22,9 @@ You can create a basic grid system by using a single set of `Row` and `Col` grid
 
 <template>
   <a-row>
+    <a-col :span="24">col</a-col>
+  </a-row>
+  <a-row>
     <a-col :span="12">col-12</a-col>
     <a-col :span="12">col-12</a-col>
   </a-row>

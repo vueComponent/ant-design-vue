@@ -1,26 +1,41 @@
 import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import classNames from '../_util/classNames';
-import { tuple } from '../_util/type';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
 import useResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';
+import { useRowStyle } from './style';
 
-const RowAligns = tuple('top', 'middle', 'bottom', 'stretch');
-const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between', 'space-evenly');
+const RowAligns = ['top', 'middle', 'bottom', 'stretch'] as const;
+const RowJustify = [
+  'start',
+  'end',
+  'center',
+  'space-around',
+  'space-between',
+  'space-evenly',
+] as const;
+
+type Responsive = 'xxxl' | 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+type ResponsiveLike<T> = {
+  [key in Responsive]?: T;
+};
 
 type Gap = number | undefined;
 export type Gutter = number | undefined | Partial<Record<Breakpoint, number>>;
+
+type ResponsiveAligns = ResponsiveLike<(typeof RowAligns)[number]>;
+type ResponsiveJustify = ResponsiveLike<(typeof RowJustify)[number]>;
 
 export interface rowContextState {
   gutter?: [number, number];
 }
 
 export const rowProps = () => ({
-  align: String as PropType<(typeof RowAligns)[number]>,
-  justify: String as PropType<(typeof RowJustify)[number]>,
+  align: [String, Object] as PropType<(typeof RowAligns)[number] | ResponsiveAligns>,
+  justify: [String, Object] as PropType<(typeof RowJustify)[number] | ResponsiveJustify>,
   prefixCls: String,
   gutter: {
     type: [Number, Array, Object] as PropType<Gutter | [Gutter, Gutter]>,
@@ -35,8 +50,10 @@ const ARow = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ARow',
   props: rowProps(),
-  setup(props, { slots }) {
+  inheritAttrs: false,
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('row', props);
+    const [wrapSSR, hashId] = useRowStyle(prefixCls);
 
     let token: number;
 
@@ -52,10 +69,46 @@ const ARow = defineComponent({
       xxxl: true,
     });
 
+    const curScreens = ref<ScreenMap>({
+      xs: false,
+      sm: false,
+      md: false,
+      lg: false,
+      xl: false,
+      xxl: false,
+      xxxl: false,
+    });
+
+    const mergePropsByScreen = (oriProp: 'align' | 'justify') => {
+      return computed(() => {
+        if (typeof props[oriProp] === 'string') {
+          return props[oriProp];
+        }
+        if (typeof props[oriProp] !== 'object') {
+          return '';
+        }
+
+        for (let i = 0; i < responsiveArray.length; i++) {
+          const breakpoint: Breakpoint = responsiveArray[i];
+          // if do not match, do nothing
+          if (!curScreens.value[breakpoint]) continue;
+          const curVal = props[oriProp][breakpoint];
+          if (curVal !== undefined) {
+            return curVal;
+          }
+        }
+        return '';
+      });
+    };
+
+    const mergeAlign = mergePropsByScreen('align');
+    const mergeJustify = mergePropsByScreen('justify');
+
     const supportFlexGap = useFlexGapSupport();
 
     onMounted(() => {
       token = responsiveObserve.value.subscribe(screen => {
+        curScreens.value = screen;
         const currentGutter = props.gutter || 0;
         if (
           (!Array.isArray(currentGutter) && typeof currentGutter === 'object') ||
@@ -98,12 +151,17 @@ const ARow = defineComponent({
     });
 
     const classes = computed(() =>
-      classNames(prefixCls.value, {
-        [`${prefixCls.value}-no-wrap`]: props.wrap === false,
-        [`${prefixCls.value}-${props.justify}`]: props.justify,
-        [`${prefixCls.value}-${props.align}`]: props.align,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-      }),
+      classNames(
+        prefixCls.value,
+        {
+          [`${prefixCls.value}-no-wrap`]: props.wrap === false,
+          [`${prefixCls.value}-${mergeJustify.value}`]: mergeJustify.value,
+          [`${prefixCls.value}-${mergeAlign.value}`]: mergeAlign.value,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        attrs.class,
+        hashId.value,
+      ),
     );
 
     const rowStyle = computed(() => {
@@ -128,13 +186,16 @@ const ARow = defineComponent({
       return style;
     });
 
-    return () => {
-      return (
-        <div class={classes.value} style={rowStyle.value}>
+    return () =>
+      wrapSSR(
+        <div
+          {...attrs}
+          class={classes.value}
+          style={{ ...rowStyle.value, ...(attrs.style as CSSProperties) }}
+        >
           {slots.default?.()}
-        </div>
+        </div>,
       );
-    };
   },
 });
 

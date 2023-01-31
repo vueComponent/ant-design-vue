@@ -66,6 +66,16 @@ A simple playground for column count and gutter.
         <div>Column</div>
       </a-col>
     </a-row>
+    Another Row:
+    <a-row :gutter="[gutters[gutterKey], vgutters[vgutterKey]]">
+      <a-col
+        v-for="item in colCounts[colCountKey]"
+        :key="item.toString()"
+        :span="24 / colCounts[colCountKey]"
+      >
+        <div>Column</div>
+      </a-col>
+    </a-row>
     <pre>{{ rowColHtml }}</pre>
     <br />
     <pre>{{ rowColHtml }}</pre>
@@ -140,12 +150,5 @@ export default defineComponent({
 }
 #components-grid-demo-playground .ant-col {
   padding: 0;
-}
-.code-box-demo #components-grid-demo-playground .ant-row > div {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-[data-theme='dark'] #components-grid-demo-playground [class~='ant-col'] > div {
-  background: #028ac8;
 }
 </style>

@@ -2,6 +2,9 @@
 
 exports[`renders ./components/grid/demo/basic.vue correctly 1`] = `
 <div class="ant-row">
+  <div class="ant-col ant-col-24">col</div>
+</div>
+<div class="ant-row">
   <div class="ant-col ant-col-12">col-12</div>
   <div class="ant-col ant-col-12">col-12</div>
 </div>
@@ -20,36 +23,43 @@ exports[`renders ./components/grid/demo/basic.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex.vue correctly 1`] = `
 <div id="components-grid-demo-flex">
-  <p>sub-element align left</p>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">sub-element align left</span></div>
   <div class="ant-row ant-row-start">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
-  <p>sub-element align center</p>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">sub-element align center</span></div>
   <div class="ant-row ant-row-center">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
-  <p>sub-element align right</p>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">sub-element align right</span></div>
   <div class="ant-row ant-row-end">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
-  <p>sub-element monospaced arrangement</p>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">sub-element monospaced arrangement</span></div>
   <div class="ant-row ant-row-space-between">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
-  <p>sub-element align full</p>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">sub-element align full</span></div>
   <div class="ant-row ant-row-space-around">
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+    <div class="ant-col ant-col-4">col-4</div>
+  </div>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">sub-element align full</span></div>
+  <div class="ant-row ant-row-space-evenly">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
@@ -60,7 +70,7 @@ exports[`renders ./components/grid/demo/flex.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
 <p>Align Top</p>
-<div class="ant-row ant-row-center ant-row-top" type="flex">
+<div class="ant-row ant-row-center ant-row-top">
   <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
@@ -75,7 +85,7 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
   </div>
 </div>
 <p>Align Center</p>
-<div class="ant-row ant-row-space-around ant-row-middle" type="flex">
+<div class="ant-row ant-row-space-around ant-row-middle">
   <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
@@ -90,7 +100,7 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
   </div>
 </div>
 <p>Align Bottom</p>
-<div class="ant-row ant-row-space-between ant-row-bottom" type="flex">
+<div class="ant-row ant-row-space-between ant-row-bottom">
   <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
@@ -108,14 +118,14 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-order.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Normal</span></div>
-<div class="ant-row" type="flex">
+<div class="ant-row">
   <div class="ant-col ant-col-6 ant-col-order-4">1 col-order-4</div>
   <div class="ant-col ant-col-6 ant-col-order-3">2 col-order-3</div>
   <div class="ant-col ant-col-6 ant-col-order-2">3 col-order-2</div>
   <div class="ant-col ant-col-6 ant-col-order-1">4 col-order-1</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Responsive</span></div>
-<div class="ant-row" type="flex">
+<div class="ant-row">
   <div class="ant-col ant-col-6 ant-col-xs-order-1 ant-col-sm-order-2 ant-col-md-order-3 ant-col-lg-order-4"> 1 col-order-responsive </div>
   <div class="ant-col ant-col-6 ant-col-xs-order-2 ant-col-sm-order-1 ant-col-md-order-4 ant-col-lg-order-3"> 2 col-order-responsive </div>
   <div class="ant-col ant-col-6 ant-col-xs-order-3 ant-col-sm-order-4 ant-col-md-order-2 ant-col-lg-order-2"> 3 col-order-responsive </div>
@@ -125,37 +135,84 @@ exports[`renders ./components/grid/demo/flex-order.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-stretch.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Percentage columns</span></div>
-<div class="ant-row" type="flex">
+<div class="ant-row">
   <div class="ant-col" style="flex: 2 2 auto;">2 / 5</div>
   <div class="ant-col" style="flex: 3 3 auto;">3 / 5</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Fill rest</span></div>
-<div class="ant-row" type="flex">
+<div class="ant-row">
   <div class="ant-col" style="flex: 0 0 100px;">100px</div>
   <div class="ant-col" style="flex-basis: auto;">auto</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Raw flex style</span></div>
-<div class="ant-row" type="flex">
+<div class="ant-row">
   <div class="ant-col" style="flex: 1 1 200px;">1 1 200px</div>
   <div class="ant-col" style="flex: 0 1 300px;">0 1 300px</div>
+</div>
+<div class="ant-row ant-row-no-wrap">
+  <div class="ant-col" style="flex: 0 0 auto;">
+    <div style="padding: 0px 16px;">none</div>
+  </div>
+  <div class="ant-col" style="flex-basis: auto; min-width: 0;">auto with no-wrap</div>
 </div>
 `;
 
 exports[`renders ./components/grid/demo/gutter.vue correctly 1`] = `
-<div class="gutter-example">
-  <div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
-    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
-      <div class="gutter-box">col-6</div>
-    </div>
-    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
-      <div class="gutter-box">col-6</div>
-    </div>
-    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
-      <div class="gutter-box">col-6</div>
-    </div>
-    <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
-      <div class="gutter-box">col-6</div>
-    </div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Horizontal</span></div>
+<div class="ant-row" style="margin-left: -8px; margin-right: -8px;">
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 8px; padding-right: 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+</div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Responsive</span></div>
+<div class="ant-row" style="margin-left: -16px; margin-right: -16px;">
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 16px; padding-right: 16px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 16px; padding-right: 16px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 16px; padding-right: 16px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding-left: 16px; padding-right: 16px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+</div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Vertical</span></div>
+<div class="ant-row" style="margin: -12px -8px -12px -8px;">
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
+  </div>
+  <div class="ant-col ant-col-6 gutter-row" style="padding: 12px 8px 12px 8px;">
+    <div class="gutter-box">col-6</div>
   </div>
 </div>
 `;
@@ -233,6 +290,19 @@ exports[`renders ./components/grid/demo/playfround.vue correctly 1`] = `
     <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
       <div>Column</div>
     </div>
+  </div> Another Row: <div class="ant-row" style="margin: -8px -8px -8px -8px;">
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+      <div>Column</div>
+    </div>
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+      <div>Column</div>
+    </div>
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+      <div>Column</div>
+    </div>
+    <div class="ant-col ant-col-6" style="padding: 8px 8px 8px 8px;">
+      <div>Column</div>
+    </div>
   </div><pre>&lt;a-row :gutter="[16,16]"&gt;
   &lt;a-col :span="6"/&gt;
   &lt;a-col :span="6"/&gt;
@@ -269,3 +339,5 @@ exports[`renders ./components/grid/demo/sort.vue correctly 1`] = `
   <div class="ant-col ant-col-6 ant-col-pull-18">col-6 col-pull-18</div>
 </div>
 `;
+
+exports[`renders ./components/grid/demo/use-breakpoint.vue correctly 1`] = `" Current break point:"`;

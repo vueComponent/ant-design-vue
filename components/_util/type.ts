@@ -50,3 +50,11 @@ export function eventType<T>() {
 export function objectType<T>(defaultVal?: any) {
   return { type: Object as PropType<T>, default: defaultVal as T };
 }
+
+export function booleanType<T>(defaultVal?: any) {
+  return { type: Boolean as PropType<T>, default: defaultVal as T };
+}
+
+export function someType<T>(types: any[], defaultVal?: any) {
+  return { type: types as PropType<T>, default: defaultVal as T };
+}

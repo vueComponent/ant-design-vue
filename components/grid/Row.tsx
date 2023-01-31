@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
 import { defineComponent, ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import classNames from '../_util/classNames';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
@@ -7,6 +7,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';
 import { useRowStyle } from './style';
+import { someType } from '../_util/type';
 
 const RowAligns = ['top', 'middle', 'bottom', 'stretch'] as const;
 const RowJustify = [
@@ -34,13 +35,10 @@ export interface rowContextState {
 }
 
 export const rowProps = () => ({
-  align: [String, Object] as PropType<(typeof RowAligns)[number] | ResponsiveAligns>,
-  justify: [String, Object] as PropType<(typeof RowJustify)[number] | ResponsiveJustify>,
+  align: someType<(typeof RowAligns)[number] | ResponsiveAligns>([String, Object]),
+  justify: someType<(typeof RowJustify)[number] | ResponsiveJustify>([String, Object]),
   prefixCls: String,
-  gutter: {
-    type: [Number, Array, Object] as PropType<Gutter | [Gutter, Gutter]>,
-    default: 0 as Gutter | [Gutter, Gutter],
-  },
+  gutter: someType<Gutter | [Gutter, Gutter]>([Number, Array, Object], 0),
   wrap: { type: Boolean, default: undefined },
 });
 
@@ -49,8 +47,8 @@ export type RowProps = Partial<ExtractPropTypes<ReturnType<typeof rowProps>>>;
 const ARow = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ARow',
-  props: rowProps(),
   inheritAttrs: false,
+  props: rowProps(),
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('row', props);
     const [wrapSSR, hashId] = useRowStyle(prefixCls);

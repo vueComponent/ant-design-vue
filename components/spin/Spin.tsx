@@ -1,5 +1,5 @@
 import type { VNode, ExtractPropTypes, PropType } from 'vue';
-import { cloneVNode, isVNode, defineComponent, nextTick, shallowRef, computed } from 'vue';
+import { cloneVNode, isVNode, defineComponent, shallowRef, watch } from 'vue';
 import debounce from 'lodash-es/debounce';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
@@ -45,8 +45,35 @@ export default defineComponent({
     const { prefixCls, size, direction } = useConfigInject('spin', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const children = slots.default?.();
-    const shouldBeDelayed = computed(() => shouldDelay(props.spinning, props.delay));
-    const sSpinning = shallowRef(props.spinning && shouldBeDelayed.value);
+    const sSpinning = shallowRef(props.spinning && shouldDelay(props.spinning, props.delay));
+    let updateSpinning: any;
+    function originalUpdateSpinning() {
+      if (sSpinning.value !== props.spinning) {
+        sSpinning.value = props.spinning;
+      }
+    }
+    function cancelExistingSpin() {
+      if (updateSpinning && updateSpinning.cancel) {
+        updateSpinning.cancel();
+      }
+    }
+    function debouncifyUpdateSpinning() {
+      const { delay } = props;
+      if (delay) {
+        cancelExistingSpin();
+        updateSpinning = debounce(originalUpdateSpinning, delay);
+      } else {
+        updateSpinning = originalUpdateSpinning;
+      }
+    }
+    watch(
+      () => [props.spinning, props.delay],
+      () => {
+        debouncifyUpdateSpinning();
+        updateSpinning?.();
+      },
+      { immediate: true },
+    );
     return () => {
       const { class: cls, ...divProps } = attrs;
       const { tip = slots.tip?.() } = props;
@@ -110,49 +137,5 @@ export default defineComponent({
       }
       return wrapSSR(spinElement);
     };
-  },
-  data() {
-    const { spinning, delay } = this;
-    const shouldBeDelayed = shouldDelay(spinning, delay);
-    return {
-      sSpinning: spinning && !shouldBeDelayed,
-    };
-  },
-  created() {
-    this.originalUpdateSpinning = this.updateSpinning;
-    this.debouncifyUpdateSpinning(this.$props);
-  },
-  mounted() {
-    this.updateSpinning();
-  },
-  updated() {
-    nextTick(() => {
-      this.debouncifyUpdateSpinning();
-      this.updateSpinning();
-    });
-  },
-  beforeUnmount() {
-    this.cancelExistingSpin();
-  },
-  methods: {
-    debouncifyUpdateSpinning(props?: any) {
-      const { delay } = props || this.$props;
-      if (delay) {
-        this.cancelExistingSpin();
-        this.updateSpinning = debounce(this.originalUpdateSpinning, delay);
-      }
-    },
-    updateSpinning() {
-      const { spinning, sSpinning } = this;
-      if (sSpinning !== spinning) {
-        this.sSpinning = spinning;
-      }
-    },
-    cancelExistingSpin() {
-      const { updateSpinning } = this;
-      if (updateSpinning && (updateSpinning as any).cancel) {
-        (updateSpinning as any).cancel();
-      }
-    },
   },
 });

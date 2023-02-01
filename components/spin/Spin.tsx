@@ -2,7 +2,7 @@ import type { VNode, ExtractPropTypes, PropType } from 'vue';
 import { cloneVNode, isVNode, defineComponent, shallowRef, watch } from 'vue';
 import debounce from 'lodash-es/debounce';
 import PropTypes from '../_util/vue-types';
-import { getPropsSlot } from '../_util/props-util';
+import { filterEmpty, getPropsSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useStyle from './style';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
@@ -44,7 +44,6 @@ export default defineComponent({
   setup(props, { attrs, slots }) {
     const { prefixCls, size, direction } = useConfigInject('spin', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const children = slots.default?.();
     const sSpinning = shallowRef(props.spinning && shouldDelay(props.spinning, props.delay));
     let updateSpinning: any;
     function originalUpdateSpinning() {
@@ -77,6 +76,7 @@ export default defineComponent({
     return () => {
       const { class: cls, ...divProps } = attrs;
       const { tip = slots.tip?.() } = props;
+      const children = slots.default?.();
       const spinClassName = {
         [hashId.value]: true,
         [prefixCls.value]: true,
@@ -121,7 +121,7 @@ export default defineComponent({
           {tip ? <div class={`${prefixCls.value}-text`}>{tip}</div> : null}
         </div>
       );
-      if (children && children.length) {
+      if (children && filterEmpty(children).length) {
         const containerClassName = {
           [`${prefixCls.value}-container`]: true,
           [`${prefixCls.value}-blur`]: sSpinning.value,

@@ -14,7 +14,6 @@ import type {
 } from '../_util/EventInterface';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
-import isMobile from '../_util/isMobile';
 import inputProps from './inputProps';
 
 export default defineComponent({
@@ -62,9 +61,6 @@ export default defineComponent({
 
     const onSearch = (e: MouseEvent | KeyboardEvent) => {
       emit('search', inputRef.value?.input?.stateValue, e);
-      if (!isMobile.tablet) {
-        inputRef.value.focus();
-      }
     };
 
     const onPressEnter = (e: KeyboardEvent) => {

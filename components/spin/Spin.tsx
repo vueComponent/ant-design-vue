@@ -130,7 +130,7 @@ export default defineComponent({
           <div class={[`${prefixCls.value}-nested-loading`, props.wrapperClassName, hashId.value]}>
             {sSpinning.value && <div key="loading">{spinElement}</div>}
             <div class={containerClassName} key="container">
-              {slots?.default?.()}
+              {children}
             </div>
           </div>,
         );

@@ -1,6 +1,6 @@
 import type { VNode, ExtractPropTypes, PropType } from 'vue';
-import { cloneVNode, isVNode, defineComponent, shallowRef, watch } from 'vue';
-import debounce from 'lodash-es/debounce';
+import { onBeforeUnmount, cloneVNode, isVNode, defineComponent, shallowRef, watch } from 'vue';
+import { debounce } from 'throttle-debounce';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, getPropsSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -44,37 +44,25 @@ export default defineComponent({
   setup(props, { attrs, slots }) {
     const { prefixCls, size, direction } = useConfigInject('spin', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const sSpinning = shallowRef(props.spinning && shouldDelay(props.spinning, props.delay));
+    const sSpinning = shallowRef(props.spinning && !shouldDelay(props.spinning, props.delay));
     let updateSpinning: any;
-    function originalUpdateSpinning() {
-      if (sSpinning.value !== props.spinning) {
-        sSpinning.value = props.spinning;
-      }
-    }
-    function cancelExistingSpin() {
-      if (updateSpinning && updateSpinning.cancel) {
-        updateSpinning.cancel();
-      }
-    }
-    function debouncifyUpdateSpinning() {
-      const { delay } = props;
-      if (delay) {
-        cancelExistingSpin();
-        updateSpinning = debounce(originalUpdateSpinning, delay);
-      } else {
-        updateSpinning = originalUpdateSpinning;
-      }
-    }
     watch(
-      () => [props.spinning, props.delay],
+      [() => props.spinning, () => props.delay],
       () => {
-        debouncifyUpdateSpinning();
+        updateSpinning?.cancel();
+        updateSpinning = debounce(props.delay, () => {
+          sSpinning.value = props.spinning;
+        });
         updateSpinning?.();
       },
       {
         immediate: true,
+        flush: 'post',
       },
     );
+    onBeforeUnmount(() => {
+      updateSpinning?.cancel();
+    });
     return () => {
       const { class: cls, ...divProps } = attrs;
       const { tip = slots.tip?.() } = props;

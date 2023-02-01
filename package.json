@@ -292,6 +292,7 @@
     "scroll-into-view-if-needed": "^2.2.25",
     "shallow-equal": "^1.0.0",
     "stylis": "^4.1.3",
+    "throttle-debounce": "^5.0.0",
     "vue-types": "^3.0.0",
     "warning": "^4.0.0"
   },

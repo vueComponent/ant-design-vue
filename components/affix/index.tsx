@@ -110,30 +110,30 @@ const Affix = defineComponent({
         status: AffixStatus.None,
       } as AffixState;
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-      const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
-      const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
+      const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
+      const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
+      const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
       if (fixedTop !== undefined) {
         newState.affixStyle = {
           position: 'fixed',
           top: fixedTop,
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width: placeholderRect.width + 'px',
+          height: placeholderRect.height + 'px',
         };
         newState.placeholderStyle = {
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width: placeholderRect.width + 'px',
+          height: placeholderRect.height + 'px',
         };
       } else if (fixedBottom !== undefined) {
         newState.affixStyle = {
           position: 'fixed',
           bottom: fixedBottom,
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width: placeholderRect.width + 'px',
+          height: placeholderRect.height + 'px',
         };
         newState.placeholderStyle = {
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width: placeholderRect.width + 'px',
+          height: placeholderRect.height + 'px',
         };
       }
 
@@ -169,9 +169,9 @@ const Affix = defineComponent({
         const targetNode = target();
         if (targetNode && placeholderNode.value) {
           const targetRect = getTargetRect(targetNode);
-          const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-          const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
-          const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
+          const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
+          const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
+          const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
           if (
             (fixedTop !== undefined && affixStyle.top === fixedTop) ||
             (fixedBottom !== undefined && affixStyle.bottom === fixedBottom)

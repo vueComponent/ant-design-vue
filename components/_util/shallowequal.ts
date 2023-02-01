@@ -1,6 +1,6 @@
 import { toRaw } from 'vue';
 
-function shallowEqual(objA, objB, compare, compareContext) {
+function shallowEqual(objA: any, objB: any, compare?: any, compareContext?: any) {
   let ret = compare ? compare.call(compareContext, objA, objB) : void 0;
 
   if (ret !== void 0) {
@@ -45,6 +45,6 @@ function shallowEqual(objA, objB, compare, compareContext) {
   return true;
 }
 
-export default function (value, other, customizer, thisArg) {
-  return shallowEqual(toRaw(value), toRaw(other), customizer, thisArg);
+export default function (value: any, other: any) {
+  return shallowEqual(toRaw(value), toRaw(other));
 }

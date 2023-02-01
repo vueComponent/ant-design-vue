@@ -35,7 +35,7 @@ import type { ComponentToken as NotificationComponentToken } from '../../notific
 // import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
 // import type { ComponentToken as SliderComponentToken } from '../../slider/style';
 // import type { ComponentToken as SpaceComponentToken } from '../../space/style';
-// import type { ComponentToken as SpinComponentToken } from '../../spin/style';
+import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 // import type { ComponentToken as StepsComponentToken } from '../../steps/style';
 // import type { ComponentToken as TableComponentToken } from '../../table/style';
 // import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
@@ -90,7 +90,7 @@ export interface ComponentTokenMap {
   //   Select?: SelectComponentToken;
   //   Skeleton?: SkeletonComponentToken;
   //   Slider?: SliderComponentToken;
-  //   Spin?: SpinComponentToken;
+  Spin?: SpinComponentToken;
   Statistic?: {};
   Switch?: {};
   //   Tag?: TagComponentToken;

@@ -1,10 +1,11 @@
 import type { VNode, ExtractPropTypes, PropType } from 'vue';
-import { inject, cloneVNode, isVNode, defineComponent, nextTick } from 'vue';
+import { cloneVNode, isVNode, defineComponent, nextTick, shallowRef, computed } from 'vue';
 import debounce from 'lodash-es/debounce';
 import PropTypes from '../_util/vue-types';
-import { getComponent, getSlot } from '../_util/props-util';
+import { getPropsSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { defaultConfigProvider, configProviderKey } from '../config-provider/context';
+import useStyle from './style';
+import useConfigInject from 'ant-design-vue/es/config-provider/hooks/useConfigInject';
 
 export type SpinSize = 'small' | 'default' | 'large';
 export const spinProps = () => ({
@@ -40,10 +41,74 @@ export default defineComponent({
     spinning: true,
     wrapperClassName: '',
   }),
-  setup() {
-    return {
-      originalUpdateSpinning: null,
-      configProvider: inject(configProviderKey, defaultConfigProvider),
+  setup(props, { attrs, slots }) {
+    const { prefixCls, size, direction } = useConfigInject('spin', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const children = slots.default?.();
+    const shouldBeDelayed = computed(() => shouldDelay(props.spinning, props.delay));
+    const sSpinning = shallowRef(props.spinning && shouldBeDelayed.value);
+    return () => {
+      const { class: cls, ...divProps } = attrs;
+      const { tip = slots.tip?.() } = props;
+      const spinClassName = {
+        [hashId.value]: true,
+        [prefixCls.value]: true,
+        [`${prefixCls.value}-sm`]: size.value === 'small',
+        [`${prefixCls.value}-lg`]: size.value === 'large',
+        [`${prefixCls.value}-spinning`]: sSpinning.value,
+        [`${prefixCls.value}-show-text`]: !!tip,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [cls as string]: !!cls,
+      };
+
+      function renderIndicator(prefixCls: string) {
+        const dotClassName = `${prefixCls}-dot`;
+        let indicator = getPropsSlot(slots, props, 'indicator');
+        // should not be render default indicator when indicator value is null
+        if (indicator === null) {
+          return null;
+        }
+        if (Array.isArray(indicator)) {
+          indicator = indicator.length === 1 ? indicator[0] : indicator;
+        }
+        if (isVNode(indicator)) {
+          return cloneVNode(indicator, { class: dotClassName });
+        }
+
+        if (defaultIndicator && isVNode(defaultIndicator())) {
+          return cloneVNode(defaultIndicator(), { class: dotClassName });
+        }
+
+        return (
+          <span class={`${dotClassName} ${prefixCls}-dot-spin`}>
+            <i class={`${prefixCls}-dot-item`} />
+            <i class={`${prefixCls}-dot-item`} />
+            <i class={`${prefixCls}-dot-item`} />
+            <i class={`${prefixCls}-dot-item`} />
+          </span>
+        );
+      }
+      const spinElement = (
+        <div {...divProps} class={spinClassName} aria-live="polite" aria-busy={sSpinning.value}>
+          {renderIndicator(prefixCls.value)}
+          {tip ? <div class={`${prefixCls.value}-text`}>{tip}</div> : null}
+        </div>
+      );
+      if (children && children.length) {
+        const containerClassName = {
+          [`${prefixCls.value}-container`]: true,
+          [`${prefixCls.value}-blur`]: sSpinning.value,
+        };
+        return wrapSSR(
+          <div class={[`${prefixCls.value}-nested-loading`, props.wrapperClassName, hashId.value]}>
+            {sSpinning.value && <div key="loading">{spinElement}</div>}
+            <div class={containerClassName} key="container">
+              {slots?.default?.()}
+            </div>
+          </div>,
+        );
+      }
+      return wrapSSR(spinElement);
     };
   },
   data() {
@@ -89,84 +154,5 @@ export default defineComponent({
         (updateSpinning as any).cancel();
       }
     },
-    renderIndicator(prefixCls: string) {
-      const dotClassName = `${prefixCls}-dot`;
-      let indicator = getComponent(this, 'indicator');
-      // should not be render default indicator when indicator value is null
-      if (indicator === null) {
-        return null;
-      }
-      if (Array.isArray(indicator)) {
-        indicator = indicator.length === 1 ? indicator[0] : indicator;
-      }
-      if (isVNode(indicator)) {
-        return cloneVNode(indicator, { class: dotClassName });
-      }
-
-      if (defaultIndicator && isVNode(defaultIndicator())) {
-        return cloneVNode(defaultIndicator(), { class: dotClassName });
-      }
-
-      return (
-        <span class={`${dotClassName} ${prefixCls}-dot-spin`}>
-          <i class={`${prefixCls}-dot-item`} />
-          <i class={`${prefixCls}-dot-item`} />
-          <i class={`${prefixCls}-dot-item`} />
-          <i class={`${prefixCls}-dot-item`} />
-        </span>
-      );
-    },
-  },
-  render() {
-    const {
-      size,
-      prefixCls: customizePrefixCls,
-      tip = this.$slots.tip?.(),
-      wrapperClassName,
-    } = this.$props;
-    const { class: cls, style, ...divProps } = this.$attrs;
-    const { getPrefixCls, direction } = this.configProvider;
-    const prefixCls = getPrefixCls('spin', customizePrefixCls);
-
-    const { sSpinning } = this;
-    const spinClassName = {
-      [prefixCls]: true,
-      [`${prefixCls}-sm`]: size === 'small',
-      [`${prefixCls}-lg`]: size === 'large',
-      [`${prefixCls}-spinning`]: sSpinning,
-      [`${prefixCls}-show-text`]: !!tip,
-      [`${prefixCls}-rtl`]: direction === 'rtl',
-      [cls as string]: !!cls,
-    };
-
-    const spinElement = (
-      <div
-        {...divProps}
-        style={style}
-        class={spinClassName}
-        aria-live="polite"
-        aria-busy={sSpinning}
-      >
-        {this.renderIndicator(prefixCls)}
-        {tip ? <div class={`${prefixCls}-text`}>{tip}</div> : null}
-      </div>
-    );
-    const children = getSlot(this);
-    if (children && children.length) {
-      const containerClassName = {
-        [`${prefixCls}-container`]: true,
-        [`${prefixCls}-blur`]: sSpinning,
-      };
-
-      return (
-        <div class={[`${prefixCls}-nested-loading`, wrapperClassName]}>
-          {sSpinning && <div key="loading">{spinElement}</div>}
-          <div class={containerClassName} key="container">
-            {children}
-          </div>
-        </div>
-      );
-    }
-    return spinElement;
   },
 });

@@ -9,6 +9,7 @@ export interface OverrideContextProps {
   selectable?: ComputedRef<boolean>;
   validator?: (menuProps: Pick<MenuProps, 'mode'>) => void;
   onClick?: () => void;
+  expandIcon?: ComputedRef<any>;
 }
 export const OverrideContextKey: InjectionKey<OverrideContextProps> = Symbol('OverrideContextKey');
 export const useInjectOverride = () => {
@@ -16,12 +17,13 @@ export const useInjectOverride = () => {
 };
 
 export const useProvideOverride = (props: OverrideContextProps) => {
-  const { prefixCls, mode, selectable, validator, onClick } = useInjectOverride() || {};
+  const { prefixCls, mode, selectable, validator, onClick, expandIcon } = useInjectOverride() || {};
   provide(OverrideContextKey, {
     prefixCls: computed(() => (props.prefixCls?.value ?? prefixCls?.value) as string),
     mode: computed(() => props.mode?.value ?? mode?.value),
     selectable: computed(() => (props.selectable?.value ?? selectable?.value) as boolean),
     validator: props.validator ?? validator,
     onClick: props.onClick ?? onClick,
+    expandIcon: props.expandIcon ?? expandIcon?.value,
   });
 };

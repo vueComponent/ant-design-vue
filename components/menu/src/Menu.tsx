@@ -392,7 +392,7 @@ export default defineComponent({
 
     const lastVisibleIndex = ref(0);
     const expandIcon = computed<MenuProps['expandIcon']>(() =>
-      props.expandIcon || slots.expandIcon
+      props.expandIcon || slots.expandIcon || override?.expandIcon?.value
         ? opt => {
             let icon = props.expandIcon || slots.expandIcon;
             icon = typeof icon === 'function' ? icon(opt) : icon;

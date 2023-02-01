@@ -11,6 +11,9 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import omit from '../_util/omit';
 import getPlacements from '../_util/placements';
+import warning from '../_util/warning';
+import useStyle from './style';
+import { useProvideOverride } from '../menu/src/OverrideContext';
 
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
@@ -31,18 +34,53 @@ const Dropdown = defineComponent({
       'dropdown',
       props,
     );
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    // Warning for deprecated usage
+    if (process.env.NODE_ENV !== 'production') {
+      [
+        ['visible', 'open'],
+        ['onVisibleChange', 'onOpenChange'],
+        ['onUpdate:visible', 'onUpdate:open'],
+      ].forEach(([deprecatedName, newName]) => {
+        warning(
+          props[deprecatedName] === undefined,
+          'Dropdown',
+          `\`${deprecatedName}\` is deprecated which will be removed in next major version, please use \`${newName}\` instead.`,
+        );
+      });
+    }
 
     const transitionName = computed(() => {
       const { placement = '', transitionName } = props;
       if (transitionName !== undefined) {
         return transitionName;
       }
-      if (placement.indexOf('top') >= 0) {
+      if (placement.includes('top')) {
         return `${rootPrefixCls.value}-slide-down`;
       }
       return `${rootPrefixCls.value}-slide-up`;
     });
-
+    useProvideOverride({
+      prefixCls: computed(() => `${prefixCls.value}-menu`),
+      expandIcon: computed(() => {
+        return (
+          <span class={`${prefixCls.value}-menu-submenu-arrow`}>
+            <RightOutlined class={`${prefixCls.value}-menu-submenu-arrow-icon`} />
+          </span>
+        );
+      }),
+      mode: computed(() => 'vertical'),
+      selectable: computed(() => false),
+      onClick: () => {},
+      validator: ({ mode }) => {
+        // Warning if use other mode
+        warning(
+          !mode || mode === 'vertical',
+          'Dropdown',
+          `mode="${mode}" is not supported for Dropdown's Menu.`,
+        );
+      },
+    });
     const renderOverlay = () => {
       // rc-dropdown already can process the function of overlay, but we have check logic here.
       // So we need render the element to check and pass back to rc-dropdown.
@@ -104,6 +142,8 @@ const Dropdown = defineComponent({
     const handleVisibleChange = (val: boolean) => {
       emit('update:visible', val);
       emit('visibleChange', val);
+      emit('update:open', val);
+      emit('openChange', val);
     };
 
     return () => {
@@ -125,13 +165,13 @@ const Dropdown = defineComponent({
         ),
       );
 
-      const overlayClassNameCustomized = classNames(overlayClassName, {
+      const overlayClassNameCustomized = classNames(overlayClassName, hashId.value, {
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       });
 
       const triggerActions = disabled ? [] : trigger;
       let alignPoint: boolean;
-      if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
+      if (triggerActions && triggerActions.includes('contextmenu')) {
         alignPoint = true;
       }
 
@@ -156,14 +196,13 @@ const Dropdown = defineComponent({
         },
         ['overlay', 'onUpdate:visible'],
       );
-      return (
+      return wrapSSR(
         <RcDropdown {...dropdownProps} v-slots={{ overlay: renderOverlay }}>
           {dropdownTrigger}
-        </RcDropdown>
+        </RcDropdown>,
       );
     };
   },
 });
-
 Dropdown.Button = DropdownButton;
 export default Dropdown;

@@ -30,7 +30,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 | overlayStyle | 下拉根元素的样式 | object | - |  |
 | placement | 菜单弹出位置 | `bottomLeft` \| `bottom` \| `bottomRight` \| `topLeft` \| `top` \| `topRight` | `bottomLeft` |  |
 | trigger | 触发下拉的行为, 移动端不支持 hover | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
-| visible(v-model) | 菜单是否显示 | boolean | - |  |
+| open(v-model) | 菜单是否显示 | boolean | - |  |
 
 `overlay` 菜单使用 [Menu](/components/menu-cn/)，还包括菜单项 `Menu.Item`，分割线 `Menu.Divider`。
 
@@ -40,9 +40,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 
 ### 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
-| visibleChange | 菜单显示状态改变时调用，参数为 visible。点击菜单按钮导致的消失不会触发 | function(visible) |
+| 事件名称 | 说明 | 回调参数 | 版本 |
+| --- | --- | --- | --- |
+| openChange | 菜单显示状态改变时调用，参数为 visible。点击菜单按钮导致的消失不会触发 | function(open) | 4.0 |
 
 ### Dropdown.Button
 
@@ -56,11 +56,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
 | size | 按钮大小，和 [Button](/components/button-cn/) 一致 | string | 'default' |  |
 | trigger | 触发下拉的行为 | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
 | type | 按钮类型，和 [Button](/components/button-cn/) 一致 | string | 'default' |  |
-| visible(v-model) | 菜单是否显示 | boolean | - |  |
+| open(v-model) | 菜单是否显示 | boolean | - |  |
 
 ### Dropdown.Button 事件
 
-| 事件名称 | 说明 | 回调参数 |
-| --- | --- | --- |
+| 事件名称 | 说明 | 回调参数 | 版本 |
+| --- | --- | --- | --- |
 | click | 点击左侧按钮的回调，和 [Button](/components/button-cn/) 一致 | Function |
-| visibleChange | 菜单显示状态改变时调用，参数为 visible。点击菜单按钮导致的消失不会触发 | function(visible) |
+| openChange | 菜单显示状态改变时调用，参数为 visible。点击菜单按钮导致的消失不会触发 | function(open) | 4.0 |

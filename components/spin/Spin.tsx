@@ -5,7 +5,7 @@ import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useStyle from './style';
-import useConfigInject from 'ant-design-vue/es/config-provider/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export type SpinSize = 'small' | 'default' | 'large';
 export const spinProps = () => ({

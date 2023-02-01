@@ -71,7 +71,9 @@ export default defineComponent({
         debouncifyUpdateSpinning();
         updateSpinning?.();
       },
-      { immediate: true },
+      {
+        immediate: true,
+      },
     );
     return () => {
       const { class: cls, ...divProps } = attrs;

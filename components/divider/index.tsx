@@ -46,7 +46,7 @@ const Divider = defineComponent({
       const prefixCls = prefixClsRef.value;
       return {
         [prefixCls]: true,
-        [hashId.value]: true,
+        [hashId.value]: !!hashId.value,
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-dashed`]: !!dashed,
         [`${prefixCls}-plain`]: !!plain,

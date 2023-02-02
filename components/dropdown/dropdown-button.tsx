@@ -62,7 +62,7 @@ export default defineComponent({
         disabled,
         trigger: disabled ? [] : trigger,
         placement,
-        getPopupContainer: getPopupContainer.value,
+        getPopupContainer: getPopupContainer?.value,
         onVisibleChange: handleVisibleChange,
         mouseEnterDelay,
         mouseLeaveDelay,

@@ -231,7 +231,7 @@ export default defineComponent({
           {...attrs}
           rootClassName={hashId.value}
           class={classNames(hashId.value, attrs.class)}
-          getContainer={getContainer || getPopupContainer.value}
+          getContainer={getContainer || getPopupContainer?.value}
           prefixCls={prefixCls.value}
           wrapClassName={wrapClassNameExtended}
           visible={open ?? visible}

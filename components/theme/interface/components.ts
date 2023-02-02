@@ -32,7 +32,7 @@ import type { ComponentToken as NotificationComponentToken } from '../../notific
 // import type { ComponentToken as ResultComponentToken } from '../../result/style';
 // import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 // import type { ComponentToken as SelectComponentToken } from '../../select/style';
-// import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
+import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
 // import type { ComponentToken as SliderComponentToken } from '../../slider/style';
 // import type { ComponentToken as SpaceComponentToken } from '../../space/style';
 import type { ComponentToken as SpinComponentToken } from '../../spin/style';
@@ -88,7 +88,7 @@ export interface ComponentTokenMap {
   //   Result?: ResultComponentToken;
   //   Segmented?: SegmentedComponentToken;
   //   Select?: SelectComponentToken;
-  //   Skeleton?: SkeletonComponentToken;
+  Skeleton?: SkeletonComponentToken;
   //   Slider?: SliderComponentToken;
   Spin?: SpinComponentToken;
   Statistic?: {};

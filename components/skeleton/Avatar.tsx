@@ -4,6 +4,7 @@ import classNames from '../_util/classNames';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import Element, { skeletonElementProps } from './Element';
+import useStyle from './style';
 
 export const avatarProps = () => {
   return {
@@ -23,16 +24,22 @@ const SkeletonAvatar = defineComponent({
   }),
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const cls = computed(() =>
-      classNames(prefixCls.value, `${prefixCls.value}-element`, {
-        [`${prefixCls.value}-active`]: props.active,
-      }),
+      classNames(
+        prefixCls.value,
+        `${prefixCls.value}-element`,
+        {
+          [`${prefixCls.value}-active`]: props.active,
+        },
+        hashId.value,
+      ),
     );
     return () => {
-      return (
+      return wrapSSR(
         <div class={cls.value}>
           <Element {...props} prefixCls={`${prefixCls.value}-avatar`} />
-        </div>
+        </div>,
       );
     };
   },

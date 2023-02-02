@@ -27,15 +27,16 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
 | okType | 确认按钮类型 | string | primary |  |
 | showCancel | 是否显示取消按钮 | boolean | true | 3.0 |
 | title | 确认框的描述 | string\|slot | 无 |  |
-| visible (v-model) | 是否显示 | boolean | - |  |
+| description | 确认内容的详细描述 | string\|slot | - | 4.0 |
+| open (v-model) | 是否显示 | boolean | - | 4.0 |
 
 ### 事件
 
-| 事件名称      | 说明           | 回调参数          |
-| ------------- | -------------- | ----------------- |
-| cancel        | 点击取消的回调 | function(e)       |
-| confirm       | 点击确认的回调 | function(e)       |
-| visibleChange | 显示隐藏的回调 | function(visible) |
+| 事件名称   | 说明           | 回调参数       | 版本 |
+| ---------- | -------------- | -------------- | ---- |
+| cancel     | 点击取消的回调 | function(e)    |      |
+| confirm    | 点击确认的回调 | function(e)    |      |
+| openChange | 显示隐藏的回调 | function(open) | 4.0  |
 
 更多属性请参考 [Tooltip](/components/tooltip-cn/#API)。
 

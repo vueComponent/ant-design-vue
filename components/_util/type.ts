@@ -55,6 +55,14 @@ export function booleanType(defaultVal?: any) {
   return { type: Boolean, default: defaultVal as boolean };
 }
 
+export function anyType<T = any>() {
+  return { validator: () => true } as unknown as { type: PropType<T> };
+}
+
+export function stringType<T extends string = string>(defaultVal?: string) {
+  return { type: String as unknown as PropType<T>, default: defaultVal as T };
+}
+
 export function someType<T>(types: any[], defaultVal?: any) {
   return { type: types as PropType<T>, default: defaultVal as T };
 }

@@ -131,7 +131,11 @@ export default defineComponent({
       return tooltip.value.getPopupDomNode();
     };
 
-    expose({ getPopupDomNode, open, forcePopupAlign: () => tooltip.value?.forcePopupAlign() });
+    expose({
+      getPopupDomNode,
+      open: innerOpen,
+      forcePopupAlign: () => tooltip.value?.forcePopupAlign(),
+    });
 
     const tooltipPlacements = computed(() => {
       const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = props;
@@ -272,7 +276,7 @@ export default defineComponent({
         ...attrs,
         ...(props as TooltipProps),
         prefixCls: prefixCls.value,
-        getPopupContainer: getPopupContainer.value,
+        getPopupContainer: getPopupContainer?.value,
         builtinPlacements: tooltipPlacements.value,
         visible: tempVisible,
         ref: tooltip,

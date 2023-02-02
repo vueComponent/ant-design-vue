@@ -104,7 +104,7 @@ export default defineComponent({
     const activeLink = ref(null);
     const getContainer = computed(() => {
       const { getContainer } = props;
-      return getContainer || getTargetContainer.value || getDefaultContainer;
+      return getContainer || getTargetContainer?.value || getDefaultContainer;
     });
     // func...
     const getCurrentAnchor = (offsetTop = 0, bounds = 5) => {

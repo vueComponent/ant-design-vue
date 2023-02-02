@@ -137,7 +137,7 @@ const Slider = defineComponent({
           transitionName={`${rootPrefixCls.value}-zoom-down`}
           key={index}
           overlayClassName={`${prefixCls.value}-tooltip`}
-          getPopupContainer={getTooltipPopupContainer || getPopupContainer.value}
+          getPopupContainer={getTooltipPopupContainer || getPopupContainer?.value}
         >
           <VcHandle
             {...restProps}

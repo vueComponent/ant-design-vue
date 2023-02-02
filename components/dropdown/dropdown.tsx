@@ -148,7 +148,7 @@ const Dropdown = defineComponent({
           arrow: !!arrow,
           alignPoint,
           prefixCls: prefixCls.value,
-          getPopupContainer: getPopupContainer.value,
+          getPopupContainer: getPopupContainer?.value,
           transitionName: transitionName.value,
           trigger: triggerActions,
           onVisibleChange: handleVisibleChange,

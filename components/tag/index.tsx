@@ -9,6 +9,9 @@ import { isPresetColor, isPresetStatusColor } from '../_util/colors';
 import type { LiteralUnion } from '../_util/type';
 import CheckableTag from './CheckableTag';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import warning from '../_util/warning';
+
+import useStyle from './style';
 
 export const tagProps = () => ({
   prefixCls: String,
@@ -17,6 +20,7 @@ export const tagProps = () => ({
   },
   closable: { type: Boolean, default: false },
   closeIcon: PropTypes.any,
+  /** @deprecated `visible` will be removed in next major version. */
   visible: { type: Boolean, default: undefined },
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
@@ -30,13 +34,25 @@ export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<type
 const Tag = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ATag',
+  inheritAttrs: false,
   props: tagProps(),
   // emits: ['update:visible', 'close'],
   slots: ['closeIcon', 'icon'],
   setup(props: TagProps, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('tag', props);
 
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const visible = ref(true);
+
+    // Warning for deprecated usage
+    if (process.env.NODE_ENV !== 'production') {
+      warning(
+        !('visible' in props),
+        'Tag',
+        '`visible` is deprecated, please use `<Tag v-show="visible" />` instead.',
+      );
+    }
 
     watchEffect(() => {
       if (props.visible !== undefined) {
@@ -70,7 +86,7 @@ const Tag = defineComponent({
     );
 
     const tagClassName = computed(() =>
-      classNames(prefixCls.value, {
+      classNames(prefixCls.value, hashId.value, {
         [`${prefixCls.value}-${props.color}`]: isInternalColor.value,
         [`${prefixCls.value}-has-color`]: props.color && !isInternalColor.value,
         [`${prefixCls.value}-hidden`]: !visible.value,
@@ -117,13 +133,13 @@ const Tag = defineComponent({
       const isNeedWave = 'onClick' in attrs;
 
       const tagNode = (
-        <span class={tagClassName.value} style={tagStyle}>
+        <span {...attrs} class={tagClassName.value} style={tagStyle}>
           {kids}
           {renderCloseIcon()}
         </span>
       );
 
-      return isNeedWave ? <Wave>{tagNode}</Wave> : tagNode;
+      return wrapSSR(isNeedWave ? <Wave>{tagNode}</Wave> : tagNode);
     };
   },
 });

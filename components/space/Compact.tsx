@@ -89,9 +89,9 @@ const Compact = defineComponent({
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const clx = computed(() => {
       return classNames(prefixCls.value, hashId.value, {
-        [`${prefixCls}-rtl`]: directionConfig.value === 'rtl',
-        [`${prefixCls}-block`]: props.block,
-        [`${prefixCls}-vertical`]: props.direction === 'vertical',
+        [`${prefixCls.value}-rtl`]: directionConfig.value === 'rtl',
+        [`${prefixCls.value}-block`]: props.block,
+        [`${prefixCls.value}-vertical`]: props.direction === 'vertical',
       });
     });
 
@@ -101,7 +101,7 @@ const Compact = defineComponent({
       const childNodes = slots.default?.() || [];
 
       return childNodes.map((child, i) => {
-        const key = (child && child.key) || `${prefixCls}-item-${i}`;
+        const key = (child && child.key) || `${prefixCls.value}-item-${i}`;
 
         return (
           <CompactItem

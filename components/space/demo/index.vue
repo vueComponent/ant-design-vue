@@ -4,7 +4,9 @@
     <Customize />
     <Vertical />
     <Align />
+    <Compact />
     <CompactButtons />
+    <CompactButtonVertical />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -12,7 +14,9 @@ import Base from './base.vue';
 import Customize from './customize.vue';
 import Vertical from './vertical.vue';
 import Align from './align.vue';
+import Compact from './compact.vue';
 import CompactButtons from './compact-buttons.vue';
+import CompactButtonVertical from './compact-button-vertical.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -25,7 +29,9 @@ export default defineComponent({
     Customize,
     Vertical,
     Align,
+    Compact,
     CompactButtons,
+    CompactButtonVertical,
   },
   setup() {
     return {};

@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 6
+order: 7
 title:
   zh-CN: Button 紧凑布局
   en-US: Button Compact Mode
@@ -149,22 +149,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-.space-align-container {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.space-align-block {
-  margin: 8px 4px;
-  border: 1px solid #40a9ff;
-  padding: 4px;
-  flex: none;
-}
-.space-align-block .mock-block {
-  display: inline-block;
-  padding: 32px 8px 16px;
-  background: rgba(150, 150, 150, 0.2);
-}
-</style>

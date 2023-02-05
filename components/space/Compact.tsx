@@ -1,5 +1,4 @@
 import classNames from '../_util/classNames';
-
 import type { DirectionType, SizeType } from '../config-provider';
 import createContext from '../_util/createContext';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
@@ -9,6 +8,7 @@ import { computed, defineComponent } from 'vue';
 import type { PropType, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
+import { isEmpty } from 'lodash-es';
 
 export const spaceCompactItemProps = () => ({
   compactSize: String as PropType<SizeType>,
@@ -27,7 +27,7 @@ export const useCompactItemContext = (prefixCls: string, direction: DirectionTyp
   const compactItemContext = SpaceCompactItemContext.useInject();
 
   const compactItemClassnames = computed(() => {
-    if (!compactItemContext) return '';
+    if (!compactItemContext || isEmpty(compactItemContext)) return '';
 
     const { compactDirection, isFirstItem, isLastItem } = compactItemContext;
     const separator = compactDirection === 'vertical' ? '-vertical-' : '-';
@@ -41,8 +41,8 @@ export const useCompactItemContext = (prefixCls: string, direction: DirectionTyp
   });
 
   return {
-    compactSize: compactItemContext?.compactSize,
-    compactDirection: compactItemContext?.compactDirection,
+    compactSize: computed(() => compactItemContext?.compactSize),
+    compactDirection: computed(() => compactItemContext?.compactDirection),
     compactItemClassnames,
   };
 };
@@ -95,22 +95,23 @@ const Compact = defineComponent({
       });
     });
 
-    const compactItemContext = SpaceCompactItemContext.useInject();
-
     const nodes = computed(() => {
+      const compactItemContext = SpaceCompactItemContext.useInject();
       const childNodes = slots.default?.() || [];
 
       return childNodes.map((child, i) => {
         const key = (child && child.key) || `${prefixCls.value}-item-${i}`;
+        const noCompactItemContext = !compactItemContext || isEmpty(compactItemContext);
 
         return (
           <CompactItem
             key={key}
             compactSize={props.size}
             compactDirection={props.direction}
-            isFirstItem={i === 0 && (!compactItemContext || compactItemContext?.isFirstItem)}
+            isFirstItem={i === 0 && (noCompactItemContext || compactItemContext?.isFirstItem)}
             isLastItem={
-              i === childNodes.length - 1 && (!compactItemContext || compactItemContext?.isLastItem)
+              i === childNodes.length - 1 &&
+              (noCompactItemContext || compactItemContext?.isLastItem)
             }
           >
             {child}

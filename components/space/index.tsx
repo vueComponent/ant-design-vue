@@ -1,12 +1,15 @@
-import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
+import type { PropType, ExtractPropTypes, CSSProperties, Plugin, App } from 'vue';
 import { defineComponent, computed, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
-import { tuple, withInstall } from '../_util/type';
+import { tuple } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import classNames from '../_util/classNames';
+import Compact from './Compact';
+
+import useStyle from './style';
 
 export type SpaceSize = SizeType | number;
 const spaceSize = {
@@ -37,6 +40,7 @@ const Space = defineComponent({
   slots: ['split'],
   setup(props, { slots }) {
     const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const supportFlexGap = useFlexGapSupport();
     const size = computed(() => props.size ?? space?.value?.size ?? 'small');
     const horizontalSize = ref<number>();
@@ -58,7 +62,7 @@ const Space = defineComponent({
       props.align === undefined && props.direction === 'horizontal' ? 'center' : props.align,
     );
     const cn = computed(() => {
-      return classNames(prefixCls.value, `${prefixCls.value}-${props.direction}`, {
+      return classNames(prefixCls.value, hashId.value, `${prefixCls.value}-${props.direction}`, {
         [`${prefixCls.value}-rtl`]: directionConfig.value === 'rtl',
         [`${prefixCls.value}-align-${mergedAlign.value}`]: mergedAlign.value,
       });
@@ -110,7 +114,7 @@ const Space = defineComponent({
               }
             }
 
-            return (
+            return wrapSSR(
               <>
                 <div class={itemClassName} style={itemStyle}>
                   {child}
@@ -120,7 +124,7 @@ const Space = defineComponent({
                     {split}
                   </span>
                 )}
-              </>
+              </>,
             );
           })}
         </div>
@@ -129,4 +133,17 @@ const Space = defineComponent({
   },
 });
 
-export default withInstall(Space);
+Space.Compact = Compact;
+
+Space.install = function (app: App) {
+  app.component(Space.name, Space);
+  app.component(Compact.name, Compact);
+  return app;
+};
+
+export { Compact };
+
+export default Space as typeof Space &
+  Plugin & {
+    readonly Compact: typeof Compact;
+  };

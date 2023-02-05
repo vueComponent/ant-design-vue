@@ -22,6 +22,8 @@ Set components spacing.
 | align | Align items | `start` \| `end` \|`center` \|`baseline` | - | 1.6.5 |
 | direction | The space direction | `vertical` \| `horizontal` | `horizontal` | 1.6.5 |
 | size | The space size | `small` \| `middle` \| `large` \| `number` | `small` | 1.6.5 |
+| split | Set split | VueNode \| v-slot | - | 1.6.5 |
+| wrap | Auto wrap line, when `horizontal` effective | boolean | false | 1.6.5 |
 
 ### Space.Compact
 

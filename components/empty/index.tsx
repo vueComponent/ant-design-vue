@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import type { App, CSSProperties, Plugin, PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';

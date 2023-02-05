@@ -14,7 +14,7 @@ import type { ComponentToken as ButtonComponentToken } from '../../button/style'
 import type { ComponentToken as DividerComponentToken } from '../../divider/style';
 import type { ComponentToken as DropdownComponentToken } from '../../dropdown/style';
 // import type { ComponentToken as DrawerComponentToken } from '../../drawer/style';
-// import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
+import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
 // import type { ComponentToken as ImageComponentToken } from '../../image/style';
 // import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
 // import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
@@ -69,7 +69,7 @@ export interface ComponentTokenMap {
   Divider?: DividerComponentToken;
   //   Drawer?: DrawerComponentToken;
   Dropdown?: DropdownComponentToken;
-  //   Empty?: EmptyComponentToken;
+  Empty?: EmptyComponentToken;
   //   FloatButton?: FloatButtonComponentToken;
   Form?: {};
   Grid?: {};

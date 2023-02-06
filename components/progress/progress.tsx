@@ -12,10 +12,13 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
 import type { VueNode } from '../_util/type';
+import useStyle from './style';
+import classNames from 'ant-design-vue/es/_util/classNames';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AProgress',
+  inheritAttrs: false,
   props: initDefaultProps(progressProps(), {
     type: 'line',
     percent: 0,
@@ -26,8 +29,9 @@ export default defineComponent({
     strokeLinecap: 'round',
   }),
   slots: ['format'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('progress', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     devWarning(
       props.successPercent == undefined,
       'Progress',
@@ -36,13 +40,18 @@ export default defineComponent({
     const classString = computed(() => {
       const { type, showInfo, size } = props;
       const pre = prefixCls.value;
-      return {
-        [pre]: true,
-        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
-        [`${pre}-show-info`]: showInfo,
-        [`${pre}-${size}`]: size,
-        [`${pre}-rtl`]: direction.value === 'rtl',
-      };
+      const cls = attrs.class;
+      return classNames(
+        {
+          [hashId.value]: true,
+          [pre]: true,
+          [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
+          [`${pre}-show-info`]: showInfo,
+          [`${pre}-${size}`]: size,
+          [`${pre}-rtl`]: direction.value === 'rtl',
+        },
+        cls,
+      );
     });
 
     const percentNumber = computed(() => {
@@ -120,15 +129,14 @@ export default defineComponent({
         );
       }
 
-      const classNames = {
-        ...classString.value,
+      const classes = classNames(classString.value, {
         [`${prefixCls.value}-status-${progressStatus.value}`]: true,
-      };
+      });
 
-      return (
-        <div class={classNames} title={title}>
+      return wrapSSR(
+        <div {...attrs} class={classes} title={title}>
           {progress}
-        </div>
+        </div>,
       );
     };
   },

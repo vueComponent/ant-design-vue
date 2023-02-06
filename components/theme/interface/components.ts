@@ -64,6 +64,7 @@ export interface ComponentTokenMap {
   //   Cascader?: CascaderComponentToken;
   //   Checkbox?: CheckboxComponentToken;
   //   Collapse?: CollapseComponentToken;
+  Comment?: {};
   //   DatePicker?: DatePickerComponentToken;
   Descriptions?: {};
   Divider?: DividerComponentToken;

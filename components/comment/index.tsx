@@ -5,6 +5,10 @@ import { flattenChildren } from '../_util/props-util';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+
+// CSSINJS
+import useStyle from './style';
+
 export const commentProps = () => ({
   actions: Array,
   /** The element to display as the comment author. */
@@ -28,6 +32,10 @@ const Comment = defineComponent({
   slots: ['actions', 'author', 'avatar', 'content', 'datetime'],
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('comment', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const renderNested = (prefixCls: string, children: VueNode) => {
       return <div class={`${prefixCls}-nested`}>{children}</div>;
     };
@@ -79,18 +87,19 @@ const Comment = defineComponent({
         </div>
       );
       const children = flattenChildren(slots.default?.());
-      return (
+      return wrapSSR(
         <div
           class={[
             pre,
             {
               [`${pre}-rtl`]: direction.value === 'rtl',
             },
+            hashId.value,
           ]}
         >
           {comment}
           {children && children.length ? renderNested(pre, children) : null}
-        </div>
+        </div>,
       );
     };
   },

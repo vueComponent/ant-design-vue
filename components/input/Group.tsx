@@ -5,6 +5,9 @@ import { FormItemInputContext } from '../form/FormItemContext';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
+// CSSINJS
+import useStyle from './style';
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AInputGroup',
@@ -23,10 +26,16 @@ export default defineComponent({
     FormItemInputContext.useProvide(formItemInputContext, {
       isFormItemInput: false,
     });
+
+    // style
+    const { prefixCls: inputPrefixCls } = useConfigInject('input', props);
+    const [wrapSSR, hashId] = useStyle(inputPrefixCls);
+
     const cls = computed(() => {
       const pre = prefixCls.value;
       return {
         [`${pre}`]: true,
+        [hashId.value]: true,
         [`${pre}-lg`]: props.size === 'large',
         [`${pre}-sm`]: props.size === 'small',
         [`${pre}-compact`]: props.compact,
@@ -34,7 +43,7 @@ export default defineComponent({
       };
     });
     return () => {
-      return (
+      return wrapSSR(
         <span
           class={cls.value}
           onMouseenter={props.onMouseenter}
@@ -43,7 +52,7 @@ export default defineComponent({
           onBlur={props.onBlur}
         >
           {slots.default?.()}
-        </span>
+        </span>,
       );
     };
   },

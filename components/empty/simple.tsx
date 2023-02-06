@@ -6,13 +6,17 @@ const Simple = defineComponent({
   setup() {
     const [, token] = useToken();
 
-    const { colorFill, colorFillTertiary, colorFillQuaternary, colorBgContainer } = token.value;
+    const color = computed(() => {
+      const { colorFill, colorFillTertiary, colorFillQuaternary, colorBgContainer } = token.value;
 
-    const color = computed(() => ({
-      borderColor: new TinyColor(colorFill).onBackground(colorBgContainer).toHexString(),
-      shadowColor: new TinyColor(colorFillTertiary).onBackground(colorBgContainer).toHexString(),
-      contentColor: new TinyColor(colorFillQuaternary).onBackground(colorBgContainer).toHexString(),
-    }));
+      return {
+        borderColor: new TinyColor(colorFill).onBackground(colorBgContainer).toHexString(),
+        shadowColor: new TinyColor(colorFillTertiary).onBackground(colorBgContainer).toHexString(),
+        contentColor: new TinyColor(colorFillQuaternary)
+          .onBackground(colorBgContainer)
+          .toHexString(),
+      };
+    });
 
     return () => (
       <svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">

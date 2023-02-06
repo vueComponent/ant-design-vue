@@ -1,25 +1,27 @@
 import { useToken } from '../theme/internal';
 import { TinyColor } from '@ctrl/tinycolor';
 import type { CSSProperties } from 'vue';
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 const Empty = defineComponent({
   setup() {
     const [, token] = useToken();
 
-    const bgColor = new TinyColor(token.value.colorBgBase);
-    let themeStyle: CSSProperties = {};
+    const themeStyle = computed<CSSProperties>(() => {
+      const bgColor = new TinyColor(token.value.colorBgBase);
 
-    // Dark Theme need more dark of this
-    if (bgColor.toHsl().l < 0.5) {
-      themeStyle = {
-        opacity: 0.65,
-      };
-    }
+      // Dark Theme need more dark of this
+      if (bgColor.toHsl().l < 0.5) {
+        return {
+          opacity: 0.65,
+        };
+      }
+      return {};
+    });
 
     return () => (
       <svg
-        style={themeStyle}
+        style={themeStyle.value}
         width="184"
         height="152"
         viewBox="0 0 184 152"

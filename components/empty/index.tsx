@@ -1,12 +1,11 @@
 import { defineComponent } from 'vue';
-import type { CSSProperties, PropType } from 'vue';
+import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
 import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
-import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
@@ -19,33 +18,37 @@ interface Locale {
   description?: string;
 }
 
-export interface EmptyProps {
-  prefixCls?: string;
-  class?: any;
-  style?: string | CSSProperties;
-  imageStyle?: CSSProperties;
-  image?: VueNode | null;
-  description?: VueNode;
-}
+export const emptyProps = () => ({
+  prefixCls: String,
+  class: PropTypes.any,
+  style: [String, Object] as PropType<string | CSSProperties>,
+  imageStyle: Object as PropType<CSSProperties>,
+  image: PropTypes.any,
+  description: PropTypes.any,
+});
+
+export type EmptyProps = Partial<ExtractPropTypes<ReturnType<typeof emptyProps>>>;
 
 const Empty = defineComponent({
   name: 'AEmpty',
+  inheritAttrs: false,
+  props: emptyProps(),
   setup(props, { slots = {}, attrs }) {
     const { direction, prefixCls: prefixClsRef } = useConfigInject('empty', props);
-    const prefixCls = prefixClsRef.value;
 
     const [wrapSSR, hashId] = useStyle(prefixClsRef);
 
-    const {
-      image = defaultEmptyImg,
-      description = slots.description?.() || undefined,
-      imageStyle,
-      class: className = '',
-      ...restProps
-    } = { ...props, ...attrs };
+    return () => {
+      const prefixCls = prefixClsRef.value;
+      const {
+        image = defaultEmptyImg,
+        description = slots.description?.() || undefined,
+        imageStyle,
+        class: className = '',
+        ...restProps
+      } = { ...props, ...attrs };
 
-    return () =>
-      wrapSSR(
+      return wrapSSR(
         <LocaleReceiver
           componentName="Empty"
           children={(locale: Locale) => {
@@ -79,6 +82,7 @@ const Empty = defineComponent({
           }}
         />,
       );
+    };
   },
 });
 

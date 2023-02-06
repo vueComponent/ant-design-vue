@@ -13,7 +13,7 @@ import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
 import type { VueNode } from '../_util/type';
 import useStyle from './style';
-import classNames from 'ant-design-vue/es/_util/classNames';
+import classNames from '../_util/classNames';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -40,18 +40,14 @@ export default defineComponent({
     const classString = computed(() => {
       const { type, showInfo, size } = props;
       const pre = prefixCls.value;
-      const cls = attrs.class;
-      return classNames(
-        {
-          [hashId.value]: true,
-          [pre]: true,
-          [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
-          [`${pre}-show-info`]: showInfo,
-          [`${pre}-${size}`]: size,
-          [`${pre}-rtl`]: direction.value === 'rtl',
-        },
-        cls,
-      );
+      return {
+        [hashId.value]: true,
+        [pre]: true,
+        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
+        [`${pre}-show-info`]: showInfo,
+        [`${pre}-${size}`]: size,
+        [`${pre}-rtl`]: direction.value === 'rtl',
+      };
     });
 
     const percentNumber = computed(() => {
@@ -102,6 +98,7 @@ export default defineComponent({
 
     return () => {
       const { type, steps, strokeColor, title } = props;
+      const { class: cls, ...restAttrs } = attrs;
       const progressInfo = renderProcessInfo();
 
       let progress: VueNode;
@@ -134,7 +131,7 @@ export default defineComponent({
       });
 
       return wrapSSR(
-        <div {...attrs} class={classes} title={title}>
+        <div {...restAttrs} class={[classes, cls]} title={title}>
           {progress}
         </div>,
       );

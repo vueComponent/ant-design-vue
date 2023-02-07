@@ -38,7 +38,7 @@ import './calendar/style';
 import './date-picker/style';
 import './slider/style';
 import './table/style';
-import './progress/style';
+// import './progress/style';
 import './timeline/style';
 import './input-number/style';
 import './transfer/style';

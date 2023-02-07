@@ -3,6 +3,7 @@ import { computed, defineComponent } from 'vue';
 import { useToken } from '../theme/internal';
 
 const Simple = defineComponent({
+  compatConfig: { MODE: 3 },
   setup() {
     const [, token] = useToken();
 

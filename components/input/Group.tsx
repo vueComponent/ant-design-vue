@@ -4,6 +4,7 @@ import type { SizeType } from '../config-provider';
 import { FormItemInputContext } from '../form/FormItemContext';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import classNames from '../_util/classNames';
 
 // CSSINJS
 import useStyle from './style';
@@ -21,7 +22,7 @@ export default defineComponent({
     onFocus: { type: Function as PropType<FocusEventHandler> },
     onBlur: { type: Function as PropType<FocusEventHandler> },
   },
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('input-group', props);
     const formItemInputContext = FormItemInputContext.useInject();
     FormItemInputContext.useProvide(formItemInputContext, {
@@ -46,7 +47,8 @@ export default defineComponent({
     return () => {
       return wrapSSR(
         <span
-          class={cls.value}
+          {...attrs}
+          class={classNames(cls.value, attrs.class)}
           onMouseenter={props.onMouseenter}
           onMouseleave={props.onMouseleave}
           onFocus={props.onFocus}

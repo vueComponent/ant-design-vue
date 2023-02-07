@@ -38,10 +38,11 @@ export type PageHeaderProps = Partial<ExtractPropTypes<ReturnType<typeof pageHea
 const PageHeader = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'APageHeader',
+  inheritAttrs: false,
   props: pageHeaderProps(),
   // emits: ['back'],
   slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, attrs }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
 
     // style
@@ -164,11 +165,12 @@ const PageHeader = defineComponent({
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-compact`]: compact.value,
         },
+        attrs.class,
         hashId.value,
       );
       return wrapSSR(
         <ResizeObserver onResize={onResize}>
-          <div class={className}>
+          <div {...attrs} class={className}>
             {renderBreadcrumb()}
             {renderTitle()}
             {children.length ? renderChildren(children) : null}

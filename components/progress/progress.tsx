@@ -13,7 +13,6 @@ import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
 import type { VueNode } from '../_util/type';
 import useStyle from './style';
-import classNames from '../_util/classNames';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -37,18 +36,6 @@ export default defineComponent({
       'Progress',
       '`successPercent` is deprecated. Please use `success.percent` instead.',
     );
-    const classString = computed(() => {
-      const { type, showInfo, size } = props;
-      const pre = prefixCls.value;
-      return {
-        [hashId.value]: true,
-        [pre]: true,
-        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
-        [`${pre}-show-info`]: showInfo,
-        [`${pre}-${size}`]: size,
-        [`${pre}-rtl`]: direction.value === 'rtl',
-      };
-    });
 
     const percentNumber = computed(() => {
       const { percent = 0 } = props;
@@ -61,10 +48,25 @@ export default defineComponent({
 
     const progressStatus = computed(() => {
       const { status } = props;
-      if (progressStatuses.indexOf(status) < 0 && percentNumber.value >= 100) {
+      if (!progressStatuses.includes(status) && percentNumber.value >= 100) {
         return 'success';
       }
       return status || 'normal';
+    });
+
+    const classString = computed(() => {
+      const { type, showInfo, size } = props;
+      const pre = prefixCls.value;
+      return {
+        [pre]: true,
+        [`${pre}-inline-circle`]: type === 'circle' && props.width! <= 20,
+        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
+        [`${pre}-status-${progressStatus.value}`]: true,
+        [`${pre}-show-info`]: showInfo,
+        [`${pre}-${size}`]: size,
+        [`${pre}-rtl`]: direction.value === 'rtl',
+        [hashId.value]: true,
+      };
     });
 
     const renderProcessInfo = () => {
@@ -126,12 +128,8 @@ export default defineComponent({
         );
       }
 
-      const classes = classNames(classString.value, {
-        [`${prefixCls.value}-status-${progressStatus.value}`]: true,
-      });
-
       return wrapSSR(
-        <div {...restAttrs} class={[classes, cls]} title={title}>
+        <div role="progressbar" {...restAttrs} class={[classString.value, cls]} title={title}>
           {progress}
         </div>,
       );

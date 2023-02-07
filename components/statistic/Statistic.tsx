@@ -33,6 +33,7 @@ export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisti
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AStatistic',
+  inheritAttrs: false,
   props: initDefaultProps(statisticProps(), {
     decimalSeparator: '.',
     groupSeparator: ',',
@@ -65,6 +66,7 @@ export default defineComponent({
       }
       return wrapSSR(
         <div
+          {...attrs}
           class={[pre, { [`${pre}-rtl`]: direction.value === 'rtl' }, attrs.class, hashId.value]}
         >
           {title && <div class={`${pre}-title`}>{title}</div>}

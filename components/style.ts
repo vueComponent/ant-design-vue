@@ -9,7 +9,7 @@ import './pagination/style';
 // import './avatar/style';
 // import './badge/style';
 import './tabs/style';
-import './input/style';
+// import './input/style';
 // import './tooltip/style';
 // import './popover/style';
 // import './popconfirm/style';

@@ -39,6 +39,7 @@ export default defineComponent({
     triggerFocus: { type: Function as PropType<() => void> },
     hidden: Boolean,
     status: String as PropType<InputStatus>,
+    hashId: String,
   },
   setup(props, { slots, attrs }) {
     const statusContext = FormItemInputContext.useInject();
@@ -73,6 +74,7 @@ export default defineComponent({
         status: customStatus,
         addonAfter = slots.addonAfter,
         addonBefore = slots.addonBefore,
+        hashId,
       } = props;
 
       const { status: contextStatus, hasFeedback } = statusContext;
@@ -96,6 +98,7 @@ export default defineComponent({
           // className will go to addon wrapper
           [`${attrs.class}`]: !hasAddon({ addonAfter, addonBefore }) && attrs.class,
         },
+        hashId,
       );
       return (
         <span class={affixWrapperCls} style={attrs.style as CSSProperties} hidden={hidden}>

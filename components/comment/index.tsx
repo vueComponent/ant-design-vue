@@ -28,9 +28,10 @@ export type CommentProps = Partial<ExtractPropTypes<ReturnType<typeof commentPro
 const Comment = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AComment',
+  inheritAttrs: false,
   props: commentProps(),
   slots: ['actions', 'author', 'avatar', 'content', 'datetime'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('comment', props);
 
     // style
@@ -89,11 +90,13 @@ const Comment = defineComponent({
       const children = flattenChildren(slots.default?.());
       return wrapSSR(
         <div
+          {...attrs}
           class={[
             pre,
             {
               [`${pre}-rtl`]: direction.value === 'rtl',
             },
+            attrs.class,
             hashId.value,
           ]}
         >

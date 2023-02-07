@@ -83,6 +83,7 @@ import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 const List = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AList',
+  inheritAttrs: false,
   Item,
   props: initDefaultProps(listProps(), {
     dataSource: [],
@@ -92,7 +93,7 @@ const List = defineComponent({
     pagination: false,
   }),
   slots: ['extra', 'loadMore', 'renderItem', 'header', 'footer'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     provide(ListContextKey, {
       grid: toRef(props, 'grid'),
       itemLayout: toRef(props, 'itemLayout'),
@@ -273,6 +274,7 @@ const List = defineComponent({
           ...classObj.value,
           [`${prefixCls.value}-something-after-last-item`]: isSomethingAfterLastItem,
         },
+        attrs.class,
         hashId.value,
       );
       const paginationContent = props.pagination ? (
@@ -307,7 +309,7 @@ const List = defineComponent({
 
       const paginationPosition = paginationProps.value.position || 'bottom';
       return wrapSSR(
-        <div class={classString}>
+        <div {...attrs} class={classString}>
           {(paginationPosition === 'top' || paginationPosition === 'both') && paginationContent}
           {header && <div class={`${prefixCls.value}-header`}>{header}</div>}
           <Spin {...loadingProp.value}>

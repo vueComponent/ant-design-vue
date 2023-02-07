@@ -11,7 +11,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import type { FocusEventHandler } from '../_util/EventInterface';
-
+import useStyle from './style';
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
 export const switchProps = () => ({
@@ -89,6 +89,7 @@ const Switch = defineComponent({
     );
 
     const { prefixCls, direction, size } = useConfigInject('switch', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const refSwitchNode = ref();
     const focus = () => {
       refSwitchNode.value?.focus();
@@ -148,47 +149,52 @@ const Switch = defineComponent({
       [`${prefixCls.value}-disabled`]: props.disabled,
       [prefixCls.value]: true,
       [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      [hashId.value]: true,
     }));
 
-    return () => (
-      <Wave insertExtraNode>
-        <button
-          {...omit(props, [
-            'prefixCls',
-            'checkedChildren',
-            'unCheckedChildren',
-            'checked',
-            'autofocus',
-            'checkedValue',
-            'unCheckedValue',
-            'id',
-            'onChange',
-            'onUpdate:checked',
-          ])}
-          {...attrs}
-          id={props.id ?? formItemContext.id.value}
-          onKeydown={handleKeyDown}
-          onClick={handleClick}
-          onBlur={handleBlur}
-          onMouseup={handleMouseUp}
-          type="button"
-          role="switch"
-          aria-checked={checked.value as any}
-          disabled={props.disabled || props.loading}
-          class={[attrs.class, classNames.value]}
-          ref={refSwitchNode}
-        >
-          <div class={`${prefixCls.value}-handle`}>
-            {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
-          </div>
-          <span class={`${prefixCls.value}-inner`}>
-            {checkedStatus.value
-              ? getPropsSlot(slots, props, 'checkedChildren')
-              : getPropsSlot(slots, props, 'unCheckedChildren')}
-          </span>
-        </button>
-      </Wave>
-    );
+    return () =>
+      wrapSSR(
+        <Wave insertExtraNode>
+          <button
+            {...omit(props, [
+              'prefixCls',
+              'checkedChildren',
+              'unCheckedChildren',
+              'checked',
+              'autofocus',
+              'checkedValue',
+              'unCheckedValue',
+              'id',
+              'onChange',
+              'onUpdate:checked',
+            ])}
+            {...attrs}
+            id={props.id ?? formItemContext.id.value}
+            onKeydown={handleKeyDown}
+            onClick={handleClick}
+            onBlur={handleBlur}
+            onMouseup={handleMouseUp}
+            type="button"
+            role="switch"
+            aria-checked={checked.value as any}
+            disabled={props.disabled || props.loading}
+            class={[attrs.class, classNames.value]}
+            ref={refSwitchNode}
+          >
+            <div class={`${prefixCls.value}-handle`}>
+              {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
+            </div>
+            <span class={`${prefixCls.value}-inner`}>
+              <span class={`${prefixCls.value}-inner-checked`}>
+                {getPropsSlot(slots, props, 'checkedChildren')}
+              </span>
+              <span class={`${prefixCls.value}-inner-unchecked`}>
+                {getPropsSlot(slots, props, 'unCheckedChildren')}
+              </span>
+            </span>
+          </button>
+        </Wave>,
+      );
   },
 });
 

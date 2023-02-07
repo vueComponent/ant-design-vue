@@ -24,7 +24,7 @@ import './carousel/style';
 // import './message/style';
 // import './spin/style';
 import './select/style';
-import './switch/style';
+// import './switch/style';
 import './auto-complete/style';
 // import './affix/style';
 import './cascader/style';

@@ -14,6 +14,9 @@ import inputProps from './inputProps';
 import omit from '../_util/omit';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 
+// CSSINJS
+import useStyle from './style';
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AInput',
@@ -25,6 +28,9 @@ export default defineComponent({
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const { direction, prefixCls, size, autocomplete } = useConfigInject('input', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
 
     const focus = (option?: InputFocusOptions) => {
       inputRef.value?.focus(option);
@@ -117,7 +123,7 @@ export default defineComponent({
       const prefixClsValue = prefixCls.value;
       const inputHasPrefixSuffix = hasPrefixSuffix({ prefix, suffix }) || !!hasFeedback;
       const clearIcon = slots.clearIcon || (() => <CloseCircleFilled />);
-      return (
+      return wrapSSR(
         <VcInput
           {...attrs}
           {...omit(rest, ['onUpdate:value', 'onChange', 'onInput'])}
@@ -140,6 +146,7 @@ export default defineComponent({
               [`${prefixClsValue}-borderless`]: !bordered,
             },
             !inputHasPrefixSuffix && getStatusClassNames(prefixClsValue, mergedStatus.value),
+            hashId.value,
           )}
           affixWrapperClassName={classNames(
             {
@@ -149,10 +156,14 @@ export default defineComponent({
               [`${prefixClsValue}-affix-wrapper-borderless`]: !bordered,
             },
             getStatusClassNames(`${prefixClsValue}-affix-wrapper`, mergedStatus.value, hasFeedback),
+            hashId.value,
           )}
-          wrapperClassName={classNames({
-            [`${prefixClsValue}-group-rtl`]: direction.value === 'rtl',
-          })}
+          wrapperClassName={classNames(
+            {
+              [`${prefixClsValue}-group-rtl`]: direction.value === 'rtl',
+            },
+            hashId.value,
+          )}
           groupClassName={classNames(
             {
               [`${prefixClsValue}-group-wrapper-sm`]: size.value === 'small',
@@ -160,9 +171,10 @@ export default defineComponent({
               [`${prefixClsValue}-group-wrapper-rtl`]: direction.value === 'rtl',
             },
             getStatusClassNames(`${prefixClsValue}-group-wrapper`, mergedStatus.value, hasFeedback),
+            hashId.value,
           )}
           v-slots={{ ...slots, clearIcon }}
-        ></VcInput>
+        ></VcInput>,
       );
     };
   },

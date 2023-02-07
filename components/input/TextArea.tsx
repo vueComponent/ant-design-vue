@@ -21,6 +21,9 @@ import omit from '../_util/omit';
 import type { VueNode } from '../_util/type';
 import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 
+// CSSINJS
+import useStyle from './style';
+
 function fixEmojiLength(value: string, maxLength: number) {
   return [...(value || '')].slice(0, maxLength).join('');
 }
@@ -58,6 +61,10 @@ export default defineComponent({
     const resizableTextArea = ref();
     const mergedValue = ref('');
     const { prefixCls, size, direction } = useConfigInject('input', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const showCount = computed(() => {
       return (props.showCount as any) === '' || props.showCount || false;
     });
@@ -198,6 +205,7 @@ export default defineComponent({
             [`${prefixCls.value}-lg`]: size.value === 'large',
           },
           getStatusClassNames(prefixCls.value, mergedStatus.value),
+          hashId.value,
         ],
         showCount: null,
         prefixCls: prefixCls.value,
@@ -252,6 +260,7 @@ export default defineComponent({
         direction: direction.value,
         bordered,
         style: showCount.value ? undefined : style,
+        hashId: hashId.value,
       };
 
       let textareaNode = (
@@ -283,6 +292,7 @@ export default defineComponent({
               },
               `${prefixCls.value}-textarea-show-count`,
               customClass,
+              hashId.value,
             )}
             style={style as CSSProperties}
             data-count={typeof dataCount !== 'object' ? dataCount : undefined}
@@ -296,7 +306,7 @@ export default defineComponent({
           </div>
         );
       }
-      return textareaNode;
+      return wrapSSR(textareaNode);
     };
   },
 });

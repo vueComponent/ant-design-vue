@@ -11,6 +11,7 @@ import useStyle from './style';
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AInputGroup',
+  inheritAttrs: false,
   props: {
     prefixCls: String,
     size: { type: String as PropType<SizeType> },

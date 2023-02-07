@@ -306,7 +306,7 @@ export default defineComponent({
           </div>
         );
       }
-      return textareaNode;
+      return wrapSSR(textareaNode);
     };
   },
 });

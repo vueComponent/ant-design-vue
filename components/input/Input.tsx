@@ -123,7 +123,7 @@ export default defineComponent({
       const prefixClsValue = prefixCls.value;
       const inputHasPrefixSuffix = hasPrefixSuffix({ prefix, suffix }) || !!hasFeedback;
       const clearIcon = slots.clearIcon || (() => <CloseCircleFilled />);
-      return (
+      return wrapSSR(
         <VcInput
           {...attrs}
           {...omit(rest, ['onUpdate:value', 'onChange', 'onInput'])}
@@ -174,7 +174,7 @@ export default defineComponent({
             hashId.value,
           )}
           v-slots={{ ...slots, clearIcon }}
-        ></VcInput>
+        ></VcInput>,
       );
     };
   },

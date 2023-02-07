@@ -16,6 +16,9 @@ import useDestroyed from '../_util/hooks/useDestroyed';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import Space from '../space';
 
+// CSSINJS
+import useStyle from './style';
+
 export const pageHeaderProps = () => ({
   backIcon: PropTypes.any,
   prefixCls: String,
@@ -40,6 +43,10 @@ const PageHeader = defineComponent({
   slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
   setup(props, { emit, slots }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const compact = ref(false);
     const isDestroyed = useDestroyed();
     const onResize = ({ width }: { width: number }) => {
@@ -148,14 +155,18 @@ const PageHeader = defineComponent({
       const hasBreadcrumb = props.breadcrumb?.routes || slots.breadcrumb;
       const hasFooter = props.footer || slots.footer;
       const children = flattenChildren(slots.default?.());
-      const className = classNames(prefixCls.value, {
-        'has-breadcrumb': hasBreadcrumb,
-        'has-footer': hasFooter,
-        [`${prefixCls.value}-ghost`]: ghost.value,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-        [`${prefixCls.value}-compact`]: compact.value,
-      });
-      return (
+      const className = classNames(
+        prefixCls.value,
+        {
+          'has-breadcrumb': hasBreadcrumb,
+          'has-footer': hasFooter,
+          [`${prefixCls.value}-ghost`]: ghost.value,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          [`${prefixCls.value}-compact`]: compact.value,
+        },
+        hashId.value,
+      );
+      return wrapSSR(
         <ResizeObserver onResize={onResize}>
           <div class={className}>
             {renderBreadcrumb()}
@@ -163,7 +174,7 @@ const PageHeader = defineComponent({
             {children.length ? renderChildren(children) : null}
             {renderFooter()}
           </div>
-        </ResizeObserver>
+        </ResizeObserver>,
       );
     };
   },

@@ -17,6 +17,9 @@ import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 
+// CSSINJS
+import useStyle from './style';
+
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';
 export type { TransferSearchProps } from './search';
@@ -125,6 +128,10 @@ const Transfer = defineComponent({
   // emits: ['update:targetKeys', 'update:selectedKeys', 'change', 'search', 'scroll', 'selectChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const sourceSelectedKeys = ref([]);
     const targetSelectedKeys = ref([]);
 
@@ -349,6 +356,7 @@ const Transfer = defineComponent({
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value, formItemInputContext.hasFeedback),
+        hashId.value,
       );
       const titles = props.titles;
       const leftTitle =
@@ -356,7 +364,7 @@ const Transfer = defineComponent({
       const rightTitle =
         (titles && titles[1]) ?? slots.rightTitle?.() ?? (locale.titles || ['', ''])[1];
       return (
-        <div class={cls} style={style as CSSProperties} id={id}>
+        <div {...attrs} class={cls} style={style as CSSProperties} id={id}>
           <List
             key="leftList"
             prefixCls={`${prefixCls.value}-list`}
@@ -422,13 +430,14 @@ const Transfer = defineComponent({
         </div>
       );
     };
-    return () => (
-      <LocaleReceiver
-        componentName="Transfer"
-        defaultLocale={defaultLocale.Transfer}
-        children={renderTransfer}
-      />
-    );
+    return () =>
+      wrapSSR(
+        <LocaleReceiver
+          componentName="Transfer"
+          defaultLocale={defaultLocale.Transfer}
+          children={renderTransfer}
+        />,
+      );
   },
 });
 

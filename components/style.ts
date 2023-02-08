@@ -44,7 +44,7 @@ import './input-number/style';
 import './transfer/style';
 import './tree/style';
 import './upload/style';
-import './layout/style';
+// import './layout/style';
 // import './anchor/style';
 // import './list/style';
 import './tree-select/style';

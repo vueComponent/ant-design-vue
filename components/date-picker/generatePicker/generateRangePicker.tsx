@@ -20,6 +20,9 @@ import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormI
 import omit from '../../_util/omit';
 import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
 
+//CSSINJS
+import useStyle from '../style';
+
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
   extraProps: ExtraProps,
@@ -58,6 +61,10 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         'picker',
         props,
       );
+
+      // style
+      const [wrapSSR, hashId] = useStyle(prefixCls);
+
       const pickerRef = ref();
       expose({
         focus: () => {
@@ -166,7 +173,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             {formItemInputContext.hasFeedback && formItemInputContext.feedbackIcon}
           </>
         );
-        return (
+        return wrapSSR(
           <VCRangePicker
             dateRender={dateRender}
             renderExtraFooter={renderExtraFooter}
@@ -202,6 +209,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
                 formItemInputContext.hasFeedback,
               ),
               attrs.class,
+              hashId.value,
             )}
             locale={locale!.lang}
             prefixCls={pre}
@@ -213,6 +221,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
             components={Components}
             direction={direction.value}
+            dropdownClassName={classNames(hashId.value)}
             onChange={onChange}
             onOpenChange={onOpenChange}
             onFocus={onFocus}
@@ -220,7 +229,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             onPanelChange={onPanelChange}
             onOk={onOk}
             onCalendarChange={onCalendarChange}
-          />
+          />,
         );
       };
     },

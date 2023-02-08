@@ -1,31 +1,29 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
 import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
-import type { valueType } from './utils';
+import type { valueType, Formatter } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 // CSSINJS
 import useStyle from './style';
+import { anyType, booleanType, functionType, someType, vNodeType } from '../_util/type';
 
 export const statisticProps = () => ({
   prefixCls: String,
   decimalSeparator: String,
   groupSeparator: String,
   format: String,
-  value: {
-    type: [String, Number, Object] as PropType<valueType>,
-  },
+  value: someType<valueType>([Number, String, Object]),
   valueStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  valueRender: PropTypes.any,
-  formatter: PropTypes.any,
+  valueRender: functionType<(node: VNode | JSX.Element) => VNode | JSX.Element>(),
+  formatter: anyType<Formatter>(),
   precision: Number,
-  prefix: PropTypes.any,
-  suffix: PropTypes.any,
-  title: PropTypes.any,
-  loading: { type: Boolean, default: undefined },
+  prefix: vNodeType(),
+  suffix: vNodeType(),
+  title: vNodeType(),
+  loading: booleanType(),
 });
 
 export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisticProps>>>;
@@ -52,7 +50,7 @@ export default defineComponent({
       const title = props.title ?? slots.title?.();
       const prefix = props.prefix ?? slots.prefix?.();
       const suffix = props.suffix ?? slots.suffix?.();
-      const formatter = props.formatter ?? slots.formatter;
+      const formatter = props.formatter ?? (slots.formatter as unknown as Formatter);
       // data-for-update just for update component
       // https://github.com/vueComponent/ant-design-vue/pull/3170
       let valueNode = (

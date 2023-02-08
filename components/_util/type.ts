@@ -47,29 +47,33 @@ export function eventType<T>() {
   return { type: [Function, Array] as PropType<T | T[]> };
 }
 
-export function objectType<T>(defaultVal?: any) {
+export function objectType<T = {}>(defaultVal?: T) {
   return { type: Object as PropType<T>, default: defaultVal as T };
 }
 
-export function booleanType(defaultVal?: any) {
+export function booleanType(defaultVal?: boolean) {
   return { type: Boolean, default: defaultVal as boolean };
 }
 
-export function functionType<T = () => {}>(defaultVal?: any) {
+export function functionType<T = () => {}>(defaultVal?: T) {
   return { type: Function as PropType<T>, default: defaultVal as T };
 }
 
-export function anyType<T = any>() {
-  return { validator: () => true } as unknown as { type: PropType<T> };
+export function anyType<T = any>(defaultVal?: T) {
+  return { validator: () => true, default: defaultVal as T } as unknown as { type: PropType<T> };
 }
 export function vNodeType<T = VueNode>() {
   return { validator: () => true } as unknown as { type: PropType<T> };
 }
 
-export function stringType<T extends string = string>(defaultVal?: string) {
+export function arrayType<T extends any[]>(defaultVal?: T) {
+  return { type: Array as unknown as PropType<T>, default: defaultVal as T };
+}
+
+export function stringType<T extends string = string>(defaultVal?: T) {
   return { type: String as unknown as PropType<T>, default: defaultVal as T };
 }
 
-export function someType<T>(types: any[], defaultVal?: any) {
+export function someType<T>(types: any[], defaultVal?: T) {
   return { type: types as PropType<T>, default: defaultVal as T };
 }

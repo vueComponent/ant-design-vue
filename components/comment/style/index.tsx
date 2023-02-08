@@ -141,7 +141,6 @@ const genBaseStyle: GenerateStyle<CommentToken> = token => {
 };
 
 export default genComponentStyleHook('Comment', token => {
-  console.log(token);
   const commentToken = mergeToken<CommentToken>(token, {
     commentBg: 'inherit',
     commentPaddingBase: `${token.paddingMD}px 0`,

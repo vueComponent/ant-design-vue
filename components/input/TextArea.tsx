@@ -23,6 +23,7 @@ import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 
 // CSSINJS
 import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 function fixEmojiLength(value: string, maxLength: number) {
   return [...(value || '')].slice(0, maxLength).join('');
@@ -64,7 +65,7 @@ export default defineComponent({
 
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
-
+    const disabled = useInjectDisabled();
     const showCount = computed(() => {
       return (props.showCount as any) === '' || props.showCount || false;
     });
@@ -191,12 +192,11 @@ export default defineComponent({
       setValue(triggerValue);
     };
     const renderTextArea = () => {
-      const { style, class: customClass } = attrs;
+      const { class: customClass } = attrs;
       const { bordered = true } = props;
       const resizeProps = {
         ...omit(props, ['allowClear']),
         ...attrs,
-        style: showCount.value ? {} : style,
         class: [
           {
             [`${prefixCls.value}-borderless`]: !bordered,
@@ -261,6 +261,7 @@ export default defineComponent({
         bordered,
         style: showCount.value ? undefined : style,
         hashId: hashId.value,
+        disabled: props.disabled ?? disabled.value,
       };
 
       let textareaNode = (
@@ -276,7 +277,11 @@ export default defineComponent({
         const valueLength = [...mergedValue.value].length;
         let dataCount: VueNode = '';
         if (typeof showCount.value === 'object') {
-          dataCount = showCount.value.formatter({ count: valueLength, maxlength });
+          dataCount = showCount.value.formatter({
+            value: mergedValue.value,
+            count: valueLength,
+            maxlength,
+          });
         } else {
           dataCount = `${valueLength}${hasMaxLength.value ? ` / ${maxlength}` : ''}`;
         }

@@ -62,6 +62,9 @@ export function functionType<T = () => {}>(defaultVal?: any) {
 export function anyType<T = any>() {
   return { validator: () => true } as unknown as { type: PropType<T> };
 }
+export function vNodeType<T = VueNode>() {
+  return { validator: () => true } as unknown as { type: PropType<T> };
+}
 
 export function stringType<T extends string = string>(defaultVal?: string) {
   return { type: String as unknown as PropType<T>, default: defaultVal as T };

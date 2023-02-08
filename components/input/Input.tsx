@@ -16,6 +16,7 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 
 // CSSINJS
 import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -31,6 +32,8 @@ export default defineComponent({
 
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
+
+    const disabled = useInjectDisabled();
 
     const focus = (option?: InputFocusOptions) => {
       inputRef.value?.focus(option);
@@ -129,6 +132,7 @@ export default defineComponent({
           {...omit(rest, ['onUpdate:value', 'onChange', 'onInput'])}
           onChange={triggerChange}
           id={id}
+          disabled={props.disabled ?? disabled.value}
           ref={inputRef}
           prefixCls={prefixClsValue}
           autocomplete={autocomplete.value}

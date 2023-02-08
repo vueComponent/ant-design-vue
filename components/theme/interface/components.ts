@@ -81,6 +81,7 @@ export interface ComponentTokenMap {
   //   List?: ListComponentToken;
   //   Mentions?: MentionsComponentToken;
   Notification?: NotificationComponentToken;
+  PageHeader?: {};
   Pagination?: {};
   Popover?: PopoverComponentToken;
   Popconfirm?: PopconfirmComponentToken;

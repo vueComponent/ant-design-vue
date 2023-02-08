@@ -26,8 +26,8 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/wc6%263gJ0Y8/Space.svg
 | align | 对齐方式 | `start` \| `end` \|`center` \|`baseline` | - | 1.6.5 |
 | direction | 间距方向 | `vertical` \| `horizontal` | `horizontal` | 1.6.5 |
 | size | 间距大小 | `small` \| `middle` \| `large` \| `number` | `small` | 1.6.5 |
-| split | 设置拆分 | VueNode \| v-slot | - | 1.6.5 |
-| wrap | 是否自动换行，仅在 `horizontal` 时有效 | boolean | false | 1.6.5 |
+| split | 设置拆分 | VueNode \| v-slot | - | 2.2.0 |
+| wrap | 是否自动换行，仅在 `horizontal` 时有效 | boolean | false | 2.2.0 |
 
 ### Space.Compact
 

@@ -1,6 +1,7 @@
 import type { App, Plugin, ExtractPropTypes, PropType, HTMLAttributes } from 'vue';
 import { provide, defineComponent, ref, watch, computed, toRef } from 'vue';
 import PropTypes from '../_util/vue-types';
+import classNames from '../_util/classNames';
 
 import type { SpinProps } from '../spin';
 import Spin from '../spin';
@@ -18,6 +19,9 @@ import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
 import eagerComputed from '../_util/eagerComputed';
+
+// CSSINJS
+import useStyle from './style';
 
 export type { ListItemProps } from './Item';
 export type { ListItemMetaProps } from './ItemMeta';
@@ -79,6 +83,7 @@ import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 const List = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AList',
+  inheritAttrs: false,
   Item,
   props: initDefaultProps(listProps(), {
     dataSource: [],
@@ -88,7 +93,7 @@ const List = defineComponent({
     pagination: false,
   }),
   slots: ['extra', 'loadMore', 'renderItem', 'header', 'footer'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     provide(ListContextKey, {
       grid: toRef(props, 'grid'),
       itemLayout: toRef(props, 'itemLayout'),
@@ -98,6 +103,10 @@ const List = defineComponent({
       total: 0,
     };
     const { prefixCls, direction, renderEmpty } = useConfigInject('list', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const paginationObj = computed(() =>
       props.pagination && typeof props.pagination === 'object' ? props.pagination : {},
     );
@@ -260,10 +269,14 @@ const List = defineComponent({
       const header = props.header ?? slots.header?.();
       const children = flattenChildren(slots.default?.());
       const isSomethingAfterLastItem = !!(loadMore || props.pagination || footer);
-      const classString = {
-        ...classObj.value,
-        [`${prefixCls.value}-something-after-last-item`]: isSomethingAfterLastItem,
-      };
+      const classString = classNames(
+        {
+          ...classObj.value,
+          [`${prefixCls.value}-something-after-last-item`]: isSomethingAfterLastItem,
+        },
+        attrs.class,
+        hashId.value,
+      );
       const paginationContent = props.pagination ? (
         <div class={`${prefixCls.value}-pagination`}>
           <Pagination
@@ -295,8 +308,8 @@ const List = defineComponent({
       }
 
       const paginationPosition = paginationProps.value.position || 'bottom';
-      return (
-        <div class={classString}>
+      return wrapSSR(
+        <div {...attrs} class={classString}>
           {(paginationPosition === 'top' || paginationPosition === 'both') && paginationContent}
           {header && <div class={`${prefixCls.value}-header`}>{header}</div>}
           <Spin {...loadingProp.value}>
@@ -307,7 +320,7 @@ const List = defineComponent({
           {loadMore ||
             ((paginationPosition === 'bottom' || paginationPosition === 'both') &&
               paginationContent)}
-        </div>
+        </div>,
       );
     };
   },

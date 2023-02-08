@@ -18,7 +18,7 @@ import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
 // import type { ComponentToken as ImageComponentToken } from '../../image/style';
 // import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
 // import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
-// import type { ComponentToken as ListComponentToken } from '../../list/style';
+import type { ComponentToken as ListComponentToken } from '../../list/style';
 // import type { ComponentToken as MentionsComponentToken } from '../../mentions/style';
 import type { ComponentToken as MenuComponentToken } from '../../menu/style';
 import type { ComponentToken as MessageComponentToken } from '../../message/style';
@@ -78,7 +78,7 @@ export interface ComponentTokenMap {
   Input?: {};
   //   InputNumber?: InputNumberComponentToken;
   //   Layout?: LayoutComponentToken;
-  //   List?: ListComponentToken;
+  List?: ListComponentToken;
   //   Mentions?: MentionsComponentToken;
   Notification?: NotificationComponentToken;
   PageHeader?: {};

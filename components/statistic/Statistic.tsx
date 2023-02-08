@@ -7,6 +7,9 @@ import type { valueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
+// CSSINJS
+import useStyle from './style';
+
 export const statisticProps = () => ({
   prefixCls: String,
   decimalSeparator: String,
@@ -30,14 +33,19 @@ export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisti
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AStatistic',
+  inheritAttrs: false,
   props: initDefaultProps(statisticProps(), {
     decimalSeparator: '.',
     groupSeparator: ',',
     loading: false,
   }),
   slots: ['title', 'prefix', 'suffix', 'formatter'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('statistic', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     return () => {
       const { value = 0, valueStyle, valueRender } = props;
       const pre = prefixCls.value;
@@ -56,8 +64,11 @@ export default defineComponent({
       if (valueRender) {
         valueNode = valueRender(valueNode);
       }
-      return (
-        <div class={[pre, { [`${pre}-rtl`]: direction.value === 'rtl' }]}>
+      return wrapSSR(
+        <div
+          {...attrs}
+          class={[pre, { [`${pre}-rtl`]: direction.value === 'rtl' }, attrs.class, hashId.value]}
+        >
           {title && <div class={`${pre}-title`}>{title}</div>}
           <Skeleton paragraph={false} loading={props.loading}>
             <div style={valueStyle} class={`${pre}-content`}>
@@ -66,7 +77,7 @@ export default defineComponent({
               {suffix && <span class={`${pre}-content-suffix`}>{suffix}</span>}
             </div>
           </Skeleton>
-        </div>
+        </div>,
       );
     };
   },

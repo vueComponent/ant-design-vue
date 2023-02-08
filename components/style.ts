@@ -5,7 +5,7 @@ import './checkbox/style';
 // import './grid/style';
 // import './tag/style';
 import './rate/style';
-import './pagination/style';
+// import './pagination/style';
 // import './avatar/style';
 // import './badge/style';
 import './tabs/style';

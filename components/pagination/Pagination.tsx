@@ -12,6 +12,9 @@ import classNames from '../_util/classNames';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 
+// CSSINJS
+import useStyle from './style';
+
 export const paginationProps = () => ({
   total: Number,
   defaultCurrent: Number,
@@ -81,6 +84,10 @@ export default defineComponent({
   // emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup(props, { slots, attrs }) {
     const { prefixCls, configProvider, direction } = useConfigInject('pagination', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const selectPrefixCls = computed(() =>
       configProvider.getPrefixCls('select', props.selectPrefixCls),
     );
@@ -152,11 +159,12 @@ export default defineComponent({
         class: classNames(
           { mini: isSmall, [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
           attrs.class,
+          hashId.value,
         ),
         itemRender,
       };
 
-      return <VcPagination {...paginationProps} />;
+      return wrapSSR(<VcPagination {...paginationProps} />);
     };
   },
 });

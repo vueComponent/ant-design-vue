@@ -131,7 +131,7 @@ const Editable = defineComponent({
         hashId.value,
       );
 
-      wrapSSR(
+      return wrapSSR(
         <div {...attrs} class={textAreaClassName}>
           <TextArea
             ref={saveTextAreaRef}

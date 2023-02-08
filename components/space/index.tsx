@@ -3,7 +3,7 @@ import { defineComponent, computed, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
-import { tuple } from '../_util/type';
+import { booleanType, tuple } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import classNames from '../_util/classNames';
@@ -24,7 +24,7 @@ export const spaceProps = () => ({
   },
   direction: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
   align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
-  wrap: { type: Boolean, default: undefined },
+  wrap: booleanType(),
 });
 
 export type SpaceProps = Partial<ExtractPropTypes<ReturnType<typeof spaceProps>>>;
@@ -36,9 +36,10 @@ function getNumberSize(size: SpaceSize) {
 const Space = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ASpace',
+  inheritAttrs: false,
   props: spaceProps(),
   slots: ['split'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const supportFlexGap = useFlexGapSupport();
@@ -96,7 +97,7 @@ const Space = defineComponent({
       const horizontalSizeVal = horizontalSize.value;
       const latestIndex = len - 1;
       return (
-        <div class={cn.value} style={style.value}>
+        <div {...attrs} class={cn.value} style={style.value}>
           {items.map((child, index) => {
             let itemStyle: CSSProperties = {};
             if (!supportFlexGap.value) {

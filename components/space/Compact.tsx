@@ -5,16 +5,16 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 import useStyle from './style';
 import { computed, defineComponent } from 'vue';
-import type { PropType, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes, Ref } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
+import { booleanType, tuple } from '../_util/type';
 import { isEmpty } from 'lodash-es';
 
 export const spaceCompactItemProps = () => ({
   compactSize: String as PropType<SizeType>,
   compactDirection: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
-  isFirstItem: { type: Boolean, default: undefined },
-  isLastItem: { type: Boolean, default: undefined },
+  isFirstItem: booleanType(),
+  isLastItem: booleanType(),
 });
 
 export type SpaceCompactItemContextType = Partial<
@@ -23,7 +23,7 @@ export type SpaceCompactItemContextType = Partial<
 
 export const SpaceCompactItemContext = createContext<SpaceCompactItemContextType | null>(null);
 
-export const useCompactItemContext = (prefixCls: string, direction: DirectionType) => {
+export const useCompactItemContext = (prefixCls: Ref<string>, direction: Ref<DirectionType>) => {
   const compactItemContext = SpaceCompactItemContext.useInject();
 
   const compactItemClassnames = computed(() => {
@@ -33,10 +33,10 @@ export const useCompactItemContext = (prefixCls: string, direction: DirectionTyp
     const separator = compactDirection === 'vertical' ? '-vertical-' : '-';
 
     return classNames({
-      [`${prefixCls}-compact${separator}item`]: true,
-      [`${prefixCls}-compact${separator}first-item`]: isFirstItem,
-      [`${prefixCls}-compact${separator}last-item`]: isLastItem,
-      [`${prefixCls}-compact${separator}item-rtl`]: direction === 'rtl',
+      [`${prefixCls.value}-compact${separator}item`]: true,
+      [`${prefixCls.value}-compact${separator}first-item`]: isFirstItem,
+      [`${prefixCls.value}-compact${separator}last-item`]: isLastItem,
+      [`${prefixCls.value}-compact${separator}item-rtl`]: direction.value === 'rtl',
     });
   });
 
@@ -85,38 +85,15 @@ const Compact = defineComponent({
   props: spaceCompactProps(),
   setup(props, { attrs, slots }) {
     const { prefixCls, direction: directionConfig } = useConfigInject('space-compact', props);
+    const compactItemContext = SpaceCompactItemContext.useInject();
 
     const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const clx = computed(() => {
       return classNames(prefixCls.value, hashId.value, {
         [`${prefixCls.value}-rtl`]: directionConfig.value === 'rtl',
         [`${prefixCls.value}-block`]: props.block,
         [`${prefixCls.value}-vertical`]: props.direction === 'vertical',
-      });
-    });
-
-    const nodes = computed(() => {
-      const compactItemContext = SpaceCompactItemContext.useInject();
-      const childNodes = slots.default?.() || [];
-
-      return childNodes.map((child, i) => {
-        const key = (child && child.key) || `${prefixCls.value}-item-${i}`;
-        const noCompactItemContext = !compactItemContext || isEmpty(compactItemContext);
-
-        return (
-          <CompactItem
-            key={key}
-            compactSize={props.size}
-            compactDirection={props.direction}
-            isFirstItem={i === 0 && (noCompactItemContext || compactItemContext?.isFirstItem)}
-            isLastItem={
-              i === childNodes.length - 1 &&
-              (noCompactItemContext || compactItemContext?.isLastItem)
-            }
-          >
-            {child}
-          </CompactItem>
-        );
       });
     });
 
@@ -126,9 +103,29 @@ const Compact = defineComponent({
         return null;
       }
 
+      const childNodes = slots.default?.() || [];
+
       return wrapSSR(
         <div class={clx.value} {...attrs}>
-          {nodes.value}
+          {childNodes.map((child, i) => {
+            const key = (child && child.key) || `${prefixCls.value}-item-${i}`;
+            const noCompactItemContext = !compactItemContext || isEmpty(compactItemContext);
+
+            return (
+              <CompactItem
+                key={key}
+                compactSize={props.size}
+                compactDirection={props.direction}
+                isFirstItem={i === 0 && (noCompactItemContext || compactItemContext?.isFirstItem)}
+                isLastItem={
+                  i === childNodes.length - 1 &&
+                  (noCompactItemContext || compactItemContext?.isLastItem)
+                }
+              >
+                {child}
+              </CompactItem>
+            );
+          })}
         </div>,
       );
     };

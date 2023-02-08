@@ -50,10 +50,7 @@ export default defineComponent({
     const hasTwoCNChar = ref(false);
 
     const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
-    const { compactSize, compactItemClassnames } = useCompactItemContext(
-      prefixCls.value,
-      direction.value,
-    );
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
 
     // =============== Update Loading ===============
     const loadingOrDelay = computed(() =>

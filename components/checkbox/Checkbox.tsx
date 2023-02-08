@@ -11,6 +11,9 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { CheckboxChangeEvent, CheckboxProps } from './interface';
 import { CheckboxGroupContextKey, checkboxProps } from './interface';
 
+// CSSINJS
+import useStyle from './style';
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ACheckbox',
@@ -22,6 +25,10 @@ export default defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const { prefixCls, direction } = useConfigInject('checkbox', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const checkboxGroup = inject(CheckboxGroupContextKey, undefined);
     const uniId = Symbol('checkboxUniId');
 
@@ -90,12 +97,16 @@ export default defineComponent({
           [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
         },
         className,
+        hashId.value,
       );
-      const checkboxClass = classNames({
-        [`${prefixCls.value}-indeterminate`]: indeterminate,
-      });
+      const checkboxClass = classNames(
+        {
+          [`${prefixCls.value}-indeterminate`]: indeterminate,
+        },
+        hashId.value,
+      );
       const ariaChecked = indeterminate ? 'mixed' : undefined;
-      return (
+      return wrapSSR(
         <label
           class={classString}
           style={style as CSSProperties}
@@ -109,7 +120,7 @@ export default defineComponent({
             ref={checkboxRef}
           />
           {children.length ? <span>{children}</span> : null}
-        </label>
+        </label>,
       );
     };
   },

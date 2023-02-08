@@ -12,6 +12,7 @@ import { optionProps } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import useStyle from './style';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -98,6 +99,7 @@ const Mentions = defineComponent({
   slots: ['notFoundContent', 'option'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const focused = ref(false);
     const vcMentions = ref(null);
     const value = ref(props.value ?? props.defaultValue ?? '');
@@ -182,6 +184,7 @@ const Mentions = defineComponent({
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value),
         !hasFeedback && className,
+        hashId.value,
       );
 
       const mentionsProps = {
@@ -206,11 +209,12 @@ const Mentions = defineComponent({
       const mentions = (
         <VcMentions
           {...mentionsProps}
+          dropdownClassName={hashId.value}
           v-slots={{ notFoundContent: getNotFoundContent, option: slots.option }}
         ></VcMentions>
       );
       if (hasFeedback) {
-        return (
+        return wrapSSR(
           <div
             class={classNames(
               `${prefixCls.value}-affix-wrapper`,
@@ -220,14 +224,15 @@ const Mentions = defineComponent({
                 hasFeedback,
               ),
               className,
+              hashId.value,
             )}
           >
             {mentions}
             <span class={`${prefixCls.value}-suffix`}>{feedbackIcon}</span>
-          </div>
+          </div>,
         );
       }
-      return mentions;
+      return wrapSSR(mentions);
     };
   },
 });

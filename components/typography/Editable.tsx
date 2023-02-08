@@ -1,8 +1,8 @@
 import KeyCode from '../_util/KeyCode';
 import TextArea from '../input/TextArea';
 import EnterOutlined from '@ant-design/icons-vue/EnterOutlined';
-import { ExtractPropTypes, PropType, toRefs } from 'vue';
-import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
+import { defineComponent, ref, reactive, watch, onMounted, toRefs } from 'vue';
 import type { Direction } from '../config-provider';
 import type { ChangeEventHandler } from '../_util/EventInterface';
 import type { AutoSizeType } from '../input/inputProps';

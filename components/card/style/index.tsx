@@ -203,7 +203,8 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         listStyle: 'none',
         background: `${token.colorBgBase}`,
         //  @card-actions-background;
-        borderTop: `${token.BackTop}`,
+        // borderTop: `${token.BackTop}`,
+        borderTop: `1px solid #f0f0f0`,
         // @border-width-base @border-style-base @border-color-split;
         ...clearFix(),
 
@@ -212,8 +213,6 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           margin: `${cardActionsLiMargin} `,
           color: `${token.colorTextDescription}`,
           textAlign: 'center',
-          borderTop: ` 1px solid #f0f0f0;`,
-           
           [` ${componentCls}-rtl &`]: {
             float: 'right',
           },

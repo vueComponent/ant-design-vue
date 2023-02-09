@@ -5,7 +5,7 @@ import type { ComponentToken as BackTopComponentToken } from '../../back-top/sty
 import type { ComponentToken as ButtonComponentToken } from '../../button/style';
 // import type { ComponentToken as FloatButtonComponentToken } from '../../float-button/style';
 // import type { ComponentToken as CalendarComponentToken } from '../../calendar/style';
-// import type { ComponentToken as CardComponentToken } from '../../card/style';
+import type { ComponentToken as CardComponentToken } from '../../card/style';
 // import type { ComponentToken as CarouselComponentToken } from '../../carousel/style';
 // import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
 // import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
@@ -49,6 +49,7 @@ import type { ComponentToken as TooltipComponentToken } from '../../tooltip/styl
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
 // import type { ComponentToken as WaveToken } from '../../_util/wave/style';
+import type { ComponentToken as StatisticComponentToken } from '../../statistic/style';
 
 export interface ComponentTokenMap {
   Affix?: {};
@@ -59,7 +60,7 @@ export interface ComponentTokenMap {
   Badge?: {};
   Button?: ButtonComponentToken;
   Breadcrumb?: {};
-  //   Card?: CardComponentToken;
+  Card?: CardComponentToken;
   //   Carousel?: CarouselComponentToken;
   //   Cascader?: CascaderComponentToken;
   //   Checkbox?: CheckboxComponentToken;
@@ -91,7 +92,7 @@ export interface ComponentTokenMap {
   Skeleton?: SkeletonComponentToken;
   //   Slider?: SliderComponentToken;
   Spin?: SpinComponentToken;
-  Statistic?: {};
+  Statistic?: StatisticComponentToken;
   Switch?: {};
   Tag?: TagComponentToken;
   Tree?: {};

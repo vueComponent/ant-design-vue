@@ -4,7 +4,8 @@ import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import type { CSSProperties, PropType, VNode } from 'vue';
 import { defineComponent } from 'vue';
-import { tuple } from '../_util/type';
+import type { VueNode } from '../_util/type';
+import { anyType, tuple } from '../_util/type';
 import type { Direction, SizeType } from '../config-provider';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import { hasAddon } from './util';
@@ -12,7 +13,7 @@ import { FormItemInputContext } from '../form/FormItemContext';
 import type { InputStatus } from '../_util/statusUtils';
 import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 
-const ClearableInputType = ['text', 'input'];
+const ClearableInputType = ['text', 'input'] as const;
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -21,24 +22,25 @@ export default defineComponent({
   props: {
     prefixCls: String,
     inputType: PropTypes.oneOf(tuple('text', 'input')),
-    value: PropTypes.any,
-    defaultValue: PropTypes.any,
+    value: anyType<VueNode>(),
+    defaultValue: anyType<VueNode>(),
     allowClear: { type: Boolean, default: undefined },
-    element: PropTypes.any,
+    element: anyType<VueNode>(),
     handleReset: Function as PropType<MouseEventHandler>,
     disabled: { type: Boolean, default: undefined },
     direction: { type: String as PropType<Direction> },
     size: { type: String as PropType<SizeType> },
-    suffix: PropTypes.any,
-    prefix: PropTypes.any,
-    addonBefore: PropTypes.any,
-    addonAfter: PropTypes.any,
+    suffix: anyType<VueNode>(),
+    prefix: anyType<VueNode>(),
+    addonBefore: anyType<VueNode>(),
+    addonAfter: anyType<VueNode>(),
     readonly: { type: Boolean, default: undefined },
     focused: { type: Boolean, default: undefined },
     bordered: { type: Boolean, default: true },
     triggerFocus: { type: Function as PropType<() => void> },
     hidden: Boolean,
     status: String as PropType<InputStatus>,
+    hashId: String,
   },
   setup(props, { slots, attrs }) {
     const statusContext = FormItemInputContext.useInject();
@@ -73,6 +75,7 @@ export default defineComponent({
         status: customStatus,
         addonAfter = slots.addonAfter,
         addonBefore = slots.addonBefore,
+        hashId,
       } = props;
 
       const { status: contextStatus, hasFeedback } = statusContext;
@@ -96,6 +99,7 @@ export default defineComponent({
           // className will go to addon wrapper
           [`${attrs.class}`]: !hasAddon({ addonAfter, addonBefore }) && attrs.class,
         },
+        hashId,
       );
       return (
         <span class={affixWrapperCls} style={attrs.style as CSSProperties} hidden={hidden}>
@@ -111,7 +115,7 @@ export default defineComponent({
     return () => {
       const { prefixCls, inputType, element = slots.element?.() } = props;
       if (inputType === ClearableInputType[0]) {
-        return renderTextAreaWithClearIcon(prefixCls, element);
+        return renderTextAreaWithClearIcon(prefixCls, element as VNode);
       }
       return null;
     };

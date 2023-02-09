@@ -1,8 +1,7 @@
 import type { VNodeTypes } from 'vue';
-import padStart from 'lodash-es/padStart';
 
 export type valueType = number | string;
-export type countdownValueType = valueType | Date;
+export type countdownValueType = number | string;
 
 export type Formatter =
   | false
@@ -41,12 +40,12 @@ export function formatTimeStr(duration: number, format: string) {
   const templateText = format.replace(escapeRegex, '[]');
 
   const replacedText = timeUnits.reduce((current, [name, unit]) => {
-    if (current.indexOf(name) !== -1) {
+    if (current.includes(name)) {
       const value = Math.floor(leftDuration / unit);
       leftDuration -= value * unit;
       return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
         const len = match.length;
-        return padStart(value.toString(), len, '0');
+        return value.toString().padStart(len, '0');
       });
     }
     return current;
@@ -60,7 +59,7 @@ export function formatTimeStr(duration: number, format: string) {
   });
 }
 
-export function formatCountdown(value: countdownValueType, config: CountdownFormatConfig) {
+export function formatCountdown(value: valueType, config: CountdownFormatConfig) {
   const { format = '' } = config;
   const target = new Date(value).getTime();
   const current = Date.now();

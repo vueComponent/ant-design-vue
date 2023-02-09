@@ -13,6 +13,8 @@ import type { KeyboardEventHandler } from '../_util/EventInterface';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 import useStyle from './style';
+import { useProvideOverride } from '../menu/src/OverrideContext';
+import warning from '../_util/warning';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -106,6 +108,20 @@ const Mentions = defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
+    useProvideOverride({
+      prefixCls: computed(() => `${prefixCls.value}-menu`),
+      mode: computed(() => 'vertical'),
+      selectable: computed(() => false),
+      onClick: () => {},
+      validator: ({ mode }) => {
+        // Warning if use other mode
+        warning(
+          !mode || mode === 'vertical',
+          'Mentions',
+          `mode="${mode}" is not supported for Mentions's Menu.`,
+        );
+      },
+    });
     watch(
       () => props.value,
       val => {

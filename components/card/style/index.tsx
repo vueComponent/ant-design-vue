@@ -19,11 +19,14 @@ interface CardToken extends FullToken<'Card'> {
   cardHeadHeight: string;
   cardShadow: string;
   cardHeadFontSizeSm:string;
+  cardHeadColor:string;
+  gradientMin:string,
+  gradientMax:string,
+  cardInnerHeadPadding:string
 }
 // ============================== Shared ==============================
 const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
-  //   const { componentCls, sizePaddingEdgeHorizontal, colorSplit, lineWidth } = token;
-  const {
+ const {
     cardHeadFontSize,
     CardHeadPadding,
     cardPaddingBase,
@@ -35,6 +38,8 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
     cardHeadTabsMarginBottom,
     cardHeadHeight,
     componentCls,
+    cardHeadColor,
+    cardShadow
   } = token;
   return {
     [`${componentCls}-small`]:{
@@ -72,9 +77,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         transition: ` box-shadow 0.3s, border-color 0.3s`,
         '&:hover': {
           borderColor: `${token.colorBgBase}`,
-          // boxShadow: `${token.boxShadow}`,
-          boxShadow: `0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12)`,
-
+          boxShadow: `${cardShadow}`
           
         },
       },
@@ -83,6 +86,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         marginBottom: `-1px`,
         overflow: 'hidden',
         whiteSpace: 'nowrap',
+        color:`${cardHeadColor}`,
         textOverflow: 'ellipsis',
         padding: ` 0 ${token.cardPaddingBase} `,
         fontWeight: 500,
@@ -114,7 +118,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
 
         [`${componentCls}-prefix-tabs-top`]: {
           clear: 'both',
-          marginBottom: `${token.margin}`,
+          marginBottom: `${cardHeadTabsMarginBottom}`,
           color: `${token.colorText}`,
           // fontWeight: 'normal',
           fontWeight: 400,
@@ -165,7 +169,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           '&:hover': {
             position: 'relative',
             zIndex: 1,
-            boxShadow: `${token.boxShadow}`,
+            boxShadow: `${cardShadow}`,
           },
         },
       },
@@ -189,7 +193,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         },
 
         img: {
-          borderRadius: `${token.borderRadius} ${token.borderRadius} 0 0 `,
+          borderRadius: `${token.borderRadiusXS}px ${token.borderRadiusXS}px 0 0 `,
         },
       },
 
@@ -205,10 +209,11 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
 
         '& > li': {
           float: 'left',
-          margin: `${cardActionsLiMargin}`,
-          color: `~@text-color-secondary`,
+          margin: `${cardActionsLiMargin} `,
+          color: `${token.colorTextDescription}`,
           textAlign: 'center',
-
+          borderTop: ` 1px solid #f0f0f0;`,
+           
           [` ${componentCls}-rtl &`]: {
             float: 'right',
           },
@@ -217,7 +222,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
             position: 'relative',
             display: 'block',
             minWidth: ' 32px',
-            fontSize: `${token.fontSize}`,
+            fontSize: `${token.fontSize}px`,
             lineHeight: `${token.lineHeight}`,
             cursor: 'pointer',
             '&:hover': {
@@ -225,11 +230,10 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
               transition: 'color 0.3s',
             },
 
-            [` a:not( ${componentCls}-btn),
-              >  ${componentCls}-css-prefix}`]: {
+            [`a:not(${componentCls}-btn), >${token.iconCls}-css-prefix}`]: {
               display: ' inline-block',
               width: '100%',
-              // color: ` $ @text-color-secondary`;
+              color: `${token.colorTextDescription}`,
               lineHeight: ' 22px',
               transition: ' color 0.3s',
 
@@ -244,33 +248,33 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
             },
           },
 
-          '  &:not(:last-child)': {
-            borderRight: `${token.borderRadius}`,
+            [`li:not(:last-child)`]: {
+            borderRight: `1px solid #f0f0f0;`,
             //  @border-width-base @border-style-base @border-color-split;
-
             [` ${componentCls}-rtl &`]: {
               borderRight: 'none',
-              borderLeft: `${token.borderRadius}`,
+              borderLeft: ` 1px solid #f0f0f0;`,
               //  @border-width-base @border-style-base @border-color-split;
             },
           },
         },
       },
-      '&-type-inner &-head': {
+       [`${componentCls}-type-inner ${componentCls}-head`]: {
         padding: `0 ${cardPaddingBase}`,
-        color: 'red',
         background: `${token.colorBgBase}`,
+           border:'solid red 1px',
 
         ' &-title': {
           padding: `${cardHeadPaddingSm} 0`,
-          fontSize: `${token.fontSize}`,
+          fontSize: `${token.fontSize}px`,
         },
       },
-      '&-type-inner &-body': {
+      [`${componentCls}-type-inner ${componentCls}-body`]: {
+        border:'solid red 1px',
         padding: `16px ${cardPaddingBase}`,
       },
       ' &-type-inner &-extra': {
-        padding: `${cardHeadPaddingSm} + 1.5px 0`,
+        padding: `${token.cardInnerHeadPadding} + 1.5px 0`,
       },
        [`${componentCls}-meta`]: {
         margin: ' -4px 0',
@@ -287,35 +291,34 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           },
         },
 
-        '  &-detail ': {
+        '&-detail ': {
           overflow: 'hidden',
-
-          ' > div:not(:last-child)': {
-            marginBottom: `${token.marginXS}`,
+          '> div:not(:last-child)': {
+            marginBottom: `${token['magenta-8']}`,
           },
         },
 
-        ' &-title': {
+        '&-title': {
           overflow: 'hidden',
-          color: `${token.colorBgBase}`,
+          color: `${cardHeadColor}`,
           fontWeight: '500',
-          fontSize: `${token.fontSizeLG}`,
+          fontSize: `${token.fontSizeLG}px`,
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
         },
 
         ' &-description': {
-          color: ' @text-color-secondary',
+          color: `${token.colorTextDescription}`,
         },
       },
-      '&-loading': {
+      [` ${componentCls}-loading`]: {
         overflow: 'hidden',
       },
-      '&-loading &-body': {
+        [` ${componentCls}-loading ${componentCls}-body`]: {
         userSelect: 'none',
       },
 
-      ' &-loading-content': {
+       [` ${componentCls}-loading-content`]: {
         p: {
           margin: 0,
         },
@@ -323,18 +326,16 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
      [` ${componentCls}-loading-block`]: {
         height: '14px',
         margin: ' 4px 0',
-        background: 'linear-gradient(90deg, @gradient-min, @gradient-max, @gradient-min)',
+        background: `linear-gradient(90deg,${token.gradientMin},${token.gradientMax}, ${token.gradientMin})`,
         backgroundSize: '600% 600%',
-        borderRadius: `${token.borderRadius}`,
+        borderRadius: `${token.borderRadiusXS}px`,
         animationName:"card-loading",
         animationDuration:'1.4s',
         animationTimingFunction:'ease',
         animationIterationCount:'infinite'
-
-        // animation: ' 1.4s ease infinite',
       },
      '@keyframes card-loading': {
-      '  0%,100% ':{
+      '0%,100% ':{
           backgroundPosition: '0 50%',
         },
         '50%':{
@@ -360,10 +361,14 @@ export default genComponentStyleHook(
       cardPaddingBaseSm: '12px',
       cardHeadHeightSm: '30px',
       cardHeadPaddingSm: '6px',
-      cardActionsLiMargin: '4px 0',
-      cardHeadTabsMarginBottom: '-9px',
-      cardShadow:
-        '0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),0 5px 12px 4px rgba(0, 0, 0, 0.09)',
+      cardActionsLiMargin: '12px 0',
+      cardHeadTabsMarginBottom: '-17px',
+      cardShadow:`0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
+      0 5px 12px 4px rgba(0, 0, 0, 0.09)`,
+        cardHeadColor:' fade(@black, 85%)',
+        gradientMin: 'rgba(207,216,220,.2)',
+        gradientMax:'rgba(207,216,220,.4)',
+        cardInnerHeadPadding:'12px',
     });
     return [genSharedDividerStyle(cardToken)];
   },

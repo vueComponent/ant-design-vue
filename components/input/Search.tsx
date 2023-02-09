@@ -64,7 +64,7 @@ export default defineComponent({
     };
 
     const onPressEnter = (e: KeyboardEvent) => {
-      if (composedRef.value) {
+      if (composedRef.value || props.loading) {
         return;
       }
       onSearch(e);

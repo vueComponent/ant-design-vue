@@ -1,6 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import omit from '../_util/omit';
 import type { VueNode } from '../_util/type';
+import { eventType } from '../_util/type';
 import type { CompositionEventHandler } from '../_util/EventInterface';
 import { inputProps as vcInputProps } from '../vc-input/inputProps';
 
@@ -29,8 +30,8 @@ const textAreaProps = () => ({
   autosize: { type: [Boolean, Object] as PropType<boolean | AutoSizeType>, default: undefined },
   autoSize: { type: [Boolean, Object] as PropType<boolean | AutoSizeType>, default: undefined },
   onResize: { type: Function as PropType<(size: { width: number; height: number }) => void> },
-  onCompositionstart: Function as PropType<CompositionEventHandler>,
-  onCompositionend: Function as PropType<CompositionEventHandler>,
+  onCompositionstart: eventType<CompositionEventHandler>(),
+  onCompositionend: eventType<CompositionEventHandler>(),
   valueModifiers: Object,
 });
 

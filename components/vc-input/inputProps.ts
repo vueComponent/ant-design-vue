@@ -107,7 +107,7 @@ export const inputProps = () => ({
 export type InputProps = Partial<ExtractPropTypes<ReturnType<typeof inputProps>>>;
 
 export interface ShowCountProps {
-  formatter: (args: { count: number; maxlength?: number }) => VueNode;
+  formatter: (args: { count: number; maxlength?: number; value?: string }) => VueNode;
 }
 
 export interface InputRef {

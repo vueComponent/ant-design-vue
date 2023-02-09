@@ -49,7 +49,6 @@ import type { ComponentToken as TooltipComponentToken } from '../../tooltip/styl
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
 // import type { ComponentToken as WaveToken } from '../../_util/wave/style';
-import type { ComponentToken as StatisticComponentToken } from '../../statistic/style';
 
 export interface ComponentTokenMap {
   Affix?: {};
@@ -94,7 +93,7 @@ export interface ComponentTokenMap {
   Skeleton?: SkeletonComponentToken;
   //   Slider?: SliderComponentToken;
   Spin?: SpinComponentToken;
-  Statistic?: StatisticComponentToken;
+  Statistic?: {};
   Switch?: {};
   Tag?: TagComponentToken;
   Tree?: {};

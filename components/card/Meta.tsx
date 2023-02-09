@@ -3,7 +3,6 @@ import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
-import useStyle from './style';
 
 export const cardMetaProps = () => ({
   prefixCls: String,
@@ -19,7 +18,6 @@ export default defineComponent({
   slots: ['title', 'description', 'avatar'],
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('card', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
     return () => {
       const classString = {
         [`${prefixCls.value}-meta`]: true,
@@ -42,11 +40,11 @@ export default defineComponent({
             {descriptionDom}
           </div>
         ) : null;
-      return wrapSSR(
+      return (
         <div class={[classString]}>
           {avatarDom}
           {MetaDetail}
-        </div>,
+        </div>
       );
     };
   },

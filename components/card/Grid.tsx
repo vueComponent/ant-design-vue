@@ -1,7 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
-import useStyle from './style';
 
 export const cardGridProps = () => ({
   prefixCls: String,
@@ -16,13 +15,15 @@ export default defineComponent({
   props: cardGridProps(),
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('card', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls); //安装style
     const classNames = computed(() => {
       return {
         [`${prefixCls.value}-grid`]: true,
         [`${prefixCls.value}-grid-hoverable`]: props.hoverable,
       };
     });
-    return wrapSSR(<div class={[classNames.value, hashId.value]}>{slots.default?.()}</div>);
+    return () => {
+      return <div class={[classNames.value]}>{slots.default?.()}</div>;
+    };
+    // return wrapSSR(<div class={[classNames.value, hashId.value]}>{slots.default?.()}</div>);
   },
 });

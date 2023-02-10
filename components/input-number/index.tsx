@@ -17,6 +17,10 @@ import PropTypes from '../_util/vue-types';
 import isValidValue from '../_util/isValidValue';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+
+// CSSINJS
+import useStyle from './style';
+
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
   ...baseProps,
@@ -48,6 +52,10 @@ const InputNumber = defineComponent({
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const { prefixCls, size, direction } = useConfigInject('input-number', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const mergedValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const focused = ref(false);
     watch(
@@ -112,6 +120,7 @@ const InputNumber = defineComponent({
         },
         getStatusClassNames(preCls, mergedStatus.value),
         className,
+        hashId.value,
       );
 
       let element = (
@@ -153,6 +162,7 @@ const InputNumber = defineComponent({
             // className will go to addon wrapper
             [`${className}`]: !hasAddon && className,
           },
+          hashId.value,
         );
         element = (
           <div
@@ -175,9 +185,14 @@ const InputNumber = defineComponent({
         ) : null;
         const addonAfterNode = addonAfter ? <div class={addonClassName}>{addonAfter}</div> : null;
 
-        const mergedWrapperClassName = classNames(`${preCls}-wrapper`, wrapperClassName, {
-          [`${wrapperClassName}-rtl`]: direction.value === 'rtl',
-        });
+        const mergedWrapperClassName = classNames(
+          `${preCls}-wrapper`,
+          wrapperClassName,
+          {
+            [`${wrapperClassName}-rtl`]: direction.value === 'rtl',
+          },
+          hashId.value,
+        );
 
         const mergedGroupClassName = classNames(
           `${preCls}-group-wrapper`,
@@ -188,6 +203,7 @@ const InputNumber = defineComponent({
           },
           getStatusClassNames(`${prefixCls}-group-wrapper`, mergedStatus.value, hasFeedback),
           className,
+          hashId.value,
         );
         element = (
           <div class={mergedGroupClassName} style={style}>
@@ -199,7 +215,7 @@ const InputNumber = defineComponent({
           </div>
         );
       }
-      return cloneElement(element, { style });
+      return wrapSSR(cloneElement(element, { style }));
     };
   },
 });

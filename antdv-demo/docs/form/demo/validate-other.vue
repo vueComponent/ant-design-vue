@@ -147,7 +147,7 @@ Demonstration of validation configuration for form controls which are not shown 
       <a-rate v-decorator="['rate', { initialValue: 3.5 }]" allow-half />
     </a-form-item>
 
-    <a-form-item label="Upload" extra="longgggggggggggggggggggggggggggggggggg">
+    <a-form-item label="Upload" extra="long">
       <a-upload
         v-decorator="[
           'upload',

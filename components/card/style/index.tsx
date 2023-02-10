@@ -2,10 +2,9 @@ import type { CSSObject } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent, clearFix } from '../../_style';
-// import type { GlobalToken } from '../../theme/interface';
+
 /** Component only token. Which will handle additional calculation of alias token */
 export interface ComponentToken {
-  //   sizePaddingEdgeHorizontal: number;
 }
 interface CardToken extends FullToken<'Card'> {
   cardHeadFontSize: string;
@@ -25,7 +24,7 @@ interface CardToken extends FullToken<'Card'> {
   cardInnerHeadPadding:string
 }
 // ============================== Shared ==============================
-const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
+const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
  const {
     cardHeadFontSize,
     CardHeadPadding,
@@ -67,7 +66,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
       background: `${token.colorBgBase}`,
       borderRadius: `${token.borderRadiusXS}px`,
       '&-bordered': {
-        border: `1px solid #f0f0f0`,
+        border: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
       },
        [`${componentCls}-rtl`]: {
         direction: 'rtl',
@@ -92,12 +91,8 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         fontWeight: 500,
         fontSize: `${cardHeadFontSize}px`,
         background: `transparent`,
-        borderBottom: '1px solid #f0f0f0',
-        border: `${token.borderRadiusXS}px ${token.borderRadiusXS}px 0 0 `,
+        borderBottom: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
         ...clearFix(),
-        // &-bordered {
-        //   border: @border-width-base @border-style-base @border-color-split;
-        // }
         '&-wrapper': {
           display: 'flex',
           alignItems: 'center',
@@ -124,8 +119,8 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           fontWeight: 400,
           fontSize: `${token.fontSize}`,
           '&-bar': {
-            // borderBottom:`${token.cardShadow}`
-            //  @border-width-base @border-style-base @border-color-split;
+            borderBottom: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
+
           },
         },
       },
@@ -135,7 +130,6 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         marginLeft: 'auto',
         padding: `${CardHeadPadding} 0`,
         color: `${token.colorText}`,
-        // fontWeight: `${token.}`,
         fontWeight: 400,
         fontSize: `${token.fontSize}`,
         [`${componentCls}-prefix-rtl &`]: {
@@ -168,7 +162,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         '&-hoverable': {
           '&:hover': {
             position: 'relative',
-            zIndex: 1,
+            zIndex: `${token.zIndexBase}`,
             boxShadow: `${cardShadow}`,
           },
         },
@@ -202,16 +196,13 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         padding: 0,
         listStyle: 'none',
         background: `${token.colorBgBase}`,
-        //  @card-actions-background;
-        // borderTop: `${token.BackTop}`,
-        borderTop: `1px solid #f0f0f0`,
-        // @border-width-base @border-style-base @border-color-split;
+        borderTop: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
         ...clearFix(),
 
         '& > li': {
           float: 'left',
           margin: `${cardActionsLiMargin} `,
-          color: `${token.colorTextDescription}`,
+          color: `${token.colorTextSecondary}`,
           textAlign: 'center',
           [` ${componentCls}-rtl &`]: {
             float: 'right',
@@ -232,7 +223,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
             [`a:not(${componentCls}-btn), >${token.iconCls}-css-prefix}`]: {
               display: ' inline-block',
               width: '100%',
-              color: `${token.colorTextDescription}`,
+              color: `${token.colorTextSecondary}`,
               lineHeight: ' 22px',
               transition: ' color 0.3s',
 
@@ -248,12 +239,10 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           },
 
             [`li:not(:last-child)`]: {
-            borderRight: `1px solid #f0f0f0;`,
-            //  @border-width-base @border-style-base @border-color-split;
+            borderRight: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
             [` ${componentCls}-rtl &`]: {
               borderRight: 'none',
-              borderLeft: ` 1px solid #f0f0f0;`,
-              //  @border-width-base @border-style-base @border-color-split;
+              borderLeft: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
             },
           },
         },
@@ -261,15 +250,12 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
        [`${componentCls}-type-inner ${componentCls}-head`]: {
         padding: `0 ${cardPaddingBase}`,
         background: `${token.colorBgBase}`,
-           border:'solid red 1px',
-
         ' &-title': {
           padding: `${cardHeadPaddingSm} 0`,
           fontSize: `${token.fontSize}px`,
         },
       },
       [`${componentCls}-type-inner ${componentCls}-body`]: {
-        border:'solid red 1px',
         padding: `16px ${cardPaddingBase}`,
       },
       ' &-type-inner &-extra': {
@@ -307,7 +293,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         },
 
         ' &-description': {
-          color: `${token.colorTextDescription}`,
+          color: `${token.colorTextSecondary}`,
         },
       },
       [` ${componentCls}-loading`]: {
@@ -351,6 +337,7 @@ const genSharedDividerStyle: GenerateStyle<CardToken> = (token): CSSObject => {
 export default genComponentStyleHook(
   'Card',
   token => {
+    const { colorFillContent } = token;
     const cardToken = mergeToken<CardToken>(token, {
       cardPaddingBase: '16px',
       cardHeadHeight: ' 36px',
@@ -369,7 +356,8 @@ export default genComponentStyleHook(
         gradientMax:'rgba(207,216,220,.4)',
         cardInnerHeadPadding:'12px',
     });
-    return [genSharedDividerStyle(cardToken)];
+    console.log('colorFillContent',colorFillContent)
+    return [genSharedCardStyle(cardToken)];
   },
   {
     sizePaddingEdgeHorizontal: 0,

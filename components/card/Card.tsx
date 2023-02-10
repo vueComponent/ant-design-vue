@@ -56,9 +56,8 @@ const Card = defineComponent({
   props: cardProps(),
   slots: ['title', 'extra', 'tabBarExtraContent', 'actions', 'cover', 'customTab'],
   setup(props, { slots, attrs }) {
-    const { prefixCls, direction, size } = useConfigInject('card', props); //注入
-    // console.log('prefixCls', prefixCls);
-    const [wrapSSR, hashId] = useStyle(prefixCls); //安装style
+    const { prefixCls, direction, size } = useConfigInject('card', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const getAction = (actions: VNodeTypes[]) => {
       const actionList = actions.map((action, index) =>
         (isVNode(action) && !isEmptyElement(action)) || !isVNode(action) ? (
@@ -101,7 +100,6 @@ const Card = defineComponent({
       } = props;
       const children = flattenChildren(slots.default?.());
       const pre = prefixCls.value;
-      // console.log('pre', pre);
       const classString = {
         [`${pre}`]: true,
         [hashId.value]: true,
@@ -207,7 +205,5 @@ const Card = defineComponent({
     };
   },
 });
-{
-  /* <div class={classString} ref="cardContainerRef"> */
-}
+
 export default Card;

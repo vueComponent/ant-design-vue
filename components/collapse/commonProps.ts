@@ -27,7 +27,7 @@ const collapseProps = () => ({
   bordered: { type: Boolean, default: undefined },
   expandIcon: Function as PropType<(panelProps: PanelProps) => any>,
   openAnimation: PropTypes.object,
-  expandIconPosition: PropTypes.oneOf(tuple('left', 'right')),
+  expandIconPosition: PropTypes.oneOf(tuple('start', 'end')),
   collapsible: { type: String as PropType<CollapsibleType> },
   ghost: { type: Boolean, default: undefined },
   onChange: Function as PropType<(key: Key | Key[]) => void>,

@@ -24,7 +24,7 @@ A content area which can be collapsed and expanded.
 | collapsible | Specify whether the panels of children be collapsible or the trigger area of collapsible | `header` \| `disabled` | - | 3.0 |
 | destroyInactivePanel | Destroy Inactive Panel | boolean | `false` |  |
 | expandIcon | allow to customize collapse icon | Function(props):VNode \| v-slot:expandIcon="props" |  |  |
-| expandIconPosition | Set expand icon position: `left`, `right` | `left` | - | 1.5.0 |
+| expandIconPosition | Set expand icon position: `start`, `end` | `start` | - | 1.5.0 |
 | ghost | Make the collapse borderless and its background transparent | boolean | false | 3.0 |
 
 ### events

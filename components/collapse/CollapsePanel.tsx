@@ -103,7 +103,7 @@ export default defineComponent({
                 {header}
               </span>
             ) : (
-              header
+              <span class={`${prefixClsValue}-header-text`}>{header}</span>
             )}
             {extra && <div class={`${prefixClsValue}-extra`}>{extra}</div>}
           </div>

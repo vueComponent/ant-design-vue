@@ -34,8 +34,8 @@ More than one panel can be expanded at a time, the first panel is initialized to
   <br />
   <span>Expand Icon Position:</span>
   <a-select v-model:value="expandIconPosition">
-    <a-select-option value="left">left</a-select-option>
-    <a-select-option value="right">right</a-select-option>
+    <a-select-option value="start">start</a-select-option>
+    <a-select-option value="end">end</a-select-option>
   </a-select>
 </template>
 <script lang="ts">

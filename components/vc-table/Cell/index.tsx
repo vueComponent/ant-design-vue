@@ -23,17 +23,17 @@ import type {
 import { getPathValue, validateValue } from '../utils/valueUtil';
 import { useInjectSlots } from '../../table/context';
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
-import { useInjectHover } from '../context/HoverContext';
+// import { useInjectHover } from '../context/HoverContext';
 import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
-import type { MouseEventHandler } from '../../_util/EventInterface';
-import eagerComputed from '../../_util/eagerComputed';
+// import type { MouseEventHandler } from '../../_util/EventInterface';
+// import eagerComputed from '../../_util/eagerComputed';
 
 /** Check if cell is in hover range */
-function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {
-  const cellEndRow = cellStartRow + cellRowSpan - 1;
-  return cellStartRow <= endRow && cellEndRow >= startRow;
-}
+// function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {
+//   const cellEndRow = cellStartRow + cellRowSpan - 1;
+//   return cellStartRow <= endRow && cellEndRow >= startRow;
+// }
 
 function isRenderCell<RecordType = DefaultRecordType>(
   data: RenderedCell<RecordType>,
@@ -111,7 +111,7 @@ export default defineComponent<CellProps>({
   slots: ['appendNode'],
   setup(props, { slots }) {
     const contextSlots = useInjectSlots();
-    const { onHover, startRow, endRow } = useInjectHover();
+    // const { onHover, startRow, endRow } = useInjectHover();
     const colSpan = computed(() => {
       return (
         props.colSpan ??
@@ -126,30 +126,30 @@ export default defineComponent<CellProps>({
         (props.additionalProps?.rowspan as number)
       );
     });
-    const hovering = eagerComputed(() => {
-      const { index } = props;
-      return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
-    });
+    // const hovering = eagerComputed(() => {
+    //   const { index } = props;
+    //   return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
+    // });
     const supportSticky = useInjectSticky();
 
     // ====================== Hover =======================
-    const onMouseenter = (event: MouseEvent, mergedRowSpan: number) => {
-      const { record, index, additionalProps } = props;
-      if (record) {
-        onHover(index, index + mergedRowSpan - 1);
-      }
+    // const onMouseenter = (event: MouseEvent, mergedRowSpan: number) => {
+    //   const { record, index, additionalProps } = props;
+    //   if (record) {
+    //     onHover(index, index + mergedRowSpan - 1);
+    //   }
 
-      additionalProps?.onMouseenter?.(event);
-    };
+    //   additionalProps?.onMouseenter?.(event);
+    // };
 
-    const onMouseleave: MouseEventHandler = event => {
-      const { record, additionalProps } = props;
-      if (record) {
-        onHover(-1, -1);
-      }
+    // const onMouseleave: MouseEventHandler = event => {
+    //   const { record, additionalProps } = props;
+    //   if (record) {
+    //     onHover(-1, -1);
+    //   }
 
-      additionalProps?.onMouseleave?.(event);
-    };
+    //   additionalProps?.onMouseleave?.(event);
+    // };
     const getTitle = (vnodes: VNodeArrayChildren) => {
       const vnode = filterEmpty(vnodes)[0];
       if (isVNode(vnode)) {
@@ -339,15 +339,15 @@ export default defineComponent<CellProps>({
             [`${cellPrefixCls}-with-append`]: appendNode,
             [`${cellPrefixCls}-fix-sticky`]:
               (isFixLeft || isFixRight) && isSticky && supportSticky.value,
-            [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
+            // [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
           },
           additionalProps.class,
           cellClassName,
         ),
-        onMouseenter: (e: MouseEvent) => {
-          onMouseenter(e, mergedRowSpan);
-        },
-        onMouseleave,
+        // onMouseenter: (e: MouseEvent) => {
+        //   onMouseenter(e, mergedRowSpan);
+        // },
+        // onMouseleave,
         style: {
           ...parseStyleText(additionalProps.style as any),
           ...alignStyle,

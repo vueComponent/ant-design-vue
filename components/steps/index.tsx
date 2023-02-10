@@ -127,6 +127,7 @@ const Steps = defineComponent({
       return wrapSSR(
         <VcSteps
           icons={icons}
+          {...attrs}
           {...omit(props, ['percent', 'responsive'])}
           direction={direction.value}
           prefixCls={prefixCls.value}

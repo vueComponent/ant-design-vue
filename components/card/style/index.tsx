@@ -19,9 +19,10 @@ interface CardToken extends FullToken<'Card'> {
   cardShadow: string;
   cardHeadFontSizeSm:string;
   cardHeadColor:string;
-  gradientMin:string,
-  gradientMax:string,
-  cardInnerHeadPadding:string
+  gradientMin:string;
+  gradientMax:string;
+  cardInnerHeadPadding:string;
+  transitionTime:string;
 }
 // ============================== Shared ==============================
 const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
@@ -38,7 +39,8 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
     cardHeadHeight,
     componentCls,
     cardHeadColor,
-    cardShadow
+    cardShadow,
+    transitionTime
   } = token;
   return {
     [`${componentCls}-small`]:{
@@ -73,7 +75,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
       },
       [`&-hoverable`]: {
         cursor: 'pointer',
-        transition: ` box-shadow 0.3s, border-color 0.3s`,
+        transition: ` box-shadow  ${transitionTime}, border-color ${transitionTime}`,
         '&:hover': {
           borderColor: `${token.colorBgBase}`,
           boxShadow: `${cardShadow}`
@@ -153,8 +155,8 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         borderRadius: 0,
         boxShadow: `1px 0 0 0 ${token.colorSplit}, 0 1px 0 0 ${token.colorSplit},
           1px 1px 0 0 ${token.colorSplit}, 1px 0 0 0 ${token.colorSplit} inset,
-          0 1px 0 0 ${token.colorSplit} inset;
-        transition: all 0.3s`,
+          0 1px 0 0 ${token.colorSplit} inset`,
+        transition: `all ${transitionTime}`,
         [`${componentCls}-cls-rtl &`]: {
           float: 'right',
         },
@@ -217,7 +219,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
             cursor: 'pointer',
             '&:hover': {
               color: ` ${token.colorPrimary}`,
-              transition: 'color 0.3s',
+              transition: `color ${transitionTime}`,
             },
 
             [`a:not(${componentCls}-btn), >${token.iconCls}-css-prefix}`]: {
@@ -225,7 +227,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
               width: '100%',
               color: `${token.colorTextSecondary}`,
               lineHeight: ' 22px',
-              transition: ' color 0.3s',
+              transition:  `color ${transitionTime}`,
 
               '&:hover': {
                 color: `${token.colorPrimary}`,
@@ -337,7 +339,6 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
 export default genComponentStyleHook(
   'Card',
   token => {
-    const { colorFillContent } = token;
     const cardToken = mergeToken<CardToken>(token, {
       cardPaddingBase: '16px',
       cardHeadHeight: ' 36px',
@@ -355,8 +356,8 @@ export default genComponentStyleHook(
         gradientMin: 'rgba(207,216,220,.2)',
         gradientMax:'rgba(207,216,220,.4)',
         cardInnerHeadPadding:'12px',
+        transitionTime:'0.3s',
     });
-    console.log('colorFillContent',colorFillContent)
     return [genSharedCardStyle(cardToken)];
   },
   {

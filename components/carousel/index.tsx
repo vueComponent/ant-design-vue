@@ -7,6 +7,9 @@ import SlickCarousel from '../vc-slick';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
+// CSSINJS
+import useStyle from './style';
+
 export type SwipeDirection = 'left' | 'down' | 'right' | 'up' | string;
 
 export type LazyLoadTypes = 'ondemand' | 'progressive';
@@ -104,6 +107,10 @@ const Carousel = defineComponent({
       );
     });
     const { prefixCls, direction } = useConfigInject('carousel', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const dotPosition = computed(() => {
       if (props.dotPosition) return props.dotPosition;
       if (props.vertical !== undefined) return props.vertical ? 'right' : 'bottom';
@@ -122,12 +129,16 @@ const Carousel = defineComponent({
       const { dots, arrows, draggable, effect } = props;
       const { class: cls, style, ...restAttrs } = attrs;
       const fade = effect === 'fade' ? true : props.fade;
-      const className = classNames(prefixCls.value, {
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-        [`${prefixCls.value}-vertical`]: vertical.value,
-        [`${cls}`]: !!cls,
-      });
-      return (
+      const className = classNames(
+        prefixCls.value,
+        {
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          [`${prefixCls.value}-vertical`]: vertical.value,
+          [`${cls}`]: !!cls,
+        },
+        hashId.value,
+      );
+      return wrapSSR(
         <div class={className} style={style as CSSProperties}>
           <SlickCarousel
             ref={slickRef}
@@ -141,7 +152,7 @@ const Carousel = defineComponent({
             vertical={vertical.value}
             v-slots={slots}
           />
-        </div>
+        </div>,
       );
     };
   },

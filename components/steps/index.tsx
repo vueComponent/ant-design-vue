@@ -14,6 +14,10 @@ import { VcStepProps } from '../vc-steps/Step';
 import type { ProgressDotRender } from '../vc-steps/Steps';
 import type { MouseEventHandler } from '../_util/EventInterface';
 
+// CSSINJS
+import useStyle from './style';
+import { useToken } from '../theme/internal';
+
 export const stepsProps = () => ({
   prefixCls: String,
   iconPrefix: String,
@@ -61,6 +65,13 @@ const Steps = defineComponent({
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
+
+    // 接入换肤
+    const [, token] = useToken();
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const screens = useBreakpoint();
     const direction = computed(() =>
       props.responsive && screens.value.xs ? 'vertical' : props.direction,
@@ -84,11 +95,12 @@ const Steps = defineComponent({
         // currently it's hard-coded, since we can't easily read the actually width of icon
         const progressWidth = props.size === 'small' ? 32 : 40;
         const iconWithProgress = (
-          <div class={`${prefixCls}-progress-icon`}>
+          <div class={`${prefixCls.value}-progress-icon`}>
             <Progress
               type="circle"
               percent={props.percent}
               width={progressWidth}
+              strokeColor={token.value.colorPrimary}
               strokeWidth={4}
               format={() => null}
             />
@@ -106,12 +118,13 @@ const Steps = defineComponent({
           [`${prefixCls.value}-with-progress`]: props.percent !== undefined,
         },
         attrs.class,
+        hashId.value,
       );
       const icons = {
         finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,
         error: <CloseOutlined class={`${prefixCls}-error-icon`} />,
       };
-      return (
+      return wrapSSR(
         <VcSteps
           icons={icons}
           {...omit(props, ['percent', 'responsive'])}
@@ -121,7 +134,7 @@ const Steps = defineComponent({
           class={stepsClassName}
           onChange={handleChange}
           v-slots={{ ...slots, stepIcon: stepIconRender }}
-        />
+        />,
       );
     };
   },

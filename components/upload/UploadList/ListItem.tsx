@@ -93,7 +93,6 @@ export default defineComponent({
       const { class: className, style } = attrs;
       // This is used for legacy span make scrollHeight the wrong value.
       // We will force these to be `display: block` with non `picture-card`
-      const spanClassName = `${prefixCls}-span`;
 
       const iconNode = iconRender({ file });
       let icon = <div class={`${prefixCls}-text-icon`}>{iconNode}</div>;
@@ -162,7 +161,7 @@ export default defineComponent({
         <span
           key="download-delete"
           class={[
-            `${prefixCls}-list-item-card-actions`,
+            `${prefixCls}-list-item-actions`,
             {
               picture: listType === 'picture',
             },
@@ -231,22 +230,21 @@ export default defineComponent({
       } else {
         message = file.error?.statusText || file.error?.message || locale.uploadError;
       }
-      const iconAndPreview = (
-        <span class={spanClassName}>
-          {icon}
-          {preview}
-        </span>
-      );
 
       const dom = (
         <div class={infoUploadingClass}>
-          <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
+          {icon}
+          {preview}
           {actions}
           {showProgress.value && (
             <Transition {...transitionProps.value}>
               <div v-show={file.status === 'uploading'} class={`${prefixCls}-list-item-progress`}>
                 {'percent' in file ? (
-                  <Progress {...progressProps} type="line" percent={file.percent} />
+                  <Progress
+                    {...(progressProps as UploadListProgressProps)}
+                    type="line"
+                    percent={file.percent}
+                  />
                 ) : null}
               </div>
             </Transition>
@@ -254,7 +252,7 @@ export default defineComponent({
         </div>
       );
       const listContainerNameClass = {
-        [`${prefixCls}-list-${listType}-container`]: true,
+        [`${prefixCls}-list-item-container`]: true,
         [`${className}`]: !!className,
       };
       const item =

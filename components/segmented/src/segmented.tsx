@@ -79,6 +79,9 @@ export default defineComponent({
       transform: '',
       width: '',
     });
+    const isValueType = item => {
+      return item instanceof Object ? (item.disabled ? true : false) : false;
+    };
     watch(
       () => currentItemKey.value,
       (newValue, oldValue) => {
@@ -127,7 +130,7 @@ export default defineComponent({
                   ref={ref => (itemRef.value[index] = ref)}
                   class={classNames(`${pre}-item`, {
                     [`${pre}-item-selected`]: currentItemKey.value == index,
-                    [`${pre}-item-disabled`]: disabled.value || item.disabled,
+                    [`${pre}-item-disabled`]: disabled.value || isValueType(item),
                   })}
                   onClick={() => handleSelectedChange(item, index)}
                 >

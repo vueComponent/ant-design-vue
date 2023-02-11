@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/segmented/demo/basic.vue correctly 1`] = `
+<div class="ant-segmented">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label">Daily</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Weekly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Monthly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Quarterly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Yearly</div>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/segmented/demo/block.vue correctly 1`] = `
+<div class="ant-segmented ant-segmented-block">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label">123</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">456</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">longtext-longtext-longtext-longtext</div>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/segmented/demo/controlled.vue correctly 1`] = `
+<div>
+  <div class="ant-segmented">
+    <div class="ant-segmented-group">
+      <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item">
+        <!---->
+        <div class="ant-segmented-item-label">Map</div>
+      </label><label class="ant-segmented-item ant-segmented-item-selected">
+        <!---->
+        <div class="ant-segmented-item-label">Transit</div>
+      </label><label class="ant-segmented-item">
+        <!---->
+        <div class="ant-segmented-item-label">Satellite</div>
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/segmented/demo/custom.vue correctly 1`] = `
+<br>
+<br>
+`;
+
+exports[`renders ./components/segmented/demo/disabled.vue correctly 1`] = `
+<div>
+  <div class="ant-segmented ant-segmented-item-disabled">
+    <div class="ant-segmented-group">
+      <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected ant-segmented-item-disabled"><input type="radio" class="ant-segmented-item-input" disabled="">
+        <div class="ant-segmented-item-label">Map</div>
+      </label><label class="ant-segmented-item ant-segmented-item-disabled"><input type="radio" class="ant-segmented-item-input" disabled="">
+        <div class="ant-segmented-item-label">Transit</div>
+      </label><label class="ant-segmented-item ant-segmented-item-disabled"><input type="radio" class="ant-segmented-item-input" disabled="">
+        <div class="ant-segmented-item-label">Satellite</div>
+      </label>
+    </div>
+  </div><br><br>
+  <div class="ant-segmented">
+    <div class="ant-segmented-group">
+      <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+        <!---->
+        <div class="ant-segmented-item-label">Daily</div>
+      </label><label class="ant-segmented-item ant-segmented-item-disabled"><input type="radio" class="ant-segmented-item-input" disabled="">
+        <div class="ant-segmented-item-label"><span>Weekly</span></div>
+      </label><label class="ant-segmented-item">
+        <!---->
+        <div class="ant-segmented-item-label">Monthly</div>
+      </label><label class="ant-segmented-item ant-segmented-item-disabled"><input type="radio" class="ant-segmented-item-input" disabled="">
+        <div class="ant-segmented-item-label"><span>Quarterly</span></div>
+      </label><label class="ant-segmented-item">
+        <!---->
+        <div class="ant-segmented-item-label">Yearly</div>
+      </label>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/segmented/demo/dynamic.vue correctly 1`] = `
+<div class="ant-segmented">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label">Daily</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Weekly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Monthly</div>
+    </label>
+  </div>
+</div>
+<br>
+<br>
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Load More</span>
+</button>
+`;
+
+exports[`renders ./components/segmented/demo/icon.vue correctly 1`] = `
+<div class="ant-segmented">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label"><span class="ant-segmented-item-icon"><span role="img" aria-label="unordered-list" class="anticon anticon-unordered-list"><svg focusable="false" class="" data-icon="unordered-list" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 192H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM104 228a56 56 0 10112 0 56 56 0 10-112 0zm0 284a56 56 0 10112 0 56 56 0 10-112 0zm0 284a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span>
+        <!--v-if--></span><span>List</span>
+      </div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label"><span class="ant-segmented-item-icon"><!--v-if--><span role="img" aria-label="appstore" class="anticon anticon-appstore"><svg focusable="false" class="" data-icon="appstore" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V212h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V212h200v200zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H212V612h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V612h200v200z"></path></svg></span></span><span>Kanban</span></div>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/segmented/demo/size.vue correctly 1`] = `
+<div class="ant-segmented ant-segmented-lg">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label">Daily</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Weekly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Monthly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Quarterly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Yearly</div>
+    </label>
+  </div>
+</div>
+<br>
+<br>
+<div class="ant-segmented">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label">Daily</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Weekly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Monthly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Quarterly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Yearly</div>
+    </label>
+  </div>
+</div>
+<br>
+<br>
+<div class="ant-segmented ant-segmented-sm">
+  <div class="ant-segmented-group">
+    <div class="ant-segmented-thumb ant-segmented-thumb-motion-appear-active"></div><label class="ant-segmented-item ant-segmented-item-selected">
+      <!---->
+      <div class="ant-segmented-item-label">Daily</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Weekly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Monthly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Quarterly</div>
+    </label><label class="ant-segmented-item">
+      <!---->
+      <div class="ant-segmented-item-label">Yearly</div>
+    </label>
+  </div>
+</div>
+`;

@@ -44,7 +44,7 @@ import mkMK from '../../locale/mk_MK';
 import mnMN from '../../locale/mn_MN';
 import msMY from '../../locale/ms_MY';
 import nbNO from '../../locale/nb_NO';
-import neNP from '../../locale/ne-NP';
+import neNP from '../../locale/ne_NP';
 import nlBE from '../../locale/nl_BE';
 import nlNL from '../../locale/nl_NL';
 import plPL from '../../locale/pl_PL';

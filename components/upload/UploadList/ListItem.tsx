@@ -246,7 +246,7 @@ export default defineComponent({
             <Transition {...transitionProps.value}>
               <div v-show={file.status === 'uploading'} class={`${prefixCls}-list-item-progress`}>
                 {'percent' in file ? (
-                  <Progress {...progressProps} type="line" percent={file.percent} />
+                  <Progress {...(progressProps as any)} type="line" percent={file.percent} />
                 ) : null}
               </div>
             </Transition>

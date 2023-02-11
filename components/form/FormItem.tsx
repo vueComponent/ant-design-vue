@@ -32,7 +32,14 @@ import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
 import { tuple } from '../_util/type';
-import type { InternalNamePath, Rule, RuleError, RuleObject, ValidateOptions } from './interface';
+import type {
+  InternalNamePath,
+  Rule,
+  RuleError,
+  RuleObject,
+  ValidateOptions,
+  FormLabelAlign,
+} from './interface';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
@@ -44,7 +51,7 @@ import useDebounce from './utils/useDebounce';
 import classNames from '../_util/classNames';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
-export type ValidateStatus = typeof ValidateStatuses[number];
+export type ValidateStatus = (typeof ValidateStatuses)[number];
 
 export interface FieldExpose {
   fieldValue: Ref<any>;
@@ -105,7 +112,10 @@ export const formItemProps = () => ({
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   hasFeedback: { type: Boolean, default: false },
   colon: { type: Boolean, default: undefined },
-  labelAlign: PropTypes.oneOf(tuple('left', 'right')),
+  labelAlign: {
+    ...PropTypes.oneOf(tuple('left', 'right')),
+    type: String as PropType<FormLabelAlign>,
+  },
   prop: { type: [String, Number, Array] as PropType<string | number | Array<string | number>> },
   name: { type: [String, Number, Array] as PropType<string | number | Array<string | number>> },
   rules: [Array, Object] as PropType<Rule[] | Rule>,

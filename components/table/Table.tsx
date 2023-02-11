@@ -48,6 +48,9 @@ import type { ContextSlots } from './context';
 import useColumns from './hooks/useColumns';
 import { convertChildrenToColumns } from './util';
 
+// CSSINJS
+import useStyle from './style';
+
 export type { ColumnsType, TablePaginationConfig };
 
 const EMPTY_LIST: any[] = [];
@@ -287,6 +290,10 @@ const InteralTable = defineComponent<
       prefixCls,
       configProvider,
     } = useConfigInject('table', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const transformCellText = computed(
       () => props.transformCellText || configProvider.transformCellText?.value,
     );
@@ -637,9 +644,10 @@ const InteralTable = defineComponent<
           [`${prefixCls.value}-wrapper-rtl`]: direction.value === 'rtl',
         },
         attrs.class,
+        hashId.value,
       );
       const tableProps = omit(props, ['columns']);
-      return (
+      return wrapSSR(
         <div class={wrapperClassNames} style={attrs.style as CSSProperties}>
           <Spin spinning={false} {...spinProps}>
             {topPaginationNode}
@@ -677,7 +685,7 @@ const InteralTable = defineComponent<
             />
             {bottomPaginationNode}
           </Spin>
-        </div>
+        </div>,
       );
     };
   },

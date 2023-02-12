@@ -16,6 +16,8 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import type { Direction } from '../config-provider';
 import type { FocusEventHandler, KeyboardEventHandler } from '../_util/EventInterface';
 
+import useStyle from './style';
+
 export const rateProps = () => ({
   prefixCls: String,
   count: Number,
@@ -54,6 +56,7 @@ const Rate = defineComponent({
   // emits: ['hoverChange', 'update:value', 'change', 'focus', 'blur', 'keydown'],
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, direction } = useConfigInject('rate', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const formItemContext = useInjectFormItemContext();
     const rateRef = ref();
     const [setRef, starRefs] = useRefs();
@@ -224,9 +227,10 @@ const Rate = defineComponent({
         );
       }
       const rateClassName = classNames(prefixCls.value, disabledClass, className, {
+        [hashId.value]: true,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       });
-      return (
+      return wrapSSR(
         <ul
           {...attrs}
           id={id}
@@ -241,7 +245,7 @@ const Rate = defineComponent({
           role="radiogroup"
         >
           {stars}
-        </ul>
+        </ul>,
       );
     };
   },

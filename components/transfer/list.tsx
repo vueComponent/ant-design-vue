@@ -7,10 +7,11 @@ import Menu from '../menu';
 import Dropdown from '../dropdown';
 import Search from './search';
 import ListBody from './ListBody';
-import type { VNode, VNodeTypes, ExtractPropTypes, PropType, CSSProperties } from 'vue';
+import type { VNode, VNodeTypes, ExtractPropTypes, CSSProperties } from 'vue';
 import { watchEffect, computed, defineComponent, ref } from 'vue';
 import type { RadioChangeEvent } from '../radio/interface';
 import type { TransferDirection, TransferItem } from './index';
+import { stringType, arrayType, booleanType } from '../_util/type';
 
 const defaultRender = () => null;
 
@@ -28,22 +29,22 @@ function getEnabledItemKeys<RecordType extends TransferItem>(items: RecordType[]
 
 export const transferListProps = {
   prefixCls: String,
-  dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
+  dataSource: arrayType<TransferItem[]>([]),
   filter: String,
   filterOption: Function,
   checkedKeys: PropTypes.arrayOf(PropTypes.string),
   handleFilter: Function,
   handleClear: Function,
   renderItem: Function,
-  showSearch: { type: Boolean, default: false },
+  showSearch: booleanType(false),
   searchPlaceholder: String,
   notFoundContent: PropTypes.any,
   itemUnit: String,
   itemsUnit: String,
   renderList: PropTypes.any,
-  disabled: { type: Boolean, default: undefined },
-  direction: String as PropType<TransferDirection>,
-  showSelectAll: { type: Boolean, default: undefined },
+  disabled: booleanType(),
+  direction: stringType<TransferDirection>(),
+  showSelectAll: booleanType(),
   remove: String,
   selectAll: String,
   selectCurrent: String,
@@ -51,7 +52,7 @@ export const transferListProps = {
   removeAll: String,
   removeCurrent: String,
   selectAllLabel: PropTypes.any,
-  showRemove: { type: Boolean, default: undefined },
+  showRemove: booleanType(),
   pagination: PropTypes.any,
   onItemSelect: Function,
   onItemSelectAll: Function,

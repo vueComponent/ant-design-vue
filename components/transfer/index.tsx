@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { computed, watchEffect, defineComponent, ref, watch, toRaw } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
@@ -8,7 +8,15 @@ import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale/en_US';
 import type { VueNode } from '../_util/type';
-import { withInstall } from '../_util/type';
+import {
+  withInstall,
+  stringType,
+  arrayType,
+  someType,
+  booleanType,
+  objectType,
+  functionType,
+} from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
@@ -72,40 +80,41 @@ export interface TransferLocale {
 export const transferProps = () => ({
   id: String,
   prefixCls: String,
-  dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
-  disabled: { type: Boolean, default: undefined },
-  targetKeys: { type: Array as PropType<string[]>, default: undefined },
-  selectedKeys: { type: Array as PropType<string[]>, default: undefined },
-  render: { type: Function as PropType<TransferRender<TransferItem>> },
-  listStyle: {
-    type: [Function, Object] as PropType<((style: ListStyle) => CSSProperties) | CSSProperties>,
-    default: () => ({}),
-  },
-  operationStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  titles: { type: Array as PropType<string[]> },
-  operations: { type: Array as PropType<string[]> },
-  showSearch: { type: Boolean, default: false },
-  filterOption: { type: Function as PropType<(inputValue: string, item: TransferItem) => boolean> },
+  dataSource: arrayType<TransferItem[]>([]),
+  disabled: booleanType(),
+  targetKeys: arrayType<string[]>(),
+  selectedKeys: arrayType<string[]>(),
+  render: functionType<TransferRender<TransferItem>>(),
+  listStyle: someType<((style: ListStyle) => CSSProperties) | CSSProperties>(
+    [Function, Object],
+    () => ({}),
+  ),
+  operationStyle: objectType<CSSProperties>(undefined as CSSProperties),
+  titles: arrayType<string[]>(),
+  operations: arrayType<string[]>(),
+  showSearch: booleanType(false),
+  filterOption: functionType<(inputValue: string, item: TransferItem) => boolean>(),
   searchPlaceholder: String,
   notFoundContent: PropTypes.any,
-  locale: { type: Object as PropType<Partial<TransferLocale>>, default: () => ({}) },
-  rowKey: { type: Function as PropType<(record: TransferItem) => string> },
-  showSelectAll: { type: Boolean, default: undefined },
-  selectAllLabels: { type: Array as PropType<SelectAllLabel[]> },
-  children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
-  oneWay: { type: Boolean, default: undefined },
-  pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
-  status: String as PropType<InputStatus>,
-  onChange: Function as PropType<
-    (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
-  >,
-  onSelectChange: Function as PropType<
+  locale: objectType(),
+  rowKey: functionType<(record: TransferItem) => string>(),
+  showSelectAll: booleanType(),
+  selectAllLabels: arrayType<SelectAllLabel[]>(),
+  children: functionType<(props: TransferListBodyProps) => VueNode>(),
+  oneWay: booleanType(),
+  pagination: someType<PaginationType>([Object, Boolean]),
+  status: stringType<InputStatus>(),
+  onChange:
+    functionType<
+      (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
+    >(),
+  onSelectChange: functionType<
     (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void
   >,
-  onSearch: Function as PropType<(direction: TransferDirection, value: string) => void>,
-  onScroll: Function as PropType<(direction: TransferDirection, e: UIEvent) => void>,
-  'onUpdate:targetKeys': Function as PropType<(keys: string[]) => void>,
-  'onUpdate:selectedKeys': Function as PropType<(keys: string[]) => void>,
+  onSearch: functionType<(direction: TransferDirection, value: string) => void>(),
+  onScroll: functionType<(direction: TransferDirection, e: UIEvent) => void>(),
+  'onUpdate:targetKeys': functionType<(keys: string[]) => void>(),
+  'onUpdate:selectedKeys': functionType<(keys: string[]) => void>(),
 });
 
 export type TransferProps = Partial<ExtractPropTypes<ReturnType<typeof transferProps>>>;

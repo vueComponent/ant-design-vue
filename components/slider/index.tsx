@@ -12,6 +12,9 @@ import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import type { FocusEventHandler } from '../_util/EventInterface';
 
+// CSSINJS
+import useStyle from './style';
+
 export type SliderValue = number | [number, number];
 
 interface SliderMarks {
@@ -87,6 +90,10 @@ const Slider = defineComponent({
   setup(props, { attrs, slots, emit, expose }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer, configProvider } =
       useConfigInject('slider', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const formItemContext = useInjectFormItemContext();
     const sliderRef = ref();
     const visibles = ref<Visibles>({});
@@ -156,9 +163,13 @@ const Slider = defineComponent({
         ...restProps
       } = props;
       const tooltipPrefixCls = configProvider.getPrefixCls('tooltip', customizeTooltipPrefixCls);
-      const cls = classNames(attrs.class, {
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-      });
+      const cls = classNames(
+        attrs.class,
+        {
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        hashId.value,
+      );
 
       // make reverse default on rtl direction
       if (direction.value === 'rtl' && !restProps.vertical) {
@@ -172,8 +183,9 @@ const Slider = defineComponent({
       }
 
       if (range) {
-        return (
+        return wrapSSR(
           <VcRange
+            {...attrs}
             {...restProps}
             step={restProps.step!}
             draggableTrack={draggableTrack}
@@ -190,11 +202,12 @@ const Slider = defineComponent({
             onChange={handleChange}
             onBlur={handleBlur}
             v-slots={{ mark: slots.mark }}
-          />
+          />,
         );
       }
-      return (
+      return wrapSSR(
         <VcSlider
+          {...attrs}
           {...restProps}
           id={id}
           step={restProps.step!}
@@ -211,7 +224,7 @@ const Slider = defineComponent({
           onChange={handleChange}
           onBlur={handleBlur}
           v-slots={{ mark: slots.mark }}
-        />
+        />,
       );
     };
   },

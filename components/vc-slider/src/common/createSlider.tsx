@@ -304,6 +304,7 @@ export default function createSlider(Component) {
         [`${prefixCls}-with-marks`]: Object.keys(marks).length,
         [`${prefixCls}-disabled`]: disabled,
         [`${prefixCls}-vertical`]: vertical,
+        [`${prefixCls}-horizontal`]: !vertical,
       });
       const markProps = {
         vertical,

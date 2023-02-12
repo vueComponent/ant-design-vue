@@ -28,7 +28,7 @@ import type { ComponentToken as PopconfirmComponentToken } from '../../popconfir
 import type { ComponentToken as PopoverComponentToken } from '../../popover/style';
 import type { ComponentToken as ProgressComponentToken } from '../../progress/style';
 // import type { ComponentToken as RadioComponentToken } from '../../radio/style';
-// import type { ComponentToken as RateComponentToken } from '../../rate/style';
+import type { ComponentToken as RateComponentToken } from '../../rate/style';
 // import type { ComponentToken as ResultComponentToken } from '../../result/style';
 // import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 // import type { ComponentToken as SelectComponentToken } from '../../select/style';
@@ -85,7 +85,7 @@ export interface ComponentTokenMap {
   Pagination?: {};
   Popover?: PopoverComponentToken;
   Popconfirm?: PopconfirmComponentToken;
-  //   Rate?: RateComponentToken;
+  Rate?: RateComponentToken;
   //   Radio?: RadioComponentToken;
   //   Result?: ResultComponentToken;
   //   Segmented?: SegmentedComponentToken;

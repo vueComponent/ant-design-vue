@@ -13,6 +13,7 @@ import VcInput from '../vc-input/Input';
 import inputProps from './inputProps';
 import omit from '../_util/omit';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import { NoCompactStyle, useCompactItemContext } from '../space/Compact';
 
 // CSSINJS
 import useStyle from './style';
@@ -30,6 +31,11 @@ export default defineComponent({
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const { direction, prefixCls, size, autocomplete } = useConfigInject('input', props);
 
+    // ===================== Compact Item =====================
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+    const mergedSize = computed(() => {
+      return compactSize.value || size.value;
+    });
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -140,12 +146,25 @@ export default defineComponent({
           onFocus={handleFocus}
           suffix={suffixNode}
           allowClear={allowClear}
-          addonAfter={addonAfter && <NoFormStatus>{addonAfter}</NoFormStatus>}
-          addonBefore={addonBefore && <NoFormStatus>{addonBefore}</NoFormStatus>}
+          addonAfter={
+            addonAfter && (
+              <NoCompactStyle>
+                <NoFormStatus>{addonAfter}</NoFormStatus>
+              </NoCompactStyle>
+            )
+          }
+          addonBefore={
+            addonBefore && (
+              <NoCompactStyle>
+                <NoFormStatus>{addonBefore}</NoFormStatus>
+              </NoCompactStyle>
+            )
+          }
+          class={[attrs.class, compactItemClassnames.value]}
           inputClassName={classNames(
             {
-              [`${prefixClsValue}-sm`]: size.value === 'small',
-              [`${prefixClsValue}-lg`]: size.value === 'large',
+              [`${prefixClsValue}-sm`]: mergedSize.value === 'small',
+              [`${prefixClsValue}-lg`]: mergedSize.value === 'large',
               [`${prefixClsValue}-rtl`]: direction.value === 'rtl',
               [`${prefixClsValue}-borderless`]: !bordered,
             },
@@ -154,8 +173,8 @@ export default defineComponent({
           )}
           affixWrapperClassName={classNames(
             {
-              [`${prefixClsValue}-affix-wrapper-sm`]: size.value === 'small',
-              [`${prefixClsValue}-affix-wrapper-lg`]: size.value === 'large',
+              [`${prefixClsValue}-affix-wrapper-sm`]: mergedSize.value === 'small',
+              [`${prefixClsValue}-affix-wrapper-lg`]: mergedSize.value === 'large',
               [`${prefixClsValue}-affix-wrapper-rtl`]: direction.value === 'rtl',
               [`${prefixClsValue}-affix-wrapper-borderless`]: !bordered,
             },
@@ -170,8 +189,8 @@ export default defineComponent({
           )}
           groupClassName={classNames(
             {
-              [`${prefixClsValue}-group-wrapper-sm`]: size.value === 'small',
-              [`${prefixClsValue}-group-wrapper-lg`]: size.value === 'large',
+              [`${prefixClsValue}-group-wrapper-sm`]: mergedSize.value === 'small',
+              [`${prefixClsValue}-group-wrapper-lg`]: mergedSize.value === 'large',
               [`${prefixClsValue}-group-wrapper-rtl`]: direction.value === 'rtl',
             },
             getStatusClassNames(`${prefixClsValue}-group-wrapper`, mergedStatus.value, hasFeedback),

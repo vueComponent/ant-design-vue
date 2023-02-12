@@ -8,7 +8,7 @@ const TITLE_ELE_LIST = tupleNum(1, 2, 3, 4, 5);
 
 export const titleProps = () => ({
   ...omit(baseProps(), ['component', 'strong']),
-  level: Number as PropType<typeof TITLE_ELE_LIST[number]>,
+  level: Number as PropType<(typeof TITLE_ELE_LIST)[number]>,
 });
 
 export type TitleProps = Partial<ExtractPropTypes<ReturnType<typeof titleProps>>>;
@@ -16,7 +16,7 @@ export type TitleProps = Partial<ExtractPropTypes<ReturnType<typeof titleProps>>
 const Title: FunctionalComponent<TitleProps> = (props, { slots, attrs }) => {
   const { level = 1, ...restProps } = props;
   let component: string;
-  if (TITLE_ELE_LIST.indexOf(level) !== -1) {
+  if (TITLE_ELE_LIST.includes(level)) {
     component = `h${level}`;
   } else {
     warning(false, 'Typography', 'Title only accept `1 | 2 | 3 | 4 | 5` as `level` value.');

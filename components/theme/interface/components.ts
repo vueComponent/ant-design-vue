@@ -17,7 +17,7 @@ import type { ComponentToken as DropdownComponentToken } from '../../dropdown/st
 import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
 // import type { ComponentToken as ImageComponentToken } from '../../image/style';
 // import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
-// import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
+import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
 import type { ComponentToken as ListComponentToken } from '../../list/style';
 // import type { ComponentToken as MentionsComponentToken } from '../../mentions/style';
 import type { ComponentToken as MenuComponentToken } from '../../menu/style';
@@ -29,11 +29,11 @@ import type { ComponentToken as PopoverComponentToken } from '../../popover/styl
 import type { ComponentToken as ProgressComponentToken } from '../../progress/style';
 // import type { ComponentToken as RadioComponentToken } from '../../radio/style';
 import type { ComponentToken as RateComponentToken } from '../../rate/style';
-// import type { ComponentToken as ResultComponentToken } from '../../result/style';
+import type { ComponentToken as ResultComponentToken } from '../../result/style';
 // import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 // import type { ComponentToken as SelectComponentToken } from '../../select/style';
 import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
-// import type { ComponentToken as SliderComponentToken } from '../../slider/style';
+import type { ComponentToken as SliderComponentToken } from '../../slider/style';
 import type { ComponentToken as SpaceComponentToken } from '../../space/style';
 import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 // import type { ComponentToken as StepsComponentToken } from '../../steps/style';
@@ -77,7 +77,7 @@ export interface ComponentTokenMap {
   //   Image?: ImageComponentToken;
   Input?: {};
   //   InputNumber?: InputNumberComponentToken;
-  //   Layout?: LayoutComponentToken;
+  Layout?: LayoutComponentToken;
   List?: ListComponentToken;
   //   Mentions?: MentionsComponentToken;
   Notification?: NotificationComponentToken;
@@ -87,11 +87,11 @@ export interface ComponentTokenMap {
   Popconfirm?: PopconfirmComponentToken;
   Rate?: RateComponentToken;
   //   Radio?: RadioComponentToken;
-  //   Result?: ResultComponentToken;
+  Result?: ResultComponentToken;
   //   Segmented?: SegmentedComponentToken;
   //   Select?: SelectComponentToken;
   Skeleton?: SkeletonComponentToken;
-  //   Slider?: SliderComponentToken;
+  Slider?: SliderComponentToken;
   Spin?: SpinComponentToken;
   Statistic?: {};
   Switch?: {};

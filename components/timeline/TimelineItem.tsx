@@ -3,14 +3,14 @@ import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { tuple } from '../_util/type';
+import { tuple, booleanType } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const timelineItemProps = () => ({
   prefixCls: String,
   color: String,
   dot: PropTypes.any,
-  pending: { type: Boolean, default: undefined },
+  pending: booleanType(),
   position: PropTypes.oneOf(tuple('left', 'right', '')).def(''),
   label: PropTypes.any,
 });

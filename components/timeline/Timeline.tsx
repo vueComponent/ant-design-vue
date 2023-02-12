@@ -6,7 +6,7 @@ import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import TimelineItem from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { tuple } from '../_util/type';
+import { tuple, booleanType } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 // CSSINJS
@@ -17,7 +17,7 @@ export const timelineProps = () => ({
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
   pendingDot: PropTypes.any,
-  reverse: { type: Boolean, default: undefined },
+  reverse: booleanType(),
   mode: PropTypes.oneOf(tuple('left', 'alternate', 'right', '')),
 });
 

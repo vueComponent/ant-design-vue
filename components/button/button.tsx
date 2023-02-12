@@ -19,6 +19,7 @@ import useStyle from './style';
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
 import { GroupSizeContext } from './button-group';
+import { useCompactItemContext } from '../space/Compact';
 
 type Loading = boolean | number;
 
@@ -49,6 +50,7 @@ export default defineComponent({
     const hasTwoCNChar = ref(false);
 
     const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
 
     // =============== Update Loading ===============
     const loadingOrDelay = computed(() =>
@@ -79,22 +81,25 @@ export default defineComponent({
       const pre = prefixCls.value;
 
       const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
-      const sizeFullname = groupSize?.value || size.value;
+      const sizeFullname = compactSize.value || groupSize?.value || size.value;
       const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
 
-      return {
-        [hashId.value]: true,
-        [`${pre}`]: true,
-        [`${pre}-${shape}`]: shape !== 'default' && shape,
-        [`${pre}-${type}`]: type,
-        [`${pre}-${sizeCls}`]: sizeCls,
-        [`${pre}-loading`]: innerLoading.value,
-        [`${pre}-background-ghost`]: ghost && !isUnBorderedButtonType(type),
-        [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
-        [`${pre}-block`]: block,
-        [`${pre}-dangerous`]: !!danger,
-        [`${pre}-rtl`]: direction.value === 'rtl',
-      };
+      return [
+        compactItemClassnames.value,
+        {
+          [hashId.value]: true,
+          [`${pre}`]: true,
+          [`${pre}-${shape}`]: shape !== 'default' && shape,
+          [`${pre}-${type}`]: type,
+          [`${pre}-${sizeCls}`]: sizeCls,
+          [`${pre}-loading`]: innerLoading.value,
+          [`${pre}-background-ghost`]: ghost && !isUnBorderedButtonType(type),
+          [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
+          [`${pre}-block`]: block,
+          [`${pre}-dangerous`]: !!danger,
+          [`${pre}-rtl`]: direction.value === 'rtl',
+        },
+      ];
     });
 
     const fixTwoCNChar = () => {
@@ -209,7 +214,11 @@ export default defineComponent({
       );
 
       if (!isUnBorderedButtonType(type)) {
-        buttonNode = <Wave ref="wave" disabled={!!innerLoading.value}>{buttonNode}</Wave>;
+        buttonNode = (
+          <Wave ref="wave" disabled={!!innerLoading.value}>
+            {buttonNode}
+          </Wave>
+        );
       }
 
       return wrapSSR(buttonNode);

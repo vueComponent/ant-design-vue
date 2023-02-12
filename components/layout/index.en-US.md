@@ -3,7 +3,7 @@ category: Components
 type: Layout
 cols: 1
 title: Layout
-cover: https://gw.alipayobjects.com/zos/alicdn/hzEndUVEx/Layout.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*4i58ToAcxaYAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Handling the overall layout of a page.

@@ -17,6 +17,7 @@ import { commonProps, datePickerProps } from './props';
 import devWarning from '../../vc-util/devWarning';
 import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
 import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
+import { useCompactItemContext } from '../../space/Compact';
 
 //CSSINJS
 import useStyle from '../style';
@@ -55,22 +56,36 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           ExtraProps;
         const formItemContext = useInjectFormItemContext();
         const formItemInputContext = FormItemInputContext.useInject();
-        devWarning(
-          !(props.monthCellContentRender || slots.monthCellContentRender),
-          'DatePicker',
-          '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
-        );
+        // =================== Warning =====================
+        if (process.env.NODE_ENV !== 'production') {
+          devWarning(
+            picker !== 'quarter',
+            displayName || 'DatePicker',
+            `DatePicker.${displayName} is legacy usage. Please use DatePicker[picker='${picker}'] directly.`,
+          );
 
-        devWarning(
-          !attrs.getCalendarContainer,
-          'DatePicker',
-          '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
-        );
-        const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
-          'picker',
-          props,
-        );
+          devWarning(
+            !props.dropdownClassName,
+            displayName || 'DatePicker',
+            '`dropdownClassName` is deprecated. Please use `popupClassName` instead.',
+          );
+          devWarning(
+            !(props.monthCellContentRender || slots.monthCellContentRender),
+            displayName || 'DatePicker',
+            '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
+          );
 
+          devWarning(
+            !attrs.getCalendarContainer,
+            displayName || 'DatePicker',
+            '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
+          );
+        }
+
+        const { prefixCls, direction, getPopupContainer, size, rootPrefixCls, disabled } =
+          useConfigInject('picker', props);
+        const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+        const mergedSize = computed(() => compactSize.value || size.value);
         // style
         const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -198,7 +213,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               dateRender={dateRender}
               renderExtraFooter={renderExtraFooter}
               ref={pickerRef}
-              placeholder={getPlaceholder(mergedPicker, locale, placeholder)}
+              placeholder={getPlaceholder(locale, mergedPicker, placeholder)}
               suffixIcon={suffixNode}
               dropdownAlign={transPlacement2DropdownAlign(direction.value, props.placement)}
               clearIcon={clearIcon || <CloseCircleFilled />}
@@ -215,7 +230,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               locale={locale!.lang}
               class={classNames(
                 {
-                  [`${pre}-${size.value}`]: size.value,
+                  [`${pre}-${mergedSize.value}`]: mergedSize.value,
                   [`${pre}-borderless`]: !bordered,
                 },
                 getStatusClassNames(
@@ -225,7 +240,9 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
                 ),
                 attrs.class,
                 hashId.value,
+                compactItemClassnames.value,
               )}
+              disabled={disabled.value}
               prefixCls={pre}
               getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
               generateConfig={generateConfig}
@@ -235,7 +252,11 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
               components={Components}
               direction={direction.value}
-              dropdownClassName={classNames(hashId.value)}
+              dropdownClassName={classNames(
+                hashId.value,
+                props.popupClassName,
+                props.dropdownClassName,
+              )}
               onChange={onChange}
               onOpenChange={onOpenChange}
               onFocus={onFocus}

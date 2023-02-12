@@ -10,7 +10,7 @@ import type { ComponentToken as ButtonComponentToken } from '../../button/style'
 // import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
 // import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
 // import type { ComponentToken as CollapseComponentToken } from '../../collapse/style';
-// import type { ComponentToken as DatePickerComponentToken } from '../../date-picker/style';
+import type { ComponentToken as DatePickerComponentToken } from '../../date-picker/style';
 import type { ComponentToken as DividerComponentToken } from '../../divider/style';
 import type { ComponentToken as DropdownComponentToken } from '../../dropdown/style';
 // import type { ComponentToken as DrawerComponentToken } from '../../drawer/style';
@@ -65,7 +65,7 @@ export interface ComponentTokenMap {
   //   Checkbox?: CheckboxComponentToken;
   //   Collapse?: CollapseComponentToken;
   Comment?: {};
-  //   DatePicker?: DatePickerComponentToken;
+  DatePicker?: DatePickerComponentToken;
   Descriptions?: {};
   Divider?: DividerComponentToken;
   //   Drawer?: DrawerComponentToken;

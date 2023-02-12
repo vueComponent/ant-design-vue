@@ -18,6 +18,9 @@ import devWarning from '../../vc-util/devWarning';
 import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
 import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
 
+//CSSINJS
+import useStyle from '../style';
+
 export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
   extraProps: ExtraProps,
@@ -67,6 +70,10 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           'picker',
           props,
         );
+
+        // style
+        const [wrapSSR, hashId] = useStyle(prefixCls);
+
         const pickerRef = ref();
         expose({
           focus: () => {
@@ -156,7 +163,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
             id = formItemContext.id.value,
             ...restProps
           } = p;
-          const showTime = p.showTime === '' ? true : p.showTime;
+          const showTime = (p as any).showTime === '' ? true : p.showTime;
           const { format } = p as any;
 
           let additionalOverrideProps: any = {};
@@ -185,7 +192,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               {formItemInputContext.hasFeedback && formItemInputContext.feedbackIcon}
             </>
           );
-          return (
+          return wrapSSR(
             <RCPicker
               monthCellRender={monthCellRender}
               dateRender={dateRender}
@@ -217,6 +224,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
                   formItemInputContext.hasFeedback,
                 ),
                 attrs.class,
+                hashId.value,
               )}
               prefixCls={pre}
               getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
@@ -227,13 +235,14 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
               components={Components}
               direction={direction.value}
+              dropdownClassName={classNames(hashId.value)}
               onChange={onChange}
               onOpenChange={onOpenChange}
               onFocus={onFocus}
               onBlur={onBlur}
               onPanelChange={onPanelChange}
               onOk={onOk}
-            />
+            />,
           );
         };
       },

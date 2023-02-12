@@ -43,7 +43,7 @@ import type { ComponentToken as TagComponentToken } from '../../tag/style';
 // import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
 import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
 // import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
-// import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
+import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
 // import type { ComponentToken as UploadComponentToken } from '../../upload/style';
 // import type { ComponentToken as TourComponentToken } from '../../tour/style';
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
@@ -98,7 +98,7 @@ export interface ComponentTokenMap {
   Tag?: TagComponentToken;
   Tree?: {};
   TreeSelect?: {};
-  //   Typography?: TypographyComponentToken;
+  Typography?: TypographyComponentToken;
   //   Timeline?: TimelineComponentToken;
   //   Transfer?: TransferComponentToken;
   //   Tabs?: TabsComponentToken;

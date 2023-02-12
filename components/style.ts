@@ -60,5 +60,5 @@ import './result/style';
 import './form/style';
 // import './space/style';
 import './image/style';
-import './typography/style';
+// import './typography/style';
 // import './color-picker/style';

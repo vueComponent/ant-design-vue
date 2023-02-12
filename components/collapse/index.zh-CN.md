@@ -25,7 +25,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/IxH16B9RD/Collapse.svg
 | collapsible | 所有子面板是否可折叠或指定可折叠触发区域 | `header` \| `disabled` | - | 3.0 |
 | destroyInactivePanel | 销毁折叠隐藏的面板 | boolean | `false` |  |
 | expandIcon | 自定义切换图标 | Function(props):VNode \| slot="expandIcon" slot-scope="props"\|#expandIcon="props" |  |  |
-| expandIconPosition | 设置图标位置： `start`, `end` | `start` | - | 1.5.0 |
+| expandIconPosition | 设置图标位置： `start`, `end` | `start` | - | 4.0 |
 | ghost | 使折叠面板透明且无边框 | boolean | false | 3.0 |
 
 ### 事件

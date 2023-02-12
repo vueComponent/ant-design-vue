@@ -34,7 +34,7 @@ import './modal/style';
 import './time-picker/style';
 import './steps/style';
 // import './breadcrumb/style';
-import './calendar/style';
+// import './calendar/style';
 // import './date-picker/style';
 import './slider/style';
 import './table/style';

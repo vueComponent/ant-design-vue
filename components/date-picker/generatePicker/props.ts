@@ -1,5 +1,5 @@
 import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
-import type { CSSProperties, PropType } from 'vue';
+import type { CSSProperties } from 'vue';
 import type { PickerLocale } from '.';
 import type { SizeType } from '../../config-provider';
 import type {
@@ -16,27 +16,39 @@ import type { MonthCellRender } from '../../vc-picker/panels/MonthPanel/MonthBod
 import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
 import type { RangeDateRender, RangeInfo, RangeType } from '../../vc-picker/RangePicker';
 import type { VueNode } from '../../_util/type';
-import { tuple } from '../../_util/type';
+import {
+  stringType,
+  arrayType,
+  someType,
+  booleanType,
+  objectType,
+  functionType,
+} from '../../_util/type';
 import type { InputStatus } from '../../_util/statusUtils';
 
-const DataPickerPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
-type DataPickerPlacement = typeof DataPickerPlacements[number];
+const DataPickerPlacements = ['bottomLeft', 'bottomRight', 'topLeft', 'topRight'] as const;
+type DataPickerPlacement = (typeof DataPickerPlacements)[number];
 
 function commonProps<DateType = any>() {
   return {
     id: String,
+    /**
+     * @deprecated `dropdownClassName` is deprecated which will be removed in next major
+     *   version.Please use `popupClassName` instead.
+     */
     dropdownClassName: String,
-    popupStyle: { type: Object as PropType<CSSProperties> },
+    popupClassName: String,
+    popupStyle: objectType<CSSProperties>(),
     transitionName: String,
     placeholder: String,
-    allowClear: { type: Boolean, default: undefined },
-    autofocus: { type: Boolean, default: undefined },
-    disabled: { type: Boolean, default: undefined },
+    allowClear: booleanType(),
+    autofocus: booleanType(),
+    disabled: booleanType(),
     tabindex: Number,
-    open: { type: Boolean, default: undefined },
-    defaultOpen: { type: Boolean, default: undefined },
+    open: booleanType(),
+    defaultOpen: booleanType(),
     /** Make input readOnly to avoid popup keyboard in mobile */
-    inputReadOnly: { type: Boolean, default: undefined },
+    inputReadOnly: booleanType(),
     // Value
     // format:  string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
     // Render
@@ -46,61 +58,59 @@ function commonProps<DateType = any>() {
     // nextIcon?: VueNode;
     // superPrevIcon?: VueNode;
     // superNextIcon?: VueNode;
-    getPopupContainer: { type: Function as PropType<(node: HTMLElement) => HTMLElement> },
-    panelRender: { type: Function as PropType<(originPanel: VueNode) => VueNode> },
+    getPopupContainer: functionType<(node: HTMLElement) => HTMLElement>(),
+    panelRender: functionType<(originPanel: VueNode) => VueNode>(),
     // // Events
-    onChange: {
-      type: Function as PropType<(value: DateType | string | null, dateString: string) => void>,
-    },
-    'onUpdate:value': { type: Function as PropType<(value: DateType | string | null) => void> },
-    onOk: { type: Function as PropType<(value: DateType | string | null) => void> },
-    onOpenChange: { type: Function as PropType<(open: boolean) => void> },
-    'onUpdate:open': { type: Function as PropType<(open: boolean) => void> },
-    onFocus: { type: Function as PropType<FocusEventHandler> },
-    onBlur: { type: Function as PropType<FocusEventHandler> },
-    onMousedown: { type: Function as PropType<MouseEventHandler> },
-    onMouseup: { type: Function as PropType<MouseEventHandler> },
-    onMouseenter: { type: Function as PropType<MouseEventHandler> },
-    onMouseleave: { type: Function as PropType<MouseEventHandler> },
-    onClick: { type: Function as PropType<MouseEventHandler> },
-    onContextmenu: { type: Function as PropType<MouseEventHandler> },
-    onKeydown: {
-      type: Function as PropType<(event: KeyboardEvent, preventDefault: () => void) => void>,
-    },
+    onChange: functionType<(value: DateType | string | null, dateString: string) => void>(),
+    'onUpdate:value': functionType<(value: DateType | string | null) => void>(),
+    onOk: functionType<(value: DateType | string | null) => void>(),
+    onOpenChange: functionType<(open: boolean) => void>(),
+    'onUpdate:open': functionType<(open: boolean) => void>(),
+    onFocus: functionType<FocusEventHandler>(),
+    onBlur: functionType<FocusEventHandler>(),
+    onMousedown: functionType<MouseEventHandler>(),
+    onMouseup: functionType<MouseEventHandler>(),
+    onMouseenter: functionType<MouseEventHandler>(),
+    onMouseleave: functionType<MouseEventHandler>(),
+    onClick: functionType<MouseEventHandler>(),
+    onContextmenu: functionType<MouseEventHandler>(),
+    onKeydown: functionType<(event: KeyboardEvent, preventDefault: () => void) => void>(),
     // WAI-ARIA
     role: String,
     name: String,
     autocomplete: String,
-    direction: { type: String as PropType<'ltr' | 'rtl'> },
-    showToday: { type: Boolean, default: undefined },
-    showTime: {
-      type: [Boolean, Object] as PropType<boolean | SharedTimeProps<DateType>>,
-      default: undefined,
-    },
-    locale: { type: Object as PropType<PickerLocale> },
-    size: { type: String as PropType<SizeType> },
-    bordered: { type: Boolean, default: undefined },
-    dateRender: { type: Function as PropType<DateRender<DateType>> },
-    disabledDate: { type: Function as PropType<(date: DateType) => boolean> },
-    mode: { type: String as PropType<PanelMode> },
-    picker: { type: String as PropType<PickerMode> },
+    direction: stringType<'ltr' | 'rtl'>(),
+    showToday: booleanType(),
+    showTime: someType<boolean | SharedTimeProps<DateType>>([Boolean, Object]),
+    locale: objectType<PickerLocale>(),
+    size: stringType<SizeType>(),
+    bordered: booleanType(),
+    dateRender: functionType<DateRender<DateType>>(),
+    disabledDate: functionType<(date: DateType) => boolean>(),
+    mode: stringType<PanelMode>(),
+    picker: stringType<PickerMode>(),
     valueFormat: String,
-    placement: String as PropType<DataPickerPlacement>,
-    status: String as PropType<InputStatus>,
+    placement: stringType<DataPickerPlacement>(),
+    status: stringType<InputStatus>(),
 
     /** @deprecated Please use `disabledTime` instead. */
-    disabledHours: Function as PropType<DisabledTimes['disabledHours']>,
+    disabledHours: functionType<DisabledTimes['disabledHours']>(),
     /** @deprecated Please use `disabledTime` instead. */
-    disabledMinutes: Function as PropType<DisabledTimes['disabledMinutes']>,
+    disabledMinutes: functionType<DisabledTimes['disabledMinutes']>(),
     /** @deprecated Please use `disabledTime` instead. */
-    disabledSeconds: Function as PropType<DisabledTimes['disabledSeconds']>,
+    disabledSeconds: functionType<DisabledTimes['disabledSeconds']>(),
   };
 }
 
 export interface CommonProps<DateType> {
   id?: string;
   prefixCls?: string;
+  /**
+   * @deprecated `dropdownClassName` is deprecated which will be removed in next major
+   *   version.Please use `popupClassName` instead.
+   */
   dropdownClassName?: string;
+  popupClassName?: string;
   popupStyle?: CSSProperties;
   transitionName?: string;
   placeholder?: string;
@@ -153,20 +163,20 @@ export interface CommonProps<DateType> {
 
 function datePickerProps<DateType = any>() {
   return {
-    defaultPickerValue: { type: [String, Object] as PropType<DateType | string> },
-    defaultValue: { type: [String, Object] as PropType<DateType | string> },
-    value: { type: [String, Object] as PropType<DateType | string> },
-    disabledTime: { type: Function as PropType<DisabledTime<DateType>> },
-    format: {
-      type: [String, Function, Array] as PropType<
-        string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]
-      >,
-    },
-    renderExtraFooter: { type: Function as PropType<(mode: PanelMode) => VueNode> },
-    showNow: { type: Boolean, default: undefined },
-    monthCellRender: { type: Function as PropType<MonthCellRender<DateType>> },
+    defaultPickerValue: someType<DateType | string>([Object, String]),
+    defaultValue: someType<DateType | string>([Object, String]),
+    value: someType<DateType | string>([Object, String]),
+    disabledTime: functionType<DisabledTime<DateType>>(),
+    format: someType<string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]>([
+      String,
+      Function,
+      Array,
+    ]),
+    renderExtraFooter: functionType<(mode: PanelMode) => VueNode>(),
+    showNow: booleanType(),
+    monthCellRender: functionType<MonthCellRender<DateType>>(),
     // deprecated  Please use `monthCellRender"` instead.',
-    monthCellContentRender: { type: Function as PropType<MonthCellRender<DateType>> },
+    monthCellContentRender: functionType<MonthCellRender<DateType>>(),
   };
 }
 
@@ -185,58 +195,47 @@ export interface DatePickerProps<DateType> {
 
 function rangePickerProps<DateType>() {
   return {
-    allowEmpty: { type: Array as unknown as PropType<[boolean, boolean]> },
-    dateRender: { type: Function as PropType<RangeDateRender<DateType>> },
-    defaultPickerValue: {
-      type: Array as unknown as PropType<RangeValue<DateType> | RangeValue<string>>,
-    },
-    defaultValue: { type: Array as unknown as PropType<RangeValue<DateType> | RangeValue<string>> },
-    value: { type: Array as unknown as PropType<RangeValue<DateType> | RangeValue<string>> },
-    disabledTime: {
-      type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
-    },
-    disabled: { type: [Boolean, Array] as unknown as PropType<boolean | [boolean, boolean]> },
+    allowEmpty: arrayType<[boolean, boolean]>(),
+    dateRender: functionType<RangeDateRender<DateType>>(),
+    defaultPickerValue: arrayType<RangeValue<DateType> | RangeValue<string>>(),
+    defaultValue: arrayType<RangeValue<DateType> | RangeValue<string>>(),
+    value: arrayType<RangeValue<DateType> | RangeValue<string>>(),
+    disabledTime: functionType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>(),
+    disabled: someType<boolean | [boolean, boolean]>([Boolean, Array]),
     format: String,
-    renderExtraFooter: { type: Function as PropType<() => VueNode> },
+    renderExtraFooter: functionType<() => VueNode>(),
     separator: { type: String },
-    ranges: {
-      type: Object as PropType<
+    ranges:
+      objectType<
         Record<
           string,
           Exclude<RangeValue<DateType>, null> | (() => Exclude<RangeValue<DateType>, null>)
         >
-      >,
-    },
-    placeholder: Array,
-    mode: { type: Array as unknown as PropType<[PanelMode, PanelMode]> },
-    onChange: {
-      type: Function as PropType<
+      >(),
+    placeholder: arrayType<string[]>(),
+    mode: arrayType<[PanelMode, PanelMode]>(),
+    onChange:
+      functionType<
         (
           value: RangeValue<DateType> | RangeValue<string> | null,
           dateString: [string, string],
         ) => void
-      >,
-    },
-    'onUpdate:value': {
-      type: Function as PropType<(value: RangeValue<DateType> | RangeValue<string> | null) => void>,
-    },
-    onCalendarChange: {
-      type: Function as PropType<
+      >(),
+    'onUpdate:value':
+      functionType<(value: RangeValue<DateType> | RangeValue<string> | null) => void>(),
+    onCalendarChange:
+      functionType<
         (
           values: RangeValue<DateType> | RangeValue<string>,
           formatString: [string, string],
           info: RangeInfo,
         ) => void
-      >,
-    },
-    onPanelChange: {
-      type: Function as PropType<
+      >(),
+    onPanelChange:
+      functionType<
         (values: RangeValue<DateType> | RangeValue<string>, modes: [PanelMode, PanelMode]) => void
-      >,
-    },
-    onOk: {
-      type: Function as PropType<(dates: RangeValue<DateType> | RangeValue<string>) => void>,
-    },
+      >(),
+    onOk: functionType<(dates: RangeValue<DateType> | RangeValue<string>) => void>(),
   };
 }
 

@@ -25,12 +25,12 @@ export default defineComponent({
     }
     const align = () => {
       cancelKeepAlign();
-      if (props.visible) {
+      if (props.open) {
         keepAlign();
       }
     };
     watch(
-      [() => props.visible, () => props.title],
+      [() => props.open, () => props.title],
       () => {
         align();
       },

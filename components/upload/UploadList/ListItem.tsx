@@ -1,5 +1,5 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
 import DownloadOutlined from '@ant-design/icons-vue/DownloadOutlined';
@@ -16,36 +16,39 @@ import type {
 import type { VueNode } from '../../_util/type';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import Transition, { getTransitionProps } from '../../_util/transition';
+import { booleanType, stringType, functionType, arrayType, objectType } from '../../_util/type';
+
 export const listItemProps = () => {
   return {
     prefixCls: String,
-    locale: { type: Object as PropType<UploadLocale>, default: undefined as UploadLocale },
-    file: Object as PropType<UploadFile>,
-    items: Array as PropType<UploadFile[]>,
-    listType: String as PropType<UploadListType>,
-    isImgUrl: Function as PropType<(file: UploadFile) => boolean>,
+    locale: objectType<UploadLocale>(undefined as UploadLocale),
+    file: objectType<UploadFile>(),
+    items: arrayType<UploadFile[]>(),
+    listType: stringType<UploadListType>(),
+    isImgUrl: functionType<(file: UploadFile) => boolean>(),
 
-    showRemoveIcon: { type: Boolean, default: undefined },
-    showDownloadIcon: { type: Boolean, default: undefined },
-    showPreviewIcon: { type: Boolean, default: undefined },
-    removeIcon: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
-    downloadIcon: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
-    previewIcon: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
+    showRemoveIcon: booleanType(),
+    showDownloadIcon: booleanType(),
+    showPreviewIcon: booleanType(),
+    removeIcon: functionType<(opt: { file: UploadFile }) => VueNode>(),
+    downloadIcon: functionType<(opt: { file: UploadFile }) => VueNode>(),
+    previewIcon: functionType<(opt: { file: UploadFile }) => VueNode>(),
 
-    iconRender: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
-    actionIconRender: Function as PropType<
-      (opt: {
-        customIcon: VueNode;
-        callback: () => void;
-        prefixCls: string;
-        title?: string | undefined;
-      }) => VueNode
-    >,
-    itemRender: Function as PropType<ItemRender>,
-    onPreview: Function as PropType<(file: UploadFile, e: Event) => void>,
-    onClose: Function as PropType<(file: UploadFile) => void>,
-    onDownload: Function as PropType<(file: UploadFile) => void>,
-    progress: Object as PropType<UploadListProgressProps>,
+    iconRender: functionType<(opt: { file: UploadFile }) => VueNode>(),
+    actionIconRender:
+      functionType<
+        (opt: {
+          customIcon: VueNode;
+          callback: () => void;
+          prefixCls: string;
+          title?: string | undefined;
+        }) => VueNode
+      >(),
+    itemRender: functionType<ItemRender>(),
+    onPreview: functionType<(file: UploadFile, e: Event) => void>(),
+    onClose: functionType<(file: UploadFile) => void>(),
+    onDownload: functionType<(file: UploadFile) => void>(),
+    progress: objectType<UploadListProgressProps>(),
   };
 };
 

@@ -4,8 +4,8 @@ import type { PickerLocale } from './generatePicker';
 import type { DirectionType } from '../config-provider';
 
 export function getPlaceholder(
-  picker: PickerMode | undefined,
   locale: PickerLocale,
+  picker: PickerMode,
   customizePlaceholder?: string,
 ): string {
   if (customizePlaceholder !== undefined) {
@@ -31,8 +31,8 @@ export function getPlaceholder(
 }
 
 export function getRangePlaceholder(
-  picker: PickerMode | undefined,
   locale: PickerLocale,
+  picker: PickerMode,
   customizePlaceholder?: [string, string],
 ) {
   if (customizePlaceholder !== undefined) {
@@ -92,17 +92,11 @@ export function transPlacement2DropdownAlign(
       };
     }
     default: {
-      return direction === 'rtl'
-        ? {
-            points: ['tr', 'br'],
-            offset: [0, 4],
-            overflow,
-          }
-        : {
-            points: ['tl', 'bl'],
-            offset: [0, 4],
-            overflow,
-          };
+      return {
+        points: direction === 'rtl' ? ['tr', 'br'] : ['tl', 'bl'],
+        offset: [0, 4],
+        overflow,
+      };
     }
   }
 }

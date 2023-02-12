@@ -1,4 +1,4 @@
-import type { App, ExtractPropTypes, PropType } from 'vue';
+import type { App, ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -13,6 +13,7 @@ import omit from '../_util/omit';
 import { VcStepProps } from '../vc-steps/Step';
 import type { ProgressDotRender } from '../vc-steps/Steps';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import { booleanType, stringType, functionType, someType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
@@ -24,28 +25,28 @@ export const stepsProps = () => ({
   current: Number,
   initial: Number,
   percent: Number,
-  responsive: { type: Boolean, default: undefined },
-  labelPlacement: String as PropType<'horizontal' | 'vertical'>,
-  status: String as PropType<'wait' | 'process' | 'finish' | 'error'>,
-  size: String as PropType<'default' | 'small'>,
-  direction: String as PropType<'horizontal' | 'vertical'>,
-  progressDot: {
-    type: [Boolean, Function] as PropType<boolean | ProgressDotRender>,
-    default: undefined as boolean | ProgressDotRender,
-  },
-  type: String as PropType<'default' | 'navigation'>,
-  onChange: Function as PropType<(current: number) => void>,
-  'onUpdate:current': Function as PropType<(current: number) => void>,
+  responsive: booleanType(),
+  labelPlacement: stringType<'horizontal' | 'vertical'>(),
+  status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
+  size: stringType<'default' | 'small'>(),
+  direction: stringType<'horizontal' | 'vertical'>(),
+  progressDot: someType<boolean | ProgressDotRender>(
+    [Boolean, Function],
+    undefined as boolean | ProgressDotRender,
+  ),
+  type: stringType<'default' | 'navigation'>(),
+  onChange: functionType<(current: number) => void>(),
+  'onUpdate:current': functionType<(current: number) => void>(),
 });
 
 export const stepProps = () => ({
   description: PropTypes.any,
   icon: PropTypes.any,
-  status: String as PropType<'wait' | 'process' | 'finish' | 'error'>,
-  disabled: { type: Boolean, default: undefined },
+  status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
+  disabled: booleanType(),
   title: PropTypes.any,
   subTitle: PropTypes.any,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: functionType<MouseEventHandler>(),
 });
 
 export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>>;

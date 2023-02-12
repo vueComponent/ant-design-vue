@@ -9,6 +9,7 @@ import type { PropType, ExtractPropTypes, Ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { booleanType, tuple } from '../_util/type';
 import { isEmpty } from 'lodash-es';
+import { flattenChildren } from '../_util/props-util';
 
 export const spaceCompactItemProps = () => ({
   compactSize: String as PropType<SizeType>,
@@ -60,7 +61,7 @@ export const NoCompactStyle = defineComponent({
 export const spaceCompactProps = () => ({
   prefixCls: String,
   size: {
-    type: [String, Number, Array] as PropType<SizeType>,
+    type: String as PropType<SizeType>,
   },
   direction: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
   align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
@@ -98,15 +99,14 @@ const Compact = defineComponent({
     });
 
     return () => {
+      const childNodes = flattenChildren(slots.default?.() || []);
       // =========================== Render ===========================
-      if (slots.default?.()?.length === 0) {
+      if (childNodes.length === 0) {
         return null;
       }
 
-      const childNodes = slots.default?.() || [];
-
       return wrapSSR(
-        <div class={clx.value} {...attrs}>
+        <div {...attrs} class={[clx.value, attrs.class]}>
           {childNodes.map((child, i) => {
             const key = (child && child.key) || `${prefixCls.value}-item-${i}`;
             const noCompactItemContext = !compactItemContext || isEmpty(compactItemContext);
@@ -114,7 +114,7 @@ const Compact = defineComponent({
             return (
               <CompactItem
                 key={key}
-                compactSize={props.size}
+                compactSize={props.size ?? 'middle'}
                 compactDirection={props.direction}
                 isFirstItem={i === 0 && (noCompactItemContext || compactItemContext?.isFirstItem)}
                 isLastItem={

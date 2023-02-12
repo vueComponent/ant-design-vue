@@ -4,7 +4,7 @@ subtitle: 布局
 type: 布局
 cols: 1
 title: Layout
-cover: https://gw.alipayobjects.com/zos/alicdn/hzEndUVEx/Layout.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*4i58ToAcxaYAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 协助进行页面级整体布局。

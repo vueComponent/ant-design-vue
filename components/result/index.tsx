@@ -83,7 +83,7 @@ const Result = defineComponent({
       const extra = props.extra ?? slots.extra?.();
       const pre = prefixCls.value;
       return wrapSSR(
-        <div {...attrs} class={className.value}>
+        <div {...attrs} class={[className.value, attrs.class]}>
           {renderIcon(pre, { status: props.status, icon })}
           <div class={`${pre}-title`}>{title}</div>
           {subTitle && <div class={`${pre}-subtitle`}>{subTitle}</div>}

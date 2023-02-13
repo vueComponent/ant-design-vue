@@ -1,14 +1,14 @@
 import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import { vNodeType } from '../_util/type';
 
 export const cardMetaProps = () => ({
   prefixCls: String,
-  title: PropTypes.any,
-  description: PropTypes.any,
-  avatar: PropTypes.any,
+  title: vNodeType(),
+  description: vNodeType(),
+  avatar: vNodeType(),
 });
 export type CardGridProps = Partial<ExtractPropTypes<ReturnType<typeof cardMetaProps>>>;
 export default defineComponent({

@@ -2,7 +2,7 @@
 category: Components
 type: Data Entry
 title: Transfer
-cover: https://gw.alipayobjects.com/zos/alicdn/QAXskNI4G/Transfer.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EAApQ5ephigAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Alert component for feedback.
@@ -31,6 +31,7 @@ One or more elements can be selected from either column, one click on the proper
 | operationStyle | A custom CSS style used for rendering the operations column | CSSProperties | - | 3.0.0 |
 | pagination | Use pagination. Not work in render props | boolean \| { pageSize: number, simple: boolean, showSizeChanger?: boolean, showLessItems?: boolean } | false | 3.0.0 |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) \| slot |  |  |
+| selectAllLabels | A set of customized labels for select all checkboxes on the header | VueNode \| ((info: { selectedCount: number; totalCount: number }) => VueNode); | - | 3.0.0 |
 | selectedKeys(v-model) | A set of keys of selected items. | string\[] | \[] |  |
 | showSearch | If included, a search box is shown on each column. | boolean | false |  |
 | showSelectAll | Show select all checkbox on the header | boolean | true |  |

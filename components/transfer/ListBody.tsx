@@ -5,13 +5,14 @@ import ListItem from './ListItem';
 import Pagination from '../pagination';
 import PropTypes from '../_util/vue-types';
 import type { TransferItem } from '.';
+import { booleanType } from '../_util/type';
 
 export const transferListBodyProps = {
   prefixCls: String,
   filteredRenderItems: PropTypes.array.def([]),
   selectedKeys: PropTypes.array,
-  disabled: { type: Boolean, default: undefined },
-  showRemove: { type: Boolean, default: undefined },
+  disabled: booleanType(),
+  showRemove: booleanType(),
   pagination: PropTypes.any,
   onItemSelect: Function,
   onScroll: Function,

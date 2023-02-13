@@ -42,7 +42,7 @@ import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 import type { ComponentToken as TagComponentToken } from '../../tag/style';
 // import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
 import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
-// import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
+import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
 import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
 // import type { ComponentToken as UploadComponentToken } from '../../upload/style';
 // import type { ComponentToken as TourComponentToken } from '../../tour/style';
@@ -100,7 +100,7 @@ export interface ComponentTokenMap {
   TreeSelect?: {};
   Typography?: TypographyComponentToken;
   //   Timeline?: TimelineComponentToken;
-  //   Transfer?: TransferComponentToken;
+  Transfer?: TransferComponentToken;
   //   Tabs?: TabsComponentToken;
   //   Calendar?: CalendarComponentToken;
   //   Steps?: StepsComponentToken;

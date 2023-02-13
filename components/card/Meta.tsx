@@ -41,7 +41,7 @@ export default defineComponent({
           </div>
         ) : null;
       return (
-        <div class={[classString]}>
+        <div class={classString}>
           {avatarDom}
           {MetaDetail}
         </div>

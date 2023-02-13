@@ -4,8 +4,7 @@ import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent, clearFix } from '../../_style';
 
 /** Component only token. Which will handle additional calculation of alias token */
-export interface ComponentToken {
-}
+export interface ComponentToken {}
 interface CardToken extends FullToken<'Card'> {
   cardHeadFontSize: string;
   CardHeadPadding: string;
@@ -17,51 +16,61 @@ interface CardToken extends FullToken<'Card'> {
   cardHeadTabsMarginBottom: string;
   cardHeadHeight: string;
   cardShadow: string;
-  cardHeadFontSizeSm:string;
-  cardHeadColor:string;
-  gradientMin:string;
-  gradientMax:string;
-  cardInnerHeadPadding:string;
-  transitionTime:string;
+  cardHeadFontSizeSm: string;
+  cardHeadColor: string;
+  gradientMin: string;
+  gradientMax: string;
+  cardInnerHeadPadding: string;
+  transitionTime: string;
 }
 // ============================== Shared ==============================
-const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
- const {
-    cardHeadFontSize,
-    CardHeadPadding,
-    cardPaddingBase,
+export const genCardSmallStyle = (token: CardToken): CSSObject => {
+
+  const {
     cardPaddingBaseSm,
     cardHeadHeightSm,
     cardHeadPaddingSm,
-    cardActionsLiMargin,
     cardHeadFontSizeSm,
+    componentCls,
+  } = token;
+
+  return {
+    [`> ${componentCls}-head`]: {
+      minHeight: `${cardHeadHeightSm}`,
+      padding: `0 ${cardPaddingBaseSm}`,
+      fontSize: `${cardHeadFontSizeSm}px`,
+      [`> ${componentCls}-head-wrapper`]: {
+        [`> ${componentCls}-head-title`]: {
+          padding: `${cardHeadPaddingSm}  0`,
+        },
+        [`> ${componentCls}-head-extra`]: {
+          padding: `${cardHeadPaddingSm}  0`,
+          fontSize: `${cardHeadFontSizeSm}px`,
+        },
+      },
+    },
+    [`> ${componentCls}-body`]: {
+      padding: `${cardPaddingBaseSm}`,
+    },
+  };
+};
+
+const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
+  const {
+    cardHeadFontSize,
+    CardHeadPadding,
+    cardPaddingBase,
+    cardHeadPaddingSm,
+    cardActionsLiMargin,
     cardHeadTabsMarginBottom,
     cardHeadHeight,
     componentCls,
     cardHeadColor,
     cardShadow,
-    transitionTime
+    transitionTime,
+    antCls
   } = token;
   return {
-    [`${componentCls}-small`]:{
-      [`  > ${componentCls}-head`]:{
-        minHeight: `${cardHeadHeightSm}`,
-        padding:  `0 ${cardPaddingBaseSm}`,
-        fontSize: `${cardHeadFontSizeSm}`,
-         [`> ${componentCls}-head-wrapper`]: {
-         [`> ${componentCls}-head-title`]: {
-            padding:`${cardHeadPaddingSm}  0`,
-          },
-        [`> ${componentCls}-head-extra`]:{
-          padding:`${cardHeadPaddingSm}  0`,
-          fontSize: `${cardHeadFontSizeSm}`,
-          }
-        }
-      },
-     [`> ${componentCls}-body`]:{
-        padding: `${cardPaddingBaseSm}`
-      }
-    },
     [componentCls]: {
       ...resetComponent(token),
       position: `relative`,
@@ -70,7 +79,10 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
       '&-bordered': {
         border: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
       },
-       [`${componentCls}-rtl`]: {
+     [`&${componentCls}-small`]: {
+        ...genCardSmallStyle(token),
+      },
+      [`&-rtl`]: {
         direction: 'rtl',
       },
       [`&-hoverable`]: {
@@ -78,8 +90,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         transition: ` box-shadow  ${transitionTime}, border-color ${transitionTime}`,
         '&:hover': {
           borderColor: `${token.colorBgBase}`,
-          boxShadow: `${cardShadow}`
-          
+          boxShadow: `${cardShadow}`,
         },
       },
       [`${componentCls}-head`]: {
@@ -87,7 +98,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         marginBottom: `-1px`,
         overflow: 'hidden',
         whiteSpace: 'nowrap',
-        color:`${cardHeadColor}`,
+        color: `${cardHeadColor}`,
         textOverflow: 'ellipsis',
         padding: ` 0 ${token.cardPaddingBase} `,
         fontWeight: 500,
@@ -106,23 +117,21 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
-          [`> ${componentCls}-typography  ${componentCls}-typography-edit-content `]: {
+          [`> ${antCls}-typography  ${antCls}-typography-edit-content `]: {
             left: 0,
             marginTop: 0,
             marginBottom: 0,
           },
         },
 
-        [`${componentCls}-prefix-tabs-top`]: {
+        [`${antCls}-tabs-top`]: {
           clear: 'both',
           marginBottom: `${cardHeadTabsMarginBottom}`,
           color: `${token.colorText}`,
-          // fontWeight: 'normal',
           fontWeight: 400,
           fontSize: `${token.fontSize}`,
           '&-bar': {
             borderBottom: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
-
           },
         },
       },
@@ -146,6 +155,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
       [`${componentCls}-contain-grid:not(${componentCls}-loading) ${componentCls}-body`]: {
         margin: ' -1px 0 0 -1px',
         padding: 0,
+        color:'red'
       },
       [`${componentCls}-grid`]: {
         float: 'left',
@@ -169,7 +179,6 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
           },
         },
       },
-
       [` ${componentCls}-contain-tabs > ${componentCls}-head ${componentCls}-head-title`]: {
         minHeight: ` ${cardHeadHeight}- ${cardPaddingBase}`,
         paddingBottom: 0,
@@ -193,7 +202,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         },
       },
 
-     [`${componentCls}-actions`]: {
+      [`${componentCls}-actions`]: {
         margin: 0,
         padding: 0,
         listStyle: 'none',
@@ -222,12 +231,12 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
               transition: `color ${transitionTime}`,
             },
 
-            [`a:not(${componentCls}-btn), >${token.iconCls}-css-prefix}`]: {
+            [`a:not(${antCls}-btn), >${token.iconCls}-css-prefix}`]: {
               display: ' inline-block',
               width: '100%',
               color: `${token.colorTextSecondary}`,
               lineHeight: ' 22px',
-              transition:  `color ${transitionTime}`,
+              transition: `color ${transitionTime}`,
 
               '&:hover': {
                 color: `${token.colorPrimary}`,
@@ -240,16 +249,16 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
             },
           },
 
-            [`li:not(:last-child)`]: {
+          [`li:not(:last-child)`]: {
             borderRight: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
-            [` ${componentCls}-rtl &`]: {
+            [`${componentCls}-rtl &`]: {
               borderRight: 'none',
               borderLeft: `${token.lineWidth}px ${token.lineType} ${token.colorBorderSecondary}`,
             },
           },
         },
       },
-       [`${componentCls}-type-inner ${componentCls}-head`]: {
+      [`${componentCls}-type-inner ${componentCls}-head`]: {
         padding: `0 ${cardPaddingBase}`,
         background: `${token.colorBgBase}`,
         ' &-title': {
@@ -263,7 +272,7 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
       ' &-type-inner &-extra': {
         padding: `${token.cardInnerHeadPadding} + 1.5px 0`,
       },
-       [`${componentCls}-meta`]: {
+      [`${componentCls}-meta`]: {
         margin: ' -4px 0',
         ...clearFix(),
 
@@ -301,37 +310,35 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
       [` ${componentCls}-loading`]: {
         overflow: 'hidden',
       },
-        [` ${componentCls}-loading ${componentCls}-body`]: {
+      [` ${componentCls}-loading ${componentCls}-body`]: {
         userSelect: 'none',
       },
 
-       [` ${componentCls}-loading-content`]: {
+      [` ${componentCls}-loading-content`]: {
         p: {
           margin: 0,
         },
       },
-     [` ${componentCls}-loading-block`]: {
+      [` ${componentCls}-loading-block`]: {
         height: '14px',
         margin: ' 4px 0',
         background: `linear-gradient(90deg,${token.gradientMin},${token.gradientMax}, ${token.gradientMin})`,
         backgroundSize: '600% 600%',
         borderRadius: `${token.borderRadiusXS}px`,
-        animationName:"card-loading",
-        animationDuration:'1.4s',
-        animationTimingFunction:'ease',
-        animationIterationCount:'infinite'
+        animationName: 'card-loading',
+        animationDuration: '1.4s',
+        animationTimingFunction: 'ease',
+        animationIterationCount: 'infinite',
       },
-     '@keyframes card-loading': {
-      '0%,100% ':{
+      '@keyframes card-loading': {
+        '0%,100% ': {
           backgroundPosition: '0 50%',
         },
-        '50%':{
+        '50%': {
           backgroundPosition: '100% 50%',
-        }
-      }
+        },
+      },
     },
-
-    
   };
 };
 
@@ -350,17 +357,15 @@ export default genComponentStyleHook(
       cardHeadPaddingSm: '6px',
       cardActionsLiMargin: '12px 0',
       cardHeadTabsMarginBottom: '-17px',
-      cardShadow:`0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
+      cardShadow: `0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12),
       0 5px 12px 4px rgba(0, 0, 0, 0.09)`,
-        cardHeadColor:' fade(@black, 85%)',
-        gradientMin: 'rgba(207,216,220,.2)',
-        gradientMax:'rgba(207,216,220,.4)',
-        cardInnerHeadPadding:'12px',
-        transitionTime:'0.3s',
+      cardHeadColor: 'rgba(0,0,0,.85)',
+      gradientMin: 'rgba(207,216,220,.2)',
+      gradientMax: 'rgba(207,216,220,.4)',
+      cardInnerHeadPadding: '12px',
+      transitionTime: '0.3s',
     });
     return [genSharedCardStyle(cardToken)];
   },
-  {
-    sizePaddingEdgeHorizontal: 0,
-  },
+  {},
 );

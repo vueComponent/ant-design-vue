@@ -21,7 +21,7 @@ export default defineComponent({
       };
     });
     return () => {
-      return <div class={[classNames.value]}>{slots.default?.()}</div>;
+      return <div class={classNames.value}>{slots.default?.()}</div>;
     };
   },
 });

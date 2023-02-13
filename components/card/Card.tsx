@@ -195,7 +195,7 @@ const Card = defineComponent({
         actions && actions.length ? <ul class={`${pre}-actions`}>{getAction(actions)}</ul> : null;
 
       return wrapSSR(
-        <div ref="cardContainerRef" {...attrs} class={[pre, { ...classString }]}>
+        <div ref="cardContainerRef" {...attrs} class={classString}>
           {head}
           {coverDom}
           {children && children.length ? body : null}

@@ -110,6 +110,9 @@ export const genBaseStyle: GenerateStyle<CollapseToken> = token => {
             flex: 'none',
             cursor: 'pointer',
           },
+          [`${componentCls}-expand-icon`]: {
+            cursor: 'pointer',
+          },
         },
 
         [`${componentCls}-icon-collapsible-only`]: {

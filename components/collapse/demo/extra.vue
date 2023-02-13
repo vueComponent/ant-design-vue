@@ -50,7 +50,7 @@ export default defineComponent({
   setup() {
     const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
     const activeKey = ref(['1']);
-    const expandIconPosition = ref<CollapseProps['expandIconPosition']>('left');
+    const expandIconPosition = ref<CollapseProps['expandIconPosition']>('start');
 
     const handleClick = (event: MouseEvent) => {
       // If you don't want click extra trigger collapse, you can prevent this:

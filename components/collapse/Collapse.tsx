@@ -80,7 +80,12 @@ export default defineComponent({
       );
 
       return (
-        <div class={`${prefixCls.value}-expand-icon`}>
+        <div
+          class={`${prefixCls.value}-expand-icon`}
+          onClick={() =>
+            ['header', 'icon'].includes(props.collapsible) && onClickItem(panelProps.panelKey)
+          }
+        >
           {isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
             ? cloneElement(
                 icon,

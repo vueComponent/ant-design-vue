@@ -3,7 +3,7 @@ category: Components
 type: 数据录入
 title: Transfer
 subtitle: 穿梭框
-cover: https://gw.alipayobjects.com/zos/alicdn/QAXskNI4G/Transfer.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EAApQ5ephigAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 双栏穿梭选择框。
@@ -32,6 +32,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QAXskNI4G/Transfer.svg
 | operationStyle | 操作栏的自定义样式 | CSSProperties | - | 3.0.0 |
 | pagination | 使用分页样式，自定义渲染列表下无效 | boolean \| { pageSize: number, simple: boolean, showSizeChanger?: boolean, showLessItems?: boolean } | flase | 3.0.0 |
 | render | 每行数据渲染函数，该函数的入参为 `dataSource` 中的项，返回值为 element。或者返回一个普通对象，其中 `label` 字段为 element，`value` 字段为 title | Function(record)\| slot |  |  |
+| selectAllLabels | 自定义顶部多选框标题的集合 | VueNode \| ((info: { selectedCount: number; totalCount: number }) => VueNode); | - | 3.0.0 |
 | selectedKeys(v-model) | 设置哪些项应该被选中 | string\[] | \[] |  |
 | showSearch | 是否显示搜索框 | boolean | false |  |
 | showSelectAll | 是否展示全选勾选框 | boolean | true |  |

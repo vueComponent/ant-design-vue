@@ -9,6 +9,7 @@ import type { SizeType } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
+import useStyle from './style';
 export interface CardTabListType {
   key: string;
   tab: any;
@@ -51,10 +52,12 @@ export type CardProps = Partial<ExtractPropTypes<ReturnType<typeof cardProps>>>;
 const Card = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ACard',
+  inheritAttrs: false,
   props: cardProps(),
   slots: ['title', 'extra', 'tabBarExtraContent', 'actions', 'cover', 'customTab'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction, size } = useConfigInject('card', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const getAction = (actions: VNodeTypes[]) => {
       const actionList = actions.map((action, index) =>
         (isVNode(action) && !isEmptyElement(action)) || !isVNode(action) ? (
@@ -99,6 +102,7 @@ const Card = defineComponent({
       const pre = prefixCls.value;
       const classString = {
         [`${pre}`]: true,
+        [hashId.value]: true,
         [`${pre}-loading`]: loading,
         [`${pre}-bordered`]: bordered,
         [`${pre}-hoverable`]: !!hoverable,
@@ -190,13 +194,13 @@ const Card = defineComponent({
       const actionDom =
         actions && actions.length ? <ul class={`${pre}-actions`}>{getAction(actions)}</ul> : null;
 
-      return (
-        <div class={classString} ref="cardContainerRef">
+      return wrapSSR(
+        <div ref="cardContainerRef" {...attrs} class={classString}>
           {head}
           {coverDom}
           {children && children.length ? body : null}
           {actionDom}
-        </div>
+        </div>,
       );
     };
   },

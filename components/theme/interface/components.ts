@@ -5,7 +5,7 @@ import type { ComponentToken as BackTopComponentToken } from '../../back-top/sty
 import type { ComponentToken as ButtonComponentToken } from '../../button/style';
 // import type { ComponentToken as FloatButtonComponentToken } from '../../float-button/style';
 // import type { ComponentToken as CalendarComponentToken } from '../../calendar/style';
-// import type { ComponentToken as CardComponentToken } from '../../card/style';
+import type { ComponentToken as CardComponentToken } from '../../card/style';
 // import type { ComponentToken as CarouselComponentToken } from '../../carousel/style';
 // import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
 // import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
@@ -59,7 +59,7 @@ export interface ComponentTokenMap {
   Badge?: {};
   Button?: ButtonComponentToken;
   Breadcrumb?: {};
-  //   Card?: CardComponentToken;
+  Card?: CardComponentToken;
   //   Carousel?: CarouselComponentToken;
   //   Cascader?: CascaderComponentToken;
   //   Checkbox?: CheckboxComponentToken;

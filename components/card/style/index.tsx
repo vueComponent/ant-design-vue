@@ -152,16 +152,15 @@ const genSharedCardStyle: GenerateStyle<CardToken> = (token): CSSObject => {
         padding: `${cardPaddingBase}`,
         ...clearFix(),
       },
-      [`${componentCls}-contain-grid:not(${componentCls}-loading) ${componentCls}-body`]: {
+      [`${componentCls}-contain-grid:not(&-loading)  ${componentCls}-body`]: {
         margin: ' -1px 0 0 -1px',
         padding: 0,
-        color:'red'
       },
       [`${componentCls}-grid`]: {
         float: 'left',
         width: '33.33%',
         padding: `${cardPaddingBase}`,
-        border: 0,
+        border: 'none',
         borderRadius: 0,
         boxShadow: `1px 0 0 0 ${token.colorSplit}, 0 1px 0 0 ${token.colorSplit},
           1px 1px 0 0 ${token.colorSplit}, 1px 0 0 0 ${token.colorSplit} inset,

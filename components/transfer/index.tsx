@@ -24,7 +24,7 @@ import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItem
 import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
-
+import { groupKeysMap, groupDisabledKeysMap } from '../_util/transKeys';
 // CSSINJS
 import useStyle from './style';
 
@@ -64,17 +64,17 @@ export type SelectAllLabel =
   | ((info: { selectedCount: number; totalCount: number }) => VueNode);
 
 export interface TransferLocale {
-  titles: VueNode[];
+  titles?: VueNode[];
   notFoundContent?: VueNode;
   searchPlaceholder: string;
   itemUnit: string;
   itemsUnit: string;
-  remove: string;
-  selectAll: string;
-  selectCurrent: string;
-  selectInvert: string;
-  removeAll: string;
-  removeCurrent: string;
+  remove?: string;
+  selectAll?: string;
+  selectCurrent?: string;
+  selectInvert?: string;
+  removeAll?: string;
+  removeCurrent?: string;
 }
 
 export const transferProps = () => ({
@@ -108,9 +108,8 @@ export const transferProps = () => ({
     functionType<
       (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
     >(),
-  onSelectChange: functionType<
-    (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void
-  >,
+  onSelectChange:
+    functionType<(sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void>(),
   onSearch: functionType<(direction: TransferDirection, value: string) => void>(),
   onScroll: functionType<(direction: TransferDirection, e: UIEvent) => void>(),
   'onUpdate:targetKeys': functionType<(keys: string[]) => void>(),
@@ -177,15 +176,16 @@ const Transfer = defineComponent({
     const moveTo = (direction: TransferDirection) => {
       const { targetKeys = [], dataSource = [] } = props;
       const moveKeys = direction === 'right' ? sourceSelectedKeys.value : targetSelectedKeys.value;
+      const dataSourceDisabledKeysMap = groupDisabledKeysMap(dataSource);
       // filter the disabled options
-      const newMoveKeys = moveKeys.filter(
-        key => !dataSource.some(data => !!(key === data.key && data.disabled)),
-      );
+      const newMoveKeys = moveKeys.filter(key => !dataSourceDisabledKeysMap.has(key));
+      const newMoveKeysMap = groupKeysMap(newMoveKeys);
+
       // move items to target box
       const newTargetKeys =
         direction === 'right'
           ? newMoveKeys.concat(targetKeys)
-          : targetKeys.filter(targetKey => newMoveKeys.indexOf(targetKey) === -1);
+          : targetKeys.filter(targetKey => !newMoveKeysMap.has(targetKey));
 
       // empty checked keys
       const oppositeDirection = direction === 'right' ? 'left' : 'right';
@@ -309,16 +309,16 @@ const Transfer = defineComponent({
 
       const ld = [];
       const rd = new Array(targetKeys.length);
+      const targetKeysMap = groupKeysMap(targetKeys);
       dataSource.forEach(record => {
         if (rowKey) {
           record.key = rowKey(record);
         }
 
-        // rightDataSource should be ordered by targetKeys
-        // leftDataSource should be ordered by dataSource
-        const indexOfKey = targetKeys.indexOf(record.key);
-        if (indexOfKey !== -1) {
-          rd[indexOfKey] = record;
+        // rightData should be ordered by targetKeys
+        // leftData should be ordered by dataSource
+        if (targetKeysMap.has(record.key)) {
+          rd[targetKeysMap.get(record.key)!] = record;
         } else {
           ld.push(record);
         }

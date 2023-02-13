@@ -76,10 +76,7 @@ const ListBody = defineComponent({
           const maxPageCount = Math.ceil(
             props.filteredRenderItems.length / mergedPagination.value.pageSize,
           );
-
-          if (current.value > maxPageCount) {
-            current.value = maxPageCount;
-          }
+          current.value = Math.min(current.value, maxPageCount);
         }
       },
       { immediate: true },

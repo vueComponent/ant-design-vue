@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, HTMLAttributes, App } from 'vue';
+import type { ExtractPropTypes, HTMLAttributes, App } from 'vue';
 import { watch, defineComponent, ref, computed } from 'vue';
 import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
@@ -17,6 +17,7 @@ import PropTypes from '../_util/vue-types';
 import isValidValue from '../_util/isValidValue';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import { booleanType, stringType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
@@ -24,8 +25,8 @@ import useStyle from './style';
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
   ...baseProps,
-  size: { type: String as PropType<SizeType> },
-  bordered: { type: Boolean, default: true },
+  size: stringType<SizeType>(),
+  bordered: booleanType(true),
   placeholder: String,
   name: String,
   id: String,
@@ -35,7 +36,7 @@ export const inputNumberProps = () => ({
   prefix: PropTypes.any,
   'onUpdate:value': baseProps.onChange,
   valueModifiers: Object,
-  status: String as PropType<InputStatus>,
+  status: stringType<InputStatus>(),
 });
 
 export type InputNumberProps = Partial<ExtractPropTypes<ReturnType<typeof inputNumberProps>>>;

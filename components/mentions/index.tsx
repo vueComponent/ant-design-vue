@@ -15,6 +15,8 @@ import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 import useStyle from './style';
 import { useProvideOverride } from '../menu/src/OverrideContext';
 import warning from '../_util/warning';
+import Spin from '../spin';
+import devWarning from '../vc-util/devWarning';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -35,6 +37,9 @@ interface MentionsEntity {
 
 export type MentionPlacement = 'top' | 'bottom';
 
+function loadingFilterOption() {
+  return true;
+}
 const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] => {
   const { prefix = '@', split = ' ' } = config;
   const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
@@ -100,6 +105,14 @@ const Mentions = defineComponent({
   props: mentionsProps(),
   slots: ['notFoundContent', 'option'],
   setup(props, { slots, emit, attrs, expose }) {
+    // =================== Warning =====================
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        !flattenChildren(slots.default?.() || []).length,
+        'Mentions',
+        '`Mentions.Option` is deprecated. Please use `options` instead.',
+      );
+    }
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const focused = ref(false);
@@ -179,7 +192,9 @@ const Mentions = defineComponent({
     };
 
     expose({ focus, blur });
-
+    const mentionsfilterOption = computed(() =>
+      props.loading ? loadingFilterOption : props.filterOption,
+    );
     return () => {
       const {
         disabled,
@@ -208,9 +223,17 @@ const Mentions = defineComponent({
         ...otherProps,
         disabled,
         direction: direction.value,
-        filterOption: props.filterOption,
+        filterOption: mentionsfilterOption.value,
         getPopupContainer,
-        options: props.options || getOptions(),
+        options: props.loading
+          ? [
+              {
+                value: 'ANTDV_SEARCHING',
+                disabled: true,
+                label: <Spin size="small" />,
+              },
+            ]
+          : props.options || getOptions(),
         class: mergedClassName,
         ...otherAttrs,
         rows,

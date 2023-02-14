@@ -12,6 +12,9 @@ import { optionProps } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import useStyle from './style';
+import { useProvideOverride } from '../menu/src/OverrideContext';
+import warning from '../_util/warning';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -98,12 +101,27 @@ const Mentions = defineComponent({
   slots: ['notFoundContent', 'option'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const focused = ref(false);
     const vcMentions = ref(null);
     const value = ref(props.value ?? props.defaultValue ?? '');
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
+    useProvideOverride({
+      prefixCls: computed(() => `${prefixCls.value}-menu`),
+      mode: computed(() => 'vertical'),
+      selectable: computed(() => false),
+      onClick: () => {},
+      validator: ({ mode }) => {
+        // Warning if use other mode
+        warning(
+          !mode || mode === 'vertical',
+          'Mentions',
+          `mode="${mode}" is not supported for Mentions's Menu.`,
+        );
+      },
+    });
     watch(
       () => props.value,
       val => {
@@ -182,6 +200,7 @@ const Mentions = defineComponent({
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value),
         !hasFeedback && className,
+        hashId.value,
       );
 
       const mentionsProps = {
@@ -206,11 +225,12 @@ const Mentions = defineComponent({
       const mentions = (
         <VcMentions
           {...mentionsProps}
+          dropdownClassName={hashId.value}
           v-slots={{ notFoundContent: getNotFoundContent, option: slots.option }}
         ></VcMentions>
       );
       if (hasFeedback) {
-        return (
+        return wrapSSR(
           <div
             class={classNames(
               `${prefixCls.value}-affix-wrapper`,
@@ -220,14 +240,15 @@ const Mentions = defineComponent({
                 hasFeedback,
               ),
               className,
+              hashId.value,
             )}
           >
             {mentions}
             <span class={`${prefixCls.value}-suffix`}>{feedbackIcon}</span>
-          </div>
+          </div>,
         );
       }
-      return mentions;
+      return wrapSSR(mentions);
     };
   },
 });

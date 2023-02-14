@@ -14,7 +14,7 @@ import './tabs/style';
 // import './popover/style';
 // import './popconfirm/style';
 // import './menu/style';
-import './mentions/style';
+// import './mentions/style';
 // import './dropdown/style';
 // import './divider/style';
 // import './card/style';

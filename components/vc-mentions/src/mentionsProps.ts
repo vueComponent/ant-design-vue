@@ -40,6 +40,7 @@ export const mentionsProps = {
 
 export const vcMentionsProps = {
   ...mentionsProps,
+  dropdownClassName: String,
 };
 
 export const defaultProps = {

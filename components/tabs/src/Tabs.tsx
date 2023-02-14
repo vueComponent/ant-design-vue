@@ -28,7 +28,7 @@ import pick from 'lodash-es/pick';
 import PropTypes from '../../_util/vue-types';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import omit from '../../_util/omit';
-
+import useStyle from '../style';
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 
@@ -155,6 +155,7 @@ const InternalTabs = defineComponent({
       '`tabBarExtraContent` slot is deprecated. Please use `rightExtra` slot instead.',
     );
     const { prefixCls, direction, size, rootPrefixCls } = useConfigInject('tabs', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const rtl = computed(() => direction.value === 'rtl');
     const mergedAnimated = computed<AnimatedConfig>(() => {
       const { animated, tabPosition } = props;
@@ -297,7 +298,7 @@ const InternalTabs = defineComponent({
       }
       const pre = prefixCls.value;
 
-      return (
+      return wrapSSR(
         <div
           {...attrs}
           id={id}
@@ -305,6 +306,7 @@ const InternalTabs = defineComponent({
             pre,
             `${pre}-${mergedTabPosition.value}`,
             {
+              [hashId.value]: true,
               [`${pre}-${size.value}`]: size.value,
               [`${pre}-card`]: ['card', 'editable-card'].includes(type as string),
               [`${pre}-editable-card`]: type === 'editable-card',
@@ -322,7 +324,7 @@ const InternalTabs = defineComponent({
             {...sharedProps}
             animated={mergedAnimated.value}
           />
-        </div>
+        </div>,
       );
     };
   },

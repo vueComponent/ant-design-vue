@@ -1,10 +1,17 @@
-import type { CSSProperties, VNodeTypes, PropType, ExtractPropTypes } from 'vue';
+import type { CSSProperties, VNodeTypes, ExtractPropTypes } from 'vue';
 import { computed, ref, defineComponent } from 'vue';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import type { VueNode } from '../_util/type';
-import { withInstall } from '../_util/type';
+import {
+  stringType,
+  booleanType,
+  someType,
+  objectType,
+  withInstall,
+  functionType,
+} from '../_util/type';
 import type { TooltipPlacement } from '../tooltip/Tooltip';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
@@ -14,6 +21,7 @@ import type { FocusEventHandler } from '../_util/EventInterface';
 
 // CSSINJS
 import useStyle from './style';
+import devWarning from '../vc-util/devWarning';
 
 export type SliderValue = number | [number, number];
 
@@ -46,35 +54,35 @@ export const sliderProps = () => ({
   id: String,
   prefixCls: String,
   tooltipPrefixCls: String,
-  range: { type: [Boolean, Object] as PropType<boolean | SliderRange>, default: undefined },
-  reverse: { type: Boolean, default: undefined },
+  range: someType<boolean | SliderRange>([Boolean, Object]),
+  reverse: booleanType(),
   min: Number,
   max: Number,
-  step: { type: [Number, Object] as PropType<null | number> },
-  marks: { type: Object as PropType<SliderMarks> },
-  dots: { type: Boolean, default: undefined },
-  value: { type: [Number, Array] as PropType<Value> },
-  defaultValue: { type: [Number, Array] as PropType<Value> },
-  included: { type: Boolean, default: undefined },
-  disabled: { type: Boolean, default: undefined },
-  vertical: { type: Boolean, default: undefined },
-  tipFormatter: {
-    type: [Function, Object] as PropType<((value?: number) => any) | null>,
-    default: () => defaultTipFormatter,
-  },
-  tooltipVisible: { type: Boolean, default: undefined },
-  tooltipPlacement: { type: String as PropType<TooltipPlacement> },
-  getTooltipPopupContainer: {
-    type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
-  },
-  autofocus: { type: Boolean, default: undefined },
-  handleStyle: { type: [Object, Array] as PropType<CSSProperties[] | CSSProperties> },
-  trackStyle: { type: [Object, Array] as PropType<CSSProperties[] | CSSProperties> },
-  onChange: { type: Function as PropType<(value: Value) => void> },
-  onAfterChange: { type: Function as PropType<(value: Value) => void> },
-  onFocus: { type: Function as PropType<FocusEventHandler> },
-  onBlur: { type: Function as PropType<FocusEventHandler> },
-  'onUpdate:value': { type: Function as PropType<(value: Value) => void> },
+  step: someType<null | number>([Object, Number]),
+  marks: objectType<SliderMarks>(),
+  dots: booleanType(),
+  value: someType<Value>([Array, Number]),
+  defaultValue: someType<Value>([Array, Number]),
+  included: booleanType(),
+  disabled: booleanType(),
+  vertical: booleanType(),
+  tipFormatter: someType<((value?: number) => any) | null>(
+    [Function, Object],
+    () => defaultTipFormatter,
+  ),
+  tooltipOpen: booleanType(),
+  /** @deprecated `tooltipVisible` is deprecated. Please use `tooltipOpen` instead. */
+  tooltipVisible: booleanType(),
+  tooltipPlacement: stringType<TooltipPlacement>(),
+  getTooltipPopupContainer: functionType<(triggerNode: HTMLElement) => HTMLElement>(),
+  autofocus: booleanType(),
+  handleStyle: someType<CSSProperties[] | CSSProperties>([Array, Object]),
+  trackStyle: someType<CSSProperties[] | CSSProperties>([Array, Object]),
+  onChange: functionType<(value: Value) => void>(),
+  onAfterChange: functionType<(value: Value) => void>(),
+  onFocus: functionType<FocusEventHandler>(),
+  onBlur: functionType<FocusEventHandler>(),
+  'onUpdate:value': functionType<(value: Value) => void>(),
 });
 
 export type SliderProps = Partial<ExtractPropTypes<ReturnType<typeof sliderProps>>>;
@@ -88,6 +96,16 @@ const Slider = defineComponent({
   // emits: ['update:value', 'change', 'afterChange', 'blur'],
   slots: ['mark'],
   setup(props, { attrs, slots, emit, expose }) {
+    // Warning for deprecated usage
+    if (process.env.NODE_ENV !== 'production') {
+      [['tooltipVisible', 'tooltipOpen']].forEach(([deprecatedName, newName]) => {
+        devWarning(
+          props.tooltipVisible === undefined,
+          'Slider',
+          `\`${deprecatedName}\` is deprecated, please use \`${newName}\` instead.`,
+        );
+      });
+    }
     const { prefixCls, rootPrefixCls, direction, getPopupContainer, configProvider } =
       useConfigInject('slider', props);
 
@@ -97,7 +115,7 @@ const Slider = defineComponent({
     const formItemContext = useInjectFormItemContext();
     const sliderRef = ref();
     const visibles = ref<Visibles>({});
-    const toggleTooltipVisible = (index: number, visible: boolean) => {
+    const toggleTooltipOpen = (index: number, visible: boolean) => {
       visibles.value[index] = visible;
     };
     const tooltipPlacement = computed(() => {
@@ -132,14 +150,14 @@ const Slider = defineComponent({
       tooltipPrefixCls,
       info: { value, dragging, index, ...restProps },
     }) => {
-      const { tipFormatter, tooltipVisible, getTooltipPopupContainer } = props;
+      const { tipFormatter, tooltipOpen = props.tooltipVisible, getTooltipPopupContainer } = props;
       const isTipFormatter = tipFormatter ? visibles.value[index] || dragging : false;
-      const visible = tooltipVisible || (tooltipVisible === undefined && isTipFormatter);
+      const open = tooltipOpen || (tooltipOpen === undefined && isTipFormatter);
       return (
         <SliderTooltip
           prefixCls={tooltipPrefixCls}
           title={tipFormatter ? tipFormatter(value) : ''}
-          visible={visible}
+          open={open}
           placement={tooltipPlacement.value}
           transitionName={`${rootPrefixCls.value}-zoom-down`}
           key={index}
@@ -149,8 +167,8 @@ const Slider = defineComponent({
           <VcHandle
             {...restProps}
             value={value}
-            onMouseenter={() => toggleTooltipVisible(index, true)}
-            onMouseleave={() => toggleTooltipVisible(index, false)}
+            onMouseenter={() => toggleTooltipOpen(index, true)}
+            onMouseleave={() => toggleTooltipOpen(index, false)}
           />
         </SliderTooltip>
       );

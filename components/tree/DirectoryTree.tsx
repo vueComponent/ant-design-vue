@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { nextTick, onUpdated, ref, watch, defineComponent, computed } from 'vue';
 import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
@@ -18,12 +18,13 @@ import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { filterEmpty } from '../_util/props-util';
+import { someType } from '../_util/type';
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 
 export const directoryTreeProps = () => ({
   ...treeProps(),
-  expandAction: { type: [Boolean, String] as PropType<ExpandAction> },
+  expandAction: someType<ExpandAction>([Boolean, String]),
 });
 
 export type DirectoryTreeProps = Partial<ExtractPropTypes<ReturnType<typeof directoryTreeProps>>>;

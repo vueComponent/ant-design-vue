@@ -8,7 +8,7 @@ import type { ComponentToken as ButtonComponentToken } from '../../button/style'
 import type { ComponentToken as CardComponentToken } from '../../card/style';
 import type { ComponentToken as CarouselComponentToken } from '../../carousel/style';
 // import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
-// import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
+import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
 import type { ComponentToken as CollapseComponentToken } from '../../collapse/style';
 import type { ComponentToken as DatePickerComponentToken } from '../../date-picker/style';
 import type { ComponentToken as DividerComponentToken } from '../../divider/style';
@@ -19,7 +19,7 @@ import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
 // import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
 import type { ComponentToken as ListComponentToken } from '../../list/style';
-// import type { ComponentToken as MentionsComponentToken } from '../../mentions/style';
+import type { ComponentToken as MentionsComponentToken } from '../../mentions/style';
 import type { ComponentToken as MenuComponentToken } from '../../menu/style';
 import type { ComponentToken as MessageComponentToken } from '../../message/style';
 import type { ComponentToken as ModalComponentToken } from '../../modal/style';
@@ -62,7 +62,7 @@ export interface ComponentTokenMap {
   Card?: CardComponentToken;
   Carousel?: CarouselComponentToken;
   //   Cascader?: CascaderComponentToken;
-  //   Checkbox?: CheckboxComponentToken;
+  Checkbox?: CheckboxComponentToken;
   Collapse?: CollapseComponentToken;
   Comment?: {};
   DatePicker?: DatePickerComponentToken;
@@ -79,7 +79,7 @@ export interface ComponentTokenMap {
   //   InputNumber?: InputNumberComponentToken;
   Layout?: LayoutComponentToken;
   List?: ListComponentToken;
-  //   Mentions?: MentionsComponentToken;
+  Mentions?: MentionsComponentToken;
   Notification?: NotificationComponentToken;
   PageHeader?: {};
   Pagination?: {};

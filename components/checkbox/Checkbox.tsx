@@ -1,5 +1,13 @@
 import type { CSSProperties } from 'vue';
-import { watchEffect, onMounted, defineComponent, inject, onBeforeUnmount, ref } from 'vue';
+import {
+  computed,
+  watchEffect,
+  onMounted,
+  defineComponent,
+  inject,
+  onBeforeUnmount,
+  ref,
+} from 'vue';
 import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox/Checkbox';
 import { flattenChildren } from '../_util/props-util';
@@ -11,6 +19,9 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { CheckboxChangeEvent, CheckboxProps } from './interface';
 import { CheckboxGroupContextKey, checkboxProps } from './interface';
 
+// CSSINJS
+import useStyle from './style';
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ACheckbox',
@@ -21,10 +32,16 @@ export default defineComponent({
   setup(props, { emit, attrs, slots, expose }) {
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
-    const { prefixCls, direction } = useConfigInject('checkbox', props);
+    const { prefixCls, direction, disabled } = useConfigInject('checkbox', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const checkboxGroup = inject(CheckboxGroupContextKey, undefined);
     const uniId = Symbol('checkboxUniId');
-
+    const mergedDisabled = computed(() => {
+      return checkboxGroup?.disabled.value || disabled.value;
+    });
     watchEffect(() => {
       if (!props.skipGroup && checkboxGroup) {
         checkboxGroup.registerValue(uniId, props.value);
@@ -75,7 +92,7 @@ export default defineComponent({
           checkboxGroup.toggleOption({ label: children, value: props.value });
         };
         checkboxProps.name = checkboxGroup.name.value;
-        checkboxProps.checked = checkboxGroup.mergedValue.value.indexOf(props.value) !== -1;
+        checkboxProps.checked = checkboxGroup.mergedValue.value.includes(props.value);
         checkboxProps.disabled = props.disabled || checkboxGroup.disabled.value;
         checkboxProps.indeterminate = indeterminate;
       } else {
@@ -90,12 +107,16 @@ export default defineComponent({
           [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
         },
         className,
+        hashId.value,
       );
-      const checkboxClass = classNames({
-        [`${prefixCls.value}-indeterminate`]: indeterminate,
-      });
+      const checkboxClass = classNames(
+        {
+          [`${prefixCls.value}-indeterminate`]: indeterminate,
+        },
+        hashId.value,
+      );
       const ariaChecked = indeterminate ? 'mixed' : undefined;
-      return (
+      return wrapSSR(
         <label
           class={classString}
           style={style as CSSProperties}
@@ -107,9 +128,10 @@ export default defineComponent({
             {...checkboxProps}
             class={checkboxClass}
             ref={checkboxRef}
+            disabled={mergedDisabled.value}
           />
           {children.length ? <span>{children}</span> : null}
-        </label>
+        </label>,
       );
     };
   },

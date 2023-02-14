@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { computed, toRef, defineComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
@@ -11,50 +11,55 @@ import enUS from '../vc-pagination/locale/en_US';
 import classNames from '../_util/classNames';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
+import { booleanType, arrayType, stringType, functionType, someType } from '../_util/type';
+
+// CSSINJS
+import useStyle from './style';
 
 export const paginationProps = () => ({
   total: Number,
   defaultCurrent: Number,
-  disabled: { type: Boolean, default: undefined },
+  disabled: booleanType(),
   current: Number,
   defaultPageSize: Number,
   pageSize: Number,
-  hideOnSinglePage: { type: Boolean, default: undefined },
-  showSizeChanger: { type: Boolean, default: undefined },
-  pageSizeOptions: Array as PropType<(string | number)[]>,
-  buildOptionText: Function as PropType<(opt: { value: any }) => any>,
-  showQuickJumper: {
-    type: [Boolean, Object] as PropType<boolean | { goButton?: any }>,
-    default: undefined as boolean | { goButton?: any },
-  },
-  showTotal: Function as PropType<(total: number, range: [number, number]) => any>,
-  size: String as PropType<'default' | 'small'>,
-  simple: { type: Boolean, default: undefined },
+  hideOnSinglePage: booleanType(),
+  showSizeChanger: booleanType(),
+  pageSizeOptions: arrayType<(string | number)[]>(),
+  buildOptionText: functionType<(opt: { value: any }) => any>(),
+  showQuickJumper: someType<boolean | { goButton?: any }>(
+    [Boolean, Object],
+    undefined as boolean | { goButton?: any },
+  ),
+  showTotal: functionType<(total: number, range: [number, number]) => any>(),
+  size: stringType<'default' | 'small'>(),
+  simple: booleanType(),
   locale: Object,
   prefixCls: String,
   selectPrefixCls: String,
   totalBoundaryShowSizeChanger: Number,
   selectComponentClass: String,
-  itemRender: Function as PropType<
-    (opt: {
-      page: number;
-      type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next';
-      originalElement: any;
-    }) => any
-  >,
+  itemRender:
+    functionType<
+      (opt: {
+        page: number;
+        type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next';
+        originalElement: any;
+      }) => any
+    >(),
   role: String,
   responsive: Boolean,
-  showLessItems: { type: Boolean, default: undefined },
-  onChange: Function as PropType<(page: number, pageSize: number) => void>,
-  onShowSizeChange: Function as PropType<(current: number, size: number) => void>,
-  'onUpdate:current': Function as PropType<(current: number) => void>,
-  'onUpdate:pageSize': Function as PropType<(size: number) => void>,
+  showLessItems: booleanType(),
+  onChange: functionType<(page: number, pageSize: number) => void>(),
+  onShowSizeChange: functionType<(current: number, size: number) => void>(),
+  'onUpdate:current': functionType<(current: number) => void>(),
+  'onUpdate:pageSize': functionType<(size: number) => void>(),
 });
 
 export type PaginationPosition = 'top' | 'bottom' | 'both';
 export const paginationConfig = () => ({
   ...paginationProps(),
-  position: String as PropType<PaginationPosition>,
+  position: stringType<PaginationPosition>(),
 });
 
 export type PaginationProps = Partial<ExtractPropTypes<ReturnType<typeof paginationProps>>>;
@@ -81,6 +86,10 @@ export default defineComponent({
   // emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup(props, { slots, attrs }) {
     const { prefixCls, configProvider, direction } = useConfigInject('pagination', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const selectPrefixCls = computed(() =>
       configProvider.getPrefixCls('select', props.selectPrefixCls),
     );
@@ -152,11 +161,12 @@ export default defineComponent({
         class: classNames(
           { mini: isSmall, [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
           attrs.class,
+          hashId.value,
         ),
         itemRender,
       };
 
-      return <VcPagination {...paginationProps} />;
+      return wrapSSR(<VcPagination {...paginationProps} />);
     };
   },
 });

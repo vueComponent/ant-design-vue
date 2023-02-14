@@ -27,10 +27,7 @@ export const paginationProps = () => ({
   showSizeChanger: booleanType(),
   pageSizeOptions: arrayType<(string | number)[]>(),
   buildOptionText: functionType<(opt: { value: any }) => any>(),
-  showQuickJumper: someType<boolean | { goButton?: any }>(
-    [Boolean, Object],
-    undefined as boolean | { goButton?: any },
-  ),
+  showQuickJumper: someType<boolean | { goButton?: any }>([Boolean, Object]),
   showTotal: functionType<(total: number, range: [number, number]) => any>(),
   size: stringType<'default' | 'small'>(),
   simple: booleanType(),

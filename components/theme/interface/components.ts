@@ -44,7 +44,7 @@ import type { ComponentToken as TagComponentToken } from '../../tag/style';
 import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
 import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
 import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
-// import type { ComponentToken as UploadComponentToken } from '../../upload/style';
+import type { ComponentToken as UploadComponentToken } from '../../upload/style';
 // import type { ComponentToken as TourComponentToken } from '../../tour/style';
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
@@ -107,7 +107,7 @@ export interface ComponentTokenMap {
   Menu?: MenuComponentToken;
   Modal?: ModalComponentToken;
   Message?: MessageComponentToken;
-  //   Upload?: UploadComponentToken;
+  Upload?: UploadComponentToken;
   Tooltip?: TooltipComponentToken;
   //   Table?: TableComponentToken;
   Space?: SpaceComponentToken;

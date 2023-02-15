@@ -23,6 +23,9 @@ import type { VueNode } from '../_util/type';
 import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form';
 
+// CSSINJS
+import useStyle from './style';
+
 export const LIST_IGNORE = `__LIST_IGNORE_${Date.now()}__`;
 
 export default defineComponent({
@@ -292,6 +295,10 @@ export default defineComponent({
     });
 
     const { prefixCls, direction } = useConfigInject('upload', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const [locale] = useLocaleReceiver(
       'Upload',
       defaultLocale.Upload,
@@ -366,6 +373,11 @@ export default defineComponent({
       if (!slots.default || disabled) {
         delete rcUploadProps.id;
       }
+
+      const rtlCls = {
+        [`${prefixCls}-rtl`]: direction.value === 'rtl',
+      };
+
       if (type === 'drag') {
         const dragCls = classNames(
           prefixCls.value,
@@ -379,9 +391,14 @@ export default defineComponent({
             [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           },
           attrs.class,
+          hashId.value,
         );
-        return (
-          <span>
+
+        return wrapSSR(
+          <span
+            {...attrs}
+            class={classNames(`${prefixCls.value}-wrapper`, rtlCls, className, hashId.value)}
+          >
             <div
               class={dragCls}
               onDrop={onFileDrop}
@@ -399,7 +416,7 @@ export default defineComponent({
               </VcUpload>
             </div>
             {renderUploadList()}
-          </span>
+          </span>,
         );
       }
 
@@ -417,17 +434,29 @@ export default defineComponent({
       );
 
       if (listType === 'picture-card') {
-        return (
-          <span class={classNames(`${prefixCls.value}-picture-card-wrapper`, attrs.class)}>
+        return wrapSSR(
+          <span
+            {...attrs}
+            class={classNames(
+              `${prefixCls.value}-wrapper`,
+              `${prefixCls.value}-picture-card-wrapper`,
+              rtlCls,
+              attrs.class,
+              hashId.value,
+            )}
+          >
             {renderUploadList(renderUploadButton, !!(children && children.length))}
-          </span>
+          </span>,
         );
       }
-      return (
-        <span class={attrs.class}>
+      return wrapSSR(
+        <span
+          {...attrs}
+          class={classNames(`${prefixCls.value}-wrapper`, rtlCls, attrs.class, hashId.value)}
+        >
           {renderUploadButton(children && children.length ? undefined : { display: 'none' })}
           {renderUploadList()}
-        </span>
+        </span>,
       );
     };
   },

@@ -121,7 +121,7 @@ export default defineComponent({
         onClick: () => {
           callback();
         },
-        class: `${prefixCls}-list-item-card-actions-btn`,
+        class: `${prefixCls}-list-item-action`,
       };
       if (isValidElement(customIcon)) {
         return <Button {...btnProps} v-slots={{ icon: () => customIcon }} />;

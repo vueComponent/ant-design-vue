@@ -40,7 +40,7 @@ import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 // import type { ComponentToken as TableComponentToken } from '../../table/style';
 // import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
 import type { ComponentToken as TagComponentToken } from '../../tag/style';
-// import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
+import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
 import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
 import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
 import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
@@ -99,7 +99,7 @@ export interface ComponentTokenMap {
   Tree?: {};
   TreeSelect?: {};
   Typography?: TypographyComponentToken;
-  //   Timeline?: TimelineComponentToken;
+  Timeline?: TimelineComponentToken;
   Transfer?: TransferComponentToken;
   //   Tabs?: TabsComponentToken;
   //   Calendar?: CalendarComponentToken;

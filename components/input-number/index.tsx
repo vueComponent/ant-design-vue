@@ -21,6 +21,8 @@ import { booleanType, stringType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
+import { NoCompactStyle, useCompactItemContext } from '../space/Compact';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
@@ -52,11 +54,14 @@ const InputNumber = defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
-    const { prefixCls, size, direction } = useConfigInject('input-number', props);
-
+    const { prefixCls, size, direction, disabled } = useConfigInject('input-number', props);
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
+    const mergedSize = computed(() => compactSize.value || size.value);
+    const disabledContext = useInjectDisabled();
+    const mergedDisabled = computed(() => disabled.value ?? disabledContext.value);
     const mergedValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const focused = ref(false);
     watch(
@@ -109,11 +114,10 @@ const InputNumber = defineComponent({
 
       const preCls = prefixCls.value;
 
-      const mergeSize = size.value;
       const inputNumberClass = classNames(
         {
-          [`${preCls}-lg`]: mergeSize === 'large',
-          [`${preCls}-sm`]: mergeSize === 'small',
+          [`${preCls}-lg`]: mergedSize.value === 'large',
+          [`${preCls}-sm`]: mergedSize.value === 'small',
           [`${preCls}-rtl`]: direction.value === 'rtl',
           [`${preCls}-readonly`]: readonly,
           [`${preCls}-borderless`]: !bordered,
@@ -121,6 +125,7 @@ const InputNumber = defineComponent({
         },
         getStatusClassNames(preCls, mergedStatus.value),
         className,
+        compactItemClassnames.value,
         hashId.value,
       );
 
@@ -154,9 +159,9 @@ const InputNumber = defineComponent({
           getStatusClassNames(`${preCls}-affix-wrapper`, mergedStatus.value, hasFeedback),
           {
             [`${preCls}-affix-wrapper-focused`]: focused.value,
-            [`${preCls}-affix-wrapper-disabled`]: props.disabled,
-            [`${preCls}-affix-wrapper-sm`]: size.value === 'small',
-            [`${preCls}-affix-wrapper-lg`]: size.value === 'large',
+            [`${preCls}-affix-wrapper-disabled`]: mergedDisabled.value,
+            [`${preCls}-affix-wrapper-sm`]: mergedSize.value === 'small',
+            [`${preCls}-affix-wrapper-lg`]: mergedSize.value === 'large',
             [`${preCls}-affix-wrapper-rtl`]: direction.value === 'rtl',
             [`${preCls}-affix-wrapper-readonly`]: readonly,
             [`${preCls}-affix-wrapper-borderless`]: !bordered,
@@ -198,8 +203,8 @@ const InputNumber = defineComponent({
         const mergedGroupClassName = classNames(
           `${preCls}-group-wrapper`,
           {
-            [`${preCls}-group-wrapper-sm`]: mergeSize === 'small',
-            [`${preCls}-group-wrapper-lg`]: mergeSize === 'large',
+            [`${preCls}-group-wrapper-sm`]: mergedSize.value === 'small',
+            [`${preCls}-group-wrapper-lg`]: mergedSize.value === 'large',
             [`${preCls}-group-wrapper-rtl`]: direction.value === 'rtl',
           },
           getStatusClassNames(`${prefixCls}-group-wrapper`, mergedStatus.value, hasFeedback),
@@ -209,9 +214,17 @@ const InputNumber = defineComponent({
         element = (
           <div class={mergedGroupClassName} style={style}>
             <div class={mergedWrapperClassName}>
-              {addonBeforeNode && <NoFormStatus>{addonBeforeNode}</NoFormStatus>}
+              {addonBeforeNode && (
+                <NoCompactStyle>
+                  <NoFormStatus>{addonBeforeNode}</NoFormStatus>
+                </NoCompactStyle>
+              )}
               {element}
-              {addonAfterNode && <NoFormStatus>{addonAfterNode}</NoFormStatus>}
+              {addonAfterNode && (
+                <NoCompactStyle>
+                  <NoFormStatus>{addonAfterNode}</NoFormStatus>
+                </NoCompactStyle>
+              )}
             </div>
           </div>
         );

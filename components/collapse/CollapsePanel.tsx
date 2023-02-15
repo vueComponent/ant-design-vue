@@ -57,6 +57,7 @@ export default defineComponent({
       const headerCls = classNames(`${prefixClsValue}-header`, {
         [headerClass]: headerClass,
         [`${prefixClsValue}-header-collapsible-only`]: collapsible === 'header',
+        [`${prefixClsValue}-icon-collapsible-only`]: collapsible === 'icon',
       });
       const itemCls = classNames({
         [`${prefixClsValue}-item`]: true,
@@ -91,20 +92,19 @@ export default defineComponent({
         <div {...attrs} class={itemCls}>
           <div
             class={headerCls}
-            onClick={() => collapsible !== 'header' && handleItemClick()}
+            onClick={() => !['header', 'icon'].includes(collapsible) && handleItemClick()}
             role={accordion ? 'tab' : 'button'}
             tabindex={disabled ? -1 : 0}
             aria-expanded={isActive}
             onKeypress={handleKeyPress}
           >
             {showArrow && icon}
-            {collapsible === 'header' ? (
-              <span onClick={handleItemClick} class={`${prefixClsValue}-header-text`}>
-                {header}
-              </span>
-            ) : (
-              header
-            )}
+            <span
+              onClick={() => collapsible === 'header' && handleItemClick()}
+              class={`${prefixClsValue}-header-text`}
+            >
+              {header}
+            </span>
             {extra && <div class={`${prefixClsValue}-extra`}>{extra}</div>}
           </div>
           <Transition {...transitionProps}>

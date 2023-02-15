@@ -5,11 +5,12 @@ import StepHandler from './StepHandler';
 import { getNumberPrecision, num2str, validateNumber } from './utils/numberUtil';
 import useCursor from './hooks/useCursor';
 import useFrame from './hooks/useFrame';
-import type { HTMLAttributes, PropType } from 'vue';
+import type { HTMLAttributes } from 'vue';
 import { watch, computed, ref, defineComponent } from 'vue';
 import type { ChangeEvent, KeyboardEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
 import classNames from '../../_util/classNames';
+import { booleanType, stringType, someType, functionType } from '../../_util/type';
 
 /**
  * We support `stringMode` which need handle correct type when user call in onChange
@@ -36,46 +37,42 @@ const getDecimalIfValidate = (value: ValueType) => {
 
 export const inputNumberProps = () => ({
   /** value will show as string */
-  stringMode: { type: Boolean as PropType<boolean> },
+  stringMode: booleanType(),
 
-  defaultValue: { type: [String, Number] as PropType<ValueType> },
-  value: { type: [String, Number] as PropType<ValueType> },
+  defaultValue: someType<ValueType>([String, Number]),
+  value: someType<ValueType>([String, Number]),
 
-  prefixCls: { type: String as PropType<string> },
-  min: { type: [String, Number] as PropType<ValueType> },
-  max: { type: [String, Number] as PropType<ValueType> },
-  step: { type: [String, Number] as PropType<ValueType>, default: 1 },
-  tabindex: { type: Number as PropType<number> },
-  controls: { type: Boolean as PropType<boolean>, default: true },
-  readonly: { type: Boolean as PropType<boolean> },
-  disabled: { type: Boolean as PropType<boolean> },
-  autofocus: { type: Boolean as PropType<boolean> },
-  keyboard: { type: Boolean as PropType<boolean>, default: true },
+  prefixCls: stringType<string>(),
+  min: someType<ValueType>([String, Number]),
+  max: someType<ValueType>([String, Number]),
+  step: someType<ValueType>([String, Number], 1),
+  tabindex: Number,
+  controls: booleanType(true),
+  readonly: booleanType(),
+  disabled: booleanType(),
+  autofocus: booleanType(),
+  keyboard: booleanType(true),
 
   /** Parse display value to validate number */
-  parser: { type: Function as PropType<(displayValue: string | undefined) => ValueType> },
+  parser: functionType<(displayValue: string | undefined) => ValueType>(),
   /** Transform `value` to display value show in input */
-  formatter: {
-    type: Function as PropType<
+  formatter:
+    functionType<
       (value: ValueType | undefined, info: { userTyping: boolean; input: string }) => string
-    >,
-  },
+    >(),
   /** Syntactic sugar of `formatter`. Config precision of display. */
-  precision: { type: Number as PropType<number> },
+  precision: Number,
   /** Syntactic sugar of `formatter`. Config decimal separator of display. */
-  decimalSeparator: { type: String as PropType<string> },
+  decimalSeparator: String,
 
-  onInput: { type: Function as PropType<(text: string) => void> },
-  onChange: { type: Function as PropType<(value: ValueType) => void> },
-  onPressEnter: { type: Function as PropType<KeyboardEventHandler> },
+  onInput: functionType<(text: string) => void>(),
+  onChange: functionType<(value: ValueType) => void>(),
+  onPressEnter: functionType<KeyboardEventHandler>(),
 
-  onStep: {
-    type: Function as PropType<
-      (value: ValueType, info: { offset: ValueType; type: 'up' | 'down' }) => void
-    >,
-  },
-  onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
-  onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
+  onStep:
+    functionType<(value: ValueType, info: { offset: ValueType; type: 'up' | 'down' }) => void>(),
+  onBlur: functionType<(e: FocusEvent) => void>(),
+  onFocus: functionType<(e: FocusEvent) => void>(),
 });
 
 export default defineComponent({

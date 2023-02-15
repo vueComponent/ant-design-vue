@@ -24,11 +24,7 @@ to work with `Form`.
       name="coders"
       v-bind="validateInfos.coders"
     >
-      <a-mentions v-model:value="modelRef.coders" rows="1">
-        <a-mentions-option value="afc163">afc163</a-mentions-option>
-        <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
-        <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
-      </a-mentions>
+      <a-mentions v-model:value="modelRef.coders" rows="1" :options="options"></a-mentions>
     </a-form-item>
     <a-form-item
       label="Bio"
@@ -41,11 +37,8 @@ to work with `Form`.
         v-model:value="modelRef.bio"
         rows="3"
         placeholder="You can use @ to ref user here"
-      >
-        <a-mentions-option value="afc163">afc163</a-mentions-option>
-        <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
-        <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
-      </a-mentions>
+        :options="options"
+      ></a-mentions>
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
       <a-button type="primary" @click="handleSubmit">Submit</a-button>
@@ -93,6 +86,20 @@ export default defineComponent({
       resetFields,
       validateInfos,
       handleSubmit,
+      options: [
+        {
+          value: 'afc163',
+          label: 'afc163',
+        },
+        {
+          value: 'zombieJ',
+          label: 'zombieJ',
+        },
+        {
+          value: 'yesmeck',
+          label: 'yesmeck',
+        },
+      ],
     };
   },
 });

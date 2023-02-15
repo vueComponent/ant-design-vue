@@ -5,7 +5,7 @@ import {
   filterOption as defaultFilterOption,
   validateSearch as defaultValidateSearch,
 } from './util';
-import { tuple } from '../../_util/type';
+import { arrayType, tuple } from '../../_util/type';
 import type { OptionProps } from './Option';
 
 export const PlaceMent = tuple('top', 'bottom');
@@ -29,10 +29,7 @@ export const mentionsProps = {
   getPopupContainer: {
     type: Function as PropType<() => HTMLElement>,
   },
-  options: {
-    type: Array as PropType<OptionProps>,
-    default: () => undefined,
-  },
+  options: arrayType<OptionProps[]>(),
   loading: { type: Boolean, default: undefined },
   rows: [Number, String],
   direction: { type: String as PropType<Direction> },
@@ -40,6 +37,7 @@ export const mentionsProps = {
 
 export const vcMentionsProps = {
   ...mentionsProps,
+  dropdownClassName: String,
 };
 
 export const defaultProps = {

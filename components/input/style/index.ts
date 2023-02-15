@@ -904,7 +904,7 @@ const genTextAreaStyle: GenerateStyle<InputToken> = token => {
         [`> ${componentCls}`]: {
           height: '100%',
         },
-        
+
         '&::after': {
           color: token.colorTextDescription,
           whiteSpace: 'nowrap',

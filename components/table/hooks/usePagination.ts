@@ -81,7 +81,7 @@ export default function usePagination(
   });
 
   const refreshPagination = (current?: number, pageSize?: number) => {
-    if ((pagination.value as any) === false) return;
+    if (paginationRef.value === false) return;
     setInnerPagination({
       current: current ?? 1,
       pageSize: pageSize || mergedPagination.value.pageSize,
@@ -98,7 +98,7 @@ export default function usePagination(
 
   return [
     computed(() => {
-      return (pagination.value as any) === false
+      return paginationRef.value === false
         ? {}
         : { ...mergedPagination.value, onChange: onInternalChange };
     }),

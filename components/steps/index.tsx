@@ -17,7 +17,6 @@ import { booleanType, stringType, functionType, someType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
-import { useToken } from '../theme/internal';
 
 export const stepsProps = () => ({
   prefixCls: String,
@@ -30,11 +29,8 @@ export const stepsProps = () => ({
   status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
   size: stringType<'default' | 'small'>(),
   direction: stringType<'horizontal' | 'vertical'>(),
-  progressDot: someType<boolean | ProgressDotRender>(
-    [Boolean, Function],
-    undefined as boolean | ProgressDotRender,
-  ),
-  type: stringType<'default' | 'navigation'>(),
+  progressDot: someType<boolean | ProgressDotRender>([Boolean, Function]),
+  type: stringType<'default' | 'navigation' | 'inline'>(),
   onChange: functionType<(current: number) => void>(),
   'onUpdate:current': functionType<(current: number) => void>(),
 });
@@ -67,9 +63,6 @@ const Steps = defineComponent({
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
 
-    // 接入换肤
-    const [, token] = useToken();
-
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -82,6 +75,8 @@ const Steps = defineComponent({
       emit('update:current', current);
       emit('change', current);
     };
+    const isInline = computed(() => props.type === 'inline');
+    const mergedPercent = computed(() => (isInline.value ? undefined : props.percent));
     const stepIconRender = ({
       node,
       status,
@@ -99,9 +94,8 @@ const Steps = defineComponent({
           <div class={`${prefixCls.value}-progress-icon`}>
             <Progress
               type="circle"
-              percent={props.percent}
+              percent={mergedPercent.value}
               width={progressWidth}
-              strokeColor={token.value.colorPrimary}
               strokeWidth={4}
               format={() => null}
             />
@@ -112,22 +106,23 @@ const Steps = defineComponent({
       }
       return node;
     };
+    const icons = computed(() => ({
+      finish: <CheckOutlined class={`${prefixCls.value}-finish-icon`} />,
+      error: <CloseOutlined class={`${prefixCls.value}-error-icon`} />,
+    }));
     return () => {
       const stepsClassName = classNames(
         {
           [`${prefixCls.value}-rtl`]: rtlDirection.value === 'rtl',
-          [`${prefixCls.value}-with-progress`]: props.percent !== undefined,
+          [`${prefixCls.value}-with-progress`]: mergedPercent.value !== undefined,
         },
         attrs.class,
         hashId.value,
       );
-      const icons = {
-        finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,
-        error: <CloseOutlined class={`${prefixCls}-error-icon`} />,
-      };
+
       return wrapSSR(
         <VcSteps
-          icons={icons}
+          icons={icons.value}
           {...attrs}
           {...omit(props, ['percent', 'responsive'])}
           direction={direction.value}

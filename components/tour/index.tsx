@@ -1,5 +1,6 @@
 import { withInstall } from '../_util/type';
-import Tour, { tourProps } from './Tour';
+import Tour, { TourProps } from './Tour';
+import { TourStepInfo, TourStepProps } from './TourStep';
 
-export { tourProps };
+export { TourProps, TourStepInfo, TourStepProps };
 export default withInstall(Tour);

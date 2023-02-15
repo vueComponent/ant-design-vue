@@ -1,10 +1,9 @@
-<script setup>
-import ATour from '../index';
-console.log(ATour);
+<script setup lang="ts">
+import Basic from './basic.vue';
 </script>
+
 <template>
-  <div>
-    <p>===</p>
-    <a-tour></a-tour>
-  </div>
+  <demo-sort>
+    <Basic />
+  </demo-sort>
 </template>

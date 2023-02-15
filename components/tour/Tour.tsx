@@ -17,34 +17,22 @@ interface TourStepInfo {
       };
 }
 
-interface TourProps {
+export interface TourProps {
   prefixCls?: string;
-  open: boolean;
+  visible: boolean;
   step?: TourStepInfo[];
 }
 
 export const tourProps = (): TourProps => ({
-  open: false,
+  visible: false,
+  step: [],
 });
 
-// const Tour = defineComponent({
-//   compatConfig: { MODE: 3 },
-//   name: 'ATour',
-//   inheritAttrs: false,
-//   setup() {
-//     return (
-//       <div>表单组件</div>
-//     )
-//   }
-// });
-//
-// export default Tour;
-
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATour',
+  inheritAttrs: false,
   setup() {
-    return () => {
-      <div>Tour</div>;
-    };
+    return () => <div>Tour</div>;
   },
 });

@@ -9,6 +9,7 @@ import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItem
 import omit from '../_util/omit';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import { useInjectRadioGroupContext, useInjectRadioOptionTypeContext } from './context';
+import useStyle from './style';
 
 export const radioProps = () => ({
   prefixCls: String,
@@ -46,6 +47,7 @@ export default defineComponent({
         ? `${radioPrefixCls.value}-button`
         : radioPrefixCls.value,
     );
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const focus = () => {
       vcCheckbox.value.focus();
     };
@@ -90,6 +92,7 @@ export default defineComponent({
         rProps.onChange = handleChange;
       }
       const wrapperClassString = classNames({
+        [hashId.value]: true,
         [`${prefixCls.value}-wrapper`]: true,
         [`${prefixCls.value}-wrapper-checked`]: rProps.checked,
         [`${prefixCls.value}-wrapper-disabled`]: rProps.disabled,
@@ -97,11 +100,11 @@ export default defineComponent({
         [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
       });
 
-      return (
+      return wrapSSR(
         <label class={wrapperClassString}>
           <VcCheckbox {...rProps} type="radio" ref={vcCheckbox} />
           {slots.default && <span>{slots.default()}</span>}
-        </label>
+        </label>,
       );
     };
   },

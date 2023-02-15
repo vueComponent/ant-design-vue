@@ -1,6 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-import { defineComponent } from 'vue';
-import classNames from '../_util/classNames';
+import { computed, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { tuple, booleanType } from '../_util/type';
@@ -27,24 +26,28 @@ export default defineComponent({
   slots: ['dot', 'label'],
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('timeline', props);
-    return () => {
-      const { color = '', pending, label = slots.label?.(), dot = slots.dot?.() } = props;
-      const itemClassName = classNames({
-        [`${prefixCls.value}-item`]: true,
-        [`${prefixCls.value}-item-pending`]: pending,
-      });
+    const itemClassName = computed(() => ({
+      [`${prefixCls.value}-item`]: true,
+      [`${prefixCls.value}-item-pending`]: props.pending,
+    }));
 
-      const dotClassName = classNames({
-        [`${prefixCls.value}-item-head`]: true,
-        [`${prefixCls.value}-item-head-custom`]: dot,
-        [`${prefixCls.value}-item-head-${color}`]: true,
-      });
-      const customColor = /blue|red|green|gray/.test(color || '') ? undefined : color;
+    const customColor = computed(() =>
+      /blue|red|green|gray/.test(props.color || '') ? undefined : props.color || 'blue',
+    );
+    const dotClassName = computed(() => ({
+      [`${prefixCls.value}-item-head`]: true,
+      [`${prefixCls.value}-item-head-${props.color || 'blue'}`]: !customColor.value,
+    }));
+    return () => {
+      const { label = slots.label?.(), dot = slots.dot?.() } = props;
       return (
-        <li class={itemClassName}>
+        <li class={itemClassName.value}>
           {label && <div class={`${prefixCls.value}-item-label`}>{label}</div>}
           <div class={`${prefixCls.value}-item-tail`} />
-          <div class={dotClassName} style={{ borderColor: customColor, color: customColor }}>
+          <div
+            class={[dotClassName.value, !!dot && `${prefixCls.value}-item-head-custom`]}
+            style={{ borderColor: customColor.value, color: customColor.value }}
+          >
             {dot}
           </div>
           <div class={`${prefixCls.value}-item-content`}>{slots.default?.()}</div>

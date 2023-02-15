@@ -18,7 +18,7 @@ import './tabs/style';
 // import './dropdown/style';
 // import './divider/style';
 // import './card/style';
-import './collapse/style';
+// import './collapse/style';
 // import './carousel/style';
 // import './notification/style';
 // import './message/style';

@@ -36,7 +36,7 @@ import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/st
 import type { ComponentToken as SliderComponentToken } from '../../slider/style';
 import type { ComponentToken as SpaceComponentToken } from '../../space/style';
 import type { ComponentToken as SpinComponentToken } from '../../spin/style';
-// import type { ComponentToken as StepsComponentToken } from '../../steps/style';
+import type { ComponentToken as StepsComponentToken } from '../../steps/style';
 // import type { ComponentToken as TableComponentToken } from '../../table/style';
 // import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
 import type { ComponentToken as TagComponentToken } from '../../tag/style';
@@ -103,7 +103,7 @@ export interface ComponentTokenMap {
   Transfer?: TransferComponentToken;
   //   Tabs?: TabsComponentToken;
   //   Calendar?: CalendarComponentToken;
-  //   Steps?: StepsComponentToken;
+  Steps?: StepsComponentToken;
   Menu?: MenuComponentToken;
   Modal?: ModalComponentToken;
   Message?: MessageComponentToken;

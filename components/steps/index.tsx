@@ -1,4 +1,4 @@
-import type { App, ExtractPropTypes, PropType } from 'vue';
+import type { App, ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -13,6 +13,11 @@ import omit from '../_util/omit';
 import { VcStepProps } from '../vc-steps/Step';
 import type { ProgressDotRender } from '../vc-steps/Steps';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import { booleanType, stringType, functionType, someType } from '../_util/type';
+
+// CSSINJS
+import useStyle from './style';
+import { useToken } from '../theme/internal';
 
 export const stepsProps = () => ({
   prefixCls: String,
@@ -20,28 +25,28 @@ export const stepsProps = () => ({
   current: Number,
   initial: Number,
   percent: Number,
-  responsive: { type: Boolean, default: undefined },
-  labelPlacement: String as PropType<'horizontal' | 'vertical'>,
-  status: String as PropType<'wait' | 'process' | 'finish' | 'error'>,
-  size: String as PropType<'default' | 'small'>,
-  direction: String as PropType<'horizontal' | 'vertical'>,
-  progressDot: {
-    type: [Boolean, Function] as PropType<boolean | ProgressDotRender>,
-    default: undefined as boolean | ProgressDotRender,
-  },
-  type: String as PropType<'default' | 'navigation'>,
-  onChange: Function as PropType<(current: number) => void>,
-  'onUpdate:current': Function as PropType<(current: number) => void>,
+  responsive: booleanType(),
+  labelPlacement: stringType<'horizontal' | 'vertical'>(),
+  status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
+  size: stringType<'default' | 'small'>(),
+  direction: stringType<'horizontal' | 'vertical'>(),
+  progressDot: someType<boolean | ProgressDotRender>(
+    [Boolean, Function],
+    undefined as boolean | ProgressDotRender,
+  ),
+  type: stringType<'default' | 'navigation'>(),
+  onChange: functionType<(current: number) => void>(),
+  'onUpdate:current': functionType<(current: number) => void>(),
 });
 
 export const stepProps = () => ({
   description: PropTypes.any,
   icon: PropTypes.any,
-  status: String as PropType<'wait' | 'process' | 'finish' | 'error'>,
-  disabled: { type: Boolean, default: undefined },
+  status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
+  disabled: booleanType(),
   title: PropTypes.any,
   subTitle: PropTypes.any,
-  onClick: Function as PropType<MouseEventHandler>,
+  onClick: functionType<MouseEventHandler>(),
 });
 
 export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>>;
@@ -61,6 +66,13 @@ const Steps = defineComponent({
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
+
+    // 接入换肤
+    const [, token] = useToken();
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const screens = useBreakpoint();
     const direction = computed(() =>
       props.responsive && screens.value.xs ? 'vertical' : props.direction,
@@ -84,11 +96,12 @@ const Steps = defineComponent({
         // currently it's hard-coded, since we can't easily read the actually width of icon
         const progressWidth = props.size === 'small' ? 32 : 40;
         const iconWithProgress = (
-          <div class={`${prefixCls}-progress-icon`}>
+          <div class={`${prefixCls.value}-progress-icon`}>
             <Progress
               type="circle"
               percent={props.percent}
               width={progressWidth}
+              strokeColor={token.value.colorPrimary}
               strokeWidth={4}
               format={() => null}
             />
@@ -106,14 +119,16 @@ const Steps = defineComponent({
           [`${prefixCls.value}-with-progress`]: props.percent !== undefined,
         },
         attrs.class,
+        hashId.value,
       );
       const icons = {
         finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,
         error: <CloseOutlined class={`${prefixCls}-error-icon`} />,
       };
-      return (
+      return wrapSSR(
         <VcSteps
           icons={icons}
+          {...attrs}
           {...omit(props, ['percent', 'responsive'])}
           direction={direction.value}
           prefixCls={prefixCls.value}
@@ -121,7 +136,7 @@ const Steps = defineComponent({
           class={stepsClassName}
           onChange={handleChange}
           v-slots={{ ...slots, stepIcon: stepIconRender }}
-        />
+        />,
       );
     };
   },

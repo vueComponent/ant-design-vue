@@ -2,10 +2,14 @@ import KeyCode from '../_util/KeyCode';
 import TextArea from '../input/TextArea';
 import EnterOutlined from '@ant-design/icons-vue/EnterOutlined';
 import type { ExtractPropTypes, PropType } from 'vue';
-import { defineComponent, ref, reactive, watch, onMounted, computed } from 'vue';
+import { defineComponent, ref, reactive, watch, onMounted, toRefs } from 'vue';
 import type { Direction } from '../config-provider';
 import type { ChangeEventHandler } from '../_util/EventInterface';
 import type { AutoSizeType } from '../input/inputProps';
+import classNames from '../_util/classNames';
+
+// CSSINJS
+import useStyle from './style';
 
 const editableProps = () => ({
   prefixCls: String,
@@ -24,9 +28,11 @@ export type EditableProps = Partial<ExtractPropTypes<ReturnType<typeof editableP
 const Editable = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Editable',
+  inheritAttrs: false,
   props: editableProps(),
   // emits: ['save', 'cancel', 'end', 'change'],
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, attrs }) {
+    const { prefixCls } = toRefs(props);
     const state = reactive({
       current: props.value || '',
       lastKeyCode: undefined,
@@ -109,34 +115,45 @@ const Editable = defineComponent({
     function confirmChange() {
       emit('save', state.current.trim());
     }
-    const textAreaClassName = computed(() => ({
-      [`${props.prefixCls}`]: true,
-      [`${props.prefixCls}-edit-content`]: true,
-      [`${props.prefixCls}-rtl`]: props.direction === 'rtl',
-      [props.component ? `${props.prefixCls}-${props.component}` : '']: true,
-    }));
-    return () => (
-      <div class={textAreaClassName.value}>
-        <TextArea
-          ref={saveTextAreaRef}
-          maxlength={props.maxlength}
-          value={state.current}
-          onChange={onChange as ChangeEventHandler}
-          onKeydown={onKeyDown}
-          onKeyup={onKeyUp}
-          onCompositionstart={onCompositionStart}
-          onCompositionend={onCompositionEnd}
-          onBlur={onBlur}
-          rows={1}
-          autoSize={props.autoSize === undefined || props.autoSize}
-        />
-        {slots.enterIcon ? (
-          slots.enterIcon({ className: `${props.prefixCls}-edit-content-confirm` })
-        ) : (
-          <EnterOutlined class={`${props.prefixCls}-edit-content-confirm`} />
-        )}
-      </div>
-    );
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
+    return () => {
+      const textAreaClassName = classNames(
+        {
+          [`${prefixCls.value}`]: true,
+          [`${prefixCls.value}-edit-content`]: true,
+          [`${prefixCls.value}-rtl`]: props.direction === 'rtl',
+          [props.component ? `${prefixCls.value}-${props.component}` : '']: true,
+        },
+        attrs.class,
+        hashId.value,
+      );
+
+      return wrapSSR(
+        <div {...attrs} class={textAreaClassName}>
+          <TextArea
+            ref={saveTextAreaRef}
+            maxlength={props.maxlength}
+            value={state.current}
+            onChange={onChange as ChangeEventHandler}
+            onKeydown={onKeyDown}
+            onKeyup={onKeyUp}
+            onCompositionstart={onCompositionStart}
+            onCompositionend={onCompositionEnd}
+            onBlur={onBlur}
+            rows={1}
+            autoSize={props.autoSize === undefined || props.autoSize}
+          />
+          {slots.enterIcon ? (
+            slots.enterIcon({ className: `${props.prefixCls}-edit-content-confirm` })
+          ) : (
+            <EnterOutlined class={`${props.prefixCls}-edit-content-confirm`} />
+          )}
+        </div>,
+      );
+    };
   },
 });
 

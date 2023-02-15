@@ -31,6 +31,7 @@ import type { EventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
 import type { AutoSizeType } from '../input/inputProps';
 import useMergedState from '../_util/hooks/useMergedState';
+import { findDOMNode } from '../_util/props-util';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 
@@ -198,7 +199,9 @@ const Base = defineComponent({
     });
 
     function getChildrenText(): string {
-      return props.ellipsis || props.editable ? props.content : contentRef.value?.$el?.innerText;
+      return props.ellipsis || props.editable
+        ? props.content
+        : findDOMNode(contentRef.value)?.innerText;
     }
 
     // =============== Expand ===============
@@ -324,7 +327,7 @@ const Base = defineComponent({
       if (
         !rows ||
         rows < 0 ||
-        !contentRef.value?.$el ||
+        !findDOMNode(contentRef.value) ||
         state.expanded ||
         props.content === undefined
       )
@@ -338,7 +341,7 @@ const Base = defineComponent({
         text,
         ellipsis: ell,
       } = measure(
-        contentRef.value?.$el,
+        findDOMNode(contentRef.value),
         { rows, suffix },
         props.content,
         renderOperations(true),

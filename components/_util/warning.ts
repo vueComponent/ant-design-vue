@@ -9,7 +9,7 @@ type Warning = (valid: boolean, component: string, message?: string) => void;
 let warning: Warning = noop;
 if (process.env.NODE_ENV !== 'production') {
   warning = (valid, component, message) => {
-    vcWarning(valid, `[antdv: ${component}] ${message}`);
+    vcWarning(valid, `[ant-design-vue: ${component}] ${message}`);
 
     // StrictMode will inject console which will not throw warning in React 17.
     if (process.env.NODE_ENV === 'test') {

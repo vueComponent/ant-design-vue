@@ -12,6 +12,11 @@ import { optionProps } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import useStyle from './style';
+import { useProvideOverride } from '../menu/src/OverrideContext';
+import warning from '../_util/warning';
+import Spin from '../spin';
+import devWarning from '../vc-util/devWarning';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -32,6 +37,9 @@ interface MentionsEntity {
 
 export type MentionPlacement = 'top' | 'bottom';
 
+function loadingFilterOption() {
+  return true;
+}
 const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] => {
   const { prefix = '@', split = ' ' } = config;
   const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
@@ -97,13 +105,36 @@ const Mentions = defineComponent({
   props: mentionsProps(),
   slots: ['notFoundContent', 'option'],
   setup(props, { slots, emit, attrs, expose }) {
+    // =================== Warning =====================
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        !flattenChildren(slots.default?.() || []).length,
+        'Mentions',
+        '`Mentions.Option` is deprecated. Please use `options` instead.',
+      );
+    }
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const focused = ref(false);
     const vcMentions = ref(null);
     const value = ref(props.value ?? props.defaultValue ?? '');
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
+    useProvideOverride({
+      prefixCls: computed(() => `${prefixCls.value}-menu`),
+      mode: computed(() => 'vertical'),
+      selectable: computed(() => false),
+      onClick: () => {},
+      validator: ({ mode }) => {
+        // Warning if use other mode
+        warning(
+          !mode || mode === 'vertical',
+          'Mentions',
+          `mode="${mode}" is not supported for Mentions's Menu.`,
+        );
+      },
+    });
     watch(
       () => props.value,
       val => {
@@ -161,7 +192,9 @@ const Mentions = defineComponent({
     };
 
     expose({ focus, blur });
-
+    const mentionsfilterOption = computed(() =>
+      props.loading ? loadingFilterOption : props.filterOption,
+    );
     return () => {
       const {
         disabled,
@@ -182,6 +215,7 @@ const Mentions = defineComponent({
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value),
         !hasFeedback && className,
+        hashId.value,
       );
 
       const mentionsProps = {
@@ -189,9 +223,17 @@ const Mentions = defineComponent({
         ...otherProps,
         disabled,
         direction: direction.value,
-        filterOption: props.filterOption,
+        filterOption: mentionsfilterOption.value,
         getPopupContainer,
-        options: props.options || getOptions(),
+        options: props.loading
+          ? [
+              {
+                value: 'ANTDV_SEARCHING',
+                disabled: true,
+                label: <Spin size="small" />,
+              },
+            ]
+          : props.options || getOptions(),
         class: mergedClassName,
         ...otherAttrs,
         rows,
@@ -206,11 +248,12 @@ const Mentions = defineComponent({
       const mentions = (
         <VcMentions
           {...mentionsProps}
+          dropdownClassName={hashId.value}
           v-slots={{ notFoundContent: getNotFoundContent, option: slots.option }}
         ></VcMentions>
       );
       if (hasFeedback) {
-        return (
+        return wrapSSR(
           <div
             class={classNames(
               `${prefixCls.value}-affix-wrapper`,
@@ -220,14 +263,15 @@ const Mentions = defineComponent({
                 hasFeedback,
               ),
               className,
+              hashId.value,
             )}
           >
             {mentions}
             <span class={`${prefixCls.value}-suffix`}>{feedbackIcon}</span>
-          </div>
+          </div>,
         );
       }
-      return mentions;
+      return wrapSSR(mentions);
     };
   },
 });

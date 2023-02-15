@@ -4,6 +4,9 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import type { Direction } from '../config-provider';
 
+// CSSINJS
+import useStyle from './style';
+
 export interface TypographyProps extends HTMLAttributes {
   direction?: Direction;
   prefixCls?: string;
@@ -24,6 +27,10 @@ const Typography = defineComponent<InternalTypographyProps>({
   props: typographyProps() as any,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('typography', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     return () => {
       const {
         prefixCls: _prefixCls,
@@ -32,17 +39,18 @@ const Typography = defineComponent<InternalTypographyProps>({
         component: Component = 'article' as any,
         ...restProps
       } = { ...props, ...attrs };
-      return (
+      return wrapSSR(
         <Component
           class={classNames(
             prefixCls.value,
             { [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
             attrs.class,
+            hashId.value,
           )}
           {...restProps}
         >
           {slots.default?.()}
-        </Component>
+        </Component>,
       );
     };
   },

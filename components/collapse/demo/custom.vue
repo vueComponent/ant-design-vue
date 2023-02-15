@@ -17,7 +17,11 @@ Customize the background, border and margin styles and icon for each panel.
 </docs>
 
 <template>
-  <a-collapse v-model:activeKey="activeKey" :bordered="false">
+  <a-collapse
+    v-model:activeKey="activeKey"
+    :bordered="false"
+    style="background: rgb(255, 255, 255)"
+  >
     <template #expandIcon="{ isActive }">
       <caret-right-outlined :rotate="isActive ? 90 : 0" />
     </template>

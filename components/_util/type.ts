@@ -74,6 +74,6 @@ export function stringType<T extends string = string>(defaultVal?: T) {
   return { type: String as unknown as PropType<T>, default: defaultVal as T };
 }
 
-export function someType<T>(types: any[], defaultVal?: T) {
-  return { type: types as PropType<T>, default: defaultVal as T };
+export function someType<T>(types?: any[], defaultVal?: T) {
+  return types ? { type: types as PropType<T>, default: defaultVal as T } : anyType<T>(defaultVal);
 }

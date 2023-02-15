@@ -287,6 +287,7 @@ export default defineComponent({
               <KeywordTrigger
                 prefixCls={prefixCls}
                 transitionName={transitionName}
+                dropdownClassName={props.dropdownClassName}
                 placement={placement}
                 options={measuring ? options.value : []}
                 visible

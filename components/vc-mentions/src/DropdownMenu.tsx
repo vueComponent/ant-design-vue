@@ -54,7 +54,7 @@ export default defineComponent({
         >
           {!loading.value &&
             options.map((option, index) => {
-              const { value, disabled, label = option.value } = option;
+              const { value, disabled, label = option.value, class: className, style } = option;
               return (
                 <MenuItem
                   key={value}
@@ -62,9 +62,10 @@ export default defineComponent({
                   onMouseenter={() => {
                     setActiveIndex(index);
                   }}
+                  class={className}
+                  style={style}
                 >
-                  {slots.option?.(option) ??
-                    (typeof label === 'function' ? label({ value, disabled }) : label)}
+                  {slots.option?.(option) ?? (typeof label === 'function' ? label(option) : label)}
                 </MenuItem>
               );
             })}

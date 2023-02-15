@@ -1,7 +1,7 @@
 import isMobile from '../../vc-util/isMobile';
-import type { PropType } from 'vue';
 import { onBeforeUnmount, ref, defineComponent } from 'vue';
 import classNames from '../../_util/classNames';
+import { functionType } from '../../_util/type';
 
 /**
  * When click and hold on a button - the speed of auto changing the value.
@@ -21,7 +21,7 @@ export default defineComponent({
     prefixCls: String,
     upDisabled: Boolean,
     downDisabled: Boolean,
-    onStep: { type: Function as PropType<(up: boolean) => void> },
+    onStep: functionType<(up: boolean) => void>(),
   },
   slots: ['upNode', 'downNode'],
   setup(props, { slots, emit }) {

@@ -28,6 +28,8 @@ When you need to mention someone or something.
 | status | Set validation status | 'error' \| 'warning' \| 'success' \| 'validating' | - | 3.3.0 |
 | validateSearch | Customize trigger search logic | (text: string, props: MentionsProps) => void |  |
 | value(v-model) | Set value of mentions | string |  |
+| options | Option Configuration | [Options](#option) | \[] | 4.0 |
+| option | custom option label | v-slot:option="option" | - | 4.0 |
 
 ### Events
 
@@ -46,8 +48,22 @@ When you need to mention someone or something.
 | blur()  | remove focus |
 | focus() | get focus    |
 
-### Option
+### Mention.Option (< 4.0)
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | value | value of suggestion, the value will insert into input filed while selected | string | '' |
+
+### Option
+
+Support from v4.0
+
+<!-- prettier-ignore -->
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| value | value of suggestion, the value will insert into input filed while selected | string | - |
+| label | Title of the option | VueNode | () => VueNode | - |
+| disabled | Optional | boolean | - |
+| class | className | string | - |
+| style | The style of the option | CSSProperties | - |
+|payload| other data | object | - |

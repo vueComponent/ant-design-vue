@@ -40,7 +40,7 @@ import './calendar/style';
 import './table/style';
 // import './progress/style';
 // import './timeline/style';
-import './input-number/style';
+// import './input-number/style';
 // import './transfer/style';
 import './tree/style';
 // import './upload/style';

@@ -1,4 +1,4 @@
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import type { ExtractPropTypes, CSSProperties } from 'vue';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
@@ -69,6 +69,15 @@ export default defineComponent({
     onBeforeUnmount(() => {
       clearTimeout(progressRafRef.value);
     });
+    const mergedStatus = ref(props.file?.status);
+    watch(
+      () => props.file?.status,
+      status => {
+        if (status !== 'removed') {
+          mergedStatus.value = status;
+        }
+      },
+    );
     const { rootPrefixCls } = useConfigInject('upload', props);
     const transitionProps = computed(() => getTransitionProps(`${rootPrefixCls.value}-fade`));
     return () => {
@@ -100,10 +109,10 @@ export default defineComponent({
       const iconNode = iconRender({ file });
       let icon = <div class={`${prefixCls}-text-icon`}>{iconNode}</div>;
       if (listType === 'picture' || listType === 'picture-card') {
-        if (file.status === 'uploading' || (!file.thumbUrl && !file.url)) {
+        if (mergedStatus.value === 'uploading' || (!file.thumbUrl && !file.url)) {
           const uploadingClassName = {
             [`${prefixCls}-list-item-thumbnail`]: true,
-            [`${prefixCls}-list-item-file`]: file.status !== 'uploading',
+            [`${prefixCls}-list-item-file`]: mergedStatus.value !== 'uploading',
           };
           icon = <div class={uploadingClassName}>{iconNode}</div>;
         } else {
@@ -137,8 +146,7 @@ export default defineComponent({
 
       const infoUploadingClass = {
         [`${prefixCls}-list-item`]: true,
-        [`${prefixCls}-list-item-${file.status}`]: true,
-        [`${prefixCls}-list-item-list-type-${listType}`]: true,
+        [`${prefixCls}-list-item-${mergedStatus.value}`]: true,
       };
       const linkProps =
         typeof file.linkProps === 'string' ? JSON.parse(file.linkProps) : file.linkProps;
@@ -152,7 +160,7 @@ export default defineComponent({
           })
         : null;
       const downloadIcon =
-        showDownloadIcon && file.status === 'done'
+        showDownloadIcon && mergedStatus.value === 'done'
           ? actionIconRender({
               customIcon: customDownloadIcon ? customDownloadIcon({ file }) : <DownloadOutlined />,
               callback: () => onDownload(file),
@@ -175,7 +183,7 @@ export default defineComponent({
         </span>
       );
       const listItemNameClass = `${prefixCls}-list-item-name`;
-      const preview = file.url
+      const fileName = file.url
         ? [
             <a
               key="view"
@@ -219,29 +227,26 @@ export default defineComponent({
         </a>
       ) : null;
 
-      const actions = listType === 'picture-card' && file.status !== 'uploading' && (
-        <span class={`${prefixCls}-list-item-actions`}>
-          {previewIcon}
-          {file.status === 'done' && downloadIcon}
-          {removeIcon}
-        </span>
-      );
-
-      let message;
-      if (file.response && typeof file.response === 'string') {
-        message = file.response;
-      } else {
-        message = file.error?.statusText || file.error?.message || locale.uploadError;
-      }
+      const pictureCardActions = listType === 'picture-card' &&
+        mergedStatus.value !== 'uploading' && (
+          <span class={`${prefixCls}-list-item-actions`}>
+            {previewIcon}
+            {mergedStatus.value === 'done' && downloadIcon}
+            {removeIcon}
+          </span>
+        );
 
       const dom = (
         <div class={infoUploadingClass}>
           {icon}
-          {preview}
-          {actions}
+          {fileName}
+          {pictureCardActions}
           {showProgress.value && (
             <Transition {...transitionProps.value}>
-              <div v-show={file.status === 'uploading'} class={`${prefixCls}-list-item-progress`}>
+              <div
+                v-show={mergedStatus.value === 'uploading'}
+                class={`${prefixCls}-list-item-progress`}
+              >
                 {'percent' in file ? (
                   <Progress
                     {...(progressProps as UploadListProgressProps)}
@@ -258,8 +263,12 @@ export default defineComponent({
         [`${prefixCls}-list-item-container`]: true,
         [`${className}`]: !!className,
       };
+      const message =
+        file.response && typeof file.response === 'string'
+          ? file.response
+          : file.error?.statusText || file.error?.message || locale.uploadError;
       const item =
-        file.status === 'error' ? (
+        mergedStatus.value === 'error' ? (
           <Tooltip title={message} getPopupContainer={node => node.parentNode as HTMLElement}>
             {dom}
           </Tooltip>

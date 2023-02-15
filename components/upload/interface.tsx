@@ -111,10 +111,7 @@ function uploadProps<T = any>() {
     >([Object, Function]),
     method: stringType<'POST' | 'PUT' | 'PATCH' | 'post' | 'put' | 'patch'>(),
     headers: objectType<HttpRequestHeader>(),
-    showUploadList: someType<boolean | ShowUploadListInterface>(
-      [Boolean, Object],
-      undefined as boolean | ShowUploadListInterface,
-    ),
+    showUploadList: someType<boolean | ShowUploadListInterface>([Boolean, Object]),
     multiple: booleanType(),
     accept: String,
     beforeUpload:
@@ -141,7 +138,7 @@ function uploadProps<T = any>() {
     customRequest: functionType<(options: RcCustomRequestOptions) => void>(),
     withCredentials: booleanType(),
     openFileDialogOnClick: booleanType(),
-    locale: objectType<UploadLocale>(undefined as UploadLocale),
+    locale: objectType<UploadLocale>(),
     id: String,
     previewFile: functionType<PreviewFileHandler>(),
     /** @deprecated Please use `beforeUpload` directly */

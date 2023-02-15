@@ -1,5 +1,5 @@
 import type { Key } from '../_util/type';
-import { tuple, booleanType, someType, stringType, functionType } from '../_util/type';
+import { booleanType, someType, stringType, functionType } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
 export type CollapsibleType = 'header' | 'icon' | 'disabled';
@@ -26,7 +26,7 @@ const collapseProps = () => ({
   bordered: booleanType(),
   expandIcon: functionType<(panelProps: PanelProps) => any>(),
   openAnimation: PropTypes.object,
-  expandIconPosition: PropTypes.oneOf(tuple('start', 'end')),
+  expandIconPosition: stringType<'start' | 'end'>(),
   collapsible: stringType<CollapsibleType>(),
   ghost: booleanType(),
   onChange: functionType<(key: Key | Key[]) => void>(),
@@ -47,7 +47,7 @@ const collapsePanelProps = () => ({
   forceRender: booleanType(),
   expandIcon: functionType<(panelProps: PanelProps) => any>(),
   extra: PropTypes.any,
-  panelKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  panelKey: someType<number | string>(),
   collapsible: stringType<CollapsibleType>(),
   role: String,
   onItemClick: functionType<(panelKey: Key) => void>(),

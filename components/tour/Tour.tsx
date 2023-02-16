@@ -1,8 +1,13 @@
 import { defineComponent } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import TourMask from './TourMask';
 
 export const TourProps = () => ({
   prefixCls: String,
+  visible: Boolean,
+  defaultCurrent: Number,
+  current: Number,
+  mask: Boolean,
 });
 
 export default defineComponent({
@@ -11,6 +16,6 @@ export default defineComponent({
   inheritAttrs: false,
   props: initDefaultProps(TourProps(), {}),
   setup() {
-    return () => <div>Tour</div>;
+    return () => <TourMask />;
   },
 });

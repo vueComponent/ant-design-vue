@@ -1,6 +1,7 @@
 import { defineComponent } from 'vue';
 import useId from '../vc-select/hooks/useId';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import Portal from '../_util/PortalWrapper';
 
 const COVER_PROPS = {
   fill: 'transparent',
@@ -13,6 +14,7 @@ export const TourMask = () => ({
   style: Object,
   animated: Boolean,
   fill: String,
+  visible: Boolean,
 });
 
 export default defineComponent({
@@ -22,11 +24,19 @@ export default defineComponent({
   props: initDefaultProps(TourMask(), {}),
   setup(props) {
     return () => {
-      const { prefixCls, showMask, style = {}, pos, animated, fill = 'rgba(0,0,0,0.5)' } = props;
+      const {
+        prefixCls,
+        visible,
+        showMask,
+        style = {},
+        pos,
+        animated,
+        fill = 'rgba(0,0,0,0.5)',
+      } = props;
       const id = useId();
       const maskId = `${prefixCls}-mask-${id}`;
       return () => (
-        <div class={'Portal'}>
+        <Portal visible={visible}>
           <div
             class={`${prefixCls}-mask`}
             style={{
@@ -89,7 +99,7 @@ export default defineComponent({
               </svg>
             ) : null}
           </div>
-        </div>
+        </Portal>
       );
     };
   },

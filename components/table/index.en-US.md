@@ -3,7 +3,7 @@ category: Components
 cols: 1
 type: Data Display
 title: Table
-cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3yz3QqMlShYAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A table displays rows of data.

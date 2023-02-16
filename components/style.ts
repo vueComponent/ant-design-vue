@@ -37,7 +37,8 @@ import './time-picker/style';
 import './calendar/style';
 // import './date-picker/style';
 // import './slider/style';
-import './table/style';
+// import './table/style';
+
 // import './progress/style';
 // import './timeline/style';
 // import './input-number/style';

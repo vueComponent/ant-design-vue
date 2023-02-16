@@ -3,7 +3,7 @@ category: Components
 type: Navigation
 cols: 1
 title: Steps
-cover: https://gw.alipayobjects.com/zos/antfincdn/UZYqMizXHaj/Steps.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*677sTqCpE3wAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 `Steps` is a navigation bar that guides users through the steps of a task.

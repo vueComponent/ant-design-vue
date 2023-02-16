@@ -1,14 +1,7 @@
 import type { UploadProps as RcUploadProps } from '../vc-upload';
 import VcUpload from '../vc-upload';
 import UploadList from './UploadList';
-import type {
-  UploadType,
-  UploadListType,
-  UploadFile,
-  UploadChangeParam,
-  ShowUploadListInterface,
-  FileType,
-} from './interface';
+import type { UploadFile, UploadChangeParam, ShowUploadListInterface, FileType } from './interface';
 import { uploadProps } from './interface';
 import { file2Obj, getFileItem, removeFileItem, updateFileList } from './utils';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
@@ -23,6 +16,10 @@ import type { VueNode } from '../_util/type';
 import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form';
 
+// CSSINJS
+import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
+
 export const LIST_IGNORE = `__LIST_IGNORE_${Date.now()}__`;
 
 export default defineComponent({
@@ -30,18 +27,25 @@ export default defineComponent({
   name: 'AUpload',
   inheritAttrs: false,
   props: initDefaultProps(uploadProps(), {
-    type: 'select' as UploadType,
+    type: 'select',
     multiple: false,
     action: '',
     data: {},
     accept: '',
     showUploadList: true,
-    listType: 'text' as UploadListType, // or picture
+    listType: 'text', // or picture
     disabled: false,
     supportServerRender: true,
   }),
   setup(props, { slots, attrs, expose }) {
     const formItemContext = useInjectFormItemContext();
+    const { prefixCls, direction, disabled } = useConfigInject('upload', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const disabledContext = useInjectDisabled();
+    const mergedDisabled = computed(() => disabledContext.value ?? disabled.value);
+
     const [mergedFileList, setMergedFileList] = useMergedState(props.defaultFileList || [], {
       value: toRef(props, 'fileList'),
       postState: list => {
@@ -56,7 +60,7 @@ export default defineComponent({
     });
     const dragState = ref('drop');
 
-    const upload = ref();
+    const upload = ref(null);
     onMounted(() => {
       devWarning(
         props.fileList !== undefined || attrs.value === undefined,
@@ -291,7 +295,6 @@ export default defineComponent({
       upload,
     });
 
-    const { prefixCls, direction } = useConfigInject('upload', props);
     const [locale] = useLocaleReceiver(
       'Upload',
       defaultLocale.Upload,
@@ -305,7 +308,6 @@ export default defineComponent({
         previewFile,
         onPreview,
         onDownload,
-        disabled,
         isImageUrl,
         progress,
         itemRender,
@@ -323,7 +325,7 @@ export default defineComponent({
           onPreview={onPreview}
           onDownload={onDownload}
           onRemove={handleRemove}
-          showRemoveIcon={!disabled && showRemoveIcon}
+          showRemoveIcon={!mergedDisabled.value && showRemoveIcon}
           showPreviewIcon={showPreviewIcon}
           showDownloadIcon={showDownloadIcon}
           removeIcon={removeIcon}
@@ -343,7 +345,7 @@ export default defineComponent({
       );
     };
     return () => {
-      const { listType, disabled, type } = props;
+      const { listType, type } = props;
       const { class: className, style: styleName, ...transAttrs } = attrs;
       const rcUploadProps = {
         onBatchStart,
@@ -356,6 +358,7 @@ export default defineComponent({
         prefixCls: prefixCls.value,
         beforeUpload: mergedBeforeUpload,
         onChange: undefined,
+        disabled: mergedDisabled.value,
       };
       delete (rcUploadProps as any).remove;
 
@@ -363,9 +366,14 @@ export default defineComponent({
       // !children: https://github.com/ant-design/ant-design/issues/14298
       // disabled: https://github.com/ant-design/ant-design/issues/16478
       //           https://github.com/ant-design/ant-design/issues/24197
-      if (!slots.default || disabled) {
+      if (!slots.default || mergedDisabled.value) {
         delete rcUploadProps.id;
       }
+
+      const rtlCls = {
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      };
+
       if (type === 'drag') {
         const dragCls = classNames(
           prefixCls.value,
@@ -375,13 +383,18 @@ export default defineComponent({
               file => file.status === 'uploading',
             ),
             [`${prefixCls.value}-drag-hover`]: dragState.value === 'dragover',
-            [`${prefixCls.value}-disabled`]: disabled,
+            [`${prefixCls.value}-disabled`]: mergedDisabled.value,
             [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           },
           attrs.class,
+          hashId.value,
         );
-        return (
-          <span>
+
+        return wrapSSR(
+          <span
+            {...attrs}
+            class={classNames(`${prefixCls.value}-wrapper`, rtlCls, className, hashId.value)}
+          >
             <div
               class={dragCls}
               onDrop={onFileDrop}
@@ -399,14 +412,14 @@ export default defineComponent({
               </VcUpload>
             </div>
             {renderUploadList()}
-          </span>
+          </span>,
         );
       }
 
       const uploadButtonCls = classNames(prefixCls.value, {
         [`${prefixCls.value}-select`]: true,
         [`${prefixCls.value}-select-${listType}`]: true,
-        [`${prefixCls.value}-disabled`]: disabled,
+        [`${prefixCls.value}-disabled`]: mergedDisabled.value,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       });
       const children = flattenChildren(slots.default?.());
@@ -417,17 +430,29 @@ export default defineComponent({
       );
 
       if (listType === 'picture-card') {
-        return (
-          <span class={classNames(`${prefixCls.value}-picture-card-wrapper`, attrs.class)}>
+        return wrapSSR(
+          <span
+            {...attrs}
+            class={classNames(
+              `${prefixCls.value}-wrapper`,
+              `${prefixCls.value}-picture-card-wrapper`,
+              rtlCls,
+              attrs.class,
+              hashId.value,
+            )}
+          >
             {renderUploadList(renderUploadButton, !!(children && children.length))}
-          </span>
+          </span>,
         );
       }
-      return (
-        <span class={attrs.class}>
+      return wrapSSR(
+        <span
+          {...attrs}
+          class={classNames(`${prefixCls.value}-wrapper`, rtlCls, attrs.class, hashId.value)}
+        >
           {renderUploadButton(children && children.length ? undefined : { display: 'none' })}
           {renderUploadList()}
-        </span>
+        </span>,
       );
     };
   },

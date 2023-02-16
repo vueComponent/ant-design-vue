@@ -245,5 +245,5 @@ export { default as Upload, UploadDragger } from './upload';
 
 export { default as LocaleProvider } from './locale-provider';
 
-export type { TourProps, TourStepInfo, TourStepProps } from './tour';
+export type { TourProps, TourStepProps } from './tour';
 export { default as Tour } from './tour';

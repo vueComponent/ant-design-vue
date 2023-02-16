@@ -17,16 +17,20 @@ Add status to Mentions with `status`, which could be `error` or `warning`。
 </docs>
 <template>
   <a-space direction="vertical">
-    <a-mentions v-model:value="value" autofocus status="error" @select="onSelect">
-      <a-mentions-option value="afc163">afc163</a-mentions-option>
-      <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
-      <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
-    </a-mentions>
-    <a-mentions v-model:value="value" autofocus status="warning" @select="onSelect">
-      <a-mentions-option value="afc163">afc163</a-mentions-option>
-      <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
-      <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
-    </a-mentions>
+    <a-mentions
+      v-model:value="value"
+      :options="options"
+      autofocus
+      status="error"
+      @select="onSelect"
+    ></a-mentions>
+    <a-mentions
+      v-model:value="value"
+      :options="options"
+      autofocus
+      status="warning"
+      @select="onSelect"
+    ></a-mentions>
   </a-space>
 </template>
 <script lang="ts">
@@ -44,6 +48,20 @@ export default defineComponent({
     return {
       value,
       onSelect,
+      options: [
+        {
+          value: 'afc163',
+          label: 'afc163',
+        },
+        {
+          value: 'zombieJ',
+          label: 'zombieJ',
+        },
+        {
+          value: 'yesmeck',
+          label: 'yesmeck',
+        },
+      ],
     };
   },
 });

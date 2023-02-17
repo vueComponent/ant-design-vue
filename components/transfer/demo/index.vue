@@ -9,6 +9,7 @@
     <table-transfer />
     <tree-transfer />
     <statusVue />
+    <custom-select-all-labels></custom-select-all-labels>
   </demo-sort>
 </template>
 <script lang="ts">
@@ -17,6 +18,7 @@ import Oneway from './oneway.vue';
 import Search from './search.vue';
 import Advanced from './advanced.vue';
 import CustomItem from './custom-item.vue';
+import CustomSelectAllLabels from './custom-select-all-labels.vue';
 import TableTransfer from './table-transfer.vue';
 import TreeTransfer from './tree-transfer.vue';
 import Pagination from './pagination.vue';
@@ -35,6 +37,7 @@ export default defineComponent({
     Search,
     Advanced,
     CustomItem,
+    CustomSelectAllLabels,
     Pagination,
     TableTransfer,
     TreeTransfer,

@@ -1,4 +1,3 @@
-import isEqual from 'lodash-es/isEqual';
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Button from '../../../button';
 import Menu from '../../../menu';
@@ -26,6 +25,8 @@ import type { EventHandler } from '../../../_util/EventInterface';
 import FilterSearch from './FilterSearch';
 import Tree from '../../../tree';
 import type { CheckboxChangeEvent } from '../../../checkbox/interface';
+import devWarning from '../../../vc-util/devWarning';
+import isEqual from '../../../vc-util/isEqual';
 
 interface FilterRestProps {
   confirm?: Boolean;
@@ -99,7 +100,7 @@ function renderFilterItems({
     return item;
   });
 }
-
+export type TreeColumnFilterItem = ColumnFilterItem;
 export interface FilterDropdownProps<RecordType> {
   tablePrefixCls: string;
   prefixCls: string;
@@ -108,7 +109,7 @@ export interface FilterDropdownProps<RecordType> {
   filterState?: FilterState<RecordType>;
   filterMultiple: boolean;
   filterMode?: 'menu' | 'tree';
-  filterSearch?: FilterSearchType;
+  filterSearch?: FilterSearchType<ColumnFilterItem | TreeColumnFilterItem>;
   columnKey: Key;
   triggerFilter: (filterState: FilterState<RecordType>) => void;
   locale: TableLocale;
@@ -136,7 +137,29 @@ export default defineComponent<FilterDropdownProps<any>>({
     const contextSlots = useInjectSlots();
     const filterMode = computed(() => props.filterMode ?? 'menu');
     const filterSearch = computed(() => props.filterSearch ?? false);
-    const filterDropdownVisible = computed(() => props.column.filterDropdownVisible);
+    const filterDropdownOpen = computed(
+      () => props.column.filterDropdownOpen || props.column.filterDropdownVisible,
+    );
+    const onFilterDropdownOpenChange = computed(
+      () => props.column.onFilterDropdownOpenChange || props.column.onFilterDropdownVisibleChange,
+    );
+
+    if (process.env.NODE_ENV !== 'production') {
+      [
+        ['filterDropdownVisible', 'filterDropdownOpen', props.column.filterDropdownVisible],
+        [
+          'onFilterDropdownVisibleChange',
+          'onFilterDropdownOpenChange',
+          props.column.onFilterDropdownVisibleChange,
+        ],
+      ].forEach(([deprecatedName, newName, prop]) => {
+        devWarning(
+          prop === undefined || prop === null,
+          'Table',
+          `\`${deprecatedName}\` is deprecated. Please use \`${newName}\` instead.`,
+        );
+      });
+    }
     const visible = ref(false);
     const filtered = computed(
       () =>
@@ -166,13 +189,11 @@ export default defineComponent<FilterDropdownProps<any>>({
 
     const triggerVisible = (newVisible: boolean) => {
       visible.value = newVisible;
-      props.column.onFilterDropdownVisibleChange?.(newVisible);
+      onFilterDropdownOpenChange.value?.(newVisible);
     };
 
     const mergedVisible = computed(() =>
-      typeof filterDropdownVisible.value === 'boolean'
-        ? filterDropdownVisible.value
-        : visible.value,
+      typeof filterDropdownOpen.value === 'boolean' ? filterDropdownOpen.value : visible.value,
     );
 
     const propFilteredKeys = computed(() => props.filterState?.filteredKeys);
@@ -234,14 +255,14 @@ export default defineComponent<FilterDropdownProps<any>>({
     });
 
     // ======================= Submit ========================
-    const internalTriggerFilter = (keys: Key[] | undefined | null) => {
+    const internalTriggerFilter = (keys?: Key[]) => {
       const { column, columnKey, filterState } = props;
       const mergedKeys = keys && keys.length ? keys : null;
       if (mergedKeys === null && (!filterState || !filterState.filteredKeys)) {
         return null;
       }
 
-      if (isEqual(mergedKeys, filterState?.filteredKeys)) {
+      if (isEqual(mergedKeys, filterState?.filteredKeys, true)) {
         return null;
       }
 
@@ -317,6 +338,13 @@ export default defineComponent<FilterDropdownProps<any>>({
         }
         return item;
       });
+
+    const getFilterData = (node: any): TreeColumnFilterItem => ({
+      ...node,
+      text: node.title,
+      value: node.key,
+      children: node.children?.map(item => getFilterData(item)) || [],
+    });
 
     const treeData = computed(() => getTreeData({ filters: props.column.filters }));
     // ======================== Style ========================
@@ -394,7 +422,12 @@ export default defineComponent<FilterDropdownProps<any>>({
                 // onExpand={onExpandChange}
                 filterTreeNode={
                   searchValue.value.trim()
-                    ? node => searchValueMatched(searchValue.value, node.title)
+                    ? node => {
+                        if (typeof filterSearch.value === 'function') {
+                          return filterSearch.value(searchValue.value, getFilterData(node));
+                        }
+                        return searchValueMatched(searchValue.value, node.title);
+                      }
                     : undefined
                 }
               />
@@ -443,6 +476,7 @@ export default defineComponent<FilterDropdownProps<any>>({
         return isEqual(
           (props.column.defaultFilteredValue || []).map(key => String(key)),
           selectedKeys,
+          true,
         );
       }
 
@@ -464,6 +498,9 @@ export default defineComponent<FilterDropdownProps<any>>({
           filters: column.filters,
           visible: mergedVisible.value,
           column: column.__originColumn__,
+          close: () => {
+            triggerVisible(false);
+          },
         });
       } else if (filterDropdownRef.value) {
         dropdownContent = filterDropdownRef.value;
@@ -512,8 +549,8 @@ export default defineComponent<FilterDropdownProps<any>>({
           <Dropdown
             overlay={menu}
             trigger={['click']}
-            visible={mergedVisible.value}
-            onVisibleChange={onVisibleChange}
+            open={mergedVisible.value}
+            onOpenChange={onVisibleChange}
             getPopupContainer={getPopupContainer}
             placement={direction.value === 'rtl' ? 'bottomLeft' : 'bottomRight'}
           >

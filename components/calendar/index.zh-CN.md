@@ -3,7 +3,7 @@ category: Components
 type: 数据展示
 title: Calendar
 subtitle: 日历
-cover: https://gw.alipayobjects.com/zos/antfincdn/dPQmLq08DI/Calendar.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*nF6_To7pDSAAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 按照日历形式展示数据的容器。

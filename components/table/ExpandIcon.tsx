@@ -32,6 +32,7 @@ function renderExpandIcon(locale: TableLocale) {
           [`${iconPrefix}-collapsed`]: expandable && !expanded,
         })}
         aria-label={expanded ? locale.collapse : locale.expand}
+        aria-expanded={expanded}
       />
     );
   };

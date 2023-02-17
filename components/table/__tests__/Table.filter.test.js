@@ -140,14 +140,14 @@ describe('Table.filter', () => {
     });
   });
   // TODO
-  xit('can be controlled by filterDropdownVisible', done => {
+  xit('can be controlled by filterDropdownOpen', done => {
     const wrapper = mount(
       Table,
       getTableOptions({
         columns: [
           {
             ...column,
-            filterDropdownVisible: true,
+            filterDropdownOpen: true,
           },
         ],
       }),
@@ -160,7 +160,7 @@ describe('Table.filter', () => {
       columns: [
         {
           ...column,
-          filterDropdownVisible: false,
+          filterDropdownOpen: false,
         },
       ],
     });
@@ -179,7 +179,7 @@ describe('Table.filter', () => {
         columns: [
           {
             ...column,
-            onFilterDropdownVisibleChange: handleChange,
+            onFilterDropdownOpenChange: handleChange,
           },
         ],
       }),

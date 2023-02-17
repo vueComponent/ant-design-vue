@@ -85,6 +85,7 @@ Specify `dataSource` of Table as an array of data.
 | expandedRowKeys(v-model) | Current expanded row keys | string\[] | - |  |
 | expandedRowRender | Expanded container render for each row | Function({record, index, indent, expanded}):VNode\|v-slot | - |  |
 | expandFixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean \| string | false | 3.0 |
+| expandColumnTitle | Set the title of the expand column | v-slot | - | 4.0.0 |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| v-slot:expandIcon="props" | - |  |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
 | footer | Table footer renderer | Function(currentPageData)\| v-slot:footer="currentPageData" |  |  |
@@ -93,7 +94,7 @@ Specify `dataSource` of Table as an array of data.
 | indentSize | Indent size in pixels of tree data | number | 15 |  |
 | loading | Loading status of table | boolean\|[object](/components/spin) | `false` |  |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br /> filterReset: 'Reset' <br /> emptyText: 'No Data' |  |
-| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object |  |  |
+| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object \| `false` |  |  |
 | rowClassName | Row's className | Function(record, index):string | - |  |
 | rowExpandable | Enable row can be expandable | (record) => boolean | - |  |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record, index):string | `key` |  |
@@ -102,7 +103,7 @@ Specify `dataSource` of Table as an array of data.
 | showExpandColumn | Show expand column | boolean | true | 3.0 |
 | showHeader | Whether to show table header | boolean | `true` |  |
 | showSorterTooltip | The header show next sorter direction tooltip. It will be set as the property of Tooltip if its type is object | boolean \| [Tooltip props](/components/tooltip/#API) | true | 3.0 |
-| size | Size of table | `default` \| `middle` \| `small` \| `large` | `default` |  |
+| size | Size of table | `middle` \| `small` \| `large` | `large` |  |
 | sortDirections | Supported sort way, could be `ascend`, `descend` | Array | \[`ascend`, `descend`] | 3.0 |
 | sticky | Set sticky header and scroll bar | boolean \| `{offsetHeader?: number, offsetScroll?: number, getContainer?: () => HTMLElement}` | - | 3.0 |
 | summary | Summary content | v-slot:summary | - | 3.0 |
@@ -162,7 +163,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | ellipsis | ellipsize cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is true. | boolean | false | 1.5.0 |
 | ellipsis | The ellipsis cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is `true` or `{ showTitle?: boolean }` | boolean \| {showTitle?: boolean } | false | 3.0 |
 | filterDropdown | Customized filter overlay | VNode \| (props: FilterDropdownProps) => VNode | - |  |
-| filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |  |
+| filterDropdownOpen | Whether `filterDropdown` is open | boolean | - | 4.0 |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |  |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |  |
 | filterIcon | Customized filter icon | ({filtered: boolean, column: Column}) | `false` |  |
@@ -176,13 +177,14 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | minWidth | Drag the minimum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | 50 | 3.0 |
 | resizable | Whether the width can be adjusted by dragging, at this time width must be number type | boolean | - | 3.0 |
 | responsive | The list of breakpoints at which to display this column. Always visible if not set. | [Breakpoint](#Breakpoint)\[] | - | 3.0 |
+| rowScope | Set scope attribute for all cells in this column | `row` \| `rowgroup` | - | 4.0 |
 | sortDirections | supported sort way, could be `'ascend'`, `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |  |
-| sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |  |
+| sortOrder | Order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
 | title | Title of this column | string | - |  |
 | width | Width of this column | string\|number | - |  |
 | onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |  |
-| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |  |
+| onFilterDropdownOpenChange | Callback executed when `filterDropdownOpen` is changed, Use as a `filterDropdownOpen` event when using template or jsx | function(open) {} | - | 4.0 |
 
 #### Breakpoint
 
@@ -274,12 +276,6 @@ return <Table rowKey="uid" />;
 // or
 return <Table rowKey={record => record.uid} />;
 ```
-
-## Migrate to v3
-
-Table deprecated `column.slots`, added `v-slot:bodyCell`, `v-slot:headerCell`, custom cells, and added `column.customFilterDropdown` `v-slot:customFilterDropdown`, custom filtering Menu, added `v-slot:customFilterIcon` custom filter button, but `column.slots` is still available, we will remove it in the next major version.
-
-Besides, the breaking change is changing `dataIndex` from nest string path like `user.age` to string array path like `['user', 'age']`. This help to resolve developer should additional work on the field which contains `.`.
 
 ## FAQ
 

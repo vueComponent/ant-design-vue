@@ -123,7 +123,7 @@ export default defineComponent({
         customFilterDropdown: true,
         onFilter: (value, record) =>
           record.name.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: visible => {
+        onFilterDropdownOpenChange: visible => {
           if (visible) {
             setTimeout(() => {
               searchInput.value.focus();
@@ -143,7 +143,7 @@ export default defineComponent({
         customFilterDropdown: true,
         onFilter: (value, record) =>
           record.address.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: visible => {
+        onFilterDropdownOpenChange: visible => {
           if (visible) {
             setTimeout(() => {
               searchInput.value.focus();

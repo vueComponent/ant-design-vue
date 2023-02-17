@@ -273,7 +273,13 @@ const TreeSelect = defineComponent({
           removeIcon={removeIcon}
           clearIcon={clearIcon}
           switcherIcon={(nodeProps: SwitcherIconProps) =>
-            renderSwitcherIcon(treePrefixCls.value, switcherIcon, treeLine, nodeProps)
+            renderSwitcherIcon(
+              treePrefixCls.value,
+              switcherIcon,
+              nodeProps,
+              slots.leafIcon,
+              treeLine,
+            )
           }
           showTreeIcon={treeIcon as any}
           notFoundContent={mergedNotFound}

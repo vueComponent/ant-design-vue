@@ -32,7 +32,6 @@ Custom indicator.
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import type { TourProps } from 'ant-design-vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
@@ -46,7 +45,7 @@ export default defineComponent({
 
     const visible = ref(false);
 
-    const steps: TourProps[] = [
+    const steps = [
       {
         title: 'Upload File',
         description: 'Put your files here',

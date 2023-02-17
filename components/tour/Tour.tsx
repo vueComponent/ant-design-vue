@@ -15,7 +15,12 @@ export default defineComponent({
   name: 'ATour',
   inheritAttrs: false,
   props: initDefaultProps(TourProps(), {}),
-  setup() {
-    return () => <TourMask />;
+  setup(props) {
+    return () => {
+      const { visible } = props;
+      // const { prefixCls } = useConfigInject('tour', props);
+
+      return <TourMask visible={visible} />;
+    };
   },
 });

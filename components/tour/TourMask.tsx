@@ -2,6 +2,7 @@ import { defineComponent } from 'vue';
 import useId from '../vc-select/hooks/useId';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Portal from '../_util/PortalWrapper';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 const COVER_PROPS = {
   fill: 'transparent',
@@ -24,21 +25,14 @@ export default defineComponent({
   props: initDefaultProps(TourMask(), {}),
   setup(props) {
     return () => {
-      const {
-        prefixCls,
-        visible,
-        showMask,
-        style = {},
-        pos,
-        animated,
-        fill = 'rgba(0,0,0,0.5)',
-      } = props;
+      const { prefixCls } = useConfigInject('tour', props);
+      const { visible, showMask, style = {}, pos, animated, fill = 'rgba(0,0,0,0.5)' } = props;
       const id = useId();
-      const maskId = `${prefixCls}-mask-${id}`;
-      return () => (
+      const maskId = `${prefixCls.value}-mask-${id}`;
+      return (
         <Portal visible={visible}>
           <div
-            class={`${prefixCls}-mask`}
+            class={`${prefixCls.value}-mask`}
             style={{
               position: 'fixed',
               left: 0,
@@ -68,7 +62,7 @@ export default defineComponent({
                         width={pos.width}
                         height={pos.height}
                         fill="black"
-                        class={animated ? `${prefixCls}-placeholder-animated` : ''}
+                        class={animated ? `${prefixCls.value}-placeholder-animated` : ''}
                       />
                     )}
                   </mask>

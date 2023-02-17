@@ -1,4 +1,4 @@
-import type { ComputedRef } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
 export interface Gap {
@@ -22,18 +22,19 @@ const isInViewPort = (element: HTMLElement) => {
 };
 
 export default function useTarget(
-  target: HTMLElement,
+  target: Ref<any>,
   gap?: Gap,
   scrollIntoViewOptions?: boolean | ScrollIntoViewOptions,
-): ComputedRef<PosInfo> {
+): [ComputedRef<PosInfo>] {
   const posInfo = ref<PosInfo | null>(null);
 
   const updatePos = () => {
-    if (target) {
-      if (!isInViewPort(target)) {
-        target.scrollIntoView(scrollIntoViewOptions);
+    if (target.value) {
+      if (!isInViewPort(target.value.$el.nextElementSibling)) {
+        target.value.$el.nextElementSibling.scrollIntoView(scrollIntoViewOptions);
       }
-      const { left, top, width, height } = target.getBoundingClientRect();
+      const { left, top, width, height } =
+        target.value.$el.nextElementSibling.getBoundingClientRect();
       posInfo.value = { left, top, width, height, radius: 0 };
     } else {
       posInfo.value = null;
@@ -66,5 +67,5 @@ export default function useTarget(
     };
   });
 
-  return mergedPosInfo;
+  return [mergedPosInfo];
 }

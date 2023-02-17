@@ -19,9 +19,9 @@ The most basic usage.
   <a-button @click="visible = true">Begin Tour</a-button>
   <a-divider />
   <a-space>
-    <a-button :ref="ref1">Upload</a-button>
-    <a-button :ref="ref2" type="primary">Save</a-button>
-    <a-button :ref="ref3">
+    <a-button ref="ref1">Upload</a-button>
+    <a-button ref="ref2" type="primary">Save</a-button>
+    <a-button ref="ref3">
       <template #icon>
         <EllipsisOutlined />
       </template>
@@ -39,9 +39,9 @@ export default defineComponent({
     EllipsisOutlined,
   },
   setup() {
-    const ref1 = ref(null);
-    const ref2 = ref(null);
-    const ref3 = ref(null);
+    const ref1 = ref();
+    const ref2 = ref();
+    const ref3 = ref();
 
     const visible = ref(false);
 
@@ -49,17 +49,17 @@ export default defineComponent({
       {
         title: 'Upload File',
         description: 'Put your files here',
-        target: () => ref1,
+        target: ref1,
       },
       {
         title: 'Save',
         description: 'Save your changes.',
-        target: () => ref2,
+        target: ref2,
       },
       {
         title: 'Other Actions',
         description: 'Click to see other actions.',
-        target: () => ref3,
+        target: ref3,
       },
     ];
     return {

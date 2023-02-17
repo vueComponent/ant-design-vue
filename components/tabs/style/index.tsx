@@ -47,7 +47,6 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
         display: 'flex',
         flex: 'none',
         alignItems: 'center',
-        // color:'#fff',
         [`${componentCls}-nav-wrap`]: {
           position: 'relative',
           display: 'flex',

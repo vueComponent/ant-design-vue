@@ -205,6 +205,7 @@ const InteralTable = defineComponent<
     'headerCell',
     'customFilterIcon',
     'customFilterDropdown',
+    'expandColumnTitle',
   ],
   setup(props, { attrs, slots, expose, emit }) {
     devWarning(

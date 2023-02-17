@@ -3,7 +3,7 @@ category: Components
 type: 数据录入
 title: TimePicker
 subtitle: 时间选择框
-cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*kGmGSLk_1fwAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 输入或选择时间的控件。

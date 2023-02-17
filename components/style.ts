@@ -31,7 +31,7 @@ import './cascader/style';
 // import './back-top/style';
 // import './modal/style';
 // import './alert/style';
-import './time-picker/style';
+// import './time-picker/style';
 // import './steps/style';
 // import './breadcrumb/style';
 // import './calendar/style';

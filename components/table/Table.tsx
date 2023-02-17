@@ -205,6 +205,7 @@ const InteralTable = defineComponent<
     'headerCell',
     'customFilterIcon',
     'customFilterDropdown',
+    'expandColumnTitle',
   ],
   setup(props, { attrs, slots, expose, emit }) {
     devWarning(
@@ -383,9 +384,19 @@ const InteralTable = defineComponent<
 
     const [transformBasicColumns] = useColumns(toRef(props, 'contextSlots'));
 
-    const columnTitleProps = computed(() => ({
-      ...sorterTitleProps.value,
-    }));
+    const columnTitleProps = computed(() => {
+      const mergedFilters: Record<string, FilterValue> = {};
+      const filtersValue = filters.value;
+      Object.keys(filtersValue).forEach(filterKey => {
+        if (filtersValue[filterKey] !== null) {
+          mergedFilters[filterKey] = filtersValue[filterKey]!;
+        }
+      });
+      return {
+        ...sorterTitleProps.value,
+        filters: mergedFilters,
+      };
+    });
     const [transformTitleColumns] = useTitleColumns(columnTitleProps);
 
     // ========================== Pagination ==========================
@@ -413,7 +424,7 @@ const InteralTable = defineComponent<
       changeEventInfo.pagination =
         props.pagination === false
           ? {}
-          : getPaginationParam(props.pagination, mergedPagination.value);
+          : getPaginationParam(mergedPagination.value, props.pagination);
 
       changeEventInfo.resetPagination = resetPagination;
     });
@@ -556,8 +567,8 @@ const InteralTable = defineComponent<
         const defaultPosition = direction.value === 'rtl' ? 'left' : 'right';
         const { position } = mergedPagination.value;
         if (position !== null && Array.isArray(position)) {
-          const topPos = position.find(p => p.indexOf('top') !== -1);
-          const bottomPos = position.find(p => p.indexOf('bottom') !== -1);
+          const topPos = position.find(p => p.includes('top'));
+          const bottomPos = position.find(p => p.includes('bottom'));
           const isDisable = position.every(p => `${p}` === 'none');
           if (!topPos && !bottomPos && !isDisable) {
             bottomPaginationNode = renderPagination(defaultPosition);

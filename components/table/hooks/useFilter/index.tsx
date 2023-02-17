@@ -74,9 +74,9 @@ function injectFilter<RecordType>(
   dropdownPrefixCls: string,
   columns: ColumnsType<RecordType>,
   filterStates: FilterState<RecordType>[],
-  triggerFilter: (filterState: FilterState<RecordType>) => void,
-  getPopupContainer: GetPopupContainer | undefined,
   locale: TableLocale,
+  triggerFilter: (filterState: FilterState<RecordType>) => void,
+  getPopupContainer?: GetPopupContainer | undefined,
   pos?: string,
 ): ColumnsType<RecordType> {
   return columns.map((column, index) => {
@@ -121,9 +121,9 @@ function injectFilter<RecordType>(
           dropdownPrefixCls,
           newColumn.children,
           filterStates,
+          locale,
           triggerFilter,
           getPopupContainer,
-          locale,
           columnPos,
         ),
       };
@@ -217,7 +217,9 @@ function useFilter<RecordType>({
 
   const mergedFilterStates = computed(() => {
     const collectedStates = collectFilterStates(mergedColumns.value, false);
-
+    if (collectedStates.length === 0) {
+      return collectedStates;
+    }
     let filteredKeysIsAllNotControlled = true;
     let filteredKeysIsAllControlled = true;
     collectedStates.forEach(({ filteredKeys }) => {
@@ -230,7 +232,23 @@ function useFilter<RecordType>({
 
     // Return if not controlled
     if (filteredKeysIsAllNotControlled) {
-      return filterStates.value;
+      // Filter column may have been removed
+      const keyList = (mergedColumns.value || []).map((column, index) =>
+        getColumnKey(column, getColumnPos(index)),
+      );
+      return filterStates.value
+        .filter(({ key }) => keyList.includes(key))
+        .map(item => {
+          const col = mergedColumns.value[keyList.findIndex(key => key === item.key)];
+          return {
+            ...item,
+            column: {
+              ...item.column,
+              ...col,
+            },
+            forceFiltered: col.filtered,
+          };
+        });
     }
 
     devWarning(
@@ -257,9 +275,9 @@ function useFilter<RecordType>({
       dropdownPrefixCls.value,
       innerColumns,
       mergedFilterStates.value,
+      locale.value,
       triggerFilter,
       getPopupContainer.value,
-      locale.value,
     );
   };
   return [transformColumns, mergedFilterStates, filters];

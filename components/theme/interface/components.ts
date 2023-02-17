@@ -38,7 +38,7 @@ import type { ComponentToken as SpaceComponentToken } from '../../space/style';
 import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 import type { ComponentToken as StepsComponentToken } from '../../steps/style';
 import type { ComponentToken as TableComponentToken } from '../../table/style';
-// import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
+import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
 import type { ComponentToken as TagComponentToken } from '../../tag/style';
 import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
 import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
@@ -101,7 +101,7 @@ export interface ComponentTokenMap {
   Typography?: TypographyComponentToken;
   Timeline?: TimelineComponentToken;
   Transfer?: TransferComponentToken;
-  //   Tabs?: TabsComponentToken;
+  Tabs?: TabsComponentToken;
   Calendar?: CalendarComponentToken;
   Steps?: StepsComponentToken;
   Menu?: MenuComponentToken;

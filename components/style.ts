@@ -42,7 +42,7 @@ import './cascader/style';
 // import './timeline/style';
 // import './input-number/style';
 // import './transfer/style';
-import './tree/style';
+// import './tree/style';
 // import './upload/style';
 // import './layout/style';
 // import './anchor/style';

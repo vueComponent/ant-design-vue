@@ -44,11 +44,9 @@ function getGlobalIconPrefixCls() {
   return globalConfigForApi.iconPrefixCls || defaultIconPrefixCls;
 }
 const globalConfigBySet = reactive<ConfigProviderProps>({}); // 权重最大
-export const globalConfigForApi = reactive<
-  ConfigProviderProps & {
-    getRootPrefixCls?: (rootPrefixCls?: string, customizePrefixCls?: string) => string;
-  }
->({});
+export const globalConfigForApi: ConfigProviderProps & {
+  getRootPrefixCls?: (rootPrefixCls?: string, customizePrefixCls?: string) => string;
+} = reactive({});
 
 export const configConsumerProps = [
   'getTargetContainer',

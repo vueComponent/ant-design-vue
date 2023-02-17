@@ -35,7 +35,7 @@ const iconMapOutlined = {
 
 const AlertTypes = tuple('success', 'info', 'warning', 'error');
 
-export type AlertType = typeof AlertTypes[number];
+export type AlertType = (typeof AlertTypes)[number];
 
 export const alertProps = () => ({
   /**

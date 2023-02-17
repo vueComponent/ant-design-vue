@@ -96,9 +96,9 @@ const Skeleton = defineComponent({
       const { loading, avatar, title, paragraph, active, round } = props;
       const pre = prefixCls.value;
       if (loading || props.loading === undefined) {
-        const hasAvatar = !!avatar || avatar === '';
-        const hasTitle = !!title || title === '';
-        const hasParagraph = !!paragraph || paragraph === '';
+        const hasAvatar = !!avatar || (avatar as string) === '';
+        const hasTitle = !!title || (title as string) === '';
+        const hasParagraph = !!paragraph || (paragraph as string) === '';
 
         // Avatar
         let avatarNode;

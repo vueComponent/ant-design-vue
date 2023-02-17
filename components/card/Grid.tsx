@@ -10,7 +10,6 @@ export type CardGridProps = Partial<ExtractPropTypes<ReturnType<typeof cardGridP
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ACardGrid',
-  inheritAttrs: false,
   __ANT_CARD_GRID: true,
   props: cardGridProps(),
   setup(props, { slots }) {
@@ -22,8 +21,7 @@ export default defineComponent({
       };
     });
     return () => {
-      return <div class={[classNames.value]}>{slots.default?.()}</div>;
+      return <div class={classNames.value}>{slots.default?.()}</div>;
     };
-    // return wrapSSR(<div class={[classNames.value, hashId.value]}>{slots.default?.()}</div>);
   },
 });

@@ -99,7 +99,6 @@ const Card = defineComponent({
       } = props;
       const children = flattenChildren(slots.default?.());
       const pre = prefixCls.value;
-      // console.log('pre', pre);
       const classString = {
         [`${pre}`]: true,
         [hashId.value]: true,
@@ -181,7 +180,5 @@ const Card = defineComponent({
     };
   },
 });
-{
-  /* <div class={classString} ref="cardContainerRef"> */
-}
+
 export default Card;

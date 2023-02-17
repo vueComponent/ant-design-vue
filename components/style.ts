@@ -34,11 +34,10 @@ import './cascader/style';
 import './time-picker/style';
 // import './steps/style';
 // import './breadcrumb/style';
-import './calendar/style';
+// import './calendar/style';
 // import './date-picker/style';
 // import './slider/style';
 // import './table/style';
-
 // import './progress/style';
 // import './timeline/style';
 // import './input-number/style';

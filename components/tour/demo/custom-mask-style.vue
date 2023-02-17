@@ -1,18 +1,18 @@
 <docs>
 ---
-order: 0
+order: 3
 title:
-zh-CN: 基本
-en-US: Basic
+zh-CN: 自定义遮罩样式
+en-US: custom mask style
 ---
 
 ## zh-CN
 
-最简单的用法。
+自定义遮罩样式。
 
 ## en-US
 
-The most basic usage.
+custom mask style.
 </docs>
 
 <template>

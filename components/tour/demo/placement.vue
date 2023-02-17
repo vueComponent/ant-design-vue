@@ -1,18 +1,18 @@
 <docs>
 ---
-order: 0
+order: 2
 title:
-zh-CN: 基本
-en-US: Basic
+zh-CN: 位置
+en-US: Placement
 ---
 
 ## zh-CN
 
-最简单的用法。
+改变引导相对于目标的位置，共有 12 种位置可供选择。当 `target={null}` 时引导将会展示在正中央。
 
 ## en-US
 
-The most basic usage.
+Change the placement of the guide relative to the target, there are 12 placements available. When `target={null}` the guide will show in the center.
 </docs>
 
 <template>

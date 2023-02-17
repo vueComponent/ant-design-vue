@@ -1,18 +1,18 @@
 <docs>
 ---
-order: 0
+order: 1
 title:
-zh-CN: 基本
-en-US: Basic
+zh-CN: 非模态
+en-US: Non-modal
 ---
 
 ## zh-CN
 
-最简单的用法。
+使用 `mask={false}` 可以将引导变为非模态，同时为了强调引导本身，建议与 `type="primary"` 组合使用。
 
 ## en-US
 
-The most basic usage.
+Use `mask={false}` to make Tour non-modal. At the meantime it is recommended to use with `type="primary"` to emphasize the guide itself.
 </docs>
 
 <template>

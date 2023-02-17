@@ -1,18 +1,18 @@
 <docs>
 ---
-order: 0
+order: 4
 title:
-zh-CN: 基本
-en-US: Basic
+zh-CN: 自定义指示器
+en-US: custom indicator
 ---
 
 ## zh-CN
 
-最简单的用法。
+自定义指示器。
 
 ## en-US
 
-The most basic usage.
+Custom indicator.
 </docs>
 
 <template>

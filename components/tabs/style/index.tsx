@@ -6,36 +6,48 @@ import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent, clearFix } from '../../_style';
 import Token from 'markdown-it/lib/token';
 import { genTabsPositionStyle } from './position';
+import { genTabsSizeStyle } from './size';
+import { genRtlStyle } from './rtl';
+import { genTabsDropdownStyle } from './dropdown';
+import { genTabscardStyle } from './card';
+import {tabsCardStyle } from './card'
 
 /** Component only token. Which will handle additional calculation of alias token */
 export interface ComponentToken {}
 interface tabsToken extends FullToken<'Tabs'> {
   tabsCardHeight: string;
   tabsCardGutter: string;
-  a: number;
+  tabsHorizontalMarginRtl: string;
 }
 // ============================== Shared ==============================
 
 export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
   const { componentCls } = token;
 
-  return {
-    [`componentCls-yang`]: {
-      // ...genTabsPositionStyle(token),
-    },
+  return  {
     [componentCls]: {
+      ...genTabsSizeStyle(token),
+      ...genTabsPositionStyle(token),
       ...resetComponent(token),
       display: 'flex',
-      ...genTabsPositionStyle(token),
-
       // ========================== Navigation ==========================
-      [`> ${componentCls}-nav,
-        > div > ${componentCls}-nav`]: {
+      [`&-card`]: {
+        ...genTabscardStyle(token),
+      },
+      [`&-rtl`]: {
+        ...genRtlStyle(token),
+      },
+      
+      [`&-dropdown`]: {
+        ...genTabsDropdownStyle(token),
+      },
+      [`${componentCls}-nav,
+         div > ${componentCls}-nav`]: {
         position: 'relative',
         display: 'flex',
         flex: 'none',
         alignItems: 'center',
-
+        // color:'#fff',
         [`${componentCls}-nav-wrap`]: {
           position: 'relative',
           display: 'flex',
@@ -44,9 +56,8 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           transform: 'translate(0)', // Fix chrome render bug
-
           // >>>>> Ping shadow
-          [` &::before,
+          [`&::before ,
             &::after `]: {
             position: 'absolute',
             zIndex: 1,
@@ -57,18 +68,17 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
           },
         },
 
-        [`  ${componentCls}-nav-list`]: {
+        [`${componentCls}-nav-list`]: {
           position: 'relative',
           display: 'flex',
           transition: `transform  ${token.motionDurationSlow}`,
         },
 
         // >>>>>>>> Operations
-        [`${componentCls}-nav-operations `]: {
+        [`${componentCls}-nav-operations`]: {
           display: 'flex',
           alignSelf: 'stretch',
-
-          [`  &-hidden `]: {
+          [`&-hidden`]: {
             position: 'absolute',
             visibility: 'hidden',
             pointerEvents: 'none',
@@ -77,11 +87,10 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
 
         [`${componentCls}-nav-more`]: {
           position: 'relative',
-          padding: '@tabs-card-horizontal-padding',
+          padding: `${token.paddingXS}px ${token.padding}px`,
           background: 'transparent',
           border: 0,
-
-          [` &::after`]: {
+          [`&::after`]: {
             position: 'absolute',
             right: 0,
             bottom: 0,
@@ -91,20 +100,18 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
             content: '""',
           },
         },
-
         [`${componentCls}-nav-add`]: {
           minWidth: `${token.tabsCardHeight}`,
           marginLeft: `${token.tabsCardGutter}`,
-          padding: `0 ${token.paddingXS} `,
-          //   background: `${token.PageHeader}`  @tabs-card-head-background,
-          border: `${token.lineWidth} ${token.borderRadius} ${token.colorSplit} `,
+          padding: `0 ${token.paddingXS}px `,
+          background: `${token.colorFillAlter}`,
+          border: `${token.lineWidth}px ${token.colorBorder}   ${token.lineType} `,
           borderRadius: ` ${token.borderRadius}e ${token.borderRadius} 0 0`,
           outline: 'none',
           cursor: 'pointer',
           transition: `all ${token.motionDurationSlow} ${token.motionEaseInOut} `,
-
           [` &:hover `]: {
-            color: ' @tabs-hover-color',
+            color: `${token.colorPrimaryActive}`,
           },
 
           [` &:active,
@@ -114,15 +121,14 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
         },
       },
 
-      [` &-extra-content `]: {
+      [`${componentCls}-extra-content `]: {
         flex: 'none',
       },
-
-      ' &-centered': {
-        [`  > ${componentCls}-nav,
-          > div > ${componentCls}-nav`]: {
-          [` ${componentCls}-nav-wrap `]: {
-            [`  &:not([class*='@:{tab-prefix-cls}-nav-wrap-ping']) `]: {
+      [`&-centered`]: {
+        [`${componentCls}-nav,
+           div > ${componentCls}-nav`]: {
+          [`${componentCls}-nav-wrap`]: {
+            [`&:not([class*='@:${componentCls}-nav-wrap-ping'])`]: {
               justifyContent: 'center',
             },
           },
@@ -130,26 +136,25 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
       },
 
       // ============================ InkBar ============================
-      [`&-ink-bar`]: {
+      [`${componentCls}-ink-bar`]: {
         position: 'absolute',
         background: `${token.colorPrimary}`,
         pointerEvents: 'none',
       },
 
       // ============================= Tabs =============================
-      [`&-tab `]: {
+      [`${componentCls}-tab `]: {
         position: 'relative',
         display: 'inline-flex',
         alignItems: 'center',
-        padding: `${token.padding}`,
-        fontSize: `${token.fontSize}`,
-
+        padding: `${token.paddingSM}px 0`,
+        fontSize: `${token.fontSize}px`,
         background: 'transparent',
         border: 0,
         outline: 'none',
         cursor: 'pointer',
 
-        [` &-btn,
+        [`&-btn,
           &-remove`]: {
           [` &:focus,
             &:active `]: {
@@ -162,12 +167,12 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
           transition: `all 0.3s`,
         },
 
-        [` &-remove `]: {
+        [`&-remove `]: {
           flex: 'none',
-          marginRight: `${token.marginXXS}`,
-          marginLeft: `${token.marginXS}`,
+          marginRight: `-${token.marginXXS}px`,
+          marginLeft: `${tabsCardStyle.tabsCardGutter}`,
           color: `${token.colorTextSecondary} `,
-          fontSize: `@font-size-sm ${token.fontSizeSM}`,
+          fontSize: ` ${token.fontSizeSM}px`,
           background: 'transparent',
           border: 'none',
           outline: 'none',
@@ -180,64 +185,63 @@ export const genTabsSmallStyle = (token: tabsToken): CSSObject => {
         },
 
         [` &:hover `]: {
-          color: `@tabs-hover-color`,
+          color: `${token.colorLinkHover}`,
         },
 
-        [` &&-active &-btn `]: {
-          color: '@tabs-highlight-color',
+        [`${componentCls}-active &-btn `]: {
+          color: `${token.colorHighlight}`,
           textShadow: '0 0 0.25px currentcolor',
         },
 
-        [` &&-disabled`]: {
+        [`&-disabled `]: {
           color: `${token.colorTextDisabled}`,
           cursor: 'not-allowed',
         },
 
-        [`&&-disabled &-btn,
-          &&-disabled &-remove`]: {
+        [`&-disabled &-btn,
+          &-disabled &-remove`]: {
           [` &:focus,
             &:active `]: {
             color: `${token.colorTextDisabled}`,
           },
         },
 
-        [` & &-remove .@:{iconfont-css-prefix} `]: {
+        [` &-remove ${token.iconCls}`]: {
           margin: 0,
         },
 
-        [` .@:{iconfont-css-prefix} `]: {
-          marginRight: `${token.marginSM}`,
+        [` ${token.iconCls} `]: {
+          marginRight: `${token.marginSM}px`,
         },
       },
 
-      [` &-tab + &-tab `]: {
-        // @tabs-horizontal-margin
-        margin: `${token.margin} `,
+      [`${componentCls}-tab + ${componentCls}-tab `]: {
+        margin: `${token.tabsHorizontalMarginRtl}`,
       },
 
       // =========================== TabPanes ===========================
-      [` &-content `]: {
-        [` &-holder`]: {
+      [`${componentCls}-content`]: {
+        [`&-holder`]: {
           flex: 'auto',
           minWidth: 0,
           minHeight: 0,
+          
         },
-
         display: 'flex',
         width: '100%',
-
-        [` &-animated`]: {
+        [`${componentCls}-animated`]: {
           transition: `margin ${token.motionDurationSlow}`,
         },
       },
 
-      [` &-tabpane `]: {
+      [` ${componentCls}-tabpane `]: {
         flex: 'none',
         width: ' 100%',
         outline: 'none',
       },
     },
   };
+
 };
 
 // ============================== Export ==============================
@@ -247,7 +251,7 @@ export default genComponentStyleHook(
     const tabsToken = mergeToken<tabsToken>(token, {
       tabsCardHeight: '40px',
       tabsCardGutter: '5px',
-      a: 1,
+      tabsHorizontalMarginRtl: '0 0 0 32px',
     });
     return [genTabsSmallStyle(tabsToken)];
   },

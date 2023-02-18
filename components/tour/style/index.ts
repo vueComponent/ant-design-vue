@@ -1,5 +1,5 @@
 import { FullToken, genComponentStyleHook, GenerateStyle, mergeToken } from '../../theme/internal';
-import { CSSObject } from '../../_util/cssinjs';
+import type { CSSObject } from '../../_util/cssinjs';
 import genTourStyle from './tour';
 
 export interface ComponentToken {}
@@ -11,8 +11,8 @@ export interface TourToken extends FullToken<'Tour'> {
 const getTourStyle: GenerateStyle<TourToken> = (token: TourToken): CSSObject => {
   const { componentCls } = token;
   return {
+    ...genTourStyle(token),
     [componentCls]: {
-      ...genTourStyle(token),
       [`${componentCls}-mask`]: {
         [`${componentCls}-placeholder-animated`]: {
           transition: 'all 0.15s',

@@ -5,6 +5,7 @@ import useTarget from './useTarget';
 import TourStep from './TourStep';
 import Trigger from '../vc-trigger';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useStyle from './style';
 
 export const TourProps = () => ({
   prefixCls: String,
@@ -31,13 +32,16 @@ export default defineComponent({
       const { visible } = props;
       const { prefixCls } = useConfigInject('tour', props);
       // current, total, title, description, arrow
-      return (
+
+      // style
+      const [wrapSSR] = useStyle(prefixCls);
+      return wrapSSR(
         <>
           <Trigger prefixCls={prefixCls.value} popupVisible={visible}>
             <TourStep current={1} total={3} title={'1111'} description={'22222'} arrow={true} />
           </Trigger>
           <TourMask visible={visible} showMask={true} pos={posInfo.value} />
-        </>
+        </>,
       );
     };
   },

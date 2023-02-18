@@ -9,7 +9,7 @@ import { nextTick, Transition, TransitionGroup } from 'vue';
 import { tuple } from './type';
 
 const SelectPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
-export type SelectCommonPlacement = typeof SelectPlacements[number];
+export type SelectCommonPlacement = (typeof SelectPlacements)[number];
 
 const getTransitionDirection = (placement: SelectCommonPlacement | undefined) => {
   if (placement !== undefined && (placement === 'topLeft' || placement === 'topRight')) {

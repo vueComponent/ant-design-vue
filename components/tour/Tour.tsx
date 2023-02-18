@@ -1,12 +1,14 @@
-import { computed, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import TourMask from './TourMask';
 import useTarget from './useTarget';
+import TourStep from './TourStep';
+import Trigger from '../vc-trigger';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 export const TourProps = () => ({
   prefixCls: String,
   visible: Boolean,
-  defaultCurrent: Number,
   current: Number,
   steps: Array,
   gap: Number,
@@ -19,25 +21,24 @@ export default defineComponent({
   inheritAttrs: false,
   props: initDefaultProps(TourProps(), {}),
   setup(props) {
-    const mergedCurrent = computed(() => {
-      if (props.current) {
-        return props.current;
-      } else {
-        return props.defaultCurrent || 1;
-      }
-    });
     // @ts-ignore
     const [posInfo] = useTarget(
-      props.steps[mergedCurrent.value].target,
+      props.steps[0].target,
       props.gap,
-      props.steps[mergedCurrent.value].stepScrollIntoViewOptions ?? props.scrollIntoViewOptions,
+      props.steps[0].stepScrollIntoViewOptions ?? props.scrollIntoViewOptions,
     );
-    // console.log(posInfo, 'posInfo');
     return () => {
       const { visible } = props;
-      // const { prefixCls } = useConfigInject('tour', props);
-
-      return <TourMask visible={visible} showMask={true} pos={posInfo.value} />;
+      const { prefixCls } = useConfigInject('tour', props);
+      // current, total, title, description, arrow
+      return (
+        <>
+          <Trigger prefixCls={prefixCls.value} popupVisible={visible}>
+            <TourStep current={1} total={3} title={'1111'} description={'22222'} arrow={true} />
+          </Trigger>
+          <TourMask visible={visible} showMask={true} pos={posInfo.value} />
+        </>
+      );
     };
   },
 });

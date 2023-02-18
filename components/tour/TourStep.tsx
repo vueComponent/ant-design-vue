@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 
 export const TourStepProps = () => ({
@@ -17,7 +18,8 @@ export default defineComponent({
   props: initDefaultProps(TourStepProps(), {}),
   setup(props, { emit }) {
     return () => {
-      const { prefixCls, current, total, title, description, arrow } = props;
+      const { current, total, title, description, arrow } = props;
+      const { prefixCls } = useConfigInject('tour', props);
       return (
         <div class={`${prefixCls}-content`}>
           {arrow && <div class={`${prefixCls}-arrow`} key="arrow" />}
@@ -44,18 +46,18 @@ export default defineComponent({
               </div>
               <div class={`${prefixCls}-buttons`}>
                 {current !== 0 ? (
-                  <button class={`${prefixCls}-prev-btn`} onClick={() => emit('prev')}>
+                  <a-button class={`${prefixCls}-prev-btn`} onClick={() => emit('prev')}>
                     Prev
-                  </button>
+                  </a-button>
                 ) : null}
                 {current === total - 1 ? (
-                  <button class={`${prefixCls}-finish-btn`} onClick={() => emit('finish')}>
+                  <a-button class={`${prefixCls}-finish-btn`} onClick={() => emit('finish')}>
                     Finish
-                  </button>
+                  </a-button>
                 ) : (
-                  <button class={`${prefixCls}-next-btn`} onClick={() => emit('next')}>
+                  <a-button class={`${prefixCls}-next-btn`} onClick={() => emit('next')}>
                     Next
-                  </button>
+                  </a-button>
                 )}
               </div>
             </div>

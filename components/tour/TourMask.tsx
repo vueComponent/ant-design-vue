@@ -1,9 +1,9 @@
 import { defineComponent } from 'vue';
 import type { ExtractPropTypes } from 'vue';
-import useId from '../vc-select/hooks/useId';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Portal from '../_util/PortalWrapper';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useStyle from './style';
 
 const COVER_PROPS = {
   fill: 'transparent',
@@ -30,8 +30,8 @@ export default defineComponent({
     return () => {
       const { prefixCls } = useConfigInject('tour', props);
       const { visible, showMask, style = {}, pos, animated, fill = 'rgba(0,0,0,0.5)' } = props;
-      const id = useId();
-      const maskId = `${prefixCls.value}-mask-${id}`;
+      const [hashId] = useStyle(prefixCls);
+      const maskId = `${prefixCls.value}-mask-${hashId}`;
       return (
         <Portal visible={visible}>
           <div

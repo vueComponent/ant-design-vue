@@ -1,4 +1,4 @@
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import type { TourStepProps } from './TourStep';
 
 export interface Gap {
@@ -24,8 +24,8 @@ const isInViewPort = (element: HTMLElement) => {
 export default function useTarget(
   target: TourStepProps['target'],
   gap?: Gap,
-  scrollIntoViewOptions?: boolean | ScrollIntoViewOptions,
-): [PosInfo, HTMLElement] {
+  scrollIntoViewOptions?: boolean,
+) {
   const targetElement = ref<null | HTMLElement | undefined>();
   onMounted(() => {
     targetElement.value = typeof target === 'function' ? (target as any)() : target;
@@ -51,8 +51,7 @@ export default function useTarget(
     updatePos();
     window.addEventListener('resize', updatePos);
   });
-
-  onBeforeUnmount(() => {
+  onUnmounted(() => {
     window.removeEventListener('resize', updatePos);
   });
 
@@ -73,5 +72,5 @@ export default function useTarget(
     };
   });
 
-  return [mergedPosInfo.value, targetElement.value];
+  return { mergedPosInfo, targetElement };
 }

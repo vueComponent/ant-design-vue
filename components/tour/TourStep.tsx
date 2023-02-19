@@ -5,25 +5,18 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useStyle from './style';
 
-type Arrow = boolean | { pointAtCenter: boolean };
 type Target = HTMLElement | (() => HTMLElement) | null | (() => null);
-type Mask =
-  | boolean
-  | {
-      style?: CSSProperties;
-      // to fill mask color, e.g. rgba(80,0,0,0.5)
-      color?: string;
-    };
+
 const tourStepInfo = () => ({
-  arrow: { type: Object as PropType<Arrow> },
+  arrow: { type: Boolean },
   target: { type: Object as PropType<Target> },
   title: { type: Object as PropType<VNode> },
   description: { type: Object as PropType<VNode> },
   placement: { type: Object as PropType<PlacementType> },
-  mask: { type: Object as PropType<Mask> },
+  mask: { type: Boolean },
   class: String,
   style: { type: Object as PropType<CSSProperties> },
-  scrollIntoViewOptions: { type: Object as PropType<boolean | ScrollIntoViewOptions> },
+  scrollIntoViewOptions: { type: Boolean },
 });
 
 export const tourStepProps = () => ({

@@ -16,7 +16,7 @@ The most basic usage.
 </docs>
 
 <template>
-  <a-button @click="visible = true">Begin Tour</a-button>
+  <a-button @click="visible = !visible">Begin Tour</a-button>
   <a-divider />
   <a-space>
     <a-button ref="ref1">Upload</a-button>
@@ -27,7 +27,7 @@ The most basic usage.
       </template>
     </a-button>
   </a-space>
-  <a-tour v-model:visible="visible" :steps="steps" />
+  <a-tour v-model:visible="visible" :steps="steps" :current="0" />
 </template>
 
 <script lang="ts">

@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, toRefs } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import type { ExtractPropTypes, PropType, VNode, CSSProperties } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useTarget from './useTarget';
@@ -36,11 +36,11 @@ export const tourProps = () => ({
   visible: Boolean,
   current: Number,
   mask: {
-    type: Object as PropType<TourStepProps['mask']>,
+    type: Boolean,
     default: true,
   },
   arrow: {
-    type: Object as PropType<TourStepProps['arrow']>,
+    type: Boolean,
     default: true,
   },
   rootClassName: String,
@@ -52,7 +52,7 @@ export const tourProps = () => ({
   gap: { type: String as PropType<Gap> },
   animated: { type: Object as PropType<boolean | { placeholder: boolean }> },
   scrollIntoViewOptions: {
-    type: Object as PropType<TourStepProps['scrollIntoViewOptions']>,
+    type: Boolean,
     default: true,
   },
 });
@@ -66,45 +66,21 @@ export default defineComponent({
   props: initDefaultProps(tourProps(), {}),
   emits: ['update:visible', 'change', 'close'],
   setup(props: TourProps, { emit }) {
-    const {
-      visible,
-      steps,
-      current,
-      mask,
-      arrow,
-      placement,
-      gap,
-      scrollIntoViewOptions,
-      rootClassName,
-    } = toRefs(props);
-
-    const mergedCurrent = ref(current.value || 0);
+    const mergedCurrent = ref(props.current || 0);
     const mergedOpen = computed(() =>
-      mergedCurrent.value < 0 || mergedCurrent.value >= steps.value.length
+      mergedCurrent.value < 0 || mergedCurrent.value >= props.steps.length
         ? false
-        : visible.value ?? true,
+        : props.visible ?? true,
     );
 
-    const stepInfo = computed(() => steps.value[mergedCurrent.value]);
+    const stepInfo = computed(() => props.steps[mergedCurrent.value]);
 
-    const mergedPlacement = stepInfo.value.placement ?? placement.value;
-    const mergedMask = mergedOpen.value && (stepInfo.value.mask ?? mask.value);
-    const mergedScrollIntoViewOptions =
-      stepInfo.value.scrollIntoViewOptions ?? scrollIntoViewOptions.value;
-    const [posInfo, targetElement] = useTarget(
-      stepInfo.value.target,
-      gap.value,
-      mergedScrollIntoViewOptions,
+    const mergedPlacement = computed(() => stepInfo.value.placement ?? props.placement);
+    const mergedMask = computed(() => mergedOpen.value && (stepInfo.value.mask ?? props.mask));
+    const mergedScrollIntoViewOptions = computed(
+      () => stepInfo.value.scrollIntoViewOptions ?? props.scrollIntoViewOptions,
     );
-
-    // ========================= arrow =========================
-    const mergedArrow = targetElement
-      ? typeof stepInfo.value.arrow === 'undefined'
-        ? arrow.value
-        : stepInfo.value.arrow
-      : false;
-    const arrowPointAtCenter = typeof mergedArrow === 'object' ? mergedArrow.pointAtCenter : false;
-
+    const target = useTarget(stepInfo.value.target, props.gap, mergedScrollIntoViewOptions.value);
     // ========================= Change =========================
     const onInternalChange = (nextCurrent: number) => {
       mergedCurrent.value = nextCurrent;
@@ -112,15 +88,15 @@ export default defineComponent({
     };
 
     // ========================= popupAlign =========================
-    const popupAlign = targetElement
-      ? arrowPointAtCenter
-        ? placement.value || getCenterPlacements({ placement: placement.value })
-        : placements[mergedPlacement]
+    const popupAlign = target.targetElement
+      ? props.arrow
+        ? props.placement || getCenterPlacements({ placement: props.placement })
+        : placements[mergedPlacement.value]
       : CENTER_ALIGN;
 
     // ========================= Render =========================
     // Skip if not init yet
-    if (targetElement === undefined) {
+    if (target.targetElement === undefined) {
       return null;
     }
 
@@ -131,11 +107,12 @@ export default defineComponent({
 
     return () => {
       const { prefixCls } = useConfigInject('tour', props);
+      const { steps, rootClassName } = props;
 
       const getPopupElement = () => (
         <TourStep
-          arrow={mergedArrow}
-          total={steps.value.length}
+          arrow={props.arrow}
+          total={steps.length}
           onPrev={() => {
             onInternalChange(mergedCurrent.value - 1);
           }}
@@ -147,16 +124,17 @@ export default defineComponent({
           onFinish={() => {
             handleClose();
           }}
-          {...steps.value[mergedCurrent.value]}
+          {...steps[mergedCurrent.value]}
         />
       );
 
-      const mergedShowMask = typeof mergedMask === 'boolean' ? mergedMask : !!mergedMask;
+      const mergedShowMask =
+        typeof mergedMask.value === 'boolean' ? mergedMask.value : !!mergedMask.value;
       // const mergedMaskStyle = typeof mergedMask === 'boolean' ? undefined : mergedMask;
 
       // when targetElement is not exist, use body as triggerDOMNode
       const getTriggerDOMNode = node => {
-        return node || targetElement || document.body;
+        return node || target.targetElement || document.body;
       };
 
       // style
@@ -166,7 +144,7 @@ export default defineComponent({
           <Trigger
             prefixCls={prefixCls.value}
             popupAlign={popupAlign}
-            popupPlacement={mergedPlacement}
+            popupPlacement={mergedPlacement.value}
             popupVisible={mergedOpen.value}
             popup={getPopupElement}
             forceRender={false}
@@ -176,16 +154,20 @@ export default defineComponent({
           >
             <Portal visible={mergedOpen.value}>
               <div
-                class={classNames(rootClassName, `${prefixCls}-target-placeholder`)}
+                class={classNames(rootClassName, `${prefixCls.value}-target-placeholder`)}
                 style={{
-                  ...(posInfo || CENTER_PLACEHOLDER),
+                  ...(target.mergedPosInfo || CENTER_PLACEHOLDER),
                   position: 'fixed',
                   pointerEvents: 'none',
                 }}
               />
             </Portal>
           </Trigger>
-          <TourMask visible={visible.value} pos={posInfo} showMask={mergedShowMask} />
+          <TourMask
+            visible={props.visible}
+            pos={target.mergedPosInfo.value}
+            showMask={mergedShowMask}
+          />
         </>,
       );
     };

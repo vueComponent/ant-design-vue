@@ -13,14 +13,35 @@ Segmented Controls.
 
 ## API
 
-### Segmented
-
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | block | Option to fit width to its parent\'s width | boolean | false |  |
-| defaultValue | Default selected value | string \| number |  |  |
 | disabled | Disable all segments | boolean | false |  |
-| change | The callback function that is triggered when the state changes | function(value: string \| number) |  |  |
-| options | Set children optional | string[] \| number[] \| Array<{ value?: string disabled?: boolean }> | [] |  |
+| options | Set children optional | string[] \| number[] \| SegmentedOption[] | [] |  |
 | size | The size of the Segmented. | `large` \| `middle` \| `small` | - |  |
 | value | Currently selected value | string \| number |  |  |
+| label | custom label by slot | v-slot:label="SegmentedBaseOption" |  |  |
+
+### events
+
+| Events Name | Description | Arguments |  |
+| --- | --- | --- | --- |
+| change | The callback function that is triggered when the state changes | function(value: string \| number) | - |
+
+#### SegmentedBaseOption、 SegmentedOption
+
+```ts
+interface SegmentedBaseOption {
+  value: string | number;
+  disabled?: boolean;
+  payload?: any; // payload more data
+  /**
+   * html `title` property for label
+   */
+  title?: string;
+  className?: string;
+}
+interface SegmentedOption extends SegmentedBaseOption {
+  label?: VueNode | ((option: SegmentedBaseOption) => VueNode);
+}
+```

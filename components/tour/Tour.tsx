@@ -1,27 +1,31 @@
 import { defineComponent } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import TourMask from './TourMask';
 import useTarget from './useTarget';
 import TourStep from './TourStep';
+import TourMask from './TourMask';
 import Trigger from '../vc-trigger';
+import type { TourStepProps } from './TourStep';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
 
-export const TourProps = () => ({
+export const tourProps = () => ({
   prefixCls: String,
   visible: Boolean,
   current: Number,
-  steps: Array,
+  steps: { type: Array as PropType<Array<TourStepProps>> },
   gap: Number,
   mask: Boolean,
 });
+
+export type TourProps = ExtractPropTypes<ReturnType<typeof tourProps>>;
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ATour',
   inheritAttrs: false,
-  props: initDefaultProps(TourProps(), {}),
-  setup(props) {
+  props: initDefaultProps(tourProps(), {}),
+  setup(props: TourProps) {
     // @ts-ignore
     const [posInfo] = useTarget(
       props.steps[0].target,

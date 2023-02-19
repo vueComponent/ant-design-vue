@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import useStyle from 'ant-design-vue/es/tour/style';
+import useStyle from './style';
 
-export const TourStepProps = () => ({
+export const tourStepProps = () => ({
   prefixCls: String,
   current: Number,
   total: Number,
@@ -12,12 +13,14 @@ export const TourStepProps = () => ({
   arrow: Boolean,
 });
 
+export type TourStepProps = ExtractPropTypes<ReturnType<typeof tourStepProps>>;
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ATourStep',
   inheritAttrs: false,
-  props: initDefaultProps(TourStepProps(), {}),
-  setup(props, { emit }) {
+  props: initDefaultProps(tourStepProps(), {}),
+  setup(props: TourStepProps, { emit }) {
     return () => {
       const { current, total, title, description, arrow } = props;
       const { prefixCls } = useConfigInject('tour', props);

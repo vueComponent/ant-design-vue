@@ -248,3 +248,7 @@ export { default as LocaleProvider } from './locale-provider';
 export type { SegmentedProps } from './segmented';
 
 export { default as Segmented } from './segmented';
+
+export type { TourProps } from './tour';
+
+export { default as Tour } from './tour';

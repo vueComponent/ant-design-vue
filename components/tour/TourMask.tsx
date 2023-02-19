@@ -1,4 +1,5 @@
 import { defineComponent } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import useId from '../vc-select/hooks/useId';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Portal from '../_util/PortalWrapper';
@@ -8,7 +9,7 @@ const COVER_PROPS = {
   fill: 'transparent',
   pointerEvents: 'auto',
 };
-export const TourMask = () => ({
+export const tourMaskProps = () => ({
   prefixCls: String,
   pos: Object, //	获取引导卡片指向的元素
   showMask: Boolean,
@@ -18,12 +19,14 @@ export const TourMask = () => ({
   visible: Boolean,
 });
 
+export type TourMaskProps = ExtractPropTypes<ReturnType<typeof tourMaskProps>>;
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ATourMask',
   inheritAttrs: false,
-  props: initDefaultProps(TourMask(), {}),
-  setup(props) {
+  props: initDefaultProps(tourMaskProps(), {}),
+  setup(props: TourMaskProps) {
     return () => {
       const { prefixCls } = useConfigInject('tour', props);
       const { visible, showMask, style = {}, pos, animated, fill = 'rgba(0,0,0,0.5)' } = props;

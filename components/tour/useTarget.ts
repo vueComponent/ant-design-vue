@@ -1,5 +1,5 @@
-import type { ComputedRef, Ref } from 'vue';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import type { TourStepProps } from './TourStep';
 
 export interface Gap {
   offset?: number;
@@ -22,19 +22,25 @@ const isInViewPort = (element: HTMLElement) => {
 };
 
 export default function useTarget(
-  target: Ref<any>,
+  target: TourStepProps['target'],
   gap?: Gap,
   scrollIntoViewOptions?: boolean | ScrollIntoViewOptions,
-): [ComputedRef<PosInfo>] {
+): [PosInfo, HTMLElement] {
+  const targetElement = ref<null | HTMLElement | undefined>();
+  onMounted(() => {
+    targetElement.value = typeof target === 'function' ? (target as any)() : target;
+  });
+
   const posInfo = ref<PosInfo | null>(null);
 
   const updatePos = () => {
-    if (target.value) {
-      if (!isInViewPort(target.value.$el.nextElementSibling)) {
-        target.value.$el.nextElementSibling.scrollIntoView(scrollIntoViewOptions);
+    if (targetElement.value) {
+      // Exist target element. We should scroll and get target position
+      if (!isInViewPort(targetElement.value)) {
+        targetElement.value.scrollIntoView(scrollIntoViewOptions);
       }
-      const { left, top, width, height } =
-        target.value.$el.nextElementSibling.getBoundingClientRect();
+
+      const { left, top, width, height } = targetElement.value.getBoundingClientRect();
       posInfo.value = { left, top, width, height, radius: 0 };
     } else {
       posInfo.value = null;
@@ -67,5 +73,5 @@ export default function useTarget(
     };
   });
 
-  return [mergedPosInfo];
+  return [mergedPosInfo.value, targetElement.value];
 }

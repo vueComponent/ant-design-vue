@@ -249,6 +249,6 @@ export type { SegmentedProps } from './segmented';
 
 export { default as Segmented } from './segmented';
 
-export type { TourProps } from './tour';
+export type { TourProps, TourStepInfo } from './tour';
 
 export { default as Tour } from './tour';

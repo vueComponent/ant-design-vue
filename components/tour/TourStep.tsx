@@ -1,18 +1,51 @@
 import { defineComponent } from 'vue';
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, VNode, CSSProperties } from 'vue';
+import type { PlacementType } from './placements';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useStyle from './style';
 
-export const tourStepProps = () => ({
-  prefixCls: String,
-  current: Number,
-  total: Number,
-  title: String,
-  description: String,
-  arrow: Boolean,
+type Arrow = boolean | { pointAtCenter: boolean };
+type Target = HTMLElement | (() => HTMLElement) | null | (() => null);
+type Mask =
+  | boolean
+  | {
+      style?: CSSProperties;
+      // to fill mask color, e.g. rgba(80,0,0,0.5)
+      color?: string;
+    };
+const tourStepInfo = () => ({
+  arrow: { type: Object as PropType<Arrow> },
+  target: { type: Object as PropType<Target> },
+  title: { type: Object as PropType<VNode> },
+  description: { type: Object as PropType<VNode> },
+  placement: { type: Object as PropType<PlacementType> },
+  mask: { type: Object as PropType<Mask> },
+  class: String,
+  style: { type: Object as PropType<CSSProperties> },
+  scrollIntoViewOptions: { type: Object as PropType<boolean | ScrollIntoViewOptions> },
 });
 
+export const tourStepProps = () => ({
+  ...tourStepInfo(),
+  prefixCls: String,
+  total: Number,
+  current: Number,
+  onClose: {
+    type: Function as PropType<() => void>,
+  },
+  onFinish: {
+    type: Function as PropType<() => void>,
+  },
+  onPrev: {
+    type: Function as PropType<() => void>,
+  },
+  onNext: {
+    type: Function as PropType<() => void>,
+  },
+});
+
+export type TourStepInfo = ExtractPropTypes<ReturnType<typeof tourStepInfo>>;
 export type TourStepProps = ExtractPropTypes<ReturnType<typeof tourStepProps>>;
 
 export default defineComponent({

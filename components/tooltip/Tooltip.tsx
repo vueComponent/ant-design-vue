@@ -218,7 +218,7 @@ export default defineComponent({
     };
 
     return () => {
-      const { openClassName, color, overlayClassName } = props;
+      const { openClassName, color, overlayClassName, overlayInnerStyle } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
 
@@ -255,7 +255,7 @@ export default defineComponent({
         visible: tempVisible,
         ref: tooltip,
         overlayClassName: customOverlayClassName,
-        overlayInnerStyle: formattedOverlayInnerStyle,
+        overlayInnerStyle: { ...formattedOverlayInnerStyle, ...overlayInnerStyle },
         onVisibleChange: handleVisibleChange,
         onPopupAlign,
       };

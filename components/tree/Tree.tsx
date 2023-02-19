@@ -260,7 +260,7 @@ export default defineComponent({
           checkable={checkable}
           selectable={selectable}
           switcherIcon={(nodeProps: SwitcherIconProps) =>
-            renderSwitcherIcon(prefixCls.value, switcherIcon, showLine, nodeProps)
+            renderSwitcherIcon(prefixCls.value, switcherIcon, nodeProps, slots.leafIcon, showLine)
           }
           onCheck={handleCheck}
           onExpand={handleExpand}

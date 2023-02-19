@@ -279,7 +279,7 @@ const Mentions = defineComponent({
 /* istanbul ignore next */
 export const MentionsOption = defineComponent({
   compatConfig: { MODE: 3 },
-  ...Option,
+  ...(Option as any),
   name: 'AMentionsOption',
   props: optionProps,
 });

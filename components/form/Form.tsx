@@ -24,6 +24,7 @@ import type {
   Callbacks,
   ValidateMessages,
   Rule,
+  FormLabelAlign,
 } from './interface';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useProvideForm } from './context';
@@ -42,7 +43,10 @@ export const formProps = () => ({
   labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   colon: { type: Boolean, default: undefined },
-  labelAlign: PropTypes.oneOf(tuple('left', 'right')),
+  labelAlign: {
+    ...PropTypes.oneOf(tuple('left', 'right')),
+    type: String as PropType<FormLabelAlign>,
+  },
   labelWrap: { type: Boolean, default: undefined },
   prefixCls: String,
   requiredMark: { type: [String, Boolean] as PropType<RequiredMark | ''>, default: undefined },

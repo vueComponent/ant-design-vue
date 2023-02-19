@@ -52,7 +52,7 @@ function externalDayjs(config) {
   });
   config.externals.push(function ({ _context, request }, callback) {
     if (/^dayjs\/plugin\//.test(request)) {
-      const name = request.replaceAll('/', '_');
+      const name = request.replace(/\//g, '_');
       return callback(null, {
         root: name,
         commonjs2: name,

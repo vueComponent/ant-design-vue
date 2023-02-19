@@ -31,14 +31,14 @@ import type { ComponentToken as ProgressComponentToken } from '../../progress/st
 import type { ComponentToken as RateComponentToken } from '../../rate/style';
 import type { ComponentToken as ResultComponentToken } from '../../result/style';
 // import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
-// import type { ComponentToken as SelectComponentToken } from '../../select/style';
+import type { ComponentToken as SelectComponentToken } from '../../select/style';
 import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
 import type { ComponentToken as SliderComponentToken } from '../../slider/style';
 import type { ComponentToken as SpaceComponentToken } from '../../space/style';
 import type { ComponentToken as SpinComponentToken } from '../../spin/style';
 import type { ComponentToken as StepsComponentToken } from '../../steps/style';
 import type { ComponentToken as TableComponentToken } from '../../table/style';
-// import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
+import type { ComponentToken as TabsComponentToken } from '../../tabs/style';
 import type { ComponentToken as TagComponentToken } from '../../tag/style';
 import type { ComponentToken as TimelineComponentToken } from '../../timeline/style';
 import type { ComponentToken as TooltipComponentToken } from '../../tooltip/style';
@@ -49,6 +49,7 @@ import type { ComponentToken as UploadComponentToken } from '../../upload/style'
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
 // import type { ComponentToken as WaveToken } from '../../_util/wave/style';
+import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 
 export interface ComponentTokenMap {
   Affix?: {};
@@ -89,7 +90,7 @@ export interface ComponentTokenMap {
   //   Radio?: RadioComponentToken;
   Result?: ResultComponentToken;
   //   Segmented?: SegmentedComponentToken;
-  //   Select?: SelectComponentToken;
+  Select?: SelectComponentToken;
   Skeleton?: SkeletonComponentToken;
   Slider?: SliderComponentToken;
   Spin?: SpinComponentToken;
@@ -101,7 +102,7 @@ export interface ComponentTokenMap {
   Typography?: TypographyComponentToken;
   Timeline?: TimelineComponentToken;
   Transfer?: TransferComponentToken;
-  //   Tabs?: TabsComponentToken;
+  Tabs?: TabsComponentToken;
   Calendar?: CalendarComponentToken;
   Steps?: StepsComponentToken;
   Menu?: MenuComponentToken;
@@ -118,4 +119,5 @@ export interface ComponentTokenMap {
 
   //   /** @private Internal TS definition. Do not use. */
   //   Wave?: WaveToken;
+  Segmented?: SegmentedComponentToken;
 }

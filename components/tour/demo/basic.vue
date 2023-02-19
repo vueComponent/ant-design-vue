@@ -39,9 +39,9 @@ export default defineComponent({
     EllipsisOutlined,
   },
   setup() {
-    const ref1 = ref<HTMLElement>();
-    const ref2 = ref<HTMLElement>();
-    const ref3 = ref<HTMLElement>();
+    const ref1 = ref();
+    const ref2 = ref();
+    const ref3 = ref();
 
     const visible = ref<boolean>(false);
 
@@ -49,17 +49,17 @@ export default defineComponent({
       {
         title: 'Upload File',
         description: 'Put your files here',
-        target: () => ref1.value,
+        target: () => ref1.value.$el.nextElementSibling,
       },
       {
         title: 'Save',
         description: 'Save your changes.',
-        target: () => ref2.value,
+        target: () => ref1.value.$el.nextElementSibling,
       },
       {
         title: 'Other Actions',
         description: 'Click to see other actions.',
-        target: () => ref3.value,
+        target: () => ref1.value.$el.nextElementSibling,
       },
     ];
     return {

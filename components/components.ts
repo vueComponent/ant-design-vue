@@ -251,3 +251,7 @@ export type { UploadProps, UploadListProps, UploadChangeParam, UploadFile } from
 export { default as Upload, UploadDragger } from './upload';
 
 export { default as LocaleProvider } from './locale-provider';
+
+export type { SegmentedProps } from './segmented';
+
+export { default as Segmented } from './segmented';

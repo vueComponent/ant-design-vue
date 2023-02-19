@@ -3,7 +3,7 @@ import classNames from './classNames';
 
 const InputStatuses = ['warning', 'error', ''] as const;
 
-export type InputStatus = typeof InputStatuses[number];
+export type InputStatus = (typeof InputStatuses)[number];
 
 export function getStatusClassNames(
   prefixCls: string,

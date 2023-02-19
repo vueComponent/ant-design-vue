@@ -4,9 +4,10 @@ import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
+import type { VNode } from 'vue';
 
 export default function getIcons(props: any, slots: any = {}) {
-  const { loading, multiple, prefixCls, hasFeedback, feedbackIcon, showArrow } = props;
+  const { loading, multiple, prefixCls } = props;
   const suffixIcon = props.suffixIcon || (slots.suffixIcon && slots.suffixIcon());
   const clearIcon = props.clearIcon || (slots.clearIcon && slots.clearIcon());
   const menuItemSelectedIcon =
@@ -17,15 +18,17 @@ export default function getIcons(props: any, slots: any = {}) {
   if (!clearIcon) {
     mergedClearIcon = <CloseCircleFilled />;
   }
+
   // Validation Feedback Icon
-  const getSuffixIconNode = arrowIcon => (
+  const getSuffixIconNode = (arrowIcon?: VNode) => (
     <>
-      {showArrow !== false && arrowIcon}
-      {hasFeedback && feedbackIcon}
+      {props.showArrow !== false && arrowIcon}
+      {props.hasFeedback && props.feedbackIcon}
     </>
   );
+
   // Arrow item icon
-  let mergedSuffixIcon = null;
+  let mergedSuffixIcon: any = null;
   if (suffixIcon !== undefined) {
     mergedSuffixIcon = getSuffixIconNode(suffixIcon);
   } else if (loading) {

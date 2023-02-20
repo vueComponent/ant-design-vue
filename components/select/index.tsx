@@ -142,10 +142,11 @@ const Select = defineComponent({
     } = useConfigInject('select', props);
     const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
     const mergedSize = computed(() => compactSize.value || contextSize.value);
-    // style
-    const [wrapSSR, hashId] = useStyle(prefixCls);
     const contextDisabled = useInjectDisabled();
     const mergedDisabled = computed(() => disabled.value ?? contextDisabled.value);
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const rootPrefixCls = computed(() => getPrefixCls());
     // ===================== Placement =====================
     const placement = computed(() => {

@@ -21,7 +21,7 @@ cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*DfTMRYSDngEAAAAAAA
 | allowClear | 显示清除按钮 | boolean | false |  |  |
 | defaultValue | 指定默认选中的条目 | string/string\[] | - |  |  |
 | disabled | 是否禁用 | boolean | false |  |  |
-| dropdownClassName | 下拉菜单的 className 属性 | string | - |  |  |
+| popupClassName | 下拉菜单的 className 属性 | string | - |  | 4.0 |
 | dropdownMatchSelectWidth | 下拉菜单和选择器同宽。默认将设置 `min-width`，当值小于选择框宽度时会被忽略。false 时会关闭虚拟滚动 | boolean \| number | true |  |  |
 | dropdownStyle | 下拉菜单的样式 | object | - |  |  |
 | fieldNames | 替换 treeNode 中 label,value,key,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', value: 'value' } |  | 3.0.0 |

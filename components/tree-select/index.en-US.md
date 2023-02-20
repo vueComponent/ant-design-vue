@@ -20,7 +20,7 @@ Tree selection control.
 | allowClear | Whether allow clear | boolean | false |  |  |
 | defaultValue | To set the initial selected treeNode(s). | string\|string\[] | - |  |  |
 | disabled | Disabled or not | boolean | false |  |  |
-| dropdownClassName | className of dropdown menu | string | - |  |  |
+| popupClassName | className of dropdown menu | string | - |  | 4.0 |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |  |
 | dropdownStyle | To set the style of the dropdown menu | object | - |  |  |
 | fieldNames | Replace the label,value, key and children fields in treeNode with the corresponding fields in treeData | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 3.0.0 |

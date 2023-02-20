@@ -1,5 +1,5 @@
 import type { App, ExtractPropTypes } from 'vue';
-import { computed, ref, watchEffect, defineComponent } from 'vue';
+import { computed, ref, defineComponent } from 'vue';
 import VcTreeSelect, {
   TreeNode,
   SHOW_ALL,
@@ -33,6 +33,8 @@ import { booleanType, stringType, objectType, someType, functionType } from '../
 // CSSINJS
 import useSelectStyle from '../select/style';
 import useStyle from './style';
+import { useCompactItemContext } from '../space/Compact';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -73,6 +75,9 @@ export function treeSelectProps<
     replaceFields: objectType<FieldNames>(),
     placement: stringType<SelectCommonPlacement>(),
     status: stringType<InputStatus>(),
+    popupClassName: String,
+    /** @deprecated Please use `popupClassName` instead */
+    dropdownClassName: String,
     'onUpdate:value': functionType<(value: any) => void>(),
     'onUpdate:treeExpandedKeys': functionType<(keys: Key[]) => void>(),
     'onUpdate:searchValue': functionType<(value: string) => void>(),
@@ -105,18 +110,21 @@ const TreeSelect = defineComponent({
       !(props.treeData === undefined && slots.default),
       '`children` of TreeSelect is deprecated. Please use `treeData` instead.',
     );
-    watchEffect(() => {
-      devWarning(
-        props.multiple !== false || !props.treeCheckable,
-        'TreeSelect',
-        '`multiple` will always be `true` when `treeCheckable` is true',
-      );
-      devWarning(
-        props.replaceFields === undefined,
-        'TreeSelect',
-        '`replaceFields` is deprecated, please use fieldNames instead',
-      );
-    });
+    devWarning(
+      props.multiple !== false || !props.treeCheckable,
+      'TreeSelect',
+      '`multiple` will always be `true` when `treeCheckable` is true',
+    );
+    devWarning(
+      props.replaceFields === undefined,
+      'TreeSelect',
+      '`replaceFields` is deprecated, please use fieldNames instead',
+    );
+    devWarning(
+      !props.dropdownClassName,
+      'TreeSelect',
+      '`dropdownClassName` is deprecated. Please use `popupClassName` instead.',
+    );
 
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
@@ -127,10 +135,15 @@ const TreeSelect = defineComponent({
       direction,
       virtual,
       dropdownMatchSelectWidth,
-      size,
+      size: contextSize,
       getPopupContainer,
       getPrefixCls,
+      disabled,
     } = useConfigInject('select', props);
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+    const mergedSize = computed(() => compactSize.value || contextSize.value);
+    const contextDisabled = useInjectDisabled();
+    const mergedDisabled = computed(() => disabled.value ?? contextDisabled.value);
     const rootPrefixCls = computed(() => getPrefixCls());
     // ===================== Placement =====================
     const placement = computed(() => {
@@ -160,7 +173,7 @@ const TreeSelect = defineComponent({
 
     const mergedDropdownClassName = computed(() =>
       classNames(
-        props.dropdownClassName,
+        props.popupClassName || props.dropdownClassName,
         `${treeSelectPrefixCls.value}-dropdown`,
         {
           [`${treeSelectPrefixCls.value}-dropdown-rtl`]: direction.value === 'rtl',
@@ -255,13 +268,14 @@ const TreeSelect = defineComponent({
       const mergedClassName = classNames(
         !customizePrefixCls && treeSelectPrefixCls.value,
         {
-          [`${prefixCls.value}-lg`]: size.value === 'large',
-          [`${prefixCls.value}-sm`]: size.value === 'small',
+          [`${prefixCls.value}-lg`]: mergedSize.value === 'large',
+          [`${prefixCls.value}-sm`]: mergedSize.value === 'small',
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-borderless`]: !bordered,
           [`${prefixCls.value}-in-form-item`]: isFormItemInput,
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value, hasFeedback),
+        compactItemClassnames.value,
         attrs.class,
         hashId.value,
       );
@@ -274,6 +288,7 @@ const TreeSelect = defineComponent({
           <VcTreeSelect
             {...attrs}
             {...selectProps}
+            disabled={mergedDisabled.value}
             virtual={virtual.value}
             dropdownMatchSelectWidth={dropdownMatchSelectWidth.value}
             id={id}

@@ -1,9 +1,10 @@
-import { computed, inject } from 'vue';
+import { computed, h, inject } from 'vue';
 import { defaultConfigProvider, configProviderKey } from '../context';
+import { DefaultRenderEmpty } from '../renderEmpty';
 export default (name: string, props: Record<any, any>) => {
   const configProvider = inject(configProviderKey, {
     ...defaultConfigProvider,
-    renderEmpty: () => null,
+    renderEmpty: (name?: string) => h(DefaultRenderEmpty, { componentName: name }),
   });
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
   const direction = computed(() => props.direction ?? configProvider.direction?.value);

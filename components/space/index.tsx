@@ -97,7 +97,7 @@ const Space = defineComponent({
       const horizontalSizeVal = horizontalSize.value;
       const latestIndex = len - 1;
       return (
-        <div {...attrs} class={cn.value} style={style.value}>
+        <div {...attrs} class={cn.value} style={[style.value, attrs.style as any]}>
           {items.map((child, index) => {
             let itemStyle: CSSProperties = {};
             if (!supportFlexGap.value) {

@@ -90,3 +90,20 @@ exports[`renders ./components/mentions/demo/readonly.vue correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`renders ./components/mentions/demo/status.vue correctly 1`] = `
+<div class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div class="ant-mentions"><textarea autofocus="" rows="1" status="error"></textarea>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div class="ant-mentions"><textarea autofocus="" rows="1" status="warning"></textarea>
+      <!---->
+    </div>
+  </div>
+  <!---->
+</div>
+`;

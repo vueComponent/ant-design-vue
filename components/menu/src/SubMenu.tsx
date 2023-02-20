@@ -20,7 +20,8 @@ import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import type { Key } from 'ant-design-vue/es/_util/type';
+import type { Key } from '../../_util/type';
+import type { MenuTheme } from './interface';
 
 let indexGuid = 0;
 
@@ -34,6 +35,7 @@ export const subMenuProps = () => ({
   internalPopupClose: Boolean,
   eventKey: String,
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
+  theme: String as PropType<MenuTheme>,
   onMouseenter: Function as PropType<MouseEventHandler>,
   onMouseleave: Function as PropType<MouseEventHandler>,
   onTitleClick: Function as PropType<(e: MouseEvent, key: Key) => void>,
@@ -91,7 +93,6 @@ export default defineComponent({
       changeActiveKeys,
       mode,
       inlineCollapsed,
-      antdMenuTheme,
       openKeys,
       overflowDisabled,
       onOpenChange,
@@ -99,6 +100,7 @@ export default defineComponent({
       unRegisterMenuInfo,
       selectedSubMenuKeys,
       expandIcon: menuExpandIcon,
+      theme,
     } = useInjectMenu();
 
     const hasKey = vnodeKey !== undefined && vnodeKey !== null;
@@ -194,7 +196,7 @@ export default defineComponent({
     const popupClassName = computed(() =>
       classNames(
         prefixCls.value,
-        `${prefixCls.value}-${antdMenuTheme.value}`,
+        `${prefixCls.value}-${props.theme || theme.value}`,
         props.popupClassName,
       ),
     );
@@ -277,13 +279,14 @@ export default defineComponent({
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
       let titleNode = () => null;
       if (!overflowDisabled.value && mode.value !== 'inline') {
+        const popupOffset = mode.value === 'horizontal' ? [0, 8] : [10, 0];
         titleNode = () => (
           <PopupTrigger
             mode={triggerModeRef.value}
             prefixCls={subMenuPrefixClsValue}
             visible={!props.internalPopupClose && open.value}
             popupClassName={popupClassName.value}
-            popupOffset={props.popupOffset}
+            popupOffset={props.popupOffset || popupOffset}
             disabled={mergedDisabled.value}
             onVisibleChange={onPopupVisibleChange}
             v-slots={{

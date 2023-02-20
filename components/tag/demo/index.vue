@@ -4,7 +4,6 @@
     <Checkable />
     <Colorful />
     <Control />
-    <Controlled />
     <HotTags />
     <Icon />
     <Status />
@@ -16,7 +15,6 @@ import Basic from './basic.vue';
 import Checkable from './checkable.vue';
 import Colorful from './colorful.vue';
 import Control from './control.vue';
-import Controlled from './controlled.vue';
 import HotTags from './hot-tags.vue';
 import Icon from './icon.vue';
 import Status from './status.vue';
@@ -32,7 +30,6 @@ export default defineComponent({
     Checkable,
     Colorful,
     Control,
-    Controlled,
     HotTags,
     Icon,
     Status,

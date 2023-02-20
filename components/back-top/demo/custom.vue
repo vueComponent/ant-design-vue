@@ -17,7 +17,7 @@ You can customize the style of the button, just note the size limit: no more tha
 
 <template>
   <div id="components-back-top-demo-custom">
-    <a-back-top>
+    <a-back-top @click="handleClick">
       <div class="ant-back-top-inner">UP</div>
     </a-back-top>
     Scroll down to see the bottom-right
@@ -25,10 +25,15 @@ You can customize the style of the button, just note the size limit: no more tha
     button.
   </div>
 </template>
+<script setup>
+const handleClick = () => {
+  console.log('click');
+};
+</script>
 
 <style scoped>
-#components-back-top-demo-custom .ant-back-top {
-  bottom: 100px;
+:deep(#components-back-top-demo-custom) .ant-back-top {
+  inset-block-end: 100px;
 }
 #components-back-top-demo-custom .ant-back-top-inner {
   height: 40px;

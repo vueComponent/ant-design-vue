@@ -18,7 +18,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
 
 </docs>
 <template>
-  <div>
+  <div class="site-input-group-wrapper">
     <a-input-group size="large">
       <a-row :gutter="8">
         <a-col :span="5">
@@ -79,13 +79,15 @@ Note: You don't need `Col` to control the width in the `compact` mode.
       />
       <a-input
         v-model:value="value13"
-        style="width: 30px; border-left: 0; pointer-events: none; background-color: #fff"
+        class="site-input-split"
+        style="width: 30px; border-left: 0; pointer-events: none"
         placeholder="~"
         disabled
       />
       <a-input
         v-model:value="value14"
-        style="width: 100px; text-align: center; border-left: 0"
+        class="site-input-right"
+        style="width: 100px; text-align: center"
         placeholder="Maximum"
       />
     </a-input-group>
@@ -221,3 +223,29 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.site-input-group-wrapper .site-input-split {
+  background-color: #fff;
+}
+
+.site-input-group-wrapper .site-input-right {
+  border-left-width: 0;
+}
+
+.site-input-group-wrapper .site-input-right:hover,
+.site-input-group-wrapper .site-input-right:focus {
+  border-left-width: 1px;
+}
+
+.site-input-group-wrapper .ant-input-rtl.site-input-right {
+  border-right-width: 0;
+}
+
+.site-input-group-wrapper .ant-input-rtl.site-input-right:hover,
+.site-input-group-wrapper .ant-input-rtl.site-input-right:focus {
+  border-right-width: 1px;
+}
+[data-theme='dark'] .site-input-group-wrapper .site-input-split {
+  background-color: transparent;
+}
+</style>

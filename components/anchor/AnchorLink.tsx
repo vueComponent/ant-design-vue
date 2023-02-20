@@ -3,7 +3,7 @@ import { defineComponent, nextTick, onBeforeUnmount, onMounted, watch } from 'vu
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot, initDefaultProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
 
 export const anchorLinkProps = () => ({

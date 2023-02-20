@@ -47,16 +47,18 @@ function externalDayjs(config) {
       commonjs2: 'dayjs',
       commonjs: 'dayjs',
       amd: 'dayjs',
+      module: 'dayjs',
     },
   });
   config.externals.push(function ({ _context, request }, callback) {
     if (/^dayjs\/plugin\//.test(request)) {
-      const name = request.replaceAll('/', '_');
+      const name = request.replace(/\//g, '_');
       return callback(null, {
         root: name,
         commonjs2: name,
         commonjs: name,
         amd: name,
+        module: name,
       });
     }
     callback();
@@ -127,6 +129,7 @@ const legacyEntryVars = {
   'root-entry-name': 'default',
 };
 const webpackConfig = injectLessVariables(getWebpackConfig(false), legacyEntryVars);
+const webpackESMConfig = injectLessVariables(getWebpackConfig(false, true), legacyEntryVars);
 const webpackDarkConfig = injectLessVariables(getWebpackConfig(false), legacyEntryVars);
 const webpackCompactConfig = injectLessVariables(getWebpackConfig(false), legacyEntryVars);
 const webpackVariableConfig = injectLessVariables(getWebpackConfig(false), {
@@ -175,6 +178,7 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
 
 module.exports = [
   ...webpackConfig,
+  ...webpackESMConfig,
   ...webpackDarkConfig,
   ...webpackCompactConfig,
   ...webpackVariableConfig,

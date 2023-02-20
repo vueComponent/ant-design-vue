@@ -22,4 +22,9 @@ Steps with progress.
     <a-step title="In Progress" sub-title="Left 00:00:08" description="This is a description." />
     <a-step title="Waiting" description="This is a description." />
   </a-steps>
+  <a-steps :percent="60" :current="1" size="small">
+    <a-step title="Finished" description="This is a description." />
+    <a-step title="In Progress" sub-title="Left 00:00:08" description="This is a description." />
+    <a-step title="Waiting" description="This is a description." />
+  </a-steps>
 </template>

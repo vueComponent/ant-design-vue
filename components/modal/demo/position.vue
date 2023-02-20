@@ -22,7 +22,7 @@ You can use `centered`,`style.top` or other styles to set position of modal dial
       Display a modal dialog at 20px to Top
     </a-button>
     <a-modal
-      v-model:visible="modal1Visible"
+      v-model:open="modal1Visible"
       title="20px to Top"
       style="top: 20px"
       @ok="setModal1Visible(false)"
@@ -37,7 +37,7 @@ You can use `centered`,`style.top` or other styles to set position of modal dial
       Vertically centered modal dialog
     </a-button>
     <a-modal
-      v-model:visible="modal2Visible"
+      v-model:open="modal2Visible"
       title="Vertically centered modal dialog"
       centered
       @ok="modal2Visible = false"
@@ -55,8 +55,8 @@ export default defineComponent({
     const modal1Visible = ref<boolean>(false);
     const modal2Visible = ref<boolean>(false);
 
-    const setModal1Visible = (visible: boolean) => {
-      modal1Visible.value = visible;
+    const setModal1Visible = (open: boolean) => {
+      modal1Visible.value = open;
     };
     return {
       modal1Visible,

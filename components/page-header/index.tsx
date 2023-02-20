@@ -5,26 +5,31 @@ import { filterEmpty, flattenChildren, isEmptyContent } from '../_util/props-uti
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import ArrowRightOutlined from '@ant-design/icons-vue/ArrowRightOutlined';
 import Breadcrumb from '../breadcrumb';
+import type { AvatarProps } from '../avatar';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import { objectType, vNodeType, withInstall } from '../_util/type';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import useDestroyed from '../_util/hooks/useDestroyed';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import Space from '../space';
+
+// CSSINJS
+import useStyle from './style';
 
 export const pageHeaderProps = () => ({
-  backIcon: PropTypes.any,
+  backIcon: vNodeType(),
   prefixCls: String,
-  title: PropTypes.any,
-  subTitle: PropTypes.any,
+  title: vNodeType(),
+  subTitle: vNodeType(),
   breadcrumb: PropTypes.object,
-  tags: PropTypes.any,
-  footer: PropTypes.any,
-  extra: PropTypes.any,
-  avatar: PropTypes.object,
+  tags: vNodeType(),
+  footer: vNodeType(),
+  extra: vNodeType(),
+  avatar: objectType<AvatarProps>(),
   ghost: { type: Boolean, default: undefined },
   onBack: Function as PropType<MouseEventHandler>,
 });
@@ -34,11 +39,16 @@ export type PageHeaderProps = Partial<ExtractPropTypes<ReturnType<typeof pageHea
 const PageHeader = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'APageHeader',
+  inheritAttrs: false,
   props: pageHeaderProps(),
   // emits: ['back'],
   slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, attrs }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const compact = ref(false);
     const isDestroyed = useDestroyed();
     const onResize = ({ width }: { width: number }) => {
@@ -124,7 +134,11 @@ const PageHeader = defineComponent({
               {tags && <span class={`${headingPrefixCls}-tags`}>{tags}</span>}
             </div>
           )}
-          {extra && <span class={`${headingPrefixCls}-extra`}>{extra}</span>}
+          {extra && (
+            <span class={`${headingPrefixCls}-extra`}>
+              <Space>{extra}</Space>
+            </span>
+          )}
         </div>
       );
     };
@@ -143,22 +157,27 @@ const PageHeader = defineComponent({
       const hasBreadcrumb = props.breadcrumb?.routes || slots.breadcrumb;
       const hasFooter = props.footer || slots.footer;
       const children = flattenChildren(slots.default?.());
-      const className = classNames(prefixCls.value, {
-        'has-breadcrumb': hasBreadcrumb,
-        'has-footer': hasFooter,
-        [`${prefixCls.value}-ghost`]: ghost.value,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-        [`${prefixCls.value}-compact`]: compact.value,
-      });
-      return (
+      const className = classNames(
+        prefixCls.value,
+        {
+          'has-breadcrumb': hasBreadcrumb,
+          'has-footer': hasFooter,
+          [`${prefixCls.value}-ghost`]: ghost.value,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          [`${prefixCls.value}-compact`]: compact.value,
+        },
+        attrs.class,
+        hashId.value,
+      );
+      return wrapSSR(
         <ResizeObserver onResize={onResize}>
-          <div class={className}>
+          <div {...attrs} class={className}>
             {renderBreadcrumb()}
             {renderTitle()}
             {children.length ? renderChildren(children) : null}
             {renderFooter()}
           </div>
-        </ResizeObserver>
+        </ResizeObserver>,
       );
     };
   },

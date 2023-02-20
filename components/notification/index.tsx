@@ -10,8 +10,14 @@ import { renderHelper } from '../_util/util';
 import { globalConfig } from '../config-provider';
 import type { NotificationInstance as VCNotificationInstance } from '../vc-notification/Notification';
 import classNames from '../_util/classNames';
-
-export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+import useStyle from './style';
+export type NotificationPlacement =
+  | 'top'
+  | 'topLeft'
+  | 'topRight'
+  | 'bottom'
+  | 'bottomLeft'
+  | 'bottomRight';
 
 export type IconType = 'success' | 'info' | 'error' | 'warning';
 
@@ -76,6 +82,15 @@ function getPlacementStyle(
 ) {
   let style: CSSProperties;
   switch (placement) {
+    case 'top':
+      style = {
+        left: '50%',
+        transform: 'translateX(-50%)',
+        right: 'auto',
+        top,
+        bottom: 'auto',
+      };
+      break;
     case 'topLeft':
       style = {
         left: '0px',
@@ -88,6 +103,15 @@ function getPlacementStyle(
         right: '0px',
         top,
         bottom: 'auto',
+      };
+      break;
+    case 'bottom':
+      style = {
+        left: '50%',
+        transform: 'translateX(-50%)',
+        right: 'auto',
+        top: 'auto',
+        bottom,
       };
       break;
     case 'bottomLeft':
@@ -139,6 +163,7 @@ function getNotificationInstance(
     {
       name: 'notification',
       prefixCls: customizePrefixCls || defaultPrefixCls,
+      useStyle,
       class: notificationClass,
       style: getPlacementStyle(placement, top, bottom),
       appContext,
@@ -177,6 +202,7 @@ export interface NotificationArgsProps {
   duration?: number | null;
   icon?: VueNode | (() => VueNode);
   placement?: NotificationPlacement;
+  maxCount?: number;
   style?: CSSProperties;
   prefixCls?: string;
   class?: string;

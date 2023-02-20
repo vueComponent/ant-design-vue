@@ -17,6 +17,7 @@ import { useInjectTabs } from '../TabContext';
 import useTouchMove from '../hooks/useTouchMove';
 import AddButton from './AddButton';
 import type { Key } from '../../../_util/type';
+import { objectType, functionType } from '../../../_util/type';
 import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
 import { onBeforeUnmount, defineComponent, ref, watch, watchEffect, computed } from 'vue';
 import PropTypes from '../../../_util/vue-types';
@@ -36,14 +37,18 @@ export const tabNavListProps = () => {
     tabPosition: { type: String as PropType<TabPosition> },
     activeKey: { type: [String, Number] },
     rtl: { type: Boolean },
-    animated: { type: Object as PropType<AnimatedConfig>, default: undefined as AnimatedConfig },
-    editable: { type: Object as PropType<EditableConfig> },
+    animated: objectType<AnimatedConfig>(),
+    editable: objectType<EditableConfig>(),
     moreIcon: PropTypes.any,
     moreTransitionName: { type: String },
     mobile: { type: Boolean },
     tabBarGutter: { type: Number },
     renderTabBar: { type: Function as PropType<RenderTabBar> },
-    locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
+    locale: objectType<TabsLocale>(),
+    popupClassName: String,
+    getPopupContainer: functionType<
+      ((triggerNode?: HTMLElement | undefined) => HTMLElement) | undefined
+    >(),
     onTabClick: {
       type: Function as PropType<(activeKey: Key, e: MouseEvent | KeyboardEvent) => void>,
     },

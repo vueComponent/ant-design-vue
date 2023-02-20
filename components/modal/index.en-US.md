@@ -36,7 +36,7 @@ When requiring users to interact with the application, but without jumping to a 
 | okText | Text of the OK button | string\|slot | `OK` |  |
 | okType | Button `type` of the OK button | string | `primary` |  |
 | title | The modal dialog's title | string\|slot | - |  |
-| visible | Whether the modal dialog is visible or not | boolean | false |  |
+| open(v-model) | Whether the modal dialog is visible or not | boolean | false |  |
 | width | Width of the modal dialog | string\|number | 520 |  |
 | wrapClassName | The class name of the container of the modal dialog | string | - |  |
 | zIndex | The `z-index` of the Modal | number | 1000 |  |
@@ -74,6 +74,7 @@ The items listed above are all functions, expecting a settings object as paramet
 | class | class of container | string | - |  |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |  |
 | content | Content | string\|VNode \|function(h) | - |  |
+| footer | Footer content, set as `footer: null` when you don't need default buttons | string\|VNode \|function(h) | - | 4.0.0 |
 | icon | custom icon (`Added in 1.14.0`) | VNode \|()=>VNode | - |  |
 | keyboard | Whether support press esc to close | boolean | true |  |
 | mask | Whether show mask or not. | boolean | true |  |
@@ -116,7 +117,7 @@ router.beforeEach((to, from, next) => {
 
 ## FAQ
 
-### Why can't the Modal method obtain global registered components, context, vuex, etc. and ConfigProvider `locale/prefixCls` configuration, and can't update data responsively?
+### Why can't the Modal method obtain global registered components, context, vuex, etc. and ConfigProvider `locale/prefixCls/theme` configuration, and can't update data responsively?
 
 Call the Modal method directly, and the component will dynamically create a new Vue entity through `Vue.render`. Its context is not the same as the context where the current code is located, so the context information cannot be obtained.
 

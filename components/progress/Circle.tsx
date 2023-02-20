@@ -1,31 +1,26 @@
 import type { CSSProperties } from 'vue';
 import { computed, defineComponent } from 'vue';
-import { presetPrimaryColors } from '@ant-design/colors';
 import { Circle as VCCircle } from '../vc-progress';
-import { getSuccessPercent, validProgress } from './utils';
+import { getPercentage, getStrokeColor } from './utils';
 import type { ProgressProps } from './props';
 import { progressProps } from './props';
+import { initDefaultProps } from '../_util/props-util';
+import Tooltip from '../tooltip';
 
 export type CircleProps = ProgressProps;
 
-function getPercentage({ percent, success, successPercent }: CircleProps) {
-  const realSuccessPercent = validProgress(getSuccessPercent({ success, successPercent }));
-  return [realSuccessPercent, validProgress(validProgress(percent) - realSuccessPercent)];
-}
+const CIRCLE_MIN_STROKE_WIDTH = 3;
 
-function getStrokeColor({
-  success = {},
-  strokeColor,
-}: Partial<CircleProps>): (string | Record<string, string>)[] {
-  const { strokeColor: successColor } = success;
-  return [successColor || presetPrimaryColors.green, strokeColor || null!];
-}
+const getMinPercent = (width: number): number => (CIRCLE_MIN_STROKE_WIDTH / width) * 100;
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Circle',
   inheritAttrs: false,
-  props: progressProps(),
+  props: initDefaultProps(progressProps(), {
+    width: 120,
+    trailColor: null as unknown as string,
+  }),
   setup(props, { slots }) {
     const gapDeg = computed(() => {
       // Support gapDeg = 0 when type = 'dashboard'
@@ -39,7 +34,7 @@ export default defineComponent({
     });
 
     const circleStyle = computed<CSSProperties>(() => {
-      const circleSize = props.width || 120;
+      const circleSize = props.width;
       return {
         width: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
         height: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
@@ -47,9 +42,11 @@ export default defineComponent({
       };
     });
 
-    const circleWidth = computed(() => props.strokeWidth || 6);
+    const circleWidth = computed(
+      () => props.strokeWidth ?? Math.max(getMinPercent(props.width), 6),
+    );
     const gapPos = computed(
-      () => props.gapPosition || (props.type === 'dashboard' && 'bottom') || 'top',
+      () => props.gapPosition || (props.type === 'dashboard' && 'bottom') || undefined,
     );
 
     // using className to style stroke color
@@ -65,8 +62,8 @@ export default defineComponent({
       [`${props.prefixCls}-circle-gradient`]: isGradient.value,
     }));
 
-    return () => (
-      <div class={wrapperClassName.value} style={circleStyle.value}>
+    return () => {
+      const circleContent = (
         <VCCircle
           percent={percent.value}
           strokeWidth={circleWidth.value}
@@ -78,8 +75,19 @@ export default defineComponent({
           gapDegree={gapDeg.value}
           gapPosition={gapPos.value}
         />
-        {slots.default?.()}
-      </div>
-    );
+      );
+      return (
+        <div class={wrapperClassName.value} style={circleStyle.value}>
+          {props.width <= 20 ? (
+            <Tooltip v-slots={{ title: slots.default }}>{circleContent}</Tooltip>
+          ) : (
+            <>
+              {circleContent}
+              {slots.default?.()}
+            </>
+          )}
+        </div>
+      );
+    };
   },
 });

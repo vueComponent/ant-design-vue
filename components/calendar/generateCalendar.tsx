@@ -1,5 +1,4 @@
 import useMergedState from '../_util/hooks/useMergedState';
-import padStart from 'lodash-es/padStart';
 import { PickerPanel } from '../vc-picker';
 import type { Locale } from '../vc-picker/interface';
 import type { GenerateConfig } from '../vc-picker/generate';
@@ -14,8 +13,11 @@ import CalendarHeader from './Header';
 import type { VueNode } from '../_util/type';
 import type { App } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
+
+// CSSINJS
+import useStyle from './style';
 
 type InjectDefaultProps<Props> = Omit<
   Props,
@@ -117,6 +119,10 @@ function generateCalendar<
     ],
     setup(props, { emit, slots, attrs }) {
       const { prefixCls, direction } = useConfigInject('picker', props);
+
+      // style
+      const [wrapSSR, hashId] = useStyle(prefixCls);
+
       const calendarPrefixCls = computed(() => `${prefixCls.value}-calendar`);
       const maybeToString = (date: DateType) => {
         return props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
@@ -238,7 +244,7 @@ function generateCalendar<
               )}
             >
               <div class={`${calendarPrefixCls.value}-date-value`}>
-                {padStart(String(generateConfig.getDate(date)), 2, '0')}
+                {String(generateConfig.getDate(date)).padStart(2, '0')}
               </div>
               <div class={`${calendarPrefixCls.value}-date-content`}>
                 {dateCellRender && dateCellRender({ current: date })}
@@ -273,7 +279,7 @@ function generateCalendar<
             </div>
           );
         };
-        return (
+        return wrapSSR(
           <div
             {...attrs}
             class={classNames(
@@ -284,6 +290,7 @@ function generateCalendar<
                 [`${calendarPrefixCls.value}-rtl`]: direction.value === 'rtl',
               },
               attrs.class,
+              hashId.value,
             )}
           >
             {headerRender ? (
@@ -319,7 +326,7 @@ function generateCalendar<
               disabledDate={mergedDisabledDate.value}
               hideHeader
             />
-          </div>
+          </div>,
         );
       };
     },

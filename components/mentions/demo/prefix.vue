@@ -20,12 +20,9 @@ Customize Trigger Token by `prefix` props. Default to `@`, `Array<string>` also 
     v-model:value="value"
     placeholder="input @ to mention people, # to mention tag"
     :prefix="['@', '#']"
+    :options="options"
     @search="onSearch"
-  >
-    <a-mentions-option v-for="val in options" :key="val" :value="val">
-      {{ val }}
-    </a-mentions-option>
-  </a-mentions>
+  ></a-mentions>
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
@@ -38,7 +35,11 @@ export default defineComponent({
     const prefix = ref<string>('@');
     const value = ref<string>('');
     const options = computed(() => {
-      return MOCK_DATA[prefix.value] || [];
+      return (MOCK_DATA[prefix.value] || []).map(value => ({
+        key: value,
+        value,
+        label: value,
+      }));
     });
 
     const onSearch = (_: string, val: string) => {

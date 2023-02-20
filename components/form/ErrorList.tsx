@@ -2,7 +2,7 @@ import { useInjectFormItemPrefix } from './context';
 import type { VueNode } from '../_util/type';
 import { computed, defineComponent, ref, watch } from 'vue';
 import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import collapseMotion from '../_util/collapseMotion';
 
 export interface ErrorListProps {

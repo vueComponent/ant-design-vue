@@ -14,6 +14,7 @@
     <show-count />
     <textarea-resize />
     <borderlessVue />
+    <statusVue />
   </demo-sort>
 </template>
 
@@ -32,6 +33,7 @@ import ShowCount from './show-count.vue';
 import Addon from './addon.vue';
 import Tooltip from './tooltip.vue';
 import borderlessVue from './borderless.vue';
+import statusVue from './status.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -40,6 +42,7 @@ export default defineComponent({
   CN,
   US,
   components: {
+    statusVue,
     Basic,
     AutosizeTextarea,
     Presuffix,

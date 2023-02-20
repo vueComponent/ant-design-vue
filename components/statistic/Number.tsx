@@ -1,4 +1,3 @@
-import padEnd from 'lodash-es/padEnd';
 import type { FunctionalComponent, VNodeTypes } from 'vue';
 import type { FormatConfig, valueType } from './utils';
 
@@ -27,7 +26,7 @@ const StatisticNumber: FunctionalComponent<NumberProps> = props => {
 
       int = int.replace(/\B(?=(\d{3})+(?!\d))/g, groupSeparator);
       if (typeof precision === 'number') {
-        decimal = padEnd(decimal, precision, '0').slice(0, precision);
+        decimal = decimal.padEnd(precision, '0').slice(0, precision > 0 ? precision : 0);
       }
 
       if (decimal) {

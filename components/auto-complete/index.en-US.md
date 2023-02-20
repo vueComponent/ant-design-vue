@@ -40,6 +40,7 @@ The differences with Select are:
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 3.0 |
 | options | Data source for autocomplete | [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
 | placeholder | placeholder of input | string | - |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | v-model:value | selected option | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | - |  |
 
 ### events
@@ -52,6 +53,7 @@ The differences with Select are:
 | focus | Called when entering the component | function() |  |  |
 | search | Called when searching items. | function(value) | - |  |
 | select | Called when a option is selected. param is option's value and option instance. | function(value, option) |  |  |
+| clear | Called when clear | function | - | 3.3.0 |
 
 ## Methods
 

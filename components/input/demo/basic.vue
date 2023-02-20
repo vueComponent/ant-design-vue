@@ -16,15 +16,26 @@ Basic usage example.
 
 </docs>
 <template>
-  <a-input v-model:value="value" placeholder="Basic usage" />
+  <a-space direction="vertical">
+    <a-input v-model:value="value" placeholder="Basic usage" />
+    <a-input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
+  </a-space>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { watch, defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     const value = ref<string>('');
+    const value1 = ref<string>('');
+    watch(value, () => {
+      console.log(value.value);
+    });
+    watch(value1, () => {
+      console.log(value1.value);
+    });
     return {
       value,
+      value1,
     };
   },
 });

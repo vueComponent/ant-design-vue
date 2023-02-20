@@ -28,15 +28,16 @@ The difference with the 'confirm' modal dialog is that it's more lightweight tha
 | okType | Button `type` of the Confirm button | string | `primary` |  |
 | showCancel | Show cancel button | boolean | true | 3.0 |
 | title | title of the confirmation box | string\|slot | - |  |
+| description | The description of the confirmation box title | string\|slot | - | 4.0 |
 | visible (v-model) | hide or show | boolean | - |  |
 
 ### events
 
-| Events Name | Description | Arguments |  |
-| --- | --- | --- | --- |
-| cancel | callback of cancel | function(e) | - |
-| confirm | callback of confirmation | function(e) | - |
-| visibleChange | Callback executed when visibility of the tooltip card is changed | function(visible) | - |
+| Events Name | Description | Arguments | Version |
+| --- | --- | --- | --- | --- |
+| cancel | callback of cancel | function(e) | - |  |
+| confirm | callback of confirmation | function(e) | - |  |
+| openChange | Callback executed when visibility of the tooltip card is changed | function(open) | - | 4.0 |
 
 Consult [Tooltip's documentation](/components/tooltip/#API) to find more APIs.
 

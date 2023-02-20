@@ -32,6 +32,10 @@ export interface scrollLockOptions {
   container: HTMLElement;
 }
 
+interface Point {
+  x: number;
+  y: number;
+}
 const DrawerChild = defineComponent({
   compatConfig: { MODE: 3 },
   inheritAttrs: false,
@@ -42,7 +46,7 @@ const DrawerChild = defineComponent({
       startPos: {
         x: null,
         y: null,
-      },
+      } as Point | null,
     });
     let timeout;
     const contentWrapper = ref<HTMLElement>();
@@ -137,6 +141,8 @@ const DrawerChild = defineComponent({
 
     const removeStartHandler = (e: TouchEvent) => {
       if (e.touches.length > 1) {
+        // need clear the startPos when another touch event happens
+        state.startPos = null;
         return;
       }
       state.startPos = {
@@ -146,7 +152,8 @@ const DrawerChild = defineComponent({
     };
 
     const removeMoveHandler = (e: TouchEvent) => {
-      if (e.changedTouches.length > 1) {
+      // the startPos may be null or undefined
+      if (e.changedTouches.length > 1 || !state.startPos) {
         return;
       }
       const currentTarget = e.currentTarget as HTMLElement;

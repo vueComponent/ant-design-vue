@@ -7,10 +7,11 @@ import PropTypes from '../_util/vue-types';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint, ScreenSizeMap } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
-import { useInjectSize } from '../_util/hooks/useSize';
 import eagerComputed from '../_util/eagerComputed';
+import useStyle from './style';
+import { useInjectSize } from './SizeContext';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
@@ -51,7 +52,7 @@ const Avatar = defineComponent({
     const avatarNodeRef = ref<HTMLElement>(null);
 
     const { prefixCls } = useConfigInject('avatar', props);
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const groupSize = useInjectSize();
     const size = computed(() => {
       return props.size === 'default' ? groupSize.value : props.size;
@@ -141,6 +142,7 @@ const Avatar = defineComponent({
         [`${pre}-${shape}`]: shape,
         [`${pre}-image`]: src && isImgExist.value,
         [`${pre}-icon`]: icon,
+        [hashId.value]: true,
       };
 
       const sizeStyle: CSSProperties =
@@ -199,7 +201,7 @@ const Avatar = defineComponent({
           </span>
         );
       }
-      return (
+      return wrapSSR(
         <span
           {...attrs}
           ref={avatarNodeRef}
@@ -207,7 +209,7 @@ const Avatar = defineComponent({
           style={[sizeStyle, responsiveSizeStyle(!!icon), attrs.style as CSSProperties]}
         >
           {childrenToRender}
-        </span>
+        </span>,
       );
     };
   },

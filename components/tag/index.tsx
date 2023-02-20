@@ -5,21 +5,22 @@ import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
 import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
-import { PresetColorTypes, PresetStatusColorTypes } from '../_util/colors';
+import { isPresetColor, isPresetStatusColor } from '../_util/colors';
 import type { LiteralUnion } from '../_util/type';
 import CheckableTag from './CheckableTag';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+import warning from '../_util/warning';
 
-const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
-const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
+import useStyle from './style';
 
 export const tagProps = () => ({
   prefixCls: String,
   color: {
-    type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
+    type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType>>,
   },
   closable: { type: Boolean, default: false },
   closeIcon: PropTypes.any,
+  /** @deprecated `visible` will be removed in next major version. */
   visible: { type: Boolean, default: undefined },
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
@@ -33,13 +34,25 @@ export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<type
 const Tag = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ATag',
+  inheritAttrs: false,
   props: tagProps(),
   // emits: ['update:visible', 'close'],
   slots: ['closeIcon', 'icon'],
   setup(props: TagProps, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('tag', props);
 
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const visible = ref(true);
+
+    // Warning for deprecated usage
+    if (process.env.NODE_ENV !== 'production') {
+      warning(
+        !('visible' in props),
+        'Tag',
+        '`visible` is deprecated, please use `<Tag v-show="visible" />` instead.',
+      );
+    }
 
     watchEffect(() => {
       if (props.visible !== undefined) {
@@ -60,18 +73,22 @@ const Tag = defineComponent({
       }
     };
 
-    const isPresetColor = computed(() => {
-      const { color } = props;
-      if (!color) {
-        return false;
-      }
-      return PresetColorRegex.test(color) || PresetStatusColorRegex.test(color);
-    });
+    // const isPresetColor = computed(() => {
+    //   const { color } = props;
+    //   if (!color) {
+    //     return false;
+    //   }
+    //   return PresetColorRegex.test(color) || PresetStatusColorRegex.test(color);
+    // });
+
+    const isInternalColor = computed(
+      () => isPresetColor(props.color) || isPresetStatusColor(props.color),
+    );
 
     const tagClassName = computed(() =>
-      classNames(prefixCls.value, {
-        [`${prefixCls.value}-${props.color}`]: isPresetColor.value,
-        [`${prefixCls.value}-has-color`]: props.color && !isPresetColor.value,
+      classNames(prefixCls.value, hashId.value, {
+        [`${prefixCls.value}-${props.color}`]: isInternalColor.value,
+        [`${prefixCls.value}-has-color`]: props.color && !isInternalColor.value,
         [`${prefixCls.value}-hidden`]: !visible.value,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       }),
@@ -99,7 +116,7 @@ const Tag = defineComponent({
       };
 
       const tagStyle = {
-        backgroundColor: color && !isPresetColor.value ? color : undefined,
+        backgroundColor: color && !isInternalColor.value ? color : undefined,
       };
 
       const iconNode = icon || null;
@@ -116,13 +133,13 @@ const Tag = defineComponent({
       const isNeedWave = 'onClick' in attrs;
 
       const tagNode = (
-        <span class={tagClassName.value} style={tagStyle}>
+        <span {...attrs} class={tagClassName.value} style={tagStyle}>
           {kids}
           {renderCloseIcon()}
         </span>
       );
 
-      return isNeedWave ? <Wave>{tagNode}</Wave> : tagNode;
+      return wrapSSR(isNeedWave ? <Wave>{tagNode}</Wave> : tagNode);
     };
   },
 });

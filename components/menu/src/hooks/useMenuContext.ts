@@ -13,15 +13,14 @@ import type { CSSMotionProps } from '../../../_util/transition';
 export interface StoreMenuInfo {
   eventKey: string;
   key: Key;
-  parentEventKeys: ComputedRef<string[]>;
+  parentEventKeys: Ref<string[]>;
   childrenEventKeys?: Ref<string[]>;
   isLeaf?: boolean;
-  parentKeys: ComputedRef<Key[]>;
+  parentKeys: Ref<Key[]>;
 }
 export interface MenuContextProps {
   isRootMenu: Ref<boolean>;
-
-  store: Ref<Record<string, StoreMenuInfo>>;
+  rootClassName: Ref<string>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;
@@ -32,7 +31,7 @@ export interface MenuContextProps {
   rtl?: ComputedRef<boolean>;
 
   inlineCollapsed: Ref<boolean>;
-  antdMenuTheme?: ComputedRef<MenuTheme>;
+  theme?: ComputedRef<MenuTheme>;
 
   siderCollapsed?: ComputedRef<boolean>;
 

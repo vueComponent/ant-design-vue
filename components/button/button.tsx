@@ -12,19 +12,21 @@ import {
 import Wave from '../_util/wave';
 import buttonProps from './buttonTypes';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import LoadingIcon from './LoadingIcon';
-
+import useStyle from './style';
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
+import { GroupSizeContext } from './button-group';
+import { useCompactItemContext } from '../space/Compact';
 
 type Loading = boolean | number;
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 
-function isUnborderedButtonType(type: ButtonType | undefined) {
+function isUnBorderedButtonType(type: ButtonType | undefined) {
   return type === 'text' || type === 'link';
 }
 export { buttonProps };
@@ -38,7 +40,8 @@ export default defineComponent({
   // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const { size: groupSize } = GroupSizeContext.useInject();
     const buttonNodeRef = ref<HTMLElement>(null);
     const delayTimeoutRef = ref(undefined);
     let isNeedInserted = false;
@@ -47,6 +50,7 @@ export default defineComponent({
     const hasTwoCNChar = ref(false);
 
     const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
 
     // =============== Update Loading ===============
     const loadingOrDelay = computed(() =>
@@ -77,21 +81,25 @@ export default defineComponent({
       const pre = prefixCls.value;
 
       const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
-      const sizeFullname = size.value;
+      const sizeFullname = compactSize.value || groupSize?.value || size.value;
       const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
 
-      return {
-        [`${pre}`]: true,
-        [`${pre}-${type}`]: type,
-        [`${pre}-${shape}`]: shape !== 'default' && shape,
-        [`${pre}-${sizeCls}`]: sizeCls,
-        [`${pre}-loading`]: innerLoading.value,
-        [`${pre}-background-ghost`]: ghost && !isUnborderedButtonType(type),
-        [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
-        [`${pre}-block`]: block,
-        [`${pre}-dangerous`]: !!danger,
-        [`${pre}-rtl`]: direction.value === 'rtl',
-      };
+      return [
+        compactItemClassnames.value,
+        {
+          [hashId.value]: true,
+          [`${pre}`]: true,
+          [`${pre}-${shape}`]: shape !== 'default' && shape,
+          [`${pre}-${type}`]: type,
+          [`${pre}-${sizeCls}`]: sizeCls,
+          [`${pre}-loading`]: innerLoading.value,
+          [`${pre}-background-ghost`]: ghost && !isUnBorderedButtonType(type),
+          [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
+          [`${pre}-block`]: block,
+          [`${pre}-dangerous`]: !!danger,
+          [`${pre}-rtl`]: direction.value === 'rtl',
+        },
+      ];
     });
 
     const fixTwoCNChar = () => {
@@ -118,6 +126,9 @@ export default defineComponent({
       }
       emit('click', event);
     };
+    const handleMousedown = (event: Event) => {
+      emit('mousedown', event);
+    };
 
     const insertSpace = (child: VNode, needInserted: boolean) => {
       const SPACE = needInserted ? ' ' : '';
@@ -133,7 +144,7 @@ export default defineComponent({
 
     watchEffect(() => {
       devWarning(
-        !(props.ghost && isUnborderedButtonType(props.type)),
+        !(props.ghost && isUnBorderedButtonType(props.type)),
         'Button',
         "`link` or `text` button can't be a `ghost` button.",
       );
@@ -150,9 +161,9 @@ export default defineComponent({
       const { icon = slots.icon?.() } = props;
       const children = flattenChildren(slots.default?.());
 
-      isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
+      isNeedInserted = children.length === 1 && !icon && !isUnBorderedButtonType(props.type);
 
-      const { type, htmlType, disabled, href, title, target, onMousedown } = props;
+      const { type, htmlType, disabled, href, title, target } = props;
 
       const iconType = innerLoading.value ? 'loading' : icon;
       const buttonProps = {
@@ -165,13 +176,12 @@ export default defineComponent({
           { [`${prefixCls.value}-icon-only`]: children.length === 0 && !!iconType },
         ],
         onClick: handleClick,
-        onMousedown,
+        onMousedown: handleMousedown,
       };
       // https://github.com/vueComponent/ant-design-vue/issues/4930
       if (!disabled) {
         delete buttonProps.disabled;
       }
-
       const iconNode =
         icon && !innerLoading.value ? (
           icon
@@ -188,30 +198,30 @@ export default defineComponent({
       );
 
       if (href !== undefined) {
-        return (
+        return wrapSSR(
           <a {...buttonProps} href={href} target={target} ref={buttonNodeRef}>
             {iconNode}
             {kids}
-          </a>
+          </a>,
         );
       }
 
-      const buttonNode = (
+      let buttonNode = (
         <button {...buttonProps} ref={buttonNodeRef} type={htmlType}>
           {iconNode}
           {kids}
         </button>
       );
 
-      if (isUnborderedButtonType(type)) {
-        return buttonNode;
+      if (!isUnBorderedButtonType(type)) {
+        buttonNode = (
+          <Wave ref="wave" disabled={!!innerLoading.value}>
+            {buttonNode}
+          </Wave>
+        );
       }
 
-      return (
-        <Wave ref="wave" disabled={!!innerLoading.value}>
-          {buttonNode}
-        </Wave>
-      );
+      return wrapSSR(buttonNode);
     };
   },
 });

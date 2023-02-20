@@ -58,7 +58,16 @@ A simple playground for column count and gutter.
       >
         <div>Column</div>
       </a-col>
-
+      <a-col
+        v-for="item in colCounts[colCountKey]"
+        :key="item.toString()"
+        :span="24 / colCounts[colCountKey]"
+      >
+        <div>Column</div>
+      </a-col>
+    </a-row>
+    Another Row:
+    <a-row :gutter="[gutters[gutterKey], vgutters[vgutterKey]]">
       <a-col
         v-for="item in colCounts[colCountKey]"
         :key="item.toString()"
@@ -119,23 +128,27 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-#components-grid-demo-playground :deep(.ant-col) {
+:deep(#components-grid-demo-playground) [class~='ant-col'] {
   background: transparent;
   border: 0;
 }
-#components-grid-demo-playground :deep(.ant-col) > div {
-  background: #00a0e9;
+:deep(#components-grid-demo-playground) [class~='ant-col'] > div {
   height: 120px;
+  font-size: 14px;
   line-height: 120px;
-  font-size: 13px;
+  background: #0092ff;
+  border-radius: 4px;
 }
-#components-grid-demo-playground pre {
+:deep(#components-grid-demo-playground) pre {
+  padding: 8px 16px;
+  font-size: 13px;
   background: #f9f9f9;
   border-radius: 6px;
-  font-size: 13px;
-  padding: 8px 16px;
 }
-[data-theme='dark'] #components-grid-demo-playground pre {
-  background: #2f2f2f;
+:deep(#components-grid-demo-playground) pre.demo-code {
+  direction: ltr;
+}
+:deep(#components-grid-demo-playground) .ant-col {
+  padding: 0;
 }
 </style>

@@ -1,19 +1,19 @@
-import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
-import type { TableLocale } from '../../interface';
+import type { FilterSearchType, TableLocale } from '../../interface';
 import Input from '../../../input';
+import { stringType, someType, functionType, objectType } from '../../../_util/type';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'FilterSearch',
   inheritAttrs: false,
   props: {
-    value: String,
-    onChange: Function as PropType<(e: InputEvent) => void>,
-    filterSearch: Boolean,
-    tablePrefixCls: String,
-    locale: { type: Object as PropType<TableLocale>, default: undefined as TableLocale },
+    value: stringType(),
+    onChange: functionType<(e: InputEvent) => void>(),
+    filterSearch: someType<FilterSearchType>([Boolean, Function]),
+    tablePrefixCls: stringType(),
+    locale: objectType<TableLocale>(),
   },
   setup(props) {
     return () => {

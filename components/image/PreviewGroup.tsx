@@ -1,6 +1,6 @@
 import PreviewGroup from '../vc-image/src/PreviewGroup';
 import { computed, defineComponent } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 import RotateLeftOutlined from '@ant-design/icons-vue/RotateLeftOutlined';
 import RotateRightOutlined from '@ant-design/icons-vue/RotateRightOutlined';

@@ -18,12 +18,7 @@ Custom modal content render. use `vueuse` implements draggable.
 <template>
   <div>
     <a-button type="primary" @click="showModal">Open Modal</a-button>
-    <a-modal
-      ref="modalRef"
-      v-model:visible="visible"
-      :wrap-style="{ overflow: 'hidden' }"
-      @ok="handleOk"
-    >
+    <a-modal ref="modalRef" v-model:open="open" :wrap-style="{ overflow: 'hidden' }" @ok="handleOk">
       <p>Some contents...</p>
       <p>Some contents...</p>
       <p>Some contents...</p>
@@ -43,15 +38,15 @@ import { defineComponent, ref, computed, CSSProperties, watch, watchEffect } fro
 import { useDraggable } from '@vueuse/core';
 export default defineComponent({
   setup() {
-    const visible = ref<boolean>(false);
+    const open = ref<boolean>(false);
     const modalTitleRef = ref<HTMLElement>(null);
     const showModal = () => {
-      visible.value = true;
+      open.value = true;
     };
     const { x, y, isDragging } = useDraggable(modalTitleRef);
     const handleOk = (e: MouseEvent) => {
       console.log(e);
-      visible.value = false;
+      open.value = false;
     };
     const startX = ref<number>(0);
     const startY = ref<number>(0);
@@ -98,7 +93,7 @@ export default defineComponent({
       };
     });
     return {
-      visible,
+      open,
       showModal,
       handleOk,
       modalTitleRef,

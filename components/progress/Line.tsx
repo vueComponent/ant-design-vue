@@ -53,7 +53,10 @@ export const sortGradient = (gradients: StringGradients) => {
  *     "100%": "#ffffff"
  *   }
  */
-export const handleGradient = (strokeColor: ProgressGradient, directionConfig: Direction) => {
+export const handleGradient = (
+  strokeColor: ProgressGradient,
+  directionConfig?: Direction,
+): CSSProperties => {
   const {
     from = presetPrimaryColors.blue,
     to = presetPrimaryColors.blue,
@@ -70,18 +73,19 @@ export const handleGradient = (strokeColor: ProgressGradient, directionConfig: D
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Line',
+  inheritAttrs: false,
   props: lineProps(),
-  setup(props, { slots }) {
-    const backgroundProps = computed(() => {
+  setup(props, { slots, attrs }) {
+    const backgroundProps = computed<CSSProperties>(() => {
       const { strokeColor, direction } = props;
       return strokeColor && typeof strokeColor !== 'string'
         ? handleGradient(strokeColor, direction)
         : {
-            background: strokeColor,
+            backgroundColor: strokeColor as string,
           };
     });
 
-    const trailStyle = computed(() =>
+    const trailStyle = computed<CSSProperties>(() =>
       props.trailColor
         ? {
             backgroundColor: props.trailColor,
@@ -94,7 +98,7 @@ export default defineComponent({
       return {
         width: `${validProgress(percent)}%`,
         height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : '',
+        borderRadius: strokeLinecap === 'square' ? 0 : undefined,
         ...(backgroundProps.value as any),
       };
     });
@@ -107,14 +111,14 @@ export default defineComponent({
       return {
         width: `${validProgress(successPercent.value)}%`,
         height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : '',
+        borderRadius: strokeLinecap === 'square' ? 0 : undefined,
         backgroundColor: success?.strokeColor,
       };
     });
 
     return () => (
       <>
-        <div class={`${props.prefixCls}-outer`}>
+        <div {...attrs} class={[`${props.prefixCls}-outer`, attrs.class]}>
           <div class={`${props.prefixCls}-inner`} style={trailStyle.value}>
             <div class={`${props.prefixCls}-bg`} style={percentStyle.value} />
             {successPercent.value !== undefined ? (

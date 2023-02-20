@@ -26,7 +26,7 @@ Slides use fade for transition.
 </template>
 <style scoped>
 /* For demo */
-.ant-carousel :deep(.slick-slide) {
+:deep(.slick-slide) {
   text-align: center;
   height: 160px;
   line-height: 160px;
@@ -34,7 +34,7 @@ Slides use fade for transition.
   overflow: hidden;
 }
 
-.ant-carousel :deep(.slick-slide h3) {
+:deep(.slick-slide h3) {
   color: #fff;
 }
 </style>

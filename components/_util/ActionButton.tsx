@@ -5,6 +5,8 @@ import type { ButtonProps } from '../button';
 import type { LegacyButtonType } from '../button/buttonTypes';
 import { convertLegacyProps } from '../button/buttonTypes';
 import useDestroyed from './hooks/useDestroyed';
+import { objectType } from './type';
+import { findDOMNode } from './props-util';
 
 const actionButtonProps = {
   type: {
@@ -14,15 +16,15 @@ const actionButtonProps = {
   close: Function,
   autofocus: Boolean,
   prefixCls: String,
-  buttonProps: Object as PropType<ButtonProps>,
+  buttonProps: objectType<ButtonProps>(),
   emitEvent: Boolean,
   quitOnNullishReturnValue: Boolean,
 };
 
 export type ActionButtonProps = ExtractPropTypes<typeof actionButtonProps>;
 
-function isThenable(thing?: PromiseLike<any>): boolean {
-  return !!(thing && !!thing.then);
+function isThenable<T>(thing?: PromiseLike<T>): boolean {
+  return !!(thing && thing.then);
 }
 
 export default defineComponent({
@@ -37,15 +39,18 @@ export default defineComponent({
     const isDestroyed = useDestroyed();
     onMounted(() => {
       if (props.autofocus) {
-        timeoutId = setTimeout(() => buttonRef.value.$el?.focus());
+        timeoutId = setTimeout(() => findDOMNode(buttonRef.value)?.focus?.());
       }
     });
     onBeforeUnmount(() => {
       clearTimeout(timeoutId);
     });
 
+    const onInternalClose = (...args: any[]) => {
+      props.close?.(...args);
+    };
+
     const handlePromiseOnOk = (returnValueOfOnOk?: PromiseLike<any>) => {
-      const { close } = props;
       if (!isThenable(returnValueOfOnOk)) {
         return;
       }
@@ -55,48 +60,46 @@ export default defineComponent({
           if (!isDestroyed.value) {
             loading.value = false;
           }
-          close(...args);
+          onInternalClose(...args);
           clickedRef.value = false;
         },
         (e: Error) => {
-          // Emit error when catch promise reject
-          // eslint-disable-next-line no-console
-          console.error(e);
           // See: https://github.com/ant-design/ant-design/issues/6183
           if (!isDestroyed.value) {
             loading.value = false;
           }
           clickedRef.value = false;
+          return Promise.reject(e);
         },
       );
     };
 
     const onClick = (e: MouseEvent) => {
-      const { actionFn, close = () => {} } = props;
+      const { actionFn } = props;
       if (clickedRef.value) {
         return;
       }
       clickedRef.value = true;
       if (!actionFn) {
-        close();
+        onInternalClose();
         return;
       }
-      let returnValueOfOnOk;
+      let returnValueOfOnOk: PromiseLike<any>;
       if (props.emitEvent) {
         returnValueOfOnOk = actionFn(e);
         if (props.quitOnNullishReturnValue && !isThenable(returnValueOfOnOk)) {
           clickedRef.value = false;
-          close(e);
+          onInternalClose(e);
           return;
         }
       } else if (actionFn.length) {
-        returnValueOfOnOk = actionFn(close);
+        returnValueOfOnOk = actionFn(props.close);
         // https://github.com/ant-design/ant-design/issues/23358
         clickedRef.value = false;
       } else {
         returnValueOfOnOk = actionFn();
         if (!returnValueOfOnOk) {
-          close();
+          onInternalClose();
           return;
         }
       }

@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import PropTypes from '../_util/vue-types';
 
 export const listItemMetaProps = () => ({

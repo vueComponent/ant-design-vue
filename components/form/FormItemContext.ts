@@ -10,6 +10,8 @@ import {
   defineComponent,
 } from 'vue';
 import devWarning from '../vc-util/devWarning';
+import createContext from '../_util/createContext';
+import type { ValidateStatus } from './FormItem';
 
 export type FormItemContext = {
   id: ComputedRef<string>;
@@ -99,6 +101,25 @@ export default defineComponent({
   setup(_, { slots }) {
     provide(InternalContextKey, defaultInternalContext);
     provide(ContextKey, defaultContext);
+    return () => {
+      return slots.default?.();
+    };
+  },
+});
+
+export interface FormItemStatusContextProps {
+  isFormItemInput?: boolean;
+  status?: ValidateStatus;
+  hasFeedback?: boolean;
+  feedbackIcon?: any;
+}
+
+export const FormItemInputContext = createContext<FormItemStatusContextProps>({});
+
+export const NoFormStatus = defineComponent({
+  name: 'NoFormStatus',
+  setup(_, { slots }) {
+    FormItemInputContext.useProvide({});
     return () => {
       return slots.default?.();
     };

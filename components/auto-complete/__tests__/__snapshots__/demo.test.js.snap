@@ -62,6 +62,35 @@ exports[`renders ./components/auto-complete/demo/options.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/auto-complete/demo/status.vue correctly 1`] = `
+<div class="ant-space ant-space-vertical" style="width: 100%;">
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div style="width: 200px;" status="error" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-show-search">
+      <!---->
+      <!---->
+      <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
+        <!----><span class="ant-select-selection-placeholder">input here</span>
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div style="width: 200px;" status="warning" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-allow-clear ant-select-show-search">
+      <!---->
+      <!---->
+      <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
+        <!----><span class="ant-select-selection-placeholder">input here</span>
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/auto-complete/demo/uncertain-category.vue correctly 1`] = `
 <div class="global-search-wrapper" style="width: 300px;">
   <div style="width: 300px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-customize-input ant-select-show-search">

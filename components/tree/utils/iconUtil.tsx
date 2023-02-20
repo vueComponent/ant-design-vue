@@ -14,8 +14,9 @@ export interface SwitcherIconProps extends AntTreeNodeProps {
 export default function renderSwitcherIcon(
   prefixCls: string,
   switcherIcon: any,
-  showLine: boolean | { showLeafIcon: boolean } | undefined,
   props: SwitcherIconProps,
+  leafIcon?: (props: SwitcherIconProps) => any,
+  showLine?: boolean | { showLeafIcon: boolean } | undefined,
 ) {
   const { isLeaf, expanded, loading } = props;
   let icon = switcherIcon;
@@ -29,12 +30,16 @@ export default function renderSwitcherIcon(
   let defaultIcon = null;
   const switcherCls = `${prefixCls}-switcher-icon`;
   if (isLeaf) {
-    if (showLine) {
-      if (typeof showLine === 'object' && !showLeafIcon) {
-        defaultIcon = <span class={`${prefixCls}-switcher-leaf-line`} />;
-      } else {
-        defaultIcon = <FileOutlined class={`${prefixCls}-switcher-line-icon`} />;
-      }
+    if (!showLine) {
+      return null;
+    }
+    if (showLeafIcon && leafIcon) {
+      return leafIcon(props);
+    }
+    if (typeof showLine === 'object' && !showLeafIcon) {
+      defaultIcon = <span class={`${prefixCls}-switcher-leaf-line`} />;
+    } else {
+      defaultIcon = <FileOutlined class={`${prefixCls}-switcher-line-icon`} />;
     }
     return defaultIcon;
   } else {

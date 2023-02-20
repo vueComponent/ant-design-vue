@@ -95,7 +95,7 @@ export default defineComponent({
     });
     const rules: Record<string, Rule[]> = {
       name: [
-        { required: true, message: 'Please input Activity name', trigger: 'blur' },
+        { required: true, message: 'Please input Activity name', trigger: 'change' },
         { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
       ],
       region: [{ required: true, message: 'Please select Activity zone', trigger: 'change' }],
@@ -126,8 +126,8 @@ export default defineComponent({
     };
     return {
       formRef,
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
+      labelCol: { span: 5 },
+      wrapperCol: { span: 13 },
       other: '',
       formState,
       rules,

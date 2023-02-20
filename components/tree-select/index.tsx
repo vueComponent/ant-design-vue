@@ -1,4 +1,4 @@
-import type { App, ExtractPropTypes, PropType } from 'vue';
+import type { App, ExtractPropTypes } from 'vue';
 import { computed, ref, watchEffect, defineComponent } from 'vue';
 import VcTreeSelect, {
   TreeNode,
@@ -28,6 +28,11 @@ import type { SelectCommonPlacement } from '../_util/transition';
 import { getTransitionDirection } from '../_util/transition';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import { booleanType, stringType, objectType, someType, functionType } from '../_util/type';
+
+// CSSINJS
+import useSelectStyle from '../select/style';
+import useStyle from './style';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -62,15 +67,15 @@ export function treeSelectProps<
       'customSlots',
     ]),
     suffixIcon: PropTypes.any,
-    size: { type: String as PropType<SizeType> },
-    bordered: { type: Boolean, default: undefined },
-    treeLine: { type: [Boolean, Object] as PropType<TreeProps['showLine']>, default: undefined },
-    replaceFields: { type: Object as PropType<FieldNames> },
-    placement: String as PropType<SelectCommonPlacement>,
-    status: String as PropType<InputStatus>,
-    'onUpdate:value': { type: Function as PropType<(value: any) => void> },
-    'onUpdate:treeExpandedKeys': { type: Function as PropType<(keys: Key[]) => void> },
-    'onUpdate:searchValue': { type: Function as PropType<(value: string) => void> },
+    size: stringType<SizeType>(),
+    bordered: booleanType(),
+    treeLine: someType<TreeProps['showLine']>([Boolean, Object]),
+    replaceFields: objectType<FieldNames>(),
+    placement: stringType<SelectCommonPlacement>(),
+    status: stringType<InputStatus>(),
+    'onUpdate:value': functionType<(value: any) => void>(),
+    'onUpdate:treeExpandedKeys': functionType<(keys: Key[]) => void>(),
+    'onUpdate:searchValue': functionType<(value: string) => void>(),
   };
 }
 export type TreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof treeSelectProps>>>;
@@ -149,10 +154,19 @@ const TreeSelect = defineComponent({
     const treePrefixCls = computed(() => getPrefixCls('select-tree', props.prefixCls));
     const treeSelectPrefixCls = computed(() => getPrefixCls('tree-select', props.prefixCls));
 
+    // style
+    const [wrapSelectSSR, hashId] = useSelectStyle(prefixCls);
+    const [wrapTreeSelectSSR] = useStyle(treeSelectPrefixCls, treePrefixCls);
+
     const mergedDropdownClassName = computed(() =>
-      classNames(props.dropdownClassName, `${treeSelectPrefixCls.value}-dropdown`, {
-        [`${treeSelectPrefixCls.value}-dropdown-rtl`]: direction.value === 'rtl',
-      }),
+      classNames(
+        props.dropdownClassName,
+        `${treeSelectPrefixCls.value}-dropdown`,
+        {
+          [`${treeSelectPrefixCls.value}-dropdown-rtl`]: direction.value === 'rtl',
+        },
+        hashId.value,
+      ),
     );
 
     const isMultiple = computed(() => !!(props.treeCheckable || props.multiple));
@@ -249,62 +263,65 @@ const TreeSelect = defineComponent({
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value, hasFeedback),
         attrs.class,
+        hashId.value,
       );
       const otherProps: any = {};
       if (props.treeData === undefined && slots.default) {
         otherProps.children = flattenChildren(slots.default());
       }
-      return (
-        <VcTreeSelect
-          {...attrs}
-          {...selectProps}
-          virtual={virtual.value}
-          dropdownMatchSelectWidth={dropdownMatchSelectWidth.value}
-          id={id}
-          fieldNames={fieldNames}
-          ref={treeSelectRef}
-          prefixCls={prefixCls.value}
-          class={mergedClassName}
-          listHeight={listHeight}
-          listItemHeight={listItemHeight}
-          treeLine={!!treeLine}
-          inputIcon={suffixIcon}
-          multiple={multiple}
-          removeIcon={removeIcon}
-          clearIcon={clearIcon}
-          switcherIcon={(nodeProps: SwitcherIconProps) =>
-            renderSwitcherIcon(
-              treePrefixCls.value,
-              switcherIcon,
-              nodeProps,
-              slots.leafIcon,
-              treeLine,
-            )
-          }
-          showTreeIcon={treeIcon as any}
-          notFoundContent={mergedNotFound}
-          getPopupContainer={getPopupContainer.value}
-          treeMotion={null}
-          dropdownClassName={mergedDropdownClassName.value}
-          choiceTransitionName={choiceTransitionName.value}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          onSearch={handleSearch}
-          onTreeExpand={handleTreeExpand}
-          v-slots={{
-            ...slots,
-            treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
-          }}
-          {...otherProps}
-          transitionName={transitionName.value}
-          customSlots={{
-            ...slots,
-            treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
-          }}
-          maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
-          placement={placement.value}
-          showArrow={hasFeedback || showArrow}
-        />
+      return wrapSelectSSR(
+        wrapTreeSelectSSR(
+          <VcTreeSelect
+            {...attrs}
+            {...selectProps}
+            virtual={virtual.value}
+            dropdownMatchSelectWidth={dropdownMatchSelectWidth.value}
+            id={id}
+            fieldNames={fieldNames}
+            ref={treeSelectRef}
+            prefixCls={prefixCls.value}
+            class={mergedClassName}
+            listHeight={listHeight}
+            listItemHeight={listItemHeight}
+            treeLine={!!treeLine}
+            inputIcon={suffixIcon}
+            multiple={multiple}
+            removeIcon={removeIcon}
+            clearIcon={clearIcon}
+            switcherIcon={(nodeProps: SwitcherIconProps) =>
+              renderSwitcherIcon(
+                treePrefixCls.value,
+                switcherIcon,
+                nodeProps,
+                slots.leafIcon,
+                treeLine,
+              )
+            }
+            showTreeIcon={treeIcon as any}
+            notFoundContent={mergedNotFound}
+            getPopupContainer={getPopupContainer.value}
+            treeMotion={null}
+            dropdownClassName={mergedDropdownClassName.value}
+            choiceTransitionName={choiceTransitionName.value}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            onSearch={handleSearch}
+            onTreeExpand={handleTreeExpand}
+            v-slots={{
+              ...slots,
+              treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
+            }}
+            {...otherProps}
+            transitionName={transitionName.value}
+            customSlots={{
+              ...slots,
+              treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
+            }}
+            maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
+            placement={placement.value}
+            showArrow={hasFeedback || showArrow}
+          />,
+        ),
       );
     };
   },

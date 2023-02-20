@@ -8,7 +8,7 @@ export default defineComponent({
   name: 'ARadioButton',
   props: radioProps(),
   setup(props, { slots }) {
-    const { prefixCls } = useConfigInject('radio-button', props);
+    const { prefixCls } = useConfigInject('radio', props);
     useProvideRadioOptionTypeContext('button');
     return () => {
       return (

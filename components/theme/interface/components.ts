@@ -15,7 +15,7 @@ import type { ComponentToken as DividerComponentToken } from '../../divider/styl
 import type { ComponentToken as DropdownComponentToken } from '../../dropdown/style';
 // import type { ComponentToken as DrawerComponentToken } from '../../drawer/style';
 import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
-// import type { ComponentToken as ImageComponentToken } from '../../image/style';
+import type { ComponentToken as ImageComponentToken } from '../../image/style';
 import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
 import type { ComponentToken as ListComponentToken } from '../../list/style';
@@ -75,7 +75,7 @@ export interface ComponentTokenMap {
   //   FloatButton?: FloatButtonComponentToken;
   Form?: {};
   Grid?: {};
-  //   Image?: ImageComponentToken;
+  Image?: ImageComponentToken;
   Input?: {};
   InputNumber?: InputNumberComponentToken;
   Layout?: LayoutComponentToken;
@@ -89,7 +89,7 @@ export interface ComponentTokenMap {
   Rate?: RateComponentToken;
   //   Radio?: RadioComponentToken;
   Result?: ResultComponentToken;
-  //   Segmented?: SegmentedComponentToken;
+  Segmented?: SegmentedComponentToken;
   Select?: SelectComponentToken;
   Skeleton?: SkeletonComponentToken;
   Slider?: SliderComponentToken;
@@ -119,5 +119,4 @@ export interface ComponentTokenMap {
 
   //   /** @private Internal TS definition. Do not use. */
   //   Wave?: WaveToken;
-  Segmented?: SegmentedComponentToken;
 }

@@ -27,7 +27,7 @@ import './radio/style';
 // import './switch/style';
 import './auto-complete/style';
 // import './affix/style';
-import './cascader/style';
+// import './cascader/style';
 // import './back-top/style';
 // import './modal/style';
 // import './alert/style';

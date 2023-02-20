@@ -48,7 +48,7 @@ import './radio/style';
 // import './anchor/style';
 // import './list/style';
 // import './tree-select/style';
-import './drawer/style';
+// import './drawer/style';
 // import './skeleton/style';
 // import './comment/style';
 // import './config-provider/style';

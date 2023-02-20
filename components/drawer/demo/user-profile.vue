@@ -42,7 +42,7 @@ Use Drawer to quickly preview details of an object, such as those in a list.
       </a-list-item>
     </template>
   </a-list>
-  <a-drawer width="640" placement="right" :closable="false" :visible="visible" @close="onClose">
+  <a-drawer width="640" placement="right" :closable="false" :open="open" @close="onClose">
     <p :style="[pStyle, pStyle2]">User Profile</p>
     <p :style="pStyle">Personal</p>
     <a-row>
@@ -136,7 +136,7 @@ export default defineComponent({
     descriptionItem,
   },
   setup() {
-    const visible = ref<boolean>(false);
+    const open = ref<boolean>(false);
     const pStyle = {
       fontSize: '16px',
       color: 'rgba(0,0,0,0.85)',
@@ -149,13 +149,13 @@ export default defineComponent({
     };
 
     const showDrawer = () => {
-      visible.value = true;
+      open.value = true;
     };
     const onClose = () => {
-      visible.value = false;
+      open.value = false;
     };
     return {
-      visible,
+      open,
       pStyle,
       pStyle2,
       showDrawer,

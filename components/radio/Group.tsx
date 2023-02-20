@@ -44,6 +44,7 @@ export type RadioGroupProps = Partial<ExtractPropTypes<ReturnType<typeof radioGr
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ARadioGroup',
+  inheritAttrs: false,
   props: radioGroupProps(),
   // emits: ['update:value', 'change'],
   setup(props, { slots, emit, attrs }) {
@@ -139,7 +140,7 @@ export default defineComponent({
         children = slots.default?.();
       }
       return wrapSSR(
-        <div class={classString} id={id}>
+        <div {...attrs} class={classString} id={id}>
           {children}
         </div>,
       );

@@ -36,8 +36,9 @@ export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ARadio',
+  inheritAttrs: false,
   props: radioProps(),
-  setup(props, { emit, expose, slots }) {
+  setup(props, { emit, expose, slots, attrs }) {
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const radioOptionTypeContext = useInjectRadioOptionTypeContext();
@@ -105,11 +106,12 @@ export default defineComponent({
           [`${prefixCls.value}-wrapper-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
         },
+        attrs.class,
         hashId.value,
       );
 
       return wrapSSR(
-        <label class={wrapperClassString}>
+        <label {...attrs} class={wrapperClassString}>
           <VcCheckbox {...rProps} type="radio" ref={vcCheckbox} />
           {slots.default && <span>{slots.default()}</span>}
         </label>,

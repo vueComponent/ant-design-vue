@@ -1,4 +1,4 @@
-import type { App, Plugin, ExtractPropTypes } from 'vue';
+import type { Plugin, ExtractPropTypes, App } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
 import type { BaseSelectRef } from '../vc-select';
@@ -8,6 +8,7 @@ import type { OptionProps } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import { DefaultRenderEmpty } from '../config-provider/renderEmpty';
 import omit from '../_util/omit';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { SelectCommonPlacement } from '../_util/transition';
@@ -17,9 +18,11 @@ import { initDefaultProps } from '../_util/props-util';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 import { stringType, someType, functionType, booleanType } from '../_util/type';
-
+import { useCompactItemContext } from '../space/Compact';
 // CSSINJS
 import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
+import devWarning from '../vc-util/devWarning';
 
 type RawValue = string | number;
 
@@ -51,6 +54,9 @@ export const selectProps = () => ({
   bordered: booleanType(true),
   transitionName: String,
   choiceTransitionName: stringType(''),
+  popupClassName: String,
+  /** @deprecated Please use `popupClassName` instead */
+  dropdownClassName: String,
   placement: stringType<SelectCommonPlacement>(),
   status: stringType<InputStatus>(),
   'onUpdate:value': functionType<(val: SelectValue) => void>(),
@@ -114,19 +120,32 @@ const Select = defineComponent({
 
       return mode;
     });
+
+    // ====================== Warning ======================
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        !props.dropdownClassName,
+        'Select',
+        '`dropdownClassName` is deprecated. Please use `popupClassName` instead.',
+      );
+    }
     const {
       prefixCls,
       direction,
       configProvider,
       renderEmpty,
-      size,
+      size: contextSize,
       getPrefixCls,
       getPopupContainer,
+      disabled,
+      select,
     } = useConfigInject('select', props);
-
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+    const mergedSize = computed(() => compactSize.value || contextSize.value);
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
-
+    const contextDisabled = useInjectDisabled();
+    const mergedDisabled = computed(() => disabled.value ?? contextDisabled.value);
     const rootPrefixCls = computed(() => getPrefixCls());
     // ===================== Placement =====================
     const placement = computed(() => {
@@ -147,13 +166,14 @@ const Select = defineComponent({
     const mergedClassName = computed(() =>
       classNames(
         {
-          [`${prefixCls.value}-lg`]: size.value === 'large',
-          [`${prefixCls.value}-sm`]: size.value === 'small',
+          [`${prefixCls.value}-lg`]: mergedSize.value === 'large',
+          [`${prefixCls.value}-sm`]: mergedSize.value === 'small',
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-borderless`]: !props.bordered,
           [`${prefixCls.value}-in-form-item`]: formItemInputContext.isFormItemInput,
         },
         getStatusClassNames(prefixCls.value, mergedStatus.value, formItemInputContext.hasFeedback),
+        compactItemClassnames.value,
         hashId.value,
       ),
     );
@@ -183,6 +203,7 @@ const Select = defineComponent({
         notFoundContent,
         listHeight = 256,
         listItemHeight = 24,
+        popupClassName,
         dropdownClassName,
         virtual,
         dropdownMatchSelectWidth,
@@ -202,7 +223,7 @@ const Select = defineComponent({
       } else if (mode.value === 'combobox') {
         mergedNotFound = null;
       } else {
-        mergedNotFound = renderEmpty('Select') as any;
+        mergedNotFound = renderEmpty?.('Select') || <DefaultRenderEmpty componentName="Select" />;
       }
 
       // ===================== Icons =====================
@@ -230,7 +251,7 @@ const Select = defineComponent({
       ]);
 
       const rcSelectRtlDropdownClassName = classNames(
-        dropdownClassName,
+        popupClassName || dropdownClassName,
         {
           [`${prefixCls.value}-dropdown-${direction.value}`]: direction.value === 'rtl',
         },
@@ -244,6 +265,7 @@ const Select = defineComponent({
           dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           {...selectProps}
           {...attrs}
+          showSearch={props.showSearch ?? select.value?.showSearch}
           placeholder={placeholder}
           listHeight={listHeight}
           listItemHeight={listItemHeight}
@@ -269,6 +291,7 @@ const Select = defineComponent({
           optionLabelRender={slots.optionLabel}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
           showArrow={hasFeedback || showArrow}
+          disabled={mergedDisabled.value}
         ></RcSelect>,
       );
     };

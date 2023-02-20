@@ -52,5 +52,6 @@ export default (name: string, props: Record<any, any>) => {
     csp,
     iconPrefixCls,
     disabled,
+    select: configProvider.select,
   };
 };

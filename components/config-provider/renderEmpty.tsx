@@ -6,7 +6,7 @@ export interface RenderEmptyProps {
   componentName?: string;
 }
 
-const RenderEmpty = (props: RenderEmptyProps) => {
+export const DefaultRenderEmpty = (props: RenderEmptyProps) => {
   const { prefixCls } = useConfigInject('empty', props);
   const renderHtml = (componentName?: string) => {
     switch (componentName) {
@@ -27,7 +27,7 @@ const RenderEmpty = (props: RenderEmptyProps) => {
 };
 
 function renderEmpty(componentName?: string): VueNode {
-  return <RenderEmpty componentName={componentName} />;
+  return <DefaultRenderEmpty componentName={componentName} />;
 }
 
 export type RenderEmptyHandler = typeof renderEmpty;

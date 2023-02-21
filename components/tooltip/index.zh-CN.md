@@ -35,6 +35,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Vyyeu8jq2/Tooltp.svg
 | mouseLeaveDelay | 鼠标移出后延时多少才隐藏 Tooltip，单位：秒 | number | 0.1 |  |
 | overlayClassName | 卡片类名 | string | 无 |  |
 | overlayStyle | 卡片样式 | object | 无 |  |
+| overlayInnerStyle | 卡片内容区域样式 | object | 无 | 4.0 |
 | placement | 气泡框位置，可选 `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom` | string | top |  |
 | trigger | 触发行为，可选 `hover/focus/click/contextmenu` | string | hover |  |
 | open(v-model) | 用于手动控制浮层显隐, 小于 4.0.0 使用 `visible` | boolean | false | 4.0 |

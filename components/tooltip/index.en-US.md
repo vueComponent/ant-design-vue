@@ -34,6 +34,7 @@ The following APIs are shared by Tooltip, Popconfirm, Popover.
 | mouseLeaveDelay | Delay in seconds, before tooltip is hidden on mouse leave | number | 0.1 |  |
 | overlayClassName | Class name of the tooltip card | string | - |  |
 | overlayStyle | Style of the tooltip card | object | - |  |
+| overlayInnerStyle | Style of the tooltip inner content | object | - | 4.0.0 |
 | placement | The position of the tooltip relative to the target, which can be one of `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom` | string | `top` |  |
 | trigger | Tooltip trigger mode | `hover` \| `focus` \| `click` \| `contextmenu` | `hover` |  |
 | open(v-model) | Whether the floating tooltip card is open or not, Use `visible` under 4.0.0 | boolean | `false` | 4.0.0 |

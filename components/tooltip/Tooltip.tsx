@@ -239,7 +239,7 @@ export default defineComponent({
       computed(() => !injectFromPopover.value),
     );
     return () => {
-      const { openClassName, overlayClassName } = props;
+      const { openClassName, overlayClassName, overlayInnerStyle } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
 
@@ -268,8 +268,8 @@ export default defineComponent({
         hashId.value,
       );
       const formattedOverlayInnerStyle = {
-        ...props.overlayInnerStyle,
         ...colorInfo.value.overlayStyle,
+        ...overlayInnerStyle,
       };
       const arrowContentStyle = colorInfo.value.arrowStyle;
       const vcTooltipProps = {

@@ -50,7 +50,7 @@ Select component to select value from options.
 | maxTagTextLength | Max text length to show | number | - |  |
 | menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - |  |
 | mode | Set mode of Select | 'multiple' \| 'tags' | - |  |
-| notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |  |
+| notFoundContent | Specify content to show when no result matches.. | string\|slot | `Not Found` |  |
 | open | Controlled open state of dropdown | boolean | - |  |
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |  |

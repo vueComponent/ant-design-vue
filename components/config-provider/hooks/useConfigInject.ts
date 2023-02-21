@@ -1,7 +1,12 @@
 import { computed, h, inject } from 'vue';
+import type { SizeType } from '../context';
 import { defaultConfigProvider, configProviderKey } from '../context';
+import { useInjectDisabled } from '../DisabledContext';
 import { DefaultRenderEmpty } from '../renderEmpty';
+import { useInjectSize } from '../SizeContext';
 export default (name: string, props: Record<any, any>) => {
+  const sizeContext = useInjectSize();
+  const disabledContext = useInjectDisabled();
   const configProvider = inject(configProviderKey, {
     ...defaultConfigProvider,
     renderEmpty: (name?: string) => h(DefaultRenderEmpty, { componentName: name }),
@@ -27,11 +32,11 @@ export default (name: string, props: Record<any, any>) => {
         ? configProvider.virtual?.value !== false
         : props.virtual !== false) && dropdownMatchSelectWidth.value !== false,
   );
-  const size = computed(() => props.size || configProvider.componentSize?.value);
+  const size = computed(() => (props.size as SizeType) || sizeContext.value);
   const autocomplete = computed(
     () => props.autocomplete ?? configProvider.input?.value?.autocomplete,
   );
-  const disabled = computed(() => props.disabled || configProvider.componentDisabled?.value);
+  const disabled = computed<boolean>(() => props.disabled ?? disabledContext.value);
   const csp = computed(() => props.csp ?? configProvider.csp);
   return {
     configProvider,

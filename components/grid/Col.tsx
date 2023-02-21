@@ -154,7 +154,7 @@ export default defineComponent({
         <div
           {...attrs}
           class={classes.value}
-          style={{ ...mergedStyle.value, ...(attrs.style as CSSProperties) }}
+          style={[mergedStyle.value, attrs.style as CSSProperties]}
         >
           {slots.default?.()}
         </div>,

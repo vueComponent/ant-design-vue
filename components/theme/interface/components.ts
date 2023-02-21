@@ -30,7 +30,7 @@ import type { ComponentToken as ProgressComponentToken } from '../../progress/st
 import type { ComponentToken as RadioComponentToken } from '../../radio/style';
 import type { ComponentToken as RateComponentToken } from '../../rate/style';
 import type { ComponentToken as ResultComponentToken } from '../../result/style';
-// import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
+import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 import type { ComponentToken as SelectComponentToken } from '../../select/style';
 import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
 import type { ComponentToken as SliderComponentToken } from '../../slider/style';
@@ -49,7 +49,6 @@ import type { ComponentToken as UploadComponentToken } from '../../upload/style'
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
 // import type { ComponentToken as WaveToken } from '../../_util/wave/style';
-import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 
 export interface ComponentTokenMap {
   Affix?: {};

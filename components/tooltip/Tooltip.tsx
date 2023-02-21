@@ -268,8 +268,8 @@ export default defineComponent({
         hashId.value,
       );
       const formattedOverlayInnerStyle = {
-        ...props.overlayInnerStyle,
         ...colorInfo.value.overlayStyle,
+        ...overlayInnerStyle,
       };
       const arrowContentStyle = colorInfo.value.arrowStyle;
       const vcTooltipProps = {
@@ -281,7 +281,7 @@ export default defineComponent({
         visible: tempVisible,
         ref: tooltip,
         overlayClassName: customOverlayClassName,
-        overlayInnerStyle: { ...formattedOverlayInnerStyle, ...overlayInnerStyle },
+        overlayInnerStyle: formattedOverlayInnerStyle,
         onVisibleChange: handleVisibleChange,
         onPopupAlign,
       };

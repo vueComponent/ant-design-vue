@@ -30,10 +30,6 @@ export default () => ({
   overlayStyle: objectType<CSSProperties>(),
   overlayInnerStyle: objectType<CSSProperties>(),
   overlayClassName: String,
-  overlayInnerStyle: {
-    type: Object as PropType<CSSProperties>,
-    default: undefined as CSSProperties,
-  },
   openClassName: String,
   prefixCls: String,
   mouseEnterDelay: Number,

@@ -1,8 +1,8 @@
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
 import { computed, defineComponent, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
-import { getStyleStr, getPixelRatio, rotateWatermark } from './utils';
+import { getStyleStr, getPixelRatio, rotateWatermark, reRendering } from './utils';
 import { withInstall } from '../_util/type';
-import MutateObserver from '../_util/mutateObserver';
+import { useMutationObserver } from '../_util/hooks/_vueuse/useMutationObserver';
 
 /**
  * Base size of the canvas, 1 for parallel layout and 2 for alternate layout
@@ -231,22 +231,27 @@ const Watermark = defineComponent({
     onBeforeUnmount(() => {
       destroyWatermark();
     });
-    const onMutate = () => {
+    const onMutate = (mutations: MutationRecord[]) => {
       if (stopObservation.value) {
         return;
       }
+      mutations.forEach(mutation => {
+        if (reRendering(mutation, watermarkRef.value)) {
+          destroyWatermark();
+          renderWatermark();
+        }
+      });
     };
+    useMutationObserver(containerRef, onMutate);
     return () => {
       return (
-        <MutateObserver onMutate={onMutate}>
-          <div
-            ref={containerRef}
-            class={[attrs.class, props.rootClassName]}
-            style={{ position: 'relative' }}
-          >
-            {slots.default?.()}
-          </div>
-        </MutateObserver>
+        <div
+          ref={containerRef}
+          class={[attrs.class, props.rootClassName]}
+          style={{ position: 'relative' }}
+        >
+          {slots.default?.()}
+        </div>
       );
     };
   },

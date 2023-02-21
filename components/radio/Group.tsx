@@ -4,16 +4,15 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
-import { tuple } from '../_util/type';
+import { booleanType, stringType, arrayType, functionType } from '../_util/type';
 import type { RadioChangeEvent, RadioGroupButtonStyle, RadioGroupOptionType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import { useProvideRadioGroupContext } from './context';
-import { booleanType, stringType, arrayType, functionType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
 
-const RadioGroupSizeTypes = tuple('large', 'default', 'small');
+const RadioGroupSizeTypes = ['large', 'default', 'small'] as const;
 
 export type RadioGroupSize = (typeof RadioGroupSizeTypes)[number];
 
@@ -28,7 +27,7 @@ export type RadioGroupChildOption = {
 export const radioGroupProps = () => ({
   prefixCls: String,
   value: PropTypes.any,
-  size: PropTypes.oneOf(RadioGroupSizeTypes),
+  size: stringType<RadioGroupSize>(),
   options: arrayType<Array<string | RadioGroupChildOption | number>>(),
   disabled: booleanType(),
   name: String,

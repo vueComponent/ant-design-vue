@@ -13,6 +13,7 @@ import { booleanType, functionType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 export const radioProps = () => ({
   prefixCls: String,
@@ -45,12 +46,13 @@ export default defineComponent({
     const radioGroupContext = useInjectRadioGroupContext();
     const vcCheckbox = ref<HTMLElement>();
 
-    const { prefixCls: radioPrefixCls, direction } = useConfigInject('radio', props);
+    const { prefixCls: radioPrefixCls, direction, disabled } = useConfigInject('radio', props);
     const prefixCls = computed(() =>
       radioGroupContext?.optionType.value === 'button' || radioOptionTypeContext === 'button'
         ? `${radioPrefixCls.value}-button`
         : radioPrefixCls.value,
     );
+    const contextDisabled = useInjectDisabled();
 
     // Style
     const [wrapSSR, hashId] = useStyle(radioPrefixCls);
@@ -88,6 +90,7 @@ export default defineComponent({
         prefixCls: prefixCls.value,
         id,
         ...omit(restProps, ['onUpdate:checked', 'onUpdate:value']),
+        disabled: disabled.value ?? contextDisabled.value,
       };
 
       if (radioGroup) {

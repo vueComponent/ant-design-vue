@@ -37,11 +37,11 @@ export const watermarkProps = () => ({
   },
   rootClassName: String,
   gap: {
-    type: Array as PropType<Array<number>>,
+    type: [Array, Object] as PropType<[number, number]>,
     default: undefined,
   },
   offset: {
-    type: Array as PropType<Array<number>>,
+    type: [Array, Object] as PropType<[number, number]>,
     default: undefined,
   },
 });
@@ -242,7 +242,9 @@ const Watermark = defineComponent({
         }
       });
     };
-    useMutationObserver(containerRef, onMutate);
+    useMutationObserver(containerRef, onMutate, {
+      attributes: true,
+    });
     return () => {
       return (
         <div

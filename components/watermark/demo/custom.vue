@@ -63,6 +63,35 @@ Preview the watermark effect by configuring custom parameters.
       <a-form-item name="content" label="Content">
         <a-input v-model:value="model.content" />
       </a-form-item>
+      <a-form-item name="font.fontSize" label="FontSize">
+        <a-slider v-model:value="model.font.fontSize" :step="1" :min="0" :max="100" />
+      </a-form-item>
+      <a-form-item name="zIndex" label="zIndex">
+        <a-slider v-model:value="model.zIndex" :step="1" :min="0" :max="100" />
+      </a-form-item>
+      <a-form-item name="rotate" label="Rotate">
+        <a-slider v-model:value="model.rotate" :step="1" :min="-180" :max="180" />
+      </a-form-item>
+      <a-form-item label="Gap" style="margin-bottom: 0">
+        <a-space style="display: flex" align="baseline">
+          <a-form-item :name="['gap', 0]">
+            <a-input-number v-model:value="model.gap[0]" placeholder="gapX" />
+          </a-form-item>
+          <a-form-item :name="['gap', 1]">
+            <a-input-number v-model:value="model.gap[1]" placeholder="gapY" />
+          </a-form-item>
+        </a-space>
+      </a-form-item>
+      <a-form-item label="Offset" style="margin-bottom: 0">
+        <a-space style="display: flex" align="baseline">
+          <a-form-item :name="['offset', 0]">
+            <a-input-number v-model:value="model.offset[0]" placeholder="offsetLeft" />
+          </a-form-item>
+          <a-form-item :name="['offset', 1]">
+            <a-input-number v-model:value="model.offset[1]" placeholder="offsetTop" />
+          </a-form-item>
+        </a-space>
+      </a-form-item>
     </a-form>
   </div>
 </template>
@@ -73,6 +102,13 @@ export default defineComponent({
   setup() {
     const model = reactive({
       content: 'Ant Design Vue',
+      font: {
+        fontSize: 16,
+      },
+      zIndex: 11,
+      rotate: -22,
+      gap: [100, 100] as [number, number],
+      offset: [],
     });
     return {
       model,

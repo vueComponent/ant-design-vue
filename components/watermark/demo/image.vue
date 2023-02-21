@@ -3,7 +3,7 @@
 order: 0
 title:
   zh-CN: 图片水印
-  en-US: Multi-line watermark
+  en-US: Image watermark
 ---
 
 ## zh-CN

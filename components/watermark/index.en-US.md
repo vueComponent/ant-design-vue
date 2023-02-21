@@ -15,14 +15,6 @@ Add specific text or patterns to the page.
 - Use when the page needs to be watermarked to identify the copyright.
 - Suitable for preventing information theft.
 
-## Examples
-
-<!-- prettier-ignore -->
-<code src="./demo/basic.tsx">Basic</code>
-<code src="./demo/multi-line.tsx">Multi-line watermark</code>
-<code src="./demo/image.tsx">Image watermark</code>
-<code src="./demo/custom.tsx">Custom configuration</code>
-
 ## API
 
 ### Watermark

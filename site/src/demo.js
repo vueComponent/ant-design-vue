@@ -224,6 +224,13 @@ export default {
     type: 'Other',
     title: 'BackTop',
   },
+  watermark: {
+    category: 'Components',
+    subtitle: '水印',
+    type: 'Other',
+    title: 'Watermark',
+    cols: 1,
+  },
   modal: {
     category: 'Components',
     subtitle: '对话框',

@@ -244,3 +244,6 @@ export type { UploadProps, UploadListProps, UploadChangeParam, UploadFile } from
 export { default as Upload, UploadDragger } from './upload';
 
 export { default as LocaleProvider } from './locale-provider';
+
+export { default as Watermark } from './watermark';
+export type { WatermarkProps } from './watermark';

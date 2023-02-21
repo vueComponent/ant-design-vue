@@ -28,7 +28,7 @@ The Drawer can appear from any edge of the screen.
     title="Basic Drawer"
     :placement="placement"
     :closable="false"
-    :visible="visible"
+    :open="open"
     @close="onClose"
   >
     <p>Some contents...</p>
@@ -42,18 +42,18 @@ import type { DrawerProps } from 'ant-design-vue';
 export default defineComponent({
   setup() {
     const placement = ref<DrawerProps['placement']>('left');
-    const visible = ref<boolean>(false);
+    const open = ref<boolean>(false);
 
     const showDrawer = () => {
-      visible.value = true;
+      open.value = true;
     };
 
     const onClose = () => {
-      visible.value = false;
+      open.value = false;
     };
     return {
       placement,
-      visible,
+      open,
       showDrawer,
       onClose,
     };

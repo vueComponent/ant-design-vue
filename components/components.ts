@@ -247,3 +247,6 @@ export { default as LocaleProvider } from './locale-provider';
 
 export { default as Watermark } from './watermark';
 export type { WatermarkProps } from './watermark';
+
+export type { SegmentedProps } from './segmented';
+export { default as Segmented } from './segmented';

@@ -16,17 +16,22 @@ import VcDrawer from '../vc-drawer';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
-import { tuple, withInstall } from '../_util/type';
+import { objectType, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 import devWarning from '../vc-util/devWarning';
 import type { KeyboardEventHandler, MouseEventHandler } from '../_util/EventInterface';
+import useStyle from './style';
+import { NoCompactStyle } from '../space/Compact';
+
+import isNumeric from '../_util/isNumeric';
+import { getTransitionName, getTransitionProps } from '../_util/transition';
 
 type ILevelMove = number | [number, number];
 
-const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
+const PlacementTypes = ['top', 'right', 'bottom', 'left'] as const;
 export type placementType = (typeof PlacementTypes)[number];
 
-const SizeTypes = tuple('default', 'large');
+const SizeTypes = ['default', 'large'] as const;
 export type sizeType = (typeof SizeTypes)[number];
 
 export interface PushState {
@@ -49,25 +54,23 @@ export const drawerProps = () => ({
   },
   maskClosable: { type: Boolean, default: undefined },
   mask: { type: Boolean, default: undefined },
-  maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  /** @deprecated Use `style` instead */
-  wrapStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  style: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  class: PropTypes.any,
-  /** @deprecated Use `class` instead */
-  wrapClassName: String,
+  maskStyle: objectType<CSSProperties>(),
+  rootClassName: String,
+  rootStyle: objectType<CSSProperties>(),
   size: {
     type: String as PropType<sizeType>,
   },
-  drawerStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  headerStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  bodyStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  drawerStyle: objectType<CSSProperties>(),
+  headerStyle: objectType<CSSProperties>(),
+  bodyStyle: objectType<CSSProperties>(),
   contentWrapperStyle: {
     type: Object as PropType<CSSProperties>,
     default: undefined as CSSProperties,
   },
   title: PropTypes.any,
+  /** @deprecated Please use `open` instead */
   visible: { type: Boolean, default: undefined },
+  open: { type: Boolean, default: undefined },
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   zIndex: Number,
@@ -77,7 +80,7 @@ export const drawerProps = () => ({
   keyboard: { type: Boolean, default: undefined },
   extra: PropTypes.any,
   footer: PropTypes.any,
-  footerStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  footerStyle: objectType<CSSProperties>(),
   level: PropTypes.any,
   levelMove: {
     type: [Number, Array, Function] as PropType<
@@ -87,8 +90,12 @@ export const drawerProps = () => ({
   handle: PropTypes.any,
   /** @deprecated Use `@afterVisibleChange` instead */
   afterVisibleChange: Function as PropType<(visible: boolean) => void>,
+  /** @deprecated Please use `@afterOpenChange` instead */
   onAfterVisibleChange: Function as PropType<(visible: boolean) => void>,
+  onAfterOpenChange: Function as PropType<(open: boolean) => void>,
+  /** @deprecated Please use `onUpdate:open` instead */
   'onUpdate:visible': Function as PropType<(visible: boolean) => void>,
+  'onUpdate:open': Function as PropType<(open: boolean) => void>,
   onClose: Function as PropType<MouseEventHandler | KeyboardEventHandler>,
 });
 
@@ -100,7 +107,7 @@ const Drawer = defineComponent({
   inheritAttrs: false,
   props: initDefaultProps(drawerProps(), {
     closable: true,
-    placement: 'right' as placementType,
+    placement: 'right',
     maskClosable: true,
     mask: true,
     level: null,
@@ -115,11 +122,11 @@ const Drawer = defineComponent({
     const vcDrawer = ref(null);
     const load = ref(false);
     const visible = ref(false);
-
+    const mergedOpen = computed(() => props.open ?? props.visible);
     watch(
-      () => props.visible,
-      propsVisible => {
-        if (propsVisible) {
+      mergedOpen,
+      () => {
+        if (mergedOpen.value) {
           load.value = true;
         } else {
           visible.value = false;
@@ -128,9 +135,9 @@ const Drawer = defineComponent({
       { immediate: true },
     );
     watch(
-      [() => props.visible, load],
-      ([propsVisible]) => {
-        if (propsVisible && load.value) {
+      [mergedOpen, load],
+      () => {
+        if (mergedOpen.value && load.value) {
           visible.value = true;
         }
       },
@@ -138,6 +145,7 @@ const Drawer = defineComponent({
     );
     const parentDrawerOpts = inject('parentDrawerOpts', null);
     const { prefixCls, getPopupContainer, direction } = useConfigInject('drawer', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const getContainer = computed(() =>
       // 有可能为 false，所以不能直接判断
       props.getContainer === undefined && getPopupContainer.value
@@ -150,16 +158,21 @@ const Drawer = defineComponent({
       'Drawer',
       '`afterVisibleChange` prop is deprecated, please use `@afterVisibleChange` event instead',
     );
-    devWarning(
-      props.wrapStyle === undefined,
-      'Drawer',
-      '`wrapStyle` prop is deprecated, please use `style` instead',
-    );
-    devWarning(
-      props.wrapClassName === undefined,
-      'Drawer',
-      '`wrapClassName` prop is deprecated, please use `class` instead',
-    );
+    // ========================== Warning ===========================
+    if (process.env.NODE_ENV !== 'production') {
+      [
+        ['visible', 'open'],
+        ['onUpdate:visible', 'onUpdate:open'],
+        ['onAfterVisibleChange', 'onAfterOpenChange'],
+      ].forEach(([deprecatedName, newName]) => {
+        devWarning(
+          !props[deprecatedName],
+          'Drawer',
+          `\`${deprecatedName}\` is deprecated, please use \`${newName}\` instead.`,
+        );
+      });
+    }
+
     const setPush = () => {
       sPush.value = true;
     };
@@ -176,7 +189,7 @@ const Drawer = defineComponent({
     });
 
     onMounted(() => {
-      if (props.visible && parentDrawerOpts) {
+      if (mergedOpen.value && parentDrawerOpts) {
         parentDrawerOpts.setPush();
       }
     });
@@ -207,6 +220,7 @@ const Drawer = defineComponent({
 
     const close = (e: Event) => {
       emit('update:visible', false);
+      emit('update:open', false);
       emit('close', e);
     };
 
@@ -222,6 +236,7 @@ const Drawer = defineComponent({
       }
       props.afterVisibleChange?.(open);
       emit('afterVisibleChange', open);
+      emit('afterOpenChange', open);
     };
 
     const pushTransform = computed(() => {
@@ -243,36 +258,28 @@ const Drawer = defineComponent({
       }
       return null;
     });
-
+    // ============================ Size ============================
+    const mergedWidth = computed(() => props.width ?? (props.size === 'large' ? 736 : 378));
+    const mergedHeight = computed(() => props.height ?? (props.size === 'large' ? 736 : 378));
     const offsetStyle = computed(() => {
       // https://github.com/ant-design/ant-design/issues/24287
-      const { mask, placement, size = 'default', width, height } = props;
+      const { mask, placement } = props;
       if (!visible.value && !mask) {
         return {};
       }
       const val: CSSProperties = {};
       if (placement === 'left' || placement === 'right') {
-        const defaultWidth = size === 'large' ? 736 : 378;
-        val.width = typeof width === 'undefined' ? defaultWidth : width;
-        val.width = typeof val.width === 'string' ? val.width : `${val.width}px`;
+        val.width = isNumeric(mergedWidth.value) ? `${mergedWidth.value}px` : mergedWidth.value;
       } else {
-        const defaultHeight = size === 'large' ? 736 : 378;
-        val.height = typeof height === 'undefined' ? defaultHeight : height;
-        val.height = typeof val.height === 'string' ? val.height : `${val.height}px`;
+        val.height = isNumeric(mergedHeight.value) ? `${mergedHeight.value}px` : mergedHeight.value;
       }
       return val;
     });
 
-    const drawerStyle = computed(() => {
-      const { zIndex, wrapStyle, mask, style } = props;
-      const val = mask ? {} : offsetStyle.value;
-      return {
-        zIndex,
-        transform: sPush.value ? pushTransform.value : undefined,
-        ...val,
-        ...wrapStyle,
-        ...style,
-      };
+    const wrapperStyle = computed(() => {
+      const { zIndex } = props;
+      const val = offsetStyle.value;
+      return [{ zIndex, transform: sPush.value ? pushTransform.value : undefined }, val];
     });
 
     const renderHeader = (prefixCls: string) => {
@@ -342,21 +349,29 @@ const Drawer = defineComponent({
         </div>
       );
     };
+    const drawerClassName = computed(() =>
+      classnames(
+        {
+          'no-mask': !props.mask,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        props.rootClassName,
+        hashId.value,
+      ),
+    );
+    // =========================== Motion ===========================
+    const maskMotion = computed(() => {
+      return getTransitionProps(getTransitionName(prefixCls.value, 'mask-motion'));
+    });
+    const panelMotion = (motionPlacement: string) => {
+      return getTransitionProps(
+        getTransitionName(prefixCls.value, `panel-motion-${motionPlacement}`),
+      );
+    };
 
     return () => {
-      const {
-        width,
-        height,
-        placement,
-        mask,
-        wrapClassName,
-        class: className,
-        forceRender,
-        ...rest
-      } = props;
+      const { width, height, placement, mask, forceRender, ...rest } = props;
 
-      const val = mask ? offsetStyle.value : {};
-      const haveMask = mask ? '' : 'no-mask';
       const vcDrawerProps: any = {
         ...attrs,
         ...omit(rest, [
@@ -369,13 +384,12 @@ const Drawer = defineComponent({
           'bodyStyle',
           'title',
           'push',
-          'wrapStyle',
           'onAfterVisibleChange',
           'onClose',
           'onUpdate:visible',
+          'onUpdate:open',
           'visible',
         ]),
-        ...val,
         forceRender,
         onClose: close,
         afterVisibleChange,
@@ -384,24 +398,26 @@ const Drawer = defineComponent({
         open: visible.value,
         showMask: mask,
         placement,
-        class: classnames({
-          [className]: className,
-          [wrapClassName]: !!wrapClassName,
-          [haveMask]: !!haveMask,
-          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-        }),
-        style: drawerStyle.value,
         ref: vcDrawer,
       };
-      return (
-        <VcDrawer
-          {...vcDrawerProps}
-          getContainer={getContainer.value}
-          v-slots={{
-            handler: props.handle ? () => props.handle : slots.handle,
-            default: () => renderBody(prefixCls.value),
-          }}
-        ></VcDrawer>
+      return wrapSSR(
+        <NoCompactStyle>
+          <VcDrawer
+            {...vcDrawerProps}
+            maskMotion={maskMotion.value}
+            motion={panelMotion}
+            width={mergedWidth.value}
+            height={mergedHeight.value}
+            getContainer={getContainer.value}
+            rootClassName={drawerClassName.value}
+            rootStyle={props.rootStyle}
+            contentWrapperStyle={wrapperStyle.value}
+            v-slots={{
+              handler: props.handle ? () => props.handle : slots.handle,
+              default: () => renderBody(prefixCls.value),
+            }}
+          ></VcDrawer>
+        </NoCompactStyle>,
       );
     };
   },

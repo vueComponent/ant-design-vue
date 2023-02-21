@@ -7,15 +7,15 @@ import type { ComponentToken as ButtonComponentToken } from '../../button/style'
 import type { ComponentToken as CalendarComponentToken } from '../../calendar/style';
 import type { ComponentToken as CardComponentToken } from '../../card/style';
 import type { ComponentToken as CarouselComponentToken } from '../../carousel/style';
-// import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
+import type { ComponentToken as CascaderComponentToken } from '../../cascader/style';
 import type { ComponentToken as CheckboxComponentToken } from '../../checkbox/style';
 import type { ComponentToken as CollapseComponentToken } from '../../collapse/style';
 import type { ComponentToken as DatePickerComponentToken } from '../../date-picker/style';
 import type { ComponentToken as DividerComponentToken } from '../../divider/style';
 import type { ComponentToken as DropdownComponentToken } from '../../dropdown/style';
-// import type { ComponentToken as DrawerComponentToken } from '../../drawer/style';
+import type { ComponentToken as DrawerComponentToken } from '../../drawer/style';
 import type { ComponentToken as EmptyComponentToken } from '../../empty/style';
-// import type { ComponentToken as ImageComponentToken } from '../../image/style';
+import type { ComponentToken as ImageComponentToken } from '../../image/style';
 import type { ComponentToken as InputNumberComponentToken } from '../../input-number/style';
 import type { ComponentToken as LayoutComponentToken } from '../../layout/style';
 import type { ComponentToken as ListComponentToken } from '../../list/style';
@@ -27,11 +27,11 @@ import type { ComponentToken as NotificationComponentToken } from '../../notific
 import type { ComponentToken as PopconfirmComponentToken } from '../../popconfirm/style';
 import type { ComponentToken as PopoverComponentToken } from '../../popover/style';
 import type { ComponentToken as ProgressComponentToken } from '../../progress/style';
-// import type { ComponentToken as RadioComponentToken } from '../../radio/style';
+import type { ComponentToken as RadioComponentToken } from '../../radio/style';
 import type { ComponentToken as RateComponentToken } from '../../rate/style';
 import type { ComponentToken as ResultComponentToken } from '../../result/style';
 // import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
-// import type { ComponentToken as SelectComponentToken } from '../../select/style';
+import type { ComponentToken as SelectComponentToken } from '../../select/style';
 import type { ComponentToken as SkeletonComponentToken } from '../../skeleton/style';
 import type { ComponentToken as SliderComponentToken } from '../../slider/style';
 import type { ComponentToken as SpaceComponentToken } from '../../space/style';
@@ -49,6 +49,7 @@ import type { ComponentToken as UploadComponentToken } from '../../upload/style'
 // import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
 // import type { ComponentToken as WaveToken } from '../../_util/wave/style';
+import type { ComponentToken as SegmentedComponentToken } from '../../segmented/style';
 
 export interface ComponentTokenMap {
   Affix?: {};
@@ -61,20 +62,20 @@ export interface ComponentTokenMap {
   Breadcrumb?: {};
   Card?: CardComponentToken;
   Carousel?: CarouselComponentToken;
-  //   Cascader?: CascaderComponentToken;
+  Cascader?: CascaderComponentToken;
   Checkbox?: CheckboxComponentToken;
   Collapse?: CollapseComponentToken;
   Comment?: {};
   DatePicker?: DatePickerComponentToken;
   Descriptions?: {};
   Divider?: DividerComponentToken;
-  //   Drawer?: DrawerComponentToken;
+  Drawer?: DrawerComponentToken;
   Dropdown?: DropdownComponentToken;
   Empty?: EmptyComponentToken;
   //   FloatButton?: FloatButtonComponentToken;
   Form?: {};
   Grid?: {};
-  //   Image?: ImageComponentToken;
+  Image?: ImageComponentToken;
   Input?: {};
   InputNumber?: InputNumberComponentToken;
   Layout?: LayoutComponentToken;
@@ -86,10 +87,10 @@ export interface ComponentTokenMap {
   Popover?: PopoverComponentToken;
   Popconfirm?: PopconfirmComponentToken;
   Rate?: RateComponentToken;
-  //   Radio?: RadioComponentToken;
+  Radio?: RadioComponentToken;
   Result?: ResultComponentToken;
-  //   Segmented?: SegmentedComponentToken;
-  //   Select?: SelectComponentToken;
+  Segmented?: SegmentedComponentToken;
+  Select?: SelectComponentToken;
   Skeleton?: SkeletonComponentToken;
   Slider?: SliderComponentToken;
   Spin?: SpinComponentToken;

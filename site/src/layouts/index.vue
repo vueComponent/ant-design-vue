@@ -1,5 +1,20 @@
 <template>
   <Header />
+  <div v-if="headers.length" class="toc-affix" :style="y > 60 ? 'position:fixed; top: 16px;' : ''">
+    <a-anchor style="width: 160px">
+      <a-anchor-link
+        v-for="h in headers"
+        :key="h.title"
+        :href="h.href || `#${slugifyTitle(h.title)}`"
+        :target="h.target"
+      >
+        <template #title>
+          <LinkOutlined v-if="h.target" />
+          {{ isZhCN ? h.title : h.enTitle || h.title }}
+        </template>
+      </a-anchor-link>
+    </a-anchor>
+  </div>
   <div class="main-wrapper">
     <a-row>
       <template v-if="isMobile">
@@ -43,21 +58,6 @@
             <component :is="matchCom" />
           </Demo>
           <router-view v-else />
-          <a-affix v-if="headers.length" class="toc-affix" :offset-top="20">
-            <a-anchor>
-              <a-anchor-link
-                v-for="h in headers"
-                :key="h.title"
-                :href="h.href || `#${slugifyTitle(h.title)}`"
-                :target="h.target"
-              >
-                <template #title>
-                  <LinkOutlined v-if="h.target" />
-                  {{ isZhCN ? h.title : h.enTitle || h.title }}
-                </template>
-              </a-anchor-link>
-            </a-anchor>
-          </a-affix>
         </section>
         <a-back-top />
         <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
@@ -100,6 +100,7 @@ import { CloseOutlined, MenuOutlined, LinkOutlined } from '@ant-design/icons-vue
 import ThemeIcon from './ThemeIcon.vue';
 import surelyVueVue from '../components/surelyVue.vue';
 import WWAdsVue from '../components/rice/WWAds.vue';
+import { useWindowScroll } from '@vueuse/core';
 
 const rControl = /[\u0000-\u001f]/g;
 const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
@@ -123,6 +124,7 @@ export default defineComponent({
     LinkOutlined,
   },
   setup() {
+    const { y } = useWindowScroll();
     const visible = ref(false);
     const route = useRoute();
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
@@ -249,6 +251,7 @@ export default defineComponent({
         // color: '#fff',
         fontSize: '20px',
       },
+      y,
     };
   },
 });

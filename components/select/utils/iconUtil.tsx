@@ -13,10 +13,7 @@ export default function getIcons(props: any, slots: any = {}) {
     props.menuItemSelectedIcon || (slots.menuItemSelectedIcon && slots.menuItemSelectedIcon());
   const removeIcon = props.removeIcon || (slots.removeIcon && slots.removeIcon());
   // Clear Icon
-  let mergedClearIcon = clearIcon;
-  if (!clearIcon) {
-    mergedClearIcon = <CloseCircleFilled />;
-  }
+  const mergedClearIcon = clearIcon ?? <CloseCircleFilled />;
   // Validation Feedback Icon
   const getSuffixIconNode = arrowIcon => (
     <>

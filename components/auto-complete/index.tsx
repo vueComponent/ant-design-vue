@@ -58,6 +58,11 @@ const AutoComplete = defineComponent({
       'AutoComplete',
       '`options` slot is deprecated, please use props `options` instead.',
     );
+    warning(
+      !props.dropdownClassName,
+      'AutoComplete',
+      '`dropdownClassName` is deprecated, please use `popupClassName` instead.',
+    );
     const selectRef = ref();
     const getInputElement = () => {
       const children = flattenChildren(slots.default?.());
@@ -132,6 +137,7 @@ const AutoComplete = defineComponent({
           notFoundContent,
           // placeholder: '',
           class: cls,
+          popupClassName: props.popupClassName || props.dropdownClassName,
           ref: selectRef,
         },
         ['dataSource', 'loading'],

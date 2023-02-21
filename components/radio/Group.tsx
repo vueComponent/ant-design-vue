@@ -1,5 +1,5 @@
 import { nextTick, defineComponent, ref, watch, computed } from 'vue';
-import type { PropType, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
@@ -8,6 +8,10 @@ import { tuple } from '../_util/type';
 import type { RadioChangeEvent, RadioGroupButtonStyle, RadioGroupOptionType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import { useProvideRadioGroupContext } from './context';
+import { booleanType, stringType, arrayType, functionType } from '../_util/type';
+
+// CSSINJS
+import useStyle from './style';
 
 const RadioGroupSizeTypes = tuple('large', 'default', 'small');
 
@@ -25,16 +29,14 @@ export const radioGroupProps = () => ({
   prefixCls: String,
   value: PropTypes.any,
   size: PropTypes.oneOf(RadioGroupSizeTypes),
-  options: {
-    type: Array as PropType<Array<string | RadioGroupChildOption | number>>,
-  },
-  disabled: { type: Boolean, default: undefined },
+  options: arrayType<Array<string | RadioGroupChildOption | number>>(),
+  disabled: booleanType(),
   name: String,
-  buttonStyle: { type: String as PropType<RadioGroupButtonStyle>, default: 'outline' },
+  buttonStyle: stringType<RadioGroupButtonStyle>('outline'),
   id: String,
-  optionType: { type: String as PropType<RadioGroupOptionType>, default: 'default' },
-  onChange: Function as PropType<(e: RadioChangeEvent) => void>,
-  'onUpdate:value': Function as PropType<(val: any) => void>,
+  optionType: stringType<RadioGroupOptionType>('default'),
+  onChange: functionType<(e: RadioChangeEvent) => void>(),
+  'onUpdate:value': functionType<(val: any) => void>(),
 });
 
 export type RadioGroupProps = Partial<ExtractPropTypes<ReturnType<typeof radioGroupProps>>>;
@@ -42,11 +44,16 @@ export type RadioGroupProps = Partial<ExtractPropTypes<ReturnType<typeof radioGr
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ARadioGroup',
+  inheritAttrs: false,
   props: radioGroupProps(),
   // emits: ['update:value', 'change'],
-  setup(props, { slots, emit }) {
+  setup(props, { slots, emit, attrs }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, direction, size } = useConfigInject('radio', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const stateValue = ref(props.value);
     const updatingValue = ref<boolean>(false);
     watch(
@@ -89,10 +96,16 @@ export default defineComponent({
 
       const groupPrefixCls = `${prefixCls.value}-group`;
 
-      const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
-        [`${groupPrefixCls}-${size.value}`]: size.value,
-        [`${groupPrefixCls}-rtl`]: direction.value === 'rtl',
-      });
+      const classString = classNames(
+        groupPrefixCls,
+        `${groupPrefixCls}-${buttonStyle}`,
+        {
+          [`${groupPrefixCls}-${size.value}`]: size.value,
+          [`${groupPrefixCls}-rtl`]: direction.value === 'rtl',
+        },
+        attrs.class,
+        hashId.value,
+      );
 
       let children = null;
       if (options && options.length > 0) {
@@ -126,10 +139,10 @@ export default defineComponent({
       } else {
         children = slots.default?.();
       }
-      return (
-        <div class={classString} id={id}>
+      return wrapSSR(
+        <div {...attrs} class={classString} id={id}>
           {children}
-        </div>
+        </div>,
       );
     };
   },

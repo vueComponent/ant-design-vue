@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox/Checkbox';
@@ -9,22 +9,26 @@ import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItem
 import omit from '../_util/omit';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import { useInjectRadioGroupContext, useInjectRadioOptionTypeContext } from './context';
+import { booleanType, functionType } from '../_util/type';
+
+// CSSINJS
+import useStyle from './style';
 
 export const radioProps = () => ({
   prefixCls: String,
-  checked: { type: Boolean, default: undefined },
-  disabled: { type: Boolean, default: undefined },
-  isGroup: { type: Boolean, default: undefined },
+  checked: booleanType(),
+  disabled: booleanType(),
+  isGroup: booleanType(),
   value: PropTypes.any,
   name: String,
   id: String,
-  autofocus: { type: Boolean, default: undefined },
-  onChange: Function as PropType<(event: RadioChangeEvent) => void>,
-  onFocus: Function as PropType<FocusEventHandler>,
-  onBlur: Function as PropType<FocusEventHandler>,
-  onClick: Function as PropType<MouseEventHandler>,
-  'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
-  'onUpdate:value': Function as PropType<(checked: boolean) => void>,
+  autofocus: booleanType(),
+  onChange: functionType<(event: RadioChangeEvent) => void>(),
+  onFocus: functionType<FocusEventHandler>(),
+  onBlur: functionType<FocusEventHandler>(),
+  onClick: functionType<MouseEventHandler>(),
+  'onUpdate:checked': functionType<(checked: boolean) => void>(),
+  'onUpdate:value': functionType<(checked: boolean) => void>(),
 });
 
 export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>>;
@@ -32,8 +36,9 @@ export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ARadio',
+  inheritAttrs: false,
   props: radioProps(),
-  setup(props, { emit, expose, slots }) {
+  setup(props, { emit, expose, slots, attrs }) {
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const radioOptionTypeContext = useInjectRadioOptionTypeContext();
@@ -42,10 +47,14 @@ export default defineComponent({
 
     const { prefixCls: radioPrefixCls, direction } = useConfigInject('radio', props);
     const prefixCls = computed(() =>
-      (radioGroupContext?.optionType.value || radioOptionTypeContext) === 'button'
+      radioGroupContext?.optionType.value === 'button' || radioOptionTypeContext === 'button'
         ? `${radioPrefixCls.value}-button`
         : radioPrefixCls.value,
     );
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(radioPrefixCls);
+
     const focus = () => {
       vcCheckbox.value.focus();
     };
@@ -89,19 +98,23 @@ export default defineComponent({
       } else {
         rProps.onChange = handleChange;
       }
-      const wrapperClassString = classNames({
-        [`${prefixCls.value}-wrapper`]: true,
-        [`${prefixCls.value}-wrapper-checked`]: rProps.checked,
-        [`${prefixCls.value}-wrapper-disabled`]: rProps.disabled,
-        [`${prefixCls.value}-wrapper-rtl`]: direction.value === 'rtl',
-        [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
-      });
+      const wrapperClassString = classNames(
+        {
+          [`${prefixCls.value}-wrapper`]: true,
+          [`${prefixCls.value}-wrapper-checked`]: rProps.checked,
+          [`${prefixCls.value}-wrapper-disabled`]: rProps.disabled,
+          [`${prefixCls.value}-wrapper-rtl`]: direction.value === 'rtl',
+          [`${prefixCls.value}-wrapper-in-form-item`]: formItemInputContext.isFormItemInput,
+        },
+        attrs.class,
+        hashId.value,
+      );
 
-      return (
-        <label class={wrapperClassString}>
+      return wrapSSR(
+        <label {...attrs} class={wrapperClassString}>
           <VcCheckbox {...rProps} type="radio" ref={vcCheckbox} />
           {slots.default && <span>{slots.default()}</span>}
-        </label>
+        </label>,
       );
     };
   },

@@ -1,7 +1,7 @@
 import { useInjectFormItemPrefix } from './context';
 import type { VueNode } from '../_util/type';
-import { computed, defineComponent, ref, Transition, watch } from 'vue';
-import { getTransitionGroupProps, getTransitionProps, TransitionGroup } from '../_util/transition';
+import { computed, defineComponent, ref, Transition, watch, TransitionGroup } from 'vue';
+import { getTransitionGroupProps, getTransitionProps } from '../_util/transition';
 
 import collapseMotion from '../_util/collapseMotion';
 import useStyle from './style';
@@ -37,19 +37,15 @@ export default defineComponent({
         `${prefixCls.value}-show-help-item`,
         colMItem,
       );
+      (transitionGroupProps as any).role = 'alert';
+      (transitionGroupProps as any).class = [hashId.value, baseClassName.value, attrs.class];
       return (
         <Transition
           {...getTransitionProps(`${prefixCls.value}-show-help`)}
           onAfterEnter={() => props.onErrorVisibleChanged(true)}
           onAfterLeave={() => props.onErrorVisibleChanged(false)}
         >
-          <TransitionGroup
-            {...transitionGroupProps}
-            tag="div"
-            role="alert"
-            v-show={!!props.errors?.length}
-            class={[hashId.value, baseClassName.value, attrs.class]}
-          >
+          <TransitionGroup {...transitionGroupProps} tag="div" v-show={!!props.errors?.length}>
             {props.errors?.map((error: any, index: number) => (
               <div
                 key={index}

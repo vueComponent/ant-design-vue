@@ -5,7 +5,7 @@ import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import { initDefaultProps } from '../../_util/props-util';
 import useStyle from '../style';
 import type { VueNode } from '../../_util/type';
-import { someType, arrayType, booleanType, stringType } from '../../_util/type';
+import { functionType, someType, arrayType, booleanType, stringType } from '../../_util/type';
 import type { ChangeEvent } from '../../_util/EventInterface';
 import MotionThumb from './MotionThumb';
 export type SegmentedValue = string | number;
@@ -46,14 +46,29 @@ export const segmentedProps = () => {
     size: stringType<segmentedSize>(),
     value: { ...someType<SegmentedValue>([String, Number]), required: true },
     motionName: String,
+    onChange: functionType<(val: SegmentedValue) => void>(),
+    'onUpdate:value': functionType<(val: SegmentedValue) => void>(),
   };
 };
 export type SegmentedProps = Partial<ExtractPropTypes<ReturnType<typeof segmentedProps>>>;
 
 const SegmentedOption: FunctionalComponent<
-  SegmentedOption & { prefixCls: string; checked: boolean }
-> = (props, { slots, emit, attrs }) => {
-  const { value, disabled, payload, title, prefixCls, label = slots.label, checked } = props;
+  SegmentedOption & {
+    prefixCls: string;
+    checked: boolean;
+    onChange: (_event: ChangeEvent, val: SegmentedValue) => void;
+  }
+> = (props, { slots, emit }) => {
+  const {
+    value,
+    disabled,
+    payload,
+    title,
+    prefixCls,
+    label = slots.label,
+    checked,
+    className,
+  } = props;
   const handleChange = (event: InputEvent) => {
     if (disabled) {
       return;
@@ -68,7 +83,7 @@ const SegmentedOption: FunctionalComponent<
         {
           [`${prefixCls}-item-disabled`]: disabled,
         },
-        attrs.class,
+        className,
       )}
     >
       <input
@@ -100,7 +115,6 @@ export default defineComponent({
     options: [],
     motionName: 'thumb-motion',
   }),
-  emits: ['change', 'update:value'],
   slots: ['label'],
   setup(props, { emit, slots, attrs }) {
     const { prefixCls, direction, size } = useConfigInject('segmented', props);
@@ -154,13 +168,13 @@ export default defineComponent({
               <SegmentedOption
                 key={segmentedOption.value}
                 prefixCls={pre}
-                class={classNames(segmentedOption.className, `${pre}-item`, {
-                  [`${pre}-item-selected`]:
-                    segmentedOption.value === props.value && !thumbShow.value,
-                })}
                 checked={segmentedOption.value === props.value}
                 onChange={handleChange}
                 {...segmentedOption}
+                className={classNames(segmentedOption.className, `${pre}-item`, {
+                  [`${pre}-item-selected`]:
+                    segmentedOption.value === props.value && !thumbShow.value,
+                })}
                 disabled={!!props.disabled || !!segmentedOption.disabled}
                 v-slots={slots}
               />

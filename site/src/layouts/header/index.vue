@@ -23,7 +23,7 @@
       <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
     </div>
     <a-popover
-      v-model:visible="menuVisible"
+      v-model:open="menuVisible"
       overlay-class-name="popover-menu"
       placement="bottomRight"
       trigger="click"

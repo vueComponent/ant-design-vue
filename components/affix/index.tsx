@@ -111,15 +111,15 @@ const Affix = defineComponent({
         status: AffixStatus.None,
       } as AffixState;
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-      const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
-      const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
+      const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
+      const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
+      const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
 
       if (
-        placeholderReact.top === 0 &&
-        placeholderReact.left === 0 &&
-        placeholderReact.width === 0 &&
-        placeholderReact.height === 0
+        placeholderRect.top === 0 &&
+        placeholderRect.left === 0 &&
+        placeholderRect.width === 0 &&
+        placeholderRect.height === 0
       ) {
         return;
       }

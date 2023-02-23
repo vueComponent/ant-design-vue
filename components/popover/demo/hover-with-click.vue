@@ -20,18 +20,13 @@ The following example shows how to create a popover which can be hovered and cli
     style="width: 500px"
     title="Hover title"
     trigger="hover"
-    :visible="hovered"
-    @visibleChange="handleHoverChange"
+    :open="hovered"
+    @openChange="handleHoverChange"
   >
     <template #content>
       <div>This is hover content.</div>
     </template>
-    <a-popover
-      title="Click title"
-      trigger="click"
-      :visible="clicked"
-      @visibleChange="handleClickChange"
-    >
+    <a-popover title="Click title" trigger="click" :open="clicked" @openChange="handleClickChange">
       <template #content>
         <div>
           <div>This is click content.</div>

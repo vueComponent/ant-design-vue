@@ -20,10 +20,10 @@ Make it pop up under some conditions.
   <div>
     <a-popconfirm
       title="Are you sure delete this task?"
-      :visible="visible"
+      :open="visible"
       ok-text="Yes"
       cancel-text="No"
-      @visibleChange="handleVisibleChange"
+      @openChange="handleVisibleChange"
       @confirm="confirm"
       @cancel="cancel"
     >

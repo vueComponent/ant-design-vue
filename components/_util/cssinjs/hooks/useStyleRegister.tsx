@@ -1,4 +1,4 @@
-// import hash from '@emotion/hash';
+import hash from '@emotion/hash';
 import type * as CSS from 'csstype';
 // @ts-ignore
 import unitless from '@emotion/unitless';
@@ -10,22 +10,22 @@ import type { Linter } from '../linters';
 import { contentQuotesLinter, hashedAnimationLinter } from '../linters';
 import type { HashPriority } from '../StyleContext';
 import {
-  // useStyleInject,
-  // ATTR_DEV_CACHE_PATH,
+  useStyleInject,
+  ATTR_DEV_CACHE_PATH,
   ATTR_MARK,
   ATTR_TOKEN,
-  // CSS_IN_JS_INSTANCE,
-  // CSS_IN_JS_INSTANCE_ID,
+  CSS_IN_JS_INSTANCE,
+  CSS_IN_JS_INSTANCE_ID,
 } from '../StyleContext';
 import { supportLayer } from '../util';
-// import useGlobalCache from './useGlobalCache';
-// import canUseDom from '../../canUseDom';
-// import { removeCSS, updateCSS } from '../../../vc-util/Dom/dynamicCSS';
+import useGlobalCache from './useGlobalCache';
+import canUseDom from '../../canUseDom';
+import { removeCSS, updateCSS } from '../../../vc-util/Dom/dynamicCSS';
 import type { Ref } from 'vue';
-// import { computed } from 'vue';
+import { computed } from 'vue';
 import type { VueNode } from '../../type';
 
-// const isClientSide = canUseDom();
+const isClientSide = canUseDom();
 
 const SKIP_CHECK = '_skip_check_';
 
@@ -275,9 +275,9 @@ export const parseStyle = (
 // ============================================================================
 // ==                                Register                                ==
 // ============================================================================
-// function uniqueHash(path: (string | number)[], styleStr: string) {
-//   return hash(`${path.join('%')}${styleStr}`);
-// }
+function uniqueHash(path: (string | number)[], styleStr: string) {
+  return hash(`${path.join('%')}${styleStr}`);
+}
 
 // function Empty() {
 //   return null;
@@ -287,90 +287,88 @@ export const parseStyle = (
  * Register a style to the global style sheet.
  */
 export default function useStyleRegister(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _info: Ref<{
+  info: Ref<{
     theme: Theme<any, any>;
     token: any;
     path: string[];
     hashId?: string;
     layer?: string;
   }>,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _styleFn: () => CSSInterpolation,
+  styleFn: () => CSSInterpolation,
 ) {
-  // const styleContext = useStyleInject();
+  const styleContext = useStyleInject();
 
-  // const tokenKey = computed(() => info.value.token._tokenKey as string);
+  const tokenKey = computed(() => info.value.token._tokenKey as string);
 
-  // const fullPath = computed(() => [tokenKey.value, ...info.value.path]);
+  const fullPath = computed(() => [tokenKey.value, ...info.value.path]);
 
   // Check if need insert style
-  // let isMergedClientSide = isClientSide;
-  // if (process.env.NODE_ENV !== 'production' && styleContext.mock !== undefined) {
-  //   isMergedClientSide = styleContext.mock === 'client';
-  // }
+  let isMergedClientSide = isClientSide;
+  if (process.env.NODE_ENV !== 'production' && styleContext.mock !== undefined) {
+    isMergedClientSide = styleContext.mock === 'client';
+  }
 
   // const [cacheStyle[0], cacheStyle[1], cacheStyle[2]]
-  // const cacheStyle = useGlobalCache(
-  //   'style',
-  //   fullPath,
-  //   // Create cache if needed
-  //   () => {
-  //     const styleObj = styleFn();
-  //     const { hashPriority, container, transformers, linters } = styleContext;
-  //     const { path, hashId, layer } = info.value;
-  //     const [parsedStyle, effectStyle] = parseStyle(styleObj, {
-  //       hashId,
-  //       hashPriority,
-  //       layer,
-  //       path: path.join('-'),
-  //       transformers,
-  //       linters,
-  //     });
-  //     const styleStr = normalizeStyle(parsedStyle);
-  //     const styleId = uniqueHash(fullPath.value, styleStr);
+  useGlobalCache(
+    'style',
+    fullPath,
+    // Create cache if needed
+    () => {
+      const styleObj = styleFn();
+      const { hashPriority, container, transformers, linters } = styleContext;
+      const { path, hashId, layer } = info.value;
+      const [parsedStyle, effectStyle] = parseStyle(styleObj, {
+        hashId,
+        hashPriority,
+        layer,
+        path: path.join('-'),
+        transformers,
+        linters,
+      });
+      const styleStr = normalizeStyle(parsedStyle);
+      const styleId = uniqueHash(fullPath.value, styleStr);
 
-  //     if (isMergedClientSide) {
-  //       const style = updateCSS(styleStr, styleId, {
-  //         mark: ATTR_MARK,
-  //         prepend: 'queue',
-  //         attachTo: container,
-  //       });
+      if (isMergedClientSide) {
+        const style = updateCSS(styleStr, styleId, {
+          mark: ATTR_MARK,
+          prepend: 'queue',
+          attachTo: container,
+        });
 
-  //       (style as any)[CSS_IN_JS_INSTANCE] = CSS_IN_JS_INSTANCE_ID;
+        (style as any)[CSS_IN_JS_INSTANCE] = CSS_IN_JS_INSTANCE_ID;
 
-  //       // Used for `useCacheToken` to remove on batch when token removed
-  //       style.setAttribute(ATTR_TOKEN, tokenKey.value);
+        // Used for `useCacheToken` to remove on batch when token removed
+        style.setAttribute(ATTR_TOKEN, tokenKey.value);
 
-  //       // Dev usage to find which cache path made this easily
-  //       if (process.env.NODE_ENV !== 'production') {
-  //         style.setAttribute(ATTR_DEV_CACHE_PATH, fullPath.value.join('|'));
-  //       }
+        // Dev usage to find which cache path made this easily
+        if (process.env.NODE_ENV !== 'production') {
+          style.setAttribute(ATTR_DEV_CACHE_PATH, fullPath.value.join('|'));
+        }
 
-  //       // Inject client side effect style
-  //       Object.keys(effectStyle).forEach(effectKey => {
-  //         if (!globalEffectStyleKeys.has(effectKey)) {
-  //           globalEffectStyleKeys.add(effectKey);
+        // Inject client side effect style
+        Object.keys(effectStyle).forEach(effectKey => {
+          if (!globalEffectStyleKeys.has(effectKey)) {
+            globalEffectStyleKeys.add(effectKey);
 
-  //           // Inject
-  //           updateCSS(normalizeStyle(effectStyle[effectKey]), `_effect-${effectKey}`, {
-  //             mark: ATTR_MARK,
-  //             prepend: 'queue',
-  //             attachTo: container,
-  //           });
-  //         }
-  //       });
-  //     }
+            // Inject
+            updateCSS(normalizeStyle(effectStyle[effectKey]), `_effect-${effectKey}`, {
+              mark: ATTR_MARK,
+              prepend: 'queue',
+              attachTo: container,
+            });
+          }
+        });
+      }
 
-  //     return [styleStr, tokenKey.value, styleId];
-  //   },
-  //   // Remove cache if no need
-  //   ([, , styleId], fromHMR) => {
-  //     if ((fromHMR || styleContext.autoClear) && isClientSide) {
-  //       removeCSS(styleId, { mark: ATTR_MARK });
-  //     }
-  //   },
-  // );
+      return [styleStr, tokenKey.value, styleId];
+    },
+    // Remove cache if no need
+    ([, , styleId], fromHMR) => {
+      if ((fromHMR || styleContext.autoClear) && isClientSide) {
+        removeCSS(styleId, { mark: ATTR_MARK });
+      }
+    },
+  );
 
   return (node: VueNode) => {
     return node;

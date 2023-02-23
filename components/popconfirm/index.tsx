@@ -21,6 +21,7 @@ import omit from '../_util/omit';
 import { tooltipDefaultProps } from '../tooltip/Tooltip';
 import ActionButton from '../_util/ActionButton';
 import usePopconfirmStyle from './style';
+import warning from '../_util/warning';
 
 export const popconfirmProps = () => ({
   ...abstractTooltipProps(),
@@ -67,6 +68,11 @@ const Popconfirm = defineComponent({
   // emits: ['update:open', 'visibleChange'],
   setup(props: PopconfirmProps, { slots, emit, expose, attrs }) {
     const rootRef = ref();
+    warning(
+      props.visible === undefined,
+      'Popconfirm',
+      `\`visible\` will be removed in next major version, please use \`open\` instead.`,
+    );
     expose({
       getPopupDomNode: () => {
         return rootRef.value?.getPopupDomNode?.();

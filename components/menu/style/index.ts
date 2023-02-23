@@ -434,12 +434,12 @@ const getBaseStyle: GenerateStyle<MenuToken> = token => {
 };
 
 // ============================== Export ==============================
-export default (prefixCls: Ref<string>, injectStyle: Ref<boolean>): UseComponentStyleResult => {
+export default (prefixCls: Ref<string>, injectStyle?: Ref<boolean>): UseComponentStyleResult => {
   const useOriginHook = genComponentStyleHook(
     'Menu',
     (token, { overrideComponentToken }) => {
       // Dropdown will handle menu style self. We do not need to handle this.
-      if (injectStyle.value === false) {
+      if (injectStyle?.value === false) {
         return [];
       }
 

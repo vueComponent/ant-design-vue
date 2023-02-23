@@ -1,5 +1,5 @@
 import type { App, Plugin, WatchStopHandle } from 'vue';
-import { inject, computed, reactive, provide, defineComponent, watchEffect } from 'vue';
+import { computed, reactive, defineComponent, watchEffect } from 'vue';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { Locale } from '../locale-provider';
@@ -15,16 +15,20 @@ import defaultLocale from '../locale/en_US';
 import type { ValidateMessages } from '../form/interface';
 import useStyle from './style';
 import useTheme from './hooks/useTheme';
+import defaultSeedToken from '../theme/themes/seed';
 import type { ConfigProviderInnerProps, ConfigProviderProps, Theme } from './context';
 import {
-  defaultConfigProvider,
-  configProviderKey,
+  useConfigContextProvider,
+  useConfigContextInject,
   configProviderProps,
   useProvideGlobalForm,
   defaultIconPrefixCls,
 } from './context';
 import { useProviderSize } from './SizeContext';
 import { useProviderDisabled } from './DisabledContext';
+import { createTheme } from '../_util/cssinjs';
+import { useDesignTokenProvider } from '../theme/internal';
+import { toReactive } from '../_util/toReactive';
 
 export type {
   ConfigProviderProps,
@@ -124,7 +128,7 @@ const ConfigProvider = defineComponent({
   inheritAttrs: false,
   props: configProviderProps(),
   setup(props, { slots }) {
-    const parentContext = inject(configProviderKey, defaultConfigProvider);
+    const parentContext = useConfigContextInject();
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
       const { prefixCls = 'ant' } = props;
       if (customizePrefixCls) return customizePrefixCls;
@@ -210,6 +214,26 @@ const ConfigProvider = defineComponent({
       componentDisabled,
       transformCellText: computed(() => props.transformCellText),
     };
+
+    // ================================ Dynamic theme ================================
+    const memoTheme = computed(() => {
+      const { algorithm, token, ...rest } = mergedTheme.value || {};
+      const themeObj =
+        algorithm && (!Array.isArray(algorithm) || algorithm.length > 0)
+          ? createTheme(algorithm)
+          : undefined;
+
+      return {
+        ...rest,
+        theme: themeObj,
+
+        token: {
+          ...defaultSeedToken,
+          ...token,
+        },
+      };
+    });
+    useDesignTokenProvider(toReactive(memoTheme));
     const validateMessagesRef = computed(() => {
       // Additional Form provider
       let validateMessages: ValidateMessages = {};
@@ -225,8 +249,7 @@ const ConfigProvider = defineComponent({
       }
       return validateMessages;
     });
-
-    provide(configProviderKey, configProvider);
+    useConfigContextProvider(configProvider);
     useProvideGlobalForm({ validateMessages: validateMessagesRef });
     useProviderSize(componentSize);
     useProviderDisabled(componentDisabled);

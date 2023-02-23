@@ -155,3 +155,11 @@ export const defaultConfigProvider: ConfigProviderInnerProps = {
   },
   iconPrefixCls: computed(() => defaultIconPrefixCls),
 };
+
+export const useConfigContextInject = () => {
+  return inject(configProviderKey, defaultConfigProvider);
+};
+
+export const useConfigContextProvider = (props: ConfigProviderInnerProps) => {
+  return provide(configProviderKey, props);
+};

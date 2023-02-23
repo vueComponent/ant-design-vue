@@ -249,6 +249,7 @@
     "ts-jest": "^28.0.5",
     "ts-loader": "^9.1.0",
     "ts-node": "^10.8.2",
+    "typedoc": "^0.23.25",
     "typescript": "~4.9.3",
     "umi-request": "^1.3.5",
     "unified": "9.2.2",

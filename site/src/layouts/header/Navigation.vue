@@ -125,7 +125,6 @@ export default defineComponent({
 });
 </script>
 <style lang="less">
-@import '../../theme/static/theme.less';
 @import './index.less';
 
 #nav {

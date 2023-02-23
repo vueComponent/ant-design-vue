@@ -19,14 +19,15 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "unpkg": "dist/antd.min.js",
-  "typings": "lib/index.d.ts",
+  "typings": "es/index.d.ts",
   "files": [
     "dist",
     "lib",
     "es",
     "scripts",
     "vetur",
-    "typings/global.d.ts"
+    "typings/global.d.ts",
+    "locale"
   ],
   "scripts": {
     "predev": "npm run version && node node_modules/esbuild/install.js",
@@ -66,8 +67,7 @@
     "> 0.5%",
     "last 2 versions",
     "Firefox ESR",
-    "not dead",
-    "not IE 11"
+    "not dead"
   ],
   "repository": {
     "type": "git",
@@ -303,9 +303,7 @@
     "*.vue",
     "*.md",
     "dist/*",
-    "es/**/style/*",
-    "lib/**/style/*",
-    "*.less"
+    "*.css"
   ],
   "vetur": {
     "tags": "vetur/tags.json",

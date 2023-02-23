@@ -3,7 +3,7 @@ category: Components
 type: 反馈
 title: Modal
 subtitle: 对话框
-cover: https://gw.alipayobjects.com/zos/alicdn/3StSdUlSH/Modal.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*wM3qQ5XrhlcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 模态对话框。

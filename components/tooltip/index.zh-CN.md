@@ -3,7 +3,7 @@ category: Components
 type: 数据展示
 title: Tooltip
 subtitle: 文字提示
-cover: https://gw.alipayobjects.com/zos/alicdn/Vyyeu8jq2/Tooltp.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3u9eSZO_4c0AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 警告提示，展现需要关注的信息。

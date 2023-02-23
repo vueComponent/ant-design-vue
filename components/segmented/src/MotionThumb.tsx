@@ -1,4 +1,4 @@
-import { addClass, removeClass } from 'ant-design-vue/es/vc-util/Dom/class';
+import { addClass, removeClass } from '../../vc-util/Dom/class';
 import type { CSSProperties, Ref, TransitionProps } from 'vue';
 import { onBeforeUnmount, nextTick, Transition, watch, defineComponent, computed, ref } from 'vue';
 import { anyType } from '../../_util/type';

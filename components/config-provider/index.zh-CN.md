@@ -4,7 +4,7 @@ subtitle: 全局化配置
 cols: 1
 type: 其他
 title: ConfigProvider
-cover: https://gw.alipayobjects.com/zos/alicdn/kegYxl1wj/ConfigProvider.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*NVKORa7BCVwAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 为组件提供统一的全局化配置。

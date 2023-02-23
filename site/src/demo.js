@@ -389,6 +389,12 @@ export default {
     type: 'Layout',
     title: 'Space',
   },
+  segmented: {
+    category: 'Components',
+    subtitle: '分段控制器',
+    type: 'Data Display',
+    title: 'Segmented',
+  },
   // colorPicker: {
   //   category: 'Components',
   //   subtitle: '取色器',

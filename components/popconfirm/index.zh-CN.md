@@ -3,7 +3,7 @@ category: Components
 type: 反馈
 title: Popconfirm
 subtitle: 气泡确认框
-cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sAGpRoBtTXcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 点击元素，弹出气泡式的确认框。

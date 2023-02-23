@@ -52,7 +52,7 @@ In this case, submit button is in the Modal which is out of Form. You can use `f
       <a-button html-type="button" style="margin: 0 8px" @click="visible = true">Add User</a-button>
     </a-form-item>
   </a-form>
-  <a-modal v-model:visible="visible" title="Basic Drawer" @ok="onOk">
+  <a-modal v-model:open="visible" title="Basic Drawer" @ok="onOk">
     <a-form ref="modalFormRef" :model="modalFormState" layout="vertical" name="userForm">
       <a-form-item name="name" label="User Name" :rules="[{ required: true }]">
         <a-input v-model:value="modalFormState.name" />

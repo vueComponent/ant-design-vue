@@ -15,17 +15,19 @@ The most basic usage.
 </docs>
 
 <template>
-  <a-segmented :options="data" />
+  <a-segmented v-model:value="value" :options="data" />
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent({
   setup() {
     const data = reactive(['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']);
+    const value = ref(data[0]);
     return {
       data,
+      value,
     };
   },
 });

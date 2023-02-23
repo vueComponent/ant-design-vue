@@ -6,7 +6,6 @@ import { computed, defineComponent, ref, watchEffect } from 'vue';
 import { useInjectTable } from '../context/TableContext';
 import { useInjectBody } from '../context/BodyContext';
 import classNames from '../../_util/classNames';
-import { parseStyleText } from '../../_util/props-util';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 
 export interface BodyRowProps<RecordType> {
@@ -128,10 +127,7 @@ export default defineComponent<BodyRowProps<unknown>>({
             computeRowClassName.value,
             additionalProps.value.class,
           )}
-          style={{
-            ...style,
-            ...parseStyleText(additionalProps.value.style),
-          }}
+          style={[style, additionalProps.value.style]}
           onClick={onClick}
         >
           {flattenColumns.map((column, colIndex) => {

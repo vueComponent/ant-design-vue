@@ -14,17 +14,19 @@ title:
 `block` property will make the `Segmented` fit to its parent width.
 </docs>
 <template>
-  <a-segmented block :options="data" />
+  <a-segmented v-model:value="value" block :options="data" />
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent({
   setup() {
     const data = reactive([123, 456, 'longtext-longtext-longtext-longtext']);
+    const value = ref(data[0]);
     return {
       data,
+      value,
     };
   },
 });

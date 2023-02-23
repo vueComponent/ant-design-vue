@@ -24,7 +24,7 @@ Use form in drawer with submit button.
   <a-drawer
     title="Create a new account"
     :width="720"
-    :visible="visible"
+    :open="open"
     :body-style="{ paddingBottom: '80px' }"
     :footer-style="{ textAlign: 'right' }"
     @close="onClose"
@@ -134,19 +134,19 @@ export default defineComponent({
       description: [{ required: true, message: 'Please enter url description' }],
     };
 
-    const visible = ref<boolean>(false);
+    const open = ref<boolean>(false);
 
     const showDrawer = () => {
-      visible.value = true;
+      open.value = true;
     };
 
     const onClose = () => {
-      visible.value = false;
+      open.value = false;
     };
     return {
       form,
       rules,
-      visible,
+      open,
       showDrawer,
       onClose,
     };

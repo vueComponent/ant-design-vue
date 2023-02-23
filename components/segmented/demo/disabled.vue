@@ -15,15 +15,15 @@ Disabled Segmented.
 </docs>
 <template>
   <div>
-    <a-segmented disabled :options="data" />
+    <a-segmented v-model:value="value" disabled :options="data" />
     <br />
     <br />
-    <a-segmented :options="data2" />
+    <a-segmented v-model:value="value2" :options="data2" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 
 export default defineComponent({
   setup() {
@@ -35,9 +35,13 @@ export default defineComponent({
       { value: 'Quarterly', disabled: true },
       'Yearly',
     ]);
+    const value = ref(data[0]);
+    const value2 = ref('Daily');
     return {
       data,
       data2,
+      value,
+      value2,
     };
   },
 });

@@ -5,6 +5,7 @@ import type { DisplayValueType, Placement } from '../vc-select/BaseSelect';
 import { baseSelectPropsWithoutPrivate } from '../vc-select/BaseSelect';
 import omit from '../_util/omit';
 import type { Key, VueNode } from '../_util/type';
+import { objectType } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
 import useId from '../vc-select/hooks/useId';
@@ -68,7 +69,7 @@ function baseCascaderProps<OptionType extends BaseOptionType = DefaultOptionType
     // MISC
     id: String,
     prefixCls: String,
-    fieldNames: Object as PropType<FieldNames>,
+    fieldNames: objectType<FieldNames>(),
     children: Array as PropType<VueNode[]>,
 
     // Value

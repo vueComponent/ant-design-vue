@@ -679,6 +679,7 @@ export default defineComponent({
       const restProps = omit(props, [
         'id',
         'prefixCls',
+        'customSlots',
 
         // Value
         'value',

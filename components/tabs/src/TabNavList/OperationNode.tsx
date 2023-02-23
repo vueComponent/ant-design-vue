@@ -160,9 +160,9 @@ export default defineComponent({
         <Dropdown
           prefixCls={dropdownPrefix}
           trigger={['hover']}
-          open={open.value}
+          visible={open.value}
           transitionName={moreTransitionName}
-          onOpenChange={setOpen}
+          onVisibleChange={setOpen}
           overlayClassName={overlayClassName}
           mouseEnterDelay={0.1}
           mouseLeaveDelay={0.1}

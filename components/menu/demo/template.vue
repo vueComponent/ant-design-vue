@@ -44,21 +44,41 @@ Use the single file method to recursively generate menus.
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, PropType } from 'vue';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
   MailOutlined,
 } from '@ant-design/icons-vue';
-
+const list = [
+  {
+    key: '1',
+    title: 'Option 1',
+  },
+  {
+    key: '2',
+    title: 'Navigation 2',
+    children: [
+      {
+        key: '2.1',
+        title: 'Navigation 3',
+        children: [{ key: '2.1.1', title: 'Option 2.1.1' }],
+      },
+    ],
+  },
+];
 // you can rewrite it to a single file component, if not, you should config vue alias to vue/dist/vue.esm-bundler.js
-const SubMenu = {
+const SubMenu = defineComponent({
   name: 'SubMenu',
+  components: {
+    PieChartOutlined,
+    MailOutlined,
+  },
   props: {
     menuInfo: {
-      type: Object,
-      default: () => ({}),
+      type: Object as PropType<(typeof list)[number]>,
+      default: () => ({} as (typeof list)[number]),
     },
   },
   template: `
@@ -80,28 +100,8 @@ const SubMenu = {
       </template>
     </a-sub-menu>
   `,
-  components: {
-    PieChartOutlined,
-    MailOutlined,
-  },
-};
-const list = [
-  {
-    key: '1',
-    title: 'Option 1',
-  },
-  {
-    key: '2',
-    title: 'Navigation 2',
-    children: [
-      {
-        key: '2.1',
-        title: 'Navigation 3',
-        children: [{ key: '2.1.1', title: 'Option 2.1.1' }],
-      },
-    ],
-  },
-];
+});
+
 export default defineComponent({
   components: {
     'sub-menu': SubMenu,

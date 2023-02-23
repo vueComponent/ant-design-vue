@@ -163,6 +163,8 @@ declare module 'vue' {
 
     ASelect: typeof import('ant-design-vue')['Select'];
 
+    ASegmented: typeof import('ant-design-vue')['Segmented'];
+
     ASelectOptGroup: typeof import('ant-design-vue')['SelectOptGroup'];
 
     ASelectOption: typeof import('ant-design-vue')['SelectOption'];

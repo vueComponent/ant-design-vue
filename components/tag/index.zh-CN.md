@@ -3,7 +3,7 @@ category: Components
 subtitle: 标签
 type: 数据展示
 title: Tag
-cover: https://gw.alipayobjects.com/zos/alicdn/cH1BOLfxC/Tag.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_SBsSrKLg00AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 进行标记和分类的小标签。

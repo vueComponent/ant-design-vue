@@ -6,9 +6,9 @@ import { genCommonStyle, genLinkStyle } from '../../_style';
 import type { UseComponentStyleResult } from '../internal';
 import { mergeToken, statisticToken, useToken } from '../internal';
 import type { ComponentTokenMap, GlobalToken } from '../interface';
-import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
+import { useConfigContextInject } from '../../config-provider/context';
 
 export type OverrideTokenWithoutDerivative = ComponentTokenMap;
 export type OverrideComponent = keyof OverrideTokenWithoutDerivative;
@@ -44,9 +44,11 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
     | OverrideTokenWithoutDerivative[ComponentName]
     | ((token: GlobalToken) => OverrideTokenWithoutDerivative[ComponentName]),
 ) {
-  return (prefixCls: Ref<string>): UseComponentStyleResult => {
+  return (_prefixCls?: Ref<string>): UseComponentStyleResult => {
+    const prefixCls = computed(() => _prefixCls?.value);
     const [theme, token, hashId] = useToken();
-    const { rootPrefixCls, iconPrefixCls } = useConfigInject('', {});
+    const { getPrefixCls, iconPrefixCls } = useConfigContextInject();
+    const rootPrefixCls = computed(() => getPrefixCls());
     const sharedInfo = computed(() => {
       return {
         theme: theme.value,

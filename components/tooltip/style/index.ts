@@ -130,7 +130,7 @@ export default (prefixCls: Ref<string>, injectStyle: Ref<boolean>): UseComponent
     'Tooltip',
     token => {
       // Popover use Tooltip as internal component. We do not need to handle this.
-      if (injectStyle.value === false) {
+      if (injectStyle?.value === false) {
         return [];
       }
 

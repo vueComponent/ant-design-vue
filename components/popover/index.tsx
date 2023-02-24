@@ -10,6 +10,7 @@ import { getTransitionName } from '../_util/transition';
 import { tooltipDefaultProps } from '../tooltip/Tooltip';
 import useStyle from './style';
 import classNames from '../_util/classNames';
+import warning from '../_util/warning';
 
 export const popoverProps = () => ({
   ...abstractTooltipProps(),
@@ -33,7 +34,11 @@ const Popover = defineComponent({
   }),
   setup(props, { expose, slots, attrs }) {
     const tooltipRef = ref();
-
+    warning(
+      props.visible === undefined,
+      'popover',
+      `\`visible\` will be removed in next major version, please use \`open\` instead.`,
+    );
     expose({
       getPopupDomNode: () => {
         return tooltipRef.value?.getPopupDomNode?.();

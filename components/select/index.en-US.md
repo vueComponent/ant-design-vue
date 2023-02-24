@@ -2,7 +2,7 @@
 category: Components
 type: Data Entry
 title: Select
-cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*zo76T7KQx2UAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Select component to select value from options.
@@ -32,7 +32,7 @@ Select component to select value from options.
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | defaultOpen | Initial open state of dropdown | boolean | - |  |
 | disabled | Whether disabled select | boolean | false |  |
-| dropdownClassName | className of dropdown menu | string | - |  |
+| popupClassName | className of dropdown menu | string | - | 4.0 |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |
 | dropdownMenuStyle | additional style applied to dropdown menu | object | - |  |
 | dropdownRender | Customize dropdown content | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
@@ -50,7 +50,7 @@ Select component to select value from options.
 | maxTagTextLength | Max text length to show | number | - |  |
 | menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - |  |
 | mode | Set mode of Select | 'multiple' \| 'tags' | - |  |
-| notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |  |
+| notFoundContent | Specify content to show when no result matches.. | string\|slot | `Not Found` |  |
 | open | Controlled open state of dropdown | boolean | - |  |
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |  |

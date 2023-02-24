@@ -19,7 +19,7 @@ When user visit a page with a list of items, and want to create a new item. The 
   <div>
     <a-button type="primary" @click="visible = true">New Collection</a-button>
     <a-modal
-      v-model:visible="visible"
+      v-model:open="visible"
       title="Create a new collection"
       ok-text="Create"
       cancel-text="Cancel"

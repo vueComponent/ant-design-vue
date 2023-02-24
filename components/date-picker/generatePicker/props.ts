@@ -29,6 +29,10 @@ import type { InputStatus } from '../../_util/statusUtils';
 const DataPickerPlacements = ['bottomLeft', 'bottomRight', 'topLeft', 'topRight'] as const;
 type DataPickerPlacement = (typeof DataPickerPlacements)[number];
 
+type RangeShowTimeObject<DateType> = Omit<SharedTimeProps<DateType>, 'defaultValue'> & {
+  defaultValue?: DateType[];
+};
+
 function commonProps<DateType = any>() {
   return {
     id: String,
@@ -205,6 +209,7 @@ function rangePickerProps<DateType>() {
     format: String,
     renderExtraFooter: functionType<() => VueNode>(),
     separator: { type: String },
+    showTime: someType<boolean | RangeShowTimeObject<DateType>>([Boolean, Object]),
     ranges:
       objectType<
         Record<
@@ -250,6 +255,7 @@ export interface RangePickerProps<DateType> {
   format?: string;
   renderExtraFooter?: () => VueNode;
   separator?: string;
+  showTime?: boolean | RangeShowTimeObject<DateType>;
   ranges?: Record<
     string,
     Exclude<RangeValue<DateType>, null> | (() => Exclude<RangeValue<DateType>, null>)

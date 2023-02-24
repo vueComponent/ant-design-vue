@@ -2,7 +2,7 @@
 category: Components
 type: Feedback
 title: Skeleton
-cover: https://gw.alipayobjects.com/zos/alicdn/KpcciCJgv/Skeleton.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*uae3QbkNCm8AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Provide a placeholder while you wait for content to load, or to visualise content that doesn't exist yet.

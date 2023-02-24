@@ -7,6 +7,7 @@ import type {
   HTMLAttributes,
 } from 'vue';
 import {
+  onMounted,
   reactive,
   watch,
   defineComponent,
@@ -49,6 +50,7 @@ import type { FormItemStatusContextProps } from './FormItemContext';
 import { FormItemInputContext, useProvideFormItemContext } from './FormItemContext';
 import useDebounce from './utils/useDebounce';
 import classNames from '../_util/classNames';
+import useStyle from './style';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = (typeof ValidateStatuses)[number];
@@ -156,6 +158,8 @@ export default defineComponent({
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);
     const eventKey = `form-item-${++indexGuid}`;
     const { prefixCls } = useConfigInject('form', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const itemRef = ref<HTMLDivElement>();
     const formContext = useInjectForm();
     const fieldName = computed(() => props.name || props.prop);
     const errors = ref([]);
@@ -165,6 +169,7 @@ export default defineComponent({
       const val = fieldName.value;
       return getNamePath(val);
     });
+
     const fieldId = computed(() => {
       if (!namePath.value.length) {
         return undefined;
@@ -407,7 +412,7 @@ export default defineComponent({
     });
     const itemClassName = computed(() => ({
       [`${prefixCls.value}-item`]: true,
-
+      [hashId.value]: true,
       // Status
       [`${prefixCls.value}-item-has-feedback`]: mergedValidateStatus.value && props.hasFeedback,
       [`${prefixCls.value}-item-has-success`]: mergedValidateStatus.value === 'success',
@@ -440,51 +445,94 @@ export default defineComponent({
         isFormItemInput: true,
       });
     });
+
+    const marginBottom = ref<number>(null);
+    const showMarginOffset = ref(false);
+    const updateMarginBottom = () => {
+      if (itemRef.value) {
+        const itemStyle = getComputedStyle(itemRef.value);
+        marginBottom.value = parseInt(itemStyle.marginBottom, 10);
+      }
+    };
+    onMounted(() => {
+      watch(
+        showMarginOffset,
+        () => {
+          if (showMarginOffset.value) {
+            updateMarginBottom();
+          }
+        },
+        { flush: 'post', immediate: true },
+      );
+    });
+
+    const onErrorVisibleChanged = (nextVisible: boolean) => {
+      if (!nextVisible) {
+        marginBottom.value = null;
+      }
+    };
     return () => {
       if (props.noStyle) return slots.default?.();
       const help = props.help ?? (slots.help ? filterEmpty(slots.help()) : null);
-      return (
-        <Row
-          {...attrs}
+      const withHelp = !!(
+        (help !== undefined && help !== null && Array.isArray(help) && help.length) ||
+        debounceErrors.value.length
+      );
+      showMarginOffset.value = withHelp;
+      return wrapSSR(
+        <div
           class={[
             itemClassName.value,
-            (help !== undefined && help !== null) || debounceErrors.value.length
-              ? `${prefixCls.value}-item-with-help`
-              : '',
+            withHelp ? `${prefixCls.value}-item-with-help` : '',
             attrs.class,
           ]}
-          key="row"
-          v-slots={{
-            default: () => (
-              <>
-                {/* Label */}
-                <FormItemLabel
-                  {...props}
-                  htmlFor={htmlFor.value}
-                  required={isRequired.value}
-                  requiredMark={formContext.requiredMark.value}
-                  prefixCls={prefixCls.value}
-                  onClick={onLabelClick}
-                  label={props.label ?? slots.label?.()}
-                />
-                {/* Input Group */}
-                <FormItemInput
-                  {...props}
-                  errors={
-                    help !== undefined && help !== null ? toArray(help) : debounceErrors.value
-                  }
-                  prefixCls={prefixCls.value}
-                  status={mergedValidateStatus.value}
-                  ref={inputRef}
-                  help={help}
-                  extra={props.extra ?? slots.extra?.()}
-                  v-slots={{ default: slots.default }}
-                  // v-slots={{ default: () => [firstChildren, children.slice(1)] }}
-                ></FormItemInput>
-              </>
-            ),
-          }}
-        ></Row>
+          ref={itemRef}
+        >
+          <Row
+            {...attrs}
+            class={`${prefixCls.value}-row`}
+            key="row"
+            v-slots={{
+              default: () => (
+                <>
+                  {/* Label */}
+                  <FormItemLabel
+                    {...props}
+                    htmlFor={htmlFor.value}
+                    required={isRequired.value}
+                    requiredMark={formContext.requiredMark.value}
+                    prefixCls={prefixCls.value}
+                    onClick={onLabelClick}
+                    label={props.label ?? slots.label?.()}
+                  />
+                  {/* Input Group */}
+                  <FormItemInput
+                    {...props}
+                    errors={
+                      help !== undefined && help !== null ? toArray(help) : debounceErrors.value
+                    }
+                    marginBottom={marginBottom.value}
+                    prefixCls={prefixCls.value}
+                    status={mergedValidateStatus.value}
+                    ref={inputRef}
+                    help={help}
+                    extra={props.extra ?? slots.extra?.()}
+                    v-slots={{ default: slots.default }}
+                    onErrorVisibleChanged={onErrorVisibleChanged}
+                  ></FormItemInput>
+                </>
+              ),
+            }}
+          ></Row>
+          {!!marginBottom.value && (
+            <div
+              class={`${prefixCls.value}-margin-offset`}
+              style={{
+                marginBottom: `-${marginBottom.value}px`,
+              }}
+            />
+          )}
+        </div>,
       );
     };
   },

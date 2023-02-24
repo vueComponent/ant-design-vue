@@ -26,7 +26,11 @@ import type { ValueType } from '../vc-cascader/Cascader';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
 import { FormItemInputContext } from '../form/FormItemContext';
+import { useCompactItemContext } from '../space/Compact';
 
+import useSelectStyle from '../select/style';
+import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 // Align the design since we use `rc-select` in root. This help:
 // - List search content will show all content
 // - Hover opacity style
@@ -38,7 +42,7 @@ export type FieldNamesType = FieldNames;
 
 export type FilledFieldNamesType = Required<FieldNamesType>;
 
-function highlightKeyword(str: string, lowerKeyword: string, prefixCls: string | undefined) {
+function highlightKeyword(str: string, lowerKeyword: string, prefixCls?: string) {
   const cells = str
     .toLowerCase()
     .split(lowerKeyword)
@@ -108,6 +112,9 @@ export function cascaderProps<DataNodeType extends CascaderOptionType = Cascader
     suffixIcon: PropTypes.any,
     status: String as PropType<InputStatus>,
     options: Array as PropType<DataNodeType[]>,
+    popupClassName: String,
+    /** @deprecated Please use `popupClassName` instead */
+    dropdownClassName: String,
     'onUpdate:value': Function as PropType<(value: ValueType) => void>,
   };
 }
@@ -129,6 +136,14 @@ const Cascader = defineComponent({
     allowClear: true,
   }),
   setup(props, { attrs, expose, slots, emit }) {
+    // ====================== Warning ======================
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        !props.dropdownClassName,
+        'Cascader',
+        '`dropdownClassName` is deprecated. Please use `popupClassName` instead.',
+      );
+    }
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
@@ -139,9 +154,18 @@ const Cascader = defineComponent({
       direction,
       getPopupContainer,
       renderEmpty,
-      size,
+      size: contextSize,
+      disabled,
     } = useConfigInject('cascader', props);
     const prefixCls = computed(() => getPrefixCls('select', props.prefixCls));
+    const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+    const mergedSize = computed(() => compactSize.value || contextSize.value);
+    const contextDisabled = useInjectDisabled();
+    const mergedDisabled = computed(() => disabled.value ?? contextDisabled.value);
+
+    const [wrapSelectSSR, hashId] = useSelectStyle(prefixCls);
+    const [wrapCascaderSSR] = useStyle(cascaderPrefixCls);
+
     const isRtl = computed(() => direction.value === 'rtl');
     // =================== Warning =====================
     if (process.env.NODE_ENV !== 'production') {
@@ -176,11 +200,12 @@ const Cascader = defineComponent({
     // =================== Dropdown ====================
     const mergedDropdownClassName = computed(() =>
       classNames(
-        props.dropdownClassName || props.popupClassName,
+        props.popupClassName || props.dropdownClassName,
         `${cascaderPrefixCls.value}-dropdown`,
         {
           [`${cascaderPrefixCls.value}-dropdown-rtl`]: isRtl.value,
         },
+        hashId.value,
       ),
     );
 
@@ -253,61 +278,66 @@ const Cascader = defineComponent({
         },
         slots,
       );
-      return (
-        <VcCascader
-          {...restProps}
-          {...attrs}
-          id={id}
-          prefixCls={prefixCls.value}
-          class={[
-            cascaderPrefixCls.value,
-            {
-              [`${prefixCls.value}-lg`]: size.value === 'large',
-              [`${prefixCls.value}-sm`]: size.value === 'small',
-              [`${prefixCls.value}-rtl`]: isRtl.value,
-              [`${prefixCls.value}-borderless`]: !bordered,
-              [`${prefixCls.value}-in-form-item`]: formItemInputContext.isFormItemInput,
-            },
-            getStatusClassNames(
-              prefixCls.value,
-              mergedStatus.value,
-              formItemInputContext.hasFeedback,
-            ),
-            attrs.class,
-          ]}
-          direction={direction.value}
-          placement={placement.value}
-          notFoundContent={mergedNotFoundContent}
-          allowClear={allowClear}
-          showSearch={mergedShowSearch.value}
-          expandIcon={mergedExpandIcon}
-          inputIcon={suffixIcon}
-          removeIcon={removeIcon}
-          clearIcon={clearIcon}
-          loadingIcon={loadingIcon}
-          checkable={!!multiple}
-          dropdownClassName={mergedDropdownClassName.value}
-          dropdownPrefixCls={cascaderPrefixCls.value}
-          choiceTransitionName={getTransitionName(rootPrefixCls.value, '', choiceTransitionName)}
-          transitionName={getTransitionName(
-            rootPrefixCls.value,
-            getTransitionDirection(placement.value),
-            transitionName,
-          )}
-          getPopupContainer={getPopupContainer.value}
-          customSlots={{
-            ...slots,
-            checkable: () => <span class={`${cascaderPrefixCls.value}-checkbox-inner`} />,
-          }}
-          tagRender={props.tagRender || slots.tagRender}
-          displayRender={props.displayRender || slots.displayRender}
-          maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
-          showArrow={formItemInputContext.hasFeedback || props.showArrow}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          v-slots={slots}
-          ref={selectRef}
-        />
+      return wrapCascaderSSR(
+        wrapSelectSSR(
+          <VcCascader
+            {...restProps}
+            {...attrs}
+            id={id}
+            prefixCls={prefixCls.value}
+            class={[
+              cascaderPrefixCls.value,
+              {
+                [`${prefixCls.value}-lg`]: mergedSize.value === 'large',
+                [`${prefixCls.value}-sm`]: mergedSize.value === 'small',
+                [`${prefixCls.value}-rtl`]: isRtl.value,
+                [`${prefixCls.value}-borderless`]: !bordered,
+                [`${prefixCls.value}-in-form-item`]: formItemInputContext.isFormItemInput,
+              },
+              getStatusClassNames(
+                prefixCls.value,
+                mergedStatus.value,
+                formItemInputContext.hasFeedback,
+              ),
+              compactItemClassnames.value,
+              attrs.class,
+              hashId.value,
+            ]}
+            disabled={mergedDisabled.value}
+            direction={direction.value}
+            placement={placement.value}
+            notFoundContent={mergedNotFoundContent}
+            allowClear={allowClear}
+            showSearch={mergedShowSearch.value}
+            expandIcon={mergedExpandIcon}
+            inputIcon={suffixIcon}
+            removeIcon={removeIcon}
+            clearIcon={clearIcon}
+            loadingIcon={loadingIcon}
+            checkable={!!multiple}
+            dropdownClassName={mergedDropdownClassName.value}
+            dropdownPrefixCls={cascaderPrefixCls.value}
+            choiceTransitionName={getTransitionName(rootPrefixCls.value, '', choiceTransitionName)}
+            transitionName={getTransitionName(
+              rootPrefixCls.value,
+              getTransitionDirection(placement.value),
+              transitionName,
+            )}
+            getPopupContainer={getPopupContainer.value}
+            customSlots={{
+              ...slots,
+              checkable: () => <span class={`${cascaderPrefixCls.value}-checkbox-inner`} />,
+            }}
+            tagRender={props.tagRender || slots.tagRender}
+            displayRender={props.displayRender || slots.displayRender}
+            maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
+            showArrow={formItemInputContext.hasFeedback || props.showArrow}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            v-slots={slots}
+            ref={selectRef}
+          />,
+        ),
       );
     };
   },

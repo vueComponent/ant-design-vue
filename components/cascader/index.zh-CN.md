@@ -3,7 +3,7 @@ category: Components
 type: 数据录入
 title: Cascader
 subtitle: 级联选择
-cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*tokLTp73TsQAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 级联选择框。
@@ -30,7 +30,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
 | defaultValue | 默认的选中项 | string\[] \| number\[] | \[] |  |
 | disabled | 禁用 | boolean | false |  |
 | displayRender | 选择后展示的渲染函数,可使用 #displayRender="{labels, selectedOptions}" | `({labels, selectedOptions}) => VNode` | `labels => labels.join(' / ')` |  |
-| dropdownClassName | 自定义浮层类名 | string | - | 3.0 |
+| popupClassName | 自定义浮层类名 | string | - | 4.0 |
 | dropdownStyle | 自定义浮层样式 | CSSProperties | {} | 3.0 |
 | expandIcon | 自定义次级菜单展开图标 | slot | - | 3.0 |
 | expandTrigger | 次级菜单的展开方式 | `click` \| `hover` | 'click' |  |

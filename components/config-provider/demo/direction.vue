@@ -226,7 +226,7 @@ Components which support rtl direction are listed here, you can toggle the direc
               <a-divider orientation="left">Modal example</a-divider>
               <div>
                 <a-button type="primary" @click="showModal">Open Modal</a-button>
-                <a-modal v-model:visible="state.modalVisible" title="پنچره ساده">
+                <a-modal v-model:open="state.modalVisible" title="پنچره ساده">
                   <p>نگاشته‌های خود را اینجا قراردهید</p>
                   <p>نگاشته‌های خود را اینجا قراردهید</p>
                   <p>نگاشته‌های خود را اینجا قراردهید</p>

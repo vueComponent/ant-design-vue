@@ -190,7 +190,7 @@ const TimeBody = defineComponent({
         0,
         59,
         props.secondStep ?? 1,
-        mergedDisabledSeconds.value && mergedDisabledSeconds.value(originHour.value, minute),
+        mergedDisabledSeconds.value && mergedDisabledSeconds.value(originHour.value, minute.value),
       ),
     );
 

@@ -2,7 +2,7 @@
 category: Components
 type: Data Display
 title: Image
-cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*FbOCS6aFMeUAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Previewable image.
@@ -33,7 +33,7 @@ Previewable image.
 
 ### previewType
 
-```js
+```ts
 {
   visible?: boolean;
   onVisibleChange?: (visible, prevVisible) => void;

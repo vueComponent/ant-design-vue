@@ -1,10 +1,6 @@
-import type { App } from 'vue';
 import Segmented from './src';
 import type { SegmentedProps } from './src';
+import { withInstall } from '../_util/type';
 
-Segmented.install = function (app: App) {
-  app.component(Segmented.name, Segmented);
-  return app;
-};
-export default Segmented;
+export default withInstall(Segmented);
 export type { SegmentedProps };

@@ -13,8 +13,8 @@ export { default as Alert } from './alert';
 export type { AvatarProps } from './avatar';
 export { default as Avatar, AvatarGroup } from './avatar';
 
-// export type { BackTopProps } from './back-top';
-// export { default as BackTop } from './back-top';
+export type { BackTopProps } from './back-top';
+export { default as BackTop } from './back-top';
 
 export type { BadgeProps } from './badge';
 export { default as Badge, BadgeRibbon } from './badge';
@@ -76,11 +76,7 @@ export { default as Drawer } from './drawer';
 export type { EmptyProps } from './empty';
 export { default as Empty } from './empty';
 
-export type {
-  FloatButtonProps,
-  FloatButtonGroupProps,
-  BackTopProps,
-} from './float-button/interface';
+export type { FloatButtonProps, FloatButtonGroupProps } from './float-button/interface';
 export { default as FloatButton } from './float-button';
 
 export type { FormProps, FormItemProps, FormInstance, FormItemInstance } from './form';

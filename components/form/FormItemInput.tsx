@@ -7,6 +7,7 @@ import type { ValidateStatus } from './FormItem';
 import type { VueNode } from '../_util/type';
 import type { HTMLAttributes } from 'vue';
 import { computed, defineComponent } from 'vue';
+import { filterEmpty } from '../_util/props-util';
 
 export interface FormItemInputMiscProps {
   prefixCls: string;
@@ -35,6 +36,8 @@ const FormItemInput = defineComponent({
     'help',
     'extra',
     'status',
+    'marginBottom',
+    'onErrorVisibleChanged',
   ],
   setup(props, { slots }) {
     const formContext = useInjectForm();
@@ -54,8 +57,10 @@ const FormItemInput = defineComponent({
       const {
         prefixCls,
         wrapperCol,
+        marginBottom,
+        onErrorVisibleChanged,
         help = slots.help?.(),
-        errors = slots.errors?.(),
+        errors = filterEmpty(slots.errors?.()),
         // hasFeedback,
         // status,
         extra = slots.extra?.(),
@@ -69,7 +74,6 @@ const FormItemInput = defineComponent({
 
       // Should provides additional icon if `hasFeedback`
       // const IconNode = status && iconMap[status];
-
       return (
         <Col
           {...mergedWrapperCol}
@@ -79,17 +83,18 @@ const FormItemInput = defineComponent({
               <>
                 <div class={`${baseClassName}-control-input`}>
                   <div class={`${baseClassName}-control-input-content`}>{slots.default?.()}</div>
-                  {/* {hasFeedback && IconNode ? (
-                    <span class={`${baseClassName}-children-icon`}>
-                      <IconNode />
-                    </span>
-                  ) : null} */}
                 </div>
-                <ErrorList
-                  errors={errors}
-                  help={help}
-                  class={`${baseClassName}-explain-connected`}
-                />
+                {marginBottom !== null || errors.length ? (
+                  <div style={{ display: 'flex', flexWrap: 'nowrap' }}>
+                    <ErrorList
+                      errors={errors}
+                      help={help}
+                      class={`${baseClassName}-explain-connected`}
+                      onErrorVisibleChanged={onErrorVisibleChanged}
+                    />
+                    {!!marginBottom && <div style={{ width: 0, height: `${marginBottom}px` }} />}
+                  </div>
+                ) : null}
                 {extra ? <div class={`${baseClassName}-extra`}>{extra}</div> : null}
               </>
             ),

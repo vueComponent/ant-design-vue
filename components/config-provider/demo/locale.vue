@@ -54,7 +54,7 @@ Components which need localization support are listed here, you can toggle the l
       <div class="example">
         <a-table :data-source="[]" :columns="columns" />
       </div>
-      <a-modal v-model:visible="visible" title="Locale Modal">
+      <a-modal v-model:open="visible" title="Locale Modal">
         <p>Locale Modal</p>
       </a-modal>
     </div>

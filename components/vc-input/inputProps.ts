@@ -2,6 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 import type { VueNode } from '../_util/type';
+import { stringType } from '../_util/type';
 import type {
   ChangeEventHandler,
   CompositionEventHandler,
@@ -54,33 +55,30 @@ export const inputProps = () => ({
     type: [String, Number] as PropType<string | number>,
   },
   autocomplete: String,
-  type: {
-    type: String as PropType<
-      | 'button'
-      | 'checkbox'
-      | 'color'
-      | 'date'
-      | 'datetime-local'
-      | 'email'
-      | 'file'
-      | 'hidden'
-      | 'image'
-      | 'month'
-      | 'number'
-      | 'password'
-      | 'radio'
-      | 'range'
-      | 'reset'
-      | 'search'
-      | 'submit'
-      | 'tel'
-      | 'text'
-      | 'time'
-      | 'url'
-      | 'week'
-    >,
-    default: 'text',
-  },
+  type: stringType<
+    | 'button'
+    | 'checkbox'
+    | 'color'
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'file'
+    | 'hidden'
+    | 'image'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'radio'
+    | 'range'
+    | 'reset'
+    | 'search'
+    | 'submit'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url'
+    | 'week'
+  >('text'),
   name: String,
   size: { type: String as PropType<SizeType> },
   autofocus: { type: Boolean, default: undefined },

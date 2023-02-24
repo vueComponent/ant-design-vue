@@ -4,7 +4,7 @@ subtitle: 锚点
 cols: 2
 type: 其他
 title: Anchor
-cover: https://gw.alipayobjects.com/zos/alicdn/_1-C1JwsC/Anchor.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*TBTSR4PyVmkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 用于跳转到页面指定位置。

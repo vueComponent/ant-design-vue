@@ -1,3 +1,4 @@
+import type { PreviewGroupPreview } from '../vc-image/src/PreviewGroup';
 import PreviewGroup from '../vc-image/src/PreviewGroup';
 import { computed, defineComponent } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
@@ -9,6 +10,8 @@ import ZoomOutOutlined from '@ant-design/icons-vue/ZoomOutOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import useStyle from './style';
+import { anyType } from '../_util/type';
 
 export const icons = {
   rotateLeft: <RotateLeftOutlined />,
@@ -24,18 +27,32 @@ const InternalPreviewGroup = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AImagePreviewGroup',
   inheritAttrs: false,
-  props: { previewPrefixCls: String },
+  props: { previewPrefixCls: String, preview: anyType<boolean | PreviewGroupPreview>() },
   setup(props, { attrs, slots }) {
-    const { getPrefixCls } = useConfigInject('image', props);
-    const prefixCls = computed(() => getPrefixCls('image-preview', props.previewPrefixCls));
+    const { prefixCls } = useConfigInject('image', props);
+    const previewPrefixCls = computed(() => `${prefixCls.value}-preview`);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const mergedPreview = computed(() => {
+      const { preview } = props;
+      if (preview === false) {
+        return preview;
+      }
+      const _preview = typeof preview === 'object' ? preview : {};
+
+      return {
+        ..._preview,
+        rootClassName: hashId.value,
+      };
+    });
     return () => {
-      return (
+      return wrapSSR(
         <PreviewGroup
           {...{ ...attrs, ...props }}
+          preview={mergedPreview.value}
           icons={icons}
-          previewPrefixCls={prefixCls.value}
+          previewPrefixCls={previewPrefixCls.value}
           v-slots={slots}
-        ></PreviewGroup>
+        ></PreviewGroup>,
       );
     };
   },

@@ -59,8 +59,18 @@ export function functionType<T = () => {}>(defaultVal?: T) {
   return { type: Function as PropType<T>, default: defaultVal as T };
 }
 
-export function anyType<T = any>(defaultVal?: T) {
-  return { validator: () => true, default: defaultVal as T } as unknown as { type: PropType<T> };
+export function anyType<T = any>(defaultVal?: T, required?: boolean) {
+  const type = { validator: () => true, default: defaultVal as T } as unknown;
+  return required
+    ? (type as {
+        type: PropType<T>;
+        default: T;
+        required: true;
+      })
+    : (type as {
+        default: T;
+        type: PropType<T>;
+      });
 }
 export function vNodeType<T = VueNode>() {
   return { validator: () => true } as unknown as { type: PropType<T> };

@@ -22,7 +22,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | accept | File types that can be accepted. See [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | - |  |  |
 | action | Uploading URL | string\|(file) => `Promise` | - |  |  |
 | beforeUpload | Hook function which will be executed before uploading. Uploading will be stopped with `false` or a rejected Promise returned. | (file, fileList) => `boolean` \| `Promise` | - |  |
-| customRequest | override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest | Function | - |  |  |
+| customRequest | override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest | function | - |  |  |
 | data | Uploading params or function which can return uploading params. | object\|function(file) | - |  |  |
 | directory | support upload whole directory ([caniuse](https://caniuse.com/#feat=input-file-directory)) | boolean | false |  |  |
 | directory | Support upload whole directory（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false | 3.0 |  |
@@ -32,7 +32,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | headers | Set request headers, valid above IE10. | object | - |  |  |
 | iconRender | Custom show icon | v-slot:iconRender="{file: UploadFile, listType?: UploadListType}" | - | 3.0 |  |
 | isImageUrl | Customize if render &lt;img /> in thumbnail | (file: UploadFile) => boolean | - | 3.0 |  |
-| itemRender | Custom item of uploadList | v-slot:itemRender="{originNode: ReactElement, file: UploadFile, fileList: object\[], actions: { download: function, preview: function, remove: function }" | - | 3.0 |  |
+| itemRender | Custom item of uploadList | v-slot:itemRender="{originNode: VNode, file: UploadFile, fileList: object\[], actions: { download: function, preview: function, remove: function }" | - | 3.0 |  |
 | listType | Built-in stylesheets, support for three types: `text`, `picture` or `picture-card` | string | `text` |  |  |
 | maxCount | Limit the number of uploaded files. Will replace current one when `maxCount` is `1` | number | - | 3.0 |  |
 | method | http method of upload request | string | `post` | 1.5.0 |  |
@@ -43,7 +43,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | previewIcon | custom preview icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
 | progress | Custom progress bar | [ProgressProps](/components/progress/#API) (support `type="line"` only) | { strokeWidth: 2, showInfo: false } | 3.0 |  |
 | removeIcon | custom remove icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
-| showUploadList | Whether to show default upload list, could be an object to specify `showPreviewIcon`, `showRemoveIcon` and `showDownloadIcon` individually | Boolean or { showPreviewIcon?: boolean, showRemoveIcon?: boolean, showDownloadIcon?: boolean } | true | showDownloadIcon(3.0) |  |
+| showUploadList | Whether to show default upload list, could be an object to specify `showPreviewIcon`, `showRemoveIcon` and `showDownloadIcon` individually | boolean \| { showPreviewIcon?: boolean, showRemoveIcon?: boolean, showDownloadIcon?: boolean } | true | showDownloadIcon(3.0) |  |
 | supportServerRender | Need to be turned on while the server side is rendering. | boolean | false |  |  |
 | withCredentials | ajax upload with cookie sent | boolean | false |  |  |
 
@@ -51,11 +51,11 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 
 | Events Name | Description | Arguments | Version |  |
 | --- | --- | --- | --- | --- |
-| change | A callback function, can be executed when uploading state is changing. See [change](#change) | Function | - |  |
-| download | Click the method to download the file, pass the method to perform the method logic, do not pass the default jump to the new TAB. | Function(file): void | Jump to new TAB | 1.5.0 |
+| change | A callback function, can be executed when uploading state is changing. See [change](#change) | function | - |  |
+| download | Click the method to download the file, pass the method to perform the method logic, do not pass the default jump to the new TAB. | function(file): void | Jump to new TAB | 1.5.0 |
 | drop | A callback function executed when files are dragged and dropped into upload area | (event: DragEvent) => void | - | 3.0 |
-| preview | A callback function, will be executed when file link or preview icon is clicked. | Function(file) | - |  |
-| reject | A callback function, will be executed when drop files is not accept. | Function(fileList) | - |  |
+| preview | A callback function, will be executed when file link or preview icon is clicked. | function(file) | - |  |
+| reject | A callback function, will be executed when drop files is not accept. | function(fileList) | - |  |
 | remove   | A callback function, will be executed when removing file button is clicked, remove event will be prevented when return value is false or a Promise which resolve(false) or reject | function(file): boolean \| Promise | -   | 3.0 |
 
 ### UploadFile

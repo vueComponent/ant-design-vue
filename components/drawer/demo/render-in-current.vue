@@ -38,7 +38,7 @@ Render in current dom. custom container, check `getContainer`.
       title="Basic Drawer"
       placement="right"
       :closable="false"
-      :visible="visible"
+      :open="open"
       :get-container="false"
       :style="{ position: 'absolute' }"
       @close="onClose"
@@ -51,23 +51,23 @@ Render in current dom. custom container, check `getContainer`.
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const visible = ref(false);
+    const open = ref(false);
 
-    const afterVisibleChange = (bool: boolean) => {
-      console.log('visible', bool);
+    const afterOpenChange = (bool: boolean) => {
+      console.log('open', bool);
     };
 
     const showDrawer = () => {
-      visible.value = true;
+      open.value = true;
     };
 
     const onClose = () => {
-      visible.value = false;
+      open.value = false;
     };
 
     return {
-      visible,
-      afterVisibleChange,
+      open,
+      afterOpenChange,
       showDrawer,
       onClose,
     };

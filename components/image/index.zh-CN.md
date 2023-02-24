@@ -3,7 +3,7 @@ category: Components
 type: 数据展示
 title: Image
 subtitle: 图片
-cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*FbOCS6aFMeUAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 可预览的图片。
@@ -34,7 +34,7 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/D1dXz9PZqa/image.svg
 
 ### previewType
 
-```js
+```ts
 {
   visible?: boolean;
   onVisibleChange?: (visible, prevVisible) => void;

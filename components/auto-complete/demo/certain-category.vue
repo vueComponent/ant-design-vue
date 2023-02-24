@@ -20,7 +20,7 @@ Lookup-Patterns - Certain Category.
     <a-auto-complete
       v-model:value="value"
       class="certain-category-search"
-      dropdown-class-name="certain-category-search-dropdown"
+      popup-class-name="certain-category-search-dropdown"
       :dropdown-match-select-width="500"
       style="width: 250px"
       :options="dataSource"

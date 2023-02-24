@@ -4,7 +4,7 @@ type: 布局
 subtitle: 间距
 title: Space
 cols: 1
-cover: https://gw.alipayobjects.com/zos/antfincdn/wc6%263gJ0Y8/Space.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*ZiJ3SbOH9SUAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 设置组件之间的间距。

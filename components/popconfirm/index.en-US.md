@@ -2,7 +2,7 @@
 category: Components
 type: Feedback
 title: Popconfirm
-cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sAGpRoBtTXcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A simple and compact confirmation dialog of an action.

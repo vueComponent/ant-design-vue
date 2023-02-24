@@ -19,12 +19,14 @@ Basic drawer.
 <template>
   <a-button type="primary" @click="showDrawer">Open</a-button>
   <a-drawer
-    v-model:visible="visible"
+    v-model:open="open"
     class="custom-class"
+    root-class-name="root-class-name"
+    :root-style="{ color: 'blue' }"
     style="color: red"
     title="Basic Drawer"
     placement="right"
-    @after-visible-change="afterVisibleChange"
+    @after-open-change="afterOpenChange"
   >
     <p>Some contents...</p>
     <p>Some contents...</p>
@@ -35,19 +37,19 @@ Basic drawer.
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const visible = ref<boolean>(false);
+    const open = ref<boolean>(false);
 
-    const afterVisibleChange = (bool: boolean) => {
-      console.log('visible', bool);
+    const afterOpenChange = (bool: boolean) => {
+      console.log('open', bool);
     };
 
     const showDrawer = () => {
-      visible.value = true;
+      open.value = true;
     };
 
     return {
-      visible,
-      afterVisibleChange,
+      open,
+      afterOpenChange,
       showDrawer,
     };
   },

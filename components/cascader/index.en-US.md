@@ -2,7 +2,7 @@
 category: Components
 type: Data Entry
 title: Cascader
-cover: https://gw.alipayobjects.com/zos/alicdn/UdS8y8xyZ/Cascader.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*tokLTp73TsQAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Cascade selection box.
@@ -28,7 +28,7 @@ Cascade selection box.
 | changeOnSelect | (Work on single select) change value on each selection if set to true, see above demo for details | boolean | false |  |
 | disabled | whether disabled select | boolean | false |  |
 | displayRender | render function of displaying selected options, you can use #displayRender="{labels, selectedOptions}". | `({labels, selectedOptions}) => VNode` | `labels => labels.join(' / ')` |  |
-| dropdownClassName | additional className of popup overlay | string | - | 3.0 |
+| popupClassName | additional className of popup overlay | string | - | 4.0 |
 | dropdownStyle | additional style of popup overlay | CSSProperties | {} | 3.0 |
 | expandIcon | Customize the current item expand icon | slot | - | 3.0 |
 | expandTrigger | expand current item when click or hover | `click` \| `hover` | 'click' |  |

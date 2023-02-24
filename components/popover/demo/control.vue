@@ -16,7 +16,7 @@ Use `visible` prop to control the display of the card.
 
 </docs>
 <template>
-  <a-popover v-model:visible="visible" title="Title" trigger="click">
+  <a-popover v-model:open="visible" title="Title" trigger="click">
     <template #content>
       <a @click="hide">Close</a>
     </template>

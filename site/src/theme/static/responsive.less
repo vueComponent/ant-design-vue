@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: @screen-lg) {
+@media only screen and (max-width: var(--screen-lg)) {
   .toc-affix {
     display: none;
   }
@@ -147,7 +147,7 @@
         display: none;
       }
       p {
-        color: @home-text-color;
+        color: #314659;
         font-size: 14px;
         line-height: 28px;
       }
@@ -189,7 +189,7 @@
   }
   .page2 {
     min-height: 840px;
-    background: @body-background;
+    background: var(--body-background);
     &-content {
       box-shadow: none;
     }
@@ -202,7 +202,7 @@
       .product-block {
         margin-bottom: 34px;
         padding-bottom: 35px;
-        border-bottom: 1px solid @site-border-color-split;
+        border-bottom: 1px solid var(--site-border-color-split);
         &:last-child {
           margin-bottom: 32px;
           border-bottom: none;
@@ -242,7 +242,7 @@
           a.more-mobile-react,
           a.more-mobile-angular {
             margin-top: 0;
-            color: @link-color;
+            color: var(--link-color);
           }
           a.more-mobile-react:hover,
           a.more-mobile-angular:hover {
@@ -262,7 +262,7 @@
     .page3-block {
       margin-bottom: 32px;
       padding: 24px;
-      background: @body-background;
+      background: var(--body-background);
       border-radius: 4px;
       box-shadow: 0 8px 16px rgba(174, 185, 193, 0.3);
       &:nth-child(2) {

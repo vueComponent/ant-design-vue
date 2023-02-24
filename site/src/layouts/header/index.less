@@ -1,14 +1,10 @@
 @import './SearchBox.less';
 
-@header-height: 64px;
-@menu-item-border: 2px;
-@mobile-max-width: 767.99px;
-
 #header {
   position: relative;
   z-index: 10;
   max-width: 100%;
-  background: @component-background;
+  background: var(--component-background);
   box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
 
   .menu-row {
@@ -41,12 +37,12 @@
 
   // Buttons
   .header-button {
-    color: @text-color;
-    border-color: @border-color-base;
+    color: var(--text-color);
+    border-color: var(--border-color-base);
   }
 }
 
-@media only screen and (max-width: @mobile-max-width) {
+@media only screen and (max-width: var(--mobile-max-width)) {
   #header {
     text-align: center;
   }

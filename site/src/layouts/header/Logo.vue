@@ -23,13 +23,12 @@ export default defineComponent({
 @import './index.less';
 
 #logo {
-  height: @header-height;
+  height: var(--header-height);
   padding-left: 40px;
   overflow: hidden;
-  color: @site-heading-color;
+  color: var(--site-text-color);
   font-size: 18px;
-  font-family: Avenir, @font-family, sans-serif;
-  line-height: @header-height;
+  line-height: var(--header-height);
   white-space: nowrap;
   text-decoration: none;
 
@@ -52,7 +51,7 @@ export default defineComponent({
   }
 }
 
-@media only screen and (max-width: @mobile-max-width) {
+@media only screen and (max-width: var(--mobile-max-width)) {
   #logo {
     padding-right: 0;
     padding-left: 0;

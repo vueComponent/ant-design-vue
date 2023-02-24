@@ -7,7 +7,7 @@
 
   &-title {
     overflow: hidden;
-    color: @text-color;
+    color: var(--text-color);
     text-overflow: ellipsis;
   }
   &-img {
@@ -18,9 +18,9 @@
   }
   &-card {
     cursor: pointer;
-    transition: all @animation-duration-base @ease-in-out;
+    transition: all var(--animation-duration-base) var(--ease-in-out);
     &:hover {
-      box-shadow: @shadow-1-down;
+      box-shadow: var(--shadow-1-down);
     }
   }
 }

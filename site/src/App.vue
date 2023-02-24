@@ -10,6 +10,7 @@ import type { Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import useMediaQuery from './hooks/useMediaQuery';
+import useSiteToken from './hooks/useSiteToken';
 import { GLOBAL_CONFIG } from './SymbolKey';
 import enUS from '../../components/locale/en_US';
 import zhCN from '../../components/locale/zh_CN';
@@ -27,6 +28,7 @@ export interface GlobalConfig {
 }
 export default defineComponent({
   setup() {
+    useSiteToken();
     const route = useRoute();
     const i18n = useI18n();
     const colSize = useMediaQuery();

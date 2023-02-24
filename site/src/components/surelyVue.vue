@@ -37,7 +37,8 @@ export default defineComponent({
 .wrap {
   display: flex;
   background-color: #f4f8fa;
-  padding: 10px 30px;
+  padding: 0px 30px;
+  box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
@@ -45,6 +46,7 @@ export default defineComponent({
   width: 100%;
   height: 100px;
   overflow: hidden;
+  align-items: center;
 }
 .placeholder {
   height: 100px;

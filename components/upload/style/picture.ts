@@ -1,7 +1,7 @@
 import { TinyColor } from '@ctrl/tinycolor';
 import type { UploadToken } from '.';
 import type { GenerateStyle } from '../../theme/internal';
-import { clearFix, textEllipsis } from '../../_style';
+import { clearFix, textEllipsis } from '../../style';
 
 const genPictureStyle: GenerateStyle<UploadToken> = token => {
   const { componentCls, iconCls, uploadThumbnailSize, uploadProgressOffset } = token;

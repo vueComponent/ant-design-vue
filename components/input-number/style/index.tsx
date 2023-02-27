@@ -11,8 +11,8 @@ import {
 } from '../../input/style';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook } from '../../theme/internal';
-import { resetComponent, resetIcon } from '../../_style';
-import { genCompactItemStyle } from '../../_style/compact-item';
+import { resetComponent, resetIcon } from '../../style';
+import { genCompactItemStyle } from '../../style/compact-item';
 
 export interface ComponentToken {
   controlWidth: number;

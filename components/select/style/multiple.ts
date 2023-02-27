@@ -1,7 +1,7 @@
 import type { CSSInterpolation, CSSObject } from '../../_util/cssinjs';
 import type { SelectToken } from '.';
 import { mergeToken } from '../../theme/internal';
-import { resetIcon } from '../../_style';
+import { resetIcon } from '../../style';
 
 const FIXED_ITEM_MARGIN = 2;
 

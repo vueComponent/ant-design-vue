@@ -1,5 +1,5 @@
 import type { CSSInterpolation, CSSObject } from '../../_util/cssinjs';
-import { resetComponent } from '../../_style';
+import { resetComponent } from '../../style';
 import type { SelectToken } from '.';
 import { mergeToken } from '../../theme/internal';
 

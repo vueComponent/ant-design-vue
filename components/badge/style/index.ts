@@ -2,7 +2,7 @@ import type { CSSObject } from '../../_util/cssinjs';
 import { Keyframes } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { genPresetColor, resetComponent } from '../../_style';
+import { genPresetColor, resetComponent } from '../../style';
 
 interface BadgeToken extends FullToken<'Badge'> {
   badgeFontHeight: number;

@@ -4,8 +4,8 @@ import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import genDropdownStyle from './dropdown';
 import genMultipleStyle from './multiple';
 import genSingleStyle from './single';
-import { resetComponent, resetIcon, textEllipsis } from '../../_style';
-import { genCompactItemStyle } from '../../_style/compact-item';
+import { resetComponent, resetIcon, textEllipsis } from '../../style';
+import { genCompactItemStyle } from '../../style/compact-item';
 
 export interface ComponentToken {
   zIndexPopup: number;

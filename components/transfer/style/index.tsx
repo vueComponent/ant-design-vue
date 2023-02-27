@@ -2,7 +2,7 @@ import type { CSSObject } from '../../_util/cssinjs';
 
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { resetComponent, resetIcon, textEllipsis } from '../../_style';
+import { resetComponent, resetIcon, textEllipsis } from '../../style';
 
 export interface ComponentToken {
   listWidth: number;

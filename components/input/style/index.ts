@@ -2,8 +2,8 @@ import type { CSSObject } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import type { GlobalToken } from '../../theme/interface';
-import { clearFix, resetComponent } from '../../_style';
-import { genCompactItemStyle } from '../../_style/compact-item';
+import { clearFix, resetComponent } from '../../style';
+import { genCompactItemStyle } from '../../style/compact-item';
 
 export type InputToken<T extends GlobalToken = FullToken<'Input'>> = T & {
   inputAffixPadding: number;

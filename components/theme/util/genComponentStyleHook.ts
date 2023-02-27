@@ -2,7 +2,7 @@
 
 import { useStyleRegister } from '../../_util/cssinjs';
 import type { CSSInterpolation } from '../../_util/cssinjs';
-import { genCommonStyle, genLinkStyle } from '../../_style';
+import { genCommonStyle, genLinkStyle } from '../../style';
 import type { UseComponentStyleResult } from '../internal';
 import { mergeToken, statisticToken, useToken } from '../internal';
 import type { ComponentTokenMap, GlobalToken } from '../interface';

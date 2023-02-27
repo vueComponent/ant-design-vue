@@ -1,6 +1,6 @@
 import type { GenerateStyle } from '../../theme/internal';
 import type { TableToken } from './index';
-import { resetComponent } from '../../_style';
+import { resetComponent } from '../../style';
 
 const genFilterStyle: GenerateStyle<TableToken> = token => {
   const {

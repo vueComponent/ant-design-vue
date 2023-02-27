@@ -14,13 +14,13 @@ import {
   slideDownOut,
   slideUpIn,
   slideUpOut,
-} from '../../_style/motion';
+} from '../../style/motion';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import type { GlobalToken } from '../../theme/interface';
 import type { TokenWithCommonCls } from '../../theme/util/genComponentStyleHook';
-import { resetComponent, roundedArrow, textEllipsis } from '../../_style';
-import { genCompactItemStyle } from '../../_style/compact-item';
+import { resetComponent, roundedArrow, textEllipsis } from '../../style';
+import { genCompactItemStyle } from '../../style/compact-item';
 
 export interface ComponentToken {
   presetsWidth: number;

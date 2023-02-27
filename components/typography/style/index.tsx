@@ -8,7 +8,7 @@ import {
   getResetStyles,
   getTitleStyles,
 } from './mixins';
-import { operationUnit } from '../../_style';
+import { operationUnit } from '../../style';
 
 /** Component only token. Which will handle additional calculation of alias token */
 export interface ComponentToken {

@@ -252,6 +252,8 @@ declare module 'vue' {
     AUploadDragger: typeof import('ant-design-vue')['UploadDragger'];
 
     AWeekPicker: typeof import('ant-design-vue')['WeekPicker'];
+
+    AQRCode: typeof import('ant-design-vue')['QRCode'];
   }
 }
 export {};

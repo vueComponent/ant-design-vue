@@ -91,7 +91,7 @@ export function formatter(
       !tableTitle.includes('()')
     ) {
       const childTag: VueTag = {
-        name: getComponentName(tableTitle.replaceAll('.', '').replaceAll('/', ''), tagPrefix),
+        name: getComponentName(tableTitle.replace(/\.|\//g, ''), tagPrefix),
         slots: [],
         events: [],
         attributes: [],

@@ -37,7 +37,7 @@ const useSiteToken = () => {
     () => {
       styleDom = styleDom || document.createElement('style');
       const tokenValue = mergedToken.value.token;
-      const demoGridColor = token.colorPrimary;
+      const demoGridColor = token.value.colorPrimary;
       styleDom.innerHTML = `
       :root {
         --header-height: ${tokenValue.headerHeight}px;

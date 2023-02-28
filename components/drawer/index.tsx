@@ -148,7 +148,7 @@ const Drawer = defineComponent({
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const getContainer = computed(() =>
       // 有可能为 false，所以不能直接判断
-      props.getContainer === undefined && getPopupContainer.value
+      props.getContainer === undefined && getPopupContainer?.value
         ? () => getPopupContainer.value(document.body)
         : props.getContainer,
     );

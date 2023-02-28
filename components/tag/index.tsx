@@ -1,4 +1,4 @@
-import type { HTMLAttributes, App, PropType, ExtractPropTypes, Plugin } from 'vue';
+import type { HTMLAttributes, App, PropType, ExtractPropTypes, Plugin, CSSProperties } from 'vue';
 import { ref, defineComponent, watchEffect, computed } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
@@ -133,7 +133,11 @@ const Tag = defineComponent({
       const isNeedWave = 'onClick' in attrs;
 
       const tagNode = (
-        <span {...attrs} class={tagClassName.value} style={tagStyle}>
+        <span
+          {...attrs}
+          class={tagClassName.value}
+          style={[tagStyle, attrs.style as CSSProperties]}
+        >
           {kids}
           {renderCloseIcon()}
         </span>

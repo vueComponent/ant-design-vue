@@ -30,7 +30,7 @@ interface QRCodeCanvasOptions {
 }
 const qrcodeProps = () => {
   return {
-    value: String,
+    value: { type: String, required: true },
     errorLevel: String,
     size: { type: Number, default: 160 },
     icon: String,

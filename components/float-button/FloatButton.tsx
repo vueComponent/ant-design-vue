@@ -28,20 +28,7 @@ const FloatButton = defineComponent({
     const floatButtonRef = ref(null);
 
     const mergeShape = computed(() => {
-      return groupShape || props.shape;
-    });
-
-    const classString = computed(() => {
-      return classNames(
-        hashId.value,
-        prefixCls.value,
-        attrs.class,
-        `${prefixCls.value}-${props.type}`,
-        `${prefixCls.value}-${mergeShape.value}`,
-        {
-          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-        },
-      );
+      return groupShape.value || props.shape;
     });
 
     expose({
@@ -62,6 +49,17 @@ const FloatButton = defineComponent({
         prefixCls: prefixCls.value,
         description,
       };
+
+      const classString = classNames(
+        prefixCls.value,
+        `${prefixCls.value}-${props.type}`,
+        `${prefixCls.value}-${mergeShape.value}`,
+        {
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        attrs.class,
+        hashId.value,
+      );
 
       const buttonNode = (
         <Tooltip placement="left">
@@ -98,7 +96,7 @@ const FloatButton = defineComponent({
             ref={floatButtonRef}
             {...attrs}
             {...(restProps as any)}
-            class={classString.value}
+            class={classString}
             style={attrs.style as CSSProperties}
           >
             {buttonNode}
@@ -108,7 +106,7 @@ const FloatButton = defineComponent({
             ref={floatButtonRef}
             {...attrs}
             {...restProps}
-            class={classString.value}
+            class={classString}
             style={attrs.style as CSSProperties}
             type="button"
           >
@@ -119,9 +117,5 @@ const FloatButton = defineComponent({
     };
   },
 });
-
-if (process.env.NODE_ENV !== 'production') {
-  FloatButton.displayName = 'FloatButton';
-}
 
 export default FloatButton;

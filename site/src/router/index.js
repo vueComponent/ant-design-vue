@@ -38,23 +38,6 @@ const routes = [
         },
         component: () => import('../../../components/layout/demo/index.vue'),
       },
-      {
-        path: 'float-button:lang(.*)',
-        meta: {
-          category: 'Components',
-          subtitle: '悬浮按钮',
-          type: '悬浮按钮',
-          cols: 1,
-          title: 'FloatButton',
-          cover:
-            'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HS-wTIIwu0kAAAAAAAAAAAAADrJ8AQ/original',
-        },
-        props: route => {
-          const hash = route.hash.replace('#', '');
-          return { iframeName: hash };
-        },
-        component: () => import('../../../components/float-button/demo/index.vue'),
-      },
     ],
   },
   {

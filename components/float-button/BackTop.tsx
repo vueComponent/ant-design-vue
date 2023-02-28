@@ -140,8 +140,4 @@ const BackTop = defineComponent({
   },
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  BackTop.displayName = 'BackTop';
-}
-
 export default BackTop;

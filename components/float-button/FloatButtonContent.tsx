@@ -1,14 +1,13 @@
 import { defineComponent } from 'vue';
 import FileTextOutlined from '@ant-design/icons-vue/FileTextOutlined';
 import classNames from '../_util/classNames';
-import { initDefaultProps } from '../_util/props-util';
 import { floatButtonContentProps } from './interface';
 
 const FloatButtonContent = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AFloatButtonContent',
   inheritAttrs: false,
-  props: initDefaultProps(floatButtonContentProps(), {}),
+  props: floatButtonContentProps(),
   setup(props, { attrs, slots }) {
     return () => {
       const { description, prefixCls } = props;

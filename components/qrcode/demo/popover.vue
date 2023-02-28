@@ -17,7 +17,7 @@ With Popover.
 <template>
   <a-popover>
     <template #content>
-      <a-qr-code value="http://www.antv.com" />
+      <a-qrcode value="http://www.antv.com" />
     </template>
     <img width="100" height="100" src="https://aliyuncdn.antdv.com/logo.png" />
   </a-popover>

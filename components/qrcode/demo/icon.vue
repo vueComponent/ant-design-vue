@@ -15,7 +15,7 @@ QRCode with Icon.
 </docs>
 
 <template>
-  <a-qr-code
+  <a-qrcode
     error-level="H"
     value="https://www.antv.com"
     icon="https://www.antdv.com/assets/logo.1ef800a8.svg"

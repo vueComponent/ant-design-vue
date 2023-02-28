@@ -131,6 +131,10 @@ const localeValues: Locale = {
   Image: {
     preview: 'Preview',
   },
+  QRCode: {
+    expired: 'QR code expired',
+    refresh: 'Refresh',
+  },
 };
 
 export default localeValues;

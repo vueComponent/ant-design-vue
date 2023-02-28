@@ -15,7 +15,7 @@ Basic Usage.
 </docs>
 
 <template>
-  <a-qr-code value="https://www.antdv.com/" />
+  <a-qrcode value="https://www.antdv.com/" />
 </template>
 
 <script lang="ts">

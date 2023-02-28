@@ -16,8 +16,8 @@ Custom Color.
 
 <template>
   <a-space>
-    <div><a-qr-code value="http://www.antv.com" color="#73d13d" /></div>
-    <div><a-qr-code value="http://www.antv.com" color="#1677ff" /></div>
+    <div><a-qrcode value="http://www.antv.com" color="#73d13d" /></div>
+    <div><a-qrcode value="http://www.antv.com" color="#1677ff" /></div>
   </a-space>
 </template>
 

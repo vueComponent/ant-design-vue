@@ -15,7 +15,7 @@ set Error Level.
 </docs>
 
 <template>
-  <a-qr-code v-model:error-level="level" value="http://www.antv.com" />
+  <a-qrcode v-model:error-level="level" value="http://www.antv.com" />
   <br />
   <br />
   <a-segmented v-model:value="level" :options="segmentedData" />

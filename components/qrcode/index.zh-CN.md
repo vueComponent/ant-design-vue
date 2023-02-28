@@ -22,7 +22,12 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*M4PBTZ_n9OgAAA
 | bordered | 是否有边框 | boolean | `true` |
 | errorLevel | 二维码纠错等级 | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` |
 | status | 二维码状态 | `active` \| `expired` \| `loading ` | `active` |
-| onRefresh | 点击"点击刷新"的回调 | `() => void` | - |
+
+### 事件
+
+| 事件名称 | 说明                 | 回调参数     | 版本 |
+| :------- | :------------------- | :----------- | :--- |
+| refresh  | 点击"点击刷新"的回调 | `() => void` | -    |
 
 ## FAQ
 

@@ -16,8 +16,8 @@ The status can be controlled by the value `status`.
 
 <template>
   <a-space>
-    <div><a-qr-code value="http://www.antv.com" status="loading" /></div>
-    <div><a-qr-code value="http://www.antv.com" status="expired" @refresh="refreshChange" /></div>
+    <div><a-qrcode value="http://www.antv.com" status="loading" /></div>
+    <div><a-qrcode value="http://www.antv.com" status="expired" @refresh="refreshChange" /></div>
   </a-space>
 </template>
 

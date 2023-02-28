@@ -27,7 +27,7 @@ Custom Size.
   </a-button-group>
   <br />
   <br />
-  <a-qr-code
+  <a-qrcode
     :size="size"
     :icon-size="size / 4"
     error-level="H"

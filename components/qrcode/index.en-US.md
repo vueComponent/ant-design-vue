@@ -21,7 +21,12 @@ Used when the link needs to be converted into a QR Code.
 | bordered | Whether has border style | boolean | `true` |
 | errorLevel | Error Code Level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` |
 | status | QRCode status | `active` \| `expired` \| `loading ` | `active` |
-| onRefresh | callback | `() => void` | - |
+
+### events
+
+| Events Name | Description | Arguments    | Version |
+| :---------- | :---------- | :----------- | :------ |
+| refresh     | callback    | `() => void` | -       |
 
 ## FAQ
 

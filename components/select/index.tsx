@@ -266,7 +266,7 @@ const Select = defineComponent({
           dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           {...selectProps}
           {...attrs}
-          showSearch={props.showSearch ?? select.value?.showSearch}
+          showSearch={props.showSearch ?? select?.value?.showSearch}
           placeholder={placeholder}
           listHeight={listHeight}
           listItemHeight={listItemHeight}
@@ -279,7 +279,7 @@ const Select = defineComponent({
           clearIcon={clearIcon}
           notFoundContent={mergedNotFound}
           class={[mergedClassName.value, attrs.class]}
-          getPopupContainer={getPopupContainer.value}
+          getPopupContainer={getPopupContainer?.value}
           dropdownClassName={rcSelectRtlDropdownClassName}
           onChange={triggerChange}
           onBlur={handleBlur}

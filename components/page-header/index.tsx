@@ -56,7 +56,7 @@ const PageHeader = defineComponent({
         compact.value = width < 768;
       }
     };
-    const ghost = computed(() => props.ghost ?? pageHeader.value?.ghost ?? true);
+    const ghost = computed(() => props.ghost ?? pageHeader?.value?.ghost ?? true);
 
     const getBackIcon = () => {
       return (

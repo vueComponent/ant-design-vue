@@ -9,7 +9,7 @@ import {
 } from '../../input/style';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook } from '../../theme/internal';
-import { resetComponent, textEllipsis } from '../../_style';
+import { resetComponent, textEllipsis } from '../../style';
 
 export interface ComponentToken {
   zIndexPopup: number;

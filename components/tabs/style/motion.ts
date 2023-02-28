@@ -1,5 +1,5 @@
 import type { TabsToken } from '.';
-import { initSlideMotion } from '../../_style/motion';
+import { initSlideMotion } from '../../style/motion';
 import type { GenerateStyle } from '../../theme/internal';
 
 const genMotionStyle: GenerateStyle<TabsToken> = token => {

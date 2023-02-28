@@ -3,10 +3,10 @@
   padding-left: 0;
   font-size: 12px;
   list-style: none;
-  border-left: 1px solid @site-border-color-split;
+  border-left: 1px solid var(--site-border-color-split);
 
   .ant-row-rtl & {
-    border-right: 1px solid @site-border-color-split;
+    border-right: 1px solid var(--site-border-color-split);
     border-left: none;
   }
 }
@@ -26,7 +26,7 @@ ul.toc > li {
   }
 
   &.toc-debug a {
-    color: @purple-6;
+    color: var(--purple-6);
   }
 }
 
@@ -42,7 +42,7 @@ ul.toc > li {
   margin-left: -1px;
   padding-left: 16px;
   overflow: hidden;
-  color: @site-text-color;
+  color: var(--site-text-color);
   white-space: nowrap;
   text-overflow: ellipsis;
   border-left: 1px solid transparent;
@@ -59,12 +59,12 @@ ul.toc > li {
 }
 
 .toc a:hover {
-  color: @primary-color;
+  color: var(--primary-color);
 }
 
 .toc a.current {
-  color: @primary-color;
-  border-color: @primary-color;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .toc-affix {
@@ -98,7 +98,7 @@ ul.toc > li {
   right: 20px;
   bottom: 88px;
   .ant-affix {
-    background: @body-background;
+    background: var(--body-background);
   }
   .ant-row-rtl & {
     right: auto;

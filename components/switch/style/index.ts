@@ -2,7 +2,7 @@ import type { CSSObject } from '../../_util/cssinjs';
 import { TinyColor } from '@ctrl/tinycolor';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { genFocusStyle, resetComponent } from '../../_style';
+import { genFocusStyle, resetComponent } from '../../style';
 
 interface SwitchToken extends FullToken<'Switch'> {
   switchMinWidth: number;

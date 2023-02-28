@@ -1,8 +1,8 @@
-import { initFadeMotion, initZoomMotion } from '../../_style/motion';
+import { initFadeMotion, initZoomMotion } from '../../style/motion';
 import type { AliasToken, FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import type { TokenWithCommonCls } from '../../theme/util/genComponentStyleHook';
-import { clearFix, genFocusStyle, resetComponent } from '../../_style';
+import { clearFix, genFocusStyle, resetComponent } from '../../style';
 import { CSSProperties } from 'vue';
 
 /** Component only token. Which will handle additional calculation of alias token */

@@ -5,8 +5,8 @@ import genListStyle from './list';
 import genMotionStyle from './motion';
 import { genPictureCardStyle, genPictureStyle } from './picture';
 import genRtlStyle from './rtl';
-import { resetComponent } from '../../_style';
-import { genCollapseMotion } from '../../_style/motion';
+import { resetComponent } from '../../style';
+import { genCollapseMotion } from '../../style/motion';
 
 export interface ComponentToken {}
 

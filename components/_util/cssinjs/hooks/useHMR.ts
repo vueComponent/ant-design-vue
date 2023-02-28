@@ -3,10 +3,9 @@ function useProdHMR() {
 }
 
 let webpackHMR = false;
-let viteHMR = false;
 
 function useDevHMR() {
-  return webpackHMR || viteHMR;
+  return webpackHMR;
 }
 
 export default process.env.NODE_ENV === 'production' ? useProdHMR : useDevHMR;
@@ -15,15 +14,11 @@ export default process.env.NODE_ENV === 'production' ? useProdHMR : useDevHMR;
 // We have to hack handler to force mark as HRM
 if (
   process.env.NODE_ENV !== 'production' &&
-  ((typeof module !== 'undefined' &&
-    module &&
-    // @ts-ignore
-    module.hot) ||
-    // @ts-ignore
-    import.meta.hot)
+  typeof module !== 'undefined' &&
+  module &&
+  (module as any).hot
 ) {
   const win = window as any;
-
   if (typeof win.webpackHotUpdate === 'function') {
     const originWebpackHotUpdate = win.webpackHotUpdate;
 
@@ -34,8 +29,5 @@ if (
       }, 0);
       return originWebpackHotUpdate(...args);
     };
-    // @ts-ignore
-  } else if (import.meta.hot) {
-    viteHMR = true;
   }
 }

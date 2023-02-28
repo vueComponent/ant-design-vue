@@ -48,7 +48,7 @@ const Tag = defineComponent({
     // Warning for deprecated usage
     if (process.env.NODE_ENV !== 'production') {
       warning(
-        !('visible' in props),
+        props.visible === undefined,
         'Tag',
         '`visible` is deprecated, please use `<Tag v-show="visible" />` instead.',
       );

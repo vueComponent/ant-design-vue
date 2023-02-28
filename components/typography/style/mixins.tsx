@@ -12,7 +12,7 @@ import type { CSSObject } from '../../_util/cssinjs';
 import type { TypographyToken } from '.';
 import { initInputToken } from '../../input/style';
 import type { GenerateStyle } from '../../theme/internal';
-import { operationUnit } from '../../_style';
+import { operationUnit } from '../../style';
 
 // eslint-disable-next-line import/prefer-default-export
 const getTitleStyle = (

@@ -1,5 +1,5 @@
 import type { CSSObject } from '../../_util/cssinjs';
-import { resetComponent } from '../../_style';
+import { resetComponent } from '../../style';
 import type { PickerPanelToken } from '../../date-picker/style';
 import { genPanelStyle, initPickerPanelToken } from '../../date-picker/style';
 import type { InputToken } from '../../input/style';

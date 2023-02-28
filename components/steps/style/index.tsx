@@ -10,7 +10,7 @@ import genStepsRTLStyle from './rtl';
 import genStepsSmallStyle from './small';
 import genStepsVerticalStyle from './vertical';
 import genStepsInlineStyle from './inline';
-import { resetComponent } from '../../_style';
+import { resetComponent } from '../../style';
 
 export interface ComponentToken {
   descriptionWidth: number;

@@ -16,7 +16,7 @@ import genSizeStyle from './size';
 import genSorterStyle from './sorter';
 import genStickyStyle from './sticky';
 import genSummaryStyle from './summary';
-import { clearFix, resetComponent } from '../../_style';
+import { clearFix, resetComponent } from '../../style';
 
 export interface ComponentToken {}
 

@@ -323,7 +323,7 @@ const Cascader = defineComponent({
               getTransitionDirection(placement.value),
               transitionName,
             )}
-            getPopupContainer={getPopupContainer.value}
+            getPopupContainer={getPopupContainer?.value}
             customSlots={{
               ...slots,
               checkable: () => <span class={`${cascaderPrefixCls.value}-checkbox-inner`} />,

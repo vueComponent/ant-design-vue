@@ -43,7 +43,7 @@ const Image = defineComponent<ImageProps>({
     });
 
     return () => {
-      const imageLocale = configProvider.locale.value?.Image || defaultLocale.Image;
+      const imageLocale = configProvider.locale?.value?.Image || defaultLocale.Image;
       const defaultPreviewMask = () => (
         <div class={`${prefixCls.value}-mask-info`}>
           <EyeOutlined />

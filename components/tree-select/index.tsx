@@ -314,7 +314,7 @@ const TreeSelect = defineComponent({
             }
             showTreeIcon={treeIcon as any}
             notFoundContent={mergedNotFound}
-            getPopupContainer={getPopupContainer.value}
+            getPopupContainer={getPopupContainer?.value}
             treeMotion={null}
             dropdownClassName={mergedDropdownClassName.value}
             choiceTransitionName={choiceTransitionName.value}

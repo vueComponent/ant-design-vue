@@ -2,9 +2,9 @@ import type { CSSObject } from '../../_util/cssinjs';
 import { Keyframes } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { initFadeMotion } from '../../_style/motion/fade';
-import { resetComponent } from '../../_style';
-import { initMotion } from '../../_style/motion/motion';
+import { initFadeMotion } from '../../style/motion/fade';
+import { resetComponent } from '../../style';
+import { initMotion } from '../../style/motion/motion';
 
 /** Component only token. Which will handle additional calculation of alias token */
 export interface ComponentToken {

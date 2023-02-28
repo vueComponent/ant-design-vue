@@ -33,7 +33,7 @@ const FloatButtonGroup = defineComponent({
     const floatButtonRef = ref<HTMLButtonElement | HTMLAnchorElement>(null);
 
     FloatButtonGroupContext.useProvide({
-      shape: computed(() => props.shape),
+      shape: props.shape,
     });
 
     const hoverAction = computed(() => {

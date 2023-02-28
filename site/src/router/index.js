@@ -172,6 +172,14 @@ const routes = [
       { path: '', redirect: '/docs/vue/introduce/' },
     ],
   },
+  {
+    path: '/theme-editor',
+    component: () => import('../views/theme-editor/index.vue'),
+  },
+  {
+    path: '/theme-editor-cn',
+    component: () => import('../views/theme-editor/index.vue'),
+  },
   { path: '/debugger', component: () => import('../../debugger') },
   { path: '/:lang(.*)', redirect: '/components/overview' },
 ];

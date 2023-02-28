@@ -1,15 +1,15 @@
 <template>
   <div>
-    <HeaderCom :name="name" />
+    <HeaderCom />
     <div style="padding: 20px; margin: 0 auto; width: 960px">
-      <router-view />
+      <slot></slot>
     </div>
     <FooterCom />
   </div>
 </template>
 
 <script>
-import Header from '../components/header';
+import Header from './header/index.vue';
 import Footer from './Footer.vue';
 import NProgress from 'nprogress';
 export default {

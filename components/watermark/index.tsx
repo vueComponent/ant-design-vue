@@ -1,8 +1,9 @@
-import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
 import { computed, defineComponent, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
 import { getStyleStr, getPixelRatio, rotateWatermark, reRendering } from './utils';
-import { withInstall } from '../_util/type';
+import { arrayType, objectType, someType, withInstall } from '../_util/type';
 import { useMutationObserver } from '../_util/hooks/_vueuse/useMutationObserver';
+import { initDefaultProps } from '../_util/props-util';
 
 /**
  * Base size of the canvas, 1 for parallel layout and 2 for alternate layout
@@ -24,32 +25,22 @@ export const watermarkProps = () => ({
   width: Number,
   height: Number,
   image: String,
-  content: [String, Array],
-  font: {
-    type: Object as PropType<WatermarkFontType>,
-    default: () => ({
-      fontSize: 16,
-      color: 'rgba(0, 0, 0, 0.15)',
-      fontWeight: 'normal',
-      fontStyle: 'normal',
-      fontFamily: 'sans-serif',
-    }),
-  },
+  content: someType<string | string[]>([String, Array]),
+  font: objectType<WatermarkFontType>(),
   rootClassName: String,
-  gap: {
-    type: [Array, Object] as PropType<[number, number]>,
-    default: undefined,
-  },
-  offset: {
-    type: [Array, Object] as PropType<[number, number]>,
-    default: undefined,
-  },
+  gap: arrayType<[number, number]>(),
+  offset: arrayType<[number, number]>(),
 });
 export type WatermarkProps = Partial<ExtractPropTypes<ReturnType<typeof watermarkProps>>>;
 const Watermark = defineComponent({
   name: 'AWatermark',
   inheritAttrs: false,
-  props: watermarkProps(),
+  props: initDefaultProps(watermarkProps(), {
+    zIndex: 9,
+    rotate: -22,
+    font: {},
+    gap: [100, 100],
+  }),
   setup(props, { slots, attrs }) {
     const containerRef = shallowRef<HTMLDivElement>();
     const watermarkRef = shallowRef<HTMLDivElement>();
@@ -65,7 +56,7 @@ const Watermark = defineComponent({
     const fontStyle = computed(() => props.font?.fontStyle ?? 'normal');
     const fontFamily = computed(() => props.font?.fontFamily ?? 'sans-serif');
     const color = computed(() => props.font?.color ?? 'rgba(0, 0, 0, 0.15)');
-    const getMarkStyle = () => {
+    const markStyle = computed(() => {
       const markStyle: CSSProperties = {
         zIndex: props.zIndex ?? 9,
         position: 'absolute',
@@ -93,7 +84,7 @@ const Watermark = defineComponent({
       markStyle.backgroundPosition = `${positionLeft}px ${positionTop}px`;
 
       return markStyle;
-    };
+    });
     const destroyWatermark = () => {
       if (watermarkRef.value) {
         watermarkRef.value.remove();
@@ -107,7 +98,7 @@ const Watermark = defineComponent({
         watermarkRef.value.setAttribute(
           'style',
           getStyleStr({
-            ...getMarkStyle(),
+            ...markStyle.value,
             backgroundImage: `url('${base64Url}')`,
             backgroundSize: `${(gapX.value + markWidth) * BaseSize}px`,
           }),
@@ -248,9 +239,10 @@ const Watermark = defineComponent({
     return () => {
       return (
         <div
+          {...attrs}
           ref={containerRef}
           class={[attrs.class, props.rootClassName]}
-          style={{ position: 'relative' }}
+          style={[{ position: 'relative' }, attrs.style as CSSProperties]}
         >
           {slots.default?.()}
         </div>

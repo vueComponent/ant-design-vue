@@ -245,6 +245,8 @@ export { default as Upload, UploadDragger } from './upload';
 
 export { default as LocaleProvider } from './locale-provider';
 
-export type { SegmentedProps } from './segmented';
+export { default as Watermark } from './watermark';
+export type { WatermarkProps } from './watermark';
 
+export type { SegmentedProps } from './segmented';
 export { default as Segmented } from './segmented';

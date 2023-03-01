@@ -28,7 +28,7 @@ const FloatButton = defineComponent({
     const floatButtonRef = ref(null);
 
     const mergeShape = computed(() => {
-      return groupShape || props.shape;
+      return groupShape?.value || props.shape;
     });
 
     expose({

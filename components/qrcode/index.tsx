@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, ref, toRefs, watch } from 'vue';
+import { defineComponent, onMounted, ref, watch } from 'vue';
 import type { ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
@@ -56,26 +56,30 @@ const QRCodeCanvas = defineComponent({
   props: initDefaultProps(canvasProps(), {}),
   setup(props) {
     const qrcodeCanvasRef = ref();
-    const { size, value, errorLevel, icon, iconSize, color } = toRefs(props);
-    watch(size, newSize => {
-      createQRCode(newSize);
-    });
-    watch(errorLevel, newLevel => {
-      createQRCode(size.value, newLevel);
-    });
-    const createQRCode = (width = size.value, level = errorLevel.value) => {
+    watch(
+      () => props.size,
+      newSize => {
+        createQRCode(newSize);
+      },
+    );
+    watch(
+      () => props.errorLevel,
+      newLevel => {
+        createQRCode(props.size, newLevel);
+      },
+    );
+    const createQRCode = (width = props.size, level = props.errorLevel) => {
       const options: QRCodeCanvasOptions = {
-        errorCorrectionLevel: level || getErrorCorrectionLevel(value.value),
+        errorCorrectionLevel: level || getErrorCorrectionLevel(props.value),
         margin: 0,
         width,
-        color: { dark: color.value },
+        color: { dark: props.color },
       };
-      toCanvas(qrcodeCanvasRef.value, value.value, options);
-      if (icon.value) {
+      toCanvas(qrcodeCanvasRef.value, props.value, options);
+      if (props.icon) {
         const ctx = qrcodeCanvasRef.value.getContext('2d');
-        const image = new Image(iconSize.value, iconSize.value);
-        image.src = icon.value;
-        image.style.backgroundColor = '#000';
+        const image = new Image(props.iconSize, props.iconSize);
+        image.src = props.icon;
         image.onload = () => {
           /*
             drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh)
@@ -85,8 +89,8 @@ const QRCodeCanvas = defineComponent({
             dw,dh 在目标画布绘制的宽高
           */
           ctx.drawImage(qrcodeCanvasRef.value, 0, 0, width, width);
-          const center = (width - iconSize.value) / 2;
-          ctx.drawImage(image, center, center, iconSize.value, iconSize.value);
+          const center = (width - props.iconSize) / 2;
+          ctx.drawImage(image, center, center, props.iconSize, props.iconSize);
         };
       }
     };
@@ -118,24 +122,23 @@ const QRCode = defineComponent({
     const { prefixCls } = useConfigInject('qrcode', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const [, token] = useToken();
-    const { value, size, status, bordered } = toRefs(props);
     const pre = prefixCls.value;
     const toDataUrl = async () => {
-      return await toDataURL(value.value);
+      return await toDataURL(props.value);
     };
     expose({ toDataUrl });
     return () => {
       return wrapSSR(
         <div
-          style={{ width: size.value + 'px', height: size.value + 'px' }}
+          style={{ width: props.size + 'px', height: props.size + 'px' }}
           class={classNames(hashId.value, pre, {
-            [`${prefixCls}-borderless`]: !bordered.value,
+            [`${prefixCls}-borderless`]: !props.bordered,
           })}
         >
-          {status.value !== 'active' && (
+          {props.status !== 'active' && (
             <div class={classNames(`${pre}-mask`)}>
-              {status.value === 'loading' && <Spin />}
-              {status.value === 'expired' && (
+              {props.status === 'loading' && <Spin />}
+              {props.status === 'expired' && (
                 <>
                   <p class={classNames(`${pre}-expired`)}>{locale.value.expired}</p>
                   <Button type="link" onClick={() => emit('refresh')}>

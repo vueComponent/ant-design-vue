@@ -42,6 +42,10 @@ export interface Locale {
     copied?: any;
     expand?: any;
   };
+  QRCode: {
+    expired?: string;
+    refresh?: string;
+  };
 }
 
 export interface LocaleProviderProps {

@@ -293,6 +293,7 @@
     "dom-scroll-into-view": "^2.0.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.15",
+    "qrcode": "^1.5.1",
     "resize-observer-polyfill": "^1.5.1",
     "scroll-into-view-if-needed": "^2.2.25",
     "shallow-equal": "^1.0.0",

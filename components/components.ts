@@ -250,3 +250,6 @@ export type { WatermarkProps } from './watermark';
 
 export type { SegmentedProps } from './segmented';
 export { default as Segmented } from './segmented';
+
+export type { QRCodeProps } from './qrcode';
+export { default as QRCode } from './qrcode';

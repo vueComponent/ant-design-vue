@@ -3,7 +3,7 @@ import type { ComponentToken as AnchorComponentToken } from '../../anchor/style'
 import type { ComponentToken as AvatarComponentToken } from '../../avatar/style';
 import type { ComponentToken as BackTopComponentToken } from '../../back-top/style';
 import type { ComponentToken as ButtonComponentToken } from '../../button/style';
-// import type { ComponentToken as FloatButtonComponentToken } from '../../float-button/style';
+import type { ComponentToken as FloatButtonComponentToken } from '../../float-button/style';
 import type { ComponentToken as CalendarComponentToken } from '../../calendar/style';
 import type { ComponentToken as CardComponentToken } from '../../card/style';
 import type { ComponentToken as CarouselComponentToken } from '../../carousel/style';
@@ -71,7 +71,7 @@ export interface ComponentTokenMap {
   Drawer?: DrawerComponentToken;
   Dropdown?: DropdownComponentToken;
   Empty?: EmptyComponentToken;
-  //   FloatButton?: FloatButtonComponentToken;
+  FloatButton?: FloatButtonComponentToken;
   Form?: {};
   Grid?: {};
   Image?: ImageComponentToken;

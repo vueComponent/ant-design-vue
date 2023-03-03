@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'vue';
-
+import { objectType, stringType } from '../_util/type';
+import type { ExtractPropTypes } from 'vue';
 interface ImageSettings {
   src: string;
   height: number;
@@ -8,26 +8,43 @@ interface ImageSettings {
   x?: number;
   y?: number;
 }
+export const qrProps = () => {
+  return {
+    size: { type: Number, default: 160 },
+    value: { type: String, required: true },
+    color: String,
+    includeMargin: Boolean,
+    imageSettings: objectType<ImageSettings>(),
+  };
+};
 
-interface QRProps {
-  value: string;
-  size?: number;
-  color?: string;
-  style?: CSSProperties;
-  includeMargin?: boolean;
-  imageSettings?: ImageSettings;
+export const qrcodeProps = () => {
+  return {
+    ...qrProps(),
+    errorLevel: stringType<'L' | 'M' | 'Q' | 'H'>('M'),
+
+    icon: String,
+    iconSize: { type: Number, default: 40 },
+
+    status: stringType<'active' | 'expired' | 'loading'>('active'),
+    bordered: { type: Boolean, default: true },
+  };
+};
+export type QRCodeProps = Partial<ExtractPropTypes<ReturnType<typeof qrcodeProps>>>;
+
+export interface QRCodeCanvasColor {
+  dark?: string; // 默认#000000ff
+  light?: string; // 默认#ffffffff
 }
 
-export type QRPropsCanvas = QRProps;
-
-export interface QRCodeProps extends QRProps {
-  className?: string;
-  rootClassName?: string;
-  prefixCls?: string;
-  icon?: string;
-  iconSize?: number;
-  bordered?: boolean;
-  errorLevel?: 'L' | 'M' | 'Q' | 'H';
-  status?: 'active' | 'expired' | 'loading';
-  onRefresh?: () => void;
+export interface QRCodeCanvasOptions {
+  version?: number;
+  errorCorrectionLevel?: string; // 默认"M"
+  maskPattern?: number; // 遮罩符号的掩码图案
+  toSJISFunc?: Function; // 将汉字转换为其 Shift JIS 值的帮助程序函数
+  margin?: number;
+  scale?: number;
+  small?: boolean;
+  width: number;
+  color?: QRCodeCanvasColor;
 }

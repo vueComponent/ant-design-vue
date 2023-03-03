@@ -28,7 +28,7 @@ export default defineComponent({
   setup() {
     const qrcodeCanvasRef = ref();
     const dowloadChange = async () => {
-      const url = await qrcodeCanvasRef.value.toDataUrl();
+      const url = await qrcodeCanvasRef.value.toDataURL();
       const a = document.createElement('a');
       a.download = 'QRCode.png';
       a.href = url;

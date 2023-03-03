@@ -15,18 +15,21 @@ set Error Level.
 </docs>
 
 <template>
-  <a-qrcode v-model:error-level="level" value="http://www.antv.com" />
+  <a-qrcode
+    :error-level="level"
+    value="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+  />
   <br />
   <br />
   <a-segmented v-model:value="level" :options="segmentedData" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const segmentedData = reactive(['L', 'M', 'Q', 'H']);
+    const segmentedData = ['L', 'M', 'Q', 'H'];
     const level = ref(segmentedData[0]);
     return {
       segmentedData,

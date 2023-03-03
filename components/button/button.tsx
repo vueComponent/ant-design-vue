@@ -41,7 +41,7 @@ export default defineComponent({
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const { size: groupSize } = GroupSizeContext.useInject();
+    const groupSizeContext = GroupSizeContext.useInject();
     const buttonNodeRef = ref<HTMLElement>(null);
     const delayTimeoutRef = ref(undefined);
     let isNeedInserted = false;
@@ -81,7 +81,7 @@ export default defineComponent({
       const pre = prefixCls.value;
 
       const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
-      const sizeFullname = compactSize.value || groupSize?.value || size.value;
+      const sizeFullname = compactSize.value || groupSizeContext?.size || size.value;
       const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
 
       return [

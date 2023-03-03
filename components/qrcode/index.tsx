@@ -1,5 +1,5 @@
 import { defineComponent, computed, ref } from 'vue';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
 import { useLocaleReceiver } from '../locale/LocaleReceiver';
@@ -10,9 +10,9 @@ import { ReloadOutlined } from '@ant-design/icons-vue';
 import { useToken } from '../theme/internal';
 import { QRCodeCanvas } from './QRCodeCanvas';
 import warning from '../_util/warning';
-import type { QRCodeProps } from './interface';
 import { qrcodeProps } from './interface';
 
+export type QRCodeProps = Partial<ExtractPropTypes<ReturnType<typeof qrcodeProps>>>;
 const QRCode = defineComponent({
   name: 'AQrcode',
   inheritAttrs: false,

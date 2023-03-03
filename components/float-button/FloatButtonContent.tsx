@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import FileTextOutlined from '@ant-design/icons-vue/FileTextOutlined';
-import classNames from '../_util/classNames';
 import { floatButtonContentProps } from './interface';
+import { filterEmpty } from '../_util/props-util';
 
 const FloatButtonContent = defineComponent({
   compatConfig: { MODE: 3 },
@@ -10,27 +10,22 @@ const FloatButtonContent = defineComponent({
   props: floatButtonContentProps(),
   setup(props, { attrs, slots }) {
     return () => {
-      const { description, prefixCls } = props;
-
-      const defaultElement = (
-        <div class={`${prefixCls}-icon`}>
-          <FileTextOutlined />
-        </div>
-      );
+      const { prefixCls } = props;
+      const description = filterEmpty(slots.description?.());
 
       return (
-        <div {...attrs} class={classNames(attrs.class, `${prefixCls}-content`)}>
-          {slots.icon || description ? (
+        <div {...attrs} class={[attrs.class, `${prefixCls}-content`]}>
+          {slots.icon || description.length ? (
             <>
               {slots.icon && <div class={`${prefixCls}-icon`}>{slots.icon()}</div>}
-              {(slots.description || description) && (
-                <div class={`${prefixCls}-description`}>
-                  {(slots.description && slots.description()) || description}
-                </div>
-              )}
+              {description.length ? (
+                <div class={`${prefixCls}-description`}>{description}</div>
+              ) : null}
             </>
           ) : (
-            defaultElement
+            <div class={`${prefixCls}-icon`}>
+              <FileTextOutlined />
+            </div>
           )}
         </div>
       );

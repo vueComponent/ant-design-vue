@@ -1,29 +1,19 @@
-import type { Ref } from 'vue';
-import { inject, provide } from 'vue';
+import type { Ref, InjectionKey } from 'vue';
+import { inject, provide, ref } from 'vue';
 
 import type { FloatButtonShape } from './interface';
 
-function createContext<T extends Record<string, any>>(defaultValue?: T) {
-  const contextKey = Symbol('floatButtonGroupContext');
-
-  const useProvide = (props: T) => {
-    provide(contextKey, props);
-
-    return props;
-  };
-
-  const useInject = () => {
-    return inject(contextKey, defaultValue as T) || ({} as T);
-  };
-
-  return {
-    useProvide,
-    useInject,
-  };
+interface FloatButtonGroupContext {
+  shape: Ref<FloatButtonShape>;
 }
+const contextKey: InjectionKey<FloatButtonGroupContext> = Symbol('floatButtonGroupContext');
 
-const FloatButtonGroupContext = createContext<{ shape: Ref<FloatButtonShape> } | undefined>(
-  undefined,
-);
+export const useProvideFloatButtonGroupContext = (props: FloatButtonGroupContext) => {
+  provide(contextKey, props);
 
-export default FloatButtonGroupContext;
+  return props;
+};
+
+export const useInjectFloatButtonGroupContext = () => {
+  return inject(contextKey, { shape: ref() } as FloatButtonGroupContext);
+};

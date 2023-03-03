@@ -30,14 +30,25 @@ cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HS-wTIIwu0kAAAAAAA
 | href | 点击跳转的地址，指定此属性 button 的行为和 a 链接一致 | string | - |  |
 | target | 相当于 a 标签的 target 属性，href 存在时生效 | string | - |  |
 
+### common events
+
+| 事件名称 | 说明                                    | 回调参数          | 版本 |
+| -------- | --------------------------------------- | ----------------- | ---- |
+| click    | Set the handler to handle `click` event | `(event) => void` | -    |
+
 ### FloatButton.Group
 
-| 参数         | 说明                             | 类型                    | 默认值   | 版本 |
-| ------------ | -------------------------------- | ----------------------- | -------- | ---- |
-| shape        | 设置包含的 FloatButton 按钮形状  | `circle` \| `square`    | `circle` |      |
-| trigger      | 触发方式（有触发方式为菜单模式） | `click` \| `hover`      | -        |      |
-| open         | 受控展开                         | boolean                 | -        |      |
-| onOpenChange | 展开收起时的回调                 | (open: boolean) => void | -        |      |
+| 参数          | 说明                             | 类型                 | 默认值   | 版本 |
+| ------------- | -------------------------------- | -------------------- | -------- | ---- |
+| shape         | 设置包含的 FloatButton 按钮形状  | `circle` \| `square` | `circle` |      |
+| trigger       | 触发方式（有触发方式为菜单模式） | `click` \| `hover`   | -        |      |
+| open(v-model) | 受控展开                         | boolean              | -        |      |
+
+### FloatButton.Group Events
+
+| 事件名称   | 说明             | 回调参数                | 版本 |
+| ---------- | ---------------- | ----------------------- | ---- |
+| openChange | 展开收起时的回调 | (open: boolean) => void | -    |
 
 ### FloatButton.BackTop
 

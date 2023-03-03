@@ -12,7 +12,7 @@ Used when the link needs to be converted into a QR Code.
 ## API
 
 | Property | Description | Type | Default |
-| :-- | :-- | :-- | :-- |
+| --- | --- | --- | --- |
 | value | scanned link | string | - |
 | icon | include image url (only image link are supported) | string | - |
 | size | QRCode size | number | 128 |
@@ -25,7 +25,7 @@ Used when the link needs to be converted into a QR Code.
 ### events
 
 | Events Name | Description | Arguments    | Version |
-| :---------- | :---------- | :----------- | :------ |
+| ----------- | ----------- | ------------ | ------- |
 | refresh     | callback    | `() => void` | -       |
 
 ## FAQ

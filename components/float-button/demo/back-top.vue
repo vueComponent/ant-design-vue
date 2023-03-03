@@ -32,10 +32,8 @@ title:
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { FileTextOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
-  components: { FileTextOutlined },
   setup() {
     return {};
   },

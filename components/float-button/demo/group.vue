@@ -25,7 +25,7 @@ When multiple buttons are used together, `<FloatButton.Group />` is recommended.
       </template>
     </a-float-button>
     <a-float-button />
-    <a-back-top :visibilityHeight="0" />
+    <a-back-top :visibility-height="0" />
   </a-float-button-group>
   <a-float-button-group shape="square" :style="{ right: '94px' }">
     <a-float-button>
@@ -40,7 +40,7 @@ When multiple buttons are used together, `<FloatButton.Group />` is recommended.
         <SyncOutlined />
       </template>
     </a-float-button>
-    <a-back-top :visibilityHeight="0" />
+    <a-back-top :visibility-height="0" />
   </a-float-button-group>
 </template>
 

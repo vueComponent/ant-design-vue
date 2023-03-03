@@ -11,16 +11,16 @@ import {
   watch,
   onDeactivated,
 } from 'vue';
-import FloatButton from './FloatButton';
+import FloatButton, { floatButtonPrefixCls } from './FloatButton';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import getScroll from '../_util/getScroll';
 import scrollTo from '../_util/scrollTo';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { initDefaultProps } from '../_util/props-util';
 import { backTopProps } from './interface';
-import { floatButtonPrefixCls } from './FloatButton';
 
 import useStyle from './style';
+import { useInjectFloatButtonGroupContext } from './context';
 
 const BackTop = defineComponent({
   compatConfig: { MODE: 3 },
@@ -30,6 +30,8 @@ const BackTop = defineComponent({
     visibilityHeight: 400,
     target: () => window,
     duration: 450,
+    type: 'default',
+    shape: 'circle',
   }),
   // emits: ['click'],
   setup(props, { slots, attrs, emit }) {
@@ -39,7 +41,7 @@ const BackTop = defineComponent({
 
     const domRef = ref();
     const state = reactive({
-      visible: false,
+      visible: props.visibilityHeight === 0,
       scrollEvent: null,
     });
 
@@ -106,7 +108,7 @@ const BackTop = defineComponent({
     onBeforeUnmount(() => {
       scrollRemove();
     });
-
+    const floatButtonGroupContext = useInjectFloatButtonGroupContext();
     return () => {
       const defaultElement = (
         <div class={`${prefixCls.value}-content`}>
@@ -115,8 +117,9 @@ const BackTop = defineComponent({
           </div>
         </div>
       );
-      const divProps = {
+      const floatButtonProps = {
         ...attrs,
+        shape: floatButtonGroupContext?.shape.value || props.shape,
         onClick: scrollToTop,
         class: {
           [`${prefixCls.value}`]: true,
@@ -128,7 +131,7 @@ const BackTop = defineComponent({
       const transitionProps = getTransitionProps('fade');
       return wrapSSR(
         <Transition {...transitionProps}>
-          <FloatButton v-show={state.visible} {...divProps} ref={domRef}>
+          <FloatButton v-show={state.visible} {...floatButtonProps} ref={domRef}>
             {{
               icon: () => <VerticalAlignTopOutlined />,
               default: () => slots.default?.() || defaultElement,

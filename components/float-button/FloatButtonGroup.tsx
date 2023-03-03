@@ -1,17 +1,18 @@
-import { defineComponent, ref, computed, watch } from 'vue';
+import { defineComponent, ref, computed, watch, onBeforeUnmount } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import FileTextOutlined from '@ant-design/icons-vue/FileTextOutlined';
 import classNames from '../_util/classNames';
 import { getTransitionProps, Transition } from '../_util/transition';
 import FloatButton, { floatButtonPrefixCls } from './FloatButton';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
-import FloatButtonGroupContext from './context';
-import { initDefaultProps } from '../_util/props-util';
+import { useProvideFloatButtonGroupContext } from './context';
+import { findDOMNode, initDefaultProps } from '../_util/props-util';
 import { floatButtonGroupProps } from './interface';
 import type { FloatButtonGroupProps } from './interface';
 
 // CSSINJS
 import useStyle from './style';
+import useMergedState from '../_util/hooks/useMergedState';
 
 const FloatButtonGroup = defineComponent({
   compatConfig: { MODE: 3 },
@@ -21,63 +22,68 @@ const FloatButtonGroup = defineComponent({
     type: 'default',
     shape: 'circle',
   } as FloatButtonGroupProps),
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction } = useConfigInject(floatButtonPrefixCls, props);
 
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
-    const open = ref(props.open);
+    const [open, setOpen] = useMergedState(false, { value: computed(() => props.open) });
 
     const floatButtonGroupRef = ref<HTMLDivElement>(null);
     const floatButtonRef = ref<HTMLButtonElement | HTMLAnchorElement>(null);
 
-    FloatButtonGroupContext.useProvide({
+    useProvideFloatButtonGroupContext({
       shape: computed(() => props.shape),
     });
-
+    const hoverTypeAction = {
+      onMouseenter() {
+        setOpen(true);
+        emit('update:open', true);
+        props.onOpenChange?.(true);
+      },
+      onMouseleave() {
+        setOpen(false);
+        emit('update:open', false);
+        props.onOpenChange?.(false);
+      },
+    };
     const hoverAction = computed(() => {
-      const hoverTypeAction = {
-        onMouseenter() {
-          open.value = true;
-          props.onOpenChange?.(true);
-        },
-        onMouseleave() {
-          open.value = false;
-          props.onOpenChange?.(false);
-        },
-      };
       return props.trigger === 'hover' ? hoverTypeAction : {};
     });
 
     const handleOpenChange = () => {
-      open.value = !open.value;
-      props.onOpenChange?.(!open.value);
+      const nextOpen = !open.value;
+      emit('update:open', nextOpen);
+      props.onOpenChange?.(nextOpen);
+      setOpen(nextOpen);
     };
 
     const onClick = (e: MouseEvent) => {
       if (floatButtonGroupRef.value?.contains(e.target as Node)) {
-        if ((floatButtonRef.value as any)?.floatButtonEl?.contains(e.target as Node)) {
+        if (findDOMNode(floatButtonRef.value)?.contains(e.target as Node)) {
           handleOpenChange();
         }
         return;
       }
-      open.value = false;
+      setOpen(false);
+      emit('update:open', false);
       props.onOpenChange?.(false);
     };
 
     watch(
       computed(() => props.trigger),
       value => {
+        document.removeEventListener('click', onClick);
         if (value === 'click') {
           document.addEventListener('click', onClick);
-          return () => {
-            document.removeEventListener('click', onClick);
-          };
         }
       },
       { immediate: true },
     );
+    onBeforeUnmount(() => {
+      document.removeEventListener('click', onClick);
+    });
 
     return () => {
       const { shape = 'circle', type = 'default', tooltip, description, trigger } = props;
@@ -99,7 +105,7 @@ const FloatButtonGroup = defineComponent({
           {trigger && ['click', 'hover'].includes(trigger) ? (
             <>
               <Transition {...transitionProps}>
-                <div v-show={open.value} class={classNames(wrapperCls)}>
+                <div v-show={open.value} class={wrapperCls}>
                   {slots.default && slots.default()}
                 </div>
               </Transition>
@@ -109,19 +115,18 @@ const FloatButtonGroup = defineComponent({
                 shape={shape}
                 tooltip={tooltip}
                 description={description}
-              >
-                {{
+                v-slots={{
                   icon: () =>
                     open.value
-                      ? (slots.closeIcon && slots.closeIcon()) || <CloseOutlined />
-                      : (slots.icon && slots.icon()) || <FileTextOutlined />,
+                      ? slots.closeIcon?.() || <CloseOutlined />
+                      : slots.icon?.() || <FileTextOutlined />,
                   tooltip: slots.tooltip,
                   description: slots.description,
                 }}
-              </FloatButton>
+              ></FloatButton>
             </>
           ) : (
-            slots.default && slots.default()
+            slots.default?.()
           )}
         </div>,
       );

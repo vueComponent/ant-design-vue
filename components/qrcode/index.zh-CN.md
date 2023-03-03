@@ -13,7 +13,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*M4PBTZ_n9OgAAA
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 |
-| :-- | :-- | :-- | :-- |
+| --- | --- | --- | --- |
 | value | 扫描后的地址 | string | - |
 | icon | 二维码中图片的地址（目前只支持图片地址） | string | - |
 | size | 二维码大小 | number | 160 |
@@ -26,7 +26,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*M4PBTZ_n9OgAAA
 ### 事件
 
 | 事件名称 | 说明                 | 回调参数     | 版本 |
-| :------- | :------------------- | :----------- | :--- |
+| -------- | -------------------- | ------------ | ---- |
 | refresh  | 点击"点击刷新"的回调 | `() => void` | -    |
 
 ## FAQ

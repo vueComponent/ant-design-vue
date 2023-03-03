@@ -33,7 +33,7 @@ FloatButton.install = function (app: App) {
   return app;
 };
 
-export { FloatButtonGroup };
+export { FloatButtonGroup, BackTop };
 
 export default FloatButton as typeof FloatButton &
   Plugin & {

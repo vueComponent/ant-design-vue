@@ -27,7 +27,6 @@ export type FloatButtonProps = Partial<ExtractPropTypes<ReturnType<typeof floatB
 export const floatButtonContentProps = () => {
   return {
     prefixCls: stringType<FloatButtonProps['prefixCls']>(),
-    description: PropTypes.any,
   };
 };
 
@@ -42,9 +41,10 @@ export const floatButtonGroupProps = () => {
     // 触发方式 (有触发方式为菜单模式）
     trigger: stringType<FloatButtonGroupTrigger>(),
     // 受控展开
-    open: booleanType(false),
+    open: booleanType(),
     // 展开收起的回调
     onOpenChange: functionType<(open: boolean) => void>(),
+    'onUpdate:open': functionType<(open: boolean) => void>(),
   };
 };
 

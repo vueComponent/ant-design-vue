@@ -1,5 +1,5 @@
 import { objectType, stringType } from '../_util/type';
-import type { ExtractPropTypes } from 'vue';
+
 interface ImageSettings {
   src: string;
   height: number;
@@ -30,7 +30,6 @@ export const qrcodeProps = () => {
     bordered: { type: Boolean, default: true },
   };
 };
-export type QRCodeProps = Partial<ExtractPropTypes<ReturnType<typeof qrcodeProps>>>;
 
 export interface QRCodeCanvasColor {
   dark?: string; // 默认#000000ff

@@ -25,9 +25,14 @@ FloatButton. Available since `4.0.0`.
 | tooltip | The text shown in the tooltip | string \| slot |  |  |
 | type | Setting button type | `default` \| `primary` | `default` |  |
 | shape | Setting button shape | `circle` \| `square` | `circle` |  |
-| onClick | Set the handler to handle `click` event | (event) => void | - |  |
 | href | The target of hyperlink | string | - |  |
 | target | Specifies where to display the linked URL | string | - |  |
+
+### common events
+
+| Events Name | Description                             | Arguments         | Version |
+| ----------- | --------------------------------------- | ----------------- | ------- |
+| click       | Set the handler to handle `click` event | `(event) => void` | -       |
 
 ### FloatButton.Group
 
@@ -35,8 +40,13 @@ FloatButton. Available since `4.0.0`.
 | --- | --- | --- | --- | --- |
 | shape | Setting button shape of children | `circle` \| `square` | `circle` |  |
 | trigger | Which action can trigger menu open/close | `click` \| `hover` | - |  |
-| open | Whether the menu is visible or not | boolean | - |  |
-| onOpenChange | Callback executed when active menu is changed | (open: boolean) => void | - |  |
+| open(v-model) | Whether the menu is visible or not | boolean | - |  |
+
+### FloatButton.Group Events
+
+| Events Name | Description                                   | Arguments               | Version |
+| ----------- | --------------------------------------------- | ----------------------- | ------- |
+| openChange  | Callback executed when active menu is changed | (open: boolean) => void | -       |
 
 ### FloatButton.BackTop
 
@@ -45,4 +55,3 @@ FloatButton. Available since `4.0.0`.
 | duration | Time to return to top（ms） | number | 450 |  |
 | target | Specifies the scrollable area dom node | () => HTMLElement | () => window |  |
 | visibilityHeight | The BackTop button will not show until the scroll height reaches this value | number | 400 |  |
-| onClick | A callback function, which can be executed when you click the button | () => void | - |  |

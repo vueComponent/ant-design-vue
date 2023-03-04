@@ -114,7 +114,6 @@ const Affix = defineComponent({
       const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
       const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
       const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
-
       if (
         placeholderRect.top === 0 &&
         placeholderRect.left === 0 &&

@@ -9,6 +9,7 @@ import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePi
 import type { PaginationLocale } from '../pagination/Pagination';
 import type { TableLocale } from '../table/interface';
 import type { UploadLocale } from '../upload/interface';
+import type { TourLocale } from '../tour/interface';
 
 interface TransferLocaleForEmpty {
   description: string;
@@ -42,7 +43,8 @@ export interface Locale {
     copied?: any;
     expand?: any;
   };
-  QRCode: {
+  Tour?: TourLocale;
+  QRCode?: {
     expired?: string;
     refresh?: string;
   };

@@ -56,6 +56,7 @@ export default defineComponent({
         triggerVisible.value = false;
       }
 
+      emit('visibleChange', false);
       emit('overlayClick', e);
     };
 

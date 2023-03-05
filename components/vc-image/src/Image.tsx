@@ -178,7 +178,7 @@ const ImageInternal = defineComponent({
             return () => {};
           }
 
-          unRegister = registerImage(currentId.value, props.src, canPreview.value);
+          unRegister = registerImage(currentId.value, preview.value.src || props.src, canPreview.value);
 
           if (!canPreview.value) {
             unRegister();

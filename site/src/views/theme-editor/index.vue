@@ -42,11 +42,12 @@
           </a-button>
         </div>
       </div>
-      {{ lang }}
-      <!-- <ThemeEditor theme={{ name: 'Custom Theme', key: 'test', config: theme }}
-        style={{ height: 'calc(100vh - 64px - 56px)' }}
-        onThemeChange={(newTheme) => { setTheme(newTheme.config); }} locale={lang === 'cn' ? zhCN :
-        enUS} /> -->
+      <ThemeEditor
+        :theme="{ name: 'Custom Theme', key: 'test', config: theme }"
+        :style="{ height: 'calc(100vh - 64px - 56px)' }"
+        @themeChange="handleThemeChange"
+        :locale="lang === 'cn' ? zhCN : enUS"
+      />
     </a-config-provider>
   </div>
 </template>
@@ -60,7 +61,7 @@ import locales from './locales';
 import Header from '../../layouts/Header/index.vue';
 
 // antd换肤编辑器
-// import { enUS, ThemeEditor, zhCN } from './antdv-token-previewer';
+import { enUS, ThemeEditor, zhCN } from '../../components/antdv-token-previewer';
 
 import type { ThemeConfig } from '../../../../components/config-provider/context';
 
@@ -74,7 +75,7 @@ export default defineComponent({
   name: 'CustomTheme',
   components: {
     Header,
-    // ThemeEditor,
+    ThemeEditor,
     JSONEditor: defineAsyncComponent(() => import('./JSONEditor/index.vue')), // 异步组件加载json编辑器
   },
   setup() {
@@ -161,37 +162,30 @@ export default defineComponent({
       URL.revokeObjectURL(objectUrl);
     };
 
+    const handleThemeChange = newTheme => {
+      theme.value = newTheme.config;
+    };
+
     nextTick(() => {
       getTheme();
     });
 
-    watch(
-      editModelOpen,
-      val => {
-        if (!val) {
-          themeConfigContent.value = {
-            json: theme,
-            text: undefined,
-          } as any;
-        }
-      },
-      { immediate: true },
-    );
-    watch(
-      theme,
-      val => {
-        if (!editModelOpen.value) {
-          themeConfigContent.value = {
-            json: val,
-            text: undefined,
-          } as any;
-        }
-      },
-      { immediate: true },
-    );
+    watch(editModelOpen, val => {
+      if (!val) {
+        themeConfigContent.value = {
+          json: theme,
+          text: undefined,
+        } as any;
+      }
+    });
 
-    watch(themeConfigContent, () => {
-      editSave();
+    watch(theme, val => {
+      if (!editModelOpen.value) {
+        themeConfigContent.value = {
+          json: val,
+          text: undefined,
+        } as any;
+      }
     });
 
     onMounted(() => {
@@ -201,6 +195,9 @@ export default defineComponent({
     return {
       locale,
       lang,
+
+      theme,
+      handleThemeChange,
 
       editModelOpen,
       editThemeFormatRight,
@@ -215,8 +212,8 @@ export default defineComponent({
       handleExport,
 
       // 皮肤编辑器的国际化
-      // zhCN,
-      // enUS,
+      zhCN,
+      enUS,
     };
   },
 });
@@ -231,6 +228,7 @@ export default defineComponent({
     padding: 0 24px;
     justify-content: space-between;
     border-bottom: 1px solid #f0f0f0;
+    box-sizing: border-box;
     &-actions {
       margin-right: 8px;
       &:last-child {

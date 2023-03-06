@@ -25,6 +25,9 @@ export const tagProps = () => ({
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
   },
+  onClick: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
   'onUpdate:visible': Function as PropType<(vis: boolean) => void>,
   icon: PropTypes.any,
 });

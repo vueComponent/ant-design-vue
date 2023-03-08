@@ -8,7 +8,7 @@ const getRelatedComponentsSingle = (token: string): string[] => {
   if (!tokenRelatedComponents[token]) {
     tokenRelatedComponents[token] = Object.entries(tokenStatistic)
       .filter(([, tokens]) => {
-        return (tokens.global as string[]).includes(token);
+        return ((tokens as any).global as string[]).includes(token);
       })
       .map(([component]) => component);
   }

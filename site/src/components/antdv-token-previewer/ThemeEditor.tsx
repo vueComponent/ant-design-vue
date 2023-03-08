@@ -2,17 +2,18 @@ import type { PropType } from 'vue';
 import { defineComponent, toRefs, ref, computed } from 'vue';
 import type { DerivativeFunc } from 'ant-design-vue/es/_util/cssinjs';
 import classNames from 'ant-design-vue/es/_util/classNames';
-// import { antdComponents } from './component-panel';
-import useControlledTheme from './hooks/useControlledTheme';
 import type { SelectedToken, Theme } from './interface';
 import type { Locale } from './locale';
 import { useProvideLocaleContext, zhCN } from './locale';
 import { mapRelatedAlias, seedRelatedAlias, seedRelatedMap } from './meta/TokenRelation';
-// import type { TokenPanelProProps } from './token-panel-pro';
-// import TokenPanelPro from './token-panel-pro';
-// import ComponentDemoPro from './token-panel-pro/ComponentDemoPro';
-import makeStyle from './utils/makeStyle';
 import { getRelatedComponents } from './utils/statistic';
+import makeStyle from './utils/makeStyle';
+import useControlledTheme from './hooks/useControlledTheme';
+
+import type { TokenPanelProProps } from './token-panel-pro';
+import TokenPanelPro from './token-panel-pro';
+// import ComponentDemoPro from './token-panel-pro/ComponentDemoPro';
+// import { antdComponents } from './component-panel';
 
 const useStyle = makeStyle('ThemeEditor', token => ({
   '.antd-theme-editor': {
@@ -45,11 +46,11 @@ const ThemeEditor = defineComponent({
   props: {
     simple: { type: Boolean },
     theme: { type: Object as PropType<Theme> },
+    onThemeChange: { type: Function as PropType<(theme: Theme) => void> },
     darkAlgorithm: { type: Function as PropType<DerivativeFunc<any, any>> },
     locale: { type: Object as PropType<Locale>, default: zhCN },
   },
-  emits: ['themeChange'],
-  setup(props, { attrs, emit, expose }) {
+  setup(props, { attrs, expose }) {
     const { theme: customTheme, darkAlgorithm, locale } = toRefs(props);
 
     const [wrapSSR, hashId] = useStyle();
@@ -60,17 +61,14 @@ const ThemeEditor = defineComponent({
 
     const aliasOpen = ref<boolean>(false);
 
-    const { theme, infoFollowPrimary, onInfoFollowPrimaryChange } = useControlledTheme({
+    const { theme, infoFollowPrimary, onInfoFollowPrimaryChange, updateRef } = useControlledTheme({
       theme: customTheme,
       defaultTheme,
-      onChange: (theme: Theme) => emit('themeChange', theme),
+      onChange: props.onThemeChange,
       darkAlgorithm,
     });
 
-    const handleTokenSelect: (token: string | string[], type: keyof SelectedToken) => void = (
-      token,
-      type,
-    ) => {
+    const handleTokenSelect: TokenPanelProProps['onTokenSelect'] = (token, type) => {
       const tokens = typeof token === 'string' ? (token ? [token] : []) : token;
       if (type === 'seed') {
         return {
@@ -123,6 +121,10 @@ const ThemeEditor = defineComponent({
       return computedSelectedTokens.value ? getRelatedComponents(computedSelectedTokens.value) : [];
     });
 
+    expose({
+      updateRef,
+    });
+
     useProvideLocaleContext(locale);
 
     return () => {
@@ -138,16 +140,16 @@ const ThemeEditor = defineComponent({
               transition: 'all 0.3s',
             }}
           >
-            {/* <TokenPanelPro
+            <TokenPanelPro
               aliasOpen={aliasOpen.value}
-              onAliasOpenChange={open => aliasOpen.value = open}
-              theme={theme}
+              onAliasOpenChange={open => (aliasOpen.value = open)}
+              theme={theme.value}
               style={{ flex: 1 }}
               selectedTokens={selectedTokens.value}
               onTokenSelect={handleTokenSelect}
               infoFollowPrimary={infoFollowPrimary.value}
               onInfoFollowPrimaryChange={onInfoFollowPrimaryChange}
-            /> */}
+            />
           </div>
           {/* <ComponentDemoPro
             theme={theme}

@@ -81,7 +81,7 @@ export default defineComponent({
 
       return (
         <div
-          class={`${prefixCls.value}-expand-icon`}
+          class={[`${prefixCls.value}-expand-icon`, hashId.value]}
           onClick={() =>
             ['header', 'icon'].includes(props.collapsible) && onClickItem(panelProps.panelKey)
           }

@@ -246,6 +246,7 @@
     "stylelint-order": "^5.0.0",
     "terser-webpack-plugin": "^5.1.1",
     "through2": "^3.0.0",
+    "tinycolor2": "^1.6.0",
     "ts-jest": "^28.0.5",
     "ts-loader": "^9.1.0",
     "ts-node": "^10.8.2",

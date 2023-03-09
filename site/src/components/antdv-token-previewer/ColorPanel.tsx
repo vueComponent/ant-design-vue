@@ -1,9 +1,9 @@
 import type { InputProps } from 'ant-design-vue';
-import { ConfigProvider, Input, InputNumber, Select, theme } from 'ant-design-vue';
+import { Input, InputNumber, Select, theme } from 'ant-design-vue';
 import classNames from 'ant-design-vue/es/_util/classNames';
 import type { PropType } from 'vue';
 import { defineComponent, watchEffect, watch, computed, toRefs, ref } from 'vue';
-// import { HexColorPicker, RgbaColorPicker } from 'react-colorful';
+import { HexColorPicker, RgbaColorPicker } from '../vue-colorful';
 import tinycolor from 'tinycolor2';
 import makeStyle from './utils/makeStyle';
 
@@ -134,12 +134,14 @@ const HexColorInput = defineComponent({
       return (
         <div>
           <Input
-            prefix="#"
             size="small"
             value={hexValue.value}
             onFocus={handleFocus}
             onChange={handleChange}
             onBlur={handleBlur}
+            v-slots={{
+              prefix: () => '#',
+            }}
           />
           <div class="color-panel-mode-title">HEX{alpha.value ? '8' : ''}</div>
         </div>
@@ -166,58 +168,39 @@ const RgbColorInput = defineComponent({
   setup(props) {
     const { value, alpha } = toRefs(props);
 
-    watch(value as any, val => {
+    watch(value, val => {
       props.onChange(val);
     });
 
     return () => {
       return (
         <div class="color-panel-rgba-input">
-          <ConfigProvider theme={{ components: { InputNumber: { handleWidth: 12 } } }}>
+          {/* <ConfigProvider theme={{ components: { InputNumber: { handleWidth: 12 } } }}> */}
+          <div class="color-panel-rgba-input-part">
+            <InputNumber min={0} max={255} size="small" v-model={[value.value.r, 'value']} />
+            <div class="color-panel-mode-title">R</div>
+          </div>
+          <div class="color-panel-rgba-input-part">
+            <InputNumber min={0} max={255} size="small" v-model={[value.value.g, 'value']} />
+            <div class="color-panel-mode-title">G</div>
+          </div>
+          <div class="color-panel-rgba-input-part">
+            <InputNumber min={0} max={255} size="small" v-model={[value.value.b, 'value']} />
+            <div class="color-panel-mode-title">B</div>
+          </div>
+          {alpha && (
             <div class="color-panel-rgba-input-part">
               <InputNumber
                 min={0}
-                max={255}
+                max={1}
+                step={0.01}
                 size="small"
-                value={value.value.r}
-                onChange={v => (value.value = { ...value.value, r: v ?? 0 })}
+                v-model={[value.value.a, 'value']}
               />
-              <div class="color-panel-mode-title">R</div>
+              <div class="color-panel-mode-title">A</div>
             </div>
-            <div class="color-panel-rgba-input-part">
-              <InputNumber
-                min={0}
-                max={255}
-                size="small"
-                value={value.value.g}
-                onChange={v => (value.value = { ...value.value, g: v ?? 0 })}
-              />
-              <div class="color-panel-mode-title">G</div>
-            </div>
-            <div class="color-panel-rgba-input-part">
-              <InputNumber
-                min={0}
-                max={255}
-                size="small"
-                value={value.value.b}
-                onChange={v => (value.value = { ...value.value, b: v ?? 0 })}
-              />
-              <div class="color-panel-mode-title">B</div>
-            </div>
-            {alpha && (
-              <div class="color-panel-rgba-input-part">
-                <InputNumber
-                  min={0}
-                  max={1}
-                  step={0.01}
-                  size="small"
-                  value={value.value.a}
-                  onChange={v => (value.value = { ...value.value, a: v ?? 0 })}
-                />
-                <div class="color-panel-mode-title">A</div>
-              </div>
-            )}
-          </ConfigProvider>
+          )}
+          {/* </ConfigProvider> */}
         </div>
       );
     };
@@ -287,24 +270,24 @@ const ColorPanel = defineComponent({
     return () => {
       return wrapSSR(
         <div {...attrs} class={classNames(hashId.value, 'color-panel')}>
-          {/* {(colorMode === 'HEX' || colorMode === 'RGB') && (
+          {(colorMode.value === 'HEX' || colorMode.value === 'RGB') && (
             <HexColorPicker
-              style={{ height: 160 }}
-              color={tinycolor(color).toHex()}
+              style={{ height: '160px' }}
+              color={tinycolor(color.value).toHex()}
               onChange={value => {
-                onChange(getColorStr(value, colorMode));
+                props.onChange(getColorStr(value, colorMode.value));
               }}
             />
           )}
-          {(colorMode === 'RGBA' || colorMode === 'HEX8') && (
+          {(colorMode.value === 'RGBA' || colorMode.value === 'HEX8') && (
             <RgbaColorPicker
-              style={{ height: 160 }}
+              style={{ height: '160px' }}
               color={tinycolor(color).toRgb()}
               onChange={value => {
-                onChange(getColorStr(value, colorMode));
+                props.onChange(getColorStr(value, colorMode.value));
               }}
             />
-          )} */}
+          )}
           <div style={{ marginTop: '12px' }}>
             <div class="color-panel-mode">
               <div class="color-panel-preview">
@@ -314,7 +297,7 @@ const ColorPanel = defineComponent({
                 value={colorMode.value}
                 onChange={handleColorModeChange}
                 options={colorModes
-                  .filter(item => alpha || item === 'HEX' || item === 'RGB')
+                  .filter(item => alpha.value || item === 'HEX' || item === 'RGB')
                   .map(item => ({ value: item, key: item }))}
                 size="small"
                 bordered={false}

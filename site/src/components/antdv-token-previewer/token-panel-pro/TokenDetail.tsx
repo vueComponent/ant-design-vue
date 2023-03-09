@@ -68,25 +68,25 @@ const TokenDetail = defineComponent({
   setup(props, { attrs }) {
     const { themes, path, tokenName } = toRefs(props);
 
+    const [wrapSSR, hashId] = useStyle();
+    const tokenPath = computed(() => [...path.value, tokenName.value]);
+    const locale = useInjectLocaleContext();
+
+    const handleTokenChange = (theme: MutableTheme) => (value: TokenValue) => {
+      theme.onThemeChange?.(deepUpdateObj(theme.config, [...path.value, tokenName.value], value), [
+        ...path.value,
+        tokenName.value,
+      ]);
+    };
+
+    const relatedComponents = computed(() => {
+      return getRelatedComponents([
+        tokenName.value,
+        ...((mapRelatedAlias as any)[tokenName.value] ?? []),
+      ]);
+    });
+
     return () => {
-      const [wrapSSR, hashId] = useStyle();
-      const tokenPath = computed(() => [...path.value, tokenName.value]);
-      const locale = useInjectLocaleContext();
-
-      const handleTokenChange = (theme: MutableTheme) => (value: TokenValue) => {
-        theme.onThemeChange?.(
-          deepUpdateObj(theme.config, [...path.value, tokenName.value], value),
-          [...path.value, tokenName.value],
-        );
-      };
-
-      const relatedComponents = computed(() => {
-        return getRelatedComponents([
-          tokenName.value,
-          ...((mapRelatedAlias as any)[tokenName.value] ?? []),
-        ]);
-      });
-
       return wrapSSR(
         <div {...attrs} class={classNames(hashId.value, attrs.class, 'token-panel-token-detail')}>
           <div class="token-panel-pro-token-collapse-map-collapse-token-description">

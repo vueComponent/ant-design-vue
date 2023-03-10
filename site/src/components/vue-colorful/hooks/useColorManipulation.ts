@@ -1,4 +1,4 @@
-import { Ref, ref, watchEffect } from 'vue';
+import { Ref, ref, watch } from 'vue';
 import { ColorModel, AnyColor, HsvaColor } from '../types';
 import { equalColorObjects } from '../utils/compare';
 import { useEventCallback } from './useEventCallback';
@@ -21,23 +21,40 @@ export function useColorManipulation<T extends AnyColor>(
 
   // Update local HSVA-value if `color` property value is changed,
   // but only if that's not the same color that we just sent to the parent
-  watchEffect(() => {
-    if (!colorModel.value.equal(color.value, cache.value.color)) {
-      const newHsva = colorModel.value.toHsva(color.value);
-      cache.value = { hsva: newHsva, color: color.value };
+
+  watch(color, val => {
+    if (!colorModel.value.equal(val, cache.value.color)) {
+      const newHsva = colorModel.value.toHsva(val);
+      cache.value = { hsva: newHsva, color: val };
       hsva.value = newHsva;
     }
   });
+  watch(colorModel, val => {
+    if (!val.equal(color.value, cache.value.color)) {
+      const newHsva = val.toHsva(color.value);
+      cache.value = { hsva: newHsva, color: color.value };
+      hsva.value = newHsva;
+    }
 
-  // Trigger `onChange` callback only if an updated color is different from cached one;
-  // save the new color to the ref to prevent unnecessary updates
-  watchEffect(() => {
     let newColor;
     if (
       !equalColorObjects(hsva.value, cache.value.hsva) &&
-      !colorModel.value.equal((newColor = colorModel.value.fromHsva(hsva.value)), cache.value.color)
+      !val.equal((newColor = val.fromHsva(hsva.value)), cache.value.color)
     ) {
       cache.value = { hsva: hsva.value, color: newColor };
+      onChangeCallback(newColor);
+    }
+  });
+  // Trigger `onChange` callback only if an updated color is different from cached one;
+  // save the new color to the ref to prevent unnecessary updates
+
+  watch(hsva, val => {
+    let newColor;
+    if (
+      !equalColorObjects(val, cache.value.hsva) &&
+      !colorModel.value.equal((newColor = colorModel.value.fromHsva(val)), cache.value.color)
+    ) {
+      cache.value = { hsva: val, color: newColor };
       onChangeCallback(newColor);
     }
   });

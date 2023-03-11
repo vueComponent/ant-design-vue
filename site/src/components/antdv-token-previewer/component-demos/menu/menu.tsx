@@ -20,9 +20,11 @@ const Demo = defineComponent({
         <div>
           <Menu
             onClick={onClick}
-            style={{ width: 256 }}
+            style={{ width: '256px' }}
             selectedKeys={selectedKeys.value}
             openKeys={openKeys.value}
+            onSelect={val => (selectedKeys.value = val as any)}
+            onOpenChange={val => (openKeys.value = val as any)}
             // v-model={[selectedKeys.value, 'selectedKeys']}
             // v-model={[openKeys.value, 'openKeys']}
             mode="inline"

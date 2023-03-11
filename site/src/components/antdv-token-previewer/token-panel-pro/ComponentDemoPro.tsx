@@ -62,6 +62,7 @@ const ComponentDemoPro = defineComponent({
     return () => {
       return (
         <div
+          {...attrs}
           style={{
             ...(attrs.style as CSSProperties),
             background: (token as any).colorBgLayout,
@@ -79,7 +80,7 @@ const ComponentDemoPro = defineComponent({
               style={{ margin: '12px 0 0 12px' }}
             />
 
-            <ConfigProvider
+            {/* <ConfigProvider
               theme={{
                 components: {
                   Select: {
@@ -105,23 +106,21 @@ const ComponentDemoPro = defineComponent({
                   },
                 },
               }}
-            >
-              {
-                mode.value === 'overview' ? (
-                  <div style={{ margin: '12px', maxWidth: 'fit-content' }}>
-                    {overviewDemo.value}
-                  </div>
-                ) : null
-                //   <ComponentDemoGroup
-                //     selectedTokens={selectedTokens}
-                //     themes={[theme]}
-                //     components={components}
-                //     activeComponents={activeComponents}
-                //     componentDrawer={componentDrawer}
-                //     hideTokens
-                //   />
-              }
-            </ConfigProvider>
+            > */}
+            {
+              mode.value === 'overview' ? (
+                <div style={{ margin: '12px' }}>{overviewDemo.value}</div>
+              ) : null
+              //   <ComponentDemoGroup
+              //     selectedTokens={selectedTokens}
+              //     themes={[theme]}
+              //     components={components}
+              //     activeComponents={activeComponents}
+              //     componentDrawer={componentDrawer}
+              //     hideTokens
+              //   />
+            }
+            {/* </ConfigProvider> */}
           </div>
         </div>
       );
@@ -142,9 +141,9 @@ export default defineComponent({
   },
   setup(props, { attrs }) {
     return () => (
-      <ConfigProvider theme={props.theme.config}>
-        <ComponentDemoPro {...props} {...attrs} />
-      </ConfigProvider>
+      // <ConfigProvider theme={props.theme.config}>
+      <ComponentDemoPro {...props} {...attrs} />
+      // </ConfigProvider>
     );
   },
 });

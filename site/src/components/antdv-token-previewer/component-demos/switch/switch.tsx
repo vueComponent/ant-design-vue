@@ -7,7 +7,7 @@ function onChange() {}
 const Demo = defineComponent({
   setup() {
     const checked = ref(true);
-    return () => <Switch v-model={[checked, 'checked']} onChange={onChange} />;
+    return () => <Switch v-model={[checked.value, 'checked']} onChange={onChange} />;
   },
 });
 

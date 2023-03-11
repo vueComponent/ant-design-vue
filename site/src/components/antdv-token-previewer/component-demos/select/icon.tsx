@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import Select from './_internal';
+import { Select } from 'ant-design-vue';
 
 import type { ComponentDemo } from '../../interface';
 

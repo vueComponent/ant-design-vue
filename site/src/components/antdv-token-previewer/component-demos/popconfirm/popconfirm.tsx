@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { Popconfirm, message } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
@@ -10,16 +10,33 @@ function cancel() {
 }
 const Demo = defineComponent({
   setup() {
+    const open = ref(true);
+
     return () => (
-      <div>
-        <Popconfirm._InternalPanelDoNotUseOrYouWillBeFired
-          title="Are you sure to delete this task?"
+      <div
+        style={{
+          width: '260px',
+          paddingTop: '80px',
+        }}
+      >
+        <Popconfirm
+          open={open.value}
+          title="Are you sure delete this task?"
+          ok-text="Yes"
+          cancel-text="No"
           onConfirm={confirm}
           onCancel={cancel}
-          okText="Yes"
-          cancelText="No"
           placement={'topLeft'}
-        />
+          getPopupContainer={node => {
+            if (node) {
+              console.log(node.parentNode);
+              return node.parentNode as HTMLElement;
+            }
+            return document.body;
+          }}
+        >
+          <a href="#">Delete</a>
+        </Popconfirm>
       </div>
     );
   },

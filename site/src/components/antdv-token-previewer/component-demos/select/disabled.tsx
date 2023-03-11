@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import Select from './_internal';
+import { Select } from 'ant-design-vue';
 
 import type { ComponentDemo } from '../../interface';
 
@@ -17,7 +17,7 @@ const Demo = defineComponent({
         disabled
         options={options}
         placeholder="Please select"
-        defaultValue={['a10', 'c12']}
+        value={['a10', 'c12']}
       />
     );
   },

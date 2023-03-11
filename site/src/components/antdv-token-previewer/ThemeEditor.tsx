@@ -163,7 +163,7 @@ const ThemeEditor = defineComponent({
             theme={theme.value}
             activeComponents={relatedComponents.value}
             selectedTokens={computedSelectedTokens.value}
-            style={{ flex: 1, overflow: 'auto', height: '100%' }}
+            style={{ flex: 1, overflow: 'auto' }}
             componentDrawer
           />
         </div>,

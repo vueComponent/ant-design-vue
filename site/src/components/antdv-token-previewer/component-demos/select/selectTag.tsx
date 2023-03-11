@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import Select from './_internal';
+import { Select } from 'ant-design-vue';
 
 import type { ComponentDemo } from '../../interface';
 
@@ -13,6 +13,7 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <Select
+        open={true}
         mode="multiple"
         allowClear
         style={{
@@ -21,7 +22,13 @@ const Demo = defineComponent({
         options={options}
         listHeight={200}
         placeholder="Please select"
-        defaultValue={['a10', 'c12', 'e14']}
+        value={['a10', 'c12', 'e14']}
+        getPopupContainer={node => {
+          if (node) {
+            return node.parentNode as HTMLElement;
+          }
+          return document.body;
+        }}
         onChange={handleChange}
       />
     );

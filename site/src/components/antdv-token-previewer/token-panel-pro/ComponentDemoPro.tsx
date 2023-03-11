@@ -132,10 +132,18 @@ const ComponentDemoPro = defineComponent({
 export default defineComponent({
   name: 'ComponentDemoProProvider',
   inheritAttrs: false,
-  setup(_, { attrs }) {
+  props: {
+    selectedTokens: { type: Array as PropType<string[]> },
+    theme: { type: Object as PropType<MutableTheme> },
+    components: { type: Object as PropType<Record<string, string[]>> },
+    activeComponents: { type: Array as PropType<string[]> },
+    componentDrawer: { type: Boolean },
+    showAll: { type: Boolean },
+  },
+  setup(props, { attrs }) {
     return () => (
-      <ConfigProvider theme={(attrs.theme as MutableTheme).config}>
-        <ComponentDemoPro {...attrs} />
+      <ConfigProvider theme={props.theme.config}>
+        <ComponentDemoPro {...props} {...attrs} />
       </ConfigProvider>
     );
   },

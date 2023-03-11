@@ -1,22 +1,36 @@
-import { defineComponent } from 'vue';
-import { Form, Input } from 'ant-design-vue';
+import { defineComponent, ref, reactive } from 'vue';
+import { Form, FormItem, Input } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
-
-function onFinish() {}
 
 const Demo = defineComponent({
   setup() {
-    return () => (
-      <Form name="basic" labelCol={{ span: 4 }} wrapperCol={{ span: 20 }} onFinish={onFinish}>
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+    return () => {
+      const onFinish = () => {};
+      const onFinishFailed = () => {};
+      const formRef = ref();
+      const formData = reactive({
+        username: '',
+      });
+
+      return (
+        <Form
+          ref={formRef}
+          model={formData}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
-          <Input status={'error'} />
-        </Form.Item>
-      </Form>
-    );
+          <FormItem
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input status={'error'} v-model={[formData.username, 'value']} />
+          </FormItem>
+        </Form>
+      );
+    };
   },
 });
 

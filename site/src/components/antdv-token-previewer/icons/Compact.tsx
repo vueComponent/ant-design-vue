@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 
 const Compact = defineComponent({
   name: 'Compact',
+  emits: ['click'],
   setup(_, { attrs }) {
     return () => {
       return (

@@ -6,8 +6,9 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <div>
-        <Tooltip._InternalPanelDoNotUseOrYouWillBeFired title="prompt text" />
-        <span>Tooltip will show on mouse enter.</span>
+        <Tooltip title="prompt text">
+          <span>Tooltip will show on mouse enter.</span>
+        </Tooltip>
       </div>
     );
   },

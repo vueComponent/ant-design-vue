@@ -21,13 +21,13 @@ const Demo = defineComponent({
       },
     ];
     return () => (
-      <Mentions._InternalPanelDoNotUseOrYouWillBeFired
+      <Mentions
         style={{ width: '100%' }}
         onChange={onChange}
         onSelect={onSelect}
         defaultValue="@afc163"
         options={options}
-      ></Mentions._InternalPanelDoNotUseOrYouWillBeFired>
+      ></Mentions>
     );
   },
 });

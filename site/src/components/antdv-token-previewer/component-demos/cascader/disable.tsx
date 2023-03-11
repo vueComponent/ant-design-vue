@@ -4,11 +4,9 @@ import { Cascader } from 'ant-design-vue';
 import options from './data';
 import type { ComponentDemo } from '../../interface';
 
-const { _InternalPanelDoNotUseOrYouWillBeFired: InternalCascader } = Cascader;
-
 const Demo = defineComponent({
   setup() {
-    return () => <InternalCascader options={options} open disabled placeholder="Please select" />;
+    return () => <Cascader options={options} open disabled placeholder="Please select" />;
   },
 });
 

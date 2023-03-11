@@ -8,10 +8,7 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <div>
-        <Typography.Text type={'danger'}>
-          Hover me <DownOutlined />
-        </Typography.Text>
-        <Dropdown._InternalPanelDoNotUseOrYouWillBeFired
+        <Dropdown
           menu={{
             items: [
               {
@@ -31,7 +28,12 @@ const Demo = defineComponent({
               },
             ],
           }}
-        />
+        >
+          {' '}
+          <Typography.Text type={'danger'}>
+            Hover me <DownOutlined />
+          </Typography.Text>
+        </Dropdown>
       </div>
     );
   },

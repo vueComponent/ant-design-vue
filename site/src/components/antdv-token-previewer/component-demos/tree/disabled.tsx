@@ -33,9 +33,9 @@ const Demo = () => {
     <Tree
       disabled
       checkable
-      defaultExpandedKeys={['0-0-0', '0-0-1']}
-      defaultSelectedKeys={['0-0-0', '0-0-1']}
-      defaultCheckedKeys={['0-0-0', '0-0-1']}
+      expandedKeys={['0-0-0', '0-0-1']}
+      selectedKeys={['0-0-0', '0-0-1']}
+      checkedKeys={['0-0-0', '0-0-1']}
       treeData={treeData}
     />
   );

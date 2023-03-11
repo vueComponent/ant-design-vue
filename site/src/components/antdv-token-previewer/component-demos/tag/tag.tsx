@@ -1,41 +1,47 @@
+import { defineComponent } from 'vue';
 import { Divider, Space, Tag, theme } from 'ant-design-vue';
 
 import type { ComponentDemo } from '../../interface';
 
-const Demo = () => {
-  const { token } = theme.useToken();
-  return (
-    <Space direction={'vertical'}>
-      <div style={{ padding: 12 }}>
-        <Tag color="magenta">magenta</Tag>
-        <Tag color="red">red</Tag>
-        <Tag color="volcano">volcano</Tag>
-        <Tag color="orange">orange</Tag>
-        <Tag color="gold">gold</Tag>
-        <Tag color="lime">lime</Tag>
-        <Tag color="green">green</Tag>
-        <Tag color="cyan">cyan</Tag>
-        <Tag color="blue">blue</Tag>
-        <Tag color="geekblue">geekblue</Tag>
-        <Tag color="purple">purple</Tag>
-      </div>
-      <Divider />
-      <div style={{ background: token.colorFillSecondary, padding: 12 }}>
-        <Tag color="magenta">magenta</Tag>
-        <Tag color="red">red</Tag>
-        <Tag color="volcano">volcano</Tag>
-        <Tag color="orange">orange</Tag>
-        <Tag color="gold">gold</Tag>
-        <Tag color="lime">lime</Tag>
-        <Tag color="green">green</Tag>
-        <Tag color="cyan">cyan</Tag>
-        <Tag color="blue">blue</Tag>
-        <Tag color="geekblue">geekblue</Tag>
-        <Tag color="purple">purple</Tag>
-      </div>
-    </Space>
-  );
-};
+const Demo = defineComponent({
+  setup() {
+    const { token } = theme.useToken();
+
+    return () => {
+      return (
+        <Space direction={'vertical'}>
+          <div style={{ padding: 12 }}>
+            <Tag color="magenta">magenta</Tag>
+            <Tag color="red">red</Tag>
+            <Tag color="volcano">volcano</Tag>
+            <Tag color="orange">orange</Tag>
+            <Tag color="gold">gold</Tag>
+            <Tag color="lime">lime</Tag>
+            <Tag color="green">green</Tag>
+            <Tag color="cyan">cyan</Tag>
+            <Tag color="blue">blue</Tag>
+            <Tag color="geekblue">geekblue</Tag>
+            <Tag color="purple">purple</Tag>
+          </div>
+          <Divider />
+          <div style={{ background: token.value.colorFillSecondary, padding: 12 }}>
+            <Tag color="magenta">magenta</Tag>
+            <Tag color="red">red</Tag>
+            <Tag color="volcano">volcano</Tag>
+            <Tag color="orange">orange</Tag>
+            <Tag color="gold">gold</Tag>
+            <Tag color="lime">lime</Tag>
+            <Tag color="green">green</Tag>
+            <Tag color="cyan">cyan</Tag>
+            <Tag color="blue">blue</Tag>
+            <Tag color="geekblue">geekblue</Tag>
+            <Tag color="purple">purple</Tag>
+          </div>
+        </Space>
+      );
+    };
+  },
+});
 
 const componentDemo: ComponentDemo = {
   demo: <Demo />,

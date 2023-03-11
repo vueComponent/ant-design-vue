@@ -1,12 +1,12 @@
 import { defineComponent } from 'vue';
-import { List, Avatar } from 'ant-design-vue';
+import { List, ListItem, ListItemMeta, Avatar } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
 const data = [
-  { title: 'Ant Design Title 1' },
-  { title: 'Ant Design Title 2' },
-  { title: 'Ant Design Title 3' },
-  { title: 'Ant Design Title 4' },
+  { title: 'Ant Design Vue Title 1' },
+  { title: 'Ant Design Vue Title 2' },
+  { title: 'Ant Design Vue Title 3' },
+  { title: 'Ant Design Vue Title 4' },
 ];
 const Demo = defineComponent({
   setup() {
@@ -14,15 +14,19 @@ const Demo = defineComponent({
       <List
         itemLayout="horizontal"
         dataSource={data}
-        renderItem={(item: any) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-              title={<a href="https://ant.design">{item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-            />
-          </List.Item>
-        )}
+        v-slots={{
+          renderItem: ({ item }: any) => (
+            <ListItem>
+              <ListItemMeta
+                v-slots={{
+                  avatar: () => <Avatar src="https://joeschmoe.io/api/v1/random" />,
+                  title: () => <a href="https://www.antdv.com">{item.title}</a>,
+                }}
+                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              />
+            </ListItem>
+          ),
+        }}
       />
     );
   },

@@ -4,7 +4,7 @@ import type { ComponentDemo } from '../../interface';
 const { Link } = Anchor;
 const Demo = () => {
   return (
-    <div style={{ padding: 12 }}>
+    <div style={{ padding: '12px' }}>
       <Anchor>
         <Link href="#" title="Basic demo" />
         <Link href="#components-anchor-demo-static" title="Static demo" />

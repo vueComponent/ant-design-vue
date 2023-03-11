@@ -89,7 +89,7 @@ const Tag = defineComponent({
     );
 
     const tagClassName = computed(() =>
-      classNames(prefixCls.value, hashId.value, {
+      classNames(prefixCls.value, hashId.value, attrs.class, {
         [`${prefixCls.value}-${props.color}`]: isInternalColor.value,
         [`${prefixCls.value}-has-color`]: props.color && !isInternalColor.value,
         [`${prefixCls.value}-hidden`]: !visible.value,

@@ -6,10 +6,10 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <Space direction="vertical">
-        <DatePicker._InternalPanelDoNotUseOrYouWillBeFired picker="week" />
-        <DatePicker._InternalPanelDoNotUseOrYouWillBeFired picker="month" />
-        <DatePicker._InternalPanelDoNotUseOrYouWillBeFired picker="quarter" />
-        <DatePicker._InternalPanelDoNotUseOrYouWillBeFired picker="year" />
+        <DatePicker picker="week" />
+        <DatePicker picker="month" />
+        <DatePicker picker="quarter" />
+        <DatePicker picker="year" />
       </Space>
     );
   },

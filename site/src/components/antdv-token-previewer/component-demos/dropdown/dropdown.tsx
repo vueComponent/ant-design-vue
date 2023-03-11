@@ -10,10 +10,15 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <div>
-        <a class="ant-dropdown-link" onClick={e => e.preventDefault()}>
-          Hover me <DownOutlined />
-        </a>
-        <Dropdown._InternalPanelDoNotUseOrYouWillBeFired overlay={menu} />
+        <Dropdown
+          v-slots={{
+            overlay: () => menu,
+          }}
+        >
+          <a class="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            Hover me <DownOutlined />
+          </a>
+        </Dropdown>
       </div>
     );
   },

@@ -1,9 +1,7 @@
-import { Cascader as _Cascader } from 'ant-design-vue';
+import { Cascader } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
 import options from './data';
-
-const { _InternalPanelDoNotUseOrYouWillBeFired: Cascader } = _Cascader;
 
 const Demo = () => {
   return (

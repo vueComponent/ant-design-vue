@@ -2,7 +2,7 @@ import { ConfigProvider, Segmented, Space, theme as antdTheme } from 'ant-design
 import type { MutableTheme } from '../interface';
 import type { PropType, CSSProperties } from 'vue';
 import { defineComponent, toRefs, ref, computed } from 'vue';
-// import ComponentDemoGroup from '../component-panel/ComponentDemoGroup';
+import ComponentDemoGroup from '../component-panel/ComponentDemoGroup';
 import { useInjectLocaleContext } from '../locale';
 import { Error, Primary, Success, Warning } from '../overviews';
 
@@ -107,19 +107,18 @@ const ComponentDemoPro = defineComponent({
                 },
               }}
             > */}
-            {
-              mode.value === 'overview' ? (
-                <div style={{ margin: '12px' }}>{overviewDemo.value}</div>
-              ) : null
-              //   <ComponentDemoGroup
-              //     selectedTokens={selectedTokens}
-              //     themes={[theme]}
-              //     components={components}
-              //     activeComponents={activeComponents}
-              //     componentDrawer={componentDrawer}
-              //     hideTokens
-              //   />
-            }
+            {mode.value === 'overview' ? (
+              <div style={{ margin: '12px' }}>{overviewDemo.value}</div>
+            ) : (
+              <ComponentDemoGroup
+                selectedTokens={selectedTokens.value}
+                themes={[theme.value]}
+                components={components.value}
+                activeComponents={activeComponents.value}
+                componentDrawer={componentDrawer.value}
+                hideTokens
+              />
+            )}
             {/* </ConfigProvider> */}
           </div>
         </div>

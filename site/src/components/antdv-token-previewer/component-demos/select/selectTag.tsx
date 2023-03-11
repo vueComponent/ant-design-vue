@@ -13,7 +13,6 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <Select
-        open={true}
         mode="multiple"
         allowClear
         style={{

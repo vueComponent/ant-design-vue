@@ -5,7 +5,9 @@ import type { ComponentDemo } from '../../interface';
 
 const Demo = defineComponent({
   setup() {
-    return () => <Segmented options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']} />;
+    return () => (
+      <Segmented value={'Daily'} options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']} />
+    );
   },
 });
 

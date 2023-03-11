@@ -1,8 +1,8 @@
 import { defineComponent, ref } from 'vue';
-import { TreeSelect as _TreeSelect } from 'ant-design-vue';
+import { TreeSelect } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
-const { TreeNode, _InternalPanelDoNotUseOrYouWillBeFired: TreeSelect } = _TreeSelect;
+const { TreeNode } = TreeSelect;
 
 const Demo = defineComponent({
   setup() {

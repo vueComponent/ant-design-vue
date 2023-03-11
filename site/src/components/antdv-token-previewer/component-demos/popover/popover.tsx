@@ -2,19 +2,23 @@ import { defineComponent } from 'vue';
 import { Popover, Button } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
-const content = (
-  <div>
-    <p>Content</p> <p>Content</p>
-  </div>
-);
 const Demo = defineComponent({
   setup() {
-    return () => (
+    const content = () => (
       <div>
-        <Popover._InternalPanelDoNotUseOrYouWillBeFired content={content} title="Title" />
-        <Button type="primary">Hover me</Button>
+        <p>Content</p> <p>Content</p>
       </div>
     );
+
+    return () => {
+      return (
+        <div>
+          <Popover v-slots={{ content }} title="Title">
+            <Button type="primary">Hover me</Button>
+          </Popover>
+        </div>
+      );
+    };
   },
 });
 

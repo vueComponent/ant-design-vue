@@ -1,14 +1,25 @@
-import { Modal } from 'ant-design-vue';
+import { Modal, Button } from 'ant-design-vue';
+import { defineComponent } from 'vue';
 
 import type { ComponentDemo } from '../../interface';
 
-const Demo = () => {
-  return (
-    <Modal._InternalPanelDoNotUseOrYouWillBeFired type={'confirm'} title={'Confirm This?'}>
-      Some descriptions.
-    </Modal._InternalPanelDoNotUseOrYouWillBeFired>
-  );
-};
+const Demo = defineComponent({
+  setup() {
+    const warning = () => {
+      Modal.warning({
+        title: 'This is a warning message',
+        content: () => (
+          <div>
+            <p>some messages...some messages...</p>
+            <p>some messages...some messages...</p>
+          </div>
+        ),
+      });
+    };
+
+    return () => <Button onClick={warning}>Warning</Button>;
+  },
+});
 
 const componentDemo: ComponentDemo = {
   demo: <Demo />,

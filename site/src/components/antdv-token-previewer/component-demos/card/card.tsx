@@ -6,17 +6,29 @@ const Demo = defineComponent({
   setup() {
     return () => (
       <Space>
-        <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
-          <p>Card content</p> <p>Card content</p> <p>Card content</p>
+        <Card
+          title="Default size card"
+          style={{ width: '300px' }}
+          v-slots={{
+            extra: () => <a href="#">More</a>,
+          }}
+        >
+          <p>Card content</p>
+          <p>Card content</p>
+          <p>Card content</p>
         </Card>
         <Card
           loading
           size="small"
           title="Small size card"
-          extra={<a href="#">More</a>}
-          style={{ width: 300 }}
+          style={{ width: '300px' }}
+          v-slots={{
+            extra: () => <a href="#">More</a>,
+          }}
         >
-          <p>Card content</p> <p>Card content</p> <p>Card content</p>
+          <p>Card content</p>
+          <p>Card content</p>
+          <p>Card content</p>
         </Card>
       </Space>
     );

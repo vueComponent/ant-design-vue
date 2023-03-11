@@ -13,7 +13,7 @@ import useControlledTheme from './hooks/useControlledTheme';
 import type { TokenPanelProProps } from './token-panel-pro';
 import TokenPanelPro from './token-panel-pro';
 import ComponentDemoPro from './token-panel-pro/ComponentDemoPro';
-// import { antdComponents } from './component-panel';
+import { antdComponents } from './component-panel';
 
 const useStyle = makeStyle('ThemeEditor', token => ({
   '.antd-theme-editor': {
@@ -161,6 +161,7 @@ const ThemeEditor = defineComponent({
           /> */}
           <ComponentDemoPro
             theme={theme.value}
+            components={antdComponents}
             activeComponents={relatedComponents.value}
             selectedTokens={computedSelectedTokens.value}
             style={{ flex: 1, overflow: 'auto' }}

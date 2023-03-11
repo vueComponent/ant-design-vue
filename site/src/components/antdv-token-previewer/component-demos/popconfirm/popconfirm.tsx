@@ -20,7 +20,6 @@ const Demo = defineComponent({
         }}
       >
         <Popconfirm
-          open={open.value}
           title="Are you sure delete this task?"
           ok-text="Yes"
           cancel-text="No"

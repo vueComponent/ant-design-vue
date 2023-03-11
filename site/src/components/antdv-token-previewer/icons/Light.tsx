@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 
 const Light = defineComponent({
   name: 'Light',
+  emits: ['click'],
   setup(_, { attrs }) {
     return () => {
       return (

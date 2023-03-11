@@ -130,7 +130,7 @@ const TokenPreview = defineComponent({
         );
       }
       if (type.value === 'Padding') {
-        const padding = (getDesignToken(theme.value) as any)[tokenName.value];
+        const padding = `${(getDesignToken(theme.value) as any)[tokenName.value]}px`;
         return (
           <div
             style={{
@@ -182,7 +182,7 @@ const TokenPreview = defineComponent({
                 transform: 'translate(30%, 30%)',
                 border: '2px solid rgba(0,0,0,0.45)',
                 background: '#fff',
-                borderRadius: (getDesignToken(theme.value) as any)[tokenName.value],
+                borderRadius: `${(getDesignToken(theme.value) as any)[tokenName.value]}px`,
               }}
             />
           </div>

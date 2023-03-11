@@ -8,7 +8,7 @@ import { useInjectLocaleContext } from '../locale';
 import { tokenCategory } from '../meta';
 import type { TokenGroup } from '../meta/interface';
 import makeStyle from '../utils/makeStyle';
-// import AliasPanel from './AliasPanel';
+import AliasPanel from './AliasPanel';
 import TokenContent from './TokenContent';
 
 const { TabPane } = Tabs;
@@ -106,7 +106,7 @@ const TokenPanelPro = defineComponent({
               </TabPane>
             ))}
           </Tabs>
-          {/* <AliasPanel
+          <AliasPanel
             open={aliasOpen.value}
             description={activeCategory.value?.aliasTokenDescription}
             onOpenChange={props.onAliasOpenChange}
@@ -115,7 +115,7 @@ const TokenPanelPro = defineComponent({
             style={{ flex: aliasOpen.value ? '0 0 320px' : 'none', width: 0 }}
             selectedTokens={selectedTokens.value}
             onTokenSelect={props.onTokenSelect}
-          /> */}
+          />
         </div>,
       );
     };

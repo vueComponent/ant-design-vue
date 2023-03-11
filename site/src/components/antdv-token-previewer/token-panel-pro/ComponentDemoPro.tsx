@@ -1,9 +1,9 @@
-import { ConfigProvider, Segmented, Space, theme as antdTheme } from 'antd';
-import type { MutableTheme } from 'antd-token-previewer';
-import type { FC } from 'react';
-import React from 'react';
-import ComponentDemoGroup from '../component-panel/ComponentDemoGroup';
-import { useLocale } from '../locale';
+import { ConfigProvider, Segmented, Space, theme as antdTheme } from 'ant-design-vue';
+import type { MutableTheme } from '../interface';
+import type { PropType, CSSProperties } from 'vue';
+import { defineComponent, toRefs, ref, computed } from 'vue';
+// import ComponentDemoGroup from '../component-panel/ComponentDemoGroup';
+import { useInjectLocaleContext } from '../locale';
 import { Error, Primary, Success, Warning } from '../overviews';
 
 export type ComponentDemoProProps = {
@@ -11,109 +11,132 @@ export type ComponentDemoProProps = {
   theme: MutableTheme;
   components: Record<string, string[]>;
   activeComponents?: string[];
-  style?: React.CSSProperties;
   componentDrawer?: boolean;
   showAll?: boolean;
 };
 
-const ComponentDemoPro: FC<ComponentDemoProProps> = ({
-  selectedTokens,
-  theme,
-  components,
-  activeComponents,
-  componentDrawer,
-  showAll,
-  style,
-}) => {
-  const [mode, setMode] = React.useState<'overview' | 'component'>('overview');
-  const {
-    token: { colorBgLayout },
-  } = antdTheme.useToken();
-  const locale = useLocale();
+const ComponentDemoPro = defineComponent({
+  name: 'ComponentDemoPro',
+  inheritAttrs: false,
+  props: {
+    selectedTokens: { type: Array as PropType<string[]> },
+    theme: { type: Object as PropType<MutableTheme> },
+    components: { type: Object as PropType<Record<string, string[]>> },
+    activeComponents: { type: Array as PropType<string[]> },
+    componentDrawer: { type: Boolean },
+    showAll: { type: Boolean },
+  },
+  setup(props, { attrs }) {
+    const { selectedTokens, theme, components, activeComponents, componentDrawer, showAll } =
+      toRefs(props);
 
-  const overviewDemo = React.useMemo(() => {
-    if (showAll) {
+    const mode = ref<'overview' | 'component'>('overview');
+
+    const { token } = antdTheme.useToken();
+
+    const locale = useInjectLocaleContext();
+
+    const overviewDemo = computed(() => {
+      if (showAll.value) {
+        return (
+          <Space direction="vertical">
+            <Primary />
+            <Success />
+            <Error />
+            <Warning />
+          </Space>
+        );
+      }
+      if (selectedTokens.value?.includes('colorError')) {
+        return <Error />;
+      }
+      if (selectedTokens.value?.includes('colorSuccess')) {
+        return <Success />;
+      }
+      if (selectedTokens.value?.includes('colorWarning')) {
+        return <Warning />;
+      }
+      return <Primary />;
+    });
+
+    return () => {
       return (
-        <Space direction="vertical">
-          <Primary />
-          <Success />
-          <Error />
-          <Warning />
-        </Space>
-      );
-    }
-    if (selectedTokens?.includes('colorError')) {
-      return <Error />;
-    }
-    if (selectedTokens?.includes('colorSuccess')) {
-      return <Success />;
-    }
-    if (selectedTokens?.includes('colorWarning')) {
-      return <Warning />;
-    }
-    return <Primary />;
-  }, [selectedTokens, showAll]);
-
-  return (
-    <div style={{ ...style, background: colorBgLayout, paddingBottom: 24 }}>
-      <div style={{ margin: 'auto', maxWidth: 960 }}>
-        <Segmented
-          options={[
-            { value: 'overview', label: locale.demo.overview },
-            { value: 'component', label: locale.demo.components },
-          ]}
-          value={mode}
-          onChange={setMode as any}
-          style={{ margin: '12px 0 0 12px' }}
-        />
-
-        <ConfigProvider
-          theme={{
-            components: {
-              Select: {
-                zIndexPopup: 10,
-              },
-              DatePicker: {
-                zIndexPopup: 10,
-              },
-              Dropdown: {
-                zIndexPopup: 10,
-              },
-              Mentions: {
-                zIndexPopup: 10,
-              },
-              Tooltip: {
-                zIndexPopup: 10,
-              },
-              Popover: {
-                zIndexPopup: 10,
-              },
-              Popconfirm: {
-                zIndexPopup: 10,
-              },
-            },
+        <div
+          style={{
+            ...(attrs.style as CSSProperties),
+            background: (token as any).colorBgLayout,
+            paddingBottom: '24px',
           }}
         >
-          {mode === 'overview' ? (
-            <div style={{ margin: 12, maxWidth: 'fit-content' }}>{overviewDemo}</div>
-          ) : (
-            <ComponentDemoGroup
-              selectedTokens={selectedTokens}
-              themes={[theme]}
-              components={components}
-              activeComponents={activeComponents}
-              componentDrawer={componentDrawer}
-              hideTokens
+          <div style={{ margin: 'auto', maxWidth: '960px' }}>
+            <Segmented
+              options={[
+                { value: 'overview', label: locale.value.demo.overview },
+                { value: 'component', label: locale.value.demo.components },
+              ]}
+              value={mode.value}
+              onChange={val => (mode.value = val as any)}
+              style={{ margin: '12px 0 0 12px' }}
             />
-          )}
-        </ConfigProvider>
-      </div>
-    </div>
-  );
-};
 
-export default (props: ComponentDemoProProps) => (
-  <ConfigProvider theme={props.theme.config}>
-    <ComponentDemoPro {...props} />
-  </ConfigProvider>
-);
+            <ConfigProvider
+              theme={{
+                components: {
+                  Select: {
+                    zIndexPopup: 10,
+                  },
+                  DatePicker: {
+                    zIndexPopup: 10,
+                  },
+                  Dropdown: {
+                    zIndexPopup: 10,
+                  },
+                  Mentions: {
+                    zIndexPopup: 10,
+                  },
+                  Tooltip: {
+                    zIndexPopup: 10,
+                  },
+                  Popover: {
+                    zIndexPopup: 10,
+                  },
+                  Popconfirm: {
+                    zIndexPopup: 10,
+                  },
+                },
+              }}
+            >
+              {
+                mode.value === 'overview' ? (
+                  <div style={{ margin: '12px', maxWidth: 'fit-content' }}>
+                    {overviewDemo.value}
+                  </div>
+                ) : null
+                //   <ComponentDemoGroup
+                //     selectedTokens={selectedTokens}
+                //     themes={[theme]}
+                //     components={components}
+                //     activeComponents={activeComponents}
+                //     componentDrawer={componentDrawer}
+                //     hideTokens
+                //   />
+              }
+            </ConfigProvider>
+          </div>
+        </div>
+      );
+    };
+  },
+});
+
+export default defineComponent({
+  name: 'ComponentDemoProProvider',
+  inheritAttrs: false,
+  setup(_, { attrs }) {
+    return () => (
+      <ConfigProvider theme={(attrs.theme as MutableTheme).config}>
+        <ComponentDemoPro {...attrs} />
+      </ConfigProvider>
+    );
+  },
+});

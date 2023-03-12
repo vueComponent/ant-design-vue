@@ -175,32 +175,32 @@ const RgbColorInput = defineComponent({
     return () => {
       return (
         <div class="color-panel-rgba-input">
-          {/* <ConfigProvider theme={{ components: { InputNumber: { handleWidth: 12 } } }}> */}
-          <div class="color-panel-rgba-input-part">
-            <InputNumber min={0} max={255} size="small" v-model={[value.value.r, 'value']} />
-            <div class="color-panel-mode-title">R</div>
-          </div>
-          <div class="color-panel-rgba-input-part">
-            <InputNumber min={0} max={255} size="small" v-model={[value.value.g, 'value']} />
-            <div class="color-panel-mode-title">G</div>
-          </div>
-          <div class="color-panel-rgba-input-part">
-            <InputNumber min={0} max={255} size="small" v-model={[value.value.b, 'value']} />
-            <div class="color-panel-mode-title">B</div>
-          </div>
-          {alpha.value && (
+          <ConfigProvider theme={{ components: { InputNumber: { handleWidth: 12 } } }}>
             <div class="color-panel-rgba-input-part">
-              <InputNumber
-                min={0}
-                max={1}
-                step={0.01}
-                size="small"
-                v-model={[value.value.a, 'value']}
-              />
-              <div class="color-panel-mode-title">A</div>
+              <InputNumber min={0} max={255} size="small" v-model={[value.value.r, 'value']} />
+              <div class="color-panel-mode-title">R</div>
             </div>
-          )}
-          {/* </ConfigProvider> */}
+            <div class="color-panel-rgba-input-part">
+              <InputNumber min={0} max={255} size="small" v-model={[value.value.g, 'value']} />
+              <div class="color-panel-mode-title">G</div>
+            </div>
+            <div class="color-panel-rgba-input-part">
+              <InputNumber min={0} max={255} size="small" v-model={[value.value.b, 'value']} />
+              <div class="color-panel-mode-title">B</div>
+            </div>
+            {alpha.value && (
+              <div class="color-panel-rgba-input-part">
+                <InputNumber
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  size="small"
+                  v-model={[value.value.a, 'value']}
+                />
+                <div class="color-panel-mode-title">A</div>
+              </div>
+            )}
+          </ConfigProvider>
         </div>
       );
     };

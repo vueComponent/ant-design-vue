@@ -234,14 +234,14 @@ export default defineComponent({
   },
   setup(props, { attrs }) {
     return () => (
-      // <ConfigProvider
-      //   theme={{
-      //     algorithm: defaultAlgorithm,
-      //     ...props.theme,
-      //   }}
-      // >
-      <ComponentTokenDrawer {...props} {...attrs} />
-      // </ConfigProvider>
+      <ConfigProvider
+        theme={{
+          algorithm: defaultAlgorithm,
+          ...props.theme,
+        }}
+      >
+        <ComponentTokenDrawer {...props} {...attrs} />
+      </ConfigProvider>
     );
   },
 });

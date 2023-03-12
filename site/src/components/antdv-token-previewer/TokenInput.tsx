@@ -1,4 +1,4 @@
-import { Button, Dropdown, Input, InputNumber } from 'ant-design-vue';
+import { Button, Popover, Input, InputNumber } from 'ant-design-vue';
 import classNames from 'ant-design-vue/es/_util/classNames';
 import type { PropType } from 'vue';
 import { defineComponent, toRefs, computed, ref, watch } from 'vue';
@@ -171,17 +171,23 @@ const TokenInput = defineComponent({
             value={String(tokenValue.value)}
             disabled={readonly.value}
             addonBefore={
-              <Dropdown
-                trigger={['click']}
-                overlay={
-                  <ColorPanel
-                    alpha
-                    color={String(tokenValue.value)}
-                    onChange={(v: string) => {
-                      handleTokenChange(v);
-                    }}
-                  />
-                }
+              <Popover
+                trigger="click"
+                placement="bottomRight"
+                arrow-point-at-center
+                overlayInnerStyle={{ padding: 0 }}
+                v-slots={{
+                  content: () => (
+                    <ColorPanel
+                      alpha
+                      color={String(tokenValue.value)}
+                      style={{ border: 'none' }}
+                      onChange={(v: string) => {
+                        handleTokenChange(v);
+                      }}
+                    />
+                  ),
+                }}
               >
                 <ColorPreview
                   color={String(tokenValue.value)}
@@ -192,7 +198,7 @@ const TokenInput = defineComponent({
                     verticalAlign: 'top',
                   }}
                 />
-              </Dropdown>
+              </Popover>
             }
             onChange={e => {
               handleTokenChange(e.target.value);

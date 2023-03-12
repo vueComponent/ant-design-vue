@@ -282,7 +282,7 @@ const ColorPanel = defineComponent({
           {(colorMode.value === 'RGBA' || colorMode.value === 'HEX8') && (
             <RgbaColorPicker
               style={{ height: '160px' }}
-              color={tinycolor(color).toRgb()}
+              color={tinycolor(color.value).toRgb()}
               onChange={value => {
                 props.onChange(getColorStr(value, colorMode.value));
               }}

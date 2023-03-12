@@ -42,7 +42,7 @@ export interface Locale {
     copied?: any;
     expand?: any;
   };
-  QRCode: {
+  QRCode?: {
     expired?: string;
     refresh?: string;
   };

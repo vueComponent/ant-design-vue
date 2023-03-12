@@ -201,7 +201,9 @@ const ConfigProvider = defineComponent({
       dropdownMatchSelectWidth,
       getPrefixCls,
       iconPrefixCls,
-      theme: mergedTheme,
+      theme: computed(() => {
+        return mergedTheme.value ?? parentContext.theme?.value;
+      }),
       renderEmpty: renderEmptyComponent,
       getTargetContainer,
       getPopupContainer,

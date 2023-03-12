@@ -1,9 +1,9 @@
-import { CaretRightOutlined } from '@ant-design/icons';
-import { Collapse, Space } from 'antd';
-import type { ThemeConfig } from 'antd/es/config-provider/context';
-import classNames from 'classnames';
-import type { CSSProperties } from 'react';
-import React, { useEffect, useMemo } from 'react';
+import { CaretRightOutlined } from '@ant-design/icons-vue';
+import { Collapse, Space } from 'ant-design-vue';
+import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
+import classNames from 'ant-design-vue/es/_util/classNames';
+import type { PropType, CSSProperties } from 'vue';
+import { defineComponent, toRefs, watch, computed, ref } from 'vue';
 import ColorPreview from '../../ColorPreview';
 import { Pick } from '../../icons';
 import type { MutableTheme, TokenValue } from '../../interface';
@@ -15,7 +15,7 @@ import { getRelatedComponents } from '../../utils/statistic';
 
 const { Panel } = Collapse;
 
-interface TokenItemProps {
+export interface TokenItemProps {
   tokenName: string;
   tokenPath: string[];
   active?: boolean;
@@ -29,53 +29,52 @@ interface TokenItemProps {
   fallback?: (config: ThemeConfig) => Record<string, TokenValue>;
 }
 
-const AdditionInfo = ({
-  info,
-  visible,
-  tokenName,
-  style,
-  dark,
-  ...rest
-}: {
-  info: string | number;
-  visible: boolean;
-  tokenName: string;
-  dark?: boolean;
-  style?: CSSProperties;
-  className?: string;
-}) => {
-  if (typeof info === 'string' && isColor(info)) {
-    return (
-      <ColorPreview
-        dark={dark}
-        color={String(info)}
-        style={{ display: visible ? 'block' : 'none', ...style }}
-      />
-    );
-  }
+const AdditionInfo = defineComponent({
+  name: 'AdditionInfo',
+  props: {
+    info: { type: [String, Number] },
+    visible: { type: Boolean },
+    tokenName: { type: String },
+    dark: { type: Boolean },
+  },
+  setup(props, { attrs }) {
+    const { info, visible, dark } = toRefs(props);
 
-  if (info.toString().length < 6 && String(info) !== '') {
-    return (
-      <div
-        style={{
-          height: 20,
-          overflow: 'hidden',
-          backgroundColor: 'rgba(0,0,0,0.04)',
-          borderRadius: '8px',
-          display: visible ? 'block' : 'none',
-          padding: '0 6px',
-          lineHeight: '20px',
-          ...style,
-        }}
-        {...rest}
-      >
-        {info}
-      </div>
-    );
-  }
+    return () => {
+      if (typeof info.value === 'string' && isColor(info.value)) {
+        return (
+          <ColorPreview
+            dark={dark.value}
+            color={String(info.value)}
+            style={{ display: visible.value ? 'block' : 'none', ...(attrs.style as CSSProperties) }}
+          />
+        );
+      }
 
-  return null;
-};
+      if (info.value.toString().length < 6 && String(info.value) !== '') {
+        return (
+          <div
+            {...attrs}
+            style={{
+              height: '20px',
+              overflow: 'hidden',
+              backgroundColor: 'rgba(0,0,0,0.04)',
+              borderRadius: '8px',
+              display: visible.value ? 'block' : 'none',
+              padding: '0 6px',
+              lineHeight: '20px',
+              ...(attrs.style as CSSProperties),
+            }}
+          >
+            {info.value}
+          </div>
+        );
+      }
+
+      return null;
+    };
+  },
+});
 
 const ShowUsageButton = ({
   selected,
@@ -85,17 +84,18 @@ const ShowUsageButton = ({
   toggleSelected: (v: boolean) => void;
 }) => {
   return (
-    <Pick
-      style={{
-        color: selected ? '#1890ff' : undefined,
-        cursor: 'pointer',
-        fontSize: 16,
-        transition: 'color 0.3s',
-        marginInlineStart: 12,
-        verticalAlign: 'middle',
-      }}
+    <span
+      style={{ marginInlineStart: '12px', verticalAlign: 'middle', cursor: 'pointer' }}
       onClick={() => toggleSelected(!selected)}
-    />
+    >
+      <Pick
+        style={{
+          color: selected ? '#1890ff' : undefined,
+          fontSize: '16px',
+          transition: 'color 0.3s',
+        }}
+      />
+    </span>
   );
 };
 
@@ -177,152 +177,178 @@ const useStyle = makeStyle('TokenItem', token => ({
 
 export const getTokenItemId = (token: string) => `previewer-token-panel-item-${token}`;
 
-export default ({
-  tokenName,
-  active,
-  onActiveChange,
-  onTokenChange,
-  tokenPath,
-  selectedTokens,
-  themes,
-  onTokenSelect,
-  enableTokenSelect,
-  hideUsageCount,
-  fallback,
-}: TokenItemProps) => {
-  const [infoVisible, setInfoVisible] = React.useState(false);
-  const [wrapSSR, hashId] = useStyle();
+export default defineComponent({
+  name: 'TokenItem',
+  props: {
+    tokenName: { type: String },
+    tokenPath: { type: Array as PropType<string[]> },
+    active: { type: Boolean },
+    themes: { type: Array as PropType<MutableTheme[]> },
+    selectedTokens: { type: Array as PropType<string[]> },
+    enableTokenSelect: { type: Boolean },
+    hideUsageCount: { type: Boolean },
+    onActiveChange: { type: Function as PropType<(active: boolean) => void> },
+    onTokenChange: {
+      type: Function as PropType<
+        (theme: MutableTheme, tokenName: string, value: TokenValue) => void
+      >,
+    },
+    onTokenSelect: { type: Function as PropType<(token: string) => void> },
+    fallback: { type: Function as PropType<(config: ThemeConfig) => Record<string, TokenValue>> },
+  },
+  setup(props, { attrs }) {
+    const {
+      tokenName,
+      active,
+      tokenPath,
+      selectedTokens,
+      themes,
+      enableTokenSelect,
+      hideUsageCount,
+    } = toRefs(props);
 
-  useEffect(() => {
-    if (active) {
-      setInfoVisible(true);
-    }
-  }, [active]);
+    const infoVisible = ref(false);
+    const [wrapSSR, hashId] = useStyle();
 
-  const handleTokenChange = (theme: MutableTheme, value: TokenValue) => {
-    onTokenChange?.(theme, tokenName, value);
-  };
+    watch(
+      active,
+      val => {
+        if (val) {
+          infoVisible.value = true;
+        }
+      },
+      { immediate: true },
+    );
 
-  const count = useMemo(() => getRelatedComponents(tokenName).length, [tokenName]);
+    const handleTokenChange = (theme: MutableTheme, value: TokenValue) => {
+      props.onTokenChange?.(theme, tokenName.value, value);
+    };
 
-  return wrapSSR(
-    <div onMouseEnter={() => onActiveChange?.(false)}>
-      <Collapse
-        collapsible="header"
-        ghost
-        onChange={key => setInfoVisible(key.length > 0)}
-        className={classNames('previewer-token-item-collapse', hashId)}
-        expandIcon={({ isActive }) => (
-          <CaretRightOutlined
-            rotate={isActive ? 90 : 0}
-            style={{ fontSize: 12, cursor: 'pointer' }}
-          />
-        )}
-        activeKey={infoVisible ? tokenName : undefined}
-      >
-        <Panel
-          key={tokenName}
-          className="previewer-token-item"
-          header={
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-              id={getTokenItemId(tokenName)}
+    const count = computed(() => getRelatedComponents(tokenName.value).length);
+
+    return () => {
+      return wrapSSR(
+        <div {...attrs} onMouseenter={() => props.onActiveChange?.(false)}>
+          <Collapse
+            collapsible="header"
+            ghost
+            onChange={key => (infoVisible.value = Array.isArray(key) ? key.length > 0 : !!key)}
+            class={classNames('previewer-token-item-collapse', hashId.value)}
+            expandIcon={({ isActive }) => (
+              <CaretRightOutlined
+                rotate={isActive ? 90 : 0}
+                style={{ fontSize: '12px', cursor: 'pointer' }}
+              />
+            )}
+            activeKey={infoVisible.value ? tokenName.value : undefined}
+          >
+            <Panel
+              key={tokenName.value}
+              class="previewer-token-item"
+              header={
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                  id={getTokenItemId(tokenName.value)}
+                >
+                  <span
+                    style={{
+                      flex: 1,
+                      width: 0,
+                      display: 'flex',
+                      overflow: 'hidden',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span
+                      title={tokenName.value}
+                      class={classNames('previewer-token-item-name', {
+                        'previewer-token-item-highlighted': active.value,
+                      })}
+                      style={{
+                        marginInlineEnd: '5px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {tokenName.value}
+                    </span>
+                    {!hideUsageCount.value && (
+                      <span class="previewer-token-count">{count.value}</span>
+                    )}
+                  </span>
+                  {!infoVisible.value && (
+                    <div
+                      class="previewer-token-preview"
+                      style={{
+                        minWidth: themes.value.length * 20 + (themes.value.length - 1) * 4,
+                      }}
+                    >
+                      {themes.value.map(({ config, key }, index) => {
+                        return (
+                          <AdditionInfo
+                            key={key}
+                            dark={key === 'dark'}
+                            tokenName={tokenName.value}
+                            info={
+                              getValueByPath(config, [...tokenPath.value, tokenName.value]) ??
+                              props.fallback?.(config)[tokenName.value] ??
+                              ''
+                            }
+                            visible={!infoVisible.value}
+                            style={{
+                              zIndex: 10 - index,
+                            }}
+                          />
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              }
+              extra={
+                enableTokenSelect.value ? (
+                  <ShowUsageButton
+                    selected={!!selectedTokens.value?.includes(tokenName.value)}
+                    toggleSelected={() => {
+                      props.onTokenSelect?.(tokenName.value);
+                    }}
+                  />
+                ) : undefined
+              }
             >
-              <span
+              <Space
+                direction="vertical"
                 style={{
-                  flex: 1,
-                  width: 0,
-                  display: 'flex',
-                  overflow: 'hidden',
-                  alignItems: 'center',
+                  background: '#fafafa',
+                  borderRadius: '4px',
+                  padding: '8px',
+                  width: '100%',
                 }}
               >
-                <span
-                  title={tokenName}
-                  className={classNames('previewer-token-item-name', {
-                    'previewer-token-item-highlighted': active,
-                  })}
-                  style={{
-                    marginInlineEnd: '5px',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  {tokenName}
-                </span>
-                {!hideUsageCount && <span className="previewer-token-count">{count}</span>}
-              </span>
-              {!infoVisible && (
-                <div
-                  className="previewer-token-preview"
-                  style={{
-                    minWidth: themes.length * 20 + (themes.length - 1) * 4,
-                  }}
-                >
-                  {themes.map(({ config, key }, index) => {
-                    return (
-                      <AdditionInfo
-                        key={key}
-                        dark={key === 'dark'}
-                        tokenName={tokenName}
-                        info={
-                          getValueByPath(config, [...tokenPath, tokenName]) ??
-                          fallback?.(config)[tokenName] ??
-                          ''
+                {themes.value.map(theme => {
+                  return (
+                    <div key={theme.key}>
+                      <TokenInput
+                        hideTheme={themes.value.length === 1}
+                        theme={theme}
+                        onChange={value => handleTokenChange(theme, value)}
+                        value={
+                          getValueByPath(theme.config, [...tokenPath.value, tokenName.value]) ??
+                          props.fallback?.(theme.config)[tokenName.value]
                         }
-                        visible={!infoVisible}
-                        style={{
-                          zIndex: 10 - index,
-                        }}
                       />
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          }
-          extra={
-            enableTokenSelect ? (
-              <ShowUsageButton
-                selected={!!selectedTokens?.includes(tokenName)}
-                toggleSelected={() => {
-                  onTokenSelect?.(tokenName);
-                }}
-              />
-            ) : undefined
-          }
-        >
-          <Space
-            direction="vertical"
-            style={{
-              background: '#fafafa',
-              borderRadius: 4,
-              padding: 8,
-              width: '100%',
-            }}
-          >
-            {themes.map(theme => {
-              return (
-                <div key={theme.key}>
-                  <TokenInput
-                    hideTheme={themes.length === 1}
-                    theme={theme}
-                    onChange={value => handleTokenChange(theme, value)}
-                    value={
-                      getValueByPath(theme.config, [...tokenPath, tokenName]) ??
-                      fallback?.(theme.config)[tokenName]
-                    }
-                  />
-                </div>
-              );
-            })}
-          </Space>
-        </Panel>
-      </Collapse>
-    </div>,
-  );
-};
+                    </div>
+                  );
+                })}
+              </Space>
+            </Panel>
+          </Collapse>
+        </div>,
+      );
+    };
+  },
+});

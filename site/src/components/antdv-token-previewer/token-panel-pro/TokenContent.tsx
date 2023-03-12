@@ -519,7 +519,7 @@ const MapTokenCollapse = defineComponent({
         return (
           <Collapse
             class="token-panel-pro-grouped-map-collapse"
-            defaultActiveKey={Object.keys(groupedTokens.value)}
+            activeKey={Object.keys(groupedTokens.value)}
             expandIconPosition="end"
             expandIcon={({ isActive }) => (
               <CaretRightOutlined rotate={isActive ? 450 : 360} style={{ fontSize: '12px' }} />
@@ -544,7 +544,7 @@ const MapTokenCollapse = defineComponent({
         return (
           <Collapse
             class="token-panel-pro-grouped-map-collapse"
-            defaultActiveKey={group.value.groups.map(item => item.key)}
+            activeKey={group.value.groups.map(item => item.key)}
             expandIconPosition="end"
             expandIcon={({ isActive }) => (
               <CaretRightOutlined rotate={isActive ? 450 : 360} style={{ fontSize: '12px' }} />

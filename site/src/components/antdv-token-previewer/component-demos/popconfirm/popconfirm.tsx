@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { Popconfirm, message } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
@@ -10,8 +10,6 @@ function cancel() {
 }
 const Demo = defineComponent({
   setup() {
-    const open = ref(true);
-
     return () => (
       <div
         style={{
@@ -28,7 +26,6 @@ const Demo = defineComponent({
           placement={'topLeft'}
           getPopupContainer={node => {
             if (node) {
-              console.log(node.parentNode);
               return node.parentNode as HTMLElement;
             }
             return document.body;

@@ -1,20 +1,18 @@
 import { defineComponent } from 'vue';
-import { notification } from 'ant-design-vue';
+import { notification, Button } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
-
-const { _InternalPanelDoNotUseOrYouWillBeFired } = notification;
 
 const Demo = defineComponent({
   setup() {
-    return () => (
-      <_InternalPanelDoNotUseOrYouWillBeFired
-        message={'Notification Title'}
-        type={'error'}
-        description={
-          'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
-        }
-      />
-    );
+    const error = () => {
+      notification.error({
+        message: 'Notification Title',
+        description:
+          'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+      });
+    };
+
+    return () => <Button onClick={error}>Error</Button>;
   },
 });
 

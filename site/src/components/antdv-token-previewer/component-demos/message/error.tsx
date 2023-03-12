@@ -1,17 +1,14 @@
 import { defineComponent } from 'vue';
-import { message } from 'ant-design-vue';
+import { message, Button } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
-
-const { _InternalPanelDoNotUseOrYouWillBeFired } = message;
 
 const Demo = defineComponent({
   setup() {
-    return () => (
-      <_InternalPanelDoNotUseOrYouWillBeFired
-        type={'error'}
-        content={'这是一条异常消息，会主动消失'}
-      />
-    );
+    const error = () => {
+      message.error('This is an error message');
+    };
+
+    return () => <Button onClick={error}>Error</Button>;
   },
 });
 

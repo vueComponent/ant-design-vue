@@ -1,4 +1,3 @@
-import { defineComponent } from 'vue';
 import { Progress, Space } from 'ant-design-vue';
 
 import type { ComponentDemo } from '../../interface';

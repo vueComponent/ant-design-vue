@@ -3,7 +3,6 @@ import { defineComponent } from 'vue';
 
 const Pick = defineComponent({
   name: 'Pick',
-  emits: ['click'],
   setup(_, { attrs }) {
     return () => {
       return (

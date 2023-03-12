@@ -3,7 +3,7 @@ import {
   Button,
   Checkbox,
   Collapse,
-  // ConfigProvider,
+  ConfigProvider,
   Popover,
   Switch,
   Tooltip,

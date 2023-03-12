@@ -1,5 +1,5 @@
 import type { InputProps } from 'ant-design-vue';
-import { Input, InputNumber, Select, theme } from 'ant-design-vue';
+import { ConfigProvider, Input, InputNumber, Select, theme } from 'ant-design-vue';
 import classNames from 'ant-design-vue/es/_util/classNames';
 import type { PropType } from 'vue';
 import { defineComponent, watchEffect, watch, computed, toRefs, ref } from 'vue';
@@ -188,7 +188,7 @@ const RgbColorInput = defineComponent({
             <InputNumber min={0} max={255} size="small" v-model={[value.value.b, 'value']} />
             <div class="color-panel-mode-title">B</div>
           </div>
-          {alpha && (
+          {alpha.value && (
             <div class="color-panel-rgba-input-part">
               <InputNumber
                 min={0}

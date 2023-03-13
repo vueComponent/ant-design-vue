@@ -66,7 +66,7 @@ export const ComponentDemoBlock = defineComponent({
     size: { type: String as PropType<'small' | 'middle' | 'large'>, default: 'middle' },
     disabled: { type: Boolean, default: false },
     demos: {
-      type: Object as PropType<(ComponentDemo & { active?: boolean })[]>,
+      type: Array as PropType<(ComponentDemo & { active?: boolean })[]>,
       default: () => [],
     },
     theme: { type: Object as PropType<MutableTheme> },

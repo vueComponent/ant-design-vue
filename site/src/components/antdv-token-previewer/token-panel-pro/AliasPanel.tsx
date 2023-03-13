@@ -5,13 +5,12 @@ import {
   ShrinkOutlined,
 } from '@ant-design/icons-vue';
 import { Button, Collapse, Empty, Tooltip } from 'ant-design-vue';
-import type { MutableTheme } from '../interface';
+import type { MutableTheme, AliasToken, SelectedToken } from '../interface';
 import classNames from 'ant-design-vue/es/_util/classNames';
 import useMergedState from 'ant-design-vue/es/_util/hooks/useMergedState';
-import { PropType, Ref } from 'vue';
 import { defineComponent, toRefs, computed } from 'vue';
+import type { PropType, Ref } from 'vue';
 import { Pick } from '../icons';
-import type { AliasToken, SelectedToken } from '../interface';
 import { mapRelatedAlias, seedRelatedAlias } from '../meta/TokenRelation';
 import makeStyle from '../utils/makeStyle';
 import { getRelatedComponents } from '../utils/statistic';

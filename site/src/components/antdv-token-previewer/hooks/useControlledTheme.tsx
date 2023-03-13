@@ -41,7 +41,7 @@ const useControlledTheme: UseControlledTheme = ({ theme: customTheme, defaultThe
 
   const getNewTheme = (newTheme: Theme, force?: boolean): Theme => {
     const newToken = { ...newTheme.config.token };
-    if (infoFollowPrimary || force) {
+    if (infoFollowPrimary.value || force) {
       newToken.colorInfo = getDesignToken(newTheme.config).colorPrimary;
     }
     return { ...newTheme, config: { ...newTheme.config, token: newToken } };

@@ -1,5 +1,6 @@
-import { Ref, ref, watch } from 'vue';
-import { ColorModel, AnyColor, HsvaColor } from '../types';
+import type { Ref } from 'vue';
+import { ref, watch } from 'vue';
+import type { ColorModel, AnyColor, HsvaColor } from '../types';
 import { equalColorObjects } from '../utils/compare';
 import { useEventCallback } from './useEventCallback';
 

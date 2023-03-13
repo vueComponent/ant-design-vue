@@ -1,9 +1,8 @@
 import { Tabs } from 'ant-design-vue';
-import type { Theme } from '../interface';
+import type { Theme, SelectedToken } from '../interface';
 import classNames from 'ant-design-vue/es/_util/classNames';
-import { PropType, toRefs } from 'vue';
-import { defineComponent, watchEffect, computed, ref } from 'vue';
-import type { SelectedToken } from '../interface';
+import type { PropType } from 'vue';
+import { toRefs, defineComponent, watchEffect, computed, ref } from 'vue';
 import { useInjectLocaleContext } from '../locale';
 import { tokenCategory } from '../meta';
 import type { TokenGroup } from '../meta/interface';

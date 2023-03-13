@@ -1,5 +1,5 @@
 import { hexToRgba } from './convert';
-import { ObjectColor } from '../types';
+import type { ObjectColor } from '../types';
 
 export const equalColorObjects = (first: ObjectColor, second: ObjectColor): boolean => {
   if (first === second) return true;

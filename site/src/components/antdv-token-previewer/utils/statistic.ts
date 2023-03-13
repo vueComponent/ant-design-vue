@@ -26,4 +26,5 @@ export const getRelatedComponents = (token: string | string[]): string[] => {
   );
 };
 
-export const getComponentToken = (component: string) => (tokenStatistic as any)[component];
+export const getComponentToken = (component: string) =>
+  tokenStatistic[component] as { component?: Record<string, any>; global: string[] };

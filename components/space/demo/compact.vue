@@ -17,7 +17,7 @@ Compact Mode for form component.
 </docs>
 
 <template>
-  <div className="site-space-compact-wrapper">
+  <div class="site-space-compact-wrapper">
     <a-space-compact block>
       <a-input :style="{ width: '20%' }" default-value="0571" />
       <a-input :style="{ width: '30%' }" default-value="26888888" />

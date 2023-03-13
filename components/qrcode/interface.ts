@@ -1,6 +1,6 @@
 import { objectType, stringType } from '../_util/type';
 
-interface ImageSettings {
+export interface ImageSettings {
   src: string;
   height: number;
   width: number;

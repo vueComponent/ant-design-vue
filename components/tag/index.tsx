@@ -7,6 +7,7 @@ import Wave from '../_util/wave';
 import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
 import { isPresetColor, isPresetStatusColor } from '../_util/colors';
 import type { LiteralUnion } from '../_util/type';
+import { eventType } from '../_util/type';
 import CheckableTag from './CheckableTag';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import warning from '../_util/warning';
@@ -25,6 +26,7 @@ export const tagProps = () => ({
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
   },
+  onClick: eventType<(e: MouseEvent) => void>(),
   'onUpdate:visible': Function as PropType<(vis: boolean) => void>,
   icon: PropTypes.any,
 });
@@ -38,7 +40,7 @@ const Tag = defineComponent({
   props: tagProps(),
   // emits: ['update:visible', 'close'],
   slots: ['closeIcon', 'icon'],
-  setup(props: TagProps, { slots, emit, attrs }) {
+  setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('tag', props);
 
     const [wrapSSR, hashId] = useStyle(prefixCls);
@@ -93,7 +95,9 @@ const Tag = defineComponent({
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       }),
     );
-
+    const handleClick = (e: MouseEvent) => {
+      emit('click', e);
+    };
     return () => {
       const {
         icon = slots.icon?.(),
@@ -130,12 +134,12 @@ const Tag = defineComponent({
         children
       );
 
-      const isNeedWave = 'onClick' in attrs;
-
+      const isNeedWave = props.onClick !== undefined;
       const tagNode = (
         <span
           {...attrs}
-          class={tagClassName.value}
+          onClick={handleClick}
+          class={[tagClassName.value, attrs.class]}
           style={[tagStyle, attrs.style as CSSProperties]}
         >
           {kids}

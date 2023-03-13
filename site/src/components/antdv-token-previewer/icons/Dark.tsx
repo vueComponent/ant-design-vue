@@ -3,7 +3,6 @@ import { defineComponent } from 'vue';
 
 const Dark = defineComponent({
   name: 'Dark',
-  emits: ['click'],
   setup(_, { attrs }) {
     return () => {
       return (

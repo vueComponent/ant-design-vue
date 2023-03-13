@@ -1,15 +1,8 @@
-import { CheckOutlined } from '@ant-design/icons';
-import { Dropdown, Input, Menu, Switch, theme as antdTheme } from 'antd';
-import classNames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import React, {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import type { PropType } from 'vue';
+import { defineComponent, toRefs, ref, watchEffect, computed } from 'vue';
+import { CheckOutlined } from '@ant-design/icons-vue';
+import { Dropdown, Input, Menu, Switch, theme as antdTheme } from 'ant-design-vue';
+import classNames from 'ant-design-vue/es/_util/classNames';
 import { SearchDropdown } from '../icons';
 import type { AliasToken, MutableTheme, TokenValue } from '../interface';
 import type { TokenType } from '../utils/classifyToken';
@@ -121,195 +114,214 @@ export interface TokenPreviewProps {
 export type TokenPanelRef = {
   scrollToToken: (token: string) => void;
 };
+export default defineComponent({
+  name: 'TokenPreview',
+  props: {
+    themes: { type: Array as PropType<MutableTheme[]> },
+    selectedTokens: { type: Array as PropType<string[]> },
+    onTokenSelect: { type: Function as PropType<(token: string) => void> },
+    filterTypes: { type: Array as PropType<TokenType[]> },
+    onFilterTypesChange: { type: Function as PropType<(types: TokenType[]) => void> },
+    enableTokenSelect: { type: Boolean },
+  },
+  setup(props, { attrs, expose }) {
+    const { filterTypes, themes, selectedTokens, enableTokenSelect } = toRefs(props);
 
-export default forwardRef<TokenPanelRef, TokenPreviewProps>((props: TokenPreviewProps, ref) => {
-  const {
-    filterTypes,
-    onFilterTypesChange,
-    themes,
-    selectedTokens,
-    onTokenSelect,
-    enableTokenSelect,
-  } = props;
-  const [wrapSSR, hashId] = useStyle();
-  const [search, setSearch] = useState<string>('');
-  const [showAll, setShowAll] = useState<boolean>(false);
-  const [showTokenListShadowTop, setShowTokenListShadowTop] = useState<boolean>(false);
-  const cardWrapperRef = useRef<HTMLDivElement>(null);
-  const [activeCards, setActiveCards] = useState<TokenType[]>([]);
-  const [activeToken, setActiveToken] = useState<string | undefined>();
-  const { token } = useToken();
-  const [mergedFilterTypes, setMergedFilterTypes] = useMergedState<TokenType[]>(filterTypes || []);
+    const [wrapSSR, hashId] = useStyle();
+    const { token } = useToken();
 
-  // TODO: Split AliasToken and SeedToken
-  const groupedToken = useMemo(() => classifyToken(token as any), [token]);
+    const search = ref<string>('');
+    const showAll = ref<boolean>(false);
+    const showTokenListShadowTop = ref<boolean>(false);
+    const cardWrapperRef = ref<HTMLDivElement>(null);
+    const activeCards = ref<TokenType[]>([]);
+    const activeToken = ref<string | undefined>();
 
-  useEffect(() => {
-    const handleTokenListScroll = () => {
-      setShowTokenListShadowTop((cardWrapperRef.current?.scrollTop ?? 0) > 0);
-    };
-    cardWrapperRef.current?.addEventListener('scroll', handleTokenListScroll);
-    const wrapper = cardWrapperRef.current;
-    return () => {
-      wrapper?.removeEventListener('scroll', handleTokenListScroll);
-    };
-  }, []);
+    const mergedFilterTypes = ref<TokenType[]>(filterTypes.value || []);
 
-  useImperativeHandle(ref, () => ({
-    scrollToToken: tokenName => {
-      const type = getTypeOfToken(tokenName);
-      if (!activeCards.includes(type)) {
-        setActiveCards(prev => [...prev, type]);
-      }
-      setActiveToken(tokenName);
-      setTimeout(() => {
-        const node = cardWrapperRef.current?.querySelector<HTMLElement>(
-          `#${getTokenItemId(tokenName)}`,
-        );
-        if (!node) {
-          return;
+    // TODO: Split AliasToken and SeedToken
+    const groupedToken = computed(() => classifyToken(token.value as any));
+
+    watchEffect(() => {
+      const handleTokenListScroll = () => {
+        showTokenListShadowTop.value = (cardWrapperRef.value?.scrollTop ?? 0) > 0;
+      };
+      cardWrapperRef.value?.addEventListener('scroll', handleTokenListScroll);
+      const wrapper = cardWrapperRef.value;
+      return () => {
+        wrapper?.removeEventListener('scroll', handleTokenListScroll);
+      };
+    });
+
+    expose({
+      scrollToToken: tokenName => {
+        const type = getTypeOfToken(tokenName);
+        if (!activeCards.value.includes(type)) {
+          activeCards.value = [...activeCards.value, type];
         }
-        node?.scrollIntoView({
-          block: 'center',
-          inline: 'nearest',
-        });
-      }, 100);
-    },
-  }));
-
-  const handleAliasTokenChange = (theme: MutableTheme, tokenName: string, value: TokenValue) => {
-    theme.onThemeChange?.(
-      {
-        ...theme.config,
-        token: {
-          ...theme.config.token,
-          [tokenName]: value,
-        },
+        activeToken.value = tokenName;
+        setTimeout(() => {
+          const node = cardWrapperRef.value?.querySelector<HTMLElement>(
+            `#${getTokenItemId(tokenName)}`,
+          );
+          if (!node) {
+            return;
+          }
+          node?.scrollIntoView({
+            block: 'center',
+            inline: 'nearest',
+          });
+        }, 100);
       },
-      ['token', tokenName],
-    );
-  };
+    });
 
-  return wrapSSR(
-    <div className={classNames('preview-panel-wrapper', hashId)}>
-      <div className={classNames('preview-panel')}>
-        <div style={{ padding: 16 }}>
-          <h3 className={classNames('preview-panel-space', hashId)}>
-            <span>Alias Token 预览</span>
-            <span className="preview-hide-token">
-              <span>显示所有</span>
-              <Switch checked={showAll} onChange={value => setShowAll(value)} size="small" />
-            </span>
-          </h3>
-          <Input
-            allowClear
-            onChange={e => {
-              setSearch(e.target.value);
-            }}
-            bordered={false}
-            addonBefore={
-              <>
-                <Dropdown
-                  overlay={
-                    <Menu
-                      items={[
-                        {
-                          label: '筛选项',
-                          type: 'group',
-                          key: 'title-key',
-                          style: { fontSize: 12 },
-                        },
-                        ...TOKEN_SORTS.map(type => ({
-                          icon: (
-                            <span>
-                              <CheckOutlined
-                                style={{
-                                  opacity: mergedFilterTypes.includes(type) ? 1 : 0,
-                                  marginInlineEnd: 8,
-                                  fontSize: 12,
-                                }}
-                              />
-                              {IconMap[type]}
-                            </span>
-                          ),
-                          label: TextMap[type],
-                          key: type,
-                          onClick: () => {
-                            const newTypes = mergedFilterTypes.includes(type)
-                              ? mergedFilterTypes.filter(item => type !== item)
-                              : [...mergedFilterTypes, type];
-                            setMergedFilterTypes(newTypes);
-                            onFilterTypesChange?.(newTypes);
-                          },
-                        })),
-                      ]}
-                    />
-                  }
-                  trigger={['click']}
-                >
-                  <SearchDropdown
-                    style={{
-                      width: 32,
-                      cursor: 'pointer',
-                      fontSize: 18,
-                      paddingTop: 2,
-                      transition: 'color 0.3s',
-                    }}
-                    className={classNames({
-                      'previewer-token-type-dropdown-icon-active': mergedFilterTypes.length > 0,
-                    })}
+    const handleAliasTokenChange = (theme: MutableTheme, tokenName: string, value: TokenValue) => {
+      theme.onThemeChange?.(
+        {
+          ...theme.config,
+          token: {
+            ...theme.config.token,
+            [tokenName]: value,
+          },
+        },
+        ['token', tokenName],
+      );
+    };
+
+    return () => {
+      return wrapSSR(
+        <div {...attrs} class={classNames('preview-panel-wrapper', hashId.value)}>
+          <div class={classNames('preview-panel')}>
+            <div style={{ padding: '16px' }}>
+              <h3 class={classNames('preview-panel-space', hashId.value)}>
+                <span>Alias Token 预览</span>
+                <span class="preview-hide-token">
+                  <span>显示所有</span>
+                  <Switch
+                    checked={showAll.value}
+                    onChange={value => (showAll.value = value as any)}
+                    size="small"
                   />
-                </Dropdown>
-              </>
-            }
-            className="preview-panel-search"
-            placeholder="搜索 Token / 色值 / 文本 / 圆角等"
-          />
-        </div>
-        <div
-          className={classNames('preview-panel-token-wrapper', {
-            'preview-panel-token-wrapper-ping-top': showTokenListShadowTop,
-          })}
-        >
-          <div ref={cardWrapperRef} style={{ height: '100%', overflow: 'auto', padding: '0 16px' }}>
-            <div>
-              {TOKEN_SORTS.filter(
-                type =>
-                  type !== 'seed' &&
-                  (mergedFilterTypes.includes(type) || mergedFilterTypes.length === 0) &&
-                  (!search ||
-                    groupedToken[type].some(item =>
-                      item.toLowerCase().includes(search.toLowerCase()),
-                    )),
-              ).map(key => (
-                <TokenCard
-                  title={TextMap[key]}
-                  icon={IconMap[key]}
-                  key={key}
-                  tokenPath={['token']}
-                  tokenArr={groupedToken[key]}
-                  keyword={search}
-                  hideUseless={!showAll}
-                  open={activeCards.includes(key)}
-                  onOpenChange={open =>
-                    setActiveCards(prev =>
-                      open ? [...prev, key] : prev.filter(item => item !== key),
-                    )
-                  }
-                  onTokenChange={handleAliasTokenChange}
-                  activeToken={activeToken}
-                  onActiveTokenChange={tokenName => setActiveToken(tokenName)}
-                  themes={themes}
-                  selectedTokens={selectedTokens}
-                  onTokenSelect={onTokenSelect}
-                  enableTokenSelect={enableTokenSelect}
-                  fallback={config => getDesignToken(config) as AliasToken}
-                />
-              ))}
+                </span>
+              </h3>
+              <Input
+                allowClear
+                onChange={e => {
+                  search.value = e.target.value;
+                }}
+                bordered={false}
+                addonBefore={
+                  <>
+                    <Dropdown
+                      v-slots={{
+                        overlay: () => (
+                          <Menu
+                            items={[
+                              {
+                                label: '筛选项',
+                                type: 'group',
+                                key: 'title-key',
+                                style: { fontSize: '12px' },
+                              },
+                              ...TOKEN_SORTS.map(type => ({
+                                icon: (
+                                  <span>
+                                    <CheckOutlined
+                                      style={{
+                                        opacity: mergedFilterTypes.value.includes(type) ? 1 : 0,
+                                        marginInlineEnd: '8px',
+                                        fontSize: '12px',
+                                      }}
+                                    />
+                                    {IconMap[type]}
+                                  </span>
+                                ),
+                                label: TextMap[type],
+                                key: type,
+                                onClick: () => {
+                                  const newTypes = mergedFilterTypes.value.includes(type)
+                                    ? mergedFilterTypes.value.filter(item => type !== item)
+                                    : [...mergedFilterTypes.value, type];
+                                  mergedFilterTypes.value = newTypes;
+                                  props.onFilterTypesChange?.(newTypes);
+                                },
+                              })),
+                            ]}
+                          />
+                        ),
+                      }}
+                      trigger={['click']}
+                    >
+                      <SearchDropdown
+                        style={{
+                          width: '32px',
+                          cursor: 'pointer',
+                          fontSize: '18px',
+                          paddingTop: '2px',
+                          transition: 'color 0.3s',
+                        }}
+                        class={classNames({
+                          'previewer-token-type-dropdown-icon-active':
+                            mergedFilterTypes.value.length > 0,
+                        })}
+                      />
+                    </Dropdown>
+                  </>
+                }
+                class="preview-panel-search"
+                placeholder="搜索 Token / 色值 / 文本 / 圆角等"
+              />
+            </div>
+            <div
+              class={classNames('preview-panel-token-wrapper', {
+                'preview-panel-token-wrapper-ping-top': showTokenListShadowTop.value,
+              })}
+            >
+              <div
+                ref={cardWrapperRef}
+                style={{ height: '100%', overflow: 'auto', padding: '0 16px' }}
+              >
+                <div>
+                  {TOKEN_SORTS.filter(
+                    type =>
+                      type !== 'seed' &&
+                      (mergedFilterTypes.value.includes(type) ||
+                        mergedFilterTypes.value.length === 0) &&
+                      (!search.value ||
+                        groupedToken.value[type].some(item =>
+                          item.toLowerCase().includes(search.value.toLowerCase()),
+                        )),
+                  ).map(key => (
+                    <TokenCard
+                      title={TextMap[key]}
+                      icon={IconMap[key]}
+                      key={key}
+                      tokenPath={['token']}
+                      tokenArr={groupedToken.value[key]}
+                      keyword={search.value}
+                      hideUseless={!showAll.value}
+                      open={activeCards.value.includes(key)}
+                      onOpenChange={open => {
+                        activeCards.value = open
+                          ? [...activeCards.value, key]
+                          : activeCards.value.filter(item => item !== key);
+                      }}
+                      onTokenChange={handleAliasTokenChange}
+                      activeToken={activeToken.value}
+                      onActiveTokenChange={tokenName => (activeToken.value = tokenName)}
+                      themes={themes.value}
+                      selectedTokens={selectedTokens.value}
+                      onTokenSelect={props.onTokenSelect}
+                      enableTokenSelect={enableTokenSelect.value}
+                      fallback={config => getDesignToken(config) as AliasToken}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>,
-  );
+        </div>,
+      );
+    };
+  },
 });

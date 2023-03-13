@@ -6,7 +6,7 @@ import classNames from 'ant-design-vue/es/_util/classNames';
 import ComponentDemos from '../component-demos';
 import type { AliasToken, ComponentDemo, MutableTheme, TokenName, TokenValue } from '../interface';
 import { useInjectLocaleContext } from '../locale';
-// import TokenCard from '../token-panel/token-card';
+import TokenCard from '../token-panel/token-card';
 import getDesignToken from '../utils/getDesignToken';
 import makeStyle from '../utils/makeStyle';
 import { getComponentToken } from '../utils/statistic';
@@ -124,7 +124,7 @@ const ComponentTokenDrawer = defineComponent({
     const componentTokenData = computed(() => Object.keys(componentToken.value ?? {}));
 
     const aliasTokenData = computed(() => {
-      return aliasTokenNames.value.sort();
+      return aliasTokenNames.sort();
     });
 
     const handleComponentTokenChange = (token: string, value: TokenValue) => {
@@ -165,17 +165,19 @@ const ComponentTokenDrawer = defineComponent({
                 <ComponentFullDemos demos={ComponentDemos[component.value]} />
               </ConfigProvider>
             </ConfigProvider>
-            <div style={{ flex: '0 0 400px', overflow: 'auto', padding: 24 }}>
+            <div
+              style={{ flex: '0 0 400px', overflow: 'auto', overflowX: 'hidden', padding: '24px' }}
+            >
               <div class="previewer-component-drawer-subtitle">Related Tokens / 相关 token</div>
-              {/* <TokenCard
+              <TokenCard
                 icon={<BuildOutlined />}
                 hideUsageCount
                 defaultOpen
                 title="Component Token"
-                tokenArr={componentTokenData}
-                tokenPath={['components', component]}
-                themes={[theme]}
-                fallback={() => componentToken}
+                tokenArr={componentTokenData.value}
+                tokenPath={['components', component.value]}
+                themes={[theme.value]}
+                fallback={() => componentToken.value}
                 onTokenChange={(_, tokenName, value) =>
                   handleComponentTokenChange(tokenName, value)
                 }
@@ -185,7 +187,7 @@ const ComponentTokenDrawer = defineComponent({
                     description="暂无相关 Component Token"
                     style={{
                       marginBlock: 0,
-                      paddingBlock: 32,
+                      paddingBlock: '32px',
                     }}
                   />
                 }
@@ -193,11 +195,11 @@ const ComponentTokenDrawer = defineComponent({
               <TokenCard
                 icon={<CarOutlined />}
                 hideUsageCount
-                themes={[theme]}
+                themes={[theme.value]}
                 defaultOpen
                 title="Alias Token"
-                tokenArr={aliasTokenData}
-                tokenPath={['components', component]}
+                tokenArr={aliasTokenData.value}
+                tokenPath={['components', component.value]}
                 fallback={themeConfig => getDesignToken(themeConfig) as AliasToken}
                 onTokenChange={(_, tokenName, value) =>
                   handleComponentTokenChange(tokenName, value)
@@ -208,11 +210,11 @@ const ComponentTokenDrawer = defineComponent({
                     description="暂无相关 Alias Token"
                     style={{
                       marginBlock: 0,
-                      paddingBlock: 32,
+                      paddingBlock: '32px',
                     }}
                   />
                 }
-              /> */}
+              />
             </div>
           </div>
         </Drawer>
@@ -232,14 +234,14 @@ export default defineComponent({
   },
   setup(props, { attrs }) {
     return () => (
-      // <ConfigProvider
-      //   theme={{
-      //     algorithm: defaultAlgorithm,
-      //     ...props.theme,
-      //   }}
-      // >
-      <ComponentTokenDrawer {...props} {...attrs} />
-      // </ConfigProvider>
+      <ConfigProvider
+        theme={{
+          algorithm: defaultAlgorithm,
+          ...props.theme,
+        }}
+      >
+        <ComponentTokenDrawer {...props} {...attrs} />
+      </ConfigProvider>
     );
   },
 });

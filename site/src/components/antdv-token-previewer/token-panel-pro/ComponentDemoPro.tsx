@@ -80,7 +80,7 @@ const ComponentDemoPro = defineComponent({
               style={{ margin: '12px 0 0 12px' }}
             />
 
-            {/* <ConfigProvider
+            <ConfigProvider
               theme={{
                 components: {
                   Select: {
@@ -106,20 +106,20 @@ const ComponentDemoPro = defineComponent({
                   },
                 },
               }}
-            > */}
-            {mode.value === 'overview' ? (
-              <div style={{ margin: '12px' }}>{overviewDemo.value}</div>
-            ) : (
-              <ComponentDemoGroup
-                selectedTokens={selectedTokens.value}
-                themes={[theme.value]}
-                components={components.value}
-                activeComponents={activeComponents.value}
-                componentDrawer={componentDrawer.value}
-                hideTokens
-              />
-            )}
-            {/* </ConfigProvider> */}
+            >
+              {mode.value === 'overview' ? (
+                <div style={{ margin: '12px' }}>{overviewDemo.value}</div>
+              ) : (
+                <ComponentDemoGroup
+                  selectedTokens={selectedTokens.value}
+                  themes={[theme.value]}
+                  components={components.value}
+                  activeComponents={activeComponents.value}
+                  componentDrawer={componentDrawer.value}
+                  hideTokens
+                />
+              )}
+            </ConfigProvider>
           </div>
         </div>
       );
@@ -140,9 +140,9 @@ export default defineComponent({
   },
   setup(props, { attrs }) {
     return () => (
-      // <ConfigProvider theme={props.theme.config}>
-      <ComponentDemoPro {...props} {...attrs} />
-      // </ConfigProvider>
+      <ConfigProvider theme={props.theme.config}>
+        <ComponentDemoPro {...props} {...attrs} />
+      </ConfigProvider>
     );
   },
 });

@@ -3,7 +3,7 @@ import {
   Button,
   Checkbox,
   Collapse,
-  // ConfigProvider,
+  ConfigProvider,
   Popover,
   Switch,
   Tooltip,
@@ -519,7 +519,7 @@ const MapTokenCollapse = defineComponent({
         return (
           <Collapse
             class="token-panel-pro-grouped-map-collapse"
-            defaultActiveKey={Object.keys(groupedTokens.value)}
+            activeKey={Object.keys(groupedTokens.value)}
             expandIconPosition="end"
             expandIcon={({ isActive }) => (
               <CaretRightOutlined rotate={isActive ? 450 : 360} style={{ fontSize: '12px' }} />
@@ -544,7 +544,7 @@ const MapTokenCollapse = defineComponent({
         return (
           <Collapse
             class="token-panel-pro-grouped-map-collapse"
-            defaultActiveKey={group.value.groups.map(item => item.key)}
+            activeKey={group.value.groups.map(item => item.key)}
             expandIconPosition="end"
             expandIcon={({ isActive }) => (
               <CaretRightOutlined rotate={isActive ? 450 : 360} style={{ fontSize: '12px' }} />
@@ -707,149 +707,154 @@ const TokenContent = defineComponent({
                 />
               )}
             </div>
-            {/* <ConfigProvider
+            <ConfigProvider
               theme={{
                 token: {
                   colorBorder: '#f0f0f0',
                 },
               }}
-            > */}
-            <Collapse
-              class="token-panel-pro-token-collapse"
-              expandIconPosition={'end'}
-              ghost
-              accordion
-              v-model={[curActiveGroup.value, 'activeKey']}
-              v-slots={{
-                expandIcon: ({ isActive }) => (
-                  <CaretRightOutlined rotate={isActive ? 450 : 360} style={{ fontSize: '12px' }} />
-                ),
-              }}
             >
-              {category.value.groups.map((group, index) => {
-                return (
-                  <Panel
-                    header={
-                      <span style={{ fontWeight: 500 }}>
-                        {locale.value._lang === 'zh-CN' ? group.name : group.nameEn}
-                      </span>
-                    }
-                    key={group.key}
-                  >
-                    <div>
-                      <div class="token-panel-pro-token-collapse-description">
-                        {locale.value._lang === 'zh-CN' ? group.desc : group.descEn}
-                      </div>
-                      {group.seedToken?.map(seedToken => (
-                        <div key={seedToken} class="token-panel-pro-token-collapse-seed-block">
-                          <div style={{ marginRight: 'auto' }}>
-                            <div class="token-panel-pro-token-collapse-subtitle">
-                              <span style={{ fontSize: '12px' }}>Seed Token</span>
+              <Collapse
+                class="token-panel-pro-token-collapse"
+                expandIconPosition={'end'}
+                ghost
+                accordion
+                v-model={[curActiveGroup.value, 'activeKey']}
+                v-slots={{
+                  expandIcon: ({ isActive }) => (
+                    <CaretRightOutlined
+                      rotate={isActive ? 450 : 360}
+                      style={{ fontSize: '12px' }}
+                    />
+                  ),
+                }}
+              >
+                {category.value.groups.map((group, index) => {
+                  return (
+                    <Panel
+                      header={
+                        <span style={{ fontWeight: 500 }}>
+                          {locale.value._lang === 'zh-CN' ? group.name : group.nameEn}
+                        </span>
+                      }
+                      key={group.key}
+                    >
+                      <div>
+                        <div class="token-panel-pro-token-collapse-description">
+                          {locale.value._lang === 'zh-CN' ? group.desc : group.descEn}
+                        </div>
+                        {group.seedToken?.map(seedToken => (
+                          <div key={seedToken} class="token-panel-pro-token-collapse-seed-block">
+                            <div style={{ marginRight: 'auto' }}>
+                              <div class="token-panel-pro-token-collapse-subtitle">
+                                <span style={{ fontSize: '12px' }}>Seed Token</span>
+                                <Tooltip
+                                  placement="topLeft"
+                                  arrowPointAtCenter
+                                  title={
+                                    locale.value._lang === 'zh-CN'
+                                      ? (tokenMeta as any)[seedToken]?.desc
+                                      : (tokenMeta as any)[seedToken]?.descEn
+                                  }
+                                >
+                                  <QuestionCircleOutlined
+                                    style={{ fontSize: '14px', marginLeft: '8px' }}
+                                  />
+                                </Tooltip>
+                              </div>
+                              <div>
+                                <span class="token-panel-pro-token-collapse-seed-block-name-cn">
+                                  {locale.value._lang === 'zh-CN'
+                                    ? (tokenMeta as any)[seedToken]?.name
+                                    : (tokenMeta as any)[seedToken]?.nameEn}
+                                </span>
+                                {seedToken === 'colorInfo' && (
+                                  <Checkbox
+                                    style={{ marginLeft: '12px' }}
+                                    checked={infoFollowPrimary.value}
+                                    onChange={e =>
+                                      props.onInfoFollowPrimaryChange(e.target.checked)
+                                    }
+                                  >
+                                    {locale.value.followPrimary}
+                                  </Checkbox>
+                                )}
+                              </div>
+                            </div>
+                            <SeedTokenPreview
+                              theme={theme.value}
+                              tokenName={seedToken}
+                              disabled={seedToken === 'colorInfo' && infoFollowPrimary.value}
+                            />
+                          </div>
+                        ))}
+                        {(group.mapToken || group.groups) && (
+                          <div style={{ marginTop: '16px', marginBottom: '24px' }}>
+                            <div
+                              class="token-panel-pro-token-collapse-subtitle"
+                              style={{
+                                marginBottom: '10px',
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <span>Map Token</span>
                               <Tooltip
                                 placement="topLeft"
                                 arrowPointAtCenter
-                                title={
-                                  locale.value._lang === 'zh-CN'
-                                    ? (tokenMeta as any)[seedToken]?.desc
-                                    : (tokenMeta as any)[seedToken]?.descEn
-                                }
+                                title="梯度变量（Map Token） 是基于 Seed 派生的梯度变量，我们精心设计的梯度变量模型具有良好的视觉设计语义，可在亮暗色模式切换时保证视觉梯度的一致性。"
                               >
                                 <QuestionCircleOutlined
                                   style={{ fontSize: '14px', marginLeft: '8px' }}
                                 />
                               </Tooltip>
-                            </div>
-                            <div>
-                              <span class="token-panel-pro-token-collapse-seed-block-name-cn">
-                                {locale.value._lang === 'zh-CN'
-                                  ? (tokenMeta as any)[seedToken]?.name
-                                  : (tokenMeta as any)[seedToken]?.nameEn}
-                              </span>
-                              {seedToken === 'colorInfo' && (
-                                <Checkbox
-                                  style={{ marginLeft: '12px' }}
-                                  checked={infoFollowPrimary.value}
-                                  onChange={e => props.onInfoFollowPrimaryChange(e.target.checked)}
+                              {group.mapTokenGroups && (
+                                <div
+                                  style={{
+                                    marginLeft: 'auto',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                  }}
                                 >
-                                  {locale.value.followPrimary}
-                                </Checkbox>
+                                  <label style={{ marginRight: '4px' }}>
+                                    {locale.value.groupView}
+                                  </label>
+                                  <Switch
+                                    checked={grouped.value}
+                                    onChange={v => (grouped.value = v as boolean)}
+                                    size="small"
+                                  />
+                                </div>
                               )}
                             </div>
+                            <MapTokenCollapse
+                              group={group}
+                              theme={theme.value}
+                              selectedTokens={selectedTokens.value}
+                              onTokenSelect={props.onTokenSelect}
+                              groupFn={
+                                group.mapTokenGroups && grouped.value ? groupMapToken : undefined
+                              }
+                            />
                           </div>
-                          <SeedTokenPreview
-                            theme={theme.value}
-                            tokenName={seedToken}
-                            disabled={seedToken === 'colorInfo' && infoFollowPrimary.value}
-                          />
-                        </div>
-                      ))}
-                      {(group.mapToken || group.groups) && (
-                        <div style={{ marginTop: '16px', marginBottom: '24px' }}>
-                          <div
-                            class="token-panel-pro-token-collapse-subtitle"
-                            style={{
-                              marginBottom: '10px',
-                              display: 'flex',
-                              alignItems: 'center',
+                        )}
+                        {index < category.value.groups.length - 1 && (
+                          <Button
+                            type="primary"
+                            style={{ borderRadius: '4px', marginBottom: '12px' }}
+                            onClick={() => {
+                              curActiveGroup.value = category.value.groups[index + 1]?.key;
                             }}
                           >
-                            <span>Map Token</span>
-                            <Tooltip
-                              placement="topLeft"
-                              arrowPointAtCenter
-                              title="梯度变量（Map Token） 是基于 Seed 派生的梯度变量，我们精心设计的梯度变量模型具有良好的视觉设计语义，可在亮暗色模式切换时保证视觉梯度的一致性。"
-                            >
-                              <QuestionCircleOutlined
-                                style={{ fontSize: '14px', marginLeft: '8px' }}
-                              />
-                            </Tooltip>
-                            {group.mapTokenGroups && (
-                              <div
-                                style={{
-                                  marginLeft: 'auto',
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                }}
-                              >
-                                <label style={{ marginRight: '4px' }}>
-                                  {locale.value.groupView}
-                                </label>
-                                <Switch
-                                  checked={grouped.value}
-                                  onChange={v => (grouped.value = v as boolean)}
-                                  size="small"
-                                />
-                              </div>
-                            )}
-                          </div>
-                          <MapTokenCollapse
-                            group={group}
-                            theme={theme.value}
-                            selectedTokens={selectedTokens.value}
-                            onTokenSelect={props.onTokenSelect}
-                            groupFn={
-                              group.mapTokenGroups && grouped.value ? groupMapToken : undefined
-                            }
-                          />
-                        </div>
-                      )}
-                      {index < category.value.groups.length - 1 && (
-                        <Button
-                          type="primary"
-                          style={{ borderRadius: '4px', marginBottom: '12px' }}
-                          onClick={() => {
-                            curActiveGroup.value = category.value.groups[index + 1]?.key;
-                          }}
-                        >
-                          {locale.value.next}
-                        </Button>
-                      )}
-                    </div>
-                  </Panel>
-                );
-              })}
-            </Collapse>
-            {/* </ConfigProvider> */}
+                            {locale.value.next}
+                          </Button>
+                        )}
+                      </div>
+                    </Panel>
+                  );
+                })}
+              </Collapse>
+            </ConfigProvider>
           </div>
         </div>,
       );

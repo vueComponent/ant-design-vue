@@ -1,17 +1,14 @@
 import { defineComponent } from 'vue';
-import { message } from 'ant-design-vue';
+import { message, Button } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
-
-const { _InternalPanelDoNotUseOrYouWillBeFired } = message;
 
 const Demo = defineComponent({
   setup() {
-    return () => (
-      <_InternalPanelDoNotUseOrYouWillBeFired
-        type={'warning'}
-        content={'这是一条警告消息，会主动消失'}
-      />
-    );
+    const warning = () => {
+      message.warning('This is an warning message');
+    };
+
+    return () => <Button onClick={warning}>Warning</Button>;
   },
 });
 

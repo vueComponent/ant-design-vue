@@ -8,7 +8,7 @@ const text = `  A dog is a type of domesticated animal.  Known for its loyalty a
 const Demo = defineComponent({
   setup() {
     return () => (
-      <Collapse defaultActiveKey={['1']}>
+      <Collapse activeKey={['1']}>
         <Panel header="This is panel header 1" key="1">
           <p>{text}</p>
         </Panel>

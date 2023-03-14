@@ -209,7 +209,7 @@ export default defineComponent({
         title,
       });
     });
-    const theme = computed(() => inject('themeMode', { theme: ref('default') }).theme.value);
+    const theme = computed(() => inject('themeMode', { theme: ref('light') }).theme.value);
     return {
       docHtml,
       iframeDemo,

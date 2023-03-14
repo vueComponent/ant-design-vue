@@ -1,6 +1,6 @@
 export default {
-  'app.theme.switch.default': 'Default theme',
-  'app.theme.switch.dark': 'Dark theme',
+  'app.theme.switch.default': 'Light',
+  'app.theme.switch.dark': 'Dark',
   'app.theme.switch.compact': 'Compact theme',
   'app.header.search': 'Search...',
   'app.header.menu.documentation': 'Docs',

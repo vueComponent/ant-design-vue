@@ -125,8 +125,6 @@ export default defineComponent({
 });
 </script>
 <style lang="less">
-@import './index.less';
-
 #nav {
   height: 100%;
   font-size: 14px;

@@ -139,7 +139,7 @@ export default defineComponent({
     });
 
     const themeMode = inject('themeMode', {
-      theme: ref('default'),
+      theme: ref('light'),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       changeTheme: (_key: any) => void 0,
     });

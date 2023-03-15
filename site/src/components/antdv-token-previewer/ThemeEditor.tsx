@@ -151,14 +151,6 @@ const ThemeEditor = defineComponent({
               onInfoFollowPrimaryChange={onInfoFollowPrimaryChange}
             />
           </div>
-          {/* <ComponentDemoPro
-            theme={theme.value}
-            components={antdComponents}
-            activeComponents={relatedComponents.value}
-            selectedTokens={computedSelectedTokens.value}
-            style={{ flex: 1, overflow: 'auto', height: '100%' }}
-            componentDrawer
-          /> */}
           <ComponentDemoPro
             theme={theme.value}
             components={antdComponents}

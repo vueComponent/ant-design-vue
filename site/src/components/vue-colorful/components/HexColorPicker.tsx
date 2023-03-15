@@ -2,7 +2,7 @@ import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
 import { ColorPicker } from './common/ColorPicker';
-import { ColorModel } from '../types';
+import type { ColorModel } from '../types';
 import { equalHex } from '../utils/compare';
 import { hexToHsva, hsvaToHex } from '../utils/convert';
 

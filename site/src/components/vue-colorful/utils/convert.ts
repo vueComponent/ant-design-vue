@@ -1,5 +1,5 @@
 import { round } from './round';
-import { RgbaColor, RgbColor, HslaColor, HslColor, HsvaColor, HsvColor } from '../types';
+import type { RgbaColor, RgbColor, HslaColor, HslColor, HsvaColor, HsvColor } from '../types';
 
 /**
  * Valid CSS <angle> units.
@@ -58,7 +58,7 @@ export const hslaToHsva = ({ h, s, l, a }: HslaColor): HsvaColor => {
   s *= (l < 50 ? l : 100 - l) / 100;
 
   return {
-    h: h,
+    h,
     s: s > 0 ? ((2 * s) / (l + s)) * 100 : 0,
     v: l + s,
     a,

@@ -1,5 +1,5 @@
 <template>
-  <div className="svelte-jsoneditor-vue" ref="editor"></div>
+  <div ref="editor" class="svelte-jsoneditor-vue"></div>
 </template>
 
 <script>

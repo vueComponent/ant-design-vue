@@ -1,7 +1,7 @@
 import type { PropType } from 'vue';
 import { defineComponent, toRefs, ref } from 'vue';
-import { Button, CardProps } from 'ant-design-vue';
-import { Card } from 'ant-design-vue';
+import type { CardProps } from 'ant-design-vue';
+import { Button, Card } from 'ant-design-vue';
 import { Control } from '../icons';
 import makeStyle from '../utils/makeStyle';
 import classNames from 'ant-design-vue/es/_util/classNames';

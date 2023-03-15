@@ -2,7 +2,7 @@ import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
 import { AlphaColorPicker } from './common/AlphaColorPicker';
-import { ColorModel, RgbaColor } from '../types';
+import type { ColorModel, RgbaColor } from '../types';
 import { equalColorObjects } from '../utils/compare';
 import { rgbaToHsva, hsvaToRgba } from '../utils/convert';
 

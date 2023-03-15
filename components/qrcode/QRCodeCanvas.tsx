@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'vue';
 import { defineComponent, ref, watch, computed, watchEffect } from 'vue';
+import type { ImageSettings } from './interface';
 import { qrProps } from './interface';
 
 import qrcodegen from './qrcodegen';
@@ -12,15 +13,6 @@ const ERROR_LEVEL_MAP: { [index: string]: qrcodegen.QrCode.Ecc } = {
   M: qrcodegen.QrCode.Ecc.MEDIUM,
   Q: qrcodegen.QrCode.Ecc.QUARTILE,
   H: qrcodegen.QrCode.Ecc.HIGH,
-};
-
-type ImageSettings = {
-  src: string;
-  height: number;
-  width: number;
-  excavate: boolean;
-  x?: number;
-  y?: number;
 };
 
 const DEFAULT_SIZE = 128;

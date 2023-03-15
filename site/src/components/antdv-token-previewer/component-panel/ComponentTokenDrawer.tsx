@@ -115,16 +115,17 @@ const ComponentTokenDrawer = defineComponent({
 
     const [, hashId] = useStyle();
 
-    const { component: componentToken, global: aliasTokenNames } = getComponentToken(
-      component.value,
-    ) || {
-      global: [],
-    };
+    const componentToken = computed(
+      () =>
+        getComponentToken(component.value) || {
+          global: [],
+        },
+    );
 
-    const componentTokenData = computed(() => Object.keys(componentToken.value ?? {}));
+    const componentTokenData = computed(() => Object.keys(componentToken.value.component ?? {}));
 
     const aliasTokenData = computed(() => {
-      return aliasTokenNames.sort();
+      return componentToken.value.global.slice().sort();
     });
 
     const handleComponentTokenChange = (token: string, value: TokenValue) => {
@@ -177,7 +178,7 @@ const ComponentTokenDrawer = defineComponent({
                 tokenArr={componentTokenData.value}
                 tokenPath={['components', component.value]}
                 themes={[theme.value]}
-                fallback={() => componentToken.value}
+                fallback={() => componentToken.value.component}
                 onTokenChange={(_, tokenName, value) =>
                   handleComponentTokenChange(tokenName, value)
                 }

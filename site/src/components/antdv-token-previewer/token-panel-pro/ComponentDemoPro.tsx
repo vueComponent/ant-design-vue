@@ -65,7 +65,7 @@ const ComponentDemoPro = defineComponent({
           {...attrs}
           style={{
             ...(attrs.style as CSSProperties),
-            background: (token as any).colorBgLayout,
+            background: token.value.colorBgLayout,
             paddingBottom: '24px',
           }}
         >

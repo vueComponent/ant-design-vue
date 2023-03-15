@@ -12,7 +12,7 @@
             v-model:open="editModelOpen"
             :title="locale.editModelTitle"
             :width="600"
-            :okText="locale.save"
+            :ok-text="locale.save"
             @ok="editSave"
             @cancel="editModelClose"
           >
@@ -25,19 +25,19 @@
               <template #default>
                 <JSONEditor
                   :content="themeConfigContent"
-                  :onChange="handleEditConfigChange"
-                  :mainMenuBar="false"
+                  :on-change="handleEditConfigChange"
+                  :main-menu-bar="false"
                 />
               </template>
             </Suspense>
           </a-modal>
-          <a-button @click="handleExport" class="theme-editor-header-actions">
+          <a-button class="theme-editor-header-actions" @click="handleExport">
             {{ locale.export }}
           </a-button>
-          <a-button @click="handleEditConfig" class="theme-editor-header-actions">
+          <a-button class="theme-editor-header-actions" @click="handleEditConfig">
             {{ locale.edit }}
           </a-button>
-          <a-button type="primary" @click="handleSave" class="theme-editor-header-actions">
+          <a-button type="primary" class="theme-editor-header-actions" @click="handleSave">
             {{ locale.save }}
           </a-button>
         </div>
@@ -45,8 +45,8 @@
       <ThemeEditor
         :theme="{ name: 'Custom Theme', key: 'test', config: theme }"
         :style="{ height: 'calc(100vh - 64px - 56px)' }"
-        @themeChange="handleThemeChange"
         :locale="lang === 'cn' ? zhCN : enUS"
+        @themeChange="handleThemeChange"
       />
     </a-config-provider>
   </div>
@@ -58,7 +58,7 @@ import { message } from 'ant-design-vue';
 import { useLocale } from '../../i18n';
 import locales from './locales';
 
-import Header from '../../layouts/Header/index.vue';
+import Header from '../../layouts/header/index.vue';
 
 // antd换肤编辑器
 import { enUS, ThemeEditor, zhCN } from '../../components/antdv-token-previewer';
@@ -108,7 +108,7 @@ export default defineComponent({
     };
 
     const editSave = () => {
-      if (!editThemeFormatRight) {
+      if (!editThemeFormatRight.value) {
         message.error(locale.value.editJsonContentTypeError);
         return;
       }

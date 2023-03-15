@@ -94,7 +94,7 @@ export type HexColorInputProps = {
   alpha?: boolean;
 };
 
-const getHexValue = (value: string, alpha: boolean = false) => {
+const getHexValue = (value: string, alpha = false) => {
   return alpha ? tinycolor(value).toHex8() : tinycolor(value).toHex();
 };
 const HexColorInput = defineComponent({
@@ -231,12 +231,12 @@ const getColorStr = (color: any, mode: ColorMode) => {
 };
 const ColorPanel = defineComponent({
   name: 'ColorPanel',
+  inheritAttrs: false,
   props: {
     color: { type: String },
     onChange: { type: Function as PropType<(color: string) => void> },
     alpha: { type: Boolean },
   },
-  inheritAttrs: false,
   setup(props, { attrs }) {
     const { color, alpha } = toRefs(props);
 

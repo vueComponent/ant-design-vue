@@ -17,7 +17,7 @@
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
     </div>
     <div v-if="visibleAlertBanner && isZhCN" class="alert-banner">
-      Surely Form 1.0 发布，快速搭建在线问卷，无缝嵌入各种系统，限时限量加群，记得扫码哦
+      Surely Form 2.0 发布，快速搭建在线问卷，无缝嵌入各种系统
       <a href="https://form.antdv.com">立即体验</a>
 
       <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
@@ -128,10 +128,10 @@ export default defineComponent({
     watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
-    const visibleAlertBanner = ref(!localStorage.getItem('surelyform'));
+    const visibleAlertBanner = ref(!localStorage.getItem('surelyform2'));
     watch(visibleAlertBanner, () => {
       if (!visibleAlertBanner.value) {
-        localStorage.setItem('surelyform', version);
+        localStorage.setItem('surelyform2', version);
       }
     });
     return {
@@ -162,10 +162,9 @@ export default defineComponent({
   line-height: 28px;
   color: #8590a6;
   text-align: center;
-  background-color: #ebebeb;
+  background-color: #141414;
 }
 .alert-banner {
-  background-color: var(--ant-primary-color);
   color: #fff;
   padding: 5px;
 }

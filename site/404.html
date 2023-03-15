@@ -50,17 +50,12 @@
       }
     </style>
     <script>
-      if (
-        location.host === 'ant-design-vue.gitee.io' ||
-        location.host === 'vue.ant.design' ||
-        location.host === 'next.antdv.com'
-      ) {
+      if (location.host === 'ant-design-vue.gitee.io' || location.host === 'vue.ant.design') {
         location.replace(location.href.replace(location.host, 'www.antdv.com'));
       }
       var _hmt = _hmt || [];
       var srcMap = {
         'ant-design-vue.gitee.io': 'https://hm.baidu.com/hm.js?1e30265f06f76fabfcdb7ed272017441',
-        'vue.ant.design': 'https://hm.baidu.com/hm.js?f0ba868f114e674b816b4880f7525811',
         'www.antdv.com': 'https://hm.baidu.com/hm.js?4ad38a0c8f0960d731b654425317da22',
       };
       var src =

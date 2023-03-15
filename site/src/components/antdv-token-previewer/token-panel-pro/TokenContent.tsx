@@ -9,21 +9,20 @@ import {
   Tooltip,
   Typography,
 } from 'ant-design-vue';
-import type { MutableTheme } from '../interface';
+import type { MutableTheme, SelectedToken } from '../interface';
 import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
 import seed from 'ant-design-vue/es/theme/themes/seed';
 import tokenMeta from 'ant-design-vue/es/version/token-meta.json';
 import classNames from 'ant-design-vue/es/_util/classNames';
 
-import { PropType, toRefs } from 'vue';
-import { defineComponent, watchEffect, computed, watch, ref } from 'vue';
+import type { PropType } from 'vue';
+import { toRefs, defineComponent, watchEffect, computed, watch, ref } from 'vue';
 import { debounce } from 'lodash';
 
 import type { ThemeCode } from '../hooks/useControlledTheme';
 import { themeMap } from '../hooks/useControlledTheme';
 import { CompactTheme, DarkTheme, Light, Pick } from '../icons';
 
-import type { SelectedToken } from '../interface';
 import { useInjectLocaleContext } from '../locale';
 import type { TokenCategory, TokenGroup } from '../meta/interface';
 import getDesignToken from '../utils/getDesignToken';
@@ -507,7 +506,7 @@ const MapTokenCollapse = defineComponent({
       const grouped: Record<string, string[]> = {};
       if (groupFn.value) {
         group.value.mapToken?.forEach(token => {
-          const key = groupFn.value(token) ?? 'default';
+          const key = groupFn.value(token) ?? 'light';
           grouped[key] = [...(grouped[key] ?? []), token];
         });
       }

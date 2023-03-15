@@ -1,6 +1,7 @@
 import classNames from 'ant-design-vue/es/_util/classNames';
 import makeStyle from './utils/makeStyle';
-import { defineComponent, PropType, toRefs } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, toRefs } from 'vue';
 
 const useStyle = makeStyle('IconSwitch', () => {
   const activeBackground = '#314659';

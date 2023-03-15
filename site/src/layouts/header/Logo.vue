@@ -20,8 +20,6 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import './index.less';
-
 #logo {
   height: var(--header-height);
   padding-left: 40px;

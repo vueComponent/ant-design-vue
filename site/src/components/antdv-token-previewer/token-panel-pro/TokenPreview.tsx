@@ -1,6 +1,6 @@
 import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
-import { PropType, toRefs } from 'vue';
-import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+import { toRefs, defineComponent } from 'vue';
 
 import getColorBgImg from '../utils/getColorBgImg';
 import getDesignToken from '../utils/getDesignToken';

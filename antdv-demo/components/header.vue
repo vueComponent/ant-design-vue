@@ -17,7 +17,7 @@ export default {
     return {
       visibleAdblockBanner: !!this.demoContext.blocked,
       value: null,
-      showTopBanner: !localStorage.getItem('notification-key-next'),
+      showTopBanner: !localStorage.getItem('notification-key-surelyform'),
     };
   },
   watch: {

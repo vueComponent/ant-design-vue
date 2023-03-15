@@ -92,20 +92,20 @@ export default {
         {isCN && this.showTopBanner && (
           <div class="global-notification">
             <span>
-              v3 版本已发布，请访问 &nbsp;&nbsp;
-              <a href="https://next.antdv.com/" target="_blank">
-                next.antdv.com
+              Surely Form 私有化部署专属的调研，投票、NPS、报名等系统，访问 &nbsp;&nbsp;
+              <a href="https://form.antdv.com/" target="_blank">
+                form.antdv.com
               </a>
-              &nbsp;&nbsp;查看更多详情
+              &nbsp;&nbsp;立即体验
             </span>
             <a-icon
               type="close"
               style="position: absolute;top: 13px;right: 15px;"
-              onClick={() => this.handleClose('next')}
+              onClick={() => this.handleClose('surelyform')}
             />
           </div>
         )}
-        {!isCN && this.showTopBanner && (
+        {/* {!isCN && this.showTopBanner && (
           <div class="global-notification">
             <span>
               v3 beta is out! Discover more about it on &nbsp;
@@ -120,7 +120,7 @@ export default {
               onClick={() => this.handleClose('next')}
             />
           </div>
-        )}
+        )} */}
         <a-row>
           <a-col class="header-left" xxl={4} xl={5} lg={5} md={6} sm={24} xs={24}>
             <router-link to={{ path: '/' }} id="logo">
@@ -173,19 +173,37 @@ export default {
               <a-menu-item key="components">
                 <router-link to="/docs/vue/introduce">{isCN ? '组件' : 'Components'}</router-link>
               </a-menu-item>
-              {isCN ? (
-                <a-menu-item key="surely-vue">
+              <a-sub-menu
+                v-if="isZhCN"
+                key="advanced"
+                title={
+                  <span style="position: relative">
+                    高级组件
+                    <a-badge color="red" style="position: absolute; top: -35px; right: -15px" />
+                  </span>
+                }
+              >
+                <a-menu-item key="surely-table">
                   <a
                     href="https://www.surely.cool"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style="position: relative"
+                    style="position: relative;"
                   >
-                    高级组件
-                    <a-badge color="red" style="position: absolute;top: -10px;right: -10px;" />
+                    Surely Table
                   </a>
                 </a-menu-item>
-              ) : null}
+                <a-menu-item key="surely-form">
+                  <a
+                    href="https://form.antdv.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="position: relative;"
+                  >
+                    Surely Form
+                  </a>
+                </a-menu-item>
+              </a-sub-menu>
               {isCN ? (
                 <a-menu-item key="store">
                   <a
@@ -268,13 +286,14 @@ export default {
                     <a>{isCN ? '微信' : 'WeChat'}</a>
                   </a-popover>
                 </a-menu-item>
-                <a-menu-item key="qq">
-                  <a-popover placement="right">
-                    <template slot="content">
-                      <img width="160" height="160" alt="qq" src="https://qn.antdv.com/qq.png" />
-                    </template>
-                    <a>{isCN ? 'QQ(217490093)' : 'QQ(217490093)'}</a>
-                  </a-popover>
+                <a-menu-item key="qq1">
+                  <a>QQ 1群(217490093) 已满</a>
+                </a-menu-item>
+                <a-menu-item key="qq2">
+                  <a>QQ 2群(809774695) 已满</a>
+                </a-menu-item>
+                <a-menu-item key="qq3">
+                  <a>QQ 3群(927828249)</a>
                 </a-menu-item>
               </a-sub-menu>
             </a-menu>

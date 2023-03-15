@@ -165,7 +165,7 @@ export default {
               <a-select-option value="2.x" onClick={() => this.changeVersion('2x')}>
                 v2 LST
               </a-select-option>
-              <a-select-option value="next" onClick={() => this.changeVersion('next')}>
+              <a-select-option value="www" onClick={() => this.changeVersion('www')}>
                 v3 Current (Latest Features)
               </a-select-option>
             </a-select>

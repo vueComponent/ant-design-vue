@@ -57,3 +57,14 @@ app.use(i18n);
 app.config.globalProperties.$i18n = i18n;
 
 app.mount('#app');
+
+// setTimeout(() => {
+//   const clicked = localStorage.getItem('surveybyantdv_22_03_14');
+//   if (!clicked) {
+//     const btn = document.getElementsByClassName('surveybyantdv-launch-button')?.[0];
+//     if (btn) {
+//       btn.click();
+//       localStorage.setItem('surveybyantdv_22_03_14', true);
+//     }
+//   }
+// }, 3000);

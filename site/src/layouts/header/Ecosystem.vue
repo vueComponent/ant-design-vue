@@ -35,7 +35,10 @@
         <a>QQ 1群(217490093) 已满</a>
       </a-menu-item>
       <a-menu-item key="qq2">
-        <a>QQ 2群(809774695)</a>
+        <a>QQ 2群(809774695) 已满</a>
+      </a-menu-item>
+      <a-menu-item key="qq3">
+        <a>QQ 3群(927828249)</a>
       </a-menu-item>
     </a-menu-item-group>
   </a-menu>

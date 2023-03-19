@@ -1,7 +1,7 @@
 <template>
   <Icon v-bind="$attrs">
     <template #component>
-      <svg :width="21" :height="21" viewBox="0 0 21 21" fill="currentColor" v-bind="$attrs">
+      <svg width="1em" height="1em" viewBox="0 0 21 21" fill="currentColor" v-bind="$attrs">
         <g fillRule="evenodd">
           <g fillRule="nonzero">
             <path

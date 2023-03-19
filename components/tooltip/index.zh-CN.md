@@ -4,6 +4,7 @@ type: 数据展示
 title: Tooltip
 subtitle: 文字提示
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3u9eSZO_4c0AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*gwrhTozoTC4AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 警告提示，展现需要关注的信息。

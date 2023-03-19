@@ -3,6 +3,7 @@ category: Components
 type: Feedback
 title: Spin
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5mC5TomY4B0AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*i43_ToFrL8YAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A spinner for displaying loading state of a page or a section.

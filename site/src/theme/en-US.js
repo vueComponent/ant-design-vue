@@ -146,4 +146,7 @@ export default {
   'app.docs.components.icon.pic-searcher.th-icon': 'Icon',
   'app.docs.components.icon.pic-searcher.th-score': 'Probability',
   'app.components.overview.search': 'Search in components',
+  'app.floatButton.theme-editor': 'Theme Editor',
+  'app.floatButton.dark-theme': 'Dark Theme',
+  'app.floatButton.compact-theme': 'Compact theme',
 };

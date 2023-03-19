@@ -4,6 +4,7 @@ type: 数据展示
 title: Statistic
 subtitle: 统计数值
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*YL7PRYNtH-4AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*BPWDRbSYxJ4AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 展示统计数值。

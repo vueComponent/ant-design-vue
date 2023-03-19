@@ -4,6 +4,7 @@ type: 数据录入
 title: TimePicker
 subtitle: 时间选择框
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*kGmGSLk_1fwAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1hDmQJIDFJQAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 输入或选择时间的控件。

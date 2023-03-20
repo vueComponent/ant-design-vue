@@ -29,17 +29,19 @@ export interface GlobalConfig {
   responsive: Ref<null | 'narrow' | 'crowded'>;
   blocked: Ref<boolean>;
 }
-export type ThemeName = 'light' | 'dark' | 'compact';
+export type ThemeName = '' | 'light' | 'dark' | 'compact';
 const getAlgorithm = (themes: ThemeName[] = []) =>
-  themes.map(theme => {
-    if (theme === 'dark') {
-      return antdTheme.darkAlgorithm;
-    }
-    if (theme === 'compact') {
-      return antdTheme.compactAlgorithm;
-    }
-    return antdTheme.defaultAlgorithm;
-  });
+  themes
+    .filter(theme => !!theme)
+    .map(theme => {
+      if (theme === 'dark') {
+        return antdTheme.darkAlgorithm;
+      }
+      if (theme === 'compact') {
+        return antdTheme.compactAlgorithm;
+      }
+      return antdTheme.defaultAlgorithm;
+    });
 
 export default defineComponent({
   components: {
@@ -51,8 +53,9 @@ export default defineComponent({
     const colSize = useMediaQuery();
     const isMobile = computed(() => colSize.value === 'sm' || colSize.value === 'xs');
     const theme = ref<ThemeName>((localStorage.getItem('theme') as ThemeName) || 'light');
+    const compactTheme = ref<ThemeName>((localStorage.getItem('compactTheme') as ThemeName) || '');
     const themeConfig = computed(() => {
-      return { algorithm: getAlgorithm([theme.value]) };
+      return { algorithm: getAlgorithm([...new Set([theme.value, compactTheme.value])]) };
     });
     // useSiteToken();
     const responsive = computed(() => {
@@ -74,9 +77,17 @@ export default defineComponent({
       theme.value = t;
       localStorage.setItem('theme', t);
     };
+
+    const changeCompactTheme = (t: ThemeName) => {
+      compactTheme.value = t;
+      localStorage.setItem('compactTheme', t);
+    };
+
     provide('themeMode', {
       theme,
+      compactTheme,
       changeTheme,
+      changeCompactTheme,
     });
     provide(GLOBAL_CONFIG, globalConfig);
     watch(

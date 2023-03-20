@@ -59,8 +59,42 @@
           </Demo>
           <router-view v-else />
         </section>
-        <a-back-top />
-        <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
+        <a-float-button-group trigger="click">
+          <template #icon>
+            <ThemeIcon />
+          </template>
+          <a-float-button
+            :tooltip="$t('app.floatButton.theme-editor')"
+            @click="$router.push(isZhCN ? '/theme-editor-cn' : '/theme-editor')"
+          >
+            <template #icon>
+              <ThemeEditorIcon />
+            </template>
+          </a-float-button>
+          <a-float-button
+            :tooltip="$t('app.floatButton.dark-theme')"
+            :type="themeMode.theme.value === 'dark' ? 'primary' : 'default'"
+            @click="themeMode.changeTheme(themeMode.theme.value === 'dark' ? 'light' : 'dark')"
+          >
+            <template #icon>
+              <DarkIcon />
+            </template>
+          </a-float-button>
+          <a-float-button
+            :tooltip="$t('app.floatButton.compact-theme')"
+            :type="themeMode.compactTheme.value === 'compact' ? 'primary' : 'default'"
+            @click="
+              themeMode.changeCompactTheme(
+                themeMode.compactTheme.value === 'compact' ? '' : 'compact',
+              )
+            "
+          >
+            <template #icon>
+              <CompactIcon />
+            </template>
+          </a-float-button>
+        </a-float-button-group>
+        <!-- <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
           <a-dropdown placement="top">
             <template #overlay>
               <a-menu
@@ -75,7 +109,7 @@
               <template #icon><ThemeIcon /></template>
             </a-avatar>
           </a-dropdown>
-        </div>
+        </div> -->
         <PrevAndNext :menus="menus" :current-menu-index="currentMenuIndex" :is-zh-c-n="isZhCN" />
         <Footer />
       </a-col>
@@ -97,7 +131,10 @@ import TopAd from '../components/rice/top_rice.vue';
 import Sponsors from '../components/rice/sponsors.vue';
 import RightBottomAd from '../components/rice/right_bottom_rice.vue';
 import { CloseOutlined, MenuOutlined, LinkOutlined } from '@ant-design/icons-vue';
-import ThemeIcon from './ThemeIcon.vue';
+import ThemeIcon from './icons/ThemeIcon.vue';
+import ThemeEditorIcon from './icons/ThemeEditorIcon';
+import DarkIcon from './icons/Dark';
+import CompactIcon from './icons/Compact';
 import surelyVueVue from '../components/surelyVue.vue';
 import WWAdsVue from '../components/rice/WWAds.vue';
 import { useWindowScroll } from '@vueuse/core';
@@ -119,6 +156,9 @@ export default defineComponent({
     CloseOutlined,
     MenuOutlined,
     ThemeIcon,
+    ThemeEditorIcon,
+    DarkIcon,
+    CompactIcon,
     surelyVueVue,
     WWAdsVue,
     LinkOutlined,
@@ -140,8 +180,10 @@ export default defineComponent({
 
     const themeMode = inject('themeMode', {
       theme: ref('light'),
+      compactTheme: ref('light'),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       changeTheme: (_key: any) => void 0,
+      changeCompactTheme: (_key: any) => void 0,
     });
 
     watch(

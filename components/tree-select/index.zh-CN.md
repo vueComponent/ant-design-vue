@@ -4,6 +4,7 @@ type: 数据录入
 title: TreeSelect
 subtitle: 树选择
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*DfTMRYSDngEAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Y5pcQLplFu4AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 树型选择控件。

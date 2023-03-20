@@ -4,6 +4,7 @@ type: 通用
 title: Button
 subtitle: 按钮
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*BrFMQ5s7AAQAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Lp1kTYmSsgoAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 按钮用于开始一个即时操作。

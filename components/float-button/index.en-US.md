@@ -3,6 +3,7 @@ category: Components
 type: Other
 title: FloatButton
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HS-wTIIwu0kAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*a0hwTY_rOSUAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 FloatButton. Available since `4.0.0`.

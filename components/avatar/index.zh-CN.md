@@ -4,6 +4,7 @@ subtitle: 头像
 type: 数据展示
 title: Avatar
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JJBSS5lBG4IAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*YbgyQaRGz-UAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 用来代表用户或事物，支持图片、图标或字符展示。

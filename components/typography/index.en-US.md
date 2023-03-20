@@ -4,6 +4,7 @@ type: General
 title: Typography
 cols: 1
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*MLt3R6m9huoAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LT2jR41Uj2EAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Basic text writing, including headings, body text, lists, and more.

@@ -3,6 +3,7 @@ category: Components
 type: Data Entry
 title: Input
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Y3R0RowXHlAAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sBqqTatJ-AkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A basic widget for getting the user input is a text field. Keyboard and mouse can be used for providing or changing data.

@@ -4,6 +4,7 @@ subtitle: 下拉菜单
 type: 导航
 title: Dropdown
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*mBBcQ6goljkAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5qm4S4Zgh2QAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 向下弹出的列表。

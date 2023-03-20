@@ -4,6 +4,7 @@ subtitle: 固钉
 type: 导航
 title: Affix
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*YSm4RI3iOJ8AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*03dxS64LxeQAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 将页面元素钉在可视范围。

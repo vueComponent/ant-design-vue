@@ -4,6 +4,7 @@ subtitle: 面包屑
 type: 导航
 title: Breadcrumb
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*I5a2Tpqs3y0AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Tr90QKrE_LcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 显示当前页面在系统层级结构中的位置，并能向上返回。

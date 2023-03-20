@@ -154,7 +154,7 @@ const Switch = defineComponent({
 
     return () =>
       wrapSSR(
-        <Wave insertExtraNode>
+        <Wave>
           <button
             {...omit(props, [
               'prefixCls',

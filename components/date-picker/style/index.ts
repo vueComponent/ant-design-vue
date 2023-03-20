@@ -655,7 +655,7 @@ export const genPanelStyle = (token: SharedPickerToken): CSSObject => {
           },
         },
         [`${componentCls}-cell-range-hover-end::after`]: {
-          insetInlineEnd: hoverCellFixedDistance,
+          insetInlineEnd: 0,
           borderInlineEnd: `${lineWidth}px dashed ${pickerDateHoverRangeBorderColor}`,
           borderStartStartRadius: 0,
           borderBottomStartRadius: 0,

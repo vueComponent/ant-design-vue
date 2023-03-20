@@ -34,6 +34,11 @@ function commonProps<DateType = any>() {
     defaultOpen: { type: Boolean, default: undefined },
     /** Make input readOnly to avoid popup keyboard in mobile */
     inputReadOnly: { type: Boolean, default: undefined },
+    format: {
+      type: [String, Function, Array] as PropType<
+        string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]
+      >,
+    },
     // Value
     // format:  string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
     // Render
@@ -107,6 +112,7 @@ export interface CommonProps<DateType> {
   open?: boolean;
   defaultOpen?: boolean;
   inputReadOnly?: boolean;
+  format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
   suffixIcon?: VueNode;
   clearIcon?: VueNode;
   prevIcon?: VueNode;
@@ -151,11 +157,6 @@ function datePickerProps<DateType = any>() {
     defaultValue: { type: [String, Object] as PropType<DateType | string> },
     value: { type: [String, Object] as PropType<DateType | string> },
     disabledTime: { type: Function as PropType<DisabledTime<DateType>> },
-    format: {
-      type: [String, Function, Array] as PropType<
-        string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]
-      >,
-    },
     renderExtraFooter: { type: Function as PropType<(mode: PanelMode) => VueNode> },
     showNow: { type: Boolean, default: undefined },
     monthCellRender: { type: Function as PropType<MonthCellRender<DateType>> },
@@ -169,7 +170,6 @@ export interface DatePickerProps<DateType> {
   defaultValue?: DateType | string;
   value?: DateType | string;
   disabledTime?: DisabledTime<DateType>;
-  format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
   renderExtraFooter?: (mode: PanelMode) => VueNode;
   showNow?: boolean;
   monthCellRender?: MonthCellRender<DateType>;
@@ -190,7 +190,6 @@ function rangePickerProps<DateType>() {
       type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
     },
     disabled: { type: [Boolean, Array] as unknown as PropType<boolean | [boolean, boolean]> },
-    format: String,
     renderExtraFooter: { type: Function as PropType<() => VueNode> },
     separator: { type: String },
     ranges: {
@@ -242,7 +241,6 @@ export interface RangePickerProps<DateType> {
   value?: RangeValue<DateType> | RangeValue<string>;
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
   disabled?: [boolean, boolean];
-  format?: string;
   renderExtraFooter?: () => VueNode;
   separator?: string;
   ranges?: Record<

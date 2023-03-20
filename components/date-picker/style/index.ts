@@ -332,7 +332,7 @@ export const genPanelStyle = (token: SharedPickerToken): CSSObject => {
 
   const pickerPanelWidth = pickerPanelCellWidth * 7 + paddingSM * 2 + 4;
   const hoverCellFixedDistance =
-    (pickerPanelWidth - paddingXS * 2) / 3 - pickerYearMonthCellWidth / 2;
+    (pickerPanelWidth - paddingXS * 2) / 3 - pickerYearMonthCellWidth - paddingXS - 4;
 
   return {
     [componentCls]: {
@@ -655,7 +655,7 @@ export const genPanelStyle = (token: SharedPickerToken): CSSObject => {
           },
         },
         [`${componentCls}-cell-range-hover-end::after`]: {
-          insetInlineEnd: 0,
+          insetInlineEnd: hoverCellFixedDistance,
           borderInlineEnd: `${lineWidth}px dashed ${pickerDateHoverRangeBorderColor}`,
           borderStartStartRadius: 0,
           borderBottomStartRadius: 0,

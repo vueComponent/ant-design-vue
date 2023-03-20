@@ -21,7 +21,7 @@ We can set the date format by `format`.
     <a-date-picker v-model:value="value1" :format="dateFormat" />
     <a-date-picker v-model:value="value2" :format="dateFormatList" />
     <a-date-picker v-model:value="value3" :format="monthFormat" picker="month" />
-    <a-range-picker v-model:value="value4" :format="customFormat" />
+    <a-range-picker v-model:value="value4" :format="dateFormat" />
     <a-date-picker v-model:value="value5" :format="customFormat" />
     <a-date-picker v-model:value="value6" :format="customWeekStartEndFormat" picker="week" />
   </a-space>

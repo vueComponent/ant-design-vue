@@ -27,8 +27,7 @@ import {
 import { useProviderSize } from './SizeContext';
 import { useProviderDisabled } from './DisabledContext';
 import { createTheme } from '../_util/cssinjs';
-import { useDesignTokenProvider } from '../theme/internal';
-import { toReactive } from '../_util/toReactive';
+import { DesignTokenProvider } from '../theme/internal';
 
 export type {
   ConfigProviderProps,
@@ -235,7 +234,6 @@ const ConfigProvider = defineComponent({
         },
       };
     });
-    useDesignTokenProvider(toReactive(memoTheme));
     const validateMessagesRef = computed(() => {
       // Additional Form provider
       let validateMessages: ValidateMessages = {};
@@ -257,9 +255,12 @@ const ConfigProvider = defineComponent({
     useProviderDisabled(componentDisabled);
 
     const renderProvider = (legacyLocale: Locale) => {
+      let childNode = shouldWrapSSR.value ? wrapSSR(slots.default?.()) : slots.default?.();
+      if (props.theme)
+        childNode = <DesignTokenProvider value={memoTheme.value}>{childNode}</DesignTokenProvider>;
       return (
         <LocaleProvider locale={locale.value || legacyLocale} ANT_MARK__={ANT_MARK}>
-          {shouldWrapSSR.value ? wrapSSR(slots.default?.()) : slots.default?.()}
+          {childNode}
         </LocaleProvider>
       );
     };

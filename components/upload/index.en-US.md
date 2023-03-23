@@ -24,7 +24,6 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | beforeUpload | Hook function which will be executed before uploading. Uploading will be stopped with `false` or a rejected Promise returned. | (file, fileList) => `boolean` \| `Promise` | - |  |
 | customRequest | override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest | function | - |  |  |
 | data | Uploading params or function which can return uploading params. | object\|function(file) | - |  |  |
-| directory | support upload whole directory ([caniuse](https://caniuse.com/#feat=input-file-directory)) | boolean | false |  |  |
 | directory | Support upload whole directory（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false | 3.0 |  |
 | disabled | disable upload button | boolean | false |  |  |
 | downloadIcon | custom download icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |

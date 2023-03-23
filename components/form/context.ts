@@ -1,9 +1,9 @@
 import type { InjectionKey, ComputedRef } from 'vue';
 import { inject, provide, computed } from 'vue';
 import type { ColProps } from '../grid';
-import type { RequiredMark, ValidationRule } from './Form';
+import type { RequiredMark } from './Form';
 import type { ValidateStatus, FieldExpose } from './FormItem';
-import type { FormLabelAlign, ValidateMessages } from './interface';
+import type { FormLabelAlign, Rule, ValidateMessages } from './interface';
 import { defaultValidateMessages } from './utils/messages';
 
 export interface FormContextProps {
@@ -20,7 +20,7 @@ export interface FormContextProps {
   addField: (eventKey: string, field: FieldExpose) => void;
   removeField: (eventKey: string) => void;
   validateTrigger?: ComputedRef<string | string[]>;
-  rules?: ComputedRef<{ [k: string]: ValidationRule[] | ValidationRule }>;
+  rules?: ComputedRef<{ [k: string]: Rule[] | Rule }>;
   onValidate: (
     name: string | number | Array<string | number>,
     status: boolean,

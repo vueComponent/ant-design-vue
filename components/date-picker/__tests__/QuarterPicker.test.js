@@ -6,7 +6,7 @@ const { QuarterPicker } = DatePicker;
 jest.mock('../../_util/Portal');
 describe('QuarterPicker', () => {
   focusTest(QuarterPicker);
-  fit('reset select item when popup close', async () => {
+  it('reset select item when popup close', async () => {
     const wrapper = mount(DatePicker, {
       props: { style: { width: '400px' }, picker: 'quarter' },
       sync: false,

@@ -10,6 +10,17 @@
 
 ---
 
+## 3.2.16
+
+`2023-03-23`
+
+- 🐞 Fix notification close event triggered multiple times [#6150](https://github.com/vueComponent/ant-design-vue/issues/6150)
+- 🐞 Fix the carousel map responsive change problem [#6100](https://github.com/vueComponent/ant-design-vue/issues/6100)
+- 🐞 Fix Table ceiling scroll bar style error [#6169](https://github.com/vueComponent/ant-design-vue/issues/6169)
+- 🐞 Fix DatePicker disabledMinutes parameter error [#6233](https://github.com/vueComponent/ant-design-vue/issues/6233)
+- 🐞 Fix the problem that the visibleChange event is not triggered when the Popup is closed [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)
+- 🐞 Fix Image preview image error [#6331](https://github.com/vueComponent/ant-design-vue/issues/6331)
+
 ## 3.2.15
 
 `2022-11-10`

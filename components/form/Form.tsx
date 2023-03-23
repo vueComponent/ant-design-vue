@@ -24,6 +24,7 @@ import type {
   Callbacks,
   ValidateMessages,
   Rule,
+  FormLabelAlign,
 } from './interface';
 import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -35,15 +36,12 @@ import { useInjectGlobalForm } from '../config-provider/context';
 export type RequiredMark = boolean | 'optional';
 export type FormLayout = 'horizontal' | 'inline' | 'vertical';
 
-/** @deprecated Will warning in future branch. Pls use `Rule` instead. */
-export type ValidationRule = Rule;
-
 export const formProps = () => ({
-  layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
+  layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical') as FormLayout[]),
   labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   colon: { type: Boolean, default: undefined },
-  labelAlign: PropTypes.oneOf(tuple('left', 'right')),
+  labelAlign: PropTypes.oneOf(tuple('left', 'right') as FormLabelAlign[]),
   labelWrap: { type: Boolean, default: undefined },
   prefixCls: String,
   requiredMark: { type: [String, Boolean] as PropType<RequiredMark | ''>, default: undefined },

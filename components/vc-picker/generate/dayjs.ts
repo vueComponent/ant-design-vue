@@ -105,6 +105,31 @@ const parseNoMatchNotice = () => {
   noteOnce(false, 'Not match any format. Please help to fire a issue about this.');
 };
 
+const toDateWithValueFormat = (val, valueFormat: string) => {
+  const LowerValueFormat = valueFormat.toLowerCase();
+  const wIndex = LowerValueFormat.indexOf('w');
+  const woEndindex = LowerValueFormat.indexOf('wo');
+  if (wIndex !== -1) {
+    const valStr = val.split('-');
+    const year = valStr[0];
+    const weekStr = valStr[1];
+    if (woEndindex !== -1) {
+      const firstWeek = dayjs(year, 'YYYY').startOf('year');
+      for (let j = 0; j <= 52; j += 1) {
+        const nextWeek = firstWeek.add(j, 'week');
+        if (nextWeek.format('Wo') === weekStr) {
+          return nextWeek;
+        }
+      }
+    } else {
+      return dayjs(year, 'YYYY').week(weekStr);
+    }
+    parseNoMatchNotice();
+    return null;
+  }
+  return typeof val === 'string' && val ? dayjs(val, valueFormat) : val || null;
+};
+
 const generateConfig: GenerateConfig<Dayjs> = {
   // get
   getNow: () => dayjs(),
@@ -177,13 +202,9 @@ const generateConfig: GenerateConfig<Dayjs> = {
 
   toDate: (value, valueFormat) => {
     if (Array.isArray(value)) {
-      return value.map((val: any) =>
-        typeof val === 'string' && val ? dayjs(val, valueFormat) : val || null,
-      ) as Dayjs[];
+      return value.map((val: any) => toDateWithValueFormat(val, valueFormat)) as Dayjs[];
     } else {
-      return (
-        typeof value === 'string' && value ? dayjs(value, valueFormat) : value || null
-      ) as Dayjs;
+      return toDateWithValueFormat(value, valueFormat) as Dayjs;
     }
   },
   toString: (value, valueFormat) => {

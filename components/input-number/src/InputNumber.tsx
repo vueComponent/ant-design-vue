@@ -26,7 +26,10 @@ const getDecimalValue = (stringMode: boolean, decimalValue: DecimalClass) => {
   if (stringMode || decimalValue.isEmpty()) {
     return decimalValue.toString();
   }
-
+  const strVal = decimalValue.toString(false);
+  if (/^-0(|[\.])$/.test(strVal)) {
+    return strVal;
+  }
   return decimalValue.toNumber();
 };
 const getDecimalIfValidate = (value: ValueType) => {

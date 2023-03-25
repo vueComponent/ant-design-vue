@@ -4,6 +4,7 @@ import type { SharedTimeProps } from './panels/TimePanel';
 import PickerTrigger from './PickerTrigger';
 import PickerPanel from './PickerPanel';
 import usePickerInput from './hooks/usePickerInput';
+import PresetPanel from './PresetPanel';
 import getDataOrAriaProps, { toArray, getValue, updateValues } from './utils/miscUtil';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
 import type { ContextOperationRefProps } from './PanelContext';
@@ -19,6 +20,7 @@ import {
 } from './utils/dateUtil';
 import useValueTexts from './hooks/useValueTexts';
 import useTextValueMapping from './hooks/useTextValueMapping';
+import usePresets from './hooks/usePresets';
 import type { GenerateConfig } from './generate';
 import type { PickerPanelProps } from '.';
 import { RangeContextProvider } from './RangeContext';
@@ -238,12 +240,14 @@ function RangerPicker<DateType>() {
       'secondStep',
       'hideDisabledOptions',
       'disabledMinutes',
+      'presets',
     ] as any,
     setup(props, { attrs, expose }) {
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
       const getPortal = useProviderTrigger();
+      const presetList = usePresets(props.presets);
       // We record opened status here in case repeat open with picker
       const openRecordsRef = ref<Record<number, boolean>>({});
 
@@ -1099,7 +1103,18 @@ function RangerPicker<DateType>() {
           }
 
           let mergedNodes: VueNode = (
-            <>
+            <div class={`${prefixCls}-panel-layout`}>
+              <PresetPanel
+                prefixCls={prefixCls}
+                presets={presetList}
+                onClick={nextValue => {
+                  triggerChange(nextValue, null);
+                  triggerOpen(false, mergedActivePickerIndex.value);
+                }}
+                onHover={hoverValue => {
+                  setRangeHoverValue(hoverValue);
+                }}
+              />
               <div class={`${prefixCls}-panels`}>{panels}</div>
               {(extraNode || rangesNode) && (
                 <div class={`${prefixCls}-footer`}>
@@ -1107,7 +1122,7 @@ function RangerPicker<DateType>() {
                   {rangesNode}
                 </div>
               )}
-            </>
+            </div>
           );
 
           if (panelRender) {

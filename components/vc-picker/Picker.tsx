@@ -18,16 +18,18 @@ import type {
 } from './PickerPanel';
 import PickerPanel from './PickerPanel';
 import PickerTrigger from './PickerTrigger';
+import PresetPanel from './PresetPanel';
 import { formatValue, isEqual, parseValue } from './utils/dateUtil';
 import getDataOrAriaProps, { toArray } from './utils/miscUtil';
 import type { ContextOperationRefProps } from './PanelContext';
 import { useProvidePanel } from './PanelContext';
-import type { CustomFormat, PickerMode } from './interface';
+import type { CustomFormat, PickerMode, PresetDate } from './interface';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
 import usePickerInput from './hooks/usePickerInput';
 import useTextValueMapping from './hooks/useTextValueMapping';
 import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
+import usePresets from './hooks/usePresets';
 import type { CSSProperties, HTMLAttributes, Ref } from 'vue';
 import { computed, defineComponent, ref, toRef, watch } from 'vue';
 import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
@@ -60,6 +62,8 @@ export type PickerSharedProps<DateType> = {
   /** Make input readOnly to avoid popup keyboard in mobile */
   inputReadOnly?: boolean;
   id?: string;
+
+  presets?: PresetDate<DateType>[];
 
   // Value
   format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
@@ -163,6 +167,7 @@ function Picker<DateType>() {
       'defaultOpen',
       'defaultOpenValue',
       'suffixIcon',
+      'presets',
       'clearIcon',
       'disabled',
       'disabledDate',
@@ -203,6 +208,7 @@ function Picker<DateType>() {
     // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
+      const presetList = usePresets(props.presets);
       const picker = computed(() => props.picker ?? 'date');
       const needConfirmButton = computed(
         () => (picker.value === 'date' && !!props.showTime) || picker.value === 'time',
@@ -433,7 +439,7 @@ function Picker<DateType>() {
 
       return () => {
         const {
-          prefixCls = 'rc-picker',
+          prefixCls = 'vc-picker',
           id,
           tabindex,
           dropdownClassName,
@@ -477,23 +483,33 @@ function Picker<DateType>() {
         };
 
         let panelNode: VueNode = (
-          <PickerPanel
-            {...panelProps}
-            generateConfig={generateConfig}
-            value={selectedValue.value}
-            locale={locale}
-            tabindex={-1}
-            onSelect={date => {
-              onSelect?.(date);
-              setSelectedValue(date);
-            }}
-            direction={direction}
-            onPanelChange={(viewDate, mode) => {
-              const { onPanelChange } = props;
-              onLeave(true);
-              onPanelChange?.(viewDate, mode);
-            }}
-          />
+          <div class={`${prefixCls}-panel-layout`}>
+            <PresetPanel
+              prefixCls={prefixCls}
+              presets={presetList}
+              onClick={nextValue => {
+                triggerChange(nextValue);
+                triggerOpen(false);
+              }}
+            />
+            <PickerPanel
+              {...panelProps}
+              generateConfig={generateConfig}
+              value={selectedValue.value}
+              locale={locale}
+              tabindex={-1}
+              onSelect={date => {
+                onSelect?.(date);
+                setSelectedValue(date);
+              }}
+              direction={direction}
+              onPanelChange={(viewDate, mode) => {
+                const { onPanelChange } = props;
+                onLeave(true);
+                onPanelChange?.(viewDate, mode);
+              }}
+            />
+          </div>
         );
 
         if (panelRender) {
@@ -503,6 +519,7 @@ function Picker<DateType>() {
         const panel = (
           <div
             class={`${prefixCls}-panel-container`}
+            ref={panelDivRef}
             onMousedown={e => {
               e.preventDefault();
             }}

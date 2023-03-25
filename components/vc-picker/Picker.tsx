@@ -439,7 +439,7 @@ function Picker<DateType>() {
 
       return () => {
         const {
-          prefixCls = 'vc-picker',
+          prefixCls = 'rc-picker',
           id,
           tabindex,
           dropdownClassName,

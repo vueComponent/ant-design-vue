@@ -1115,13 +1115,15 @@ function RangerPicker<DateType>() {
                   setRangeHoverValue(hoverValue);
                 }}
               />
-              <div class={`${prefixCls}-panels`}>{panels}</div>
-              {(extraNode || rangesNode) && (
-                <div class={`${prefixCls}-footer`}>
-                  {extraNode}
-                  {rangesNode}
-                </div>
-              )}
+              <div>
+                <div class={`${prefixCls}-panels`}>{panels}</div>
+                {(extraNode || rangesNode) && (
+                  <div class={`${prefixCls}-footer`}>
+                    {extraNode}
+                    {rangesNode}
+                  </div>
+                )}
+              </div>
             </div>
           );
 

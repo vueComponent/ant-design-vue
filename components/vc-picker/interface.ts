@@ -109,3 +109,8 @@ export type RangeList = {
 }[];
 
 export type CustomFormat<DateType> = (value: DateType) => string;
+
+export interface PresetDate<T> {
+  label: VueNode;
+  value: T;
+}

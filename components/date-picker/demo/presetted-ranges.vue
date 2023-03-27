@@ -31,7 +31,7 @@ We can set presetted ranges to RangePicker to improve user experience.
 </template>
 <script lang="ts">
 import dayjs, { Dayjs } from 'dayjs';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 type RangeValue = [Dayjs, Dayjs];
 export default defineComponent({
   setup() {
@@ -51,21 +51,18 @@ export default defineComponent({
       }
     };
 
-    const presets = [
+    const presets = ref([
       { label: 'Yesterday', value: dayjs().add(-1, 'd') },
       { label: 'Last Week', value: dayjs().add(-7, 'd') },
       { label: 'Last Month', value: dayjs().add(-1, 'month') },
-    ];
+    ]);
 
-    const rangePresets: {
-      label: string;
-      value: [Dayjs, Dayjs];
-    }[] = [
+    const rangePresets = ref([
       { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()] },
       { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()] },
       { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()] },
       { label: 'Last 90 Days', value: [dayjs().add(-90, 'd'), dayjs()] },
-    ];
+    ]);
     return {
       presets,
       rangePresets,

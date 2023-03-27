@@ -208,7 +208,8 @@ function Picker<DateType>() {
     // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
-      const presetList = usePresets(props.presets);
+      const presets = computed(() => props.presets ?? []);
+      const presetList = usePresets(presets);
       const picker = computed(() => props.picker ?? 'date');
       const needConfirmButton = computed(
         () => (picker.value === 'date' && !!props.showTime) || picker.value === 'time',
@@ -486,7 +487,7 @@ function Picker<DateType>() {
           <div class={`${prefixCls}-panel-layout`}>
             <PresetPanel
               prefixCls={prefixCls}
-              presets={presetList}
+              presets={presetList.value}
               onClick={nextValue => {
                 triggerChange(nextValue);
                 triggerOpen(false);

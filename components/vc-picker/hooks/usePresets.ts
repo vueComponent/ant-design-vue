@@ -1,11 +1,14 @@
+import type { Ref, ComputedRef } from 'vue';
+import { computed } from 'vue';
+
 import warning from 'ant-design-vue/es/vc-util/warning';
 import type { PresetDate } from '../interface';
 
 export default function usePresets<T>(
-  presets?: PresetDate<T>[],
+  presets?: Ref<PresetDate<T>[]> | ComputedRef<PresetDate<T>[]>,
   legacyRanges?: Record<string, T | (() => T)>,
-): PresetDate<T>[] {
-  if (presets) {
+): Ref<PresetDate<T>[]> | ComputedRef<PresetDate<T>[]> {
+  if (presets.value) {
     return presets;
   }
   if (legacyRanges) {
@@ -13,15 +16,17 @@ export default function usePresets<T>(
 
     const rangeLabels = Object.keys(legacyRanges);
 
-    return rangeLabels.map(label => {
-      const range = legacyRanges[label];
-      const newValues = typeof range === 'function' ? (range as any)() : range;
+    return computed(() =>
+      rangeLabels.map(label => {
+        const range = legacyRanges[label];
+        const newValues = typeof range === 'function' ? (range as any)() : range;
 
-      return {
-        label,
-        value: newValues,
-      };
-    });
+        return {
+          label,
+          value: newValues,
+        };
+      }),
+    );
   }
-  return [];
+  return [] as unknown as ComputedRef<PresetDate<T>[]>;
 }

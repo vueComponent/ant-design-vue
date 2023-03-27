@@ -247,7 +247,8 @@ function RangerPicker<DateType>() {
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
       const getPortal = useProviderTrigger();
-      const presetList = usePresets(props.presets);
+      const presets = computed(() => props.presets ?? []);
+      const presetList = usePresets(presets);
       // We record opened status here in case repeat open with picker
       const openRecordsRef = ref<Record<number, boolean>>({});
 
@@ -1106,7 +1107,7 @@ function RangerPicker<DateType>() {
             <div class={`${prefixCls}-panel-layout`}>
               <PresetPanel
                 prefixCls={prefixCls}
-                presets={presetList}
+                presets={presetList.value}
                 onClick={nextValue => {
                   triggerChange(nextValue, null);
                   triggerOpen(false, mergedActivePickerIndex.value);

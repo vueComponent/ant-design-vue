@@ -208,7 +208,7 @@ function rangePickerProps<DateType>() {
     defaultPickerValue: arrayType<RangeValue<DateType> | RangeValue<string>>(),
     defaultValue: arrayType<RangeValue<DateType> | RangeValue<string>>(),
     value: arrayType<RangeValue<DateType> | RangeValue<string>>(),
-    presets: arrayType<PresetDate<RangeValue<DateType>>[]>(),
+    presets: arrayType<PresetDate<Array<DateType>>[]>(),
     disabledTime: functionType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>(),
     disabled: someType<boolean | [boolean, boolean]>([Boolean, Array]),
     format: String,

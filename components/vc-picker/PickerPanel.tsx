@@ -186,7 +186,6 @@ function PickerPanel<DateType>() {
       const panelContext = useInjectPanel();
       const {
         operationRef,
-        panelRef: panelDivRef,
         onSelect: onContextSelect,
         hideRanges,
         defaultOpenValue,

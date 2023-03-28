@@ -1,5 +1,5 @@
 import type { VueNode } from '../../_util/type';
-import type { Components, RangeList, Locale } from '../interface';
+import type { Components, Locale } from '../interface';
 
 export type RangesProps = {
   prefixCls: string;

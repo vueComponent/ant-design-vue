@@ -76,6 +76,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 | --- | --- | --- | --- | --- |
 | autoLink | 是否自动关联表单域，对于大部分情况都可以使用自动关联，如果不满足自动关联的条件，可以手动关联，参见下方注意事项 | boolean | true |  |
 | colon | 配合 label 属性使用，表示是否显示 label 后面的冒号 | boolean | true |  |
+| disabled | 是否禁用 Item 并跳过 rule 验证 | boolean | false |  |
 | extra | 额外的提示信息，和 help 类似，当需要错误信息和提示文案同时出现时，可以使用这个。 | string\|slot |  |  |
 | hasFeedback | 配合 validateStatus 属性使用，展示校验状态图标，建议只配合 Input 组件使用 | boolean | false |  |
 | help | 提示信息，如不设置，则会根据校验规则自动生成 | string\|slot |  |  |

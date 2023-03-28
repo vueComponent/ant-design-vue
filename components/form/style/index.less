@@ -59,7 +59,7 @@
 // ================================================================
 .@{form-item-prefix-cls} {
   .reset-component();
-
+  position: relative;
   margin-bottom: @form-item-margin-bottom;
   vertical-align: top;
 
@@ -72,6 +72,16 @@
   &-hidden.@{ant-prefix}-row {
     // https://github.com/ant-design/ant-design/issues/26141
     display: none;
+  }
+
+  &-disabled {
+    //https://github.com/vueComponent/ant-design-vue/issues/6374
+    .disabled();
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    position: absolute;
+    background: none;
   }
 
   // ==============================================================
@@ -110,7 +120,9 @@
       }
 
       // Required mark
-      &.@{form-item-prefix-cls}-required:not(.@{form-item-prefix-cls}-required-mark-optional)::before {
+      &.@{form-item-prefix-cls}-required:not(
+          .@{form-item-prefix-cls}-required-mark-optional
+        )::before {
         display: inline-block;
         margin-right: 4px;
         color: @label-required-color;

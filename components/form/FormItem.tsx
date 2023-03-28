@@ -102,6 +102,7 @@ export const formItemProps = () => ({
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
   noStyle: Boolean,
+  disabled: Boolean,
 });
 
 export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
@@ -250,7 +251,9 @@ export default defineComponent({
       );
       validateState.value = 'validating';
       errors.value = [];
-
+      if (props.disabled) {
+        return Promise.resolve();
+      }
       promise
         .catch(e => e)
         .then((results: RuleError[] = []) => {
@@ -408,6 +411,8 @@ export default defineComponent({
           v-slots={{
             default: () => (
               <>
+                {/* disable */}
+                {props.disabled ? <div class={[`${prefixCls.value}-item-disabled`]}></div> : ''}
                 {/* Label */}
                 <FormItemLabel
                   {...props}

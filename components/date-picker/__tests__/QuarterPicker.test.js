@@ -14,4 +14,20 @@ describe('QuarterPicker', () => {
     });
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  it('test QuarterPicker valueFormat', async () => {
+    const case1 = '2023-1';
+    const wrapper = mount(DatePicker, {
+      props: {
+        picker: 'quarter',
+        format: 'YYYY-Q',
+        valueFormat: 'YYYY-Q',
+        value: case1,
+      },
+      sync: false,
+      attachTo: 'body',
+    });
+    const input = wrapper.find('input');
+    expect(input.element.value).toBe(case1);
+  });
 });

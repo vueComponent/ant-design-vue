@@ -4,6 +4,7 @@ import weekday from 'dayjs/plugin/weekday';
 import localeData from 'dayjs/plugin/localeData';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import weekYear from 'dayjs/plugin/weekYear';
+import quarterOfYear from 'dayjs/plugin/quarterOfYear';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import type { GenerateConfig } from '.';
@@ -15,6 +16,7 @@ dayjs.extend(weekday);
 dayjs.extend(localeData);
 dayjs.extend(weekOfYear);
 dayjs.extend(weekYear);
+dayjs.extend(quarterOfYear);
 
 dayjs.extend((_o, c) => {
   // todo support Wo (ISO week)
@@ -105,29 +107,56 @@ const parseNoMatchNotice = () => {
   noteOnce(false, 'Not match any format. Please help to fire a issue about this.');
 };
 
-const toDateWithValueFormat = (val, valueFormat: string) => {
-  const LowerValueFormat = valueFormat.toLowerCase();
-  const wIndex = LowerValueFormat.indexOf('w');
-  const woEndindex = LowerValueFormat.indexOf('wo');
-  if (wIndex !== -1) {
-    const valStr = val.split('-');
-    const year = valStr[0];
-    const weekStr = valStr[1];
-    if (woEndindex !== -1) {
-      const firstWeek = dayjs(year, 'YYYY').startOf('year');
-      for (let j = 0; j <= 52; j += 1) {
-        const nextWeek = firstWeek.add(j, 'week');
-        if (nextWeek.format('Wo') === weekStr) {
-          return nextWeek;
-        }
-      }
-    } else {
-      return dayjs(year, 'YYYY').week(weekStr);
+const advancedFormatRegex = /\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|k{1,2}|S/g;
+
+function findTagertStr(val: string, index: number, segmentation: string) {
+  const items = [...new Set(val.split(segmentation))];
+  let idx = 0;
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    idx += item.length;
+    if (idx > index) {
+      return item;
     }
-    parseNoMatchNotice();
-    return null;
+    idx += segmentation.length;
   }
-  return typeof val === 'string' && val ? dayjs(val, valueFormat) : val || null;
+}
+
+const toDateWithValueFormat = (val: string | Dayjs, valueFormat: string) => {
+  if (dayjs.isDayjs(val)) {
+    return val;
+  }
+  const matchs = valueFormat.matchAll(advancedFormatRegex);
+  let baseDate = dayjs(val, valueFormat);
+  if (matchs === null) {
+    return baseDate;
+  }
+  for (const match of matchs) {
+    const origin = match[0];
+    const index = match['index'];
+
+    if (origin === 'Q') {
+      const segmentation = val.slice(index - 1, index);
+      const quarterStr = findTagertStr(val, index, segmentation).match(/\d+/)[0];
+      baseDate = baseDate.quarter(parseInt(quarterStr));
+    }
+
+    if (origin.toLowerCase() === 'wo') {
+      const segmentation = val.slice(index - 1, index);
+      const weekStr = findTagertStr(val, index, segmentation).match(/\d+/)[0];
+      baseDate = baseDate.week(parseInt(weekStr));
+    }
+
+    if (origin.toLowerCase() === 'ww') {
+      baseDate = baseDate.week(parseInt(val.slice(index, index + origin.length)));
+    }
+
+    if (origin.toLowerCase() === 'w') {
+      baseDate = baseDate.week(parseInt(val.slice(index, index + origin.length + 1)));
+    }
+  }
+
+  return baseDate;
 };
 
 const generateConfig: GenerateConfig<Dayjs> = {

@@ -601,7 +601,6 @@ function PickerPanel<DateType>() {
             onKeydown={onInternalKeydown}
             onBlur={onInternalBlur}
             onMousedown={onMousedown}
-            ref={panelDivRef}
           >
             {panelNode}
             {extraFooter || rangesNode || todayNode ? (

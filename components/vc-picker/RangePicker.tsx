@@ -1,4 +1,11 @@
-import type { DisabledTimes, PanelMode, PickerMode, RangeValue, EventValue } from './interface';
+import type {
+  DisabledTimes,
+  PanelMode,
+  PickerMode,
+  RangeValue,
+  EventValue,
+  PresetDate,
+} from './interface';
 import type { PickerBaseProps, PickerDateProps, PickerTimeProps } from './Picker';
 import type { SharedTimeProps } from './panels/TimePanel';
 import PickerTrigger from './PickerTrigger';
@@ -93,6 +100,8 @@ export type RangePickerSharedProps<DateType> = {
   placeholder?: [string, string];
   disabled?: boolean | [boolean, boolean];
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
+  presets?: PresetDate<RangeValue<DateType>>[];
+  /** @deprecated Please use `presets` instead */
   ranges?: Record<
     string,
     Exclude<RangeValue<DateType>, null> | (() => Exclude<RangeValue<DateType>, null>)
@@ -141,6 +150,7 @@ type OmitPickerProps<Props> = Omit<
   | 'onPickerValueChange'
   | 'onOk'
   | 'dateRender'
+  | 'presets'
 >;
 
 type RangeShowTimeObject<DateType> = Omit<SharedTimeProps<DateType>, 'defaultValue'> & {
@@ -247,9 +257,10 @@ function RangerPicker<DateType>() {
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
       const getPortal = useProviderTrigger();
-      const presets = computed(() => props.presets ?? []);
-      const presetList = usePresets(presets);
-      // We record opened status here in case repeat open with picker
+      const presets = computed(() => props.presets);
+      const ranges = computed(() => props.ranges);
+      const presetList = usePresets(presets, ranges);
+      // We record oqqpened status here in case repeat open with picker
       const openRecordsRef = ref<Record<number, boolean>>({});
 
       const containerRef = ref<HTMLDivElement>(null);
@@ -835,28 +846,6 @@ function RangerPicker<DateType>() {
         },
       });
 
-      // ============================ Ranges =============================
-
-      const rangeList = computed(() =>
-        Object.keys(props.ranges || {}).map(label => {
-          const range = props.ranges![label];
-          const newValues = typeof range === 'function' ? range() : range;
-
-          return {
-            label,
-            onClick: () => {
-              triggerChange(newValues, null);
-              triggerOpen(false, mergedActivePickerIndex.value);
-            },
-            onMouseenter: () => {
-              setRangeHoverValue(newValues);
-            },
-            onMouseleave: () => {
-              setRangeHoverValue(null);
-            },
-          };
-        }),
-      );
       // ============================= Panel =============================
       const panelHoverRangedValue = computed(() => {
         if (
@@ -1049,7 +1038,6 @@ function RangerPicker<DateType>() {
               !getValue(selectedValue.value, mergedActivePickerIndex.value) ||
               (disabledDate && disabledDate(selectedValue.value[mergedActivePickerIndex.value])),
             locale,
-            rangeList: rangeList.value,
             onOk: () => {
               if (getValue(selectedValue.value, mergedActivePickerIndex.value)) {
                 // triggerChangeOld(selectedValue.value);

@@ -208,7 +208,7 @@ function Picker<DateType>() {
     // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
-      const presets = computed(() => props.presets ?? []);
+      const presets = computed(() => props.presets);
       const presetList = usePresets(presets);
       const picker = computed(() => props.picker ?? 'date');
       const needConfirmButton = computed(
@@ -415,7 +415,6 @@ function Picker<DateType>() {
       useProvidePanel({
         operationRef,
         hideHeader: computed(() => picker.value === 'time'),
-        panelRef: panelDivRef,
         onSelect: onContextSelect,
         open: mergedOpen,
         defaultOpenValue: toRef(props, 'defaultOpenValue'),

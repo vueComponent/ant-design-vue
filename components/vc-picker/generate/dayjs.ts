@@ -109,7 +109,7 @@ const parseNoMatchNotice = () => {
 
 const advancedFormatRegex = /\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|k{1,2}|S/g;
 
-function findTagertStr(val: string, index: number, segmentation: string) {
+function findTargetStr(val: string, index: number, segmentation: string) {
   const items = [...new Set(val.split(segmentation))];
   let idx = 0;
   for (let i = 0; i < items.length; i++) {
@@ -137,13 +137,13 @@ const toDateWithValueFormat = (val: string | Dayjs, valueFormat: string) => {
 
     if (origin === 'Q') {
       const segmentation = val.slice(index - 1, index);
-      const quarterStr = findTagertStr(val, index, segmentation).match(/\d+/)[0];
+      const quarterStr = findTargetStr(val, index, segmentation).match(/\d+/)[0];
       baseDate = baseDate.quarter(parseInt(quarterStr));
     }
 
     if (origin.toLowerCase() === 'wo') {
       const segmentation = val.slice(index - 1, index);
-      const weekStr = findTagertStr(val, index, segmentation).match(/\d+/)[0];
+      const weekStr = findTargetStr(val, index, segmentation).match(/\d+/)[0];
       baseDate = baseDate.week(parseInt(weekStr));
     }
 

@@ -3,20 +3,24 @@ import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
+import type { VueNode } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps, { Step as VcStep } from '../vc-steps';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
+import useLegacyItems from './useLegacyItems';
 import classNames from '../_util/classNames';
 import Progress from '../progress';
 import omit from '../_util/omit';
+import Tooltip from '../tooltip';
 import { VcStepProps } from '../vc-steps/Step';
 import type { ProgressDotRender } from '../vc-steps/Steps';
 import type { MouseEventHandler } from '../_util/EventInterface';
-import { booleanType, stringType, functionType, someType } from '../_util/type';
+import { booleanType, stringType, functionType, someType, arrayType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
+import { filterEmpty } from '../_util/props-util';
 
 export const stepsProps = () => ({
   prefixCls: String,
@@ -25,6 +29,7 @@ export const stepsProps = () => ({
   initial: Number,
   percent: Number,
   responsive: booleanType(),
+  items: arrayType<StepProps[]>(),
   labelPlacement: stringType<'horizontal' | 'vertical'>(),
   status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
   size: stringType<'default' | 'small'>(),
@@ -62,7 +67,8 @@ const Steps = defineComponent({
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
-
+    const items = computed(() => props.items);
+    const mergedItems = useLegacyItems(items, filterEmpty(slots.default?.()));
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -119,17 +125,22 @@ const Steps = defineComponent({
         attrs.class,
         hashId.value,
       );
+      const itemRender = (item: StepProps, stepItem: VueNode) =>
+        item.description ? <Tooltip title={item.description}>{stepItem}</Tooltip> : stepItem;
 
       return wrapSSR(
         <VcSteps
           icons={icons.value}
           {...attrs}
           {...omit(props, ['percent', 'responsive'])}
+          items={mergedItems.value}
           direction={direction.value}
           prefixCls={prefixCls.value}
           iconPrefix={iconPrefix.value}
           class={stepsClassName}
           onChange={handleChange}
+          isInline={isInline.value}
+          itemRender={isInline.value ? itemRender : undefined}
           v-slots={{ ...slots, stepIcon: stepIconRender }}
         />,
       );

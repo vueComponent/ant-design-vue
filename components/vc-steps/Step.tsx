@@ -2,12 +2,14 @@ import PropTypes, { withUndefined } from '../_util/vue-types';
 import type { CSSProperties, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import type { EventHandler } from '../_util/EventInterface';
+import classNames from '../_util/classNames';
 
 function isString(str: any): str is string {
   return typeof str === 'string';
 }
 function noop() {}
 export const VcStepProps = () => ({
+  class: PropTypes.string,
   prefixCls: String,
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   itemWidth: String,
@@ -19,6 +21,7 @@ export const VcStepProps = () => ({
   adjustMarginRight: String,
   stepNumber: Number,
   stepIndex: Number,
+  style: PropTypes.style,
   description: PropTypes.any,
   title: PropTypes.any,
   subTitle: PropTypes.any,
@@ -55,27 +58,25 @@ export default defineComponent({
         stepIcon = slots.stepIcon,
       } = props;
 
-      let iconNode: any;
-      const iconClassName = {
-        [`${prefixCls}-icon`]: true,
-        [`${iconPrefix}icon`]: true,
+      let iconNode;
+      const iconClassName = classNames(`${prefixCls}-icon`, `${iconPrefix}icon`, {
         [`${iconPrefix}icon-${icon}`]: icon && isString(icon),
-        [`${iconPrefix}icon-check`]: !icon && status === 'finish' && icons && !icons.finish,
-        [`${iconPrefix}icon-close`]: !icon && status === 'error' && icons && !icons.error,
-      };
+        [`${iconPrefix}icon-check`]:
+          !icon && status === 'finish' && ((icons && !icons.finish) || !icons),
+        [`${iconPrefix}icon-cross`]:
+          !icon && status === 'error' && ((icons && !icons.error) || !icons),
+      });
       const iconDot = <span class={`${prefixCls}-icon-dot`} />;
       // `progressDot` enjoy the highest priority
       if (progressDot) {
         if (typeof progressDot === 'function') {
           iconNode = (
             <span class={`${prefixCls}-icon`}>
-              {progressDot({
-                iconDot,
+              {progressDot(iconDot, {
                 index: stepNumber - 1,
                 status,
                 title,
                 description,
-                prefixCls,
               })}
             </span>
           );
@@ -103,12 +104,14 @@ export default defineComponent({
           node: iconNode,
         });
       }
+
       return iconNode;
     };
     return () => {
       const {
         prefixCls,
         itemWidth,
+        style,
         active,
         status = 'wait',
         tailContent,
@@ -121,18 +124,21 @@ export default defineComponent({
         onClick,
         onStepClick,
       } = props;
-
-      const classString = {
-        [`${prefixCls}-item`]: true,
-        [`${prefixCls}-item-${status}`]: true,
-        [`${prefixCls}-item-custom`]: icon,
-        [`${prefixCls}-item-active`]: active,
-        [`${prefixCls}-item-disabled`]: disabled === true,
-      };
+      const mergedStatus = status || 'wait';
+      const classString = classNames(
+        `${prefixCls}-item`,
+        `${prefixCls}-item-${mergedStatus}`,
+        props.class,
+        {
+          [`${prefixCls}-item-custom`]: icon,
+          [`${prefixCls}-item-active`]: active,
+          [`${prefixCls}-item-disabled`]: disabled === true,
+        },
+      );
       const stepProps = {
         class: classString,
       };
-      const stepItemStyle: CSSProperties = {};
+      const stepItemStyle: CSSProperties = { ...style };
       if (itemWidth) {
         stepItemStyle.width = itemWidth;
       }

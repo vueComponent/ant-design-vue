@@ -53,9 +53,9 @@ export default defineComponent({
     const onClick = (e: MouseEvent) => {
       if (props.visible === undefined) {
         triggerVisible.value = false;
+        // emit('visibleChange', false);
       }
 
-      emit('visibleChange', false);
       emit('overlayClick', e);
     };
 

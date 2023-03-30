@@ -25,6 +25,7 @@ export const propTypes = {
   trailColor: String,
   trailWidth: Number,
   transition: String,
+  class: String,
 };
 
 export type ProgressProps = Partial<ExtractPropTypes<typeof propTypes>>;

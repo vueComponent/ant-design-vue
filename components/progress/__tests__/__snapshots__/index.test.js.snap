@@ -2,7 +2,7 @@
 
 exports[`Progress render dashboard 295 gapDegree 1`] = `
 <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
-  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg viewBox="0 0 100 100">
+  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,47
    a 47,47 0 1 1 0,-94
@@ -19,7 +19,7 @@ exports[`Progress render dashboard 295 gapDegree 1`] = `
 
 exports[`Progress render dashboard 296 gapDegree 1`] = `
 <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
-  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg viewBox="0 0 100 100">
+  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,47
    a 47,47 0 1 1 0,-94
@@ -36,7 +36,7 @@ exports[`Progress render dashboard 296 gapDegree 1`] = `
 
 exports[`Progress render dashboard zero gapDegree 1`] = `
 <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
-  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg viewBox="0 0 100 100">
+  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,47
    a 47,47 0 1 1 0,-94
@@ -119,7 +119,7 @@ exports[`Progress render out-of-range progress with info 1`] = `
 
 exports[`Progress render strokeColor 1`] = `
 <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
-  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg viewBox="0 0 100 100">
+  <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94

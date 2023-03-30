@@ -127,6 +127,7 @@ export default defineComponent({
         trailColor,
         strokeLinecap,
         strokeColor,
+        class: className,
         ...restProps
       } = props;
       const { pathString, pathStyle } = getPathStyles(
@@ -150,10 +151,9 @@ export default defineComponent({
         class: `${prefixCls}-circle-trail`,
         style: pathStyle,
       };
-
       return (
         <svg
-          class={classNames(`${prefixCls}-circle`, props.class)}
+          class={classNames(`${prefixCls}-circle`, className)}
           viewBox="0 0 100 100"
           {...restProps}
         >

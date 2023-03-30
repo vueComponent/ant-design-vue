@@ -1,8 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import type { VueNode } from '../_util/type';
+import PropTypes from '../_util/vue-types';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';
+import { getSize } from './utils';
 
 export const stepsProps = () => ({
   ...progressProps(),
@@ -10,11 +12,11 @@ export const stepsProps = () => ({
   size: {
     type: String as PropType<ProgressSize>,
   },
-  strokeColor: String,
+  strokeColor: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   trailColor: String,
 });
 
-export type StepsProps = Partial<ExtractPropTypes<typeof stepsProps>>;
+export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>>;
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -22,13 +24,22 @@ export default defineComponent({
   props: stepsProps(),
   setup(props, { slots }) {
     const current = computed(() => Math.round(props.steps * ((props.percent || 0) / 100)));
-    const stepWidth = computed(() => (props.size === 'small' ? 2 : 14));
+    const mergedSize = computed(
+      () => props.size ?? [props.size === 'small' ? 2 : 14, props.strokeWidth || 8],
+    );
+    const sizeRef = computed(() =>
+      getSize(mergedSize.value as ProgressSize, 'step', {
+        steps: props.steps,
+        strokeWidth: props.strokeWidth || 8,
+      }),
+    );
 
     const styledSteps = computed(() => {
-      const { steps, strokeWidth = 8, strokeColor, trailColor, prefixCls } = props;
+      const { steps, strokeColor, trailColor, prefixCls } = props;
 
       const temp: VueNode[] = [];
       for (let i = 0; i < steps; i += 1) {
+        const color = Array.isArray(strokeColor) ? strokeColor[i] : strokeColor;
         const cls = {
           [`${prefixCls}-steps-item`]: true,
           [`${prefixCls}-steps-item-active`]: i <= current.value - 1,
@@ -38,9 +49,9 @@ export default defineComponent({
             key={i}
             class={cls}
             style={{
-              backgroundColor: i <= current.value - 1 ? strokeColor : trailColor,
-              width: `${stepWidth.value}px`,
-              height: `${strokeWidth}px`,
+              backgroundColor: i <= current.value - 1 ? color : trailColor,
+              width: `${sizeRef.value.width / steps}px`,
+              height: `${sizeRef.value.height}px`,
             }}
           />,
         );

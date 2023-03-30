@@ -104,7 +104,7 @@ exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1
         <div class="ant-steps-item-tail">
           <!---->
         </div>
-        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="undefined-icon-dot"></span></span></div>
+        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="ant-steps-icon-dot"></span></span></div>
         <div class="ant-steps-item-content">
           <div class="ant-steps-item-title">Finished
             <!---->
@@ -118,7 +118,7 @@ exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1
         <div class="ant-steps-item-tail">
           <!---->
         </div>
-        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="undefined-icon-dot"></span></span></div>
+        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="ant-steps-icon-dot"></span></span></div>
         <div class="ant-steps-item-content">
           <div class="ant-steps-item-title">In Progress
             <!---->
@@ -132,7 +132,7 @@ exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1
         <div class="ant-steps-item-tail">
           <!---->
         </div>
-        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="undefined-icon-dot"></span></span></div>
+        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="ant-steps-icon-dot"></span></span></div>
         <div class="ant-steps-item-content">
           <div class="ant-steps-item-title">Waiting
             <!---->
@@ -146,7 +146,7 @@ exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1
         <div class="ant-steps-item-tail">
           <!---->
         </div>
-        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="undefined-icon-dot"></span></span></div>
+        <div class="ant-steps-item-icon"><span class="ant-steps-icon"><!----><span class="ant-steps-icon-dot"></span></span></div>
         <div class="ant-steps-item-content">
           <div class="ant-steps-item-title">Waiting
             <!---->

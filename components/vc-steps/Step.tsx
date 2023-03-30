@@ -72,11 +72,13 @@ export default defineComponent({
         if (typeof progressDot === 'function') {
           iconNode = (
             <span class={`${prefixCls}-icon`}>
-              {progressDot(iconDot, {
+              {progressDot({
+                iconDot,
                 index: stepNumber - 1,
                 status,
                 title,
                 description,
+                prefixCls,
               })}
             </span>
           );

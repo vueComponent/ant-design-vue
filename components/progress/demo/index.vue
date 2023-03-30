@@ -4,6 +4,7 @@
     <circle-demo />
     <line-mini />
     <circle-mini />
+    <circle-micro />
     <dynamic />
     <circle-dynamic />
     <format />
@@ -27,6 +28,7 @@ import Segment from './segment.vue';
 import LineCap from './linecap.vue';
 import GradientLine from './gradient-line.vue';
 import Steps from './steps.vue';
+import CircleMicro from './circle-micro.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -47,6 +49,7 @@ export default defineComponent({
     LineCap,
     GradientLine,
     Steps,
+    CircleMicro,
   },
   setup() {
     return {};

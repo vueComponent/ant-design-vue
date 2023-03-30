@@ -4,6 +4,7 @@ import { propTypes } from './types';
 import { computed, defineComponent, ref } from 'vue';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
 import useRefs from '../../_util/hooks/useRefs';
+import classNames from '../../_util/classNames';
 
 let gradientSeed = 0;
 
@@ -151,7 +152,11 @@ export default defineComponent({
       };
 
       return (
-        <svg class={`${prefixCls}-circle`} viewBox="0 0 100 100" {...restProps}>
+        <svg
+          class={classNames(`${prefixCls}-circle`, props.class)}
+          viewBox="0 0 100 100"
+          {...restProps}
+        >
           {gradient && (
             <defs>
               <linearGradient

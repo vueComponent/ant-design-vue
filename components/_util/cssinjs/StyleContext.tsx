@@ -1,5 +1,6 @@
-import type { InjectionKey, Ref } from 'vue';
-import { unref, computed, inject } from 'vue';
+import type { App, InjectionKey, Ref } from 'vue';
+import { provide, defineComponent, unref, computed, inject } from 'vue';
+import { objectType } from '../type';
 import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
@@ -81,11 +82,11 @@ export const useStyleInject = () => {
     defaultCache: true,
   });
 };
-export const useStyleProvider = (props: StyleContextProps) => {
+export const useStyleProvider = (props: StyleProviderProps) => {
   const parentContext = useStyleInject();
 
-  const context = computed<StyleContextProps>(() => {
-    const mergedContext: StyleContextProps = {
+  const context = computed<StyleProviderProps>(() => {
+    const mergedContext: StyleProviderProps = {
       ...parentContext,
     };
     const propsValue = unref(props);
@@ -102,10 +103,24 @@ export const useStyleProvider = (props: StyleContextProps) => {
 
     return mergedContext;
   });
-
+  provide(StyleContextKey, context.value);
   return context;
 };
+export const StyleProvider = defineComponent({
+  name: 'AStyleProvider',
+  props: {
+    value: objectType<StyleProviderProps>(),
+  },
+  setup(props, { slots }) {
+    const config = computed(() => unref(props.value));
+    useStyleProvider(config);
+    return () => slots.default?.();
+  },
+});
 
+StyleProvider.install = function (app: App) {
+  app.component(StyleProvider.name, StyleProvider);
+};
 export default {
   useStyleInject,
   useStyleProvider,

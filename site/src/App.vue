@@ -1,8 +1,10 @@
 <template>
   <a-config-provider :locale="locale" :theme="themeConfig">
-    <SiteToken>
-      <router-view />
-    </SiteToken>
+    <a-style-provider :value="{ hashPriority: 'high' }">
+      <SiteToken>
+        <router-view />
+      </SiteToken>
+    </a-style-provider>
   </a-config-provider>
 </template>
 

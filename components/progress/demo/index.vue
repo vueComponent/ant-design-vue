@@ -13,6 +13,7 @@
     <line-cap />
     <gradient-line />
     <steps />
+    <Size />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -32,6 +33,7 @@ import CircleMicro from './circle-micro.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
+import Size from './size.vue';
 
 export default defineComponent({
   CN,
@@ -50,6 +52,7 @@ export default defineComponent({
     GradientLine,
     Steps,
     CircleMicro,
+    Size,
   },
   setup() {
     return {};

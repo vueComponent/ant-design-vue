@@ -126,7 +126,6 @@ export default defineComponent({
         stepProps.active = stepNumber === current;
         return render(stepProps);
       };
-      const children = filterEmpty(slots.default?.());
       const renderStepWithNode = (node, index) => {
         return renderStep({ ...node.props }, index, stepProps => {
           const stepNode = cloneElement(node, stepProps);
@@ -147,7 +146,9 @@ export default defineComponent({
       };
       return (
         <div class={classString} style={style} {...restProps}>
-          {items.length ? items.map(renderStepWithItem) : children.map(renderStepWithNode)}
+          {items.length
+            ? items.map(renderStepWithItem)
+            : filterEmpty(slots.default?.()).map(renderStepWithNode)}
         </div>
       );
     };

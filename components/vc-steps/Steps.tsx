@@ -2,7 +2,8 @@ import PropTypes from '../_util/vue-types';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import Step from './Step';
-
+import { cloneElement } from '../_util/vnode';
+import { filterEmpty } from '../_util/props-util';
 export type Status = 'error' | 'process' | 'finish' | 'wait';
 export type StepIconRender = (info: {
   index: number;
@@ -86,8 +87,8 @@ export default defineComponent({
         [`${prefixCls}-navigation`]: isNav,
         [`${prefixCls}-inline`]: isInline,
       });
-      const renderStep = (item, index) => {
-        const { prefixCls: pre = prefixCls, ...restProps } = item || {};
+      const renderStep = (props, index, render) => {
+        const { prefixCls: pre = prefixCls, ...restProps } = props || {};
         const stepNumber = initial + index;
         const stepProps = {
           ...restProps,
@@ -123,15 +124,30 @@ export default defineComponent({
           stepProps.subTitle = undefined;
         }
         stepProps.active = stepNumber === current;
-        const stepNode = <Step {...stepProps} />;
-        if (itemRender) {
-          return itemRender(stepProps, stepNode);
-        }
-        return stepNode;
+        return render(stepProps);
+      };
+      const children = filterEmpty(slots.default?.());
+      const renderStepWithNode = (node, index) => {
+        return renderStep({ ...node.props }, index, stepProps => {
+          const stepNode = cloneElement(node, stepProps);
+          if (itemRender) {
+            return itemRender(stepProps, stepNode);
+          }
+          return stepNode;
+        });
+      };
+      const renderStepWithItem = (item, index) => {
+        return renderStep(item, index, stepProps => {
+          const stepNode = <Step {...stepProps} />;
+          if (itemRender) {
+            return itemRender(stepProps, stepNode);
+          }
+          return stepNode;
+        });
       };
       return (
         <div class={classString} style={style} {...restProps}>
-          {items.map(renderStep)}
+          {items.length ? items.map(renderStepWithItem) : children.map(renderStepWithNode)}
         </div>
       );
     };

@@ -172,7 +172,10 @@ export default defineComponent({
               <div class={`${prefixCls}-item-title`}>
                 {title}
                 {subTitle && (
-                  <div title={subTitle} class={`${prefixCls}-item-subtitle`}>
+                  <div
+                    title={typeof subTitle === 'string' ? subTitle : undefined}
+                    class={`${prefixCls}-item-subtitle`}
+                  >
                     {subTitle}
                   </div>
                 )}

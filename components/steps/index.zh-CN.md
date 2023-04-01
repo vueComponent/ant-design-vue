@@ -32,7 +32,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*cFsBQLA0b7UAAA
 | size | 指定大小，目前支持普通（`default`）和迷你（`small`） | string | default |  |
 | status | 指定当前步骤的状态，可选 `wait` `process` `finish` `error` | string | process |  |
 | type | 步骤条类型，有 `default` 和 `navigation` 两种 | string | `default` | 1.5.0 |
-| items | 配置选项卡内容 | [StepItem](#stepitem)[] | [] |  |
+| items | 配置选项卡内容 | [StepItem](#stepsstep)[] | [] |  |
 
 #### Steps 事件
 
@@ -49,17 +49,17 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*cFsBQLA0b7UAAA
 | initial | 起始序号，从 0 开始记数 | number | 0 |  |
 | status | 指定当前步骤的状态，可选 `wait` `process` `finish` `error` | string | `process` |  |
 | onChange | 点击切换步骤时触发 | (current) => void | - |  |
-| items | 配置选项卡内容，不支持 `icon` `subtitle` | [StepItem](#stepitem) | [] | 4.24.0 |
+| items | 配置选项卡内容，不支持 `icon` `subtitle` | [StepItem](#stepsstep) | [] | 4.24.0 |
 
-### StepItem
+### Steps.Step
 
 步骤条内的每一个步骤。
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| description | 步骤的详情描述，可选 | slot | - |  |
-| disabled | 禁用点击 | boolean | false |  |
-| icon | 步骤图标的类型，可选 | slot | - |  |
+| description | 步骤的详情描述，可选 | string \| slot | - |  |
+| disabled | 禁用点击 | boolean | false | 1.5.0 |
+| icon | 步骤图标的类型，可选 | string \| slot | - |  |
 | status | 指定状态。当不配置该属性时，会使用 Steps 的 `current` 来自动指定状态。可选：`wait` `process` `finish` `error` | string | `wait` |  |
-| subTitle | 子标题 | slot | - |  |
-| title | 标题 | slot | - |  |
+| subTitle | 子标题 | string \| slot | - | 1.5.0 |
+| title | 标题 | string \| slot | - |  |

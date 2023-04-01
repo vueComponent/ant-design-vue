@@ -8,7 +8,6 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps, { Step as VcStep } from '../vc-steps';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
-import useLegacyItems from './useLegacyItems';
 import classNames from '../_util/classNames';
 import Progress from '../progress';
 import omit from '../_util/omit';
@@ -20,7 +19,6 @@ import { booleanType, stringType, functionType, someType, arrayType } from '../_
 
 // CSSINJS
 import useStyle from './style';
-import { filterEmpty } from '../_util/props-util';
 
 export const stepsProps = () => ({
   prefixCls: String,
@@ -67,8 +65,7 @@ const Steps = defineComponent({
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
-    const items = computed(() => props.items);
-    const mergedItems = useLegacyItems(items, filterEmpty(slots.default?.()));
+    const mergedItems = computed(() => props.items);
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -141,7 +138,7 @@ const Steps = defineComponent({
           onChange={handleChange}
           isInline={isInline.value}
           itemRender={isInline.value ? itemRender : undefined}
-          v-slots={{ ...slots, stepIcon: stepIconRender }}
+          v-slots={{ stepIcon: stepIconRender, ...slots }}
         />,
       );
     };

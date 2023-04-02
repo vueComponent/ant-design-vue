@@ -86,6 +86,16 @@ const routes = [
         component: () => import('../vueDocs/getting-started.en-US.md'),
       },
       {
+        path: 'vue/compatible-style-cn',
+        meta: { enTitle: 'Compatible Style', title: '样式兼容', category: 'docs' },
+        component: () => import('../vueDocs/compatible-style.zh-CN.md'),
+      },
+      {
+        path: 'vue/compatible-style',
+        meta: { enTitle: 'Compatible Style', title: '样式兼容', category: 'docs' },
+        component: () => import('../vueDocs/compatible-style.en-US.md'),
+      },
+      {
         path: 'vue/customize-theme-cn',
         meta: { enTitle: 'Customize Theme', title: '定制主题', category: 'docs' },
         component: () => import('../vueDocs/customize-theme.zh-CN.md'),

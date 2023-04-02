@@ -4,7 +4,8 @@ import useStyleRegister, { extractStyle } from './hooks/useStyleRegister';
 import Keyframes from './Keyframes';
 import type { Linter } from './linters';
 import { legacyNotSelectorLinter, logicalPropertiesLinter } from './linters';
-import { createCache, useStyleInject, useStyleProvider } from './StyleContext';
+import type { StyleContextProps } from './StyleContext';
+import { createCache, useStyleInject, useStyleProvider, StyleProvider } from './StyleContext';
 import type { DerivativeFunc, TokenType } from './theme';
 import { createTheme, Theme } from './theme';
 import type { Transformer } from './transformers/interface';
@@ -27,5 +28,16 @@ export {
   // Linters
   logicalPropertiesLinter,
   legacyNotSelectorLinter,
+
+  // cssinjs
+  StyleProvider,
 };
-export type { TokenType, CSSObject, CSSInterpolation, DerivativeFunc, Transformer, Linter };
+export type {
+  TokenType,
+  CSSObject,
+  CSSInterpolation,
+  DerivativeFunc,
+  Transformer,
+  Linter,
+  StyleContextProps,
+};

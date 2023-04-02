@@ -3,6 +3,7 @@ category: Components
 type: Feedback
 title: Drawer
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*v3TvSq2E0HAAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*4wzwRIBLuqEAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A panel which slides in from the edge of the screen.

@@ -150,36 +150,6 @@ function getWebpackConfig(modules, esm = false) {
             },
           ],
         },
-        {
-          test: /\.less$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  plugins: ['autoprefixer'],
-                },
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                lessOptions: {
-                  javascriptEnabled: true,
-                },
-                sourceMap: true,
-              },
-            },
-          ],
-        },
         // Images
         {
           test: svgRegex,

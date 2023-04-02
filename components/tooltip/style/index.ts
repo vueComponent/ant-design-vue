@@ -1,8 +1,8 @@
-import { initZoomMotion } from '../../_style/motion';
+import { initZoomMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, UseComponentStyleResult } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { genPresetColor, resetComponent } from '../../_style';
-import getArrowStyle, { MAX_VERTICAL_CONTENT_RADIUS } from '../../_style/placementArrow';
+import { genPresetColor, resetComponent } from '../../style';
+import getArrowStyle, { MAX_VERTICAL_CONTENT_RADIUS } from '../../style/placementArrow';
 import { Ref } from 'vue';
 
 export interface ComponentToken {
@@ -130,7 +130,7 @@ export default (prefixCls: Ref<string>, injectStyle: Ref<boolean>): UseComponent
     'Tooltip',
     token => {
       // Popover use Tooltip as internal component. We do not need to handle this.
-      if (injectStyle.value === false) {
+      if (injectStyle?.value === false) {
         return [];
       }
 

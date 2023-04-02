@@ -1,5 +1,5 @@
 .markdown {
-  color: @site-text-color;
+  color: var(--site-text-color);
   font-size: 14px;
   line-height: 2;
 }
@@ -25,10 +25,10 @@
 .markdown h1 {
   margin-top: 8px;
   margin-bottom: 20px;
-  color: @site-heading-color;
+  color: var(--site-text-color);
   font-weight: 500;
   font-size: 30px;
-  font-family: Avenir, @font-family, sans-serif;
+  font-family: var(--font-family);
   line-height: 38px;
 
   .subtitle {
@@ -48,9 +48,9 @@
 .markdown h6 {
   clear: both;
   margin: 1.6em 0 0.6em;
-  color: @site-heading-color;
+  color: var(--site-text-color);
   font-weight: 500;
-  font-family: Avenir, @font-family, sans-serif;
+  font-family: var(--font-family);
 }
 
 .markdown h3 {
@@ -70,7 +70,7 @@
   clear: both;
   height: 1px;
   margin: 56px 0;
-  background: @site-border-color-split;
+  background: var(--site-border-color-split);
   border: 0;
 }
 
@@ -121,23 +121,23 @@
   margin: 0 1px;
   padding: 0.2em 0.4em;
   font-size: 0.9em;
-  background: @site-markdown-code-bg;
-  border: 1px solid @border-color-split;
+  background: var(--site-markdown-code-bg);
+  border: 1px solid var(--site-border-color-split);
   border-radius: 3px;
 }
 
 .markdown pre {
-  font-family: @code-family;
-  background: @site-markdown-code-bg;
-  border-radius: @border-radius-base;
+  font-family: var(--code-family);
+  background: var(--site-markdown-code-bg);
+  border-radius: var(--border-radius-base);
 }
 
 .markdown pre code {
   margin: 0;
   padding: 0;
   overflow: auto;
-  color: @site-text-color;
-  font-size: max(@font-size-base - 1px, 12px);
+  color: var(--site-text-color);
+  font-size: var(--font-size-max);
   direction: ltr;
   text-align: left;
   background: #f5f5f5;
@@ -154,7 +154,7 @@
   margin: 8px 0 16px;
   direction: ltr;
   empty-cells: show;
-  border: 1px solid @site-border-color-split;
+  border: 1px solid var(--site-border-color-split);
   border-collapse: collapse;
   border-spacing: 0;
 }
@@ -170,7 +170,7 @@
 .markdown > table td {
   padding: 16px 24px;
   text-align: left;
-  border: 1px solid @site-border-color-split;
+  border: 1px solid var(--site-border-color-split);
 }
 
 .markdown table td > a:not(:last-child) {
@@ -183,14 +183,14 @@
 .markdown blockquote {
   margin: 1em 0;
   padding-left: 0.8em;
-  color: @site-text-color-secondary;
+  color: var(--site-text-color-secondary);
   font-size: 90%;
-  border-left: 4px solid @site-border-color-split;
+  border-left: 4px solid var(--site-border-color-split);
 
   .rtl & {
     padding-right: 0.8em;
     padding-left: 0;
-    border-right: 4px solid @site-border-color-split;
+    border-right: 4px solid var(--site-border-color-split);
     border-left: none;
   }
 }
@@ -228,12 +228,12 @@
 
   .anticon {
     display: block;
-    color: @site-text-color-secondary;
+    color: var(--site-text-color-secondary);
     font-size: 16px;
     transition: all 0.3s;
 
     &:hover {
-      color: @site-text-color;
+      color: var(--site-text-color);
     }
   }
 }
@@ -259,24 +259,24 @@
     margin: 2em 0;
     overflow-x: auto;
     overflow-y: hidden;
-    font-size: max(@font-size-base - 1px, 12px);
-    font-family: @code-family;
-    line-height: @line-height-base;
+    font-size: var(--font-size-max);
+    font-family: var(--code-family);
+    line-height: var(--line-height-base);
     border: 0;
     -webkit-overflow-scrolling: touch;
 
     th,
     td {
       padding: 12px;
-      border-color: @border-color-split;
+      border-color: var(--site-border-color-split);
       border-width: 1px 0;
 
       &:first-child {
-        border-left: 1px solid @border-color-split;
+        border-left: 1px solid var(--site-border-color-split);
       }
 
       &:last-child {
-        border-right: 1px solid @border-color-split;
+        border-right: 1px solid var(--site-border-color-split);
       }
     }
 
@@ -295,7 +295,7 @@
     td {
       &:first-child {
         width: 18%;
-        color: @gray-8;
+        color: var(--gray-8);
         font-weight: 600;
         white-space: nowrap;
       }
@@ -304,16 +304,16 @@
       }
       &:nth-child(3) {
         width: 22%;
-        color: @magenta-7;
-        font-size: max(@font-size-base - 1px, 12px);
+        color: var(--magenta-7);
+        font-size: var(--font-size-max);
       }
       &:nth-child(4) {
         width: 15%;
-        font-size: max(@font-size-base - 1px, 12px);
+        font-size: var(--font-size-max);
       }
       &:nth-child(5) {
         width: 8%;
-        font-size: max(@font-size-base - 1px, 12px);
+        font-size: var(--font-size-max);
       }
       &:nth-last-child(3):first-child {
         width: 38%;
@@ -398,9 +398,9 @@
   }
   .code-box-demo .ant-row > div:not(.gutter-row) {
     padding: 16px 0;
-    background: @demo-grid-color;
+    background: var(--demo-grid-color);
     &:nth-child(2n + 1) {
-      background: fade(@demo-grid-color, 75%);
+      background: var(--demo-grid-color-75);
     }
   }
   .ant-row .demo-col,
@@ -408,17 +408,17 @@
     margin-top: 0;
     margin-bottom: 0;
     padding: 30px 0;
-    color: @white;
+    color: var(--white);
     font-size: 18px;
     text-align: center;
     border: none;
   }
   .ant-row .demo-col-1 {
-    background: fade(@demo-grid-color, 75%);
+    background: var(--demo-grid-color-75);
   }
   .ant-row .demo-col-2,
   .code-box-demo .ant-row .demo-col-2 {
-    background: fade(@demo-grid-color, 50%);
+    background: var(--demo-grid-color-75);
   }
   .ant-row .demo-col-3,
   .code-box-demo .ant-row .demo-col-3 {
@@ -427,7 +427,7 @@
   }
   .ant-row .demo-col-4,
   .code-box-demo .ant-row .demo-col-4 {
-    background: fade(@demo-grid-color, 60%);
+    background: var(--demo-grid-color-60);
   }
   .ant-row .demo-col-5,
   .code-box-demo .ant-row .demo-col-5 {

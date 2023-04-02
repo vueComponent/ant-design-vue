@@ -27,7 +27,6 @@ const Popover = defineComponent({
   props: initDefaultProps(popoverProps(), {
     ...tooltipDefaultProps(),
     trigger: 'hover',
-    transitionName: 'zoom-big',
     placement: 'top',
     mouseEnterDelay: 0.1,
     mouseLeaveDelay: 0.1,

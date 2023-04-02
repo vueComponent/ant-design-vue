@@ -4,6 +4,7 @@ type: 反馈
 title: Drawer
 subtitle: 抽屉
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*v3TvSq2E0HAAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*4wzwRIBLuqEAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 屏幕边缘滑出的浮层面板。

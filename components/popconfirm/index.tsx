@@ -55,7 +55,6 @@ const Popconfirm = defineComponent({
   props: initDefaultProps(popconfirmProps(), {
     ...tooltipDefaultProps(),
     trigger: 'click',
-    transitionName: 'zoom-big',
     placement: 'top',
     mouseEnterDelay: 0.1,
     mouseLeaveDelay: 0.1,

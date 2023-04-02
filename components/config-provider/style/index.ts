@@ -1,5 +1,5 @@
 import { useStyleRegister } from '../../_util/cssinjs';
-import { resetIcon } from '../../_style';
+import { resetIcon } from '../../style';
 import { useToken } from '../../theme/internal';
 import { computed, Ref } from 'vue';
 

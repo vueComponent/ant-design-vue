@@ -7,6 +7,7 @@ import { outputFileSync, readFileSync } from 'fs-extra';
 import type { Options, VueTag } from './type';
 import { getComponentName, normalizePath, toKebabCase } from './utils';
 import { genVeturAttributes, genVeturTags } from './vetur';
+import { flatMap } from 'lodash';
 
 async function readMarkdown(options: Options): Promise<Map<String, VueTag>> {
   const mdPaths = await glob(normalizePath(`${options.path}/**/*.md`));
@@ -22,7 +23,7 @@ async function readMarkdown(options: Options): Promise<Map<String, VueTag>> {
     })
     .filter(item => item) as VueTag[][];
   const tags: Map<String, VueTag> = new Map();
-  data.flatMap(item => item).forEach(mergedTag => mergeTag(tags, mergedTag));
+  flatMap(data, item => item).forEach(mergedTag => mergeTag(tags, mergedTag));
   return tags;
 }
 

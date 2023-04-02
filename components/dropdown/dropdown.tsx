@@ -139,6 +139,10 @@ const Dropdown = defineComponent({
       return placement;
     });
 
+    const mergedVisible = computed(() => {
+      return typeof props.visible === 'boolean' ? props.visible : props.open;
+    });
+
     const handleVisibleChange = (val: boolean) => {
       emit('update:visible', val);
       emit('visibleChange', val);
@@ -183,6 +187,7 @@ const Dropdown = defineComponent({
         {
           ...props,
           ...attrs,
+          visible: mergedVisible.value,
           builtinPlacements,
           overlayClassName: overlayClassNameCustomized,
           arrow: !!arrow,

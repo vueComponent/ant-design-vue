@@ -1,4 +1,4 @@
-import { getArrowOffset } from '../../_style/placementArrow';
+import { getArrowOffset } from '../../style/placementArrow';
 import {
   initMoveMotion,
   initSlideMotion,
@@ -7,12 +7,12 @@ import {
   slideDownOut,
   slideUpIn,
   slideUpOut,
-} from '../../_style/motion';
+} from '../../style/motion';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import genButtonStyle from './button';
 import genStatusStyle from './status';
-import { genFocusStyle, resetComponent, roundedArrow } from '../../_style';
+import { genFocusStyle, resetComponent, roundedArrow } from '../../style';
 
 export interface ComponentToken {
   zIndexPopup: number;

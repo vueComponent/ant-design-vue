@@ -1,13 +1,13 @@
 import { TinyColor } from '@ctrl/tinycolor';
 import type { CSSObject } from '../../_util/cssinjs';
-import { genCollapseMotion, initSlideMotion, initZoomMotion } from '../../_style/motion';
+import { genCollapseMotion, initSlideMotion, initZoomMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle, UseComponentStyleResult } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import getHorizontalStyle from './horizontal';
 import getRTLStyle from './rtl';
 import getThemeStyle from './theme';
 import getVerticalStyle from './vertical';
-import { clearFix, resetComponent, resetIcon } from '../../_style';
+import { clearFix, resetComponent, resetIcon } from '../../style';
 import { Ref } from 'vue';
 
 /** Component only token. Which will handle additional calculation of alias token */
@@ -434,12 +434,12 @@ const getBaseStyle: GenerateStyle<MenuToken> = token => {
 };
 
 // ============================== Export ==============================
-export default (prefixCls: Ref<string>, injectStyle: Ref<boolean>): UseComponentStyleResult => {
+export default (prefixCls: Ref<string>, injectStyle?: Ref<boolean>): UseComponentStyleResult => {
   const useOriginHook = genComponentStyleHook(
     'Menu',
     (token, { overrideComponentToken }) => {
       // Dropdown will handle menu style self. We do not need to handle this.
-      if (injectStyle.value === false) {
+      if (injectStyle?.value === false) {
         return [];
       }
 

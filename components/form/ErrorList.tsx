@@ -38,7 +38,12 @@ export default defineComponent({
         colMItem,
       );
       (transitionGroupProps as any).role = 'alert';
-      (transitionGroupProps as any).class = [hashId.value, baseClassName.value, attrs.class];
+      (transitionGroupProps as any).class = [
+        hashId.value,
+        baseClassName.value,
+        attrs.class,
+        `${prefixCls.value}-show-help`,
+      ];
       return (
         <Transition
           {...getTransitionProps(`${prefixCls.value}-show-help`)}

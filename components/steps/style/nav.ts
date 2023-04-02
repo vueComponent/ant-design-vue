@@ -1,5 +1,5 @@
 import type { CSSObject } from '../../_util/cssinjs';
-import { textEllipsis } from '../../_style';
+import { textEllipsis } from '../../style';
 import type { StepsToken } from '.';
 import type { GenerateStyle } from '../../theme/internal';
 

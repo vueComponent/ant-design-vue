@@ -19,8 +19,10 @@ import type { FullToken } from './util/genComponentStyleHook';
 import genComponentStyleHook from './util/genComponentStyleHook';
 import statisticToken, { merge as mergeToken, statistic } from './util/statistic';
 import type { VueNode } from '../_util/type';
+import { objectType } from '../_util/type';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import { computed, inject } from 'vue';
+import { defineComponent, provide, computed, inject } from 'vue';
+import { toReactive } from '../_util/toReactive';
 
 const defaultTheme = createTheme(defaultDerivative);
 
@@ -60,6 +62,25 @@ export interface DesignTokenContext {
 }
 //defaultConfig
 const DesignTokenContextKey: InjectionKey<DesignTokenContext> = Symbol('DesignTokenContext');
+
+export const useDesignTokenProvider = (value: DesignTokenContext) => {
+  provide(DesignTokenContextKey, value);
+};
+
+export const useDesignTokenInject = () => {
+  return inject(DesignTokenContextKey, defaultConfig);
+};
+export const DesignTokenProvider = defineComponent({
+  props: {
+    value: objectType<DesignTokenContext>(),
+  },
+  setup(props, { slots }) {
+    useDesignTokenProvider(toReactive(computed(() => props.value)));
+    return () => {
+      return slots.default?.();
+    };
+  },
+});
 // ================================== Hook ==================================
 export function useToken(): [
   ComputedRef<Theme<SeedToken, MapToken>>,

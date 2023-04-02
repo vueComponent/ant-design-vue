@@ -37,8 +37,8 @@
         <a-tooltip
           v-if="!blocked"
           :title="$t(`app.demo.${copied ? 'copied' : 'copy'}`)"
-          :visible="copyTooltipVisible"
-          @visibleChange="onCopyTooltipVisibleChange"
+          :open="copyTooltipVisible"
+          @openChange="onCopyTooltipVisibleChange"
         >
           <component
             :is="copied && copyTooltipVisible ? 'CheckOutlined' : 'SnippetsOutlined'"
@@ -209,7 +209,7 @@ export default defineComponent({
         title,
       });
     });
-    const theme = computed(() => inject('themeMode', { theme: ref('default') }).theme.value);
+    const theme = computed(() => inject('themeMode', { theme: ref('light') }).theme.value);
     return {
       docHtml,
       iframeDemo,

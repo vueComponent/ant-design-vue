@@ -1,7 +1,7 @@
-import { genCollapseMotion } from '../../_style/motion';
+import { genCollapseMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { resetComponent, resetIcon } from '../../_style';
+import { resetComponent, resetIcon } from '../../style';
 
 export interface ComponentToken {}
 

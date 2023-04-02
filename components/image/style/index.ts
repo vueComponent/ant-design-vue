@@ -1,10 +1,10 @@
 import { CSSObject } from '../../_util/cssinjs';
 import { TinyColor } from '@ctrl/tinycolor';
 import { genModalMaskStyle } from '../../modal/style';
-import { initZoomMotion, initFadeMotion } from '../../_style/motion';
+import { initZoomMotion, initFadeMotion } from '../../style/motion';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { resetComponent, textEllipsis } from '../../_style';
+import { resetComponent, textEllipsis } from '../../style';
 
 export interface ComponentToken {
   zIndexPopup: number;

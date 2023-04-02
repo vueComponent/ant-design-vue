@@ -1,8 +1,8 @@
 import { getStyle as getCheckboxStyle } from '../../checkbox/style';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook } from '../../theme/internal';
-import { textEllipsis } from '../../_style';
-import { genCompactItemStyle } from '../../_style/compact-item';
+import { textEllipsis } from '../../style';
+import { genCompactItemStyle } from '../../style/compact-item';
 
 export interface ComponentToken {
   controlWidth: number;

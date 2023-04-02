@@ -4,6 +4,7 @@ type: 反馈
 title: Message
 subtitle: 全局提示
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JjZBT6N1MusAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*7qMTRoq3ZGkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 全局展示操作反馈信息。

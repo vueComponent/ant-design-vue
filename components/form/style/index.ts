@@ -1,8 +1,8 @@
 import type { CSSObject } from '../../_util/cssinjs';
-import { genCollapseMotion, zoomIn } from '../../_style/motion';
+import { genCollapseMotion, zoomIn } from '../../style/motion';
 import type { AliasToken, FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { resetComponent } from '../../_style';
+import { resetComponent } from '../../style';
 import genFormValidateMotionStyle from './explain';
 
 export interface FormToken extends FullToken<'Form'> {

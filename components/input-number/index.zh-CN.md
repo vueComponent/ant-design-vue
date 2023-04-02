@@ -4,6 +4,7 @@ type: 数据录入
 title: InputNumber
 subtitle: 数字输入框
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JvWbSYhuNlIAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1uH-R5kLAMIAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 通过鼠标或键盘，输入范围内的数值。

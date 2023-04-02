@@ -3,7 +3,7 @@ import type { CSSProperties } from 'vue';
 import { TinyColor } from '@ctrl/tinycolor';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { resetComponent } from '../../_style';
+import { resetComponent } from '../../style';
 
 // Direction naming standard:
 // Horizontal base:

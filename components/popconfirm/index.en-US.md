@@ -3,6 +3,7 @@ category: Components
 type: Feedback
 title: Popconfirm
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sAGpRoBtTXcAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HrFtQ6jJJFQAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A simple and compact confirmation dialog of an action.

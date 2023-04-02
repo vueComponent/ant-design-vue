@@ -1,7 +1,7 @@
 import { CSSObject } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { genFocusStyle, resetComponent, textEllipsis } from '../../_style';
+import { genFocusStyle, resetComponent, textEllipsis } from '../../style';
 import genMotionStyle from './motion';
 
 export interface ComponentToken {

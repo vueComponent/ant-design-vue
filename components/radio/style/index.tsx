@@ -1,7 +1,7 @@
 import { Keyframes } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
-import { genFocusOutline, resetComponent } from '../../_style';
+import { genFocusOutline, resetComponent } from '../../style';
 
 // ============================== Tokens ==============================
 export interface ComponentToken {}

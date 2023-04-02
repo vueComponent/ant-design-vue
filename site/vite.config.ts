@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue';
 import md from '../plugin/md';
 import docs from '../plugin/docs';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { additionalData } from './themeConfig';
 /**
  * @type {import('vite').UserConfig}
  */
@@ -45,13 +44,8 @@ export default {
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: {
-          hack: `true;@import "${require.resolve('../components/style/color/colorPalette.less')}";`,
-          'root-entry-name': 'variable',
-        },
         javascriptEnabled: true,
         // includePaths: ["node_modules/"],
-        additionalData,
       },
     },
   },

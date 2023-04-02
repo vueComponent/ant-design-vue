@@ -33,7 +33,7 @@ export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>;
 
 const BackTop = defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'ABackTop',
+  name: 'ABackTopLegacy',
   inheritAttrs: false,
   props: backTopProps(),
   // emits: ['click'],

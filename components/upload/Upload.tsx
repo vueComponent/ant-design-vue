@@ -394,7 +394,7 @@ export default defineComponent({
                 class={`${prefixCls.value}-btn`}
                 v-slots={slots}
               >
-                <div class={`${prefixCls}-drag-container`}>{slots.default?.()}</div>
+                <div class={`${prefixCls.value}-drag-container`}>{slots.default?.()}</div>
               </VcUpload>
             </div>
             {renderUploadList()}

@@ -1,10 +1,11 @@
 import type { App, InjectionKey, Ref } from 'vue';
-import { provide, defineComponent, unref, computed, inject } from 'vue';
-import { objectType } from '../type';
+import { watch, reactive, provide, defineComponent, unref, computed, inject } from 'vue';
 import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
-
+import { arrayType, objectType } from '../type';
+import PropTypes from '../vue-types';
+import initDefaultProps from '../props-util/initDefaultProps';
 export const ATTR_TOKEN = 'data-token-hash';
 export const ATTR_MARK = 'data-css-hash';
 export const ATTR_DEV_CACHE_PATH = 'data-dev-cache-path';
@@ -72,48 +73,86 @@ export interface StyleContextProps {
   linters?: Linter[];
 }
 
-const StyleContextKey: InjectionKey<StyleContextProps> = Symbol('StyleContextKey');
+const StyleContextKey: InjectionKey<Partial<StyleContextProps>> = Symbol('StyleContextKey');
 
 export type StyleProviderProps = Partial<StyleContextProps> | Ref<Partial<StyleContextProps>>;
+const defaultStyleContext: StyleContextProps = {
+  cache: createCache(),
+  defaultCache: true,
+  hashPriority: 'low',
+};
 export const useStyleInject = () => {
-  return inject(StyleContextKey, {
-    hashPriority: 'low',
-    cache: createCache(),
-    defaultCache: true,
-  });
+  return inject(StyleContextKey, defaultStyleContext);
 };
 export const useStyleProvider = (props: StyleProviderProps) => {
   const parentContext = useStyleInject();
 
-  const context = computed<StyleProviderProps>(() => {
-    const mergedContext: StyleProviderProps = {
+  const context = computed<Partial<StyleContextProps>>(() => {
+    const mergedContext: Partial<StyleContextProps> = {
       ...parentContext,
     };
     const propsValue = unref(props);
-    (Object.keys(propsValue) as (keyof StyleContextProps)[]).forEach(key => {
+    Object.keys(propsValue).forEach(key => {
       const value = propsValue[key];
       if (propsValue[key] !== undefined) {
-        (mergedContext as any)[key] = value;
+        mergedContext[key] = value;
       }
     });
 
     const { cache } = propsValue;
     mergedContext.cache = mergedContext.cache || createCache();
     mergedContext.defaultCache = !cache && parentContext.defaultCache;
-
     return mergedContext;
   });
-  provide(StyleContextKey, context.value);
+
   return context;
 };
+const AStyleProviderProps = () => ({
+  autoClear: PropTypes.bool,
+  /** @private Test only. Not work in production. */
+  mock: PropTypes.oneOf(['server', 'client'] as const),
+  /**
+   * Only set when you need ssr to extract style on you own.
+   * If not provided, it will auto create <style /> on the end of Provider in server side.
+   */
+  cache: objectType<CacheEntity>(),
+  /** Tell children that this context is default generated context */
+  defaultCache: PropTypes.bool,
+  /** Use `:where` selector to reduce hashId css selector priority */
+  hashPriority: PropTypes.oneOf(['low', 'high'] as const),
+  /** Tell cssinjs where to inject style in */
+  container: PropTypes.any,
+  /** Component wil render inline  `<style />` for fallback in SSR. Not recommend. */
+  ssrInline: PropTypes.bool,
+  /** Transform css before inject in document. Please note that `transformers` do not support dynamic update */
+  transformers: arrayType<Transformer[]>(),
+  /**
+   * Linters to lint css before inject in document.
+   * Styles will be linted after transforming.
+   * Please note that `linters` do not support dynamic update.
+   */
+  linters: arrayType<Linter[]>(),
+});
+
 export const StyleProvider = defineComponent({
   name: 'AStyleProvider',
-  props: {
-    value: objectType<StyleProviderProps>(),
-  },
+  props: initDefaultProps(AStyleProviderProps(), defaultStyleContext),
   setup(props, { slots }) {
-    const config = computed(() => unref(props.value));
-    useStyleProvider(config);
+    const providerProps = computed(() => ({ ...props }));
+    const context = useStyleProvider(providerProps);
+    const state = reactive<Partial<StyleContextProps>>({
+      ...context.value,
+    });
+    provide(StyleContextKey, state);
+    watch(
+      props,
+      newValue => {
+        Object.keys(newValue).forEach(key => {
+          state[key] = newValue[key];
+        });
+      },
+      { immediate: true },
+    );
     return () => slots.default?.();
   },
 });

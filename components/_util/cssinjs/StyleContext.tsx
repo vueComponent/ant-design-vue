@@ -121,7 +121,7 @@ const AStyleProviderProps = () => ({
   /** Use `:where` selector to reduce hashId css selector priority */
   hashPriority: PropTypes.oneOf(['low', 'high'] as const),
   /** Tell cssinjs where to inject style in */
-  container: PropTypes.any,
+  container: PropTypes.oneOfType([objectType<Element>(), objectType<ShadowRoot>()]),
   /** Component wil render inline  `<style />` for fallback in SSR. Not recommend. */
   ssrInline: PropTypes.bool,
   /** Transform css before inject in document. Please note that `transformers` do not support dynamic update */
@@ -138,8 +138,7 @@ export const StyleProvider = defineComponent({
   name: 'AStyleProvider',
   props: initDefaultProps(AStyleProviderProps(), defaultStyleContext),
   setup(props, { slots }) {
-    const providerProps = computed(() => ({ ...props }));
-    const context = useStyleProvider(providerProps);
+    const context = useStyleProvider(props);
     const state = reactive<Partial<StyleContextProps>>({
       ...context.value,
     });

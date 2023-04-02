@@ -331,8 +331,9 @@ export const genPanelStyle = (token: SharedPickerToken): CSSObject => {
   } = token;
 
   const pickerPanelWidth = pickerPanelCellWidth * 7 + paddingSM * 2 + 4;
+
   const hoverCellFixedDistance =
-    (pickerPanelWidth - paddingXS * 2) / 3 - pickerYearMonthCellWidth / 2;
+    (pickerPanelWidth - paddingXS * 2) / 3 - pickerYearMonthCellWidth - paddingSM;
 
   return {
     [componentCls]: {
@@ -658,17 +659,17 @@ export const genPanelStyle = (token: SharedPickerToken): CSSObject => {
           insetInlineEnd: hoverCellFixedDistance,
           borderInlineEnd: `${lineWidth}px dashed ${pickerDateHoverRangeBorderColor}`,
           borderStartStartRadius: 0,
-          borderBottomStartRadius: 0,
+          borderEndStartRadius: 0,
           borderStartEndRadius: borderRadius,
-          borderBottomEndRadius: borderRadius,
+          borderEndEndRadius: borderRadius,
 
           [`${componentCls}-panel-rtl &`]: {
             insetInlineStart: hoverCellFixedDistance,
             borderInlineStart: `${lineWidth}px dashed ${pickerDateHoverRangeBorderColor}`,
             borderStartStartRadius: borderRadius,
-            borderBottomStartRadius: borderRadius,
+            borderEndStartRadius: borderRadius,
             borderStartEndRadius: 0,
-            borderBottomEndRadius: 0,
+            borderEndEndRadius: 0,
           },
         },
       },
@@ -1429,6 +1430,7 @@ export default genComponentStyleHook(
       initInputToken<FullToken<'DatePicker'>>(token),
       initPickerPanelToken(token),
     );
+
     return [
       genPickerStyle(pickerToken),
       genPickerStatusStyle(pickerToken),

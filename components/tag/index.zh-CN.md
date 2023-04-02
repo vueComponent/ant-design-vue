@@ -4,6 +4,7 @@ subtitle: 标签
 type: 数据展示
 title: Tag
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_SBsSrKLg00AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JPNAQYrVkYkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 进行标记和分类的小标签。

@@ -141,10 +141,10 @@ const Previewer = defineComponent({
     );
 
     const shownThemes = ref<string[]>(
-      showTheme.value && !theme.value ? ['default', 'dark'] : [themes.value[0].key],
+      showTheme.value && !theme.value ? ['light', 'dark'] : [themes.value[0].key],
     );
     const enabledThemes = ref<string[]>(
-      showTheme.value && !theme.value ? ['default', 'dark'] : [themes.value[0].key],
+      showTheme.value && !theme.value ? ['light', 'dark'] : [themes.value[0].key],
     );
 
     watchEffect(() => {

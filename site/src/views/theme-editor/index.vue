@@ -174,7 +174,7 @@ export default defineComponent({
     watch(editModelOpen, val => {
       if (!val) {
         themeConfigContent.value = {
-          json: theme,
+          json: theme.value,
           text: undefined,
         } as any;
       }

@@ -54,7 +54,7 @@ const useSiteToken = () => {
         --site-text-color-secondary: ${tokenValue.colorTextSecondary};
         --site-border-color-split: ${tokenValue.colorSplit};
         --border-radius-base: ${tokenValue.borderRadius};
-        --font-size-base: ${tokenValue.fontSize};
+        --font-size-base: ${tokenValue.fontSize}px;
         --font-size-max: ${Math.max(tokenValue.fontSize - 1, 12)}px;
         --font-family: ${tokenValue.fontFamily};
         --code-family: ${tokenValue.codeFamily};
@@ -81,6 +81,7 @@ const useSiteToken = () => {
         --animation-duration-base: ${tokenValue.motionDurationSlow};
         --ease-in-out: ${tokenValue.motionEaseInOut};
         --shadow-1-down: ${tokenValue.boxShadowCard};
+        --box-shadow: ${tokenValue.boxShadow};
       }
     `;
       if (styleDom && !document.body.contains(styleDom)) {

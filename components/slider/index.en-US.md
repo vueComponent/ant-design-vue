@@ -3,6 +3,7 @@ category: Components
 type: Data Entry
 title: Slider
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_4heQaUrFn4AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*XkgXTaudeosAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A Slider component for displaying current value and intervals in range.

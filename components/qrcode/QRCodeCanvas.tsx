@@ -258,7 +258,7 @@ export const QRCodeCanvas = defineComponent({
       }
       return (
         <>
-          <canvas {...attrs} style={[canvasStyle, attrs.style as CSSProperties]} ref={_canvas} />;
+          <canvas {...attrs} style={[canvasStyle, attrs.style as CSSProperties]} ref={_canvas} />
           {img}
         </>
       );

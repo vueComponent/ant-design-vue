@@ -1,6 +1,6 @@
-import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
+import { useInjectMenu } from './hooks/useMenuContext';
 
 export const menuDividerProps = () => ({
   prefixCls: String,
@@ -14,7 +14,7 @@ export default defineComponent({
   name: 'AMenuDivider',
   props: menuDividerProps(),
   setup(props) {
-    const { prefixCls } = useConfigInject('menu', props);
+    const { prefixCls } = useInjectMenu();
     const cls = computed(() => {
       return {
         [`${prefixCls.value}-item-divider`]: true,

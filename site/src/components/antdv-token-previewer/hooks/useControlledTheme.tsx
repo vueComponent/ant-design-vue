@@ -10,11 +10,11 @@ import getValueByPath from '../utils/getValueByPath';
 
 const { darkAlgorithm: defaultDark, compactAlgorithm, defaultAlgorithm } = antTheme;
 
-export type ThemeCode = 'default' | 'dark' | 'compact';
+export type ThemeCode = 'light' | 'dark' | 'compact';
 export const themeMap: Record<ThemeCode, DerivativeFunc<any, any>> = {
   dark: defaultDark,
   compact: compactAlgorithm,
-  default: defaultAlgorithm,
+  light: defaultAlgorithm,
 };
 
 export type SetThemeState = (theme: Theme, modifiedPath: string[], updated?: boolean) => void;

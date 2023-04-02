@@ -21,6 +21,7 @@ import raf from '../_util/raf';
 import { parseColor } from './util';
 export type { AdjustOverflow, PlacementsConfig } from '../_util/placements';
 import useStyle from './style';
+import { getTransitionName } from '../_util/transition';
 
 // https://github.com/react-component/tooltip
 // https://github.com/yiminghe/dom-align
@@ -55,7 +56,6 @@ export const tooltipProps = () => ({
 
 export const tooltipDefaultProps = () => ({
   trigger: 'hover',
-  transitionName: 'zoom-big-fast',
   align: {},
   placement: 'top',
   mouseEnterDelay: 0.1,
@@ -72,7 +72,6 @@ export default defineComponent({
   inheritAttrs: false,
   props: initDefaultProps(tooltipProps(), {
     trigger: 'hover',
-    transitionName: 'zoom-big-fast',
     align: {},
     placement: 'top',
     mouseEnterDelay: 0.1,
@@ -96,7 +95,10 @@ export default defineComponent({
       });
     }
 
-    const { prefixCls, getPopupContainer, direction } = useConfigInject('tooltip', props);
+    const { prefixCls, getPopupContainer, direction, rootPrefixCls } = useConfigInject(
+      'tooltip',
+      props,
+    );
     const mergedOpen = computed(() => props.open ?? props.visible);
     const innerOpen = ref(firstNotUndefined([props.open, props.visible]));
 
@@ -284,6 +286,11 @@ export default defineComponent({
         overlayInnerStyle: formattedOverlayInnerStyle,
         onVisibleChange: handleVisibleChange,
         onPopupAlign,
+        transitionName: getTransitionName(
+          rootPrefixCls.value,
+          'zoom-big-fast',
+          props.transitionName,
+        ),
       };
       return wrapSSR(
         <VcTooltip

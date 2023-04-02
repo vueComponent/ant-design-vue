@@ -4,6 +4,7 @@ type: 反馈
 title: Progress
 subtitle: 进度条
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*gK_4S6fDRfgAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HJH8Tb1lcYAAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 展示操作的当前进度。

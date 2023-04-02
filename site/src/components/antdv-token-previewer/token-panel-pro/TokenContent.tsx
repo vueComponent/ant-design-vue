@@ -506,7 +506,7 @@ const MapTokenCollapse = defineComponent({
       const grouped: Record<string, string[]> = {};
       if (groupFn.value) {
         group.value.mapToken?.forEach(token => {
-          const key = groupFn.value(token) ?? 'default';
+          const key = groupFn.value(token) ?? 'light';
           grouped[key] = [...(grouped[key] ?? []), token];
         });
       }

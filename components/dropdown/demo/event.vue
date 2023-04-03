@@ -17,7 +17,7 @@ An event will be triggered when you click menu items, in which you can make diff
 </docs>
 
 <template>
-  <a-dropdown>
+  <a-dropdown @visible-change="handleVisibleChange">
     <a class="ant-dropdown-link" @click.prevent>
       Hover me, Click menu item
       <DownOutlined />
@@ -44,8 +44,12 @@ export default defineComponent({
     const onClick: MenuProps['onClick'] = ({ key }) => {
       console.log(`Click on item ${key}`);
     };
+    const handleVisibleChange = (value: boolean) => {
+      console.log('visible', value);
+    };
     return {
       onClick,
+      handleVisibleChange,
     };
   },
 });

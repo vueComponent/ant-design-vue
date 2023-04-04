@@ -10,6 +10,12 @@
 
 ---
 
+## 3.2.17
+
+`2023-04-04`
+
+- 🐞 回滚 [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)，解决引起的 Table 过滤器隐藏问题 [#6400](https://github.com/vueComponent/ant-design-vue/issues/6400)
+
 ## 3.2.16
 
 `2023-03-23`

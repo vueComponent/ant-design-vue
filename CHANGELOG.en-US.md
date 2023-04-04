@@ -10,6 +10,12 @@
 
 ---
 
+## 3.2.17
+
+`2023-04-04`
+
+- 🐞 revert [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)，fix table filter hidden error [#6400](https://github.com/vueComponent/ant-design-vue/issues/6400)
+
 ## 3.2.16
 
 `2023-03-23`

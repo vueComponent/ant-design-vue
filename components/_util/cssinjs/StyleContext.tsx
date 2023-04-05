@@ -1,5 +1,5 @@
-import type { App, InjectionKey, Ref } from 'vue';
-import { watch, reactive, provide, defineComponent, unref, computed, inject } from 'vue';
+import type { App, ComputedRef, InjectionKey, Ref } from 'vue';
+import { provide, defineComponent, unref, computed, inject } from 'vue';
 import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
@@ -73,7 +73,8 @@ export interface StyleContextProps {
   linters?: Linter[];
 }
 
-const StyleContextKey: InjectionKey<Partial<StyleContextProps>> = Symbol('StyleContextKey');
+const StyleContextKey: InjectionKey<ComputedRef<Partial<StyleContextProps>>> =
+  Symbol('StyleContextKey');
 
 export type StyleProviderProps = Partial<StyleContextProps> | Ref<Partial<StyleContextProps>>;
 const defaultStyleContext: StyleContextProps = {
@@ -82,14 +83,17 @@ const defaultStyleContext: StyleContextProps = {
   hashPriority: 'low',
 };
 export const useStyleInject = () => {
-  return inject(StyleContextKey, defaultStyleContext);
+  return inject(
+    StyleContextKey,
+    computed(() => defaultStyleContext),
+  );
 };
 export const useStyleProvider = (props: StyleProviderProps) => {
   const parentContext = useStyleInject();
 
   const context = computed<Partial<StyleContextProps>>(() => {
     const mergedContext: Partial<StyleContextProps> = {
-      ...parentContext,
+      ...parentContext.value,
     };
     const propsValue = unref(props);
     Object.keys(propsValue).forEach(key => {
@@ -101,10 +105,10 @@ export const useStyleProvider = (props: StyleProviderProps) => {
 
     const { cache } = propsValue;
     mergedContext.cache = mergedContext.cache || createCache();
-    mergedContext.defaultCache = !cache && parentContext.defaultCache;
+    mergedContext.defaultCache = !cache && parentContext.value.defaultCache;
     return mergedContext;
   });
-
+  provide(StyleContextKey, context);
   return context;
 };
 const AStyleProviderProps = () => ({
@@ -138,20 +142,7 @@ export const StyleProvider = defineComponent({
   name: 'AStyleProvider',
   props: initDefaultProps(AStyleProviderProps(), defaultStyleContext),
   setup(props, { slots }) {
-    const context = useStyleProvider(props);
-    const state = reactive<Partial<StyleContextProps>>({
-      ...context.value,
-    });
-    provide(StyleContextKey, state);
-    watch(
-      props,
-      newValue => {
-        Object.keys(newValue).forEach(key => {
-          state[key] = newValue[key];
-        });
-      },
-      { immediate: true },
-    );
+    useStyleProvider(props);
     return () => slots.default?.();
   },
 });

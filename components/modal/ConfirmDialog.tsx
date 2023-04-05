@@ -165,10 +165,9 @@ export default defineComponent<ConfirmDialogProps>({
           buttonProps={cancelButtonProps}
           prefixCls={`${rootPrefixCls}-btn`}
         >
-          {renderSomeContent(okCancel) || locale.value.cancelText}
+          {renderSomeContent(props.cancelText) || locale.value.cancelText}
         </ActionButton>
       );
-
       return (
         <Dialog
           prefixCls={prefixCls}

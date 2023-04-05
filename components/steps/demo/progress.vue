@@ -18,8 +18,8 @@ Steps with progress.
 
 <template>
   <a-steps
+    v-model:current="current"
     :percent="60"
-    :v-model:current="current"
     :items="[
       {
         title: 'Finished',
@@ -37,8 +37,8 @@ Steps with progress.
     ]"
   ></a-steps>
   <a-steps
+    v-model:current="current"
     :percent="60"
-    :current="1"
     size="small"
     :items="[
       {
@@ -62,7 +62,7 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const current = ref<number>(0);
+    const current = ref<number>(1);
 
     return {
       current,

@@ -54,11 +54,11 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const current = ref<number>(0);
+    const current = ref<number>(1);
 
     return {
       current,
-      description: 'This is a description.',
+      description: 'You can hover on the dot.',
     };
   },
 });

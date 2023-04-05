@@ -16,7 +16,7 @@ By using `status` of `Steps`, you can specify the state for current step.
 </docs>
 <template>
   <a-steps
-    :v-model:current="current"
+    v-model:current="current"
     status="error"
     :items="[
       {
@@ -39,7 +39,7 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const current = ref<number>(0);
+    const current = ref<number>(1);
 
     return {
       current,

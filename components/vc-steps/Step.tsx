@@ -5,8 +5,9 @@ import type { EventHandler } from '../_util/EventInterface';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
 import type { VueNode } from '../_util/type';
-import { stringType, functionType } from '../_util/type';
+import { booleanType, stringType, functionType } from '../_util/type';
 import type { StepIconRender, Status } from './interface';
+import omit from '../_util/omit';
 function isString(str: any): str is string {
   return typeof str === 'string';
 }
@@ -36,12 +37,14 @@ export const VcStepProps = () => ({
   onStepClick: functionType<(next: number) => void>(),
   stepIcon: functionType<StepIconRender>(),
   itemRender: functionType<(stepItem: VueNode) => VueNode>(),
+  __legacy: booleanType(),
 });
 
 export type VCStepProps = Partial<ExtractPropTypes<ReturnType<typeof VcStepProps>>>;
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Step',
+  inheritAttrs: false,
   props: VcStepProps(),
   slots: ['title', 'subTitle', 'description', 'tailContent', 'stepIcon', 'progressDot'],
   setup(props, { slots, emit, attrs }) {
@@ -49,7 +52,7 @@ export default defineComponent({
       emit('click', e);
       emit('stepClick', props.stepIndex);
     };
-    if (attrs.__legacy !== false) {
+    if (props.__legacy !== false) {
       warning(
         false,
         'Steps',
@@ -140,9 +143,6 @@ export default defineComponent({
         [`${prefixCls}-item-active`]: active,
         [`${prefixCls}-item-disabled`]: disabled === true,
       });
-      const stepProps = {
-        class: classString,
-      };
       const stepItemStyle: CSSProperties = {};
       if (itemWidth) {
         stepItemStyle.width = itemWidth;
@@ -165,7 +165,11 @@ export default defineComponent({
         accessibilityProps.onClick = onItemClick;
       }
       const stepNode = (
-        <div {...stepProps} style={[attrs.style as CSSProperties, stepItemStyle]}>
+        <div
+          {...omit(attrs, ['__legacy'])}
+          class={[classString, attrs.class]}
+          style={[attrs.style as CSSProperties, stepItemStyle]}
+        >
           <div {...accessibilityProps} class={`${prefixCls}-item-container`}>
             <div class={`${prefixCls}-item-tail`}>{tailContent}</div>
             <div class={`${prefixCls}-item-icon`}>

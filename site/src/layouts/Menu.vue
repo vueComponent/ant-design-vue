@@ -12,7 +12,7 @@
           {{ isZhCN ? '组件总览' : 'Components Overview' }}
         </router-link>
       </a-menu-item>
-      <a-menu-item-group v-if="isZhCN" title="高级组件">
+      <a-menu-item-group v-if="isZhCN" key="advanced" title="高级组件">
         <a-menu-item key="surely-table">
           <a
             href="https://www.surely.cool"

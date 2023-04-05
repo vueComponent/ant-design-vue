@@ -1,5 +1,5 @@
 import type { Ref, UnwrapRef } from 'vue';
-import { computed, ref, toRaw, unref, watch } from 'vue';
+import { toRaw, watchEffect, unref, watch, ref } from 'vue';
 
 export default function useMergedState<T, R = Ref<T>>(
   defaultStateValue: T | (() => T),
@@ -21,26 +21,19 @@ export default function useMergedState<T, R = Ref<T>>(
   }
 
   const innerValue = ref(initValue) as Ref<T>;
-  const innerMergedValue = ref(initValue) as Ref<T>;
-  const exposeValue = computed({
-    get: () => {
-      let val = innerValue.value;
-      if (option.postState) {
-        val = option.postState(val as T);
-      }
-      innerMergedValue.value = val as T;
-
-      return innerMergedValue.value;
-    },
-    set: (val: T) => {
-      triggerChange(val);
-    },
+  const mergedValue = ref(initValue) as Ref<T>;
+  watchEffect(() => {
+    let val = value.value !== undefined ? value.value : innerValue.value;
+    if (option.postState) {
+      val = option.postState(val as T);
+    }
+    mergedValue.value = val as T;
   });
 
   function triggerChange(newValue: T) {
-    const preVal = innerMergedValue.value;
+    const preVal = mergedValue.value;
     innerValue.value = newValue;
-    if (toRaw(innerMergedValue.value) !== newValue && option.onChange) {
+    if (toRaw(mergedValue.value) !== newValue && option.onChange) {
       option.onChange(newValue, preVal);
     }
   }
@@ -50,5 +43,5 @@ export default function useMergedState<T, R = Ref<T>>(
     innerValue.value = value.value as T;
   });
 
-  return [exposeValue as unknown as R, triggerChange];
+  return [mergedValue as unknown as R, triggerChange];
 }

@@ -1,27 +1,28 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import type { CSSProperties, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import type { EventHandler } from '../_util/EventInterface';
 import classNames from '../_util/classNames';
-
+import warning from '../_util/warning';
+import type { VueNode } from '../_util/type';
+import { stringType, functionType } from '../_util/type';
+import type { StepIconRender, Status } from './interface';
 function isString(str: any): str is string {
   return typeof str === 'string';
 }
 function noop() {}
+
 export const VcStepProps = () => ({
-  class: PropTypes.string,
   prefixCls: String,
-  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   itemWidth: String,
   active: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
-  status: String,
+  status: stringType<Status>(),
   iconPrefix: String,
   icon: PropTypes.any,
   adjustMarginRight: String,
   stepNumber: Number,
   stepIndex: Number,
-  style: PropTypes.style,
   description: PropTypes.any,
   title: PropTypes.any,
   subTitle: PropTypes.any,
@@ -31,22 +32,30 @@ export const VcStepProps = () => ({
     finish: PropTypes.any,
     error: PropTypes.any,
   }).loose,
-  onClick: Function,
-  onStepClick: Function,
-  stepIcon: Function,
+  onClick: functionType(),
+  onStepClick: functionType<(next: number) => void>(),
+  stepIcon: functionType<StepIconRender>(),
+  itemRender: functionType<(stepItem: VueNode) => VueNode>(),
 });
+
+export type VCStepProps = Partial<ExtractPropTypes<ReturnType<typeof VcStepProps>>>;
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Step',
   props: VcStepProps(),
   slots: ['title', 'subTitle', 'description', 'tailContent', 'stepIcon', 'progressDot'],
-  emits: ['click', 'stepClick'],
-  setup(props, { slots, emit }) {
+  setup(props, { slots, emit, attrs }) {
     const onItemClick: EventHandler = e => {
       emit('click', e);
       emit('stepClick', props.stepIndex);
     };
-
+    if (attrs.__legacy !== false) {
+      warning(
+        false,
+        'Steps',
+        'Step is deprecated, and not support inline type. Please use `items` directly. ',
+      );
+    }
     const renderIconNode = ({ icon, title, description }) => {
       const {
         prefixCls,
@@ -113,7 +122,6 @@ export default defineComponent({
       const {
         prefixCls,
         itemWidth,
-        style,
         active,
         status = 'wait',
         tailContent,
@@ -127,20 +135,15 @@ export default defineComponent({
         onStepClick,
       } = props;
       const mergedStatus = status || 'wait';
-      const classString = classNames(
-        `${prefixCls}-item`,
-        `${prefixCls}-item-${mergedStatus}`,
-        props.class,
-        {
-          [`${prefixCls}-item-custom`]: icon,
-          [`${prefixCls}-item-active`]: active,
-          [`${prefixCls}-item-disabled`]: disabled === true,
-        },
-      );
+      const classString = classNames(`${prefixCls}-item`, `${prefixCls}-item-${mergedStatus}`, {
+        [`${prefixCls}-item-custom`]: icon,
+        [`${prefixCls}-item-active`]: active,
+        [`${prefixCls}-item-disabled`]: disabled === true,
+      });
       const stepProps = {
         class: classString,
       };
-      const stepItemStyle: CSSProperties = { ...style };
+      const stepItemStyle: CSSProperties = {};
       if (itemWidth) {
         stepItemStyle.width = itemWidth;
       }
@@ -161,8 +164,8 @@ export default defineComponent({
         accessibilityProps.tabindex = 0;
         accessibilityProps.onClick = onItemClick;
       }
-      return (
-        <div {...stepProps} style={stepItemStyle}>
+      const stepNode = (
+        <div {...stepProps} style={[attrs.style as CSSProperties, stepItemStyle]}>
           <div {...accessibilityProps} class={`${prefixCls}-item-container`}>
             <div class={`${prefixCls}-item-tail`}>{tailContent}</div>
             <div class={`${prefixCls}-item-icon`}>
@@ -185,6 +188,10 @@ export default defineComponent({
           </div>
         </div>
       );
+      if (props.itemRender) {
+        return props.itemRender(stepNode);
+      }
+      return stepNode;
     };
   },
 });

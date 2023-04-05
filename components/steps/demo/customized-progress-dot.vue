@@ -17,7 +17,27 @@ You can customize the display for Steps with progress dot style.
 
 <template>
   <div>
-    <a-steps :current="1">
+    <a-steps
+      v-model:current="current"
+      :items="[
+        {
+          title: 'Finished',
+          description,
+        },
+        {
+          title: 'In Progress',
+          description,
+        },
+        {
+          title: 'Waiting',
+          description,
+        },
+        {
+          title: 'Waiting',
+          description,
+        },
+      ]"
+    >
       <template #progressDot="{ index, status, prefixCls }">
         <a-popover>
           <template #content>
@@ -26,10 +46,20 @@ You can customize the display for Steps with progress dot style.
           <span :class="`${prefixCls}-icon-dot`" />
         </a-popover>
       </template>
-      <a-step title="Finished" description="You can hover on the dot." />
-      <a-step title="In Progress" description="You can hover on the dot." />
-      <a-step title="Waiting" description="You can hover on the dot." />
-      <a-step title="Waiting" description="You can hover on the dot." />
     </a-steps>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const current = ref<number>(0);
+
+    return {
+      current,
+      description: 'This is a description.',
+    };
+  },
+});
+</script>

@@ -239,17 +239,43 @@ Components which support rtl direction are listed here, you can toggle the direc
             <a-col :span="24">
               <a-divider orientation="left">Steps example</a-divider>
               <div>
-                <a-steps progress-dot :current="state.currentStep">
-                  <a-step title="Finished" description="This is a description." />
-                  <a-step title="In Progress" description="This is a description." />
-                  <a-step title="Waiting" description="This is a description." />
-                </a-steps>
+                <a-steps
+                  progress-dot
+                  :current="state.currentStep"
+                  :items="[
+                    {
+                      title: 'Finished',
+                      description: 'This is a description.',
+                    },
+                    {
+                      title: 'In Progress',
+                      description: 'This is a description.',
+                    },
+                    {
+                      title: 'Waiting',
+                      description: 'This is a description.',
+                    },
+                  ]"
+                ></a-steps>
                 <br />
-                <a-steps :current="state.currentStep" @change="onStepsChange">
-                  <a-step title="Step 1" description="This is a description." />
-                  <a-step title="Step 2" description="This is a description." />
-                  <a-step title="Step 3" description="This is a description." />
-                </a-steps>
+                <a-steps
+                  :current="state.currentStep"
+                  :items="[
+                    {
+                      title: 'Step 1',
+                      description: 'This is a description.',
+                    },
+                    {
+                      title: 'Step 2',
+                      description: 'This is a description.',
+                    },
+                    {
+                      title: 'Step 3',
+                      description: 'This is a description.',
+                    },
+                  ]"
+                  @change="onStepsChange"
+                ></a-steps>
               </div>
             </a-col>
           </a-row>

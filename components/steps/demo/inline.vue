@@ -43,15 +43,8 @@ Inline type steps, suitable for displaying the process and current state of the 
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { List, Steps, Avatar } from 'ant-design-vue';
 
 export default defineComponent({
-  components: {
-    [List.name]: List,
-    [Steps.name]: Steps,
-    [Avatar.name]: Avatar,
-  },
-
   setup() {
     const data = [
       {

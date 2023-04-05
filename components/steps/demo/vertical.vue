@@ -16,9 +16,36 @@ A simple step bar in the vertical direction.
 </docs>
 
 <template>
-  <a-steps direction="vertical" :current="1">
-    <a-step title="Finished" description="This is a description." />
-    <a-step title="In Progress" description="This is a description." />
-    <a-step title="Waiting" description="This is a description." />
-  </a-steps>
+  <a-steps
+    direction="vertical"
+    :current="1"
+    :items="[
+      {
+        title: 'Finished',
+        description,
+      },
+      {
+        title: 'In Progress',
+        description,
+      },
+      {
+        title: 'Waiting',
+        description,
+      },
+    ]"
+  ></a-steps>
 </template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const current = ref<number>(0);
+
+    return {
+      current,
+      description: 'This is a description.',
+    };
+  },
+});
+</script>

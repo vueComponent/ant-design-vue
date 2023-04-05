@@ -17,38 +17,80 @@ Navigation steps.
 
 <template>
   <div>
-    <a-steps v-model:current="current" type="navigation" size="small" :style="stepStyle">
-      <a-step
-        title="Step 1"
-        sub-title="00:00:05"
-        status="finish"
-        description="This is a description."
-      />
-      <a-step
-        title="Step 2"
-        sub-title="00:01:02"
-        status="process"
-        description="This is a description."
-      />
-      <a-step
-        title="Step 3"
-        sub-title="waiting for longlong time"
-        status="wait"
-        description="This is a description."
-      />
-    </a-steps>
-    <a-steps v-model:current="current" type="navigation" :style="stepStyle">
-      <a-step status="finish" title="Step 1" />
-      <a-step status="process" title="Step 2" />
-      <a-step status="wait" title="Step 3" />
-      <a-step status="wait" title="Step 4" />
-    </a-steps>
-    <a-steps v-model:current="current" type="navigation" size="small" :style="stepStyle">
-      <a-step status="finish" title="finish 1" />
-      <a-step status="finish" title="finish 2" />
-      <a-step status="process" title="current process" />
-      <a-step status="wait" title="wait" disabled />
-    </a-steps>
+    <a-steps
+      v-model:current="current"
+      type="navigation"
+      size="small"
+      :style="stepStyle"
+      :items="[
+        {
+          title: 'Step 1',
+          subTitle: '00:00:05',
+          status: 'finish',
+          description: 'This is a description.',
+        },
+        {
+          title: 'Step 2',
+          subTitle: '00:01:02',
+          status: 'process',
+          description: 'This is a description.',
+        },
+        {
+          title: 'Step 3',
+          subTitle: 'waiting for longlong time',
+          status: 'wait',
+          description: 'This is a description.',
+        },
+      ]"
+    ></a-steps>
+    <a-steps
+      v-model:current="current"
+      type="navigation"
+      :style="stepStyle"
+      :items="[
+        {
+          status: 'finish',
+          title: 'Step 1',
+        },
+        {
+          status: 'process',
+          title: 'Step 2',
+        },
+        {
+          status: 'wait',
+          title: 'Step 3',
+        },
+        {
+          status: 'wait',
+          title: 'Step 4',
+        },
+      ]"
+    ></a-steps>
+    <a-steps
+      v-model:current="current"
+      type="navigation"
+      size="small"
+      :style="stepStyle"
+      :items="[
+        {
+          status: 'finish',
+          title: 'finish 1',
+        },
+        {
+          status: 'finish',
+          title: 'finish 2',
+        },
+        {
+          status: 'process',
+          title: 'current process',
+        },
+        {
+          status: 'wait',
+          title: 'wait',
+          disabled: true,
+        },
+      ]"
+    ></a-steps>
   </div>
 </template>
 <script lang="ts">

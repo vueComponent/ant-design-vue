@@ -29,22 +29,20 @@ The whole of the step bar.
 | type | Type of steps, can be set to one of the following values: `default`, `navigation` | string | `default` | 1.5.0 |
 | items | StepItem content | [StepItem](#stepsstep) | [] |  |
 
+### `type="inline"` (4.0+)
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| current | To set the current step, counting from 0. You can overwrite this state by using `status` of `Step` | number | 0 |  |
+| initial | Set the initial step, counting from 0 | number | 0 |  |
+| status | To specify the status of current step, can be set to one of the following values: `wait` `process` `finish` `error` | string | `process` |  |
+| items | StepItem content. not supported: `icon` `subtitle` | [StepItem](#stepsstep) | [] |  |
+
 #### Steps Events
 
 | Events Name | Description                  | Arguments         | Version |       |
 | ----------- | ---------------------------- | ----------------- | ------- | ----- |
 | change      | Trigger when Step is changed | (current) => void | -       | 1.5.0 |
-
-### `type="inline"`
-
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| className | Additional class to Steps | string | - |  |
-| current | To set the current step, counting from 0. You can overwrite this state by using `status` of `Step` | number | 0 |  |
-| initial | Set the initial step, counting from 0 | number | 0 |  |
-| status | To specify the status of current step, can be set to one of the following values: `wait` `process` `finish` `error` | string | `process` |  |
-| onChange | Trigger when Step is changed | (current) => void | - |  |
-| items | StepItem content. not supported: `icon` `subtitle` | [StepItem](#stepsstep) | [] | 4.24.0 |
 
 ### Steps.Step
 

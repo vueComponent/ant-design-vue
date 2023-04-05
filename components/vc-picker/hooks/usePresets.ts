@@ -8,13 +8,13 @@ export default function usePresets<T>(
   presets?: ComputedRef<PresetDate<T>[]>,
   legacyRanges?: ComputedRef<Record<string, T | (() => T)>>,
 ): ComputedRef<PresetDate<T>[]> {
-  if (presets.value) {
-    return presets;
-  }
-  if (legacyRanges && legacyRanges.value) {
-    warning(false, '`ranges` is deprecated. Please use `presets` instead.');
+  return computed(() => {
+    if (presets?.value) {
+      return presets.value;
+    }
+    if (legacyRanges?.value) {
+      warning(false, '`ranges` is deprecated. Please use `presets` instead.');
 
-    return computed(() => {
       const rangeLabels = Object.keys(legacyRanges.value);
       return rangeLabels.map(label => {
         const range = legacyRanges.value[label];
@@ -24,7 +24,7 @@ export default function usePresets<T>(
           value: newValues,
         };
       });
-    });
-  }
-  return [] as unknown as ComputedRef<PresetDate<T>[]>;
+    }
+    return [] as unknown as PresetDate<T>[];
+  });
 }

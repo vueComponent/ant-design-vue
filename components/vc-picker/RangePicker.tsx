@@ -1,9 +1,17 @@
-import type { DisabledTimes, PanelMode, PickerMode, RangeValue, EventValue } from './interface';
+import type {
+  DisabledTimes,
+  PanelMode,
+  PickerMode,
+  RangeValue,
+  EventValue,
+  PresetDate,
+} from './interface';
 import type { PickerBaseProps, PickerDateProps, PickerTimeProps } from './Picker';
 import type { SharedTimeProps } from './panels/TimePanel';
 import PickerTrigger from './PickerTrigger';
 import PickerPanel from './PickerPanel';
 import usePickerInput from './hooks/usePickerInput';
+import PresetPanel from './PresetPanel';
 import getDataOrAriaProps, { toArray, getValue, updateValues } from './utils/miscUtil';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
 import type { ContextOperationRefProps } from './PanelContext';
@@ -19,6 +27,7 @@ import {
 } from './utils/dateUtil';
 import useValueTexts from './hooks/useValueTexts';
 import useTextValueMapping from './hooks/useTextValueMapping';
+import usePresets from './hooks/usePresets';
 import type { GenerateConfig } from './generate';
 import type { PickerPanelProps } from '.';
 import { RangeContextProvider } from './RangeContext';
@@ -91,6 +100,8 @@ export type RangePickerSharedProps<DateType> = {
   placeholder?: [string, string];
   disabled?: boolean | [boolean, boolean];
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
+  presets?: PresetDate<RangeValue<DateType>>[];
+  /** @deprecated Please use `presets` instead */
   ranges?: Record<
     string,
     Exclude<RangeValue<DateType>, null> | (() => Exclude<RangeValue<DateType>, null>)
@@ -139,6 +150,7 @@ type OmitPickerProps<Props> = Omit<
   | 'onPickerValueChange'
   | 'onOk'
   | 'dateRender'
+  | 'presets'
 >;
 
 type RangeShowTimeObject<DateType> = Omit<SharedTimeProps<DateType>, 'defaultValue'> & {
@@ -238,13 +250,17 @@ function RangerPicker<DateType>() {
       'secondStep',
       'hideDisabledOptions',
       'disabledMinutes',
+      'presets',
     ] as any,
     setup(props, { attrs, expose }) {
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
       const getPortal = useProviderTrigger();
-      // We record opened status here in case repeat open with picker
+      const presets = computed(() => props.presets);
+      const ranges = computed(() => props.ranges);
+      const presetList = usePresets(presets, ranges);
+      // We record oqqpened status here in case repeat open with picker
       const openRecordsRef = ref<Record<number, boolean>>({});
 
       const containerRef = ref<HTMLDivElement>(null);
@@ -830,28 +846,6 @@ function RangerPicker<DateType>() {
         },
       });
 
-      // ============================ Ranges =============================
-
-      const rangeList = computed(() =>
-        Object.keys(props.ranges || {}).map(label => {
-          const range = props.ranges![label];
-          const newValues = typeof range === 'function' ? range() : range;
-
-          return {
-            label,
-            onClick: () => {
-              triggerChange(newValues, null);
-              triggerOpen(false, mergedActivePickerIndex.value);
-            },
-            onMouseenter: () => {
-              setRangeHoverValue(newValues);
-            },
-            onMouseleave: () => {
-              setRangeHoverValue(null);
-            },
-          };
-        }),
-      );
       // ============================= Panel =============================
       const panelHoverRangedValue = computed(() => {
         if (
@@ -1044,7 +1038,6 @@ function RangerPicker<DateType>() {
               !getValue(selectedValue.value, mergedActivePickerIndex.value) ||
               (disabledDate && disabledDate(selectedValue.value[mergedActivePickerIndex.value])),
             locale,
-            rangeList: rangeList.value,
             onOk: () => {
               if (getValue(selectedValue.value, mergedActivePickerIndex.value)) {
                 // triggerChangeOld(selectedValue.value);
@@ -1099,15 +1092,28 @@ function RangerPicker<DateType>() {
           }
 
           let mergedNodes: VueNode = (
-            <>
-              <div class={`${prefixCls}-panels`}>{panels}</div>
-              {(extraNode || rangesNode) && (
-                <div class={`${prefixCls}-footer`}>
-                  {extraNode}
-                  {rangesNode}
-                </div>
-              )}
-            </>
+            <div class={`${prefixCls}-panel-layout`}>
+              <PresetPanel
+                prefixCls={prefixCls}
+                presets={presetList.value}
+                onClick={nextValue => {
+                  triggerChange(nextValue, null);
+                  triggerOpen(false, mergedActivePickerIndex.value);
+                }}
+                onHover={hoverValue => {
+                  setRangeHoverValue(hoverValue);
+                }}
+              />
+              <div>
+                <div class={`${prefixCls}-panels`}>{panels}</div>
+                {(extraNode || rangesNode) && (
+                  <div class={`${prefixCls}-footer`}>
+                    {extraNode}
+                    {rangesNode}
+                  </div>
+                )}
+              </div>
+            </div>
           );
 
           if (panelRender) {

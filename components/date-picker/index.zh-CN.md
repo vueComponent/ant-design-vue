@@ -98,6 +98,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 | placement | 选择框弹出的位置 | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | popupStyle | 额外的弹出日历样式 | CSSProperties | {} |  |
 | prevIcon | 自定义上一个图标 | slot | - | 3.0 |
+| presets | 预设时间范围快捷选择 | { label: slot, value: [dayjs](https://day.js.org/) }[] | - |  |
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | `large` \| `middle` \| `small` | - |  |
 | status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | v-slot:suffixIcon | - |  |
@@ -175,6 +176,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 | disabled | 禁用起始项 | \[boolean, boolean] | - |  |
 | disabledTime | 不可选择的时间 | function(date: dayjs, partial: `start` \| `end`) | - |  |
 | format | 展示的日期格式 | [formatType](#formatType) | `YYYY-MM-DD HH:mm:ss` |  |
+| presets | 预设时间范围快捷选择 | { label: slot, value: [dayjs](https://day.js.org/)\[] }[] | - |  |
 | ranges | 预设时间范围快捷选择 | { \[range: string]: [dayjs](https://day.js.org/)\[] } \| { \[range: string]: () => [dayjs](https://day.js.org/)\[] } | - |  |
 | renderExtraFooter | 在面板中添加额外的页脚 | v-slot:renderExtraFooter="mode" | - |  |
 | separator | 设置分隔符 | string \| v-slot:separator | `<SwapRightOutlined />` |  |

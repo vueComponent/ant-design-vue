@@ -18,13 +18,14 @@ We can set presetted ranges to RangePicker to improve user experience.
 
 <template>
   <a-space direction="vertical" :size="12">
-    <a-range-picker v-model:value="value1" :ranges="ranges" />
+    <a-date-picker :presets="presets" @change="onChange" />
+    <a-range-picker :presets="rangePresets" @change="onRangeChange" />
     <a-range-picker
-      v-model:value="value2"
       style="width: 400px"
-      :ranges="ranges"
       show-time
       format="YYYY/MM/DD HH:mm:ss"
+      :presets="rangePresets"
+      @change="onRangeChange"
     />
   </a-space>
 </template>
@@ -34,13 +35,40 @@ import { defineComponent, ref } from 'vue';
 type RangeValue = [Dayjs, Dayjs];
 export default defineComponent({
   setup() {
+    const onChange = (date: Dayjs) => {
+      if (date) {
+        console.log('Date: ', date);
+      } else {
+        console.log('Clear');
+      }
+    };
+    const onRangeChange = (dates: RangeValue, dateStrings: string[]) => {
+      if (dates) {
+        console.log('From: ', dates[0], ', to: ', dates[1]);
+        console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+      } else {
+        console.log('Clear');
+      }
+    };
+
+    const presets = ref([
+      { label: 'Yesterday', value: dayjs().add(-1, 'd') },
+      { label: 'Last Week', value: dayjs().add(-7, 'd') },
+      { label: 'Last Month', value: dayjs().add(-1, 'month') },
+    ]);
+
+    const rangePresets = ref([
+      { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()] },
+      { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()] },
+      { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()] },
+      { label: 'Last 90 Days', value: [dayjs().add(-90, 'd'), dayjs()] },
+    ]);
     return {
-      value1: ref<RangeValue>(),
-      value2: ref<RangeValue>(),
-      ranges: {
-        Today: [dayjs(), dayjs()] as RangeValue,
-        'This Month': [dayjs(), dayjs().endOf('month')] as RangeValue,
-      },
+      presets,
+      rangePresets,
+
+      onChange,
+      onRangeChange,
     };
   },
 });

@@ -96,7 +96,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | placeholder | The placeholder of date input | string \| \[string,string] | - |  |
 | placement | The position where the selection box pops up | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | popupStyle | To customize the style of the popup calendar | CSSProperties | {} |  |
-| presets | The preset ranges for quick selection | { label: slot, value: [dayjs](https://day.js.org/) }[] | - |  |
+| presets | The preset ranges for quick selection | { label: slot, value: [dayjs](https://day.js.org/) }[] | - | 4.0 |
 | prevIcon | The custom prev icon | slot | - | 3.0 |
 | size | To determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | `large` \| `middle` \| `small` | - |  |
 | status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
@@ -175,7 +175,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | disabled | If disable start or end | \[boolean, boolean] | - |  |
 | disabledTime | To specify the time that cannot be selected | function(date: dayjs, partial: `start` \| `end`) | - |  |
 | format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM-DD HH:mm:ss` |  |
-| presets | The preset ranges for quick selection | { label: slot, value: [dayjs](https://day.js.org/)\[] }[] | - |  |
+| presets | The preset ranges for quick selection | { label: slot, value: [dayjs](https://day.js.org/)\[] }[] | - | 4.0 |
 | ranges | The preseted ranges for quick selection | { \[range: string]: [dayjs](https://day.js.org/)\[] } \| { \[range: string]: () => [dayjs](https://day.js.org/)\[] } | - |  |
 | renderExtraFooter | Render extra footer in panel | v-slot:renderExtraFooter="mode" | - |  |
 | separator | Set separator between inputs | string \| v-slot:separator | `<SwapRightOutlined />` |  |

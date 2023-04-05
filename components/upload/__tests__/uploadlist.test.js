@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import * as Vue from 'vue';
 import Upload from '..';
-import { errorRequest, successRequest, syncErrorRequest } from './requests';
+import { errorRequest, successRequest } from './requests';
 import PropsTypes from '../../_util/vue-types';
 import { uploadListProps } from '../interface';
 import { sleep } from '../../../tests/utils';
@@ -138,38 +138,6 @@ describe('Upload List', () => {
       props: {
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         customRequest: errorRequest,
-      },
-      listeners: {
-        change: ({ file }) => {
-          if (file.status !== 'uploading') {
-            expect(wrapper.html()).toMatchSnapshot();
-            done();
-          }
-        },
-      },
-      slots: {
-        default: () => h('button', 'upload'),
-      },
-      sync: false,
-    };
-    const wrapper = mount(Upload, props);
-    setTimeout(() => {
-      const mockFile = new File(['foo'], 'foo.png', {
-        type: 'image/png',
-      });
-      wrapper.findComponent({ name: 'ajaxUploader' }).vm.onChange({
-        target: {
-          files: [mockFile],
-        },
-      });
-    }, 0);
-  });
-
-  xit('handle sync throw error', done => {
-    const props = {
-      props: {
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        customRequest: syncErrorRequest,
       },
       listeners: {
         change: ({ file }) => {

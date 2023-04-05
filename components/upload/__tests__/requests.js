@@ -9,7 +9,3 @@ export const errorRequest = ({ onError }) => {
     onError();
   });
 };
-
-export const syncErrorRequest = ({ onError }) => {
-  onError();
-};

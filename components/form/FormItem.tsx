@@ -45,7 +45,6 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';
-import type { ValidationRule } from './Form';
 import type { FormItemStatusContextProps } from './FormItemContext';
 import { FormItemInputContext, useProvideFormItemContext } from './FormItemContext';
 import useDebounce from './utils/useDebounce';
@@ -62,7 +61,7 @@ export interface FieldExpose {
   resetField: () => void;
   clearValidate: () => void;
   namePath: ComputedRef<InternalNamePath>;
-  rules?: ComputedRef<ValidationRule[]>;
+  rules?: ComputedRef<Rule[]>;
   validateRules: (options: ValidateOptions) => Promise<void> | Promise<RuleError[]>;
 }
 
@@ -198,7 +197,7 @@ export default defineComponent({
       validateTrigger = validateTrigger === undefined ? 'change' : validateTrigger;
       return toArray(validateTrigger);
     });
-    const rulesRef = computed<ValidationRule[]>(() => {
+    const rulesRef = computed<Rule[]>(() => {
       let formRules = formContext.rules.value;
       const selfRules = props.rules;
       const requiredRule =

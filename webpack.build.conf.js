@@ -1,5 +1,5 @@
 // This config is for building dist files
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { ESBuildMinifyPlugin } = require('esbuild-loader');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const getWebpackConfig = require('./antd-tools/getWebpackConfig');
@@ -74,13 +74,13 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
         css: true,
       });
     }
-    config.plugins.push(
-      new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        openAnalyzer: false,
-        reportFilename: '../report.html',
-      }),
-    );
+    // config.plugins.push(
+    //   new BundleAnalyzerPlugin({
+    //     analyzerMode: 'static',
+    //     openAnalyzer: false,
+    //     reportFilename: '../report.html',
+    //   }),
+    // );
 
     if (!process.env.NO_DUP_CHECK) {
       config.plugins.push(

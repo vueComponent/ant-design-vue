@@ -85,6 +85,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 | dateRender | 自定义日期单元格的内容 | v-slot:dateRender="{current, today}" | - |  |
 | disabled | 禁用 | boolean | false |  |
 | disabledDate | 不可选择的日期 | (currentDate: dayjs) => boolean | - |  |
+| format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format)，支持[自定义格式](#components-date-picker-demo-format) | [formatType](#formatType) | `YYYY-MM-DD` |  |
 | dropdownClassName | 额外的弹出日历 className | string | - |  |
 | getPopupContainer | 定义浮层的容器，默认为 body 上新建 div | function(trigger) | - |  |
 | inputReadOnly | 设置输入框为只读（避免在移动设备上打开虚拟键盘） | boolean | false |  |
@@ -124,7 +125,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 | --- | --- | --- | --- | --- |
 | defaultPickerValue | 默认面板日期 | [dayjs](https://day.js.org/) | - |  |
 | disabledTime | 不可选择的时间 | function(date) | - |  |
-| format | 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format)，支持[自定义格式](#components-date-picker-demo-format) | string \| (value: dayjs) => string \| (string \| (value: dayjs) => string)\[] | `YYYY-MM-DD` |  |
+| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY-MM-DD` |  |
 | renderExtraFooter | 在面板中添加额外的页脚 | v-slot:renderExtraFooter="mode" | - |  |
 | showNow | 当设定了 `showTime` 的时候，面板是否显示“此刻”按钮 | boolean | - |  |
 | showTime | 增加时间选择功能 | Object \| boolean | [TimePicker Options](/components/time-picker/#API) |  |
@@ -143,26 +144,26 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | string | `YYYY` |  |
+| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY` |  |
 
 ### DatePicker\[picker=quarter]
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | string | `YYYY-\QQ` |  |
+| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY-\QQ` |  |
 
 ### DatePicker\[picker=month]
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | string | `YYYY-MM` |  |
+| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY-MM` |  |
 | monthCellRender | 自定义的月份内容渲染方法 | v-slot:monthCellRender="{current, locale}" | - |  |
 
 ### DatePicker\[picker=week]
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | string | `YYYY-wo` |  |
+| format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY-wo` |  |
 
 ### RangePicker
 
@@ -173,7 +174,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 | defaultPickerValue | 默认面板日期 | [dayjs](https://day.js.org/)\[] | - |  |
 | disabled | 禁用起始项 | \[boolean, boolean] | - |  |
 | disabledTime | 不可选择的时间 | function(date: dayjs, partial: `start` \| `end`) | - |  |
-| format | 展示的日期格式 | string | `YYYY-MM-DD HH:mm:ss` |  |
+| format | 展示的日期格式 | [formatType](#formatType) | `YYYY-MM-DD HH:mm:ss` |  |
 | ranges | 预设时间范围快捷选择 | { \[range: string]: [dayjs](https://day.js.org/)\[] } \| { \[range: string]: () => [dayjs](https://day.js.org/)\[] } | - |  |
 | renderExtraFooter | 在面板中添加额外的页脚 | v-slot:renderExtraFooter="mode" | - |  |
 | separator | 设置分隔符 | string \| v-slot:separator | `<SwapRightOutlined />` |  |
@@ -188,6 +189,17 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 | calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string], info: { range:`start`\|`end` }) |
 | change | 日期范围发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string]) |
 | ok | 点击确定按钮的回调 | function(dates: \[dayjs, dayjs] \| \[string, string]) |
+
+#### formatType
+
+```typescript
+import type { Dayjs } from 'dayjs';
+
+type Generic = string;
+type GenericFn = (value: Dayjs) => string;
+
+export type FormatType = Generic | GenericFn | Array<Generic | GenericFn>;
+```
 
 ## FAQ
 

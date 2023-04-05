@@ -144,7 +144,7 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 - [Home Page](https://www.antdv.com/)
 - [Ant Design Of React](https://ant.design/)
-- [Components](https://www.antdv.com/docs/vue/introduce)
+- [Components](https://www.antdv.com/components/overview)
 - [Change Log](/docs/vue/changelog)
 - [CodeSandbox template](https://codesandbox.io/s/agitated-franklin-1w72v) for bug reports
 - [Customize Theme](/docs/vue/customize-theme)

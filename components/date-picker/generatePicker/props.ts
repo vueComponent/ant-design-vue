@@ -54,6 +54,11 @@ function commonProps<DateType = any>() {
     defaultOpen: booleanType(),
     /** Make input readOnly to avoid popup keyboard in mobile */
     inputReadOnly: booleanType(),
+    format: someType<string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]>([
+      String,
+      Function,
+      Array,
+    ]),
     // Value
     // format:  string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
     // Render
@@ -127,6 +132,7 @@ export interface CommonProps<DateType> {
   open?: boolean;
   defaultOpen?: boolean;
   inputReadOnly?: boolean;
+  format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
   suffixIcon?: VueNode;
   clearIcon?: VueNode;
   prevIcon?: VueNode;
@@ -174,11 +180,6 @@ function datePickerProps<DateType = any>() {
     value: someType<DateType | string>([Object, String]),
     presets: arrayType<PresetDate<DateType>[]>(),
     disabledTime: functionType<DisabledTime<DateType>>(),
-    format: someType<string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]>([
-      String,
-      Function,
-      Array,
-    ]),
     renderExtraFooter: functionType<(mode: PanelMode) => VueNode>(),
     showNow: booleanType(),
     monthCellRender: functionType<MonthCellRender<DateType>>(),
@@ -193,7 +194,6 @@ export interface DatePickerProps<DateType> {
   value?: DateType | string;
   presets?: PresetDate<DateType>[];
   disabledTime?: DisabledTime<DateType>;
-  format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
   renderExtraFooter?: (mode: PanelMode) => VueNode;
   showNow?: boolean;
   monthCellRender?: MonthCellRender<DateType>;
@@ -211,7 +211,6 @@ function rangePickerProps<DateType>() {
     presets: arrayType<PresetDate<Array<DateType>>[]>(),
     disabledTime: functionType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>(),
     disabled: someType<boolean | [boolean, boolean]>([Boolean, Array]),
-    format: String,
     renderExtraFooter: functionType<() => VueNode>(),
     separator: { type: String },
     showTime: someType<boolean | RangeShowTimeObject<DateType>>([Boolean, Object]),
@@ -258,7 +257,6 @@ export interface RangePickerProps<DateType> {
   presets?: PresetDate<RangeValue<DateType>>[];
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
   disabled?: [boolean, boolean];
-  format?: string;
   renderExtraFooter?: () => VueNode;
   separator?: string;
   showTime?: boolean | RangeShowTimeObject<DateType>;

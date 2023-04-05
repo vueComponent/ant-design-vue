@@ -1,9 +1,9 @@
 import PropTypes from '../_util/vue-types';
-import { filterEmpty } from '../_util/props-util';
-import { cloneElement } from '../_util/vnode';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-
+import Step from './Step';
+import { cloneElement } from '../_util/vnode';
+import { filterEmpty } from '../_util/props-util';
 export type Status = 'error' | 'process' | 'finish' | 'wait';
 export type StepIconRender = (info: {
   index: number;
@@ -35,11 +35,15 @@ export default defineComponent({
     progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(undefined),
     initial: PropTypes.number.def(0),
     current: PropTypes.number.def(0),
+    items: PropTypes.array.def(() => []),
     icons: PropTypes.shape({
       finish: PropTypes.any,
       error: PropTypes.any,
     }).loose,
+    style: PropTypes.style,
     stepIcon: Function,
+    isInline: PropTypes.looseBool,
+    itemRender: Function,
   },
   slots: ['stepIcon', 'progressDot'],
   emits: ['change'],
@@ -54,6 +58,7 @@ export default defineComponent({
       const {
         prefixCls,
         direction,
+        style = {},
         type,
         labelPlacement,
         iconPrefix,
@@ -64,56 +69,86 @@ export default defineComponent({
         initial,
         icons,
         stepIcon = slots.stepIcon,
+        items,
+        isInline,
+        itemRender,
+        ...restProps
       } = props;
       const isNav = type === 'navigation';
-      const adjustedLabelPlacement = progressDot ? 'vertical' : labelPlacement;
-      const classString = classNames(prefixCls, `${prefixCls}-${direction}`, {
-        [`${prefixCls}-${size}`]: size,
-        [`${prefixCls}-label-${adjustedLabelPlacement}`]: direction === 'horizontal',
-        [`${prefixCls}-dot`]: !!progressDot,
-        [`${prefixCls}-navigation`]: isNav,
-      });
-      const children = filterEmpty(slots.default?.());
-      return (
-        <div class={classString}>
-          {children.map((child, index) => {
-            // description: PropTypes.any,
-            // icon: PropTypes.any,
-            // status: PropTypes.oneOf(tuple('wait', 'process', 'finish', 'error')),
-            // disabled: { type: Boolean, default: undefined },
-            // title: PropTypes.any,
-            // subTitle: PropTypes.any,
-            const { prefixCls: pre = prefixCls, ...restProps } = child.props || {};
-            const stepNumber = initial + index;
-            const stepProps = {
-              ...restProps,
-              stepNumber: stepNumber + 1,
-              stepIndex: stepNumber,
-              key: stepNumber,
-              prefixCls: pre,
-              iconPrefix,
-              progressDot,
-              icons,
-              stepIcon,
-              onStepClick,
-            };
+      const mergedProgressDot = isInline || progressDot;
+      const mergedDirection = isInline ? 'horizontal' : direction;
+      const mergedSize = isInline ? undefined : size;
 
-            // fix tail color
-            if (status === 'error' && index === current - 1) {
-              stepProps.class = `${prefixCls}-next-error`;
-            }
-            if (!restProps.status) {
-              if (stepNumber === current) {
-                stepProps.status = status;
-              } else if (stepNumber < current) {
-                stepProps.status = 'finish';
-              } else {
-                stepProps.status = 'wait';
-              }
-            }
-            stepProps.active = stepNumber === current;
-            return cloneElement(child, stepProps);
-          })}
+      const adjustedLabelPlacement = mergedProgressDot ? 'vertical' : labelPlacement;
+      const classString = classNames(prefixCls, `${prefixCls}-${direction}`, {
+        [`${prefixCls}-${mergedSize}`]: mergedSize,
+        [`${prefixCls}-label-${adjustedLabelPlacement}`]: mergedDirection === 'horizontal',
+        [`${prefixCls}-dot`]: !!mergedProgressDot,
+        [`${prefixCls}-navigation`]: isNav,
+        [`${prefixCls}-inline`]: isInline,
+      });
+      const renderStep = (props, index, render) => {
+        const { prefixCls: pre = prefixCls, ...restProps } = props || {};
+        const stepNumber = initial + index;
+        const stepProps = {
+          ...restProps,
+          stepNumber: stepNumber + 1,
+          stepIndex: stepNumber,
+          key: stepNumber,
+          prefixCls: pre,
+          iconPrefix,
+          progressDot: mergedProgressDot,
+          icons,
+          stepIcon,
+          onStepClick,
+          active: stepNumber === current,
+        };
+
+        // fix tail color
+        if (status === 'error' && index === current - 1) {
+          stepProps.class = `${prefixCls}-next-error`;
+        }
+
+        if (!restProps.status) {
+          if (stepNumber === current) {
+            stepProps.status = status;
+          } else if (stepNumber < current) {
+            stepProps.status = 'finish';
+          } else {
+            stepProps.status = 'wait';
+          }
+        }
+
+        if (isInline) {
+          stepProps.icon = undefined;
+          stepProps.subTitle = undefined;
+        }
+        stepProps.active = stepNumber === current;
+        return render(stepProps);
+      };
+      const renderStepWithNode = (node, index) => {
+        return renderStep({ ...node.props }, index, stepProps => {
+          const stepNode = cloneElement(node, stepProps);
+          if (itemRender) {
+            return itemRender(stepProps, stepNode);
+          }
+          return stepNode;
+        });
+      };
+      const renderStepWithItem = (item, index) => {
+        return renderStep(item, index, stepProps => {
+          const stepNode = <Step {...stepProps} />;
+          if (itemRender) {
+            return itemRender(stepProps, stepNode);
+          }
+          return stepNode;
+        });
+      };
+      return (
+        <div class={classString} style={style} {...restProps}>
+          {items.length
+            ? items.map(renderStepWithItem)
+            : filterEmpty(slots.default?.()).map(renderStepWithNode)}
         </div>
       );
     };

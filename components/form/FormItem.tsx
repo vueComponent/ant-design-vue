@@ -13,7 +13,7 @@ import {
   defineComponent,
   computed,
   nextTick,
-  ref,
+  shallowRef,
   watchEffect,
   onBeforeUnmount,
   toRaw,
@@ -158,12 +158,12 @@ export default defineComponent({
     const eventKey = `form-item-${++indexGuid}`;
     const { prefixCls } = useConfigInject('form', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const itemRef = ref<HTMLDivElement>();
+    const itemRef = shallowRef<HTMLDivElement>();
     const formContext = useInjectForm();
     const fieldName = computed(() => props.name || props.prop);
-    const errors = ref([]);
-    const validateDisabled = ref(false);
-    const inputRef = ref();
+    const errors = shallowRef([]);
+    const validateDisabled = shallowRef(false);
+    const inputRef = shallowRef();
     const namePath = computed(() => {
       const val = fieldName.value;
       return getNamePath(val);
@@ -188,7 +188,7 @@ export default defineComponent({
     };
     const fieldValue = computed(() => getNewFieldValue());
 
-    const initialValue = ref(cloneDeep(fieldValue.value));
+    const initialValue = shallowRef(cloneDeep(fieldValue.value));
     const mergedValidateTrigger = computed(() => {
       let validateTrigger =
         props.validateTrigger !== undefined
@@ -228,7 +228,7 @@ export default defineComponent({
       return isRequired || props.required;
     });
 
-    const validateState = ref();
+    const validateState = shallowRef();
     watchEffect(() => {
       validateState.value = props.validateStatus;
     });
@@ -445,8 +445,8 @@ export default defineComponent({
       });
     });
 
-    const marginBottom = ref<number>(null);
-    const showMarginOffset = ref(false);
+    const marginBottom = shallowRef<number>(null);
+    const showMarginOffset = shallowRef(false);
     const updateMarginBottom = () => {
       if (itemRef.value) {
         const itemStyle = getComputedStyle(itemRef.value);

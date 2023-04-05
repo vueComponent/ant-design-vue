@@ -1,5 +1,5 @@
 import type { HTMLAttributes, App, PropType, ExtractPropTypes, Plugin, CSSProperties } from 'vue';
-import { ref, defineComponent, watchEffect, computed } from 'vue';
+import { shallowRef, defineComponent, watchEffect, computed } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
@@ -45,7 +45,7 @@ const Tag = defineComponent({
 
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
-    const visible = ref(true);
+    const visible = shallowRef(true);
 
     // Warning for deprecated usage
     if (process.env.NODE_ENV !== 'production') {

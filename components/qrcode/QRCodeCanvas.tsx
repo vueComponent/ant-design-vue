@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { defineComponent, ref, watch, computed, watchEffect } from 'vue';
+import { defineComponent, shallowRef, watch, computed, watchEffect } from 'vue';
 import type { ImageSettings } from './interface';
 import { qrProps } from './interface';
 
@@ -146,9 +146,9 @@ export const QRCodeCanvas = defineComponent({
   props: { ...qrProps(), level: String, bgColor: String, fgColor: String, marginSize: Number },
   setup(props, { attrs, expose }) {
     const imgSrc = computed(() => props.imageSettings?.src);
-    const _canvas = ref<HTMLCanvasElement>(null);
-    const _image = ref<HTMLImageElement>(null);
-    const isImgLoaded = ref(false);
+    const _canvas = shallowRef<HTMLCanvasElement>(null);
+    const _image = shallowRef<HTMLImageElement>(null);
+    const isImgLoaded = shallowRef(false);
     expose({
       toDataURL: (type?: string, quality?: any) => {
         return _canvas.value?.toDataURL(type, quality);

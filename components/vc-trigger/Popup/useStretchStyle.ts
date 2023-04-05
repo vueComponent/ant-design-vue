@@ -1,11 +1,11 @@
 import type { ComputedRef, CSSProperties, Ref } from 'vue';
-import { computed, ref } from 'vue';
+import { computed, shallowRef } from 'vue';
 import type { StretchType } from '../interface';
 
 export default (
   stretch?: Ref<StretchType>,
 ): [ComputedRef<CSSProperties>, (element: HTMLElement) => void] => {
-  const targetSize = ref({ width: 0, height: 0 });
+  const targetSize = shallowRef({ width: 0, height: 0 });
 
   function measureStretch(element: HTMLElement) {
     targetSize.value = {

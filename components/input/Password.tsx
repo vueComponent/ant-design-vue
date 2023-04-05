@@ -6,7 +6,7 @@ import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import type { InputProps } from './inputProps';
 import inputProps from './inputProps';
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, shallowRef } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 
@@ -29,7 +29,7 @@ export default defineComponent({
     iconRender: Function,
   },
   setup(props, { slots, attrs, expose }) {
-    const visible = ref(false);
+    const visible = shallowRef(false);
     const onVisibleChange = () => {
       const { disabled } = props;
       if (disabled) {
@@ -37,7 +37,7 @@ export default defineComponent({
       }
       visible.value = !visible.value;
     };
-    const inputRef = ref();
+    const inputRef = shallowRef();
     const focus = () => {
       inputRef.value?.focus();
     };

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { onBeforeUnmount, onMounted, Transition, render, defineComponent, ref } from 'vue';
+import { onBeforeUnmount, onMounted, Transition, render, defineComponent, shallowRef } from 'vue';
 import useState from '../hooks/useState';
 import { objectType } from '../type';
 import { getTargetWaveColor } from './util';
@@ -19,7 +19,7 @@ const WaveEffect = defineComponent({
     className: String,
   },
   setup(props) {
-    const divRef = ref<HTMLDivElement | null>(null);
+    const divRef = shallowRef<HTMLDivElement | null>(null);
 
     const [color, setWaveColor] = useState<string | null>(null);
     const [borderRadius, setBorderRadius] = useState<number[]>([]);

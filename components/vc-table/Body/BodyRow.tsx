@@ -2,7 +2,7 @@ import Cell from '../Cell';
 import { getColumnsKey } from '../utils/valueUtil';
 import type { CustomizeComponent, GetComponentProps, Key, GetRowKey } from '../interface';
 import ExpandedRow from './ExpandedRow';
-import { computed, defineComponent, ref, watchEffect } from 'vue';
+import { computed, defineComponent, shallowRef, watchEffect } from 'vue';
 import { useInjectTable } from '../context/TableContext';
 import { useInjectBody } from '../context/BodyContext';
 import classNames from '../../_util/classNames';
@@ -45,7 +45,7 @@ export default defineComponent<BodyRowProps<unknown>>({
   setup(props, { attrs }) {
     const tableContext = useInjectTable();
     const bodyContext = useInjectBody();
-    const expandRended = ref(false);
+    const expandRended = shallowRef(false);
 
     const expanded = computed(() => props.expandedKeys && props.expandedKeys.has(props.recordKey));
 

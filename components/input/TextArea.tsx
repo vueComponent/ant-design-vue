@@ -4,7 +4,7 @@ import {
   defineComponent,
   getCurrentInstance,
   nextTick,
-  ref,
+  shallowRef,
   watch,
   watchEffect,
 } from 'vue';
@@ -58,9 +58,9 @@ export default defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
-    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
-    const resizableTextArea = ref();
-    const mergedValue = ref('');
+    const stateValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
+    const resizableTextArea = shallowRef();
+    const mergedValue = shallowRef('');
     const { prefixCls, size, direction } = useConfigInject('input', props);
 
     // Style
@@ -71,10 +71,10 @@ export default defineComponent({
     });
     // Max length value
     const hasMaxLength = computed(() => Number(props.maxlength) > 0);
-    const compositing = ref(false);
+    const compositing = shallowRef(false);
 
-    const oldCompositionValueRef = ref<string>();
-    const oldSelectionStartRef = ref<number>(0);
+    const oldCompositionValueRef = shallowRef<string>();
+    const oldSelectionStartRef = shallowRef<number>(0);
     const onInternalCompositionStart = (e: CompositionEvent) => {
       compositing.value = true;
       // 拼音输入前保存一份旧值

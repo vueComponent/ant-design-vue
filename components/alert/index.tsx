@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, shallowRef } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -71,9 +71,9 @@ const Alert = defineComponent({
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, direction } = useConfigInject('alert', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const closing = ref(false);
-    const closed = ref(false);
-    const alertNode = ref();
+    const closing = shallowRef(false);
+    const closed = shallowRef(false);
+    const alertNode = shallowRef();
 
     const handleClose = (e: MouseEvent) => {
       e.preventDefault();
@@ -103,7 +103,7 @@ const Alert = defineComponent({
       return props.banner ? 'warning' : 'info';
     });
     expose({ animationEnd });
-    const motionStyle = ref<CSSProperties>({});
+    const motionStyle = shallowRef<CSSProperties>({});
     return () => {
       const { banner, closeIcon: customCloseIcon = slots.closeIcon?.() } = props;
 

@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, shallowRef, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, flattenChildren, isEmptyContent } from '../_util/props-util';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
@@ -49,7 +49,7 @@ const PageHeader = defineComponent({
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
-    const compact = ref(false);
+    const compact = shallowRef(false);
     const isDestroyed = useDestroyed();
     const onResize = ({ width }: { width: number }) => {
       if (!isDestroyed.value) {

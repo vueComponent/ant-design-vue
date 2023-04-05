@@ -2,7 +2,7 @@ import TransBtn from '../TransBtn';
 import type { InnerSelectorProps } from './interface';
 import Input from './Input';
 import type { Ref, PropType } from 'vue';
-import { computed, defineComponent, onMounted, ref, watch } from 'vue';
+import { computed, defineComponent, onMounted, shallowRef, watch } from 'vue';
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
@@ -77,9 +77,9 @@ const SelectSelector = defineComponent<SelectorProps>({
   inheritAttrs: false,
   props: props as any,
   setup(props) {
-    const measureRef = ref();
-    const inputWidth = ref(0);
-    const focused = ref(false);
+    const measureRef = shallowRef();
+    const inputWidth = shallowRef(0);
+    const focused = shallowRef(false);
     const legacyTreeSelectContext = useInjectLegacySelectContext();
     const selectionPrefixCls = computed(() => `${props.prefixCls}-selection`);
 

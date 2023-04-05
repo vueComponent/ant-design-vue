@@ -1,4 +1,4 @@
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
 import type { ExtractPropTypes, CSSProperties } from 'vue';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
@@ -59,8 +59,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: listItemProps(),
   setup(props, { slots, attrs }) {
-    const showProgress = ref(false);
-    const progressRafRef = ref();
+    const showProgress = shallowRef(false);
+    const progressRafRef = shallowRef();
     onMounted(() => {
       progressRafRef.value = setTimeout(() => {
         showProgress.value = true;
@@ -69,7 +69,7 @@ export default defineComponent({
     onBeforeUnmount(() => {
       clearTimeout(progressRafRef.value);
     });
-    const mergedStatus = ref(props.file?.status);
+    const mergedStatus = shallowRef(props.file?.status);
     watch(
       () => props.file?.status,
       status => {
@@ -277,7 +277,7 @@ export default defineComponent({
         );
 
       return (
-        <div class={listContainerNameClass} style={style as CSSProperties} ref={ref}>
+        <div class={listContainerNameClass} style={style as CSSProperties}>
           {itemRender
             ? itemRender({
                 originNode: item,

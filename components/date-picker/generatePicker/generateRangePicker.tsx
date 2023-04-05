@@ -68,7 +68,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       const maybeToStrings = (dates: DateType[]) => {
         return props.valueFormat ? generateConfig.toString(dates, props.valueFormat) : dates;
       };
-      const onChange = (dates: [DateType, DateType], dateStrings: [string, string]) => {
+      const onChange = (dates: RangeValue<DateType>, dateStrings: [string, string]) => {
         const values = maybeToStrings(dates);
         emit('update:value', values);
         emit('change', values, dateStrings);

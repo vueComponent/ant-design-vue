@@ -28,8 +28,8 @@ export default defineComponent({
   props: initDefaultProps(circleProps(), {
     trailColor: null as unknown as string,
   }),
-  setup(props, { slots }) {
-    const originWidth = computed(() => props.width || 120);
+  setup(props, { slots, attrs }) {
+    const originWidth = computed(() => props.width ?? 120);
     const mergedSize = computed(() => props.size ?? [originWidth.value, originWidth.value]);
 
     const sizeRef = computed(() => getSize(mergedSize.value as ProgressProps['size'], 'circle'));
@@ -87,7 +87,11 @@ export default defineComponent({
         />
       );
       return (
-        <div class={wrapperClassName.value} style={circleStyle.value}>
+        <div
+          {...attrs}
+          class={[wrapperClassName.value, attrs.class]}
+          style={[attrs.style as CSSProperties, circleStyle.value]}
+        >
           {sizeRef.value.width <= 20 ? (
             <Tooltip v-slots={{ title: slots.default }}>
               <span>{circleContent}</span>

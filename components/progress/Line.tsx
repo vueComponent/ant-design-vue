@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { presetPrimaryColors } from '@ant-design/colors';
 import { computed, defineComponent } from 'vue';
 import type { Direction } from '../config-provider';
@@ -6,14 +6,12 @@ import type { StringGradients, ProgressGradient, ProgressSize } from './props';
 import { progressProps } from './props';
 import { getSize, getSuccessPercent, validProgress } from './utils';
 import devWarning from '../vc-util/devWarning';
-import { anyType } from '../_util/type';
+import { anyType, stringType } from '../_util/type';
 
 export const lineProps = () => ({
   ...progressProps(),
   strokeColor: anyType<string | ProgressGradient>(),
-  direction: {
-    type: String as PropType<Direction>,
-  },
+  direction: stringType<Direction>(),
 });
 
 export type LineProps = Partial<ExtractPropTypes<ReturnType<typeof lineProps>>>;
@@ -86,8 +84,9 @@ export default defineComponent({
             backgroundColor: strokeColor as string,
           };
     });
-    const borderRadius =
-      props.strokeLinecap === 'square' || props.strokeLinecap === 'butt' ? 0 : undefined;
+    const borderRadius = computed(() =>
+      props.strokeLinecap === 'square' || props.strokeLinecap === 'butt' ? 0 : undefined,
+    );
 
     const trailStyle = computed<CSSProperties>(() =>
       props.trailColor
@@ -118,7 +117,7 @@ export default defineComponent({
       return {
         width: `${validProgress(percent)}%`,
         height: `${sizeRef.value.height}px`,
-        borderRadius,
+        borderRadius: borderRadius.value,
         ...backgroundProps.value,
       };
     });
@@ -131,7 +130,7 @@ export default defineComponent({
       return {
         width: `${validProgress(successPercent.value)}%`,
         height: `${sizeRef.value.height}px`,
-        borderRadius,
+        borderRadius: borderRadius.value,
         backgroundColor: success?.strokeColor,
       };
     });
@@ -143,7 +142,11 @@ export default defineComponent({
 
     return () => (
       <>
-        <div {...attrs} class={[`${props.prefixCls}-outer`, attrs.class]} style={outerStyle}>
+        <div
+          {...attrs}
+          class={[`${props.prefixCls}-outer`, attrs.class]}
+          style={[attrs.style as CSSProperties, outerStyle]}
+        >
           <div class={`${props.prefixCls}-inner`} style={trailStyle.value}>
             <div class={`${props.prefixCls}-bg`} style={percentStyle.value} />
             {successPercent.value !== undefined ? (

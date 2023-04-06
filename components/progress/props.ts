@@ -1,5 +1,12 @@
 import type { VueNode } from '../_util/type';
-import { someType, functionType, stringType, anyType, objectType } from '../_util/type';
+import {
+  booleanType,
+  someType,
+  functionType,
+  stringType,
+  anyType,
+  objectType,
+} from '../_util/type';
 import type { ExtractPropTypes } from 'vue';
 
 export const progressStatuses = ['normal', 'exception', 'active', 'success'] as const;
@@ -25,7 +32,7 @@ export const progressProps = () => ({
   percent: Number,
   format: functionType<(percent?: number, successPercent?: number) => VueNode>(),
   status: stringType<ProgressStatusesType>(),
-  showInfo: { type: Boolean, default: undefined },
+  showInfo: booleanType(),
   strokeWidth: Number,
   strokeLinecap: stringType<'butt' | 'square' | 'round'>(),
   strokeColor: anyType<string | string[] | ProgressGradient>(),
@@ -35,7 +42,7 @@ export const progressProps = () => ({
   success: objectType<SuccessProps>(),
   gapDegree: Number,
   gapPosition: stringType<'top' | 'bottom' | 'left' | 'right'>(),
-  size: someType<ProgressSize>([String, Number, Array]),
+  size: someType<ProgressSize | number | [number, number]>([String, Number, Array]),
   steps: Number,
   /** @deprecated Use `success` instead */
   successPercent: Number,

@@ -1,7 +1,7 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import type { VueNode } from '../_util/type';
-import PropTypes from '../_util/vue-types';
+import { someType } from '../_util/type';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';
 import { getSize } from './utils';
@@ -9,10 +9,7 @@ import { getSize } from './utils';
 export const stepsProps = () => ({
   ...progressProps(),
   steps: Number,
-  size: {
-    type: String as PropType<ProgressSize>,
-  },
-  strokeColor: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  strokeColor: someType<string | string[]>(),
   trailColor: String,
 });
 

@@ -48,7 +48,7 @@ export { default as Comment } from './comment';
 
 export type { ConfigProviderProps } from './config-provider';
 export { default as ConfigProvider } from './config-provider';
-export * from './_util/cssinjs';
+
 export type { DatePickerProps } from './date-picker';
 export {
   default as DatePicker,

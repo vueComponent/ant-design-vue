@@ -27,7 +27,11 @@ Ant Design Vue 的 CSS-in-JS 默认通过 `:where` 选择器降低 CSS Selector 
     }
 ```
 
-注意：关闭 `:where` 降权后，你可能需要手动调整一些样式的优先级。
+注意：
+
+1、关闭 `:where` 降权后，你可能需要手动调整一些样式的优先级。
+
+2、hashPriority 不支持动态修改，修改后请刷新浏览器
 
 ### CSS 逻辑属性
 

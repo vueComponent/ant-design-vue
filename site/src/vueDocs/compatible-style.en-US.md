@@ -27,7 +27,11 @@ It will turn `:where` to class selector:
     }
 ```
 
-Note: After turning off the `:where` downgrade, you may need to manually adjust the priority of some styles.
+Note:
+
+1、After turning off the `:where` downgrade, you may need to manually adjust the priority of some styles.
+
+2、hashPriority not support change，you can reload for new value.
 
 ### CSS Logical Properties
 

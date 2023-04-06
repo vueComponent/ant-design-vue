@@ -1,10 +1,9 @@
-import type { App, ComputedRef, InjectionKey, Ref } from 'vue';
-import { provide, defineComponent, unref, computed, inject } from 'vue';
+import type { ShallowRef, ExtractPropTypes, InjectionKey, Ref } from 'vue';
+import { provide, defineComponent, unref, inject, watch, shallowRef } from 'vue';
 import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
-import { arrayType, objectType } from '../type';
-import PropTypes from '../vue-types';
+import { arrayType, booleanType, objectType, someType, stringType, withInstall } from '../type';
 import initDefaultProps from '../props-util/initDefaultProps';
 export const ATTR_TOKEN = 'data-token-hash';
 export const ATTR_MARK = 'data-css-hash';
@@ -73,61 +72,62 @@ export interface StyleContextProps {
   linters?: Linter[];
 }
 
-const StyleContextKey: InjectionKey<ComputedRef<Partial<StyleContextProps>>> =
+const StyleContextKey: InjectionKey<ShallowRef<Partial<StyleContextProps>>> =
   Symbol('StyleContextKey');
 
-export type StyleProviderProps = Partial<StyleContextProps> | Ref<Partial<StyleContextProps>>;
+export type UseStyleProviderProps = Partial<StyleContextProps> | Ref<Partial<StyleContextProps>>;
 const defaultStyleContext: StyleContextProps = {
   cache: createCache(),
   defaultCache: true,
   hashPriority: 'low',
 };
 export const useStyleInject = () => {
-  return inject(
-    StyleContextKey,
-    computed(() => defaultStyleContext),
-  );
+  return inject(StyleContextKey, shallowRef({ ...defaultStyleContext }));
 };
-export const useStyleProvider = (props: StyleProviderProps) => {
+export const useStyleProvider = (props: UseStyleProviderProps) => {
   const parentContext = useStyleInject();
+  const context = shallowRef<Partial<StyleContextProps>>({ ...defaultStyleContext });
+  watch(
+    [props, parentContext],
+    () => {
+      const mergedContext: Partial<StyleContextProps> = {
+        ...parentContext.value,
+      };
+      const propsValue = unref(props);
+      Object.keys(propsValue).forEach(key => {
+        const value = propsValue[key];
+        if (propsValue[key] !== undefined) {
+          mergedContext[key] = value;
+        }
+      });
 
-  const context = computed<Partial<StyleContextProps>>(() => {
-    const mergedContext: Partial<StyleContextProps> = {
-      ...parentContext.value,
-    };
-    const propsValue = unref(props);
-    Object.keys(propsValue).forEach(key => {
-      const value = propsValue[key];
-      if (propsValue[key] !== undefined) {
-        mergedContext[key] = value;
-      }
-    });
-
-    const { cache } = propsValue;
-    mergedContext.cache = mergedContext.cache || createCache();
-    mergedContext.defaultCache = !cache && parentContext.value.defaultCache;
-    return mergedContext;
-  });
+      const { cache } = propsValue;
+      mergedContext.cache = mergedContext.cache || createCache();
+      mergedContext.defaultCache = !cache && parentContext.value.defaultCache;
+      context.value = mergedContext;
+    },
+    { immediate: true },
+  );
   provide(StyleContextKey, context);
   return context;
 };
-const AStyleProviderProps = () => ({
-  autoClear: PropTypes.bool,
+export const styleProviderProps = () => ({
+  autoClear: booleanType(),
   /** @private Test only. Not work in production. */
-  mock: PropTypes.oneOf(['server', 'client'] as const),
+  mock: stringType<'server' | 'client'>(),
   /**
    * Only set when you need ssr to extract style on you own.
    * If not provided, it will auto create <style /> on the end of Provider in server side.
    */
   cache: objectType<CacheEntity>(),
   /** Tell children that this context is default generated context */
-  defaultCache: PropTypes.bool,
+  defaultCache: booleanType(),
   /** Use `:where` selector to reduce hashId css selector priority */
-  hashPriority: PropTypes.oneOf(['low', 'high'] as const),
+  hashPriority: stringType<HashPriority>(),
   /** Tell cssinjs where to inject style in */
-  container: PropTypes.oneOfType([objectType<Element>(), objectType<ShadowRoot>()]),
+  container: someType<Element | ShadowRoot>(),
   /** Component wil render inline  `<style />` for fallback in SSR. Not recommend. */
-  ssrInline: PropTypes.bool,
+  ssrInline: booleanType(),
   /** Transform css before inject in document. Please note that `transformers` do not support dynamic update */
   transformers: arrayType<Transformer[]>(),
   /**
@@ -137,20 +137,21 @@ const AStyleProviderProps = () => ({
    */
   linters: arrayType<Linter[]>(),
 });
+export type StyleProviderProps = Partial<ExtractPropTypes<ReturnType<typeof styleProviderProps>>>;
+export const StyleProvider = withInstall(
+  defineComponent({
+    name: 'AStyleProvider',
+    inheritAttrs: false,
+    props: initDefaultProps(styleProviderProps(), defaultStyleContext),
+    setup(props, { slots }) {
+      useStyleProvider(props);
+      return () => slots.default?.();
+    },
+  }),
+);
 
-export const StyleProvider = defineComponent({
-  name: 'AStyleProvider',
-  props: initDefaultProps(AStyleProviderProps(), defaultStyleContext),
-  setup(props, { slots }) {
-    useStyleProvider(props);
-    return () => slots.default?.();
-  },
-});
-
-StyleProvider.install = function (app: App) {
-  app.component(StyleProvider.name, StyleProvider);
-};
 export default {
   useStyleInject,
   useStyleProvider,
+  StyleProvider,
 };

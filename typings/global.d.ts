@@ -63,6 +63,8 @@ declare module 'vue' {
 
     AConfigProvider: typeof import('ant-design-vue')['ConfigProvider'];
 
+    AStyleProvider: typeof import('ant-design-vue')['StyleProvider'];
+
     ADatePicker: typeof import('ant-design-vue')['DatePicker'];
 
     ADescriptions: typeof import('ant-design-vue')['Descriptions'];

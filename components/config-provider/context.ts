@@ -154,6 +154,7 @@ export const defaultConfigProvider: ConfigProviderInnerProps = {
     return suffixCls ? `ant-${suffixCls}` : 'ant';
   },
   iconPrefixCls: computed(() => defaultIconPrefixCls),
+  getPopupContainer: computed(() => () => document.body),
 };
 
 export const useConfigContextInject = () => {

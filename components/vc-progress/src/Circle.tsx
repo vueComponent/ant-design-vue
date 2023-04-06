@@ -4,7 +4,6 @@ import { propTypes } from './types';
 import { computed, defineComponent, ref } from 'vue';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
 import useRefs from '../../_util/hooks/useRefs';
-import classNames from '../../_util/classNames';
 
 let gradientSeed = 0;
 
@@ -127,7 +126,6 @@ export default defineComponent({
         trailColor,
         strokeLinecap,
         strokeColor,
-        class: className,
         ...restProps
       } = props;
       const { pathString, pathStyle } = getPathStyles(
@@ -152,11 +150,7 @@ export default defineComponent({
         style: pathStyle,
       };
       return (
-        <svg
-          class={classNames(`${prefixCls}-circle`, className)}
-          viewBox="0 0 100 100"
-          {...restProps}
-        >
+        <svg class={`${prefixCls}-circle`} viewBox="0 0 100 100" {...restProps}>
           {gradient && (
             <defs>
               <linearGradient

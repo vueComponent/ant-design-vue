@@ -240,7 +240,7 @@ export const QRCodeCanvas = defineComponent({
 
     return () => {
       const size = props.size ?? DEFAULT_SIZE;
-      const canvasStyle = { height: size, width: size };
+      const canvasStyle = { height: `${size}px`, width: `${size}px` };
 
       let img = null;
       if (imgSrc.value != null) {

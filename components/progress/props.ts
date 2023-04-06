@@ -1,5 +1,5 @@
 import type { VueNode } from '../_util/type';
-import { functionType, stringType, anyType, objectType } from '../_util/type';
+import { someType, functionType, stringType, anyType, objectType } from '../_util/type';
 import type { ExtractPropTypes } from 'vue';
 
 export const progressStatuses = ['normal', 'exception', 'active', 'success'] as const;
@@ -7,7 +7,7 @@ export type ProgressStatusesType = (typeof progressStatuses)[number];
 const ProgressType = ['line', 'circle', 'dashboard'] as const;
 export type ProgressType = (typeof ProgressType)[number];
 const ProgressSize = ['default', 'small'] as const;
-export type ProgressSize = (typeof ProgressSize)[number];
+export type ProgressSize = (typeof ProgressSize)[number] | number | [number, number];
 export type StringGradients = { [percentage: string]: string };
 type FromToGradients = { from: string; to: string };
 export type ProgressGradient = { direction?: string } & (StringGradients | FromToGradients);
@@ -28,17 +28,19 @@ export const progressProps = () => ({
   showInfo: { type: Boolean, default: undefined },
   strokeWidth: Number,
   strokeLinecap: stringType<'butt' | 'square' | 'round'>(),
-  strokeColor: anyType<string | ProgressGradient>(),
+  strokeColor: anyType<string | string[] | ProgressGradient>(),
   trailColor: String,
+  /** @deprecated Use `size` instead */
   width: Number,
   success: objectType<SuccessProps>(),
   gapDegree: Number,
   gapPosition: stringType<'top' | 'bottom' | 'left' | 'right'>(),
-  size: stringType<ProgressSize>(),
+  size: someType<ProgressSize>([String, Number, Array]),
   steps: Number,
   /** @deprecated Use `success` instead */
   successPercent: Number,
   title: String,
+  progressStatus: stringType<ProgressStatusesType>(),
 });
 
 export type ProgressProps = Partial<ExtractPropTypes<ReturnType<typeof progressProps>>>;

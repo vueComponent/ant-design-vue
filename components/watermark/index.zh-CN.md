@@ -20,6 +20,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*duAQQbjHlHQAAA
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
+| visible | 水印是否显示 | boolean | true |  |
 | width | 水印的宽度，`content` 的默认值为自身的宽度 | number | 120 |  |
 | height | 水印的高度，`content` 的默认值为自身的高度 | number | 64 |  |
 | rotate | 水印绘制时，旋转的角度，单位 `°` | number | -22 |  |

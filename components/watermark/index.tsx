@@ -30,6 +30,7 @@ export const watermarkProps = () => ({
   rootClassName: String,
   gap: arrayType<[number, number]>(),
   offset: arrayType<[number, number]>(),
+  visible:Boolean
 });
 export type WatermarkProps = Partial<ExtractPropTypes<ReturnType<typeof watermarkProps>>>;
 const Watermark = defineComponent({
@@ -40,6 +41,7 @@ const Watermark = defineComponent({
     rotate: -22,
     font: {},
     gap: [100, 100],
+    visible:true
   }),
   setup(props, { slots, attrs }) {
     const containerRef = shallowRef<HTMLDivElement>();
@@ -207,12 +209,12 @@ const Watermark = defineComponent({
       }
     };
     onMounted(() => {
-      renderWatermark();
+      props.visible && renderWatermark();
     });
     watch(
       () => props,
       () => {
-        renderWatermark();
+        props.visible?renderWatermark():destroyWatermark();
       },
       {
         deep: true,

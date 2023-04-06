@@ -19,6 +19,7 @@ Add specific text or patterns to the page.
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| visible | Is the watermark displayed | boolean | true |  |
 | width | The width of the watermark, the default value of `content` is its own width | number | 120 |  |
 | height | The height of the watermark, the default value of `content` is its own height | number | 64 |  |
 | rotate | When the watermark is drawn, the rotation Angle, unit `°` | number | -22 |  |

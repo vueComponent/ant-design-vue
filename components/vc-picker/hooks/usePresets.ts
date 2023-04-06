@@ -1,7 +1,7 @@
 import type { ComputedRef } from 'vue';
 import { computed } from 'vue';
 
-import warning from 'ant-design-vue/es/vc-util/warning';
+import warning from '../../vc-util/warning';
 import type { PresetDate } from '../interface';
 
 export default function usePresets<T>(

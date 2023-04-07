@@ -17,7 +17,7 @@ import { isPresetColor } from '../_util/colors';
 
 export const badgeProps = () => ({
   /** Number to show in badge */
-  count: PropTypes.any,
+  count: PropTypes.any.def(null),
   showZero: { type: Boolean, default: undefined },
   /** Max count to show */
   overflowCount: { type: Number, default: 99 },

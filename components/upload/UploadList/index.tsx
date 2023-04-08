@@ -9,7 +9,14 @@ import type { ButtonProps } from '../../button';
 import Button from '../../button';
 import ListItem from './ListItem';
 import type { HTMLAttributes } from 'vue';
-import { computed, defineComponent, getCurrentInstance, onMounted, ref, watchEffect } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  shallowRef,
+  watchEffect,
+} from 'vue';
 import { filterEmpty, initDefaultProps, isValidElement } from '../../_util/props-util';
 import type { VueNode } from '../../_util/type';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
@@ -38,7 +45,7 @@ export default defineComponent({
     appendActionVisible: true,
   }),
   setup(props, { slots, expose }) {
-    const motionAppear = ref(false);
+    const motionAppear = shallowRef(false);
     const instance = getCurrentInstance();
     onMounted(() => {
       motionAppear.value == true;

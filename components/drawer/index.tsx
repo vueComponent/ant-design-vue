@@ -3,7 +3,7 @@ import {
   inject,
   nextTick,
   defineComponent,
-  ref,
+  shallowRef,
   onMounted,
   provide,
   onUnmounted,
@@ -117,11 +117,11 @@ const Drawer = defineComponent({
   slots: ['closeIcon', 'title', 'extra', 'footer', 'handle'],
   // emits: ['update:visible', 'close', 'afterVisibleChange'],
   setup(props, { emit, slots, attrs }) {
-    const sPush = ref(false);
-    const destroyClose = ref(false);
-    const vcDrawer = ref(null);
-    const load = ref(false);
-    const visible = ref(false);
+    const sPush = shallowRef(false);
+    const destroyClose = shallowRef(false);
+    const vcDrawer = shallowRef(null);
+    const load = shallowRef(false);
+    const visible = shallowRef(false);
     const mergedOpen = computed(() => props.open ?? props.visible);
     watch(
       mergedOpen,

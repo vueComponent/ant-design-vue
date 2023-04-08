@@ -1,4 +1,12 @@
-import { Transition, defineComponent, onMounted, onUnmounted, nextTick, watch, ref } from 'vue';
+import {
+  Transition,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  nextTick,
+  watch,
+  shallowRef,
+} from 'vue';
 import classnames from '../../_util/classNames';
 import KeyCode from '../../_util/KeyCode';
 import omit from '../../_util/omit';
@@ -17,11 +25,11 @@ const DrawerChild = defineComponent({
   props: drawerChildProps(),
   emits: ['close', 'handleClick', 'change'],
   setup(props, { emit, slots }) {
-    const contentWrapper = ref<HTMLElement>();
-    const dom = ref<HTMLElement>();
-    const maskDom = ref<HTMLElement>();
-    const handlerDom = ref<HTMLElement>();
-    const contentDom = ref<HTMLElement>();
+    const contentWrapper = shallowRef<HTMLElement>();
+    const dom = shallowRef<HTMLElement>();
+    const maskDom = shallowRef<HTMLElement>();
+    const handlerDom = shallowRef<HTMLElement>();
+    const contentDom = shallowRef<HTMLElement>();
     let levelDom = [];
     const drawerId = `drawer_id_${Number(
       (Date.now() + Math.random())
@@ -151,7 +159,7 @@ const DrawerChild = defineComponent({
       emit('handleClick', e);
     };
 
-    const canOpen = ref(false);
+    const canOpen = shallowRef(false);
     watch(dom, () => {
       nextTick(() => {
         canOpen.value = true;

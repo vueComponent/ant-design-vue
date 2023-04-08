@@ -23,7 +23,7 @@ import {
   onBeforeUnmount,
   onMounted,
   provide,
-  ref,
+  shallowRef,
   toRefs,
   watch,
   watchEffect,
@@ -269,17 +269,17 @@ export default defineComponent({
         ? props.showSearch
         : multiple.value || props.mode === 'combobox',
     );
-    const mobile = ref(false);
+    const mobile = shallowRef(false);
     onMounted(() => {
       mobile.value = isMobile();
     });
     const legacyTreeSelectContext = useInjectLegacySelectContext();
     // ============================== Refs ==============================
-    const containerRef = ref<HTMLDivElement>(null);
+    const containerRef = shallowRef<HTMLDivElement>(null);
     const selectorDomRef = createRef();
-    const triggerRef = ref<RefTriggerProps>(null);
-    const selectorRef = ref<RefSelectorProps>(null);
-    const listRef = ref<RefOptionListProps>(null);
+    const triggerRef = shallowRef<RefTriggerProps>(null);
+    const selectorRef = shallowRef<RefSelectorProps>(null);
+    const listRef = shallowRef<RefOptionListProps>(null);
 
     /** Used for component focused management */
     const [mockFocused, setMockFocused, cancelSetMockFocused] = useDelayReset();
@@ -308,8 +308,8 @@ export default defineComponent({
 
     // ============================== Open ==============================
     const initOpen = props.open !== undefined ? props.open : props.defaultOpen;
-    const innerOpen = ref(initOpen);
-    const mergedOpen = ref(initOpen);
+    const innerOpen = shallowRef(initOpen);
+    const mergedOpen = shallowRef(initOpen);
     const setInnerOpen = (val: boolean) => {
       innerOpen.value = props.open !== undefined ? props.open : val;
       mergedOpen.value = innerOpen.value;
@@ -504,7 +504,7 @@ export default defineComponent({
 
     // ========================== Focus / Blur ==========================
     /** Record real focus status */
-    const focusRef = ref(false);
+    const focusRef = shallowRef(false);
 
     const onContainerFocus: FocusEventHandler = (...args) => {
       setMockFocused(true);
@@ -592,7 +592,7 @@ export default defineComponent({
     };
 
     // ============================= Dropdown ==============================
-    const containerWidth = ref<number>(null);
+    const containerWidth = shallowRef<number>(null);
     const instance = getCurrentInstance();
     const onPopupMouseEnter = () => {
       // We need force update here since popup dom is render async

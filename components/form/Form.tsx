@@ -45,9 +45,6 @@ import { useProviderDisabled } from '../config-provider/DisabledContext';
 export type RequiredMark = boolean | 'optional';
 export type FormLayout = 'horizontal' | 'inline' | 'vertical';
 
-/** @deprecated Will warning in future branch. Pls use `Rule` instead. */
-export type ValidationRule = Rule;
-
 export const formProps = () => ({
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
   labelCol: objectType<ColProps & HTMLAttributes>(),

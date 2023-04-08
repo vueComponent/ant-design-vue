@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { onMounted, ref, defineComponent, onBeforeUnmount } from 'vue';
+import { shallowRef, onMounted, defineComponent, onBeforeUnmount } from 'vue';
 import Button from '../button';
 import type { ButtonProps } from '../button';
 import type { LegacyButtonType } from '../button/buttonTypes';
@@ -32,9 +32,9 @@ export default defineComponent({
   name: 'ActionButton',
   props: actionButtonProps,
   setup(props, { slots }) {
-    const clickedRef = ref<boolean>(false);
-    const buttonRef = ref();
-    const loading = ref(false);
+    const clickedRef = shallowRef<boolean>(false);
+    const buttonRef = shallowRef();
+    const loading = shallowRef(false);
     let timeoutId: any;
     const isDestroyed = useDestroyed();
     onMounted(() => {

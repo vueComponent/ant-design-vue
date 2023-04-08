@@ -1,6 +1,6 @@
 <template>
   <header id="header" :class="headerClassName">
-    <div v-if="visibleAdblockBanner" class="adblock-banner">
+    <!-- <div v-if="visibleAdblockBanner" class="adblock-banner">
       <template v-if="isZhCN">
         我们检测到你可能使用了 AdBlock 或 Adblock
         Plus，它会影响到正常功能的使用（如复制、展开代码等）。
@@ -15,9 +15,9 @@
       </template>
 
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
-    </div>
+    </div> -->
     <div v-if="visibleAlertBanner && isZhCN" class="alert-banner">
-      Surely Form 2.0 发布，快速搭建在线问卷，无缝嵌入各种系统
+      Surely Form 2.0 发布，快速定制自己的问卷平台 &nbsp;&nbsp;
       <a href="https://form.antdv.com">立即体验</a>
 
       <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
@@ -128,10 +128,10 @@ export default defineComponent({
     watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
-    const visibleAlertBanner = ref(!localStorage.getItem('surelyform2'));
+    const visibleAlertBanner = ref(!localStorage.getItem('surelyform_v2'));
     watch(visibleAlertBanner, () => {
       if (!visibleAlertBanner.value) {
-        localStorage.setItem('surelyform2', version);
+        localStorage.setItem('surelyform_v2', version);
       }
     });
     return {

@@ -6,7 +6,7 @@ import { getNumberPrecision, num2str, validateNumber } from './utils/numberUtil'
 import useCursor from './hooks/useCursor';
 import useFrame from './hooks/useFrame';
 import type { HTMLAttributes } from 'vue';
-import { watch, computed, ref, defineComponent } from 'vue';
+import { watch, computed, shallowRef, defineComponent } from 'vue';
 import type { ChangeEvent, KeyboardEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
 import classNames from '../../_util/classNames';
@@ -85,11 +85,11 @@ export default defineComponent({
   },
   slots: ['upHandler', 'downHandler'],
   setup(props, { attrs, slots, emit, expose }) {
-    const inputRef = ref<HTMLInputElement>();
-    const focus = ref(false);
-    const userTypingRef = ref(false);
-    const compositionRef = ref(false);
-    const decimalValue = ref(getMiniDecimal(props.value));
+    const inputRef = shallowRef<HTMLInputElement>();
+    const focus = shallowRef(false);
+    const userTypingRef = shallowRef(false);
+    const compositionRef = shallowRef(false);
+    const decimalValue = shallowRef(getMiniDecimal(props.value));
 
     function setUncontrolledDecimalValue(newDecimal: DecimalClass) {
       if (props.value === undefined) {
@@ -139,7 +139,7 @@ export default defineComponent({
     };
 
     // >>> Formatter
-    const inputValue = ref<string | number>('');
+    const inputValue = shallowRef<string | number>('');
 
     const mergedFormatter = (number: string, userTyping: boolean) => {
       if (props.formatter) {

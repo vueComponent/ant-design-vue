@@ -2,7 +2,7 @@ import glob from 'glob';
 import { mount } from '@vue/test-utils';
 import MockDate from 'mockdate';
 import dayjs from 'dayjs';
-import antd from 'ant-design-vue';
+import antd from '../../components';
 
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'vue';

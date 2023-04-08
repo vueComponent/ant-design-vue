@@ -5,7 +5,7 @@ import {
   defineComponent,
   getCurrentInstance,
   nextTick,
-  ref,
+  shallowRef,
   watch,
   withDirectives,
 } from 'vue';
@@ -30,9 +30,9 @@ export default defineComponent({
   inheritAttrs: false,
   props: inputProps(),
   setup(props, { slots, attrs, expose, emit }) {
-    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
-    const focused = ref(false);
-    const inputRef = ref<HTMLInputElement>();
+    const stateValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
+    const focused = shallowRef(false);
+    const inputRef = shallowRef<HTMLInputElement>();
     watch(
       () => props.value,
       () => {

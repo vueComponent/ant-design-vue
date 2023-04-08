@@ -7,7 +7,7 @@
       "ant-design-vue/lib/*": ["components/*"],
       "ant-design-vue/locale/*": ["components/locale/*"]
     },
-    "lib": ["dom", "es2017"],
+    "lib": ["DOM", "ESNext"],
     "strictNullChecks": false,
     "moduleResolution": "node",
     "esModuleInterop": true,

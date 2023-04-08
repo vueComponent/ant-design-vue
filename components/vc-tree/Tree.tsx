@@ -28,7 +28,6 @@ import {
   defineComponent,
   onUnmounted,
   reactive,
-  ref,
   shallowRef,
   watch,
   watchEffect,
@@ -78,9 +77,9 @@ export default defineComponent({
   }),
 
   setup(props, { attrs, slots, expose }) {
-    const destroyed = ref(false);
+    const destroyed = shallowRef(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
-    const indent = ref();
+    const indent = shallowRef();
     const selectedKeys = shallowRef<Key[]>([]);
     const checkedKeys = shallowRef<Key[]>([]);
     const halfCheckedKeys = shallowRef<Key[]>([]);
@@ -122,14 +121,14 @@ export default defineComponent({
     );
     const keyEntities = shallowRef({});
 
-    const focused = ref(false);
-    const activeKey = ref<Key>(null);
+    const focused = shallowRef(false);
+    const activeKey = shallowRef<Key>(null);
 
-    const listChanging = ref(false);
+    const listChanging = shallowRef(false);
 
     const fieldNames = computed(() => fillFieldNames(props.fieldNames));
 
-    const listRef = ref();
+    const listRef = shallowRef();
 
     let dragStartMousePosition = null;
 

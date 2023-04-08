@@ -1,5 +1,5 @@
 import type { PropType } from 'vue';
-import { computed, ref, defineComponent } from 'vue';
+import { computed, shallowRef, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import Input from './Input';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
@@ -32,8 +32,8 @@ export default defineComponent({
     },
   },
   setup(props, { slots, attrs, expose, emit }) {
-    const inputRef = ref();
-    const composedRef = ref(false);
+    const inputRef = shallowRef();
+    const composedRef = shallowRef(false);
     const focus = () => {
       inputRef.value?.focus();
     };

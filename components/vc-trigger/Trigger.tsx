@@ -1,5 +1,5 @@
 import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
-import { computed, defineComponent, inject, provide, ref } from 'vue';
+import { computed, defineComponent, inject, provide, shallowRef } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import raf from '../_util/raf';
@@ -98,7 +98,7 @@ export default defineComponent({
       return popupAlign;
     });
     const { setPortal, popPortal } = useInjectTrigger(props.tryPopPortal);
-    const popupRef = ref(null);
+    const popupRef = shallowRef(null);
     const setPopupRef = val => {
       popupRef.value = val;
     };
@@ -111,7 +111,7 @@ export default defineComponent({
       ),
       popupRef,
       setPopupRef,
-      triggerRef: ref(null),
+      triggerRef: shallowRef(null),
       align,
       focusTime: null,
       clickOutsideHandler: null,

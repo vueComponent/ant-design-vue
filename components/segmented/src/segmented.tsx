@@ -1,4 +1,4 @@
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, shallowRef, computed } from 'vue';
 import type { ExtractPropTypes, FunctionalComponent } from 'vue';
 import classNames from '../../_util/classNames';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
@@ -119,8 +119,8 @@ export default defineComponent({
   setup(props, { emit, slots, attrs }) {
     const { prefixCls, direction, size } = useConfigInject('segmented', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const rootRef = ref<HTMLDivElement>();
-    const thumbShow = ref(false);
+    const rootRef = shallowRef<HTMLDivElement>();
+    const thumbShow = shallowRef(false);
 
     const segmentedOptions = computed(() => normalizeOptions(props.options));
     const handleChange = (_event: ChangeEvent, val: SegmentedValue) => {

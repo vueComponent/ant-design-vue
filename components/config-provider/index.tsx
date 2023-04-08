@@ -1,5 +1,5 @@
 import type { App, Plugin, WatchStopHandle } from 'vue';
-import { computed, reactive, defineComponent, watchEffect } from 'vue';
+import { watch, computed, reactive, defineComponent, watchEffect } from 'vue';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { Locale } from '../locale-provider';
@@ -157,6 +157,13 @@ const ConfigProvider = defineComponent({
       () => props.autoInsertSpaceInButton ?? parentContext.autoInsertSpaceInButton?.value,
     );
     const locale = computed(() => props.locale || parentContext.locale?.value);
+    watch(
+      locale,
+      () => {
+        globalConfigBySet.locale = locale.value;
+      },
+      { immediate: true },
+    );
     const direction = computed(() => props.direction || parentContext.direction?.value);
     const space = computed(() => props.space ?? parentContext.space?.value);
     const virtual = computed(() => props.virtual ?? parentContext.virtual?.value);

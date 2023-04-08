@@ -1,6 +1,7 @@
 import type { App, VNode, PropType } from 'vue';
 import { provide, defineComponent, reactive, watch } from 'vue';
 import type { ModalLocale } from '../modal/locale';
+import { changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
@@ -81,9 +82,10 @@ const LocaleProvider = defineComponent({
     provide('localeData', state);
     watch(
       () => props.locale,
-      () => {
+      locale => {
+        changeConfirmLocale(locale && locale.Modal);
         state.antLocale = {
-          ...props.locale,
+          ...locale,
           exist: true,
         } as any;
       },

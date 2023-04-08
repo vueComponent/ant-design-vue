@@ -96,7 +96,7 @@ const Steps = defineComponent({
             <Progress
               type="circle"
               percent={mergedPercent.value}
-              width={progressWidth}
+              size={progressWidth}
               strokeWidth={4}
               format={() => null}
             />
@@ -146,7 +146,7 @@ const Steps = defineComponent({
 /* istanbul ignore next */
 export const Step = defineComponent({
   compatConfig: { MODE: 3 },
-  ...VcStep,
+  ...(VcStep as any),
   name: 'AStep',
   props: VcStepProps(),
 });

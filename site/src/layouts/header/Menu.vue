@@ -13,7 +13,6 @@
     >
       <a-select-option :value="antdVersion">{{ antdVersion }}</a-select-option>
       <a-select-option value="3.x" @click="changeVersion('3x')">3.x</a-select-option>
-      <a-select-option value="next" @click="changeVersion('next')">4.x (Next)</a-select-option>
       <a-select-option value="2.x" @click="changeVersion('2x')">
         2.x (Not Recommended)
       </a-select-option>

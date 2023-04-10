@@ -28,6 +28,7 @@ import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import eagerComputed from '../../_util/eagerComputed';
+import usePropsWithComponentType from '../hooks/usePropsWithComponentType';
 
 /** Check if cell is in hover range */
 function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {
@@ -319,7 +320,7 @@ export default defineComponent<CellProps>({
           title = getTitle([childNode]);
         }
       }
-
+      const childNodes = computed(() => [appendNode, childNode, slots.dragHandle?.()]);
       const componentProps = {
         title,
         ...restCellProps,
@@ -355,12 +356,9 @@ export default defineComponent<CellProps>({
           ...cellStyle,
         },
       };
-
       return (
-        <Component {...componentProps}>
-          {appendNode}
-          {childNode}
-          {slots.dragHandle?.()}
+        <Component {...usePropsWithComponentType(componentProps, Component, childNodes).value}>
+          {childNodes.value}
         </Component>
       );
     };

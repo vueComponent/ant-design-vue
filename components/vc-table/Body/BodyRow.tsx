@@ -8,6 +8,7 @@ import { useInjectBody } from '../context/BodyContext';
 import classNames from '../../_util/classNames';
 import { parseStyleText } from '../../_util/props-util';
 import type { MouseEventHandler } from '../../_util/EventInterface';
+import usePropsWithComponentType from '../hooks/usePropsWithComponentType';
 
 export interface BodyRowProps<RecordType> {
   record: RecordType;
@@ -117,75 +118,78 @@ export default defineComponent<BodyRowProps<unknown>>({
         expandedRowRender,
         expandIconColumnIndex,
       } = bodyContext;
+      const children = computed(() =>
+        flattenColumns.map((column, colIndex) => {
+          const { customRender, dataIndex, className: columnClassName } = column;
+
+          const key = columnsKey[colIndex];
+          const fixedInfo = fixedInfoList[colIndex];
+
+          let additionalCellProps;
+          if (column.customCell) {
+            additionalCellProps = column.customCell(record, index, column);
+          }
+          // not use slot to fix https://github.com/vueComponent/ant-design-vue/issues/5295
+          const appendNode =
+            colIndex === (expandIconColumnIndex || 0) && nestExpandable.value ? (
+              <>
+                <span
+                  style={{ paddingLeft: `${indentSize * indent}px` }}
+                  class={`${prefixCls}-row-indent indent-level-${indent}`}
+                />
+                {expandIcon({
+                  prefixCls,
+                  expanded: expanded.value,
+                  expandable: hasNestChildren.value,
+                  record,
+                  onExpand: onInternalTriggerExpand,
+                })}
+              </>
+            ) : null;
+          return (
+            <Cell
+              cellType="body"
+              class={columnClassName}
+              ellipsis={column.ellipsis}
+              align={column.align}
+              component={cellComponent}
+              prefixCls={prefixCls}
+              key={key}
+              record={record}
+              index={index}
+              renderIndex={props.renderIndex}
+              dataIndex={dataIndex}
+              customRender={customRender}
+              {...fixedInfo}
+              additionalProps={additionalCellProps}
+              column={column}
+              transformCellText={transformCellText}
+              appendNode={appendNode}
+            />
+          );
+        }),
+      );
+      const mergedProps = {
+        ...additionalProps.value,
+        'data-row-key': rowKey,
+        class: classNames(
+          className,
+          `${prefixCls}-row`,
+          `${prefixCls}-row-level-${indent}`,
+          computeRowClassName.value,
+          additionalProps.value.class,
+        ),
+        style: {
+          ...style,
+          ...parseStyleText(additionalProps.value.style),
+        },
+        onClick,
+      };
       const baseRowNode = (
-        <RowComponent
-          {...additionalProps.value}
-          data-row-key={rowKey}
-          class={classNames(
-            className,
-            `${prefixCls}-row`,
-            `${prefixCls}-row-level-${indent}`,
-            computeRowClassName.value,
-            additionalProps.value.class,
-          )}
-          style={{
-            ...style,
-            ...parseStyleText(additionalProps.value.style),
-          }}
-          onClick={onClick}
-        >
-          {flattenColumns.map((column, colIndex) => {
-            const { customRender, dataIndex, className: columnClassName } = column;
-
-            const key = columnsKey[colIndex];
-            const fixedInfo = fixedInfoList[colIndex];
-
-            let additionalCellProps;
-            if (column.customCell) {
-              additionalCellProps = column.customCell(record, index, column);
-            }
-            // not use slot to fix https://github.com/vueComponent/ant-design-vue/issues/5295
-            const appendNode =
-              colIndex === (expandIconColumnIndex || 0) && nestExpandable.value ? (
-                <>
-                  <span
-                    style={{ paddingLeft: `${indentSize * indent}px` }}
-                    class={`${prefixCls}-row-indent indent-level-${indent}`}
-                  />
-                  {expandIcon({
-                    prefixCls,
-                    expanded: expanded.value,
-                    expandable: hasNestChildren.value,
-                    record,
-                    onExpand: onInternalTriggerExpand,
-                  })}
-                </>
-              ) : null;
-            return (
-              <Cell
-                cellType="body"
-                class={columnClassName}
-                ellipsis={column.ellipsis}
-                align={column.align}
-                component={cellComponent}
-                prefixCls={prefixCls}
-                key={key}
-                record={record}
-                index={index}
-                renderIndex={props.renderIndex}
-                dataIndex={dataIndex}
-                customRender={customRender}
-                {...fixedInfo}
-                additionalProps={additionalCellProps}
-                column={column}
-                transformCellText={transformCellText}
-                appendNode={appendNode}
-              />
-            );
-          })}
+        <RowComponent {...usePropsWithComponentType(mergedProps, RowComponent, children).value}>
+          {children.value}
         </RowComponent>
       );
-
       // ======================== Expand Row =========================
       let expandRowNode;
       if (rowSupportExpand.value && (expandRended.value || expanded.value)) {

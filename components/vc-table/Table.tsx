@@ -61,6 +61,7 @@ import { useProvideResize } from './context/ResizeContext';
 import { useProvideSticky } from './context/StickyContext';
 import pickAttrs from '../_util/pickAttrs';
 import { useProvideExpandedRow } from './context/ExpandedRowContext';
+import usePropsWithComponentType from './hooks/usePropsWithComponentType';
 
 // Used for conditions cache
 const EMPTY_DATA = [];
@@ -706,6 +707,16 @@ export default defineComponent<TableProps<DefaultRecordType>>({
             return 0;
           }) as number[];
         } else {
+          const children = computed(() => [
+            bodyColGroup(),
+            bodyTable(),
+            !fixFooter.value && summaryNode && (
+              <Footer stickyOffsets={stickyOffsets.value} flattenColumns={flattenColumns.value}>
+                {summaryNode}
+              </Footer>
+            ),
+          ]);
+
           bodyContent = () => (
             <div
               style={{
@@ -717,18 +728,18 @@ export default defineComponent<TableProps<DefaultRecordType>>({
               class={classNames(`${prefixCls}-body`)}
             >
               <TableComponent
-                style={{
-                  ...scrollTableStyle.value,
-                  tableLayout: mergedTableLayout.value,
-                }}
+                {...usePropsWithComponentType(
+                  {
+                    style: {
+                      ...scrollTableStyle.value,
+                      tableLayout: mergedTableLayout.value,
+                    },
+                  },
+                  TableComponent,
+                  children,
+                ).value}
               >
-                {bodyColGroup()}
-                {bodyTable()}
-                {!fixFooter.value && summaryNode && (
-                  <Footer stickyOffsets={stickyOffsets.value} flattenColumns={flattenColumns.value}>
-                    {summaryNode}
-                  </Footer>
-                )}
+                {children.value}
               </TableComponent>
             </div>
           );
@@ -799,6 +810,16 @@ export default defineComponent<TableProps<DefaultRecordType>>({
         );
       } else {
         // >>>>>> Unique table
+        const children = computed(() => [
+          bodyColGroup(),
+          showHeader !== false && <Header {...headerProps} {...columnContext.value} />,
+          bodyTable(),
+          summaryNode && (
+            <Footer stickyOffsets={stickyOffsets.value} flattenColumns={flattenColumns.value}>
+              {summaryNode}
+            </Footer>
+          ),
+        ]);
         groupTableNode = () => (
           <div
             style={{
@@ -810,16 +831,18 @@ export default defineComponent<TableProps<DefaultRecordType>>({
             ref={scrollBodyRef}
           >
             <TableComponent
-              style={{ ...scrollTableStyle.value, tableLayout: mergedTableLayout.value }}
+              {...usePropsWithComponentType(
+                {
+                  style: {
+                    ...scrollTableStyle.value,
+                    tableLayout: mergedTableLayout.value,
+                  },
+                },
+                TableComponent,
+                children,
+              ).value}
             >
-              {bodyColGroup()}
-              {showHeader !== false && <Header {...headerProps} {...columnContext.value} />}
-              {bodyTable()}
-              {summaryNode && (
-                <Footer stickyOffsets={stickyOffsets.value} flattenColumns={flattenColumns.value}>
-                  {summaryNode}
-                </Footer>
-              )}
+              {children.value}
             </TableComponent>
           </div>
         );

@@ -5,11 +5,12 @@ import { getColumnsKey } from '../utils/valueUtil';
 import MeasureCell from './MeasureCell';
 import BodyRow from './BodyRow';
 import useFlattenRecords from '../hooks/useFlattenRecords';
-import { defineComponent, ref, toRef } from 'vue';
+import { computed, defineComponent, ref, toRef } from 'vue';
 import { useInjectResize } from '../context/ResizeContext';
 import { useInjectTable } from '../context/TableContext';
 import { useInjectBody } from '../context/BodyContext';
 import { useProvideHover } from '../context/HoverContext';
+import usePropsWithComponentType from '../hooks/usePropsWithComponentType';
 
 export interface BodyProps<RecordType> {
   data: RecordType[];
@@ -118,27 +119,26 @@ export default defineComponent<BodyProps<any>>({
       }
 
       const columnsKey = getColumnsKey(flattenColumns);
-
+      const children = computed(() => [
+        measureColumnWidth && (
+          <tr
+            aria-hidden="true"
+            class={`${prefixCls}-measure-row`}
+            style={{ height: 0, fontSize: 0 }}
+          >
+            {columnsKey.map(columnKey => (
+              <MeasureCell key={columnKey} columnKey={columnKey} onColumnResize={onColumnResize} />
+            ))}
+          </tr>
+        ),
+        rows,
+      ]);
       return (
-        <WrapperComponent class={`${prefixCls}-tbody`}>
-          {/* Measure body column width with additional hidden col */}
-          {measureColumnWidth && (
-            <tr
-              aria-hidden="true"
-              class={`${prefixCls}-measure-row`}
-              style={{ height: 0, fontSize: 0 }}
-            >
-              {columnsKey.map(columnKey => (
-                <MeasureCell
-                  key={columnKey}
-                  columnKey={columnKey}
-                  onColumnResize={onColumnResize}
-                />
-              ))}
-            </tr>
-          )}
-
-          {rows}
+        <WrapperComponent
+          {...usePropsWithComponentType({ class: `${prefixCls}-tbody` }, WrapperComponent, children)
+            .value}
+        >
+          {children.value}
         </WrapperComponent>
       );
     };

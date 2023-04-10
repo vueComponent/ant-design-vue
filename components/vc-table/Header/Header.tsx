@@ -11,6 +11,7 @@ import type {
   DefaultRecordType,
 } from '../interface';
 import HeaderRow from './HeaderRow';
+import usePropsWithComponentType from '../hooks/usePropsWithComponentType';
 
 function parseHeaderRows<RecordType>(
   rootColumns: ColumnsType<RecordType>,
@@ -103,24 +104,26 @@ export default defineComponent<HeaderProps>({
       const WrapperComponent = getComponent(['header', 'wrapper'], 'thead');
       const trComponent = getComponent(['header', 'row'], 'tr');
       const thComponent = getComponent(['header', 'cell'], 'th');
+      const children = computed(() =>
+        rows.value.map((row, rowIndex) => (
+          <HeaderRow
+            key={rowIndex}
+            flattenColumns={flattenColumns}
+            cells={row}
+            stickyOffsets={stickyOffsets}
+            rowComponent={trComponent}
+            cellComponent={thComponent}
+            customHeaderRow={customHeaderRow}
+            index={rowIndex}
+          />
+        )),
+      );
       return (
-        <WrapperComponent class={`${prefixCls}-thead`}>
-          {rows.value.map((row, rowIndex) => {
-            const rowNode = (
-              <HeaderRow
-                key={rowIndex}
-                flattenColumns={flattenColumns}
-                cells={row}
-                stickyOffsets={stickyOffsets}
-                rowComponent={trComponent}
-                cellComponent={thComponent}
-                customHeaderRow={customHeaderRow}
-                index={rowIndex}
-              />
-            );
-
-            return rowNode;
-          })}
+        <WrapperComponent
+          {...usePropsWithComponentType({ class: `${prefixCls}-thead` }, WrapperComponent, children)
+            .value}
+        >
+          {children.value}
         </WrapperComponent>
       );
     };

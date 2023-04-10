@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import Cell from '../Cell';
 import { useInjectTable } from '../context/TableContext';
 import type {
@@ -12,6 +12,7 @@ import type {
 import { getCellFixedInfo } from '../utils/fixUtil';
 import { getColumnsKey } from '../utils/valueUtil';
 import DragHandleVue from './DragHandle';
+import usePropsWithComponentType from '../hooks/usePropsWithComponentType';
 
 export interface RowProps<RecordType = DefaultRecordType> {
   cells: readonly CellType<RecordType>[];
@@ -57,53 +58,56 @@ export default defineComponent<RowProps>({
       }
 
       const columnsKey = getColumnsKey(cells.map(cell => cell.column));
+      const children = computed(() =>
+        cells.map((cell: CellType, cellIndex) => {
+          const { column } = cell;
+          const fixedInfo = getCellFixedInfo(
+            cell.colStart,
+            cell.colEnd,
+            flattenColumns,
+            stickyOffsets,
+            direction,
+          );
+
+          let additionalProps;
+          if (column && column.customHeaderCell) {
+            additionalProps = cell.column.customHeaderCell(column);
+          }
+          const col: ColumnType<any> = column;
+          return (
+            <Cell
+              {...cell}
+              cellType="header"
+              ellipsis={column.ellipsis}
+              align={column.align}
+              component={CellComponent}
+              prefixCls={prefixCls}
+              key={columnsKey[cellIndex]}
+              {...fixedInfo}
+              additionalProps={additionalProps}
+              rowType="header"
+              column={column}
+              v-slots={{
+                default: () => column.title,
+                dragHandle: () =>
+                  col.resizable ? (
+                    <DragHandleVue
+                      prefixCls={prefixCls}
+                      width={col.width as number}
+                      minWidth={col.minWidth}
+                      maxWidth={col.maxWidth}
+                      column={col}
+                    />
+                  ) : null,
+              }}
+            />
+          );
+        }),
+      );
 
       return (
-        <RowComponent {...rowProps}>
-          {cells.map((cell: CellType, cellIndex) => {
-            const { column } = cell;
-            const fixedInfo = getCellFixedInfo(
-              cell.colStart,
-              cell.colEnd,
-              flattenColumns,
-              stickyOffsets,
-              direction,
-            );
-
-            let additionalProps;
-            if (column && column.customHeaderCell) {
-              additionalProps = cell.column.customHeaderCell(column);
-            }
-            const col: ColumnType<any> = column;
-            return (
-              <Cell
-                {...cell}
-                cellType="header"
-                ellipsis={column.ellipsis}
-                align={column.align}
-                component={CellComponent}
-                prefixCls={prefixCls}
-                key={columnsKey[cellIndex]}
-                {...fixedInfo}
-                additionalProps={additionalProps}
-                rowType="header"
-                column={column}
-                v-slots={{
-                  default: () => column.title,
-                  dragHandle: () =>
-                    col.resizable ? (
-                      <DragHandleVue
-                        prefixCls={prefixCls}
-                        width={col.width as number}
-                        minWidth={col.minWidth}
-                        maxWidth={col.maxWidth}
-                        column={col}
-                      />
-                    ) : null,
-                }}
-              />
-            );
-          })}
+        <RowComponent {...usePropsWithComponentType(rowProps, RowComponent, children).value}>
+          {children.value}
         </RowComponent>
       );
     };

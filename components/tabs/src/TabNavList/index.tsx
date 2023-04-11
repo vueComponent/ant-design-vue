@@ -514,15 +514,17 @@ export default defineComponent({
               </ResizeObserver>
             </div>
           </ResizeObserver>
-          <OperationNode
-            {...props}
-            removeAriaLabel={locale?.removeAriaLabel}
-            v-slots={pick(slots, ['moreIcon'])}
-            ref={operationsRef}
-            prefixCls={pre}
-            tabs={hiddenTabs.value}
-            class={!hasDropdown && operationsHiddenClassName.value}
-          />
+          {hasDropdown && (
+            <OperationNode
+              {...props}
+              removeAriaLabel={locale?.removeAriaLabel}
+              v-slots={pick(slots, ['moreIcon'])}
+              ref={operationsRef}
+              prefixCls={pre}
+              tabs={hiddenTabs.value}
+              class={!hasDropdown && operationsHiddenClassName.value}
+            />
+          )}
 
           <ExtraContent position="right" prefixCls={pre} extra={slots.rightExtra} />
           <ExtraContent position="right" prefixCls={pre} extra={slots.tabBarExtraContent} />

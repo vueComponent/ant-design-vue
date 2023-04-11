@@ -2,6 +2,7 @@
   <demo-sort :cols="1">
     <Base />
     <Customize />
+    <Size />
     <Vertical />
     <Align />
     <Wrap />
@@ -24,6 +25,7 @@ import CompactButtonVertical from './compact-button-vertical.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
+import Size from './size.vue';
 
 export default defineComponent({
   CN,
@@ -38,6 +40,7 @@ export default defineComponent({
     Compact,
     CompactButtons,
     CompactButtonVertical,
+    Size,
   },
   setup() {
     return {};

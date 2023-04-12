@@ -4,7 +4,7 @@ import setStyle from './setStyle';
 import Portal from './Portal';
 import {
   defineComponent,
-  ref,
+  shallowRef,
   watch,
   onMounted,
   onBeforeUnmount,
@@ -60,9 +60,9 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
-    const container = ref<HTMLElement>();
-    const componentRef = ref();
-    const rafId = ref<number>();
+    const container = shallowRef<HTMLElement>();
+    const componentRef = shallowRef();
+    const rafId = shallowRef<number>();
     const scrollLocker = new ScrollLocker({
       container: getParent(props.getContainer) as HTMLElement,
     });

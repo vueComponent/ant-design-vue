@@ -2,7 +2,8 @@ import type { App, ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import PropTypes from '../_util/vue-types';
+import type { VueNode } from '../_util/type';
+import { anyType, booleanType, stringType, functionType, someType, arrayType } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps, { Step as VcStep } from '../vc-steps';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
@@ -10,10 +11,10 @@ import useBreakpoint from '../_util/hooks/useBreakpoint';
 import classNames from '../_util/classNames';
 import Progress from '../progress';
 import omit from '../_util/omit';
+import Tooltip from '../tooltip';
 import { VcStepProps } from '../vc-steps/Step';
-import type { ProgressDotRender } from '../vc-steps/Steps';
+import type { Status, ProgressDotRender } from '../vc-steps/interface';
 import type { MouseEventHandler } from '../_util/EventInterface';
-import { booleanType, stringType, functionType, someType } from '../_util/type';
 
 // CSSINJS
 import useStyle from './style';
@@ -25,8 +26,9 @@ export const stepsProps = () => ({
   initial: Number,
   percent: Number,
   responsive: booleanType(),
+  items: arrayType<StepProps[]>(),
   labelPlacement: stringType<'horizontal' | 'vertical'>(),
-  status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
+  status: stringType<Status>(),
   size: stringType<'default' | 'small'>(),
   direction: stringType<'horizontal' | 'vertical'>(),
   progressDot: someType<boolean | ProgressDotRender>([Boolean, Function]),
@@ -36,12 +38,12 @@ export const stepsProps = () => ({
 });
 
 export const stepProps = () => ({
-  description: PropTypes.any,
-  icon: PropTypes.any,
-  status: stringType<'wait' | 'process' | 'finish' | 'error'>(),
+  description: anyType(),
+  icon: anyType(),
+  status: stringType<Status>(),
   disabled: booleanType(),
-  title: PropTypes.any,
-  subTitle: PropTypes.any,
+  title: anyType(),
+  subTitle: anyType(),
   onClick: functionType<MouseEventHandler>(),
 });
 
@@ -62,7 +64,6 @@ const Steps = defineComponent({
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
-
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -95,7 +96,7 @@ const Steps = defineComponent({
             <Progress
               type="circle"
               percent={mergedPercent.value}
-              width={progressWidth}
+              size={progressWidth}
               strokeWidth={4}
               format={() => null}
             />
@@ -119,18 +120,23 @@ const Steps = defineComponent({
         attrs.class,
         hashId.value,
       );
+      const itemRender = (item: StepProps, stepItem: VueNode) =>
+        item.description ? <Tooltip title={item.description}>{stepItem}</Tooltip> : stepItem;
 
       return wrapSSR(
         <VcSteps
           icons={icons.value}
           {...attrs}
           {...omit(props, ['percent', 'responsive'])}
+          items={props.items}
           direction={direction.value}
           prefixCls={prefixCls.value}
           iconPrefix={iconPrefix.value}
           class={stepsClassName}
           onChange={handleChange}
-          v-slots={{ ...slots, stepIcon: stepIconRender }}
+          isInline={isInline.value}
+          itemRender={isInline.value ? itemRender : undefined}
+          v-slots={{ stepIcon: stepIconRender, ...slots }}
         />,
       );
     };
@@ -140,7 +146,7 @@ const Steps = defineComponent({
 /* istanbul ignore next */
 export const Step = defineComponent({
   compatConfig: { MODE: 3 },
-  ...VcStep,
+  ...(VcStep as any),
   name: 'AStep',
   props: VcStepProps(),
 });

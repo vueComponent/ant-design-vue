@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { shallowRef, watch } from 'vue';
 import type { MaybeComputedElementRef } from './unrefElement';
 import type { UseResizeObserverOptions } from './useResizeObserver';
 import { useResizeObserver } from './useResizeObserver';
@@ -23,8 +23,8 @@ export function useElementSize(
   options: UseResizeObserverOptions = {},
 ) {
   const { box = 'content-box' } = options;
-  const width = ref(initialSize.width);
-  const height = ref(initialSize.height);
+  const width = shallowRef(initialSize.width);
+  const height = shallowRef(initialSize.height);
 
   useResizeObserver(
     target,

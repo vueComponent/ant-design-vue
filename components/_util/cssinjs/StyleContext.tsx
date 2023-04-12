@@ -1,9 +1,10 @@
-import type { InjectionKey, Ref } from 'vue';
-import { unref, computed, inject } from 'vue';
+import type { ShallowRef, ExtractPropTypes, InjectionKey, Ref } from 'vue';
+import { provide, defineComponent, unref, inject, watch, shallowRef } from 'vue';
 import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
-
+import { arrayType, booleanType, objectType, someType, stringType, withInstall } from '../type';
+import initDefaultProps from '../props-util/initDefaultProps';
 export const ATTR_TOKEN = 'data-token-hash';
 export const ATTR_MARK = 'data-css-hash';
 export const ATTR_DEV_CACHE_PATH = 'data-dev-cache-path';
@@ -71,42 +72,86 @@ export interface StyleContextProps {
   linters?: Linter[];
 }
 
-const StyleContextKey: InjectionKey<StyleContextProps> = Symbol('StyleContextKey');
+const StyleContextKey: InjectionKey<ShallowRef<Partial<StyleContextProps>>> =
+  Symbol('StyleContextKey');
 
-export type StyleProviderProps = Partial<StyleContextProps> | Ref<Partial<StyleContextProps>>;
-export const useStyleInject = () => {
-  return inject(StyleContextKey, {
-    hashPriority: 'low',
-    cache: createCache(),
-    defaultCache: true,
-  });
+export type UseStyleProviderProps = Partial<StyleContextProps> | Ref<Partial<StyleContextProps>>;
+const defaultStyleContext: StyleContextProps = {
+  cache: createCache(),
+  defaultCache: true,
+  hashPriority: 'low',
 };
-export const useStyleProvider = (props: StyleContextProps) => {
+export const useStyleInject = () => {
+  return inject(StyleContextKey, shallowRef({ ...defaultStyleContext }));
+};
+export const useStyleProvider = (props: UseStyleProviderProps) => {
   const parentContext = useStyleInject();
+  const context = shallowRef<Partial<StyleContextProps>>({ ...defaultStyleContext });
+  watch(
+    [props, parentContext],
+    () => {
+      const mergedContext: Partial<StyleContextProps> = {
+        ...parentContext.value,
+      };
+      const propsValue = unref(props);
+      Object.keys(propsValue).forEach(key => {
+        const value = propsValue[key];
+        if (propsValue[key] !== undefined) {
+          mergedContext[key] = value;
+        }
+      });
 
-  const context = computed<StyleContextProps>(() => {
-    const mergedContext: StyleContextProps = {
-      ...parentContext,
-    };
-    const propsValue = unref(props);
-    (Object.keys(propsValue) as (keyof StyleContextProps)[]).forEach(key => {
-      const value = propsValue[key];
-      if (propsValue[key] !== undefined) {
-        (mergedContext as any)[key] = value;
-      }
-    });
-
-    const { cache } = propsValue;
-    mergedContext.cache = mergedContext.cache || createCache();
-    mergedContext.defaultCache = !cache && parentContext.defaultCache;
-
-    return mergedContext;
-  });
-
+      const { cache } = propsValue;
+      mergedContext.cache = mergedContext.cache || createCache();
+      mergedContext.defaultCache = !cache && parentContext.value.defaultCache;
+      context.value = mergedContext;
+    },
+    { immediate: true },
+  );
+  provide(StyleContextKey, context);
   return context;
 };
+export const styleProviderProps = () => ({
+  autoClear: booleanType(),
+  /** @private Test only. Not work in production. */
+  mock: stringType<'server' | 'client'>(),
+  /**
+   * Only set when you need ssr to extract style on you own.
+   * If not provided, it will auto create <style /> on the end of Provider in server side.
+   */
+  cache: objectType<CacheEntity>(),
+  /** Tell children that this context is default generated context */
+  defaultCache: booleanType(),
+  /** Use `:where` selector to reduce hashId css selector priority */
+  hashPriority: stringType<HashPriority>(),
+  /** Tell cssinjs where to inject style in */
+  container: someType<Element | ShadowRoot>(),
+  /** Component wil render inline  `<style />` for fallback in SSR. Not recommend. */
+  ssrInline: booleanType(),
+  /** Transform css before inject in document. Please note that `transformers` do not support dynamic update */
+  transformers: arrayType<Transformer[]>(),
+  /**
+   * Linters to lint css before inject in document.
+   * Styles will be linted after transforming.
+   * Please note that `linters` do not support dynamic update.
+   */
+  linters: arrayType<Linter[]>(),
+});
+export type StyleProviderProps = Partial<ExtractPropTypes<ReturnType<typeof styleProviderProps>>>;
+export const StyleProvider = withInstall(
+  defineComponent({
+    name: 'AStyleProvider',
+    inheritAttrs: false,
+    props: initDefaultProps(styleProviderProps(), defaultStyleContext),
+    setup(props, { slots }) {
+      useStyleProvider(props);
+      return () => slots.default?.();
+    },
+  }),
+);
 
 export default {
   useStyleInject,
   useStyleProvider,
+  StyleProvider,
 };

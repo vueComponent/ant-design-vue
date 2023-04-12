@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
-  ref,
+  shallowRef,
   reactive,
   watch,
   onMounted,
@@ -77,8 +77,8 @@ const Affix = defineComponent({
   inheritAttrs: false,
   props: affixProps(),
   setup(props, { slots, emit, expose, attrs }) {
-    const placeholderNode = ref();
-    const fixedNode = ref();
+    const placeholderNode = shallowRef();
+    const fixedNode = shallowRef();
     const state = reactive({
       affixStyle: undefined,
       placeholderStyle: undefined,

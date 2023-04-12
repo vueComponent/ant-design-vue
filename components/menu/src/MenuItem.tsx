@@ -1,7 +1,14 @@
 import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
 import type { ExtractPropTypes, PropType } from 'vue';
-import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  onBeforeUnmount,
+  shallowRef,
+  watch,
+} from 'vue';
 import { useInjectKeyPath, useMeasure } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
@@ -64,7 +71,7 @@ export default defineComponent({
       unRegisterMenuInfo,
     } = useInjectMenu();
     const firstLevel = useInjectFirstLevel();
-    const isActive = ref(false);
+    const isActive = shallowRef(false);
     const keysPath = computed(() => {
       return [...parentKeys.value, key];
     });

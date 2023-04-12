@@ -198,23 +198,10 @@ Modify global theme color by css variable. Css variable depends on the design, i
         <a-pagination show-quick-jumper :default-current="2" :total="500" />
 
         <!-- Steps -->
-        <a-steps :current="1" :percent="60">
-          <a-step title="Finished" description="This is a description." />
-          <a-step
-            title="In Progress"
-            sub-title="Left 00:00:08"
-            description="This is a description."
-          />
-          <a-step title="Waiting" description="This is a description." />
-        </a-steps>
+        <a-steps :current="1" :percent="60" :items="stepsItems"></a-steps>
 
         <!-- Steps - dot -->
-        <a-steps :current="2" status="error" progress-dot>
-          <a-step title="Finished" description="You can hover on the dot." />
-          <a-step title="In Progress" description="You can hover on the dot." />
-          <a-step title="Error" description="You can hover on the dot." />
-          <a-step title="Waiting" description="You can hover on the dot." />
-        </a-steps>
+        <a-steps :current="2" status="error" progress-dot :items="stepsItems2"></a-steps>
 
         <!-- Form - Input -->
         <a-form>
@@ -568,6 +555,34 @@ export default defineComponent({
       colorState,
       inputProps,
       selectedKeys: ref(['mail']),
+      stepsItems: [
+        {
+          title: 'Finished',
+          description: 'This is a description.',
+        },
+        {
+          title: 'In Progress',
+          description: 'This is a description.',
+        },
+        {
+          title: 'Waiting',
+          description: 'This is a description.',
+        },
+      ],
+      stepsItems2: [
+        {
+          title: 'Finished',
+          description: 'You can hover on the dot.',
+        },
+        {
+          title: 'In Progress',
+          description: 'You can hover on the dot.',
+        },
+        {
+          title: 'Waiting',
+          description: 'You can hover on the dot.',
+        },
+      ],
     };
   },
 });

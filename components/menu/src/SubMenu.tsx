@@ -1,6 +1,13 @@
 import PropTypes from '../../_util/vue-types';
 import type { PropType, ExtractPropTypes } from 'vue';
-import { computed, defineComponent, getCurrentInstance, ref, watch, onBeforeUnmount } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  shallowRef,
+  watch,
+  onBeforeUnmount,
+} from 'vue';
 import useProvideKeyPath, { useInjectKeyPath, useMeasure } from './hooks/useKeyPath';
 import {
   useInjectMenu,
@@ -67,7 +74,7 @@ export default defineComponent({
       (isValid(vnodeKey) ? `sub_menu_${++indexGuid}_$$_${vnodeKey}` : (key as string));
     const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
     const keysPath = computed(() => [...parentKeys.value, key]);
-    const childrenEventKeys = ref([]);
+    const childrenEventKeys = shallowRef([]);
     const menuInfo = {
       eventKey,
       key,
@@ -119,8 +126,8 @@ export default defineComponent({
 
     const subMenuPrefixCls = computed(() => `${prefixCls.value}-submenu`);
     const mergedDisabled = computed(() => contextDisabled.value || props.disabled);
-    const elementRef = ref();
-    const popupRef = ref();
+    const elementRef = shallowRef();
+    const popupRef = shallowRef();
 
     // // ================================ Icon ================================
     // const mergedItemIcon = itemIcon || contextItemIcon;
@@ -135,7 +142,7 @@ export default defineComponent({
       return selectedSubMenuKeys.value.includes(key);
     });
 
-    const isActive = ref(false);
+    const isActive = shallowRef(false);
     watch(
       activeKeys,
       () => {

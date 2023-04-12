@@ -1,5 +1,5 @@
 import type { App, PropType, ExtractPropTypes } from 'vue';
-import { computed, watch, ref, defineComponent } from 'vue';
+import { computed, watch, shallowRef, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import VcMentions, { Option } from '../vc-mentions';
@@ -115,9 +115,9 @@ const Mentions = defineComponent({
     }
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const focused = ref(false);
-    const vcMentions = ref(null);
-    const value = ref(props.value ?? props.defaultValue ?? '');
+    const focused = shallowRef(false);
+    const vcMentions = shallowRef(null);
+    const value = shallowRef(props.value ?? props.defaultValue ?? '');
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));

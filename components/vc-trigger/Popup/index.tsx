@@ -1,4 +1,4 @@
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, shallowRef, watch } from 'vue';
 import { popupProps } from './interface';
 import Mask from './Mask';
 import MobilePopupInner from './MobilePopupInner';
@@ -10,9 +10,9 @@ export default defineComponent({
   inheritAttrs: false,
   props: popupProps,
   setup(props, { attrs, slots, expose }) {
-    const innerVisible = ref(false);
-    const inMobile = ref(false);
-    const popupRef = ref();
+    const innerVisible = shallowRef(false);
+    const inMobile = shallowRef(false);
+    const popupRef = shallowRef();
     watch(
       [() => props.visible, () => props.mobile],
       () => {

@@ -49,7 +49,7 @@ export default defineComponent({
   }
 }
 
-@media only screen and (max-width: var(--mobile-max-width)) {
+@media only screen and (max-width: 767.99px) {
   #logo {
     padding-right: 0;
     padding-left: 0;

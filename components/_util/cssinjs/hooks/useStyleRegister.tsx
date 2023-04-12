@@ -304,8 +304,8 @@ export default function useStyleRegister(
 
   // Check if need insert style
   let isMergedClientSide = isClientSide;
-  if (process.env.NODE_ENV !== 'production' && styleContext.mock !== undefined) {
-    isMergedClientSide = styleContext.mock === 'client';
+  if (process.env.NODE_ENV !== 'production' && styleContext.value.mock !== undefined) {
+    isMergedClientSide = styleContext.value.mock === 'client';
   }
 
   // const [cacheStyle[0], cacheStyle[1], cacheStyle[2]]
@@ -315,7 +315,7 @@ export default function useStyleRegister(
     // Create cache if needed
     () => {
       const styleObj = styleFn();
-      const { hashPriority, container, transformers, linters } = styleContext;
+      const { hashPriority, container, transformers, linters } = styleContext.value;
       const { path, hashId, layer } = info.value;
       const [parsedStyle, effectStyle] = parseStyle(styleObj, {
         hashId,
@@ -364,7 +364,7 @@ export default function useStyleRegister(
     },
     // Remove cache if no need
     ([, , styleId], fromHMR) => {
-      if ((fromHMR || styleContext.autoClear) && isClientSide) {
+      if ((fromHMR || styleContext.value.autoClear) && isClientSide) {
         removeCSS(styleId, { mark: ATTR_MARK });
       }
     },

@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, HTMLAttributes, PropType } from 'vue';
-import { computed, defineComponent, ref, watch } from 'vue';
+import { computed, defineComponent, shallowRef, watch } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
 import type { MouseEventHandler } from '../_util/EventInterface';
@@ -51,14 +51,14 @@ const Overflow = defineComponent<OverflowProps>({
   setup(props, { attrs, emit, slots }) {
     const fullySSR = computed(() => props.ssr === 'full');
 
-    const containerWidth = ref<number>(null);
+    const containerWidth = shallowRef<number>(null);
     const mergedContainerWidth = computed(() => containerWidth.value || 0);
-    const itemWidths = ref<Map<Key, number>>(new Map<Key, number>());
-    const prevRestWidth = ref(0);
-    const restWidth = ref(0);
-    const suffixWidth = ref(0);
-    const suffixFixedStart = ref<number>(null);
-    const displayCount = ref<number>(null);
+    const itemWidths = shallowRef<Map<Key, number>>(new Map<Key, number>());
+    const prevRestWidth = shallowRef(0);
+    const restWidth = shallowRef(0);
+    const suffixWidth = shallowRef(0);
+    const suffixFixedStart = shallowRef<number>(null);
+    const displayCount = shallowRef<number>(null);
 
     const mergedDisplayCount = computed(() => {
       if (displayCount.value === null && fullySSR.value) {
@@ -68,7 +68,7 @@ const Overflow = defineComponent<OverflowProps>({
       return displayCount.value || 0;
     });
 
-    const restReady = ref(false);
+    const restReady = shallowRef(false);
 
     const itemPrefixCls = computed(() => `${props.prefixCls}-item`);
 

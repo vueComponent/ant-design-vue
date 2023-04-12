@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, HTMLAttributes, App } from 'vue';
-import { watch, defineComponent, ref, computed } from 'vue';
+import { watch, defineComponent, shallowRef, computed } from 'vue';
 import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
@@ -62,15 +62,15 @@ const InputNumber = defineComponent({
     const mergedSize = computed(() => compactSize.value || size.value);
     const disabledContext = useInjectDisabled();
     const mergedDisabled = computed(() => disabled.value ?? disabledContext.value);
-    const mergedValue = ref(props.value === undefined ? props.defaultValue : props.value);
-    const focused = ref(false);
+    const mergedValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
+    const focused = shallowRef(false);
     watch(
       () => props.value,
       () => {
         mergedValue.value = props.value;
       },
     );
-    const inputNumberRef = ref(null);
+    const inputNumberRef = shallowRef(null);
     const focus = () => {
       inputNumberRef.value?.focus();
     };

@@ -3,20 +3,25 @@ import { Steps } from 'ant-design-vue';
 
 import type { ComponentDemo } from '../../interface';
 
-const { Step } = Steps;
-
 const Demo = defineComponent({
   setup() {
     return () => (
-      <Steps current={1}>
-        <Step title="Error" status={'error'} description="This is a description." />
-        <Step
-          status={'error'}
-          title="In Progress"
-          subTitle="Left 00:00:08"
-          description="This is a description."
-        />
-      </Steps>
+      <Steps
+        current={1}
+        items={[
+          {
+            title: 'Error',
+            status: 'error',
+            description: 'This is a description.',
+          },
+          {
+            title: 'In Progress"',
+            status: 'error',
+            subTitle: 'Left 00:00:08',
+            description: 'This is a description.',
+          },
+        ]}
+      />
     );
   },
 });

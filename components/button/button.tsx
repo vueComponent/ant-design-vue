@@ -4,7 +4,7 @@ import {
   onBeforeUnmount,
   onMounted,
   onUpdated,
-  ref,
+  shallowRef,
   Text,
   watch,
   watchEffect,
@@ -17,7 +17,7 @@ import devWarning from '../vc-util/devWarning';
 import LoadingIcon from './LoadingIcon';
 import useStyle from './style';
 import type { ButtonType } from './buttonTypes';
-import type { VNode, Ref } from 'vue';
+import type { VNode } from 'vue';
 import { GroupSizeContext } from './button-group';
 import { useCompactItemContext } from '../space/Compact';
 
@@ -42,12 +42,12 @@ export default defineComponent({
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const groupSizeContext = GroupSizeContext.useInject();
-    const buttonNodeRef = ref<HTMLElement>(null);
-    const delayTimeoutRef = ref(undefined);
+    const buttonNodeRef = shallowRef<HTMLElement>(null);
+    const delayTimeoutRef = shallowRef(undefined);
     let isNeedInserted = false;
 
-    const innerLoading: Ref<Loading> = ref(false);
-    const hasTwoCNChar = ref(false);
+    const innerLoading = shallowRef<Loading>(false);
+    const hasTwoCNChar = shallowRef(false);
 
     const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
     const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);

@@ -1,9 +1,11 @@
 <template>
-  <a-config-provider :locale="locale" :theme="themeConfig">
-    <SiteToken>
-      <router-view />
-    </SiteToken>
-  </a-config-provider>
+  <a-style-provider :hash-priority="hashPriority">
+    <a-config-provider :locale="locale" :theme="themeConfig">
+      <SiteToken>
+        <router-view />
+      </SiteToken>
+    </a-config-provider>
+  </a-style-provider>
 </template>
 
 <script lang="ts">
@@ -56,6 +58,10 @@ export default defineComponent({
     const compactTheme = ref<ThemeName>((localStorage.getItem('compactTheme') as ThemeName) || '');
     const themeConfig = computed(() => {
       return { algorithm: getAlgorithm([...new Set([theme.value, compactTheme.value])]) };
+    });
+    const hashPriority = ref('low' as const);
+    watch(hashPriority, () => {
+      location.reload();
     });
     // useSiteToken();
     const responsive = computed(() => {
@@ -132,7 +138,7 @@ export default defineComponent({
       },
       { immediate: true },
     );
-    return { globalConfig, locale, themeConfig };
+    return { globalConfig, locale, themeConfig, hashPriority };
   },
 });
 </script>

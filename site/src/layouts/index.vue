@@ -183,6 +183,7 @@ export default defineComponent({
       compactTheme: ref('light'),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       changeTheme: (_key: any) => void 0,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       changeCompactTheme: (_key: any) => void 0,
     });
 

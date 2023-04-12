@@ -1,7 +1,14 @@
 import addEventListenerWrap from '../../vc-util/Dom/addEventListener';
 import type { EventHandler } from '../../_util/EventInterface';
 import raf from '../../_util/raf';
-import { defineComponent, onUnmounted, computed, ref, watchEffect, getCurrentInstance } from 'vue';
+import {
+  defineComponent,
+  onUnmounted,
+  computed,
+  shallowRef,
+  watchEffect,
+  getCurrentInstance,
+} from 'vue';
 import type { PropType } from 'vue';
 import devWarning from '../../vc-util/devWarning';
 import type { ColumnType } from '../interface';
@@ -73,7 +80,7 @@ export default defineComponent({
     });
     const instance = getCurrentInstance();
     let baseWidth = 0;
-    const dragging = ref(false);
+    const dragging = shallowRef(false);
     let rafId: number;
     const updateWidth = (e: HandleEvent) => {
       let pageX = 0;

@@ -1,7 +1,7 @@
 import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
 import type { InnerSelectorProps } from './interface';
-import { Fragment, computed, defineComponent, ref, watch } from 'vue';
+import { Fragment, computed, defineComponent, shallowRef, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
 import useInjectLegacySelectContext from '../../vc-tree-select/LegacyContext';
@@ -40,7 +40,7 @@ const props = {
 const SingleSelector = defineComponent<SelectorProps>({
   name: 'SingleSelector',
   setup(props) {
-    const inputChanged = ref(false);
+    const inputChanged = shallowRef(false);
 
     const combobox = computed(() => props.mode === 'combobox');
     const inputEditable = computed(() => combobox.value || props.showSearch);

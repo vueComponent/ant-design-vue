@@ -16,7 +16,7 @@ import type {
 import FilterDropdownMenuWrapper from './FilterWrapper';
 import type { FilterState } from '.';
 import { flattenKeys } from '.';
-import { computed, defineComponent, onBeforeUnmount, ref, shallowRef, watch } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, shallowRef, watch } from 'vue';
 import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../config-provider/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';
@@ -160,7 +160,7 @@ export default defineComponent<FilterDropdownProps<any>>({
         );
       });
     }
-    const visible = ref(false);
+    const visible = shallowRef(false);
     const filtered = computed(
       () =>
         !!(
@@ -227,7 +227,7 @@ export default defineComponent<FilterDropdownProps<any>>({
     // const onExpandChange = keys => (expandKeys.value = keys);
     const openKeys = shallowRef([]);
 
-    const openRef = ref();
+    const openRef = shallowRef();
 
     const onOpenChange = (keys: string[]) => {
       openRef.value = setTimeout(() => {
@@ -242,7 +242,7 @@ export default defineComponent<FilterDropdownProps<any>>({
       clearTimeout(openRef.value);
     });
 
-    const searchValue = ref('');
+    const searchValue = shallowRef('');
     const onSearch: EventHandler = e => {
       const { value } = e.target;
       searchValue.value = value;

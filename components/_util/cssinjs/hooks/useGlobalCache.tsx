@@ -17,7 +17,7 @@ export default function useClientCache<CacheType>(
   });
   const HMRUpdate = useHMR();
   const clearCache = (pathStr: string) => {
-    styleContext.cache.update(pathStr, prevCache => {
+    styleContext.value.cache.update(pathStr, prevCache => {
       const [times = 0, cache] = prevCache || [];
       const nextCount = times - 1;
       if (nextCount === 0) {
@@ -34,7 +34,7 @@ export default function useClientCache<CacheType>(
     (newStr, oldStr) => {
       if (oldStr) clearCache(oldStr);
       // Create cache
-      styleContext.cache.update(newStr, prevCache => {
+      styleContext.value.cache.update(newStr, prevCache => {
         const [times = 0, cache] = prevCache || [];
 
         // HMR should always ignore cache since developer may change it
@@ -47,7 +47,7 @@ export default function useClientCache<CacheType>(
 
         return [times + 1, mergedCache];
       });
-      res.value = styleContext.cache.get(fullPathStr.value)![1];
+      res.value = styleContext.value.cache.get(fullPathStr.value)![1];
     },
     { immediate: true },
   );

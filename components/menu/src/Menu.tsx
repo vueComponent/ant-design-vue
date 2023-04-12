@@ -117,7 +117,7 @@ export default defineComponent({
       return props.inlineCollapsed;
     });
     const { itemsNodes } = useItems(props);
-    const isMounted = ref(false);
+    const isMounted = shallowRef(false);
     onMounted(() => {
       isMounted.value = true;
     });
@@ -267,7 +267,7 @@ export default defineComponent({
     const disabled = computed(() => !!props.disabled);
     const isRtl = computed(() => direction.value === 'rtl');
     const mergedMode = ref<MenuMode>('vertical');
-    const mergedInlineCollapsed = ref(false);
+    const mergedInlineCollapsed = shallowRef(false);
 
     watchEffect(() => {
       if ((props.mode === 'inline' || props.mode === 'vertical') && inlineCollapsed.value) {
@@ -293,7 +293,7 @@ export default defineComponent({
     // >>>>> Cache & Reset open keys when inlineCollapsed changed
     const inlineCacheOpenKeys = ref(mergedOpenKeys.value);
 
-    const mountRef = ref(false);
+    const mountRef = shallowRef(false);
 
     // Cache
     watch(
@@ -426,13 +426,13 @@ export default defineComponent({
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions.value : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
-      overflowDisabled: ref(undefined),
+      overflowDisabled: shallowRef(undefined),
       onOpenChange: onInternalOpenChange,
       onItemClick: onInternalClick,
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuKeys,
-      isRootMenu: ref(true),
+      isRootMenu: shallowRef(true),
       expandIcon,
       forceSubMenuRender: computed(() => props.forceSubMenuRender),
       rootClassName: hashId,

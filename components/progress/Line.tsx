@@ -1,17 +1,17 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { presetPrimaryColors } from '@ant-design/colors';
 import { computed, defineComponent } from 'vue';
 import type { Direction } from '../config-provider';
-import type { StringGradients, ProgressGradient } from './props';
+import type { StringGradients, ProgressGradient, ProgressSize } from './props';
 import { progressProps } from './props';
-import { getSuccessPercent, validProgress } from './utils';
+import { getSize, getSuccessPercent, validProgress } from './utils';
+import devWarning from '../vc-util/devWarning';
+import { anyType, stringType } from '../_util/type';
 
 export const lineProps = () => ({
   ...progressProps(),
-  prefixCls: String,
-  direction: {
-    type: String as PropType<Direction>,
-  },
+  strokeColor: anyType<string | ProgressGradient>(),
+  direction: stringType<Direction>(),
 });
 
 export type LineProps = Partial<ExtractPropTypes<ReturnType<typeof lineProps>>>;
@@ -84,6 +84,9 @@ export default defineComponent({
             backgroundColor: strokeColor as string,
           };
     });
+    const borderRadius = computed(() =>
+      props.strokeLinecap === 'square' || props.strokeLinecap === 'butt' ? 0 : undefined,
+    );
 
     const trailStyle = computed<CSSProperties>(() =>
       props.trailColor
@@ -93,13 +96,29 @@ export default defineComponent({
         : undefined,
     );
 
+    const mergedSize = computed(
+      () => props.size ?? [-1, props.strokeWidth || (props.size === 'small' ? 6 : 8)],
+    );
+
+    const sizeRef = computed(() =>
+      getSize(mergedSize.value as ProgressSize, 'line', { strokeWidth: props.strokeWidth }),
+    );
+
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        'strokeWidth' in props,
+        'Progress',
+        '`strokeWidth` is deprecated. Please use `size` instead.',
+      );
+    }
+
     const percentStyle = computed<CSSProperties>(() => {
-      const { percent, strokeWidth, strokeLinecap, size } = props;
+      const { percent } = props;
       return {
         width: `${validProgress(percent)}%`,
-        height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : undefined,
-        ...(backgroundProps.value as any),
+        height: `${sizeRef.value.height}px`,
+        borderRadius: borderRadius.value,
+        ...backgroundProps.value,
       };
     });
 
@@ -107,18 +126,27 @@ export default defineComponent({
       return getSuccessPercent(props);
     });
     const successPercentStyle = computed<CSSProperties>(() => {
-      const { strokeWidth, size, strokeLinecap, success } = props;
+      const { success } = props;
       return {
         width: `${validProgress(successPercent.value)}%`,
-        height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-        borderRadius: strokeLinecap === 'square' ? 0 : undefined,
+        height: `${sizeRef.value.height}px`,
+        borderRadius: borderRadius.value,
         backgroundColor: success?.strokeColor,
       };
     });
 
+    const outerStyle: CSSProperties = {
+      width: sizeRef.value.width < 0 ? '100%' : sizeRef.value.width,
+      height: `${sizeRef.value.height}px`,
+    };
+
     return () => (
       <>
-        <div {...attrs} class={[`${props.prefixCls}-outer`, attrs.class]}>
+        <div
+          {...attrs}
+          class={[`${props.prefixCls}-outer`, attrs.class]}
+          style={[attrs.style as CSSProperties, outerStyle]}
+        >
           <div class={`${props.prefixCls}-inner`} style={trailStyle.value}>
             <div class={`${props.prefixCls}-bg`} style={percentStyle.value} />
             {successPercent.value !== undefined ? (

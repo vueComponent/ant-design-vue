@@ -1,4 +1,4 @@
-import { defineComponent, ref, watchEffect } from 'vue';
+import { defineComponent, shallowRef, watchEffect } from 'vue';
 import { collapsePanelProps } from './commonProps';
 import classNames from '../_util/classNames';
 
@@ -7,7 +7,7 @@ export default defineComponent({
   name: 'PanelContent',
   props: collapsePanelProps(),
   setup(props, { slots }) {
-    const rendered = ref(false);
+    const rendered = shallowRef(false);
 
     watchEffect(() => {
       if (props.isActive || props.forceRender) {
@@ -20,7 +20,6 @@ export default defineComponent({
       const { prefixCls, isActive, role } = props;
       return (
         <div
-          ref={ref}
           class={classNames(`${prefixCls}-content`, {
             [`${prefixCls}-content-active`]: isActive,
             [`${prefixCls}-content-inactive`]: !isActive,

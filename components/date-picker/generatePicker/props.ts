@@ -3,6 +3,7 @@ import type { CSSProperties } from 'vue';
 import type { PickerLocale } from '.';
 import type { SizeType } from '../../config-provider';
 import type {
+  PresetDate,
   CustomFormat,
   DisabledTime,
   DisabledTimes,
@@ -53,6 +54,11 @@ function commonProps<DateType = any>() {
     defaultOpen: booleanType(),
     /** Make input readOnly to avoid popup keyboard in mobile */
     inputReadOnly: booleanType(),
+    format: someType<string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]>([
+      String,
+      Function,
+      Array,
+    ]),
     // Value
     // format:  string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
     // Render
@@ -113,6 +119,7 @@ export interface CommonProps<DateType> {
    * @deprecated `dropdownClassName` is deprecated which will be removed in next major
    *   version.Please use `popupClassName` instead.
    */
+
   dropdownClassName?: string;
   popupClassName?: string;
   popupStyle?: CSSProperties;
@@ -125,6 +132,7 @@ export interface CommonProps<DateType> {
   open?: boolean;
   defaultOpen?: boolean;
   inputReadOnly?: boolean;
+  format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
   suffixIcon?: VueNode;
   clearIcon?: VueNode;
   prevIcon?: VueNode;
@@ -170,12 +178,8 @@ function datePickerProps<DateType = any>() {
     defaultPickerValue: someType<DateType | string>([Object, String]),
     defaultValue: someType<DateType | string>([Object, String]),
     value: someType<DateType | string>([Object, String]),
+    presets: arrayType<PresetDate<DateType>[]>(),
     disabledTime: functionType<DisabledTime<DateType>>(),
-    format: someType<string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]>([
-      String,
-      Function,
-      Array,
-    ]),
     renderExtraFooter: functionType<(mode: PanelMode) => VueNode>(),
     showNow: booleanType(),
     monthCellRender: functionType<MonthCellRender<DateType>>(),
@@ -188,8 +192,8 @@ export interface DatePickerProps<DateType> {
   defaultPickerValue?: DateType | string;
   defaultValue?: DateType | string;
   value?: DateType | string;
+  presets?: PresetDate<DateType>[];
   disabledTime?: DisabledTime<DateType>;
-  format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
   renderExtraFooter?: (mode: PanelMode) => VueNode;
   showNow?: boolean;
   monthCellRender?: MonthCellRender<DateType>;
@@ -204,9 +208,9 @@ function rangePickerProps<DateType>() {
     defaultPickerValue: arrayType<RangeValue<DateType> | RangeValue<string>>(),
     defaultValue: arrayType<RangeValue<DateType> | RangeValue<string>>(),
     value: arrayType<RangeValue<DateType> | RangeValue<string>>(),
+    presets: arrayType<PresetDate<Array<DateType>>[]>(),
     disabledTime: functionType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>(),
     disabled: someType<boolean | [boolean, boolean]>([Boolean, Array]),
-    format: String,
     renderExtraFooter: functionType<() => VueNode>(),
     separator: { type: String },
     showTime: someType<boolean | RangeShowTimeObject<DateType>>([Boolean, Object]),
@@ -250,9 +254,9 @@ export interface RangePickerProps<DateType> {
   defaultPickerValue?: RangeValue<DateType> | RangeValue<string>;
   defaultValue?: RangeValue<DateType> | RangeValue<string>;
   value?: RangeValue<DateType> | RangeValue<string>;
+  presets?: PresetDate<RangeValue<DateType>>[];
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
   disabled?: [boolean, boolean];
-  format?: string;
   renderExtraFooter?: () => VueNode;
   separator?: string;
   showTime?: boolean | RangeShowTimeObject<DateType>;

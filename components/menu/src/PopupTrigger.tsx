@@ -1,6 +1,6 @@
 import Trigger from '../../vc-trigger';
 import type { PropType } from 'vue';
-import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, shallowRef, watch } from 'vue';
 import type { MenuMode } from './interface';
 import { useInjectForceRender, useInjectMenu } from './hooks/useMenuContext';
 import { placements, placementsRtl } from './placements';
@@ -31,7 +31,7 @@ export default defineComponent({
   slots: ['popup'],
   emits: ['visibleChange'],
   setup(props, { slots, emit }) {
-    const innerVisible = ref(false);
+    const innerVisible = shallowRef(false);
     const {
       getPopupContainer,
       rtl,
@@ -54,7 +54,7 @@ export default defineComponent({
 
     const popupPlacement = computed(() => popupPlacementMap[props.mode]);
 
-    const visibleRef = ref<number>();
+    const visibleRef = shallowRef<number>();
     watch(
       () => props.visible,
       visible => {

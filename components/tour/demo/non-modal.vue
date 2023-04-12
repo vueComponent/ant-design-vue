@@ -28,7 +28,7 @@ Use `mask={false}` to make Tour non-modal. At the meantime it is recommended to 
     <a-button ref="ref3"><EllipsisOutlined /></a-button>
   </a-space>
 
-  <a-tour :open="open" @Close="handleOpen(false)" :mask="false" type="primary" :steps="steps" />
+  <a-tour :open="open" :mask="false" type="primary" :steps="steps" @Close="handleOpen(false)" />
 </template>
 
 <script lang="ts">

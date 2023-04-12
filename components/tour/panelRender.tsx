@@ -1,14 +1,15 @@
 import { computed, defineComponent, toRefs } from 'vue';
 import classNames from '../_util/classNames';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
-import { tourStepProps, TourBtnProps } from './interface';
+import { tourStepProps } from './interface';
+import type { TourBtnProps } from './interface';
 
 import LocaleReceiver from '../locale/LocaleReceiver';
 import Button from '../button';
 import type { ButtonProps } from '../button';
 import defaultLocale from '../locale/en_US';
 
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 
 const panelRender = defineComponent({
   props: tourStepProps(),

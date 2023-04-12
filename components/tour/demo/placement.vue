@@ -18,18 +18,16 @@ Change the placement of the guide relative to the target, there are 12 placement
 </docs>
 
 <template>
-  <a-button type="primary" @click="handleOpen(true)" ref="btnRef">Begin Tour</a-button>
+  <a-button ref="btnRef" type="primary" @click="handleOpen(true)">Begin Tour</a-button>
 
-  <a-tour :open="open" @close="handleOpen(false)" :steps="steps" />
+  <a-tour :open="open" :steps="steps" @close="handleOpen(false)" />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { EllipsisOutlined } from '@ant-design/icons-vue';
 import type { TourProps } from 'ant-design-vue';
 
 export default defineComponent({
-  components: { EllipsisOutlined },
   setup() {
     const open = ref<boolean>(false);
 

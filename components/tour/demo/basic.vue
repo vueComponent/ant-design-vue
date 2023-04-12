@@ -28,7 +28,7 @@ The most basic usage.
     <a-button ref="ref3"><EllipsisOutlined /></a-button>
   </a-space>
 
-  <a-tour :open="open" @Close="handleOpen(false)" :steps="steps" />
+  <a-tour :open="open" :steps="steps" @Close="handleOpen(false)" />
 </template>
 
 <script lang="ts">

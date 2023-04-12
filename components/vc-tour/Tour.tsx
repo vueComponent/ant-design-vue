@@ -1,7 +1,7 @@
 import { ref, computed, watch, watchEffect, defineComponent, toRefs } from 'vue';
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import type { VueNode } from '../_util/type';
-import Trigger from '../vc-trigger';
+import Trigger, { triggerProps } from '../vc-trigger';
 import classNames from '../_util/classNames';
 import useMergedState from '../_util/hooks/useMergedState';
 import useTarget from './hooks/useTarget';
@@ -11,7 +11,6 @@ import type { TourStepInfo, TourStepProps } from './interface';
 import Mask from './Mask';
 import { getPlacements } from './placements';
 import type { PlacementType } from './placements';
-import { triggerProps } from '../vc-trigger';
 import { initDefaultProps } from '../_util/props-util';
 import useScrollLocker from './hooks/useScrollLocker';
 import canUseDom from '../_util/canUseDom';

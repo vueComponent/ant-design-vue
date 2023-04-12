@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { tourProps as VCTourProps, tourStepProps as VCTourStepProps } from '../vc-tour';
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 
 export const tourProps = () => ({
   ...VCTourProps(),

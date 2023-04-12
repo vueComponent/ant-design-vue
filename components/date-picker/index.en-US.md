@@ -206,3 +206,20 @@ Please refer [replace date](/docs/vue/replace-date)
 ### Why config dayjs.locale globally not work?
 
 DatePicker default set `locale` as `en` in v4. You can config DatePicker `locale` prop or [ConfigProvider `locale`](/components/config-provider) prop instead.
+
+### How to modify start day of week?
+
+Please use correct [language](/docs/vue/i18n) ([#5605](https://github.com/ant-design/ant-design/issues/5605)), or update dayjs `locale` config:
+
+- Example: <https://codesandbox.io/s/dayjs-day-of-week-x9tuj2?file=/demo.tsx>
+
+```js
+import dayjs from 'dayjs';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import 'dayjs/locale/zh-cn';
+
+dayjs.extend(updateLocale);
+dayjs.updateLocale('zh-cn', {
+  weekStart: 0,
+});
+```

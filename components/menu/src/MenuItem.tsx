@@ -250,7 +250,7 @@ export default defineComponent({
             {cloneElement(
               typeof icon === 'function' ? <icon /> : icon,
               {
-                class: `${prefixCls}-item-icon`,
+                class: `${prefixCls.value}-item-icon`,
               },
               false,
             )}

@@ -36,6 +36,7 @@ export const genCheckboxStyle: GenerateStyle<CheckboxToken> = token => {
         ...resetComponent(token),
 
         display: 'inline-flex',
+        flexWrap: 'wrap',
       },
 
       // Wrapper

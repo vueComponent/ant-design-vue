@@ -16,14 +16,14 @@ function splitValues(value: string | number) {
       temp += item;
       brackets += item.split('(').length - 1;
     } else if (item.includes(')')) {
-      temp += item;
+      temp += ` ${item}`;
       brackets -= item.split(')').length - 1;
       if (brackets === 0) {
         list.push(temp);
         temp = '';
       }
     } else if (brackets > 0) {
-      temp += item;
+      temp += ` ${item}`;
     } else {
       list.push(item);
     }

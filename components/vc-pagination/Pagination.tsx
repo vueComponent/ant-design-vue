@@ -47,7 +47,7 @@ export default defineComponent({
     showPrevNextJumpers: { type: Boolean, default: true },
     showQuickJumper: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]).def(false),
     showTitle: { type: Boolean, default: true },
-    pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
     buildOptionText: Function,
     showTotal: Function,
     simple: { type: Boolean, default: undefined },

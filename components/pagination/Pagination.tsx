@@ -22,7 +22,7 @@ export const paginationProps = () => ({
   pageSize: Number,
   hideOnSinglePage: { type: Boolean, default: undefined },
   showSizeChanger: { type: Boolean, default: undefined },
-  pageSizeOptions: Array as PropType<(string | number)[]>,
+  pageSizeOptions: Array as PropType<string[]>,
   buildOptionText: Function as PropType<(opt: { value: any }) => any>,
   showQuickJumper: {
     type: [Boolean, Object] as PropType<boolean | { goButton?: any }>,

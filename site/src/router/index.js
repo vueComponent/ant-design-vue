@@ -117,6 +117,16 @@ const routes = [
         component: () => import('../vueDocs/customize-theme-variable.en-US.md'),
       },
       {
+        path: 'vue/replace-date-cn',
+        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
+        component: () => import('../vueDocs/replace-date.zh-CN.md'),
+      },
+      {
+        path: 'vue/replace-date',
+        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
+        component: () => import('../vueDocs/replace-date.en-US.md'),
+      },
+      {
         path: 'vue/migration-v2-cn',
         meta: { enTitle: 'V1 to V2', title: '从 v1 到 v2', category: 'docs' },
         component: () => import('../vueDocs/migration-v2.zh-CN.md'),
@@ -137,14 +147,14 @@ const routes = [
         component: () => import('../vueDocs/migration-v3.en-US.md'),
       },
       {
-        path: 'vue/replace-date-cn',
-        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
-        component: () => import('../vueDocs/replace-date.zh-CN.md'),
+        path: 'vue/migration-v4-cn',
+        meta: { enTitle: 'V3 to V4', title: '从 V3 到 V4', category: 'docs' },
+        component: () => import('../vueDocs/migration-v4.zh-CN.md'),
       },
       {
-        path: 'vue/replace-date',
-        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
-        component: () => import('../vueDocs/replace-date.en-US.md'),
+        path: 'vue/migration-v4',
+        meta: { enTitle: 'V3 to V4', title: '从 V3 到 V4', category: 'docs' },
+        component: () => import('../vueDocs/migration-v4.en-US.md'),
       },
       {
         path: 'vue/i18n-cn',

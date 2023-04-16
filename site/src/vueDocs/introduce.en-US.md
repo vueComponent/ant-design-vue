@@ -94,9 +94,9 @@ And import stylesheets manually:
 import 'ant-design-vue/dist/reset.css';
 ```
 
-### Use modularized antd
+### Use modularized ant-design-vue
 
-`antd` supports ES modules tree shaking by default.
+`ant-design-vue` supports ES modules tree shaking by default.
 
 ## Links
 
@@ -112,7 +112,7 @@ import 'ant-design-vue/dist/reset.css';
 
 ## Contributing
 
-If you'd like to help us improve antd, just create a [Pull Request](https://github.com/vueComponent/ant-design-vue/pulls). Feel free to report bugs and issues [here](https://vuecomponent.github.io/issue-helper/).
+If you'd like to help us improve ant-design-vue, just create a [Pull Request](https://github.com/vueComponent/ant-design-vue/pulls). Feel free to report bugs and issues [here](https://vuecomponent.github.io/issue-helper/).
 
 > If you're new to posting issues, we ask that you read [_How To Ask Questions The Smart Way_](http://www.catb.org/~esr/faqs/smart-questions.html) and [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
 

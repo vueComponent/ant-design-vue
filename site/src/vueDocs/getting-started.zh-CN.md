@@ -99,7 +99,7 @@ app.config.globalProperties.$message = message;
 
 ## 按需加载
 
-`antd` 默认支持基于 ES modules 的 tree shaking，直接引入 `import { Button } from 'antd';` 就会有按需加载的效果。
+`ant-design-vue` 默认支持基于 ES modules 的 tree shaking，直接引入 `import { Button } from 'ant-design-vue';` 就会有按需加载的效果。
 
 ## 配置主题和字体
 

@@ -101,7 +101,7 @@ In this way, component sub-components, such as Button and ButtonGroup, need to b
 
 ## Import on Demand
 
-`antd` supports tree shaking of ES modules, so using `import { Button } from 'antd';` would drop js code you didn't use.
+`ant-design-vue` supports tree shaking of ES modules, so using `import { Button } from 'ant-design-vue';` would drop js code you didn't use.
 
 ## Customization
 

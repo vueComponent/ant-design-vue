@@ -203,6 +203,9 @@ const List = defineComponent({
     watch(
       [useVirtual, mergedData],
       () => {
+        // Reset the ListState when the data's shallowRef or useVirtual changes
+        state.scrollMoving = false;
+        state.scrollTop = 0;
         if (!useVirtual.value) {
           Object.assign(calRes, {
             scrollHeight: undefined,
@@ -243,7 +246,6 @@ const List = defineComponent({
         if (!useVirtual.value || !inVirtual.value) {
           return;
         }
-
         let itemTop = 0;
         let startIndex: number | undefined;
         let startOffset: number | undefined;
@@ -298,7 +300,6 @@ const List = defineComponent({
       },
       { immediate: true },
     );
-
     // =============================== In Range ===============================
     const maxScrollHeight = computed(() => calRes.scrollHeight! - props.height!);
 
@@ -325,10 +326,9 @@ const List = defineComponent({
     // When data size reduce. It may trigger native scroll event back to fit scroll position
     function onFallbackScroll(e: UIEvent) {
       const { scrollTop: newScrollTop } = e.currentTarget as Element;
-      if (Math.abs(newScrollTop - state.scrollTop) >= 1) {
+      if (newScrollTop !== state.scrollTop) {
         syncScrollTop(newScrollTop);
       }
-
       // Trigger origin onScroll
       props.onScroll?.(e);
     }

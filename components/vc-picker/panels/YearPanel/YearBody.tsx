@@ -6,6 +6,7 @@ import { formatValue, isSameYear } from '../../utils/dateUtil';
 import { useInjectRange } from '../../RangeContext';
 import PanelBody from '../PanelBody';
 import useMergeProps from '../../hooks/useMergeProps';
+import type { VueNode } from '../../../_util/type';
 
 export const YEAR_COL_COUNT = 3;
 const YEAR_ROW_COUNT = 4;
@@ -18,11 +19,13 @@ export type YearBodyProps<DateType> = {
   viewDate: DateType;
   disabledDate?: (date: DateType) => boolean;
   onSelect: (value: DateType) => void;
+
+  dateRender?: (year: number) => VueNode;
 };
 
 function YearBody<DateType>(_props: YearBodyProps<DateType>) {
   const props = useMergeProps(_props);
-  const { prefixCls, value, viewDate, locale, generateConfig } = props;
+  const { prefixCls, value, viewDate, locale, generateConfig, dateRender } = props;
   const { rangedValue, hoverRangedValue } = useInjectRange();
 
   const yearPrefixCls = `${prefixCls}-cell`;
@@ -52,12 +55,15 @@ function YearBody<DateType>(_props: YearBodyProps<DateType>) {
     offsetCell: (date, offset) => generateConfig.addYear(date, offset),
   });
 
+  const getCellNode = dateRender ? () => dateRender(generateConfig.getYear(baseYear)) : undefined;
+
   return (
     <PanelBody
       {...props}
       rowNum={YEAR_ROW_COUNT}
       colNum={YEAR_COL_COUNT}
       baseDate={baseYear}
+      getCellNode={getCellNode}
       getCellText={generateConfig.getYear}
       getCellClassName={getCellClassName}
       getCellDate={generateConfig.addYear}

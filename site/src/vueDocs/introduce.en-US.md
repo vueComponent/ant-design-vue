@@ -49,11 +49,11 @@ You can subscribe to this feed for new version notifications: https://github.com
 **We recommend using npm or yarn to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
 ```bash
-$ npm install ant-design-vue@next --save
+$ npm install ant-design-vue@4.x --save
 ```
 
 ```bash
-$ yarn add ant-design-vue@next
+$ yarn add ant-design-vue@4.x
 ```
 
 If you are in a bad network environment，you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).

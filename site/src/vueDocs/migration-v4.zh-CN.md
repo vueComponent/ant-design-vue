@@ -132,7 +132,7 @@ npm install --save ant-design-vue@4.x
 
 ```js
 const { theme } = require('ant-design-vue/lib');
-const { convertLegacyToken } = require('@ant-design/compatible/lib');
+const convertLegacyToken = require('ant-design-vue/lib/theme/convertLegacyToken');
 
 const { defaultAlgorithm, defaultSeed } = theme;
 

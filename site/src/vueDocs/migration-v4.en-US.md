@@ -15,7 +15,7 @@ This document will help you upgrade from ant-design-vue `3.x` version to ant-des
 
 ### Technology adjustment
 
-- Remove less, adopt CSS-in-JS, for better support of dynamic themes. The bottom layer uses [@ant-design/cssinjs](https://github.com/ant-design/cssinjs) as a solution.
+- Remove less, adopt CSS-in-JS, for better support of dynamic themes.
   - All less files are removed, and less variables are no longer exported.
   - Css files are no longer included in package. Since CSS-in-JS supports importing on demand, the original `ant-design-vue/dist/antd.css` has also been abandoned. If you need to reset some basic styles, please import `ant-design-vue/dist/reset.css`.
   - If you need to reset the style of the component, but you don't want to introduce `ant-design-vue/dist/reset.css` to pollute the global style, You can try using the [App](/components/app) in the outermost layer to solve the problem that native elements do not have antd specification style.
@@ -110,12 +110,7 @@ This document will help you upgrade from ant-design-vue `3.x` version to ant-des
   ```
 
 - `getPopupContainer`: All `getPopupContainer` are guaranteed to return a unique div.
-- Upload List structure changes. [#34528](https://github.com/ant-design/ant-design/pull/34528)
-- Notification
-  - Static methods are no longer allowed to dynamically set `prefixCls` `maxCount` `top` `bottom` `getContainer` in `open`, Notification static methods will now have only one instance. If you need a different configuration, use `useNotification`.
-  - `close` was renamed to `destroy` to be consistent with message.
-- Drawer `style` & `className` are migrated to Drawer panel node, the original properties are replaced by `rootClassName` and `rootStyle`.
-- The deprecated `message.warn` in 3.x is now completely removed, please use `message.warning` instead.
+- Drawer `style` & `class` are migrated to Drawer panel node, the original properties are replaced by `rootClassName` and `rootStyle`.
 
 #### Component refactoring and removal
 
@@ -127,7 +122,7 @@ This document will help you upgrade from ant-design-vue `3.x` version to ant-des
 Use git to save your code and install latest version:
 
 ```bash
-npm install --save antd@5.x
+npm install --save ant-design-vue@4
 ```
 
 ### less migration
@@ -136,7 +131,7 @@ If you using ant-design-vue less variables, you can use compatible package to co
 
 ```js
 const { theme } = require('ant-design-vue/lib');
-const { convertLegacyToken } = require('@ant-design/compatible/lib');
+const convertLegacyToken = require('ant-design-vue/lib/theme/convertLegacyToken');
 
 const { defaultAlgorithm, defaultSeed } = theme;
 
@@ -172,20 +167,6 @@ Remove `babel-plugin-import` from package.json and modify `.babelrc`:
 "plugins": [
 - ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
 ]
-```
-
-### Replace Day.js locale
-
-Replace moment.js locale with day.js locale:
-
-```diff
--   import moment from 'moment';
-+   import dayjs from 'dayjs';
--   import 'moment/locale/zh-cn';
-+   import 'dayjs/locale/zh-cn';
-
--   moment.locale('zh-cn');
-+   dayjs.locale('zh-cn');
 ```
 
 ### Legacy browser support

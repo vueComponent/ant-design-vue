@@ -39,7 +39,7 @@ For displaying anchor hyperlinks on page and jumping between them.
 | key | The unique identifier of the Anchor Link | string \| number | - |  |
 | href | The target of hyperlink | string |  |  |
 | target | Specifies where to display the linked URL | string |  |  |
-| title | The content of hyperlink | ReactNode |  |  |
+| title | The content of hyperlink | VueNode \| (item: AnchorItem) => VueNode |  |  |
 | children | Nested Anchor Link, `Attention: This attribute does not support horizontal orientation` | [AnchorItem](#anchoritem)\[] | - |  |
 
 ### Events

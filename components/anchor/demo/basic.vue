@@ -21,7 +21,7 @@ The simplest usage.
       {
         key: 'part-1',
         href: '#part-1',
-        title: 'Part 1',
+        title: () => h('span', { style: 'color: red' }, 'Part 1'),
       },
       {
         key: 'part-2',
@@ -36,3 +36,19 @@ The simplest usage.
     ]"
   />
 </template>
+
+<script lang="ts">
+import { defineComponent, h } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const onChange = (link: string) => {
+      console.log('Anchor:OnChange', link);
+    };
+    return {
+      onChange,
+      h,
+    };
+  },
+});
+</script>

@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 锚点
-cols: 2
+cols: 1
 type: 导航
 title: Anchor
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*TBTSR4PyVmkAAAAAAAAAAAAADrJ8AQ/original
@@ -32,6 +32,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 | wrapperStyle | 容器样式 | object | - |  |
 | items | 数据化配置选项内容，支持通过 children 嵌套 | { key, href, title, target, children }\[] [具体见](#anchoritem) | - | 4.0 |
 | direction | 设置导航方向 | `vertical` \| `horizontal` | `vertical` | 4.0 |
+| customTitle | 使用插槽自定义选项 title | v-slot="AnchorItem" | - | 4.0 |
 
 ### AnchorItem
 

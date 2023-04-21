@@ -1,6 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import {
-  watch,
   defineComponent,
   nextTick,
   onBeforeUnmount,
@@ -19,18 +18,11 @@ import getScroll from '../_util/getScroll';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useProvideAnchor from './context';
 import useStyle from './style';
-import type { AnchorLinkProps } from './AnchorLink';
+import type { AnchorLinkItemProps } from './AnchorLink';
 import AnchorLink from './AnchorLink';
-import type { Key } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import devWarning from '../vc-util/devWarning';
-
-export interface AnchorLinkItemProps extends AnchorLinkProps {
-  key: Key;
-  class?: String;
-  style?: CSSProperties;
-  children?: AnchorLinkItemProps[];
-}
+import { arrayType } from '../_util/type';
 
 export type AnchorDirection = 'vertical' | 'horizontal';
 
@@ -76,10 +68,7 @@ export const anchorProps = () => ({
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   getCurrentAnchor: Function as PropType<(activeLink: string) => string>,
   targetOffset: Number,
-  items: {
-    type: Array as PropType<AnchorLinkItemProps[]>,
-    default: undefined as AnchorLinkItemProps[],
-  },
+  items: arrayType<AnchorLinkItemProps[]>(),
   direction: PropTypes.oneOf(['vertical', 'horizontal'] as AnchorDirection[]).def('vertical'),
   onChange: Function as PropType<(currentActiveLink: string) => void>,
   onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
@@ -105,7 +94,7 @@ export default defineComponent({
 
     if (process.env.NODE_ENV !== 'production') {
       devWarning(
-        typeof slots.default !== 'function',
+        props.items && typeof slots.default !== 'function',
         'Anchor',
         '`Anchor children` is deprecated. Please use `items` instead.',
       );
@@ -274,17 +263,25 @@ export default defineComponent({
       updateInk();
     });
 
-    watch([anchorDirection, getCurrentAnchor, state.links, activeLink], () => {
-      updateInk();
-    });
-
     const createNestedLink = (options?: AnchorLinkItemProps[]) =>
       Array.isArray(options)
-        ? options.map(item => (
-            <AnchorLink {...item} key={item.key}>
-              {anchorDirection.value === 'vertical' ? createNestedLink(item.children) : null}
-            </AnchorLink>
-          ))
+        ? options.map(option => {
+            const { children, key, href, target, class: cls, style, title } = option;
+            return (
+              <AnchorLink
+                key={key}
+                href={href}
+                target={target}
+                class={cls}
+                style={style}
+                title={title}
+                customTitleProps={option}
+                v-slots={{ customTitle: slots.customTitle }}
+              >
+                {anchorDirection.value === 'vertical' ? createNestedLink(children) : null}
+              </AnchorLink>
+            );
+          })
         : null;
 
     const [wrapSSR, hashId] = useStyle(prefixCls);

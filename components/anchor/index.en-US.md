@@ -1,7 +1,7 @@
 ---
 category: Components
 type: Navigation
-cols: 2
+cols: 1
 title: Anchor
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*TBTSR4PyVmkAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAAAAAAAAAAAADrJ8AQ/original
@@ -31,6 +31,7 @@ For displaying anchor hyperlinks on page and jumping between them.
 | wrapperStyle | The style of the container | object | - |  |
 | items | Data configuration option content, support nesting through children | { key, href, title, target, children }\[] [see](#anchoritem) | - | 4.0 |
 | direction | Set Anchor direction | `vertical` \| `horizontal` | `vertical` | 4.0 |
+| customTitle | custom option title by slot | v-slot="AnchorItem" | - | 4.0 |
 
 ### AnchorItem
 

@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-响应式的栅格列表。尺寸与 [Layout Grid](https://www.antdv.com/components/grid-cn/#Col) 保持一致。
+响应式的栅格列表。尺寸与 [Layout Grid](https://www.antdv.com/components/grid-cn/#col) 保持一致。
 
 ## en-US
 
-Responsive grid list. The size property is as same as [Layout Grid](https://www.antdv.com/components/grid/#Col).
+Responsive grid list. The size property is as same as [Layout Grid](https://www.antdv.com/components/grid/#col).
 
 </docs>
 

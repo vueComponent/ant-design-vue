@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-通过 [`Form.useForm`](#useForm)  合并展示表单校验信息。
+通过 [`Form.useForm`](#useform)  合并展示表单校验信息。
 
 ## en-US
 
-use [`Form.useForm`](#useForm)  combined display form verification information.
+use [`Form.useForm`](#useform)  combined display form verification information.
 </docs>
 
 <template>

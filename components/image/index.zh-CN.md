@@ -22,7 +22,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LVQ3R5JjjJEAAA
 | fallback | 加载失败容错地址 | string | - | 2.0.0 |
 | height | 图像高度 | string \| number | - | 2.0.0 |
 | placeholder | 加载占位, 为 `true` 时使用默认占位 | boolean \| slot | - | 2.0.0 |
-| preview | 预览参数，为 `false` 时禁用 | boolean \| [previewType](#previewType) | true | 2.0.0 |
+| preview | 预览参数，为 `false` 时禁用 | boolean \| [previewType](#previewtype) | true | 2.0.0 |
 | src | 图片地址 | string | - | 2.0.0 |
 | previewMask | 自定义 mask | false \| function \| slot | - | 3.2.0 |
 | width | 图像宽度 | string \| number | - | 2.0.0 |

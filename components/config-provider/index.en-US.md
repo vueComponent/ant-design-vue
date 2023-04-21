@@ -53,7 +53,7 @@ Some components use dynamic style to support wave effect. You can config `csp` p
 | csp | Set [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) config | { nonce: string } | - |  |
 | direction | Set direction of layout. See [demo](#components-config-provider-demo-direction) | `ltr` \| `rtl` | `ltr` | 3.0 |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | - | 3.0 |
-| form | Set Form common props | { validateMessages?: [ValidateMessages](/components/form/#validateMessages), requiredMark?: boolean \| `optional` } | - | 3.0 |
+| form | Set Form common props | { validateMessages?: [ValidateMessages](/components/form/#validatemessages), requiredMark?: boolean \| `optional` } | - | 3.0 |
 | getPopupContainer | to set the container of the popup element. The default is to create a `div` element in `body`. | Function(triggerNode, dialogContext) | `() => document.body` |  |
 | getTargetContainer | Config Affix, Anchor scroll target container | () => HTMLElement | () => window | 3.0 |
 | input | Set Input common props | { autocomplete?: string } | - | 3.0 |

@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-通过 [`Form.useForm`](#useForm)  使用点字符串拼接进行嵌套数据校验。
+通过 [`Form.useForm`](#useform)  使用点字符串拼接进行嵌套数据校验。
 
 ## en-US
 
-[`Form.useForm`](#useForm) use dot string splicing for nested data verification.
+[`Form.useForm`](#useform) use dot string splicing for nested data verification.
 </docs>
 
 <template>

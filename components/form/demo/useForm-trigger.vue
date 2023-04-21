@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-通过 [`Form.useForm`](#useForm) 自定义触发校验时机
+通过 [`Form.useForm`](#useform) 自定义触发校验时机
 
 ## en-US
 
-use [`Form.useForm`](#useForm) custom trigger to validation logic and status.
+use [`Form.useForm`](#useform) custom trigger to validation logic and status.
 </docs>
 
 <template>

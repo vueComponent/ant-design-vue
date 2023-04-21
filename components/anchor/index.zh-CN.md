@@ -27,7 +27,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 | offsetBottom | 距离窗口底部达到指定偏移量后触发 | number |  |  |
 | offsetTop | 距离窗口顶部达到指定偏移量后触发 | number |  |  |
 | showInkInFixed | `:affix="false"` 时是否显示小方块 | boolean | false |  |
-| targetOffset | 锚点滚动偏移量，默认与 offsetTop 相同，[例子](#components-anchor-demo-targetOffset) | number | `offsetTop` | 1.5.0 |
+| targetOffset | 锚点滚动偏移量，默认与 offsetTop 相同，[例子](#components-anchor-demo-targetoffset) | number | `offsetTop` | 1.5.0 |
 | wrapperClass | 容器的类名 | string | - |  |
 | wrapperStyle | 容器样式 | object | - |  |
 | items | 数据化配置选项内容，支持通过 children 嵌套 | { key, href, title, target, children }\[] [具体见](#anchoritem) | - | 4.0 |

@@ -22,7 +22,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*RMP_TrdZ3nsAAA
 | content | 卡片内容 | string\|slot\|VNode | -      |      |
 | title   | 卡片标题 | string\|slot\|VNode | -      |      |
 
-更多属性请参考 [Tooltip](/components/tooltip-cn/#API)。
+更多属性请参考 [Tooltip](/components/tooltip-cn/#api)。
 
 ## 注意
 

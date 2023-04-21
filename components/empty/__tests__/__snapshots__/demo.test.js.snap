@@ -203,7 +203,7 @@ exports[`renders ./components/empty/demo/config-provider.vue correctly 1`] = `
 exports[`renders ./components/empty/demo/customize.vue correctly 1`] = `
 <div class="ant-empty">
   <div class="ant-empty-image" style="height: 60px;"><img alt="empty" src="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"></div>
-  <p class="ant-empty-description"><span> Customize <a href="#API">Description</a></span></p>
+  <p class="ant-empty-description"><span> Customize <a href="#api">Description</a></span></p>
   <div class="ant-empty-footer"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Create Now</span>
     </button></div>

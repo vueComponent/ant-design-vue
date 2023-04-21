@@ -21,7 +21,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fBrgSJBmavgAAA
 | --- | --- | --- | --- | --- |
 | afterClose | Modal 完全关闭后的回调 | function | 无 |  |
 | bodyStyle | Modal body 样式 | object | {} |  |
-| cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button/#API) | - |  |
+| cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button/#api) | - |  |
 | cancelText | 取消按钮文字 | string\| slot | 取消 |  |
 | centered | 垂直居中展示 Modal | boolean | `false` |  |
 | closable | 是否显示右上角的关闭按钮 | boolean | true |  |
@@ -37,7 +37,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fBrgSJBmavgAAA
 | mask | 是否展示遮罩 | boolean | true |  |
 | maskClosable | 点击蒙层是否允许关闭 | boolean | true |  |
 | maskStyle | 遮罩样式 | object | {} |  |
-| okButtonProps | ok 按钮 props | [ButtonProps](/components/button/#API) | - |  |
+| okButtonProps | ok 按钮 props | [ButtonProps](/components/button/#api) | - |  |
 | okText | 确认按钮文字 | string\|slot | 确定 |  |
 | okType | 确认按钮类型 | string | primary |  |
 | title | 标题 | string\|slot | 无 |  |

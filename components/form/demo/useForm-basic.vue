@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-通过 [`Form.useForm`](#useForm) 更加灵活的使用表单组件。
+通过 [`Form.useForm`](#useform) 更加灵活的使用表单组件。
 
 ## en-US
 
-use [`Form.useForm`](#useForm) provides form validation logic and status.
+use [`Form.useForm`](#useform) provides form validation logic and status.
 </docs>
 
 <template>

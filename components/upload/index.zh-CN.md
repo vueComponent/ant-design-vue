@@ -42,7 +42,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 | openFileDialogOnClick | 点击打开文件对话框 | boolean | true | 3.0 |  |
 | previewFile | 自定义文件预览逻辑 | (file: File \| Blob) => Promise&lt;dataURL: string> | 无 | 1.5.0 |  |
 | previewIcon | 自定义预览 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
-| progress | 自定义进度条样式 | [ProgressProps](/components/progress/#API)（仅支持 `type="line"`） | { strokeWidth: 2, showInfo: false } | 3.0 |  |
+| progress | 自定义进度条样式 | [ProgressProps](/components/progress/#api)（仅支持 `type="line"`） | { strokeWidth: 2, showInfo: false } | 3.0 |  |
 | removeIcon | 自定义删除 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
 | showUploadList | 是否展示 uploadList, 可设为一个对象，用于单独设定 showPreviewIcon, showRemoveIcon 和 showDownloadIcon | boolean \| { showPreviewIcon?: boolean, showRemoveIcon?: boolean, showDownloadIcon?: boolean } | true | showDownloadIcon(3.0) |  |
 | supportServerRender | 服务端渲染时需要打开这个 | boolean | false |  |  |

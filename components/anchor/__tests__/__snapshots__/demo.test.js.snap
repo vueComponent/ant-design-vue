@@ -30,7 +30,7 @@ exports[`renders ./components/anchor/demo/customizeHighlight.vue correctly 1`] =
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-static" title="Static demo">Static demo</a>
       <!---->
     </div>
-    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#API" title="API">API</a>
+    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#api" title="API">API</a>
       <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#Anchor-Props" title="Anchor Props">Anchor Props</a>
         <!---->
       </div>
@@ -83,7 +83,7 @@ exports[`renders ./components/anchor/demo/onChange.vue correctly 1`] = `
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-static" title="Static demo">Static demo</a>
       <!---->
     </div>
-    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#API" title="API">API</a>
+    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#api" title="API">API</a>
       <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#Anchor-Props" title="Anchor Props">Anchor Props</a>
         <!---->
       </div>
@@ -104,7 +104,7 @@ exports[`renders ./components/anchor/demo/onClick.vue correctly 1`] = `
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-static" title="Static demo">Static demo</a>
       <!---->
     </div>
-    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#API" title="API">API</a>
+    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#api" title="API">API</a>
       <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#Anchor-Props" title="Anchor Props">Anchor Props</a>
         <!---->
       </div>
@@ -125,7 +125,7 @@ exports[`renders ./components/anchor/demo/static.vue correctly 1`] = `
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-static" title="Static demo">Static demo</a>
       <!---->
     </div>
-    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#API" title="API">API</a>
+    <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#api" title="API">API</a>
       <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#Anchor-Props" title="Anchor Props">Anchor Props</a>
         <!---->
       </div>
@@ -149,7 +149,7 @@ exports[`renders ./components/anchor/demo/targetOffset.vue correctly 1`] = `
         <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-static" title="Static demo">Static demo</a>
           <!---->
         </div>
-        <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#API" title="API">API</a>
+        <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#api" title="API">API</a>
           <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#Anchor-Props" title="Anchor Props">Anchor Props</a>
             <!---->
           </div>

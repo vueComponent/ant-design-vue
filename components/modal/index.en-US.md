@@ -18,7 +18,7 @@ When requiring users to interact with the application, but without jumping to a 
 | --- | --- | --- | --- | --- |
 | afterClose | Specify a function that will be called when modal is closed completely. | function | - |  |
 | bodyStyle | Body style for modal body element. Such as height, padding etc. | object | {} |  |
-| cancelButtonProps | The cancel button props | [ButtonProps](/components/button/#API) | - |  |
+| cancelButtonProps | The cancel button props | [ButtonProps](/components/button/#api) | - |  |
 | cancelText | Text of the Cancel button | string\|slot | `Cancel` |  |
 | centered | Centered Modal | boolean | `false` |  |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | true |  |
@@ -33,7 +33,7 @@ When requiring users to interact with the application, but without jumping to a 
 | mask | Whether show mask or not. | boolean | true |  |
 | maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | boolean | true |  |
 | maskStyle | Style for modal's mask element. | object | {} |  |
-| okButtonProps | The ok button props | [ButtonProps](/components/button/#API) | - |  |
+| okButtonProps | The ok button props | [ButtonProps](/components/button/#api) | - |  |
 | okText | Text of the OK button | string\|slot | `OK` |  |
 | okType | Button `type` of the OK button | string | `primary` |  |
 | title | The modal dialog's title | string\|slot | - |  |

@@ -2,7 +2,7 @@
 category: Components
 subtitle: 锚点
 cols: 2
-type: 其他
+type: 导航
 title: Anchor
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*TBTSR4PyVmkAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAAAAAAAAAAAADrJ8AQ/original
@@ -30,7 +30,18 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 | targetOffset | 锚点滚动偏移量，默认与 offsetTop 相同，[例子](#components-anchor-demo-targetOffset) | number | `offsetTop` | 1.5.0 |
 | wrapperClass | 容器的类名 | string | - |  |
 | wrapperStyle | 容器样式 | object | - |  |
-| items | 数据化配置选项内容，支持通过 children 嵌套 | { href, title, target, children, key }\[] | - | 4.0 |
+| items | 数据化配置选项内容，支持通过 children 嵌套 | { key, href, title, target, children }\[] [具体见](#anchoritem) | - | 4.0 |
+| direction | 设置导航方向 | `vertical` \| `horizontal` | `vertical` | 4.0 |
+
+### AnchorItem
+
+| 成员 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| key | 唯一标志 | string \| number | - |  |
+| href | 锚点链接 | string | - |  |
+| target | 该属性指定在何处显示链接的资源 | string | - |  |
+| title | 文字内容 | VueNode \| (item: AnchorItem) => VueNode | - |  |
+| children | 嵌套的 Anchor Link，`注意：水平方向该属性不支持` | [AnchorItem](#anchoritem)\[] | - |  |
 
 ### 事件
 

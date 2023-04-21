@@ -16,17 +16,23 @@ The simplest usage.
 </docs>
 
 <template>
-  <a-anchor>
-    <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />
-    <a-anchor-link href="#components-anchor-demo-static" title="Static demo" />
-    <a-anchor-link
-      href="#components-anchor-demo-basic"
-      title="Basic demo with Target"
-      target="_blank"
-    />
-    <a-anchor-link href="#API" title="API">
-      <a-anchor-link href="#Anchor-Props" title="Anchor Props" />
-      <a-anchor-link href="#Link-Props" title="Link Props" />
-    </a-anchor-link>
-  </a-anchor>
+  <a-anchor
+    :items="[
+      {
+        key: 'part-1',
+        href: '#part-1',
+        title: 'Part 1',
+      },
+      {
+        key: 'part-2',
+        href: '#part-2',
+        title: 'Part 2',
+      },
+      {
+        key: 'part-3',
+        href: '#part-3',
+        title: 'Part 3',
+      },
+    ]"
+  />
 </template>

@@ -22,7 +22,6 @@
   - 如果需要组件重置样式，又不想引入 `ant-design-vue/dist/reset.css` 从而导致污染全局样式的话，可以尝试在应用最外层使用[App 组件](/components/app-cn)，解决原生元素没有 ant-design-vue 规范样式的问题。
 - 移除 css variables 以及在此之上构筑的动态主题方案。
 - LocaleProvider 在 3.x 中已经废弃（使用 `<ConfigProvider locale />` 替代），我们在 4.x 里彻底移除了相关目录 `ant-design-vue/es/locale-provider`、`ant-design-vue/lib/locale-provider`。
-- 内置的时间库使用 Dayjs 替代 Moment.js，具体请查看 [使用自定义日期库](/docs/vue/use-custom-date-library-cn/)。
 - 不再支持 `babel-plugin-import`，CSS-in-JS 本身具有按需加载的能力，不再需要插件支持。
 
 ### 兼容性调整
@@ -111,12 +110,7 @@
   ```
 
 - `getPopupContainer`: 所有的 `getPopupContainer` 都需要保证返回的是唯一的 div。
-- Upload List dom 结构变化。[#34528](https://github.com/ant-design/ant-design/pull/34528)
-- Notification
-  - 静态方法不再允许在 `open` 中动态设置 `prefixCls` `maxCount` `top` `bottom` `getContainer`，Notification 静态方法现在将只有一个实例。如果需要不同配置，请使用 `useNotification`。
-  - `close` 改名为 `destroy`，和 message 保持一致。
-- Drawer `style` 和 `className` 迁移至 Drawer 弹层区域上，原属性替换为 `rootClassName` 和 `rootStyle`。
-- 3.x 中已经废弃的 `message.warn` 现在被彻底移除，请使用 `message.warning` 代替。
+- Drawer `style` 和 `class` 迁移至 Drawer 弹层区域上，原属性替换为 `rootClassName` 和 `rootStyle`。
 
 #### 组件重构与移除
 
@@ -174,20 +168,6 @@ or
 "plugins": [
 - ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
 ]
-```
-
-### 替换 Day.js 语言包
-
-将 moment.js 的 locale 替换为 day.js 的 locale 引入：
-
-```diff
--   import moment from 'moment';
-+   import dayjs from 'dayjs';
--   import 'moment/locale/zh-cn';
-+   import 'dayjs/locale/zh-cn';
-
--   moment.locale('zh-cn');
-+   dayjs.locale('zh-cn');
 ```
 
 ### 旧版浏览器兼容

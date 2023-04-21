@@ -39,7 +39,7 @@ $ vue create antd-demo
 #### 安装
 
 ```bash
-$ npm i --save ant-design-vue@next
+$ npm i --save ant-design-vue@4.x
 ```
 
 #### 注册

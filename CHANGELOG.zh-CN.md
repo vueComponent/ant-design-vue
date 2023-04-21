@@ -10,6 +10,23 @@
 
 ---
 
+## 3.2.17
+
+`2023-04-04`
+
+- 🐞 回滚 [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)，解决引起的 Table 过滤器隐藏问题 [#6400](https://github.com/vueComponent/ant-design-vue/issues/6400)
+
+## 3.2.16
+
+`2023-03-23`
+
+- 🐞 修复 notification close 事件多次触发问题 [#6150](https://github.com/vueComponent/ant-design-vue/issues/6150)
+- 🐞 修复轮播图响应式变化问题 [#6100](https://github.com/vueComponent/ant-design-vue/issues/6100)
+- 🐞 修复 Table 吸顶滚动条样式错误问题 [#6169](https://github.com/vueComponent/ant-design-vue/issues/6169)
+- 🐞 修复 DatePicker disabledMinutes 参数错误 [#6233](https://github.com/vueComponent/ant-design-vue/issues/6233)
+- 🐞 修复 Popup 关闭时没有触发 visibleChange 事件问题 [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)
+- 🐞 修复 Image 预览图片错误问题 [#6331](https://github.com/vueComponent/ant-design-vue/issues/6331)
+
 ## 3.2.15
 
 `2022-11-10`

@@ -1,6 +1,7 @@
 import type { VNodeProps, Ref, ShallowRef } from 'vue';
-import { watch, ref } from 'vue';
+import { onUnmounted, watch, ref } from 'vue';
 import type { GetKey } from '../interface';
+import wrapperRaf from '../../_util/raf';
 
 export type CacheMap = Map<any, number>;
 
@@ -16,14 +17,14 @@ export default function useHeights<T>(
   watch(mergedData, () => {
     updatedMark.value = Symbol('update');
   });
-  let heightUpdateId = 0;
+  let collectRaf: number = undefined;
+
+  function cancelRaf() {
+    wrapperRaf.cancel(collectRaf);
+  }
   function collectHeight() {
-    heightUpdateId += 1;
-    const currentId = heightUpdateId;
-    Promise.resolve().then(() => {
-      // Only collect when it's latest call
-      if (currentId !== heightUpdateId) return;
-      // let changed = false;
+    cancelRaf();
+    collectRaf = wrapperRaf(() => {
       instance.forEach((element, key) => {
         if (element && element.offsetParent) {
           const { offsetHeight } = element;
@@ -57,6 +58,9 @@ export default function useHeights<T>(
       }
     }
   }
+  onUnmounted(() => {
+    cancelRaf();
+  });
 
   return [setInstance, collectHeight, heights, updatedMark];
 }

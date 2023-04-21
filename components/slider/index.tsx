@@ -14,7 +14,7 @@ import type { FocusEventHandler } from '../_util/EventInterface';
 
 export type SliderValue = number | [number, number];
 
-interface SliderMarks {
+export interface SliderMarks {
   [key: number]:
     | VueNode
     | {
@@ -28,7 +28,7 @@ interface HandleGeneratorInfo {
   dragging?: boolean;
   index: number;
 }
-interface SliderRange {
+export interface SliderRange {
   draggableTrack?: boolean;
 }
 export type HandleGeneratorFn = (config: {

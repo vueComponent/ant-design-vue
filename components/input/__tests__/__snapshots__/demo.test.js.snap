@@ -126,7 +126,7 @@ exports[`renders ./components/input/demo/textarea.vue correctly 1`] = `
 <textarea placeholder="Basic usage" rows="4" class="ant-input"></textarea>
 <br>
 <br>
-<textarea rows="4" placeholder="maxLength is 6" class="ant-input"></textarea>
+<textarea rows="4" placeholder="maxlength is 6" class="ant-input"></textarea>
 `;
 
 exports[`renders ./components/input/demo/tooltip.vue correctly 1`] = `<input placeholder="Input a number" type="text" max-length="25" style="width: 120px;" class="ant-input">`;

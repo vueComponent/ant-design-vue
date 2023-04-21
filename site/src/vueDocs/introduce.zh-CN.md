@@ -146,7 +146,7 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 - [首页](https://www.antdv.com/)
 - [Ant Design Of React](https://ant.design/)
-- [组件库](https://www.antdv.com/docs/vue/introduce-cn)
+- [组件库](https://www.antdv.com/components/overview-cn)
 - [更新日志](/docs/vue/changelog-cn)
 - [CodeSandbox 模板](https://codesandbox.io/s/agitated-franklin-1w72v) for bug reports
 - [定制主题](/docs/vue/customize-theme-cn)

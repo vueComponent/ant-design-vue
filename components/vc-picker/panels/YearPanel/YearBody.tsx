@@ -20,7 +20,7 @@ export type YearBodyProps<DateType> = {
   disabledDate?: (date: DateType) => boolean;
   onSelect: (value: DateType) => void;
 
-  dateRender?: (year: number) => VueNode;
+  dateRender?: (date: DateType) => VueNode;
 };
 
 function YearBody<DateType>(_props: YearBodyProps<DateType>) {
@@ -55,7 +55,7 @@ function YearBody<DateType>(_props: YearBodyProps<DateType>) {
     offsetCell: (date, offset) => generateConfig.addYear(date, offset),
   });
 
-  const getCellNode = dateRender ? () => dateRender(generateConfig.getYear(baseYear)) : undefined;
+  const getCellNode = dateRender ? (date: DateType) => dateRender(date) : undefined;
 
   return (
     <PanelBody

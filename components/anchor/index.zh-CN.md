@@ -40,7 +40,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 | key | 唯一标志 | string \| number | - |  |
 | href | 锚点链接 | string | - |  |
 | target | 该属性指定在何处显示链接的资源 | string | - |  |
-| title | 文字内容 | ReactNode | - |  |
+| title | 文字内容 | VueNode \| (item: AnchorItem) => VueNode | - |  |
 | children | 嵌套的 Anchor Link，`注意：水平方向该属性不支持` | [AnchorItem](#anchoritem)\[] | - |  |
 
 ### 事件

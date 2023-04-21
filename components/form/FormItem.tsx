@@ -208,7 +208,7 @@ export default defineComponent({
       if (typeof props.label === 'string') {
         variables.label = props.label;
       } else if (props.name) {
-        variables.label = String(name);
+        variables.label = String(props.name);
       }
       if (props.messageVariables) {
         variables = { ...variables, ...props.messageVariables };

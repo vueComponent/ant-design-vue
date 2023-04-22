@@ -40,7 +40,7 @@ export interface TreeContextProps {
   showIcon: boolean;
   icon: IconType;
   switcherIcon: IconType;
-  draggable: DraggableConfig;
+  draggable: DraggableConfig | false;
   draggingNodeKey?: Key;
   checkable: boolean;
   customCheckable: () => any;

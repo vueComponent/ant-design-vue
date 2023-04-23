@@ -57,6 +57,15 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Lp1kTYmSsgoAAA
 
 支持原生 button 的其他所有属性。
 
+### 方法
+
+#### Button
+
+| 名称    | 描述     | 版本 |
+| ------- | -------- | ---- |
+| blur()  | 移除焦点 |      |
+| focus() | 获取焦点 |      |
+
 ## FAQ
 
 ### 如何移除 2 个汉字之间的空格

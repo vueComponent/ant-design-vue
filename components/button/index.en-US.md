@@ -56,6 +56,15 @@ It accepts all props which native buttons support.
 
 ## FAQ
 
+### Methods
+
+#### Checkbox
+
+| Name    | Description  | Version |
+| ------- | ------------ | ------- |
+| blur()  | remove focus |         |
+| focus() | get focus    |         |
+
 ### How to remove space between 2 chinese characters
 
 Following the Ant Design specification, we will add one space between if Button (exclude Text button and Link button) contains two Chinese characters only. If you don't need that, you can use [ConfigProvider](/components/config-provider/#api) to set `autoInsertSpaceInButton` as `false`.

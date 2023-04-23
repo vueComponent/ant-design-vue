@@ -2,7 +2,6 @@ import Table, { tableProps } from './Table';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
 import type { TableProps, TablePaginationConfig } from './Table';
-import { defineComponent } from 'vue';
 import type { App } from 'vue';
 import { EXPAND_COLUMN, Summary, SummaryCell, SummaryRow } from '../vc-table';
 import {
@@ -16,8 +15,8 @@ export type { ColumnProps } from './Column';
 export type { ColumnsType, ColumnType, ColumnGroupType } from './interface';
 export type { TableProps, TablePaginationConfig };
 
-const TableSummaryRow = defineComponent({ ...(SummaryRow as any), name: 'ATableSummaryRow' });
-const TableSummaryCell = defineComponent({ ...(SummaryCell as any), name: 'ATableSummaryCell' });
+const TableSummaryRow = SummaryRow;
+const TableSummaryCell = SummaryCell;
 
 const TableSummary = Object.assign(Summary, {
   Cell: TableSummaryCell,

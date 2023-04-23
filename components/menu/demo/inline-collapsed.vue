@@ -38,7 +38,7 @@ Here is [a complete demo](/components/layout/#components-layout-demo-side) with 
 </template>
 
 <script lang="ts" setup>
-import { reactive, watch } from 'vue';
+import { reactive, watch, h } from 'vue';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -57,25 +57,25 @@ const state = reactive({
 const items = reactive([
   {
     key: '1',
-    icon: PieChartOutlined,
+    icon: () => h(PieChartOutlined),
     label: 'Option 1',
     title: 'Option 1',
   },
   {
     key: '2',
-    icon: DesktopOutlined,
+    icon: () => h(DesktopOutlined),
     label: 'Option 2',
     title: 'Option 2',
   },
   {
     key: '3',
-    icon: InboxOutlined,
+    icon: () => h(InboxOutlined),
     label: 'Option 3',
     title: 'Option 3',
   },
   {
     key: 'sub1',
-    icon: MailOutlined,
+    icon: () => h(MailOutlined),
     label: 'Navigation One',
     title: 'Navigation One',
     children: [
@@ -103,7 +103,7 @@ const items = reactive([
   },
   {
     key: 'sub2',
-    icon: AppstoreOutlined,
+    icon: () => h(AppstoreOutlined),
     label: 'Navigation Two',
     title: 'Navigation Two',
     children: [

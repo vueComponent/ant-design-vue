@@ -36,7 +36,7 @@ Show the dynamic switching mode (between `inline` and `vertical`).
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { h, reactive } from 'vue';
 import {
   MailOutlined,
   CalendarOutlined,
@@ -70,14 +70,14 @@ function getItem(
 }
 
 const items: ItemType[] = reactive([
-  getItem('Navigation One', '1', MailOutlined),
-  getItem('Navigation Two', '2', CalendarOutlined),
-  getItem('Navigation Two', 'sub1', AppstoreOutlined, [
+  getItem('Navigation One', '1', h(MailOutlined)),
+  getItem('Navigation Two', '2', h(CalendarOutlined)),
+  getItem('Navigation Two', 'sub1', h(AppstoreOutlined), [
     getItem('Option 3', '3'),
     getItem('Option 4', '4'),
     getItem('Submenu', 'sub1-2', null, [getItem('Option 5', '5'), getItem('Option 6', '6')]),
   ]),
-  getItem('Navigation Three', 'sub2', SettingOutlined, [
+  getItem('Navigation Three', 'sub2', h(SettingOutlined), [
     getItem('Option 7', '7'),
     getItem('Option 8', '8'),
     getItem('Option 9', '9'),

@@ -37,7 +37,7 @@ There are two built-in themes: `light` and `dark`. The default value is `light`.
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { h, ref } from 'vue';
 import {
   MailOutlined,
   CalendarOutlined,
@@ -51,19 +51,19 @@ const openKeys = ref(['sub1']);
 const items = ref([
   {
     key: '1',
-    icon: MailOutlined,
+    icon: () => h(MailOutlined),
     label: 'Navigation One',
     title: 'Navigation One',
   },
   {
     key: '2',
-    icon: CalendarOutlined,
+    icon: () => h(CalendarOutlined),
     label: 'Navigation Two',
     title: 'Navigation Two',
   },
   {
     key: 'sub1',
-    icon: AppstoreOutlined,
+    icon: () => h(AppstoreOutlined),
     label: 'Navigation Three',
     title: 'Navigation Three',
     children: [
@@ -98,7 +98,7 @@ const items = ref([
   },
   {
     key: 'sub2',
-    icon: SettingOutlined,
+    icon: () => h(SettingOutlined),
     label: 'Navigation Four',
     title: 'Navigation Four',
     children: [

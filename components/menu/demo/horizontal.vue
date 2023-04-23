@@ -26,19 +26,19 @@ const current = ref<string[]>(['mail']);
 const items = ref([
   {
     key: 'mail',
-    icon: MailOutlined,
+    icon: () => h(MailOutlined),
     label: 'Navigation One',
     title: 'Navigation One',
   },
   {
     key: 'app',
-    icon: AppstoreOutlined,
+    icon: () => h(AppstoreOutlined),
     label: 'Navigation Two',
     title: 'Navigation Two',
   },
   {
     key: 'sub1',
-    icon: SettingOutlined,
+    icon: () => h(SettingOutlined),
     label: 'Navigation Three - Submenu',
     title: 'Navigation Three - Submenu',
     children: [

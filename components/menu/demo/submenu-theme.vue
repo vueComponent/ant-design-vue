@@ -38,7 +38,7 @@ You can config SubMenu theme with `theme` prop to enable different theme color e
   </div>
 </template>
 <script lang="ts" setup>
-import { computed, ref, VueElement, ComputedRef } from 'vue';
+import { computed, ref, VueElement, ComputedRef, h } from 'vue';
 import { MailOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
 
@@ -66,7 +66,7 @@ const items: ComputedRef<MenuProps['items']> = computed(() => [
   getItem(
     'Navigation One',
     'sub1',
-    MailOutlined,
+    h(MailOutlined),
     [getItem('Option 1', '1'), getItem('Option 2', '2'), getItem('Option 3', '3')],
     theme.value,
   ),

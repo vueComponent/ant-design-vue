@@ -259,7 +259,6 @@ All rights reserved.
       },
       mode: 'production',
       plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.LoaderOptionsPlugin({
           minimize: true,
         }),

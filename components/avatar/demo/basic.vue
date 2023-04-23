@@ -43,12 +43,6 @@ Three sizes and two shapes are available.
   </a-avatar>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { UserOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-  },
-});
 </script>

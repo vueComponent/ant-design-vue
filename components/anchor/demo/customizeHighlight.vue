@@ -51,17 +51,8 @@ Customize the anchor highlight.
   ></a-anchor>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const getCurrentAnchor = () => {
-      return '#components-anchor-demo-static';
-    };
-    return {
-      getCurrentAnchor,
-    };
-  },
-});
+<script lang="ts" setup>
+const getCurrentAnchor = () => {
+  return '#components-anchor-demo-static';
+};
 </script>

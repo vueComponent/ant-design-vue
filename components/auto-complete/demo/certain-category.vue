@@ -63,8 +63,8 @@ Lookup-Patterns - Certain Category.
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UserOutlined } from '@ant-design/icons-vue';
 const dataSource = [
   {
@@ -106,20 +106,10 @@ const dataSource = [
     value: 'all',
   },
 ];
-export default defineComponent({
-  components: {
-    UserOutlined,
-  },
-  setup() {
-    return {
-      value: ref(''),
-      dataSource,
-    };
-  },
-});
+const value = ref('');
 </script>
 
-<style>
+<style scoped>
 .certain-category-search-dropdown .ant-select-dropdown-menu-item-group-title {
   color: #666;
   font-weight: bold;

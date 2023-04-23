@@ -50,18 +50,10 @@ Anchor target scroll to screen center.
   ></a-anchor>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const targetOffset = ref<number | undefined>(undefined);
-    onMounted(() => {
-      targetOffset.value = window.innerHeight / 2;
-    });
-    return {
-      targetOffset,
-    };
-  },
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
+const targetOffset = ref<number | undefined>(undefined);
+onMounted(() => {
+  targetOffset.value = window.innerHeight / 2;
 });
 </script>

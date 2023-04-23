@@ -25,18 +25,10 @@ Smoothly and unaffectedly unmount Alert.
     :after-close="handleClose"
   />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const visible = ref<boolean>(true);
-    const handleClose = () => {
-      visible.value = false;
-    };
-    return {
-      visible,
-      handleClose,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const visible = ref<boolean>(true);
+const handleClose = () => {
+  visible.value = false;
+};
 </script>

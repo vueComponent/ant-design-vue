@@ -46,7 +46,7 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 [id^='components-alert-demo'] .ant-alert {
   margin-bottom: 16px;
 }

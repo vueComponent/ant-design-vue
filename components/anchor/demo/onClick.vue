@@ -51,19 +51,10 @@ Clicking on an anchor does not record history.
   ></a-anchor>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import type { AnchorProps } from 'ant-design-vue';
-
-export default defineComponent({
-  setup() {
-    const handleClick: AnchorProps['onClick'] = (e, link) => {
-      e.preventDefault();
-      console.log(link);
-    };
-    return {
-      handleClick,
-    };
-  },
-});
+const handleClick: AnchorProps['onClick'] = (e, link) => {
+  e.preventDefault();
+  console.log(link);
+};
 </script>

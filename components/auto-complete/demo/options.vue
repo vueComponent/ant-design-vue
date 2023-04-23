@@ -30,28 +30,17 @@ For 3.0+, You could pass `v-slot:option` to custom option.
   </a-auto-complete>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const value = ref('');
-    const options = ref<{ value: string }[]>([]);
-    const handleSearch = (val: string) => {
-      let res: { value: string }[];
-      if (!val || val.indexOf('@') >= 0) {
-        res = [];
-      } else {
-        res = ['gmail.com', '163.com', 'qq.com'].map(domain => ({ value: `${val}@${domain}` }));
-      }
-      options.value = res;
-    };
-
-    return {
-      value,
-      options,
-      handleSearch,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref('');
+const options = ref<{ value: string }[]>([]);
+const handleSearch = (val: string) => {
+  let res: { value: string }[];
+  if (!val || val.indexOf('@') >= 0) {
+    res = [];
+  } else {
+    res = ['gmail.com', '163.com', 'qq.com'].map(domain => ({ value: `${val}@${domain}` }));
+  }
+  options.value = res;
+};
 </script>

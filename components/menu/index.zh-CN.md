@@ -24,17 +24,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAA
 
 ## API
 
-```html
-<template>
-  <a-menu>
-    <a-menu-item>菜单项</a-menu-item>
-    <a-sub-menu key="sub1" title="子菜单">
-      <a-menu-item>子菜单项</a-menu-item>
-    </a-sub-menu>
-  </a-menu>
-</template>
-```
-
 ### Menu
 
 | 参数 | 说明 | 类型 | 默认值 |

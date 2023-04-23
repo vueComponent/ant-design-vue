@@ -23,17 +23,6 @@ More layouts with navigation: [Layout](/components/layout).
 
 ## API
 
-```html
-<template>
-  <a-menu>
-    <a-menu-item>Menu</a-menu-item>
-    <a-sub-menu key="sub1" title="SubMenu">
-      <a-menu-item>SubMenuItem</a-menu-item>
-    </a-sub-menu>
-  </a-menu>
-</template>
-```
-
 ### Menu
 
 | Param | Description | Type | Default value |

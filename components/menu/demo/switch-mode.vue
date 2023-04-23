@@ -18,60 +18,25 @@ Show the dynamic switching mode (between `inline` and `vertical`).
 
 <template>
   <div>
-    <a-switch :checked="mode === 'vertical'" @change="changeMode" />
+    <a-switch :checked="state.mode === 'vertical'" @change="changeMode" />
     Change Mode
     <span class="ant-divider" style="margin: 0 1em" />
-    <a-switch :checked="theme === 'dark'" @change="changeTheme" />
+    <a-switch :checked="state.theme === 'dark'" @change="changeTheme" />
     Change Theme
     <br />
     <br />
     <a-menu
-      v-model:openKeys="openKeys"
-      v-model:selectedKeys="selectedKeys"
+      v-model:openKeys="state.openKeys"
+      v-model:selectedKeys="state.selectedKeys"
       style="width: 256px"
-      :mode="mode"
-      :theme="theme"
-    >
-      <a-menu-item key="1">
-        <template #icon>
-          <MailOutlined />
-        </template>
-        Navigation One
-      </a-menu-item>
-      <a-menu-item key="2">
-        <template #icon>
-          <CalendarOutlined />
-        </template>
-        Navigation Two
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <template #icon>
-          <AppstoreOutlined />
-        </template>
-        <template #title>Navigation Three</template>
-        <a-menu-item key="3">Option 3</a-menu-item>
-        <a-menu-item key="4">Option 4</a-menu-item>
-        <a-sub-menu key="sub1-2" title="Submenu">
-          <a-menu-item key="5">Option 5</a-menu-item>
-          <a-menu-item key="6">Option 6</a-menu-item>
-        </a-sub-menu>
-      </a-sub-menu>
-      <a-sub-menu key="sub2">
-        <template #icon>
-          <SettingOutlined />
-        </template>
-
-        <template #title>Navigation Four</template>
-        <a-menu-item key="7">Option 7</a-menu-item>
-        <a-menu-item key="8">Option 8</a-menu-item>
-        <a-menu-item key="9">Option 9</a-menu-item>
-        <a-menu-item key="10">Option 10</a-menu-item>
-      </a-sub-menu>
-    </a-menu>
+      :mode="state.mode"
+      :items="items"
+      :theme="state.theme"
+    ></a-menu>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
+<script lang="ts" setup>
+import { h, reactive } from 'vue';
 import {
   MailOutlined,
   CalendarOutlined,
@@ -79,31 +44,52 @@ import {
   SettingOutlined,
 } from '@ant-design/icons-vue';
 import type { MenuMode, MenuTheme } from 'ant-design-vue';
-export default defineComponent({
-  components: {
-    MailOutlined,
-    CalendarOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
-  },
-  setup() {
-    const state = reactive({
-      mode: 'inline' as MenuMode,
-      theme: 'light' as MenuTheme,
-      selectedKeys: ['1'],
-      openKeys: ['sub1'],
-    });
-    const changeMode = (checked: boolean) => {
-      state.mode = checked ? 'vertical' : 'inline';
-    };
-    const changeTheme = (checked: boolean) => {
-      state.theme = checked ? 'dark' : 'light';
-    };
-    return {
-      ...toRefs(state),
-      changeMode,
-      changeTheme,
-    };
-  },
+import { ItemType } from 'ant-design-vue';
+
+const state = reactive({
+  mode: 'inline' as MenuMode,
+  theme: 'light' as MenuTheme,
+  selectedKeys: ['1'],
+  openKeys: ['sub1'],
 });
+
+function getItem(
+  label: string,
+  key: string,
+  icon?: any,
+  children?: ItemType[],
+  type?: 'group',
+): ItemType {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as ItemType;
+}
+
+const items: ItemType[] = reactive([
+  getItem('Navigation One', '1', h(MailOutlined)),
+  getItem('Navigation Two', '2', h(CalendarOutlined)),
+  getItem('Navigation Two', 'sub1', h(AppstoreOutlined), [
+    getItem('Option 3', '3'),
+    getItem('Option 4', '4'),
+    getItem('Submenu', 'sub1-2', null, [getItem('Option 5', '5'), getItem('Option 6', '6')]),
+  ]),
+  getItem('Navigation Three', 'sub2', h(SettingOutlined), [
+    getItem('Option 7', '7'),
+    getItem('Option 8', '8'),
+    getItem('Option 9', '9'),
+    getItem('Option 10', '10'),
+  ]),
+]);
+
+const changeMode = (checked: boolean) => {
+  state.mode = checked ? 'vertical' : 'inline';
+};
+
+const changeTheme = (checked: boolean) => {
+  state.theme = checked ? 'dark' : 'light';
+};
 </script>

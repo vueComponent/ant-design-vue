@@ -224,7 +224,7 @@ export default defineComponent({
       return (
         <>
           {cloneElement(
-            icon,
+            typeof icon === 'function' ? icon() : icon,
             {
               class: `${prefixCls.value}-item-icon`,
             },

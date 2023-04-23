@@ -22,8 +22,9 @@ Horizontal top navigation menu.
 <script lang="ts" setup>
 import { h, ref } from 'vue';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import { MenuProps } from 'ant-design-vue';
 const current = ref<string[]>(['mail']);
-const items = ref([
+const items = ref<MenuProps['items']>([
   {
     key: 'mail',
     icon: () => h(MailOutlined),

@@ -66,14 +66,14 @@ More layouts with navigation: [Layout](/components/layout).
 
 #### MenuItemType
 
-| Param    | Description                          | Type    | Default value | Version |
-| -------- | ------------------------------------ | ------- | ------------- | ------- |
-| danger   | Display the danger style             | boolean | false         |         |
-| disabled | Whether menu item is disabled        | boolean | false         |         |
-| icon     | The icon of the menu item            | VueNode | -             |         |
-| key      | Unique ID of the menu item           | string  | -             |         |
-| label    | Menu label                           | VueNode | -             |         |
-| title    | Set display title for collapsed item | string  | -             |         |
+| Param | Description | Type | Default value | Version |
+| --- | --- | --- | --- | --- |
+| danger | Display the danger style | boolean | false |  |
+| disabled | Whether menu item is disabled | boolean | false |  |
+| icon | The icon of the menu item | VueNode \| (item: MenuItemType) => VNode | - |  |
+| key | Unique ID of the menu item | string | - |  |
+| label | Menu label | VueNode | - |  |
+| title | Set display title for collapsed item | string | - |  |
 
 #### SubMenuType
 
@@ -82,7 +82,7 @@ More layouts with navigation: [Layout](/components/layout).
 | --- | --- | --- | --- | --- |
 | children | Sub-menus or sub-menu items | [ItemType\[\]](#ItemType) | - |  |
 | disabled | Whether sub-menu is disabled | boolean | false |  |
-| icon | Icon of sub menu | VueNode\|()=>VueNode | - |  |
+| icon | Icon of sub menu | VueNode \| (item: SubMenuType) => VueNode | - |  |
 | key | Unique ID of the sub-menu | string | - |  |
 | label | Menu label | VueNode | - |  |
 | popupClassName | Sub-menu class name, not working when `mode="inline"` | string | - |  |

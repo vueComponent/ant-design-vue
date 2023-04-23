@@ -1,4 +1,4 @@
-import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
+import { flattenChildren, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
 import type { ExtractPropTypes, PropType } from 'vue';
 import {
@@ -13,12 +13,13 @@ import { useInjectKeyPath, useMeasure } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
 import Tooltip from '../../tooltip';
-import type { MenuInfo } from './interface';
+import type { ItemType, MenuInfo } from './interface';
 import KeyCode from '../../_util/KeyCode';
 import useDirectionStyle from './hooks/useDirectionStyle';
 import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
+import { objectType } from '../../_util/type';
 
 let indexGuid = 0;
 export const menuItemProps = () => ({
@@ -33,6 +34,8 @@ export const menuItemProps = () => ({
   onClick: Function as PropType<MouseEventHandler>,
   onKeydown: Function as PropType<MouseEventHandler>,
   onFocus: Function as PropType<MouseEventHandler>,
+  // Internal user prop
+  originItemValue: objectType<ItemType>(),
 });
 
 export type MenuItemProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemProps>>>;
@@ -215,7 +218,7 @@ export default defineComponent({
         optionRoleProps['aria-selected'] = selected.value;
       }
 
-      const icon = getPropsSlot(slots, props, 'icon');
+      const icon = props.icon ?? slots.icon?.(props);
       return (
         <Tooltip
           {...tooltipProps}
@@ -248,7 +251,7 @@ export default defineComponent({
             title={typeof title === 'string' ? title : undefined}
           >
             {cloneElement(
-              typeof icon === 'function' ? icon() : icon,
+              typeof icon === 'function' ? icon(props.originItemValue) : icon,
               {
                 class: `${prefixCls.value}-item-icon`,
               },

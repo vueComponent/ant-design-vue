@@ -28,7 +28,8 @@ import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import type { Key } from '../../_util/type';
-import type { MenuTheme } from './interface';
+import { objectType } from '../../_util/type';
+import type { ItemType, MenuTheme } from './interface';
 
 let indexGuid = 0;
 
@@ -46,6 +47,9 @@ export const subMenuProps = () => ({
   onMouseenter: Function as PropType<MouseEventHandler>,
   onMouseleave: Function as PropType<MouseEventHandler>,
   onTitleClick: Function as PropType<(e: MouseEvent, key: Key) => void>,
+
+  // Internal user prop
+  originItemValue: objectType<ItemType>(),
 });
 
 export type SubMenuProps = Partial<ExtractPropTypes<ReturnType<typeof subMenuProps>>>;
@@ -224,7 +228,7 @@ export default defineComponent({
       return (
         <>
           {cloneElement(
-            typeof icon === 'function' ? icon() : icon,
+            typeof icon === 'function' ? icon(props.originItemValue) : icon,
             {
               class: `${prefixCls.value}-item-icon`,
             },
@@ -247,7 +251,7 @@ export default defineComponent({
     );
     const baseTitleNode = () => {
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
-      const icon = getPropsSlot(slots, props, 'icon');
+      const icon = props.icon ?? slots.icon?.(props);
       const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
       const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
       return (

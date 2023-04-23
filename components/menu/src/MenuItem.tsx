@@ -248,7 +248,7 @@ export default defineComponent({
             title={typeof title === 'string' ? title : undefined}
           >
             {cloneElement(
-              typeof icon === 'function' ? <icon /> : icon,
+              typeof icon === 'function' ? icon() : icon,
               {
                 class: `${prefixCls.value}-item-icon`,
               },

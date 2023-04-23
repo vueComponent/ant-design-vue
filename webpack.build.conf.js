@@ -1,6 +1,6 @@
 // This config is for building dist files
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
+const { EsbuildPlugin } = require('esbuild-loader');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const getWebpackConfig = require('./antd-tools/getWebpackConfig');
 
@@ -36,30 +36,7 @@ function externalDayjs(config) {
   });
 }
 
-function injectWarningCondition(config) {
-  config.module.rules.forEach(rule => {
-    // Remove devWarning if needed
-    if (rule.test.test('test.tsx')) {
-      rule.use = [
-        ...rule.use,
-        {
-          loader: 'string-replace-loader',
-          options: {
-            search: 'devWarning(',
-            replace: "if (process.env.NODE_ENV !== 'production') devWarning(",
-          },
-        },
-      ];
-    }
-  });
-}
-
 const webpackConfig = getWebpackConfig(false);
-const webpackESMConfig = getWebpackConfig(false, true);
-
-webpackConfig.forEach(config => {
-  injectWarningCondition(config);
-});
 
 if (process.env.RUN_ENV === 'PRODUCTION') {
   webpackConfig.forEach(config => {
@@ -69,7 +46,7 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
     config.optimization.usedExports = true;
     // use esbuild
     if (process.env.ESBUILD || process.env.CSB_REPO) {
-      config.optimization.minimizer[0] = new ESBuildMinifyPlugin({
+      config.optimization.minimizer[0] = new EsbuildPlugin({
         target: 'es2015',
         css: true,
       });
@@ -93,4 +70,4 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
   });
 }
 
-module.exports = [...webpackConfig, ...webpackESMConfig];
+module.exports = [...webpackConfig];

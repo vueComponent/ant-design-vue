@@ -10,6 +10,18 @@
 
 ---
 
+## 3.2.18
+
+`2023-04-23`
+
+- 🐞 Fix the style of input addonAfter when Form disabled [#6403](https://github.com/vueComponent/ant-design-vue/issues/6403)
+- 🐞 Fix Upload class name error [#6413](https://github.com/vueComponent/ant-design-vue/issues/6413)
+- 🐞 Fix date component's week, quarter does not support format problem [#6385](https://github.com/vueComponent/ant-design-vue/issues/6385)
+- 🐞 Fix the problem that Select scrolls under Firefox [#6470](https://github.com/vueComponent/ant-design-vue/issues/6470)
+- 🌟 Button added focus and blur methods [#6483](https://github.com/vueComponent/ant-design-vue/issues/6483)
+- 🐞 Fix the problem that the container height changes after Select is selected [#6467](https://github.com/vueComponent/ant-design-vue/issues/6467)
+- 🐞 Fix Form name not taking effect [#6460](https://github.com/vueComponent/ant-design-vue/issues/6460)
+
 ## 3.2.17
 
 `2023-04-04`

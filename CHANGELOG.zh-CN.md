@@ -10,6 +10,18 @@
 
 ---
 
+## 3.2.18
+
+`2023-04-23`
+
+- 🐞 修复 input addonAfter 在 Form diabled 时的样式 [#6403](https://github.com/vueComponent/ant-design-vue/issues/6403)
+- 🐞 修复 Upload 类名错误 [#6413](https://github.com/vueComponent/ant-design-vue/issues/6413)
+- 🐞 修复日期组件的 周、季度 不支持 format 问题 [#6385](https://github.com/vueComponent/ant-design-vue/issues/6385)
+- 🐞 修复 Select 在 Firefox 下滚动显示异常问题 [#6470](https://github.com/vueComponent/ant-design-vue/issues/6470)
+- 🌟 Button 新增 focus、blur 方法 [#6483](https://github.com/vueComponent/ant-design-vue/issues/6483)
+- 🐞 修复 Select 选中后导致容器高度变化问题 [#6467](https://github.com/vueComponent/ant-design-vue/issues/6467)
+- 🐞 修复 Form name 未生效问题 [#6460](https://github.com/vueComponent/ant-design-vue/issues/6460)
+
 ## 3.2.17
 
 `2023-04-04`

@@ -29,18 +29,13 @@ There are 4 position options available.
     <div><h3>4</h3></div>
   </a-carousel>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import type { CarouselProps } from 'ant-design-vue';
 
-export default defineComponent({
-  setup() {
-    return {
-      dotPosition: ref<CarouselProps['dotPosition']>('top'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { CarouselProps } from 'ant-design-vue';
+const dotPosition = ref<CarouselProps['dotPosition']>('top');
 </script>
+
 <style scoped>
 /* For demo */
 :deep(.slick-slide) {

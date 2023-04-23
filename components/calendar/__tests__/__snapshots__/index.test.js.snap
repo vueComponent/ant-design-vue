@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Calendar Calendar should support locale 1`] = `
-<div class="ant-picker-calendar ant-picker-calendar-full">
+<div class="ant-picker-calendar ant-picker-calendar-full css-dev-only-do-not-override-1tm6q75">
   <div class="ant-picker-calendar-header">
-    <div class="ant-select ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="2018年">2018年</span>
@@ -12,7 +12,7 @@ exports[`Calendar Calendar should support locale 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-select ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="Oct">Oct</span>
@@ -21,7 +21,7 @@ exports[`Calendar Calendar should support locale 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>月</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>年</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>月</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>年</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">

@@ -37,31 +37,20 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks.
     </template>
   </a-drawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const open = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-    const childrenDrawer = ref<boolean>(false);
+const childrenDrawer = ref<boolean>(false);
 
-    const showDrawer = () => {
-      open.value = true;
-    };
-    const onClose = () => {
-      open.value = false;
-    };
-    const showChildrenDrawer = () => {
-      childrenDrawer.value = true;
-    };
-    return {
-      open,
-      childrenDrawer,
-      showDrawer,
-      onClose,
-      showChildrenDrawer,
-    };
-  },
-});
+const showDrawer = () => {
+  open.value = true;
+};
+const onClose = () => {
+  open.value = false;
+};
+const showChildrenDrawer = () => {
+  childrenDrawer.value = true;
+};
 </script>

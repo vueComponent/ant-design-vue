@@ -49,33 +49,25 @@ Basic Form data control. Includes layout, initial values, validation and submit.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
+<script lang="ts" setup>
+import { reactive } from 'vue';
 
 interface FormState {
   username: string;
   password: string;
   remember: boolean;
 }
-export default defineComponent({
-  setup() {
-    const formState = reactive<FormState>({
-      username: '',
-      password: '',
-      remember: true,
-    });
-    const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
 
-    const onFinishFailed = (errorInfo: any) => {
-      console.log('Failed:', errorInfo);
-    };
-    return {
-      formState,
-      onFinish,
-      onFinishFailed,
-    };
-  },
+const formState = reactive<FormState>({
+  username: '',
+  password: '',
+  remember: true,
 });
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
 </script>

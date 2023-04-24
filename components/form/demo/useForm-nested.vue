@@ -29,56 +29,48 @@ title:
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, toRaw } from 'vue';
+<script lang="ts" setup>
+import { reactive, toRaw } from 'vue';
 import { Form } from 'ant-design-vue';
 
 const useForm = Form.useForm;
-export default defineComponent({
-  setup() {
-    const modelRef = reactive({
-      name: '',
-      sub: {
-        name: '',
-      },
-    });
-    const { resetFields, validate, validateInfos } = useForm(
-      modelRef,
-      reactive({
-        name: [
-          {
-            required: true,
-            message: 'Please input name',
-          },
-        ],
-        'sub.name': [
-          {
-            required: true,
-            message: 'Please input sub name',
-          },
-        ],
-      }),
-    );
-    const onSubmit = () => {
-      validate()
-        .then(res => {
-          console.log(res, toRaw(modelRef));
-        })
-        .catch(err => {
-          console.log('error', err);
-        });
-    };
-    const reset = () => {
-      resetFields();
-    };
-    return {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
-      validateInfos,
-      reset,
-      modelRef,
-      onSubmit,
-    };
+
+const labelCol = { span: 4 };
+const wrapperCol = { span: 14 };
+
+const modelRef = reactive({
+  name: '',
+  sub: {
+    name: '',
   },
 });
+const { resetFields, validate, validateInfos } = useForm(
+  modelRef,
+  reactive({
+    name: [
+      {
+        required: true,
+        message: 'Please input name',
+      },
+    ],
+    'sub.name': [
+      {
+        required: true,
+        message: 'Please input sub name',
+      },
+    ],
+  }),
+);
+const onSubmit = () => {
+  validate()
+    .then(res => {
+      console.log(res, toRaw(modelRef));
+    })
+    .catch(err => {
+      console.log('error', err);
+    });
+};
+const reset = () => {
+  resetFields();
+};
 </script>

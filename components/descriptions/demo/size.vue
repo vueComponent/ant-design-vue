@@ -65,21 +65,12 @@ Custom sizes to fit in a variety of containers.
     </a-descriptions>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { DescriptionsProps } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const size = ref<DescriptionsProps['size']>('default');
-    const onChange = (e: any) => {
-      console.log('size checked', e.target.value);
-      size.value = e.target.value;
-    };
-
-    return {
-      size,
-      onChange,
-    };
-  },
-});
+const size = ref<DescriptionsProps['size']>('default');
+const onChange = (e: any) => {
+  console.log('size checked', e.target.value);
+  size.value = e.target.value;
+};
 </script>

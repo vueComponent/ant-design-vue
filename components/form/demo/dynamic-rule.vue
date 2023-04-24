@@ -42,8 +42,8 @@ Perform different check rules according to different situations.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { reactive, ref, watch } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 
 interface FormState {
@@ -51,44 +51,33 @@ interface FormState {
   nickname: string;
   checkNick: boolean;
 }
-export default defineComponent({
-  setup() {
-    const formRef = ref<FormInstance>();
-    const formState = reactive<FormState>({
-      username: '',
-      nickname: '',
-      checkNick: false,
-    });
-    watch(
-      () => formState.checkNick,
-      () => {
-        formRef.value.validateFields(['nickname']);
-      },
-      { flush: 'post' },
-    );
-    const onCheck = async () => {
-      try {
-        const values = await formRef.value.validateFields();
-        console.log('Success:', values);
-      } catch (errorInfo) {
-        console.log('Failed:', errorInfo);
-      }
-    };
-    const formItemLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 8 },
-    };
-    const formTailLayout = {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 8, offset: 4 },
-    };
-    return {
-      formState,
-      formItemLayout,
-      formTailLayout,
-      onCheck,
-      formRef,
-    };
-  },
+const formRef = ref<FormInstance>();
+const formState = reactive<FormState>({
+  username: '',
+  nickname: '',
+  checkNick: false,
 });
+watch(
+  () => formState.checkNick,
+  () => {
+    formRef.value.validateFields(['nickname']);
+  },
+  { flush: 'post' },
+);
+const onCheck = async () => {
+  try {
+    const values = await formRef.value.validateFields();
+    console.log('Success:', values);
+  } catch (errorInfo) {
+    console.log('Failed:', errorInfo);
+  }
+};
+const formItemLayout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 8 },
+};
+const formTailLayout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 8, offset: 4 },
+};
 </script>

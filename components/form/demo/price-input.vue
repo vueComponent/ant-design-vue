@@ -13,9 +13,8 @@
   </span>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import type { PropType } from 'vue';
+<script lang="ts" setup>
+import { defineProps, defineEmits } from 'vue';
 import { Form } from 'ant-design-vue';
 
 export type Currency = 'rmb' | 'dollar';
@@ -24,29 +23,19 @@ interface PriceValue {
   number: number;
   currency: Currency;
 }
-export default defineComponent({
-  props: {
-    value: { type: Object as PropType<PriceValue>, isRequired: true },
-  },
-  emits: ['update:value'],
-  setup(props, { emit }) {
-    const formItemContext = Form.useInjectFormItemContext();
-    const triggerChange = (changedValue: { number?: number; currency?: Currency }) => {
-      emit('update:value', { ...props.value, ...changedValue });
-      formItemContext.onFieldChange();
-    };
-    const onNumberChange = (e: InputEvent) => {
-      const newNumber = parseInt((e.target as any).value || '0', 10);
-      triggerChange({ number: newNumber });
-    };
-    const onCurrencyChange = (newCurrency: Currency) => {
-      triggerChange({ currency: newCurrency });
-    };
+const props = defineProps<{ value: PriceValue }>();
+const emit = defineEmits(['update:value']);
 
-    return {
-      onNumberChange,
-      onCurrencyChange,
-    };
-  },
-});
+const formItemContext = Form.useInjectFormItemContext();
+const triggerChange = (changedValue: { number?: number; currency?: Currency }) => {
+  emit('update:value', { ...props.value, ...changedValue });
+  formItemContext.onFieldChange();
+};
+const onNumberChange = (e: InputEvent) => {
+  const newNumber = parseInt((e.target as any).value || '0', 10);
+  triggerChange({ number: newNumber });
+};
+const onCurrencyChange = (newCurrency: Currency) => {
+  triggerChange({ currency: newCurrency });
+};
 </script>

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Descriptions Descriptions support colon 1`] = `
-<div class="ant-descriptions">
+<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
   <!---->
   <div class="ant-descriptions-view">
     <table>
@@ -18,7 +18,7 @@ exports[`Descriptions Descriptions support colon 1`] = `
 `;
 
 exports[`Descriptions Descriptions support style 1`] = `
-<div class="ant-descriptions" style="background-color: rgb(232, 232, 232);">
+<div style="background-color: rgb(232, 232, 232);" class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
   <!---->
   <div class="ant-descriptions-view">
     <table>
@@ -37,7 +37,7 @@ exports[`Descriptions Descriptions support style 1`] = `
 `;
 
 exports[`Descriptions Descriptions.Item support className 1`] = `
-<div class="ant-descriptions">
+<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
   <!---->
   <div class="ant-descriptions-view">
     <table>
@@ -54,7 +54,7 @@ exports[`Descriptions Descriptions.Item support className 1`] = `
 `;
 
 exports[`Descriptions column is number 1`] = `
-<div class="ant-descriptions">
+<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
   <!---->
   <div class="ant-descriptions-view">
     <table>
@@ -82,7 +82,7 @@ exports[`Descriptions column is number 1`] = `
 `;
 
 exports[`Descriptions vertical layout 1`] = `
-<div class="ant-descriptions">
+<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
   <!---->
   <div class="ant-descriptions-view">
     <table>
@@ -150,7 +150,7 @@ exports[`Descriptions vertical layout 1`] = `
 `;
 
 exports[`Descriptions when item is rendered conditionally 1`] = `
-<div class="ant-descriptions">
+<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
   <!---->
   <div class="ant-descriptions-view">
     <table>

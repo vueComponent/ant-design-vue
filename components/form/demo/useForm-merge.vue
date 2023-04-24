@@ -39,63 +39,53 @@ use [`Form.useForm`](#useform)  combined display form verification information.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { reactive, toRaw, computed, defineComponent } from 'vue';
+<script lang="ts" setup>
+import { reactive, toRaw, computed } from 'vue';
 import { toArray } from 'lodash-es';
 import { Form } from 'ant-design-vue';
 
 const useForm = Form.useForm;
-export default defineComponent({
-  setup() {
-    const modelRef = reactive({
-      name: '',
-      region: undefined,
-      type: [],
+
+const labelCol = { span: 4 };
+const wrapperCol = { span: 14 };
+const modelRef = reactive({
+  name: '',
+  region: undefined,
+  type: [],
+});
+const rulesRef = reactive({
+  name: [
+    {
+      required: true,
+      message: 'Please input name',
+    },
+  ],
+  region: [
+    {
+      required: true,
+      message: 'Please select region',
+    },
+  ],
+  type: [
+    {
+      required: true,
+      message: 'Please select type',
+      type: 'array',
+    },
+  ],
+});
+const { resetFields, validate, validateInfos, mergeValidateInfo } = useForm(modelRef, rulesRef);
+const onSubmit = () => {
+  validate()
+    .then(() => {
+      console.log(toRaw(modelRef));
+    })
+    .catch(err => {
+      console.log('error', err);
     });
-    const rulesRef = reactive({
-      name: [
-        {
-          required: true,
-          message: 'Please input name',
-        },
-      ],
-      region: [
-        {
-          required: true,
-          message: 'Please select region',
-        },
-      ],
-      type: [
-        {
-          required: true,
-          message: 'Please select type',
-          type: 'array',
-        },
-      ],
-    });
-    const { resetFields, validate, validateInfos, mergeValidateInfo } = useForm(modelRef, rulesRef);
-    const onSubmit = () => {
-      validate()
-        .then(() => {
-          console.log(toRaw(modelRef));
-        })
-        .catch(err => {
-          console.log('error', err);
-        });
-    };
-    const errorInfos = computed(() => {
-      return mergeValidateInfo(toArray(validateInfos));
-    });
-    return {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
-      validateInfos,
-      resetFields,
-      modelRef,
-      onSubmit,
-      errorInfos,
-    };
-  },
+};
+const errorInfos = computed(() => {
+  return mergeValidateInfo(toArray(validateInfos));
 });
 </script>
 <style scoped>

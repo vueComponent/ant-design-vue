@@ -35,13 +35,3 @@ Setting `tooltip` prop to show FloatButton with tooltip.
     </template>
   </a-float-button>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>

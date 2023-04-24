@@ -453,8 +453,8 @@ Modify global theme color by css variable. Css variable depends on the design, i
     </a-col>
   </a-row>
 </template>
-<script lang="ts">
-import { defineComponent, h, reactive, ref } from 'vue';
+<script lang="ts" setup>
+import { h, reactive, ref } from 'vue';
 import { ConfigProvider, Space, Divider } from 'ant-design-vue';
 import type { TreeSelectProps } from 'ant-design-vue';
 import {
@@ -463,127 +463,109 @@ import {
   SettingOutlined,
   ClockCircleOutlined,
 } from '@ant-design/icons-vue';
-export default defineComponent({
-  components: {
-    DownOutlined,
-    MailOutlined,
-    SettingOutlined,
-    ClockCircleOutlined,
-    SplitSpace: (props, { slots }) =>
-      h(Space, { size: 4, ...props }, { ...slots, split: () => h(Divider, { type: 'vertical' }) }),
+
+const SplitSpace = (props, { slots }) =>
+  h(Space, { size: 4, ...props }, { ...slots, split: () => h(Divider, { type: 'vertical' }) });
+
+const inputProps = {
+  style: { width: '128px' },
+};
+
+const selectProps = {
+  ...inputProps,
+  options: [
+    { value: 'light', label: 'Light' },
+    { value: 'bamboo', label: 'Bamboo' },
+    { value: 'little', label: 'Little' },
+  ],
+};
+
+const treeData = [
+  {
+    value: 'little',
+    key: 'little',
+    label: 'Little',
+    title: 'Little',
+    children: [
+      { value: 'light', key: 'light', label: 'Light', title: 'Light' },
+      { value: 'bamboo', key: 'bamboo', label: 'Bamboo', title: 'Bamboo' },
+    ],
   },
-  setup() {
-    const inputProps = {
-      style: { width: '128px' },
-    };
+];
 
-    const selectProps = {
-      ...inputProps,
-      options: [
-        { value: 'light', label: 'Light' },
-        { value: 'bamboo', label: 'Bamboo' },
-        { value: 'little', label: 'Little' },
-      ],
-    };
+const treeSelectProps: TreeSelectProps = {
+  ...inputProps,
+  treeCheckable: true,
+  maxTagCount: 'responsive',
+  treeData,
+};
 
-    const treeData = [
-      {
-        value: 'little',
-        key: 'little',
-        label: 'Little',
-        title: 'Little',
-        children: [
-          { value: 'light', key: 'light', label: 'Light', title: 'Light' },
-          { value: 'bamboo', key: 'bamboo', label: 'Bamboo', title: 'Bamboo' },
-        ],
-      },
-    ];
-
-    const treeSelectProps: TreeSelectProps = {
-      ...inputProps,
-      treeCheckable: true,
-      maxTagCount: 'responsive',
-      treeData,
-    };
-
-    const carTabListNoTitle = [
-      {
-        key: 'article',
-        tab: 'article',
-      },
-      {
-        key: 'app',
-        tab: 'app',
-      },
-      {
-        key: 'project',
-        tab: 'project',
-      },
-    ];
-
-    const transferData = [];
-
-    for (let i = 0; i < 20; i++) {
-      transferData.push({
-        key: i.toString(),
-        title: `content${i + 1}`,
-        description: `description of content${i + 1}`,
-      });
-    }
-
-    const colorState = reactive({
-      primaryColor: '#1890ff',
-      errorColor: '#ff4d4f',
-      warningColor: '#faad14',
-      successColor: '#52c41a',
-      infoColor: '#1890ff',
-    });
-
-    const onColorChange = (type: string, e: any) => {
-      Object.assign(colorState, { [type]: e.target.value });
-      ConfigProvider.config({
-        theme: colorState,
-      });
-    };
-    return {
-      selectProps,
-      carTabListNoTitle,
-      onColorChange,
-      treeData,
-      treeSelectProps,
-      transferData,
-      colorState,
-      inputProps,
-      selectedKeys: ref(['mail']),
-      stepsItems: [
-        {
-          title: 'Finished',
-          description: 'This is a description.',
-        },
-        {
-          title: 'In Progress',
-          description: 'This is a description.',
-        },
-        {
-          title: 'Waiting',
-          description: 'This is a description.',
-        },
-      ],
-      stepsItems2: [
-        {
-          title: 'Finished',
-          description: 'You can hover on the dot.',
-        },
-        {
-          title: 'In Progress',
-          description: 'You can hover on the dot.',
-        },
-        {
-          title: 'Waiting',
-          description: 'You can hover on the dot.',
-        },
-      ],
-    };
+const carTabListNoTitle = [
+  {
+    key: 'article',
+    tab: 'article',
   },
+  {
+    key: 'app',
+    tab: 'app',
+  },
+  {
+    key: 'project',
+    tab: 'project',
+  },
+];
+
+const transferData = [];
+
+for (let i = 0; i < 20; i++) {
+  transferData.push({
+    key: i.toString(),
+    title: `content${i + 1}`,
+    description: `description of content${i + 1}`,
+  });
+}
+
+const colorState = reactive({
+  primaryColor: '#1890ff',
+  errorColor: '#ff4d4f',
+  warningColor: '#faad14',
+  successColor: '#52c41a',
+  infoColor: '#1890ff',
 });
+
+const onColorChange = (type: string, e: any) => {
+  Object.assign(colorState, { [type]: e.target.value });
+  ConfigProvider.config({
+    theme: colorState,
+  });
+};
+const selectedKeys = ref(['mail']);
+const stepsItems = [
+  {
+    title: 'Finished',
+    description: 'This is a description.',
+  },
+  {
+    title: 'In Progress',
+    description: 'This is a description.',
+  },
+  {
+    title: 'Waiting',
+    description: 'This is a description.',
+  },
+];
+const stepsItems2 = [
+  {
+    title: 'Finished',
+    description: 'You can hover on the dot.',
+  },
+  {
+    title: 'In Progress',
+    description: 'You can hover on the dot.',
+  },
+  {
+    title: 'Waiting',
+    description: 'You can hover on the dot.',
+  },
+];
 </script>

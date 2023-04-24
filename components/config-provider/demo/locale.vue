@@ -60,13 +60,13 @@ Components which need localization support are listed here, you can toggle the l
     </div>
   </a-config-provider>
 </template>
-<script>
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import { Modal } from 'ant-design-vue';
 import enUS from 'ant-design-vue/es/locale/en_US';
 import zhCN from 'ant-design-vue/es/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
-import { defineComponent, ref, watch } from 'vue';
 
 dayjs.locale('en');
 
@@ -86,37 +86,24 @@ const columns = [
     dataIndex: 'age',
   },
 ];
-export default defineComponent({
-  setup() {
-    const visible = ref(false);
-    const locale = ref(enUS.locale);
-    watch(locale, val => {
-      dayjs.locale(val);
-    });
-    const info = () => {
-      Modal.info({
-        title: 'some info',
-        content: 'some info',
-      });
-    };
-    const confirm = () => {
-      Modal.confirm({
-        title: 'some info',
-        content: 'some info',
-      });
-    };
-    return {
-      columns,
-      visible,
-      locale,
-      dayjs,
-      enUS,
-      zhCN,
-      info,
-      confirm,
-    };
-  },
+
+const visible = ref(false);
+const locale = ref(enUS.locale);
+watch(locale, val => {
+  dayjs.locale(val);
 });
+const info = () => {
+  Modal.info({
+    title: 'some info',
+    content: 'some info',
+  });
+};
+const confirm = () => {
+  Modal.confirm({
+    title: 'some info',
+    content: 'some info',
+  });
+};
 </script>
 <style scoped>
 .site-config-provider-calendar-wrapper {

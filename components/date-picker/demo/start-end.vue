@@ -41,58 +41,44 @@ When `RangePicker` does not satisfied your requirements, try to implement simila
     />
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { Dayjs } from 'dayjs';
-import { defineComponent, ref, watch } from 'vue';
-export default defineComponent({
-  setup() {
-    const startValue = ref<Dayjs>();
-    const endValue = ref<Dayjs>();
-    const endOpen = ref<boolean>(false);
+import { ref, watch } from 'vue';
+const startValue = ref<Dayjs>();
+const endValue = ref<Dayjs>();
+const endOpen = ref<boolean>(false);
 
-    const disabledStartDate = (startValue: Dayjs) => {
-      if (!startValue || !endValue.value) {
-        return false;
-      }
+const disabledStartDate = (startValue: Dayjs) => {
+  if (!startValue || !endValue.value) {
+    return false;
+  }
 
-      return startValue.valueOf() > endValue.value.valueOf();
-    };
+  return startValue.valueOf() > endValue.value.valueOf();
+};
 
-    const disabledEndDate = (endValue: Dayjs) => {
-      if (!endValue || !startValue.value) {
-        return false;
-      }
+const disabledEndDate = (endValue: Dayjs) => {
+  if (!endValue || !startValue.value) {
+    return false;
+  }
 
-      return startValue.value.valueOf() >= endValue.valueOf();
-    };
+  return startValue.value.valueOf() >= endValue.valueOf();
+};
 
-    const handleStartOpenChange = (open: boolean) => {
-      if (!open) {
-        endOpen.value = true;
-      }
-    };
+const handleStartOpenChange = (open: boolean) => {
+  if (!open) {
+    endOpen.value = true;
+  }
+};
 
-    const handleEndOpenChange = (open: boolean) => {
-      endOpen.value = open;
-    };
+const handleEndOpenChange = (open: boolean) => {
+  endOpen.value = open;
+};
 
-    watch(startValue, () => {
-      console.log('startValue', startValue.value);
-    });
+watch(startValue, () => {
+  console.log('startValue', startValue.value);
+});
 
-    watch(endValue, () => {
-      console.log('endValue', endValue.value);
-    });
-
-    return {
-      startValue,
-      endValue,
-      endOpen,
-      disabledStartDate,
-      disabledEndDate,
-      handleStartOpenChange,
-      handleEndOpenChange,
-    };
-  },
+watch(endValue, () => {
+  console.log('endValue', endValue.value);
 });
 </script>

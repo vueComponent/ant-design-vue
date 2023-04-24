@@ -358,8 +358,8 @@ Components which support rtl direction are listed here, you can toggle the direc
     </div>
   </a-config-provider>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, watch, ref } from 'vue';
+<script lang="ts" setup>
+import { reactive, watch, ref } from 'vue';
 
 import {
   SearchOutlined as SearchIcon,
@@ -372,200 +372,171 @@ import {
 } from '@ant-design/icons-vue';
 import type { TreeProps, TreeSelectProps, CascaderProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: {
-    SmileOutlined,
-    DownloadOutlined,
-    LeftOutlined,
-    RightOutlined,
-    MinusOutlined,
-    PlusOutlined,
-    SearchIcon,
+const state = reactive({
+  currentStep: 0,
+  modalVisible: false,
+
+  badgeCount: 5,
+  showBadge: true,
+  direction: 'ltr' as 'ltr' | 'rtl',
+  popupPlacement: 'bottomLeft' as CascaderProps['placement'],
+});
+const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+
+const treeData: TreeProps['treeData'] = [
+  {
+    title: 'parent 1',
+    key: '0-0',
+    children: [
+      {
+        title: 'parent 1-0',
+        key: '0-0-0',
+        disabled: true,
+        children: [
+          { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
+          { title: 'leaf', key: '0-0-0-1' },
+        ],
+      },
+      {
+        title: 'parent 1-1',
+        key: '0-0-1',
+        children: [{ key: '0-0-1-0', title: 'sss' }],
+      },
+    ],
   },
-  setup() {
-    const state = reactive({
-      currentStep: 0,
-      modalVisible: false,
+];
 
-      badgeCount: 5,
-      showBadge: true,
-      direction: 'ltr' as 'ltr' | 'rtl',
-      popupPlacement: 'bottomLeft' as CascaderProps['placement'],
-    });
-    const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-
-    const treeData: TreeProps['treeData'] = [
+const treeSelectData = ref<TreeSelectProps['treeData']>([
+  {
+    title: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
-        title: 'parent 1',
-        key: '0-0',
+        title: 'parent 1-0',
+        value: 'parent 1-0',
         children: [
           {
-            title: 'parent 1-0',
-            key: '0-0-0',
-            disabled: true,
-            children: [
-              { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
-              { title: 'leaf', key: '0-0-0-1' },
-            ],
+            title: 'my leaf',
+            value: 'leaf1',
           },
           {
-            title: 'parent 1-1',
-            key: '0-0-1',
-            children: [{ key: '0-0-1-0', title: 'sss' }],
+            title: 'your leaf',
+            value: 'leaf2',
           },
         ],
       },
-    ];
-
-    const treeSelectData = ref<TreeSelectProps['treeData']>([
       {
-        title: 'parent 1',
-        value: 'parent 1',
-        children: [
-          {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-              },
-            ],
-          },
-          {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
-          },
-        ],
+        title: 'parent 1-1',
+        value: 'parent 1-1',
       },
-    ]);
-    watch(
-      () => state.direction,
-      directionValue => {
-        if (directionValue === 'rtl') {
-          state.popupPlacement = 'bottomRight';
-        } else {
-          state.popupPlacement = 'bottomLeft';
-        }
-      },
-    );
-    const cascaderOptions = [
+    ],
+  },
+]);
+watch(
+  () => state.direction,
+  directionValue => {
+    if (directionValue === 'rtl') {
+      state.popupPlacement = 'bottomRight';
+    } else {
+      state.popupPlacement = 'bottomLeft';
+    }
+  },
+);
+const cascaderOptions = [
+  {
+    value: 'tehran',
+    label: 'تهران',
+    children: [
       {
-        value: 'tehran',
+        value: 'tehran-c',
         label: 'تهران',
         children: [
           {
-            value: 'tehran-c',
-            label: 'تهران',
-            children: [
-              {
-                value: 'saadat-abad',
-                label: 'سعادت آیاد',
-              },
-            ],
+            value: 'saadat-abad',
+            label: 'سعادت آیاد',
           },
         ],
       },
+    ],
+  },
+  {
+    value: 'ardabil',
+    label: 'اردبیل',
+    children: [
       {
-        value: 'ardabil',
+        value: 'ardabil-c',
         label: 'اردبیل',
         children: [
           {
-            value: 'ardabil-c',
-            label: 'اردبیل',
-            children: [
-              {
-                value: 'primadar',
-                label: 'پیرمادر',
-              },
-            ],
+            value: 'primadar',
+            label: 'پیرمادر',
           },
         ],
       },
+    ],
+  },
+  {
+    value: 'gilan',
+    label: 'گیلان',
+    children: [
       {
-        value: 'gilan',
-        label: 'گیلان',
+        value: 'rasht',
+        label: 'رشت',
         children: [
           {
-            value: 'rasht',
-            label: 'رشت',
-            children: [
-              {
-                value: 'district-3',
-                label: 'منطقه ۳',
-              },
-            ],
+            value: 'district-3',
+            label: 'منطقه ۳',
           },
         ],
       },
-    ];
-
-    // ==== Cascader ====
-    const cascaderFilter = (inputValue, path) =>
-      path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
-
-    const onCascaderChange = value => {
-      console.log(value);
-    };
-    // ==== End Cascader ====
-
-    // ==== Modal ====
-    const showModal = () => {
-      state.modalVisible = true;
-    };
-
-    // ==== End Modal ====
-
-    const onStepsChange = currentStep => {
-      console.log('onChange:', currentStep);
-      state.currentStep = currentStep;
-    };
-
-    // ==== Badge ====
-
-    const increaseBadge = () => {
-      const badgeCount = state.badgeCount + 1;
-      state.badgeCount = badgeCount;
-    };
-
-    const declineBadge = () => {
-      let badgeCount = state.badgeCount - 1;
-      if (badgeCount < 0) {
-        badgeCount = 0;
-      }
-      state.badgeCount = badgeCount;
-    };
-
-    const onChangeBadge = showBadge => {
-      state.showBadge = showBadge;
-    };
-    return {
-      state,
-      cascaderOptions,
-      cascaderFilter,
-      onCascaderChange,
-      showModal,
-      onStepsChange,
-      increaseBadge,
-      declineBadge,
-      onChangeBadge,
-      expandedKeys,
-      selectedKeys,
-      checkedKeys,
-      treeData,
-      treeSelectData,
-      rateValue: ref(2),
-    };
+    ],
   },
-});
+];
+
+// ==== Cascader ====
+const cascaderFilter = (inputValue, path) =>
+  path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
+
+const onCascaderChange = value => {
+  console.log(value);
+};
+// ==== End Cascader ====
+
+// ==== Modal ====
+const showModal = () => {
+  state.modalVisible = true;
+};
+
+// ==== End Modal ====
+
+const onStepsChange = currentStep => {
+  console.log('onChange:', currentStep);
+  state.currentStep = currentStep;
+};
+
+// ==== Badge ====
+
+const increaseBadge = () => {
+  const badgeCount = state.badgeCount + 1;
+  state.badgeCount = badgeCount;
+};
+
+const declineBadge = () => {
+  let badgeCount = state.badgeCount - 1;
+  if (badgeCount < 0) {
+    badgeCount = 0;
+  }
+  state.badgeCount = badgeCount;
+};
+
+const onChangeBadge = showBadge => {
+  state.showBadge = showBadge;
+};
+const rateValue = ref(2);
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .direction-components {
   .button-demo .ant-btn,
   .button-demo .ant-btn-group {

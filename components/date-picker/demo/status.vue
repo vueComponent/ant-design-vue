@@ -25,11 +25,3 @@ Add status to DatePicker with `status`, which could be `error` or `warning`.
     <a-range-picker status="warning" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>

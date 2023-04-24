@@ -24,53 +24,42 @@ In the various types of information modal dialog, only one button to close dialo
     <a-button @click="warning">Warning</a-button>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { Modal } from 'ant-design-vue';
-import { defineComponent, h } from 'vue';
-export default defineComponent({
-  setup() {
-    const info = () => {
-      Modal.info({
-        title: 'This is a notification message',
-        content: h('div', {}, [
-          h('p', 'some messages...some messages...'),
-          h('p', 'some messages...some messages...'),
-        ]),
-        onOk() {
-          console.log('ok');
-        },
-      });
-    };
-    const success = () => {
-      Modal.success({
-        title: 'This is a success message',
-        content: h('div', {}, [
-          h('p', 'some messages...some messages...'),
-          h('p', 'some messages...some messages...'),
-        ]),
-      });
-    };
+import { h } from 'vue';
+const info = () => {
+  Modal.info({
+    title: 'This is a notification message',
+    content: h('div', {}, [
+      h('p', 'some messages...some messages...'),
+      h('p', 'some messages...some messages...'),
+    ]),
+    onOk() {
+      console.log('ok');
+    },
+  });
+};
+const success = () => {
+  Modal.success({
+    title: 'This is a success message',
+    content: h('div', {}, [
+      h('p', 'some messages...some messages...'),
+      h('p', 'some messages...some messages...'),
+    ]),
+  });
+};
 
-    const error = () => {
-      Modal.error({
-        title: 'This is an error message',
-        content: 'some messages...some messages...',
-      });
-    };
+const error = () => {
+  Modal.error({
+    title: 'This is an error message',
+    content: 'some messages...some messages...',
+  });
+};
 
-    const warning = () => {
-      Modal.warning({
-        title: 'This is a warning message',
-        content: 'some messages...some messages...',
-      });
-    };
-
-    return {
-      info,
-      success,
-      error,
-      warning,
-    };
-  },
-});
+const warning = () => {
+  Modal.warning({
+    title: 'This is a warning message',
+    content: 'some messages...some messages...',
+  });
+};
 </script>

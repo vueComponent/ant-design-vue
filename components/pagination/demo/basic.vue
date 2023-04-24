@@ -19,13 +19,7 @@ Basic pagination.
 <template>
   <a-pagination v-model:current="current" :total="50" show-less-items />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      current: ref(2),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const current = ref(2);
 </script>

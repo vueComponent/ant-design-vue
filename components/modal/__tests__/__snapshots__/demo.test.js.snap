@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/modal/demo/async.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with async logic</span>
   </button>
   <!---->
@@ -9,7 +9,7 @@ exports[`renders ./components/modal/demo/async.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/basic.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal</span>
   </button>
   <!---->
@@ -17,7 +17,7 @@ exports[`renders ./components/modal/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/button-props.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with customized button props</span>
   </button>
   <!---->
@@ -25,20 +25,20 @@ exports[`renders ./components/modal/demo/button-props.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/confirm.vue correctly 1`] = `
-<div class="ant-space ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
-  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+<div class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
       <!----><span>Confirm</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
       <!----><span>With promise</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-dashed" type="button">
       <!----><span>Delete</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="padding-bottom: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
+  <div class="ant-space-item" style="padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-dashed" type="button">
       <!----><span>With extra props</span>
     </button></div>
   <!---->
@@ -46,19 +46,19 @@ exports[`renders ./components/modal/demo/confirm.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/confirm-promise.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
   <!----><span>Confirm</span>
 </button>
 `;
 
 exports[`renders ./components/modal/demo/confirm-router.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
   <!----><span>Confirm</span>
 </button>
 `;
 
 exports[`renders ./components/modal/demo/footer.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with customized footer</span>
   </button>
   <!---->
@@ -66,7 +66,7 @@ exports[`renders ./components/modal/demo/footer.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/fullscreen.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal</span>
   </button>
   <!---->
@@ -74,20 +74,20 @@ exports[`renders ./components/modal/demo/fullscreen.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/info.vue correctly 1`] = `
-<div class="ant-space ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
-  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+<div class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
       <!----><span>Info</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
       <!----><span>Success</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
       <!----><span>Error</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="padding-bottom: 8px;"><button class="ant-btn" type="button">
+  <div class="ant-space-item" style="padding-bottom: 8px;"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
       <!----><span>Warning</span>
     </button></div>
   <!---->
@@ -95,9 +95,9 @@ exports[`renders ./components/modal/demo/info.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/locale.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Modal</span>
-  </button><button class="ant-btn" type="button">
+  </button><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
     <!----><span>Confirm</span>
   </button>
   <!---->
@@ -105,13 +105,13 @@ exports[`renders ./components/modal/demo/locale.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/manual.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
   <!----><span>Open modal to close in 5s</span>
 </button>
 `;
 
 exports[`renders ./components/modal/demo/modal-render.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal</span>
   </button>
   <!---->
@@ -119,10 +119,10 @@ exports[`renders ./components/modal/demo/modal-render.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/position.vue correctly 1`] = `
-<div id="components-modal-demo-position"><button class="ant-btn ant-btn-primary" type="button">
+<div id="components-modal-demo-position"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Display a modal dialog at 20px to Top</span>
   </button>
-  <!----><br><br><button class="ant-btn ant-btn-primary" type="button">
+  <!----><br><br><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Vertically centered modal dialog</span>
   </button>
   <!---->
@@ -130,7 +130,7 @@ exports[`renders ./components/modal/demo/position.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/width.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary" type="button">
+<div><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal of 1000px width</span>
   </button>
   <!---->

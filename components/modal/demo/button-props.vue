@@ -32,31 +32,17 @@ Passing `okButtonProps` and `cancelButtonProps` can customize the ok button and 
     </a-modal>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const open = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const showModal = () => {
-      open.value = true;
-    };
+const open = ref<boolean>(false);
 
-    const handleOk = (e: MouseEvent) => {
-      console.log(e);
-      open.value = false;
-    };
+const showModal = () => {
+  open.value = true;
+};
 
-    const handleCancel = (e: MouseEvent) => {
-      console.log(e);
-      open.value = false;
-    };
-    return {
-      open,
-      showModal,
-      handleOk,
-      handleCancel,
-    };
-  },
-});
+const handleOk = (e: MouseEvent) => {
+  console.log(e);
+  open.value = false;
+};
 </script>

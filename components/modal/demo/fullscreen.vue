@@ -32,29 +32,20 @@ Full screen by custom style.
     </a-modal>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const open = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const open = ref<boolean>(false);
 
-    const showModal = () => {
-      open.value = true;
-    };
+const showModal = () => {
+  open.value = true;
+};
 
-    const handleOk = (e: MouseEvent) => {
-      console.log(e);
-      open.value = false;
-    };
-    return {
-      open,
-      showModal,
-      handleOk,
-    };
-  },
-});
+const handleOk = (e: MouseEvent) => {
+  console.log(e);
+  open.value = false;
+};
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .full-modal {
   .ant-modal {
     max-width: 100%;

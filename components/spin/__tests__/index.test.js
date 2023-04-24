@@ -37,11 +37,11 @@ describe('Spin', () => {
     };
     const wrapper = mount(Spin, props);
     await asyncExpect(() => {
-      expect(wrapper.vm.sSpinning).toBe(false);
+      expect(wrapper.vm.spinning).toBe(false);
       wrapper.setProps({ spinning: true });
     });
     await asyncExpect(() => {
-      expect(wrapper.vm.sSpinning).toBe(true);
+      expect(wrapper.vm.spinning).toBe(true);
     });
   });
 });

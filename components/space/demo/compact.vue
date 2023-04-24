@@ -202,43 +202,35 @@ Compact Mode for form component.
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { CopyOutlined } from '@ant-design/icons-vue';
 import { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
 
-export default defineComponent({
-  components: {
-    CopyOutlined,
-  },
-  setup() {
-    const treeData = ref<TreeSelectProps['treeData']>([
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    title: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
-        title: 'parent 1',
-        value: 'parent 1',
+        title: 'parent 1-0',
+        value: 'parent 1-0',
         children: [
           {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-              },
-            ],
+            title: 'my leaf',
+            value: 'leaf1',
           },
           {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
+            title: 'your leaf',
+            value: 'leaf2',
           },
         ],
       },
-    ]);
-    return { treeData };
+      {
+        title: 'parent 1-1',
+        value: 'parent 1-1',
+      },
+    ],
   },
-});
+]);
 </script>

@@ -55,17 +55,8 @@ Setting `v-model` makes Steps clickable.
     ></a-steps>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const current = ref<number>(0);
-
-    return {
-      current,
-      description: 'This is a description.',
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const current = ref<number>(0);
+const description = 'This is a description.';
 </script>

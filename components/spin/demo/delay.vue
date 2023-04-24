@@ -28,23 +28,10 @@ Specifies a delay for loading state. If `spinning` ends during delay, loading st
     <a-switch v-model:checked="spinning" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const spinning = ref<boolean>(false);
-    const delayTime = 500;
-
-    const changeSpinning = () => {
-      spinning.value = !spinning.value;
-    };
-    return {
-      spinning,
-      delayTime,
-      changeSpinning,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const spinning = ref<boolean>(false);
+const delayTime = 500;
 </script>
 <style scoped>
 .spin-state {

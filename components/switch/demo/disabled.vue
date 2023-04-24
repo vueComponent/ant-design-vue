@@ -24,22 +24,12 @@ Disabled state of `Switch`.
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const checked = ref<boolean>(true);
-    const disabled = ref<boolean>(true);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const checked = ref<boolean>(true);
+const disabled = ref<boolean>(true);
 
-    const onToggle = () => {
-      disabled.value = !disabled.value;
-    };
-
-    return {
-      checked,
-      disabled,
-      onToggle,
-    };
-  },
-});
+const onToggle = () => {
+  disabled.value = !disabled.value;
+};
 </script>

@@ -24,28 +24,21 @@ Set labelPlacement to `vertical`.
     <a-steps :current="1" size="small" label-placement="vertical" :items="items" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const items = ref([
-      {
-        title: 'Finished',
-        description: 'This is a description.',
-      },
-      {
-        title: 'In Progress',
-        description: 'This is a description.',
-      },
-      {
-        title: 'Waiting',
-        description: 'This is a description.',
-      },
-    ]);
-    return {
-      items,
-    };
+const items = ref([
+  {
+    title: 'Finished',
+    description: 'This is a description.',
   },
-});
+  {
+    title: 'In Progress',
+    description: 'This is a description.',
+  },
+  {
+    title: 'Waiting',
+    description: 'This is a description.',
+  },
+]);
 </script>

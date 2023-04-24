@@ -26,8 +26,3 @@ Crowded components split.
     <a-typography-link>Link</a-typography-link>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({});
-</script>

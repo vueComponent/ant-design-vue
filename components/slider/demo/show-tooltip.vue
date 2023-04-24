@@ -18,16 +18,7 @@ When `tooltipOpen` is `true`, ToolTip will show always, or ToolTip will not show
 <template>
   <a-slider v-model:value="value" :tooltip-open="true" />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const value = ref<number>(30);
-
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<number>(30);
 </script>

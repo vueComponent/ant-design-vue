@@ -27,9 +27,8 @@ If a `sortOrder` or `defaultSortOrder` is specified with the value `ascend` or `
 <template>
   <a-table :columns="columns" :data-source="data" @change="onChange" />
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import type { TableColumnType, TableProps } from 'ant-design-vue';
-import { defineComponent } from 'vue';
 
 type TableDataType = {
   key: string;
@@ -124,16 +123,7 @@ const data: TableDataType[] = [
     address: 'London No. 2 Lake Park',
   },
 ];
-export default defineComponent({
-  setup() {
-    const onChange: TableProps<TableDataType>['onChange'] = (pagination, filters, sorter) => {
-      console.log('params', pagination, filters, sorter);
-    };
-    return {
-      data,
-      columns,
-      onChange,
-    };
-  },
-});
+const onChange: TableProps<TableDataType>['onChange'] = (pagination, filters, sorter) => {
+  console.log('params', pagination, filters, sorter);
+};
 </script>

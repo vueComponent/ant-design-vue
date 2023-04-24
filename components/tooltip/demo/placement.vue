@@ -100,15 +100,8 @@ There are 12 placement options available.
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      buttonWidth: 70,
-    };
-  },
-});
+<script lang="ts" setup>
+const buttonWidth = 70;
 </script>
 <style scoped>
 :deep(#components-a-tooltip-demo-placement) .ant-btn {

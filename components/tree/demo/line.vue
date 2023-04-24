@@ -48,76 +48,62 @@ Tree with connected line between nodes, turn on by `showLine`, customize the pre
     </a-tree>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { CarryOutOutlined, SmileTwoTone } from '@ant-design/icons-vue';
 import type { TreeProps } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    CarryOutOutlined,
-    SmileTwoTone,
-  },
-  setup() {
-    const showLine = ref<boolean>(true);
-    const showIcon = ref<boolean>(false);
-    const treeData = ref<TreeProps['treeData']>([
+const showLine = ref<boolean>(true);
+const showIcon = ref<boolean>(false);
+const treeData = ref<TreeProps['treeData']>([
+  {
+    title: 'parent 1',
+    key: '0-0',
+    children: [
       {
-        title: 'parent 1',
-        key: '0-0',
+        title: 'parent 1-0',
+        key: '0-0-0',
         children: [
+          { title: 'leaf', key: '0-0-0-0' },
           {
-            title: 'parent 1-0',
-            key: '0-0-0',
-            children: [
-              { title: 'leaf', key: '0-0-0-0' },
-              {
-                key: '0-0-0-1',
-              },
-              { title: 'leaf', key: '0-0-0-2' },
-            ],
+            key: '0-0-0-1',
           },
-          {
-            title: 'parent 1-1',
-            key: '0-0-1',
-            children: [{ title: 'leaf', key: '0-0-1-0' }],
-          },
-          {
-            title: 'parent 1-2',
-            key: '0-0-2',
-            children: [
-              { title: 'leaf 1', key: '0-0-2-0' },
-              {
-                title: 'leaf 2',
-                key: '0-0-2-1',
-              },
-            ],
-          },
+          { title: 'leaf', key: '0-0-0-2' },
         ],
       },
       {
-        title: 'parent 2',
-        key: '0-1',
+        title: 'parent 1-1',
+        key: '0-0-1',
+        children: [{ title: 'leaf', key: '0-0-1-0' }],
+      },
+      {
+        title: 'parent 1-2',
+        key: '0-0-2',
         children: [
+          { title: 'leaf 1', key: '0-0-2-0' },
           {
-            title: 'parent 2-0',
-            key: '0-1-0',
-            children: [
-              { title: 'leaf', key: '0-1-0-0' },
-              { title: 'leaf', key: '0-1-0-1' },
-            ],
+            title: 'leaf 2',
+            key: '0-0-2-1',
           },
         ],
       },
-    ]);
-    const onSelect: TreeProps['onSelect'] = (selectedKeys, info) => {
-      console.log('selected', selectedKeys, info);
-    };
-    return {
-      showLine,
-      showIcon,
-      onSelect,
-      treeData,
-    };
+    ],
   },
-});
+  {
+    title: 'parent 2',
+    key: '0-1',
+    children: [
+      {
+        title: 'parent 2-0',
+        key: '0-1-0',
+        children: [
+          { title: 'leaf', key: '0-1-0-0' },
+          { title: 'leaf', key: '0-1-0-1' },
+        ],
+      },
+    ],
+  },
+]);
+const onSelect: TreeProps['onSelect'] = (selectedKeys, info) => {
+  console.log('selected', selectedKeys, info);
+};
 </script>

@@ -27,14 +27,7 @@ Customized bar of tab.
     </a-tabs>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref('1'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const activeKey = ref('1');
 </script>

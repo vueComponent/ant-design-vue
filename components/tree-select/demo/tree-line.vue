@@ -43,49 +43,40 @@ Use `treeLine` to show the line style.
     </a-tree-select>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-export default defineComponent({
-  setup() {
-    const treeLine = ref(true);
-    const showLeafIcon = ref(false);
-    const value = ref<string>();
-    const treeData = ref<TreeSelectProps['treeData']>([
+
+const treeLine = ref(true);
+const showLeafIcon = ref(false);
+const value = ref<string>();
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    title: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
-        title: 'parent 1',
-        value: 'parent 1',
+        title: 'parent 1-0',
+        value: 'parent 1-0',
         children: [
           {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-              },
-            ],
+            title: 'my leaf',
+            value: 'leaf1',
           },
           {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
+            title: 'your leaf',
+            value: 'leaf2',
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log(value.value);
-    });
-    return {
-      treeLine,
-      showLeafIcon,
-      value,
-      treeData,
-    };
+      {
+        title: 'parent 1-1',
+        value: 'parent 1-1',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log(value.value);
 });
 </script>

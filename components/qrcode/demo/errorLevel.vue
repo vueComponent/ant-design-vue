@@ -24,17 +24,8 @@ set Error Level.
   <a-segmented v-model:value="level" :options="segmentedData" />
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const segmentedData = ['L', 'M', 'Q', 'H'];
-    const level = ref(segmentedData[0]);
-    return {
-      segmentedData,
-      level,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const segmentedData = ['L', 'M', 'Q', 'H'];
+const level = ref(segmentedData[0]);
 </script>

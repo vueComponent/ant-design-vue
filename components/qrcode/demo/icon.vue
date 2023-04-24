@@ -21,13 +21,3 @@ QRCode with Icon.
     icon="https://www.antdv.com/assets/logo.1ef800a8.svg"
   />
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>

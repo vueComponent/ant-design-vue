@@ -27,29 +27,20 @@ Try to copy `Lucy,Jack` to the input. Only available in tags and multiple mode.
     @change="handleChange"
   ></a-select>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { SelectProps } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const options = ref<SelectProps['options']>([
-      {
-        value: 'a1',
-        label: 'a1',
-      },
-    ]);
-    const value = ref<string[]>([]);
-    const handleChange = (value: []) => {
-      console.log(`selected ${value}`);
-    };
-    watch(value, () => {
-      console.log('value', value.value);
-    });
-    return {
-      options,
-      handleChange,
-      value,
-    };
+const options = ref<SelectProps['options']>([
+  {
+    value: 'a1',
+    label: 'a1',
   },
+]);
+const value = ref<string[]>([]);
+const handleChange = (value: []) => {
+  console.log(`selected ${value}`);
+};
+watch(value, () => {
+  console.log('value', value.value);
 });
 </script>

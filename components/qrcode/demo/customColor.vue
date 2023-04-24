@@ -20,13 +20,3 @@ Custom Color.
     <div><a-qrcode value="http://www.antv.com" color="#1677ff" /></div>
   </a-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>

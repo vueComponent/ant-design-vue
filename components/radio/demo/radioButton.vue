@@ -43,19 +43,10 @@ The combination of radio button style.
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value1 = ref<string>('a');
-    const value2 = ref<string>('a');
-    const value3 = ref<string>('a');
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    return {
-      value1,
-      value2,
-      value3,
-    };
-  },
-});
+const value1 = ref<string>('a');
+const value2 = ref<string>('a');
+const value3 = ref<string>('a');
 </script>

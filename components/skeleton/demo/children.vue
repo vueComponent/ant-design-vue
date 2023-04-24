@@ -31,22 +31,15 @@ Skeleton contains sub component.
     <a-button :disabled="loading" @click="showSkeleton">Show Skeleton</a-button>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const loading = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const showSkeleton = () => {
-      loading.value = true;
-      setTimeout(() => {
-        loading.value = false;
-      }, 3000);
-    };
-    return {
-      loading,
-      showSkeleton,
-    };
-  },
-});
+const loading = ref<boolean>(false);
+
+const showSkeleton = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 3000);
+};
 </script>

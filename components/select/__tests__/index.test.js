@@ -46,7 +46,7 @@ describe('Select', () => {
 
     await asyncExpect(() => {
       expect($$('.ant-select-item-option').length).toBe(0);
-      expect($$('.ant-empty-description')[0].innerHTML).toBe('No Data');
+      expect($$('.ant-empty-description')[0].innerHTML).toBe('No data');
     }, 100);
   });
 

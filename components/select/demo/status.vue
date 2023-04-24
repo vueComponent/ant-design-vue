@@ -23,14 +23,6 @@ Add status to DatePicker with `status`, which could be `error` or `warning`.
     <a-select status="warning" style="width: 100%" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>
 <style scoped>
 #components-select-demo-status .ant-select {
   margin: 0;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Select Select Custom Icons should support customized icons 1`] = `
-<div class="ant-select ant-select-single ant-select-show-arrow">
+<div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span>

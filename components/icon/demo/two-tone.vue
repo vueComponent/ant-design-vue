@@ -23,15 +23,8 @@ You can set `two-tone-color` prop to specific primary color for two-tone icons.
     <check-circle-two-tone two-tone-color="#52c41a" />
   </a-space>
 </template>
-<script>
+<script lang="ts" setup>
 import { SmileTwoTone, HeartTwoTone, CheckCircleTwoTone } from '@ant-design/icons-vue';
-export default {
-  components: {
-    SmileTwoTone,
-    HeartTwoTone,
-    CheckCircleTwoTone,
-  },
-};
 </script>
 <style scoped>
 .icons-list :deep(.anticon) {

@@ -32,8 +32,8 @@ You can use the Input in conjunction with [Tooltip](/components/tooltip/) compon
     />
   </a-tooltip>
 </template>
-<script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue';
 
 function formatNumber(value: string) {
   value += '';
@@ -54,44 +54,31 @@ function formatNumber(value: string) {
   return `${prefix}${result}${list[1] ? `.${list[1]}` : ''}`;
 }
 
-export default defineComponent({
-  setup() {
-    const inputValue = ref<string>('111');
-    const formatValue = computed(() => {
-      if (inputValue.value === '-') return '-';
-      return formatNumber(inputValue.value);
-    });
+const inputValue = ref<string>('111');
+const formatValue = computed(() => {
+  if (inputValue.value === '-') return '-';
+  return formatNumber(inputValue.value);
+});
 
-    const format = (val: string, preVal: string) => {
-      const reg = /^-?\d*(\.\d*)?$/;
+const format = (val: string, preVal: string) => {
+  const reg = /^-?\d*(\.\d*)?$/;
 
-      if ((!isNaN(+val) && reg.test(val)) || val === '' || val === '-') {
-        inputValue.value = val;
-      } else {
-        inputValue.value = preVal;
-      }
-    };
+  if ((!isNaN(+val) && reg.test(val)) || val === '' || val === '-') {
+    inputValue.value = val;
+  } else {
+    inputValue.value = preVal;
+  }
+};
 
-    // '.' at the end or only '-' in the input box.
-    const onBlur = () => {
-      if (
-        inputValue.value.charAt(inputValue.value.length - 1) === '.' ||
-        inputValue.value === '-'
-      ) {
-        format(inputValue.value.slice(0, -1), inputValue.value);
-      }
-    };
+// '.' at the end or only '-' in the input box.
+const onBlur = () => {
+  if (inputValue.value.charAt(inputValue.value.length - 1) === '.' || inputValue.value === '-') {
+    format(inputValue.value.slice(0, -1), inputValue.value);
+  }
+};
 
-    watch(inputValue, (val, preVal) => {
-      format(val, preVal);
-    });
-
-    return {
-      inputValue,
-      onBlur,
-      formatValue,
-    };
-  },
+watch(inputValue, (val, preVal) => {
+  format(val, preVal);
 });
 </script>
 <style>

@@ -25,7 +25,3 @@ You can set different preview image.
     }"
   />
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({});
-</script>

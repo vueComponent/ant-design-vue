@@ -93,26 +93,15 @@ Both the top navigation and the sidebar, commonly used in documentation site.
   </a-layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined,
-  },
-  setup() {
-    return {
-      selectedKeys1: ref<string[]>(['2']),
-      selectedKeys2: ref<string[]>(['1']),
-      openKeys: ref<string[]>(['sub1']),
-    };
-  },
-});
+const selectedKeys1 = ref<string[]>(['2']);
+const selectedKeys2 = ref<string[]>(['1']);
+const openKeys = ref<string[]>(['sub1']);
 </script>
 
-<style>
+<style scoped>
 #components-layout-demo-top-side .logo {
   float: left;
   width: 120px;

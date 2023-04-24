@@ -27,8 +27,8 @@ Setting `itemLayout` property with `vertical` to create a vertical list.
     <template #renderItem="{ item }">
       <a-list-item key="item.title">
         <template #actions>
-          <span v-for="{ type, text } in actions" :key="type">
-            <component :is="type" style="margin-right: 8px" />
+          <span v-for="{ icon, text } in actions" :key="icon">
+            <component :is="icon" style="margin-right: 8px" />
             {{ text }}
           </span>
         </template>
@@ -50,10 +50,8 @@ Setting `itemLayout` property with `vertical` to create a vertical list.
     </template>
   </a-list>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-
 const listData: Record<string, string>[] = [];
 
 for (let i = 0; i < 23; i++) {
@@ -68,29 +66,15 @@ for (let i = 0; i < 23; i++) {
   });
 }
 
-export default defineComponent({
-  components: {
-    StarOutlined,
-    LikeOutlined,
-    MessageOutlined,
+const pagination = {
+  onChange: (page: number) => {
+    console.log(page);
   },
-  setup() {
-    const pagination = {
-      onChange: (page: number) => {
-        console.log(page);
-      },
-      pageSize: 3,
-    };
-    const actions: Record<string, string>[] = [
-      { type: 'StarOutlined', text: '156' },
-      { type: 'LikeOutlined', text: '156' },
-      { type: 'MessageOutlined', text: '2' },
-    ];
-    return {
-      listData,
-      pagination,
-      actions,
-    };
-  },
-});
+  pageSize: 3,
+};
+const actions: Record<string, any>[] = [
+  { icon: StarOutlined, text: '156' },
+  { icon: LikeOutlined, text: '156' },
+  { icon: MessageOutlined, text: '2' },
+];
 </script>

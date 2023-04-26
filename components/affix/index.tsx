@@ -109,31 +109,48 @@ const Affix = defineComponent({
       const newState = {
         status: AffixStatus.None,
       } as AffixState;
-      const targetRect = getTargetRect(targetNode);
       const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
+
+      if (
+        placeholderRect.top === 0 &&
+        placeholderRect.left === 0 &&
+        placeholderRect.width === 0 &&
+        placeholderRect.height === 0
+      ) {
+        return;
+      }
+
+      const targetRect = getTargetRect(targetNode);
       const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
       const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
+
       if (fixedTop !== undefined) {
+        const width = `${placeholderRect.width}px`;
+        const height = `${placeholderRect.height}px`;
+
         newState.affixStyle = {
           position: 'fixed',
           top: fixedTop,
-          width: placeholderRect.width + 'px',
-          height: placeholderRect.height + 'px',
+          width,
+          height,
         };
         newState.placeholderStyle = {
-          width: placeholderRect.width + 'px',
-          height: placeholderRect.height + 'px',
+          width,
+          height,
         };
       } else if (fixedBottom !== undefined) {
+        const width = `${placeholderRect.width}px`;
+        const height = `${placeholderRect.height}px`;
+
         newState.affixStyle = {
           position: 'fixed',
           bottom: fixedBottom,
-          width: placeholderRect.width + 'px',
-          height: placeholderRect.height + 'px',
+          width,
+          height,
         };
         newState.placeholderStyle = {
-          width: placeholderRect.width + 'px',
-          height: placeholderRect.height + 'px',
+          width,
+          height,
         };
       }
 

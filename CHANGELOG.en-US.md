@@ -10,6 +10,13 @@
 
 ---
 
+## 3.2.20
+
+`2023-04-27`
+
+- 🌟 Optimize the repeated instantiation of Space subcomponents [#6500](https://github.com/vueComponent/ant-design-vue/issues/6500)
+- 🐞 Fix RangePicker does not support null value problem [#6510](https://github.com/vueComponent/ant-design-vue/issues/6510)
+
 ## 3.2.19
 
 `2023-04-23`

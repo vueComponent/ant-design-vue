@@ -10,6 +10,13 @@
 
 ---
 
+## 3.2.20
+
+`2023-04-27`
+
+- 🌟 优化 Space 子组件重复实例化问题 [#6500](https://github.com/vueComponent/ant-design-vue/issues/6500)
+- 🐞 修复 RangePicker 不支持空值问题 [#6510](https://github.com/vueComponent/ant-design-vue/issues/6510)
+
 ## 3.2.19
 
 `2023-04-23`

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RangePicker customize separator 1`] = `
-<div class="ant-picker ant-picker-range css-dev-only-do-not-override-1tm6q75">
+<div class="ant-picker ant-picker-range">
   <div class="ant-picker-input ant-picker-input-active"><input readonly="" placeholder="Start date" size="12" autocomplete="off"></div>
   <div class="ant-picker-range-separator">test</div>
   <div class="ant-picker-input"><input readonly="" placeholder="End date" size="12" autocomplete="off"></div>
@@ -10,7 +10,7 @@ exports[`RangePicker customize separator 1`] = `
   <!---->
   <div>
     <!---->
-    <div class="ant-picker-dropdown css-dev-only-do-not-override-1tm6q75 ant-picker-dropdown-range ant-slide-up-enter ant-slide-up-enter-prepare ant-slide-up-enter-start" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-picker-dropdown-range ant-slide-up-enter ant-slide-up-enter-prepare ant-slide-up-enter-start" style="pointer-events: none; display: none;">
       <div class="ant-picker-range-wrapper ant-picker-date-range-wrapper" style="min-width: 0px;">
         <div class="ant-picker-range-arrow" style="left: 0px;"></div>
         <div class="ant-picker-panel-container" style="margin-left: 0px;">

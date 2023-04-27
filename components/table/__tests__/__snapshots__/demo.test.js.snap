@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -52,11 +52,11 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-green">NICE<!----></span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-geekblue">DEVELOPER<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-green">NICE<!----></span><span class="ant-tag ant-tag-geekblue">DEVELOPER<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Invite 一 John Brown</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
+                    <!----><span><a>Invite 一 John Brown</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
                     <!---->
                   </td>
                 </tr>
@@ -75,11 +75,11 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-volcano">LOSER<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-volcano">LOSER<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Invite 一 Jim Green</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
+                    <!----><span><a>Invite 一 Jim Green</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
                     <!---->
                   </td>
                 </tr>
@@ -98,11 +98,11 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-green">COOL<!----></span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-geekblue">TEACHER<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-green">COOL<!----></span><span class="ant-tag ant-tag-geekblue">TEACHER<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Invite 一 Joe Black</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
+                    <!----><span><a>Invite 一 Joe Black</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
                     <!---->
                   </td>
                 </tr>
@@ -114,7 +114,7 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -132,8 +132,8 @@ exports[`renders ./components/table/demo/big-data.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/bordered.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -213,7 +213,7 @@ exports[`renders ./components/table/demo/bordered.vue correctly 1`] = `
         </div>
         <div class="ant-table-footer">Footer</div>
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -226,8 +226,8 @@ exports[`renders ./components/table/demo/bordered.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/colspan-rowspan.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -367,7 +367,7 @@ exports[`renders ./components/table/demo/colspan-rowspan.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -380,8 +380,8 @@ exports[`renders ./components/table/demo/colspan-rowspan.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/custom-filter-panel.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -482,7 +482,7 @@ exports[`renders ./components/table/demo/custom-filter-panel.vue correctly 1`] =
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -495,11 +495,11 @@ exports[`renders ./components/table/demo/custom-filter-panel.vue correctly 1`] =
 `;
 
 exports[`renders ./components/table/demo/edit-cell.vue correctly 1`] = `
-<button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default editable-add-btn" style="margin-bottom: 8px;" type="button">
+<button class="ant-btn ant-btn-default editable-add-btn" style="margin-bottom: 8px;" type="button">
   <!----><span>Add</span>
 </button>
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -586,7 +586,7 @@ exports[`renders ./components/table/demo/edit-cell.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -599,8 +599,8 @@ exports[`renders ./components/table/demo/edit-cell.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/edit-row.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -873,7 +873,7 @@ exports[`renders ./components/table/demo/edit-row.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -887,7 +887,7 @@ exports[`renders ./components/table/demo/edit-row.vue correctly 1`] = `
         <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a rel="nofollow">10</a></li>
         <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
         <li class="ant-pagination-options">
-          <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
+          <div class="ant-select ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">10 / page</span>
@@ -905,8 +905,8 @@ exports[`renders ./components/table/demo/edit-row.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/ellipsis.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -1037,7 +1037,7 @@ exports[`renders ./components/table/demo/ellipsis.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -1050,8 +1050,8 @@ exports[`renders ./components/table/demo/ellipsis.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/expand.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -1181,7 +1181,7 @@ exports[`renders ./components/table/demo/expand.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -1194,18 +1194,18 @@ exports[`renders ./components/table/demo/expand.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/expand-children.vue correctly 1`] = `
-<div style="margin-bottom: 16px;" class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-horizontal ant-space-align-center">
+<div style="margin-bottom: 16px;" class="ant-space ant-space-horizontal ant-space-align-center">
   <div class="ant-space-item" style="margin-right: 8px;"> CheckStrictly: </div>
   <!---->
-  <div class="ant-space-item"><button type="button" role="switch" aria-checked="false" class="ant-switch css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-space-item"><button type="button" role="switch" aria-checked="false" class="ant-switch">
       <div class="ant-switch-handle">
         <!---->
       </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"><!----></span><span class="ant-switch-inner-unchecked"><!----></span></span>
     </button></div>
   <!---->
 </div>
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -1224,7 +1224,7 @@ exports[`renders ./components/table/demo/expand-children.vue correctly 1`] = `
                 <tr>
                   <th class="ant-table-cell ant-table-selection-column" colstart="0" colend="0">
                     <!---->
-                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
+                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -1249,7 +1249,7 @@ exports[`renders ./components/table/demo/expand-children.vue correctly 1`] = `
                 <!---->
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -1269,7 +1269,7 @@ exports[`renders ./components/table/demo/expand-children.vue correctly 1`] = `
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -1294,7 +1294,7 @@ exports[`renders ./components/table/demo/expand-children.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -1307,8 +1307,8 @@ exports[`renders ./components/table/demo/expand-children.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/filter-in-tree.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -1415,7 +1415,7 @@ exports[`renders ./components/table/demo/filter-in-tree.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -1428,8 +1428,8 @@ exports[`renders ./components/table/demo/filter-in-tree.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/filter-search.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -1536,7 +1536,7 @@ exports[`renders ./components/table/demo/filter-search.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -1549,8 +1549,8 @@ exports[`renders ./components/table/demo/filter-search.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/fixed-columns.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -1765,7 +1765,7 @@ exports[`renders ./components/table/demo/fixed-columns.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -1778,8 +1778,8 @@ exports[`renders ./components/table/demo/fixed-columns.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/fixed-columns-header.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -2370,7 +2370,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.vue correctly 1`] 
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -2384,7 +2384,7 @@ exports[`renders ./components/table/demo/fixed-columns-header.vue correctly 1`] 
         <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a rel="nofollow">10</a></li>
         <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
         <li class="ant-pagination-options">
-          <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
+          <div class="ant-select ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">10 / page</span>
@@ -2402,8 +2402,8 @@ exports[`renders ./components/table/demo/fixed-columns-header.vue correctly 1`] 
 `;
 
 exports[`renders ./components/table/demo/fixed-header.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -3209,14 +3209,14 @@ exports[`renders ./components/table/demo/fixed-header.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
         <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a rel="nofollow">2</a></li>
         <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
         <li class="ant-pagination-options">
-          <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
+          <div class="ant-select ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">50 / page</span>
@@ -3234,8 +3234,8 @@ exports[`renders ./components/table/demo/fixed-header.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/grouping-columns.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -3709,7 +3709,7 @@ exports[`renders ./components/table/demo/grouping-columns.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -3723,7 +3723,7 @@ exports[`renders ./components/table/demo/grouping-columns.vue correctly 1`] = `
         <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a rel="nofollow">10</a></li>
         <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
         <li class="ant-pagination-options">
-          <div class="ant-select ant-select-sm css-dev-only-do-not-override-1tm6q75 ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
+          <div class="ant-select ant-select-sm ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">10 / page</span>
@@ -3741,8 +3741,8 @@ exports[`renders ./components/table/demo/grouping-columns.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/head.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -3845,7 +3845,7 @@ exports[`renders ./components/table/demo/head.vue correctly 1`] = `
     </div>
     <!---->
   </div>
-  <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+  <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
     <!---->
     <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -3858,8 +3858,8 @@ exports[`renders ./components/table/demo/head.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/multiple-sorter.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -3980,7 +3980,7 @@ exports[`renders ./components/table/demo/multiple-sorter.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -3993,8 +3993,8 @@ exports[`renders ./components/table/demo/multiple-sorter.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/nested-table.vue correctly 1`] = `
-<div class="ant-table-wrapper components-table-demo-nested css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper components-table-demo-nested">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -4156,7 +4156,7 @@ exports[`renders ./components/table/demo/nested-table.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -4169,8 +4169,8 @@ exports[`renders ./components/table/demo/nested-table.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -4201,7 +4201,7 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
                   </th>
                   <th class="ant-table-cell ant-table-selection-column" colstart="3" colend="3">
                     <!---->
-                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
+                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4230,7 +4230,7 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4255,7 +4255,7 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4280,7 +4280,7 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4305,7 +4305,7 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4323,7 +4323,7 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -4337,15 +4337,15 @@ exports[`renders ./components/table/demo/order-column.vue correctly 1`] = `
 
 exports[`renders ./components/table/demo/reset-filter.vue correctly 1`] = `
 <div>
-  <div class="table-operations"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
+  <div class="table-operations"><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Sort age</span>
-    </button><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
+    </button><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Clear filters</span>
-    </button><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
+    </button><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Clear filters and sorters</span>
     </button></div>
-  <div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-    <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-table-wrapper">
+    <div class="ant-spin-nested-loading">
       <!---->
       <div class="ant-spin-container">
         <!---->
@@ -4448,7 +4448,7 @@ exports[`renders ./components/table/demo/reset-filter.vue correctly 1`] = `
       </div>
       <!---->
     </div>
-    <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+    <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
       <!---->
       <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
       <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -4462,8 +4462,8 @@ exports[`renders ./components/table/demo/reset-filter.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/resizable-column.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -4519,11 +4519,11 @@ exports[`renders ./components/table/demo/resizable-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-green">NICE<!----></span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-geekblue">DEVELOPER<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-green">NICE<!----></span><span class="ant-tag ant-tag-geekblue">DEVELOPER<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Invite 一 John Brown</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
+                    <!----><span><a>Invite 一 John Brown</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
                     <!---->
                   </td>
                 </tr>
@@ -4542,11 +4542,11 @@ exports[`renders ./components/table/demo/resizable-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-volcano">LOSER<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-volcano">LOSER<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Invite 一 Jim Green</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
+                    <!----><span><a>Invite 一 Jim Green</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
                     <!---->
                   </td>
                 </tr>
@@ -4565,11 +4565,11 @@ exports[`renders ./components/table/demo/resizable-column.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-green">COOL<!----></span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-geekblue">TEACHER<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-green">COOL<!----></span><span class="ant-tag ant-tag-geekblue">TEACHER<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Invite 一 Joe Black</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
+                    <!----><span><a>Invite 一 Joe Black</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a class="ant-dropdown-link"> More actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></a></span>
                     <!---->
                   </td>
                 </tr>
@@ -4581,7 +4581,7 @@ exports[`renders ./components/table/demo/resizable-column.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -4594,8 +4594,8 @@ exports[`renders ./components/table/demo/resizable-column.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/responsive.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -4629,7 +4629,7 @@ exports[`renders ./components/table/demo/responsive.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -4642,8 +4642,8 @@ exports[`renders ./components/table/demo/responsive.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -4659,7 +4659,7 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
                 <tr>
                   <th class="ant-table-cell ant-table-selection-column" colstart="0" colend="0">
                     <!---->
-                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
+                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4684,7 +4684,7 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
                 <!---->
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input name="John Brown" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="John Brown" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4705,7 +4705,7 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input name="Jim Green" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Jim Green" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4726,7 +4726,7 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
                 <!---->
                 <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input name="Joe Black" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input name="Joe Black" type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4747,7 +4747,7 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
                 <!---->
                 <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75 ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input name="Disabled User" type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -4773,7 +4773,7 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -4787,11 +4787,11 @@ exports[`renders ./components/table/demo/row-selection.vue correctly 1`] = `
 
 exports[`renders ./components/table/demo/row-selection-and-operation.vue correctly 1`] = `
 <div>
-  <div style="margin-bottom: 16px;"><button disabled="" class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
+  <div style="margin-bottom: 16px;"><button disabled="" class="ant-btn ant-btn-primary" type="button">
       <!----><span>Reload</span>
     </button><span style="margin-left: 8px;"><!--v-if--></span></div>
-  <div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-    <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-table-wrapper">
+    <div class="ant-spin-nested-loading">
       <!---->
       <div class="ant-spin-container">
         <!---->
@@ -4807,7 +4807,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <tr>
                     <th class="ant-table-cell ant-table-selection-column" colstart="0" colend="0">
                       <!---->
-                      <div class="ant-table-selection"><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
+                      <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
                           <!---->
                         </label>
                         <!---->
@@ -4832,7 +4832,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4853,7 +4853,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4874,7 +4874,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4895,7 +4895,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4916,7 +4916,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4937,7 +4937,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="5" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4958,7 +4958,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="6" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -4979,7 +4979,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="7" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -5000,7 +5000,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="8" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -5021,7 +5021,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
                   <!---->
                   <tr data-row-key="9" class="ant-table-row ant-table-row-level-0">
                     <td class="ant-table-cell ant-table-selection-column">
-                      <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                      <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -5047,7 +5047,7 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
           </div>
           <!---->
         </div>
-        <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+        <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
           <!---->
           <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
           <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -5065,8 +5065,8 @@ exports[`renders ./components/table/demo/row-selection-and-operation.vue correct
 `;
 
 exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -5082,7 +5082,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <tr>
                   <th class="ant-table-cell ant-table-selection-column" colstart="0" colend="0">
                     <!---->
-                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input" aria-label="Custom selection"><span class="ant-checkbox-inner"></span></span>
+                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" aria-label="Custom selection"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <div class="ant-table-selection-extra">
@@ -5109,7 +5109,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5130,7 +5130,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5151,7 +5151,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5172,7 +5172,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5193,7 +5193,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5214,7 +5214,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="5" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5235,7 +5235,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="6" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5256,7 +5256,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="7" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5277,7 +5277,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="8" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5298,7 +5298,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
                 <!---->
                 <tr data-row-key="9" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell ant-table-selection-column">
-                    <!----><label class="ant-checkbox-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-checkbox css-dev-only-do-not-override-1tm6q75"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                     <!---->
@@ -5324,7 +5324,7 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -5343,8 +5343,8 @@ exports[`renders ./components/table/demo/row-selection-custom.vue correctly 1`] 
 exports[`renders ./components/table/demo/size.vue correctly 1`] = `
 <div id="components-table-demo-size">
   <h4>Middle size table</h4>
-  <div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-    <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-table-wrapper">
+    <div class="ant-spin-nested-loading">
       <!---->
       <div class="ant-spin-container">
         <!---->
@@ -5424,7 +5424,7 @@ exports[`renders ./components/table/demo/size.vue correctly 1`] = `
           </div>
           <!---->
         </div>
-        <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+        <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
           <!---->
           <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
           <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -5435,8 +5435,8 @@ exports[`renders ./components/table/demo/size.vue correctly 1`] = `
     </div>
   </div>
   <h4>Small size table</h4>
-  <div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-    <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-table-wrapper">
+    <div class="ant-spin-nested-loading">
       <!---->
       <div class="ant-spin-container">
         <!---->
@@ -5516,7 +5516,7 @@ exports[`renders ./components/table/demo/size.vue correctly 1`] = `
           </div>
           <!---->
         </div>
-        <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+        <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
           <!---->
           <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
           <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -5530,8 +5530,8 @@ exports[`renders ./components/table/demo/size.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -6117,7 +6117,7 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
               <tfoot class="ant-table-summary">
                 <tr>
                   <td colspan="2" class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
-                    <!----><button type="button" role="switch" aria-checked="false" class="ant-switch css-dev-only-do-not-override-1tm6q75">
+                    <!----><button type="button" role="switch" aria-checked="false" class="ant-switch">
                       <div class="ant-switch-handle">
                         <!---->
                       </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked">Fixed Top</span><span class="ant-switch-inner-unchecked">Fixed Top</span></span>
@@ -6141,7 +6141,7 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -6155,7 +6155,7 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
         <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a rel="nofollow">10</a></li>
         <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
         <li class="ant-pagination-options">
-          <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
+          <div class="ant-select ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">10 / page</span>
@@ -6173,8 +6173,8 @@ exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/stripe.vue correctly 1`] = `
-<div class="ant-table-wrapper ant-table-striped css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper ant-table-striped">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -6269,7 +6269,7 @@ exports[`renders ./components/table/demo/stripe.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -6279,8 +6279,8 @@ exports[`renders ./components/table/demo/stripe.vue correctly 1`] = `
     </div>
   </div>
 </div>
-<div class="ant-table-wrapper ant-table-striped css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper ant-table-striped">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -6375,7 +6375,7 @@ exports[`renders ./components/table/demo/stripe.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
@@ -6388,8 +6388,8 @@ exports[`renders ./components/table/demo/stripe.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -6485,11 +6485,11 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span class="ant-typography ant-typography-danger css-dev-only-do-not-override-1tm6q75">195<!----></span>
+                    <!----><span class="ant-typography ant-typography-danger">195<!----></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span class="ant-typography css-dev-only-do-not-override-1tm6q75">88<!----></span>
+                    <!----><span class="ant-typography">88<!----></span>
                     <!---->
                   </td>
                 </tr>
@@ -6499,7 +6499,7 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td colspan="2" class="ant-table-cell">
-                    <!----><span class="ant-typography ant-typography-danger css-dev-only-do-not-override-1tm6q75">107<!----></span>
+                    <!----><span class="ant-typography ant-typography-danger">107<!----></span>
                     <!---->
                   </td>
                 </tr>
@@ -6514,8 +6514,8 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
   </div>
 </div>
 <br>
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -6801,8 +6801,8 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/template.vue correctly 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -6866,11 +6866,11 @@ exports[`renders ./components/table/demo/template.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-blue">nice<!----></span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-blue">developer<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-blue">nice<!----></span><span class="ant-tag ant-tag-blue">developer<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Action 一 John</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a></span>
+                    <!----><span><a>Action 一 John</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a></span>
                     <!---->
                   </td>
                 </tr>
@@ -6893,11 +6893,11 @@ exports[`renders ./components/table/demo/template.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-blue">loser<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-blue">loser<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Action 一 Jim</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a></span>
+                    <!----><span><a>Action 一 Jim</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a></span>
                     <!---->
                   </td>
                 </tr>
@@ -6920,11 +6920,11 @@ exports[`renders ./components/table/demo/template.vue correctly 1`] = `
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-blue">cool<!----></span><span class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-blue">teacher<!----></span></span>
+                    <!----><span><span class="ant-tag ant-tag-blue">cool<!----></span><span class="ant-tag ant-tag-blue">teacher<!----></span></span>
                     <!---->
                   </td>
                   <td class="ant-table-cell">
-                    <!----><span><a>Action 一 Joe</a><div class="ant-divider css-dev-only-do-not-override-1tm6q75 ant-divider-vertical" role="separator"><!----></div><a>Delete</a></span>
+                    <!----><span><a>Action 一 Joe</a><div class="ant-divider ant-divider-vertical" role="separator"><!----></div><a>Delete</a></span>
                     <!---->
                   </td>
                 </tr>
@@ -6936,7 +6936,7 @@ exports[`renders ./components/table/demo/template.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right css-dev-only-do-not-override-1tm6q75">
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
         <!---->
         <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
         <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>

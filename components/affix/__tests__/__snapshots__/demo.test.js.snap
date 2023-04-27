@@ -3,14 +3,14 @@
 exports[`renders ./components/affix/demo/basic.vue correctly 1`] = `
 <div>
   <!---->
-  <div class="css-dev-only-do-not-override-1tm6q75"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
+  <div class=""><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Affix top</span>
     </button></div>
 </div>
 <br>
 <div>
   <!---->
-  <div class="css-dev-only-do-not-override-1tm6q75"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
+  <div class=""><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Affix bottom</span>
     </button></div>
 </div>
@@ -19,7 +19,7 @@ exports[`renders ./components/affix/demo/basic.vue correctly 1`] = `
 exports[`renders ./components/affix/demo/on-change.vue correctly 1`] = `
 <div>
   <!---->
-  <div class="css-dev-only-do-not-override-1tm6q75"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
+  <div class=""><button class="ant-btn ant-btn-default" type="button">
       <!----><span>120px to affix top</span>
     </button></div>
 </div>
@@ -30,7 +30,7 @@ exports[`renders ./components/affix/demo/target.vue correctly 1`] = `
   <div class="background">
     <div>
       <!---->
-      <div class="css-dev-only-do-not-override-1tm6q75"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
+      <div class=""><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Fixed at the top of container</span>
         </button></div>
     </div>

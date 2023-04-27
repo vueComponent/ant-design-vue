@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Breadcrumb should allow Breadcrumb.Item is null or undefined 1`] = `
-<nav class="ant-breadcrumb css-dev-only-do-not-override-1tm6q75">
+<nav class="ant-breadcrumb">
   <ol>
     <li><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></li>
   </ol>
@@ -9,7 +9,7 @@ exports[`Breadcrumb should allow Breadcrumb.Item is null or undefined 1`] = `
 `;
 
 exports[`Breadcrumb should not display Breadcrumb Item when its children is falsy 1`] = `
-<nav class="ant-breadcrumb css-dev-only-do-not-override-1tm6q75">
+<nav class="ant-breadcrumb">
   <ol>
     <!---->
     <li><span class="ant-breadcrumb-link">xxx</span><span class="ant-breadcrumb-separator">/</span></li>
@@ -19,7 +19,7 @@ exports[`Breadcrumb should not display Breadcrumb Item when its children is fals
 `;
 
 exports[`Breadcrumb should render a menu 1`] = `
-<nav class="ant-breadcrumb css-dev-only-do-not-override-1tm6q75">
+<nav class="ant-breadcrumb">
   <ol>
     <li><span class="ant-breadcrumb-link"><a href="#/index">home</a></span><span class="ant-breadcrumb-separator">/</span></li>
     <li>
@@ -31,7 +31,7 @@ exports[`Breadcrumb should render a menu 1`] = `
 `;
 
 exports[`Breadcrumb should support Breadcrumb.Item default separator 1`] = `
-<nav class="ant-breadcrumb css-dev-only-do-not-override-1tm6q75">
+<nav class="ant-breadcrumb">
   <ol>
     <li><span class="ant-breadcrumb-link">Location</span><span class="ant-breadcrumb-separator">/</span></li><span><li><span class="ant-breadcrumb-link">Mock Node</span><span class="ant-breadcrumb-separator">/</span></li></span>
     <li><span class="ant-breadcrumb-link">Application Center</span><span class="ant-breadcrumb-separator">/</span></li>
@@ -40,7 +40,7 @@ exports[`Breadcrumb should support Breadcrumb.Item default separator 1`] = `
 `;
 
 exports[`Breadcrumb should support custom attribute 1`] = `
-<nav data-custom="custom" class="ant-breadcrumb css-dev-only-do-not-override-1tm6q75">
+<nav data-custom="custom" class="ant-breadcrumb">
   <ol>
     <li><span class="ant-breadcrumb-link" data-custom="custom-item">xxx</span><span class="ant-breadcrumb-separator">/</span></li>
     <li><span class="ant-breadcrumb-link">yyy</span><span class="ant-breadcrumb-separator">/</span></li>

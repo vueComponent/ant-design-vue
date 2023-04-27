@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Carousel should works for dotPosition bottom 1`] = `
-<div class="ant-carousel css-dev-only-do-not-override-1tm6q75">
+<div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <div class="slick-list">
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
@@ -17,7 +17,7 @@ exports[`Carousel should works for dotPosition bottom 1`] = `
 `;
 
 exports[`Carousel should works for dotPosition left 1`] = `
-<div class="ant-carousel ant-carousel-vertical css-dev-only-do-not-override-1tm6q75">
+<div class="ant-carousel ant-carousel-vertical">
   <div class="slick-slider slick-vertical slick-initialized">
     <div class="slick-list">
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
@@ -33,7 +33,7 @@ exports[`Carousel should works for dotPosition left 1`] = `
 `;
 
 exports[`Carousel should works for dotPosition right 1`] = `
-<div class="ant-carousel ant-carousel-vertical css-dev-only-do-not-override-1tm6q75">
+<div class="ant-carousel ant-carousel-vertical">
   <div class="slick-slider slick-vertical slick-initialized">
     <div class="slick-list">
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
@@ -49,7 +49,7 @@ exports[`Carousel should works for dotPosition right 1`] = `
 `;
 
 exports[`Carousel should works for dotPosition top 1`] = `
-<div class="ant-carousel css-dev-only-do-not-override-1tm6q75">
+<div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <div class="slick-list">
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">

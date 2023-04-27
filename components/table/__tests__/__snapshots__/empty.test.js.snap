@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table renders empty table 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -53,7 +53,7 @@ exports[`Table renders empty table 1`] = `
                 <tr class="ant-table-placeholder">
                   <td colspan="8" class="ant-table-cell">
                     <!---->
-                    <div class="ant-empty css-dev-only-do-not-override-1tm6q75 ant-empty-normal">
+                    <div class="ant-empty ant-empty-normal">
                       <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
                           <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
                             <ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse>
@@ -83,8 +83,8 @@ exports[`Table renders empty table 1`] = `
 `;
 
 exports[`Table renders empty table with custom emptyText 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -152,8 +152,8 @@ exports[`Table renders empty table with custom emptyText 1`] = `
 `;
 
 exports[`Table renders empty table with fixed columns 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <!---->
@@ -228,7 +228,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
                 <tr class="ant-table-placeholder">
                   <td colspan="11" class="ant-table-cell">
                     <!---->
-                    <div class="ant-empty css-dev-only-do-not-override-1tm6q75 ant-empty-normal">
+                    <div class="ant-empty ant-empty-normal">
                       <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
                           <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
                             <ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse>
@@ -258,10 +258,10 @@ exports[`Table renders empty table with fixed columns 1`] = `
 `;
 
 exports[`Table renders empty table without emptyText when loading 1`] = `
-<div class="ant-table-wrapper css-dev-only-do-not-override-1tm6q75">
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1tm6q75">
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
     <div>
-      <div class="css-dev-only-do-not-override-1tm6q75 ant-spin ant-spin-spinning" aria-live="polite" aria-busy="true"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
+      <div class="ant-spin ant-spin-spinning" aria-live="polite" aria-busy="true"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
         <!---->
       </div>
     </div>
@@ -314,7 +314,7 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
                 <tr class="ant-table-placeholder">
                   <td colspan="8" class="ant-table-cell">
                     <!---->
-                    <div class="ant-empty css-dev-only-do-not-override-1tm6q75 ant-empty-normal">
+                    <div class="ant-empty ant-empty-normal">
                       <div class="ant-empty-image"><svg width="64" height="41" viewBox="0 0 64 41" xmlns="http://www.w3.org/2000/svg">
                           <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
                             <ellipse fill="#f5f5f5" cx="32" cy="33" rx="32" ry="7"></ellipse>

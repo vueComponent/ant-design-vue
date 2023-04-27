@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Drawer class is test_drawer 1`] = `
-<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline css-dev-only-do-not-override-1tm6q75">
+<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline ">
   <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
   <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-right-enter ant-drawer-panel-motion-right-enter-prepare ant-drawer-panel-motion-right-enter-start" style="width: 378px; display: none;">
     <div class="ant-drawer-content test_drawer">
@@ -22,7 +22,7 @@ exports[`Drawer class is test_drawer 1`] = `
 `;
 
 exports[`Drawer closable is false 1`] = `
-<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline css-dev-only-do-not-override-1tm6q75">
+<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline ">
   <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
   <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-right-enter ant-drawer-panel-motion-right-enter-prepare ant-drawer-panel-motion-right-enter-start" style="width: 378px; display: none;">
     <div class="ant-drawer-content">
@@ -38,7 +38,7 @@ exports[`Drawer closable is false 1`] = `
 `;
 
 exports[`Drawer destroyOnClose is true 1`] = `
-<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline css-dev-only-do-not-override-1tm6q75">
+<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline ">
   <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
   <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-right-enter ant-drawer-panel-motion-right-enter-prepare ant-drawer-panel-motion-right-enter-start" style="width: 378px; display: none;">
     <div class="ant-drawer-content">
@@ -54,7 +54,7 @@ exports[`Drawer destroyOnClose is true 1`] = `
 `;
 
 exports[`Drawer have a title 1`] = `
-<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline css-dev-only-do-not-override-1tm6q75">
+<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline ">
   <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
   <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-right-enter ant-drawer-panel-motion-right-enter-prepare ant-drawer-panel-motion-right-enter-start" style="width: 378px; display: none;">
     <div class="ant-drawer-content">
@@ -75,7 +75,7 @@ exports[`Drawer have a title 1`] = `
 `;
 
 exports[`Drawer render correctly 1`] = `
-<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline css-dev-only-do-not-override-1tm6q75">
+<div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline ">
   <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
   <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-right-enter ant-drawer-panel-motion-right-enter-prepare ant-drawer-panel-motion-right-enter-start" style="width: 400px; display: none;">
     <div class="ant-drawer-content">
@@ -96,7 +96,7 @@ exports[`Drawer render correctly 1`] = `
 `;
 
 exports[`Drawer render top drawer 1`] = `
-<div tabindex="-1" class="ant-drawer ant-drawer-top ant-drawer-inline css-dev-only-do-not-override-1tm6q75">
+<div tabindex="-1" class="ant-drawer ant-drawer-top ant-drawer-inline ">
   <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
   <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-top-enter ant-drawer-panel-motion-top-enter-prepare ant-drawer-panel-motion-top-enter-start" style="height: 400px; display: none;">
     <div class="ant-drawer-content">

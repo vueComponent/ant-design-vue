@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FloatButton fixbug renders {0} , 0 and {false} 1`] = `
-<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle css-dev-only-do-not-override-1tm6q75" type="button">
+<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
   <!---->
   <div class="ant-float-btn-body">
     <div class="ant-float-btn-content">
@@ -12,7 +12,7 @@ exports[`FloatButton fixbug renders {0} , 0 and {false} 1`] = `
 `;
 
 exports[`FloatButton fixbug renders {0} , 0 and {false} 2`] = `
-<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle css-dev-only-do-not-override-1tm6q75" type="button">
+<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
   <!---->
   <div class="ant-float-btn-body">
     <div class="ant-float-btn-content">
@@ -23,7 +23,7 @@ exports[`FloatButton fixbug renders {0} , 0 and {false} 2`] = `
 `;
 
 exports[`FloatButton fixbug renders {0} , 0 and {false} 3`] = `
-<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle css-dev-only-do-not-override-1tm6q75" type="button">
+<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
   <!---->
   <div class="ant-float-btn-body">
     <div class="ant-float-btn-content">
@@ -34,7 +34,7 @@ exports[`FloatButton fixbug renders {0} , 0 and {false} 3`] = `
 `;
 
 exports[`FloatButton renders correctly 1`] = `
-<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle css-dev-only-do-not-override-1tm6q75" type="button">
+<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
   <!---->
   <div class="ant-float-btn-body">
     <div class="ant-float-btn-content">

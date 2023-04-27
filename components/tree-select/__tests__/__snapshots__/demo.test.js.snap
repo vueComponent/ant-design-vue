@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/tree-select/demo/async.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-show-arrow">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-single ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -13,7 +13,7 @@ exports[`renders ./components/tree-select/demo/async.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/basic.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list"></span>
@@ -25,7 +25,7 @@ exports[`renders ./components/tree-select/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/checkable.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear ant-select-show-search">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-multiple ant-select-allow-clear ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector">
@@ -44,14 +44,14 @@ exports[`renders ./components/tree-select/demo/checkable.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/custom-tag-render.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear ant-select-show-search">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-multiple ant-select-allow-clear ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector">
     <div class="ant-select-selection-overflow">
-      <div class="ant-select-selection-overflow-item" style="opacity: 1;"><span><span style="margin-right: 3px;" class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-pink">parent 1&nbsp;&nbsp; <span role="img" aria-label="close" tabindex="-1" class="anticon anticon-close ant-tag-close-icon"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></span></div>
-      <div class="ant-select-selection-overflow-item" style="opacity: 1;"><span><span style="margin-right: 3px;" class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-orange">parent 1-0&nbsp;&nbsp; <span role="img" aria-label="close" tabindex="-1" class="anticon anticon-close ant-tag-close-icon"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></span></div>
-      <div class="ant-select-selection-overflow-item" style="opacity: 1;"><span><span style="margin-right: 3px;" class="ant-tag css-dev-only-do-not-override-1tm6q75 ant-tag-green">my leaf&nbsp;&nbsp; <span role="img" aria-label="close" tabindex="-1" class="anticon anticon-close ant-tag-close-icon"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></span></div>
+      <div class="ant-select-selection-overflow-item" style="opacity: 1;"><span><span style="margin-right: 3px;" class="ant-tag ant-tag-pink">parent 1&nbsp;&nbsp; <span role="img" aria-label="close" tabindex="-1" class="anticon anticon-close ant-tag-close-icon"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></span></div>
+      <div class="ant-select-selection-overflow-item" style="opacity: 1;"><span><span style="margin-right: 3px;" class="ant-tag ant-tag-orange">parent 1-0&nbsp;&nbsp; <span role="img" aria-label="close" tabindex="-1" class="anticon anticon-close ant-tag-close-icon"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></span></div>
+      <div class="ant-select-selection-overflow-item" style="opacity: 1;"><span><span style="margin-right: 3px;" class="ant-tag ant-tag-green">my leaf&nbsp;&nbsp; <span role="img" aria-label="close" tabindex="-1" class="anticon anticon-close ant-tag-close-icon"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></span></div>
       <!---->
       <div class="ant-select-selection-overflow-item ant-select-selection-overflow-item-suffix" style="opacity: 1;">
         <div class="ant-select-selection-search" style="width: 0px;"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"><span class="ant-select-selection-search-mirror" aria-hidden="true">&nbsp;</span></div>
@@ -65,7 +65,7 @@ exports[`renders ./components/tree-select/demo/custom-tag-render.vue correctly 1
 `;
 
 exports[`renders ./components/tree-select/demo/highlight.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list"></span>
@@ -77,7 +77,7 @@ exports[`renders ./components/tree-select/demo/highlight.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/multiple.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear ant-select-show-search">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-multiple ant-select-allow-clear ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector">
@@ -95,10 +95,10 @@ exports[`renders ./components/tree-select/demo/multiple.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/placement.vue correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="topLeft"><span class="ant-radio-button-inner"></span></span><span>topLeft</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="topRight"><span class="ant-radio-button-inner"></span></span><span>topRight</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottomLeft"><span class="ant-radio-button-inner"></span></span><span>bottomLeft</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottomRight"><span class="ant-radio-button-inner"></span></span><span>bottomRight</span></label></div>
+<div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="topLeft"><span class="ant-radio-button-inner"></span></span><span>topLeft</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="topRight"><span class="ant-radio-button-inner"></span></span><span>topRight</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottomLeft"><span class="ant-radio-button-inner"></span></span><span>bottomLeft</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottomRight"><span class="ant-radio-button-inner"></span></span><span>bottomRight</span></label></div>
 <br>
 <br>
-<div class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+<div class="ant-select ant-tree-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list"></span>
@@ -110,7 +110,7 @@ exports[`renders ./components/tree-select/demo/placement.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/replaceFields.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+<div style="width: 100%;" class="ant-select ant-tree-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list"></span>
@@ -122,9 +122,9 @@ exports[`renders ./components/tree-select/demo/replaceFields.vue correctly 1`] =
 `;
 
 exports[`renders ./components/tree-select/demo/status.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-vertical">
+<div style="width: 100%;" class="ant-space ant-space-vertical">
   <div class="ant-space-item" style="margin-bottom: 8px;">
-    <div style="width: 100%;" class="ant-select ant-tree-select ant-select-status-error css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-show-arrow">
+    <div style="width: 100%;" class="ant-select ant-tree-select ant-select-status-error ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -136,7 +136,7 @@ exports[`renders ./components/tree-select/demo/status.vue correctly 1`] = `
   </div>
   <!---->
   <div class="ant-space-item">
-    <div style="width: 100%;" class="ant-select ant-tree-select ant-select-status-warning css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-show-search">
+    <div style="width: 100%;" class="ant-select ant-tree-select ant-select-status-warning ant-select-multiple ant-select-show-search">
       <!---->
       <!---->
       <div class="ant-select-selector">
@@ -157,9 +157,9 @@ exports[`renders ./components/tree-select/demo/status.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/suffix.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-vertical">
+<div style="width: 100%;" class="ant-space ant-space-vertical">
   <div class="ant-space-item" style="margin-bottom: 8px;">
-    <div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+    <div style="width: 100%;" class="ant-select ant-tree-select ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list"></span>
@@ -171,7 +171,7 @@ exports[`renders ./components/tree-select/demo/suffix.vue correctly 1`] = `
   </div>
   <!---->
   <div class="ant-space-item">
-    <div style="width: 100%;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+    <div style="width: 100%;" class="ant-select ant-tree-select ant-select-multiple ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
       <!---->
       <!---->
       <div class="ant-select-selector">
@@ -192,21 +192,21 @@ exports[`renders ./components/tree-select/demo/suffix.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/tree-line.vue correctly 1`] = `
-<div class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-vertical">
-  <div class="ant-space-item" style="margin-bottom: 8px;"><button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch css-dev-only-do-not-override-1tm6q75">
+<div class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;"><button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
       <div class="ant-switch-handle">
         <!---->
       </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked">treeLine</span><span class="ant-switch-inner-unchecked">treeLine</span></span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="margin-bottom: 8px;"><button type="button" role="switch" aria-checked="false" class="ant-switch css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-space-item" style="margin-bottom: 8px;"><button type="button" role="switch" aria-checked="false" class="ant-switch">
       <div class="ant-switch-handle">
         <!---->
       </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked">showLeafIcon</span><span class="ant-switch-inner-unchecked">showLeafIcon</span></span>
     </button></div>
   <!---->
   <div class="ant-space-item">
-    <div style="width: 300px;" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-show-arrow">
+    <div style="width: 300px;" class="ant-select ant-tree-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -221,7 +221,7 @@ exports[`renders ./components/tree-select/demo/tree-line.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/tree-select/demo/virtual-scroll.vue correctly 1`] = `
-<div style="width: 100%;" height="233" class="ant-select ant-tree-select css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-show-search">
+<div style="width: 100%;" height="233" class="ant-select ant-tree-select ant-select-multiple ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector">

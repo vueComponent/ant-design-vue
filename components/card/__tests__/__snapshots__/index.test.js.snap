@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Card should still have padding when card which set padding to 0 is loading 1`] = `
-<div class="ant-card css-dev-only-do-not-override-1tm6q75 ant-card-loading ant-card-bordered">
+<div class="ant-card  ant-card-loading ant-card-bordered">
   <!---->
   <!---->
   <div class="ant-card-body" style="padding: 0px;">
-    <div class="ant-skeleton ant-skeleton-active css-dev-only-do-not-override-1tm6q75">
+    <div class="ant-skeleton ant-skeleton-active ">
       <!---->
       <div class="ant-skeleton-content">
         <!---->
@@ -23,11 +23,11 @@ exports[`Card should still have padding when card which set padding to 0 is load
 `;
 
 exports[`Card title should be vertically aligned 1`] = `
-<div style="width: 300px;" class="ant-card css-dev-only-do-not-override-1tm6q75 ant-card-bordered">
+<div style="width: 300px;" class="ant-card  ant-card-bordered">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card title</div>
-      <div class="ant-card-extra"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-default" type="button">
+      <div class="ant-card-extra"><button class="ant-btn ant-btn-default" type="button">
           <!----><span>Button</span>
         </button></div>
     </div>

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/cascader/demo/basic.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -13,7 +13,7 @@ exports[`renders ./components/cascader/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/change-on-select.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -25,7 +25,7 @@ exports[`renders ./components/cascader/demo/change-on-select.vue correctly 1`] =
 `;
 
 exports[`renders ./components/cascader/demo/custom-render.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div style="width: 100%;" class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item"><span><span>Zhejiang /</span></span><span><span>Hangzhou /</span></span><span><span>West Lake ( <a>752100</a> ) </span></span></span>
@@ -38,7 +38,7 @@ exports[`renders ./components/cascader/demo/custom-render.vue correctly 1`] = `
 exports[`renders ./components/cascader/demo/custom-trigger.vue correctly 1`] = `<span>Unselect &nbsp; <!----><a href="#">Change city</a></span>`;
 
 exports[`renders ./components/cascader/demo/disabled-option.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -50,7 +50,7 @@ exports[`renders ./components/cascader/demo/disabled-option.vue correctly 1`] = 
 `;
 
 exports[`renders ./components/cascader/demo/fields-name.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -62,7 +62,7 @@ exports[`renders ./components/cascader/demo/fields-name.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/hover.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -74,7 +74,7 @@ exports[`renders ./components/cascader/demo/hover.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/lazy.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -86,13 +86,13 @@ exports[`renders ./components/cascader/demo/lazy.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/multiple.vue correctly 1`] = `
-<div style="width: 100%;" class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-vertical">
+<div style="width: 100%;" class="ant-space ant-space-vertical">
   <div class="ant-space-item" style="margin-bottom: 8px;">
     <h4>Cascader.SHOW_PARENT</h4>
   </div>
   <!---->
   <div class="ant-space-item" style="margin-bottom: 8px;">
-    <div style="width: 100%;" class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear">
+    <div style="width: 100%;" class="ant-select ant-cascader ant-select-multiple ant-select-allow-clear">
       <!---->
       <!---->
       <div class="ant-select-selector">
@@ -114,7 +114,7 @@ exports[`renders ./components/cascader/demo/multiple.vue correctly 1`] = `
   </div>
   <!---->
   <div class="ant-space-item">
-    <div style="width: 100%;" class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear">
+    <div style="width: 100%;" class="ant-select ant-cascader ant-select-multiple ant-select-allow-clear">
       <!---->
       <!---->
       <div class="ant-select-selector">
@@ -135,7 +135,7 @@ exports[`renders ./components/cascader/demo/multiple.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/search.vue correctly 1`] = `
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow ant-select-show-search">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list"></span>
@@ -147,7 +147,7 @@ exports[`renders ./components/cascader/demo/search.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/size.vue correctly 1`] = `
-<div size="large" class="ant-select ant-cascader ant-select-lg css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div size="large" class="ant-select ant-cascader ant-select-lg ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -158,7 +158,7 @@ exports[`renders ./components/cascader/demo/size.vue correctly 1`] = `
 </div>
 <br>
 <br>
-<div class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -169,7 +169,7 @@ exports[`renders ./components/cascader/demo/size.vue correctly 1`] = `
 </div>
 <br>
 <br>
-<div size="small" class="ant-select ant-cascader ant-select-sm css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+<div size="small" class="ant-select ant-cascader ant-select-sm ant-select-single ant-select-allow-clear ant-select-show-arrow">
   <!---->
   <!---->
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -183,9 +183,9 @@ exports[`renders ./components/cascader/demo/size.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/suffix.vue correctly 1`] = `
-<div class="ant-space css-dev-only-do-not-override-1tm6q75 ant-space-horizontal ant-space-align-center">
+<div class="ant-space ant-space-horizontal ant-space-align-center">
   <div class="ant-space-item" style="margin-right: 8px;">
-    <div style="margin-top: 1rem;" class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+    <div style="margin-top: 1rem;" class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -197,7 +197,7 @@ exports[`renders ./components/cascader/demo/suffix.vue correctly 1`] = `
   </div>
   <!---->
   <div class="ant-space-item">
-    <div suffixicon="ab" style="margin-top: 1rem;" class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-allow-clear ant-select-show-arrow">
+    <div suffixicon="ab" style="margin-top: 1rem;" class="ant-select ant-cascader ant-select-single ant-select-allow-clear ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" readonly="" unselectable="on" style="opacity: 0;"></span>
@@ -211,7 +211,7 @@ exports[`renders ./components/cascader/demo/suffix.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/tagRender.vue correctly 1`] = `
-<div suffixicon="Shopping Around" class="ant-select ant-cascader css-dev-only-do-not-override-1tm6q75 ant-select-multiple ant-select-allow-clear">
+<div suffixicon="Shopping Around" class="ant-select ant-cascader ant-select-multiple ant-select-allow-clear">
   <!---->
   <!---->
   <div class="ant-select-selector">

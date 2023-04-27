@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/calendar/demo/basic.vue correctly 1`] = `
-<div class="ant-picker-calendar ant-picker-calendar-full css-dev-only-do-not-override-1tm6q75">
+<div class="ant-picker-calendar ant-picker-calendar-full">
   <div class="ant-picker-calendar-header">
-    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="2016">2016</span>
@@ -12,7 +12,7 @@ exports[`renders ./components/calendar/demo/basic.vue correctly 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="Nov">Nov</span>
@@ -21,7 +21,7 @@ exports[`renders ./components/calendar/demo/basic.vue correctly 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">
@@ -399,9 +399,9 @@ exports[`renders ./components/calendar/demo/basic.vue correctly 1`] = `
 
 exports[`renders ./components/calendar/demo/card.vue correctly 1`] = `
 <div style="width: 300px; border: 1px solid #d9d9d9; border-radius: 4px;">
-  <div class="ant-picker-calendar ant-picker-calendar-mini css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-picker-calendar ant-picker-calendar-mini">
     <div class="ant-picker-calendar-header">
-      <div class="ant-select ant-select-sm css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
+      <div class="ant-select ant-select-sm ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
         <!---->
         <!---->
         <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="2016">2016</span>
@@ -410,7 +410,7 @@ exports[`renders ./components/calendar/demo/card.vue correctly 1`] = `
         <!----></span>
         <!---->
       </div>
-      <div class="ant-select ant-select-sm css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
+      <div class="ant-select ant-select-sm ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
         <!---->
         <!---->
         <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="Nov">Nov</span>
@@ -419,7 +419,7 @@ exports[`renders ./components/calendar/demo/card.vue correctly 1`] = `
         <!----></span>
         <!---->
       </div>
-      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small ant-picker-calendar-mode-switch css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
     </div>
     <div tabindex="0" class="ant-picker-panel">
       <div class="ant-picker-date-panel">
@@ -798,15 +798,15 @@ exports[`renders ./components/calendar/demo/card.vue correctly 1`] = `
 
 exports[`renders ./components/calendar/demo/customize-header.vue correctly 1`] = `
 <div style="width: 300px; border: 1px solid #d9d9d9; border-radius: 4px;">
-  <div class="ant-picker-calendar ant-picker-calendar-mini css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-picker-calendar ant-picker-calendar-mini">
     <div style="padding: 10px;">
       <div style="margin-bottom: 10px;">Custom header</div>
-      <div type="flex" class="ant-row ant-row-space-between css-dev-only-do-not-override-1tm6q75">
-        <div class="ant-col css-dev-only-do-not-override-1tm6q75">
-          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+      <div type="flex" class="ant-row ant-row-space-between">
+        <div class="ant-col">
+          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
         </div>
-        <div class="ant-col css-dev-only-do-not-override-1tm6q75">
-          <div class="ant-select ant-select-sm css-dev-only-do-not-override-1tm6q75 my-year-select ant-select-single ant-select-show-arrow">
+        <div class="ant-col">
+          <div class="ant-select ant-select-sm my-year-select ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">2016</span>
@@ -816,8 +816,8 @@ exports[`renders ./components/calendar/demo/customize-header.vue correctly 1`] =
             <!---->
           </div>
         </div>
-        <div class="ant-col css-dev-only-do-not-override-1tm6q75">
-          <div class="ant-select ant-select-sm css-dev-only-do-not-override-1tm6q75 ant-select-single ant-select-show-arrow">
+        <div class="ant-col">
+          <div class="ant-select ant-select-sm ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
             <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item">Nov</span>
@@ -1205,9 +1205,9 @@ exports[`renders ./components/calendar/demo/customize-header.vue correctly 1`] =
 `;
 
 exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = `
-<div class="ant-picker-calendar ant-picker-calendar-full css-dev-only-do-not-override-1tm6q75">
+<div class="ant-picker-calendar ant-picker-calendar-full">
   <div class="ant-picker-calendar-header">
-    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="2016">2016</span>
@@ -1216,7 +1216,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
       <!----></span>
       <!---->
     </div>
-    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="Nov">Nov</span>
@@ -1225,7 +1225,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">
@@ -1324,8 +1324,8 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
                   <div class="ant-picker-calendar-date-value">08</div>
                   <div class="ant-picker-calendar-date-content">
                     <ul class="events">
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
                     </ul>
                   </div>
                 </div>
@@ -1343,9 +1343,9 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
                   <div class="ant-picker-calendar-date-value">10</div>
                   <div class="ant-picker-calendar-date-content">
                     <ul class="events">
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event.</span></span></li>
                     </ul>
                   </div>
                 </div>
@@ -1389,12 +1389,12 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
                   <div class="ant-picker-calendar-date-value">15</div>
                   <div class="ant-picker-calendar-date-content">
                     <ul class="events">
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is very long usual event。。....</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 1.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 2.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 3.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 4.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is very long usual event。。....</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 1.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 2.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 3.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event 4.</span></span></li>
                     </ul>
                   </div>
                 </div>
@@ -1586,8 +1586,8 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
                   <div class="ant-picker-calendar-date-value">08</div>
                   <div class="ant-picker-calendar-date-content">
                     <ul class="events">
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
                     </ul>
                   </div>
                 </div>
@@ -1605,9 +1605,9 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
                   <div class="ant-picker-calendar-date-value">10</div>
                   <div class="ant-picker-calendar-date-content">
                     <ul class="events">
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
-                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">This is warning event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">This is usual event.</span></span></li>
+                      <li><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">This is error event.</span></span></li>
                     </ul>
                   </div>
                 </div>
@@ -1623,7 +1623,7 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
 `;
 
 exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
-<div role="alert" class="ant-alert ant-alert-info ant-alert-no-icon css-dev-only-do-not-override-1tm6q75" data-show="true">
+<div role="alert" class="ant-alert ant-alert-info ant-alert-no-icon" data-show="true">
   <!---->
   <div class="ant-alert-content">
     <div class="ant-alert-message">You selected date: 2017-01-25</div>
@@ -1632,9 +1632,9 @@ exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
   <!---->
   <!---->
 </div>
-<div class="ant-picker-calendar ant-picker-calendar-full css-dev-only-do-not-override-1tm6q75">
+<div class="ant-picker-calendar ant-picker-calendar-full">
   <div class="ant-picker-calendar-header">
-    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select ant-picker-calendar-year-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="2017">2017</span>
@@ -1643,7 +1643,7 @@ exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-select css-dev-only-do-not-override-1tm6q75 ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
+    <div class="ant-select ant-picker-calendar-month-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
       <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" style="opacity: 0;"></span><span class="ant-select-selection-item" title="Jan">Jan</span>
@@ -1652,7 +1652,7 @@ exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
       <!----></span>
       <!---->
     </div>
-    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
+    <div class="ant-radio-group ant-radio-group-outline ant-picker-calendar-mode-switch"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
   </div>
   <div tabindex="0" class="ant-picker-panel">
     <div class="ant-picker-date-panel">

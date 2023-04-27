@@ -3,8 +3,8 @@
 exports[`renders ./components/anchor/demo/basic.vue correctly 1`] = `
 <div>
   <!---->
-  <div class="css-dev-only-do-not-override-1tm6q75">
-    <div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper" style="max-height: 100vh;">
+  <div class="">
+    <div class="ant-anchor-wrapper" style="max-height: 100vh;">
       <div class="ant-anchor"><span class="ant-anchor-ink"></span>
         <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#part-1" title=""><span style="color: red;">Part 1</span></a>
           <!---->
@@ -22,7 +22,7 @@ exports[`renders ./components/anchor/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/anchor/demo/customizeHighlight.vue correctly 1`] = `
-<div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper" style="max-height: 100vh;">
+<div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor ant-anchor-fixed"><span class="ant-anchor-ink"></span>
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-basic" title="Basic demo">Basic demo</a>
       <!---->
@@ -46,8 +46,8 @@ exports[`renders ./components/anchor/demo/horizontal.vue correctly 1`] = `
 <div>
   <div>
     <!---->
-    <div class="css-dev-only-do-not-override-1tm6q75">
-      <div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper ant-anchor-wrapper-horizontal" style="max-height: 100vh;">
+    <div class="">
+      <div class="ant-anchor-wrapper ant-anchor-wrapper-horizontal" style="max-height: 100vh;">
         <div class="ant-anchor"><span class="ant-anchor-ink"></span>
           <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#horizontally-part-1" title="Part 1">Part 1</a>
             <!---->
@@ -75,7 +75,7 @@ exports[`renders ./components/anchor/demo/horizontal.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/anchor/demo/onChange.vue correctly 1`] = `
-<div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper" style="max-height: 100vh;">
+<div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor ant-anchor-fixed"><span class="ant-anchor-ink"></span>
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-basic" title="Basic demo">Basic demo</a>
       <!---->
@@ -96,7 +96,7 @@ exports[`renders ./components/anchor/demo/onChange.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/anchor/demo/onClick.vue correctly 1`] = `
-<div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper" style="max-height: 100vh;">
+<div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor ant-anchor-fixed"><span class="ant-anchor-ink"></span>
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-basic" title="Basic demo">Basic demo</a>
       <!---->
@@ -117,7 +117,7 @@ exports[`renders ./components/anchor/demo/onClick.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/anchor/demo/static.vue correctly 1`] = `
-<div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper" style="max-height: 100vh;">
+<div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor ant-anchor-fixed"><span class="ant-anchor-ink"></span>
     <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-basic" title="Basic demo">Basic demo</a>
       <!---->
@@ -140,8 +140,8 @@ exports[`renders ./components/anchor/demo/static.vue correctly 1`] = `
 exports[`renders ./components/anchor/demo/targetOffset.vue correctly 1`] = `
 <div>
   <!---->
-  <div class="css-dev-only-do-not-override-1tm6q75">
-    <div class="css-dev-only-do-not-override-1tm6q75 ant-anchor-wrapper" style="max-height: 100vh;">
+  <div class="">
+    <div class="ant-anchor-wrapper" style="max-height: 100vh;">
       <div class="ant-anchor"><span class="ant-anchor-ink"></span>
         <div class="ant-anchor-link"><a class="ant-anchor-link-title" href="#components-anchor-demo-basic" title="Basic demo">Basic demo</a>
           <!---->

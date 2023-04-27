@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/descriptions/demo/basic.vue correctly 1`] = `
-<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
+<div class="ant-descriptions">
   <div class="ant-descriptions-header">
     <div class="ant-descriptions-title">User Info</div>
     <!---->
@@ -41,7 +41,7 @@ exports[`renders ./components/descriptions/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/descriptions/demo/border.vue correctly 1`] = `
-<div class="ant-descriptions ant-descriptions-bordered css-dev-only-do-not-override-1tm6q75">
+<div class="ant-descriptions ant-descriptions-bordered">
   <div class="ant-descriptions-header">
     <div class="ant-descriptions-title">User Info</div>
     <!---->
@@ -94,7 +94,7 @@ exports[`renders ./components/descriptions/demo/border.vue correctly 1`] = `
             <!---->
           </th>
           <td class="ant-descriptions-item-content" colspan="1">
-            <!----><span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Running</span></span></span>
+            <!----><span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Running</span></span></span>
           </td>
         </tr>
         <tr class="ant-descriptions-row">
@@ -136,7 +136,7 @@ exports[`renders ./components/descriptions/demo/border.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/descriptions/demo/responsive.vue correctly 1`] = `
-<div class="ant-descriptions ant-descriptions-bordered css-dev-only-do-not-override-1tm6q75">
+<div class="ant-descriptions ant-descriptions-bordered">
   <div class="ant-descriptions-header">
     <div class="ant-descriptions-title">Responsive Descriptions</div>
     <!---->
@@ -208,11 +208,11 @@ exports[`renders ./components/descriptions/demo/responsive.vue correctly 1`] = `
 
 exports[`renders ./components/descriptions/demo/size.vue correctly 1`] = `
 <div>
-  <div class="ant-radio-group ant-radio-group-outline css-dev-only-do-not-override-1tm6q75"><label class="ant-radio-wrapper ant-radio-wrapper-checked css-dev-only-do-not-override-1tm6q75"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="default"><span class="ant-radio-inner"></span></span><span>default</span></label><label class="ant-radio-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="middle"><span class="ant-radio-inner"></span></span><span>middle</span></label><label class="ant-radio-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="small"><span class="ant-radio-inner"></span></span><span>small</span></label></div><br><br>
-  <div class="ant-descriptions ant-descriptions-bordered css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="default"><span class="ant-radio-inner"></span></span><span>default</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="middle"><span class="ant-radio-inner"></span></span><span>middle</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="small"><span class="ant-radio-inner"></span></span><span>small</span></label></div><br><br>
+  <div class="ant-descriptions ant-descriptions-bordered">
     <div class="ant-descriptions-header">
       <div class="ant-descriptions-title">Custom Size</div>
-      <div class="ant-descriptions-extra"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
+      <div class="ant-descriptions-extra"><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Edit</span>
         </button></div>
     </div>
@@ -279,10 +279,10 @@ exports[`renders ./components/descriptions/demo/size.vue correctly 1`] = `
       </table>
     </div>
   </div><br><br>
-  <div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
+  <div class="ant-descriptions">
     <div class="ant-descriptions-header">
       <div class="ant-descriptions-title">Custom Size</div>
-      <div class="ant-descriptions-extra"><button class="css-dev-only-do-not-override-1tm6q75 ant-btn ant-btn-primary" type="button">
+      <div class="ant-descriptions-extra"><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Edit</span>
         </button></div>
     </div>
@@ -327,7 +327,7 @@ exports[`renders ./components/descriptions/demo/size.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/descriptions/demo/vertical.vue correctly 1`] = `
-<div class="ant-descriptions css-dev-only-do-not-override-1tm6q75">
+<div class="ant-descriptions">
   <div class="ant-descriptions-header">
     <div class="ant-descriptions-title">User Info</div>
     <!---->
@@ -412,7 +412,7 @@ exports[`renders ./components/descriptions/demo/vertical.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/descriptions/demo/vertical-border.vue correctly 1`] = `
-<div class="ant-descriptions ant-descriptions-bordered css-dev-only-do-not-override-1tm6q75">
+<div class="ant-descriptions ant-descriptions-bordered">
   <div class="ant-descriptions-header">
     <div class="ant-descriptions-title">User Info</div>
     <!---->
@@ -477,7 +477,7 @@ exports[`renders ./components/descriptions/demo/vertical-border.vue correctly 1`
         </tr>
         <tr class="ant-descriptions-row">
           <td class="ant-descriptions-item-content" colspan="1">
-            <!----><span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper css-dev-only-do-not-override-1tm6q75"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Running</span></span></span>
+            <!----><span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Running</span></span></span>
           </td>
         </tr>
         <tr class="ant-descriptions-row">

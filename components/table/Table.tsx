@@ -106,6 +106,7 @@ export interface TableProps<RecordType = DefaultRecordType>
     sorter: SorterResult<RecordType> | SorterResult<RecordType>[],
     extra: TableCurrentDataSource<RecordType>,
   ) => void;
+  onResizeColumn?: (w: number, col: ColumnType) => void;
   rowSelection?: TableRowSelection<RecordType>;
 
   getPopupContainer?: GetPopupContainer;

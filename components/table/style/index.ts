@@ -13,6 +13,7 @@ import genRadiusStyle from './radius';
 import genRtlStyle from './rtl';
 import genSelectionStyle from './selection';
 import genSizeStyle from './size';
+import genResizeStyle from './resize';
 import genSorterStyle from './sorter';
 import genStickyStyle from './sticky';
 import genSummaryStyle from './summary';
@@ -404,6 +405,7 @@ export default genComponentStyleHook('Table', token => {
     genStickyStyle(tableToken),
     genEllipsisStyle(tableToken),
     genSizeStyle(tableToken),
+    genResizeStyle(tableToken),
     genRtlStyle(tableToken),
   ];
 });

@@ -19,20 +19,9 @@ Customize message display duration from default `3s` to `10s`.
 <template>
   <a-button @click="success">Customized display duration</a-button>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { message } from 'ant-design-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    const success = () => {
-      message.success(
-        'This is a prompt message for success, and it will disappear in 10 seconds',
-        10,
-      );
-    };
-    return {
-      success,
-    };
-  },
-});
+const success = () => {
+  message.success('This is a prompt message for success, and it will disappear in 10 seconds', 10);
+};
 </script>

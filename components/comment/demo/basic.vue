@@ -65,45 +65,26 @@ A basic comment with author, avatar, time and actions.
     </template>
   </a-comment>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import dayjs from 'dayjs';
 import { LikeFilled, LikeOutlined, DislikeFilled, DislikeOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
-export default defineComponent({
-  components: {
-    LikeFilled,
-    LikeOutlined,
-    DislikeFilled,
-    DislikeOutlined,
-  },
-  setup() {
-    const likes = ref<number>(0);
-    const dislikes = ref<number>(0);
-    const action = ref<string>();
+const likes = ref<number>(0);
+const dislikes = ref<number>(0);
+const action = ref<string>();
 
-    const like = () => {
-      likes.value = 1;
-      dislikes.value = 0;
-      action.value = 'liked';
-    };
+const like = () => {
+  likes.value = 1;
+  dislikes.value = 0;
+  action.value = 'liked';
+};
 
-    const dislike = () => {
-      likes.value = 0;
-      dislikes.value = 1;
-      action.value = 'disliked';
-    };
-
-    return {
-      likes,
-      dislikes,
-      action,
-      like,
-      dislike,
-      dayjs,
-    };
-  },
-});
+const dislike = () => {
+  likes.value = 0;
+  dislikes.value = 1;
+  action.value = 'disliked';
+};
 </script>

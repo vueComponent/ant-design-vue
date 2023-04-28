@@ -66,12 +66,6 @@ Custom Icon make information more clear and more friendly.
   </a-alert>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { SmileOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    SmileOutlined,
-  },
-});
 </script>

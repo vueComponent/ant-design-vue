@@ -27,8 +27,7 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
     </template>
   </a-table>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import type { TableColumnType } from 'ant-design-vue';
 // In the fifth row, other columns are merged into first column
 // by setting it's colSpan to be 0
@@ -81,54 +80,46 @@ const data = [
   },
 ];
 
-export default defineComponent({
-  setup() {
-    const columns: TableColumnType[] = [
-      {
-        title: 'Name',
-        dataIndex: 'name',
-        customCell: (_, index) => ({
-          colSpan: index < 4 ? 1 : 5,
-        }),
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        customCell: sharedOnCell,
-      },
-      {
-        title: 'Home phone',
-        colSpan: 2,
-        dataIndex: 'tel',
-        customCell: (_, index) => {
-          if (index === 2) {
-            return { rowSpan: 2 };
-          }
-          // These two are merged into above cell
-          if (index === 3) {
-            return { rowSpan: 0 };
-          }
-          if (index === 4) {
-            return { colSpan: 0 };
-          }
-        },
-      },
-      {
-        title: 'Phone',
-        colSpan: 0,
-        dataIndex: 'phone',
-        customCell: sharedOnCell,
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        customCell: sharedOnCell,
-      },
-    ];
-    return {
-      data,
-      columns,
-    };
+const columns: TableColumnType[] = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    customCell: (_, index) => ({
+      colSpan: index < 4 ? 1 : 5,
+    }),
   },
-});
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    customCell: sharedOnCell,
+  },
+  {
+    title: 'Home phone',
+    colSpan: 2,
+    dataIndex: 'tel',
+    customCell: (_, index) => {
+      if (index === 2) {
+        return { rowSpan: 2 };
+      }
+      // These two are merged into above cell
+      if (index === 3) {
+        return { rowSpan: 0 };
+      }
+      if (index === 4) {
+        return { colSpan: 0 };
+      }
+    },
+  },
+  {
+    title: 'Phone',
+    colSpan: 0,
+    dataIndex: 'phone',
+    customCell: sharedOnCell,
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    customCell: sharedOnCell,
+  },
+];
 </script>

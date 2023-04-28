@@ -48,21 +48,12 @@ You can use `centered`,`style.top` or other styles to set position of modal dial
     </a-modal>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const modal1Visible = ref<boolean>(false);
-    const modal2Visible = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const modal1Visible = ref<boolean>(false);
+const modal2Visible = ref<boolean>(false);
 
-    const setModal1Visible = (open: boolean) => {
-      modal1Visible.value = open;
-    };
-    return {
-      modal1Visible,
-      modal2Visible,
-      setModal1Visible,
-    };
-  },
-});
+const setModal1Visible = (open: boolean) => {
+  modal1Visible.value = open;
+};
 </script>

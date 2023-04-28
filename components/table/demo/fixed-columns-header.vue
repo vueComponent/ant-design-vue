@@ -32,10 +32,8 @@ A Solution for displaying large amounts of data with long columns.
     </template>
   </a-table>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import type { TableColumnsType } from 'ant-design-vue';
-import { defineComponent } from 'vue';
-
 const columns: TableColumnsType = [
   { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
   { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
@@ -71,13 +69,4 @@ for (let i = 0; i < 100; i++) {
     address: `London Park no. ${i}`,
   });
 }
-
-export default defineComponent({
-  data() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>

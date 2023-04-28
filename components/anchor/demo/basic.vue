@@ -37,18 +37,6 @@ The simplest usage.
   />
 </template>
 
-<script lang="ts">
-import { defineComponent, h } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const onChange = (link: string) => {
-      console.log('Anchor:OnChange', link);
-    };
-    return {
-      onChange,
-      h,
-    };
-  },
-});
+<script lang="ts" setup>
+import { h } from 'vue';
 </script>

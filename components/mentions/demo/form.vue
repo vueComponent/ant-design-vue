@@ -46,61 +46,51 @@ to work with `Form`.
     </a-form-item>
   </a-form>
 </template>
-<script>
+<script lang="ts" setup>
 import { Mentions, Form } from 'ant-design-vue';
-import { defineComponent, reactive } from 'vue';
+import { reactive } from 'vue';
 
 const useForm = Form.useForm;
 const { getMentions } = Mentions;
-export default defineComponent({
-  setup() {
-    const checkMention = async (rule, value) => {
-      const mentions = getMentions(value);
-      if (mentions.length < 2) {
-        return Promise.reject('More than one must be selected!');
-      } else {
-        return Promise.resolve();
-      }
-    };
-    const modelRef = reactive({
-      bio: '',
-      coders: '',
-    });
-    const rulesRef = reactive({
-      bio: [{ required: true, message: 'Must input bio' }],
-      coders: [{ required: true, validator: checkMention }],
-    });
-    const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef);
-    const handleSubmit = e => {
-      e.preventDefault();
-      validate()
-        .then(() => {
-          console.log('Submit!!!', modelRef);
-        })
-        .catch(errors => {
-          console.log('Errors in the form!!!', errors);
-        });
-    };
-    return {
-      modelRef,
-      resetFields,
-      validateInfos,
-      handleSubmit,
-      options: [
-        {
-          value: 'afc163',
-          label: 'afc163',
-        },
-        {
-          value: 'zombieJ',
-          label: 'zombieJ',
-        },
-        {
-          value: 'yesmeck',
-          label: 'yesmeck',
-        },
-      ],
-    };
-  },
+const checkMention = async (_, value) => {
+  const mentions = getMentions(value);
+  if (mentions.length < 2) {
+    return Promise.reject('More than one must be selected!');
+  } else {
+    return Promise.resolve();
+  }
+};
+const modelRef = reactive({
+  bio: '',
+  coders: '',
 });
+const rulesRef = reactive({
+  bio: [{ required: true, message: 'Must input bio' }],
+  coders: [{ required: true, validator: checkMention }],
+});
+const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef);
+const handleSubmit = e => {
+  e.preventDefault();
+  validate()
+    .then(() => {
+      console.log('Submit!!!', modelRef);
+    })
+    .catch(errors => {
+      console.log('Errors in the form!!!', errors);
+    });
+};
+const options = [
+  {
+    value: 'afc163',
+    label: 'afc163',
+  },
+  {
+    value: 'zombieJ',
+    label: 'zombieJ',
+  },
+  {
+    value: 'yesmeck',
+    label: 'yesmeck',
+  },
+];
 </script>

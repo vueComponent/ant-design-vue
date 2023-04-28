@@ -37,13 +37,6 @@ The most basic dropdown menu.
     </template>
   </a-dropdown>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: {
-    DownOutlined,
-  },
-});
 </script>

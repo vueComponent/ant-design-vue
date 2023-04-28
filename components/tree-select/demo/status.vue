@@ -23,11 +23,3 @@ Add status to DatePicker with `status`, which could be `error` or `warning`.
     <a-tree-select status="warning" style="width: 100%" multiple placeholder="Warning multiple" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>

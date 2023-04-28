@@ -51,17 +51,8 @@ Listening for anchor link change.
   ></a-anchor>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const onChange = (link: string) => {
-      console.log('Anchor:OnChange', link);
-    };
-    return {
-      onChange,
-    };
-  },
-});
+<script lang="ts" setup>
+const onChange = (link: string) => {
+  console.log('Anchor:OnChange', link);
+};
 </script>

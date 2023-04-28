@@ -45,25 +45,18 @@ Support 6 placements.
     </template>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import type { DropdownProps } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    return {
-      placements: [
-        'bottomLeft',
-        'bottom',
-        'bottomRight',
-        'topLeft',
-        'top',
-        'topRight',
-      ] as DropdownProps['placement'][],
-    };
-  },
-});
+const placements = [
+  'bottomLeft',
+  'bottom',
+  'bottomRight',
+  'topLeft',
+  'top',
+  'topRight',
+] as DropdownProps['placement'][];
 </script>
-<style>
+<style scoped>
 #components-dropdown-demo-placement .ant-btn {
   margin-right: 8px;
   margin-bottom: 8px;

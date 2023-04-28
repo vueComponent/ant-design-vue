@@ -21,15 +21,6 @@ The status can be controlled by the value `status`.
   </a-space>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const refreshChange = () => alert('updated');
-    return {
-      refreshChange,
-    };
-  },
-});
+<script lang="ts" setup>
+const refreshChange = () => alert('updated');
 </script>

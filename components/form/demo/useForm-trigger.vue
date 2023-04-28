@@ -35,56 +35,46 @@ use [`Form.useForm`](#useform) custom trigger to validation logic and status.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, toRaw } from 'vue';
+<script lang="ts" setup>
+import { reactive, toRaw } from 'vue';
 import { Form } from 'ant-design-vue';
 
 const useForm = Form.useForm;
-export default defineComponent({
-  setup() {
-    const modelRef = reactive({
-      name: '',
-      region: undefined,
-    });
-    const rulesRef = reactive({
-      name: [
-        {
-          required: true,
-          message: 'Please input Activity name',
-        },
-        {
-          min: 3,
-          max: 5,
-          message: 'Length should be 3 to 5',
-          trigger: 'blur',
-        },
-      ],
-      region: [
-        {
-          required: true,
-          message: 'Please select region',
-        },
-      ],
-    });
-    const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef);
-    const onSubmit = () => {
-      validate()
-        .then(() => {
-          console.log(toRaw(modelRef));
-        })
-        .catch(err => {
-          console.log('error', err);
-        });
-    };
-    return {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
-      validate,
-      validateInfos,
-      resetFields,
-      modelRef,
-      onSubmit,
-    };
-  },
+
+const labelCol = { span: 4 };
+const wrapperCol = { span: 14 };
+const modelRef = reactive({
+  name: '',
+  region: undefined,
 });
+const rulesRef = reactive({
+  name: [
+    {
+      required: true,
+      message: 'Please input Activity name',
+    },
+    {
+      min: 3,
+      max: 5,
+      message: 'Length should be 3 to 5',
+      trigger: 'blur',
+    },
+  ],
+  region: [
+    {
+      required: true,
+      message: 'Please select region',
+    },
+  ],
+});
+const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef);
+const onSubmit = () => {
+  validate()
+    .then(() => {
+      console.log(toRaw(modelRef));
+    })
+    .catch(err => {
+      console.log('error', err);
+    });
+};
 </script>

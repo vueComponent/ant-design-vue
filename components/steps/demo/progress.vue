@@ -57,17 +57,8 @@ Steps with progress.
     ]"
   ></a-steps>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const current = ref<number>(1);
-
-    return {
-      current,
-      description: 'This is a description.',
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const current = ref<number>(1);
+const description = 'This is a description.';
 </script>

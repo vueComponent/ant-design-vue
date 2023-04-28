@@ -18,6 +18,7 @@ function getTestRegex(libDir) {
 module.exports = {
   verbose: true,
   setupFiles: ['./tests/setup.js'],
+  setupFilesAfterEnv: ['./tests/setupAfterEnv.ts'],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'vue', 'md', 'jpg'],
   modulePathIgnorePatterns: ['/_site/'],
   testPathIgnorePatterns: testPathIgnorePatterns,

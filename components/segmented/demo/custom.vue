@@ -44,74 +44,63 @@ Custom each Segmented Item.
   </a-segmented>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UserOutlined } from '@ant-design/icons-vue';
 import ASegmented from 'ant-design-vue/es/segmented/src/segmented';
-export default defineComponent({
-  components: { ASegmented, UserOutlined },
-  setup() {
-    const data = ref([
-      {
-        value: 'user1',
-        payload: {
-          src: 'https://joeschmoe.io/api/v1/random',
-          style: { backgroundColor: '#f56a00' },
-        },
-      },
-      {
-        value: 'user2',
-        payload: {
-          style: { backgroundColor: '#f56a00' },
-          content: 'K',
-        },
-      },
-      {
-        value: 'user3',
-        payload: {
-          icon: UserOutlined,
-          style: { backgroundColor: '#f56a00' },
-        },
-      },
-    ]);
-    const options2 = ref([
-      {
-        value: 'spring',
-        payload: {
-          title: 'Spring',
-          subTitle: 'Jan-Mar',
-        },
-      },
-      {
-        value: 'summer',
-        payload: {
-          title: 'Summer',
-          subTitle: 'Apr-Jun',
-        },
-      },
-      {
-        value: 'autumn',
-        payload: {
-          title: 'Autumn',
-          subTitle: 'Jul-Sept',
-        },
-      },
-      {
-        value: 'winter',
-        payload: {
-          title: 'Winter',
-          subTitle: 'Oct-Dec',
-        },
-      },
-    ]);
-    const value = ref('user1');
-    const value2 = ref('spring');
-    return {
-      data,
-      options2,
-      value,
-      value2,
-    };
+const data = ref([
+  {
+    value: 'user1',
+    payload: {
+      src: 'https://joeschmoe.io/api/v1/random',
+      style: { backgroundColor: '#f56a00' },
+    },
   },
-});
+  {
+    value: 'user2',
+    payload: {
+      style: { backgroundColor: '#f56a00' },
+      content: 'K',
+    },
+  },
+  {
+    value: 'user3',
+    payload: {
+      icon: UserOutlined,
+      style: { backgroundColor: '#f56a00' },
+    },
+  },
+]);
+const options2 = ref([
+  {
+    value: 'spring',
+    payload: {
+      title: 'Spring',
+      subTitle: 'Jan-Mar',
+    },
+  },
+  {
+    value: 'summer',
+    payload: {
+      title: 'Summer',
+      subTitle: 'Apr-Jun',
+    },
+  },
+  {
+    value: 'autumn',
+    payload: {
+      title: 'Autumn',
+      subTitle: 'Jul-Sept',
+    },
+  },
+  {
+    value: 'winter',
+    payload: {
+      title: 'Winter',
+      subTitle: 'Oct-Dec',
+    },
+  },
+]);
+const value = ref('user1');
+const value2 = ref('spring');
 </script>

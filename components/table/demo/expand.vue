@@ -33,8 +33,7 @@ When there's too much information to show and the table can't display all at onc
     </template>
   </a-table>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 const columns = [
   { title: 'Name', dataIndex: 'name', key: 'name', fixed: true },
   { title: 'Age', dataIndex: 'age', key: 'age' },
@@ -65,13 +64,4 @@ const data = [
     description: 'My name is Joe Black, I am 32 years old, living in Sidney No. 1 Lake Park.',
   },
 ];
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>

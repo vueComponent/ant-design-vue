@@ -21,16 +21,6 @@ The most basic usage.
   <a-float-button @click="handleClick" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const handleClick = () => console.log('click');
-
-    return {
-      handleClick,
-    };
-  },
-});
+<script lang="ts" setup>
+const handleClick = () => console.log('click');
 </script>

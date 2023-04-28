@@ -25,19 +25,13 @@ Set range picker type by `picker` prop.
     <a-range-picker v-model:value="value5" picker="year" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { Dayjs } from 'dayjs';
 type RangeValue = [Dayjs, Dayjs];
-export default defineComponent({
-  setup() {
-    return {
-      value1: ref<RangeValue>(),
-      value2: ref<RangeValue>(),
-      value3: ref<RangeValue>(),
-      value4: ref<RangeValue>(),
-      value5: ref<RangeValue>(),
-    };
-  },
-});
+const value1 = ref<RangeValue>();
+const value2 = ref<RangeValue>();
+const value3 = ref<RangeValue>();
+const value4 = ref<RangeValue>();
+const value5 = ref<RangeValue>();
 </script>

@@ -2,7 +2,7 @@
 
 exports[`renders ./components/steps/demo/clickable.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -46,10 +46,10 @@ exports[`renders ./components/steps/demo/clickable.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-divider css-dev-only-do-not-override-1etm4mv ant-divider-horizontal" role="separator">
+  <div class="ant-divider ant-divider-horizontal" role="separator">
     <!---->
   </div>
-  <div class="ant-steps ant-steps-vertical css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-vertical">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -98,7 +98,7 @@ exports[`renders ./components/steps/demo/clickable.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -160,7 +160,7 @@ exports[`renders ./components/steps/demo/customized-progress-dot.vue correctly 1
 `;
 
 exports[`renders ./components/steps/demo/error.vue correctly 1`] = `
-<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish ant-steps-next-error">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -207,7 +207,7 @@ exports[`renders ./components/steps/demo/error.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/icon.vue correctly 1`] = `
-<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish ant-steps-item-custom ant-steps-item-active">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -268,22 +268,22 @@ exports[`renders ./components/steps/demo/icon.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/inline.vue correctly 1`] = `
-<div class="ant-list ant-list-split css-dev-only-do-not-override-1etm4mv">
+<div class="ant-list ant-list-split">
   <!---->
   <!---->
-  <div class="ant-spin-nested-loading css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
       <ul class="ant-list-items">
         <li class="ant-list-item">
           <div class="ant-list-item-meta">
-            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image css-dev-only-do-not-override-1etm4mv"><img src="https://joeschmoe.io/api/v1/random"></span></div>
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random"></span></div>
             <div class="ant-list-item-meta-content">
               <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 1</a></h4>
               <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
             </div>
           </div>
-          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline css-dev-only-do-not-override-1etm4mv" style="margin-top: 8px;">
+          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline" style="margin-top: 8px;">
             <!---->
             <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
               <div role="button" tabindex="0" class="ant-steps-item-container">
@@ -335,13 +335,13 @@ exports[`renders ./components/steps/demo/inline.vue correctly 1`] = `
         </li>
         <li class="ant-list-item">
           <div class="ant-list-item-meta">
-            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image css-dev-only-do-not-override-1etm4mv"><img src="https://joeschmoe.io/api/v1/random"></span></div>
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random"></span></div>
             <div class="ant-list-item-meta-content">
               <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 2</a></h4>
               <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
             </div>
           </div>
-          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline css-dev-only-do-not-override-1etm4mv" style="margin-top: 8px;">
+          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline" style="margin-top: 8px;">
             <!---->
             <div class="ant-steps-item ant-steps-item-finish ant-steps-next-error">
               <div role="button" tabindex="0" class="ant-steps-item-container">
@@ -393,13 +393,13 @@ exports[`renders ./components/steps/demo/inline.vue correctly 1`] = `
         </li>
         <li class="ant-list-item">
           <div class="ant-list-item-meta">
-            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image css-dev-only-do-not-override-1etm4mv"><img src="https://joeschmoe.io/api/v1/random"></span></div>
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random"></span></div>
             <div class="ant-list-item-meta-content">
               <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 3</a></h4>
               <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
             </div>
           </div>
-          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline css-dev-only-do-not-override-1etm4mv" style="margin-top: 8px;">
+          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline" style="margin-top: 8px;">
             <!---->
             <div class="ant-steps-item ant-steps-item-finish">
               <div role="button" tabindex="0" class="ant-steps-item-container">
@@ -451,13 +451,13 @@ exports[`renders ./components/steps/demo/inline.vue correctly 1`] = `
         </li>
         <li class="ant-list-item">
           <div class="ant-list-item-meta">
-            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image css-dev-only-do-not-override-1etm4mv"><img src="https://joeschmoe.io/api/v1/random"></span></div>
+            <div class="ant-list-item-meta-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random"></span></div>
             <div class="ant-list-item-meta-content">
               <h4 class="ant-list-item-meta-title"><a href="https://www.antdv.com/">Ant Design Title 4</a></h4>
               <div class="ant-list-item-meta-description">Ant Design, a design language for background applications, is refined by Ant UED Team</div>
             </div>
           </div>
-          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline css-dev-only-do-not-override-1etm4mv" style="margin-top: 8px;">
+          <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot ant-steps-inline" style="margin-top: 8px;">
             <!---->
             <div class="ant-steps-item ant-steps-item-finish">
               <div role="button" tabindex="0" class="ant-steps-item-container">
@@ -517,7 +517,7 @@ exports[`renders ./components/steps/demo/inline.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/label-placement.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -561,7 +561,7 @@ exports[`renders ./components/steps/demo/label-placement.vue correctly 1`] = `
       </div>
     </div>
   </div><br>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-with-progress css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-with-progress">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -583,7 +583,7 @@ exports[`renders ./components/steps/demo/label-placement.vue correctly 1`] = `
         </div>
         <div class="ant-steps-item-icon">
           <div class="ant-steps-progress-icon">
-            <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
+            <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-40">
               <div class="ant-progress-inner" style="width: 40px; height: 40px; font-size: 12px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
                   <!---->
                   <path d="M 50,50 m 0,-48
@@ -622,7 +622,7 @@ exports[`renders ./components/steps/demo/label-placement.vue correctly 1`] = `
       </div>
     </div>
   </div><br>
-  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-vertical css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-vertical">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -671,7 +671,7 @@ exports[`renders ./components/steps/demo/label-placement.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation css-dev-only-do-not-override-1etm4mv" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
+  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -712,7 +712,7 @@ exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal ant-steps-navigation css-dev-only-do-not-override-1etm4mv" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal ant-steps-navigation" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -770,7 +770,7 @@ exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation css-dev-only-do-not-override-1etm4mv" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
+  <div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-navigation" style="margin-bottom: 60px; box-shadow: 0px -1px 0 0 #e8e8e8 inset;">
     <div class="ant-steps-item ant-steps-item-finish ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -832,7 +832,7 @@ exports[`renders ./components/steps/demo/nav.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
-<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal ant-steps-with-progress css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal ant-steps-with-progress">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -854,7 +854,7 @@ exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
       </div>
       <div class="ant-steps-item-icon">
         <div class="ant-steps-progress-icon">
-          <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
+          <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-40">
             <div class="ant-progress-inner" style="width: 40px; height: 40px; font-size: 12px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
                 <!---->
                 <path d="M 50,50 m 0,-48
@@ -892,7 +892,7 @@ exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
     </div>
   </div>
 </div>
-<div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-with-progress css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal ant-steps-with-progress">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -914,7 +914,7 @@ exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
       </div>
       <div class="ant-steps-item-icon">
         <div class="ant-steps-progress-icon">
-          <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default css-dev-only-do-not-override-1etm4mv">
+          <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-32">
             <div class="ant-progress-inner" style="width: 32px; height: 32px; font-size: 10.8px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
                 <!---->
                 <path d="M 50,50 m 0,-48
@@ -956,7 +956,7 @@ exports[`renders ./components/steps/demo/progress.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/progress-dot.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -1000,10 +1000,10 @@ exports[`renders ./components/steps/demo/progress-dot.vue correctly 1`] = `
       </div>
     </div>
   </div>
-  <div class="ant-divider css-dev-only-do-not-override-1etm4mv ant-divider-horizontal" role="separator">
+  <div class="ant-divider ant-divider-horizontal" role="separator">
     <!---->
   </div>
-  <div class="ant-steps ant-steps-vertical ant-steps-dot css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-vertical ant-steps-dot">
     <div class="ant-steps-item ant-steps-item-finish">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -1079,7 +1079,7 @@ exports[`renders ./components/steps/demo/progress-dot.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/simple.vue correctly 1`] = `
-<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -1125,7 +1125,7 @@ exports[`renders ./components/steps/demo/simple.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/small-size.vue correctly 1`] = `
-<div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-horizontal ant-steps-small ant-steps-label-horizontal">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -1173,7 +1173,7 @@ exports[`renders ./components/steps/demo/small-size.vue correctly 1`] = `
 
 exports[`renders ./components/steps/demo/step-next.vue correctly 1`] = `
 <div>
-  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal css-dev-only-do-not-override-1etm4mv">
+  <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
     <div class="ant-steps-item ant-steps-item-process ant-steps-item-active">
       <div role="button" tabindex="0" class="ant-steps-item-container">
         <div class="ant-steps-item-tail">
@@ -1218,7 +1218,7 @@ exports[`renders ./components/steps/demo/step-next.vue correctly 1`] = `
     </div>
   </div>
   <div class="steps-content">First-content</div>
-  <div class="steps-action"><button class="css-dev-only-do-not-override-1etm4mv ant-btn ant-btn-primary" type="button">
+  <div class="steps-action"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Next</span>
     </button>
     <!--v-if-->
@@ -1228,7 +1228,7 @@ exports[`renders ./components/steps/demo/step-next.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/vertical.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-vertical">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">
@@ -1275,7 +1275,7 @@ exports[`renders ./components/steps/demo/vertical.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/steps/demo/vertical-small.vue correctly 1`] = `
-<div class="ant-steps ant-steps-vertical ant-steps-small css-dev-only-do-not-override-1etm4mv">
+<div class="ant-steps ant-steps-vertical ant-steps-small">
   <div class="ant-steps-item ant-steps-item-finish">
     <div role="button" tabindex="0" class="ant-steps-item-container">
       <div class="ant-steps-item-tail">

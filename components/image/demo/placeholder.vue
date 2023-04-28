@@ -33,13 +33,7 @@ Progressive when large image loading.
     <a-button type="primary" @click="random = Date.now()">reload</a-button>
   </a-space>
 </template>
-<script lang="ts">
-import { ref, defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      random: ref(),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const random = ref();
 </script>

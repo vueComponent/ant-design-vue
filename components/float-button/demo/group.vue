@@ -44,14 +44,6 @@ When multiple buttons are used together, `<FloatButton.Group />` is recommended.
   </a-float-button-group>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { QuestionCircleOutlined, SyncOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: { QuestionCircleOutlined, SyncOutlined },
-  setup() {
-    return {};
-  },
-});
 </script>

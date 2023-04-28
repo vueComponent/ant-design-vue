@@ -25,24 +25,13 @@ Radio unavailable.
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const disabled = ref<boolean>(true);
-    const checked1 = ref<boolean>(true);
-    const checked2 = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const disabled = ref<boolean>(true);
+const checked1 = ref<boolean>(true);
+const checked2 = ref<boolean>(false);
 
-    const toggleDisabled = () => {
-      disabled.value = !disabled.value;
-    };
-
-    return {
-      disabled,
-      checked1,
-      checked2,
-      toggleDisabled,
-    };
-  },
-});
+const toggleDisabled = () => {
+  disabled.value = !disabled.value;
+};
 </script>

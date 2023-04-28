@@ -34,7 +34,7 @@ describe('Checkbox', () => {
       },
     });
     expect(errorSpy).toHaveBeenCalledWith(
-      'Warning: [antdv: Checkbox] `value` is not validate prop, do you mean `checked`?',
+      'Warning: [ant-design-vue: Checkbox] `value` is not validate prop, do you mean `checked`?',
     );
     errorSpy.mockRestore();
   });

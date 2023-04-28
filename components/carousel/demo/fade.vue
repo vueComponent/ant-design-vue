@@ -24,6 +24,7 @@ Slides use fade for transition.
     <div><h3>4</h3></div>
   </a-carousel>
 </template>
+
 <style scoped>
 /* For demo */
 :deep(.slick-slide) {

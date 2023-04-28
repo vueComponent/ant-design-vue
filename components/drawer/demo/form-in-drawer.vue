@@ -105,51 +105,37 @@ Use form in drawer with submit button.
     </template>
   </a-drawer>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { reactive, ref } from 'vue';
 import { PlusOutlined } from '@ant-design/icons-vue';
-import { defineComponent, reactive, ref } from 'vue';
 import type { Rule } from 'ant-design-vue/es/form';
-export default defineComponent({
-  components: {
-    PlusOutlined,
-  },
-  setup() {
-    const form = reactive({
-      name: '',
-      url: '',
-      owner: '',
-      type: '',
-      approver: '',
-      dateTime: null,
-      description: '',
-    });
-
-    const rules: Record<string, Rule[]> = {
-      name: [{ required: true, message: 'Please enter user name' }],
-      url: [{ required: true, message: 'please enter url' }],
-      owner: [{ required: true, message: 'Please select an owner' }],
-      type: [{ required: true, message: 'Please choose the type' }],
-      approver: [{ required: true, message: 'Please choose the approver' }],
-      dateTime: [{ required: true, message: 'Please choose the dateTime', type: 'object' }],
-      description: [{ required: true, message: 'Please enter url description' }],
-    };
-
-    const open = ref<boolean>(false);
-
-    const showDrawer = () => {
-      open.value = true;
-    };
-
-    const onClose = () => {
-      open.value = false;
-    };
-    return {
-      form,
-      rules,
-      open,
-      showDrawer,
-      onClose,
-    };
-  },
+const form = reactive({
+  name: '',
+  url: '',
+  owner: '',
+  type: '',
+  approver: '',
+  dateTime: null,
+  description: '',
 });
+
+const rules: Record<string, Rule[]> = {
+  name: [{ required: true, message: 'Please enter user name' }],
+  url: [{ required: true, message: 'please enter url' }],
+  owner: [{ required: true, message: 'Please select an owner' }],
+  type: [{ required: true, message: 'Please choose the type' }],
+  approver: [{ required: true, message: 'Please choose the approver' }],
+  dateTime: [{ required: true, message: 'Please choose the dateTime', type: 'object' }],
+  description: [{ required: true, message: 'Please enter url description' }],
+};
+
+const open = ref<boolean>(false);
+
+const showDrawer = () => {
+  open.value = true;
+};
+
+const onClose = () => {
+  open.value = false;
+};
 </script>

@@ -24,59 +24,47 @@ async.
   </a-mentions>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { debounce } from 'lodash-es';
-import { computed, defineComponent, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { MentionsProps } from '..';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('');
-    const loading = ref<boolean>(false);
-    const users = ref<{ login: string; avatar_url: string }[]>([]);
-    const search = ref<string>('');
-    const loadGithubUsers = debounce((key: string) => {
-      if (!key) {
-        users.value = [];
-        return;
-      }
+const value = ref<string>('');
+const loading = ref<boolean>(false);
+const users = ref<{ login: string; avatar_url: string }[]>([]);
+const search = ref<string>('');
+const loadGithubUsers = debounce((key: string) => {
+  if (!key) {
+    users.value = [];
+    return;
+  }
 
-      fetch(`https://api.github.com/search/users?q=${key}`)
-        .then(res => res.json())
-        .then(({ items = [] }) => {
-          if (search.value !== key) return;
-          users.value = items.slice(0, 10);
-          loading.value = false;
-        });
-    }, 800);
+  fetch(`https://api.github.com/search/users?q=${key}`)
+    .then(res => res.json())
+    .then(({ items = [] }) => {
+      if (search.value !== key) return;
+      users.value = items.slice(0, 10);
+      loading.value = false;
+    });
+}, 800);
 
-    const onSearch = (searchValue: string) => {
-      search.value = searchValue;
-      loading.value = !!searchValue;
-      console.log(!!searchValue);
-      users.value = [];
-      console.log('Search:', searchValue);
-      loadGithubUsers(searchValue);
-    };
-    const options = computed<MentionsProps['options']>(() =>
-      users.value.map(user => ({
-        key: user.login,
-        value: user.login,
-        class: 'antd-demo-dynamic-option',
-        payload: user,
-      })),
-    );
-    return {
-      value,
-      loading,
-      users,
-      loadGithubUsers,
-      onSearch,
-      options,
-    };
-  },
-});
+const onSearch = (searchValue: string) => {
+  search.value = searchValue;
+  loading.value = !!searchValue;
+  console.log(!!searchValue);
+  users.value = [];
+  console.log('Search:', searchValue);
+  loadGithubUsers(searchValue);
+};
+const options = computed<MentionsProps['options']>(() =>
+  users.value.map(user => ({
+    key: user.login,
+    value: user.login,
+    class: 'antd-demo-dynamic-option',
+    payload: user,
+  })),
+);
 </script>
-<style>
+<style scoped>
 .antd-demo-dynamic-option img {
   width: 20px;
   height: 20px;

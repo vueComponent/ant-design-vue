@@ -45,7 +45,7 @@ A notification box can appear from the `topRight`, `bottomRight`, `bottomLeft` o
     </a-button>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import {
   RadiusUpleftOutlined,
   RadiusUprightOutlined,
@@ -55,29 +55,13 @@ import {
   BorderBottomOutlined,
 } from '@ant-design/icons-vue';
 import { notification } from 'ant-design-vue';
-import { defineComponent } from 'vue';
 import type { NotificationPlacement } from 'ant-design-vue';
-export default defineComponent({
-  components: {
-    RadiusUpleftOutlined,
-    RadiusUprightOutlined,
-    RadiusBottomleftOutlined,
-    RadiusBottomrightOutlined,
-    BorderTopOutlined,
-    BorderBottomOutlined,
-  },
-  setup() {
-    const openNotification = (placement: NotificationPlacement) => {
-      notification.open({
-        message: `Notification ${placement}`,
-        description:
-          'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-        placement,
-      });
-    };
-    return {
-      openNotification,
-    };
-  },
-});
+const openNotification = (placement: NotificationPlacement) => {
+  notification.open({
+    message: `Notification ${placement}`,
+    description:
+      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    placement,
+  });
+};
 </script>

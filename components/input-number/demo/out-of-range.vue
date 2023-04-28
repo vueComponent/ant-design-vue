@@ -22,15 +22,7 @@ Show warning style when `value` is out of range by control.
     <a-button type="primary" @click="value = 99">Reset</a-button>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<number>(99);
-
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<number>(99);
 </script>

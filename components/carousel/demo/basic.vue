@@ -24,21 +24,13 @@ Basic usage.
     <div><h3>4</h3></div>
   </a-carousel>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const onChange = (current: number) => {
-      console.log(current);
-    };
-
-    return {
-      onChange,
-    };
-  },
-});
+<script lang="ts" setup>
+const onChange = (current: number) => {
+  console.log(current);
+};
 </script>
+
 <style scoped>
 /* For demo */
 :deep(.slick-slide) {

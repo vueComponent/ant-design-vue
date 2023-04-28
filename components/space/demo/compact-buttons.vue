@@ -125,7 +125,7 @@ Button component compact example.
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
   DownloadOutlined,
   EllipsisOutlined,
@@ -135,17 +135,4 @@ import {
   StarOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  components: {
-    DownloadOutlined,
-    EllipsisOutlined,
-    HeartOutlined,
-    LikeOutlined,
-    CommentOutlined,
-    StarOutlined,
-    ShareAltOutlined,
-  },
-});
 </script>

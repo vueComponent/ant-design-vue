@@ -28,8 +28,7 @@ Responsive grid list. The size property is as same as [Layout Grid](https://www.
     </template>
   </a-list>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 interface DataItem {
   title: string;
 }
@@ -53,12 +52,4 @@ const data: DataItem[] = [
     title: 'Title 6',
   },
 ];
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-    };
-  },
-});
 </script>

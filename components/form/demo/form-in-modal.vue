@@ -46,8 +46,8 @@ When user visit a page with a list of items, and want to create a new item. The 
     </a-modal>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, ref, toRaw } from 'vue';
+<script lang="ts" setup>
+import { reactive, ref, toRaw } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 
 interface Values {
@@ -56,41 +56,30 @@ interface Values {
   modifier: string;
 }
 
-export default defineComponent({
-  setup() {
-    const formRef = ref<FormInstance>();
-    const visible = ref(false);
-    const formState = reactive<Values>({
-      title: '',
-      description: '',
-      modifier: 'public',
-    });
-
-    const onOk = () => {
-      formRef.value
-        .validateFields()
-        .then(values => {
-          console.log('Received values of form: ', values);
-          console.log('formState: ', toRaw(formState));
-          visible.value = false;
-          formRef.value.resetFields();
-          console.log('reset formState: ', toRaw(formState));
-        })
-        .catch(info => {
-          console.log('Validate Failed:', info);
-        });
-    };
-
-    return {
-      formState,
-      formRef,
-      visible,
-      onOk,
-    };
-  },
+const formRef = ref<FormInstance>();
+const visible = ref(false);
+const formState = reactive<Values>({
+  title: '',
+  description: '',
+  modifier: 'public',
 });
+
+const onOk = () => {
+  formRef.value
+    .validateFields()
+    .then(values => {
+      console.log('Received values of form: ', values);
+      console.log('formState: ', toRaw(formState));
+      visible.value = false;
+      formRef.value.resetFields();
+      console.log('reset formState: ', toRaw(formState));
+    })
+    .catch(info => {
+      console.log('Validate Failed:', info);
+    });
+};
 </script>
-<style>
+<style scoped>
 .collection-create-form_last-form-item {
   margin-bottom: 0;
 }

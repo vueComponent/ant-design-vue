@@ -45,18 +45,7 @@ The most basic usage.
   </a-float-button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { CustomerServiceOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: { CustomerServiceOutlined },
-  setup() {
-    const handleClick = () => console.log('click');
-
-    return {
-      handleClick,
-    };
-  },
-});
+const handleClick = () => console.log('click');
 </script>

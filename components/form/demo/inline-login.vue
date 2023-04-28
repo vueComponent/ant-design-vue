@@ -53,39 +53,25 @@ Inline login form is often used in navigation bar.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, computed } from 'vue';
+<script lang="ts" setup>
+import { reactive, computed } from 'vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 interface FormState {
   username: string;
   password: string;
 }
-export default defineComponent({
-  components: {
-    UserOutlined,
-    LockOutlined,
-  },
-  setup() {
-    const formState = reactive<FormState>({
-      username: '',
-      password: '',
-    });
-    const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
+const formState = reactive<FormState>({
+  username: '',
+  password: '',
+});
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
 
-    const onFinishFailed = (errorInfo: any) => {
-      console.log('Failed:', errorInfo);
-    };
-    const disabled = computed(() => {
-      return !(formState.username && formState.password);
-    });
-    return {
-      formState,
-      onFinish,
-      onFinishFailed,
-      disabled,
-    };
-  },
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
+const disabled = computed(() => {
+  return !(formState.username && formState.password);
 });
 </script>

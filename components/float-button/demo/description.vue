@@ -56,14 +56,6 @@ Setting `description` prop to show FloatButton with description.
   </a-float-button>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { FileTextOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: { FileTextOutlined },
-  setup() {
-    return {};
-  },
-});
 </script>

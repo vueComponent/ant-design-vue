@@ -25,21 +25,12 @@ title:
     <a-checkable-tag v-model:checked="checked3" @change="handleChange">Tag3</a-checkable-tag>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    // or use watch
-    const handleChange = (checked: boolean) => {
-      console.log(checked);
-    };
-
-    return {
-      handleChange,
-      checked1: ref(false),
-      checked2: ref(false),
-      checked3: ref(false),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const handleChange = (checked: boolean) => {
+  console.log(checked);
+};
+const checked1 = ref(false);
+const checked2 = ref(false);
+const checked3 = ref(false);
 </script>

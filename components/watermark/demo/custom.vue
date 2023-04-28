@@ -96,23 +96,16 @@ Preview the watermark effect by configuring custom parameters.
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
-export default defineComponent({
-  setup() {
-    const model = reactive({
-      content: 'Ant Design Vue',
-      font: {
-        fontSize: 16,
-      },
-      zIndex: 11,
-      rotate: -22,
-      gap: [100, 100] as [number, number],
-      offset: [],
-    });
-    return {
-      model,
-    };
+<script lang="ts" setup>
+import { reactive } from 'vue';
+const model = reactive({
+  content: 'Ant Design Vue',
+  font: {
+    fontSize: 16,
   },
+  zIndex: 11,
+  rotate: -22,
+  gap: [100, 100] as [number, number],
+  offset: [],
 });
 </script>

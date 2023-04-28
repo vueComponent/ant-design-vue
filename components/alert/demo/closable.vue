@@ -32,16 +32,8 @@ To show close button.
   />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    const onClose = (e: MouseEvent) => {
-      console.log(e, 'I was closed.');
-    };
-    return {
-      onClose,
-    };
-  },
-});
+<script lang="ts" setup>
+const onClose = (e: MouseEvent) => {
+  console.log(e, 'I was closed.');
+};
 </script>

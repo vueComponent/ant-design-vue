@@ -27,37 +27,26 @@ To customize the text of the buttons, you need to set `okText` and `cancelText` 
     </a-modal>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref, createVNode } from 'vue';
+import { ref, createVNode } from 'vue';
 import { Modal } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const open = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-    const showModal = () => {
-      open.value = true;
-    };
-    const hideModal = () => {
-      open.value = false;
-    };
+const showModal = () => {
+  open.value = true;
+};
+const hideModal = () => {
+  open.value = false;
+};
 
-    const confirm = () => {
-      Modal.confirm({
-        title: 'Confirm',
-        icon: createVNode(ExclamationCircleOutlined),
-        content: 'Bla bla ...',
-        okText: '确认',
-        cancelText: '取消',
-      });
-    };
-
-    return {
-      open,
-      showModal,
-      hideModal,
-      confirm,
-    };
-  },
-});
+const confirm = () => {
+  Modal.confirm({
+    title: 'Confirm',
+    icon: createVNode(ExclamationCircleOutlined),
+    content: 'Bla bla ...',
+    okText: '确认',
+    cancelText: '取消',
+  });
+};
 </script>

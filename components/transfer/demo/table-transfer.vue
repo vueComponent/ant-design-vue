@@ -75,8 +75,8 @@ Customize render list with Table component.
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 interface MockData {
   key: string;
   title: string;
@@ -113,50 +113,34 @@ const rightTableColumns = [
   },
 ];
 
-export default defineComponent({
-  setup() {
-    const targetKeys = ref<string[]>(originTargetKeys);
-    const disabled = ref<boolean>(false);
-    const showSearch = ref<boolean>(false);
-    const leftColumns = ref<tableColumn[]>(leftTableColumns);
-    const rightColumns = ref<tableColumn[]>(rightTableColumns);
+const targetKeys = ref<string[]>(originTargetKeys);
+const disabled = ref<boolean>(false);
+const showSearch = ref<boolean>(false);
+const leftColumns = ref<tableColumn[]>(leftTableColumns);
+const rightColumns = ref<tableColumn[]>(rightTableColumns);
 
-    const onChange = (nextTargetKeys: string[]) => {
-      console.log('nextTargetKeys', nextTargetKeys);
-    };
+const onChange = (nextTargetKeys: string[]) => {
+  console.log('nextTargetKeys', nextTargetKeys);
+};
 
-    const getRowSelection = ({
-      disabled,
-      selectedKeys,
-      onItemSelectAll,
-      onItemSelect,
-    }: Record<string, any>) => {
-      return {
-        getCheckboxProps: (item: Record<string, string | boolean>) => ({
-          disabled: disabled || item.disabled,
-        }),
-        onSelectAll(selected: boolean, selectedRows: Record<string, string | boolean>[]) {
-          const treeSelectedKeys = selectedRows
-            .filter(item => !item.disabled)
-            .map(({ key }) => key);
-          onItemSelectAll(treeSelectedKeys, selected);
-        },
-        onSelect({ key }: Record<string, string>, selected: boolean) {
-          onItemSelect(key, selected);
-        },
-        selectedRowKeys: selectedKeys,
-      };
-    };
-    return {
-      mockData,
-      targetKeys,
-      disabled,
-      showSearch,
-      leftColumns,
-      rightColumns,
-      onChange,
-      getRowSelection,
-    };
-  },
-});
+const getRowSelection = ({
+  disabled,
+  selectedKeys,
+  onItemSelectAll,
+  onItemSelect,
+}: Record<string, any>) => {
+  return {
+    getCheckboxProps: (item: Record<string, string | boolean>) => ({
+      disabled: disabled || item.disabled,
+    }),
+    onSelectAll(selected: boolean, selectedRows: Record<string, string | boolean>[]) {
+      const treeSelectedKeys = selectedRows.filter(item => !item.disabled).map(({ key }) => key);
+      onItemSelectAll(treeSelectedKeys, selected);
+    },
+    onSelect({ key }: Record<string, string>, selected: boolean) {
+      onItemSelect(key, selected);
+    },
+    selectedRowKeys: selectedKeys,
+  };
+};
 </script>

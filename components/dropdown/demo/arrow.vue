@@ -38,15 +38,6 @@ You could display an arrow.
     </template>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  components: {},
-  setup() {
-    return {
-      placements: ['topLeft', 'top', 'topRight', 'bottomLeft', 'bottom', 'bottomRight'] as const,
-    };
-  },
-});
+<script lang="ts" setup>
+const placements = ['topLeft', 'top', 'topRight', 'bottomLeft', 'bottom', 'bottomRight'] as const;
 </script>

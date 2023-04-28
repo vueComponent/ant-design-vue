@@ -50,13 +50,13 @@ exports[`renders ./components/notification/demo/with-btn.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/notification/demo/with-icon.vue correctly 1`] = `
-<div><button class="ant-btn" type="button">
+<div><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Success</span>
-  </button><button class="ant-btn" type="button">
+  </button><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Info</span>
-  </button><button class="ant-btn" type="button">
+  </button><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Warning</span>
-  </button><button class="ant-btn" type="button">
+  </button><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Error</span>
   </button></div>
 `;

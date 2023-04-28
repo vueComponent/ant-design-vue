@@ -96,11 +96,6 @@ If you want specific control over the positioning and placement of the `Icon`, t
     <template #icon><SearchOutlined /></template>
   </a-button>
 </template>
-<script>
+<script lang="ts" setup>
 import { SearchOutlined } from '@ant-design/icons-vue';
-export default {
-  components: {
-    SearchOutlined,
-  },
-};
 </script>

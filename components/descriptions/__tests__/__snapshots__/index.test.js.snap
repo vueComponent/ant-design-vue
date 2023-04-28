@@ -18,7 +18,7 @@ exports[`Descriptions Descriptions support colon 1`] = `
 `;
 
 exports[`Descriptions Descriptions support style 1`] = `
-<div class="ant-descriptions" style="background-color: rgb(232, 232, 232);">
+<div style="background-color: rgb(232, 232, 232);" class="ant-descriptions">
   <!---->
   <div class="ant-descriptions-view">
     <table>

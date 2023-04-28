@@ -35,16 +35,8 @@ Solid radio button style.
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value1 = ref<string>('a');
-    const value2 = ref<string>('c');
-    return {
-      value1,
-      value2,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value1 = ref<string>('a');
+const value2 = ref<string>('c');
 </script>

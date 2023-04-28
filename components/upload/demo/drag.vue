@@ -38,35 +38,24 @@ We can upload serveral files at once by giving the input the `multiple` attribut
     </p>
   </a-upload-dragger>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { InboxOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
 import type { UploadChangeParam } from 'ant-design-vue';
-
-export default defineComponent({
-  components: {
-    InboxOutlined,
-  },
-  setup() {
-    const handleChange = (info: UploadChangeParam) => {
-      const status = info.file.status;
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    };
-    return {
-      handleChange,
-      fileList: ref([]),
-      handleDrop: (e: DragEvent) => {
-        console.log(e);
-      },
-    };
-  },
-});
+const fileList = ref([]);
+const handleChange = (info: UploadChangeParam) => {
+  const status = info.file.status;
+  if (status !== 'uploading') {
+    console.log(info.file, info.fileList);
+  }
+  if (status === 'done') {
+    message.success(`${info.file.name} file uploaded successfully.`);
+  } else if (status === 'error') {
+    message.error(`${info.file.name} file upload failed.`);
+  }
+};
+function handleDrop(e: DragEvent) {
+  console.log(e);
+}
 </script>

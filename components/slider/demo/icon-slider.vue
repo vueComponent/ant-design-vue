@@ -22,37 +22,21 @@ You can add an icon beside the slider to make it meaningful.
     <smile-outlined :style="{ color: nextColor }" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+<script lang="ts" setup>
+import { ref, computed } from 'vue';
 import { FrownOutlined, SmileOutlined } from '@ant-design/icons-vue';
-export default defineComponent({
-  components: {
-    FrownOutlined,
-    SmileOutlined,
-  },
-  setup() {
-    const sliderValue = ref<number>(0);
-    const min = ref<number>(0);
-    const max = ref<number>(20);
+const sliderValue = ref<number>(0);
+const min = ref<number>(0);
+const max = ref<number>(20);
 
-    const preColor = computed(() => {
-      const mid = +((max.value - min.value) / 2).toFixed(5);
-      return sliderValue.value >= mid ? '' : 'rgba(0, 0, 0, .45)';
-    });
+const preColor = computed(() => {
+  const mid = +((max.value - min.value) / 2).toFixed(5);
+  return sliderValue.value >= mid ? '' : 'rgba(0, 0, 0, .45)';
+});
 
-    const nextColor = computed(() => {
-      const mid = +((max.value - min.value) / 2).toFixed(5);
-      return sliderValue.value >= mid ? 'rgba(0, 0, 0, .45)' : '';
-    });
-
-    return {
-      sliderValue,
-      min,
-      max,
-      preColor,
-      nextColor,
-    };
-  },
+const nextColor = computed(() => {
+  const mid = +((max.value - min.value) / 2).toFixed(5);
+  return sliderValue.value >= mid ? 'rgba(0, 0, 0, .45)' : '';
 });
 </script>
 <style scoped>

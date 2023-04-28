@@ -66,7 +66,7 @@ const items: ComputedRef<MenuProps['items']> = computed(() => [
   getItem(
     'Navigation One',
     'sub1',
-    h(MailOutlined),
+    () => h(MailOutlined),
     [getItem('Option 1', '1'), getItem('Option 2', '2'), getItem('Option 3', '3')],
     theme.value,
   ),

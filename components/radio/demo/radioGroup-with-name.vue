@@ -23,14 +23,7 @@ Passing the `name` property to all `input[type="radio"]` that are in the same Ra
     <a-radio value="4">D</a-radio>
   </a-radio-group>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('1');
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<string>('1');
 </script>

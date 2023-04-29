@@ -29,36 +29,26 @@ Search the options while expanded.
     @change="handleChange"
   ></a-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import type { SelectProps } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const options = ref<SelectProps['options']>([
-      { value: 'jack', label: 'Jack' },
-      { value: 'lucy', label: 'Lucy' },
-      { value: 'tom', label: 'Tom' },
-    ]);
-    const handleChange = (value: string) => {
-      console.log(`selected ${value}`);
-    };
-    const handleBlur = () => {
-      console.log('blur');
-    };
-    const handleFocus = () => {
-      console.log('focus');
-    };
-    const filterOption = (input: string, option: any) => {
-      return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
-    };
-    return {
-      value: ref<string | undefined>(undefined),
-      filterOption,
-      handleBlur,
-      handleFocus,
-      handleChange,
-      options,
-    };
-  },
-});
+import { ref } from 'vue';
+const options = ref<SelectProps['options']>([
+  { value: 'jack', label: 'Jack' },
+  { value: 'lucy', label: 'Lucy' },
+  { value: 'tom', label: 'Tom' },
+]);
+const handleChange = (value: string) => {
+  console.log(`selected ${value}`);
+};
+const handleBlur = () => {
+  console.log('blur');
+};
+const handleFocus = () => {
+  console.log('focus');
+};
+const filterOption = (input: string, option: any) => {
+  return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0;
+};
+
+const value = ref<string | undefined>(undefined);
 </script>

@@ -1,18 +1,11 @@
 <template>
   <Header />
   <div v-if="headers.length" class="toc-affix" :style="y > 60 ? 'position:fixed; top: 16px;' : ''">
-    <a-anchor style="width: 160px">
-      <a-anchor-link
-        v-for="h in headers"
-        :key="h.title"
-        :href="h.href || `#${slugifyTitle(h.title)}`"
-        :target="h.target"
-      >
-        <template #title>
-          <LinkOutlined v-if="h.target" />
-          {{ isZhCN ? h.title : h.enTitle || h.title }}
-        </template>
-      </a-anchor-link>
+    <a-anchor style="width: 160px" :items="headers">
+      <template #customTitle="item">
+        <LinkOutlined v-if="item.target" />
+        {{ item.title }}
+      </template>
     </a-anchor>
   </div>
   <div class="main-wrapper">
@@ -211,6 +204,21 @@ export default defineComponent({
         ? matchCom.value[isZhCN.value ? 'CN' : 'US']?.pageData
         : (matchCom.value as any)?.pageData,
     );
+    const slugifyTitle = (str: string) => {
+      return (
+        str
+          // Remove control characters
+          .replace(rControl, '')
+          // Replace special characters
+          .replace(rSpecial, '-')
+          // Remove continuos separators
+          .replace(/\-{2,}/g, '-')
+          // Remove prefixing and trailing separtors
+          .replace(/^\-+|\-+$/g, '')
+          // ensure it doesn't start with a number (#121)
+          .replace(/^(\d)/, '_$1')
+      );
+    };
     const headers = computed(() => {
       let tempHeaders = (pageData.value?.headers || []).filter((h: Header) => h.level === 2);
       if (isDemo.value) {
@@ -245,10 +253,15 @@ export default defineComponent({
             ],
           );
         }
-        tempHeaders.push({ title: 'API', href: '#API' });
+        tempHeaders.push({ title: 'API', href: '#api' });
       }
 
-      return tempHeaders;
+      return tempHeaders.map(header => ({
+        ...header,
+        key: header.title,
+        title: isZhCN.value ? header.title : header.enTitle || header.title,
+        href: (header.href || `#${slugifyTitle(header.title)}`).toLocaleLowerCase(),
+      }));
     });
 
     const mainContainerClass = computed(() => {
@@ -261,21 +274,6 @@ export default defineComponent({
       visible.value = !visible.value;
     };
     return {
-      slugifyTitle: (str: string) => {
-        return (
-          str
-            // Remove control characters
-            .replace(rControl, '')
-            // Replace special characters
-            .replace(rSpecial, '-')
-            // Remove continuos separators
-            .replace(/\-{2,}/g, '-')
-            // Remove prefixing and trailing separtors
-            .replace(/^\-+|\-+$/g, '')
-            // ensure it doesn't start with a number (#121)
-            .replace(/^(\d)/, '_$1')
-        );
-      },
       themeMode,
       visible,
       isMobile: globalConfig.isMobile,
@@ -303,14 +301,7 @@ export default defineComponent({
 .toc-affix :deep(.ant-anchor) {
   font-size: 12px;
   max-width: 110px;
-  .ant-anchor-link {
-    border-left: 2px solid #f0f0f0;
-    padding: 4px 0 4px 16px;
-  }
 
-  .ant-anchor-link-active {
-    border-left: 2px solid #1890ff;
-  }
   .ant-anchor-ink::before {
     display: none;
   }

@@ -41,23 +41,10 @@ Limit files with `maxCount`. Will replace current one when `maxCount` is `1`.
     </a-upload>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UploadOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
-
-export default defineComponent({
-  components: {
-    UploadOutlined,
-  },
-  setup() {
-    const fileList = ref<UploadProps['fileList']>([]);
-    const fileList2 = ref<UploadProps['fileList']>([]);
-
-    return {
-      fileList,
-      fileList2,
-    };
-  },
-});
+const fileList = ref<UploadProps['fileList']>([]);
+const fileList2 = ref<UploadProps['fileList']>([]);
 </script>

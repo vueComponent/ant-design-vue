@@ -57,6 +57,31 @@
   - 💄 优化 Upload 操作按钮的样式细节。
 - 🐞 修复 Switch 在暗黑主题下关闭时的颜色问题。
 
+## 3.2.20
+
+`2023-04-27`
+
+- 🌟 Optimize the repeated instantiation of Space subcomponents [#6500](https://github.com/vueComponent/ant-design-vue/issues/6500)
+- 🐞 Fix RangePicker does not support null value problem [#6510](https://github.com/vueComponent/ant-design-vue/issues/6510)
+
+## 3.2.19
+
+`2023-04-23`
+
+- 🐞 Fix antd.min.js file error
+
+## 3.2.18
+
+`2023-04-23`
+
+- 🐞 Fix the style of input addonAfter when Form disabled [#6403](https://github.com/vueComponent/ant-design-vue/issues/6403)
+- 🐞 Fix Upload class name error [#6413](https://github.com/vueComponent/ant-design-vue/issues/6413)
+- 🐞 Fix date component's week, quarter does not support format problem [#6385](https://github.com/vueComponent/ant-design-vue/issues/6385)
+- 🐞 Fix the problem that Select scrolls under Firefox [#6470](https://github.com/vueComponent/ant-design-vue/issues/6470)
+- 🌟 Button added focus and blur methods [#6483](https://github.com/vueComponent/ant-design-vue/issues/6483)
+- 🐞 Fix the problem that the container height changes after Select is selected [#6467](https://github.com/vueComponent/ant-design-vue/issues/6467)
+- 🐞 Fix Form name not taking effect [#6460](https://github.com/vueComponent/ant-design-vue/issues/6460)
+
 ## 3.2.17
 
 `2023-04-04`

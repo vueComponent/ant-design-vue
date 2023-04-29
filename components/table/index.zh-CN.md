@@ -78,9 +78,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Sv8XQ50NB40AAA
 | bodyCell | 个性化单元格 | v-slot:bodyCell="{text, record, index, column}" | - | 3.0 |
 | bordered | 是否展示外边框和列边框 | boolean | false |  |
 | childrenColumnName | 指定树形结构的列名 | string | `children` |  |
-| columns | 表格列的配置描述，具体项见[下表](#Column) | array | - |  |
+| columns | 表格列的配置描述，具体项见[下表](#column) | array | - |  |
 | components | 覆盖默认的 table 元素 | object | - |  |
-| customFilterDropdown | 自定义筛选菜单，需要配合 `column.customFilterDropdown` 使用 | v-slot:customFilterDropdown="[FilterDropdownProps](#FilterDropdownProps)" | - | 3.0 |
+| customFilterDropdown | 自定义筛选菜单，需要配合 `column.customFilterDropdown` 使用 | v-slot:customFilterDropdown="[FilterDropdownProps](#filterdropdownprops)" | - | 3.0 |
 | customFilterIcon | 自定义筛选图标 | v-slot:customFilterIcon="{filtered, column}" | - | 3.0 |
 | customHeaderRow | 设置头部行属性 | Function(columns, index) | - |  |
 | customRow | 设置行属性 | Function(record, index) | - |  |
@@ -104,7 +104,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Sv8XQ50NB40AAA
 | rowClassName | 表格行的类名 | Function(record, index):string | - |  |
 | rowExpandable | 设置是否允许行展开 | (record) => boolean | - | 3.0 |
 | rowKey | 表格行 key 的取值，可以是字符串或一个函数 | string\|Function(record):string | 'key' |  |
-| rowSelection | 列表项是否可选择，[配置项](#rowSelection) | object | null |  |
+| rowSelection | 列表项是否可选择，[配置项](#rowselection) | object | null |  |
 | scroll | 表格是否可滚动，也可以指定滚动区域的宽、高，[配置项](#scroll) | object | - |  |
 | showExpandColumn | 设置是否展示行展开列 | boolean | true | 3.0 |
 | showHeader | 是否显示表头 | boolean | true |  |
@@ -181,9 +181,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Sv8XQ50NB40AAA
 | maxWidth | 拖动列最大宽度，会受到表格自动调整分配宽度影响 | number | - | 3.0 |
 | minWidth | 拖动列最小宽度，会受到表格自动调整分配宽度影响 | number | 50 | 3.0 |
 | resizable | 是否可拖动调整宽度，此时 width 必须是 number 类型 | boolean | - | 3.0 |
-| responsive | 响应式 breakpoint 配置列表。未设置则始终可见。 | [Breakpoint](#Breakpoint)\[] | - | 3.0 |
+| responsive | 响应式 breakpoint 配置列表。未设置则始终可见。 | [Breakpoint](#breakpoint)\[] | - | 3.0 |
 | rowScope | 设置列范围 | `row` \| `rowgroup` | - | 4.0 |
-| showSorterTooltip | 表头显示下一次排序的 tooltip 提示, 覆盖 table 中 `showSorterTooltip` | boolean \| [Tooltip props](/components/tooltip/#API) | true |  |
+| showSorterTooltip | 表头显示下一次排序的 tooltip 提示, 覆盖 table 中 `showSorterTooltip` | boolean \| [Tooltip props](/components/tooltip/#api) | true |  |
 | sortDirections | 支持的排序方式，取值为 `'ascend'` `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
 | sorter | 排序函数，本地排序使用一个函数(参考 [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 的 compareFunction)，需要服务端排序可设为 true | Function\|boolean | - |  |
 | sortOrder | 排序的受控属性，外界可用此控制列的排序，可设置为 `'ascend'` `'descend'` `null` | string | - |  |

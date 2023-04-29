@@ -23,13 +23,6 @@ You can select and upload a whole directory.
     </a-button>
   </a-upload>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { UploadOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: {
-    UploadOutlined,
-  },
-});
 </script>

@@ -24,6 +24,7 @@ Timing of scrolling to the next card/picture.
     <div><h3>4</h3></div>
   </a-carousel>
 </template>
+
 <style scoped>
 /* For demo */
 :deep(.slick-slide) {

@@ -73,9 +73,9 @@ Specify `dataSource` of Table as an array of data.
 | bodyCell | custom body cell by slot | v-slot:bodyCell="{text, record, index, column}" | - | 3.0 |
 | bordered | Whether to show all table borders | boolean | `false` |  |
 | childrenColumnName | The column contains children to display | string | `children` |  |
-| columns | Columns of table [config](#Column) | array | - |  |
+| columns | Columns of table [config](#column) | array | - |  |
 | components | Override default table elements | object | - |  |
-| customFilterDropdown | Customized filter overlay，need set `column.customFilterDropdown` | v-slot:customFilterDropdown="[FilterDropdownProps](#FilterDropdownProps)" | - | 3.0 |
+| customFilterDropdown | Customized filter overlay，need set `column.customFilterDropdown` | v-slot:customFilterDropdown="[FilterDropdownProps](#filterdropdownprops)" | - | 3.0 |
 | customFilterIcon | Customized filter icon | v-slot:customFilterIcon="{filtered, column}" | - | 3.0 |
 | customHeaderRow | Set props on per header row | Function(columns, index) | - |  |
 | customRow | Set props on per row | Function(record, index) | - |  |
@@ -99,11 +99,11 @@ Specify `dataSource` of Table as an array of data.
 | rowClassName | Row's className | Function(record, index):string | - |  |
 | rowExpandable | Enable row can be expandable | (record) => boolean | - |  |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record, index):string | `key` |  |
-| rowSelection | Row selection [config](#rowSelection) | object | null |  |
+| rowSelection | Row selection [config](#rowselection) | object | null |  |
 | scroll | Whether the table can be scrollable, [config](#scroll) | object | - |  |
 | showExpandColumn | Show expand column | boolean | true | 3.0 |
 | showHeader | Whether to show table header | boolean | `true` |  |
-| showSorterTooltip | The header show next sorter direction tooltip. It will be set as the property of Tooltip if its type is object | boolean \| [Tooltip props](/components/tooltip/#API) | true | 3.0 |
+| showSorterTooltip | The header show next sorter direction tooltip. It will be set as the property of Tooltip if its type is object | boolean \| [Tooltip props](/components/tooltip/#api) | true | 3.0 |
 | size | Size of table | `middle` \| `small` \| `large` | `large` |  |
 | sortDirections | Supported sort way, could be `ascend`, `descend` | Array | \[`ascend`, `descend`] | 3.0 |
 | sticky | Set sticky header and scroll bar | boolean \| `{offsetHeader?: number, offsetScroll?: number, getContainer?: () => HTMLElement}` | - | 3.0 |
@@ -177,7 +177,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | maxWidth | Drag the maximum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | - | 3.0 |
 | minWidth | Drag the minimum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | 50 | 3.0 |
 | resizable | Whether the width can be adjusted by dragging, at this time width must be number type | boolean | - | 3.0 |
-| responsive | The list of breakpoints at which to display this column. Always visible if not set. | [Breakpoint](#Breakpoint)\[] | - | 3.0 |
+| responsive | The list of breakpoints at which to display this column. Always visible if not set. | [Breakpoint](#breakpoint)\[] | - | 3.0 |
 | rowScope | Set scope attribute for all cells in this column | `row` \| `rowgroup` | - | 4.0 |
 | sortDirections | supported sort way, could be `'ascend'`, `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |  |
@@ -224,7 +224,7 @@ Properties for row selection.
 | hideSelectAll | Hide the selectAll checkbox and custom selection | boolean | false | 3.0 |
 | preserveSelectedRowKeys | Keep selection `key` even when it removed from `dataSource` | boolean | - | 3.0 |
 | selectedRowKeys | Controlled selected row keys | string\[] | \[] |  |
-| selections | Custom selection [config](#rowSelection), only displays default selections when set to `true` | object\[] \| boolean | - |  |
+| selections | Custom selection [config](#rowselection), only displays default selections when set to `true` | object\[] \| boolean | - |  |
 | type | `checkbox` or `radio` | `checkbox` \| `radio` | `checkbox` |  |
 | onChange | Callback executed when selected rows change | Function(selectedRowKeys, selectedRows) | - |  |
 | onSelect | Callback executed when select/deselect one row | Function(record, selected, selectedRows, nativeEvent) | - |  |

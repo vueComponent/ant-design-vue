@@ -133,8 +133,8 @@ Note: You don't need `Col` to control the width in the `compact` mode.
     </a-input-group>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { CopyOutlined } from '@ant-design/icons-vue';
 
 const options = [
@@ -171,57 +171,26 @@ const options = [
     ],
   },
 ];
-export default defineComponent({
-  components: {
-    CopyOutlined,
-  },
-  setup() {
-    const value1 = ref<string>('0571');
-    const value2 = ref<string>('26888888');
-    const value3 = ref<string>('Zhejiang');
-    const value4 = ref<string>('Xihu District, Hangzhou');
-    const value5 = ref<string>('Option1');
-    const value6 = ref<string>('input content');
-    const value7 = ref<string>('input content');
-    const value8 = ref<string | null>(null);
-    const value9 = ref<string>('Option1-1');
-    const value10 = ref<string>('Option2-2');
-    const value11 = ref<string>('1');
-    const value12 = ref<string>('');
-    const value13 = ref<string>('');
-    const value14 = ref<string>('');
-    const value15 = ref<string>('Sign Up');
-    const value16 = ref<string>('');
-    const value17 = ref<string>('Home');
-    const value18 = ref<string[]>([]);
-    const value19 = ref<string>('https://surely.cool');
-    const value20 = ref<string>('https://antdv.com');
-
-    return {
-      value1,
-      value2,
-      value3,
-      value4,
-      value5,
-      value6,
-      value7,
-      value8,
-      value9,
-      value10,
-      value11,
-      value12,
-      value13,
-      value14,
-      value15,
-      value16,
-      value17,
-      value18,
-      options,
-      value19,
-      value20,
-    };
-  },
-});
+const value1 = ref<string>('0571');
+const value2 = ref<string>('26888888');
+const value3 = ref<string>('Zhejiang');
+const value4 = ref<string>('Xihu District, Hangzhou');
+const value5 = ref<string>('Option1');
+const value6 = ref<string>('input content');
+const value7 = ref<string>('input content');
+const value8 = ref<string | null>(null);
+const value9 = ref<string>('Option1-1');
+const value10 = ref<string>('Option2-2');
+const value11 = ref<string>('1');
+const value12 = ref<string>('');
+const value13 = ref<string>('');
+const value14 = ref<string>('');
+const value15 = ref<string>('Sign Up');
+const value16 = ref<string>('');
+const value17 = ref<string>('Home');
+const value18 = ref<string[]>([]);
+const value19 = ref<string>('https://surely.cool');
+const value20 = ref<string>('https://antdv.com');
 </script>
 <style scoped>
 .site-input-group-wrapper .site-input-split {

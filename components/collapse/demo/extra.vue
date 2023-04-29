@@ -38,34 +38,20 @@ More than one panel can be expanded at a time, the first panel is initialized to
     <a-select-option value="end">end</a-select-option>
   </a-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { SettingOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import type { CollapseProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: {
-    SettingOutlined,
-  },
-  setup() {
-    const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
-    const activeKey = ref(['1']);
-    const expandIconPosition = ref<CollapseProps['expandIconPosition']>('start');
+const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
+const activeKey = ref(['1']);
+const expandIconPosition = ref<CollapseProps['expandIconPosition']>('start');
 
-    const handleClick = (event: MouseEvent) => {
-      // If you don't want click extra trigger collapse, you can prevent this:
-      event.stopPropagation();
-    };
-    watch(activeKey, val => {
-      console.log(val);
-    });
-
-    return {
-      text,
-      activeKey,
-      expandIconPosition,
-      handleClick,
-    };
-  },
+const handleClick = (event: MouseEvent) => {
+  // If you don't want click extra trigger collapse, you can prevent this:
+  event.stopPropagation();
+};
+watch(activeKey, val => {
+  console.log(val);
 });
 </script>

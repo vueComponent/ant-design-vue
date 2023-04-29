@@ -38,8 +38,8 @@ Select multiple options
     ></a-cascader>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { CascaderProps } from 'ant-design-vue';
 import { Cascader } from 'ant-design-vue';
 const options: CascaderProps['options'] = [
@@ -75,13 +75,6 @@ const options: CascaderProps['options'] = [
     ],
   },
 ];
-export default defineComponent({
-  setup() {
-    return {
-      value: ref<string[]>([]),
-      options,
-      Cascader,
-    };
-  },
-});
+
+const value = ref<string[]>([]);
 </script>

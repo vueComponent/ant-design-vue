@@ -36,35 +36,24 @@ You could set `footer` to `null` if you don't need default footer buttons.
     </a-modal>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const loading = ref<boolean>(false);
-    const open = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const loading = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-    const showModal = () => {
-      open.value = true;
-    };
+const showModal = () => {
+  open.value = true;
+};
 
-    const handleOk = () => {
-      loading.value = true;
-      setTimeout(() => {
-        loading.value = false;
-        open.value = false;
-      }, 2000);
-    };
+const handleOk = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+    open.value = false;
+  }, 2000);
+};
 
-    const handleCancel = () => {
-      open.value = false;
-    };
-    return {
-      loading,
-      open,
-      showModal,
-      handleOk,
-      handleCancel,
-    };
-  },
-});
+const handleCancel = () => {
+  open.value = false;
+};
 </script>

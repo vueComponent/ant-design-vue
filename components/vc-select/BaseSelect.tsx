@@ -873,7 +873,7 @@ export default defineComponent({
                 style={{
                   width: 0,
                   height: 0,
-                  display: 'flex',
+                  position: 'absolute',
                   overflow: 'hidden',
                   opacity: 0,
                 }}

@@ -8,38 +8,41 @@ exports[`QuarterPicker reset select item when popup close 1`] = `
   </div>
   <div>
     <!---->
-    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
+    <div class="ant-picker-dropdown ant-slide-up-enter ant-slide-up-enter-prepare ant-slide-up-enter-start" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
-        <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
-          <div class="ant-picker-quarter-panel">
-            <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn"><span class="ant-picker-super-prev-icon"></span></button>
-              <!---->
-              <div class="ant-picker-header-view"><button type="button" class="ant-picker-year-btn">2023</button></div>
-              <!----><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn"><span class="ant-picker-super-next-icon"></span></button>
-            </div>
-            <div class="ant-picker-body">
-              <table class="ant-picker-content">
-                <!---->
-                <tbody>
-                  <tr>
-                    <td title="2023-Q1" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">Q1</div>
-                    </td>
-                    <td title="2023-Q2" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">Q2</div>
-                    </td>
-                    <td title="2023-Q3" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">Q3</div>
-                    </td>
-                    <td title="2023-Q4" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">Q4</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="ant-picker-panel-layout">
           <!---->
+          <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
+            <div class="ant-picker-quarter-panel">
+              <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn"><span class="ant-picker-super-prev-icon"></span></button>
+                <!---->
+                <div class="ant-picker-header-view"><button type="button" class="ant-picker-year-btn">2023</button></div>
+                <!----><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn"><span class="ant-picker-super-next-icon"></span></button>
+              </div>
+              <div class="ant-picker-body">
+                <table class="ant-picker-content">
+                  <!---->
+                  <tbody>
+                    <tr>
+                      <td title="2023-Q1" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">Q1</div>
+                      </td>
+                      <td title="2023-Q2" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">Q2</div>
+                      </td>
+                      <td title="2023-Q3" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">Q3</div>
+                      </td>
+                      <td title="2023-Q4" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">Q4</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!---->
+          </div>
         </div>
       </div>
     </div>

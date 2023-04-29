@@ -33,25 +33,15 @@ Basic drawer.
     <p>Some contents...</p>
   </a-drawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const open = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const open = ref<boolean>(false);
 
-    const afterOpenChange = (bool: boolean) => {
-      console.log('open', bool);
-    };
+const afterOpenChange = (bool: boolean) => {
+  console.log('open', bool);
+};
 
-    const showDrawer = () => {
-      open.value = true;
-    };
-
-    return {
-      open,
-      afterOpenChange,
-      showDrawer,
-    };
-  },
-});
+const showDrawer = () => {
+  open.value = true;
+};
 </script>

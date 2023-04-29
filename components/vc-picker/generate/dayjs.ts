@@ -123,6 +123,7 @@ function findTargetStr(val: string, index: number, segmentation: string) {
 }
 
 const toDateWithValueFormat = (val: string | Dayjs, valueFormat: string) => {
+  if (!val) return null;
   if (dayjs.isDayjs(val)) {
     return val;
   }

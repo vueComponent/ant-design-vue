@@ -25,22 +25,12 @@ You can hide the arrow icon by passing `showArrow={false}` to `CollapsePanel` co
     </a-collapse-panel>
   </a-collapse>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
+const activeKey = ref(['1']);
+const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
 
-export default defineComponent({
-  setup() {
-    const activeKey = ref(['1']);
-    const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
-
-    watch(activeKey, val => {
-      console.log('activeKey', val);
-    });
-
-    return {
-      activeKey,
-      text,
-    };
-  },
+watch(activeKey, val => {
+  console.log('activeKey', val);
 });
 </script>

@@ -40,54 +40,44 @@ Allows for custom rendering of tags.
     </template>
   </a-tree-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
 import { TreeSelect } from 'ant-design-vue';
 const SHOW_ALL = TreeSelect.SHOW_ALL;
-export default defineComponent({
-  setup() {
-    const value = ref<string[]>(['parent 1', 'parent 1-0', 'leaf1']);
-    const treeData = ref<TreeSelectProps['treeData']>([
+const value = ref<string[]>(['parent 1', 'parent 1-0', 'leaf1']);
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    title: 'parent 1',
+    value: 'parent 1',
+    color: 'pink',
+    children: [
       {
-        title: 'parent 1',
-        value: 'parent 1',
-        color: 'pink',
+        title: 'parent 1-0',
+        value: 'parent 1-0',
+        color: 'orange',
         children: [
           {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            color: 'orange',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-                color: 'green',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-                color: 'cyan',
-              },
-            ],
+            title: 'my leaf',
+            value: 'leaf1',
+            color: 'green',
           },
           {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
-            color: 'blue',
+            title: 'your leaf',
+            value: 'leaf2',
+            color: 'cyan',
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log('select', value.value);
-    });
-
-    return {
-      value,
-      treeData,
-      SHOW_ALL,
-    };
+      {
+        title: 'parent 1-1',
+        value: 'parent 1-1',
+        color: 'blue',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log('select', value.value);
 });
 </script>

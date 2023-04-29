@@ -70,7 +70,7 @@ exports[`renders ./components/typography/demo/ellipsis.vue correctly 1`] = `
 <button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
   <div class="ant-switch-handle">
     <!---->
-  </div><span class="ant-switch-inner"><!----></span>
+  </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"><!----></span><span class="ant-switch-inner-unchecked"><!----></span></span>
 </button>
 <div class="ant-typography ant-typography-ellipsis ant-typography-single-line ant-typography-ellipsis-single-line"> Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
   Design, a design language for background applications, is refined by Ant UED Team. Ant
@@ -152,7 +152,7 @@ Trigger edit with:  
 `;
 
 exports[`renders ./components/typography/demo/suffix.vue correctly 1`] = `
-<div tabindex="-1" class="ant-slider">
+<div tabindex="-1" class="ant-slider ant-slider-horizontal">
   <div class="ant-slider-rail"></div>
   <div class="ant-slider-track" style="left: 0%; width: 0%;"></div>
   <div class="ant-slider-step"></div>

@@ -30,17 +30,10 @@ You can manually specify the position of the popup via `placement`.
     <a-time-range-picker v-model:value="value2" :placement="placement" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { Dayjs } from 'dayjs';
-export default defineComponent({
-  setup() {
-    const placement = ref('topLeft' as const);
-    return {
-      placement,
-      value1: ref<Dayjs>(),
-      value2: ref<[Dayjs, Dayjs]>(),
-    };
-  },
-});
+const placement = ref('topLeft' as const);
+const value1 = ref<Dayjs>();
+const value2 = ref<[Dayjs, Dayjs]>();
 </script>

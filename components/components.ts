@@ -116,6 +116,7 @@ export type {
   MenuItemProps,
   MenuMode,
   MenuDividerProps,
+  ItemType,
 } from './menu';
 export { default as Menu, MenuDivider, MenuItem, MenuItemGroup, SubMenu } from './menu';
 

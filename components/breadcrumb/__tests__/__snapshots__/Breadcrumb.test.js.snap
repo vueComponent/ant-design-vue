@@ -40,7 +40,7 @@ exports[`Breadcrumb should support Breadcrumb.Item default separator 1`] = `
 `;
 
 exports[`Breadcrumb should support custom attribute 1`] = `
-<nav class="ant-breadcrumb" data-custom="custom">
+<nav data-custom="custom" class="ant-breadcrumb">
   <ol>
     <li><span class="ant-breadcrumb-link" data-custom="custom-item">xxx</span><span class="ant-breadcrumb-separator">/</span></li>
     <li><span class="ant-breadcrumb-link">yyy</span><span class="ant-breadcrumb-separator">/</span></li>

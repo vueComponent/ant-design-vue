@@ -29,9 +29,9 @@ The most basic usage, tell you how to use checkable, selectable, disabled, defau
     </template>
   </a-tree>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
 
 const treeData: TreeProps['treeData'] = [
   {
@@ -56,27 +56,16 @@ const treeData: TreeProps['treeData'] = [
   },
 ];
 
-export default defineComponent({
-  setup() {
-    const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    watch(expandedKeys, () => {
-      console.log('expandedKeys', expandedKeys);
-    });
-    watch(selectedKeys, () => {
-      console.log('selectedKeys', selectedKeys);
-    });
-    watch(checkedKeys, () => {
-      console.log('checkedKeys', checkedKeys);
-    });
-
-    return {
-      treeData,
-      expandedKeys,
-      selectedKeys,
-      checkedKeys,
-    };
-  },
+const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+watch(expandedKeys, () => {
+  console.log('expandedKeys', expandedKeys);
+});
+watch(selectedKeys, () => {
+  console.log('selectedKeys', selectedKeys);
+});
+watch(checkedKeys, () => {
+  console.log('checkedKeys', checkedKeys);
 });
 </script>

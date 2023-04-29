@@ -21,25 +21,16 @@ A way to download QRCode.
   <a-button type="primary" @click="dowloadChange">Downlaod</a-button>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const qrcodeCanvasRef = ref();
-    const dowloadChange = async () => {
-      const url = await qrcodeCanvasRef.value.toDataURL();
-      const a = document.createElement('a');
-      a.download = 'QRCode.png';
-      a.href = url;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    };
-    return {
-      dowloadChange,
-      qrcodeCanvasRef,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const qrcodeCanvasRef = ref();
+const dowloadChange = async () => {
+  const url = await qrcodeCanvasRef.value.toDataURL();
+  const a = document.createElement('a');
+  a.download = 'QRCode.png';
+  a.href = url;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
 </script>

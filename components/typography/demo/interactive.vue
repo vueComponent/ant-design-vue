@@ -71,8 +71,8 @@ Provide additional interactive capacity of editable and copyable.
     Hide Copy tooltips.
   </a-typography-paragraph>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import {
   HighlightOutlined,
   SmileOutlined,
@@ -80,50 +80,34 @@ import {
   CheckOutlined,
 } from '@ant-design/icons-vue';
 
-export default defineComponent({
-  components: {
-    HighlightOutlined,
-    SmileOutlined,
-    SmileFilled,
-    CheckOutlined,
-  },
-  setup() {
-    const editableStr = ref('This is an editable text.');
-    watch(editableStr, () => {
-      console.log('editableStr', editableStr.value);
-    });
-    const chooseTrigger = ref<('icon' | 'text')[]>(['icon']);
-
-    const radioToState = (input: string): ('icon' | 'text')[] => {
-      switch (input) {
-        case 'text':
-          return ['text'];
-        case 'both':
-          return ['icon', 'text'];
-        case 'icon':
-        default:
-          return ['icon'];
-      }
-    };
-
-    const stateToRadio = () => {
-      if (chooseTrigger.value.indexOf('text') !== -1) {
-        return chooseTrigger.value.indexOf('icon') !== -1 ? 'both' : 'text';
-      }
-      return 'icon';
-    };
-    return {
-      radioToState,
-      stateToRadio,
-      editableStr,
-      customIconStr: ref('Custom Edit icon and replace tooltip text.'),
-      hideTooltipStr: ref('Hide Edit tooltip.'),
-      lengthLimitedStr: ref('This is an editable text with limited length.'),
-      clickTriggerStr: ref('Text or icon as trigger - click to start editing.'),
-      chooseTrigger,
-      customEnterIconStr: ref('Editable text with a custom enter icon in edit field.'),
-      noEnterIconStr: ref('Editable text with no enter icon in edit field.'),
-    };
-  },
+const editableStr = ref('This is an editable text.');
+watch(editableStr, () => {
+  console.log('editableStr', editableStr.value);
 });
+const chooseTrigger = ref<('icon' | 'text')[]>(['icon']);
+
+const radioToState = (input: string): ('icon' | 'text')[] => {
+  switch (input) {
+    case 'text':
+      return ['text'];
+    case 'both':
+      return ['icon', 'text'];
+    case 'icon':
+    default:
+      return ['icon'];
+  }
+};
+
+const stateToRadio = () => {
+  if (chooseTrigger.value.indexOf('text') !== -1) {
+    return chooseTrigger.value.indexOf('icon') !== -1 ? 'both' : 'text';
+  }
+  return 'icon';
+};
+const customIconStr = ref('Custom Edit icon and replace tooltip text.');
+const hideTooltipStr = ref('Hide Edit tooltip.');
+const lengthLimitedStr = ref('This is an editable text with limited length.');
+const clickTriggerStr = ref('Text or icon as trigger - click to start editing.');
+const customEnterIconStr = ref('Editable text with a custom enter icon in edit field.');
+const noEnterIconStr = ref('Editable text with no enter icon in edit field.');
 </script>

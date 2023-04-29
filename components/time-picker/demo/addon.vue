@@ -30,33 +30,20 @@ Render addon contents to timepicker panel's bottom.
     </a-time-picker>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { Dayjs } from 'dayjs';
-import { defineComponent, ref } from 'vue';
+const open = ref(false);
+const open2 = ref(false);
+const value = ref<Dayjs>();
 
-export default defineComponent({
-  setup() {
-    const open = ref(false);
-    const open2 = ref(false);
-    const value = ref<Dayjs>();
+const handleOpenChange = (openStatus: boolean) => {
+  console.log('open', openStatus);
+  open.value = openStatus;
+};
 
-    const handleOpenChange = (openStatus: boolean) => {
-      console.log('open', openStatus);
-      open.value = openStatus;
-    };
-
-    const handleClose = () => {
-      open.value = false;
-      open2.value = false;
-    };
-
-    return {
-      value,
-      open,
-      open2,
-      handleOpenChange,
-      handleClose,
-    };
-  },
-});
+const handleClose = () => {
+  open.value = false;
+  open2.value = false;
+};
 </script>

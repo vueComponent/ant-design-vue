@@ -4,9 +4,13 @@ import { computed, defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
 import { useMeasure } from './hooks/useKeyPath';
+import type { ItemType } from './interface';
+import { objectType } from '../../_util/type';
 
 export const menuItemGroupProps = () => ({
   title: PropTypes.any,
+  // Internal user prop
+  originItemValue: objectType<ItemType>(),
 });
 
 export type MenuItemGroupProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemGroupProps>>>;

@@ -34,12 +34,6 @@ Alternate timeline.
     </a-timeline-item>
   </a-timeline>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ClockCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    ClockCircleOutlined,
-  },
-});
 </script>

@@ -22,27 +22,16 @@ Disabled Segmented.
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const data = reactive(['Map', 'Transit', 'Satellite']);
-    const data2 = reactive([
-      'Daily',
-      { value: 'Weekly', disabled: true },
-      'Monthly',
-      { value: 'Quarterly', disabled: true },
-      'Yearly',
-    ]);
-    const value = ref(data[0]);
-    const value2 = ref('Daily');
-    return {
-      data,
-      data2,
-      value,
-      value2,
-    };
-  },
-});
+<script lang="ts" setup>
+import { reactive, ref } from 'vue';
+const data = reactive(['Map', 'Transit', 'Satellite']);
+const data2 = reactive([
+  'Daily',
+  { value: 'Weekly', disabled: true },
+  'Monthly',
+  { value: 'Quarterly', disabled: true },
+  'Yearly',
+]);
+const value = ref(data[0]);
+const value2 = ref('Daily');
 </script>

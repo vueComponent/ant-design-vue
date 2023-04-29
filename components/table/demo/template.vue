@@ -53,8 +53,7 @@ Using template style API.
     </a-table-column>
   </a-table>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 const data = [
   {
     key: '1',
@@ -81,12 +80,4 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ];
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-    };
-  },
-});
 </script>

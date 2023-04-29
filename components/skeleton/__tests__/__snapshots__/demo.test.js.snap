@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/skeleton/demo/active.vue correctly 1`] = `
-<div class="ant-skeleton ant-skeleton-active">
+<div class="ant-skeleton ant-skeleton-active ">
   <!---->
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 38%;"></h3>
@@ -15,7 +15,7 @@ exports[`renders ./components/skeleton/demo/active.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/skeleton/demo/basic.vue correctly 1`] = `
-<div class="ant-skeleton">
+<div class="ant-skeleton ">
   <!---->
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 38%;"></h3>
@@ -29,18 +29,23 @@ exports[`renders ./components/skeleton/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/skeleton/demo/children.vue correctly 1`] = `
-<div class="article">
-  <div>
-    <h4>Ant Design Vue, a design language</h4>
-    <p> We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently. </p>
-  </div><button class="ant-btn" type="button">
-    <!----><span>Show Skeleton</span>
-  </button>
+<div style="width: 100%;" class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 16px;">
+    <div>
+      <h4>Ant Design Vue, a design language</h4>
+      <p> We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently. </p>
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>Show Skeleton</span>
+    </button></div>
+  <!---->
 </div>
 `;
 
 exports[`renders ./components/skeleton/demo/complex.vue correctly 1`] = `
-<div class="ant-skeleton ant-skeleton-with-avatar">
+<div class="ant-skeleton ant-skeleton-with-avatar ">
   <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 50%;"></h3>
@@ -83,84 +88,94 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
   <!---->
 </div>
 <form style="margin: 16px 0px;" class="ant-form ant-form-inline">
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label class="" title="Active">Active
-        <!---->
-      </label></div>
-    <div class="ant-col ant-form-item-control">
-      <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
-            <div class="ant-switch-handle">
-              <!---->
-            </div><span class="ant-switch-inner"><!----></span>
-          </button></div>
-        <!---->
-      </div>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label class="" title="Button Block">Button Block
-        <!---->
-      </label></div>
-    <div class="ant-col ant-form-item-control">
-      <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
-            <div class="ant-switch-handle">
-              <!---->
-            </div><span class="ant-switch-inner"><!----></span>
-          </button></div>
-        <!---->
-      </div>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label class="" title="Size">Size
-        <!---->
-      </label></div>
-    <div class="ant-col ant-form-item-control">
-      <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div>
+  <div class="ant-form-item">
+    <div class="ant-row ant-form-row">
+      <div class="ant-col ant-form-item-label"><label class="" title="Active">Active
+          <!---->
+        </label></div>
+      <div class="ant-col ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
+              <div class="ant-switch-handle">
+                <!---->
+              </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"><!----></span><span class="ant-switch-inner-unchecked"><!----></span></span>
+            </button></div>
         </div>
         <!---->
-      </div>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label class="" title="Button Shape">Button Shape
         <!---->
-      </label></div>
-    <div class="ant-col ant-form-item-control">
-      <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="round"><span class="ant-radio-button-inner"></span></span><span>Round</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div class="ant-form-item">
+    <div class="ant-row ant-form-row">
+      <div class="ant-col ant-form-item-label"><label class="" title="Button Block">Button Block
+          <!---->
+        </label></div>
+      <div class="ant-col ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
+              <div class="ant-switch-handle">
+                <!---->
+              </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"><!----></span><span class="ant-switch-inner-unchecked"><!----></span></span>
+            </button></div>
         </div>
         <!---->
-      </div>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label class="" title="Avatar Shape">Avatar Shape
         <!---->
-      </label></div>
-    <div class="ant-col ant-form-item-control">
-      <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="square"><span class="ant-radio-button-inner"></span></span><span>Square</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div class="ant-form-item">
+    <div class="ant-row ant-form-row">
+      <div class="ant-col ant-form-item-label"><label class="" title="Size">Size
+          <!---->
+        </label></div>
+      <div class="ant-col ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content">
+            <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div>
+          </div>
         </div>
         <!---->
+        <!---->
       </div>
-      <!---->
-      <!---->
     </div>
+    <!---->
+  </div>
+  <div class="ant-form-item">
+    <div class="ant-row ant-form-row">
+      <div class="ant-col ant-form-item-label"><label class="" title="Button Shape">Button Shape
+          <!---->
+        </label></div>
+      <div class="ant-col ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content">
+            <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="round"><span class="ant-radio-button-inner"></span></span><span>Round</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
+          </div>
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <!---->
+  </div>
+  <div class="ant-form-item">
+    <div class="ant-row ant-form-row">
+      <div class="ant-col ant-form-item-label"><label class="" title="Avatar Shape">Avatar Shape
+          <!---->
+        </label></div>
+      <div class="ant-col ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content">
+            <div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="square"><span class="ant-radio-button-inner"></span></span><span>Square</span></label><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="circle"><span class="ant-radio-button-inner"></span></span><span>Circle</span></label></div>
+          </div>
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <!---->
   </div>
 </form>
 `;
@@ -169,7 +184,7 @@ exports[`renders ./components/skeleton/demo/list.vue correctly 1`] = `
 <div><button type="button" role="switch" aria-checked="false" class="ant-switch">
     <div class="ant-switch-handle">
       <!---->
-    </div><span class="ant-switch-inner"><!----></span>
+    </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"><!----></span><span class="ant-switch-inner-unchecked"><!----></span></span>
   </button>
   <div class="ant-list ant-list-vertical ant-list-lg ant-list-split">
     <!---->
@@ -180,7 +195,7 @@ exports[`renders ./components/skeleton/demo/list.vue correctly 1`] = `
         <ul class="ant-list-items">
           <li class="ant-list-item">
             <div class="ant-list-item-main">
-              <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
+              <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active ">
                 <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
                 <div class="ant-skeleton-content">
                   <h3 class="ant-skeleton-title" style="width: 50%;"></h3>
@@ -198,7 +213,7 @@ exports[`renders ./components/skeleton/demo/list.vue correctly 1`] = `
           </li>
           <li class="ant-list-item">
             <div class="ant-list-item-main">
-              <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
+              <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active ">
                 <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
                 <div class="ant-skeleton-content">
                   <h3 class="ant-skeleton-title" style="width: 50%;"></h3>
@@ -216,7 +231,7 @@ exports[`renders ./components/skeleton/demo/list.vue correctly 1`] = `
           </li>
           <li class="ant-list-item">
             <div class="ant-list-item-main">
-              <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
+              <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active ">
                 <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
                 <div class="ant-skeleton-content">
                   <h3 class="ant-skeleton-title" style="width: 50%;"></h3>

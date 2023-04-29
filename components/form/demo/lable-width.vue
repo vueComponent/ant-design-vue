@@ -44,8 +44,8 @@ Set label width by labelCol.style
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, toRaw } from 'vue';
+<script lang="ts" setup>
+import { reactive, toRaw } from 'vue';
 import type { UnwrapRef } from 'vue';
 
 interface FormState {
@@ -55,24 +55,16 @@ interface FormState {
   resource: string;
   desc: string;
 }
-export default defineComponent({
-  setup() {
-    const formState: UnwrapRef<FormState> = reactive({
-      name: '',
-      delivery: false,
-      type: [],
-      resource: '',
-      desc: '',
-    });
-    const onSubmit = () => {
-      console.log('submit!', toRaw(formState));
-    };
-    return {
-      labelCol: { style: { width: '150px' } },
-      wrapperCol: { span: 14 },
-      formState,
-      onSubmit,
-    };
-  },
+const formState: UnwrapRef<FormState> = reactive({
+  name: '',
+  delivery: false,
+  type: [],
+  resource: '',
+  desc: '',
 });
+const onSubmit = () => {
+  console.log('submit!', toRaw(formState));
+};
+const labelCol = { style: { width: '150px' } };
+const wrapperCol = { span: 14 };
 </script>

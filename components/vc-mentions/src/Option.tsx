@@ -17,11 +17,14 @@ export type BaseOptionsProps = Partial<ExtractPropTypes<typeof baseOptionsProps>
 
 export type OptionProps = Partial<ExtractPropTypes<typeof optionProps>> & Partial<HTMLAttributes>;
 
-export default defineComponent({
-  compatConfig: { MODE: 3 },
+export const optionOptions = {
   name: 'Option',
   props: optionProps,
   render(_props: any, { slots }: any) {
     return slots.default?.();
   },
+};
+export default defineComponent({
+  compatConfig: { MODE: 3 },
+  ...optionOptions,
 });

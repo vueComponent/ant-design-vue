@@ -42,44 +42,35 @@ You can manually specify the position of the popup via `placement`.
     </template>
   </a-tree-select>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const placement = ref('topLeft' as const);
-    const value = ref<string>();
-    const treeData = ref<TreeSelectProps['treeData']>([
+const placement = ref('topLeft' as const);
+const value = ref<string>();
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    title: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
-        title: 'parent 1',
-        value: 'parent 1',
+        title: 'parent 1-0',
+        value: 'parent 1-0',
         children: [
           {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-              },
-            ],
+            title: 'my leaf',
+            value: 'leaf1',
           },
           {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
+            title: 'your leaf',
+            value: 'leaf2',
           },
         ],
       },
-    ]);
-    return {
-      placement,
-      value,
-      treeData,
-    };
+      {
+        title: 'parent 1-1',
+        value: 'parent 1-1',
+      },
+    ],
   },
-});
+]);
 </script>

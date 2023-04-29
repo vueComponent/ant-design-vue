@@ -32,21 +32,11 @@ If you need several buttons, we recommend that you use 1 primary button + n seco
     </a-button>
   </a-dropdown>
 </template>
-<script lang="ts">
+
+<script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    DownOutlined,
-  },
-  setup() {
-    const handleMenuClick: MenuProps['onClick'] = e => {
-      console.log('click', e);
-    };
-    return {
-      handleMenuClick,
-    };
-  },
-});
+const handleMenuClick: MenuProps['onClick'] = e => {
+  console.log('click', e);
+};
 </script>

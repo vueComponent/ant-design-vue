@@ -18,14 +18,7 @@ No border.
 <template>
   <a-input v-model:value="value" :bordered="false" placeholder="Borderless" />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('');
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<string>('');
 </script>

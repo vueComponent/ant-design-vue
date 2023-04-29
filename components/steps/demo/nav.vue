@@ -93,20 +93,12 @@ Navigation steps.
     ></a-steps>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
+const current = ref<number>(0);
 
-export default defineComponent({
-  setup() {
-    const current = ref<number>(0);
-
-    return {
-      current,
-      stepStyle: {
-        marginBottom: '60px',
-        boxShadow: '0px -1px 0 0 #e8e8e8 inset',
-      },
-    };
-  },
-});
+const stepStyle = {
+  marginBottom: '60px',
+  boxShadow: '0px -1px 0 0 #e8e8e8 inset',
+};
 </script>

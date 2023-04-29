@@ -17,21 +17,16 @@ Mark a pending state of switch.
 </docs>
 <template>
   <div>
-    <a-switch v-model:checked="checked1" loading />
+    <a-switch v-model:checked="state.checked1" loading />
     <br />
-    <a-switch v-model:checked="checked2" size="small" loading />
+    <a-switch v-model:checked="state.checked2" size="small" loading />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
-export default defineComponent({
-  setup() {
-    const state = reactive({
-      checked1: true,
-      checked2: false,
-    });
-    return { ...toRefs(state) };
-  },
+<script lang="ts" setup>
+import { reactive } from 'vue';
+const state = reactive({
+  checked1: true,
+  checked2: false,
 });
 </script>

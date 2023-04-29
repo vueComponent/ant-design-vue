@@ -21,16 +21,8 @@ Show character counting.
   <br />
   <a-textarea v-model:value="value2" show-count :maxlength="100" />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value1 = ref<string>('test value');
-    const value2 = ref<string>('test value');
-    return {
-      value1,
-      value2,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value1 = ref<string>('test value');
+const value2 = ref<string>('test value');
 </script>

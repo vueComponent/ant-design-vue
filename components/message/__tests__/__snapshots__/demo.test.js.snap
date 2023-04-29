@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/message/demo/custom-style.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="ant-btn ant-btn-default" type="button">
   <!----><span>Customized style</span>
 </button>
 `;
 
 exports[`renders ./components/message/demo/duration.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="ant-btn ant-btn-default" type="button">
   <!----><span>Customized display duration</span>
 </button>
 `;
@@ -19,22 +19,22 @@ exports[`renders ./components/message/demo/info.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/message/demo/loading.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="ant-btn ant-btn-default" type="button">
   <!----><span>Display a loading indicator</span>
 </button>
 `;
 
 exports[`renders ./components/message/demo/other.vue correctly 1`] = `
 <div class="ant-space ant-space-horizontal ant-space-align-center">
-  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn" type="button">
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Success</span>
     </button></div>
   <!---->
-  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn" type="button">
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Error</span>
     </button></div>
   <!---->
-  <div class="ant-space-item"><button class="ant-btn" type="button">
+  <div class="ant-space-item"><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Warning</span>
     </button></div>
   <!---->
@@ -42,7 +42,7 @@ exports[`renders ./components/message/demo/other.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/message/demo/thenable.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="ant-btn ant-btn-default" type="button">
   <!----><span>Display a sequence of message</span>
 </button>
 `;

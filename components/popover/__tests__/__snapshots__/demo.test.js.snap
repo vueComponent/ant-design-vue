@@ -3,13 +3,13 @@
 exports[`renders ./components/popover/demo/arrow-point-at-center.vue correctly 1`] = `
 <div class="ant-space ant-space-horizontal ant-space-align-center">
   <div class="ant-space-item" style="margin-right: 8px;">
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Align edge / 边缘对齐</span>
     </button>
   </div>
   <!---->
   <div class="ant-space-item">
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Arrow points to center / 箭头指向中心</span>
     </button>
   </div>
@@ -30,7 +30,7 @@ exports[`renders ./components/popover/demo/control.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/popover/demo/hover-with-click.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<button class="ant-btn ant-btn-default" type="button">
   <!----><span>Hover and click / 悬停并单击</span>
 </button>
 `;
@@ -38,46 +38,46 @@ exports[`renders ./components/popover/demo/hover-with-click.vue correctly 1`] = 
 exports[`renders ./components/popover/demo/placement.vue correctly 1`] = `
 <div id="components-popover-demo-placement">
   <div style="margin-left: 70px; white-space: nowrap;">
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>TL</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Top</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>TR</span>
     </button>
   </div>
   <div style="width: 70px; float: left;">
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>LT</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Left</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>LB</span>
     </button>
   </div>
   <div style="width: 70px; margin-left: 304px;">
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>RT</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Right</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>RB</span>
     </button>
   </div>
   <div style="margin-left: 70px; clear: both; white-space: nowrap;">
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>BL</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Bottom</span>
     </button>
-    <!----><button class="ant-btn" type="button">
+    <!----><button class="ant-btn ant-btn-default" type="button">
       <!----><span>BR</span>
     </button>
   </div>
@@ -86,13 +86,13 @@ exports[`renders ./components/popover/demo/placement.vue correctly 1`] = `
 
 exports[`renders ./components/popover/demo/triggerType.vue correctly 1`] = `
 <div>
-  <!----><button class="ant-btn" type="button">
+  <!----><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Hover me</span>
   </button>
-  <!----><button class="ant-btn" type="button">
+  <!----><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Focus me</span>
   </button>
-  <!----><button class="ant-btn" type="button">
+  <!----><button class="ant-btn ant-btn-default" type="button">
     <!----><span>Click me</span>
   </button>
 </div>

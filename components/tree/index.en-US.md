@@ -40,7 +40,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | showLine | Shows a connecting line | boolean \| {showLeafIcon: boolean}(3.0+) | false |  |
 | switcherIcon | customize collapse/expand icon of tree node | v-slot:switcherIcon="{active, checked, expanded, loading, selected, halfChecked, title, key, children, dataRef, data, defaultIcon, switcherCls}" | - |  |
 | title | custom title | slot |  | 2.0.0 |
-| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | [TreeNode\[\]](#TreeNode) | - |  |
+| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | [TreeNode\[\]](#treenode) | - |  |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
 
 ### Events

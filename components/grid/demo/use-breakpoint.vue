@@ -24,18 +24,9 @@ Use `useBreakpoint` Hook provide personalized layout.
     </a-tag>
   </template>
 </template>
-<script>
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { Grid } from 'ant-design-vue';
 
 const useBreakpoint = Grid.useBreakpoint;
-
-export default defineComponent({
-  setup() {
-    const screens = useBreakpoint();
-    return {
-      screens,
-    };
-  },
-});
+const screens = useBreakpoint();
 </script>

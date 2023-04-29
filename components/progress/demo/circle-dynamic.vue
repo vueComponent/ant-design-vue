@@ -29,31 +29,18 @@ A dynamic progress bar is better.
     </a-button-group>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    MinusOutlined,
-    PlusOutlined,
-  },
-  setup() {
-    const defaultPercent = ref<number>(0);
+import { ref } from 'vue';
+const defaultPercent = ref<number>(0);
 
-    const increase = () => {
-      const percent = defaultPercent.value + 10;
-      defaultPercent.value = percent > 100 ? 100 : percent;
-    };
+const increase = () => {
+  const percent = defaultPercent.value + 10;
+  defaultPercent.value = percent > 100 ? 100 : percent;
+};
 
-    const decline = () => {
-      const percent = defaultPercent.value - 10;
-      defaultPercent.value = percent < 0 ? 0 : percent;
-    };
-    return {
-      defaultPercent,
-      increase,
-      decline,
-    };
-  },
-});
+const decline = () => {
+  const percent = defaultPercent.value - 10;
+  defaultPercent.value = percent < 0 ? 0 : percent;
+};
 </script>

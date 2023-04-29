@@ -21,22 +21,14 @@ Basic usage example.
     <a-input v-model:value.lazy="value1" autofocus placeholder="Lazy usage" />
   </a-space>
 </template>
-<script lang="ts">
-import { watch, defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('');
-    const value1 = ref<string>('');
-    watch(value, () => {
-      console.log(value.value);
-    });
-    watch(value1, () => {
-      console.log(value1.value);
-    });
-    return {
-      value,
-      value1,
-    };
-  },
+<script lang="ts" setup>
+import { watch, ref } from 'vue';
+const value = ref<string>('');
+const value1 = ref<string>('');
+watch(value, () => {
+  console.log(value.value);
+});
+watch(value1, () => {
+  console.log(value1.value);
 });
 </script>

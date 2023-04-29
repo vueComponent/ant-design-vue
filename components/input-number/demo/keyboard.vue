@@ -21,16 +21,8 @@ Control keyboard behavior by `keyboard`.
     <a-checkbox v-model:checked="keyboard">Toggle keyboard</a-checkbox>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<number>(3);
-
-    return {
-      value,
-      keyboard: ref(true),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<number>(3);
+const keyboard = ref(true);
 </script>

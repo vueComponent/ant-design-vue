@@ -1,7 +1,7 @@
 ---
 category: Components
-type: Other
-cols: 2
+type: Navigation
+cols: 1
 title: Anchor
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*TBTSR4PyVmkAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAAAAAAAAAAAADrJ8AQ/original
@@ -26,10 +26,22 @@ For displaying anchor hyperlinks on page and jumping between them.
 | offsetBottom | Pixels to offset from bottom when calculating position of scroll | number | - |  |
 | offsetTop | Pixels to offset from top when calculating position of scroll | number | 0 |  |
 | showInkInFixed | Whether show ink-square when `：affix="false"` | boolean | false |  |
-| targetOffset | Anchor scroll offset, default as `offsetTop`, [example](#components-anchor-demo-targetOffset) | number | `offsetTop` | 1.5.0 |
+| targetOffset | Anchor scroll offset, default as `offsetTop`, [example](#components-anchor-demo-targetoffset) | number | `offsetTop` | 1.5.0 |
 | wrapperClass | The class name of the container | string | - |  |
 | wrapperStyle | The style of the container | object | - |  |
-| items | Data configuration option content, support nesting through children | { href, title, target, children, key }\[] | - | 4.0 |
+| items | Data configuration option content, support nesting through children | { key, href, title, target, children }\[] [see](#anchoritem) | - | 4.0 |
+| direction | Set Anchor direction | `vertical` \| `horizontal` | `vertical` | 4.0 |
+| customTitle | custom option title by slot | v-slot="AnchorItem" | - | 4.0 |
+
+### AnchorItem
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| key | The unique identifier of the Anchor Link | string \| number | - |  |
+| href | The target of hyperlink | string |  |  |
+| target | Specifies where to display the linked URL | string |  |  |
+| title | The content of hyperlink | VueNode \| (item: AnchorItem) => VueNode |  |  |
+| children | Nested Anchor Link, `Attention: This attribute does not support horizontal orientation` | [AnchorItem](#anchoritem)\[] | - |  |
 
 ### Events
 

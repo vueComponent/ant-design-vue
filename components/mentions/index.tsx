@@ -2,13 +2,13 @@ import type { App, PropType, ExtractPropTypes } from 'vue';
 import { computed, watch, shallowRef, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import VcMentions, { Option } from '../vc-mentions';
+import VcMentions from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
-import { optionProps } from '../vc-mentions/src/Option';
+import { optionProps, optionOptions } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
 import type { InputStatus } from '../_util/statusUtils';
 import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
@@ -279,7 +279,7 @@ const Mentions = defineComponent({
 /* istanbul ignore next */
 export const MentionsOption = defineComponent({
   compatConfig: { MODE: 3 },
-  ...(Option as any),
+  ...optionOptions,
   name: 'AMentionsOption',
   props: optionProps,
 });

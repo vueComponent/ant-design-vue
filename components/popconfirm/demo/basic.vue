@@ -27,24 +27,15 @@ The basic example.
     <a href="#">Delete</a>
   </a-popconfirm>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { message } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const confirm = (e: MouseEvent) => {
-      console.log(e);
-      message.success('Click on Yes');
-    };
+const confirm = (e: MouseEvent) => {
+  console.log(e);
+  message.success('Click on Yes');
+};
 
-    const cancel = (e: MouseEvent) => {
-      console.log(e);
-      message.error('Click on No');
-    };
-    return {
-      confirm,
-      cancel,
-    };
-  },
-});
+const cancel = (e: MouseEvent) => {
+  console.log(e);
+  message.error('Click on No');
+};
 </script>

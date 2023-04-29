@@ -22,7 +22,7 @@ const imageOptions = {
   limit: 10000,
 };
 
-function getWebpackConfig(modules, esm = false) {
+function getWebpackConfig(modules) {
   const pkg = require(getProjectPath('package.json'));
   const babelConfig = require('./getBabelCommonConfig')(modules || false);
 
@@ -170,7 +170,7 @@ function getWebpackConfig(modules, esm = false) {
       new webpack.BannerPlugin(`
 ${pkg.name} v${pkg.version}
 
-Copyright 2017-present, ant-design-vue.
+Copyright 2017-present, Ant Design Vue.
 All rights reserved.
       `),
       new WebpackBar({
@@ -197,6 +197,9 @@ All rights reserved.
         },
       },
     ];
+    config.output.library = distFileBaseName;
+    config.output.libraryTarget = 'umd';
+    config.output.globalObject = 'this';
     config.optimization = {
       minimizer: [
         new TerserPlugin({
@@ -207,28 +210,10 @@ All rights reserved.
         }),
       ],
     };
-    if (esm) {
-      entry = ['./index.esm'];
-      config.experiments = {
-        ...config.experiments,
-        outputModule: true,
-      };
-      config.output.chunkFormat = 'module';
-      config.output.library = {
-        type: 'module',
-      };
-      config.target = 'es2019';
-    } else {
-      config.output.libraryTarget = 'umd';
-      config.output.library = distFileBaseName;
-    }
-
-    const entryName = esm ? `${distFileBaseName}.esm` : distFileBaseName;
-
     // Development
     const uncompressedConfig = merge({}, config, {
       entry: {
-        [entryName]: entry,
+        [distFileBaseName]: entry,
       },
       mode: 'development',
       plugins: [
@@ -241,11 +226,10 @@ All rights reserved.
     // Production
     const prodConfig = merge({}, config, {
       entry: {
-        [`${entryName}.min`]: entry,
+        [`${distFileBaseName}.min`]: entry,
       },
       mode: 'production',
       plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.LoaderOptionsPlugin({
           minimize: true,
         }),

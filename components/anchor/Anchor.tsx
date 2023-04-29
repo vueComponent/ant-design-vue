@@ -9,6 +9,7 @@ import {
   ref,
   computed,
 } from 'vue';
+import scrollIntoView from 'scroll-into-view-if-needed';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
@@ -17,16 +18,14 @@ import getScroll from '../_util/getScroll';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useProvideAnchor from './context';
 import useStyle from './style';
-import type { AnchorLinkProps } from './AnchorLink';
+import type { AnchorLinkItemProps } from './AnchorLink';
 import AnchorLink from './AnchorLink';
-import type { Key } from '../_util/type';
+import PropTypes from '../_util/vue-types';
+import devWarning from '../vc-util/devWarning';
+import { arrayType } from '../_util/type';
 
-export interface AnchorLinkItemProps extends AnchorLinkProps {
-  key: Key;
-  class?: String;
-  style?: CSSProperties;
-  children?: AnchorLinkItemProps[];
-}
+export type AnchorDirection = 'vertical' | 'horizontal';
+
 function getDefaultContainer() {
   return window;
 }
@@ -69,10 +68,8 @@ export const anchorProps = () => ({
   wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   getCurrentAnchor: Function as PropType<(activeLink: string) => string>,
   targetOffset: Number,
-  items: {
-    type: Array as PropType<AnchorLinkItemProps[]>,
-    default: undefined as AnchorLinkItemProps[],
-  },
+  items: arrayType<AnchorLinkItemProps[]>(),
+  direction: PropTypes.oneOf(['vertical', 'horizontal'] as AnchorDirection[]).def('vertical'),
   onChange: Function as PropType<(currentActiveLink: string) => void>,
   onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
 });
@@ -93,6 +90,24 @@ export default defineComponent({
   props: anchorProps(),
   setup(props, { emit, attrs, slots, expose }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
+    const anchorDirection = computed(() => props.direction ?? 'vertical');
+
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        props.items && typeof slots.default !== 'function',
+        'Anchor',
+        '`Anchor children` is deprecated. Please use `items` instead.',
+      );
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        !(anchorDirection.value === 'horizontal' && props.items?.some(n => 'children' in n)),
+        'Anchor',
+        '`Anchor items#children` is not supported when `Anchor` direction is horizontal.',
+      );
+    }
+
     const spanLinkNode = ref<HTMLSpanElement>(null);
     const anchorRef = ref();
     const state = reactive<AnchorState>({
@@ -184,12 +199,21 @@ export default defineComponent({
     };
 
     const updateInk = () => {
-      const linkNode = anchorRef.value.getElementsByClassName(
-        `${prefixCls.value}-link-title-active`,
-      )[0];
+      const linkNode = anchorRef.value.querySelector(`.${prefixCls.value}-link-title-active`);
       if (linkNode && spanLinkNode.value) {
-        spanLinkNode.value.style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2}px`;
-        spanLinkNode.value.style.height = `${linkNode.clientHeight}px`;
+        const horizontalAnchor = anchorDirection.value === 'horizontal';
+        spanLinkNode.value.style.top = horizontalAnchor
+          ? ''
+          : `${linkNode.offsetTop + linkNode.clientHeight / 2}px`;
+        spanLinkNode.value.style.height = horizontalAnchor ? '' : `${linkNode.clientHeight}px`;
+        spanLinkNode.value.style.left = horizontalAnchor ? `${linkNode.offsetLeft}px` : '';
+        spanLinkNode.value.style.width = horizontalAnchor ? `${linkNode.clientWidth}px` : '';
+        if (horizontalAnchor) {
+          scrollIntoView(linkNode, {
+            scrollMode: 'if-needed',
+            block: 'nearest',
+          });
+        }
       }
     };
 
@@ -210,6 +234,7 @@ export default defineComponent({
       handleClick: (e, info) => {
         emit('click', e, info);
       },
+      direction: anchorDirection,
     });
 
     onMounted(() => {
@@ -237,23 +262,39 @@ export default defineComponent({
       }
       updateInk();
     });
+
     const createNestedLink = (options?: AnchorLinkItemProps[]) =>
       Array.isArray(options)
-        ? options.map(item => (
-            <AnchorLink {...item} key={item.key}>
-              {createNestedLink(item.children)}
-            </AnchorLink>
-          ))
+        ? options.map(option => {
+            const { children, key, href, target, class: cls, style, title } = option;
+            return (
+              <AnchorLink
+                key={key}
+                href={href}
+                target={target}
+                class={cls}
+                style={style}
+                title={title}
+                customTitleProps={option}
+                v-slots={{ customTitle: slots.customTitle }}
+              >
+                {anchorDirection.value === 'vertical' ? createNestedLink(children) : null}
+              </AnchorLink>
+            );
+          })
         : null;
+
     const [wrapSSR, hashId] = useStyle(prefixCls);
+
     return () => {
       const { offsetTop, affix, showInkInFixed } = props;
       const pre = prefixCls.value;
-      const inkClass = classNames(`${pre}-ink-ball`, {
-        [`${pre}-ink-ball-visible`]: activeLink.value,
+      const inkClass = classNames(`${pre}-ink`, {
+        [`${pre}-ink-visible`]: activeLink.value,
       });
 
       const wrapperClass = classNames(hashId.value, props.wrapperClass, `${pre}-wrapper`, {
+        [`${pre}-wrapper-horizontal`]: anchorDirection.value === 'horizontal',
         [`${pre}-rtl`]: direction.value === 'rtl',
       });
 
@@ -268,9 +309,7 @@ export default defineComponent({
       const anchorContent = (
         <div class={wrapperClass} style={wrapperStyle} ref={anchorRef}>
           <div class={anchorClass}>
-            <div class={`${pre}-ink`}>
-              <span class={inkClass} ref={spanLinkNode} />
-            </div>
+            <span class={inkClass} ref={spanLinkNode} />
             {Array.isArray(props.items) ? createNestedLink(props.items) : slots.default?.()}
           </div>
         </div>

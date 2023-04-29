@@ -28,20 +28,8 @@ use `upIcon` `downIcon` custom icon
     </a-input-number>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons-vue';
-export default defineComponent({
-  components: {
-    ArrowUpOutlined,
-    ArrowDownOutlined,
-  },
-  setup() {
-    const value = ref<number>(3);
-
-    return {
-      value,
-    };
-  },
-});
+const value = ref<number>(3);
 </script>

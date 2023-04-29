@@ -8,7 +8,7 @@ import { getConfirmLocale } from './locale';
 import destroyFns from './destroyFns';
 
 type ConfigUpdate = ModalFuncProps | ((prevConfig: ModalFuncProps) => ModalFuncProps);
-export type ModalStaticFunctions = Record<NonNullable<ModalFuncProps['type']>, ModalFunc>;
+export type ModalStaticFunctions<T = ModalFunc> = Record<NonNullable<ModalFuncProps['type']>, T>;
 
 export type ModalFunc = (props: ModalFuncProps) => {
   destroy: () => void;

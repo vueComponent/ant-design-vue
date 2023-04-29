@@ -1,5 +1,5 @@
-import type { ComputedRef } from 'vue';
-import { unref, computed, defineComponent, ref, watch } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
+import { isRef, unref, computed, defineComponent, ref, watch } from 'vue';
 import type { VueNode } from '../../_util/type';
 import type { ModalFuncProps } from '../Modal';
 import type { HookModalRef } from './HookModal';
@@ -33,8 +33,15 @@ const ElementsHolder = defineComponent({
     };
   },
 });
+export type ModalFuncWithRef = (props: Ref<ModalFuncProps> | ModalFuncProps) => {
+  destroy: () => void;
+  update: (configUpdate: ModalFuncProps) => void;
+};
 
-function useModal(): readonly [Omit<ModalStaticFunctions, 'warn'>, () => VueNode] {
+function useModal(): readonly [
+  Omit<ModalStaticFunctions<ModalFuncWithRef>, 'warn'>,
+  () => VueNode,
+] {
   const holderRef = ref<ElementsHolderRef>(null);
   // ========================== Effect ==========================
   const actionQueue = ref([]);
@@ -56,18 +63,21 @@ function useModal(): readonly [Omit<ModalStaticFunctions, 'warn'>, () => VueNode
 
   // =========================== Hook ===========================
   const getConfirmFunc = (withFunc: (config: ModalFuncProps) => ModalFuncProps) =>
-    function hookConfirm(config: ModalFuncProps) {
+    function hookConfirm(config: Ref<ModalFuncProps> | ModalFuncProps) {
       uuid += 1;
       const open = ref(true);
       const modalRef = ref<HookModalRef>(null);
       const configRef = ref(unref(config));
       const updateConfig = ref({});
-      watch(config, val => {
-        updateAction({
-          ...val,
-          ...updateConfig.value,
-        });
-      });
+      watch(
+        () => config,
+        val => {
+          updateAction({
+            ...(isRef(val) ? val.value : val),
+            ...updateConfig.value,
+          });
+        },
+      );
       // eslint-disable-next-line prefer-const
       let closeFunc: Function | undefined;
       const modal = computed(() => (

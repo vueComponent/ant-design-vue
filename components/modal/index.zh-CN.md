@@ -120,21 +120,44 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
+### Modal.useModal()
+
+当你需要使用 Context 时，可以通过 `Modal.useModal` 创建一个 `contextHolder` 插入子节点中。通过 hooks 创建的临时 Modal 将会得到 `contextHolder` 所在位置的所有上下文。创建的 `modal` 对象拥有与 [`Modal.method`](#modalmethod) 相同的创建通知方法。
+
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { Modal } from 'ant-design-vue';
+  const [modal, contextHolder] = Modal.useModal();
+
+  modal.confirm({
+    // ...
+  });
+</script>
+```
+
 ## FAQ
 
 ### 为什么 Modal 方法不能获取 全局注册组件、context、vuex 等内容和 ConfigProvider `locale/prefixCls/theme` 配置， 以及不能响应式更新数据 ？
 
 直接调用 Modal 方法，组件会通过 `Vue.render` 动态创建新的 Vue 实体。其 context 与当前代码所在 context 并不相同，因而无法获取 context 信息。
 
-当你需要 context 信息（例如使用全局注册的组件）时，可以通过 `appContext` 属性传递当前组件 context, 当你需要保留属性响应式时，你可以使用函数返回：
+当你需要 context 信息（例如使用全局注册的组件）时，可以通过 Modal.useModal 方法会返回 modal 实体以及 contextHolder 节点。将其插入到你需要获取 context 位置即可：
 
-```tsx
-import { getCurrentInstance } from 'vue';
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { Modal } from 'ant-design-vue';
+  const [modal, contextHolder] = Modal.useModal();
 
-const appContext = getCurrentInstance().appContext;
-const title = ref('some message');
-Modal.confirm({
-  title: () => title.value, // 此时 title 的改变，会同步更新 confirm 中的 title
-  appContext,
-});
+  modal.confirm({
+    // ...
+  });
+</script>
 ```

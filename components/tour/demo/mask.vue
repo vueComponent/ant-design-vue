@@ -1,20 +1,20 @@
 <docs>
 ---
-order: 1
+order: 3
 title:
-  zh-CN: 非模态
-  en-US: Non modal
+  zh-CN: 自定义遮罩样式
+  en-US: custom mask style
 ---
 
 ## zh-CN
 
-使用 `mask={false}` 可以将引导变为非模态，同时为了强调引导本身，建议与 `type="primary"` 组合使用。
+自定义遮罩样式。
 
 ## en-US
 
-Use `mask={false}` to make Tour non-modal. At the meantime it is recommended to use with `type="primary"` to emphasize the guide itself.
+custom mask style.
+
   
-    
 </docs>
 
 <template>
@@ -28,7 +28,17 @@ Use `mask={false}` to make Tour non-modal. At the meantime it is recommended to 
     <a-button ref="ref3"><EllipsisOutlined /></a-button>
   </a-space>
 
-  <a-tour :open="open" :mask="false" type="primary" :steps="steps" @close="handleOpen(false)" />
+  <a-tour
+    :open="open"
+    :steps="steps"
+    :mask="{
+      style: {
+        boxShadow: 'inset 0 0 15px #333',
+      },
+      color: 'rgba(80, 255, 255, .4)',
+    }"
+    @close="handleOpen(false)"
+  />
 </template>
 
 <script lang="ts">
@@ -59,11 +69,18 @@ export default defineComponent({
         title: 'Save',
         description: 'Save your changes.',
         target: () => ref2.value && ref2.value.$el,
+        mask: {
+          style: {
+            boxShadow: 'inset 0 0 15px #fff',
+          },
+          color: 'rgba(40, 0, 255, .4)',
+        },
       },
       {
         title: 'Other Actions',
         description: 'Click to see other actions.',
         target: () => ref3.value && ref3.value.$el,
+        mask: false,
       },
     ];
 

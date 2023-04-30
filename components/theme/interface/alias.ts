@@ -94,6 +94,7 @@ export interface AliasToken extends MapToken {
 
   boxShadow: string;
   boxShadowSecondary: string;
+  boxShadowTertiary: string;
 
   linkDecoration: CSSProperties['textDecoration'];
   linkHoverDecoration: CSSProperties['textDecoration'];

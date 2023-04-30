@@ -1,25 +1,22 @@
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
 import type { PlacementType } from './placements';
 import type { VueNode } from '../_util/type';
+import { someType, stringType, objectType, functionType } from '../_util/type';
 
 export const tourStepInfo = () => ({
-  arrow: { type: [Boolean, Object] as PropType<boolean | { pointAtCenter: boolean }> },
-  target: {
-    type: [String, Function, Object] as PropType<
-      HTMLElement | (() => HTMLElement) | null | (() => null)
-    >,
-    default: undefined as HTMLElement | (() => HTMLElement) | null | (() => null),
-  },
-  title: { type: [String, Object] as PropType<string | VueNode> },
-  description: { type: [String, Object] as PropType<string | VueNode> },
-  placement: { type: String as PropType<PlacementType> },
-  mask: {
-    type: [Boolean, Object] as PropType<boolean | { style?: CSSProperties; color?: string }>,
-    default: true,
-  },
+  arrow: someType<boolean | { pointAtCenter: boolean }>([Boolean, Object]),
+  target: someType<HTMLElement | (() => HTMLElement) | null | (() => null)>([
+    String,
+    Function,
+    Object,
+  ]),
+  title: someType<string | VueNode>([String, Object]),
+  description: someType<string | VueNode>([String, Object]),
+  placement: stringType<PlacementType>(),
+  mask: someType<boolean | { style?: CSSProperties; color?: string }>([Object, Boolean], true),
   className: { type: String },
-  style: { type: Object as PropType<CSSProperties> },
-  scrollIntoViewOptions: { type: [Boolean, Object] as PropType<boolean | ScrollIntoViewOptions> },
+  style: objectType<CSSProperties>(),
+  scrollIntoViewOptions: someType<boolean | ScrollIntoViewOptions>([Boolean, Object]),
 });
 
 export type TourStepInfo = Partial<ExtractPropTypes<ReturnType<typeof tourStepInfo>>>;
@@ -29,11 +26,11 @@ export const tourStepProps = () => ({
   prefixCls: { type: String },
   total: { type: Number },
   current: { type: Number },
-  onClose: { type: Function as PropType<(e: MouseEvent) => void> },
-  onFinish: { type: Function as PropType<(e: MouseEvent) => void> },
-  renderPanel: { type: Function as PropType<(step: any, current: number) => VueNode> },
-  onPrev: { type: Function as PropType<(e: MouseEvent) => void> },
-  onNext: { type: Function as PropType<(e: MouseEvent) => void> },
+  onClose: functionType<(e: MouseEvent) => void>(),
+  onFinish: functionType<(e: MouseEvent) => void>(),
+  renderPanel: functionType<(step: any, current: number) => VueNode>(),
+  onPrev: functionType<(e: MouseEvent) => void>(),
+  onNext: functionType<(e: MouseEvent) => void>(),
 });
 
 export type TourStepProps = Partial<ExtractPropTypes<ReturnType<typeof tourStepProps>>>;

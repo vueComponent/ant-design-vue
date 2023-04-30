@@ -1,5 +1,5 @@
 import { ref, computed, watch, watchEffect, defineComponent, toRefs } from 'vue';
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import type { VueNode } from '../_util/type';
 import Trigger, { triggerProps } from '../vc-trigger';
 import classNames from '../_util/classNames';
@@ -14,6 +14,14 @@ import type { PlacementType } from './placements';
 import { initDefaultProps } from '../_util/props-util';
 import useScrollLocker from './hooks/useScrollLocker';
 import canUseDom from '../_util/canUseDom';
+import {
+  someType,
+  stringType,
+  arrayType,
+  objectType,
+  functionType,
+  booleanType,
+} from '../_util/type';
 
 const CENTER_PLACEHOLDER: CSSProperties = {
   left: '50%',
@@ -26,31 +34,22 @@ export const tourProps = () => {
   const { builtinPlacements, ...pickedTriggerProps } = triggerProps();
   return {
     ...pickedTriggerProps,
-    steps: { type: Array as PropType<TourStepInfo[]>, default: () => [] },
-    open: { type: Boolean },
+    steps: arrayType<TourStepInfo[]>(),
+    open: booleanType(),
     defaultCurrent: { type: Number },
     current: { type: Number },
-    onChange: { type: Function as PropType<(current: number) => void> },
-    onClose: { type: Function as PropType<(current: number) => void> },
-    onFinish: { type: Function as PropType<() => void> },
-    mask: {
-      type: [Boolean, Object] as PropType<boolean | { style?: CSSProperties; color?: string }>,
-      default: true,
-    },
-    arrow: {
-      type: [Boolean, Object] as PropType<boolean | { pointAtCenter: boolean }>,
-      default: true,
-    },
+    onChange: functionType<(current: number) => void>(),
+    onClose: functionType<(current: number) => void>(),
+    onFinish: functionType<() => void>(),
+    mask: someType<boolean | { style?: CSSProperties; color?: string }>([Boolean, Object], true),
+    arrow: someType<boolean | { pointAtCenter: boolean }>([Boolean, Object], true),
     rootClassName: { type: String },
-    placement: { type: String as PropType<PlacementType>, default: 'bottom' },
-    prefixCls: { type: String, default: 'vc-tour' },
-    renderPanel: { type: Function as PropType<(props: TourStepProps, current: number) => VueNode> },
-    gap: { type: Object as PropType<Gap> },
-    animated: { type: [Boolean, Object] as PropType<boolean | { placeholder: boolean }> },
-    scrollIntoViewOptions: {
-      type: [Boolean, Object] as PropType<boolean | ScrollIntoViewOptions>,
-      default: true,
-    },
+    placement: stringType<PlacementType>('bottom'),
+    prefixCls: { type: String, default: 'rc-tour' },
+    renderPanel: functionType<(props: TourStepProps, current: number) => VueNode>(),
+    gap: objectType<Gap>(),
+    animated: someType<boolean | { placeholder: boolean }>([Boolean, Object]),
+    scrollIntoViewOptions: someType<boolean | ScrollIntoViewOptions>([Boolean, Object], true),
     zIndex: { type: Number, default: 1001 },
   };
 };
@@ -87,7 +86,7 @@ const Tour = defineComponent({
       openRef.value = mergedOpen.value;
     });
 
-    const curStep = computed(() => props.steps[mergedCurrent.value] || {});
+    const curStep = computed(() => (props.steps[mergedCurrent.value] || {}) as TourStepInfo);
 
     const mergedPlacement = computed(() => curStep.value.placement ?? placement.value);
     const mergedMask = computed(() => mergedOpen.value && (curStep.value.mask ?? mask.value));
@@ -155,6 +154,15 @@ const Tour = defineComponent({
         onClose?.(mergedCurrent.value);
       };
 
+      const mergedShowMask =
+        typeof mergedMask.value === 'boolean' ? mergedMask.value : !!mergedMask.value;
+      const mergedMaskStyle = typeof mergedMask.value === 'boolean' ? undefined : mergedMask.value;
+
+      // when targetElement is not exist, use body as triggerDOMNode
+      const getTriggerDOMNode = () => {
+        return targetElement.value || document.body;
+      };
+
       const getPopupElement = () => (
         <TourStep
           arrow={mergedArrow.value}
@@ -177,15 +185,6 @@ const Tour = defineComponent({
           {...curStep.value}
         />
       );
-
-      const mergedShowMask =
-        typeof mergedMask.value === 'boolean' ? mergedMask.value : !!mergedMask.value;
-      const mergedMaskStyle = typeof mergedMask.value === 'boolean' ? undefined : mergedMask.value;
-
-      // when targetElement is not exist, use body as triggerDOMNode
-      const getTriggerDOMNode = () => {
-        return targetElement.value || document.body;
-      };
 
       return (
         <>

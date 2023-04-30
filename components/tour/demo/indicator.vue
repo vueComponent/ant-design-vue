@@ -1,20 +1,20 @@
 <docs>
 ---
-order: 1
+order: 4
 title:
-  zh-CN: 非模态
-  en-US: Non modal
+  zh-CN: 自定义指示器
+  en-US: custom indicator
 ---
 
 ## zh-CN
 
-使用 `mask={false}` 可以将引导变为非模态，同时为了强调引导本身，建议与 `type="primary"` 组合使用。
+自定义指示器。
 
 ## en-US
 
-Use `mask={false}` to make Tour non-modal. At the meantime it is recommended to use with `type="primary"` to emphasize the guide itself.
+Custom indicator.
+
   
-    
 </docs>
 
 <template>
@@ -28,11 +28,15 @@ Use `mask={false}` to make Tour non-modal. At the meantime it is recommended to 
     <a-button ref="ref3"><EllipsisOutlined /></a-button>
   </a-space>
 
-  <a-tour :open="open" :mask="false" type="primary" :steps="steps" @close="handleOpen(false)" />
+  <a-tour :open="open" :steps="steps" @close="handleOpen(false)">
+    <template #indicatorsRender="{ current, total }">
+      <span>{{ current + 1 }} / {{ total }}</span>
+    </template>
+  </a-tour>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, createVNode } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 import type { TourProps } from 'ant-design-vue';
 
@@ -49,10 +53,6 @@ export default defineComponent({
       {
         title: 'Upload File',
         description: 'Put your files here.',
-        cover: createVNode('img', {
-          alt: 'tour.png',
-          src: 'https://user-images.githubusercontent.com/5378891/197385811-55df8480-7ff4-44bd-9d43-a7dade598d70.png',
-        }),
         target: () => ref1.value && ref1.value.$el,
       },
       {

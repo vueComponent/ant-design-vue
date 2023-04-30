@@ -13,7 +13,7 @@ import type { VueNode } from '../_util/type';
 
 const panelRender = defineComponent({
   props: tourStepProps(),
-  setup(props, { attrs }) {
+  setup(props, { attrs, slots }) {
     const { current, total } = toRefs(props);
 
     const isLastStep = computed(() => current.value === total.value - 1);
@@ -73,18 +73,23 @@ const panelRender = defineComponent({
         coverNode = <div class={`${prefixCls}-cover`}>{cover}</div>;
       }
 
-      const mergedSlickNode = [...Array.from({ length: total.value }).keys()].map(
-        (stepItem, index) => (
-          <span
-            key={stepItem}
-            class={classNames(
-              index === current.value && `${prefixCls}-slider-active`,
-              `${prefixCls}-slider`,
-            )}
-          />
-        ),
-      );
-      const slickNode: VueNode = total.value > 1 ? mergedSlickNode : null;
+      let mergeIndicatorNode: VueNode;
+
+      if (slots.indicatorsRender) {
+        mergeIndicatorNode = slots.indicatorsRender({ current: current.value, total });
+      } else {
+        mergeIndicatorNode = [...Array.from({ length: total.value }).keys()].map(
+          (stepItem, index) => (
+            <span
+              key={stepItem}
+              class={classNames(
+                index === current.value && `${prefixCls}-indicator-active`,
+                `${prefixCls}-indicator`,
+              )}
+            />
+          ),
+        );
+      }
 
       const mainBtnType = stepType === 'primary' ? 'default' : 'primary';
       const secondaryBtnProps: ButtonProps = {
@@ -110,7 +115,9 @@ const panelRender = defineComponent({
                 {headerNode}
                 {descriptionNode}
                 <div class={`${prefixCls}-footer`}>
-                  <div class={`${prefixCls}-sliders`}>{slickNode}</div>
+                  {total.value > 1 && (
+                    <div class={`${prefixCls}-indicators`}>{mergeIndicatorNode}</div>
+                  )}
                   <div class={`${prefixCls}-buttons`}>
                     {current.value !== 0 ? (
                       <Button

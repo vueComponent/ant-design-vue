@@ -45,7 +45,10 @@ export const listItemProps = () => {
     onPreview: Function as PropType<(file: UploadFile, e: Event) => void>,
     onClose: Function as PropType<(file: UploadFile) => void>,
     onDownload: Function as PropType<(file: UploadFile) => void>,
-    progress: Object as PropType<UploadListProgressProps>,
+    progress: {
+      type: Object as PropType<UploadListProgressProps>,
+      default: undefined as UploadListProgressProps,
+    },
   };
 };
 

@@ -36,7 +36,7 @@ export default defineComponent({
   props: initDefaultProps(buttonProps(), { type: 'default' }),
   slots: ['icon'],
   // emits: ['click', 'mousedown'],
-  setup(props, { slots, attrs, emit }) {
+  setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
 
     const buttonNodeRef = ref<HTMLElement>(null);
@@ -144,6 +144,17 @@ export default defineComponent({
 
     onBeforeUnmount(() => {
       delayTimeoutRef.value && clearTimeout(delayTimeoutRef.value);
+    });
+
+    const focus = () => {
+      buttonNodeRef.value?.focus();
+    };
+    const blur = () => {
+      buttonNodeRef.value?.blur();
+    };
+    expose({
+      focus,
+      blur,
     });
 
     return () => {

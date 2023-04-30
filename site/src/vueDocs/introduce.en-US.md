@@ -78,6 +78,7 @@ Like:
 <script src="https://unpkg.com/dayjs/plugin/weekOfYear.js"></script>
 <script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
 <script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
 ```
 
 ## Usage

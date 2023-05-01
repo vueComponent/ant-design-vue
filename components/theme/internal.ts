@@ -73,7 +73,7 @@ export const useDesignTokenProvider = (value: DesignTokenContext) => {
 };
 
 export const useDesignTokenInject = () => {
-  return inject(DesignTokenContextKey, globalDesignTokenApi.value ?? defaultConfig);
+  return inject(DesignTokenContextKey, globalDesignTokenApi.value || defaultConfig);
 };
 export const DesignTokenProvider = defineComponent({
   props: {

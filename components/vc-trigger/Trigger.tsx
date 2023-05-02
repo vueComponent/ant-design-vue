@@ -11,7 +11,6 @@ import {
   getSlot,
   findDOMNode,
 } from '../_util/props-util';
-import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName } from './utils/alignUtil';
@@ -43,7 +42,6 @@ const ALL_HANDLERS = [
   'onBlur',
   'onContextmenu',
 ];
-
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Trigger',
@@ -107,7 +105,11 @@ export default defineComponent({
       setPortal,
       vcTriggerContext: inject(
         'vcTriggerContext',
-        {} as { onPopupMouseDown?: (...args: any[]) => void },
+        {} as {
+          onPopupMouseDown?: (...args: any[]) => void;
+          onPopupMouseenter?: (...args: any[]) => void;
+          onPopupMouseleave?: (...args: any[]) => void;
+        },
       ),
       popupRef,
       setPopupRef,
@@ -165,6 +167,8 @@ export default defineComponent({
   created() {
     provide('vcTriggerContext', {
       onPopupMouseDown: this.onPopupMouseDown,
+      onPopupMouseenter: this.onPopupMouseenter,
+      onPopupMouseleave: this.onPopupMouseleave,
     });
     useProvidePortal(this);
   },
@@ -256,6 +260,10 @@ export default defineComponent({
     },
 
     onPopupMouseenter() {
+      const { vcTriggerContext = {} } = this;
+      if (vcTriggerContext.onPopupMouseenter) {
+        vcTriggerContext.onPopupMouseenter();
+      }
       this.clearDelayTimer();
     },
 
@@ -269,6 +277,10 @@ export default defineComponent({
         return;
       }
       this.delaySetPopupVisible(false, this.$props.mouseLeaveDelay);
+      const { vcTriggerContext = {} } = this;
+      if (vcTriggerContext.onPopupMouseleave) {
+        vcTriggerContext.onPopupMouseleave(e);
+      }
     },
 
     onFocus(e) {
@@ -359,7 +371,6 @@ export default defineComponent({
       this.mouseDownTimeout = setTimeout(() => {
         this.hasPopupMouseDown = false;
       }, 0);
-
       if (vcTriggerContext.onPopupMouseDown) {
         vcTriggerContext.onPopupMouseDown(...args);
       }
@@ -574,7 +585,7 @@ export default defineComponent({
       this.clearDelayTimer();
       if (delay) {
         const point = event ? { pageX: event.pageX, pageY: event.pageY } : null;
-        this.delayTimer = requestAnimationTimeout(() => {
+        this.delayTimer = setTimeout(() => {
           this.setPopupVisible(visible, point);
           this.clearDelayTimer();
         }, delay);
@@ -585,7 +596,7 @@ export default defineComponent({
 
     clearDelayTimer() {
       if (this.delayTimer) {
-        cancelAnimationTimeout(this.delayTimer);
+        clearTimeout(this.delayTimer);
         this.delayTimer = null;
       }
     },

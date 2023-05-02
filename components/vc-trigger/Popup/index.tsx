@@ -13,6 +13,7 @@ export default defineComponent({
     const innerVisible = shallowRef(false);
     const inMobile = shallowRef(false);
     const popupRef = shallowRef();
+    const rootRef = shallowRef<HTMLElement>();
     watch(
       [() => props.visible, () => props.mobile],
       () => {
@@ -45,7 +46,7 @@ export default defineComponent({
       );
 
       return (
-        <div>
+        <div ref={rootRef}>
           <Mask {...cloneProps} />
           {popupNode}
         </div>

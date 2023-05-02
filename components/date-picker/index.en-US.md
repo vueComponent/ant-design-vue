@@ -141,12 +141,14 @@ The following APIs are shared by DatePicker, RangePicker.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY` |  |
+| yearCellRender | Custom year cell content render method | v-slot:yearCellRender="{current, locale}" | - |  |
 
 ### DatePicker\[picker=quarter]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-\QQ` |  |
+| quarterCellRender | Custom quarter cell content render method | v-slot:quarterCellRender="{current, locale}" | - |  |
 
 ### DatePicker\[picker=month]
 

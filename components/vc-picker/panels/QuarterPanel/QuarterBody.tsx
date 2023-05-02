@@ -5,9 +5,12 @@ import { useInjectRange } from '../../RangeContext';
 import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
 import useMergeProps from '../../hooks/useMergeProps';
+import type { VueNode } from '../../../_util/type';
 
 export const QUARTER_COL_COUNT = 4;
 const QUARTER_ROW_COUNT = 1;
+
+export type QuarterCellRender<DateType> = (obj: { current: DateType; locale: Locale }) => VueNode;
 
 export type QuarterBodyProps<DateType> = {
   prefixCls: string;
@@ -17,11 +20,12 @@ export type QuarterBodyProps<DateType> = {
   viewDate: DateType;
   disabledDate?: (date: DateType) => boolean;
   onSelect: (value: DateType) => void;
+  quarterCellRender?: QuarterCellRender<DateType>;
 };
 
 function QuarterBody<DateType>(_props: QuarterBodyProps<DateType>) {
   const props = useMergeProps(_props);
-  const { prefixCls, locale, value, viewDate, generateConfig } = props;
+  const { prefixCls, locale, value, viewDate, generateConfig, quarterCellRender } = props;
 
   const { rangedValue, hoverRangedValue } = useInjectRange();
 
@@ -40,12 +44,17 @@ function QuarterBody<DateType>(_props: QuarterBodyProps<DateType>) {
 
   const baseQuarter = generateConfig.setDate(generateConfig.setMonth(viewDate, 0), 1);
 
+  const getCellNode = quarterCellRender
+    ? (date: DateType) => quarterCellRender({ current: date, locale })
+    : undefined;
+
   return (
     <PanelBody
       {...props}
       rowNum={QUARTER_ROW_COUNT}
       colNum={QUARTER_COL_COUNT}
       baseDate={baseQuarter}
+      getCellNode={getCellNode}
       getCellText={date =>
         formatValue(date, {
           locale,

@@ -43,6 +43,8 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
         'dateRender',
         'renderExtraFooter',
         'monthCellRender',
+        'quarterCellRender',
+        'yearCellRender',
       ],
       setup(_props, { slots, expose, attrs, emit }) {
         // 兼容 vue 3.2.7
@@ -150,6 +152,8 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
             monthCellRender = slots.monthCellRender ||
               (props as any).monthCellContentRender ||
               slots.monthCellContentRender,
+            quarterCellRender = slots.quarterCellRender || (props as any).quarterCellRender,
+            yearCellRender = slots.yearCellRender || (props as any).quarterCellRender,
             clearIcon = slots.clearIcon?.(),
             id = formItemContext.id.value,
             ...restProps
@@ -180,6 +184,8 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           return (
             <RCPicker
               monthCellRender={monthCellRender}
+              quarterCellRender={quarterCellRender}
+              yearCellRender={yearCellRender}
               dateRender={dateRender}
               renderExtraFooter={renderExtraFooter}
               ref={pickerRef}

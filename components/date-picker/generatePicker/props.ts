@@ -14,6 +14,8 @@ import type {
 } from '../../vc-picker/interface';
 import type { DateRender } from '../../vc-picker/panels/DatePanel/DateBody';
 import type { MonthCellRender } from '../../vc-picker/panels/MonthPanel/MonthBody';
+import type { QuarterCellRender } from '../../vc-picker/panels/QuarterPanel/QuarterBody';
+import type { YearCellRender } from '../../vc-picker/panels/YearPanel/YearBody';
 import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
 import type { RangeDateRender, RangeInfo, RangeType } from '../../vc-picker/RangePicker';
 import type { VueNode } from '../../_util/type';
@@ -162,6 +164,8 @@ function datePickerProps<DateType = any>() {
     monthCellRender: { type: Function as PropType<MonthCellRender<DateType>> },
     // deprecated  Please use `monthCellRender"` instead.',
     monthCellContentRender: { type: Function as PropType<MonthCellRender<DateType>> },
+    yearCellRender: { type: Function as PropType<YearCellRender<DateType>> },
+    quarterCellRender: { type: Function as PropType<QuarterCellRender<DateType>> },
   };
 }
 
@@ -175,6 +179,8 @@ export interface DatePickerProps<DateType> {
   monthCellRender?: MonthCellRender<DateType>;
   // deprecated  Please use `monthCellRender"` instead.',
   monthCellContentRender?: MonthCellRender<DateType>;
+  yearCellRender?: YearCellRender<DateType>;
+  quarterCellRender?: QuarterCellRender<DateType>;
 }
 
 function rangePickerProps<DateType>() {

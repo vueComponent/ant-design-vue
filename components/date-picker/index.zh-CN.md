@@ -142,12 +142,14 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY` |  |
+| yearCellRender | 自定义的年份内容渲染方法 | v-slot:yearCellRender="{current, locale}" | - |
 
 ### DatePicker\[picker=quarter]
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | format | 展示的日期格式，配置参考 [dayjs](https://day.js.org/docs/zh-CN/display/format) | [formatType](#formatType) | `YYYY-\QQ` |  |
+| quarterCellRender | 自定义的季度内容渲染方法 | v-slot:quarterCellRender="{current, locale}" | - |
 
 ### DatePicker\[picker=month]
 

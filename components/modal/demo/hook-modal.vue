@@ -17,25 +17,25 @@ Use `Modal.useModal` to get `contextHolder` with context accessible issue.
 </docs>
 
 <template>
-  <div>
+  <a-space wrap>
     <a-button @click="showConfirm">Confirm</a-button>
     <a-button @click="showPromiseConfirm">With promise</a-button>
     <a-button type="dashed" @click="showDeleteConfirm">Delete</a-button>
     <a-button type="dashed" @click="showPropsConfirm">With extra props</a-button>
     <contextHolder />
-  </div>
+  </a-space>
 </template>
 
 <script lang="ts" setup>
 import { Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { createVNode } from 'vue';
+import { h } from 'vue';
 const [modal, contextHolder] = Modal.useModal();
 const showConfirm = () => {
   modal.confirm({
     title: 'Do you Want to delete these items?',
-    icon: createVNode(ExclamationCircleOutlined),
-    content: createVNode('div', { style: 'color:red;' }, 'Some descriptions'),
+    icon: h(ExclamationCircleOutlined),
+    content: h('div', { style: 'color:red;' }, 'Some descriptions'),
     onOk() {
       console.log('OK');
     },
@@ -48,7 +48,7 @@ const showConfirm = () => {
 const showDeleteConfirm = () => {
   modal.confirm({
     title: 'Are you sure delete this task?',
-    icon: createVNode(ExclamationCircleOutlined),
+    icon: h(ExclamationCircleOutlined),
     content: 'Some descriptions',
     okText: 'Yes',
     okType: 'danger',
@@ -64,7 +64,7 @@ const showDeleteConfirm = () => {
 const showPropsConfirm = () => {
   modal.confirm({
     title: 'Are you sure delete this task?',
-    icon: createVNode(ExclamationCircleOutlined),
+    icon: h(ExclamationCircleOutlined),
     content: 'Some descriptions',
     okText: 'Yes',
     okType: 'danger',
@@ -84,7 +84,7 @@ const showPropsConfirm = () => {
 function showPromiseConfirm() {
   modal.confirm({
     title: 'Do you want to delete these items?',
-    icon: createVNode(ExclamationCircleOutlined),
+    icon: h(ExclamationCircleOutlined),
     content: 'When clicked the OK button, this dialog will be closed after 1 second',
     async onOk() {
       try {

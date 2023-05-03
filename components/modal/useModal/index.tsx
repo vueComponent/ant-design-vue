@@ -1,6 +1,6 @@
-import type { ComputedRef, Ref } from 'vue';
-import { isRef, unref, computed, defineComponent, ref, watch } from 'vue';
-import type { VueNode } from '../../_util/type';
+import type { Ref } from 'vue';
+import { isRef, unref, computed, defineComponent, shallowRef, watch } from 'vue';
+import type { MaybeRef, VueNode } from '../../_util/type';
 import type { ModalFuncProps } from '../Modal';
 import type { HookModalRef } from './HookModal';
 import type { ModalStaticFunctions } from '../confirm';
@@ -12,16 +12,17 @@ import destroyFns from '../destroyFns';
 let uuid = 0;
 
 interface ElementsHolderRef {
-  addModal: (modal: ComputedRef<JSX.Element>) => () => void;
+  addModal: (modal: () => JSX.Element) => () => void;
 }
 
 const ElementsHolder = defineComponent({
   name: 'ElementsHolder',
   inheritAttrs: false,
   setup(_, { expose }) {
-    const modals = ref<ComputedRef<JSX.Element>[]>([]);
-    const addModal = (modal: ComputedRef<JSX.Element>) => {
+    const modals = shallowRef<(() => JSX.Element)[]>([]);
+    const addModal = (modal: () => JSX.Element) => {
       modals.value.push(modal);
+      modals.value = modals.value.slice();
       return () => {
         modals.value = modals.value.filter(currentModal => currentModal !== modal);
       };
@@ -29,11 +30,11 @@ const ElementsHolder = defineComponent({
 
     expose({ addModal });
     return () => {
-      return <>{modals.value.map(modal => modal.value)}</>;
+      return modals.value.map(modal => modal());
     };
   },
 });
-export type ModalFuncWithRef = (props: Ref<ModalFuncProps> | ModalFuncProps) => {
+export type ModalFuncWithRef = (props: MaybeRef<ModalFuncProps>) => {
   destroy: () => void;
   update: (configUpdate: ModalFuncProps) => void;
 };
@@ -42,9 +43,9 @@ function useModal(): readonly [
   Omit<ModalStaticFunctions<ModalFuncWithRef>, 'warn'>,
   () => VueNode,
 ] {
-  const holderRef = ref<ElementsHolderRef>(null);
+  const holderRef = shallowRef<ElementsHolderRef>(null);
   // ========================== Effect ==========================
-  const actionQueue = ref([]);
+  const actionQueue = shallowRef([]);
   watch(
     actionQueue,
     () => {
@@ -65,10 +66,10 @@ function useModal(): readonly [
   const getConfirmFunc = (withFunc: (config: ModalFuncProps) => ModalFuncProps) =>
     function hookConfirm(config: Ref<ModalFuncProps> | ModalFuncProps) {
       uuid += 1;
-      const open = ref(true);
-      const modalRef = ref<HookModalRef>(null);
-      const configRef = ref(unref(config));
-      const updateConfig = ref({});
+      const open = shallowRef(true);
+      const modalRef = shallowRef<HookModalRef>(null);
+      const configRef = shallowRef(unref(config));
+      const updateConfig = shallowRef({});
       watch(
         () => config,
         val => {
@@ -78,9 +79,17 @@ function useModal(): readonly [
           });
         },
       );
+
+      const destroyAction = (...args: any[]) => {
+        open.value = false;
+        const triggerCancel = args.some(param => param && param.triggerCancel);
+        if (configRef.value.onCancel && triggerCancel) {
+          configRef.value.onCancel(() => {}, ...args.slice(1));
+        }
+      };
       // eslint-disable-next-line prefer-const
       let closeFunc: Function | undefined;
-      const modal = computed(() => (
+      const modal = () => (
         <HookModal
           key={`modal-${uuid}`}
           config={withFunc(configRef.value)}
@@ -91,21 +100,13 @@ function useModal(): readonly [
             closeFunc?.();
           }}
         />
-      ));
+      );
 
       closeFunc = holderRef.value?.addModal(modal);
 
       if (closeFunc) {
         destroyFns.push(closeFunc);
       }
-
-      const destroyAction = (...args: any[]) => {
-        open.value = false;
-        const triggerCancel = args.some(param => param && param.triggerCancel);
-        if (configRef.value.onCancel && triggerCancel) {
-          configRef.value.onCancel(() => {}, ...args.slice(1));
-        }
-      };
 
       const updateAction = (newConfig: ModalFuncProps) => {
         configRef.value = {

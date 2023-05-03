@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders ./components/modal/demo/HookModal.vue correctly 1`] = `
+<div><button class="ant-btn ant-btn-default" type="button">
+    <!----><span>Confirm</span>
+  </button><button class="ant-btn ant-btn-default" type="button">
+    <!----><span>With promise</span>
+  </button><button class="ant-btn ant-btn-dashed" type="button">
+    <!----><span>Delete</span>
+  </button><button class="ant-btn ant-btn-dashed" type="button">
+    <!----><span>With extra props</span>
+  </button></div>
+`;
+
 exports[`renders ./components/modal/demo/async.vue correctly 1`] = `
 <div><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with async logic</span>

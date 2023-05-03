@@ -1,15 +1,16 @@
 import type { App, Plugin } from 'vue';
 import type { ModalFunc, ModalFuncProps } from './Modal';
-import Modal, { destroyFns } from './Modal';
+import Modal from './Modal';
 import confirm, { withWarn, withInfo, withSuccess, withError, withConfirm } from './confirm';
-
+import useModal from './useModal';
+import destroyFns from './destroyFns';
 export type { ActionButtonProps } from '../_util/ActionButton';
 export type { ModalProps, ModalFuncProps } from './Modal';
 
 function modalWarn(props: ModalFuncProps) {
   return confirm(withWarn(props));
 }
-
+Modal.useModal = useModal;
 Modal.info = function infoFn(props: ModalFuncProps) {
   return confirm(withInfo(props));
 };
@@ -60,4 +61,6 @@ export default Modal as typeof Modal &
     readonly confirm: ModalFunc;
 
     readonly destroyAll: () => void;
+
+    readonly useModal: typeof useModal;
   };

@@ -65,7 +65,7 @@ export const menuProps = () => ({
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
 
   inlineIndent: { type: Number, default: 24 },
-  subMenuOpenDelay: { type: Number, default: 0.1 },
+  subMenuOpenDelay: { type: Number, default: 0 },
   subMenuCloseDelay: { type: Number, default: 0.1 },
 
   builtinPlacements: { type: Object as PropType<BuiltinPlacements> },
@@ -201,41 +201,40 @@ export default defineComponent({
 
     // >>>>> Trigger select
     const triggerSelection = (info: MenuInfo) => {
-      if (!props.selectable) {
-        return;
-      }
-      // Insert or Remove
-      const { key: targetKey } = info;
-      const exist = mergedSelectedKeys.value.includes(targetKey);
-      let newSelectedKeys: Key[];
+      if (props.selectable) {
+        // Insert or Remove
+        const { key: targetKey } = info;
+        const exist = mergedSelectedKeys.value.includes(targetKey);
+        let newSelectedKeys: Key[];
 
-      if (props.multiple) {
-        if (exist) {
-          newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
+        if (props.multiple) {
+          if (exist) {
+            newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
+          } else {
+            newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+          }
         } else {
-          newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+          newSelectedKeys = [targetKey];
         }
-      } else {
-        newSelectedKeys = [targetKey];
-      }
 
-      // Trigger event
-      const selectInfo: SelectInfo = {
-        ...info,
-        selectedKeys: newSelectedKeys,
-      };
-      if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
-        if (props.selectedKeys === undefined) {
-          mergedSelectedKeys.value = newSelectedKeys;
-        }
-        emit('update:selectedKeys', newSelectedKeys);
-        if (exist && props.multiple) {
-          emit('deselect', selectInfo);
-        } else {
-          emit('select', selectInfo);
+        // Trigger event
+        const selectInfo: SelectInfo = {
+          ...info,
+          selectedKeys: newSelectedKeys,
+        };
+        if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
+          if (props.selectedKeys === undefined) {
+            mergedSelectedKeys.value = newSelectedKeys;
+          }
+          emit('update:selectedKeys', newSelectedKeys);
+          if (exist && props.multiple) {
+            emit('deselect', selectInfo);
+          } else {
+            emit('select', selectInfo);
+          }
         }
       }
-
+      // Whatever selectable, always close it
       if (mergedMode.value !== 'inline' && !props.multiple && mergedOpenKeys.value.length) {
         triggerOpenKeys(EMPTY_LIST);
       }
@@ -432,7 +431,6 @@ export default defineComponent({
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuKeys,
-      isRootMenu: shallowRef(true),
       expandIcon,
       forceSubMenuRender: computed(() => props.forceSubMenuRender),
       rootClassName: hashId,

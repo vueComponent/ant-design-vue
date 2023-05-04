@@ -302,7 +302,7 @@ export default defineComponent({
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
               popup: () => (
-                <MenuContextProvider mode={subMenuTriggerModeRef.value} isRootMenu={false}>
+                <MenuContextProvider mode={subMenuTriggerModeRef.value}>
                   <SubMenuList
                     id={popupId}
                     ref={popupRef}

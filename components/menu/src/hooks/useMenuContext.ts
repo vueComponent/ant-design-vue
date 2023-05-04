@@ -19,7 +19,6 @@ export interface StoreMenuInfo {
   parentKeys: Ref<Key[]>;
 }
 export interface MenuContextProps {
-  isRootMenu: Ref<boolean>;
   rootClassName: Ref<string>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
@@ -114,7 +113,6 @@ const MenuContextProvider = defineComponent({
   props: {
     mode: { type: String as PropType<MenuMode>, default: undefined },
     overflowDisabled: { type: Boolean, default: undefined },
-    isRootMenu: { type: Boolean, default: undefined },
   },
   setup(props, { slots }) {
     const menuContext = useInjectMenu();
@@ -123,9 +121,6 @@ const MenuContextProvider = defineComponent({
     // 不需要 watch 变化
     if (props.mode !== undefined) {
       newContext.mode = toRef(props, 'mode');
-    }
-    if (props.isRootMenu !== undefined) {
-      newContext.isRootMenu = toRef(props, 'isRootMenu');
     }
     if (props.overflowDisabled !== undefined) {
       newContext.overflowDisabled = toRef(props, 'overflowDisabled');

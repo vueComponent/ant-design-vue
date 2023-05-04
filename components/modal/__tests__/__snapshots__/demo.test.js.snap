@@ -73,6 +73,29 @@ exports[`renders ./components/modal/demo/fullscreen.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/modal/demo/hook-modal.vue correctly 1`] = `
+<div class="ant-space ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>Confirm</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>With promise</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
+      <!----><span>Delete</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
+      <!----><span>With extra props</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="padding-bottom: 8px;"></div>
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/modal/demo/info.vue correctly 1`] = `
 <div class="ant-space ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
   <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-default" type="button">

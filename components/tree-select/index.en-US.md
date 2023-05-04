@@ -23,6 +23,7 @@ Tree selection control.
 | disabled | Disabled or not | boolean | false |  |  |
 | popupClassName | className of dropdown menu | string | - |  | 4.0 |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |  |
+| dropdownRender | Customize dropdown content | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
 | dropdownStyle | To set the style of the dropdown menu | object | - |  |  |
 | fieldNames | Replace the label,value, key and children fields in treeNode with the corresponding fields in treeData | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 3.0.0 |
 | filterTreeNode | Whether to filter treeNodes by input value. The value of `treeNodeFilterProp` is used for filtering by default. | boolean\|Function(inputValue: string, treeNode: TreeNode) (should return boolean) | Function |  |  |

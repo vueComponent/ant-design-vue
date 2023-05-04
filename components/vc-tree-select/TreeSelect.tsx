@@ -758,6 +758,7 @@ export default defineComponent({
           onDropdownVisibleChange={onInternalDropdownVisibleChange}
           tagRender={props.tagRender || slots.tagRender}
           dropdownMatchSelectWidth={props.dropdownMatchSelectWidth ?? true}
+          dropdownRender={slots.dropdownRender}
         />
       );
     };

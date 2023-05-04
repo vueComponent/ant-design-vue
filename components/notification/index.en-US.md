@@ -26,6 +26,7 @@ To display a notification message at any of the four corners of the viewport. Ty
 - `notification.open(config)`
 - `notification.close(key: String)`
 - `notification.destroy()`
+- `notification.useNotification()`
 
 The properties of config are as follows:
 
@@ -74,3 +75,33 @@ notification.config({
 | placement | Position of Notification, can be one of `topLeft` `topRight` `bottomLeft` `bottomRight` | string | `topRight` |  |
 | rtl | Whether to enable RTL mode | boolean | false |  |
 | top | Distance from the top of the viewport, when `placement` is `topRight` or `topLeft` (unit: pixels). | string | `24px` |  |
+
+## FAQ
+
+### Why I can not access context, Pinia, ConfigProvider `locale/prefixCls/theme` in notification?
+
+antdv will dynamic create Vue instance by `Vue.render` when call notification methods. Whose context is different with origin code located context.
+
+When you need context info (like ConfigProvider context), you can use `notification.useNotification` to get `api` instance and `contextHolder` node. And put it in your children:
+
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { notification } from 'ant-design-vue';
+  const [notificationApi, contextHolder] = notification.useNotification();
+  notificationApi.open({
+    // ...
+  });
+</script>
+```
+
+**Note:** You must insert `contextHolder` into your children with hooks. You can use origin method if you do not need context connection.
+
+> [App Package Component](/components/app) can be used to simplify the problem of `useNotification` and other methods that need to manually implant contextHolder.
+
+### How to set static methods prefixCls ？
+
+You can config with [`ConfigProvider.config`](/components/config-provider#configproviderconfig-4130)

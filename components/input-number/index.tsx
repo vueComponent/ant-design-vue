@@ -76,6 +76,7 @@ const InputNumber = defineComponent({
       emit('focus', e);
     };
     return () => {
+      const id = props.id ?? formItemContext.id.value;
       const {
         class: className,
         bordered,
@@ -86,7 +87,7 @@ const InputNumber = defineComponent({
         prefix = slots.prefix?.(),
         valueModifiers = {},
         ...others
-      } = { ...attrs, ...props } as InputNumberProps & HTMLAttributes;
+      } = { ...attrs, ...props, id } as InputNumberProps & HTMLAttributes;
 
       const preCls = prefixCls.value;
 

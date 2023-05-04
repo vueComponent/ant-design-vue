@@ -11,6 +11,8 @@ import { globalConfig } from '../config-provider';
 import type { NotificationInstance as VCNotificationInstance } from '../vc-notification/Notification';
 import classNames from '../_util/classNames';
 import useStyle from './style';
+import useNotification from './useNotification';
+
 export type NotificationPlacement =
   | 'top'
   | 'topLeft'
@@ -284,6 +286,7 @@ iconTypes.forEach(type => {
 });
 
 api.warn = api.warning;
+api.useNotification = useNotification;
 
 export interface NotificationInstance {
   success(args: NotificationArgsProps): void;
@@ -298,6 +301,7 @@ export interface NotificationApi extends NotificationInstance {
   close(key: string): void;
   config(options: ConfigProps): void;
   destroy(): void;
+  useNotification: typeof useNotification;
 }
 
 /** @private test Only function. Not work on production */

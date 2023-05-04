@@ -116,21 +116,44 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
+### Modal.useModal()
+
+When you need using Context, you can use `contextHolder` which created by `Modal.useModal` to insert into children. Modal created by hooks will get all the context where `contextHolder` are. Created `modal` has the same creating function with `Modal.method`.
+
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { Modal } from 'ant-design-vue';
+  const [modal, contextHolder] = Modal.useModal();
+
+  modal.confirm({
+    // ...
+  });
+</script>
+```
+
 ## FAQ
 
 ### Why can't the Modal method obtain global registered components, context, vuex, etc. and ConfigProvider `locale/prefixCls/theme` configuration, and can't update data responsively?
 
 Call the Modal method directly, and the component will dynamically create a new Vue entity through `Vue.render`. Its context is not the same as the context where the current code is located, so the context information cannot be obtained.
 
-When you need context information (for example, using a globally registered component), you can pass the current component context through the `appContext` property. When you need to keep the property responsive, you can use the function to return:
+When you need context information (for example, using a globally registered component), you can use `Modal.useModal` to get `modal` instance and `contextHolder` node. And put it in your children:
 
-```tsx
-import { getCurrentInstance } from 'vue';
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { Modal } from 'ant-design-vue';
+  const [modal, contextHolder] = Modal.useModal();
 
-const appContext = getCurrentInstance().appContext;
-const title = ref('some message');
-Modal.confirm({
-  title: () => title.value, // the change of title will update the title in confirm synchronously
-  appContext,
-});
+  modal.confirm({
+    // ...
+  });
+</script>
 ```

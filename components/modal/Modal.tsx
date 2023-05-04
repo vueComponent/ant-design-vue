@@ -149,8 +149,6 @@ export interface ModalLocale {
   justOkText: string;
 }
 
-export const destroyFns = [];
-
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AModal',
@@ -167,6 +165,7 @@ export default defineComponent({
       props,
     );
     const [wrapSSR, hashId] = useStyle(prefixCls);
+
     warning(
       props.visible === undefined,
       'Modal',

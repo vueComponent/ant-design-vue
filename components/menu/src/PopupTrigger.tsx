@@ -39,7 +39,6 @@ export default defineComponent({
       subMenuCloseDelay,
       builtinPlacements,
       triggerSubMenuAction,
-      isRootMenu,
       forceSubMenuRender,
       motion,
       defaultMotions,
@@ -91,9 +90,7 @@ export default defineComponent({
             rootClassName.value,
           )}
           stretch={mode === 'horizontal' ? 'minWidth' : null}
-          getPopupContainer={
-            isRootMenu.value ? getPopupContainer.value : triggerNode => triggerNode.parentNode
-          }
+          getPopupContainer={getPopupContainer.value}
           builtinPlacements={placement.value}
           popupPlacement={popupPlacement.value}
           popupVisible={innerVisible.value}

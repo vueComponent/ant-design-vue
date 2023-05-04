@@ -98,25 +98,17 @@ describe('Modal.confirm triggers callbacks correctly', () => {
   });
 
   it('trigger onCancel once when click on cancel button', async () => {
-    const arr = ['info'];
-    for (let type of arr) {
-      Modal[type]({
-        title: 'title',
-        content: 'content',
-      });
-      await sleep();
-      expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(1);
-      // $$('.ant-btn')[0].click();
-      // await sleep(2000);
-      // expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(0);
-    }
+    const onCancel = jest.fn();
+    const onOk = jest.fn();
+    await open({
+      title: 'title',
+      content: 'content',
+      onCancel,
+      onOk,
+    });
+    await sleep();
+    $$('.ant-btn')[0].click();
+    expect(onCancel.mock.calls.length).toBe(1);
+    expect(onOk.mock.calls.length).toBe(0);
   });
-
-  // it('should render title', async () => {
-  //   open({
-  //     title: () => <span>title</span>,
-  //   });
-  //   await sleep();
-  //   expect($$('.ant-modal-confirm-title')[0].innerHTML).toBe('<span>title</span>');
-  // });
 });

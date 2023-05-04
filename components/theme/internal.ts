@@ -21,7 +21,7 @@ import statisticToken, { merge as mergeToken, statistic } from './util/statistic
 import type { VueNode } from '../_util/type';
 import { objectType } from '../_util/type';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import { defineComponent, provide, computed, inject } from 'vue';
+import { defineComponent, provide, computed, inject, watchEffect, ref } from 'vue';
 import { toReactive } from '../_util/toReactive';
 
 const defaultTheme = createTheme(defaultDerivative);
@@ -63,12 +63,17 @@ export interface DesignTokenContext {
 //defaultConfig
 const DesignTokenContextKey: InjectionKey<DesignTokenContext> = Symbol('DesignTokenContext');
 
+export const globalDesignTokenApi = ref<DesignTokenContext>();
+
 export const useDesignTokenProvider = (value: DesignTokenContext) => {
   provide(DesignTokenContextKey, value);
+  watchEffect(() => {
+    globalDesignTokenApi.value = value;
+  });
 };
 
 export const useDesignTokenInject = () => {
-  return inject(DesignTokenContextKey, defaultConfig);
+  return inject(DesignTokenContextKey, globalDesignTokenApi.value || defaultConfig);
 };
 export const DesignTokenProvider = defineComponent({
   props: {
@@ -87,7 +92,10 @@ export function useToken(): [
   ComputedRef<GlobalToken>,
   ComputedRef<string>,
 ] {
-  const designTokenContext = inject(DesignTokenContextKey, defaultConfig);
+  const designTokenContext = inject<DesignTokenContext>(
+    DesignTokenContextKey,
+    globalDesignTokenApi.value || defaultConfig,
+  );
 
   const salt = computed(() => `${version}-${designTokenContext.hashed || ''}`);
 

@@ -1,4 +1,4 @@
-import { ref, computed, watch, watchEffect, defineComponent, toRefs } from 'vue';
+import { ref, computed, watch, watchEffect, defineComponent, toRefs, shallowRef } from 'vue';
 import type { CSSProperties, ExtractPropTypes } from 'vue';
 import type { VueNode } from '../_util/type';
 import Trigger, { triggerProps } from '../vc-trigger';
@@ -78,7 +78,7 @@ const Tour = defineComponent({
           : origin ?? true,
     });
 
-    const openRef = ref(mergedOpen.value);
+    const openRef = shallowRef(mergedOpen.value);
     watchEffect(() => {
       if (mergedOpen.value && !openRef.value) {
         setMergedCurrent(0);

@@ -35,50 +35,36 @@ Custom indicator.
   </a-tour>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 import type { TourProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: { EllipsisOutlined },
-  setup() {
-    const open = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-    const ref1 = ref(null);
-    const ref2 = ref(null);
-    const ref3 = ref(null);
+const ref1 = ref(null);
+const ref2 = ref(null);
+const ref3 = ref(null);
 
-    const steps: TourProps['steps'] = [
-      {
-        title: 'Upload File',
-        description: 'Put your files here.',
-        target: () => ref1.value && ref1.value.$el,
-      },
-      {
-        title: 'Save',
-        description: 'Save your changes.',
-        target: () => ref2.value && ref2.value.$el,
-      },
-      {
-        title: 'Other Actions',
-        description: 'Click to see other actions.',
-        target: () => ref3.value && ref3.value.$el,
-      },
-    ];
-
-    const handleOpen = (val: boolean): void => {
-      open.value = val;
-    };
-
-    return {
-      ref1,
-      ref2,
-      ref3,
-      open,
-      handleOpen,
-      steps,
-    };
+const steps: TourProps['steps'] = [
+  {
+    title: 'Upload File',
+    description: 'Put your files here.',
+    target: () => ref1.value && ref1.value.$el,
   },
-});
+  {
+    title: 'Save',
+    description: 'Save your changes.',
+    target: () => ref2.value && ref2.value.$el,
+  },
+  {
+    title: 'Other Actions',
+    description: 'Click to see other actions.',
+    target: () => ref3.value && ref3.value.$el,
+  },
+];
+
+const handleOpen = (val: boolean): void => {
+  open.value = val;
+};
 </script>

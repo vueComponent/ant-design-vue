@@ -12,6 +12,14 @@ exports[`renders ./components/message/demo/duration.vue correctly 1`] = `
 </button>
 `;
 
+exports[`renders ./components/message/demo/hook.vue correctly 1`] = `
+<!--teleport start-->
+<!--teleport end-->
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Display normal message</span>
+</button>
+`;
+
 exports[`renders ./components/message/demo/info.vue correctly 1`] = `
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Display normal message</span>

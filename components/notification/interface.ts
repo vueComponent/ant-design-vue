@@ -12,19 +12,19 @@ export type NotificationPlacement =
 export type IconType = 'success' | 'info' | 'error' | 'warning';
 
 export interface ArgsProps {
-  message: VueNode;
-  description?: VueNode;
-  btn?: VueNode;
+  message: (() => VueNode) | VueNode;
+  description?: (() => VueNode) | VueNode;
+  btn?: (() => VueNode) | VueNode;
   key?: Key;
   onClose?: () => void;
   duration?: number | null;
-  icon?: VueNode;
+  icon?: (() => VueNode) | VueNode;
   placement?: NotificationPlacement;
   style?: CSSProperties;
-  className?: string;
+  class?: string;
   readonly type?: IconType;
   onClick?: () => void;
-  closeIcon?: VueNode;
+  closeIcon?: (() => VueNode) | VueNode;
 }
 
 type StaticFn = (args: ArgsProps) => void;
@@ -39,20 +39,20 @@ export interface NotificationInstance {
 }
 
 export interface GlobalConfigProps {
-  top?: number;
-  bottom?: number;
+  top?: number | string;
+  bottom?: number | string;
   duration?: number;
   prefixCls?: string;
   getContainer?: () => HTMLElement;
   placement?: NotificationPlacement;
-  closeIcon?: VueNode;
+  closeIcon?: (() => VueNode) | VueNode;
   rtl?: boolean;
   maxCount?: number;
 }
 
 export interface NotificationConfig {
-  top?: number;
-  bottom?: number;
+  top?: number | string;
+  bottom?: number | string;
   prefixCls?: string;
   getContainer?: () => HTMLElement;
   placement?: NotificationPlacement;

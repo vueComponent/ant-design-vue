@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, defineComponent } from 'vue';
 import useStyle from './style';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { IconType } from './interface';
@@ -6,13 +6,12 @@ import Notice from '../vc-notification/Notice';
 import classNames from '../_util/classNames';
 import type { NoticeProps } from '../vc-notification/Notice';
 import type { VueNode } from '../_util/type';
-import {
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  CloseOutlined,
-  ExclamationCircleOutlined,
-  InfoCircleOutlined,
-} from '@ant-design/icons-vue';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
+import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
+import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
+import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import { renderHelper } from '../_util/util';
 
 export function getCloseIcon(prefixCls: string, closeIcon?: VueNode) {
@@ -34,11 +33,19 @@ export interface PureContentProps {
   type?: IconType;
 }
 
+export const TypeIcon = {
+  info: <InfoCircleFilled />,
+  success: <CheckCircleFilled />,
+  error: <CloseCircleFilled />,
+  warning: <ExclamationCircleFilled />,
+  loading: <LoadingOutlined />,
+};
+
 const typeToIcon = {
-  success: CheckCircleOutlined,
-  info: InfoCircleOutlined,
-  error: CloseCircleOutlined,
-  warning: ExclamationCircleOutlined,
+  success: CheckCircleFilled,
+  info: InfoCircleFilled,
+  error: CloseCircleFilled,
+  warning: ExclamationCircleFilled,
 };
 
 export function PureContent({
@@ -74,36 +81,42 @@ export function PureContent({
 
 export interface PurePanelProps
   extends Omit<NoticeProps, 'prefixCls' | 'eventKey'>,
-    Omit<PureContentProps, 'prefixCls' | 'children'> {
+    Omit<PureContentProps, 'prefixCls'> {
   prefixCls?: string;
 }
 
 /** @private Internal Component. Do not use in your production. */
-export default function PurePanel(props: PurePanelProps) {
-  const { getPrefixCls } = useConfigInject('notification', props);
-  const prefixCls = computed(() => props.prefixCls || getPrefixCls('notification'));
-  const noticePrefixCls = `${prefixCls.value}-notice`;
+export default defineComponent<PurePanelProps>({
+  name: 'PurePanel',
+  inheritAttrs: false,
+  props: ['prefixCls', 'icon', 'type', 'message', 'description', 'btn', 'closeIcon'] as any,
+  setup(props) {
+    const { getPrefixCls } = useConfigInject('notification', props);
+    const prefixCls = computed(() => props.prefixCls || getPrefixCls('notification'));
+    const noticePrefixCls = computed(() => `${prefixCls.value}-notice`);
 
-  const [, hashId] = useStyle(prefixCls);
-
-  return (
-    <Notice
-      {...props}
-      prefixCls={prefixCls.value}
-      class={classNames(hashId.value, `${noticePrefixCls}-pure-panel`)}
-      noticeKey="pure"
-      duration={null}
-      closable={props.closable}
-      closeIcon={getCloseIcon(prefixCls.value, props.closeIcon)}
-    >
-      <PureContent
-        prefixCls={noticePrefixCls}
-        icon={props.icon}
-        type={props.type}
-        message={props.message}
-        description={props.description}
-        btn={props.btn}
-      />
-    </Notice>
-  );
-}
+    const [, hashId] = useStyle(prefixCls);
+    return () => {
+      return (
+        <Notice
+          {...props}
+          prefixCls={prefixCls.value}
+          class={classNames(hashId.value, `${noticePrefixCls.value}-pure-panel`)}
+          noticeKey="pure"
+          duration={null}
+          closable={props.closable}
+          closeIcon={getCloseIcon(prefixCls.value, props.closeIcon)}
+        >
+          <PureContent
+            prefixCls={noticePrefixCls.value}
+            icon={props.icon}
+            type={props.type}
+            message={props.message}
+            description={props.description}
+            btn={props.btn}
+          />
+        </Notice>
+      );
+    };
+  },
+});

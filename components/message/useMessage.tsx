@@ -56,11 +56,14 @@ const Holder = defineComponent({
     const [, hashId] = useStyle(prefixCls);
 
     // =============================== Style ===============================
-    const getStyles = () => ({
-      left: '50%',
-      transform: 'translateX(-50%)',
-      top: `${top ?? DEFAULT_OFFSET}px`,
-    });
+    const getStyles = () => {
+      const top = props.top ?? DEFAULT_OFFSET;
+      return {
+        left: '50%',
+        transform: 'translateX(-50%)',
+        top: typeof top === 'number' ? `${top}px` : top,
+      };
+    };
     const getClassName = () => classNames(hashId.value, props.rtl ? `${prefixCls.value}-rtl` : '');
 
     // ============================== Motion ===============================

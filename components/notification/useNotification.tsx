@@ -84,68 +84,64 @@ export function useInternalNotification(
   notificationConfig?: HolderProps,
 ): readonly [NotificationInstance, () => VNode] {
   const holderRef = shallowRef<HolderRef>(null);
-
+  const holderKey = Symbol('notificationHolderKey');
   // ================================ API ================================
-  const wrapAPI = computed(() => {
-    // Wrap with notification content
+  // Wrap with notification content
 
-    // >>> Open
-    const open = (config: ArgsProps) => {
-      if (!holderRef.value) {
-        return;
-      }
-      const { open: originOpen, prefixCls, hashId } = holderRef.value;
-      const noticePrefixCls = `${prefixCls}-notice`;
+  // >>> Open
+  const open = (config: ArgsProps) => {
+    if (!holderRef.value) {
+      return;
+    }
+    const { open: originOpen, prefixCls, hashId } = holderRef.value;
+    const noticePrefixCls = `${prefixCls}-notice`;
 
-      const { message, description, icon, type, btn, className, ...restConfig } = config;
-      return originOpen({
-        placement: 'topRight',
-        ...restConfig,
-        content: (
-          <PureContent
-            prefixCls={noticePrefixCls}
-            icon={icon}
-            type={type}
-            message={message}
-            description={description}
-            btn={btn}
-          />
-        ),
-        // @ts-ignore
-        class: classNames(type && `${noticePrefixCls}-${type}`, hashId, className),
-      });
-    };
-
-    // >>> destroy
-    const destroy = (key?: Key) => {
-      if (key !== undefined) {
-        holderRef.value?.close(key);
-      } else {
-        holderRef.value?.destroy();
-      }
-    };
-
-    const clone = {
-      open,
-      destroy,
-    } as NotificationInstance;
-
-    const keys = ['success', 'info', 'warning', 'error'] as const;
-    keys.forEach(type => {
-      clone[type] = config =>
-        open({
-          ...config,
-          type,
-        });
+    const { message, description, icon, type, btn, class: className, ...restConfig } = config;
+    return originOpen({
+      placement: 'topRight',
+      ...restConfig,
+      content: () => (
+        <PureContent
+          prefixCls={noticePrefixCls}
+          icon={typeof icon === 'function' ? icon() : icon}
+          type={type}
+          message={typeof message === 'function' ? message() : message}
+          description={typeof description === 'function' ? description() : description}
+          btn={typeof btn === 'function' ? btn() : btn}
+        />
+      ),
+      // @ts-ignore
+      class: classNames(type && `${noticePrefixCls}-${type}`, hashId, className),
     });
+  };
 
-    return clone;
+  // >>> destroy
+  const destroy = (key?: Key) => {
+    if (key !== undefined) {
+      holderRef.value?.close(key);
+    } else {
+      holderRef.value?.destroy();
+    }
+  };
+
+  const wrapAPI = {
+    open,
+    destroy,
+  } as NotificationInstance;
+
+  const keys = ['success', 'info', 'warning', 'error'] as const;
+  keys.forEach(type => {
+    wrapAPI[type] = config =>
+      open({
+        ...config,
+        type,
+      });
   });
 
   // ============================== Return ===============================
   return [
-    wrapAPI.value,
-    () => <Holder key="notification-holder" {...notificationConfig} ref={holderRef} />,
+    wrapAPI,
+    () => <Holder key={holderKey} {...notificationConfig} ref={holderRef} />,
   ] as const;
 }
 

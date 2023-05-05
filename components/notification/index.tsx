@@ -12,6 +12,7 @@ import type { NotificationInstance as VCNotificationInstance } from '../vc-notif
 import classNames from '../_util/classNames';
 import useStyle from './style';
 import useNotification from './useNotification';
+import { getPlacementStyle } from './util';
 
 export type NotificationPlacement =
   | 'top'
@@ -77,63 +78,6 @@ function setNotificationConfig(options: ConfigProps) {
   }
 }
 
-function getPlacementStyle(
-  placement: NotificationPlacement,
-  top: string = defaultTop,
-  bottom: string = defaultBottom,
-) {
-  let style: CSSProperties;
-  switch (placement) {
-    case 'top':
-      style = {
-        left: '50%',
-        transform: 'translateX(-50%)',
-        right: 'auto',
-        top,
-        bottom: 'auto',
-      };
-      break;
-    case 'topLeft':
-      style = {
-        left: '0px',
-        top,
-        bottom: 'auto',
-      };
-      break;
-    case 'topRight':
-      style = {
-        right: '0px',
-        top,
-        bottom: 'auto',
-      };
-      break;
-    case 'bottom':
-      style = {
-        left: '50%',
-        transform: 'translateX(-50%)',
-        right: 'auto',
-        top: 'auto',
-        bottom,
-      };
-      break;
-    case 'bottomLeft':
-      style = {
-        left: '0px',
-        top: 'auto',
-        bottom,
-      };
-      break;
-    default:
-      style = {
-        right: '0px',
-        top: 'auto',
-        bottom,
-      };
-      break;
-  }
-  return style;
-}
-
 function getNotificationInstance(
   {
     prefixCls: customizePrefixCls,
@@ -167,7 +111,7 @@ function getNotificationInstance(
       prefixCls: customizePrefixCls || defaultPrefixCls,
       useStyle,
       class: notificationClass,
-      style: getPlacementStyle(placement, top, bottom),
+      style: getPlacementStyle(placement, top ?? defaultTop, bottom ?? defaultBottom),
       appContext,
       getContainer,
       closeIcon: ({ prefixCls }) => {
@@ -210,8 +154,8 @@ export interface NotificationArgsProps {
   class?: string;
   readonly type?: IconType;
   onClick?: () => void;
-  top?: string;
-  bottom?: string;
+  top?: string | number;
+  bottom?: string | number;
   getContainer?: () => HTMLElement;
   closeIcon?: VueNode | (() => VueNode);
   appContext?: any;

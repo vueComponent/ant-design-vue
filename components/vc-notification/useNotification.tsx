@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { shallowRef, watch, ref, computed } from 'vue';
+import { shallowRef, watch, computed } from 'vue';
 import HookNotification, { getUuid } from './HookNotification';
 import type { NotificationInstance, OpenConfig, Placement } from './Notification';
 import type { CSSMotionProps } from '../_util/transition';
@@ -82,7 +82,7 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
     ...shareConfig
   } = rootConfig;
 
-  const notices = ref([]);
+  const notices = shallowRef([]);
   const notificationsRef = shallowRef<NotificationInstance>();
   const add = (originNotice: NoticeContent, holderCallback?: HolderReadyCallback) => {
     const key = originNotice.key || getUuid();
@@ -132,29 +132,27 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
     ></HookNotification>
   ));
 
-  const taskQueue = ref([] as Task[]);
+  const taskQueue = shallowRef([] as Task[]);
   // ========================= Refs =========================
-  const api = computed(() => {
-    return {
-      open: (config: OpenConfig) => {
-        const mergedConfig = mergeConfig(shareConfig, config);
+  const api = {
+    open: (config: OpenConfig) => {
+      const mergedConfig = mergeConfig(shareConfig, config);
+      //@ts-ignore
+      if (mergedConfig.key === null || mergedConfig.key === undefined) {
         //@ts-ignore
-        if (mergedConfig.key === null || mergedConfig.key === undefined) {
-          //@ts-ignore
-          mergedConfig.key = `vc-notification-${uniqueKey}`;
-          uniqueKey += 1;
-        }
+        mergedConfig.key = `vc-notification-${uniqueKey}`;
+        uniqueKey += 1;
+      }
 
-        taskQueue.value = [...taskQueue.value, { type: 'open', config: mergedConfig as any }];
-      },
-      close: key => {
-        taskQueue.value = [...taskQueue.value, { type: 'close', key }];
-      },
-      destroy: () => {
-        taskQueue.value = [...taskQueue.value, { type: 'destroy' }];
-      },
-    };
-  });
+      taskQueue.value = [...taskQueue.value, { type: 'open', config: mergedConfig as any }];
+    },
+    close: key => {
+      taskQueue.value = [...taskQueue.value, { type: 'close', key }];
+    },
+    destroy: () => {
+      taskQueue.value = [...taskQueue.value, { type: 'destroy' }];
+    },
+  };
 
   // ======================== Effect ========================
   watch(taskQueue, () => {
@@ -180,5 +178,5 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
   });
 
   // ======================== Return ========================
-  return [api.value, () => contextHolder.value] as const;
+  return [api, () => contextHolder.value] as const;
 }

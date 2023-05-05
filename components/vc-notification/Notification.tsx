@@ -29,7 +29,7 @@ export interface NoticeContent extends Omit<NoticeProps, 'prefixCls' | 'noticeKe
   prefixCls?: string;
   key?: Key;
   updateMark?: string;
-  content?: any;
+  content?: string | ((arg: { prefixCls: string }) => VueNode) | VueNode;
   onClose?: () => void;
   style?: CSSProperties;
   class?: String;

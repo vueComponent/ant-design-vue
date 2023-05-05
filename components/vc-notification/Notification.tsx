@@ -1,7 +1,8 @@
 import { getTransitionGroupProps } from '../_util/transition';
-import type { Key } from '../_util/type';
+import type { Key, VueNode } from '../_util/type';
 import type { CSSProperties } from 'vue';
 import {
+  shallowRef,
   createVNode,
   computed,
   defineComponent,
@@ -32,6 +33,14 @@ export interface NoticeContent extends Omit<NoticeProps, 'prefixCls' | 'noticeKe
   onClose?: () => void;
   style?: CSSProperties;
   class?: String;
+}
+export type Placement = 'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight';
+
+export interface OpenConfig extends NoticeProps {
+  key: Key;
+  placement?: Placement;
+  content?: VueNode;
+  duration?: number | null;
 }
 
 export type NoticeFunc = (noticeProps: NoticeContent) => void;
@@ -220,7 +229,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
     compatConfig: { MODE: 3 },
     name: 'NotificationWrapper',
     setup(_props, { attrs }) {
-      const notiRef = ref();
+      const notiRef = shallowRef();
       const prefixCls = computed(() => globalConfigForApi.getPrefixCls(name, customizePrefixCls));
       const [, hashId] = useStyle(prefixCls);
       onMounted(() => {

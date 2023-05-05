@@ -59,7 +59,7 @@ const Holder = defineComponent({
     const getStyles = () => ({
       left: '50%',
       transform: 'translateX(-50%)',
-      top: top ?? DEFAULT_OFFSET,
+      top: `${top ?? DEFAULT_OFFSET}px`,
     });
     const getClassName = () => classNames(hashId.value, props.rtl ? `${prefixCls.value}-rtl` : '');
 
@@ -113,114 +113,113 @@ export function useInternalMessage(
   messageConfig?: HolderProps,
 ): readonly [MessageInstance, () => VNode] {
   const holderRef = shallowRef<HolderRef>(null);
+  const holderKey = Symbol('messageHolderKey');
   // ================================ API ================================
-  const wrapAPI = computed(() => {
-    // Wrap with notification content
-    // >>> close
-    const close = (key: Key) => {
-      holderRef.value?.close(key);
-    };
 
-    // >>> Open
-    const open = (config: ArgsProps): MessageType => {
-      if (!holderRef.value) {
-        const fakeResult: any = () => {};
-        fakeResult.then = () => {};
-        return fakeResult;
-      }
+  // Wrap with notification content
+  // >>> close
+  const close = (key: Key) => {
+    holderRef.value?.close(key);
+  };
 
-      const { open: originOpen, prefixCls, hashId } = holderRef.value;
-      const noticePrefixCls = `${prefixCls}-notice`;
-      const { content, icon, type, key, className, onClose, ...restConfig } = config;
+  // >>> Open
+  const open = (config: ArgsProps): MessageType => {
+    if (!holderRef.value) {
+      const fakeResult: any = () => {};
+      fakeResult.then = () => {};
+      return fakeResult;
+    }
 
-      let mergedKey: Key = key!;
-      if (mergedKey === undefined || mergedKey === null) {
-        keyIndex += 1;
-        mergedKey = `antd-message-${keyIndex}`;
-      }
+    const { open: originOpen, prefixCls, hashId } = holderRef.value;
+    const noticePrefixCls = `${prefixCls}-notice`;
+    const { content, icon, type, key, class: className, onClose, ...restConfig } = config;
 
-      return wrapPromiseFn(resolve => {
-        originOpen({
-          ...restConfig,
-          key: mergedKey,
-          content: (
-            <PureContent prefixCls={prefixCls} type={type} icon={icon}>
-              {content}
-            </PureContent>
-          ),
-          placement: 'top',
-          // @ts-ignore
-          class: classNames(type && `${noticePrefixCls}-${type}`, hashId, className),
-          onClose: () => {
-            onClose?.();
-            resolve();
-          },
-        });
+    let mergedKey: Key = key!;
+    if (mergedKey === undefined || mergedKey === null) {
+      keyIndex += 1;
+      mergedKey = `antd-message-${keyIndex}`;
+    }
 
-        // Return close function
-        return () => {
-          close(mergedKey);
-        };
+    return wrapPromiseFn(resolve => {
+      originOpen({
+        ...restConfig,
+        key: mergedKey,
+        content: () => (
+          <PureContent
+            prefixCls={prefixCls}
+            type={type}
+            icon={typeof icon === 'function' ? icon() : icon}
+          >
+            {typeof content === 'function' ? content() : content}
+          </PureContent>
+        ),
+        placement: 'top',
+        // @ts-ignore
+        class: classNames(type && `${noticePrefixCls}-${type}`, hashId, className),
+        onClose: () => {
+          onClose?.();
+          resolve();
+        },
       });
-    };
 
-    // >>> destroy
-    const destroy = (key?: Key) => {
-      if (key !== undefined) {
-        close(key);
+      // Return close function
+      return () => {
+        close(mergedKey);
+      };
+    });
+  };
+
+  // >>> destroy
+  const destroy = (key?: Key) => {
+    if (key !== undefined) {
+      close(key);
+    } else {
+      holderRef.value?.destroy();
+    }
+  };
+
+  const wrapAPI = {
+    open,
+    destroy,
+  } as MessageInstance;
+
+  const keys: NoticeType[] = ['info', 'success', 'warning', 'error', 'loading'];
+  keys.forEach(type => {
+    const typeOpen: TypeOpen = (jointContent, duration, onClose) => {
+      let config: ArgsProps;
+      if (jointContent && typeof jointContent === 'object' && 'content' in jointContent) {
+        config = jointContent;
       } else {
-        holderRef.value?.destroy();
-      }
-    };
-
-    const clone = {
-      open,
-      destroy,
-    } as MessageInstance;
-
-    const keys: NoticeType[] = ['info', 'success', 'warning', 'error', 'loading'];
-    keys.forEach(type => {
-      const typeOpen: TypeOpen = (jointContent, duration, onClose) => {
-        let config: ArgsProps;
-        if (jointContent && typeof jointContent === 'object' && 'content' in jointContent) {
-          config = jointContent;
-        } else {
-          config = {
-            content: jointContent as VNode,
-          };
-        }
-
-        // Params
-        let mergedDuration: number | undefined;
-        let mergedOnClose: VoidFunction | undefined;
-        if (typeof duration === 'function') {
-          mergedOnClose = duration;
-        } else {
-          mergedDuration = duration;
-          mergedOnClose = onClose;
-        }
-
-        const mergedConfig = {
-          onClose: mergedOnClose,
-          duration: mergedDuration,
-          ...config,
-          type,
+        config = {
+          content: jointContent as VNode,
         };
+      }
 
-        return open(mergedConfig);
+      // Params
+      let mergedDuration: number | undefined;
+      let mergedOnClose: VoidFunction | undefined;
+      if (typeof duration === 'function') {
+        mergedOnClose = duration;
+      } else {
+        mergedDuration = duration;
+        mergedOnClose = onClose;
+      }
+
+      const mergedConfig = {
+        onClose: mergedOnClose,
+        duration: mergedDuration,
+        ...config,
+        type,
       };
 
-      clone[type] = typeOpen;
-    });
+      return open(mergedConfig);
+    };
 
-    return clone;
+    wrapAPI[type] = typeOpen;
   });
 
   // ============================== Return ===============================
-  return [
-    wrapAPI.value,
-    () => <Holder key="message-holder" {...messageConfig} ref={holderRef} />,
-  ] as const;
+  return [wrapAPI, () => <Holder key={holderKey} {...messageConfig} ref={holderRef} />] as const;
 }
 
 export default function useMessage(messageConfig?: ConfigOptions) {

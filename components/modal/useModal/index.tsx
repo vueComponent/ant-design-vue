@@ -144,8 +144,8 @@ function useModal(): readonly [
     warning: getConfirmFunc(withWarn),
     confirm: getConfirmFunc(withConfirm),
   }));
-
-  return [fns.value, () => <ElementsHolder key="modal-holder" ref={holderRef} />] as const;
+  const holderKey = Symbol('modalHolderKey');
+  return [fns.value, () => <ElementsHolder key={holderKey} ref={holderRef} />] as const;
 }
 
 export default useModal;

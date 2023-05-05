@@ -39,7 +39,7 @@ export type Placement = 'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft'
 export interface OpenConfig extends NoticeProps {
   key: Key;
   placement?: Placement;
-  content?: VueNode;
+  content?: string | (() => VueNode) | VueNode;
   duration?: number | null;
 }
 
@@ -254,7 +254,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
         const rootPrefixCls = global.getRootPrefixCls(customRootPrefixCls, prefixCls.value);
         const transitionName = hasTransitionName
           ? customTransitionName
-          : `${rootPrefixCls}-${customTransitionName}`;
+          : `${prefixCls.value}-${customTransitionName}`;
         return (
           <ConfigProvider {...global} prefixCls={rootPrefixCls}>
             <Notification

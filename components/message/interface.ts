@@ -14,14 +14,14 @@ export interface ConfigOptions {
 }
 
 export interface ArgsProps {
-  content: VueNode;
+  content: string | (() => VueNode) | VueNode;
   duration?: number;
   type?: NoticeType;
   onClose?: () => void;
-  icon?: VueNode;
+  icon?: (() => VueNode) | VueNode;
   key?: string | number;
   style?: CSSProperties;
-  className?: string;
+  class?: string;
   onClick?: (e: Event) => void;
 }
 

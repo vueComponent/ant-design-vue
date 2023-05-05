@@ -17,7 +17,7 @@ Use `message.useMessage` to get `contextHolder` with context accessible issue. P
 </docs>
 
 <template>
-  <contextHolder />
+  <context-holder />
   <a-button type="primary" @click="info">Display normal message</a-button>
 </template>
 
@@ -26,6 +26,6 @@ import { message } from 'ant-design-vue';
 const [messageApi, contextHolder] = message.useMessage();
 
 const info = () => {
-  messageApi.info('Hello, Ant Design!');
+  messageApi.info('Hello, Ant Design Vue!');
 };
 </script>

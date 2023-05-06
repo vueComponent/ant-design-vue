@@ -23,7 +23,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1hDmQJIDFJQAAA
 | clearIcon | 自定义的清除图标 | v-slot:clearIcon | - |  |
 | clearText | 清除按钮的提示文案 | string | clear |  |
 | disabled | 禁用全部操作 | boolean | false |  |
-| disabledTime | 不可选择的时间 | [DisabledTime](#DisabledTime) | - | 3.3.0 |
+| disabledTime | 不可选择的时间 | [DisabledTime](#disabledtime) | - | 3.3.0 |
 | format | 展示的时间格式 | string | `HH:mm:ss` |  |
 | getPopupContainer | 定义浮层的容器，默认为 body 上新建 div | function(trigger) | - |  |
 | hideDisabledOptions | 隐藏禁止选择的选项 | boolean | false |  |
@@ -70,12 +70,12 @@ type DisabledTime = (now: Dayjs) => {
 
 ### TimeRangePicker
 
-属性与 DatePicker 的 [RangePicker](/components/date-picker/#RangePicker) 相同。还包含以下属性：
+属性与 DatePicker 的 [RangePicker](/components/date-picker/#rangepicker) 相同。还包含以下属性：
 
 | 参数         | 说明                 | 类型                                    | 默认值 | 版本  |
 | ------------ | -------------------- | --------------------------------------- | ------ | ----- |
 | order        | 始末时间是否自动排序 | boolean                                 | true   |       |
-| disabledTime | 不可选择的时间       | [RangeDisabledTime](#RangeDisabledTime) | -      | 3.3.0 |
+| disabledTime | 不可选择的时间       | [RangeDisabledTime](#pangedisabledtime) | -      | 3.3.0 |
 
 #### RangeDisabledTime
 

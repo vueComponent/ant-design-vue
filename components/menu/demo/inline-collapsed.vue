@@ -23,62 +23,22 @@ Here is [a complete demo](/components/layout/#components-layout-demo-side) with 
 <template>
   <div style="width: 256px">
     <a-button type="primary" style="margin-bottom: 16px" @click="toggleCollapsed">
-      <MenuUnfoldOutlined v-if="collapsed" />
+      <MenuUnfoldOutlined v-if="state.collapsed" />
       <MenuFoldOutlined v-else />
     </a-button>
     <a-menu
-      v-model:openKeys="openKeys"
-      v-model:selectedKeys="selectedKeys"
+      v-model:openKeys="state.openKeys"
+      v-model:selectedKeys="state.selectedKeys"
       mode="inline"
       theme="dark"
-      :inline-collapsed="collapsed"
-    >
-      <a-menu-item key="1">
-        <template #icon>
-          <PieChartOutlined />
-        </template>
-        <span>Option 1</span>
-      </a-menu-item>
-      <a-menu-item key="2">
-        <template #icon>
-          <DesktopOutlined />
-        </template>
-        <span>Option 2</span>
-      </a-menu-item>
-      <a-menu-item key="3">
-        <template #icon>
-          <InboxOutlined />
-        </template>
-        <span>Option 3</span>
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <template #icon>
-          <MailOutlined />
-        </template>
-        <template #title>Navigation One</template>
-        <a-menu-item key="5">Option 5</a-menu-item>
-        <a-menu-item key="6">Option 6</a-menu-item>
-        <a-menu-item key="7">Option 7</a-menu-item>
-        <a-menu-item key="8">Option 8</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="sub2">
-        <template #icon>
-          <AppstoreOutlined />
-        </template>
-        <template #title>Navigation Two</template>
-        <a-menu-item key="9">Option 9</a-menu-item>
-        <a-menu-item key="10">Option 10</a-menu-item>
-        <a-sub-menu key="sub3" title="Submenu">
-          <a-menu-item key="11">Option 11</a-menu-item>
-          <a-menu-item key="12">Option 12</a-menu-item>
-        </a-sub-menu>
-      </a-sub-menu>
-    </a-menu>
+      :inline-collapsed="state.collapsed"
+      :items="items"
+    ></a-menu>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs, watch } from 'vue';
+<script lang="ts" setup>
+import { reactive, watch, h } from 'vue';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -88,39 +48,103 @@ import {
   InboxOutlined,
   AppstoreOutlined,
 } from '@ant-design/icons-vue';
-export default defineComponent({
-  components: {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    PieChartOutlined,
-    MailOutlined,
-    DesktopOutlined,
-    InboxOutlined,
-    AppstoreOutlined,
-  },
-  setup() {
-    const state = reactive({
-      collapsed: false,
-      selectedKeys: ['1'],
-      openKeys: ['sub1'],
-      preOpenKeys: ['sub1'],
-    });
-
-    watch(
-      () => state.openKeys,
-      (_val, oldVal) => {
-        state.preOpenKeys = oldVal;
-      },
-    );
-    const toggleCollapsed = () => {
-      state.collapsed = !state.collapsed;
-      state.openKeys = state.collapsed ? [] : state.preOpenKeys;
-    };
-
-    return {
-      ...toRefs(state),
-      toggleCollapsed,
-    };
-  },
+const state = reactive({
+  collapsed: false,
+  selectedKeys: ['1'],
+  openKeys: ['sub1'],
+  preOpenKeys: ['sub1'],
 });
+const items = reactive([
+  {
+    key: '1',
+    icon: () => h(PieChartOutlined),
+    label: 'Option 1',
+    title: 'Option 1',
+  },
+  {
+    key: '2',
+    icon: () => h(DesktopOutlined),
+    label: 'Option 2',
+    title: 'Option 2',
+  },
+  {
+    key: '3',
+    icon: () => h(InboxOutlined),
+    label: 'Option 3',
+    title: 'Option 3',
+  },
+  {
+    key: 'sub1',
+    icon: () => h(MailOutlined),
+    label: 'Navigation One',
+    title: 'Navigation One',
+    children: [
+      {
+        key: '5',
+        label: 'Option 5',
+        title: 'Option 5',
+      },
+      {
+        key: '6',
+        label: 'Option 6',
+        title: 'Option 6',
+      },
+      {
+        key: '7',
+        label: 'Option 7',
+        title: 'Option 7',
+      },
+      {
+        key: '8',
+        label: 'Option 8',
+        title: 'Option 8',
+      },
+    ],
+  },
+  {
+    key: 'sub2',
+    icon: () => h(AppstoreOutlined),
+    label: 'Navigation Two',
+    title: 'Navigation Two',
+    children: [
+      {
+        key: '9',
+        label: 'Option 9',
+        title: 'Option 9',
+      },
+      {
+        key: '10',
+        label: 'Option 10',
+        title: 'Option 10',
+      },
+      {
+        key: 'sub3',
+        label: 'Submenu',
+        title: 'Submenu',
+        children: [
+          {
+            key: '11',
+            label: 'Option 11',
+            title: 'Option 11',
+          },
+          {
+            key: '12',
+            label: 'Option 12',
+            title: 'Option 12',
+          },
+        ],
+      },
+    ],
+  },
+]);
+watch(
+  () => state.openKeys,
+  (_val, oldVal) => {
+    state.preOpenKeys = oldVal;
+  },
+);
+const toggleCollapsed = () => {
+  state.collapsed = !state.collapsed;
+  state.openKeys = state.collapsed ? [] : state.preOpenKeys;
+};
 </script>

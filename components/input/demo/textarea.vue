@@ -21,14 +21,7 @@ For multi-line input.
   <br />
   <a-textarea :rows="4" placeholder="maxlength is 6" :maxlength="6" />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('');
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<string>('');
 </script>

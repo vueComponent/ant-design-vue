@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/divider/demo/customize-style.vue correctly 1`] = `
-<div class="ant-divider ant-divider-horizontal" role="separator" style="height: 2px; background-color: rgb(124, 179, 5);">
+<div style="height: 2px; background-color: rgb(124, 179, 5);" class="ant-divider ant-divider-horizontal" role="separator">
   <!---->
 </div>
-<div class="ant-divider ant-divider-horizontal ant-divider-dashed" role="separator" style="border-color: #7cb305;">
+<div style="border-color: #7cb305;" class="ant-divider ant-divider-horizontal ant-divider-dashed" role="separator">
   <!---->
 </div>
-<div class="ant-divider ant-divider-vertical" role="separator" style="height: 60px; background-color: rgb(124, 179, 5);">
+<div style="height: 60px; background-color: rgb(124, 179, 5);" class="ant-divider ant-divider-vertical" role="separator">
   <!---->
 </div>
-<div class="ant-divider ant-divider-vertical ant-divider-dashed" role="separator" style="height: 60px; border-color: #7cb305;">
+<div style="height: 60px; border-color: #7cb305;" class="ant-divider ant-divider-vertical ant-divider-dashed" role="separator">
   <!---->
 </div>
 `;

@@ -1,9 +1,7 @@
 import type { App } from 'vue';
-import { defineComponent } from 'vue';
 import Tree from './Tree';
 import { TreeNode as VcTreeNode } from '../vc-tree';
 import DirectoryTree from './DirectoryTree';
-import { treeNodeProps } from '../vc-tree/props';
 
 export type { EventDataNode, DataNode } from '../vc-tree/interface';
 
@@ -26,11 +24,7 @@ export type {
 
 /* istanbul ignore next */
 
-const TreeNode = defineComponent({
-  ...(VcTreeNode as any),
-  name: 'ATreeNode',
-  props: treeNodeProps,
-});
+const TreeNode = VcTreeNode;
 
 export { DirectoryTree, TreeNode };
 

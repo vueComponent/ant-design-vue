@@ -33,8 +33,8 @@ Custom display the context menu
   </a-tree>
 </template>
 
-<script lang="ts">
-import { defineComponent, watch, ref } from 'vue';
+<script lang="ts" setup>
+import { watch, ref } from 'vue';
 
 const treeData = [
   {
@@ -62,23 +62,12 @@ const treeData = [
     ],
   },
 ];
-export default defineComponent({
-  setup() {
-    const onContextMenuClick = (treeKey: string, menuKey: string | number) => {
-      console.log(`treeKey: ${treeKey}, menuKey: ${menuKey}`);
-    };
-    const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const onContextMenuClick = (treeKey: string, menuKey: string | number) => {
+  console.log(`treeKey: ${treeKey}, menuKey: ${menuKey}`);
+};
+const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
 
-    watch(expandedKeys, () => {
-      console.log('expandedKeys', expandedKeys);
-    });
-    return {
-      treeData,
-      onContextMenuClick,
-      expandedKeys,
-    };
-  },
+watch(expandedKeys, () => {
+  console.log('expandedKeys', expandedKeys);
 });
 </script>
-
-<style></style>

@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-通过 [`Form.useForm`](#useForm) 更加灵活的使用表单组件。
+通过 [`Form.useForm`](#useform) 更加灵活的使用表单组件。
 
 ## en-US
 
-use [`Form.useForm`](#useForm) provides form validation logic and status.
+use [`Form.useForm`](#useform) provides form validation logic and status.
 </docs>
 
 <template>
@@ -39,59 +39,50 @@ use [`Form.useForm`](#useForm) provides form validation logic and status.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, toRaw } from 'vue';
+<script lang="ts" setup>
+import { reactive, toRaw } from 'vue';
 import { Form } from 'ant-design-vue';
 
 const useForm = Form.useForm;
-export default defineComponent({
-  setup() {
-    const modelRef = reactive({
-      name: '',
-      region: undefined,
-      type: [],
-    });
-    const rulesRef = reactive({
-      name: [
-        {
-          required: true,
-          message: 'Please input name',
-        },
-      ],
-      region: [
-        {
-          required: true,
-          message: 'Please select region',
-        },
-      ],
-      type: [
-        {
-          required: true,
-          message: 'Please select type',
-          type: 'array',
-        },
-      ],
-    });
-    const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
-      onValidate: (...args) => console.log(...args),
-    });
-    const onSubmit = () => {
-      validate()
-        .then(() => {
-          console.log(toRaw(modelRef));
-        })
-        .catch(err => {
-          console.log('error', err);
-        });
-    };
-    return {
-      labelCol: { span: 4 },
-      wrapperCol: { span: 14 },
-      validateInfos,
-      resetFields,
-      modelRef,
-      onSubmit,
-    };
-  },
+
+const labelCol = { span: 4 };
+const wrapperCol = { span: 14 };
+const modelRef = reactive({
+  name: '',
+  region: undefined,
+  type: [],
 });
+const rulesRef = reactive({
+  name: [
+    {
+      required: true,
+      message: 'Please input name',
+    },
+  ],
+  region: [
+    {
+      required: true,
+      message: 'Please select region',
+    },
+  ],
+  type: [
+    {
+      required: true,
+      message: 'Please select type',
+      type: 'array',
+    },
+  ],
+});
+const { resetFields, validate, validateInfos } = useForm(modelRef, rulesRef, {
+  onValidate: (...args) => console.log(...args),
+});
+const onSubmit = () => {
+  validate()
+    .then(() => {
+      console.log(toRaw(modelRef));
+    })
+    .catch(err => {
+      console.log('error', err);
+    });
+};
 </script>

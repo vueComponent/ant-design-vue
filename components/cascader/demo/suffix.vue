@@ -34,9 +34,9 @@ Custom suffix icon
     />
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { SmileOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import type { CascaderProps } from 'ant-design-vue';
 const options: CascaderProps['options'] = [
   {
@@ -72,16 +72,6 @@ const options: CascaderProps['options'] = [
     ],
   },
 ];
-export default defineComponent({
-  components: {
-    SmileOutlined,
-  },
-  setup() {
-    return {
-      value1: ref<string[]>([]),
-      value2: ref<string[]>([]),
-      options,
-    };
-  },
-});
+const value1 = ref<string[]>([]);
+const value2 = ref<string[]>([]);
 </script>

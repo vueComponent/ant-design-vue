@@ -25,18 +25,12 @@ Basic use case. Users can select or input a date in panel.
     <a-date-picker v-model:value="value5" picker="year" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { Dayjs } from 'dayjs';
-export default defineComponent({
-  setup() {
-    return {
-      value1: ref<Dayjs>(),
-      value2: ref<Dayjs>(),
-      value3: ref<Dayjs>(),
-      value4: ref<Dayjs>(),
-      value5: ref<Dayjs>(),
-    };
-  },
-});
+const value1 = ref<Dayjs>();
+const value2 = ref<Dayjs>();
+const value3 = ref<Dayjs>();
+const value4 = ref<Dayjs>();
+const value5 = ref<Dayjs>();
 </script>

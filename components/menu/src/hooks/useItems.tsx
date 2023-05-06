@@ -9,19 +9,19 @@ import ItemGroup from '../ItemGroup';
 import MenuDivider from '../Divider';
 import MenuItem from '../MenuItem';
 import type { Key } from '../../../_util/type';
+import type { VNode } from 'vue';
 import { ref, shallowRef, watch } from 'vue';
 import type { MenuProps } from '../Menu';
 import type { StoreMenuInfo } from './useMenuContext';
 
 export interface MenuItemType extends VcMenuItemType {
   danger?: boolean;
-  icon?: any;
+  icon?: VNode | ((item: MenuItemType) => VNode);
   title?: string;
 }
 
 export interface SubMenuType extends Omit<VcSubMenuType, 'children'> {
-  icon?: any;
-  theme?: 'dark' | 'light';
+  icon?: VNode | ((item: SubMenuType) => VNode);
   children: ItemType[];
 }
 
@@ -69,7 +69,7 @@ function convertItemsToNodes(
             const childrenNodes = convertItemsToNodes(children, store, parentMenuInfo);
             // Group
             return (
-              <ItemGroup key={mergedKey} {...restProps} title={label}>
+              <ItemGroup key={mergedKey} {...restProps} title={label} originItemValue={opt}>
                 {childrenNodes}
               </ItemGroup>
             );
@@ -84,7 +84,7 @@ function convertItemsToNodes(
             parentKeys: [].concat(parentKeys, mergedKey),
           });
           return (
-            <SubMenu key={mergedKey} {...restProps} title={label}>
+            <SubMenu key={mergedKey} {...restProps} title={label} originItemValue={opt}>
               {childrenNodes}
             </SubMenu>
           );
@@ -97,7 +97,7 @@ function convertItemsToNodes(
         menuInfo.isLeaf = true;
         store.set(mergedKey, menuInfo);
         return (
-          <MenuItem key={mergedKey} {...restProps}>
+          <MenuItem key={mergedKey} {...restProps} originItemValue={opt}>
             {label}
           </MenuItem>
         );

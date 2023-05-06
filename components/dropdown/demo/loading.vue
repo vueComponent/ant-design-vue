@@ -54,33 +54,21 @@ A loading indicator can be added to a button by setting the `loading` property o
     </a-dropdown-button>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, Ref, ref } from 'vue';
+<script lang="ts" setup>
+import { Ref, ref } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: {
-    DownOutlined,
-  },
-  setup() {
-    const loading1 = ref(false);
-    const loading2 = ref(false);
-    const enterLoading = (loading: Ref<boolean>) => {
-      loading.value = true;
-      setTimeout(() => {
-        loading.value = false;
-      }, 6000);
-    };
-    return {
-      loading1,
-      loading2,
-      enterLoading1() {
-        enterLoading(loading1);
-      },
-      enterLoading2() {
-        enterLoading(loading2);
-      },
-    };
-  },
-});
+const loading1 = ref(false);
+const loading2 = ref(false);
+const enterLoading = (loading: Ref<boolean>) => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 6000);
+};
+function enterLoading1() {
+  enterLoading(loading1);
+}
+function enterLoading2() {
+  enterLoading(loading2);
+}
 </script>

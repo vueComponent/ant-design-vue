@@ -41,7 +41,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1GeUQJPTGUYAAA
 | showLine | 是否展示连接线 | boolean \| {showLeafIcon: boolean}(3.0+) | false |  |  |
 | switcherIcon | 自定义树节点的展开/折叠图标 | v-slot:switcherIcon="{active, checked, expanded, loading, selected, halfChecked, title, key, children, dataRef, data, defaultIcon, switcherCls}" | - |  |  |
 | title | 自定义标题 | slot |  | 2.0.0 |  |
-| treeData | treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（key 在整个树范围内唯一） | [TreeNode\[\]](#TreeNode) | -- |  |  |
+| treeData | treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（key 在整个树范围内唯一） | [TreeNode\[\]](#treenode) | -- |  |  |
 | virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 3.0 |  |
 
 ### 事件

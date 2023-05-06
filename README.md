@@ -28,7 +28,7 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Environment Support
 
-- Modern browsers. v1.x support Internet Explorer 9+ (with [polyfills](https://www.antdv.com/docs/vue/getting-started/#Compatibility))
+- Modern browsers. v1.x support Internet Explorer 9+ (with [polyfills](https://www.antdv.com/docs/vue/getting-started/#compatibility))
 - Server-side Rendering
 - Support Vue 2 & Vue 3
 - [Electron](https://electronjs.org/)

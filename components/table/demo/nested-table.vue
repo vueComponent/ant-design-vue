@@ -56,10 +56,8 @@ Showing more detailed info of every row.
     </template>
   </a-table>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-
 const columns = [
   { title: 'Name', dataIndex: 'name', key: 'name' },
   { title: 'Platform', dataIndex: 'platform', key: 'platform' },
@@ -121,18 +119,4 @@ for (let i = 0; i < 3; ++i) {
     upgradeNum: 'Upgraded: 56',
   });
 }
-
-export default defineComponent({
-  components: {
-    DownOutlined,
-  },
-  setup() {
-    return {
-      data,
-      columns,
-      innerColumns,
-      innerData,
-    };
-  },
-});
 </script>

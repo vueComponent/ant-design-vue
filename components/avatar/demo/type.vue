@@ -32,12 +32,6 @@ Image, Icon and letter are supported, and the latter two kinds avatar can have c
   </a-avatar>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { UserOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-  },
-});
 </script>

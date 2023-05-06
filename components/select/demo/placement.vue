@@ -36,15 +36,8 @@ You can manually specify the position of the popup via `placement`.
     <a-select-option value="WenZhou">WenZhou #325000</a-select-option>
   </a-select>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const placement = ref('topLeft' as const);
-    return {
-      placement,
-      value: ref('HangZhou'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const placement = ref('topLeft' as const);
+const value = ref('HangZhou');
 </script>

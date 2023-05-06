@@ -37,8 +37,8 @@ Searchable Tree.
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeProps } from 'ant-design-vue';
 
 const x = 3;
@@ -99,38 +99,27 @@ const getParentKey = (
   }
   return parentKey;
 };
-export default defineComponent({
-  setup() {
-    const expandedKeys = ref<(string | number)[]>([]);
-    const searchValue = ref<string>('');
-    const autoExpandParent = ref<boolean>(true);
-    const gData = ref<TreeProps['treeData']>(genData);
+const expandedKeys = ref<(string | number)[]>([]);
+const searchValue = ref<string>('');
+const autoExpandParent = ref<boolean>(true);
+const gData = ref<TreeProps['treeData']>(genData);
 
-    const onExpand = (keys: string[]) => {
-      expandedKeys.value = keys;
-      autoExpandParent.value = false;
-    };
+const onExpand = (keys: string[]) => {
+  expandedKeys.value = keys;
+  autoExpandParent.value = false;
+};
 
-    watch(searchValue, value => {
-      const expanded = dataList
-        .map((item: TreeProps['treeData'][number]) => {
-          if (item.title.indexOf(value) > -1) {
-            return getParentKey(item.key, gData.value);
-          }
-          return null;
-        })
-        .filter((item, i, self) => item && self.indexOf(item) === i);
-      expandedKeys.value = expanded;
-      searchValue.value = value;
-      autoExpandParent.value = true;
-    });
-    return {
-      expandedKeys,
-      searchValue,
-      autoExpandParent,
-      gData,
-      onExpand,
-    };
-  },
+watch(searchValue, value => {
+  const expanded = dataList
+    .map((item: TreeProps['treeData'][number]) => {
+      if (item.title.indexOf(value) > -1) {
+        return getParentKey(item.key, gData.value);
+      }
+      return null;
+    })
+    .filter((item, i, self) => item && self.indexOf(item) === i);
+  expandedKeys.value = expanded;
+  searchValue.value = value;
+  autoExpandParent.value = true;
 });
 </script>

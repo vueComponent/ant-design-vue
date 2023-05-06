@@ -26,7 +26,7 @@ Customize image, description and extra content.
     <template #description>
       <span>
         Customize
-        <a href="#API">Description</a>
+        <a href="#api">Description</a>
       </span>
     </template>
     <a-button type="primary">Create Now</a-button>

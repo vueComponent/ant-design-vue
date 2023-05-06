@@ -24,16 +24,8 @@ Support set allow to clear star when click again.
     <span class="ant-rate-text">allowClear: false</span>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value1 = ref<number>(3);
-    const value2 = ref<number>(3);
-    return {
-      value1,
-      value2,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value1 = ref<number>(3);
+const value2 = ref<number>(3);
 </script>

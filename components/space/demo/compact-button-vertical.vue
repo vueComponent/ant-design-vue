@@ -35,9 +35,3 @@ Vertical Mode for Space.Compact, support Button only.
     </a-space-compact>
   </a-space>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({});
-</script>

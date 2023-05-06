@@ -38,8 +38,8 @@ Use `oneWay` to makes Transfer to one way style.
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 interface MockData {
   key: string;
   title: string;
@@ -56,37 +56,23 @@ for (let i = 0; i < 20; i++) {
   });
 }
 
-export default defineComponent({
-  data() {
-    const disabled = ref<boolean>(false);
+const disabled = ref<boolean>(false);
 
-    const targetKeys = ref<string[]>([]);
+const targetKeys = ref<string[]>([]);
 
-    const selectedKeys = ref<string[]>(['1', '4']);
+const selectedKeys = ref<string[]>(['1', '4']);
 
-    const handleChange = (nextTargetKeys: string[], direction: string, moveKeys: string[]) => {
-      console.log('targetKeys: ', nextTargetKeys);
-      console.log('direction: ', direction);
-      console.log('moveKeys: ', moveKeys);
-    };
-    const handleSelectChange = (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => {
-      console.log('sourceSelectedKeys: ', sourceSelectedKeys);
-      console.log('targetSelectedKeys: ', targetSelectedKeys);
-    };
-    const handleScroll = (direction: string, e: Event) => {
-      console.log('direction:', direction);
-      console.log('target:', e.target);
-    };
-
-    return {
-      mockData,
-      targetKeys,
-      selectedKeys,
-      disabled,
-      handleChange,
-      handleSelectChange,
-      handleScroll,
-    };
-  },
-});
+const handleChange = (nextTargetKeys: string[], direction: string, moveKeys: string[]) => {
+  console.log('targetKeys: ', nextTargetKeys);
+  console.log('direction: ', direction);
+  console.log('moveKeys: ', moveKeys);
+};
+const handleSelectChange = (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => {
+  console.log('sourceSelectedKeys: ', sourceSelectedKeys);
+  console.log('targetSelectedKeys: ', targetSelectedKeys);
+};
+const handleScroll = (direction: string, e: Event) => {
+  console.log('direction:', direction);
+  console.log('target:', e.target);
+};
 </script>

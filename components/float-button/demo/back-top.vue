@@ -6,7 +6,7 @@ title:
   zh-CN: 回到顶部
   en-US: BackTop
 ---
-  
+
 ## zh-CN
 
 返回页面顶部的操作按钮。
@@ -29,13 +29,3 @@ title:
     <a-back-top />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {};
-  },
-});
-</script>

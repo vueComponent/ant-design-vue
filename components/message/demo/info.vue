@@ -19,17 +19,9 @@ Normal message for information.
 <template>
   <a-button type="primary" @click="info">Display normal message</a-button>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { message } from 'ant-design-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    const info = () => {
-      message.info('This is a normal message');
-    };
-    return {
-      info,
-    };
-  },
-});
+const info = () => {
+  message.info('This is a normal message');
+};
 </script>

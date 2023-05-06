@@ -25,14 +25,7 @@ A group of radio components.
     </a-radio-group>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<number>(1);
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<number>(1);
 </script>

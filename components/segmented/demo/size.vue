@@ -23,21 +23,10 @@ There are three sizes of an a-segmented: `large` (40px), `default` (32px) and `s
   <a-segmented v-model:value="value3" :options="data" size="small" />
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const data = reactive(['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']);
-    const value = ref(data[0]);
-    const value2 = ref(data[0]);
-    const value3 = ref(data[0]);
-    return {
-      data,
-      value,
-      value2,
-      value3,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref, reactive } from 'vue';
+const data = reactive(['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']);
+const value = ref(data[0]);
+const value2 = ref(data[0]);
+const value3 = ref(data[0]);
 </script>

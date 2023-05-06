@@ -22,7 +22,7 @@ By clicking the input box, you can select a time from a popup panel.
 | clearIcon | The custom clear icon | v-slot:clearIcon | - |  |
 | clearText | The clear tooltip of icon | string | clear |  |
 | disabled | Determine whether the TimePicker is disabled | boolean | false |  |
-| disabledTime | To specify the time that cannot be selected | [DisabledTime](#DisabledTime) | - | 3.3.0 |
+| disabledTime | To specify the time that cannot be selected | [DisabledTime](#disabledtime) | - | 3.3.0 |
 | format | To set the time format | string | `HH:mm:ss` |  |
 | getPopupContainer | To set the container of the floating layer, while the default is to create a div element in body | function(trigger) | - |  |
 | hideDisabledOptions | Whether hide the options that can not be selected | boolean | false |  |
@@ -68,12 +68,12 @@ type DisabledTime = (now: Dayjs) => {
 
 ### TimeRangePicker
 
-Same props from [RangePicker](/components/date-picker/#RangePicker) of DatePicker. And includes additional props:
+Same props from [RangePicker](/components/date-picker/#rangepicker) of DatePicker. And includes additional props:
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | order | Order start and end time | boolean | true |  |
-| disabledTime | To specify the time that cannot be selected | [RangeDisabledTime](#RangeDisabledTime) | - | 3.3.0 |
+| disabledTime | To specify the time that cannot be selected | [RangeDisabledTime](#rangedisabledtime) | - | 3.3.0 |
 
 #### RangeDisabledTime
 

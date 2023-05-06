@@ -18,12 +18,12 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HrFtQ6jJJFQAAA
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | cancelButton | 完全自定义取消按钮 | slot | - | 3.0 |
-| cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button/#API) | - |  |
+| cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button/#api) | - |  |
 | cancelText | 取消按钮文字 | string\|slot | 取消 |  |
 | disabled | 点击 Popconfirm 子元素是否弹出气泡确认框 | boolean | false |  |
 | icon | 自定义弹出气泡 Icon 图标 | vNode | &lt;Icon type="exclamation-circle" /> |  |
 | okButton | 完全自定义确认按钮 | slot | - | 3.0 |
-| okButtonProps | ok 按钮 props | [ButtonProps](/components/button/#API) | - |  |
+| okButtonProps | ok 按钮 props | [ButtonProps](/components/button/#api) | - |  |
 | okText | 确认按钮文字 | string\|slot | 确定 |  |
 | okType | 确认按钮类型 | string | primary |  |
 | showCancel | 是否显示取消按钮 | boolean | true | 3.0 |
@@ -39,7 +39,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HrFtQ6jJJFQAAA
 | confirm    | 点击确认的回调 | function(e)    |      |
 | openChange | 显示隐藏的回调 | function(open) | 4.0  |
 
-更多属性请参考 [Tooltip](/components/tooltip-cn/#API)。
+更多属性请参考 [Tooltip](/components/tooltip-cn/#api)。
 
 ## 注意
 

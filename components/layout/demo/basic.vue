@@ -50,7 +50,7 @@ Classic page layouts.
   </a-layout>
 </template>
 
-<style>
+<style scoped>
 #components-layout-demo-basic .code-box-demo {
   text-align: center;
 }

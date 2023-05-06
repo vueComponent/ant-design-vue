@@ -26,9 +26,9 @@ Multiple and checkable.
     placeholder="Please select"
   />
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
 import { TreeSelect } from 'ant-design-vue';
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 
@@ -64,19 +64,10 @@ const treeData: TreeSelectProps['treeData'] = [
     ],
   },
 ];
-export default defineComponent({
-  setup() {
-    const value = ref<string[]>(['0-0-0']);
 
-    watch(value, () => {
-      console.log(value.value);
-    });
+const value = ref<string[]>(['0-0-0']);
 
-    return {
-      value,
-      treeData,
-      SHOW_PARENT,
-    };
-  },
+watch(value, () => {
+  console.log(value.value);
 });
 </script>

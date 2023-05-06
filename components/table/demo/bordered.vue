@@ -26,9 +26,7 @@ Add border, title and footer for table.
     <template #footer>Footer</template>
   </a-table>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
 const columns = [
   {
     title: 'Name',
@@ -65,17 +63,8 @@ const data = [
     address: 'Sidney No. 1 Lake Park',
   },
 ];
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>
-<style>
+<style scoped>
 th.column-money,
 td.column-money {
   text-align: right !important;

@@ -56,7 +56,11 @@ or use `valueFormat` to format.
       />
     </a-form-item>
     <a-form-item name="time-picker" label="TimePicker" v-bind="config">
-      <a-time-picker v-model:value="formState['time-picker']" format="HH:mm:ss" value-format="HH:mm:ss" />
+      <a-time-picker
+        v-model:value="formState['time-picker']"
+        format="HH:mm:ss"
+        value-format="HH:mm:ss"
+      />
     </a-form-item>
     <a-form-item
       :wrapper-col="{
@@ -68,8 +72,8 @@ or use `valueFormat` to format.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
+<script lang="ts" setup>
+import { reactive } from 'vue';
 
 interface FormState {
   'date-picker': string;
@@ -79,40 +83,28 @@ interface FormState {
   'range-time-picker': [string, string];
   'time-picker': string;
 }
-export default defineComponent({
-  setup() {
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    };
-    const config = {
-      rules: [{ type: 'string' as const, required: true, message: 'Please select time!' }],
-    };
-    const rangeConfig = {
-      rules: [{ type: 'array' as const, required: true, message: 'Please select time!' }],
-    };
-    const formState = reactive({} as FormState);
-    const onFinish = (values: any) => {
-      console.log('Success:', values, formState);
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-      console.log('Failed:', errorInfo);
-    };
-    return {
-      formState,
-      onFinish,
-      onFinishFailed,
-      formItemLayout,
-      config,
-      rangeConfig,
-    };
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
   },
-});
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 16 },
+  },
+};
+const config = {
+  rules: [{ type: 'string' as const, required: true, message: 'Please select time!' }],
+};
+const rangeConfig = {
+  rules: [{ type: 'array' as const, required: true, message: 'Please select time!' }],
+};
+const formState = reactive({} as FormState);
+const onFinish = (values: any) => {
+  console.log('Success:', values, formState);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+  console.log('Failed:', errorInfo);
+};
 </script>

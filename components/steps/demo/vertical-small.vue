@@ -32,17 +32,6 @@ A simple mini version step bar in the vertical direction.
     ]"
   ></a-steps>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const current = ref<number>(0);
-
-    return {
-      current,
-      description: 'This is a description.',
-    };
-  },
-});
+<script lang="ts" setup>
+const description = 'This is a description.';
 </script>

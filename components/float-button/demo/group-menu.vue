@@ -15,7 +15,7 @@ title:
 
 Open menu mode with `trigger`, which could be `hover` or `click`.
 
-  
+
 </docs>
 
 <template>
@@ -43,14 +43,6 @@ Open menu mode with `trigger`, which could be `hover` or `click`.
   </a-float-button-group>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { CustomerServiceOutlined, CommentOutlined } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: { CustomerServiceOutlined, CommentOutlined },
-  setup() {
-    return {};
-  },
-});
 </script>

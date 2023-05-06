@@ -16,27 +16,43 @@ Listening for anchor link change.
 </docs>
 
 <template>
-  <a-anchor :affix="false" @change="onChange">
-    <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />
-    <a-anchor-link href="#components-anchor-demo-static" title="Static demo" />
-    <a-anchor-link href="#API" title="API">
-      <a-anchor-link href="#Anchor-Props" title="Anchor Props" />
-      <a-anchor-link href="#Link-Props" title="Link Props" />
-    </a-anchor-link>
-  </a-anchor>
+  <a-anchor
+    :affix="false"
+    :items="[
+      {
+        key: '1',
+        href: '#components-anchor-demo-basic',
+        title: 'Basic demo',
+      },
+      {
+        key: '2',
+        href: '#components-anchor-demo-static',
+        title: 'Static demo',
+      },
+      {
+        key: '3',
+        href: '#api',
+        title: 'API',
+        children: [
+          {
+            key: '4',
+            href: '#anchor-props',
+            title: 'Anchor Props',
+          },
+          {
+            key: '5',
+            href: '#link-props',
+            title: 'Link Props',
+          },
+        ],
+      },
+    ]"
+    @change="onChange"
+  ></a-anchor>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const onChange = (link: string) => {
-      console.log('Anchor:OnChange', link);
-    };
-    return {
-      onChange,
-    };
-  },
-});
+<script lang="ts" setup>
+const onChange = (link: string) => {
+  console.log('Anchor:OnChange', link);
+};
 </script>

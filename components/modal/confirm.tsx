@@ -1,13 +1,14 @@
 import { createVNode, render as vueRender } from 'vue';
 import ConfirmDialog from './ConfirmDialog';
 import type { ModalFuncProps } from './Modal';
-import { destroyFns } from './Modal';
 import ConfigProvider, { globalConfigForApi } from '../config-provider';
 import omit from '../_util/omit';
 
 import { getConfirmLocale } from './locale';
+import destroyFns from './destroyFns';
 
 type ConfigUpdate = ModalFuncProps | ((prevConfig: ModalFuncProps) => ModalFuncProps);
+export type ModalStaticFunctions<T = ModalFunc> = Record<NonNullable<ModalFuncProps['type']>, T>;
 
 export type ModalFunc = (props: ModalFuncProps) => {
   destroy: () => void;

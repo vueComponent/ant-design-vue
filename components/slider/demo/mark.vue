@@ -66,36 +66,22 @@ Using `marks` property to mark a graduated slider, use `value` to specify the po
     </a-slider>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const value1 = ref<number>(37);
-    const value2 = ref<[number, number]>([26, 37]);
-    const value3 = ref<number>(37);
-    const value4 = ref<number>(37);
-    const value5 = ref<number>(37);
-    const marks = ref<Record<number, any>>({
-      0: '0°C',
-      26: '26°C',
-      37: '37°C',
-      100: {
-        style: {
-          color: '#f50',
-        },
-        label: '100°C',
-      },
-    });
-
-    return {
-      value1,
-      value2,
-      value3,
-      value4,
-      value5,
-      marks,
-    };
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value1 = ref<number>(37);
+const value2 = ref<[number, number]>([26, 37]);
+const value3 = ref<number>(37);
+const value4 = ref<number>(37);
+const value5 = ref<number>(37);
+const marks = ref<Record<number, any>>({
+  0: '0°C',
+  26: '26°C',
+  37: '37°C',
+  100: {
+    style: {
+      color: '#f50',
+    },
+    label: '100°C',
   },
 });
 </script>

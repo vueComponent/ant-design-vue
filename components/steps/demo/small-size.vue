@@ -31,17 +31,3 @@ By setting like this: `<Steps size="small">`, you can get a mini version.
     ]"
   ></a-steps>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const current = ref<number>(0);
-
-    return {
-      current,
-      description: 'This is a description.',
-    };
-  },
-});
-</script>

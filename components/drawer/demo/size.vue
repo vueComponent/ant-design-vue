@@ -31,28 +31,18 @@ The default width (or height) of Drawer is `378px`, and there is a presetted lar
     <p>Some contents...</p>
   </a-drawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { DrawerProps } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const open = ref<boolean>(false);
-    const size = ref<DrawerProps['size']>('default');
+const open = ref<boolean>(false);
+const size = ref<DrawerProps['size']>('default');
 
-    const showDrawer = (val: DrawerProps['size']) => {
-      size.value = val;
-      open.value = true;
-    };
+const showDrawer = (val: DrawerProps['size']) => {
+  size.value = val;
+  open.value = true;
+};
 
-    const onClose = () => {
-      open.value = false;
-    };
-    return {
-      open,
-      size,
-      showDrawer,
-      onClose,
-    };
-  },
-});
+const onClose = () => {
+  open.value = false;
+};
 </script>

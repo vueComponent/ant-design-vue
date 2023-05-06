@@ -31,22 +31,11 @@ An event will be triggered when you click menu items, in which you can make diff
     </template>
   </a-dropdown>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue';
 import type { MenuProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: {
-    DownOutlined,
-  },
-  setup() {
-    const onClick: MenuProps['onClick'] = ({ key }) => {
-      console.log(`Click on item ${key}`);
-    };
-    return {
-      onClick,
-    };
-  },
-});
+const onClick: MenuProps['onClick'] = ({ key }) => {
+  console.log(`Click on item ${key}`);
+};
 </script>

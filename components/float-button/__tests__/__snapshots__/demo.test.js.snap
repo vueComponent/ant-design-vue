@@ -1,256 +1,245 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/button/demo/basic.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary" type="button">
-  <!----><span>Primary Button</span>
-</button>
-<button class="ant-btn" type="button">
-  <!----><span>Default Button</span>
-</button>
-<button class="ant-btn ant-btn-dashed" type="button">
-  <!----><span>Dashed Button</span>
-</button>
-<button class="ant-btn ant-btn-text" type="button">
-  <!----><span>Text Button</span>
-</button>
-<button class="ant-btn ant-btn-link" type="button">
-  <!----><span>Link Button</span>
-</button>
-`;
-
-exports[`renders ./components/button/demo/block.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary ant-btn-block" type="button">
-  <!----><span>Primary</span>
-</button>
-<button class="ant-btn ant-btn-block" type="button">
-  <!----><span>Default</span>
-</button>
-<button class="ant-btn ant-btn-dashed ant-btn-block" type="button">
-  <!----><span>Dashed</span>
-</button>
-<button class="ant-btn ant-btn-block ant-btn-dangerous" type="button">
-  <!----><span>Danger</span>
-</button>
-<button class="ant-btn ant-btn-link ant-btn-block" type="button">
-  <!----><span>Link</span>
-</button>
-`;
-
-exports[`renders ./components/button/demo/button-group.vue correctly 1`] = `
-<div id="components-button-demo-button-group">
-  <h4>Basic</h4>
-  <div class="ant-btn-group"><button class="ant-btn" type="button">
-      <!----><span>Cancel</span>
-    </button><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>OK</span>
-    </button></div>
-  <div class="ant-btn-group"><button disabled="" class="ant-btn" type="button">
-      <!----><span>L</span>
-    </button><button disabled="" class="ant-btn" type="button">
-      <!----><span>M</span>
-    </button><button disabled="" class="ant-btn" type="button">
-      <!----><span>R</span>
-    </button></div>
-  <div class="ant-btn-group"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>L</span>
-    </button><button class="ant-btn" type="button">
-      <!----><span>M</span>
-    </button><button class="ant-btn" type="button">
-      <!----><span>M</span>
-    </button><button class="ant-btn ant-btn-dashed" type="button">
-      <!----><span>R</span>
-    </button></div>
-  <h4>With Icon</h4>
-  <div class="ant-btn-group"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span><span>Go back</span>
-    </button><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Go forward</span><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span>
-    </button></div>
-  <div class="ant-btn-group"><button class="ant-btn ant-btn-primary ant-btn-icon-only" type="button"><span role="img" aria-label="cloud" class="anticon anticon-cloud"><svg focusable="false" class="" data-icon="cloud" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M811.4 418.7C765.6 297.9 648.9 212 512.2 212S258.8 297.8 213 418.6C127.3 441.1 64 519.1 64 612c0 110.5 89.5 200 199.9 200h496.2C870.5 812 960 722.5 960 612c0-92.7-63.1-170.7-148.6-193.3zm36.3 281a123.07 123.07 0 01-87.6 36.3H263.9c-33.1 0-64.2-12.9-87.6-36.3A123.3 123.3 0 01140 612c0-28 9.1-54.3 26.2-76.3a125.7 125.7 0 0166.1-43.7l37.9-9.9 13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0152.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9 15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5 37.8 10c54.3 14.5 92.1 63.8 92.1 120 0 33.1-12.9 64.3-36.3 87.7z"></path></svg></span></button><button class="ant-btn ant-btn-primary ant-btn-icon-only" type="button"><span role="img" aria-label="cloud-download" class="anticon anticon-cloud-download"><svg focusable="false" class="" data-icon="cloud-download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M624 706.3h-74.1V464c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v242.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.7a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9z"></path><path d="M811.4 366.7C765.6 245.9 648.9 160 512.2 160S258.8 245.8 213 366.6C127.3 389.1 64 467.2 64 560c0 110.5 89.5 200 199.9 200H304c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8h-40.1c-33.7 0-65.4-13.4-89-37.7-23.5-24.2-36-56.8-34.9-90.6.9-26.4 9.9-51.2 26.2-72.1 16.7-21.3 40.1-36.8 66.1-43.7l37.9-9.9 13.9-36.6c8.6-22.8 20.6-44.1 35.7-63.4a245.6 245.6 0 0152.4-49.9c41.1-28.9 89.5-44.2 140-44.2s98.9 15.3 140 44.2c19.9 14 37.5 30.8 52.4 49.9 15.1 19.3 27.1 40.7 35.7 63.4l13.8 36.5 37.8 10C846.1 454.5 884 503.8 884 560c0 33.1-12.9 64.3-36.3 87.7a123.07 123.07 0 01-87.6 36.3H720c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h40.1C870.5 760 960 670.5 960 560c0-92.7-63.1-170.7-148.6-193.3z"></path></svg></span></button></div>
+exports[`renders ./components/float-button/demo/back-top.vue correctly 1`] = `
+<div style="height: 500vh; padding: 10px;">
+  <div>Scroll to bottom</div>
+  <div>Scroll to bottom</div>
+  <div>Scroll to bottom</div>
+  <div>Scroll to bottom</div>
+  <div>Scroll to bottom</div>
+  <div>Scroll to bottom</div>
+  <div>Scroll to bottom</div><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle fade-enter fade-enter-prepare fade-enter-start" type="button" style="display: none;">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="vertical-align-top" class="anticon anticon-vertical-align-top"><svg focusable="false" class="" data-icon="vertical-align-top" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M859.9 168H164.1c-4.5 0-8.1 3.6-8.1 8v60c0 4.4 3.6 8 8.1 8h695.8c4.5 0 8.1-3.6 8.1-8v-60c0-4.4-3.6-8-8.1-8zM518.3 355a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V848c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V509.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 355z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button>
 </div>
 `;
 
-exports[`renders ./components/button/demo/danger.vue correctly 1`] = `
-<div><button class="ant-btn ant-btn-primary ant-btn-dangerous" type="button">
-    <!----><span>Primary</span>
-  </button><button class="ant-btn ant-btn-dangerous" type="button">
-    <!----><span>Default</span>
-  </button><button class="ant-btn ant-btn-dashed ant-btn-dangerous" type="button">
-    <!----><span>Dashed</span>
-  </button><button class="ant-btn ant-btn-text ant-btn-dangerous" type="button">
-    <!----><span>Text</span>
-  </button><button class="ant-btn ant-btn-link ant-btn-dangerous" type="button">
-    <!----><span>Link</span>
+exports[`renders ./components/float-button/demo/basic.vue correctly 1`] = `
+<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+    </div>
+  </div>
+</button>
+`;
+
+exports[`renders ./components/float-button/demo/description.vue correctly 1`] = `
+<button style="right: 24px;" class="ant-float-btn ant-float-btn-default ant-float-btn-square" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+      <div class="ant-float-btn-description">HELP INFO</div>
+    </div>
+  </div>
+</button>
+<button style="right: 94px;" class="ant-float-btn ant-float-btn-default ant-float-btn-square" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <!---->
+      <div class="ant-float-btn-description">HELP INFO</div>
+    </div>
+  </div>
+</button>
+<button style="right: 164px;" class="ant-float-btn ant-float-btn-default ant-float-btn-square" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+      <div class="ant-float-btn-description">HELP</div>
+    </div>
+  </div>
+</button>
+`;
+
+exports[`renders ./components/float-button/demo/group.vue correctly 1`] = `
+<div style="right: 24px;" class="ant-float-btn-group ant-float-btn-group-circle ant-float-btn-group-circle-shadow"><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="question-circle" class="anticon anticon-question-circle"><svg focusable="false" class="" data-icon="question-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+      </div>
+    </div>
+  </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle fade-enter fade-enter-prepare fade-enter-start" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="vertical-align-top" class="anticon anticon-vertical-align-top"><svg focusable="false" class="" data-icon="vertical-align-top" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M859.9 168H164.1c-4.5 0-8.1 3.6-8.1 8v60c0 4.4 3.6 8 8.1 8h695.8c4.5 0 8.1-3.6 8.1-8v-60c0-4.4-3.6-8-8.1-8zM518.3 355a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V848c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V509.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 355z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button></div>
+<div style="right: 94px;" class="ant-float-btn-group ant-float-btn-group-square ant-float-btn-group-square-shadow"><button class="ant-float-btn ant-float-btn-default ant-float-btn-square" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="question-circle" class="anticon anticon-question-circle"><svg focusable="false" class="" data-icon="question-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-square" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+      </div>
+    </div>
+  </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-square" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="sync" class="anticon anticon-sync"><svg focusable="false" class="" data-icon="sync" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M168 504.2c1-43.7 10-86.1 26.9-126 17.3-41 42.1-77.7 73.7-109.4S337 212.3 378 195c42.4-17.9 87.4-27 133.9-27s91.5 9.1 133.8 27A341.5 341.5 0 01755 268.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.7 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c0-6.7-7.7-10.5-12.9-6.3l-56.4 44.1C765.8 155.1 646.2 92 511.8 92 282.7 92 96.3 275.6 92 503.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8zm756 7.8h-60c-4.4 0-7.9 3.5-8 7.8-1 43.7-10 86.1-26.9 126-17.3 41-42.1 77.8-73.7 109.4A342.45 342.45 0 01512.1 856a342.24 342.24 0 01-243.2-100.8c-9.9-9.9-19.2-20.4-27.8-31.4l60.2-47a8 8 0 00-3-14.1l-175.7-43c-5-1.2-9.9 2.6-9.9 7.7l-.7 181c0 6.7 7.7 10.5 12.9 6.3l56.4-44.1C258.2 868.9 377.8 932 512.2 932c229.2 0 415.5-183.7 419.8-411.8a8 8 0 00-8-8.2z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-square fade-enter fade-enter-prepare fade-enter-start" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="vertical-align-top" class="anticon anticon-vertical-align-top"><svg focusable="false" class="" data-icon="vertical-align-top" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M859.9 168H164.1c-4.5 0-8.1 3.6-8.1 8v60c0 4.4 3.6 8 8.1 8h695.8c4.5 0 8.1-3.6 8.1-8v-60c0-4.4-3.6-8-8.1-8zM518.3 355a8 8 0 00-12.6 0l-112 141.7a7.98 7.98 0 006.3 12.9h73.9V848c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V509.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 355z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
   </button></div>
 `;
 
-exports[`renders ./components/button/demo/disabled.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary" type="button">
-  <!----><span>Primary</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-primary" type="button">
-  <!----><span>Primary(disabled)</span>
-</button>
-<br>
-<button class="ant-btn" type="button">
-  <!----><span>Default</span>
-</button>
-<button disabled="" class="ant-btn" type="button">
-  <!----><span>Default(disabled)</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-dashed" type="button">
-  <!----><span>Dashed</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-dashed" type="button">
-  <!----><span>Dashed(disabled)</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-text" type="button">
-  <!----><span>Text</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-text" type="button">
-  <!----><span>Text(disabled)</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-link" type="button">
-  <!----><span>Link</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-link" type="button">
-  <!----><span>Link(disabled)</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-dangerous" type="button">
-  <!----><span>Danger Default</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-dangerous" type="button">
-  <!----><span>Danger Default(disabled)</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-text ant-btn-dangerous" type="button">
-  <!----><span>Danger Text</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-text ant-btn-dangerous" type="button">
-  <!----><span>Danger Text(disabled)</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-link ant-btn-dangerous" type="button">
-  <!----><span>Danger Link</span>
-</button>
-<button disabled="" class="ant-btn ant-btn-link ant-btn-dangerous" type="button">
-  <!----><span>Danger Link(disabled)</span>
-</button>
-<br>
-<div style="padding: 8px 8px 0px 8px; background: rgb(190, 200, 200);"><button class="ant-btn ant-btn-background-ghost" type="button">
-    <!----><span>Ghost</span>
-  </button><button disabled="" class="ant-btn ant-btn-background-ghost" type="button">
-    <!----><span>Ghost(disabled)</span>
-  </button></div>
-`;
-
-exports[`renders ./components/button/demo/ghost.vue correctly 1`] = `
-<div style="background: rgb(190, 200, 200); padding: 26px 16px 16px;"><button class="ant-btn ant-btn-primary ant-btn-background-ghost" type="button">
-    <!----><span>Primary</span>
-  </button><button class="ant-btn ant-btn-background-ghost" type="button">
-    <!----><span>Default</span>
-  </button><button class="ant-btn ant-btn-dashed ant-btn-background-ghost" type="button">
-    <!----><span>Dashed</span>
-  </button><button class="ant-btn ant-btn-primary ant-btn-background-ghost ant-btn-dangerous" type="button">
-    <!----><span>Danger</span>
-  </button></div>
-`;
-
-exports[`renders ./components/button/demo/icon.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary ant-btn-circle ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn ant-btn-primary ant-btn-circle" type="button">
-  <!----><span>A</span>
-</button>
-<button class="ant-btn ant-btn-primary" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<button class="ant-btn ant-btn-default ant-btn-circle ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<button class="ant-btn ant-btn-default ant-btn-circle ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<button class="ant-btn ant-btn-dashed ant-btn-circle ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn ant-btn-dashed" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<a class="ant-btn ant-btn-icon-only" href="https://www.google.com"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></a>
-<br>
-<br>
-<button class="ant-btn ant-btn-primary ant-btn-circle ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn ant-btn-primary ant-btn-circle ant-btn-lg" type="button">
-  <!----><span>A</span>
-</button>
-<button class="ant-btn ant-btn-primary ant-btn-lg" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<button class="ant-btn ant-btn-default ant-btn-circle ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn ant-btn-lg" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<br>
-<button class="ant-btn ant-btn-default ant-btn-circle ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn ant-btn-lg" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<button class="ant-btn ant-btn-dashed ant-btn-circle ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></button>
-<button class="ant-btn ant-btn-dashed ant-btn-lg" type="button"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span>Search</span></button>
-<a class="ant-btn ant-btn-lg ant-btn-icon-only" href="https://www.google.com"><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span></a>
-`;
-
-exports[`renders ./components/button/demo/loading.vue correctly 1`] = `
-<div class="ant-space ant-space-horizontal ant-space-align-center" style="width: 100%;">
-  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary ant-btn-loading" type="button"><span class="ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span><span>Loading</span></button></div>
-  <!---->
-  <div class="ant-space-item"><button class="ant-btn ant-btn-primary ant-btn-sm ant-btn-loading" type="button"><span class="ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span><span>Loading</span></button></div>
-  <!---->
+exports[`renders ./components/float-button/demo/group-menu.vue correctly 1`] = `
+<div style="right: 24px;" class="ant-float-btn-group ant-float-btn-group-circle">
+  <div class="ant-float-btn-group-wrap ant-float-btn-group-wrap-enter ant-float-btn-group-wrap-enter-prepare ant-float-btn-group-wrap-enter-start" style="display: none;"><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+      <!---->
+      <div class="ant-float-btn-body">
+        <div class="ant-float-btn-content">
+          <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+        </div>
+      </div>
+    </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+      <!---->
+      <div class="ant-float-btn-body">
+        <div class="ant-float-btn-content">
+          <div class="ant-float-btn-icon"><span role="img" aria-label="comment" class="anticon anticon-comment"><svg focusable="false" class="" data-icon="comment" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M573 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40zm-280 0c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"></path><path d="M894 345a343.92 343.92 0 00-189-130v.1c-17.1-19-36.4-36.5-58-52.1-163.7-119-393.5-82.7-513 81-96.3 133-92.2 311.9 6 439l.8 132.6c0 3.2.5 6.4 1.5 9.4a31.95 31.95 0 0040.1 20.9L309 806c33.5 11.9 68.1 18.7 102.5 20.6l-.5.4c89.1 64.9 205.9 84.4 313 49l127.1 41.4c3.2 1 6.5 1.6 9.9 1.6 17.7 0 32-14.3 32-32V753c88.1-119.6 90.4-284.9 1-408zM323 735l-12-5-99 31-1-104-8-9c-84.6-103.2-90.2-251.9-11-361 96.4-132.2 281.2-161.4 413-66 132.2 96.1 161.5 280.6 66 412-80.1 109.9-223.5 150.5-348 102zm505-17l-8 10 1 104-98-33-12 5c-56 20.8-115.7 22.5-171 7l-.2-.1A367.31 367.31 0 00729 676c76.4-105.3 88.8-237.6 44.4-350.4l.6.4c23 16.5 44.1 37.1 62 62 72.6 99.6 68.5 235.2-8 330z"></path><path d="M433 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"></path></svg></span></div>
+          <!---->
+        </div>
+      </div>
+    </button></div><button class="ant-float-btn ant-float-btn-primary ant-float-btn-circle" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="customer-service" class="anticon anticon-customer-service"><svg focusable="false" class="" data-icon="customer-service" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 128c-212.1 0-384 171.9-384 384v360c0 13.3 10.7 24 24 24h184c35.3 0 64-28.7 64-64V624c0-35.3-28.7-64-64-64H200v-48c0-172.3 139.7-312 312-312s312 139.7 312 312v48H688c-35.3 0-64 28.7-64 64v208c0 35.3 28.7 64 64 64h184c13.3 0 24-10.7 24-24V512c0-212.1-171.9-384-384-384zM328 632v192H200V632h128zm496 192H696V632h128v192z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button>
 </div>
-<div class="ant-space ant-space-horizontal ant-space-align-center" style="width: 100%;">
-  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>mouseenter me!</span>
-    </button></div>
-  <!---->
-  <div class="ant-space-item"><button class="ant-btn ant-btn-primary" type="button"><span role="img" aria-label="poweroff" class="anticon anticon-poweroff"><svg focusable="false" class="" data-icon="poweroff" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M705.6 124.9a8 8 0 00-11.6 7.2v64.2c0 5.5 2.9 10.6 7.5 13.6a352.2 352.2 0 0162.2 49.8c32.7 32.8 58.4 70.9 76.3 113.3a355 355 0 0127.9 138.7c0 48.1-9.4 94.8-27.9 138.7a355.92 355.92 0 01-76.3 113.3 353.06 353.06 0 01-113.2 76.4c-43.8 18.6-90.5 28-138.5 28s-94.7-9.4-138.5-28a353.06 353.06 0 01-113.2-76.4A355.92 355.92 0 01184 650.4a355 355 0 01-27.9-138.7c0-48.1 9.4-94.8 27.9-138.7 17.9-42.4 43.6-80.5 76.3-113.3 19-19 39.8-35.6 62.2-49.8 4.7-2.9 7.5-8.1 7.5-13.6V132c0-6-6.3-9.8-11.6-7.2C178.5 195.2 82 339.3 80 506.3 77.2 745.1 272.5 943.5 511.2 944c239 .5 432.8-193.3 432.8-432.4 0-169.2-97-315.7-238.4-386.7zM480 560h64c4.4 0 8-3.6 8-8V88c0-4.4-3.6-8-8-8h-64c-4.4 0-8 3.6-8 8v464c0 4.4 3.6 8 8 8z"></path></svg></span><span>延迟1s</span></button></div>
-  <!---->
-</div>
-<div class="ant-space ant-space-horizontal ant-space-align-center" style="width: 100%;">
-  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary ant-btn-loading ant-btn-icon-only" type="button"><span class="ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></button></div>
-  <!---->
-  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary ant-btn-circle ant-btn-loading ant-btn-icon-only" type="button"><span class="ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></button></div>
-  <!---->
-  <div class="ant-space-item"><button class="ant-btn ant-btn-default ant-btn-round ant-btn-loading ant-btn-dangerous ant-btn-icon-only" type="button"><span class="ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></button></div>
-  <!---->
+<div style="right: 94px;" class="ant-float-btn-group ant-float-btn-group-circle">
+  <div class="ant-float-btn-group-wrap ant-float-btn-group-wrap-enter ant-float-btn-group-wrap-enter-prepare ant-float-btn-group-wrap-enter-start" style="display: none;"><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+      <!---->
+      <div class="ant-float-btn-body">
+        <div class="ant-float-btn-content">
+          <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+        </div>
+      </div>
+    </button><button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+      <!---->
+      <div class="ant-float-btn-body">
+        <div class="ant-float-btn-content">
+          <div class="ant-float-btn-icon"><span role="img" aria-label="comment" class="anticon anticon-comment"><svg focusable="false" class="" data-icon="comment" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M573 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40zm-280 0c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"></path><path d="M894 345a343.92 343.92 0 00-189-130v.1c-17.1-19-36.4-36.5-58-52.1-163.7-119-393.5-82.7-513 81-96.3 133-92.2 311.9 6 439l.8 132.6c0 3.2.5 6.4 1.5 9.4a31.95 31.95 0 0040.1 20.9L309 806c33.5 11.9 68.1 18.7 102.5 20.6l-.5.4c89.1 64.9 205.9 84.4 313 49l127.1 41.4c3.2 1 6.5 1.6 9.9 1.6 17.7 0 32-14.3 32-32V753c88.1-119.6 90.4-284.9 1-408zM323 735l-12-5-99 31-1-104-8-9c-84.6-103.2-90.2-251.9-11-361 96.4-132.2 281.2-161.4 413-66 132.2 96.1 161.5 280.6 66 412-80.1 109.9-223.5 150.5-348 102zm505-17l-8 10 1 104-98-33-12 5c-56 20.8-115.7 22.5-171 7l-.2-.1A367.31 367.31 0 00729 676c76.4-105.3 88.8-237.6 44.4-350.4l.6.4c23 16.5 44.1 37.1 62 62 72.6 99.6 68.5 235.2-8 330z"></path><path d="M433 421c-23.1 0-41 17.9-41 40s17.9 40 41 40c21.1 0 39-17.9 39-40s-17.9-40-39-40z"></path></svg></span></div>
+          <!---->
+        </div>
+      </div>
+    </button></div><button class="ant-float-btn ant-float-btn-primary ant-float-btn-circle" type="button">
+    <!---->
+    <div class="ant-float-btn-body">
+      <div class="ant-float-btn-content">
+        <div class="ant-float-btn-icon"><span role="img" aria-label="customer-service" class="anticon anticon-customer-service"><svg focusable="false" class="" data-icon="customer-service" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 128c-212.1 0-384 171.9-384 384v360c0 13.3 10.7 24 24 24h184c35.3 0 64-28.7 64-64V624c0-35.3-28.7-64-64-64H200v-48c0-172.3 139.7-312 312-312s312 139.7 312 312v48H688c-35.3 0-64 28.7-64 64v208c0 35.3 28.7 64 64 64h184c13.3 0 24-10.7 24-24V512c0-212.1-171.9-384-384-384zM328 632v192H200V632h128zm496 192H696V632h128v192z"></path></svg></span></div>
+        <!---->
+      </div>
+    </div>
+  </button>
 </div>
 `;
 
-exports[`renders ./components/button/demo/multiple.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary" type="button">
-  <!----><span>Primary</span>
+exports[`renders ./components/float-button/demo/shape.vue correctly 1`] = `
+<button class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+    </div>
+  </div>
 </button>
-<button class="ant-btn" type="button">
-  <!----><span>secondary</span>
+<button style="right: 94px;" class="ant-float-btn ant-float-btn-primary ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="customer-service" class="anticon anticon-customer-service"><svg focusable="false" class="" data-icon="customer-service" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 128c-212.1 0-384 171.9-384 384v360c0 13.3 10.7 24 24 24h184c35.3 0 64-28.7 64-64V624c0-35.3-28.7-64-64-64H200v-48c0-172.3 139.7-312 312-312s312 139.7 312 312v48H688c-35.3 0-64 28.7-64 64v208c0 35.3 28.7 64 64 64h184c13.3 0 24-10.7 24-24V512c0-212.1-171.9-384-384-384zM328 632v192H200V632h128zm496 192H696V632h128v192z"></path></svg></span></div>
+      <!---->
+    </div>
+  </div>
 </button>
-<button class="ant-btn ant-dropdown-trigger" type="button">
-  <!----><span>Actions</span><span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span>
+<button style="right: 24px;" class="ant-float-btn ant-float-btn-primary ant-float-btn-square" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="customer-service" class="anticon anticon-customer-service"><svg focusable="false" class="" data-icon="customer-service" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 128c-212.1 0-384 171.9-384 384v360c0 13.3 10.7 24 24 24h184c35.3 0 64-28.7 64-64V624c0-35.3-28.7-64-64-64H200v-48c0-172.3 139.7-312 312-312s312 139.7 312 312v48H688c-35.3 0-64 28.7-64 64v208c0 35.3 28.7 64 64 64h184c13.3 0 24-10.7 24-24V512c0-212.1-171.9-384-384-384zM328 632v192H200V632h128zm496 192H696V632h128v192z"></path></svg></span></div>
+      <!---->
+    </div>
+  </div>
 </button>
 `;
 
-exports[`renders ./components/button/demo/size.vue correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="large"><span class="ant-radio-button-inner"></span></span><span>Large</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="default"><span class="ant-radio-button-inner"></span></span><span>Default</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="small"><span class="ant-radio-button-inner"></span></span><span>Small</span></label></div>
-<br>
-<br>
-<button class="ant-btn ant-btn-primary ant-btn-lg" type="button">
-  <!----><span>Primary</span>
+exports[`renders ./components/float-button/demo/tooltip.vue correctly 1`] = `
+<button style="right: 24px;" class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+    </div>
+  </div>
 </button>
-<button class="ant-btn ant-btn-lg" type="button">
-  <!----><span>Normal</span>
+<button style="right: 94px;" class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="file-text" class="anticon anticon-file-text"><svg focusable="false" class="" data-icon="file-text" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M854.6 288.6L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494zM504 618H320c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h184c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8zM312 490v48c0 4.4 3.6 8 8 8h384c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8H320c-4.4 0-8 3.6-8 8z"></path></svg></span></div>
+    </div>
+  </div>
 </button>
-<button class="ant-btn ant-btn-dashed ant-btn-lg" type="button">
-  <!----><span>Dashed</span>
+`;
+
+exports[`renders ./components/float-button/demo/type.vue correctly 1`] = `
+<button style="right: 24px;" class="ant-float-btn ant-float-btn-primary ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="question-circle" class="anticon anticon-question-circle"><svg focusable="false" class="" data-icon="question-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg></span></div>
+      <!---->
+    </div>
+  </div>
 </button>
-<button class="ant-btn ant-btn-lg ant-btn-dangerous" type="button">
-  <!----><span>Danger</span>
+<button style="right: 94px;" class="ant-float-btn ant-float-btn-default ant-float-btn-circle" type="button">
+  <!---->
+  <div class="ant-float-btn-body">
+    <div class="ant-float-btn-content">
+      <div class="ant-float-btn-icon"><span role="img" aria-label="question-circle" class="anticon anticon-question-circle"><svg focusable="false" class="" data-icon="question-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z"></path></svg></span></div>
+      <!---->
+    </div>
+  </div>
 </button>
-<button class="ant-btn ant-btn-link ant-btn-lg" type="button">
-  <!----><span>Link</span>
-</button>
-<br>
-<button class="ant-btn ant-btn-primary ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span></button>
-<button class="ant-btn ant-btn-primary ant-btn-circle ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span></button>
-<button class="ant-btn ant-btn-primary ant-btn-round ant-btn-lg" type="button"><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span>Download</span></button>
-<button class="ant-btn ant-btn-primary ant-btn-round ant-btn-lg ant-btn-icon-only" type="button"><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span></button>
-<button class="ant-btn ant-btn-primary ant-btn-lg" type="button"><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span>Download</span></button>
-<br>
 `;

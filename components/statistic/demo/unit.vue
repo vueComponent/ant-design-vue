@@ -34,12 +34,6 @@ Add unit through `prefix` and `suffix`.
     </a-col>
   </a-row>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { LikeOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    LikeOutlined,
-  },
-});
 </script>

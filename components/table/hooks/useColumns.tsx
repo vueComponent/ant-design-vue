@@ -37,7 +37,7 @@ function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: R
         () => [column.title as any],
       );
     }
-    if ('children' in cloneColumn) {
+    if ('children' in cloneColumn && Array.isArray(cloneColumn.children)) {
       cloneColumn.children = fillSlots(cloneColumn.children, contextSlots);
     }
 

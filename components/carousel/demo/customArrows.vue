@@ -34,16 +34,11 @@ Custom arrows display
     <div><h3>4</h3></div>
   </a-carousel>
 </template>
-<script lang="ts">
+
+<script lang="ts" setup>
 import { LeftCircleOutlined, RightCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    LeftCircleOutlined,
-    RightCircleOutlined,
-  },
-});
 </script>
+
 <style scoped>
 /* For demo */
 :deep(.slick-slide) {

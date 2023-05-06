@@ -146,27 +146,17 @@ We provide properties like `validateStatus` `help` `hasFeedback` to customize yo
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import { SmileOutlined } from '@ant-design/icons-vue';
-export default defineComponent({
-  components: {
-    SmileOutlined,
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 6 },
   },
-  setup() {
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 14 },
-      },
-    };
-    return {
-      formItemLayout,
-    };
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 14 },
   },
-});
+};
 </script>

@@ -47,30 +47,15 @@ Render in current dom. custom container, check `getContainer`.
     </a-drawer>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const open = ref(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const open = ref(false);
 
-    const afterOpenChange = (bool: boolean) => {
-      console.log('open', bool);
-    };
+const showDrawer = () => {
+  open.value = true;
+};
 
-    const showDrawer = () => {
-      open.value = true;
-    };
-
-    const onClose = () => {
-      open.value = false;
-    };
-
-    return {
-      open,
-      afterOpenChange,
-      showDrawer,
-      onClose,
-    };
-  },
-});
+const onClose = () => {
+  open.value = false;
+};
 </script>

@@ -33,9 +33,9 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
     </a-modal>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { PlusOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 
 function getBase64(file: File) {
@@ -47,79 +47,63 @@ function getBase64(file: File) {
   });
 }
 
-export default defineComponent({
-  components: {
-    PlusOutlined,
+const previewVisible = ref(false);
+const previewImage = ref('');
+const previewTitle = ref('');
+
+const fileList = ref<UploadProps['fileList']>([
+  {
+    uid: '-1',
+    name: 'image.png',
+    status: 'done',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   },
-  setup() {
-    const previewVisible = ref(false);
-    const previewImage = ref('');
-    const previewTitle = ref('');
-
-    const fileList = ref<UploadProps['fileList']>([
-      {
-        uid: '-1',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-2',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-3',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-4',
-        name: 'image.png',
-        status: 'done',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-xxx',
-        percent: 50,
-        name: 'image.png',
-        status: 'uploading',
-        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      },
-      {
-        uid: '-5',
-        name: 'image.png',
-        status: 'error',
-      },
-    ]);
-
-    const handleCancel = () => {
-      previewVisible.value = false;
-      previewTitle.value = '';
-    };
-    const handlePreview = async (file: UploadProps['fileList'][number]) => {
-      if (!file.url && !file.preview) {
-        file.preview = (await getBase64(file.originFileObj)) as string;
-      }
-      previewImage.value = file.url || file.preview;
-      previewVisible.value = true;
-      previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
-    };
-
-    return {
-      previewVisible,
-      previewImage,
-      fileList,
-      handleCancel,
-      handlePreview,
-      previewTitle,
-    };
+  {
+    uid: '-2',
+    name: 'image.png',
+    status: 'done',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
   },
-});
+  {
+    uid: '-3',
+    name: 'image.png',
+    status: 'done',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  },
+  {
+    uid: '-4',
+    name: 'image.png',
+    status: 'done',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  },
+  {
+    uid: '-xxx',
+    percent: 50,
+    name: 'image.png',
+    status: 'uploading',
+    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+  },
+  {
+    uid: '-5',
+    name: 'image.png',
+    status: 'error',
+  },
+]);
+
+const handleCancel = () => {
+  previewVisible.value = false;
+  previewTitle.value = '';
+};
+const handlePreview = async (file: UploadProps['fileList'][number]) => {
+  if (!file.url && !file.preview) {
+    file.preview = (await getBase64(file.originFileObj)) as string;
+  }
+  previewImage.value = file.url || file.preview;
+  previewVisible.value = true;
+  previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
+};
 </script>
-<style>
+<style scoped>
 /* you can make up upload button and sample style by using stylesheets */
 .ant-upload-select-picture-card i {
   font-size: 32px;

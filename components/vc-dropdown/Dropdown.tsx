@@ -70,7 +70,6 @@ export default defineComponent({
       const extraOverlayProps = {
         prefixCls: `${props.prefixCls}-menu`,
         onClick,
-        getPopupContainer: () => triggerRef.value.getPopupDomNode(),
       };
       return (
         <Fragment key={skipFlattenKey}>

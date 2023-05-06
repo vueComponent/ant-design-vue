@@ -8,7 +8,7 @@ const Demo = () => {
       <Anchor>
         <Link href="#" title="Basic demo" />
         <Link href="#components-anchor-demo-static" title="Static demo" />
-        <Link href="#API" title="API">
+        <Link href="#api" title="API">
           <Link href="#Anchor-Props" title="Anchor Props" />
           <Link href="#Link-Props" title="Link Props" />
         </Link>

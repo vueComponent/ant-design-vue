@@ -29,18 +29,12 @@ You can add extra actions to the right of Tabs.
     </template>
   </a-tabs>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref('1'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const activeKey = ref('1');
 </script>
-<style>
+
+<style scoped>
 .tabs-extra-demo-button {
   margin-right: 16px;
 }

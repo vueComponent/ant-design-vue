@@ -216,11 +216,18 @@ exports[`renders ./components/button/demo/disabled.vue correctly 1`] = `
   </div>
   <!---->
   <div class="ant-space-item">
-    <div style="padding: 8px; background: rgb(190, 200, 200);"><button class="ant-btn ant-btn-default ant-btn-background-ghost" type="button">
-        <!----><span>Ghost</span>
-      </button><button disabled="" class="ant-btn ant-btn-default ant-btn-background-ghost" type="button">
-        <!----><span>Ghost(disabled)</span>
-      </button></div>
+    <div style="padding: 8px; background: rgb(190, 200, 200);">
+      <div class="ant-space ant-space-horizontal ant-space-align-center">
+        <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default ant-btn-background-ghost" type="button">
+            <!----><span>Ghost</span>
+          </button></div>
+        <!---->
+        <div class="ant-space-item"><button disabled="" class="ant-btn ant-btn-default ant-btn-background-ghost" type="button">
+            <!----><span>Ghost(disabled)</span>
+          </button></div>
+        <!---->
+      </div>
+    </div>
   </div>
   <!---->
 </div>

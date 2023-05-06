@@ -50,8 +50,10 @@ To mark a button as disabled, add the `disabled` property to the `Button`.
       <a-button danger type="link" disabled>Danger Link(disabled)</a-button>
     </a-space>
     <div :style="{ padding: '8px', background: 'rgb(190, 200, 200)' }">
-      <a-button ghost>Ghost</a-button>
-      <a-button ghost disabled>Ghost(disabled)</a-button>
+      <a-space>
+        <a-button ghost>Ghost</a-button>
+        <a-button ghost disabled>Ghost(disabled)</a-button>
+      </a-space>
     </div>
   </a-space>
 </template>

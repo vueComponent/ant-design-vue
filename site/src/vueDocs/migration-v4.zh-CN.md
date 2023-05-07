@@ -79,8 +79,8 @@
     ]"
   />
 
-- <a-slider :tooltipVisible="visible" />
-+ <a-slider :tooltip="{ open: visible }" />
+-- <a-slider :tooltipVisible="visible" />
+++ <a-slider :tooltip="{ open: visible }" />
 </template>
 
 <script setup>
@@ -147,7 +147,7 @@ or
 
 ```diff
 "plugins": [
-- ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
+-- ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
 ]
 ```
 

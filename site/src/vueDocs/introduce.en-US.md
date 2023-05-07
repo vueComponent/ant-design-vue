@@ -40,7 +40,7 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 
 - Stable: [![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
 
-You can subscribe to this feed for new version notifications: https://github.com/vueComponent/ant-design-vue/releases.atom
+You can subscribe to this feed for new version notifications: <https://github.com/vueComponent/ant-design-vue/releases.atom>
 
 ## Installation
 
@@ -49,11 +49,11 @@ You can subscribe to this feed for new version notifications: https://github.com
 **We recommend using npm or yarn to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
 ```bash
-$ npm install ant-design-vue@4.x --save
+npm install ant-design-vue@4.x --save
 ```
 
 ```bash
-$ yarn add ant-design-vue@4.x
+yarn add ant-design-vue@4.x
 ```
 
 If you are in a bad network environment，you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
@@ -98,6 +98,64 @@ import 'ant-design-vue/dist/reset.css';
 
 `ant-design-vue` supports ES modules tree shaking by default.
 
+### Automatically import components on demand
+
+#### [babel-plugin-import](https://github.com/umijs/babel-plugin-import)
+
+Instead of manually importing each component in 'main.js',' babel-plugin-import 'provides automatic on-demand component loading. Due to technical tweaks, deprecated 'less' in favor of 'CSS-in-JS' to better support dynamic themes. Therefore, there is no need to configure 'style: true'.
+
+```bash
+npm install babel-plugin-import --save-dev
+```
+
+```js
+// babel.config.js
+module.exports = {
+  plugins: [
+    [
+      'import',
+      {
+        libraryName: 'ant-design-vue',
+        libraryDirectory: 'es',
+      },
+    ],
+  ],
+};
+```
+
+#### [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+
+If you're using 'Vite', we recommend using 'unplugin-vue-components'
+
+```bash
+npm install unplugin-vue-components -D
+```
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+export default defineConfig({
+  plugins: [
+    // ...
+    Components({
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: false, // css in js
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+You can then import 'ant-design-vue' components directly in your code, and the plugin will automatically convert your code to 'import {Button} from 'ant-design-vue''.
+
+```js
+import { Button } from 'ant-design-vue';
+```
+
 ## Links
 
 - [Home Page](https://www.antdv.com/)
@@ -122,7 +180,7 @@ As we all know, Ant Design, as a design language, has gone through many years of
 
 The ant-design-vue is the Vue implementation of Ant Design. The style of the component is kept in sync with Ant Design. The html structure and css style of the component are also consistent. The style 0 modification is really achieved, and the component API is kept as consistent as possible.
 
-Ant Design Vue is committed to providing programmers with a ** pleasant ** development experience.
+Ant Design Vue is committed to providing programmers with a **pleasant** development experience.
 
 ## THANK YOU
 

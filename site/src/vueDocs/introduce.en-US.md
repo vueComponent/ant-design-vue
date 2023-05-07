@@ -49,11 +49,11 @@ You can subscribe to this feed for new version notifications: <https://github.co
 **We recommend using npm or yarn to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
 ```bash
-npm install ant-design-vue@4.x --save
+$ npm install ant-design-vue@4.x --save
 ```
 
 ```bash
-yarn add ant-design-vue@4.x
+$ yarn add ant-design-vue@4.x
 ```
 
 If you are in a bad network environment，you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
@@ -105,7 +105,7 @@ import 'ant-design-vue/dist/reset.css';
 Instead of manually importing each component in 'main.js',' babel-plugin-import 'provides automatic on-demand component loading. Due to technical tweaks, deprecated 'less' in favor of 'CSS-in-JS' to better support dynamic themes. Therefore, there is no need to configure 'style: true'.
 
 ```bash
-npm install babel-plugin-import --save-dev
+$ npm install babel-plugin-import --save-dev
 ```
 
 ```js
@@ -128,7 +128,7 @@ module.exports = {
 If you're using 'Vite', we recommend using 'unplugin-vue-components'
 
 ```bash
-npm install unplugin-vue-components -D
+$ npm install unplugin-vue-components -D
 ```
 
 ```js
@@ -152,7 +152,7 @@ export default defineConfig({
 
 You can then import 'ant-design-vue' components directly in your code, and the plugin will automatically convert your code to 'import {Button} from 'ant-design-vue''.
 
-```js
+```jsx
 import { Button } from 'ant-design-vue';
 ```
 

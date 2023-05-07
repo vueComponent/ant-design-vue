@@ -49,11 +49,11 @@
 **我们推荐使用 npm 或 yarn 的方式进行开发**，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
 
 ```bash
-npm install ant-design-vue@4.x --save
+$ npm install ant-design-vue@4.x --save
 ```
 
 ```bash
-yarn add ant-design-vue@4.x
+$ yarn add ant-design-vue@4.x
 ```
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
@@ -105,7 +105,7 @@ import 'ant-design-vue/dist/reset.css';
 `babel-plugin-import` 提供了自动按需加载组件，完全颠覆了以往需要在 `main.js` 中手动引入每个组件的方式。由于技术调整,弃用 `less`，采用`CSS-in-JS`，更好地支持动态主题。因此，无需配置 `style: true`。
 
 ```bash
-npm install babel-plugin-import --save-dev
+$ npm install babel-plugin-import --save-dev
 ```
 
 ```js
@@ -128,7 +128,7 @@ module.exports = {
 如果你使用的是 `Vite` ，我们推荐使用 `unplugin-vue-components`
 
 ```bash
-npm install unplugin-vue-components -D
+$ npm install unplugin-vue-components -D
 ```
 
 ```js
@@ -152,7 +152,7 @@ export default defineConfig({
 
 然后你可以在代码中直接引入 `ant-design-vue` 的组件，插件会自动将代码转化为 `import { Button } from 'ant-design-vue'` 的形式。
 
-```js
+```jsx
 import { Button } from 'ant-design-vue';
 ```
 

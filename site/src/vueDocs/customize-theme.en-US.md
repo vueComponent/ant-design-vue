@@ -600,10 +600,6 @@ root.render(
 
 <TokenTable type="alias"></TokenTable>
 
-### StyleProvider
-
-Please ref [`@ant-design/cssinjs`](https://github.com/ant-design/cssinjs#styleprovider).
-
 ## How to Debug your Theme
 
 We provide tools to help users debug themes: [Theme Editor](/theme-editor)

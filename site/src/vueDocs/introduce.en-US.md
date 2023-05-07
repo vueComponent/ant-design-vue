@@ -100,29 +100,6 @@ import 'ant-design-vue/dist/reset.css';
 
 ### Automatically import components on demand
 
-#### [babel-plugin-import](https://github.com/umijs/babel-plugin-import)
-
-Instead of manually importing each component in 'main.js',' babel-plugin-import 'provides automatic on-demand component loading. Due to technical tweaks, deprecated 'less' in favor of 'CSS-in-JS' to better support dynamic themes. Therefore, there is no need to configure 'style: true'.
-
-```bash
-$ npm install babel-plugin-import --save-dev
-```
-
-```js
-// babel.config.js
-module.exports = {
-  plugins: [
-    [
-      'import',
-      {
-        libraryName: 'ant-design-vue',
-        libraryDirectory: 'es',
-      },
-    ],
-  ],
-};
-```
-
 #### [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
 
 If you're using 'Vite', we recommend using 'unplugin-vue-components'

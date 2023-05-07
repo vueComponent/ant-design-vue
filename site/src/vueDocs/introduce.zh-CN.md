@@ -100,29 +100,6 @@ import 'ant-design-vue/dist/reset.css';
 
 ### 自动按需引入组件
 
-#### [babel-plugin-import](https://github.com/umijs/babel-plugin-import)
-
-`babel-plugin-import` 提供了自动按需加载组件，完全颠覆了以往需要在 `main.js` 中手动引入每个组件的方式。由于技术调整,弃用 `less`，采用`CSS-in-JS`，更好地支持动态主题。因此，无需配置 `style: true`。
-
-```bash
-$ npm install babel-plugin-import --save-dev
-```
-
-```js
-// babel.config.js
-module.exports = {
-  plugins: [
-    [
-      'import',
-      {
-        libraryName: 'ant-design-vue',
-        libraryDirectory: 'es',
-      },
-    ],
-  ],
-};
-```
-
 #### [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
 
 如果你使用的是 `Vite` ，我们推荐使用 `unplugin-vue-components`

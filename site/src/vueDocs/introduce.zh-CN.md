@@ -40,7 +40,7 @@
 
 - 稳定版：[![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
 
-你可以订阅：https://github.com/vueComponent/ant-design-vue/releases.atom 来获得稳定版发布的通知。
+你可以订阅：<https://github.com/vueComponent/ant-design-vue/releases.atom> 来获得稳定版发布的通知。
 
 ## 安装
 
@@ -97,6 +97,41 @@ import 'ant-design-vue/dist/reset.css';
 ### 按需加载
 
 `ant-design-vue` 默认支持基于 ES modules 的 tree shaking。
+
+### 自动按需引入组件
+
+#### [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+
+如果你使用的是 `Vite` ，我们推荐使用 `unplugin-vue-components`
+
+```bash
+$ npm install unplugin-vue-components -D
+```
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+export default defineConfig({
+  plugins: [
+    // ...
+    Components({
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: false, // css in js
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+然后你可以在代码中直接引入 `ant-design-vue` 的组件，插件会自动将代码转化为 `import { Button } from 'ant-design-vue'` 的形式。
+
+```jsx
+import { Button } from 'ant-design-vue';
+```
 
 ## 链接
 

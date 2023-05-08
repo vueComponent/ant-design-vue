@@ -133,7 +133,7 @@ Ant Design Vue 设计规范和技术上支持灵活的样式定制，以满足�
 
 ### 静态消费（如 less）
 
-当你需要非 React 生命周期消费 Token 变量时，可以通过静态方法将其导出：
+当你需要非 Vue 生命周期消费 Token 变量时，可以通过静态方法将其导出：
 
 ```jsx
 import { theme } from 'ant-design-vue';

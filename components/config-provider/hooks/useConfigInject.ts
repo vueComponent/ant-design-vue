@@ -21,10 +21,10 @@ export default (name: string, props: Record<any, any>) => {
   const pageHeader = configProvider.pageHeader;
   const form = configProvider.form;
   const getTargetContainer = computed(
-    () => props.getTargetContainer ?? configProvider.getTargetContainer,
+    () => props.getTargetContainer ?? configProvider.getTargetContainer?.value,
   );
   const getPopupContainer = computed(
-    () => props.getPopupContainer ?? configProvider.getPopupContainer,
+    () => props.getPopupContainer ?? configProvider.getPopupContainer?.value,
   );
 
   const dropdownMatchSelectWidth = computed<boolean | number>(

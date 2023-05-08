@@ -133,7 +133,7 @@ If you want to consume the Design Token under the current theme, we provide `use
 
 ### Static consume (e.g. less)
 
-When you need token out of React life cycle, you can use static function to get them:
+When you need token out of Vue life cycle, you can use static function to get them:
 
 ```jsx
 import { theme } from 'ant-design-vue';

@@ -20,8 +20,12 @@ export default (name: string, props: Record<any, any>) => {
   const space = configProvider.space;
   const pageHeader = configProvider.pageHeader;
   const form = configProvider.form;
-  const getTargetContainer = configProvider.getTargetContainer;
-  const getPopupContainer = configProvider.getPopupContainer;
+  const getTargetContainer = computed(
+    () => props.getTargetContainer ?? configProvider.getTargetContainer,
+  );
+  const getPopupContainer = computed(
+    () => props.getPopupContainer ?? configProvider.getPopupContainer,
+  );
 
   const dropdownMatchSelectWidth = computed<boolean | number>(
     () => props.dropdownMatchSelectWidth ?? configProvider.dropdownMatchSelectWidth?.value,

@@ -105,17 +105,6 @@ const routes = [
         meta: { enTitle: 'Customize Theme', title: '定制主题', category: 'docs' },
         component: () => import('../vueDocs/customize-theme.en-US.md'),
       },
-
-      {
-        path: 'vue/customize-theme-variable-cn',
-        meta: { enTitle: 'Dynamic Theme (Experimental)', title: '动态主题', category: 'docs' },
-        component: () => import('../vueDocs/customize-theme-variable.zh-CN.md'),
-      },
-      {
-        path: 'vue/customize-theme-variable',
-        meta: { enTitle: 'Dynamic Theme (Experimental)', title: '动态主题', category: 'docs' },
-        component: () => import('../vueDocs/customize-theme-variable.en-US.md'),
-      },
       {
         path: 'vue/replace-date-cn',
         meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },

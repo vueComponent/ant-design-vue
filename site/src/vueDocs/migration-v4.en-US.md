@@ -40,19 +40,14 @@ This document will help you upgrade from ant-design-vue `3.x` version to ant-des
   - DatePicker
   - Mentions
 
-  ```html
-  <template>
-    <a-select - dropdownClassName="my-select-popup" + popupClassName="my-select-popup" />
-  </template>
-
-  <script>
-    import { defineComponent } from 'vue';
-
-    export default defineComponent({
-      name: 'App',
-    });
-  </script>
-  ```
+```diff
+<template>
+  <a-select
+--  dropdownClassName="my-select-popup"
+++  popupClassName="my-select-popup"
+  />
+</template>
+```
 
 - The controlled visible API of the component popup is unified to `open`, and `visible` and other similar APIs will be replaced.
 
@@ -64,50 +59,36 @@ This document will help you upgrade from ant-design-vue `3.x` version to ant-des
   - Slider `tooltip` related API converged to `tooltip` property.
   - Table `filterDropdownVisible` changed to `filterDropdownOpen`.
 
-  ```html
-  <template>
-    -
-    <a-modal :visible="visible">content</a-modal>
-    +
-    <a-modal :open="visible">content</a-modal>
+```diff
+<template>
+-- <a-modal :visible="visible">content</a-modal>
+++ <a-modal :open="visible">content</a-modal>
 
-    -
-    <a-tag :visible="visible">tag</a-tag>
-    +
-    <a-tag v-if="visible">tag</a-tag>
+-- <a-tag :visible="visible">tag</a-tag>
+++ <a-tag v-if="visible">tag</a-tag>
 
-    <a-table
-      :data="[]"
-      :columns="[
-        {
-            title: 'Name',
-            dataIndex: 'name',
-  -          filterDropdownVisible: visible,
-  +          filterDropdownOpen: visible,
-        },
-        ]"
-    />
-
-    -
-    <a-slider :tooltipVisible="visible" />
-    +
-    <a-slider :tooltip="{ open: visible }" />
-  </template>
-
-  <script>
-    import { defineComponent, ref } from 'vue';
-
-    export default defineComponent({
-      name: 'App',
-      setup() {
-        const visible = ref(true);
-        return {
-          visible,
-        };
+  <a-table
+    :data="[]"
+    :columns="[
+      {
+        title: 'Name',
+        dataIndex: 'name',
+--      filterDropdownVisible: visible,
+++      filterDropdownOpen: visible,
       },
-    });
-  </script>
-  ```
+    ]"
+  />
+
+-- <a-slider :tooltipVisible="visible" />
+++ <a-slider :tooltip="{ open: visible }" />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const visible = ref(true);
+</script>
+```
 
 - `getPopupContainer`: All `getPopupContainer` are guaranteed to return a unique div.
 - Drawer `style` & `class` are migrated to Drawer panel node, the original properties are replaced by `rootClassName` and `rootStyle`.
@@ -165,7 +146,7 @@ Remove `babel-plugin-import` from package.json and modify `.babelrc`:
 
 ```diff
 "plugins": [
-- ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
+-- ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
 ]
 ```
 

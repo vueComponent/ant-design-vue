@@ -9,7 +9,7 @@ import type { Key, VueNode } from '../_util/type';
 import type { NotificationInstance } from '../vc-notification/Notification';
 import classNames from '../_util/classNames';
 import useStyle from './style';
-
+import useMessage from './useMessage';
 let defaultDuration = 3;
 let defaultTop: string;
 let messageInstance: NotificationInstance;
@@ -70,6 +70,7 @@ function getMessageInstance(args: MessageArgsProps, callback: (i: NotificationIn
     callback(messageInstance);
     return;
   }
+
   Notification.newInstance(
     {
       appContext: args.appContext,
@@ -225,7 +226,7 @@ export function attachTypeApi(originalApi: MessageApi, type: NoticeType) {
 typeList.forEach(type => attachTypeApi(api, type));
 
 api.warn = api.warning;
-
+api.useMessage = useMessage;
 export interface MessageInstance {
   info(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
   success(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
@@ -233,6 +234,7 @@ export interface MessageInstance {
   warning(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
   loading(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
   open(args: MessageArgsProps): MessageType;
+  useMessage: typeof useMessage;
 }
 
 export interface MessageApi extends MessageInstance {

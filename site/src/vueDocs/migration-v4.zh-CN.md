@@ -40,19 +40,14 @@
   - DatePicker 组件
   - Mentions 组件
 
-  ```html
-  <template>
-    <a-select - dropdownClassName="my-select-popup" + popupClassName="my-select-popup" />
-  </template>
-
-  <script>
-    import { defineComponent } from 'vue';
-
-    export default defineComponent({
-      name: 'App',
-    });
-  </script>
-  ```
+```diff
+<template>
+  <a-select
+--  dropdownClassName="my-select-popup"
+++  popupClassName="my-select-popup"
+  />
+</template>
+```
 
 - 组件弹框的受控可见 API 统一为 `open`，`visible` 等类似 API 都会被替换。
 
@@ -64,50 +59,36 @@
   - Slider 组件 `tooltip` 相关 API 收敛到 `tooltip` 属性中。
   - Table 组件 `filterDropdownVisible` 变为 `filterDropdownOpen`。
 
-  ```html
-  <template>
-    -
-    <a-modal :visible="visible">content</a-modal>
-    +
-    <a-modal :open="visible">content</a-modal>
+```diff
+<template>
+-- <a-modal :visible="visible">content</a-modal>
+++ <a-modal :open="visible">content</a-modal>
 
-    -
-    <a-tag :visible="visible">tag</a-tag>
-    +
-    <a-tag v-if="visible">tag</a-tag>
+-- <a-tag :visible="visible">tag</a-tag>
+++ <a-tag v-if="visible">tag</a-tag>
 
-    <a-table
-      :data="[]"
-      :columns="[
-        {
-            title: 'Name',
-            dataIndex: 'name',
-  -          filterDropdownVisible: visible,
-  +          filterDropdownOpen: visible,
-        },
-        ]"
-    />
-
-    -
-    <a-slider :tooltipVisible="visible" />
-    +
-    <a-slider :tooltip="{ open: visible }" />
-  </template>
-
-  <script>
-    import { defineComponent, ref } from 'vue';
-
-    export default defineComponent({
-      name: 'App',
-      setup() {
-        const visible = ref(true);
-        return {
-          visible,
-        };
+  <a-table
+    :data="[]"
+    :columns="[
+      {
+        title: 'Name',
+        dataIndex: 'name',
+--      filterDropdownVisible: visible,
+++      filterDropdownOpen: visible,
       },
-    });
-  </script>
-  ```
+    ]"
+  />
+
+-- <a-slider :tooltipVisible="visible" />
+++ <a-slider :tooltip="{ open: visible }" />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const visible = ref(true);
+</script>
+```
 
 - `getPopupContainer`: 所有的 `getPopupContainer` 都需要保证返回的是唯一的 div。
 - Drawer `style` 和 `class` 迁移至 Drawer 弹层区域上，原属性替换为 `rootClassName` 和 `rootStyle`。
@@ -166,7 +147,7 @@ or
 
 ```diff
 "plugins": [
-- ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
+-- ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "lib"}, "ant-design-vue"],
 ]
 ```
 

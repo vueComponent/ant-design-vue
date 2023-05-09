@@ -289,6 +289,8 @@ const ConfigProvider = defineComponent({
   },
 });
 
+ConfigProvider.config = setGlobalConfig;
+
 ConfigProvider.install = function (app: App) {
   app.component(ConfigProvider.name, ConfigProvider);
 };

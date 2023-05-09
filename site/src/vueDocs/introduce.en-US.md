@@ -40,7 +40,7 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 
 - Stable: [![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
 
-You can subscribe to this feed for new version notifications: https://github.com/vueComponent/ant-design-vue/releases.atom
+You can subscribe to this feed for new version notifications: <https://github.com/vueComponent/ant-design-vue/releases.atom>
 
 ## Installation
 
@@ -98,6 +98,41 @@ import 'ant-design-vue/dist/reset.css';
 
 `ant-design-vue` supports ES modules tree shaking by default.
 
+### Automatically import components on demand
+
+#### [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
+
+If you're using 'Vite', we recommend using 'unplugin-vue-components'
+
+```bash
+$ npm install unplugin-vue-components -D
+```
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+export default defineConfig({
+  plugins: [
+    // ...
+    Components({
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: false, // css in js
+        }),
+      ],
+    }),
+  ],
+});
+```
+
+You can then import 'ant-design-vue' components directly in your code, and the plugin will automatically convert your code to 'import {Button} from 'ant-design-vue''.
+
+```jsx
+import { Button } from 'ant-design-vue';
+```
+
 ## Links
 
 - [Home Page](https://www.antdv.com/)
@@ -122,7 +157,7 @@ As we all know, Ant Design, as a design language, has gone through many years of
 
 The ant-design-vue is the Vue implementation of Ant Design. The style of the component is kept in sync with Ant Design. The html structure and css style of the component are also consistent. The style 0 modification is really achieved, and the component API is kept as consistent as possible.
 
-Ant Design Vue is committed to providing programmers with a ** pleasant ** development experience.
+Ant Design Vue is committed to providing programmers with a **pleasant** development experience.
 
 ## THANK YOU
 

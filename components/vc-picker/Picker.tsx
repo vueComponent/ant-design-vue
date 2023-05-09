@@ -172,6 +172,7 @@ function Picker<DateType>() {
       'inputRender',
       'onChange',
       'onOpenChange',
+      'onPanelChange',
       'onFocus',
       'onBlur',
       'onMousedown',

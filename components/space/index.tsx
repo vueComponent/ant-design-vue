@@ -63,10 +63,16 @@ const Space = defineComponent({
       props.align === undefined && props.direction === 'horizontal' ? 'center' : props.align,
     );
     const cn = computed(() => {
-      return classNames(prefixCls.value, hashId.value, `${prefixCls.value}-${props.direction}`, {
-        [`${prefixCls.value}-rtl`]: directionConfig.value === 'rtl',
-        [`${prefixCls.value}-align-${mergedAlign.value}`]: mergedAlign.value,
-      });
+      return classNames(
+        prefixCls.value,
+        hashId.value,
+        `${prefixCls.value}-${props.direction}`,
+        {
+          [`${prefixCls.value}-rtl`]: directionConfig.value === 'rtl',
+          [`${prefixCls.value}-align-${mergedAlign.value}`]: mergedAlign.value,
+        },
+        attrs.class,
+      );
     });
 
     const marginDirection = computed(() =>
@@ -81,6 +87,7 @@ const Space = defineComponent({
       return {
         ...gapStyle,
         ...(props.wrap && { flexWrap: 'wrap', marginBottom: `${-verticalSize.value}px` }),
+        ...(attrs.style as CSSProperties),
       } as CSSProperties;
     });
     return () => {
@@ -97,7 +104,7 @@ const Space = defineComponent({
       const horizontalSizeVal = horizontalSize.value;
       const latestIndex = len - 1;
       return (
-        <div {...attrs} class={cn.value} style={[style.value, attrs.style as any]}>
+        <div {...attrs} class={cn.value} style={style.value}>
           {items.map((child, index) => {
             const originIndex = children.indexOf(child);
             let itemStyle: CSSProperties = {};

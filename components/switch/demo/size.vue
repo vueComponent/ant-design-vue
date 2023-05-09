@@ -17,11 +17,10 @@ title:
 </docs>
 
 <template>
-  <div>
+  <a-space direction="vertical">
     <a-switch v-model:checked="state.checked1" />
-    <br />
     <a-switch v-model:checked="state.checked2" size="small" />
-  </div>
+  </a-space>
 </template>
 
 <script lang="ts" setup>

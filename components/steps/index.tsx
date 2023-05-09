@@ -15,6 +15,7 @@ import Tooltip from '../tooltip';
 import { VcStepProps } from '../vc-steps/Step';
 import type { Status, ProgressDotRender } from '../vc-steps/interface';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import { useToken } from '../theme/internal';
 
 // CSSINJS
 import useStyle from './style';
@@ -66,6 +67,7 @@ const Steps = defineComponent({
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
+    const [, token] = useToken();
 
     const screens = useBreakpoint();
     const direction = computed(() =>
@@ -90,7 +92,10 @@ const Steps = defineComponent({
     }) => {
       if (status === 'process' && props.percent !== undefined) {
         // currently it's hard-coded, since we can't easily read the actually width of icon
-        const progressWidth = props.size === 'small' ? 32 : 40;
+
+        const progressWidth =
+          props.size === 'small' ? token.value.controlHeight : token.value.controlHeightLG;
+
         const iconWithProgress = (
           <div class={`${prefixCls.value}-progress-icon`}>
             <Progress

@@ -17,16 +17,14 @@ With text and icon.
 </docs>
 
 <template>
-  <div>
+  <a-space direction="vertical">
     <a-switch v-model:checked="state.checked1" checked-children="开" un-checked-children="关" />
-    <br />
     <a-switch v-model:checked="state.checked2" checked-children="1" un-checked-children="0" />
-    <br />
     <a-switch v-model:checked="state.checked3">
       <template #checkedChildren><check-outlined /></template>
       <template #unCheckedChildren><close-outlined /></template>
     </a-switch>
-  </div>
+  </a-space>
 </template>
 <script lang="ts" setup>
 import { reactive } from 'vue';

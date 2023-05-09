@@ -39,7 +39,7 @@ export const Primary = defineComponent({
                   {SelectTag.demo}
                 </Space>
                 {Pagination.demo}
-                <div style={{ padding: 12 }}>{Steps.demo}</div>
+                <div style={{ padding: '12px' }}>{Steps.demo}</div>
                 <Space size={'large'} align={'start'}>
                   {Popconfirm.demo}
                   {Timeline.demo}

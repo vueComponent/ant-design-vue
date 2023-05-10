@@ -27,7 +27,6 @@ export interface SegmentedOption extends SegmentedBaseOption {
 function normalizeOptions(options: (SegmentedOption | string | number)[]) {
   return options.map(option => {
     if (typeof option === 'object' && option !== null) {
-      option.label = option.value;
       return option;
     }
 
@@ -102,7 +101,9 @@ const SegmentedOption: FunctionalComponent<
               payload,
               title,
             })
-          : label}
+          : label
+          ? label
+          : value}
       </div>
     </label>
   );

@@ -227,7 +227,7 @@ const SelectSelector = defineComponent<SelectorProps>({
       const inputNode = (
         <div
           class={`${selectionPrefixCls.value}-search`}
-          style={{ width: inputWidth.value + 'px' }}
+          // style={{ width: inputWidth.value + 'px' }}
           key="input"
         >
           <Input

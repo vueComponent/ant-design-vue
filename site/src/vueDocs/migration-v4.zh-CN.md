@@ -95,7 +95,9 @@ const visible = ref(true);
 
 #### 组件重构与移除
 
-- 移除 `locale-provider` 目录。`LocaleProvider` 在 v3 中已移除，请使用 `ConfigProvider` 替代。
+- 移除 `locale-provider` 目录。`LocaleProvider` 在 v4 中已移除，请使用 `ConfigProvider` 替代。
+
+- 移除栅格布局中的`xxxl`断点属性。 `xxxl`属性已经在 v4 被移除，您可以使用 [主题定制](/docs/vue/customize-theme-cn) 修改 `screen[XS|SM|MD|LG|XL|XXL]` 来修改断点值实现。
 
 - BackTop 组件在 `4.0.0` 中废弃，移至 FloatButton 悬浮按钮中。如需使用，可以从 FloatButton 中引入。
 

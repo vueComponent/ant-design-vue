@@ -58,6 +58,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*DLUwQ4B2_zQAAA
 | lg | `≥992px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | xl | `≥1200px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | xxl | `≥1600px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
-| xxxl | `≥2000px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - | 3.0 |
+
+您可以使用 [主题定制](/docs/vue/customize-theme-cn) 修改 `screen[XS|SM|MD|LG|XL|XXL]` 来修改断点值（自 4.0.0 起，[codesandbox demo](https://codesandbox.io/s/usebreakpoint-hook-ant-design-vue-4-0-0-beta-4-forked-n2k1sy?file=/src/demo.vue)）。
 
 响应式栅格的断点扩展自 [BootStrap 4 的规则](https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints)（不包含链接里 `occasionally` 的部分)。

@@ -61,6 +61,7 @@ Our grid systems support Flex layout to allow the elements within the parent to 
 | lg | `≥992px`, could be a `span` value or an object containing above props | number\|object | - |
 | xl | `≥1200px`, could be a `span` value or an object containing above props | number\|object | - |
 | xxl | `≥1600px`, could be a `span` value or an object containing above props | number\|object | - |
-| xxxl | `≥2000px`, could be a `span` value or an object containing above props | number\|object | 3.0 |
+
+You can modify the breakpoints values using by modifying `screen[XS|SM|MD|LG|XL|XXL]` with [theme customization](/docs/vue/customize-theme) (since 4.0.0, [sandbox demo](https://codesandbox.io/s/usebreakpoint-hook-ant-design-vue-4-0-0-beta-4-forked-n2k1sy?file=/src/demo.vue)).
 
 The breakpoints of responsive grid follow [BootStrap 4 media queries rules](https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints)(not including `occasionally part`).

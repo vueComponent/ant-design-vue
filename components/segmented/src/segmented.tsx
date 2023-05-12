@@ -101,9 +101,7 @@ const SegmentedOption: FunctionalComponent<
               payload,
               title,
             })
-          : label
-          ? label
-          : value}
+          : label ?? value}
       </div>
     </label>
   );

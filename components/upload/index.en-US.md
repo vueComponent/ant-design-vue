@@ -110,7 +110,7 @@ When uploading state change, it returns:
 
 ### How to select albums or folders on mobile devices?
 
-You can set `:accept="null"`
+You can set `:capture="null"`
 
 ### I want to display download links.
 

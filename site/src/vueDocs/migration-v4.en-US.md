@@ -96,6 +96,7 @@ const visible = ref(true);
 #### Component refactoring and removal
 
 - Remove `locale-provider` Directory. `LocaleProvider` was removed in v4, please use `ConfigProvider` instead.
+- Remove the `xxxl` breakpoint property from the grid layout. `xxxl` breakpoint has been removed in v4. You can customize breakpoint values using [theme customization](/docs/vue/customize-theme) with `screen[XS|SM|MD|LG|XL|XXL]` properties.
 - BackTop is deprecated in `4.0.0`, and is merged into FloatButton.
 
 ## Start upgrading

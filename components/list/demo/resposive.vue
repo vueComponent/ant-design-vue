@@ -17,10 +17,7 @@ Responsive grid list. The size property is as same as [Layout Grid](https://www.
 </docs>
 
 <template>
-  <a-list
-    :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3, xxxl: 2 }"
-    :data-source="data"
-  >
+  <a-list :grid="{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }" :data-source="data">
     <template #renderItem="{ item }">
       <a-list-item>
         <a-card :title="item.title">Card content</a-card>

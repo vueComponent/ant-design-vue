@@ -9,7 +9,7 @@ const Demo = defineComponent({
 
     return () => {
       return (
-        <div style={{ padding: 12, background: token.value.colorFillSecondary }}>
+        <div style={{ padding: '12px', background: token.value.colorFillSecondary }}>
           <Slider defaultValue={30} />
           <Slider range defaultValue={[20, 50]} />
         </div>

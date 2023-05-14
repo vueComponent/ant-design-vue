@@ -1,44 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/layout/demo/basic.vue correctly 1`] = `
-<section class="ant-layout">
-  <header class="ant-layout-header">Header</header>
-  <main class="ant-layout-content">Content</main>
-  <footer class="ant-layout-footer">Footer</footer>
-</section>
-<section class="ant-layout">
-  <header class="ant-layout-header">Header</header>
-  <section class="ant-layout">
-    <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
-      <div class="ant-layout-sider-children">Sider</div>
-      <!---->
-    </aside>
-    <main class="ant-layout-content">Content</main>
-  </section>
-  <footer class="ant-layout-footer">Footer</footer>
-</section>
-<section class="ant-layout">
-  <header class="ant-layout-header">Header</header>
-  <section class="ant-layout">
-    <main class="ant-layout-content">Content</main>
-    <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
-      <div class="ant-layout-sider-children">Sider</div>
-      <!---->
-    </aside>
-  </section>
-  <footer class="ant-layout-footer">Footer</footer>
-</section>
-<section class="ant-layout">
-  <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
-    <div class="ant-layout-sider-children">Sider</div>
-    <!---->
-  </aside>
-  <section class="ant-layout">
-    <header class="ant-layout-header">Header</header>
-    <main class="ant-layout-content">Content</main>
-    <footer class="ant-layout-footer">Footer</footer>
-  </section>
-</section>
+<div style="width: 100%;" class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 0px;">
+    <section class="ant-layout">
+      <header class="ant-layout-header" style="text-align: center; color: rgb(255, 255, 255); padding-inline: 50; line-height: 64px; background-color: rgb(125, 188, 234);">Header</header>
+      <main class="ant-layout-content" style="text-align: center; min-height: 120; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(16, 142, 233);">Content</main>
+      <footer class="ant-layout-footer" style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(125, 188, 234);">Footer</footer>
+    </section>
+  </div>
+  <!---->
+  <div class="ant-space-item" style="margin-bottom: 0px;">
+    <section class="ant-layout">
+      <header class="ant-layout-header" style="text-align: center; color: rgb(255, 255, 255); padding-inline: 50; line-height: 64px; background-color: rgb(125, 188, 234);">Header</header>
+      <section class="ant-layout">
+        <aside style="text-align: center; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(59, 160, 233); flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;" class="ant-layout-sider ant-layout-sider-dark">
+          <div class="ant-layout-sider-children">Sider</div>
+          <!---->
+        </aside>
+        <main class="ant-layout-content" style="text-align: center; min-height: 120; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(16, 142, 233);">Content</main>
+      </section>
+      <footer class="ant-layout-footer" style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(125, 188, 234);">Footer</footer>
+    </section>
+  </div>
+  <!---->
+  <div class="ant-space-item" style="margin-bottom: 0px;">
+    <section class="ant-layout">
+      <header class="ant-layout-header" style="text-align: center; color: rgb(255, 255, 255); padding-inline: 50; line-height: 64px; background-color: rgb(125, 188, 234);">Header</header>
+      <section class="ant-layout">
+        <main class="ant-layout-content" style="text-align: center; min-height: 120; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(16, 142, 233);">Content</main>
+        <aside style="text-align: center; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(59, 160, 233); flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;" class="ant-layout-sider ant-layout-sider-dark">
+          <div class="ant-layout-sider-children">Sider</div>
+          <!---->
+        </aside>
+      </section>
+      <footer class="ant-layout-footer" style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(125, 188, 234);">Footer</footer>
+    </section>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <section class="ant-layout">
+      <aside style="text-align: center; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(59, 160, 233); flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;" class="ant-layout-sider ant-layout-sider-dark">
+        <div class="ant-layout-sider-children">Sider</div>
+        <!---->
+      </aside>
+      <section class="ant-layout">
+        <header class="ant-layout-header" style="text-align: center; color: rgb(255, 255, 255); padding-inline: 50; line-height: 64px; background-color: rgb(125, 188, 234);">Header</header>
+        <main class="ant-layout-content" style="text-align: center; min-height: 120; line-height: 120px; color: rgb(255, 255, 255); background-color: rgb(16, 142, 233);">Content</main>
+        <footer class="ant-layout-footer" style="text-align: center; color: rgb(255, 255, 255); background-color: rgb(125, 188, 234);">Footer</footer>
+      </section>
+    </section>
+  </div>
+  <!---->
+</div>
 `;
 
 exports[`renders ./components/layout/demo/custom-trigger.vue correctly 1`] = `

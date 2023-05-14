@@ -10,7 +10,7 @@ const Demo = defineComponent({
     return () => {
       return (
         <Space direction={'vertical'}>
-          <div style={{ padding: 12 }}>
+          <div style={{ padding: '12px' }}>
             <Tag color="magenta">magenta</Tag>
             <Tag color="red">red</Tag>
             <Tag color="volcano">volcano</Tag>
@@ -24,7 +24,7 @@ const Demo = defineComponent({
             <Tag color="purple">purple</Tag>
           </div>
           <Divider />
-          <div style={{ background: token.value.colorFillSecondary, padding: 12 }}>
+          <div style={{ background: token.value.colorFillSecondary, padding: '12px' }}>
             <Tag color="magenta">magenta</Tag>
             <Tag color="red">red</Tag>
             <Tag color="volcano">volcano</Tag>

@@ -17,11 +17,10 @@ Disabled state of `Switch`.
 </docs>
 
 <template>
-  <div>
-    <a-switch v-model:checked="checked" :disabled="disabled" style="margin-bottom: 5px" />
-    <br />
+  <a-space direction="vertical">
+    <a-switch v-model:checked="checked" :disabled="disabled" />
     <a-button type="primary" @click="onToggle">Toggle disabled</a-button>
-  </div>
+  </a-space>
 </template>
 
 <script lang="ts" setup>

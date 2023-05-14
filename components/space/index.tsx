@@ -97,7 +97,11 @@ const Space = defineComponent({
       const horizontalSizeVal = horizontalSize.value;
       const latestIndex = len - 1;
       return (
-        <div {...attrs} class={cn.value} style={[style.value, attrs.style as any]}>
+        <div
+          {...attrs}
+          class={[cn.value, attrs.class]}
+          style={[style.value, attrs.style as CSSProperties]}
+        >
           {items.map((child, index) => {
             const originIndex = children.indexOf(child);
             let itemStyle: CSSProperties = {};

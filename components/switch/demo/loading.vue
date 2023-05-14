@@ -16,11 +16,10 @@ Mark a pending state of switch.
 
 </docs>
 <template>
-  <div>
+  <a-space direction="vertical">
     <a-switch v-model:checked="state.checked1" loading />
-    <br />
     <a-switch v-model:checked="state.checked2" size="small" loading />
-  </div>
+  </a-space>
 </template>
 
 <script lang="ts" setup>

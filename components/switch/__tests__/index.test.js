@@ -93,12 +93,12 @@ describe('Switch', () => {
       wrapper.find('button').trigger('click');
     });
     expect(checked.value).toBe(2);
-    expect(wrapper.find('.ant-switch-inner').text()).toBe('on');
+    expect(wrapper.find('.ant-switch-inner').text()).toBe('onoff');
 
     await asyncExpect(() => {
       wrapper.find('button').trigger('click');
     });
     expect(checked.value).toBe(1);
-    expect(wrapper.find('.ant-switch-inner').text()).toBe('off');
+    expect(wrapper.find('.ant-switch-inner').text()).toBe('onoff');
   });
 });

@@ -59,17 +59,13 @@ export const colProps = () => ({
     type: [String, Number, Object] as PropType<string | number | ColSize>,
     default: undefined as string | number | ColSize,
   },
-  xxxl: {
-    type: [String, Number, Object] as PropType<string | number | ColSize>,
-    default: undefined as string | number | ColSize,
-  },
   prefixCls: String,
   flex: [String, Number],
 });
 
 export type ColProps = Partial<ExtractPropTypes<ReturnType<typeof colProps>>>;
 
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'] as const;
+const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'] as const;
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ACol',

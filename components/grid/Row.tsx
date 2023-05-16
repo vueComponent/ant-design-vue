@@ -19,7 +19,7 @@ const RowJustify = [
   'space-evenly',
 ] as const;
 
-type Responsive = 'xxxl' | 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+type Responsive = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 type ResponsiveLike<T> = {
   [key in Responsive]?: T;
 };
@@ -64,7 +64,6 @@ const ARow = defineComponent({
       lg: true,
       xl: true,
       xxl: true,
-      xxxl: true,
     });
 
     const curScreens = ref<ScreenMap>({
@@ -74,7 +73,6 @@ const ARow = defineComponent({
       lg: false,
       xl: false,
       xxl: false,
-      xxxl: false,
     });
 
     const mergePropsByScreen = (oriProp: 'align' | 'justify') => {

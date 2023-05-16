@@ -241,7 +241,7 @@ export default defineComponent({
       computed(() => !injectFromPopover.value),
     );
     return () => {
-      const { openClassName, overlayClassName, overlayInnerStyle } = props;
+      const { openClassName, overlayClassName, overlayStyle, overlayInnerStyle } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
 
@@ -283,6 +283,7 @@ export default defineComponent({
         visible: tempVisible,
         ref: tooltip,
         overlayClassName: customOverlayClassName,
+        overlayStyle: { ...arrowContentStyle, ...overlayStyle },
         overlayInnerStyle: formattedOverlayInnerStyle,
         onVisibleChange: handleVisibleChange,
         onPopupAlign,
@@ -296,9 +297,7 @@ export default defineComponent({
         <VcTooltip
           {...vcTooltipProps}
           v-slots={{
-            arrowContent: () => (
-              <span class={`${prefixCls.value}-arrow-content`} style={arrowContentStyle}></span>
-            ),
+            arrowContent: () => <span class={`${prefixCls.value}-arrow-content`}></span>,
             overlay: getOverlay,
           }}
         >

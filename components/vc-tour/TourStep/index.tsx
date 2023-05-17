@@ -4,6 +4,7 @@ import { tourStepProps } from '../interface';
 
 const TourStep = defineComponent({
   name: 'TourStep',
+  inheritAttrs: false,
   props: tourStepProps(),
   setup(props, { attrs }) {
     return () => {

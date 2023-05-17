@@ -23,7 +23,7 @@ Use when you want to guide users through a product.
 | mask | Whether to enable masking, change mask style and fill color by pass custom props | `boolean` \| `{ style?: CSSProperties; color?: string; }` | `true` |  |
 | type | Type, affects the background color and text color | `default` `primary` | `default` |  |
 | open | Open tour | `boolean` | - |  |
-| current | What is the current step | `number` | - |  |
+| current(v-model) | What is the current step | `number` | - |  |
 | scrollIntoViewOptions | support pass custom scrollIntoView options | `boolean` \| `ScrollIntoViewOptions` | `true` |  |
 | indicatorsRender | custom indicator | `v-slot:indicatorsRender="{current, total}"` | - |  |
 | zIndex | Tour's zIndex | `number` | `1001` |  |

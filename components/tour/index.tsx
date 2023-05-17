@@ -1,4 +1,4 @@
-import { defineComponent, toRefs } from 'vue';
+import { computed, defineComponent, toRefs } from 'vue';
 import VCTour from '../vc-tour';
 import classNames from '../_util/classNames';
 import TourPanel from './panelRender';
@@ -11,26 +11,27 @@ import useMergedType from './useMergedType';
 
 // CSSINJS
 import useStyle from './style';
+import getPlacements from '../_util/placements';
 
 export { TourProps, TourStepProps };
 
 const Tour = defineComponent({
   name: 'ATour',
+  inheritAttrs: false,
   props: tourProps(),
   setup(props, { attrs, emit, slots }) {
-    const { current } = toRefs(props);
+    const { current, type, steps, defaultCurrent } = toRefs(props);
     const { prefixCls, direction } = useConfigInject('tour', props);
 
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
     const { currentMergedType, updateInnerCurrent } = useMergedType({
-      defaultType: props.type,
-      steps: props.steps,
+      defaultType: type,
+      steps,
       current,
-      defaultCurrent: props.defaultCurrent,
+      defaultCurrent,
     });
-
     return () => {
       const { steps, current, type, rootClassName, ...restProps } = props;
 
@@ -58,8 +59,16 @@ const Tour = defineComponent({
 
       const onStepChange = (stepCurrent: number) => {
         updateInnerCurrent(stepCurrent);
+        emit('update:current', stepCurrent);
         emit('change', stepCurrent);
       };
+
+      const builtinPlacements = computed(() =>
+        getPlacements({
+          arrowPointAtCenter: true,
+          autoAdjustOverflow: true,
+        }),
+      );
 
       return wrapSSR(
         <VCTour
@@ -73,6 +82,7 @@ const Tour = defineComponent({
           renderPanel={mergedRenderPanel}
           onChange={onStepChange}
           steps={steps}
+          builtinPlacements={builtinPlacements.value as any}
         />,
       );
     };

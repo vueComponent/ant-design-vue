@@ -8,6 +8,7 @@ export const tourProps = () => ({
   prefixCls: { type: String },
   current: { type: Number },
   type: { type: String as PropType<'default' | 'primary'> }, //	default	类型，影响底色与文字颜色
+  'onUpdate:current': Function as PropType<(val: number) => void>,
 });
 
 export type TourProps = Partial<ExtractPropTypes<ReturnType<typeof tourProps>>>;

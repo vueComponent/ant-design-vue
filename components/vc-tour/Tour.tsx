@@ -12,8 +12,7 @@ import Mask from './Mask';
 import { getPlacements } from './placements';
 import type { PlacementType } from './placements';
 import { initDefaultProps } from '../_util/props-util';
-import useScrollLocker from './hooks/useScrollLocker';
-import canUseDom from '../_util/canUseDom';
+
 import {
   someType,
   stringType,
@@ -22,18 +21,20 @@ import {
   functionType,
   booleanType,
 } from '../_util/type';
+import Portal from '../_util/PortalWrapper';
 
 const CENTER_PLACEHOLDER: CSSProperties = {
   left: '50%',
   top: '50%',
-  width: 1,
-  height: 1,
+  width: '1px',
+  height: '1px',
 };
 
 export const tourProps = () => {
-  const { builtinPlacements, ...pickedTriggerProps } = triggerProps();
+  const { builtinPlacements, popupAlign } = triggerProps();
   return {
-    ...pickedTriggerProps,
+    builtinPlacements,
+    popupAlign,
     steps: arrayType<TourStepInfo[]>(),
     open: booleanType(),
     defaultCurrent: { type: Number },
@@ -58,6 +59,7 @@ export type TourProps = Partial<ExtractPropTypes<ReturnType<typeof tourProps>>>;
 
 const Tour = defineComponent({
   name: 'Tour',
+  inheritAttrs: false,
   props: initDefaultProps(tourProps(), {}),
   setup(props) {
     const { defaultCurrent, placement, mask, scrollIntoViewOptions, open, gap, arrow } =
@@ -125,11 +127,6 @@ const Tour = defineComponent({
       props.onChange?.(nextCurrent);
     };
 
-    // ========================= lock scroll =========================
-    const lockScroll = computed(() => mergedOpen.value && canUseDom());
-
-    useScrollLocker(lockScroll);
-
     return () => {
       const {
         prefixCls,
@@ -159,8 +156,8 @@ const Tour = defineComponent({
       const mergedMaskStyle = typeof mergedMask.value === 'boolean' ? undefined : mergedMask.value;
 
       // when targetElement is not exist, use body as triggerDOMNode
-      const getTriggerDOMNode = () => {
-        return targetElement.value || document.body;
+      const getTriggerDOMNode = node => {
+        return node || targetElement.value || document.body;
       };
 
       const getPopupElement = () => (
@@ -185,7 +182,19 @@ const Tour = defineComponent({
           {...curStep.value}
         />
       );
-
+      const posInfoStyle = computed(() => {
+        const info = posInfo.value || CENTER_PLACEHOLDER;
+        // 如果info[key] 是number，添加 px
+        const style: CSSProperties = {};
+        Object.keys(info).forEach(key => {
+          if (typeof info[key] === 'number') {
+            style[key] = `${info[key]}px`;
+          } else {
+            style[key] = info[key];
+          }
+        });
+        return style;
+      });
       return (
         <>
           <Mask
@@ -203,18 +212,8 @@ const Tour = defineComponent({
             builtinPlacements={getPlacements(arrowPointAtCenter.value)}
             {...restProps}
             ref={triggerRef}
-            popupStyle={
-              !curStep.value.target
-                ? {
-                    ...curStep.value.style,
-                    position: 'fixed',
-                    left: CENTER_PLACEHOLDER.left,
-                    top: CENTER_PLACEHOLDER.top,
-                    transform: 'translate(-50%, -50%)',
-                  }
-                : curStep.value.style
-            }
-            popupPlacement={!curStep.value.target ? 'center' : mergedPlacement.value}
+            popupStyle={curStep.value.style}
+            popupPlacement={mergedPlacement.value}
             popupVisible={mergedOpen.value}
             popupClassName={classNames(rootClassName, curStep.value.className)}
             prefixCls={prefixCls}
@@ -225,14 +224,16 @@ const Tour = defineComponent({
             mask={false}
             getTriggerDOMNode={getTriggerDOMNode}
           >
-            <div
-              class={classNames(rootClassName, `${prefixCls}-target-placeholder`)}
-              style={{
-                ...(posInfo.value || CENTER_PLACEHOLDER),
-                position: 'fixed',
-                pointerEvents: 'none',
-              }}
-            />
+            <Portal visible={mergedOpen.value} autoLock>
+              <div
+                class={classNames(rootClassName, `${prefixCls}-target-placeholder`)}
+                style={{
+                  ...posInfoStyle.value,
+                  position: 'fixed',
+                  pointerEvents: 'none',
+                }}
+              />
+            </Portal>
           </Trigger>
         </>
       );

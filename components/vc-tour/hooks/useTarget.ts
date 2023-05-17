@@ -1,4 +1,4 @@
-import { computed, watchEffect, watch } from 'vue';
+import { computed, watchEffect, onMounted, watch, onBeforeUnmount } from 'vue';
 import type { Ref } from 'vue';
 import { isInViewPort } from '../util';
 import type { TourStepInfo } from '..';
@@ -29,11 +29,15 @@ export default function useTarget(
   // `null` as empty target.
   const [targetElement, setTargetElement] = useState<null | HTMLElement | undefined>(undefined);
 
-  watchEffect(() => {
-    const nextElement = typeof target.value === 'function' ? (target.value as any)() : target.value;
+  watchEffect(
+    () => {
+      const nextElement =
+        typeof target.value === 'function' ? (target.value as any)() : target.value;
 
-    setTargetElement(nextElement || null);
-  });
+      setTargetElement(nextElement || null);
+    },
+    { flush: 'post' },
+  );
 
   // ========================= Align ==========================
   const [posInfo, setPosInfo] = useState<PosInfo>(null);
@@ -47,36 +51,29 @@ export default function useTarget(
 
       const { left, top, width, height } = targetElement.value.getBoundingClientRect();
       const nextPosInfo: PosInfo = { left, top, width, height, radius: 0 };
-
-      setPosInfo(nextPosInfo);
+      if (JSON.stringify(posInfo.value) !== JSON.stringify(nextPosInfo)) {
+        setPosInfo(nextPosInfo);
+      }
     } else {
       // Not exist target which means we just show in center
       setPosInfo(null);
     }
   };
 
-  watchEffect(() => {
-    updatePos();
+  onMounted(() => {
+    watch(
+      [open, targetElement],
+      () => {
+        updatePos();
+      },
+      { flush: 'post', immediate: true },
+    );
     // update when window resize
     window.addEventListener('resize', updatePos);
-    return () => {
-      window.removeEventListener('resize', updatePos);
-    };
   });
-
-  watch(
-    open,
-    val => {
-      updatePos();
-      // update when window resize
-      if (val) {
-        window.addEventListener('resize', updatePos);
-      } else {
-        window.removeEventListener('resize', updatePos);
-      }
-    },
-    { immediate: true },
-  );
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', updatePos);
+  });
 
   // ======================== PosInfo =========================
   const mergedPosInfo = computed(() => {

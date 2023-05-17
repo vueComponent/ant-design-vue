@@ -15,11 +15,11 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName } from './utils/alignUtil';
 import BaseMixin from '../_util/BaseMixin';
-import Portal from '../_util/Portal';
+import Portal from '../_util/PortalWrapper';
 import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
 import supportsPassive from '../_util/supportsPassive';
-import { useInjectTrigger, useProvidePortal } from './context';
+import { useProvidePortal } from './context';
 
 const ALL_HANDLERS = [
   'onClick',
@@ -45,14 +45,11 @@ export default defineComponent({
       }
       return popupAlign;
     });
-    const { setPortal, popPortal } = useInjectTrigger(props.tryPopPortal);
     const popupRef = shallowRef(null);
     const setPopupRef = val => {
       popupRef.value = val;
     };
     return {
-      popPortal,
-      setPortal,
       vcTriggerContext: inject(
         'vcTriggerContext',
         {} as {
@@ -92,14 +89,6 @@ export default defineComponent({
         (this as any).fireEvents(h, e);
       };
     });
-    (this as any).setPortal?.(
-      <Portal
-        key="portal"
-        v-slots={{ default: this.getComponent }}
-        getContainer={this.getContainer}
-        didUpdate={this.handlePortalUpdate}
-      ></Portal>,
-    );
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
@@ -406,7 +395,7 @@ export default defineComponent({
       }
       mouseProps.onMousedown = this.onPopupMouseDown;
       mouseProps[supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'] = this.onPopupMouseDown;
-      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = this;
+      const { handleGetPopupClassFromAlign, getRootDomNode, $attrs } = this;
       const {
         prefixCls,
         destroyPopupOnHide,
@@ -439,7 +428,6 @@ export default defineComponent({
         transitionName: popupTransitionName,
         maskAnimation,
         maskTransitionName,
-        getContainer,
         class: popupClassName,
         style: popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
@@ -644,7 +632,7 @@ export default defineComponent({
   render() {
     const { $attrs } = this;
     const children = filterEmpty(getSlot(this));
-    const { alignPoint } = this.$props;
+    const { alignPoint, getPopupContainer } = this.$props;
 
     const child = children[0];
     this.childOriginEvents = getEvents(child);
@@ -701,23 +689,21 @@ export default defineComponent({
       newChildProps.class = childrenClassName;
     }
     const trigger = cloneElement(child, { ...newChildProps, ref: 'triggerRef' }, true, true);
-    if (this.popPortal) {
-      return trigger;
-    } else {
-      const portal = (
-        <Portal
-          key="portal"
-          v-slots={{ default: this.getComponent }}
-          getContainer={this.getContainer}
-          didUpdate={this.handlePortalUpdate}
-        ></Portal>
-      );
-      return (
-        <>
-          {portal}
-          {trigger}
-        </>
-      );
-    }
+
+    const portal = (
+      <Portal
+        key="portal"
+        v-slots={{ default: this.getComponent }}
+        getContainer={getPopupContainer && (() => getPopupContainer(this.getRootDomNode()))}
+        didUpdate={this.handlePortalUpdate}
+        visible={this.$data.sPopupVisible}
+      ></Portal>
+    );
+    return (
+      <>
+        {portal}
+        {trigger}
+      </>
+    );
   },
 });

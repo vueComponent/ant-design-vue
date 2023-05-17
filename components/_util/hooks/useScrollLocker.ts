@@ -19,26 +19,30 @@ export function isBodyOverflowing() {
 
 export default function useScrollLocker(lock?: Ref<boolean>) {
   const mergedLock = computed(() => !!lock && !!lock.value);
-  const id = computed(() => {
-    uuid += 1;
-    return `${UNIQUE_ID}_${uuid}`;
-  });
+  uuid += 1;
+  const id = `${UNIQUE_ID}_${uuid}`;
 
-  watchEffect(() => {
-    if (mergedLock.value) {
-      const scrollbarSize = getScrollBarSize();
-      const isOverflow = isBodyOverflowing();
+  watchEffect(
+    onClear => {
+      if (mergedLock.value) {
+        const scrollbarSize = getScrollBarSize();
+        const isOverflow = isBodyOverflowing();
 
-      updateCSS(
-        `
+        updateCSS(
+          `
 html body {
   overflow-y: hidden;
   ${isOverflow ? `width: calc(100% - ${scrollbarSize}px);` : ''}
 }`,
-        id.value,
-      );
-    } else {
-      removeCSS(id.value);
-    }
-  });
+          id,
+        );
+      } else {
+        removeCSS(id);
+      }
+      onClear(() => {
+        removeCSS(id);
+      });
+    },
+    { flush: 'post' },
+  );
 }

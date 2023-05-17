@@ -256,6 +256,8 @@ declare module 'vue' {
     AWeekPicker: typeof import('ant-design-vue')['WeekPicker'];
 
     AQRCode: typeof import('ant-design-vue')['QRCode'];
+
+    ATour: typeof import('ant-design-vue')['Tour'];
   }
 }
 export {};

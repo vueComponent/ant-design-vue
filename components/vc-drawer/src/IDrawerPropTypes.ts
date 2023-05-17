@@ -54,7 +54,6 @@ const drawerChildProps = () => ({
   getContainer: Function,
   getOpenCount: Function as PropType<() => number>,
   scrollLocker: PropTypes.any,
-  switchScrollingEffect: Function,
   inline: Boolean,
 });
 export { drawerProps, drawerChildProps };

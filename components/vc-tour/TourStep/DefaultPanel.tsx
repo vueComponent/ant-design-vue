@@ -5,6 +5,7 @@ import type { TourStepProps } from '../interface';
 
 const DefaultPanel = defineComponent({
   name: 'DefaultPanel',
+  inheritAttrs: false,
   props: tourStepProps(),
   setup(props, { attrs }) {
     return () => {

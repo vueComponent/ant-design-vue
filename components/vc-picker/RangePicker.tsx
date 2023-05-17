@@ -44,7 +44,6 @@ import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import useState from '../_util/hooks/useState';
 import classNames from '../_util/classNames';
-import { useProviderTrigger } from '../vc-trigger/context';
 import { legacyPropsWarning } from './utils/warnUtil';
 import { useElementSize } from '../_util/hooks/_vueuse/useElementSize';
 
@@ -256,7 +255,6 @@ function RangerPicker<DateType>() {
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
-      const getPortal = useProviderTrigger();
       const presets = computed(() => props.presets);
       const ranges = computed(() => props.ranges);
       const presetList = usePresets(presets, ranges);
@@ -1298,7 +1296,6 @@ function RangerPicker<DateType>() {
               />
               {suffixNode}
               {clearNode}
-              {getPortal()}
             </div>
           </PickerTrigger>
         );

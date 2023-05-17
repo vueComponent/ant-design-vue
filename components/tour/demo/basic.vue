@@ -28,7 +28,7 @@ The most basic usage.
     <a-button ref="ref3"><EllipsisOutlined /></a-button>
   </a-space>
 
-  <a-tour :open="open" :steps="steps" @close="handleOpen(false)" />
+  <a-tour v-model:current="current" :open="open" :steps="steps" @close="handleOpen(false)" />
 </template>
 
 <script lang="ts" setup>
@@ -41,7 +41,7 @@ const open = ref<boolean>(false);
 const ref1 = ref(null);
 const ref2 = ref(null);
 const ref3 = ref(null);
-
+const current = ref(0);
 const steps: TourProps['steps'] = [
   {
     title: 'Upload File',

@@ -35,17 +35,16 @@ const Mask = defineComponent({
     zIndex: { type: Number },
   },
   setup(props, { attrs }) {
+    const id = useId();
     return () => {
       const { prefixCls, open, rootClassName, pos, showMask, fill, animated, zIndex } = props;
 
-      const id = useId();
       const maskId = `${prefixCls}-mask-${id}`;
       const mergedAnimated = typeof animated === 'object' ? animated?.placeholder : animated;
-
-      console.log(open);
       return (
         <Portal
           visible={open}
+          autoLock
           v-slots={{
             default: () =>
               open && (
@@ -60,7 +59,9 @@ const Mask = defineComponent({
                       top: 0,
                       bottom: 0,
                       zIndex,
+                      pointerEvents: 'none',
                     },
+                    attrs.style as CSSProperties,
                   ]}
                 >
                   {showMask ? (

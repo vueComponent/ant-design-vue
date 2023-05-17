@@ -12,16 +12,16 @@ import defaultLocale from '../locale/en_US';
 import type { VueNode } from '../_util/type';
 
 const panelRender = defineComponent({
+  name: 'ATourPanel',
+  inheritAttrs: false,
   props: tourStepProps(),
   setup(props, { attrs, slots }) {
     const { current, total } = toRefs(props);
 
     const isLastStep = computed(() => current.value === total.value - 1);
 
-    const prevButtonProps = props.prevButtonProps as TourBtnProps;
-    const nextButtonProps = props.nextButtonProps as TourBtnProps;
-
     const prevBtnClick = e => {
+      const prevButtonProps = props.prevButtonProps as TourBtnProps;
       props.onPrev?.(e);
       if (typeof prevButtonProps?.onClick === 'function') {
         prevButtonProps?.onClick();
@@ -29,6 +29,7 @@ const panelRender = defineComponent({
     };
 
     const nextBtnClick = e => {
+      const nextButtonProps = props.nextButtonProps as TourBtnProps;
       if (isLastStep.value) {
         props.onFinish?.(e);
       } else {
@@ -40,16 +41,7 @@ const panelRender = defineComponent({
     };
 
     return () => {
-      const {
-        prefixCls,
-        title,
-        onClose,
-
-        cover,
-        description,
-        type: stepType,
-        arrow,
-      } = props;
+      const { prefixCls, title, onClose, cover, description, type: stepType, arrow } = props;
 
       const prevButtonProps = props.prevButtonProps as TourBtnProps;
       const nextButtonProps = props.nextButtonProps as TourBtnProps;

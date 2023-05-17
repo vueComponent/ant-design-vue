@@ -18,12 +18,6 @@ export const useProviderTrigger = () => {
   };
 };
 
-export const useInjectTrigger = (tryPopPortal?: boolean) => {
-  return tryPopPortal
-    ? inject(TriggerContextKey, { setPortal: () => {}, popPortal: false })
-    : { setPortal: () => {}, popPortal: false };
-};
-
 export interface PortalContextProps {
   shouldRender: Ref<boolean>;
   inTriggerContext: boolean; // 仅处理 trigger 上下文的 portal

@@ -209,7 +209,7 @@ const DrawerChild = defineComponent({
       const motionProps = typeof motion === 'function' ? motion(placement) : motion;
       return (
         <div
-          {...omit(otherProps, ['switchScrollingEffect', 'autofocus'])}
+          {...omit(otherProps, ['autofocus'])}
           tabindex={-1}
           class={wrapperClassName}
           style={rootStyle}

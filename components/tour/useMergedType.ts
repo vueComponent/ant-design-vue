@@ -1,33 +1,36 @@
-import useMergedState from '../_util/hooks/useMergedState';
 import type { TourProps } from './interface';
 import type { Ref } from 'vue';
-import { computed, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 interface Props {
-  defaultType?: string;
-  steps?: TourProps['steps'];
+  defaultType?: Ref<string>;
+  steps?: Ref<TourProps['steps']>;
   current?: Ref<number>;
-  defaultCurrent?: number;
+  defaultCurrent?: Ref<number>;
 }
-
 /**
  * returns the merged type of a step or the default type.
  */
-const useMergedType = ({ defaultType, steps = [], current, defaultCurrent }: Props) => {
-  const [innerCurrent, updateInnerCurrent] = useMergedState<number | undefined>(defaultCurrent, {
-    value: current,
-  });
-
-  watch(current, val => {
-    if (val === undefined) return;
-    updateInnerCurrent(val);
-  });
-
+const useMergedType = ({ defaultType, steps, current, defaultCurrent }: Props) => {
+  const innerCurrent = ref(defaultCurrent?.value);
+  const mergedCurrent = computed(() => current?.value);
+  watch(
+    mergedCurrent,
+    val => {
+      innerCurrent.value = val ?? defaultCurrent?.value;
+    },
+    { immediate: true },
+  );
+  const updateInnerCurrent = (val: number) => {
+    innerCurrent.value = val;
+  };
   const innerType = computed(() => {
-    return typeof innerCurrent.value === 'number' ? steps[innerCurrent.value]?.type : defaultType;
+    return typeof innerCurrent.value === 'number'
+      ? steps && steps.value?.[innerCurrent.value]?.type
+      : defaultType?.value;
   });
 
-  const currentMergedType = computed(() => innerType.value ?? defaultType);
+  const currentMergedType = computed(() => innerType.value ?? defaultType?.value);
 
   return { currentMergedType, updateInnerCurrent };
 };

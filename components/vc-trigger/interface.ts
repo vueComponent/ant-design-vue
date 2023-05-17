@@ -5,22 +5,23 @@ import PropTypes from '../_util/vue-types';
 /** Two char of 't' 'b' 'c' 'l' 'r'. Example: 'lt' */
 export type AlignPoint = string;
 
+export type OffsetType = number | `${number}%`;
 export interface AlignType {
   /**
    * move point of source node to align with point of target node.
    * Such as ['tr','cc'], align top right point of source node with center point of target node.
    * Point can be 't'(top), 'b'(bottom), 'c'(center), 'l'(left), 'r'(right) */
-  points?: AlignPoint[];
+  points?: (string | AlignPoint)[];
   /**
    * offset source node by offset[0] in x and offset[1] in y.
    * If offset contains percentage string value, it is relative to sourceNode region.
    */
-  offset?: number[];
+  offset?: OffsetType[];
   /**
    * offset target node by offset[0] in x and offset[1] in y.
    * If targetOffset contains percentage string value, it is relative to targetNode region.
    */
-  targetOffset?: number[];
+  targetOffset?: OffsetType[];
   /**
    * If adjustX field is true, will adjust source node in x direction if source node is invisible.
    * If adjustY field is true, will adjust source node in y direction if source node is invisible.
@@ -28,7 +29,24 @@ export interface AlignType {
   overflow?: {
     adjustX?: boolean | number;
     adjustY?: boolean | number;
+    shiftX?: boolean | number;
+    shiftY?: boolean | number;
   };
+  /** Auto adjust arrow position */
+  autoArrow?: boolean;
+  /**
+   * Config visible region check of html node. Default `visible`:
+   *  - `visible`:
+   *    The visible region of user browser window.
+   *    Use `clientHeight` for check.
+   *    If `visible` region not satisfy, fallback to `scroll`.
+   *  - `scroll`:
+   *    The whole region of the html scroll area.
+   *    Use `scrollHeight` for check.
+   *  - `visibleFirst`:
+   *    Similar to `visible`, but if `visible` region not satisfy, fallback to `scroll`.
+   */
+  htmlRegion?: 'visible' | 'scroll' | 'visibleFirst';
   /**
    * Whether use css right instead of left to position
    */
@@ -122,8 +140,6 @@ export const triggerProps = () => ({
   autoDestroy: { type: Boolean, default: false },
   mobile: Object,
   getTriggerDOMNode: Function as PropType<(d?: HTMLElement) => HTMLElement>,
-  // portal context will change
-  tryPopPortal: Boolean, // no need reactive
 });
 
 export type TriggerProps = Partial<ExtractPropTypes<ReturnType<typeof triggerProps>>>;

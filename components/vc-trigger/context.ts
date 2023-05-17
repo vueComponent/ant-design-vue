@@ -1,22 +1,5 @@
 import type { InjectionKey, Ref } from 'vue';
 import { computed, inject, provide } from 'vue';
-export interface TriggerContextProps {
-  setPortal: (val?: any) => void;
-  popPortal: boolean; // 将 portal 上传至父级元素渲染，不用考虑响应式
-}
-const TriggerContextKey: InjectionKey<TriggerContextProps> = Symbol('TriggerContextKey');
-export const useProviderTrigger = () => {
-  let portal = null;
-  provide(TriggerContextKey, {
-    setPortal(val) {
-      portal = val;
-    },
-    popPortal: true,
-  });
-  return () => {
-    return portal;
-  };
-};
 
 export interface PortalContextProps {
   shouldRender: Ref<boolean>;

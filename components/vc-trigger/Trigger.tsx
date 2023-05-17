@@ -701,8 +701,8 @@ export default defineComponent({
     );
     return (
       <>
-        {portal}
         {trigger}
+        {portal}
       </>
     );
   },

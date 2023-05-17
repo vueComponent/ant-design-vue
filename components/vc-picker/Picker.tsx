@@ -589,47 +589,57 @@ function Picker<DateType>() {
 
         const popupPlacement = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
         return (
-          <PickerTrigger
-            visible={mergedOpen.value}
-            popupStyle={popupStyle}
-            prefixCls={prefixCls}
-            dropdownClassName={dropdownClassName}
-            dropdownAlign={dropdownAlign}
-            getPopupContainer={getPopupContainer}
-            transitionName={transitionName}
-            popupPlacement={popupPlacement}
-            direction={direction}
-            v-slots={{
-              popupElement: () => panel,
-            }}
+          <div
+            ref={containerRef}
+            class={classNames(prefixCls, attrs.class, {
+              [`${prefixCls}-disabled`]: disabled,
+              [`${prefixCls}-focused`]: focused.value,
+              [`${prefixCls}-rtl`]: direction === 'rtl',
+            })}
+            style={attrs.style as CSSProperties}
+            onMousedown={onMousedown}
+            onMouseup={onInternalMouseup}
+            onMouseenter={onMouseenter}
+            onMouseleave={onMouseleave}
+            onContextmenu={onContextmenu}
+            onClick={onClick}
           >
             <div
-              ref={containerRef}
-              class={classNames(prefixCls, attrs.class, {
-                [`${prefixCls}-disabled`]: disabled,
-                [`${prefixCls}-focused`]: focused.value,
-                [`${prefixCls}-rtl`]: direction === 'rtl',
+              class={classNames(`${prefixCls}-input`, {
+                [`${prefixCls}-input-placeholder`]: !!hoverValue.value,
               })}
-              style={attrs.style as CSSProperties}
-              onMousedown={onMousedown}
-              onMouseup={onInternalMouseup}
-              onMouseenter={onMouseenter}
-              onMouseleave={onMouseleave}
-              onContextmenu={onContextmenu}
-              onClick={onClick}
+              ref={inputDivRef}
+            >
+              {inputNode}
+              {suffixNode}
+              {clearNode}
+            </div>
+            <PickerTrigger
+              visible={mergedOpen.value}
+              popupStyle={popupStyle}
+              prefixCls={prefixCls}
+              dropdownClassName={dropdownClassName}
+              dropdownAlign={dropdownAlign}
+              getPopupContainer={getPopupContainer}
+              transitionName={transitionName}
+              popupPlacement={popupPlacement}
+              direction={direction}
+              v-slots={{
+                popupElement: () => panel,
+              }}
             >
               <div
-                class={classNames(`${prefixCls}-input`, {
-                  [`${prefixCls}-input-placeholder`]: !!hoverValue.value,
-                })}
-                ref={inputDivRef}
-              >
-                {inputNode}
-                {suffixNode}
-                {clearNode}
-              </div>
-            </div>
-          </PickerTrigger>
+                style={{
+                  pointerEvents: 'none',
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              ></div>
+            </PickerTrigger>
+          </div>
         );
       };
     },

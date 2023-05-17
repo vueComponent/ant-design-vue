@@ -3,7 +3,6 @@ import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import type { EventHandler } from '../_util/EventInterface';
 import classNames from '../_util/classNames';
-import warning from '../_util/warning';
 import type { VueNode } from '../_util/type';
 import { booleanType, stringType, functionType } from '../_util/type';
 import type { StepIconRender, Status } from './interface';
@@ -52,13 +51,13 @@ export default defineComponent({
       emit('click', e);
       emit('stepClick', props.stepIndex);
     };
-    if (props.__legacy !== false) {
-      warning(
-        false,
-        'Steps',
-        'Step is deprecated, and not support inline type. Please use `items` directly. ',
-      );
-    }
+    // if (props.__legacy !== false) {
+    //   warning(
+    //     false,
+    //     'Steps',
+    //     'Step is deprecated, and not support inline type. Please use `items` directly. ',
+    //   );
+    // }
     const renderIconNode = ({ icon, title, description }) => {
       const {
         prefixCls,

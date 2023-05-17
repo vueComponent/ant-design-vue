@@ -8,7 +8,7 @@ import { someType, objectType, booleanType } from '../_util/type';
 
 const COVER_PROPS = {
   fill: 'transparent',
-  pointerEvents: 'auto',
+  'pointer-events': 'auto',
 };
 
 export interface MaskProps {

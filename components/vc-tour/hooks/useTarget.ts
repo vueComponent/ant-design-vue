@@ -43,6 +43,10 @@ export default function useTarget(
   const [posInfo, setPosInfo] = useState<PosInfo>(null);
 
   const updatePos = () => {
+    if (!open.value) {
+      setPosInfo(null);
+      return;
+    }
     if (targetElement.value) {
       // Exist target element. We should scroll and get target position
       if (!isInViewPort(targetElement.value) && open.value) {

@@ -32,6 +32,11 @@ const localeValues: Locale = {
     triggerAsc: '點擊升序',
     cancelSort: '取消排序',
   },
+  Tour: {
+    Next: '下一步',
+    Previous: '上一步',
+    Finish: '結束導覽',
+  },
   Modal: {
     okText: '確定',
     cancelText: '取消',

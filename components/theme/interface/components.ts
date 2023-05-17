@@ -44,7 +44,7 @@ import type { ComponentToken as TooltipComponentToken } from '../../tooltip/styl
 import type { ComponentToken as TransferComponentToken } from '../../transfer/style';
 import type { ComponentToken as TypographyComponentToken } from '../../typography/style';
 import type { ComponentToken as UploadComponentToken } from '../../upload/style';
-// import type { ComponentToken as TourComponentToken } from '../../tour/style';
+import type { ComponentToken as TourComponentToken } from '../../tour/style';
 import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 // import type { ComponentToken as AppComponentToken } from '../../app/style';
 import type { ComponentToken as WaveToken } from '../../_util/wave/style';
@@ -110,7 +110,7 @@ export interface ComponentTokenMap {
   Table?: TableComponentToken;
   Space?: SpaceComponentToken;
   Progress?: ProgressComponentToken;
-  //   Tour?: TourComponentToken;
+  Tour?: TourComponentToken;
   QRCode?: QRCodeComponentToken;
   //   App?: AppComponentToken;
 

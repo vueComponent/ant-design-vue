@@ -1,6 +1,6 @@
-import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
+import type { HTMLAttributes } from 'vue';
 import { computed, defineComponent, inject, provide, shallowRef } from 'vue';
-import PropTypes from '../_util/vue-types';
+import { triggerProps, noop } from './interface';
 import contains from '../vc-util/Dom/contains';
 import raf from '../_util/raf';
 import {
@@ -21,17 +21,6 @@ import { cloneElement } from '../_util/vnode';
 import supportsPassive from '../_util/supportsPassive';
 import { useInjectTrigger, useProvidePortal } from './context';
 
-function noop() {}
-function returnEmptyString() {
-  return '';
-}
-
-function returnDocument(element) {
-  if (element) {
-    return element.ownerDocument;
-  }
-  return window.document;
-}
 const ALL_HANDLERS = [
   'onClick',
   'onMousedown',
@@ -47,46 +36,7 @@ export default defineComponent({
   name: 'Trigger',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: {
-    action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
-    showAction: PropTypes.any.def([]),
-    hideAction: PropTypes.any.def([]),
-    getPopupClassNameFromAlign: PropTypes.any.def(returnEmptyString),
-    onPopupVisibleChange: Function as PropType<(open: boolean) => void>,
-    afterPopupVisibleChange: PropTypes.func.def(noop),
-    popup: PropTypes.any,
-    popupStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-    prefixCls: PropTypes.string.def('rc-trigger-popup'),
-    popupClassName: PropTypes.string.def(''),
-    popupPlacement: String,
-    builtinPlacements: PropTypes.object,
-    popupTransitionName: String,
-    popupAnimation: PropTypes.any,
-    mouseEnterDelay: PropTypes.number.def(0),
-    mouseLeaveDelay: PropTypes.number.def(0.1),
-    zIndex: Number,
-    focusDelay: PropTypes.number.def(0),
-    blurDelay: PropTypes.number.def(0.15),
-    getPopupContainer: Function,
-    getDocument: PropTypes.func.def(returnDocument),
-    forceRender: { type: Boolean, default: undefined },
-    destroyPopupOnHide: { type: Boolean, default: false },
-    mask: { type: Boolean, default: false },
-    maskClosable: { type: Boolean, default: true },
-    // onPopupAlign: PropTypes.func.def(noop),
-    popupAlign: PropTypes.object.def(() => ({})),
-    popupVisible: { type: Boolean, default: undefined },
-    defaultPopupVisible: { type: Boolean, default: false },
-    maskTransitionName: String,
-    maskAnimation: String,
-    stretch: String,
-    alignPoint: { type: Boolean, default: undefined }, // Maybe we can support user pass position in the future
-    autoDestroy: { type: Boolean, default: false },
-    mobile: Object,
-    getTriggerDOMNode: Function as PropType<(d?: HTMLElement) => HTMLElement>,
-    // portal context will change
-    tryPopPortal: Boolean, // no need reactive
-  },
+  props: triggerProps(),
   setup(props) {
     const align = computed(() => {
       const { popupPlacement, popupAlign, builtinPlacements } = props;

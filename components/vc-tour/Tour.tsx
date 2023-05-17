@@ -209,10 +209,24 @@ const Tour = defineComponent({
             rootClassName={rootClassName}
           />
           <Trigger
-            builtinPlacements={getPlacements(arrowPointAtCenter.value)}
             {...restProps}
+            builtinPlacements={
+              !curStep.value.target
+                ? undefined
+                : restProps.builtinPlacements ?? getPlacements(arrowPointAtCenter.value)
+            }
             ref={triggerRef}
-            popupStyle={curStep.value.style}
+            popupStyle={
+              !curStep.value.target
+                ? {
+                    ...curStep.value.style,
+                    position: 'fixed',
+                    left: CENTER_PLACEHOLDER.left,
+                    top: CENTER_PLACEHOLDER.top,
+                    transform: 'translate(-50%, -50%)',
+                  }
+                : curStep.value.style
+            }
             popupPlacement={mergedPlacement.value}
             popupVisible={mergedOpen.value}
             popupClassName={classNames(rootClassName, curStep.value.className)}

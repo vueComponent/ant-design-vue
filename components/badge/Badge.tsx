@@ -41,7 +41,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: badgeProps(),
   slots: Object as CustomSlotsType<{
-    text: BadgeProps;
+    text: any;
     count: any;
     default: any;
   }>,

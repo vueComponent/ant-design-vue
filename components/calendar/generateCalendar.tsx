@@ -11,7 +11,7 @@ import type {
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import CalendarHeader from './Header';
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 import type { App } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -108,13 +108,19 @@ function generateCalendar<
       'onSelect',
       'valueFormat',
     ] as any,
-    slots: [
-      'dateFullCellRender',
-      'dateCellRender',
-      'monthFullCellRender',
-      'monthCellRender',
-      'headerRender',
-    ],
+    slots: Object as CustomSlotsType<{
+      dateFullCellRender?: { current: DateType };
+      dateCellRender?: { current: DateType };
+      monthFullCellRender?: { current: DateType };
+      monthCellRender?: { current: DateType };
+      headerRender?: {
+        value: DateType;
+        type: CalendarMode;
+        onChange: (date: DateType) => void;
+        onTypeChange: (type: CalendarMode) => void;
+      };
+      default: any;
+    }>,
     setup(props, { emit, slots, attrs }) {
       const { prefixCls, direction } = useConfigInject('picker', props);
       const calendarPrefixCls = computed(() => `${prefixCls.value}-calendar`);

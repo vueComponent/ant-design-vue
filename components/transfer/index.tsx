@@ -7,7 +7,7 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
@@ -109,16 +109,17 @@ const Transfer = defineComponent({
   name: 'ATransfer',
   inheritAttrs: false,
   props: transferProps(),
-  slots: [
-    'leftTitle',
-    'rightTitle',
-    'children',
-    'render',
-    'notFoundContent',
-    'leftSelectAllLabel',
-    'rightSelectAllLabel',
-    'footer',
-  ],
+  slots: Object as CustomSlotsType<{
+    leftTitle?: any;
+    rightTitle?: any;
+    children?: any;
+    render?: TransferItem;
+    notFoundContent?: any;
+    leftSelectAllLabel?: any;
+    rightSelectAllLabel?: any;
+    footer?: any;
+    default?: any;
+  }>,
   // emits: ['update:targetKeys', 'update:selectedKeys', 'change', 'search', 'scroll', 'selectChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);

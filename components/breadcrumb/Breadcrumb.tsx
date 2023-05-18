@@ -56,7 +56,7 @@ export default defineComponent({
   name: 'ABreadcrumb',
   props: breadcrumbProps(),
   slots: Object as CustomSlotsType<{
-    separator: BreadcrumbProps;
+    separator: any;
     itemRender: { route: Route; params: any; routes: Route[]; paths: string[] };
     default: any;
   }>,

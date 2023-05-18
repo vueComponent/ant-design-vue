@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'AAnchorLink',
   props: initDefaultProps(anchorLinkProps(), { href: '#' }),
   slots: Object as CustomSlotsType<{
-    title: AnchorLinkProps;
+    title: any;
     default: any;
   }>,
   setup(props, { slots }) {

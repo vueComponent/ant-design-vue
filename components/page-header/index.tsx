@@ -8,6 +8,7 @@ import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import type { CustomSlotsType } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
@@ -36,7 +37,17 @@ const PageHeader = defineComponent({
   name: 'APageHeader',
   props: pageHeaderProps(),
   // emits: ['back'],
-  slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
+  slots: Object as CustomSlotsType<{
+    backIcon: any;
+    avatar: any;
+    breadcrumb: any;
+    title: any;
+    subTitle: any;
+    tags: any;
+    extra: any;
+    footer: any;
+    default: any;
+  }>,
   setup(props, { emit, slots }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
     const compact = ref(false);

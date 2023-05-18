@@ -42,7 +42,7 @@ const Avatar = defineComponent({
   inheritAttrs: false,
   props: avatarProps(),
   slots: Object as CustomSlotsType<{
-    icon: AvatarProps;
+    icon: any;
     default: any;
   }>,
   setup(props, { slots, attrs }) {

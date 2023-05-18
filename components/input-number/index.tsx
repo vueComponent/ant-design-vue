@@ -11,6 +11,7 @@ import { cloneElement } from '../_util/vnode';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';
 import isValidValue from '../_util/isValidValue';
+import type { CustomSlotsType } from '../_util/type';
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
   ...baseProps,
@@ -35,7 +36,13 @@ const InputNumber = defineComponent({
   inheritAttrs: false,
   props: inputNumberProps(),
   // emits: ['focus', 'blur', 'change', 'input', 'update:value'],
-  slots: ['addonBefore', 'addonAfter', 'prefix'],
+  slots: Object as CustomSlotsType<{
+    addonBefore?: any;
+    addonAfter?: any;
+    prefix?: any;
+    default?: any;
+  }>,
+
   setup(props, { emit, expose, attrs, slots }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, size, direction } = useConfigInject('input-number', props);

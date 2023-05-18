@@ -13,6 +13,7 @@ import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
+import type { CustomSlotsType } from '../_util/type';
 
 export interface TimePickerLocale {
   placeholder?: string;
@@ -93,7 +94,13 @@ function createTimePicker<
       ...timePickerProps(),
       addon: { type: Function },
     } as any,
-    slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
+    slots: Object as CustomSlotsType<{
+      addon?: any;
+      renderExtraFooter?: any;
+      suffixIcon?: any;
+      clearIcon?: any;
+      default: any;
+    }>,
     setup(props, { slots, expose, emit, attrs }) {
       const formItemContext = useInjectFormItemContext();
       devWarning(
@@ -164,7 +171,12 @@ function createTimePicker<
       ...timePickerProps(),
       order: { type: Boolean, default: true },
     } as any,
-    slot: ['renderExtraFooter', 'suffixIcon', 'clearIcon'],
+    slots: Object as CustomSlotsType<{
+      renderExtraFooter?: any;
+      suffixIcon?: any;
+      clearIcon?: any;
+      default: any;
+    }>,
     setup(props, { slots, expose, emit, attrs }) {
       const pickerRef = ref();
       const formItemContext = useInjectFormItemContext();

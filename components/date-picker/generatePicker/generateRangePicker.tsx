@@ -18,6 +18,7 @@ import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 import { useInjectFormItemContext } from '../../form/FormItemContext';
 import omit from '../../_util/omit';
+import type { CustomSlotsType } from '../../_util/type';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -32,18 +33,18 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       ...rangePickerProps<DateType>(),
       ...extraProps,
     },
-    slots: [
-      'suffixIcon',
-      // 'clearIcon',
-      'prevIcon',
-      'nextIcon',
-      'superPrevIcon',
-      'superNextIcon',
-      // 'panelRender',
-      'dateRender',
-      'renderExtraFooter',
-      // 'separator',
-    ],
+    slots: Object as CustomSlotsType<{
+      suffixIcon?: any;
+      prevIcon?: any;
+      nextIcon?: any;
+      superPrevIcon?: any;
+      superNextIcon?: any;
+      dateRender?: any;
+      renderExtraFooter?: any;
+      default?: any;
+      separator?: any;
+      clearIcon?: any;
+    }>,
     setup(_props, { expose, slots, attrs, emit }) {
       const props = _props as unknown as CommonProps<DateType> & RangePickerProps<DateType>;
       const formItemContext = useInjectFormItemContext();

@@ -26,6 +26,7 @@ import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
+import type { CustomSlotsType } from '../_util/type';
 import { tuple } from '../_util/type';
 import type {
   FormLabelAlign,
@@ -133,7 +134,12 @@ export default defineComponent({
   inheritAttrs: false,
   __ANT_NEW_FORM_ITEM: true,
   props: formItemProps(),
-  slots: ['help', 'label', 'extra'],
+  slots: Object as CustomSlotsType<{
+    help: any;
+    label: any;
+    extra: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs, expose }) {
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);
     const eventKey = `form-item-${++indexGuid}`;

@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import type { CustomSlotsType } from '../_util/type';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -24,7 +25,11 @@ export default defineComponent({
     color: 'blue',
     pending: false,
   }),
-  slots: ['dot', 'label'],
+  slots: Object as CustomSlotsType<{
+    dot?: any;
+    label?: any;
+    default?: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('timeline', props);
     return () => {

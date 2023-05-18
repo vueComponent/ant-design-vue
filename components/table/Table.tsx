@@ -36,7 +36,7 @@ import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { CSSProperties, PropType } from 'vue';
 import { nextTick, reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
-import type { DefaultRecordType } from '../vc-table/interface';
+import type { DefaultRecordType, RenderExpandIconProps } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
@@ -47,6 +47,7 @@ import { useProvideSlots, useProvideTableContext } from './context';
 import type { ContextSlots } from './context';
 import useColumns from './hooks/useColumns';
 import { convertChildrenToColumns } from './util';
+import type { CustomSlotsType } from '../_util/type';
 
 export type { ColumnsType, TablePaginationConfig };
 
@@ -242,19 +243,19 @@ const InteralTable = defineComponent<
   props: initDefaultProps(tableProps(), {
     rowKey: 'key',
   }) as any,
-  // emits: ['expandedRowsChange', 'change', 'expand'],
-  slots: [
-    'emptyText',
-    'expandIcon',
-    'title',
-    'footer',
-    'summary',
-    'expandedRowRender',
-    'bodyCell',
-    'headerCell',
-    'customFilterIcon',
-    'customFilterDropdown',
-  ],
+  slots: Object as CustomSlotsType<{
+    emptyText?: any;
+    expandIcon?: RenderExpandIconProps<any>;
+    title?: any;
+    footer?: any;
+    summary?: any;
+    expandedRowRender?: any;
+    bodyCell?: any;
+    headerCell?: any;
+    customFilterIcon?: any;
+    customFilterDropdown?: any;
+    default: any;
+  }>,
   setup(props, { attrs, slots, expose, emit }) {
     devWarning(
       !(typeof props.rowKey === 'function' && props.rowKey.length > 1),

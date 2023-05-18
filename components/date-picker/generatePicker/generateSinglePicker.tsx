@@ -16,6 +16,7 @@ import { commonProps, datePickerProps } from './props';
 
 import devWarning from '../../vc-util/devWarning';
 import { useInjectFormItemContext } from '../../form/FormItemContext';
+import type { CustomSlotsType } from '../../_util/type';
 
 export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -32,18 +33,19 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
       name: displayName,
       inheritAttrs: false,
       props: comProps,
-      slots: [
-        'suffixIcon',
-        // 'clearIcon',
-        'prevIcon',
-        'nextIcon',
-        'superPrevIcon',
-        'superNextIcon',
-        // 'panelRender',
-        'dateRender',
-        'renderExtraFooter',
-        'monthCellRender',
-      ],
+      slots: Object as CustomSlotsType<{
+        suffixIcon?: any;
+        prevIcon?: any;
+        nextIcon?: any;
+        superPrevIcon?: any;
+        superNextIcon?: any;
+        dateRender?: any;
+        renderExtraFooter?: any;
+        monthCellRender?: any;
+        monthCellContentRender?: any;
+        clearIcon?: any;
+        default?: any;
+      }>,
       setup(_props, { slots, expose, attrs, emit }) {
         // 兼容 vue 3.2.7
         const props = _props as unknown as CommonProps<DateType> &
@@ -154,7 +156,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
             id = formItemContext.id.value,
             ...restProps
           } = p;
-          const showTime = p.showTime === '' ? true : p.showTime;
+          const showTime = (p.showTime as string) === '' ? true : p.showTime;
           const { format } = p as any;
 
           let additionalOverrideProps: any = {};

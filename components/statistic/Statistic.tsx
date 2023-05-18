@@ -9,6 +9,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 // CSSINJS
 import useStyle from './style';
 import { anyType, booleanType, functionType, someType, vNodeType } from '../_util/type';
+import type { CustomSlotsType } from '../_util/type';
 
 export const statisticProps = () => ({
   prefixCls: String,
@@ -37,7 +38,13 @@ export default defineComponent({
     groupSeparator: ',',
     loading: false,
   }),
-  slots: ['title', 'prefix', 'suffix', 'formatter'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    prefix?: any;
+    suffix?: any;
+    formatter?: any;
+    default?: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('statistic', props);
 

@@ -1,4 +1,4 @@
-import type { Key } from '../../_util/type';
+import type { CustomSlotsType, Key } from '../../_util/type';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import {
   shallowRef,
@@ -58,9 +58,9 @@ export const menuProps = () => ({
   activeKey: String, // 内部组件使用
   selectable: { type: Boolean, default: true },
   multiple: { type: Boolean, default: false },
-
+  tabindex: { type: [Number, String] },
   motion: Object as PropType<CSSMotionProps>,
-
+  role: String,
   theme: { type: String as PropType<MenuTheme>, default: 'light' },
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
 
@@ -95,7 +95,11 @@ export default defineComponent({
   name: 'AMenu',
   inheritAttrs: false,
   props: menuProps(),
-  slots: ['expandIcon', 'overflowedIndicator'],
+  slots: Object as CustomSlotsType<{
+    expandIcon?: { isOpen: boolean; [key: string]: any };
+    overflowedIndicator?: any;
+    default: any;
+  }>,
   setup(props, { slots, emit, attrs }) {
     const { direction, getPrefixCls } = useConfigInject('menu', props);
     const override = useInjectOverride();

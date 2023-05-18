@@ -8,8 +8,11 @@ import { convertLegacyProps } from '../button/buttonTypes';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import Button from '../button';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
+
 import defaultLocale from '../locale/en_US';
 import { anyType, objectType, stringType, withInstall } from '../_util/type';
+import type { CustomSlotsType } from '../_util/type';
+
 import useMergedState from '../_util/hooks/useMergedState';
 
 import KeyCode from '../_util/KeyCode';
@@ -63,7 +66,18 @@ const Popconfirm = defineComponent({
     okType: 'primary',
     disabled: false,
   }),
-  slots: ['title', 'content', 'okText', 'icon', 'cancelText', 'cancelButton', 'okButton'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    content?: any;
+    description?: any;
+    okText?: any;
+    icon?: any;
+    cancel?: any;
+    cancelText?: any;
+    cancelButton?: any;
+    okButton?: any;
+    default?: any;
+  }>,
   // emits: ['update:open', 'visibleChange'],
   setup(props: PopconfirmProps, { slots, emit, expose, attrs }) {
     const rootRef = ref();

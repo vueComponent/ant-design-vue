@@ -196,15 +196,6 @@ function Picker<DateType>() {
       'secondStep',
       'hideDisabledOptions',
     ] as any,
-    // slots: [
-    //   'suffixIcon',
-    //   'clearIcon',
-    //   'prevIcon',
-    //   'nextIcon',
-    //   'superPrevIcon',
-    //   'superNextIcon',
-    //   'panelRender',
-    // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
       const presets = computed(() => props.presets);

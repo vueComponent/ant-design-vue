@@ -3,7 +3,8 @@ import { computed, ref, defineComponent } from 'vue';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
-import type { VueNode } from '../_util/type';
+
+import type { VueNode, CustomSlotsType } from '../_util/type';
 import {
   stringType,
   booleanType,
@@ -94,7 +95,10 @@ const Slider = defineComponent({
   inheritAttrs: false,
   props: sliderProps(),
   // emits: ['update:value', 'change', 'afterChange', 'blur'],
-  slots: ['mark'],
+  slots: Object as CustomSlotsType<{
+    mark?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots, emit, expose }) {
     // Warning for deprecated usage
     if (process.env.NODE_ENV !== 'production') {

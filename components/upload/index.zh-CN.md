@@ -113,7 +113,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 
 ### 手机设备如何选择相册或文件夹？
 
-你可以设置 `:accept="null"`
+你可以设置 `:capture="null"`
 
 ### 如何显示下载链接？
 

@@ -6,9 +6,10 @@ import warning from '../_util/warning';
 import type { BreadcrumbItemProps } from './BreadcrumbItem';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
-import type { VueNode } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
+import type { CustomSlotsType, VueNode } from '../_util/type';
+
 export interface Route {
   path: string;
   breadcrumbName: string;
@@ -57,7 +58,11 @@ export default defineComponent({
   name: 'ABreadcrumb',
   inheritAttrs: false,
   props: breadcrumbProps(),
-  slots: ['separator', 'itemRender'],
+  slots: Object as CustomSlotsType<{
+    separator: any;
+    itemRender: { route: Route; params: any; routes: Route[]; paths: string[] };
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('breadcrumb', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);

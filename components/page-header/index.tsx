@@ -9,8 +9,11 @@ import type { AvatarProps } from '../avatar';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
+
 import { objectType, vNodeType, withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import type { CustomSlotsType } from '../_util/type';
+
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import useDestroyed from '../_util/hooks/useDestroyed';
@@ -42,7 +45,17 @@ const PageHeader = defineComponent({
   inheritAttrs: false,
   props: pageHeaderProps(),
   // emits: ['back'],
-  slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
+  slots: Object as CustomSlotsType<{
+    backIcon: any;
+    avatar: any;
+    breadcrumb: any;
+    title: any;
+    subTitle: any;
+    tags: any;
+    extra: any;
+    footer: any;
+    default: any;
+  }>,
   setup(props, { emit, slots, attrs }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
 

@@ -3,6 +3,7 @@ import { defineComponent, computed, ref, watch, Fragment } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
+import type { CustomSlotsType } from '../_util/type';
 import { booleanType, tuple } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
@@ -38,7 +39,10 @@ const Space = defineComponent({
   name: 'ASpace',
   inheritAttrs: false,
   props: spaceProps(),
-  slots: ['split'],
+  slots: Object as CustomSlotsType<{
+    split?: any;
+    default?: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);

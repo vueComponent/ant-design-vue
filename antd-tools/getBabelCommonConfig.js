@@ -1,4 +1,4 @@
-const { resolve } = require('./utils/projectHelper');
+const { resolve, isThereHaveBrowserslistConfig } = require('./utils/projectHelper');
 
 module.exports = function (modules) {
   const plugins = [
@@ -39,9 +39,11 @@ module.exports = function (modules) {
         resolve('@babel/preset-env'),
         {
           modules,
-          targets: {
-            browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 11'],
-          },
+          targets: isThereHaveBrowserslistConfig()
+            ? undefined
+            : {
+                browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 11'],
+              },
         },
       ],
     ],

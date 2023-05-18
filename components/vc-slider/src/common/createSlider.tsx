@@ -43,7 +43,6 @@ export default function createSlider(Component) {
     name: 'CreateSlider',
     mixins: [BaseMixin, Component],
     inheritAttrs: false,
-    slots: ['mark'],
     props: initDefaultProps(propTypes, {
       prefixCls: 'rc-slider',
       min: 0,

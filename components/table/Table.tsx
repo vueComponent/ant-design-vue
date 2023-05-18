@@ -36,7 +36,7 @@ import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { CSSProperties } from 'vue';
 import { nextTick, reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
-import type { DefaultRecordType } from '../vc-table/interface';
+import type { DefaultRecordType, RenderExpandIconProps } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
@@ -47,6 +47,7 @@ import { useProvideSlots, useProvideTableContext } from './context';
 import type { ContextSlots } from './context';
 import useColumns from './hooks/useColumns';
 import { convertChildrenToColumns } from './util';
+
 import {
   stringType,
   booleanType,
@@ -58,6 +59,7 @@ import {
 
 // CSSINJS
 import useStyle from './style';
+import type { CustomSlotsType } from '../_util/type';
 
 export type { ColumnsType, TablePaginationConfig };
 
@@ -179,35 +181,22 @@ export const tableProps = () => {
     >(),
     sortDirections: arrayType<SortOrder[]>(),
     showSorterTooltip: someType<boolean | TooltipProps>([Boolean, Object], true),
-    contextSlots: objectType<ContextSlots>(),
     transformCellText: functionType<TableProps['transformCellText']>(),
   };
 };
 
-const InteralTable = defineComponent<
-  TableProps & {
-    contextSlots: ContextSlots;
-  }
->({
+const InteralTable = defineComponent({
   name: 'InteralTable',
   inheritAttrs: false,
-  props: initDefaultProps(tableProps(), {
-    rowKey: 'key',
-  }) as any,
-  // emits: ['expandedRowsChange', 'change', 'expand'],
-  slots: [
-    'emptyText',
-    'expandIcon',
-    'title',
-    'footer',
-    'summary',
-    'expandedRowRender',
-    'bodyCell',
-    'headerCell',
-    'customFilterIcon',
-    'customFilterDropdown',
-    'expandColumnTitle',
-  ],
+  props: initDefaultProps(
+    {
+      ...tableProps(),
+      contextSlots: objectType<ContextSlots>(),
+    },
+    {
+      rowKey: 'key',
+    },
+  ),
   setup(props, { attrs, slots, expose, emit }) {
     devWarning(
       !(typeof props.rowKey === 'function' && props.rowKey.length > 1),
@@ -651,9 +640,34 @@ const InteralTable = defineComponent<
   },
 });
 
-const Table = defineComponent<TableProps>({
+const Table = defineComponent({
   name: 'ATable',
   inheritAttrs: false,
+  props: initDefaultProps(tableProps(), {
+    rowKey: 'key',
+  }),
+  slots: Object as CustomSlotsType<{
+    emptyText?: any;
+    expandIcon?: RenderExpandIconProps<any>;
+    title?: any;
+    footer?: any;
+    summary?: any;
+    expandedRowRender?: any;
+    bodyCell?: {
+      text: any;
+      value: any;
+      record: Record<string, any>;
+      index: number;
+      column: ColumnType;
+    };
+    headerCell?: {
+      title: any;
+      column: ColumnType;
+    };
+    customFilterIcon?: any;
+    customFilterDropdown?: any;
+    default: any;
+  }>,
   setup(_props, { attrs, slots, expose }) {
     const table = ref();
     expose({

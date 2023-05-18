@@ -14,7 +14,6 @@ export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Content',
   props: tooltipContentProps,
-  slots: ['overlay'],
   setup(props: TooltipContentProps, { slots }) {
     return () => (
       <div

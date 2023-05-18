@@ -11,7 +11,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
 import useStyle from './style';
 import type { PresetColorKey } from '../theme/interface';
-import type { LiteralUnion } from '../_util/type';
+import type { LiteralUnion, CustomSlotsType } from '../_util/type';
 import type { PresetStatusColorType } from '../_util/colors';
 import { isPresetColor } from '../_util/colors';
 
@@ -42,7 +42,11 @@ export default defineComponent({
   Ribbon,
   inheritAttrs: false,
   props: badgeProps(),
-  slots: ['text', 'count'],
+  slots: Object as CustomSlotsType<{
+    text: any;
+    count: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('badge', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);

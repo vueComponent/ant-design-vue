@@ -11,6 +11,7 @@ import type { ChangeEvent, KeyboardEventHandler } from '../../_util/EventInterfa
 import KeyCode from '../../_util/KeyCode';
 import classNames from '../../_util/classNames';
 import { booleanType, stringType, someType, functionType } from '../../_util/type';
+import type { CustomSlotsType } from '../../_util/type';
 
 /**
  * We support `stringMode` which need handle correct type when user call in onChange
@@ -83,7 +84,11 @@ export default defineComponent({
     ...inputNumberProps(),
     lazy: Boolean,
   },
-  slots: ['upHandler', 'downHandler'],
+  slots: Object as CustomSlotsType<{
+    upHandler: any;
+    downHandler: any;
+    default: any;
+  }>,
   setup(props, { attrs, slots, emit, expose }) {
     const inputRef = shallowRef<HTMLInputElement>();
     const focus = shallowRef(false);

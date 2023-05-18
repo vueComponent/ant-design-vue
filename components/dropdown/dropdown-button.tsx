@@ -6,8 +6,11 @@ import classNames from '../_util/classNames';
 import { initDefaultProps } from '../_util/props-util';
 import { dropdownButtonProps } from './props';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
+
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
+import type { CustomSlotsType } from '../_util/type';
+
 const ButtonGroup = Button.Group;
 
 export type DropdownButtonProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownButtonProps>>>;
@@ -22,8 +25,14 @@ export default defineComponent({
     placement: 'bottomRight',
     type: 'default',
   }),
-  // emits: ['click', 'visibleChange', 'update:visible'],
-  slots: ['icon', 'leftButton', 'rightButton', 'overlay'],
+  // emits: ['click', 'visibleChange', 'update:visible'],s
+  slots: Object as CustomSlotsType<{
+    icon: any;
+    leftButton: { button: any };
+    rightButton: { button: any };
+    overlay: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs, emit }) {
     const handleVisibleChange = (val: boolean) => {
       emit('update:visible', val);

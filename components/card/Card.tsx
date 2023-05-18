@@ -9,6 +9,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import useStyle from './style';
 import Skeleton from '../skeleton';
+import type { CustomSlotsType } from '../_util/type';
 export interface CardTabListType {
   key: string;
   tab: any;
@@ -53,7 +54,15 @@ const Card = defineComponent({
   name: 'ACard',
   inheritAttrs: false,
   props: cardProps(),
-  slots: ['title', 'extra', 'tabBarExtraContent', 'actions', 'cover', 'customTab'],
+  slots: Object as CustomSlotsType<{
+    title: any;
+    extra: any;
+    tabBarExtraContent: any;
+    actions: any;
+    cover: any;
+    customTab: CardTabListType;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction, size } = useConfigInject('card', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);

@@ -4,7 +4,7 @@ import { initDefaultProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
-import type { Key, VueNode } from '../_util/type';
+import type { Key, VueNode, CustomSlotsType } from '../_util/type';
 import { objectType, anyType } from '../_util/type';
 import type { CSSProperties } from '../_util/cssinjs/hooks/useStyleRegister';
 
@@ -33,7 +33,11 @@ export default defineComponent({
   name: 'AAnchorLink',
   inheritAttrs: false,
   props: initDefaultProps(anchorLinkProps(), { href: '#' }),
-  slots: ['title', 'customTitle'],
+  slots: Object as CustomSlotsType<{
+    title: any;
+    default: any;
+    customTitle: any;
+  }>,
   setup(props, { slots, attrs }) {
     let mergedTitle = null;
     const {

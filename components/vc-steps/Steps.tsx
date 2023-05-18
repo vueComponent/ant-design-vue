@@ -32,7 +32,6 @@ export default defineComponent({
     isInline: PropTypes.looseBool,
     itemRender: functionType<(item: Record<string, any>, stepItem: VueNode) => VueNode>(),
   },
-  slots: ['stepIcon', 'progressDot'],
   emits: ['change'],
   setup(props, { slots, emit }) {
     const onStepClick = (next: number) => {

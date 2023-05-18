@@ -13,6 +13,7 @@ import type { RadioChangeEvent } from '../radio/interface';
 import type { TransferDirection, TransferItem } from './index';
 import { stringType, arrayType, booleanType } from '../_util/type';
 import { groupKeysMap } from '../_util/transKeys';
+import type { CustomSlotsType } from '../_util/type';
 
 const defaultRender = () => null;
 
@@ -69,7 +70,11 @@ export default defineComponent({
   inheritAttrs: false,
   props: transferListProps,
   // emits: ['scroll', 'itemSelectAll', 'itemRemove', 'itemSelect'],
-  slots: ['footer', 'titleText'],
+  slots: Object as CustomSlotsType<{
+    footer?: any;
+    titleText?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots }) {
     const filterValue = ref('');
     const transferNode = ref();

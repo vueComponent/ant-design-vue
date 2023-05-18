@@ -14,8 +14,10 @@ import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
+
 import type { InputStatus } from '../_util/statusUtils';
 import { booleanType, stringType } from '../_util/type';
+import type { CustomSlotsType } from '../_util/type';
 
 export interface TimePickerLocale {
   placeholder?: string;
@@ -75,7 +77,7 @@ function createTimePicker<
   });
 
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
-  const TimePicker = defineComponent<DTimePickerProps>({
+  const TimePicker = defineComponent({
     name: 'ATimePicker',
     inheritAttrs: false,
     props: {
@@ -83,9 +85,16 @@ function createTimePicker<
       ...datePickerProps<DateType>(),
       ...timePickerProps(),
       addon: { type: Function },
-    } as any,
-    slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    setup(props, { slots, expose, emit, attrs }) {
+    },
+    slots: Object as CustomSlotsType<{
+      addon?: any;
+      renderExtraFooter?: any;
+      suffixIcon?: any;
+      clearIcon?: any;
+      default: any;
+    }>,
+    setup(p, { slots, expose, emit, attrs }) {
+      const props = p as unknown as DTimePickerProps;
       const formItemContext = useInjectFormItemContext();
       devWarning(
         !(slots.addon || props.addon),
@@ -146,7 +155,7 @@ function createTimePicker<
     },
   });
 
-  const TimeRangePicker = defineComponent<DTimeRangePickerProps>({
+  const TimeRangePicker = defineComponent({
     name: 'ATimeRangePicker',
     inheritAttrs: false,
     props: {
@@ -154,9 +163,15 @@ function createTimePicker<
       ...rangePickerProps<DateType>(),
       ...timePickerProps(),
       order: { type: Boolean, default: true },
-    } as any,
-    slot: ['renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    setup(props, { slots, expose, emit, attrs }) {
+    },
+    slots: Object as CustomSlotsType<{
+      renderExtraFooter?: any;
+      suffixIcon?: any;
+      clearIcon?: any;
+      default: any;
+    }>,
+    setup(p, { slots, expose, emit, attrs }) {
+      const props = p as unknown as DTimeRangePickerProps;
       const pickerRef = ref();
       const formItemContext = useInjectFormItemContext();
       expose({

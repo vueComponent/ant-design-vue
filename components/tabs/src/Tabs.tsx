@@ -23,7 +23,6 @@ import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import devWarning from '../../vc-util/devWarning';
 import type { SizeType } from '../../config-provider';
 import { useProvideTabs } from './TabContext';
-import type { Key } from '../../_util/type';
 import {
   arrayType,
   stringType,
@@ -32,6 +31,7 @@ import {
   objectType,
   booleanType,
 } from '../../_util/type';
+import type { CustomSlotsType, Key } from '../../_util/type';
 import pick from 'lodash-es/pick';
 import PropTypes from '../../_util/vue-types';
 import type { MouseEventHandler } from '../../_util/EventInterface';
@@ -133,15 +133,16 @@ const InternalTabs = defineComponent({
     }),
     tabs: arrayType<Tab[]>(),
   },
-  slots: [
-    'tabBarExtraContent',
-    'leftExtra',
-    'rightExtra',
-    'moreIcon',
-    'addIcon',
-    'removeIcon',
-    'renderTabBar',
-  ],
+  slots: Object as CustomSlotsType<{
+    tabBarExtraContent?: any;
+    leftExtra?: any;
+    rightExtra?: any;
+    moreIcon?: any;
+    addIcon?: any;
+    removeIcon?: any;
+    renderTabBar?: any;
+    default: any;
+  }>,
   // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots }) {
     devWarning(
@@ -351,15 +352,16 @@ export default defineComponent({
       tabPane: false,
     },
   }),
-  slots: [
-    'tabBarExtraContent',
-    'leftExtra',
-    'rightExtra',
-    'moreIcon',
-    'addIcon',
-    'removeIcon',
-    'renderTabBar',
-  ],
+  slots: Object as CustomSlotsType<{
+    tabBarExtraContent?: any;
+    leftExtra?: any;
+    rightExtra?: any;
+    moreIcon?: any;
+    addIcon?: any;
+    removeIcon?: any;
+    renderTabBar?: any;
+    default?: any;
+  }>,
   // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots, emit }) {
     const handleChange = (key: string) => {

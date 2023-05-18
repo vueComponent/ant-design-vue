@@ -6,8 +6,9 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
 import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
 import { isPresetColor, isPresetStatusColor } from '../_util/colors';
-import type { LiteralUnion } from '../_util/type';
 import { eventType } from '../_util/type';
+import type { CustomSlotsType, LiteralUnion } from '../_util/type';
+
 import CheckableTag from './CheckableTag';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import warning from '../_util/warning';
@@ -39,7 +40,11 @@ const Tag = defineComponent({
   inheritAttrs: false,
   props: tagProps(),
   // emits: ['update:visible', 'close'],
-  slots: ['closeIcon', 'icon'],
+  slots: Object as CustomSlotsType<{
+    closeIcon: any;
+    icon: any;
+    default: any;
+  }>,
   setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('tag', props);
 

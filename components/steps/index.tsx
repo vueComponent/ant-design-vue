@@ -2,7 +2,7 @@ import type { App, ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import type { VueNode } from '../_util/type';
+import type { VueNode, CustomSlotsType } from '../_util/type';
 import { anyType, booleanType, stringType, functionType, someType, arrayType } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps, { Step as VcStep } from '../vc-steps';
@@ -61,7 +61,11 @@ const Steps = defineComponent({
     responsive: true,
     labelPlacement: 'horizontal',
   }),
-  slots: ['progressDot'],
+  slots: Object as CustomSlotsType<{
+    progressDot: any;
+    default: any;
+  }>,
+
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);

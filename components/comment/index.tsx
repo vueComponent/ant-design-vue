@@ -2,7 +2,7 @@ import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
@@ -30,7 +30,14 @@ const Comment = defineComponent({
   name: 'AComment',
   inheritAttrs: false,
   props: commentProps(),
-  slots: ['actions', 'author', 'avatar', 'content', 'datetime'],
+  slots: Object as CustomSlotsType<{
+    actions: any;
+    author: any;
+    avatar: any;
+    content: any;
+    datetime: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('comment', props);
 
@@ -50,7 +57,7 @@ const Comment = defineComponent({
     return () => {
       const pre = prefixCls.value;
 
-      const actions = props.actions ?? slots.actions?.();
+      const actions: any[] = props.actions ?? slots.actions?.();
       const author = props.author ?? slots.author?.();
       const avatar = props.avatar ?? slots.avatar?.();
       const content = props.content ?? slots.content?.();

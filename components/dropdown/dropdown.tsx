@@ -14,6 +14,7 @@ import getPlacements from '../_util/placements';
 import warning from '../_util/warning';
 import useStyle from './style';
 import { useProvideOverride } from '../menu/src/OverrideContext';
+import type { CustomSlotsType } from '../_util/type';
 
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
@@ -28,7 +29,10 @@ const Dropdown = defineComponent({
     trigger: 'hover',
   }),
   // emits: ['visibleChange', 'update:visible'],
-  slots: ['overlay'],
+  slots: Object as CustomSlotsType<{
+    default?: any;
+    overlay?: any;
+  }>,
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer } = useConfigInject(
       'dropdown',

@@ -27,7 +27,7 @@ import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import type { Key } from '../../_util/type';
+import type { Key, CustomSlotsType } from '../../_util/type';
 import { objectType } from '../../_util/type';
 import type { ItemType, MenuTheme } from './interface';
 
@@ -59,8 +59,12 @@ export default defineComponent({
   name: 'ASubMenu',
   inheritAttrs: false,
   props: subMenuProps(),
-  slots: ['icon', 'title', 'expandIcon'],
-  // emits: ['titleClick', 'mouseenter', 'mouseleave'],
+  slots: Object as CustomSlotsType<{
+    icon?: any;
+    title?: any;
+    expandIcon?: { isOpen: boolean; [key: string]: any };
+    default?: any;
+  }>,
   setup(props, { slots, attrs, emit }) {
     useProvideFirstLevel(false);
     const isMeasure = useMeasure();

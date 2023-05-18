@@ -11,7 +11,6 @@ import { Row } from '../grid';
 import Item from './Item';
 import { flattenChildren } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import type { Key } from '../_util/type';
 import {
   arrayType,
   someType,
@@ -20,6 +19,7 @@ import {
   vNodeType,
   functionType,
 } from '../_util/type';
+import type { CustomSlotsType, Key } from '../_util/type';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
@@ -90,7 +90,14 @@ const List = defineComponent({
     loading: false,
     pagination: false,
   }),
-  slots: ['extra', 'loadMore', 'renderItem', 'header', 'footer'],
+  slots: Object as CustomSlotsType<{
+    extra: any;
+    loadMore: any;
+    renderItem: { item: any; index: number };
+    header: any;
+    footer: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     provide(ListContextKey, {
       grid: toRef(props, 'grid'),

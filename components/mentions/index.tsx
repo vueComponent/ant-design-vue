@@ -17,6 +17,7 @@ import { useProvideOverride } from '../menu/src/OverrideContext';
 import warning from '../_util/warning';
 import Spin from '../spin';
 import devWarning from '../vc-util/devWarning';
+import type { CustomSlotsType } from '../_util/type';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -103,7 +104,11 @@ const Mentions = defineComponent({
   name: 'AMentions',
   inheritAttrs: false,
   props: mentionsProps(),
-  slots: ['notFoundContent', 'option'],
+  slots: Object as CustomSlotsType<{
+    notFoundContent?: any;
+    option?: any;
+    default?: any;
+  }>,
   setup(props, { slots, emit, attrs, expose }) {
     // =================== Warning =====================
     if (process.env.NODE_ENV !== 'production') {

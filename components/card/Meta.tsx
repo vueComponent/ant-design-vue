@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { vNodeType } from '../_util/type';
+import type { CustomSlotsType } from '../_util/type';
 
 export const cardMetaProps = () => ({
   prefixCls: String,
@@ -15,7 +16,12 @@ export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ACardMeta',
   props: cardMetaProps(),
-  slots: ['title', 'description', 'avatar'],
+  slots: Object as CustomSlotsType<{
+    title: any;
+    description: any;
+    avatar: any;
+    default: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('card', props);
     return () => {

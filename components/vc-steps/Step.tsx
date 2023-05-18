@@ -45,7 +45,6 @@ export default defineComponent({
   name: 'Step',
   inheritAttrs: false,
   props: VcStepProps(),
-  slots: ['title', 'subTitle', 'description', 'tailContent', 'stepIcon', 'progressDot'],
   setup(props, { slots, emit, attrs }) {
     const onItemClick: EventHandler = e => {
       emit('click', e);

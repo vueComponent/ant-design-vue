@@ -6,8 +6,11 @@ import warning from '../_util/warning';
 import Option from './Option';
 import OptGroup from './OptGroup';
 import omit from '../_util/omit';
+
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { InputStatus } from '../_util/statusUtils';
+
+import type { CustomSlotsType } from '../_util/type';
 
 function isSelectOptionOrSelectOptGroup(child: any): boolean {
   return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
@@ -46,7 +49,12 @@ const AutoComplete = defineComponent({
   inheritAttrs: false,
   props: autoCompleteProps(),
   // emits: ['change', 'select', 'focus', 'blur'],
-  slots: ['option'],
+  slots: Object as CustomSlotsType<{
+    options: any;
+    default: any;
+    notFoundContent: any;
+    dataSource: any;
+  }>,
   setup(props, { slots, attrs, expose }) {
     warning(
       !('dataSource' in slots),

@@ -56,7 +56,6 @@ export default defineComponent({
     direction: String,
     dropdownClassName: String,
   },
-  slots: ['notFoundContent', 'option'],
   setup(props, { slots }) {
     const getDropdownPrefix = () => {
       return `${props.prefixCls}-dropdown`;

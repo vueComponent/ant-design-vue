@@ -37,7 +37,7 @@ Customize Calendar header content.
                 :value="String(current.year())"
                 @change="
                   newYear => {
-                    onChange(current.year(newYear));
+                    onChange(current.year(+newYear));
                   }
                 "
               >

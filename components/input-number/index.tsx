@@ -24,6 +24,7 @@ import useStyle from './style';
 import { NoCompactStyle, useCompactItemContext } from '../space/Compact';
 import { useInjectDisabled } from '../config-provider/DisabledContext';
 
+import type { CustomSlotsType } from '../_util/type';
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
   ...baseProps,
@@ -49,7 +50,15 @@ const InputNumber = defineComponent({
   inheritAttrs: false,
   props: inputNumberProps(),
   // emits: ['focus', 'blur', 'change', 'input', 'update:value'],
-  slots: ['addonBefore', 'addonAfter', 'prefix'],
+  slots: Object as CustomSlotsType<{
+    addonBefore?: any;
+    addonAfter?: any;
+    prefix?: any;
+    default?: any;
+    upIcon?: any;
+    downIcon?: any;
+  }>,
+
   setup(props, { emit, expose, attrs, slots }) {
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();

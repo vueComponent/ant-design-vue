@@ -11,7 +11,7 @@ import { getSize, getSuccessPercent, validProgress } from './utils';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
-import type { VueNode } from '../_util/type';
+import type { VueNode, CustomSlotsType, VueNode } from '../_util/type';
 import useStyle from './style';
 
 export default defineComponent({
@@ -27,7 +27,10 @@ export default defineComponent({
     size: 'default',
     strokeLinecap: 'round',
   }),
-  slots: ['format'],
+  slots: Object as CustomSlotsType<{
+    default?: any;
+    format?: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('progress', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);

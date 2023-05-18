@@ -10,6 +10,7 @@ import serverError from './serverError';
 import unauthorized from './unauthorized';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
+import type { CustomSlotsType } from '../_util/type';
 
 import useStyle from './style';
 
@@ -65,7 +66,13 @@ const Result = defineComponent({
   name: 'AResult',
   inheritAttrs: false,
   props: resultProps(),
-  slots: ['title', 'subTitle', 'icon', 'extra'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    subTitle?: any;
+    icon?: any;
+    extra?: any;
+    default?: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('result', props);
 

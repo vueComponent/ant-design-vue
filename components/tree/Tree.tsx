@@ -19,6 +19,7 @@ import { booleanType, someType, arrayType, functionType, objectType } from '../_
 
 // CSSINJS
 import useStyle from './style';
+import type { CustomSlotsType } from '../_util/type';
 
 export interface AntdTreeNodeAttribute {
   eventKey: string;
@@ -150,17 +151,15 @@ export default defineComponent({
     showIcon: false,
     blockNode: false,
   }),
-  slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
-  // emits: [
-  //   'update:selectedKeys',
-  //   'update:checkedKeys',
-  //   'update:expandedKeys',
-  //   'expand',
-  //   'select',
-  //   'check',
-  //   'doubleclick',
-  //   'dblclick',
-  // ],
+
+  slots: Object as CustomSlotsType<{
+    icon?: any;
+    title?: any;
+    switcherIcon?: any;
+    titleRender?: any;
+    default?: any;
+    leafIcon?: any;
+  }>,
   setup(props, { attrs, expose, emit, slots }) {
     warning(
       !(props.treeData === undefined && slots.default),

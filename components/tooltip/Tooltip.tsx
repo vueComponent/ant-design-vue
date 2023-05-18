@@ -18,10 +18,12 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import getPlacements from '../_util/placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import raf from '../_util/raf';
+
 import { parseColor } from './util';
 export type { AdjustOverflow, PlacementsConfig } from '../_util/placements';
 import useStyle from './style';
 import { getTransitionName } from '../_util/transition';
+import type { CustomSlotsType } from '../_util/type';
 
 // https://github.com/react-component/tooltip
 // https://github.com/yiminghe/dom-align
@@ -79,7 +81,10 @@ export default defineComponent({
     arrowPointAtCenter: false,
     autoAdjustOverflow: true,
   }),
-  slots: ['title'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    default?: any;
+  }>,
   // emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
     if (process.env.NODE_ENV !== 'production') {

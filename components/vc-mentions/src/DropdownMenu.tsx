@@ -16,7 +16,6 @@ export default defineComponent({
       default: () => [],
     },
   },
-  slots: ['notFoundContent', 'option'],
   setup(props, { slots }) {
     const {
       activeIndex,

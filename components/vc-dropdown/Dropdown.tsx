@@ -33,7 +33,6 @@ export default defineComponent({
     mouseLeaveDelay: PropTypes.number.def(0.1),
   },
   emits: ['visibleChange', 'overlayClick'],
-  slots: ['overlay'],
   setup(props, { slots, emit, expose }) {
     const triggerVisible = ref(!!props.visible);
     watch(

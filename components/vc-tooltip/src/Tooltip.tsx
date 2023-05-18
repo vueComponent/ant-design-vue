@@ -37,7 +37,6 @@ export default defineComponent({
     onVisibleChange: Function,
     onPopupAlign: Function,
   },
-  slots: ['arrowContent', 'overlay'],
   setup(props, { slots, attrs, expose }) {
     const triggerDOM = ref();
 

@@ -1,4 +1,4 @@
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue';
@@ -41,7 +41,10 @@ const Avatar = defineComponent({
   name: 'AAvatar',
   inheritAttrs: false,
   props: avatarProps(),
-  slots: ['icon'],
+  slots: Object as CustomSlotsType<{
+    icon: AvatarProps;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const isImgExist = ref(true);
     const isMounted = ref(false);

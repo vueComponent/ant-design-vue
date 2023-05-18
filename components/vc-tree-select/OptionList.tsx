@@ -35,7 +35,6 @@ export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'OptionList',
   inheritAttrs: false,
-  slots: ['notFoundContent', 'menuItemSelectedIcon'],
   setup(_, { slots, expose }) {
     const baseProps = useBaseProps();
     const legacyContext = useInjectLegacySelectContext();

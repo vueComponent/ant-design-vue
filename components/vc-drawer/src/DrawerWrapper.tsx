@@ -24,7 +24,6 @@ const DrawerWrapper = defineComponent({
     autofocus: true,
   }),
   emits: ['handleClick', 'close'],
-  slots: ['handler'],
   setup(props, { emit, slots }) {
     const dom = ref<HTMLElement>(null);
 

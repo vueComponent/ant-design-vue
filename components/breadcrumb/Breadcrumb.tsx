@@ -5,7 +5,7 @@ import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import warning from '../_util/warning';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export interface Route {
@@ -55,7 +55,11 @@ export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ABreadcrumb',
   props: breadcrumbProps(),
-  slots: ['separator', 'itemRender'],
+  slots: Object as CustomSlotsType<{
+    separator: BreadcrumbProps;
+    itemRender: { route: Route; params: any; routes: Route[]; paths: string[] };
+    default: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('breadcrumb', props);
 

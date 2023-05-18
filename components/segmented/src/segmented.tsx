@@ -4,7 +4,7 @@ import classNames from '../../_util/classNames';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import { initDefaultProps } from '../../_util/props-util';
 import useStyle from '../style';
-import type { VueNode } from '../../_util/type';
+import type { CustomSlotsType, VueNode } from '../../_util/type';
 import { functionType, someType, arrayType, booleanType, stringType } from '../../_util/type';
 import type { ChangeEvent } from '../../_util/EventInterface';
 import MotionThumb from './MotionThumb';
@@ -115,7 +115,9 @@ export default defineComponent({
     options: [],
     motionName: 'thumb-motion',
   }),
-  slots: ['label'],
+  slots: Object as CustomSlotsType<{
+    label: SegmentedBaseOption;
+  }>,
   setup(props, { emit, slots, attrs }) {
     const { prefixCls, direction, size } = useConfigInject('segmented', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);

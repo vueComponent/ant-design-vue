@@ -11,7 +11,7 @@ import { getSize, getSuccessPercent, validProgress } from './utils';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
-import type { VueNode, CustomSlotsType, VueNode } from '../_util/type';
+import type { VueNode, CustomSlotsType } from '../_util/type';
 import useStyle from './style';
 
 export default defineComponent({

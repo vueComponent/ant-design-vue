@@ -46,7 +46,7 @@ const AutoComplete = defineComponent({
   props: autoCompleteProps(),
   // emits: ['change', 'select', 'focus', 'blur'],
   slots: Object as CustomSlotsType<{
-    option: any;
+    options: any;
     default: any;
     notFoundContent: any;
     dataSource: any;

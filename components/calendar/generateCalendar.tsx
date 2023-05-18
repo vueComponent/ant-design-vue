@@ -12,7 +12,7 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import CalendarHeader from './Header';
 import type { CustomSlotsType, VueNode } from '../_util/type';
-import type { App } from 'vue';
+import type { App, PropType } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
@@ -86,28 +86,41 @@ function generateCalendar<
     );
   }
 
-  const Calendar = defineComponent<Props>({
+  const Calendar = defineComponent({
     name: 'ACalendar',
     inheritAttrs: false,
-    props: [
-      'prefixCls',
-      'locale',
-      'validRange',
-      'disabledDate',
-      'dateFullCellRender',
-      'dateCellRender',
-      'monthFullCellRender',
-      'monthCellRender',
-      'headerRender',
-      'value',
-      'defaultValue',
-      'mode',
-      'fullscreen',
-      'onChange',
-      'onPanelChange',
-      'onSelect',
-      'valueFormat',
-    ] as any,
+    props: {
+      prefixCls: String,
+      locale: { type: Object as PropType<Props['locale']>, default: undefined as Props['locale'] },
+      validRange: { type: Array as PropType<DateType[]>, default: undefined },
+      disabledDate: { type: Function as PropType<Props['disabledDate']>, default: undefined },
+      dateFullCellRender: {
+        type: Function as PropType<Props['dateFullCellRender']>,
+        default: undefined,
+      },
+      dateCellRender: { type: Function as PropType<Props['dateCellRender']>, default: undefined },
+      monthFullCellRender: {
+        type: Function as PropType<Props['monthFullCellRender']>,
+        default: undefined,
+      },
+      monthCellRender: { type: Function as PropType<Props['monthCellRender']>, default: undefined },
+      headerRender: { type: Function as PropType<Props['headerRender']>, default: undefined },
+      value: {
+        type: [Object, String] as PropType<Props['value']>,
+        default: undefined as Props['value'],
+      },
+      defaultValue: {
+        type: [Object, String] as PropType<Props['defaultValue']>,
+        default: undefined as Props['defaultValue'],
+      },
+      mode: { type: String as PropType<Props['mode']>, default: undefined },
+      fullscreen: { type: Boolean as PropType<Props['fullscreen']>, default: undefined },
+      onChange: { type: Function as PropType<Props['onChange']>, default: undefined },
+      'onUpdate:value': { type: Function as PropType<Props['onUpdate:value']>, default: undefined },
+      onPanelChange: { type: Function as PropType<Props['onPanelChange']>, default: undefined },
+      onSelect: { type: Function as PropType<Props['onSelect']>, default: undefined },
+      valueFormat: { type: String, default: undefined },
+    },
     slots: Object as CustomSlotsType<{
       dateFullCellRender?: { current: DateType };
       dateCellRender?: { current: DateType };
@@ -121,7 +134,8 @@ function generateCalendar<
       };
       default: any;
     }>,
-    setup(props, { emit, slots, attrs }) {
+    setup(p, { emit, slots, attrs }) {
+      const props = p as unknown as Props;
       const { prefixCls, direction } = useConfigInject('picker', props);
       const calendarPrefixCls = computed(() => `${prefixCls.value}-calendar`);
       const maybeToString = (date: DateType) => {

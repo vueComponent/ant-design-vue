@@ -76,6 +76,7 @@ const Popconfirm = defineComponent({
     content?: any;
     okText?: any;
     icon?: any;
+    cancel?: any;
     cancelText?: any;
     cancelButton?: any;
     okButton?: any;

@@ -85,7 +85,7 @@ function createTimePicker<
   });
 
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
-  const TimePicker = defineComponent<DTimePickerProps>({
+  const TimePicker = defineComponent({
     name: 'ATimePicker',
     inheritAttrs: false,
     props: {
@@ -93,7 +93,7 @@ function createTimePicker<
       ...datePickerProps<DateType>(),
       ...timePickerProps(),
       addon: { type: Function },
-    } as any,
+    },
     slots: Object as CustomSlotsType<{
       addon?: any;
       renderExtraFooter?: any;
@@ -101,7 +101,8 @@ function createTimePicker<
       clearIcon?: any;
       default: any;
     }>,
-    setup(props, { slots, expose, emit, attrs }) {
+    setup(p, { slots, expose, emit, attrs }) {
+      const props = p as unknown as DTimePickerProps;
       const formItemContext = useInjectFormItemContext();
       devWarning(
         !(slots.addon || props.addon),
@@ -162,7 +163,7 @@ function createTimePicker<
     },
   });
 
-  const TimeRangePicker = defineComponent<DTimeRangePickerProps>({
+  const TimeRangePicker = defineComponent({
     name: 'ATimeRangePicker',
     inheritAttrs: false,
     props: {
@@ -170,14 +171,15 @@ function createTimePicker<
       ...rangePickerProps<DateType>(),
       ...timePickerProps(),
       order: { type: Boolean, default: true },
-    } as any,
+    },
     slots: Object as CustomSlotsType<{
       renderExtraFooter?: any;
       suffixIcon?: any;
       clearIcon?: any;
       default: any;
     }>,
-    setup(props, { slots, expose, emit, attrs }) {
+    setup(p, { slots, expose, emit, attrs }) {
+      const props = p as unknown as DTimeRangePickerProps;
       const pickerRef = ref();
       const formItemContext = useInjectFormItemContext();
       expose({

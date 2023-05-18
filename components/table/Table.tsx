@@ -224,38 +224,27 @@ export const tableProps = () => {
       type: [Boolean, Object] as PropType<boolean | TooltipProps>,
       default: true,
     },
-    contextSlots: {
-      type: Object as PropType<ContextSlots>,
-    },
+
     transformCellText: {
       type: Function as PropType<TableProps['transformCellText']>,
     },
   };
 };
 
-const InteralTable = defineComponent<
-  TableProps & {
-    contextSlots: ContextSlots;
-  }
->({
+const InteralTable = defineComponent({
   name: 'InteralTable',
   inheritAttrs: false,
-  props: initDefaultProps(tableProps(), {
-    rowKey: 'key',
-  }) as any,
-  slots: Object as CustomSlotsType<{
-    emptyText?: any;
-    expandIcon?: RenderExpandIconProps<any>;
-    title?: any;
-    footer?: any;
-    summary?: any;
-    expandedRowRender?: any;
-    bodyCell?: any;
-    headerCell?: any;
-    customFilterIcon?: any;
-    customFilterDropdown?: any;
-    default: any;
-  }>,
+  props: initDefaultProps(
+    {
+      ...tableProps(),
+      contextSlots: {
+        type: Object as PropType<ContextSlots>,
+      },
+    },
+    {
+      rowKey: 'key',
+    },
+  ),
   setup(props, { attrs, slots, expose, emit }) {
     devWarning(
       !(typeof props.rowKey === 'function' && props.rowKey.length > 1),
@@ -684,9 +673,34 @@ const InteralTable = defineComponent<
   },
 });
 
-const Table = defineComponent<TableProps>({
+const Table = defineComponent({
   name: 'ATable',
   inheritAttrs: false,
+  props: initDefaultProps(tableProps(), {
+    rowKey: 'key',
+  }),
+  slots: Object as CustomSlotsType<{
+    emptyText?: any;
+    expandIcon?: RenderExpandIconProps<any>;
+    title?: any;
+    footer?: any;
+    summary?: any;
+    expandedRowRender?: any;
+    bodyCell?: {
+      text: any;
+      value: any;
+      record: Record<string, any>;
+      index: number;
+      column: ColumnType;
+    };
+    headerCell?: {
+      title: any;
+      column: ColumnType;
+    };
+    customFilterIcon?: any;
+    customFilterDropdown?: any;
+    default: any;
+  }>,
   setup(_props, { attrs, slots, expose }) {
     const table = ref();
     expose({

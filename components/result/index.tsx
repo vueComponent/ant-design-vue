@@ -68,7 +68,7 @@ const Result = defineComponent({
     subTitle?: any;
     icon?: any;
     extra?: any;
-    dfault?: any;
+    default?: any;
   }>,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('result', props);

@@ -23,5 +23,5 @@
     "importsNotUsedAsValues": "preserve",
     "stripInternal": true
   },
-  "exclude": ["node_modules", "lib", "es", "dist", "scripts", "**/__tests__/**/*"]
+  "exclude": ["node_modules", "lib", "es", "dist", "scripts", "**/__tests__/**/*", "site/dist"]
 }

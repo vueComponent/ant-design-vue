@@ -19,8 +19,6 @@ declare module 'vue' {
 
     AAvatarGroup: typeof import('ant-design-vue')['AvatarGroup'];
 
-    ABackTop: typeof import('ant-design-vue')['BackTop'];
-
     ABadge: typeof import('ant-design-vue')['Badge'];
 
     ABadgeRibbon: typeof import('ant-design-vue')['BadgeRibbon'];
@@ -258,6 +256,14 @@ declare module 'vue' {
     AQRCode: typeof import('ant-design-vue')['QRCode'];
 
     ATour: typeof import('ant-design-vue')['Tour'];
+
+    AFloatButton: typeof import('ant-design-vue')['FloatButton'];
+
+    AFloatButtonGroup: typeof import('ant-design-vue')['FloatButtonGroup'];
+
+    ABackTop: typeof import('ant-design-vue')['BackTop'];
+
+    AWatermark: typeof import('ant-design-vue')['Watermark'];
   }
 }
 export {};

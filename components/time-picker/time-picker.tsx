@@ -77,15 +77,15 @@ function createTimePicker<
   });
 
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
-  const TimePicker = defineComponent({
+  const TimePicker = defineComponent<DTimePickerProps>({
     name: 'ATimePicker',
     inheritAttrs: false,
     props: {
-      ...commonProps<DateType>(),
-      ...datePickerProps<DateType>(),
+      ...commonProps<any>(),
+      ...datePickerProps<any>(),
       ...timePickerProps(),
       addon: { type: Function },
-    },
+    } as any,
     slots: Object as CustomSlotsType<{
       addon?: any;
       renderExtraFooter?: any;
@@ -155,15 +155,15 @@ function createTimePicker<
     },
   });
 
-  const TimeRangePicker = defineComponent({
+  const TimeRangePicker = defineComponent<DTimeRangePickerProps>({
     name: 'ATimeRangePicker',
     inheritAttrs: false,
     props: {
-      ...commonProps<DateType>(),
-      ...rangePickerProps<DateType>(),
+      ...commonProps<any>(),
+      ...rangePickerProps<any>(),
       ...timePickerProps(),
       order: { type: Boolean, default: true },
-    },
+    } as any,
     slots: Object as CustomSlotsType<{
       renderExtraFooter?: any;
       suffixIcon?: any;

@@ -88,7 +88,7 @@ function generateCalendar<
     );
   }
 
-  const Calendar = defineComponent({
+  const Calendar = defineComponent<Props>({
     name: 'ACalendar',
     inheritAttrs: false,
     props: {
@@ -122,7 +122,7 @@ function generateCalendar<
       onPanelChange: { type: Function as PropType<Props['onPanelChange']>, default: undefined },
       onSelect: { type: Function as PropType<Props['onSelect']>, default: undefined },
       valueFormat: { type: String, default: undefined },
-    },
+    } as any,
     slots: Object as CustomSlotsType<{
       dateFullCellRender?: { current: DateType };
       dateCellRender?: { current: DateType };

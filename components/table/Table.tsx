@@ -701,18 +701,18 @@ const Table = defineComponent({
     customFilterDropdown?: any;
     default: any;
   }>,
-  setup(_props, { attrs, slots, expose }) {
+  setup(props, { attrs, slots, expose }) {
     const table = ref();
     expose({
       table,
     });
     return () => {
-      const props = attrs as TableProps;
       const columns = props.columns || convertChildrenToColumns(slots.default?.());
       return (
         <InteralTable
           ref={table}
           {...attrs}
+          {...props}
           columns={columns || []}
           expandedRowRender={slots.expandedRowRender}
           contextSlots={{ ...slots }} // use new object, 否则slot热更新失效，原因需进一步探究

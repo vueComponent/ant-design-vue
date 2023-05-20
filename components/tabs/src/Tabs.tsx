@@ -10,9 +10,14 @@ import type {
   OnTabScroll,
   Tab,
 } from './interface';
+import { defineComponent, computed, onMounted, watchEffect } from 'vue';
 import type { CSSProperties, ExtractPropTypes } from 'vue';
-import { defineComponent, computed, onMounted, watchEffect, camelize } from 'vue';
-import { flattenChildren, initDefaultProps, isValidElement } from '../../_util/props-util';
+import {
+  camelize,
+  flattenChildren,
+  initDefaultProps,
+  isValidElement,
+} from '../../_util/props-util';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import useState from '../../_util/hooks/useState';
 import isMobile from '../../vc-util/isMobile';

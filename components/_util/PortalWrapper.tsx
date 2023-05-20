@@ -166,16 +166,6 @@ export default defineComponent({
       removeCurrentContainer();
       raf.cancel(rafId.value);
     });
-    watch(
-      [() => props.visible, () => props.forceRender],
-      () => {
-        const { forceRender, visible } = props;
-        if (visible === false && !forceRender) {
-          removeCurrentContainer();
-        }
-      },
-      { flush: 'post' },
-    );
     return () => {
       const { forceRender, visible } = props;
       let portal = null;
@@ -183,7 +173,6 @@ export default defineComponent({
         getOpenCount: () => openCount,
         getContainer,
       };
-      if (visible === false && !forceRender) return null;
       if (forceRender || visible || componentRef.value) {
         portal = (
           <Portal

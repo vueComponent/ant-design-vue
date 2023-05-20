@@ -195,7 +195,7 @@ const Tour = defineComponent({
         });
         return style;
       });
-      return (
+      return mergedOpen.value ? (
         <>
           <Mask
             zIndex={zIndex}
@@ -250,7 +250,7 @@ const Tour = defineComponent({
             </Portal>
           </Trigger>
         </>
-      );
+      ) : null;
     };
   },
 });

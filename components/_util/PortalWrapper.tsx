@@ -30,7 +30,7 @@ const getParent = (getContainer: GetContainer) => {
   }
   if (getContainer) {
     if (typeof getContainer === 'string') {
-      return document.querySelectorAll(getContainer)[0];
+      return document.querySelectorAll(getContainer)[0] as HTMLElement;
     }
     if (typeof getContainer === 'function') {
       return getContainer();
@@ -68,9 +68,10 @@ export default defineComponent({
       container.value?.parentNode?.removeChild(container.value);
       container.value = null;
     };
+    let parent: HTMLElement = null;
     const attachToParent = (force = false) => {
       if (force || (container.value && !container.value.parentNode)) {
-        const parent = getParent(props.getContainer);
+        parent = getParent(props.getContainer);
         if (parent) {
           parent.appendChild(container.value);
           return true;
@@ -123,11 +124,14 @@ export default defineComponent({
         [() => props.visible, () => props.getContainer],
         ([visible, getContainer], [prevVisible, prevGetContainer]) => {
           // Update count
-          if (supportDom && getParent(props.getContainer) === document.body) {
-            if (visible && !prevVisible) {
-              openCount += 1;
-            } else if (init) {
-              openCount -= 1;
+          if (supportDom) {
+            parent = getParent(props.getContainer);
+            if (parent === document.body) {
+              if (visible && !prevVisible) {
+                openCount += 1;
+              } else if (init) {
+                openCount -= 1;
+              }
             }
           }
 
@@ -158,8 +162,8 @@ export default defineComponent({
     });
 
     onBeforeUnmount(() => {
-      const { visible, getContainer } = props;
-      if (supportDom && getParent(getContainer) === document.body) {
+      const { visible } = props;
+      if (supportDom && parent === document.body) {
         // 离开时不会 render， 导到离开时数值不变，改用 func 。。
         openCount = visible && openCount ? openCount - 1 : openCount;
       }

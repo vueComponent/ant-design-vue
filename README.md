@@ -85,3 +85,5 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 ## [More Sponsor (From Patreon、alipay、wechat、paypal...)](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/104172832)
+
+This project is tested with BrowserStack.

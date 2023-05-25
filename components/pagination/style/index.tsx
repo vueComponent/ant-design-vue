@@ -57,7 +57,16 @@ const genPaginationDisabledStyle: GenerateStyle<PaginationToken, CSSObject> = to
 
     [`&${componentCls}-disabled`]: {
       cursor: 'not-allowed',
-
+      [`&${componentCls}-mini`]: {
+        [`
+          &:hover ${componentCls}-item:not(${componentCls}-item-active),
+          &:active ${componentCls}-item:not(${componentCls}-item-active),
+          &:hover ${componentCls}-item-link,
+          &:active ${componentCls}-item-link
+        `]: {
+          backgroundColor: 'transparent',
+        },
+      },
       [`${componentCls}-item`]: {
         cursor: 'not-allowed',
 
@@ -89,26 +98,38 @@ const genPaginationDisabledStyle: GenerateStyle<PaginationToken, CSSObject> = to
       [`${componentCls}-item-link`]: {
         color: token.colorTextDisabled,
         cursor: 'not-allowed',
-
         '&:hover, &:active': {
           backgroundColor: 'transparent',
         },
-
         [`${componentCls}-simple&`]: {
           backgroundColor: 'transparent',
+          '&:hover, &:active': {
+            backgroundColor: 'transparent',
+          },
         },
-      },
-
-      [`${componentCls}-item-link-icon`]: {
-        opacity: 0,
-      },
-
-      [`${componentCls}-item-ellipsis`]: {
-        opacity: 1,
       },
 
       [`${componentCls}-simple-pager`]: {
         color: token.colorTextDisabled,
+      },
+
+      [`${componentCls}-jump-prev, ${componentCls}-jump-next`]: {
+        [`${componentCls}-item-link-icon`]: {
+          opacity: 0,
+        },
+
+        [`${componentCls}-item-ellipsis`]: {
+          opacity: 1,
+        },
+      },
+    },
+    [`&${componentCls}-simple`]: {
+      [`${componentCls}-prev, ${componentCls}-next`]: {
+        [`&${componentCls}-disabled ${componentCls}-item-link`]: {
+          '&:hover, &:active': {
+            backgroundColor: 'transparent',
+          },
+        },
       },
     },
   };
@@ -134,6 +155,12 @@ const genPaginationMiniStyle: GenerateStyle<PaginationToken, CSSObject> = token 
     [`&${componentCls}-mini ${componentCls}-item:not(${componentCls}-item-active)`]: {
       backgroundColor: 'transparent',
       borderColor: 'transparent',
+      '&:hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+      '&:active': {
+        backgroundColor: token.colorBgTextActive,
+      },
     },
 
     [`&${componentCls}-mini ${componentCls}-prev, &${componentCls}-mini ${componentCls}-next`]: {
@@ -141,6 +168,15 @@ const genPaginationMiniStyle: GenerateStyle<PaginationToken, CSSObject> = token 
       height: token.paginationItemSizeSM,
       margin: 0,
       lineHeight: `${token.paginationItemSizeSM}px`,
+      [`&:hover ${componentCls}-item-link`]: {
+        backgroundColor: token.colorBgTextHover,
+      },
+      [`&:active ${componentCls}-item-link`]: {
+        backgroundColor: token.colorBgTextActive,
+      },
+      [`&${componentCls}-disabled:hover ${componentCls}-item-link`]: {
+        backgroundColor: 'transparent',
+      },
     },
 
     [`
@@ -200,7 +236,12 @@ const genPaginationSimpleStyle: GenerateStyle<PaginationToken, CSSObject> = toke
         height: token.paginationItemSizeSM,
         backgroundColor: 'transparent',
         border: 0,
-
+        '&:hover': {
+          backgroundColor: token.colorBgTextHover,
+        },
+        '&:active': {
+          backgroundColor: token.colorBgTextActive,
+        },
         '&::after': {
           height: token.paginationItemSizeSM,
           lineHeight: `${token.paginationItemSizeSM}px`,

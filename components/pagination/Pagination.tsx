@@ -82,7 +82,7 @@ export default defineComponent({
   props: paginationProps(),
   // emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup(props, { slots, attrs }) {
-    const { prefixCls, configProvider, direction } = useConfigInject('pagination', props);
+    const { prefixCls, configProvider, direction, size } = useConfigInject('pagination', props);
 
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
@@ -94,50 +94,45 @@ export default defineComponent({
     const [locale] = useLocaleReceiver('Pagination', enUS, toRef(props, 'locale'));
     const getIconsProps = (pre: string) => {
       const ellipsis = <span class={`${pre}-item-ellipsis`}>•••</span>;
-      let prevIcon = (
+      const prevIcon = (
         <button class={`${pre}-item-link`} type="button" tabindex={-1}>
-          <LeftOutlined />
+          {direction.value === 'rtl' ? <RightOutlined /> : <LeftOutlined />}
         </button>
       );
-      let nextIcon = (
+      const nextIcon = (
         <button class={`${pre}-item-link`} type="button" tabindex={-1}>
-          <RightOutlined />
+          {direction.value === 'rtl' ? <LeftOutlined /> : <RightOutlined />}
         </button>
       );
-      let jumpPrevIcon = (
+      const jumpPrevIcon = (
         <a rel="nofollow" class={`${pre}-item-link`}>
-          {/* You can use transition effects in the container :) */}
           <div class={`${pre}-item-container`}>
-            <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            {direction.value === 'rtl' ? (
+              <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            ) : (
+              <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            )}
             {ellipsis}
           </div>
         </a>
       );
-      let jumpNextIcon = (
+      const jumpNextIcon = (
         <a rel="nofollow" class={`${pre}-item-link`}>
-          {/* You can use transition effects in the container :) */}
           <div class={`${pre}-item-container`}>
-            <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            {direction.value === 'rtl' ? (
+              <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            ) : (
+              <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            )}
             {ellipsis}
           </div>
         </a>
       );
-      // change arrows direction in right-to-left direction
-      if (direction.value === 'rtl') {
-        [prevIcon, nextIcon] = [nextIcon, prevIcon];
-        [jumpPrevIcon, jumpNextIcon] = [jumpNextIcon, jumpPrevIcon];
-      }
-      return {
-        prevIcon,
-        nextIcon,
-        jumpPrevIcon,
-        jumpNextIcon,
-      };
+      return { prevIcon, nextIcon, jumpPrevIcon, jumpNextIcon };
     };
 
     return () => {
       const {
-        size,
         itemRender = slots.itemRender,
         buildOptionText = slots.buildOptionText,
         selectComponentClass,
@@ -145,7 +140,8 @@ export default defineComponent({
         ...restProps
       } = props;
 
-      const isSmall = size === 'small' || !!(breakpoint.value?.xs && !size && responsive);
+      const isSmall =
+        size.value === 'small' || !!(breakpoint.value?.xs && !size.value && responsive);
       const paginationProps = {
         ...restProps,
         ...getIconsProps(prefixCls.value),
@@ -156,7 +152,10 @@ export default defineComponent({
         buildOptionText,
         ...attrs,
         class: classNames(
-          { mini: isSmall, [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
+          {
+            [`${prefixCls.value}-mini`]: isSmall,
+            [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          },
           attrs.class,
           hashId.value,
         ),

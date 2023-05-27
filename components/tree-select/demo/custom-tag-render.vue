@@ -28,15 +28,16 @@ Allows for custom rendering of tags.
     :show-checked-strategy="SHOW_ALL"
     tree-default-expand-all
     :tree-data="treeData"
+    tree-node-filter-prop="label"
   >
     <template #tagRender="{ label, closable, onClose, option }">
       <a-tag :closable="closable" :color="option.color" style="margin-right: 3px" @close="onClose">
         {{ label }}&nbsp;&nbsp;
       </a-tag>
     </template>
-    <template #title="{ value: val, title }">
+    <template #title="{ value: val, label }">
       <b v-if="val === 'parent 1-1'" style="color: #08c">{{ val }}</b>
-      <template v-else>{{ title }}</template>
+      <template v-else>{{ label }}</template>
     </template>
   </a-tree-select>
 </template>
@@ -50,29 +51,29 @@ export default defineComponent({
     const value = ref<string[]>(['parent 1', 'parent 1-0', 'leaf1']);
     const treeData = ref<TreeSelectProps['treeData']>([
       {
-        title: 'parent 1',
+        label: 'parent 1',
         value: 'parent 1',
         color: 'pink',
         children: [
           {
-            title: 'parent 1-0',
+            label: 'parent 1-0',
             value: 'parent 1-0',
             color: 'orange',
             children: [
               {
-                title: 'my leaf',
+                label: 'my leaf',
                 value: 'leaf1',
                 color: 'green',
               },
               {
-                title: 'your leaf',
+                label: 'your leaf',
                 value: 'leaf2',
                 color: 'cyan',
               },
             ],
           },
           {
-            title: 'parent 1-1',
+            label: 'parent 1-1',
             value: 'parent 1-1',
             color: 'blue',
           },

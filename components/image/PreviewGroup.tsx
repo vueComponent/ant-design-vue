@@ -1,4 +1,4 @@
-import PreviewGroup from '../vc-image/src/PreviewGroup';
+import PreviewGroup, { imageGroupProps } from '../vc-image/src/PreviewGroup';
 import { computed, defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -24,7 +24,7 @@ const InternalPreviewGroup = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AImagePreviewGroup',
   inheritAttrs: false,
-  props: { previewPrefixCls: String },
+  props: imageGroupProps(),
   setup(props, { attrs, slots }) {
     const { getPrefixCls } = useConfigInject('image', props);
     const prefixCls = computed(() => getPrefixCls('image-preview', props.previewPrefixCls));

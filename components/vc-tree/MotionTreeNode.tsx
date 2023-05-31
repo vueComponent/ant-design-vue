@@ -29,7 +29,6 @@ export default defineComponent({
     motionType: String,
     // treeNodeRequiredProps: { type: Object as PropType<TreeNodeRequiredProps> },
   },
-  slots: ['title', 'icon', 'switcherIcon', 'checkable'],
   setup(props, { attrs, slots }) {
     const visible = ref(true);
     const context = useInjectTreeContext();

@@ -13,6 +13,7 @@ import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
+import type { CustomSlotsType } from '../_util/type';
 
 export interface TimePickerLocale {
   placeholder?: string;
@@ -88,13 +89,20 @@ function createTimePicker<
     name: 'ATimePicker',
     inheritAttrs: false,
     props: {
-      ...commonProps<DateType>(),
-      ...datePickerProps<DateType>(),
+      ...commonProps<any>(),
+      ...datePickerProps<any>(),
       ...timePickerProps(),
       addon: { type: Function },
     } as any,
-    slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    setup(props, { slots, expose, emit, attrs }) {
+    slots: Object as CustomSlotsType<{
+      addon?: any;
+      renderExtraFooter?: any;
+      suffixIcon?: any;
+      clearIcon?: any;
+      default: any;
+    }>,
+    setup(p, { slots, expose, emit, attrs }) {
+      const props = p as unknown as DTimePickerProps;
       const formItemContext = useInjectFormItemContext();
       devWarning(
         !(slots.addon || props.addon),
@@ -159,13 +167,19 @@ function createTimePicker<
     name: 'ATimeRangePicker',
     inheritAttrs: false,
     props: {
-      ...commonProps<DateType>(),
-      ...rangePickerProps<DateType>(),
+      ...commonProps<any>(),
+      ...rangePickerProps<any>(),
       ...timePickerProps(),
       order: { type: Boolean, default: true },
     } as any,
-    slot: ['renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    setup(props, { slots, expose, emit, attrs }) {
+    slots: Object as CustomSlotsType<{
+      renderExtraFooter?: any;
+      suffixIcon?: any;
+      clearIcon?: any;
+      default: any;
+    }>,
+    setup(p, { slots, expose, emit, attrs }) {
+      const props = p as unknown as DTimeRangePickerProps;
       const pickerRef = ref();
       const formItemContext = useInjectFormItemContext();
       expose({

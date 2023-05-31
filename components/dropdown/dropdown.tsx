@@ -11,6 +11,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import omit from '../_util/omit';
 import getPlacements from '../tooltip/placements';
+import type { CustomSlotsType } from '../_util/type';
 
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
@@ -25,7 +26,10 @@ const Dropdown = defineComponent({
     trigger: 'hover',
   }),
   // emits: ['visibleChange', 'update:visible'],
-  slots: ['overlay'],
+  slots: Object as CustomSlotsType<{
+    default?: any;
+    overlay?: any;
+  }>,
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer } = useConfigInject(
       'dropdown',

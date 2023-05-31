@@ -10,6 +10,7 @@ import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFill
 import Button from '../button';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
+import type { CustomSlotsType } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useMergedState from '../_util/hooks/useMergedState';
 import devWarning from '../vc-util/devWarning';
@@ -70,7 +71,17 @@ const Popconfirm = defineComponent({
     okType: 'primary',
     disabled: false,
   }),
-  slots: ['title', 'content', 'okText', 'icon', 'cancelText', 'cancelButton', 'okButton'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    content?: any;
+    okText?: any;
+    icon?: any;
+    cancel?: any;
+    cancelText?: any;
+    cancelButton?: any;
+    okButton?: any;
+    default?: any;
+  }>,
   emits: ['update:visible', 'visibleChange'],
   setup(props: PopconfirmProps, { slots, emit, expose }) {
     onMounted(() => {

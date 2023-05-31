@@ -2,6 +2,7 @@ import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import PropTypes from '../_util/vue-types';
+import type { CustomSlotsType } from '../_util/type';
 
 export const listItemMetaProps = () => ({
   avatar: PropTypes.any,
@@ -18,7 +19,12 @@ export default defineComponent({
   props: listItemMetaProps(),
   displayName: 'AListItemMeta', // 兼容历史函数式组件
   __ANT_LIST_ITEM_META: true,
-  slots: ['avatar', 'description', 'title'],
+  slots: Object as CustomSlotsType<{
+    avatar: any;
+    description: any;
+    title: any;
+    default: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('list', props);
     return () => {

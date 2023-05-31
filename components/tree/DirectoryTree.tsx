@@ -18,6 +18,7 @@ import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { filterEmpty } from '../_util/props-util';
+import type { CustomSlotsType } from '../_util/type';
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 
@@ -44,7 +45,14 @@ export default defineComponent({
     showIcon: true,
     expandAction: 'click',
   }),
-  slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
+  slots: Object as CustomSlotsType<{
+    icon?: any;
+    title?: any;
+    switcherIcon?: any;
+    titleRender?: any;
+    default?: any;
+  }>,
+
   // emits: [
   //   'update:selectedKeys',
   //   'update:checkedKeys',

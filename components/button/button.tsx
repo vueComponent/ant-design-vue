@@ -18,6 +18,7 @@ import LoadingIcon from './LoadingIcon';
 
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
+import type { CustomSlotsType } from '../_util/type';
 
 type Loading = boolean | number;
 
@@ -34,7 +35,10 @@ export default defineComponent({
   inheritAttrs: false,
   __ANT_BUTTON: true,
   props: initDefaultProps(buttonProps(), { type: 'default' }),
-  slots: ['icon'],
+  slots: Object as CustomSlotsType<{
+    icon: any;
+    default: any;
+  }>,
   // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);

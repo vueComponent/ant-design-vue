@@ -10,6 +10,7 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import { optionProps, optionOptions } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
+import type { CustomSlotsType } from '../_util/type';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -92,7 +93,11 @@ const Mentions = defineComponent({
   name: 'AMentions',
   inheritAttrs: false,
   props: mentionsProps(),
-  slots: ['notFoundContent', 'option'],
+  slots: Object as CustomSlotsType<{
+    notFoundContent?: any;
+    option?: any;
+    default?: any;
+  }>,
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
     const focused = ref(false);

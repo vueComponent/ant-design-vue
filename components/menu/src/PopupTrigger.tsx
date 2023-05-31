@@ -7,6 +7,7 @@ import { placements, placementsRtl } from './placements';
 import raf from '../../_util/raf';
 import classNames from '../../_util/classNames';
 import { getTransitionProps } from '../../_util/transition';
+import type { CustomSlotsType } from '../../_util/type';
 
 const popupPlacementMap = {
   horizontal: 'bottomLeft',
@@ -28,7 +29,10 @@ export default defineComponent({
     disabled: Boolean,
     onVisibleChange: Function as PropType<(visible: boolean) => void>,
   },
-  slots: ['popup'],
+  slots: Object as CustomSlotsType<{
+    default?: any;
+    popup?: any;
+  }>,
   emits: ['visibleChange'],
   setup(props, { slots, emit }) {
     const innerVisible = ref(false);

@@ -7,6 +7,7 @@ import Transition from '../_util/transition';
 import classNames from '../_util/classNames';
 import devWarning from '../vc-util/devWarning';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { CustomSlotsType } from '../_util/type';
 
 export { collapsePanelProps };
 export type CollapsePanelProps = Partial<ExtractPropTypes<ReturnType<typeof collapsePanelProps>>>;
@@ -21,7 +22,13 @@ export default defineComponent({
     headerClass: '',
     forceRender: false,
   }),
-  slots: ['expandIcon', 'extra', 'header'],
+  slots: Object as CustomSlotsType<{
+    expandIcon?: any;
+    extra?: any;
+    header?: any;
+    default?: any;
+  }>,
+
   // emits: ['itemClick'],
   setup(props, { slots, emit, attrs }) {
     devWarning(

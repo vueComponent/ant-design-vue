@@ -9,7 +9,7 @@ import { useProvideForm, useInjectForm, useProvideFormItemPrefix } from './conte
 import ErrorList from './ErrorList';
 import classNames from '../_util/classNames';
 import type { ValidateStatus } from './FormItem';
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 import type { HTMLAttributes } from 'vue';
 import { computed, defineComponent } from 'vue';
 
@@ -35,7 +35,12 @@ const iconMap: { [key: string]: any } = {
 };
 const FormItemInput = defineComponent({
   compatConfig: { MODE: 3 },
-  slots: ['help', 'extra', 'errors'],
+  slots: Object as CustomSlotsType<{
+    help: any;
+    errors: any;
+    extra: any;
+    default: any;
+  }>,
   inheritAttrs: false,
   props: [
     'prefixCls',

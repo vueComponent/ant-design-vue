@@ -5,6 +5,7 @@ import PropTypes from '../_util/vue-types';
 import KeyCode from '../_util/KeyCode';
 import Wave from '../_util/wave';
 import warning from '../_util/warning';
+import type { CustomSlotsType } from '../_util/type';
 import { tuple, withInstall } from '../_util/type';
 import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -60,7 +61,11 @@ const Switch = defineComponent({
   __ANT_SWITCH: true,
   inheritAttrs: false,
   props: switchProps(),
-  slots: ['checkedChildren', 'unCheckedChildren'],
+  slots: Object as CustomSlotsType<{
+    checkedChildren: any;
+    unCheckedChildren: any;
+    default: any;
+  }>,
   // emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown', 'blur'],
   setup(props, { attrs, slots, expose, emit }) {
     const formItemContext = useInjectFormItemContext();

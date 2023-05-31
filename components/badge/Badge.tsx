@@ -11,6 +11,7 @@ import { isPresetColor } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
 import type { PresetStatusColorType } from '../_util/colors';
+import type { CustomSlotsType } from '../_util/type';
 
 export const badgeProps = () => ({
   /** Number to show in badge */
@@ -39,7 +40,11 @@ export default defineComponent({
   Ribbon,
   inheritAttrs: false,
   props: badgeProps(),
-  slots: ['text', 'count'],
+  slots: Object as CustomSlotsType<{
+    text: any;
+    count: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('badge', props);
 

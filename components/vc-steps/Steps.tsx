@@ -41,7 +41,6 @@ export default defineComponent({
     }).loose,
     stepIcon: Function,
   },
-  slots: ['stepIcon', 'progressDot'],
   emits: ['change'],
   setup(props, { slots, emit }) {
     const onStepClick = next => {

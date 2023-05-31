@@ -18,28 +18,27 @@ export const typographyProps = () => ({
   // Form Internal use
   component: String,
 });
-const Typography = defineComponent<InternalTypographyProps>({
+const Typography = defineComponent({
   name: 'ATypography',
   inheritAttrs: false,
-  props: typographyProps() as any,
+  props: typographyProps(),
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('typography', props);
     return () => {
       const {
         prefixCls: _prefixCls,
-        class: _className,
         direction: _direction,
         component: Component = 'article' as any,
         ...restProps
       } = { ...props, ...attrs };
       return (
         <Component
+          {...restProps}
           class={classNames(
             prefixCls.value,
             { [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
             attrs.class,
           )}
-          {...restProps}
         >
           {slots.default?.()}
         </Component>

@@ -16,6 +16,7 @@ import VcDrawer from '../vc-drawer';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { CustomSlotsType } from '../_util/type';
 import { tuple, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 import devWarning from '../vc-util/devWarning';
@@ -24,10 +25,10 @@ import type { KeyboardEventHandler, MouseEventHandler } from '../_util/EventInte
 type ILevelMove = number | [number, number];
 
 const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
-export type placementType = typeof PlacementTypes[number];
+export type placementType = (typeof PlacementTypes)[number];
 
 const SizeTypes = tuple('default', 'large');
-export type sizeType = typeof SizeTypes[number];
+export type sizeType = (typeof SizeTypes)[number];
 
 export interface PushState {
   distance: string | number;
@@ -102,7 +103,14 @@ const Drawer = defineComponent({
     keyboard: true,
     push: defaultPushState,
   }),
-  slots: ['closeIcon', 'title', 'extra', 'footer', 'handle'],
+  slots: Object as CustomSlotsType<{
+    closeIcon: any;
+    title: any;
+    extra: any;
+    footer: any;
+    handle: any;
+    default: any;
+  }>,
   // emits: ['update:visible', 'close', 'afterVisibleChange'],
   setup(props, { emit, slots, attrs }) {
     const sPush = ref(false);

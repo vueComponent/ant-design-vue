@@ -29,7 +29,6 @@ export default defineComponent({
   inheritAttrs: false,
   props: treeNodeProps,
   isTreeNode: 1,
-  slots: ['title', 'icon', 'switcherIcon'],
   setup(props, { attrs, slots, expose }) {
     warning(
       !('slots' in props.data),

@@ -2,7 +2,7 @@ import Menu, { MenuItem } from '../../../menu';
 import Dropdown from '../../../vc-dropdown';
 import type { Tab, TabsLocale, EditableConfig } from '../interface';
 import AddButton from './AddButton';
-import type { Key } from '../../../_util/type';
+import type { CustomSlotsType, Key } from '../../../_util/type';
 import KeyCode from '../../../_util/KeyCode';
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import classNames from '../../../_util/classNames';
@@ -35,7 +35,10 @@ export default defineComponent({
   inheritAttrs: false,
   props: operationNodeProps,
   emits: ['tabClick'],
-  slots: ['moreIcon'],
+  slots: Object as CustomSlotsType<{
+    moreIcon?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots }) {
     // ======================== Dropdown ========================
     const [open, setOpen] = useState(false);

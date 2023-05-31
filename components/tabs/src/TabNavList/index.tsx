@@ -16,7 +16,7 @@ import OperationNode from './OperationNode';
 import { useInjectTabs } from '../TabContext';
 import useTouchMove from '../hooks/useTouchMove';
 import AddButton from './AddButton';
-import type { Key } from '../../../_util/type';
+import type { CustomSlotsType, Key } from '../../../_util/type';
 import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
 import { onBeforeUnmount, defineComponent, ref, watch, watchEffect, computed } from 'vue';
 import PropTypes from '../../../_util/vue-types';
@@ -64,7 +64,13 @@ export default defineComponent({
   name: 'TabNavList',
   inheritAttrs: false,
   props: tabNavListProps(),
-  slots: ['moreIcon', 'leftExtra', 'rightExtra', 'tabBarExtraContent'],
+  slots: Object as CustomSlotsType<{
+    moreIcon?: any;
+    leftExtra?: any;
+    rightExtra?: any;
+    tabBarExtraContent?: any;
+    default?: any;
+  }>,
   emits: ['tabClick', 'tabScroll'],
   setup(props, { attrs, slots }) {
     const { tabs, prefixCls } = useInjectTabs();

@@ -13,6 +13,7 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import { getTransitionName } from '../_util/transition';
 import type { SizeType } from '../config-provider';
 import { initDefaultProps } from '../_util/props-util';
+import type { CustomSlotsType } from '../_util/type';
 
 type RawValue = string | number;
 
@@ -65,20 +66,20 @@ const Select = defineComponent({
     listItemHeight: 24,
   }),
   SECRET_COMBOBOX_MODE_DO_NOT_USE,
-  // emits: ['change', 'update:value', 'blur'],
-  slots: [
-    'notFoundContent',
-    'suffixIcon',
-    'itemIcon',
-    'removeIcon',
-    'clearIcon',
-    'dropdownRender',
-    'option',
-    'placeholder',
-    'tagRender',
-    'maxTagPlaceholder',
-    'optionLabel', // donot use, maybe remove it
-  ],
+  slots: Object as CustomSlotsType<{
+    notFoundContent: any;
+    suffixIcon: any;
+    itemIcon: any;
+    removeIcon: any;
+    clearIcon: any;
+    dropdownRender: any;
+    option: any;
+    placeholder: any;
+    tagRender: any;
+    maxTagPlaceholder: any;
+    optionLabel: any;
+    default: any;
+  }>,
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref<BaseSelectRef>();
     const formItemContext = useInjectFormItemContext();

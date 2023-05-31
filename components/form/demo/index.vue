@@ -1,7 +1,6 @@
 <template>
   <demo-sort :cols="1">
     <Basic />
-    <disabled />
     <LabelWidth />
     <HorizontalLogin />
     <Layout />
@@ -14,6 +13,7 @@
     <CustomizedFormControls />
     <advancedSearchVue />
     <dynamicFormItemsComplexVue />
+    <dynamicFormItemsVue />
     <dynamicRuleVue />
     <formContextVue />
     <formInModalVue />
@@ -23,7 +23,6 @@
     <UseFormBasic />
     <UseFormNested />
     <UseFormTrigger />
-    <dynamicFormItemsVue />
     <UseFormMerge />
   </demo-sort>
 </template>

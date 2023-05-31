@@ -1,4 +1,5 @@
 import PreviewGroup, { imageGroupProps } from '../vc-image/src/PreviewGroup';
+import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -19,6 +20,8 @@ export const icons = {
   left: <LeftOutlined />,
   right: <RightOutlined />,
 };
+
+export type ImageGroupProps = Partial<ExtractPropTypes<ReturnType<typeof imageGroupProps>>>;
 
 const InternalPreviewGroup = defineComponent({
   compatConfig: { MODE: 3 },

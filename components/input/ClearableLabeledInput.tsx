@@ -44,7 +44,6 @@ export default defineComponent({
   },
   setup(props, { slots, attrs }) {
     const statusContext = FormItemInputContext.useInject();
-
     const renderClearIcon = (prefixCls: string) => {
       const { value, disabled, readonly, handleReset, suffix = slots.suffix } = props;
       const needClear = !disabled && !readonly && value;
@@ -83,6 +82,7 @@ export default defineComponent({
       if (!allowClear) {
         return cloneElement(element, {
           value,
+          disabled: props.disabled,
         });
       }
       const affixWrapperCls = classNames(
@@ -106,6 +106,7 @@ export default defineComponent({
           {cloneElement(element, {
             style: null,
             value,
+            disabled: props.disabled,
           })}
           {renderClearIcon(prefixCls)}
         </span>

@@ -1,7 +1,8 @@
 <template>
   <demo-sort :cols="1">
     <Basic />
-    <LableWidth />
+    <disabled />
+    <LabelWidth />
     <HorizontalLogin />
     <Layout />
     <inlineLoginVue />
@@ -13,7 +14,6 @@
     <CustomizedFormControls />
     <advancedSearchVue />
     <dynamicFormItemsComplexVue />
-    <dynamicFormItemsVue />
     <dynamicRuleVue />
     <formContextVue />
     <formInModalVue />
@@ -23,6 +23,7 @@
     <UseFormBasic />
     <UseFormNested />
     <UseFormTrigger />
+    <dynamicFormItemsVue />
     <UseFormMerge />
   </demo-sort>
 </template>
@@ -40,7 +41,7 @@ import formContextVue from './form-context.vue';
 import formInModalVue from './form-in-modal.vue';
 import HorizontalLogin from './horizontal-login.vue';
 import inlineLoginVue from './inline-login.vue';
-import LableWidth from './lable-width.vue';
+import LabelWidth from './label-width.vue';
 import Layout from './layout.vue';
 import NestedForm from './nest-messages.vue';
 import normalLoginVue from './normal-login.vue';
@@ -74,7 +75,7 @@ export default defineComponent({
     UseFormNested,
     UseFormTrigger,
     UseFormMerge,
-    LableWidth,
+    LabelWidth,
     CustomizedFormControls,
     advancedSearchVue,
     dynamicFormItemsComplexVue,
@@ -91,6 +92,7 @@ export default defineComponent({
 .code-box-demo .ant-form:not(.ant-form-inline):not(.ant-form-vertical) {
   max-width: 600px;
 }
+
 .markdown.api-container table td:nth-of-type(4) {
   white-space: nowrap;
   word-wrap: break-word;

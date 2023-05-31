@@ -65,12 +65,13 @@ const InputNumber = defineComponent({
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const { prefixCls, size, direction, disabled } = useConfigInject('input-number', props);
     const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+    const disabledContext = useInjectDisabled();
+    const mergedDisabled = computed(() => disabled.value ?? disabledContext.value);
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
     const mergedSize = computed(() => compactSize.value || size.value);
-    const disabledContext = useInjectDisabled();
-    const mergedDisabled = computed(() => disabled.value ?? disabledContext.value);
+
     const mergedValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
     const focused = shallowRef(false);
     watch(
@@ -120,7 +121,8 @@ const InputNumber = defineComponent({
         prefix = slots.prefix?.(),
         valueModifiers = {},
         ...others
-      } = { ...attrs, ...props, id } as InputNumberProps & HTMLAttributes;
+      } = { ...attrs, ...props, id, disabled: mergedDisabled.value } as InputNumberProps &
+        HTMLAttributes;
 
       const preCls = prefixCls.value;
 

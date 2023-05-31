@@ -66,6 +66,7 @@ export default defineComponent({
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const disabled = useInjectDisabled();
+
     const showCount = computed(() => {
       return (props.showCount as any) === '' || props.showCount || false;
     });
@@ -207,6 +208,7 @@ export default defineComponent({
           getStatusClassNames(prefixCls.value, mergedStatus.value),
           hashId.value,
         ],
+        disabled: disabled.value,
         showCount: null,
         prefixCls: prefixCls.value,
         onInput: handleChange,
@@ -222,7 +224,7 @@ export default defineComponent({
       return (
         <ResizableTextArea
           {...resizeProps}
-          id={resizeProps.id ?? formItemContext.id.value}
+          id={resizeProps?.id ?? formItemContext.id.value}
           ref={resizableTextArea}
           maxlength={props.maxlength}
         />
@@ -250,7 +252,6 @@ export default defineComponent({
     return () => {
       const { maxlength, bordered = true, hidden } = props;
       const { style, class: customClass } = attrs;
-
       const inputProps: any = {
         ...props,
         ...attrs,

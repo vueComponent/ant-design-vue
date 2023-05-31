@@ -66,6 +66,7 @@ $ yarn add ant-design-vue
 | [vue-cli-plugin-ant-design](https://github.com/vueComponent/vue-cli-plugin-ant-design) | 使用 vue-cli3 快速使用 ant-design-vue 组件库 |
 | [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | 在 DOM 模板中，您可以使用 ant-design-vue 组件的自定义事件（camelCase） |
 | [@formily/antdv](https://github.com/formilyjs/antdv) | 这是一个结合了 Formily 和 ant-design-vue 的组件库 |
+| [@ant-design-vue/nuxt](https://github.com/vueComponent/ant-design-vue-nuxt) | ant-design-vue 的 nuxt 模块扩展 |
 
 ## 问答
 

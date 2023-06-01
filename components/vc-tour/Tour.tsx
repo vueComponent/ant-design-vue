@@ -156,8 +156,8 @@ const Tour = defineComponent({
       const mergedMaskStyle = typeof mergedMask.value === 'boolean' ? undefined : mergedMask.value;
 
       // when targetElement is not exist, use body as triggerDOMNode
-      const getTriggerDOMNode = node => {
-        return node || targetElement.value || document.body;
+      const getTriggerDOMNode = () => {
+        return targetElement.value || document.body;
       };
 
       const getPopupElement = () => (

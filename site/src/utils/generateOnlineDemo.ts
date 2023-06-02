@@ -32,14 +32,15 @@ components: {
 });
 </script>`;
 
-const mainJs = `import { createApp } from "vue";
-import App from "./App.vue";
+const mainJs = `import { createApp } from 'vue';
 import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import App from './App';
+import 'ant-design-vue/dist/reset.css';
 
-const app = createApp(App).use(Antd);
-app.mount("#app");
-`;
+const app = createApp(App);
+
+app.use(Antd).mount('#app');
+`
 
 function getDeps(code: string) {
   return (code.match(/from '([^']+)';\n/g) || [])

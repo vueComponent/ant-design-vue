@@ -1,4 +1,5 @@
-import PreviewGroup from '../vc-image/src/PreviewGroup';
+import PreviewGroup, { imageGroupProps } from '../vc-image/src/PreviewGroup';
+import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -20,11 +21,13 @@ export const icons = {
   right: <RightOutlined />,
 };
 
+export type ImageGroupProps = Partial<ExtractPropTypes<ReturnType<typeof imageGroupProps>>>;
+
 const InternalPreviewGroup = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AImagePreviewGroup',
   inheritAttrs: false,
-  props: { previewPrefixCls: String },
+  props: imageGroupProps(),
   setup(props, { attrs, slots }) {
     const { getPrefixCls } = useConfigInject('image', props);
     const prefixCls = computed(() => getPrefixCls('image-preview', props.previewPrefixCls));

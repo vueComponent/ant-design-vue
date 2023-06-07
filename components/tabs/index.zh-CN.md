@@ -53,7 +53,7 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 | change | 切换面板的回调 | Function(activeKey) {} |
 | edit | 新增和删除页签的回调，在 `type="editable-card"` 时有效 | (action === 'add' ? event : targetKey, action): void |
 | tabClick | tab 被点击的回调 | Function |
-| tabScroll | 滚动 TabBar 是触发 | { direction: 'left' \| 'right' \| 'top' \| 'bottom' } |
+| tabScroll | 滚动 TabBar 时触发 | { direction: 'left' \| 'right' \| 'top' \| 'bottom' } |
 
 ### Tabs.TabPane
 

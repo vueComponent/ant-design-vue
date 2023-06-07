@@ -248,11 +248,7 @@ const getBaseStyle: GenerateStyle<MenuToken> = token => {
         lineHeight: 0, // Fix display inline-block gap
         listStyle: 'none',
         outline: 'none',
-        transition: [
-          `background ${motionDurationSlow}`,
-          // Magic cubic here but smooth transition
-          `width ${motionDurationSlow} cubic-bezier(0.2, 0, 0, 1) 0s`,
-        ].join(','),
+        transition: `width ${motionDurationSlow} cubic-bezier(0.2, 0, 0, 1) 0s`,
 
         [`ul, ol`]: {
           margin: 0,

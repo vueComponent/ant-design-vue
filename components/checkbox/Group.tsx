@@ -100,7 +100,7 @@ export default defineComponent({
             onChange={option.onChange}
             class={`${groupPrefixCls}-item`}
           >
-            {option.label === undefined ? slots.label?.(option) : option.label}
+            {slots.label !== undefined ? slots.label?.(option) : option.label}
           </Checkbox>
         ));
       }

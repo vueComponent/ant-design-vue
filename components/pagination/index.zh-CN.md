@@ -27,7 +27,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/1vqv2bj68/Pagination.svg
 | responsive | 当 size 未指定时，根据屏幕宽度自动调整尺寸 | boolean | - | 3.1 |
 | showLessItems | 是否显示较少页面内容 | boolean | false | 1.5.0 |
 | showQuickJumper | 是否可以快速跳转至某页 | boolean | false |  |
-| showSizeChanger | 是否可以改变 pageSize | boolean | false |  |
+| showSizeChanger | 是否展示 `pageSize` 切换器，当 `total` 大于 50 时默认为 true | boolean | - |  |
 | showTotal | 用于显示数据总量和当前数据顺序 | Function(total, range) | - |  |
 | simple | 当添加该属性时，显示为简单分页 | boolean | - |  |
 | size | 当为「small」时，是小尺寸分页 | string | "" |  |

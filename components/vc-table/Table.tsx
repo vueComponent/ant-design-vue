@@ -192,7 +192,6 @@ export default defineComponent<TableProps<DefaultRecordType>>({
     'onUpdateInternalRefs',
     'transformCellText',
   ] as any,
-  slots: ['title', 'footer', 'summary', 'emptyText'],
   emits: ['expand', 'expandedRowsChange', 'updateInternalRefs', 'update:expandedRowKeys'],
   setup(props, { attrs, slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
@@ -490,11 +489,15 @@ export default defineComponent<TableProps<DefaultRecordType>>({
       }, 100);
     };
 
-    watch([horizonScroll, () => props.data, () => props.columns], () => {
-      if (horizonScroll.value) {
-        triggerOnScroll();
-      }
-    });
+    watch(
+      [horizonScroll, () => props.data, () => props.columns],
+      () => {
+        if (horizonScroll.value) {
+          triggerOnScroll();
+        }
+      },
+      { flush: 'post' },
+    );
 
     const [scrollbarSize, setScrollbarSize] = useState(0);
     useProvideSticky();

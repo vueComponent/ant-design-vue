@@ -63,6 +63,9 @@
         <a-col :md="6" :sm="24" :xs="24">
           <div class="footer-center">
             <h2>{{ isCN ? '友情链接' : 'Links' }}</h2>
+            <div v-if="showJeecg">
+              <a href="http://www.jeecg.com/" target="_blank">Jeecg</a>
+            </div>
             <div>
               <a href="https://cn.vuejs.org/" target="_blank">Vue</a>
             </div>
@@ -74,9 +77,6 @@
             </div>
             <div>
               <a href="https://antdv.formilyjs.org/" target="_blank">@formily/antdv</a>
-            </div>
-            <div v-if="showPpy()">
-              <a href="https://www.pengpengyu.com/" target="_blank">砰砰鱼</a>
             </div>
           </div>
         </a-col>
@@ -114,17 +114,18 @@
 </template>
 <script>
 import dayjs from 'dayjs';
+import { computed } from 'vue';
 export default {
   props: {
     isCN: Boolean,
   },
   setup() {
-    const showPpy = () => {
-      return dayjs().isBefore(dayjs('2021-06-15'));
-    };
+    const showJeecg = computed(() => {
+      return dayjs().isBefore(dayjs('2023-09-10'));
+    });
     return {
       dayjs,
-      showPpy,
+      showJeecg,
     };
   },
 };

@@ -4,6 +4,7 @@ import { computed, defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
 import { useMeasure } from './hooks/useKeyPath';
+import type { CustomSlotsType } from '../../_util/type';
 
 export const menuItemGroupProps = () => ({
   title: PropTypes.any,
@@ -12,10 +13,14 @@ export const menuItemGroupProps = () => ({
 export type MenuItemGroupProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemGroupProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMenuItemGroup',
   inheritAttrs: false,
   props: menuItemGroupProps(),
-  slots: ['title'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    default?: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls } = useInjectMenu();
     const groupPrefixCls = computed(() => `${prefixCls.value}-item-group`);

@@ -4,7 +4,6 @@ import {
   defineComponent,
   getCurrentInstance,
   nextTick,
-  onMounted,
   ref,
   watch,
   watchEffect,
@@ -46,6 +45,7 @@ function setTriggerValue(
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATextarea',
   inheritAttrs: false,
   props: textAreaProps(),
@@ -215,13 +215,6 @@ export default defineComponent({
       );
     };
 
-    onMounted(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (props.autofocus) {
-          focus();
-        }
-      }
-    });
     expose({
       focus,
       blur,

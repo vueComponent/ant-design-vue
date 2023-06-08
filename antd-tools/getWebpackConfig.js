@@ -216,14 +216,16 @@ All rights reserved.
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
     const entry = ['./index'];
-    config.externals = {
-      vue: {
-        root: 'Vue',
-        commonjs2: 'vue',
-        commonjs: 'vue',
-        amd: 'vue',
+    config.externals = [
+      {
+        vue: {
+          root: 'Vue',
+          commonjs2: 'vue',
+          commonjs: 'vue',
+          amd: 'vue',
+        },
       },
-    };
+    ];
     config.output.library = distFileBaseName;
     config.output.libraryTarget = 'umd';
     config.optimization = {
@@ -257,7 +259,6 @@ All rights reserved.
       },
       mode: 'production',
       plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.LoaderOptionsPlugin({
           minimize: true,
         }),

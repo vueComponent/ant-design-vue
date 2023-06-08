@@ -40,6 +40,7 @@ export const useInjectRange = () => {
 };
 
 export const RangeContextProvider = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PanelContextProvider',
   inheritAttrs: false,
   props: {

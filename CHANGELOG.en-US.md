@@ -10,6 +10,104 @@
 
 ---
 
+## 3.2.20
+
+`2023-04-27`
+
+- 🌟 Optimize the repeated instantiation of Space subcomponents [#6500](https://github.com/vueComponent/ant-design-vue/issues/6500)
+- 🐞 Fix RangePicker does not support null value problem [#6510](https://github.com/vueComponent/ant-design-vue/issues/6510)
+
+## 3.2.19
+
+`2023-04-23`
+
+- 🐞 Fix antd.min.js file error
+
+## 3.2.18
+
+`2023-04-23`
+
+- 🐞 Fix the style of input addonAfter when Form disabled [#6403](https://github.com/vueComponent/ant-design-vue/issues/6403)
+- 🐞 Fix Upload class name error [#6413](https://github.com/vueComponent/ant-design-vue/issues/6413)
+- 🐞 Fix date component's week, quarter does not support format problem [#6385](https://github.com/vueComponent/ant-design-vue/issues/6385)
+- 🐞 Fix the problem that Select scrolls under Firefox [#6470](https://github.com/vueComponent/ant-design-vue/issues/6470)
+- 🌟 Button added focus and blur methods [#6483](https://github.com/vueComponent/ant-design-vue/issues/6483)
+- 🐞 Fix the problem that the container height changes after Select is selected [#6467](https://github.com/vueComponent/ant-design-vue/issues/6467)
+- 🐞 Fix Form name not taking effect [#6460](https://github.com/vueComponent/ant-design-vue/issues/6460)
+
+## 3.2.17
+
+`2023-04-04`
+
+- 🐞 revert [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)，fix table filter hidden error [#6400](https://github.com/vueComponent/ant-design-vue/issues/6400)
+
+## 3.2.16
+
+`2023-03-23`
+
+- 🐞 Fix notification close event triggered multiple times [#6150](https://github.com/vueComponent/ant-design-vue/issues/6150)
+- 🐞 Fix the carousel map responsive change problem [#6100](https://github.com/vueComponent/ant-design-vue/issues/6100)
+- 🐞 Fix Table ceiling scroll bar style error [#6169](https://github.com/vueComponent/ant-design-vue/issues/6169)
+- 🐞 Fix DatePicker disabledMinutes parameter error [#6233](https://github.com/vueComponent/ant-design-vue/issues/6233)
+- 🐞 Fix the problem that the visibleChange event is not triggered when the Popup is closed [#6324](https://github.com/vueComponent/ant-design-vue/issues/6324)
+- 🐞 Fix Image preview image error [#6331](https://github.com/vueComponent/ant-design-vue/issues/6331)
+
+## 3.2.15
+
+`2022-11-10`
+
+- 🐞 Fix the problem of preview image error when `Image` is deleted dynamically
+
+## 3.2.14
+
+`2022-11-07`
+
+- 🐞 Fix the problem of dynamic theme failure when custom `prefixCls` [#6063](https://github.com/vueComponent/ant-design-vue/issues/6063)
+- 🐞 Fix `DatePicker` error when using select and other popup components as slots [#6062](https://github.com/vueComponent/ant-design-vue/issues/6062)
+- 🐞 Fix `DirectoryTree` not exposing scrollTo method [#6067](https://github.com/vueComponent/ant-design-vue/issues/6067)
+- 🐞 Fix `RangePicker` popup position does not change [#6073](https://github.com/vueComponent/ant-design-vue/issues/6073)
+
+## 3.2.13
+
+`2022-10-08`
+
+- 🌟 Support Vue 3 upgrade tool `@vue/compat` [#5973](https://github.com/vueComponent/ant-design-vue/issues/5973)
+- 🌟 Cascader add tagRender slot [#5954](https://github.com/vueComponent/ant-design-vue/issues/5954)
+- 🐞 Fix image flickering issue when Image preview is closed [#5955](https://github.com/vueComponent/ant-design-vue/issues/5955)
+- 🐞 Fix Tag close icon style display misplaced [#5956](https://github.com/vueComponent/ant-design-vue/issues/5956)
+- 🐞 Fix Table loading property ts type error [#5964](https://github.com/vueComponent/ant-design-vue/issues/5964)
+- 🐞 Fix Transfer deletion exception [#5975](https://github.com/vueComponent/ant-design-vue/issues/5975)
+- 🐞 Fix the scroll shadow display issue of Table fixed column [#5996](https://github.com/vueComponent/ant-design-vue/issues/5996)
+- 🐞 Fix DirectoryTree's default expansion failure issue when customizing fieldNames [#6007](https://github.com/vueComponent/ant-design-vue/issues/6007)
+
+## 3.2.12
+
+`2022-09-02`
+
+- 🐞 Fix DescriptionItem labelStyle does not take effect [#5920](https://github.com/vueComponent/ant-design-vue/issues/5920)
+- 🌟 Typography copy button prevents bubbling [##5746](https://github.com/vueComponent/ant-design-vue/issues/5746)
+- 🐞 Fix table merged column scroll shadow occlusion issue [#5786](https://github.com/vueComponent/ant-design-vue/issues/5786)
+- 🐞 Fix the inconsistency between css var and ConfigProvider variables [#5929](https://github.com/vueComponent/ant-design-vue/issues/5929)
+
+## 3.2.11
+
+`2022-08-08`
+
+- 🐞 Fix dayjs error when CDN introduces component library [#5874](https://github.com/vueComponent/ant-design-vue/issues/5874)
+- 🐞 Fix `Dropdown` submenu wrapping issue [#5798](https://github.com/vueComponent/ant-design-vue/issues/5798)
+- 🐞 Fix the problem that the package size increases when the icon is introduced [#5822](https://github.com/vueComponent/ant-design-vue/issues/5822)
+- 🐞 Fix `Select` custom field, no auto-focus selected node issue [#5843](https://github.com/vueComponent/ant-design-vue/issues/5843)
+- 🐞 Fix `InputNumber` size=large, the style is not aligned [#5853](https://github.com/vueComponent/ant-design-vue/issues/5853)
+
+## 3.2.10
+
+`2022-07-07`
+
+- 🐞 Fix the problem that the popup component cannot be used under `process.env.NODE_ENV = 'test'` [#4565](https://github.com/vueComponent/ant-design-vue/issues/4565)
+- 🐞 Fix the problem that the popup layer is directly closed when the Menu component hovers quickly [36df58](https://github.com/vueComponent/ant-design-vue/commit/36df585acf9a7d53c8b50be2ab240f54588a3b20)
+- 🐞 Fix Input autosize type error [#5766](https://github.com/vueComponent/ant-design-vue/issues/5766)
+- 🐞 Fix Table ellipsis tilte not working under fixed [#5755](https://github.com/vueComponent/ant-design-vue/issues/5755)
+
 ## 3.2.9
 
 `2022-06-25`

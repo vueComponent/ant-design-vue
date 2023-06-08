@@ -11,6 +11,7 @@ import {
 import { useInjectPortal } from '../vc-trigger/context';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Portal',
   inheritAttrs: false,
   props: {

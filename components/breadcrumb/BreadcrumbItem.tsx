@@ -6,6 +6,7 @@ import DropDown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import type { CustomSlotsType } from '../_util/type';
 
 export const breadcrumbItemProps = () => ({
   prefixCls: String,
@@ -17,12 +18,17 @@ export const breadcrumbItemProps = () => ({
 
 export type BreadcrumbItemProps = Partial<ExtractPropTypes<ReturnType<typeof breadcrumbItemProps>>>;
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ABreadcrumbItem',
   inheritAttrs: false,
   __ANT_BREADCRUMB_ITEM: true,
   props: breadcrumbItemProps(),
   // emits: ['click'],
-  slots: ['separator', 'overlay'],
+  slots: Object as CustomSlotsType<{
+    separator: any;
+    overlay: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const { prefixCls } = useConfigInject('breadcrumb', props);
     /**

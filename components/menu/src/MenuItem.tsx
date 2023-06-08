@@ -12,6 +12,7 @@ import useDirectionStyle from './hooks/useDirectionStyle';
 import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
+import type { CustomSlotsType } from '../../_util/type';
 
 let indexGuid = 0;
 export const menuItemProps = () => ({
@@ -31,11 +32,16 @@ export const menuItemProps = () => ({
 export type MenuItemProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMenuItem',
   inheritAttrs: false,
   props: menuItemProps(),
-  // emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
-  slots: ['icon', 'title'],
+  slots: Object as CustomSlotsType<{
+    icon?: any;
+    title?: any;
+    default?: any;
+  }>,
+
   setup(props, { slots, emit, attrs }) {
     const instance = getCurrentInstance();
     const isMeasure = useMeasure();

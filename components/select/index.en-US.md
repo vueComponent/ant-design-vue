@@ -50,7 +50,7 @@ Select component to select value from options.
 | maxTagTextLength | Max text length to show | number | - |  |
 | menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - |  |
 | mode | Set mode of Select | 'multiple' \| 'tags' | - |  |
-| notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |  |
+| notFoundContent | Specify content to show when no result matches.. | string\|slot | `Not Found` |  |
 | open | Controlled open state of dropdown | boolean | - |  |
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |  |
@@ -59,8 +59,8 @@ Select component to select value from options.
 | placeholder | Placeholder of select | string\|slot | - |  |
 | removeIcon | The custom remove icon | VNode \| slot | - |  |
 | searchValue | The current input "search" text | string | - |  |
-| showArrow | Whether to show the drop-down arrow | boolean | true |  |
-| showSearch | Whether show search input in single mode. | boolean | false |  |
+| showArrow | Whether to show the drop-down arrow | boolean | single:true, multiple:false |  |
+| showSearch | Whether select is searchable | boolean | single:false, multiple:true |  |
 | size | Size of Select input. `default` `large` `small` | string | default |  |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |
 | tagRender | Customize tag render, only applies when `mode` is set to `multiple` or `tags` | slot \| (props) => any | - |  |

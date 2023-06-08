@@ -2,14 +2,14 @@ import Menu, { MenuItem } from '../../../menu';
 import Dropdown from '../../../vc-dropdown';
 import type { Tab, TabsLocale, EditableConfig } from '../interface';
 import AddButton from './AddButton';
-import type { Key } from '../../../_util/type';
+import type { CustomSlotsType, Key } from '../../../_util/type';
 import KeyCode from '../../../_util/KeyCode';
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import classNames from '../../../_util/classNames';
 import { defineComponent, watch, computed, onMounted } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 import useState from '../../../_util/hooks/useState';
-import { EllipsisOutlined } from '@ant-design/icons-vue';
+import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 
 export const operationNodeProps = {
   prefixCls: { type: String },
@@ -30,11 +30,15 @@ export const operationNodeProps = {
 export type OperationNodeProps = Partial<ExtractPropTypes<typeof operationNodeProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'OperationNode',
   inheritAttrs: false,
   props: operationNodeProps,
   emits: ['tabClick'],
-  slots: ['moreIcon'],
+  slots: Object as CustomSlotsType<{
+    moreIcon?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots }) {
     // ======================== Dropdown ========================
     const [open, setOpen] = useState(false);

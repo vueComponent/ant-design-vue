@@ -40,7 +40,7 @@ export interface TreeContextProps {
   showIcon: boolean;
   icon: IconType;
   switcherIcon: IconType;
-  draggable: DraggableConfig;
+  draggable: DraggableConfig | false;
   draggingNodeKey?: Key;
   checkable: boolean;
   customCheckable: () => any;
@@ -91,6 +91,7 @@ export interface TreeContextProps {
 const TreeContextKey: InjectionKey<ComputedRef<TreeContextProps>> = Symbol('TreeContextKey');
 
 export const TreeContext = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'TreeContext',
   props: {
     value: { type: Object as PropType<TreeContextProps> },

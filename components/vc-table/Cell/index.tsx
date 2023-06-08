@@ -108,7 +108,6 @@ export default defineComponent<CellProps>({
     'cellType',
     'transformCellText',
   ] as any,
-  slots: ['appendNode'],
   setup(props, { slots }) {
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();

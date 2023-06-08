@@ -26,6 +26,7 @@ import { useInjectFormItemContext } from '../form';
 export const LIST_IGNORE = `__LIST_IGNORE_${Date.now()}__`;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AUpload',
   inheritAttrs: false,
   props: initDefaultProps(uploadProps(), {
@@ -393,7 +394,7 @@ export default defineComponent({
                 class={`${prefixCls.value}-btn`}
                 v-slots={slots}
               >
-                <div class={`${prefixCls}-drag-container`}>{slots.default?.()}</div>
+                <div class={`${prefixCls.value}-drag-container`}>{slots.default?.()}</div>
               </VcUpload>
             </div>
             {renderUploadList()}

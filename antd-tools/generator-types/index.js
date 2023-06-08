@@ -3,18 +3,21 @@ const pkg = require('../../package.json');
 const { parseAndWrite } = require('./lib/index.js');
 const rootPath = path.resolve(__dirname, '../../');
 
-try {
-  parseAndWrite({
-    version: pkg.version,
-    name: 'ant-design-vue',
-    path: path.resolve(rootPath, './components'),
-    // default match lang
-    test: /en-US\.md/,
-    outputDir: path.resolve(rootPath, './vetur'),
-    tagPrefix: 'a-',
+parseAndWrite({
+  version: pkg.version,
+  name: 'ant-design-vue',
+  path: path.resolve(rootPath, './components'),
+  typingsPath: path.resolve(rootPath, './typings/global.d.ts'),
+  // default match lang
+  test: /en-US\.md/,
+  outputDir: path.resolve(rootPath, './vetur'),
+  tagPrefix: 'a-',
+})
+  .then(result => {
+    // eslint-disable-next-line no-console
+    console.log(`generator types success: ${result} tags generated`);
+  })
+  .catch(error => {
+    console.error('generator types error', error);
+    return Promise.reject(error);
   });
-  // eslint-disable-next-line no-console
-  console.log('generator types success');
-} catch (e) {
-  console.error('generator types error', e);
-}

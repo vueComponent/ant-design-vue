@@ -14,6 +14,7 @@ import { getTransitionProps } from '../../_util/transition';
 import supportsPassive from '../../_util/supportsPassive';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PopupInner',
   inheritAttrs: false,
   props: innerProps,
@@ -150,7 +151,8 @@ export default defineComponent({
           zIndex,
           opacity:
             statusValue === 'motion' || statusValue === 'stable' || !visible.value ? null : 0,
-          pointerEvents: statusValue === 'stable' ? null : 'none',
+          // pointerEvents: statusValue === 'stable' ? null : 'none',
+          pointerEvents: !visible.value && statusValue !== 'stable' ? 'none' : null,
         },
         attrs.style as CSSProperties,
       ];

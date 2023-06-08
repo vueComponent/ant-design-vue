@@ -37,8 +37,8 @@
       </template>
       <a-col :xxxl="20" :xxl="20" :xl="19" :lg="18" :md="18" :sm="24" :xs="24">
         <section :class="mainContainerClass">
-          <!-- <TopAd :is-c-n="isZhCN" /> -->
           <WWAdsVue v-if="isZhCN" />
+          <TopAd v-else />
           <Demo v-if="isDemo" :page-data="pageData" :is-zh-c-n="isZhCN">
             <component :is="matchCom" />
           </Demo>
@@ -59,6 +59,7 @@
             </a-anchor>
           </a-affix>
         </section>
+        <a-back-top />
         <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
           <a-dropdown placement="top">
             <template #overlay>

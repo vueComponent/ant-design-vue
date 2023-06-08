@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { CustomSlotsType } from '../_util/type';
 
 export const cardMetaProps = () => ({
   prefixCls: String,
@@ -12,9 +13,15 @@ export const cardMetaProps = () => ({
 });
 export type CardGridProps = Partial<ExtractPropTypes<ReturnType<typeof cardMetaProps>>>;
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ACardMeta',
   props: cardMetaProps(),
-  slots: ['title', 'description', 'avatar'],
+  slots: Object as CustomSlotsType<{
+    title: any;
+    description: any;
+    avatar: any;
+    default: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('card', props);
     return () => {

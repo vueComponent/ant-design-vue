@@ -29,6 +29,7 @@ export const radioProps = () => ({
 export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ARadio',
   props: radioProps(),
   // emits: ['update:checked', 'update:value', 'change', 'blur', 'focus'],

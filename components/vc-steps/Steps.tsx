@@ -22,6 +22,7 @@ export type ProgressDotRender = (info: {
 }) => any;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Steps',
   props: {
     type: PropTypes.string.def('default'),
@@ -40,7 +41,6 @@ export default defineComponent({
     }).loose,
     stepIcon: Function,
   },
-  slots: ['stepIcon', 'progressDot'],
   emits: ['change'],
   setup(props, { slots, emit }) {
     const onStepClick = next => {

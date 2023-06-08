@@ -63,6 +63,7 @@ export const mergeDefaultValue = <T extends object>(obj: T, defaultValues: objec
 };
 let uuid = 0;
 const ImageInternal = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Image',
   inheritAttrs: false,
   props: imageProps(),
@@ -80,6 +81,7 @@ const ImageInternal = defineComponent({
         ? mergeDefaultValue(props.preview, defaultValues)
         : defaultValues;
     });
+    const src = computed(() => preview.value.src ?? props.src);
     const isCustomPlaceholder = computed(
       () => (props.placeholder && props.placeholder !== true) || slots.placeholder,
     );
@@ -170,14 +172,14 @@ const ImageInternal = defineComponent({
     let unRegister = () => {};
     onMounted(() => {
       watch(
-        [() => props.src, canPreview],
+        [src, canPreview],
         () => {
           unRegister();
           if (!isPreviewGroup.value) {
             return () => {};
           }
 
-          unRegister = registerImage(currentId.value, props.src, canPreview.value);
+          unRegister = registerImage(currentId.value, src.value, canPreview.value);
 
           if (!canPreview.value) {
             unRegister();
@@ -186,7 +188,9 @@ const ImageInternal = defineComponent({
         { flush: 'post', immediate: true },
       );
     });
-    onUnmounted(unRegister);
+    onUnmounted(() => {
+      unRegister();
+    });
     const toSizePx = (l: number | string) => {
       if (isNumber(l)) return l + 'px';
       return l;
@@ -213,12 +217,12 @@ const ImageInternal = defineComponent({
         class: cls,
         style,
       } = attrs as ImgHTMLAttributes;
-      const { icons, maskClassName, src: previewSrc, ...dialogProps } = preview.value;
+      const { icons, maskClassName, ...dialogProps } = preview.value;
 
       const wrappperClass = cn(prefixCls, wrapperClassName, rootClassName, {
         [`${prefixCls}-error`]: isError.value,
       });
-      const mergedSrc = isError.value && fallback ? fallback : previewSrc ?? imgSrc;
+      const mergedSrc = isError.value && fallback ? fallback : src.value;
       const imgCommonProps = {
         crossorigin,
         decoding,

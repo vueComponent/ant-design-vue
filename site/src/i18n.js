@@ -4,7 +4,7 @@ import zhCN from './locale/zh-CN';
 import { isZhCN } from './utils/util';
 
 const i18n = createI18n({
-  legacy: true,
+  legacy: false,
   locale: isZhCN(location.pathname) ? 'zh-CN' : 'en-US',
   fallbackLocale: 'en-US',
   messages: {

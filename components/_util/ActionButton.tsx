@@ -26,6 +26,7 @@ function isThenable(thing?: PromiseLike<any>): boolean {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ActionButton',
   props: actionButtonProps,
   setup(props, { slots }) {

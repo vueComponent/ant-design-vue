@@ -16,6 +16,7 @@ import { treeNodeProps } from './props';
 import collapseMotion from '../_util/collapseMotion';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'MotionTreeNode',
   inheritAttrs: false,
   props: {
@@ -28,7 +29,6 @@ export default defineComponent({
     motionType: String,
     // treeNodeRequiredProps: { type: Object as PropType<TreeNodeRequiredProps> },
   },
-  slots: ['title', 'icon', 'switcherIcon', 'checkable'],
   setup(props, { attrs, slots }) {
     const visible = ref(true);
     const context = useInjectTreeContext();

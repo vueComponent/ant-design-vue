@@ -18,11 +18,12 @@ import useState from '../../_util/hooks/useState';
 import isMobile from '../../vc-util/isMobile';
 import useMergedState from '../../_util/hooks/useMergedState';
 import classNames from '../../_util/classNames';
-import { CloseOutlined, PlusOutlined } from '@ant-design/icons-vue';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import devWarning from '../../vc-util/devWarning';
 import type { SizeType } from '../../config-provider';
 import { useProvideTabs } from './TabContext';
-import type { Key } from '../../_util/type';
+import type { CustomSlotsType, Key } from '../../_util/type';
 import pick from 'lodash-es/pick';
 import PropTypes from '../../_util/vue-types';
 import type { MouseEventHandler } from '../../_util/EventInterface';
@@ -114,6 +115,7 @@ function parseTabList(children: any[]): Tab[] {
     .filter(tab => tab);
 }
 const InternalTabs = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'InternalTabs',
   inheritAttrs: false,
   props: {
@@ -126,15 +128,16 @@ const InternalTabs = defineComponent({
     }),
     tabs: { type: Array as PropType<Tab[]> },
   },
-  slots: [
-    'tabBarExtraContent',
-    'leftExtra',
-    'rightExtra',
-    'moreIcon',
-    'addIcon',
-    'removeIcon',
-    'renderTabBar',
-  ],
+  slots: Object as CustomSlotsType<{
+    tabBarExtraContent?: any;
+    leftExtra?: any;
+    rightExtra?: any;
+    moreIcon?: any;
+    addIcon?: any;
+    removeIcon?: any;
+    renderTabBar?: any;
+    default: any;
+  }>,
   // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots }) {
     devWarning(
@@ -327,6 +330,7 @@ const InternalTabs = defineComponent({
 });
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATabs',
   inheritAttrs: false,
   props: initDefaultProps(tabsProps(), {
@@ -336,15 +340,16 @@ export default defineComponent({
       tabPane: false,
     },
   }),
-  slots: [
-    'tabBarExtraContent',
-    'leftExtra',
-    'rightExtra',
-    'moreIcon',
-    'addIcon',
-    'removeIcon',
-    'renderTabBar',
-  ],
+  slots: Object as CustomSlotsType<{
+    tabBarExtraContent?: any;
+    leftExtra?: any;
+    rightExtra?: any;
+    moreIcon?: any;
+    addIcon?: any;
+    removeIcon?: any;
+    renderTabBar?: any;
+    default?: any;
+  }>,
   // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots, emit }) {
     const handleChange = (key: string) => {

@@ -1,15 +1,16 @@
 import type { App, PropType, ExtractPropTypes } from 'vue';
-import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
+import { watch, ref, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import VcMentions, { Option } from '../vc-mentions';
+import VcMentions from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
-import { optionProps } from '../vc-mentions/src/Option';
+import { optionProps, optionOptions } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
+import type { CustomSlotsType } from '../_util/type';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -88,10 +89,15 @@ export const mentionsProps = () => ({
 export type MentionsProps = Partial<ExtractPropTypes<ReturnType<typeof mentionsProps>>>;
 
 const Mentions = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMentions',
   inheritAttrs: false,
   props: mentionsProps(),
-  slots: ['notFoundContent', 'option'],
+  slots: Object as CustomSlotsType<{
+    notFoundContent?: any;
+    option?: any;
+    default?: any;
+  }>,
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
     const focused = ref(false);
@@ -156,16 +162,6 @@ const Mentions = defineComponent({
 
     expose({ focus, blur });
 
-    onMounted(() => {
-      nextTick(() => {
-        if (process.env.NODE_ENV === 'test') {
-          if (props.autofocus) {
-            focus();
-          }
-        }
-      });
-    });
-
     return () => {
       const {
         disabled,
@@ -214,7 +210,8 @@ const Mentions = defineComponent({
 
 /* istanbul ignore next */
 export const MentionsOption = defineComponent({
-  ...Option,
+  compatConfig: { MODE: 3 },
+  ...optionOptions,
   name: 'AMentionsOption',
   props: optionProps,
 });

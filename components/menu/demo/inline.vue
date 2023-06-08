@@ -86,12 +86,9 @@ export default defineComponent({
     const titleClick = (e: Event) => {
       console.log('titleClick', e);
     };
-    watch(
-      () => openKeys,
-      val => {
-        console.log('openKeys', val);
-      },
-    );
+    watch(openKeys, val => {
+      console.log('openKeys', val);
+    });
     return {
       selectedKeys,
       openKeys,

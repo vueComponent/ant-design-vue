@@ -42,7 +42,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | filterOption | 是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 `true`，反之则返回 `false`。 | `boolean` \| `function(inputValue, option)` | true |  |
 | filterSort | 搜索时对筛选结果项的排序函数, 类似[Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)里的 compareFunction | (optionA: Option, optionB: Option) => number | - | 3.0 |
 | firstActiveValue | 默认高亮的选项 | string\|string\[] | - |  |
-| getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |  |
+| getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | function(triggerNode) | () => document.body |  |
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 Select 的 value 类型从 `string` 变为 `{key: string, label: vNodes, originLabel: any}` 的格式, originLabel（3.1） 保持原始类型，如果通过 a-select-option children 构造的节点，该值是是个函数（即 a-select-option 的默认插槽） | boolean | false |  |
 | listHeight | 设置弹窗滚动高度 | number | 256 |  |
 | maxTagCount | 最多显示多少个 tag | number | - |  |
@@ -50,7 +50,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | maxTagTextLength | 最大显示的 tag 文本长度 | number | - |  |
 | menuItemSelectedIcon | 自定义当前选中的条目图标 | VNode \| slot | - |  |
 | mode | 设置 Select 的模式为多选或标签 | 'multiple' \| 'tags' \| 'combobox' | - |  |
-| notFoundContent | 当下拉列表为空时显示的内容 | string\|slot | 'Not Found' |  |
+| notFoundContent | 当下拉列表为空时显示的内容 | string\|slot | `Not Found` |  |
 | open | 是否展开下拉菜单 | boolean | - |  |
 | option | 通过 option 插槽，自定义节点 | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |
 | optionFilterProp | 搜索时过滤对应的 option 属性，不支持 children | string | value |  |
@@ -59,8 +59,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | placeholder | 选择框默认文字 | string\|slot | - |  |
 | removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |  |
 | searchValue | 控制搜索文本 | string | - |  |
-| showArrow | 是否显示下拉小箭头 | boolean | true |  |
-| showSearch | 使单选模式可搜索 | boolean | false |  |
+| showArrow | 是否显示下拉小箭头 | boolean | 单选为true,多选为false |  |
+| showSearch | 配置是否可搜索 | boolean | 单选为false,多选为true |  |
 | size | 选择框大小，可选 `large` `small` | string | default |  |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |  |
 | tagRender | 自定义 tag 内容 render，仅在 `mode` 为 `multiple` 或 `tags` 时生效 | slot \| (props) => any | - | 3.0 |

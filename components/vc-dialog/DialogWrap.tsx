@@ -7,6 +7,7 @@ import { useProvidePortal } from '../vc-trigger/context';
 import { initDefaultProps } from '../_util/props-util';
 const IDialogPropTypes = getDialogPropTypes();
 const DialogWrap = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'DialogWrap',
   inheritAttrs: false,
   props: initDefaultProps(IDialogPropTypes, {

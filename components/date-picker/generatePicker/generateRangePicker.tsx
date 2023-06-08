@@ -8,7 +8,7 @@ import enUS from '../locale/en_US';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import { getRangePlaceholder } from '../util';
 import { getTimeProps, Components } from '.';
-import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import type { CommonProps, RangePickerProps } from './props';
@@ -18,12 +18,14 @@ import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 import { useInjectFormItemContext } from '../../form/FormItemContext';
 import omit from '../../_util/omit';
+import type { CustomSlotsType } from '../../_util/type';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
   extraProps: ExtraProps,
 ) {
   const RangePicker = defineComponent({
+    compatConfig: { MODE: 3 },
     name: 'ARangePicker',
     inheritAttrs: false,
     props: {
@@ -31,18 +33,18 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       ...rangePickerProps<DateType>(),
       ...extraProps,
     },
-    slots: [
-      'suffixIcon',
-      // 'clearIcon',
-      'prevIcon',
-      'nextIcon',
-      'superPrevIcon',
-      'superNextIcon',
-      // 'panelRender',
-      'dateRender',
-      'renderExtraFooter',
-      // 'separator',
-    ],
+    slots: Object as CustomSlotsType<{
+      suffixIcon?: any;
+      prevIcon?: any;
+      nextIcon?: any;
+      superPrevIcon?: any;
+      superNextIcon?: any;
+      dateRender?: any;
+      renderExtraFooter?: any;
+      default?: any;
+      separator?: any;
+      clearIcon?: any;
+    }>,
     setup(_props, { expose, slots, attrs, emit }) {
       const props = _props as unknown as CommonProps<DateType> & RangePickerProps<DateType>;
       const formItemContext = useInjectFormItemContext();
@@ -56,15 +58,6 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         props,
       );
       const pickerRef = ref();
-      onMounted(() => {
-        nextTick(() => {
-          if (process.env.NODE_ENV === 'test') {
-            if (props.autofocus) {
-              pickerRef.value?.focus();
-            }
-          }
-        });
-      });
       expose({
         focus: () => {
           pickerRef.value?.focus();
@@ -76,7 +69,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       const maybeToStrings = (dates: DateType[]) => {
         return props.valueFormat ? generateConfig.toString(dates, props.valueFormat) : dates;
       };
-      const onChange = (dates: [DateType, DateType], dateStrings: [string, string]) => {
+      const onChange = (dates: RangeValue<DateType>, dateStrings: [string, string]) => {
         const values = maybeToStrings(dates);
         emit('update:value', values);
         emit('change', values, dateStrings);

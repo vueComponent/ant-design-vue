@@ -230,7 +230,7 @@ export default defineComponent<StickyScrollBarProps>({
             onMousedown={onMouseDown}
             ref={scrollBarRef}
             class={classNames(`${prefixCls}-sticky-scroll-bar`, {
-              [`${prefixCls}-sticky-scroll-bar-active`]: isActive,
+              [`${prefixCls}-sticky-scroll-bar-active`]: isActive.value,
             })}
             style={{
               width: `${scrollBarWidth.value}px`,

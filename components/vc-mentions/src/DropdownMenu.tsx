@@ -7,6 +7,7 @@ import Spin from '../../spin';
 
 function noop() {}
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'DropdownMenu',
   props: {
     prefixCls: String,
@@ -15,7 +16,6 @@ export default defineComponent({
       default: () => [],
     },
   },
-  slots: ['notFoundContent', 'option'],
   setup(props, { slots }) {
     const {
       activeIndex,

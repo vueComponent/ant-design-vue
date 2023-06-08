@@ -257,6 +257,7 @@ export function isMultiple(mode: Mode) {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'BaseSelect',
   inheritAttrs: false,
   props: initDefaultProps(baseSelectProps(), { showAction: [], notFoundContent: 'Not Found' }),
@@ -699,7 +700,7 @@ export default defineComponent({
         typeof getRawInputElement === 'function' && getRawInputElement();
       const domProps = {
         ...restProps,
-      } as Omit<keyof typeof restProps, typeof DEFAULT_OMIT_PROPS[number]>;
+      } as Omit<keyof typeof restProps, (typeof DEFAULT_OMIT_PROPS)[number]>;
 
       // Used for raw custom input trigger
       let onTriggerVisibleChange: null | ((newOpen: boolean) => void);
@@ -872,7 +873,7 @@ export default defineComponent({
                 style={{
                   width: 0,
                   height: 0,
-                  display: 'flex',
+                  position: 'absolute',
                   overflow: 'hidden',
                   opacity: 0,
                 }}

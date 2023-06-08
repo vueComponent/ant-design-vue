@@ -11,6 +11,7 @@ export type BreadcrumbSeparatorProps = Partial<
 >;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ABreadcrumbSeparator',
   __ANT_BREADCRUMB_SEPARATOR: true,
   inheritAttrs: false,

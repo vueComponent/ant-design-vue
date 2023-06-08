@@ -33,10 +33,10 @@ export type MentionsProps = Partial<ExtractPropTypes<typeof vcMentionsProps>>;
 function noop() {}
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Mentions',
   inheritAttrs: false,
   props: initDefaultProps(vcMentionsProps, defaultProps),
-  slots: ['notFoundContent', 'option'],
   emits: ['change', 'select', 'search', 'focus', 'blur', 'pressenter'],
   setup(props, { emit, attrs, expose, slots }) {
     const measure = ref(null);

@@ -78,14 +78,12 @@ function isChecked(selectedKeys: (string | number)[], eventKey: string | number)
   return selectedKeys.indexOf(eventKey) !== -1;
 }
 
-function handleTreeData(data: TransferProps['dataSource'], targetKeys: string[] = []) {
-  data.forEach(item => {
-    item['disabled'] = targetKeys.includes(item.key as any);
-    if (item.children) {
-      handleTreeData(item.children, targetKeys);
-    }
-  });
-  return data as TreeProps['treeData'];
+function handleTreeData(treeNodes: TransferProps['dataSource'], targetKeys: string[] = []) {
+  return treeNodes.map(({ children, ...props }) => ({
+    ...props,
+    disabled: targetKeys.includes(props.key as string),
+    children: handleTreeData(children ?? [], targetKeys),
+  }));
 }
 
 export default defineComponent({

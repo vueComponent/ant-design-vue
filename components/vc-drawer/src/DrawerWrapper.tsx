@@ -5,6 +5,7 @@ import { drawerProps } from './IDrawerPropTypes';
 import PortalWrapper from '../../_util/PortalWrapper';
 
 const DrawerWrapper = defineComponent({
+  compatConfig: { MODE: 3 },
   inheritAttrs: false,
   props: initDefaultProps(drawerProps(), {
     prefixCls: 'drawer',
@@ -23,7 +24,6 @@ const DrawerWrapper = defineComponent({
     autofocus: true,
   }),
   emits: ['handleClick', 'close'],
-  slots: ['handler'],
   setup(props, { emit, slots }) {
     const dom = ref<HTMLElement>(null);
 

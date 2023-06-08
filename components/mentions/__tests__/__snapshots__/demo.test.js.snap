@@ -7,7 +7,7 @@ exports[`renders ./components/mentions/demo/async.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/mentions/demo/basic.vue correctly 1`] = `
-<div class="ant-mentions ant-mentions-focused"><textarea autofocus="" rows="1"></textarea>
+<div class="ant-mentions"><textarea autofocus="" rows="1"></textarea>
   <!---->
 </div>
 `;

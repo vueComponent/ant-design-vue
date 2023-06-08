@@ -10,6 +10,7 @@ import { watch, computed, ref, defineComponent } from 'vue';
 import type { ChangeEvent, KeyboardEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
 import classNames from '../../_util/classNames';
+import type { CustomSlotsType } from '../../_util/type';
 
 /**
  * We support `stringMode` which need handle correct type when user call in onChange
@@ -79,13 +80,18 @@ export const inputNumberProps = () => ({
 });
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'InnerInputNumber',
   inheritAttrs: false,
   props: {
     ...inputNumberProps(),
     lazy: Boolean,
   },
-  slots: ['upHandler', 'downHandler'],
+  slots: Object as CustomSlotsType<{
+    upHandler: any;
+    downHandler: any;
+    default: any;
+  }>,
   setup(props, { attrs, slots, emit, expose }) {
     const inputRef = ref<HTMLInputElement>();
     const focus = ref(false);

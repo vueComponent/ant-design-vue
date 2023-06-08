@@ -69,4 +69,25 @@ describe('RangePicker', () => {
     await sleep();
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  fit('test WeekPicker valueFormat', async () => {
+    const case1 = ['2023-22', '2023-24'];
+    const case2 = ['2023-27', '2023-28'];
+    const wrapper = mount(RangePicker, {
+      props: {
+        picker: 'week',
+        format: 'YYYY-ww',
+        valueFormat: 'YYYY-ww',
+        value: case1,
+      },
+      sync: false,
+      attachTo: 'body',
+    });
+    const inputs = wrapper.findAll('input');
+    expect((inputs[0].element.value, inputs[1].element.value)).toBe((case1[0], case1[1]));
+    await asyncExpect(() => {
+      wrapper.setProps({ value: case2 });
+    });
+    expect((inputs[0].element.value, inputs[1].element.value)).toBe((case2[0], case2[1]));
+  });
 });

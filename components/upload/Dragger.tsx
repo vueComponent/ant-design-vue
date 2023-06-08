@@ -3,6 +3,7 @@ import Upload from './Upload';
 import { uploadProps } from './interface';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AUploadDragger',
   inheritAttrs: false,
   props: uploadProps(),

@@ -1,4 +1,4 @@
-import type { LiteralUnion } from '../_util/type';
+import type { CustomSlotsType, LiteralUnion } from '../_util/type';
 import type { PresetColorType } from '../_util/colors';
 import { isPresetColor } from './utils';
 import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
@@ -16,10 +16,14 @@ export const ribbonProps = () => ({
 export type RibbonProps = Partial<ExtractPropTypes<ReturnType<typeof ribbonProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ABadgeRibbon',
   inheritAttrs: false,
   props: ribbonProps(),
-  slots: ['text'],
+  slots: Object as CustomSlotsType<{
+    text: any;
+    default: any;
+  }>,
   setup(props, { attrs, slots }) {
     const { prefixCls, direction } = useConfigInject('ribbon', props);
     const colorInPreset = computed(() => isPresetColor(props.color));

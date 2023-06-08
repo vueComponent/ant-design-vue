@@ -24,6 +24,7 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import type { BaseSelectRef } from '../vc-select';
 import type { BaseOptionType, DefaultOptionType } from '../vc-tree-select/TreeSelect';
 import type { TreeProps } from '../tree';
+import type { CustomSlotsType } from '../_util/type';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -70,6 +71,7 @@ export function treeSelectProps<
 export type TreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof treeSelectProps>>>;
 
 const TreeSelect = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATreeSelect',
   inheritAttrs: false,
   props: initDefaultProps(treeSelectProps(), {
@@ -79,15 +81,16 @@ const TreeSelect = defineComponent({
     listItemHeight: 26,
     bordered: true,
   }),
-  slots: [
-    'title',
-    'titleRender',
-    'placeholder',
-    'maxTagPlaceholder',
-    'treeIcon',
-    'switcherIcon',
-    'notFoundContent',
-  ],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    titleRender?: any;
+    placeholder?: any;
+    maxTagPlaceholder?: any;
+    treeIcon?: any;
+    switcherIcon?: any;
+    notFoundContent?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots, expose, emit }) {
     warning(
       !(props.treeData === undefined && slots.default),

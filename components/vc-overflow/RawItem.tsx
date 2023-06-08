@@ -5,6 +5,7 @@ import { OverflowContextProvider, useInjectOverflowContext } from './context';
 import Item from './Item';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'RawItem',
   inheritAttrs: false,
   props: {
@@ -16,6 +17,8 @@ export default defineComponent({
     onClick: { type: Function },
     onKeydown: { type: Function },
     onFocus: { type: Function },
+    role: String,
+    tabindex: Number,
   },
   setup(props, { slots, attrs }) {
     const context = useInjectOverflowContext();

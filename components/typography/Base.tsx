@@ -123,6 +123,7 @@ export const baseProps = () => ({
 });
 
 const Base = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Base',
   inheritAttrs: false,
   props: baseProps(),
@@ -233,6 +234,7 @@ const Base = defineComponent({
     // ================ Copy ================
     function onCopyClick(e: MouseEvent) {
       e.preventDefault();
+      e.stopPropagation();
       const { copyable } = props;
 
       const copyConfig = {

@@ -32,7 +32,6 @@ export default defineComponent<BodyProps<any>>({
     'rowExpandable',
     'childrenColumnName',
   ] as any,
-  slots: ['emptyNode'],
   setup(props, { slots }) {
     const resizeContext = useInjectResize();
     const tableContext = useInjectTable();

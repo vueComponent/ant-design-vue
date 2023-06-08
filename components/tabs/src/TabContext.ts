@@ -18,6 +18,7 @@ export const useInjectTabs = () => {
 };
 
 const TabsContextProvider = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'TabsContextProvider',
   inheritAttrs: false,
   props: {

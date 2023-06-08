@@ -83,6 +83,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | dateRender | Custom rendering function for date cells | v-slot:dateRender="{current, today}" | - |  |
 | disabled | Determine whether the DatePicker is disabled | boolean | false |  |
 | disabledDate | Specify the date that cannot be selected | (currentDate: dayjs) => boolean | - |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/). When an array is provided, all values are used for parsing and first value is used for formatting, support [Custom Format](#components-date-picker-demo-format) | [formatType](#formatType) | `YYYY-MM-DD` |  |
 | dropdownClassName | To customize the className of the popup calendar | string | - |  |
 | getPopupContainer | To set the container of the floating layer, while the default is to create a `div` element in `body` | function(trigger) | - |  |
 | inputReadOnly | Set the `readonly` attribute of the input tag (avoids virtual keyboard on touch devices) | boolean | false |  |
@@ -120,7 +121,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | --- | --- | --- | --- | --- |
 | defaultPickerValue | To set default picker date | [dayjs](https://day.js.org/) | - |  |
 | disabledTime | To specify the time that cannot be selected | function(date) | - |  |
-| format | To set the date format, refer to [dayjs](https://day.js.org/). When an array is provided, all values are used for parsing and first value is used for formatting, support [Custom Format](#components-date-picker-demo-format) | string \| (value: dayjs) => string \| (string \| (value: dayjs) => string)\[] | `YYYY-MM-DD` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM-DD` |  |
 | renderExtraFooter | Render extra footer in panel | v-slot:renderExtraFooter="mode" | - |  |
 | showNow | Whether to show 'Now' button on panel when `showTime` is set | boolean | - |  |
 | showTime | To provide an additional time selection | object \| boolean | [TimePicker Options](/components/time-picker/#API) |  |
@@ -139,26 +140,26 @@ The following APIs are shared by DatePicker, RangePicker.
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | string | `YYYY` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY` |  |
 
 ### DatePicker\[picker=quarter]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | string | `YYYY-\QQ` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-\QQ` |  |
 
 ### DatePicker\[picker=month]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | string | `YYYY-MM` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM` |  |
 | monthCellRender | Custom month cell content render method | v-slot:monthCellRender="{current, locale}" | - |  |
 
 ### DatePicker\[picker=week]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | string | `YYYY-wo` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-wo` |  |
 
 ### RangePicker
 
@@ -169,9 +170,9 @@ The following APIs are shared by DatePicker, RangePicker.
 | defaultPickerValue | To set default picker date | \[[dayjs](https://day.js.org/), [dayjs](https://day.js.org/)] | - |  |
 | disabled | If disable start or end | \[boolean, boolean] | - |  |
 | disabledTime | To specify the time that cannot be selected | function(date: dayjs, partial: `start` \| `end`) | - |  |
-| format | To set the date format, refer to [dayjs](https://day.js.org/). When an array is provided, all values are used for parsing and first value is used for formatting | string \| string\[] | `YYYY-MM-DD HH:mm:ss` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM-DD HH:mm:ss` |  |
 | ranges | The preseted ranges for quick selection | { \[range: string]: [dayjs](https://day.js.org/)\[] } \| { \[range: string]: () => [dayjs](https://day.js.org/)\[] } | - |  |
-| renderExtraFooter | Render extra footer in panel | v-slot:renderExtraFooter | - |  |
+| renderExtraFooter | Render extra footer in panel | v-slot:renderExtraFooter="mode" | - |  |
 | separator | Set separator between inputs | string \| v-slot:separator | `<SwapRightOutlined />` |  |
 | showTime | To provide an additional time selection | object \| boolean | [TimePicker Options](/components/time-picker/#API) |  |
 | showTime.defaultValue | To set default time of selected date, [demo](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/)\[] | \[dayjs(), dayjs()] |  |
@@ -185,6 +186,17 @@ The following APIs are shared by DatePicker, RangePicker.
 | change | a callback function, can be executed when the selected time is changing | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string]) |  |  |
 | ok | callback when click ok button | function(dates: \[dayjs, dayjs] \| \[string, string]) |  |  |
 
+#### formatType
+
+```typescript
+import type { Dayjs } from 'dayjs';
+
+type Generic = string;
+type GenericFn = (value: Dayjs) => string;
+
+export type FormatType = Generic | GenericFn | Array<Generic | GenericFn>;
+```
+
 ## FAQ
 
 ### How to use DatePicker with customize date library（like moment.js \| dayjs \| date-fns）？
@@ -194,3 +206,20 @@ Please refer [replace date](/docs/vue/replace-date)
 ### Why config dayjs.locale globally not work?
 
 DatePicker default set `locale` as `en` in v4. You can config DatePicker `locale` prop or [ConfigProvider `locale`](/components/config-provider) prop instead.
+
+### How to modify start day of week?
+
+Please use correct [language](/docs/vue/i18n) ([#5605](https://github.com/ant-design/ant-design/issues/5605)), or update dayjs `locale` config:
+
+- Example: <https://codesandbox.io/s/dayjs-day-of-week-x9tuj2?file=/demo.tsx>
+
+```js
+import dayjs from 'dayjs';
+import updateLocale from 'dayjs/plugin/updateLocale';
+import 'dayjs/locale/zh-cn';
+
+dayjs.extend(updateLocale);
+dayjs.updateLocale('zh-cn', {
+  weekStart: 0,
+});
+```

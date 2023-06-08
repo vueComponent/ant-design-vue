@@ -56,20 +56,23 @@ export const context = {
   },
 };
 
+export const imageGroupProps = () => ({
+  previewPrefixCls: String,
+  preview: {
+    type: [Boolean, Object] as PropType<boolean | ImagePreviewType>,
+    default: true as boolean | ImagePreviewType,
+  },
+  icons: {
+    type: Object as PropType<PreviewProps['icons']>,
+    default: () => ({}),
+  },
+});
+
 const Group = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PreviewGroup',
   inheritAttrs: false,
-  props: {
-    previewPrefixCls: String,
-    preview: {
-      type: [Boolean, Object] as PropType<boolean | ImagePreviewType>,
-      default: true as boolean | ImagePreviewType,
-    },
-    icons: {
-      type: Object as PropType<PreviewProps['icons']>,
-      default: () => ({}),
-    },
-  },
+  props: imageGroupProps(),
   setup(props, { slots }) {
     const preview = computed<PreviewGroupPreview>(() => {
       const defaultValues = {
@@ -150,7 +153,7 @@ const Group = defineComponent({
     );
     watchEffect(
       () => {
-        if (!isShowPreview.value && isControlled.value) {
+        if (isShowPreview.value && isControlled.value) {
           setCurrent(currentControlledKey.value);
         }
       },

@@ -1,4 +1,4 @@
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue';
@@ -37,10 +37,14 @@ export const avatarProps = () => ({
 export type AvatarProps = Partial<ExtractPropTypes<ReturnType<typeof avatarProps>>>;
 
 const Avatar = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AAvatar',
   inheritAttrs: false,
   props: avatarProps(),
-  slots: ['icon'],
+  slots: Object as CustomSlotsType<{
+    icon: any;
+    default: any;
+  }>,
   setup(props, { slots, attrs }) {
     const isImgExist = ref(true);
     const isMounted = ref(false);

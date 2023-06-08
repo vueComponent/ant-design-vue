@@ -13,6 +13,7 @@ import omit from '../_util/omit';
 import { VcStepProps } from '../vc-steps/Step';
 import type { ProgressDotRender } from '../vc-steps/Steps';
 import type { MouseEventHandler } from '../_util/EventInterface';
+import type { CustomSlotsType } from '../_util/type';
 
 export const stepsProps = () => ({
   prefixCls: String,
@@ -49,6 +50,7 @@ export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>
 export type StepProps = Partial<ExtractPropTypes<ReturnType<typeof stepProps>>>;
 
 const Steps = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ASteps',
   inheritAttrs: false,
   props: initDefaultProps(stepsProps(), {
@@ -56,7 +58,11 @@ const Steps = defineComponent({
     responsive: true,
     labelPlacement: 'horizontal',
   }),
-  slots: ['progressDot'],
+  slots: Object as CustomSlotsType<{
+    progressDot: any;
+    default: any;
+  }>,
+
   // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
@@ -128,6 +134,7 @@ const Steps = defineComponent({
 
 /* istanbul ignore next */
 export const Step = defineComponent({
+  compatConfig: { MODE: 3 },
   ...VcStep,
   name: 'AStep',
   props: VcStepProps(),

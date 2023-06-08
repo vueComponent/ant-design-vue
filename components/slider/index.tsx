@@ -3,7 +3,7 @@ import { computed, ref, defineComponent } from 'vue';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
-import type { VueNode } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import type { TooltipPlacement } from '../tooltip/Tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -14,7 +14,7 @@ import type { FocusEventHandler } from '../_util/EventInterface';
 
 export type SliderValue = number | [number, number];
 
-interface SliderMarks {
+export interface SliderMarks {
   [key: number]:
     | VueNode
     | {
@@ -28,7 +28,7 @@ interface HandleGeneratorInfo {
   dragging?: boolean;
   index: number;
 }
-interface SliderRange {
+export interface SliderRange {
   draggableTrack?: boolean;
 }
 export type HandleGeneratorFn = (config: {
@@ -78,11 +78,15 @@ export type SliderProps = Partial<ExtractPropTypes<ReturnType<typeof sliderProps
 export type Visibles = { [index: number]: boolean };
 
 const Slider = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ASlider',
   inheritAttrs: false,
   props: sliderProps(),
   // emits: ['update:value', 'change', 'afterChange', 'blur'],
-  slots: ['mark'],
+  slots: Object as CustomSlotsType<{
+    mark?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots, emit, expose }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer, configProvider } =
       useConfigInject('slider', props);

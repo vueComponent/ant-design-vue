@@ -76,6 +76,7 @@ export interface ListState {
 }
 
 const List = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'List',
   inheritAttrs: false,
   props: {
@@ -225,8 +226,13 @@ const List = defineComponent({
             offset: undefined,
           });
         }
+        if (componentRef.value) {
+          state.scrollTop = componentRef.value.scrollTop;
+        }
       },
-      { immediate: true },
+      {
+        immediate: true,
+      },
     );
     watch(
       [
@@ -276,11 +282,11 @@ const List = defineComponent({
           itemTop = currentItemBottom;
         }
 
-        // Fallback to normal if not match. This code should never reach
-        /* istanbul ignore next */
+        // When scrollTop at the end but data cut to small count will reach this
         if (startIndex === undefined) {
           startIndex = 0;
           startOffset = 0;
+          endIndex = Math.ceil(height / itemHeight);
         }
         if (endIndex === undefined) {
           endIndex = dataLen - 1;
@@ -324,7 +330,7 @@ const List = defineComponent({
     // When data size reduce. It may trigger native scroll event back to fit scroll position
     function onFallbackScroll(e: UIEvent) {
       const { scrollTop: newScrollTop } = e.currentTarget as Element;
-      if (Math.abs(newScrollTop - state.scrollTop) >= 1) {
+      if (newScrollTop !== state.scrollTop) {
         syncScrollTop(newScrollTop);
       }
 

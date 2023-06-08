@@ -5,10 +5,12 @@ import { nextTick } from 'vue';
 import { asyncExpect, sleep } from '../../../tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
 import { resetWarned } from '../../_util/warning';
+import focusTest from '../../../tests/shared/focusTest';
 
 describe('Button', () => {
   mountTest(Button);
   mountTest(Button.Group);
+  focusTest(Button);
   it('renders correctly', () => {
     const wrapper = mount({
       render() {

@@ -58,6 +58,7 @@ const generateId = (() => {
 })();
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ALayoutSider',
   inheritAttrs: false,
   props: initDefaultProps(siderProps(), {

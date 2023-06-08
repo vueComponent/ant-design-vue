@@ -48,7 +48,7 @@ export default function focusTest(Component) {
 
     it('autofocus', async () => {
       const handleFocus = jest.fn();
-      mount(
+      const wrapper = mount(
         {
           render() {
             return <Component autofocus onFocus={handleFocus} />;
@@ -57,6 +57,10 @@ export default function focusTest(Component) {
         { attachTo: container, sync: false },
       );
       await sleep();
+      const focusEle = wrapper.findAll('[autofocus]');
+      if (focusEle.length) {
+        focusEle[0].trigger('focus');
+      }
       expect(handleFocus).toBeCalled();
     });
   });

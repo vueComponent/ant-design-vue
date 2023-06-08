@@ -73,6 +73,7 @@ export interface AnchorState {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AAnchor',
   inheritAttrs: false,
   props: anchorProps(),
@@ -130,8 +131,6 @@ export default defineComponent({
       const { offsetTop, targetOffset } = props;
 
       setCurrentActiveLink(link);
-      const container = getContainer.value();
-      const scrollTop = getScroll(container, true);
       const sharpLinkMatch = sharpMatcherRegx.exec(link);
       if (!sharpLinkMatch) {
         return;
@@ -141,6 +140,8 @@ export default defineComponent({
         return;
       }
 
+      const container = getContainer.value();
+      const scrollTop = getScroll(container, true);
       const eleOffsetTop = getOffsetTop(targetElement, container);
       let y = scrollTop + eleOffsetTop;
       y -= targetOffset !== undefined ? targetOffset : offsetTop || 0;

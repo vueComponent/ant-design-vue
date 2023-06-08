@@ -33,9 +33,9 @@ export const VcStepProps = () => ({
   stepIcon: Function,
 });
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Step',
   props: VcStepProps(),
-  slots: ['title', 'subTitle', 'description', 'tailContent', 'stepIcon', 'progressDot'],
   emits: ['click', 'stepClick'],
   setup(props, { slots, emit }) {
     const onItemClick: EventHandler = e => {

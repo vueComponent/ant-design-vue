@@ -7,6 +7,7 @@ import type { CSSProperties, PropType } from 'vue';
 import { defineComponent, ref, watchEffect } from 'vue';
 function noop() {}
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Tooltip',
   inheritAttrs: false,
   props: {
@@ -36,7 +37,6 @@ export default defineComponent({
     onVisibleChange: Function,
     onPopupAlign: Function,
   },
-  slots: ['arrowContent', 'overlay'],
   setup(props, { slots, attrs, expose }) {
     const triggerDOM = ref();
 

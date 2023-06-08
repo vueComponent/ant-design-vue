@@ -1,4 +1,4 @@
-import type { Key } from '../../_util/type';
+import type { CustomSlotsType, Key } from '../../_util/type';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import {
   Teleport,
@@ -51,9 +51,9 @@ export const menuProps = () => ({
   activeKey: String, // 内部组件使用
   selectable: { type: Boolean, default: true },
   multiple: { type: Boolean, default: false },
-
+  tabindex: { type: [Number, String] },
   motion: Object as PropType<CSSMotionProps>,
-
+  role: String,
   theme: { type: String as PropType<MenuTheme>, default: 'light' },
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
 
@@ -84,10 +84,15 @@ export type MenuProps = Partial<ExtractPropTypes<ReturnType<typeof menuProps>>>;
 
 const EMPTY_LIST: string[] = [];
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AMenu',
   inheritAttrs: false,
   props: menuProps(),
-  slots: ['expandIcon', 'overflowedIndicator'],
+  slots: Object as CustomSlotsType<{
+    expandIcon?: { isOpen: boolean; [key: string]: any };
+    overflowedIndicator?: any;
+    default: any;
+  }>,
   setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);
     const store = ref<Record<string, StoreMenuInfo>>({});
@@ -338,7 +343,7 @@ export default defineComponent({
     };
 
     const onInternalOpenChange = (key: Key, open: boolean) => {
-      const childrenEventKeys = keyMapStore.value[key].childrenEventKeys;
+      const childrenEventKeys = keyMapStore.value[key]?.childrenEventKeys || [];
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
 
       if (open) {

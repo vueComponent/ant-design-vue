@@ -1,8 +1,9 @@
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
-import { defineComponent, computed, ref, watch } from 'vue';
+import { defineComponent, computed, ref, watch, Fragment } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
+import type { CustomSlotsType } from '../_util/type';
 import { tuple, withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
@@ -31,9 +32,13 @@ function getNumberSize(size: SpaceSize) {
 }
 
 const Space = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ASpace',
   props: spaceProps(),
-  slots: ['split'],
+  slots: Object as CustomSlotsType<{
+    split?: any;
+    default?: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);
     const supportFlexGap = useFlexGapSupport();
@@ -79,8 +84,8 @@ const Space = defineComponent({
     });
     return () => {
       const { wrap, direction = 'horizontal' } = props;
-
-      const items = filterEmpty(slots.default?.());
+      const children = slots.default?.();
+      const items = filterEmpty(children);
       const len = items.length;
 
       if (len === 0) {
@@ -93,6 +98,7 @@ const Space = defineComponent({
       return (
         <div class={cn.value} style={style.value}>
           {items.map((child, index) => {
+            const originIndex = children.indexOf(child);
             let itemStyle: CSSProperties = {};
             if (!supportFlexGap.value) {
               if (direction === 'vertical') {
@@ -110,7 +116,7 @@ const Space = defineComponent({
             }
 
             return (
-              <>
+              <Fragment key={originIndex}>
                 <div class={itemClassName} style={itemStyle}>
                   {child}
                 </div>
@@ -119,7 +125,7 @@ const Space = defineComponent({
                     {split}
                   </span>
                 )}
-              </>
+              </Fragment>
             );
           })}
         </div>

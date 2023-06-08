@@ -66,7 +66,20 @@ $ yarn add ant-design-vue
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：引入 antd.js 前你需要自行引入 [dayjs](https://day.js.org/)。
+> 注意：引入 antd.js 前你需要自行引入 [dayjs](https://day.js.org/) 及其相关插件。
+
+如：
+
+```html
+<script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/customParseFormat.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekday.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/localeData.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekOfYear.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
+```
 
 ## 示例
 
@@ -134,7 +147,7 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
 - [首页](https://www.antdv.com/)
 - [Ant Design Of React](https://ant.design/)
-- [组件库](https://www.antdv.com/docs/vue/introduce-cn)
+- [组件库](https://www.antdv.com/components/overview-cn)
 - [更新日志](/docs/vue/changelog-cn)
 - [CodeSandbox 模板](https://codesandbox.io/s/agitated-franklin-1w72v) for bug reports
 - [定制主题](/docs/vue/customize-theme-cn)

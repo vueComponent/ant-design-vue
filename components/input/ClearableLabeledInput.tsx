@@ -12,6 +12,7 @@ import { getInputClassName, hasAddon, hasPrefixSuffix } from './util';
 const ClearableInputType = ['text', 'input'];
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {
@@ -143,6 +144,7 @@ export default defineComponent({
         size,
         direction,
         hidden,
+        disabled,
       } = props;
       // Not wrap when there is not addons
       if (!hasAddon({ addonBefore, addonAfter })) {
@@ -151,10 +153,16 @@ export default defineComponent({
 
       const wrapperClassName = `${prefixCls}-group`;
       const addonClassName = `${wrapperClassName}-addon`;
+      // fix form error style for input addonAfter slot when disabled
+      const mergedAddonClassName = classNames(addonClassName, {
+        [`${addonClassName}-disabled`]: disabled,
+      });
       const addonBeforeNode = addonBefore ? (
-        <span class={addonClassName}>{addonBefore}</span>
+        <span class={mergedAddonClassName}>{addonBefore}</span>
       ) : null;
-      const addonAfterNode = addonAfter ? <span class={addonClassName}>{addonAfter}</span> : null;
+      const addonAfterNode = addonAfter ? (
+        <span class={mergedAddonClassName}>{addonAfter}</span>
+      ) : null;
 
       const mergedWrapperClassName = classNames(`${prefixCls}-wrapper`, wrapperClassName, {
         [`${wrapperClassName}-rtl`]: direction === 'rtl',

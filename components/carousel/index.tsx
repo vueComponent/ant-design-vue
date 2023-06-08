@@ -70,6 +70,7 @@ export const carouselProps = () => ({
 });
 export type CarouselProps = Partial<ExtractPropTypes<ReturnType<typeof carouselProps>>>;
 const Carousel = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ACarousel',
   inheritAttrs: false,
   props: carouselProps(),

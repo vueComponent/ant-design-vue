@@ -1,5 +1,5 @@
 import type { PropType, ExtractPropTypes, HTMLAttributes, App } from 'vue';
-import { watch, defineComponent, nextTick, onMounted, ref } from 'vue';
+import { watch, defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
@@ -11,6 +11,7 @@ import { cloneElement } from '../_util/vnode';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';
 import isValidValue from '../_util/isValidValue';
+import type { CustomSlotsType } from '../_util/type';
 const baseProps = baseInputNumberProps();
 export const inputNumberProps = () => ({
   ...baseProps,
@@ -30,11 +31,18 @@ export const inputNumberProps = () => ({
 export type InputNumberProps = Partial<ExtractPropTypes<ReturnType<typeof inputNumberProps>>>;
 
 const InputNumber = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AInputNumber',
   inheritAttrs: false,
   props: inputNumberProps(),
   // emits: ['focus', 'blur', 'change', 'input', 'update:value'],
-  slots: ['addonBefore', 'addonAfter', 'prefix'],
+  slots: Object as CustomSlotsType<{
+    addonBefore?: any;
+    addonAfter?: any;
+    prefix?: any;
+    default?: any;
+  }>,
+
   setup(props, { emit, expose, attrs, slots }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, size, direction } = useConfigInject('input-number', props);
@@ -74,16 +82,8 @@ const InputNumber = defineComponent({
       focused.value = true;
       emit('focus', e);
     };
-    onMounted(() => {
-      nextTick(() => {
-        if (process.env.NODE_ENV === 'test') {
-          if (props.autofocus && !props.disabled) {
-            focus();
-          }
-        }
-      });
-    });
     return () => {
+      const id = props.id ?? formItemContext.id.value;
       const {
         class: className,
         bordered,
@@ -94,7 +94,7 @@ const InputNumber = defineComponent({
         prefix = slots.prefix?.(),
         valueModifiers = {},
         ...others
-      } = { ...attrs, ...props } as InputNumberProps & HTMLAttributes;
+      } = { ...attrs, ...props, id } as InputNumberProps & HTMLAttributes;
 
       const preCls = prefixCls.value;
 
@@ -133,8 +133,6 @@ const InputNumber = defineComponent({
         const affixWrapperCls = classNames(`${preCls}-affix-wrapper`, {
           [`${preCls}-affix-wrapper-focused`]: focused.value,
           [`${preCls}-affix-wrapper-disabled`]: props.disabled,
-          [`${preCls}-affix-wrapper-sm`]: size.value === 'small',
-          [`${preCls}-affix-wrapper-lg`]: size.value === 'large',
           [`${preCls}-affix-wrapper-rtl`]: direction.value === 'rtl',
           [`${preCls}-affix-wrapper-readonly`]: readonly,
           [`${preCls}-affix-wrapper-borderless`]: !bordered,

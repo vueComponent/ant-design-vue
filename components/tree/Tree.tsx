@@ -15,6 +15,7 @@ import dropIndicatorRender from './utils/dropIndicator';
 import devWarning from '../vc-util/devWarning';
 import { warning } from '../vc-util/warning';
 import omit from '../_util/omit';
+import type { CustomSlotsType } from '../_util/type';
 
 export interface AntdTreeNodeAttribute {
   eventKey: string;
@@ -142,6 +143,7 @@ export const treeProps = () => {
 export type TreeProps = Partial<ExtractPropTypes<ReturnType<typeof treeProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATree',
   inheritAttrs: false,
   props: initDefaultProps(treeProps(), {
@@ -150,17 +152,14 @@ export default defineComponent({
     showIcon: false,
     blockNode: false,
   }),
-  slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
-  // emits: [
-  //   'update:selectedKeys',
-  //   'update:checkedKeys',
-  //   'update:expandedKeys',
-  //   'expand',
-  //   'select',
-  //   'check',
-  //   'doubleclick',
-  //   'dblclick',
-  // ],
+
+  slots: Object as CustomSlotsType<{
+    icon?: any;
+    title?: any;
+    switcherIcon?: any;
+    titleRender?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, expose, emit, slots }) {
     warning(
       !(props.treeData === undefined && slots.default),

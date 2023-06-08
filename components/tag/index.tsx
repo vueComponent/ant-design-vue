@@ -6,7 +6,7 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
 import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
 import { PresetColorTypes, PresetStatusColorTypes } from '../_util/colors';
-import type { LiteralUnion } from '../_util/type';
+import type { CustomSlotsType, LiteralUnion } from '../_util/type';
 import CheckableTag from './CheckableTag';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -31,10 +31,15 @@ export const tagProps = () => ({
 export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<typeof tagProps>>>;
 
 const Tag = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATag',
   props: tagProps(),
   // emits: ['update:visible', 'close'],
-  slots: ['closeIcon', 'icon'],
+  slots: Object as CustomSlotsType<{
+    closeIcon: any;
+    icon: any;
+    default: any;
+  }>,
   setup(props: TagProps, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('tag', props);
 
@@ -87,9 +92,9 @@ const Tag = defineComponent({
       const renderCloseIcon = () => {
         if (closable) {
           return closeIcon ? (
-            <div class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick}>
+            <span class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick}>
               {closeIcon}
-            </div>
+            </span>
           ) : (
             <CloseOutlined class={`${prefixCls.value}-close-icon`} onClick={handleCloseClick} />
           );

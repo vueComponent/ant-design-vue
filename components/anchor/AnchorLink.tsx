@@ -5,6 +5,7 @@ import { getPropsSlot, initDefaultProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
+import type { CustomSlotsType } from '../_util/type';
 
 export const anchorLinkProps = () => ({
   prefixCls: String,
@@ -16,9 +17,13 @@ export const anchorLinkProps = () => ({
 export type AnchorLinkProps = Partial<ExtractPropTypes<ReturnType<typeof anchorLinkProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AAnchorLink',
   props: initDefaultProps(anchorLinkProps(), { href: '#' }),
-  slots: ['title'],
+  slots: Object as CustomSlotsType<{
+    title: any;
+    default: any;
+  }>,
   setup(props, { slots }) {
     let mergedTitle = null;
     const {

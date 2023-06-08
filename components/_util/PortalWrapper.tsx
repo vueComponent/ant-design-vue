@@ -49,6 +49,7 @@ const getParent = (getContainer: GetContainer) => {
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'PortalWrapper',
   inheritAttrs: false,
   props: {

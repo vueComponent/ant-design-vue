@@ -103,10 +103,10 @@ export default function useScrollTo(
             collectHeight();
           }
           syncScroll(times - 1, newTargetAlign);
-        });
+        }, 2);
       };
 
-      syncScroll(3);
+      syncScroll(5);
     }
   };
 }

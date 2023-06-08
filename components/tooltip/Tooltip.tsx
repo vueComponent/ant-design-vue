@@ -13,6 +13,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import raf from '../_util/raf';
+import type { CustomSlotsType } from '../_util/type';
 export type { AdjustOverflow, PlacementsConfig } from './placements';
 
 // https://github.com/react-component/tooltip
@@ -60,6 +61,7 @@ export const tooltipDefaultProps = () => ({
 export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ATooltip',
   inheritAttrs: false,
   props: initDefaultProps(tooltipProps(), {
@@ -72,7 +74,10 @@ export default defineComponent({
     arrowPointAtCenter: false,
     autoAdjustOverflow: true,
   }),
-  slots: ['title'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    default?: any;
+  }>,
   // emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, getPopupContainer } = useConfigInject('tooltip', props);

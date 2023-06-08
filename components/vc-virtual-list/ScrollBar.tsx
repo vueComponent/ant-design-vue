@@ -19,6 +19,7 @@ function getPageY(e: MouseEvent | TouchEvent) {
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'ScrollBar',
   inheritAttrs: false,
   props: {
@@ -118,18 +119,19 @@ export default defineComponent({
         this.onScrollbarTouchStart,
         supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
       );
-      this.thumbRef.current.removeEventListener(
-        'touchstart',
-        this.onMouseDown,
-        supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
-      );
-      this.thumbRef.current.removeEventListener(
-        'touchmove',
-        this.onMouseMove,
-        supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
-      );
-      this.thumbRef.current.removeEventListener('touchend', this.onMouseUp);
-
+      if (this.thumbRef.current) {
+        this.thumbRef.current.removeEventListener(
+          'touchstart',
+          this.onMouseDown,
+          supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
+        );
+        this.thumbRef.current.removeEventListener(
+          'touchmove',
+          this.onMouseMove,
+          supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
+        );
+        this.thumbRef.current.removeEventListener('touchend', this.onMouseUp);
+      }
       raf.cancel(this.moveRaf);
     },
 

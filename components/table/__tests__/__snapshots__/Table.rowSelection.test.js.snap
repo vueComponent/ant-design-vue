@@ -106,13 +106,13 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
 exports[`Table.rowSelection render with default selection correctly 1`] = `
 <div>
   <!---->
-  <div class="ant-dropdown" style="pointer-events: none; display: none;">
+  <div class="ant-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
     <div class="ant-dropdown-content">
       <!---->
       <ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light" role="menu" data-menu-list="true">
         <div>
           <!---->
-          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip" style="pointer-events: none; display: none;">
+          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip zoom-big-fast-enter zoom-big-fast-enter-prepare" style="pointer-events: none; display: none;">
             <div class="ant-tooltip-content">
               <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
               <div class="ant-tooltip-inner" role="tooltip">
@@ -126,7 +126,7 @@ exports[`Table.rowSelection render with default selection correctly 1`] = `
         </li>
         <div>
           <!---->
-          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip" style="pointer-events: none; display: none;">
+          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip zoom-big-fast-enter zoom-big-fast-enter-prepare" style="pointer-events: none; display: none;">
             <div class="ant-tooltip-content">
               <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
               <div class="ant-tooltip-inner" role="tooltip">
@@ -140,7 +140,7 @@ exports[`Table.rowSelection render with default selection correctly 1`] = `
         </li>
         <div>
           <!---->
-          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip" style="pointer-events: none; display: none;">
+          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip zoom-big-fast-enter zoom-big-fast-enter-prepare" style="pointer-events: none; display: none;">
             <div class="ant-tooltip-content">
               <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
               <div class="ant-tooltip-inner" role="tooltip">

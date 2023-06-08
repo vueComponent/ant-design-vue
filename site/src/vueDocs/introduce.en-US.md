@@ -66,7 +66,20 @@ We provide `antd.js` `antd.css` and `antd.min.js` `antd.min.css` under `ant-desi
 
 > **We strongly discourage loading the entire files** this will add bloat to your application and make it more difficult to receive bugfixes and updates. Antd is intended to be used in conjunction with a build tool, such as [webpack](https://webpack.github.io/), which will make it easy to import only the parts of antd that you are using.
 
-> Note: you should import [dayjs](https://day.js.org/) before using antd.js.
+> Note: you should import [dayjs](https://day.js.org/) and dayjs plugins before using antd.js.
+
+Like:
+
+```html
+<script src="https://unpkg.com/dayjs/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/customParseFormat.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekday.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/localeData.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekOfYear.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/weekYear.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/advancedFormat.js"></script>
+<script src="https://unpkg.com/dayjs/plugin/quarterOfYear.js"></script>
+```
 
 ## Usage
 
@@ -128,12 +141,11 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
   };
   ```
 
-
 ## Links
 
 - [Home Page](https://www.antdv.com/)
 - [Ant Design Of React](https://ant.design/)
-- [Components](https://www.antdv.com/docs/vue/introduce)
+- [Components](https://www.antdv.com/components/overview)
 - [Change Log](/docs/vue/changelog)
 - [CodeSandbox template](https://codesandbox.io/s/agitated-franklin-1w72v) for bug reports
 - [Customize Theme](/docs/vue/customize-theme)

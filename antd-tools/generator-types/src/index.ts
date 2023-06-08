@@ -1,52 +1,91 @@
 import glob from 'fast-glob';
-import { join, dirname } from 'path';
+import { dirname, join } from 'path';
 import { mdParser } from './parser';
 import { formatter } from './formatter';
 import { genWebTypes } from './web-types';
-import { readFileSync, outputFileSync } from 'fs-extra';
+import { outputFileSync, readFileSync } from 'fs-extra';
 import type { Options, VueTag } from './type';
-import { normalizePath, getComponentName } from './utils';
-import { genVeturTags, genVeturAttributes } from './vetur';
+import { getComponentName, normalizePath, toKebabCase } from './utils';
+import { genVeturAttributes, genVeturTags } from './vetur';
 
-async function readMarkdown(options: Options) {
-  // const mds = await glob(normalizePath(`${options.path}/**/*.md`))
-  const mds = await glob(normalizePath(`${options.path}/**/*.md`));
-  return mds
+async function readMarkdown(options: Options): Promise<Map<String, VueTag>> {
+  const mdPaths = await glob(normalizePath(`${options.path}/**/*.md`));
+  const data = mdPaths
     .filter(md => options.test.test(md))
     .map(path => {
       const docPath = dirname(path);
-      const componentName = docPath.substring(docPath.lastIndexOf('/') + 1);
-      return {
-        componentName: getComponentName(componentName || ''),
-        md: readFileSync(path, 'utf-8'),
-      };
-    });
+      const kebabComponentName =
+        options.tagPrefix + docPath.substring(docPath.lastIndexOf('/') + 1) || '';
+      const componentName = getComponentName(docPath.substring(docPath.lastIndexOf('/') + 1) || '');
+      const fileContent = readFileSync(path, 'utf-8');
+      return formatter(mdParser(fileContent), componentName, kebabComponentName, options.tagPrefix);
+    })
+    .filter(item => item) as VueTag[][];
+  const tags: Map<String, VueTag> = new Map();
+  data.flatMap(item => item).forEach(mergedTag => mergeTag(tags, mergedTag));
+  return tags;
 }
 
-export async function parseAndWrite(options: Options) {
+function readTypings(options: Options): Map<String, VueTag> {
+  const tags: Map<String, VueTag> = new Map();
+  const fileContent = readFileSync(options.typingsPath, 'utf-8');
+  fileContent
+    .split('\n')
+    .filter(line => line && line.includes('typeof'))
+    .map(line => {
+      const l = line.trim();
+      return toKebabCase(l.substring(0, l.indexOf(':')));
+    })
+    .forEach(tagName =>
+      tags.set(tagName, {
+        name: tagName,
+        slots: [],
+        events: [],
+        attributes: [],
+      }),
+    );
+  return tags;
+}
+
+function mergeTag(tags: Map<String, VueTag>, mergedTag: VueTag) {
+  const tagName = mergedTag.name;
+  const vueTag = tags.get(tagName);
+  if (vueTag) {
+    vueTag.slots = [...vueTag.slots, ...mergedTag.slots];
+    vueTag.events = [...vueTag.events, ...mergedTag.events];
+    vueTag.attributes = [...vueTag.attributes, ...mergedTag.attributes];
+  } else {
+    tags.set(tagName, mergedTag);
+  }
+}
+
+function mergeTags(mergedTagsArr: Map<String, VueTag>[]): VueTag[] {
+  if (mergedTagsArr.length === 1) return [...mergedTagsArr[0].values()];
+  const tags: Map<String, VueTag> = new Map();
+  if (mergedTagsArr.length === 0) return [];
+  mergedTagsArr.forEach(mergedTags => {
+    mergedTags.forEach(mergedTag => mergeTag(tags, mergedTag));
+  });
+  return [...tags.values()];
+}
+
+export async function parseAndWrite(options: Options): Promise<Number> {
   if (!options.outputDir) {
     throw new Error('outputDir can not be empty.');
   }
-
-  const docs = await readMarkdown(options);
-  const datas = docs
-    .map(doc => formatter(mdParser(doc.md), doc.componentName, options.tagPrefix))
-    .filter(item => item) as VueTag[][];
-  const tags: VueTag[] = [];
-  datas.forEach(arr => {
-    tags.push(...arr);
-  });
-
+  const tagsFromMarkdown = await readMarkdown(options);
+  const tagsFromTypings = await readTypings(options);
+  const tags = mergeTags([tagsFromMarkdown, tagsFromTypings]);
   const webTypes = genWebTypes(tags, options);
   const veturTags = genVeturTags(tags);
   const veturAttributes = genVeturAttributes(tags);
-
   outputFileSync(join(options.outputDir, 'tags.json'), JSON.stringify(veturTags, null, 2));
   outputFileSync(
     join(options.outputDir, 'attributes.json'),
     JSON.stringify(veturAttributes, null, 2),
   );
   outputFileSync(join(options.outputDir, 'web-types.json'), JSON.stringify(webTypes, null, 2));
+  return tags.length;
 }
 
 export default { parseAndWrite };

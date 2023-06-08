@@ -111,7 +111,7 @@ But it also has some disadvantages:
 </a-form-item>
 ```
 
-As above Form.Item does not know whether to collect `name="a"` or `name=`b\`\`, you can solve this kind of problem in the following two ways:
+As above Form.Item does not know whether to collect `name="a"` or `name="b"`, you can solve this kind of problem in the following two ways:
 
 The first is to use multiple `a-form-item`:
 

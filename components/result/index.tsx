@@ -10,6 +10,7 @@ import serverError from './serverError';
 import unauthorized from './unauthorized';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
+import type { CustomSlotsType } from '../_util/type';
 
 export const IconMap = {
   success: CheckCircleFilled,
@@ -59,9 +60,16 @@ const renderExtra = (prefixCls: string, extra: VNodeTypes) =>
   extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
 
 const Result = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AResult',
   props: resultProps(),
-  slots: ['title', 'subTitle', 'icon', 'extra'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    subTitle?: any;
+    icon?: any;
+    extra?: any;
+    default?: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('result', props);
     const className = computed(() =>

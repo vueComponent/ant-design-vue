@@ -6,6 +6,7 @@ import StatisticNumber from './Number';
 import type { valueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { CustomSlotsType } from '../_util/type';
 
 export const statisticProps = () => ({
   prefixCls: String,
@@ -28,13 +29,20 @@ export const statisticProps = () => ({
 export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisticProps>>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AStatistic',
   props: initDefaultProps(statisticProps(), {
     decimalSeparator: '.',
     groupSeparator: ',',
     loading: false,
   }),
-  slots: ['title', 'prefix', 'suffix', 'formatter'],
+  slots: Object as CustomSlotsType<{
+    title?: any;
+    prefix?: any;
+    suffix?: any;
+    formatter?: any;
+    default?: any;
+  }>,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('statistic', props);
     return () => {

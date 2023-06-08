@@ -34,9 +34,9 @@ export type OptionListProps = Record<string, never>;
  * Will fallback to dom if use customize render.
  */
 const OptionList = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'OptionList',
   inheritAttrs: false,
-  slots: ['option'],
   setup(_, { expose, slots }) {
     const baseProps = useBaseProps();
     const props = useSelectProps();
@@ -115,7 +115,7 @@ const OptionList = defineComponent({
         if (!baseProps.multiple && baseProps.open && props.rawValues.size === 1) {
           const value = Array.from(props.rawValues)[0];
           const index = toRaw(memoFlattenOptions.value).findIndex(
-            ({ data }) => data.value === value,
+            ({ data }) => data[props.fieldNames.value] === value,
           );
           if (index !== -1) {
             setActive(index);

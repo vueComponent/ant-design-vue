@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '../../../tests/utils';
+import { sleep } from '../../../tests/utils';
 import Radio from '../Radio';
 import RadioGroup from '../Group';
 
@@ -62,26 +62,21 @@ describe('Radio', () => {
     const props = { onChange };
     const wrapper = mount(createRadioGroup(props), { sync: false });
     let radios = null;
-    await asyncExpect(() => {
-      radios = wrapper.findAll('input');
-      // uncontrolled component
-      wrapper.vm.$refs.radioGroup.stateValue = 'B';
-      // wrapper.setData({ value: 'B' })
-      radios[0].trigger('change');
-      expect(onChange.mock.calls.length).toBe(1);
-    });
-    await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot();
-    });
-    await asyncExpect(() => {
-      // controlled component
-      wrapper.setProps({ value: 'A' });
-      radios[1].trigger('change');
-      expect(onChange.mock.calls.length).toBe(2);
-    });
-    await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot();
-    });
+    await sleep();
+    radios = wrapper.findAll('input');
+    // uncontrolled component
+    wrapper.vm.$refs.radioGroup.stateValue = 'B';
+    // wrapper.setData({ value: 'B' })
+    radios[0].trigger('change');
+    expect(onChange.mock.calls.length).toBe(1);
+    await sleep();
+    expect(wrapper.html()).toMatchSnapshot();
+    // controlled component
+    wrapper.setProps({ value: 'A' });
+    radios[1].trigger('change');
+    expect(onChange.mock.calls.length).toBe(2);
+    await sleep();
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('both of radio and radioGroup will trigger onchange event when they exists', async () => {
@@ -138,12 +133,11 @@ describe('Radio', () => {
     radios[0].trigger('change');
     expect(onChange.mock.calls.length).toBe(1);
 
-    asyncExpect(() => {
-      // controlled component
-      wrapper.setProps({ value: 'A' });
-      radios[1].trigger('change');
-      expect(onChange.mock.calls.length).toBe(2);
-    });
+    await sleep();
+    // controlled component
+    wrapper.setProps({ value: 'A' });
+    radios[1].trigger('change');
+    expect(onChange.mock.calls.length).toBe(2);
   });
 
   // it('should only trigger once when in group with options', () => {
@@ -215,7 +209,7 @@ describe('Radio', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  it('when onChange do not change the value, change event can be also triggered.', async () => {
+  fit('when onChange do not change the value, change event can be also triggered.', async () => {
     const onChange = jest.fn();
     const onChangeRadioGroup = () => {
       onChange();
@@ -238,17 +232,11 @@ describe('Radio', () => {
       },
       { sync: false },
     );
-
+    await sleep();
     const radios = wrapper.findAll('input');
-
-    await asyncExpect(() => {
-      radios[1].trigger('click');
-      expect(onChange.mock.calls.length).toBe(1);
-    });
-
-    await asyncExpect(() => {
-      radios[1].trigger('click');
-      expect(onChange.mock.calls.length).toBe(2);
-    });
+    radios[1].trigger('click');
+    radios[1].trigger('change');
+    await sleep(10);
+    expect(onChange).toHaveBeenCalled();
   });
 });

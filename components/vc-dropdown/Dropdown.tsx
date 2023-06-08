@@ -7,6 +7,7 @@ import { cloneElement } from '../_util/vnode';
 import classNames from '../_util/classNames';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   props: {
     minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
     arrow: { type: Boolean, default: false },
@@ -32,7 +33,6 @@ export default defineComponent({
     mouseLeaveDelay: PropTypes.number.def(0.1),
   },
   emits: ['visibleChange', 'overlayClick'],
-  slots: ['overlay'],
   setup(props, { slots, emit, expose }) {
     const triggerVisible = ref(!!props.visible);
     watch(
@@ -53,7 +53,6 @@ export default defineComponent({
       if (props.visible === undefined) {
         triggerVisible.value = false;
       }
-
       emit('overlayClick', e);
     };
 

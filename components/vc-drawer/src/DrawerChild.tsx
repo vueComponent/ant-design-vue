@@ -33,6 +33,7 @@ export interface scrollLockOptions {
 }
 
 const DrawerChild = defineComponent({
+  compatConfig: { MODE: 3 },
   inheritAttrs: false,
   props: drawerChildProps(),
   emits: ['close', 'handleClick', 'change'],

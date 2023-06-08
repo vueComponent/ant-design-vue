@@ -14,6 +14,7 @@ import omit from '../_util/omit';
 import isMobile from '../_util/isMobile';
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AInputSearch',
   inheritAttrs: false,
   props: {

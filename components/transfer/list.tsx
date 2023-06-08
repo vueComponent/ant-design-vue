@@ -11,6 +11,7 @@ import type { VNode, VNodeTypes, ExtractPropTypes, PropType, CSSProperties } fro
 import { watchEffect, computed, defineComponent, ref } from 'vue';
 import type { RadioChangeEvent } from '../radio/interface';
 import type { TransferDirection, TransferItem } from './index';
+import type { CustomSlotsType } from '../_util/type';
 
 const defaultRender = () => null;
 
@@ -62,11 +63,16 @@ export const transferListProps = {
 export type TransferListProps = Partial<ExtractPropTypes<typeof transferListProps>>;
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'TransferList',
   inheritAttrs: false,
   props: transferListProps,
   // emits: ['scroll', 'itemSelectAll', 'itemRemove', 'itemSelect'],
-  slots: ['footer', 'titleText'],
+  slots: Object as CustomSlotsType<{
+    footer?: any;
+    titleText?: any;
+    default?: any;
+  }>,
   setup(props, { attrs, slots }) {
     const filterValue = ref('');
     const transferNode = ref();

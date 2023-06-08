@@ -7,6 +7,7 @@ import { uploadProps } from './interface';
 function empty() {}
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'Upload',
   inheritAttrs: false,
   props: initDefaultProps(uploadProps(), {

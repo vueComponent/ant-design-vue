@@ -14,7 +14,8 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
-    "target": "es6",
+    "target": "esnext",
+    "module": "esnext",
     "skipLibCheck": true,
     "allowJs": true,
     "importsNotUsedAsValues": "preserve"

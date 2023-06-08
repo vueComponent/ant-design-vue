@@ -72,6 +72,7 @@ export type AffixExpose = {
 
 export type AffixInstance = ComponentPublicInstance<AffixProps, AffixExpose>;
 const Affix = defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AAffix',
   props: affixProps(),
   setup(props, { slots, emit, expose }) {
@@ -108,31 +109,48 @@ const Affix = defineComponent({
       const newState = {
         status: AffixStatus.None,
       } as AffixState;
+      const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
+
+      if (
+        placeholderRect.top === 0 &&
+        placeholderRect.left === 0 &&
+        placeholderRect.width === 0 &&
+        placeholderRect.height === 0
+      ) {
+        return;
+      }
+
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-      const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
-      const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
+      const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
+      const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
+
       if (fixedTop !== undefined) {
+        const width = `${placeholderRect.width}px`;
+        const height = `${placeholderRect.height}px`;
+
         newState.affixStyle = {
           position: 'fixed',
           top: fixedTop,
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width,
+          height,
         };
         newState.placeholderStyle = {
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width,
+          height,
         };
       } else if (fixedBottom !== undefined) {
+        const width = `${placeholderRect.width}px`;
+        const height = `${placeholderRect.height}px`;
+
         newState.affixStyle = {
           position: 'fixed',
           bottom: fixedBottom,
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width,
+          height,
         };
         newState.placeholderStyle = {
-          width: placeholderReact.width + 'px',
-          height: placeholderReact.height + 'px',
+          width,
+          height,
         };
       }
 
@@ -168,9 +186,9 @@ const Affix = defineComponent({
         const targetNode = target();
         if (targetNode && placeholderNode.value) {
           const targetRect = getTargetRect(targetNode);
-          const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-          const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
-          const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
+          const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
+          const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
+          const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
           if (
             (fixedTop !== undefined && affixStyle.top === fixedTop) ||
             (fixedBottom !== undefined && affixStyle.bottom === fixedBottom)

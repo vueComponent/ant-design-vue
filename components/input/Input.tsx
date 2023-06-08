@@ -105,6 +105,7 @@ export function triggerFocus(
 }
 
 export default defineComponent({
+  compatConfig: { MODE: 3 },
   name: 'AInput',
   inheritAttrs: false,
   props: inputProps(),
@@ -246,11 +247,6 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (props.autofocus) {
-          focus();
-        }
-      }
       clearPasswordValueAttribute();
     });
     onBeforeUnmount(() => {

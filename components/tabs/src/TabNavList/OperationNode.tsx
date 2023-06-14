@@ -146,6 +146,7 @@ export default defineComponent({
       if (!tabs.length) {
         moreStyle.visibility = 'hidden';
         moreStyle.order = 1;
+        setOpen(false);
       }
 
       const overlayClassName = classNames({

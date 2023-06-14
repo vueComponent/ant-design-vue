@@ -197,6 +197,9 @@ export default defineComponent({
                           onClick={e => {
                             e.stopPropagation();
                             onRemoveTab(e, tab.key);
+                            if (tabs.length === 1) {
+                              setOpen(false);
+                            }
                           }}
                         >
                           {tab.closeIcon?.() || editable.removeIcon?.() || '×'}

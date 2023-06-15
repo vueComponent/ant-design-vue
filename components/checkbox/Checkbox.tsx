@@ -33,7 +33,6 @@ export default defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const { prefixCls, direction, disabled } = useConfigInject('checkbox', props);
-
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -85,6 +84,7 @@ export default defineComponent({
         id,
         prefixCls: prefixCls.value,
         ...restAttrs,
+        disabled: mergedDisabled.value,
       };
       if (checkboxGroup && !skipGroup) {
         checkboxProps.onChange = (...args) => {
@@ -93,7 +93,7 @@ export default defineComponent({
         };
         checkboxProps.name = checkboxGroup.name.value;
         checkboxProps.checked = checkboxGroup.mergedValue.value.includes(props.value);
-        checkboxProps.disabled = props.disabled || checkboxGroup.disabled.value;
+        checkboxProps.disabled = mergedDisabled.value || checkboxGroup.disabled.value;
         checkboxProps.indeterminate = indeterminate;
       } else {
         checkboxProps.onChange = handleChange;

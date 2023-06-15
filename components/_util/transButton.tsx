@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, shallowRef, onMounted } from 'vue';
 /**
  * Wrap of sub component which need use as Button capacity (like Icon component).
  * This helps accessibility reader to tread as a interactive button to operation.
@@ -25,7 +25,7 @@ const TransButton = defineComponent({
     autofocus: { type: Boolean, default: undefined },
   },
   setup(props, { slots, emit, attrs, expose }) {
-    const domRef = ref();
+    const domRef = shallowRef();
     const onKeyDown = (event: KeyboardEvent) => {
       const { keyCode } = event;
       if (keyCode === KeyCode.ENTER) {

@@ -8,7 +8,7 @@ import {
   defineComponent,
   onBeforeUnmount,
   onMounted,
-  ref,
+  shallowRef,
   Transition,
   watch,
 } from 'vue';
@@ -30,9 +30,9 @@ export default defineComponent({
     // treeNodeRequiredProps: { type: Object as PropType<TreeNodeRequiredProps> },
   },
   setup(props, { attrs, slots }) {
-    const visible = ref(true);
+    const visible = shallowRef(true);
     const context = useInjectTreeContext();
-    const motionedRef = ref(false);
+    const motionedRef = shallowRef(false);
     const transitionProps = computed(() => {
       if (props.motion) {
         return props.motion;
@@ -112,7 +112,6 @@ export default defineComponent({
       return (
         <TreeNode
           v-slots={slots}
-          domRef={ref}
           class={attrs.class}
           style={attrs.style}
           {...otherProps}

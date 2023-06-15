@@ -17,7 +17,7 @@ export type DatetimePanelProps<DateType> = {
 } & Omit<DatePanelProps<DateType>, 'disabledHours' | 'disabledMinutes' | 'disabledSeconds'>;
 
 const ACTIVE_PANEL = tuple('date', 'time');
-type ActivePanelType = typeof ACTIVE_PANEL[number];
+type ActivePanelType = (typeof ACTIVE_PANEL)[number];
 
 function DatetimePanel<DateType>(_props: DatetimePanelProps<DateType>) {
   const props = useMergeProps(_props);

@@ -25,8 +25,8 @@ You can control the indent width by setting `indentSize`.
   </a-space>
   <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 const columns = [
   {
     title: 'Name',
@@ -130,16 +130,6 @@ const rowSelection = ref({
   },
   onSelectAll: (selected: boolean, selectedRows: DataItem[], changeRows: DataItem[]) => {
     console.log(selected, selectedRows, changeRows);
-  },
-});
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-      rowSelection,
-    };
   },
 });
 </script>

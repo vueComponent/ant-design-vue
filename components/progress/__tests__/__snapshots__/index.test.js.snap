@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Progress render dashboard 295 gapDegree 1`] = `
-<div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
+<div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
   <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,47
@@ -18,7 +18,7 @@ exports[`Progress render dashboard 295 gapDegree 1`] = `
 `;
 
 exports[`Progress render dashboard 296 gapDegree 1`] = `
-<div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
+<div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
   <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,47
@@ -35,7 +35,7 @@ exports[`Progress render dashboard 296 gapDegree 1`] = `
 `;
 
 exports[`Progress render dashboard zero gapDegree 1`] = `
-<div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
+<div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
   <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,47
@@ -52,8 +52,8 @@ exports[`Progress render dashboard zero gapDegree 1`] = `
 `;
 
 exports[`Progress render format 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 50%; height: 8px;"></div>
       <div class="ant-progress-success-bg" style="width: 10%; height: 8px;"></div>
@@ -63,8 +63,8 @@ exports[`Progress render format 1`] = `
 `;
 
 exports[`Progress render negative progress 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 0%; height: 8px;"></div>
       <!---->
@@ -74,8 +74,8 @@ exports[`Progress render negative progress 1`] = `
 `;
 
 exports[`Progress render negative successPercent 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 50%; height: 8px;"></div>
       <div class="ant-progress-success-bg" style="width: 0%; height: 8px;"></div>
@@ -85,8 +85,8 @@ exports[`Progress render negative successPercent 1`] = `
 `;
 
 exports[`Progress render normal progress 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 0%; height: 8px;"></div>
       <!---->
@@ -96,8 +96,8 @@ exports[`Progress render normal progress 1`] = `
 `;
 
 exports[`Progress render out-of-range progress 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-success">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-success ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 100%; height: 8px;"></div>
       <!---->
@@ -107,8 +107,8 @@ exports[`Progress render out-of-range progress 1`] = `
 `;
 
 exports[`Progress render out-of-range progress with info 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-success">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-success ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 100%; height: 8px;"></div>
       <!---->
@@ -118,7 +118,7 @@ exports[`Progress render out-of-range progress with info 1`] = `
 `;
 
 exports[`Progress render strokeColor 1`] = `
-<div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
+<div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-default">
   <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
       <!---->
       <path d="M 50,50 m 0,-47
@@ -135,8 +135,8 @@ exports[`Progress render strokeColor 1`] = `
 `;
 
 exports[`Progress render strokeColor 2`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 50%; height: 8px;"></div>
       <!---->
@@ -146,8 +146,8 @@ exports[`Progress render strokeColor 2`] = `
 `;
 
 exports[`Progress render strokeColor 3`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 50%; height: 8px;"></div>
       <!---->
@@ -157,8 +157,8 @@ exports[`Progress render strokeColor 3`] = `
 `;
 
 exports[`Progress render successColor progress 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner">
       <div class="ant-progress-bg" style="width: 60%; height: 8px;"></div>
       <div class="ant-progress-success-bg" style="width: 30%; height: 8px; background-color: rgb(255, 255, 255);"></div>
@@ -168,8 +168,8 @@ exports[`Progress render successColor progress 1`] = `
 `;
 
 exports[`Progress render trailColor progress 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
-  <div class="ant-progress-outer">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+  <div class="ant-progress-outer" style="width: 100%; height: 8px;">
     <div class="ant-progress-inner" style="background-color: rgb(255, 255, 255);">
       <div class="ant-progress-bg" style="width: 0%; height: 8px;"></div>
       <!---->
@@ -179,7 +179,7 @@ exports[`Progress render trailColor progress 1`] = `
 `;
 
 exports[`Progress should support steps 1`] = `
-<div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-normal">
+<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
   <div class="ant-progress-steps-outer">
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>

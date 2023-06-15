@@ -3,7 +3,8 @@ category: Components
 type: Data Entry
 cols: 2
 title: AutoComplete
-cover: https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*g8THS4NpV6sAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*WERTQ6qvgEYAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Autocomplete function of input field.
@@ -33,6 +34,7 @@ The differences with Select are:
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | defaultOpen | Initial open state of dropdown | boolean | - |  |
 | disabled | Whether disabled select | boolean | false |  |
+| popupClassName | The className of dropdown menu | string | - | 4.0 |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |
 | dropdownMenuStyle | additional style applied to dropdown menu | object |  | 1.5.0 |
 | filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true |  |
@@ -40,6 +42,7 @@ The differences with Select are:
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 3.0 |
 | options | Data source for autocomplete | [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
 | placeholder | placeholder of input | string | - |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | v-model:value | selected option | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | - |  |
 
 ### events
@@ -52,6 +55,7 @@ The differences with Select are:
 | focus | Called when entering the component | function() |  |  |
 | search | Called when searching items. | function(value) | - |  |
 | select | Called when a option is selected. param is option's value and option instance. | function(value, option) |  |  |
+| clear | Called when clear | function | - | 3.3.0 |
 
 ## Methods
 

@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import type { ExtractPropTypes, CSSProperties, DefineComponent, HTMLAttributes } from 'vue';
 import { defineComponent } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import SingleNumber from './SingleNumber';
 import { filterEmpty } from '../_util/props-util';
 

@@ -7,7 +7,6 @@
   </span>
 </template>
 <style lang="less" scoped>
-@import '../../theme/static/theme.less';
 @import './Github.less';
 #github-btn {
   display: flex;
@@ -38,7 +37,7 @@
     background: #fff;
 
     &:hover {
-      color: @primary-color;
+      color: var(--primary-color);
     }
   }
 

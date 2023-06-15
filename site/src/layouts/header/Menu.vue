@@ -12,7 +12,7 @@
       :default-value="antdVersion"
     >
       <a-select-option :value="antdVersion">{{ antdVersion }}</a-select-option>
-      <a-select-option value="next" @click="changeVersion('next')">4.x (Next)</a-select-option>
+      <a-select-option value="3.x" @click="changeVersion('3x')">3.x</a-select-option>
       <a-select-option value="2.x" @click="changeVersion('2x')">
         2.x (Not Recommended)
       </a-select-option>
@@ -70,7 +70,12 @@ export default defineComponent({
         );
     };
 
-    const changeVersion = v => {
+    const changeVersion = (v: string) => {
+      if (v === '3x') {
+        // TODO: 3.x site
+        location.href = `https://antdv.com${route.fullPath}`;
+        return;
+      }
       location.href = `https://${v}.antdv.com${route.fullPath}`;
     };
     return {

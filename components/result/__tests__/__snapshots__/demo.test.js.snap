@@ -249,7 +249,7 @@ exports[`renders ./components/result/demo/error.vue correctly 1`] = `
   <div class="ant-result-subtitle">Please check and modify the following information before resubmitting.</div>
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Go Console</span>
-    </button><button class="ant-btn" type="button">
+    </button><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Buy Again</span>
     </button></div>
   <div class="ant-result-content">
@@ -281,7 +281,7 @@ exports[`renders ./components/result/demo/success.vue correctly 1`] = `
   <div class="ant-result-subtitle">Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.</div>
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Go Console</span>
-    </button><button class="ant-btn" type="button">
+    </button><button class="ant-btn ant-btn-default" type="button">
       <!----><span>Buy Again</span>
     </button></div>
   <!---->

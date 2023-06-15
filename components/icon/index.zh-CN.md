@@ -3,7 +3,8 @@ category: Components
 type: 通用
 title: Icon
 subtitle: 图标
-cover: https://gw.alipayobjects.com/zos/alicdn/rrwbSt3FQ/Icon.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*PdAYS7anRpoAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*xEDOTJx2DEkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 语义化的矢量图形。使用图标组件，你需要安装 `@ant-design/icons-vue` 图标组件包：

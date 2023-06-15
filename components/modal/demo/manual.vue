@@ -19,31 +19,23 @@ Manually updating and destroying a modal from `Modal.method`.
 <template>
   <a-button @click="countDown">Open modal to close in 5s</a-button>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { Modal } from 'ant-design-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    const countDown = () => {
-      let secondsToGo = 5;
-      const modal = Modal.success({
-        title: 'This is a notification message',
-        content: `This modal will be destroyed after ${secondsToGo} second.`,
-      });
-      const interval = setInterval(() => {
-        secondsToGo -= 1;
-        modal.update({
-          content: `This modal will be destroyed after ${secondsToGo} second.`,
-        });
-      }, 1000);
-      setTimeout(() => {
-        clearInterval(interval);
-        modal.destroy();
-      }, secondsToGo * 1000);
-    };
-    return {
-      countDown,
-    };
-  },
-});
+const countDown = () => {
+  let secondsToGo = 5;
+  const modal = Modal.success({
+    title: 'This is a notification message',
+    content: `This modal will be destroyed after ${secondsToGo} second.`,
+  });
+  const interval = setInterval(() => {
+    secondsToGo -= 1;
+    modal.update({
+      content: `This modal will be destroyed after ${secondsToGo} second.`,
+    });
+  }, 1000);
+  setTimeout(() => {
+    clearInterval(interval);
+    modal.destroy();
+  }, secondsToGo * 1000);
+};
 </script>

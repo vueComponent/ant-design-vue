@@ -6,18 +6,23 @@ import { RangePicker as VCRangePicker } from '../../vc-picker';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
-import { getRangePlaceholder } from '../util';
+import { getRangePlaceholder, transPlacement2DropdownAlign } from '../util';
 import { getTimeProps, Components } from '.';
 import { computed, defineComponent, ref } from 'vue';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import type { CommonProps, RangePickerProps } from './props';
 import { commonProps, rangePickerProps } from './props';
 import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
-import devWarning from '../../vc-util/devWarning';
-import { useInjectFormItemContext } from '../../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
 import omit from '../../_util/omit';
+import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
+
+//CSSINJS
+import useStyle from '../style';
+import { useCompactItemContext } from '../../space/Compact';
+import devWarning from '../../vc-util/devWarning';
 import type { CustomSlotsType } from '../../_util/type';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
@@ -48,15 +53,28 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
     setup(_props, { expose, slots, attrs, emit }) {
       const props = _props as unknown as CommonProps<DateType> & RangePickerProps<DateType>;
       const formItemContext = useInjectFormItemContext();
-      devWarning(
-        !attrs.getCalendarContainer,
-        'DatePicker',
-        '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
-      );
-      const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
-        'picker',
-        props,
-      );
+      const formItemInputContext = FormItemInputContext.useInject();
+
+      // =================== Warning =====================
+      if (process.env.NODE_ENV !== 'production') {
+        devWarning(
+          !props.dropdownClassName,
+          'RangePicker',
+          '`dropdownClassName` is deprecated. Please use `popupClassName` instead.',
+        );
+        devWarning(
+          !attrs.getCalendarContainer,
+          'DatePicker',
+          '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
+        );
+      }
+
+      const { prefixCls, direction, getPopupContainer, size, rootPrefixCls, disabled } =
+        useConfigInject('picker', props);
+      const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+      const mergedSize = computed(() => compactSize.value || size.value);
+      // style
+      const [wrapSSR, hashId] = useStyle(prefixCls);
       const pickerRef = ref();
       expose({
         focus: () => {
@@ -159,7 +177,13 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             : {}),
         };
         const pre = prefixCls.value;
-        return (
+        const suffixNode = (
+          <>
+            {suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)}
+            {formItemInputContext.hasFeedback && formItemInputContext.feedbackIcon}
+          </>
+        );
+        return wrapSSR(
           <VCRangePicker
             dateRender={dateRender}
             renderExtraFooter={renderExtraFooter}
@@ -171,15 +195,15 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
               )
             }
             ref={pickerRef}
-            placeholder={getRangePlaceholder(picker, locale, placeholder as [string, string])}
-            suffixIcon={
-              suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
-            }
+            dropdownAlign={transPlacement2DropdownAlign(direction.value, props.placement)}
+            placeholder={getRangePlaceholder(locale, picker, placeholder as [string, string])}
+            suffixIcon={suffixNode}
             clearIcon={clearIcon || <CloseCircleFilled />}
             allowClear={allowClear}
             transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
             {...restProps}
             {...additionalOverrideProps}
+            disabled={disabled.value}
             id={id}
             value={value.value}
             defaultValue={defaultValue.value}
@@ -187,10 +211,17 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             picker={picker}
             class={classNames(
               {
-                [`${pre}-${size.value}`]: size.value,
+                [`${pre}-${mergedSize.value}`]: mergedSize.value,
                 [`${pre}-borderless`]: !bordered,
               },
+              getStatusClassNames(
+                pre,
+                getMergedStatus(formItemInputContext.status, props.status),
+                formItemInputContext.hasFeedback,
+              ),
               attrs.class,
+              hashId.value,
+              compactItemClassnames.value,
             )}
             locale={locale!.lang}
             prefixCls={pre}
@@ -202,6 +233,11 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
             components={Components}
             direction={direction.value}
+            dropdownClassName={classNames(
+              hashId.value,
+              props.popupClassName,
+              props.dropdownClassName,
+            )}
             onChange={onChange}
             onOpenChange={onOpenChange}
             onFocus={onFocus}
@@ -209,7 +245,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             onPanelChange={onPanelChange}
             onOk={onOk}
             onCalendarChange={onCalendarChange}
-          />
+          />,
         );
       };
     },

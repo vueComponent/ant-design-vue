@@ -1,19 +1,34 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { watchEffect, defineComponent, ref, watch, toRaw } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
+import { computed, watchEffect, defineComponent, ref, watch, toRaw } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale-provider/default';
-import type { CustomSlotsType, VueNode } from '../_util/type';
-import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+
+import defaultLocale from '../locale/en_US';
+import type { VueNode, CustomSlotsType } from '../_util/type';
+import {
+  withInstall,
+  stringType,
+  arrayType,
+  someType,
+  booleanType,
+  objectType,
+  functionType,
+} from '../_util/type';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import { groupKeysMap, groupDisabledKeysMap } from '../_util/transKeys';
+// CSSINJS
+import useStyle from './style';
 
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';
@@ -51,55 +66,56 @@ export type SelectAllLabel =
   | ((info: { selectedCount: number; totalCount: number }) => VueNode);
 
 export interface TransferLocale {
-  titles: VueNode[];
+  titles?: VueNode[];
   notFoundContent?: VueNode;
   searchPlaceholder: string;
   itemUnit: string;
   itemsUnit: string;
-  remove: string;
-  selectAll: string;
-  selectCurrent: string;
-  selectInvert: string;
-  removeAll: string;
-  removeCurrent: string;
+  remove?: string;
+  selectAll?: string;
+  selectCurrent?: string;
+  selectInvert?: string;
+  removeAll?: string;
+  removeCurrent?: string;
 }
 
 export const transferProps = () => ({
   id: String,
   prefixCls: String,
-  dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
-  disabled: { type: Boolean, default: undefined },
-  targetKeys: { type: Array as PropType<string[]>, default: undefined },
-  selectedKeys: { type: Array as PropType<string[]>, default: undefined },
-  render: { type: Function as PropType<TransferRender<TransferItem>> },
-  listStyle: {
-    type: [Function, Object] as PropType<((style: ListStyle) => CSSProperties) | CSSProperties>,
-    default: () => ({}),
-  },
-  operationStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  titles: { type: Array as PropType<string[]> },
-  operations: { type: Array as PropType<string[]> },
-  showSearch: { type: Boolean, default: false },
-  filterOption: { type: Function as PropType<(inputValue: string, item: TransferItem) => boolean> },
+  dataSource: arrayType<TransferItem[]>([]),
+  disabled: booleanType(),
+  targetKeys: arrayType<string[]>(),
+  selectedKeys: arrayType<string[]>(),
+  render: functionType<TransferRender<TransferItem>>(),
+  listStyle: someType<((style: ListStyle) => CSSProperties) | CSSProperties>(
+    [Function, Object],
+    () => ({}),
+  ),
+  operationStyle: objectType<CSSProperties>(undefined as CSSProperties),
+  titles: arrayType<string[]>(),
+  operations: arrayType<string[]>(),
+  showSearch: booleanType(false),
+  filterOption: functionType<(inputValue: string, item: TransferItem) => boolean>(),
   searchPlaceholder: String,
   notFoundContent: PropTypes.any,
-  locale: { type: Object as PropType<Partial<TransferLocale>>, default: () => ({}) },
-  rowKey: { type: Function as PropType<(record: TransferItem) => string> },
-  showSelectAll: { type: Boolean, default: undefined },
-  selectAllLabels: { type: Array as PropType<SelectAllLabel[]> },
-  children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
-  oneWay: { type: Boolean, default: undefined },
-  pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
-  onChange: Function as PropType<
-    (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
-  >,
-  onSelectChange: Function as PropType<
-    (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void
-  >,
-  onSearch: Function as PropType<(direction: TransferDirection, value: string) => void>,
-  onScroll: Function as PropType<(direction: TransferDirection, e: UIEvent) => void>,
-  'onUpdate:targetKeys': Function as PropType<(keys: string[]) => void>,
-  'onUpdate:selectedKeys': Function as PropType<(keys: string[]) => void>,
+  locale: objectType(),
+  rowKey: functionType<(record: TransferItem) => string>(),
+  showSelectAll: booleanType(),
+  selectAllLabels: arrayType<SelectAllLabel[]>(),
+  children: functionType<(props: TransferListBodyProps) => VueNode>(),
+  oneWay: booleanType(),
+  pagination: someType<PaginationType>([Object, Boolean]),
+  status: stringType<InputStatus>(),
+  onChange:
+    functionType<
+      (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
+    >(),
+  onSelectChange:
+    functionType<(sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void>(),
+  onSearch: functionType<(direction: TransferDirection, value: string) => void>(),
+  onScroll: functionType<(direction: TransferDirection, e: UIEvent) => void>(),
+  'onUpdate:targetKeys': functionType<(keys: string[]) => void>(),
+  'onUpdate:selectedKeys': functionType<(keys: string[]) => void>(),
 });
 
 export type TransferProps = Partial<ExtractPropTypes<ReturnType<typeof transferProps>>>;
@@ -123,10 +139,16 @@ const Transfer = defineComponent({
   // emits: ['update:targetKeys', 'update:selectedKeys', 'change', 'search', 'scroll', 'selectChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const sourceSelectedKeys = ref([]);
     const targetSelectedKeys = ref([]);
 
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     watch(
       () => props.selectedKeys,
       () => {
@@ -157,15 +179,16 @@ const Transfer = defineComponent({
     const moveTo = (direction: TransferDirection) => {
       const { targetKeys = [], dataSource = [] } = props;
       const moveKeys = direction === 'right' ? sourceSelectedKeys.value : targetSelectedKeys.value;
+      const dataSourceDisabledKeysMap = groupDisabledKeysMap(dataSource);
       // filter the disabled options
-      const newMoveKeys = moveKeys.filter(
-        key => !dataSource.some(data => !!(key === data.key && data.disabled)),
-      );
+      const newMoveKeys = moveKeys.filter(key => !dataSourceDisabledKeysMap.has(key));
+      const newMoveKeysMap = groupKeysMap(newMoveKeys);
+
       // move items to target box
       const newTargetKeys =
         direction === 'right'
           ? newMoveKeys.concat(targetKeys)
-          : targetKeys.filter(targetKey => newMoveKeys.indexOf(targetKey) === -1);
+          : targetKeys.filter(targetKey => !newMoveKeysMap.has(targetKey));
 
       // empty checked keys
       const oppositeDirection = direction === 'right' ? 'left' : 'right';
@@ -289,16 +312,16 @@ const Transfer = defineComponent({
 
       const ld = [];
       const rd = new Array(targetKeys.length);
+      const targetKeysMap = groupKeysMap(targetKeys);
       dataSource.forEach(record => {
         if (rowKey) {
           record.key = rowKey(record);
         }
 
-        // rightDataSource should be ordered by targetKeys
-        // leftDataSource should be ordered by dataSource
-        const indexOfKey = targetKeys.indexOf(record.key);
-        if (indexOfKey !== -1) {
-          rd[indexOfKey] = record;
+        // rightData should be ordered by targetKeys
+        // leftData should be ordered by dataSource
+        if (targetKeysMap.has(record.key)) {
+          rd[targetKeysMap.get(record.key)!] = record;
         } else {
           ld.push(record);
         }
@@ -336,17 +359,24 @@ const Transfer = defineComponent({
       const leftActive = targetSelectedKeys.value.length > 0;
       const rightActive = sourceSelectedKeys.value.length > 0;
 
-      const cls = classNames(prefixCls.value, className, {
-        [`${prefixCls.value}-disabled`]: disabled,
-        [`${prefixCls.value}-customize-list`]: !!children,
-      });
+      const cls = classNames(
+        prefixCls.value,
+        className,
+        {
+          [`${prefixCls.value}-disabled`]: disabled,
+          [`${prefixCls.value}-customize-list`]: !!children,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        getStatusClassNames(prefixCls.value, mergedStatus.value, formItemInputContext.hasFeedback),
+        hashId.value,
+      );
       const titles = props.titles;
       const leftTitle =
         (titles && titles[0]) ?? slots.leftTitle?.() ?? (locale.titles || ['', ''])[0];
       const rightTitle =
         (titles && titles[1]) ?? slots.rightTitle?.() ?? (locale.titles || ['', ''])[1];
       return (
-        <div class={cls} style={style as CSSProperties} id={id}>
+        <div {...attrs} class={cls} style={style as CSSProperties} id={id}>
           <List
             key="leftList"
             prefixCls={`${prefixCls.value}-list`}
@@ -412,13 +442,14 @@ const Transfer = defineComponent({
         </div>
       );
     };
-    return () => (
-      <LocaleReceiver
-        componentName="Transfer"
-        defaultLocale={defaultLocale.Transfer}
-        children={renderTransfer}
-      />
-    );
+    return () =>
+      wrapSSR(
+        <LocaleReceiver
+          componentName="Transfer"
+          defaultLocale={defaultLocale.Transfer}
+          children={renderTransfer}
+        />,
+      );
   },
 });
 

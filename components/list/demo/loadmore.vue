@@ -54,57 +54,45 @@ Load more list with `loadMore` property.
     </template>
   </a-list>
 </template>
-<script lang="ts">
-import { defineComponent, onMounted, ref, nextTick } from 'vue';
+<script lang="ts" setup>
+import { onMounted, ref, nextTick } from 'vue';
 const count = 3;
 const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat,picture&noinfo`;
 
-export default defineComponent({
-  setup() {
-    const initLoading = ref(true);
-    const loading = ref(false);
-    const data = ref([]);
-    const list = ref([]);
-    onMounted(() => {
-      fetch(fakeDataUrl)
-        .then(res => res.json())
-        .then(res => {
-          initLoading.value = false;
-          data.value = res.results;
-          list.value = res.results;
-        });
+const initLoading = ref(true);
+const loading = ref(false);
+const data = ref([]);
+const list = ref([]);
+onMounted(() => {
+  fetch(fakeDataUrl)
+    .then(res => res.json())
+    .then(res => {
+      initLoading.value = false;
+      data.value = res.results;
+      list.value = res.results;
     });
-
-    const onLoadMore = () => {
-      loading.value = true;
-      list.value = data.value.concat(
-        [...new Array(count)].map(() => ({ loading: true, name: {}, picture: {} })),
-      );
-      fetch(fakeDataUrl)
-        .then(res => res.json())
-        .then(res => {
-          const newData = data.value.concat(res.results);
-          loading.value = false;
-          data.value = newData;
-          list.value = newData;
-          nextTick(() => {
-            // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-            // In real scene, you can using public method of react-virtualized:
-            // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-            window.dispatchEvent(new Event('resize'));
-          });
-        });
-    };
-
-    return {
-      loading,
-      initLoading,
-      data,
-      list,
-      onLoadMore,
-    };
-  },
 });
+
+const onLoadMore = () => {
+  loading.value = true;
+  list.value = data.value.concat(
+    [...new Array(count)].map(() => ({ loading: true, name: {}, picture: {} })),
+  );
+  fetch(fakeDataUrl)
+    .then(res => res.json())
+    .then(res => {
+      const newData = data.value.concat(res.results);
+      loading.value = false;
+      data.value = newData;
+      list.value = newData;
+      nextTick(() => {
+        // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
+        // In real scene, you can using public method of react-virtualized:
+        // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
+        window.dispatchEvent(new Event('resize'));
+      });
+    });
+};
 </script>
 <style scoped>
 .demo-loadmore-list {

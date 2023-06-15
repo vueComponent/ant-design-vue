@@ -32,9 +32,7 @@ New feature after 3.16.0. We preset a series of colorful Badge styles for use in
   <br />
   <a-badge color="#108ee9" text="#108ee9" />
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
 const colors = [
   'pink',
   'red',
@@ -50,11 +48,4 @@ const colors = [
   'gold',
   'lime',
 ];
-export default defineComponent({
-  setup() {
-    return {
-      colors,
-    };
-  },
-});
 </script>

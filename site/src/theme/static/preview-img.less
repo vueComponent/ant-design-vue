@@ -69,7 +69,7 @@
   display: block;
   width: 100%;
   height: 3px;
-  background: @primary-color;
+  background: var(--primary-color);
   content: '';
 }
 
@@ -80,19 +80,19 @@
   display: block;
   width: 100%;
   height: 3px;
-  background: @error-color;
+  background: var(--error-color);
   content: '';
 }
 
 .preview-image-title {
   margin-top: 20px;
-  color: @site-text-color;
+  color: var(--site-text-color);
   font-size: 12px;
 }
 
 .preview-image-description {
   margin-top: 2px;
-  color: @site-text-color-secondary;
+  color: var(--site-text-color-secondary);
   font-size: 12px;
   line-height: 1.5;
 }
@@ -106,8 +106,8 @@
 .preview-image-box img {
   max-width: 100%;
   padding: 12px;
-  background: @body-background;
-  border-radius: @border-radius-base;
+  background: var(--body-background);
+  border-radius: var(--border-radius-base);
   cursor: pointer;
   transition: all 0.3s;
   &.no-padding {
@@ -118,8 +118,8 @@
 
 .preview-image-boxes.preview-image-boxes-with-carousel img {
   padding: 0;
-  box-shadow: 0 1px 0 0 #ddd, 0 3px 0 0 @body-background, 0 4px 0 0 #ddd, 0 6px 0 0 @body-background,
-    0 7px 0 0 #ddd;
+  box-shadow: 0 1px 0 0 #ddd, 0 3px 0 0 var(--body-background), 0 4px 0 0 #ddd,
+    0 6px 0 0 var(--body-background), 0 7px 0 0 #ddd;
 }
 
 .preview-image-box img:hover {

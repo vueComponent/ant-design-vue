@@ -6,7 +6,7 @@
     <Layout />
     <inlineLoginVue />
     <normalLoginVue />
-    <!-- <Validation /> -->
+    <validationVue />
     <CustomValidation />
     <DynamicFormItem />
     <NestedForm />
@@ -19,6 +19,7 @@
     <formInModalVue />
     <timeRelatedControlsVue />
     <validateOtherVue />
+    <validateStaticVue />
     <UseFormBasic />
     <UseFormNested />
     <UseFormTrigger />
@@ -29,6 +30,7 @@
 import { defineComponent } from 'vue';
 import advancedSearchVue from './advanced-search.vue';
 import Basic from './basic.vue';
+import validationVue from './validation.vue';
 import CustomValidation from './custom-validation.vue';
 import DynamicFormItem from './dynamic-form-item.vue';
 import dynamicFormItemsComplexVue from './dynamic-form-items-complex.vue';
@@ -50,6 +52,7 @@ import UseFormMerge from './useForm-merge.vue';
 import CustomizedFormControls from './customized-form-controls.vue';
 import timeRelatedControlsVue from './time-related-controls.vue';
 import validateOtherVue from './validate-other.vue';
+import validateStaticVue from './validate-static.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -57,6 +60,7 @@ export default defineComponent({
   US,
   CN,
   components: {
+    validateStaticVue,
     timeRelatedControlsVue,
     validateOtherVue,
     Basic,
@@ -65,7 +69,7 @@ export default defineComponent({
     HorizontalLogin,
     NestedForm,
     Layout,
-    // Validation,
+    validationVue,
     UseFormBasic,
     UseFormNested,
     UseFormTrigger,

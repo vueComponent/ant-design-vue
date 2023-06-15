@@ -2,7 +2,8 @@
 category: Components
 type: Feedback
 title: Modal
-cover: https://gw.alipayobjects.com/zos/alicdn/3StSdUlSH/Modal.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*wM3qQ5XrhlcAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fBrgSJBmavgAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Modal dialogs.
@@ -17,7 +18,7 @@ When requiring users to interact with the application, but without jumping to a 
 | --- | --- | --- | --- | --- |
 | afterClose | Specify a function that will be called when modal is closed completely. | function | - |  |
 | bodyStyle | Body style for modal body element. Such as height, padding etc. | object | {} |  |
-| cancelButtonProps | The cancel button props | [ButtonProps](/components/button/#API) | - |  |
+| cancelButtonProps | The cancel button props | [ButtonProps](/components/button/#api) | - |  |
 | cancelText | Text of the Cancel button | string\|slot | `Cancel` |  |
 | centered | Centered Modal | boolean | `false` |  |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | true |  |
@@ -32,11 +33,11 @@ When requiring users to interact with the application, but without jumping to a 
 | mask | Whether show mask or not. | boolean | true |  |
 | maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | boolean | true |  |
 | maskStyle | Style for modal's mask element. | object | {} |  |
-| okButtonProps | The ok button props | [ButtonProps](/components/button/#API) | - |  |
+| okButtonProps | The ok button props | [ButtonProps](/components/button/#api) | - |  |
 | okText | Text of the OK button | string\|slot | `OK` |  |
 | okType | Button `type` of the OK button | string | `primary` |  |
 | title | The modal dialog's title | string\|slot | - |  |
-| visible | Whether the modal dialog is visible or not | boolean | false |  |
+| open(v-model) | Whether the modal dialog is visible or not | boolean | false |  |
 | width | Width of the modal dialog | string\|number | 520 |  |
 | wrapClassName | The class name of the container of the modal dialog | string | - |  |
 | zIndex | The `z-index` of the Modal | number | 1000 |  |
@@ -74,6 +75,7 @@ The items listed above are all functions, expecting a settings object as paramet
 | class | class of container | string | - |  |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |  |
 | content | Content | string\|VNode \|function(h) | - |  |
+| footer | Footer content, set as `footer: null` when you don't need default buttons | string\|VNode \|function(h) | - | 4.0.0 |
 | icon | custom icon (`Added in 1.14.0`) | VNode \|()=>VNode | - |  |
 | keyboard | Whether support press esc to close | boolean | true |  |
 | mask | Whether show mask or not. | boolean | true |  |
@@ -114,21 +116,44 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
+### Modal.useModal()
+
+When you need using Context, you can use `contextHolder` which created by `Modal.useModal` to insert into children. Modal created by hooks will get all the context where `contextHolder` are. Created `modal` has the same creating function with `Modal.method`.
+
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { Modal } from 'ant-design-vue';
+  const [modal, contextHolder] = Modal.useModal();
+
+  modal.confirm({
+    // ...
+  });
+</script>
+```
+
 ## FAQ
 
-### Why can't the Modal method obtain global registered components, context, vuex, etc. and ConfigProvider `locale/prefixCls` configuration, and can't update data responsively?
+### Why can't the Modal method obtain global registered components, context, vuex, etc. and ConfigProvider `locale/prefixCls/theme` configuration, and can't update data responsively?
 
 Call the Modal method directly, and the component will dynamically create a new Vue entity through `Vue.render`. Its context is not the same as the context where the current code is located, so the context information cannot be obtained.
 
-When you need context information (for example, using a globally registered component), you can pass the current component context through the `appContext` property. When you need to keep the property responsive, you can use the function to return:
+When you need context information (for example, using a globally registered component), you can use `Modal.useModal` to get `modal` instance and `contextHolder` node. And put it in your children:
 
-```tsx
-import { getCurrentInstance } from 'vue';
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { Modal } from 'ant-design-vue';
+  const [modal, contextHolder] = Modal.useModal();
 
-const appContext = getCurrentInstance().appContext;
-const title = ref('some message');
-Modal.confirm({
-  title: () => title.value, // the change of title will update the title in confirm synchronously
-  appContext,
-});
+  modal.confirm({
+    // ...
+  });
+</script>
 ```

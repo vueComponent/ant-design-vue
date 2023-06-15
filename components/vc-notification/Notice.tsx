@@ -103,7 +103,7 @@ export default defineComponent<NoticeProps>({
       const componentClass = `${prefixCls}-notice`;
       const dataOrAriaAttributeProps = Object.keys(attrs).reduce(
         (acc: Record<string, string>, key: string) => {
-          if (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-' || key === 'role') {
+          if (key.startsWith('data-') || key.startsWith('aria-') || key === 'role') {
             acc[key] = (attrs as any)[key];
           }
           return acc;

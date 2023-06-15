@@ -23,7 +23,7 @@
       <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
     </div>
     <a-popover
-      v-model:visible="menuVisible"
+      v-model:open="menuVisible"
       overlay-class-name="popover-menu"
       placement="bottomRight"
       trigger="click"
@@ -162,10 +162,9 @@ export default defineComponent({
   line-height: 28px;
   color: #8590a6;
   text-align: center;
-  background-color: #ebebeb;
+  background-color: #141414;
 }
 .alert-banner {
-  background-color: var(--ant-primary-color);
   color: #fff;
   padding: 5px;
 }

@@ -20,13 +20,14 @@ import {
 } from 'vue';
 import warning from '../_util/warning';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
-import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
+import useResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import Row from './Row';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { flattenChildren } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { CustomSlotsType } from '../_util/type';
+import useStyle from './style';
 
 export const DescriptionsItemProps = {
   prefixCls: String,
@@ -82,7 +83,7 @@ function getColumn(column: DescriptionsProps['column'], screens: ScreenMap): num
   return 3;
 }
 
-function getFilledItem(node: VNode, span: number | undefined, rowRestCol: number): VNode {
+function getFilledItem(node: VNode, rowRestCol: number, span?: number): VNode {
   let clone = node;
 
   if (span === undefined || span > rowRestCol) {
@@ -106,12 +107,12 @@ function getRows(children: VNode[], column: number) {
   let tmpRow: VNode[] = [];
   let rowRestCol = column;
   childNodes.forEach((node, index) => {
-    const span: number | undefined = node.props?.span;
+    const span: number = node.props?.span;
     const mergedSpan = span || 1;
 
     // Additional handle last one
     if (index === childNodes.length - 1) {
-      tmpRow.push(getFilledItem(node, span, rowRestCol));
+      tmpRow.push(getFilledItem(node, rowRestCol, span));
       rows.push(tmpRow);
       return;
     }
@@ -120,7 +121,7 @@ function getRows(children: VNode[], column: number) {
       rowRestCol -= mergedSpan;
       tmpRow.push(node);
     } else {
-      tmpRow.push(getFilledItem(node, mergedSpan, rowRestCol));
+      tmpRow.push(getFilledItem(node, rowRestCol, mergedSpan));
       rows.push(tmpRow);
       rowRestCol = column;
       tmpRow = [];
@@ -160,6 +161,7 @@ export const descriptionsContext: InjectionKey<DescriptionsContextProp> =
 const Descriptions = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ADescriptions',
+  inheritAttrs: false,
   props: descriptionsProps(),
   slots: Object as CustomSlotsType<{
     title?: any;
@@ -167,12 +169,16 @@ const Descriptions = defineComponent({
     default?: any;
   }>,
   Item: DescriptionsItem,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('descriptions', props);
     let token: number;
     const screens = ref<ScreenMap>({});
+
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const responsiveObserve = useResponsiveObserve();
+
     onBeforeMount(() => {
-      token = ResponsiveObserve.subscribe(screen => {
+      token = responsiveObserve.value.subscribe(screen => {
         if (typeof props.column !== 'object') {
           return;
         }
@@ -181,7 +187,7 @@ const Descriptions = defineComponent({
     });
 
     onBeforeUnmount(() => {
-      ResponsiveObserve.unsubscribe(token);
+      responsiveObserve.value.unsubscribe(token);
     });
 
     provide(descriptionsContext, {
@@ -204,8 +210,9 @@ const Descriptions = defineComponent({
       const children = slots.default?.();
       const rows = getRows(children, mergeColumn.value);
 
-      return (
+      return wrapSSR(
         <div
+          {...attrs}
           class={[
             prefixCls.value,
             {
@@ -213,6 +220,8 @@ const Descriptions = defineComponent({
               [`${prefixCls.value}-bordered`]: !!bordered,
               [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
             },
+            attrs.class,
+            hashId.value,
           ]}
         >
           {(title || extra) && (
@@ -238,7 +247,7 @@ const Descriptions = defineComponent({
               </tbody>
             </table>
           </div>
-        </div>
+        </div>,
       );
     };
   },

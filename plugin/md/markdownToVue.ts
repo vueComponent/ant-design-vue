@@ -58,14 +58,7 @@ export function createMarkdownToVueRenderFn(
     };
     const newContent = data.vueCode
       ? await genComponentCode(md, data, pageData)
-      : `
-<template><article class="markdown">${html}</article></template>
-
-<script>
-export default { pageData: ${JSON.stringify(pageData)} }
-</script>
-${fetchCode(content, 'style')}
-`;
+      : await genDocCode(content, pageData);
 
     debug(`[render] ${file} in ${Date.now() - start}ms.`);
     const result = {
@@ -135,6 +128,28 @@ ${jsSourceCode}
     ${style}
     `;
   return newContent;
+}
+
+async function genDocCode(content: string, pageData: PageData) {
+  return `
+<template><article class="markdown">${pageData.html}</article></template>
+
+<script>
+import ColorChunk from '@/components/ColorChunk';
+import TokenTable from '@/components/TokenTable';
+import ComponentTokenTable from '@/components/ComponentTokenTable';
+
+export default { 
+    components: {
+        ColorChunk,
+        TokenTable, 
+        ComponentTokenTable
+    }, 
+    pageData: ${JSON.stringify(pageData)} 
+}
+</script>
+${fetchCode(content, 'style')}
+`;
 }
 
 const inferTitle = (frontmatter: any, content: string) => {

@@ -63,28 +63,19 @@ Set a number and automatically fold after exceeding.
     ></a-select>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import type { SelectProps } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const options = ref<SelectProps['options']>([]);
+import { ref } from 'vue';
+const options = ref<SelectProps['options']>([]);
 
-    for (let i = 10; i < 36; i++) {
-      const value = i.toString(36) + i;
-      options.value.push({
-        label: `Long Label: ${value}`,
-        value,
-      });
-    }
-    const maxTagCount = ref(2);
-    const maxTagTextLength = ref(10);
-    return {
-      value: ref(['a10', 'c12', 'h17', 'j19', 'k20']),
-      options,
-      maxTagCount,
-      maxTagTextLength,
-    };
-  },
-});
+for (let i = 10; i < 36; i++) {
+  const value = i.toString(36) + i;
+  options.value.push({
+    label: `Long Label: ${value}`,
+    value,
+  });
+}
+const maxTagCount = ref(2);
+const maxTagTextLength = ref(10);
+const value = ref(['a10', 'c12', 'h17', 'j19', 'k20']);
 </script>

@@ -1,5 +1,5 @@
 import type { InjectionKey, Ref } from 'vue';
-import { ref, inject, provide } from 'vue';
+import { shallowRef, inject, provide } from 'vue';
 
 export interface HoverContextProps {
   startRow: Ref<number>;
@@ -14,8 +14,8 @@ export const useProvideHover = (props: HoverContextProps) => {
 
 export const useInjectHover = () => {
   return inject(HoverContextKey, {
-    startRow: ref(-1),
-    endRow: ref(-1),
+    startRow: shallowRef(-1),
+    endRow: shallowRef(-1),
     onHover() {},
   } as HoverContextProps);
 };

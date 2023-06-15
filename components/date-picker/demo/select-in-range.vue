@@ -24,51 +24,37 @@ A example shows how to select a dynamic range by using `onCalendarChange` and `d
     @calendarChange="onCalendarChange"
   />
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { Dayjs } from 'dayjs';
-import { defineComponent, ref } from 'vue';
 type RangeValue = [Dayjs, Dayjs];
-export default defineComponent({
-  setup() {
-    const dates = ref<RangeValue>();
-    const value = ref<RangeValue>();
-    const hackValue = ref<RangeValue>();
+const dates = ref<RangeValue>();
+const value = ref<RangeValue>();
+const hackValue = ref<RangeValue>();
 
-    const disabledDate = (current: Dayjs) => {
-      if (!dates.value || (dates.value as any).length === 0) {
-        return false;
-      }
-      const tooLate = dates.value[0] && current.diff(dates.value[0], 'days') > 7;
-      const tooEarly = dates.value[1] && dates.value[1].diff(current, 'days') > 7;
-      return tooEarly || tooLate;
-    };
+const disabledDate = (current: Dayjs) => {
+  if (!dates.value || (dates.value as any).length === 0) {
+    return false;
+  }
+  const tooLate = dates.value[0] && current.diff(dates.value[0], 'days') > 7;
+  const tooEarly = dates.value[1] && dates.value[1].diff(current, 'days') > 7;
+  return tooEarly || tooLate;
+};
 
-    const onOpenChange = (open: boolean) => {
-      if (open) {
-        dates.value = [] as any;
-        hackValue.value = [] as any;
-      } else {
-        hackValue.value = undefined;
-      }
-    };
+const onOpenChange = (open: boolean) => {
+  if (open) {
+    dates.value = [] as any;
+    hackValue.value = [] as any;
+  } else {
+    hackValue.value = undefined;
+  }
+};
 
-    const onChange = (val: RangeValue) => {
-      value.value = val;
-    };
+const onChange = (val: RangeValue) => {
+  value.value = val;
+};
 
-    const onCalendarChange = (val: RangeValue) => {
-      dates.value = val;
-    };
-
-    return {
-      dates,
-      value,
-      hackValue,
-      disabledDate,
-      onOpenChange,
-      onChange,
-      onCalendarChange,
-    };
-  },
-});
+const onCalendarChange = (val: RangeValue) => {
+  dates.value = val;
+};
 </script>

@@ -29,19 +29,9 @@ Tab's position: left, right, top or bottom.  Will auto switch to `top` in mobile
     <a-tab-pane key="3" tab="Tab 3">Content of Tab 3</a-tab-pane>
   </a-tabs>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import { TabsProps } from '..';
-
-export default defineComponent({
-  setup() {
-    const tabPosition = ref<TabsProps['tabPosition']>('top');
-    const activeKey = ref('1');
-
-    return {
-      tabPosition,
-      activeKey,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+import { TabsProps } from 'ant-design-vue/es/tabs';
+const tabPosition = ref<TabsProps['tabPosition']>('top');
+const activeKey = ref('1');
 </script>

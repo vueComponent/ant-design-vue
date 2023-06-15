@@ -1,10 +1,10 @@
 import type { Ref } from 'vue';
-import { ref, onBeforeUnmount } from 'vue';
+import { shallowRef, onBeforeUnmount } from 'vue';
 import raf from '../../../_util/raf';
 
 export default function useRaf<Callback extends Function>(callback: Callback) {
-  const rafRef = ref<number>();
-  const removedRef = ref(false);
+  const rafRef = shallowRef<number>();
+  const removedRef = shallowRef(false);
 
   function trigger(...args: any[]) {
     if (!removedRef.value) {
@@ -28,8 +28,8 @@ type Callback<T> = (ori: T) => T;
 export function useRafState<T>(
   defaultState: T | (() => T),
 ): [Ref<T>, (updater: Callback<T>) => void] {
-  const batchRef = ref<Callback<T>[]>([]);
-  const state: Ref<T> = ref(
+  const batchRef = shallowRef<Callback<T>[]>([]);
+  const state: Ref<T> = shallowRef(
     typeof defaultState === 'function' ? (defaultState as any)() : defaultState,
   );
 

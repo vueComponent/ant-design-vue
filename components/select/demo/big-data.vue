@@ -26,8 +26,9 @@ Select use virtual scroll which get better performance than 1.x
     :options="options"
   />
 </template>
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
+
 const options: { value: string; disabled: boolean }[] = [];
 for (let i = 0; i < 100000; i++) {
   const value = `${i.toString(36)}${i}`;
@@ -36,13 +37,6 @@ for (let i = 0; i < 100000; i++) {
     disabled: i === 10,
   });
 }
-export default defineComponent({
-  setup() {
-    const state = reactive({
-      options,
-      value: ['a10', 'c12'],
-    });
-    return state;
-  },
-});
+
+const value = ref(['a10', 'c12']);
 </script>

@@ -3,7 +3,7 @@
 exports[`Spin should only affect the spin element when set style to a nested <Spin>xx</Spin> 1`] = `
 <div class="ant-spin-nested-loading">
   <div>
-    <div style="background: red;" class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
+    <div style="background: red;" class="ant-spin ant-spin-spinning" aria-live="polite" aria-busy="true"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
       <!---->
     </div>
   </div>
@@ -14,7 +14,7 @@ exports[`Spin should only affect the spin element when set style to a nested <Sp
 `;
 
 exports[`Spin should render custom indicator when it's set 1`] = `
-<div class="ant-spin ant-spin-spinning">
+<div class="ant-spin ant-spin-spinning" aria-live="polite" aria-busy="true">
   <div class="custom-indicator ant-spin-dot"></div>
   <!---->
 </div>

@@ -42,7 +42,7 @@ Use Drawer to quickly preview details of an object, such as those in a list.
       </a-list-item>
     </template>
   </a-list>
-  <a-drawer width="640" placement="right" :closable="false" :visible="visible" @close="onClose">
+  <a-drawer width="640" placement="right" :closable="false" :open="open" @close="onClose">
     <p :style="[pStyle, pStyle2]">User Profile</p>
     <p :style="pStyle">Personal</p>
     <a-row>
@@ -128,39 +128,25 @@ Use Drawer to quickly preview details of an object, such as those in a list.
     </a-row>
   </a-drawer>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import descriptionItem from './descriptionItem/index.vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    descriptionItem,
-  },
-  setup() {
-    const visible = ref<boolean>(false);
-    const pStyle = {
-      fontSize: '16px',
-      color: 'rgba(0,0,0,0.85)',
-      lineHeight: '24px',
-      display: 'block',
-      marginBottom: '16px',
-    };
-    const pStyle2 = {
-      marginBottom: '24px',
-    };
+const open = ref<boolean>(false);
+const pStyle = {
+  fontSize: '16px',
+  color: 'rgba(0,0,0,0.85)',
+  lineHeight: '24px',
+  display: 'block',
+  marginBottom: '16px',
+};
+const pStyle2 = {
+  marginBottom: '24px',
+};
 
-    const showDrawer = () => {
-      visible.value = true;
-    };
-    const onClose = () => {
-      visible.value = false;
-    };
-    return {
-      visible,
-      pStyle,
-      pStyle2,
-      showDrawer,
-      onClose,
-    };
-  },
-});
+const showDrawer = () => {
+  open.value = true;
+};
+const onClose = () => {
+  open.value = false;
+};
 </script>

@@ -3,7 +3,8 @@ category: Components
 type: General
 title: Typography
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*MLt3R6m9huoAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LT2jR41Uj2EAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Basic text writing, including headings, body text, lists, and more.
@@ -81,7 +82,7 @@ Basic text writing, including headings, body text, lists, and more.
 ```json
   {
     text: string,
-    onCopy: function,
+    onCopy: function(event),
     tooltip: false,
   }
 ```

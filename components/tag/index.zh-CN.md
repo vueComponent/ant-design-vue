@@ -3,7 +3,8 @@ category: Components
 subtitle: 标签
 type: 数据展示
 title: Tag
-cover: https://gw.alipayobjects.com/zos/alicdn/cH1BOLfxC/Tag.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_SBsSrKLg00AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JPNAQYrVkYkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 进行标记和分类的小标签。
@@ -17,13 +18,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/cH1BOLfxC/Tag.svg
 
 ### Tag
 
-| 参数             | 说明             | 类型          | 默认值 | 版本  |
-| ---------------- | ---------------- | ------------- | ------ | ----- |
-| closable         | 标签是否可以关闭 | boolean       | false  |       |
-| closeIcon        | 自定义关闭按钮   | VNode \| slot | -      | 2.0.0 |
-| color            | 标签色           | string        | -      |       |
-| icon             | 设置图标         | VNode \| slot | -      | 2.0.0 |
-| visible(v-model) | 是否显示标签     | boolean       | `true` |       |
+| 参数      | 说明             | 类型          | 默认值 | 版本  |
+| --------- | ---------------- | ------------- | ------ | ----- |
+| closable  | 标签是否可以关闭 | boolean       | false  |       |
+| closeIcon | 自定义关闭按钮   | VNode \| slot | -      | 2.0.0 |
+| color     | 标签色           | string        | -      |       |
+| icon      | 设置图标         | VNode \| slot | -      | 2.0.0 |
 
 ### 事件
 

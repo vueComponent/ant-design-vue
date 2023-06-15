@@ -26,11 +26,12 @@ import {
   computed,
   toRaw,
 } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { EventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
 import type { AutoSizeType } from '../input/inputProps';
 import useMergedState from '../_util/hooks/useMergedState';
+import { findDOMNode } from '../_util/props-util';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 
@@ -39,7 +40,7 @@ const isTextOverflowSupport = isStyleSupport('textOverflow');
 
 export interface CopyConfig {
   text?: string;
-  onCopy?: () => void;
+  onCopy?: (event?: MouseEvent) => void;
   tooltip?: boolean;
 }
 
@@ -198,7 +199,9 @@ const Base = defineComponent({
     });
 
     function getChildrenText(): string {
-      return props.ellipsis || props.editable ? props.content : contentRef.value?.$el?.innerText;
+      return props.ellipsis || props.editable
+        ? props.content
+        : findDOMNode(contentRef.value)?.innerText;
     }
 
     // =============== Expand ===============
@@ -250,7 +253,7 @@ const Base = defineComponent({
       state.copied = true;
       nextTick(() => {
         if (copyConfig.onCopy) {
-          copyConfig.onCopy();
+          copyConfig.onCopy(e);
         }
 
         state.copyId = setTimeout(() => {
@@ -324,7 +327,7 @@ const Base = defineComponent({
       if (
         !rows ||
         rows < 0 ||
-        !contentRef.value?.$el ||
+        !findDOMNode(contentRef.value) ||
         state.expanded ||
         props.content === undefined
       )
@@ -338,7 +341,7 @@ const Base = defineComponent({
         text,
         ellipsis: ell,
       } = measure(
-        contentRef.value?.$el,
+        findDOMNode(contentRef.value),
         { rows, suffix },
         props.content,
         renderOperations(true),
@@ -469,6 +472,7 @@ const Base = defineComponent({
           onCancel={onEditCancel}
           onEnd={onEnd}
           direction={direction.value}
+          component={props.component}
           v-slots={{ enterIcon: slots.editableEnterIcon }}
         />
       );
@@ -529,7 +533,6 @@ const Base = defineComponent({
               'keyboard',
               'onUpdate:content',
             ]);
-
             const cssEllipsis = canUseCSSEllipsis.value;
             const cssTextOverflow = rows === 1 && cssEllipsis;
             const cssLineClamp = rows && rows > 1 && cssEllipsis;

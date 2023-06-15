@@ -6,7 +6,7 @@ import { cloneElement } from '../_util/vnode';
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, inject, ref } from 'vue';
 import ItemMeta from './ItemMeta';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { ListContextKey } from './contextKey';
 import type { ListGridType } from '.';
 import type { CustomSlotsType } from '../_util/type';

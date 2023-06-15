@@ -29,22 +29,10 @@ Replace the default star to other character like alphabet, digit, iconfont or ev
     <br />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { HeartOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    HeartOutlined,
-  },
-  setup() {
-    const value1 = ref<number>(2);
-    const value2 = ref<number>(2.5);
-    const value3 = ref<number>(0.5);
-    return {
-      value1,
-      value2,
-      value3,
-    };
-  },
-});
+import { ref } from 'vue';
+const value1 = ref<number>(2);
+const value2 = ref<number>(2.5);
+const value3 = ref<number>(0.5);
 </script>

@@ -1,11 +1,14 @@
-import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
 import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
-import type { valueType } from './utils';
+import type { valueType, Formatter } from './utils';
 import Skeleton from '../skeleton/Skeleton';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+
+// CSSINJS
+import useStyle from './style';
+import { anyType, booleanType, functionType, someType, vNodeType } from '../_util/type';
 import type { CustomSlotsType } from '../_util/type';
 
 export const statisticProps = () => ({
@@ -13,17 +16,15 @@ export const statisticProps = () => ({
   decimalSeparator: String,
   groupSeparator: String,
   format: String,
-  value: {
-    type: [String, Number, Object] as PropType<valueType>,
-  },
+  value: someType<valueType>([Number, String, Object]),
   valueStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  valueRender: PropTypes.any,
-  formatter: PropTypes.any,
+  valueRender: functionType<(node: VNode | JSX.Element) => VNode | JSX.Element>(),
+  formatter: anyType<Formatter>(),
   precision: Number,
-  prefix: PropTypes.any,
-  suffix: PropTypes.any,
-  title: PropTypes.any,
-  loading: { type: Boolean, default: undefined },
+  prefix: vNodeType(),
+  suffix: vNodeType(),
+  title: vNodeType(),
+  loading: booleanType(),
 });
 
 export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisticProps>>>;
@@ -31,6 +32,7 @@ export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisti
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AStatistic',
+  inheritAttrs: false,
   props: initDefaultProps(statisticProps(), {
     decimalSeparator: '.',
     groupSeparator: ',',
@@ -43,15 +45,19 @@ export default defineComponent({
     formatter?: any;
     default?: any;
   }>,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('statistic', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     return () => {
       const { value = 0, valueStyle, valueRender } = props;
       const pre = prefixCls.value;
       const title = props.title ?? slots.title?.();
       const prefix = props.prefix ?? slots.prefix?.();
       const suffix = props.suffix ?? slots.suffix?.();
-      const formatter = props.formatter ?? slots.formatter;
+      const formatter = props.formatter ?? (slots.formatter as unknown as Formatter);
       // data-for-update just for update component
       // https://github.com/vueComponent/ant-design-vue/pull/3170
       let valueNode = (
@@ -63,8 +69,11 @@ export default defineComponent({
       if (valueRender) {
         valueNode = valueRender(valueNode);
       }
-      return (
-        <div class={[pre, { [`${pre}-rtl`]: direction.value === 'rtl' }]}>
+      return wrapSSR(
+        <div
+          {...attrs}
+          class={[pre, { [`${pre}-rtl`]: direction.value === 'rtl' }, attrs.class, hashId.value]}
+        >
           {title && <div class={`${pre}-title`}>{title}</div>}
           <Skeleton paragraph={false} loading={props.loading}>
             <div style={valueStyle} class={`${pre}-content`}>
@@ -73,7 +82,7 @@ export default defineComponent({
               {suffix && <span class={`${pre}-content-suffix`}>{suffix}</span>}
             </div>
           </Skeleton>
-        </div>
+        </div>,
       );
     };
   },

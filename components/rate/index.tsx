@@ -1,6 +1,6 @@
 import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
 import { watch, defineComponent, ref, reactive, onMounted } from 'vue';
-import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
+import { initDefaultProps, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 import { getOffsetLeft } from './util';
 import classNames from '../_util/classNames';
@@ -8,13 +8,15 @@ import PropTypes from '../_util/vue-types';
 import KeyCode from '../_util/KeyCode';
 import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 import Star from './Star';
 import useRefs from '../_util/hooks/useRefs';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import type { Direction } from '../config-provider';
 import type { FocusEventHandler, KeyboardEventHandler } from '../_util/EventInterface';
+
+import useStyle from './style';
 
 export const rateProps = () => ({
   prefixCls: String,
@@ -54,6 +56,7 @@ const Rate = defineComponent({
   // emits: ['hoverChange', 'update:value', 'change', 'focus', 'blur', 'keydown'],
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, direction } = useConfigInject('rate', props);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const formItemContext = useInjectFormItemContext();
     const rateRef = ref();
     const [setRef, starRefs] = useRefs();
@@ -197,13 +200,13 @@ const Rate = defineComponent({
       if (!tooltips) return node;
       return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
     };
-    const character = getPropsSlot(slots, props, 'character') || <StarFilled />;
 
     return () => {
       const { count, allowHalf, disabled, tabindex, id = formItemContext.id.value } = props;
       const { class: className, style } = attrs;
       const stars = [];
       const disabledClass = disabled ? `${prefixCls.value}-disabled` : '';
+      const character = props.character || slots.character || (() => <StarFilled />);
       for (let index = 0; index < count; index++) {
         stars.push(
           <Star
@@ -224,9 +227,10 @@ const Rate = defineComponent({
         );
       }
       const rateClassName = classNames(prefixCls.value, disabledClass, className, {
+        [hashId.value]: true,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       });
-      return (
+      return wrapSSR(
         <ul
           {...attrs}
           id={id}
@@ -241,7 +245,7 @@ const Rate = defineComponent({
           role="radiogroup"
         >
           {stars}
-        </ul>
+        </ul>,
       );
     };
   },

@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue';
-import { computed, defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
+import { computed, defineComponent, shallowRef, onMounted, onBeforeUnmount } from 'vue';
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import addEventListener from '../../vc-util/Dom/addEventListener';
@@ -26,8 +26,8 @@ export default defineComponent({
     onMousedown: { type: Function as PropType<(payload: MouseEvent) => void> },
   },
   setup(props, { attrs, emit, expose }) {
-    const clickFocused = ref(false);
-    const handle = ref();
+    const clickFocused = shallowRef(false);
+    const handle = shallowRef();
     const handleMouseUp = () => {
       if (document.activeElement === handle.value) {
         clickFocused.value = true;

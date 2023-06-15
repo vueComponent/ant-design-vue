@@ -5,6 +5,7 @@ import type { Ref } from 'vue';
 import { defineComponent, ref } from 'vue';
 import type { Locale } from '../vc-picker/interface';
 import type { GenerateConfig } from '../vc-picker/generate';
+import { FormItemInputContext } from '../form/FormItemContext';
 
 const YearSelectOffset = 10;
 const YearSelectTotal = 20;
@@ -168,6 +169,9 @@ export default defineComponent<CalendarHeaderProps<any>>({
   ] as any,
   setup(_props, { attrs }) {
     const divRef = ref<HTMLDivElement>(null);
+    const formItemInputContext = FormItemInputContext.useInject();
+    FormItemInputContext.useProvide(formItemInputContext, { isFormItemInput: false });
+
     return () => {
       const props = { ..._props, ...attrs };
       const { prefixCls, fullscreen, mode, onChange, onModeChange } = props;

@@ -3,7 +3,8 @@ category: Components
 type: 数据展示
 title: List
 subtitle: 列表
-cover: https://gw.alipayobjects.com/zos/alicdn/5FrZKStG_/List.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EYuhSpw1iSwAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*tBzwQ7raKX8AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 通用列表。
@@ -24,10 +25,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5FrZKStG_/List.svg
 | grid | 列表栅格配置 | object | - |  |  |
 | header | 列表头部 | string\|slot | - |  |  |
 | itemLayout | 设置 `List.Item` 布局, 设置成 `vertical` 则竖直样式显示, 默认横排 | string | - |  |  |
-| loading | 当卡片内容还在加载中时，可以用 `loading` 展示一个占位 | boolean\|[object](https://www.antdv.com/components/spin-cn/#API) | false |  |  |
+| loading | 当卡片内容还在加载中时，可以用 `loading` 展示一个占位 | boolean\|[object](https://www.antdv.com/components/spin-cn/#api) | false |  |  |
 | loadMore | 加载更多 | string\|slot | - |  |  |
 | locale | 默认文案设置，目前包括空数据文案 | object | emptyText: '暂无数据' |  |  |
-| pagination | 对应的 `pagination` [配置](https://www.antdv.com/components/pagination-cn/#API), 设置 `false` 不显示 | boolean\|object | false |  |  |
+| pagination | 对应的 `pagination` [配置](https://www.antdv.com/components/pagination-cn/#api), 设置 `false` 不显示 | boolean\|object | false |  |  |
 | renderItem | 自定义`Item`函数，也可使用 #renderItem="{item, index}" | ({item, index}) => vNode |  | - |  |
 | rowKey | 各项 key 的取值，可以是字符串或一个函数 | item => string\|number |  |  |  |
 | size | list 的尺寸 | `default` \| `middle` \| `small` | `default` |  |  |
@@ -41,7 +42,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5FrZKStG_/List.svg
 | -------- | ------------------ | --------------------------- | -------- |
 | position | 指定分页显示的位置 | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
-更多配置项，请查看 [`Pagination`](https://www.antdv.com/components/pagination-cn/#API)。
+更多配置项，请查看 [`Pagination`](https://www.antdv.com/components/pagination-cn/#api)。
 
 ### List grid props
 

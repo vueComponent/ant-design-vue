@@ -29,42 +29,33 @@ Use `beforeUpload` for transform file before request such as add a watermark.
     </a-upload>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UploadOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: {
-    UploadOutlined,
-  },
-  setup() {
-    const beforeUpload: UploadProps['beforeUpload'] = file => {
-      return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          const img: HTMLImageElement = document.createElement('img');
-          img.src = reader.result as string;
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-            ctx.fillStyle = 'red';
-            ctx.textBaseline = 'middle';
-            ctx.font = '33px Arial';
-            ctx.fillText('Ant Design Vue', 20, 20);
-            canvas.toBlob(resolve);
-          };
-        };
-      });
+const beforeUpload: UploadProps['beforeUpload'] = file => {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const img: HTMLImageElement = document.createElement('img');
+      img.src = reader.result as string;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        ctx.fillStyle = 'red';
+        ctx.textBaseline = 'middle';
+        ctx.font = '33px Arial';
+        ctx.fillText('Ant Design Vue', 20, 20);
+        canvas.toBlob(resolve);
+      };
     };
-    return {
-      beforeUpload,
-      fileList: ref([]),
-    };
-  },
-});
+  });
+};
+
+const fileList = ref<UploadProps['fileList']>([]);
 </script>

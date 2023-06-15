@@ -30,52 +30,40 @@ Use slot for custom action icons of files.
     <template #removeIcon><StarOutlined @click="handleClick"></StarOutlined></template>
   </a-upload>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UploadOutlined, StarOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: {
-    UploadOutlined,
-    StarOutlined,
+const fileList = ref<UploadProps['fileList']>([
+  {
+    uid: '1',
+    name: 'xxx.png',
+    status: 'done',
+    response: 'Server Error 500', // custom error message to show
+    url: 'http://www.baidu.com/xxx.png',
   },
-  setup() {
-    const fileList = ref<UploadProps['fileList']>([
-      {
-        uid: '1',
-        name: 'xxx.png',
-        status: 'done',
-        response: 'Server Error 500', // custom error message to show
-        url: 'http://www.baidu.com/xxx.png',
-      },
-      {
-        uid: '2',
-        name: 'yyy.png',
-        status: 'done',
-        url: 'http://www.baidu.com/yyy.png',
-      },
-      {
-        uid: '3',
-        name: 'zzz.png',
-        status: 'error',
-        response: 'Server Error 500', // custom error message to show
-        url: 'http://www.baidu.com/zzz.png',
-      },
-    ]);
+  {
+    uid: '2',
+    name: 'yyy.png',
+    status: 'done',
+    url: 'http://www.baidu.com/yyy.png',
+  },
+  {
+    uid: '3',
+    name: 'zzz.png',
+    status: 'error',
+    response: 'Server Error 500', // custom error message to show
+    url: 'http://www.baidu.com/zzz.png',
+  },
+]);
 
-    const handleChange = ({ file, fileList }: UploadChangeParam) => {
-      if (file.status !== 'uploading') {
-        console.log(file, fileList);
-      }
-    };
-    return {
-      fileList,
-      handleChange,
-      handleClick: (e: MouseEvent) => {
-        console.log(e, 'custom removeIcon event');
-      },
-    };
-  },
-});
+const handleChange = ({ file, fileList }: UploadChangeParam) => {
+  if (file.status !== 'uploading') {
+    console.log(file, fileList);
+  }
+};
+function handleClick(e: MouseEvent) {
+  console.log(e, 'custom removeIcon event');
+}
 </script>

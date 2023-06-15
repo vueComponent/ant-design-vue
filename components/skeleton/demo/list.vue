@@ -23,8 +23,8 @@ Use skeleton in list component.
       <template #renderItem="{ item }">
         <a-list-item key="item.title">
           <template v-if="!loading" #actions>
-            <span v-for="{ type, text } in actions" :key="type">
-              <component :is="type" style="margin-right: 8px"></component>
+            <span v-for="({ icon, text }, index) in actions" :key="index">
+              <component :is="icon" style="margin-right: 8px"></component>
               {{ text }}
             </span>
           </template>
@@ -50,9 +50,9 @@ Use skeleton in list component.
     </a-list>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 interface DataItem {
   href: string;
   title: string;
@@ -72,33 +72,18 @@ for (let i = 0; i < 3; i++) {
       'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
   });
 }
-export default defineComponent({
-  components: {
-    StarOutlined,
-    LikeOutlined,
-    MessageOutlined,
-  },
-  setup() {
-    const loading = ref<boolean>(true);
 
-    const actions = [
-      { type: 'star-outlined', text: '156' },
-      { type: 'like-outlined', text: '156' },
-      { type: 'message-outlined', text: '2' },
-    ];
+const loading = ref<boolean>(true);
 
-    const onChange = (checked: boolean) => {
-      loading.value = !checked;
-    };
+const actions = [
+  { icon: StarOutlined, text: '156' },
+  { icon: LikeOutlined, text: '156' },
+  { icon: MessageOutlined, text: '2' },
+];
 
-    return {
-      loading,
-      listData,
-      actions,
-      onChange,
-    };
-  },
-});
+const onChange = (checked: boolean) => {
+  loading.value = !checked;
+};
 </script>
 <style scoped>
 .skeleton-demo {

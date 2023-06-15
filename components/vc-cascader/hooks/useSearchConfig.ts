@@ -1,11 +1,11 @@
 import type { BaseCascaderProps, ShowSearchType } from '../Cascader';
 import type { Ref } from 'vue';
-import { ref, watchEffect } from 'vue';
+import { ref, shallowRef, watchEffect } from 'vue';
 import { warning } from '../../vc-util/warning';
 
 // Convert `showSearch` to unique config
 export default function useSearchConfig(showSearch?: Ref<BaseCascaderProps['showSearch']>) {
-  const mergedShowSearch = ref(false);
+  const mergedShowSearch = shallowRef(false);
   const mergedSearchConfig = ref<ShowSearchType>({});
   watchEffect(() => {
     if (!showSearch.value) {

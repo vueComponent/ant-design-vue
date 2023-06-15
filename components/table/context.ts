@@ -9,6 +9,7 @@ export type ContextSlots = {
   footer?: (...args: any[]) => any;
   summary?: (...args: any[]) => any;
   bodyCell?: (...args: any[]) => any;
+  expandColumnTitle?: (...args: any[]) => any;
   headerCell?: (...args: any[]) => any;
   customFilterIcon?: (...args: any[]) => any;
   customFilterDropdown?: (...args: any[]) => any;

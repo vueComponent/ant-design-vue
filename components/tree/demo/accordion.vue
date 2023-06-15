@@ -28,10 +28,10 @@ Nodes of the same level can only be expanded one
     </template>
   </a-tree>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeProps } from 'ant-design-vue';
-import _ from 'lodash';
-import { defineComponent, ref, watch } from 'vue';
+import difference from 'lodash-es/difference';
 
 const treeData: TreeProps['treeData'] = [
   {
@@ -69,38 +69,25 @@ const treeData: TreeProps['treeData'] = [
   },
 ];
 
-export default defineComponent({
-  setup() {
-    const expandedKeys = ref<string[]>([]);
-    const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    watch(expandedKeys, () => {
-      console.log('expandedKeys', expandedKeys);
-    });
-    watch(selectedKeys, () => {
-      console.log('selectedKeys', selectedKeys);
-    });
-    watch(checkedKeys, () => {
-      console.log('checkedKeys', checkedKeys);
-    });
-    const handleExpand = (keys: string[], { expanded, node }) => {
-      // node.parent add from 3.0.0-alpha.10
-      const tempKeys = ((node.parent ? node.parent.children : treeData) || []).map(
-        ({ key }) => key,
-      );
-      if (expanded) {
-        expandedKeys.value = _.difference(keys, tempKeys).concat(node.key);
-      } else {
-        expandedKeys.value = keys;
-      }
-    };
-    return {
-      treeData,
-      expandedKeys,
-      selectedKeys,
-      checkedKeys,
-      handleExpand,
-    };
-  },
+const expandedKeys = ref<string[]>([]);
+const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
+watch(expandedKeys, () => {
+  console.log('expandedKeys', expandedKeys);
 });
+watch(selectedKeys, () => {
+  console.log('selectedKeys', selectedKeys);
+});
+watch(checkedKeys, () => {
+  console.log('checkedKeys', checkedKeys);
+});
+const handleExpand = (keys: string[], { expanded, node }) => {
+  // node.parent add from 3.0.0-alpha.10
+  const tempKeys = ((node.parent ? node.parent.children : treeData) || []).map(({ key }) => key);
+  if (expanded) {
+    expandedKeys.value = difference(keys, tempKeys).concat(node.key);
+  } else {
+    expandedKeys.value = keys;
+  }
+};
 </script>

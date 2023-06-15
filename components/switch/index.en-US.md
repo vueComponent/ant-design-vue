@@ -2,7 +2,8 @@
 category: Components
 type: Data Entry
 title: Switch
-cover: https://gw.alipayobjects.com/zos/alicdn/zNdJQMhfm/Switch.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*rtArRpBNDZcAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*al07RK8SGf4AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Switching Selector.

@@ -2,7 +2,8 @@
 category: Components
 type: Data Display
 title: Tabs
-cover: https://gw.alipayobjects.com/zos/antfincdn/lkI2hNEDr2V/Tabs.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*72NDQqXkyOEAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*8HMoTZUoSGoAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Tabs make it easy to switch between different views.
@@ -25,9 +26,9 @@ Ant Design has 3 types of Tabs for different situations.
 | animated | Whether to change tabs with animation. Only works while tabPosition=`"top"` \| `"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |  |
 | destroyInactiveTabPane | Whether destroy inactive TabPane when change tab | boolean | false |  |
 | hideAdd | Hide plus icon or not. Only works while `type="editable-card"` | boolean | `false` | } |
-| size | preset tab bar size | `large` \| `default` \| `small` | `default` |  |
+| size | preset tab bar size | `large` \| `middle` \| `small` | `middle` |  |
 | tabBarGutter | The gap between tabs | number | - |  |
-| tabBarStyle | Tab bar style object | object | - |  |
+| tabBarStyle | Tab bar style object | CSSProperties | - |  |
 | tabPosition | Position of tabs | `top` \| `right` \| `bottom` \| `left` | `top` |  |
 | type | Basic style of tabs | `line` \| `card` \| `editable-card` | `line` |  |
 
@@ -46,7 +47,7 @@ Ant Design has 3 types of Tabs for different situations.
 | Events Name | Description | Arguments |
 | --- | --- | --- |
 | change | Callback executed when active tab is changed | Function(activeKey) {} |
-| edit | Callback executed when tab is added or removed. Only works while `type="editable-card"` | (targetKey, action): void |
+| edit | Callback executed when tab is added or removed. Only works while `type="editable-card"` | (action === 'add' ? event : targetKey, action): void |
 | nextClick | Callback executed when next button is clicked | Function |
 | prevClick | Callback executed when prev button is clicked | Function |
 | tabClick | Callback executed when tab is clicked | Function |

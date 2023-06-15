@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Transfer should render correctly 1`] = `
-<div class="ant-transfer">
+<div lazy="false" class="ant-transfer">
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
         <!---->
@@ -44,7 +44,7 @@ exports[`Transfer should render correctly 1`] = `
 `;
 
 exports[`Transfer should show sorted targetkey 1`] = `
-<div class="ant-transfer">
+<div lazy="false" class="ant-transfer">
   <div class="ant-transfer-list">
     <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
         <!---->

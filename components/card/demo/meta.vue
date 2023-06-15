@@ -37,14 +37,6 @@ A Card that supports `cover`, `avatar`, `title` and `description`.
   </a-card>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    SettingOutlined,
-    EditOutlined,
-    EllipsisOutlined,
-  },
-});
 </script>

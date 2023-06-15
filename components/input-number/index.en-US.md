@@ -2,7 +2,8 @@
 category: Components
 type: Data Entry
 title: InputNumber
-cover: https://gw.alipayobjects.com/zos/alicdn/XOS8qZ0kU/InputNumber.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JvWbSYhuNlIAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1uH-R5kLAMIAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Enter a number within certain range with the mouse or keyboard.
@@ -31,9 +32,12 @@ When a numeric value needs to be provided.
 | precision | precision of input value | number | - |  |
 | prefix | The prefix icon for the Input | slot | - | 3.0 |
 | size | height of input box | string | - |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | step | The number to which the current value is increased or decreased. It can be an integer or decimal. | number\|string | 1 |  |
 | stringMode | Set value as string to support high precision decimals. Will return string value by `change` | boolean | false | 3.0 |
 | value(v-model) | current value | number |  |  |
+| upIcon | custom up icon | slot | `<UpOutlined />` | 3.3.0 |
+| downIcon | custom up down | slot | `<DownOutlined />` | 3.3.0 |
 
 ### events
 

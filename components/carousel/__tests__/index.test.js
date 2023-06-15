@@ -135,7 +135,7 @@ describe('Carousel', () => {
       },
     });
     expect(warnSpy).toHaveBeenCalledWith(
-      'Warning: [antdv: Carousel] `vertical` is deprecated, please use `dotPosition` instead.',
+      'Warning: [ant-design-vue: Carousel] `vertical` is deprecated, please use `dotPosition` instead.',
     );
     warnSpy.mockRestore();
   });

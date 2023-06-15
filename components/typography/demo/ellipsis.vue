@@ -42,13 +42,7 @@ Multiple line ellipsis support. You can use `tooltip` to config ellipsis tooltip
     content="Ant Design, a design language for background applications, is refined by Ant UED Team."
   />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      ellipsis: ref(true),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const ellipsis = ref(true);
 </script>

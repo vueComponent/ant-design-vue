@@ -44,46 +44,36 @@ Lookup-Patterns - Uncertain Category.
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 interface Option {
   query: string;
   category: string;
   value: string;
   count: number;
 }
-export default defineComponent({
-  setup() {
-    const value = ref('');
-    const dataSource = ref<Option[]>([]);
-    const onSelect = (value: string) => {
-      console.log('onSelect', value);
-    };
+const value = ref('');
+const dataSource = ref<Option[]>([]);
+const onSelect = (value: string) => {
+  console.log('onSelect', value);
+};
 
-    const getRandomInt = (max: number, min = 0) => {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
+const getRandomInt = (max: number, min = 0) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
-    const searchResult = (query: string): Option[] => {
-      return new Array(getRandomInt(5))
-        .join('.')
-        .split('.')
-        .map((_item, idx) => ({
-          query,
-          category: `${query}${idx}`,
-          value: `${query}${idx}`,
-          count: getRandomInt(200, 100),
-        }));
-    };
-    const handleSearch = (val: string) => {
-      dataSource.value = val ? searchResult(val) : [];
-    };
-    return {
-      value,
-      dataSource,
-      onSelect,
-      handleSearch,
-    };
-  },
-});
+const searchResult = (query: string): Option[] => {
+  return new Array(getRandomInt(5))
+    .join('.')
+    .split('.')
+    .map((_item, idx) => ({
+      query,
+      category: `${query}${idx}`,
+      value: `${query}${idx}`,
+      count: getRandomInt(200, 100),
+    }));
+};
+const handleSearch = (val: string) => {
+  dataSource.value = val ? searchResult(val) : [];
+};
 </script>

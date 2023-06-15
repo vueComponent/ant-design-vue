@@ -52,7 +52,7 @@ In this case, submit button is in the Modal which is out of Form. You can use `f
       <a-button html-type="button" style="margin: 0 8px" @click="visible = true">Add User</a-button>
     </a-form-item>
   </a-form>
-  <a-modal v-model:visible="visible" title="Basic Drawer" @ok="onOk">
+  <a-modal v-model:open="visible" title="Basic Drawer" @ok="onOk">
     <a-form ref="modalFormRef" :model="modalFormState" layout="vertical" name="userForm">
       <a-form-item name="name" label="User Name" :rules="[{ required: true }]">
         <a-input v-model:value="modalFormState.name" />
@@ -63,8 +63,8 @@ In this case, submit button is in the Modal which is out of Form. You can use `f
     </a-form>
   </a-modal>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, ref, watch, toRaw } from 'vue';
+<script lang="ts" setup>
+import { reactive, ref, watch, toRaw } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 import { SmileOutlined, UserOutlined } from '@ant-design/icons-vue';
 
@@ -79,60 +79,41 @@ interface FormState {
   users: UserType[];
 }
 
-export default defineComponent({
-  components: {
-    SmileOutlined,
-    UserOutlined,
-  },
-  setup() {
-    const formRef = ref<FormInstance>();
-    const modalFormRef = ref<FormInstance>();
-    const visible = ref(false);
-    const formState = reactive<FormState>({
-      group: '',
-      users: [],
-    });
-    const modalFormState = ref<UserType>({});
-
-    watch(
-      visible,
-      () => {
-        modalFormState.value = {};
-      },
-      { flush: 'post' },
-    );
-
-    const onOk = () => {
-      modalFormRef.value.validateFields().then(() => {
-        formState.users.push({ ...modalFormState.value, key: Date.now() });
-        visible.value = false;
-      });
-    };
-    const onFinish = () => {
-      console.log('Finish:', toRaw(formState));
-    };
-    const layout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 16 },
-    };
-    const tailLayout = {
-      wrapperCol: { offset: 8, span: 16 },
-    };
-    return {
-      formState,
-      layout,
-      tailLayout,
-      formRef,
-      modalFormRef,
-      visible,
-      modalFormState,
-      onOk,
-      onFinish,
-    };
-  },
+const formRef = ref<FormInstance>();
+const modalFormRef = ref<FormInstance>();
+const visible = ref(false);
+const formState = reactive<FormState>({
+  group: '',
+  users: [],
 });
+const modalFormState = ref<UserType>({});
+
+watch(
+  visible,
+  () => {
+    modalFormState.value = {};
+  },
+  { flush: 'post' },
+);
+
+const onOk = () => {
+  modalFormRef.value.validateFields().then(() => {
+    formState.users.push({ ...modalFormState.value, key: Date.now() });
+    visible.value = false;
+  });
+};
+const onFinish = () => {
+  console.log('Finish:', toRaw(formState));
+};
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const tailLayout = {
+  wrapperCol: { offset: 8, span: 16 },
+};
 </script>
-<style>
+<style scoped>
 #components-form-demo-form-context .user {
   margin-bottom: 8px;
 }

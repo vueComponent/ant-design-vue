@@ -45,20 +45,13 @@ Using pre & post tabs example.
     </a-input-number>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { SettingOutlined } from '@ant-design/icons-vue';
-export default defineComponent({
-  components: { SettingOutlined },
-  setup() {
-    return {
-      value1: ref(100),
-      value2: ref(100),
-      value3: ref(100),
-      value4: ref(100),
-      addonBeforeValue: ref('add'),
-      addonAfterValue: ref('USD'),
-    };
-  },
-});
+const value1 = ref(100);
+const value2 = ref(100);
+const value3 = ref(100);
+const value4 = ref(100);
+const addonBeforeValue = ref('add');
+const addonAfterValue = ref('USD');
 </script>

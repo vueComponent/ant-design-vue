@@ -1,5 +1,6 @@
 <template>
   <demo-sort>
+    <hook />
     <basic />
     <duratioin />
     <with-icon />
@@ -12,6 +13,7 @@
 </template>
 <script lang="ts">
 import Basic from './basic.vue';
+import Hook from './hook.vue';
 import Duratioin from './duration.vue';
 import WithIcon from './with-icon.vue';
 import CustomIcon from './custom-icon.vue';
@@ -35,6 +37,7 @@ export default defineComponent({
     CustomStyle,
     Placement,
     Update,
+    Hook,
   },
   setup() {
     return {};

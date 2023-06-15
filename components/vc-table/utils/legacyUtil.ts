@@ -52,7 +52,7 @@ export function getExpandableProps<RecordType>(
 export function getDataAndAriaProps(props: object) {
   /* eslint-disable no-param-reassign */
   return Object.keys(props).reduce((memo, key) => {
-    if (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-') {
+    if (key.startsWith('data-') || key.startsWith('aria-')) {
       memo[key] = props[key];
     }
     return memo;

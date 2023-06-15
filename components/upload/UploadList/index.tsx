@@ -2,17 +2,24 @@ import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PaperClipOutlined from '@ant-design/icons-vue/PaperClipOutlined';
 import PictureTwoTone from '@ant-design/icons-vue/PictureTwoTone';
 import FileTwoTone from '@ant-design/icons-vue/FileTwoTone';
-import type { UploadListType, InternalUploadFile, UploadFile } from '../interface';
+import type { InternalUploadFile, UploadFile } from '../interface';
 import { uploadListProps } from '../interface';
 import { previewImage, isImageUrl } from '../utils';
 import type { ButtonProps } from '../../button';
 import Button from '../../button';
 import ListItem from './ListItem';
 import type { HTMLAttributes } from 'vue';
-import { computed, defineComponent, getCurrentInstance, onMounted, ref, watchEffect } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  shallowRef,
+  watchEffect,
+} from 'vue';
 import { filterEmpty, initDefaultProps, isValidElement } from '../../_util/props-util';
 import type { VueNode } from '../../_util/type';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import { getTransitionGroupProps, TransitionGroup } from '../../_util/transition';
 import collapseMotion from '../../_util/collapseMotion';
 
@@ -24,7 +31,7 @@ export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AUploadList',
   props: initDefaultProps(uploadListProps(), {
-    listType: 'text' as UploadListType, // or picture
+    listType: 'text', // or picture
     progress: {
       strokeWidth: 2,
       showInfo: false,
@@ -38,7 +45,7 @@ export default defineComponent({
     appendActionVisible: true,
   }),
   setup(props, { slots, expose }) {
-    const motionAppear = ref(false);
+    const motionAppear = shallowRef(false);
     const instance = getCurrentInstance();
     onMounted(() => {
       motionAppear.value == true;
@@ -121,7 +128,7 @@ export default defineComponent({
         onClick: () => {
           callback();
         },
-        class: `${prefixCls}-list-item-card-actions-btn`,
+        class: `${prefixCls}-list-item-action`,
       };
       if (isValidElement(customIcon)) {
         return <Button {...btnProps} v-slots={{ icon: () => customIcon }} />;
@@ -138,23 +145,33 @@ export default defineComponent({
       handleDownload: onInternalDownload,
     });
 
-    const { prefixCls, direction } = useConfigInject('upload', props);
+    const { prefixCls, rootPrefixCls } = useConfigInject('upload', props);
 
     const listClassNames = computed(() => ({
       [`${prefixCls.value}-list`]: true,
       [`${prefixCls.value}-list-${props.listType}`]: true,
-      [`${prefixCls.value}-list-rtl`]: direction.value === 'rtl',
     }));
-    const transitionGroupProps = computed(() => ({
-      ...collapseMotion(
-        `${prefixCls.value}-${props.listType === 'picture-card' ? 'animate-inline' : 'animate'}`,
-      ),
-      ...getTransitionGroupProps(
-        `${prefixCls.value}-${props.listType === 'picture-card' ? 'animate-inline' : 'animate'}`,
-      ),
-      class: listClassNames.value,
-      appear: motionAppear.value,
-    }));
+    const transitionGroupProps = computed(() => {
+      const motion = {
+        ...collapseMotion(`${rootPrefixCls.value}-motion-collapse`),
+      };
+      delete motion.onAfterAppear;
+      delete motion.onAfterEnter;
+      delete motion.onAfterLeave;
+      const motionConfig = {
+        ...getTransitionGroupProps(
+          `${prefixCls.value}-${props.listType === 'picture-card' ? 'animate-inline' : 'animate'}`,
+        ),
+        class: listClassNames.value,
+        appear: motionAppear.value,
+      };
+      return props.listType !== 'picture-card'
+        ? {
+            ...motion,
+            ...motionConfig,
+          }
+        : motionConfig;
+    });
     return () => {
       const {
         listType,

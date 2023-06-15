@@ -20,7 +20,7 @@ Passing `okButtonProps` and `cancelButtonProps` can customize the ok button and 
   <div>
     <a-button type="primary" @click="showModal">Open Modal with customized button props</a-button>
     <a-modal
-      v-model:visible="visible"
+      v-model:open="open"
       title="Basic Modal"
       :ok-button-props="{ disabled: true }"
       :cancel-button-props="{ disabled: true }"
@@ -32,31 +32,17 @@ Passing `okButtonProps` and `cancelButtonProps` can customize the ok button and 
     </a-modal>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const visible = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-    const showModal = () => {
-      visible.value = true;
-    };
+const open = ref<boolean>(false);
 
-    const handleOk = (e: MouseEvent) => {
-      console.log(e);
-      visible.value = false;
-    };
+const showModal = () => {
+  open.value = true;
+};
 
-    const handleCancel = (e: MouseEvent) => {
-      console.log(e);
-      visible.value = false;
-    };
-    return {
-      visible,
-      showModal,
-      handleOk,
-      handleCancel,
-    };
-  },
-});
+const handleOk = (e: MouseEvent) => {
+  console.log(e);
+  open.value = false;
+};
 </script>

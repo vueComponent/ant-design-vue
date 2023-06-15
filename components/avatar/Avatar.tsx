@@ -1,16 +1,17 @@
 import type { CustomSlotsType, VueNode } from '../_util/type';
 
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue';
+import { computed, defineComponent, nextTick, onMounted, shallowRef, watch } from 'vue';
 import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint, ScreenSizeMap } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
-import { useInjectSize } from '../_util/hooks/useSize';
 import eagerComputed from '../_util/eagerComputed';
+import useStyle from './style';
+import { useInjectSize } from './SizeContext';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
@@ -46,15 +47,15 @@ const Avatar = defineComponent({
     default: any;
   }>,
   setup(props, { slots, attrs }) {
-    const isImgExist = ref(true);
-    const isMounted = ref(false);
-    const scale = ref(1);
+    const isImgExist = shallowRef(true);
+    const isMounted = shallowRef(false);
+    const scale = shallowRef(1);
 
-    const avatarChildrenRef = ref<HTMLElement>(null);
-    const avatarNodeRef = ref<HTMLElement>(null);
+    const avatarChildrenRef = shallowRef<HTMLElement>(null);
+    const avatarNodeRef = shallowRef<HTMLElement>(null);
 
     const { prefixCls } = useConfigInject('avatar', props);
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const groupSize = useInjectSize();
     const size = computed(() => {
       return props.size === 'default' ? groupSize.value : props.size;
@@ -144,6 +145,7 @@ const Avatar = defineComponent({
         [`${pre}-${shape}`]: shape,
         [`${pre}-image`]: src && isImgExist.value,
         [`${pre}-icon`]: icon,
+        [hashId.value]: true,
       };
 
       const sizeStyle: CSSProperties =
@@ -202,7 +204,7 @@ const Avatar = defineComponent({
           </span>
         );
       }
-      return (
+      return wrapSSR(
         <span
           {...attrs}
           ref={avatarNodeRef}
@@ -210,7 +212,7 @@ const Avatar = defineComponent({
           style={[sizeStyle, responsiveSizeStyle(!!icon), attrs.style as CSSProperties]}
         >
           {childrenToRender}
-        </span>
+        </span>,
       );
     };
   },

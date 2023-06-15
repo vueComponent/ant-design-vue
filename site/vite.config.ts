@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue';
 import md from '../plugin/md';
 import docs from '../plugin/docs';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import { additionalData } from './themeConfig';
 /**
  * @type {import('vite').UserConfig}
  */
@@ -13,6 +12,7 @@ export default {
       vue: 'vue/dist/vue.esm-bundler.js',
       'ant-design-vue/es': path.resolve(__dirname, '../components'),
       'ant-design-vue': path.resolve(__dirname, '../components'),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   server: {
@@ -45,13 +45,8 @@ export default {
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: {
-          hack: `true;@import "${require.resolve('../components/style/color/colorPalette.less')}";`,
-          'root-entry-name': 'variable',
-        },
         javascriptEnabled: true,
         // includePaths: ["node_modules/"],
-        additionalData,
       },
     },
   },

@@ -3,7 +3,8 @@ category: Components
 type: Data Entry
 cols: 1
 title: Form
-cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*-lcdS5Qm1bsAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*ylFATY6w-ygAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 High performance Form component with data scope management. Including data collection, verification, and styles.
@@ -32,9 +33,10 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | Property | Description | Type | Default Value | Version |
 | --- | --- | --- | --- | --- |
 | colon | change default props colon value of Form.Item (only effective when prop layout is horizontal) | boolean | true |  |
+| disabled | Set form component disable, only available for antdv components | boolean | false | 4.0 |
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |  |
 | labelAlign | text align of label of all items | 'left' \| 'right' | 'right' |  |
-| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |  |
+| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#col) |  |  |
 | labelWrap | whether label can be wrap | boolean | false | 3.0 |
 | layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |  |
 | model | data of form component | object |  |  |
@@ -44,7 +46,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | scrollToFirstError | Auto scroll to first failed field when submit | boolean \| [options](https://github.com/stipsan/scroll-into-view-if-needed/#options) | false | 2.0.0 |
 | validateOnRuleChange | whether to trigger validation when the `rules` prop is changed | boolean | true |  |
 | validateTrigger | Config field validate trigger | string \| string\[] | `change` | 2.0.0 |
-| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
+| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#col) |  |  |
 
 ### Events
 
@@ -59,11 +61,11 @@ A form consists of one or more form fields whose type includes input, textarea, 
 
 | Method | Description | Parameters | Version |
 | --- | --- | --- | --- |
-| clearValidate | clear validation message for certain fields. The parameter is name or an array of names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | (nameList?: [NamePath](#NamePath)\[]) => void |  |
-| resetFields | reset all the fields and remove validation result | (nameList?: [NamePath](#NamePath)\[]) => void |  |
-| scrollToField | Scroll to field position | (name: [NamePath](#NamePath), options: \[[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
-| validate | Validate fields, it is same as validateFields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
-| validateFields | Validate fields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
+| clearValidate | clear validation message for certain fields. The parameter is name or an array of names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | (nameList?: [NamePath](#namepath)\[]) => void |  |
+| resetFields | reset all the fields and remove validation result | (nameList?: [NamePath](#namepath)\[]) => void |  |
+| scrollToField | Scroll to field position | (name: [NamePath](#namepath), options: \[[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
+| validate | Validate fields, it is same as validateFields | (nameList?: [NamePath](#namepath)\[]) => Promise |  |
+| validateFields | Validate fields | (nameList?: [NamePath](#namepath)\[]) => Promise |  |
 
 #### NamePath
 
@@ -81,14 +83,14 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | htmlFor | Set sub label `htmlFor`. | string |  |  |
 | label | Label text | string\|slot |  |  |
 | labelAlign | text align of label | 'left' \| 'right' | 'right' |  |
-| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |  |
+| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#col) |  |  |
 | name | a key of `model`. In the use of validate and resetFields method, the attribute is required | string |  | 2.0.0 |
 | required | Whether provided or not, it will be generated by the validation rule. | boolean | false |  |
 | rules | validation rules of form | object \| array |  |  |
 | validateFirst | Whether stop validate on first rule of error for this field. | boolean | false |  |
 | validateStatus | The validation status. If not provided, it will be generated by validation rule. options: 'success' 'warning' 'error' 'validating' | string |  |  |
 | validateTrigger | When to validate the value of children node | string \| string\[] | `change` |  |
-| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
+| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#col) |  |  |
 
 ### Note
 

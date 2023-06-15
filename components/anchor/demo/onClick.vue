@@ -16,29 +16,45 @@ Clicking on an anchor does not record history.
 </docs>
 
 <template>
-  <a-anchor :affix="false" @click="handleClick">
-    <a-anchor-link href="#components-anchor-demo-basic" title="Basic demo" />
-    <a-anchor-link href="#components-anchor-demo-static" title="Static demo" />
-    <a-anchor-link href="#API" title="API">
-      <a-anchor-link href="#Anchor-Props" title="Anchor Props" />
-      <a-anchor-link href="#Link-Props" title="Link Props" />
-    </a-anchor-link>
-  </a-anchor>
+  <a-anchor
+    :affix="false"
+    :items="[
+      {
+        key: '1',
+        href: '#components-anchor-demo-basic',
+        title: 'Basic demo',
+      },
+      {
+        key: '2',
+        href: '#components-anchor-demo-static',
+        title: 'Static demo',
+      },
+      {
+        key: '3',
+        href: '#api',
+        title: 'API',
+        children: [
+          {
+            key: '4',
+            href: '#anchor-props',
+            title: 'Anchor Props',
+          },
+          {
+            key: '5',
+            href: '#link-props',
+            title: 'Link Props',
+          },
+        ],
+      },
+    ]"
+    @click="handleClick"
+  ></a-anchor>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 import type { AnchorProps } from 'ant-design-vue';
-
-export default defineComponent({
-  setup() {
-    const handleClick: AnchorProps['onClick'] = (e, link) => {
-      e.preventDefault();
-      console.log(link);
-    };
-    return {
-      handleClick,
-    };
-  },
-});
+const handleClick: AnchorProps['onClick'] = (e, link) => {
+  e.preventDefault();
+  console.log(link);
+};
 </script>

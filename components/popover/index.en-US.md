@@ -2,7 +2,8 @@
 category: Components
 type: Data Display
 title: Popover
-cover: https://gw.alipayobjects.com/zos/alicdn/1PNL1p_cO/Popover.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*XhL3QpRw92kAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*RMP_TrdZ3nsAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 The floating card popped by clicking or hovering.
@@ -20,7 +21,7 @@ Comparing with `Tooltip`, besides information `Popover` card can also provide ac
 | content | Content of the card | string\|slot\|vNode | -             |         |
 | title   | Title of the card   | string\|slot\|VNode | -             |         |
 
-Consult [Tooltip's documentation](/components/tooltip/#API) to find more APIs.
+Consult [Tooltip's documentation](/components/tooltip/#api) to find more APIs.
 
 ## Note
 

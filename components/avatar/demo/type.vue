@@ -22,7 +22,7 @@ Image, Icon and letter are supported, and the latter two kinds avatar can have c
     </template>
   </a-avatar>
   <a-avatar>U</a-avatar>
-  <a-avatar>USER</a-avatar>
+  <a-avatar :size="40">USER</a-avatar>
   <a-avatar src="https://joeschmoe.io/api/v1/random" />
   <a-avatar style="color: #f56a00; background-color: #fde3cf">U</a-avatar>
   <a-avatar style="background-color: #87d068">
@@ -32,12 +32,6 @@ Image, Icon and letter are supported, and the latter two kinds avatar can have c
   </a-avatar>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { UserOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-  },
-});
 </script>

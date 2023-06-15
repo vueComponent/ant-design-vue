@@ -2,7 +2,8 @@
 category: Components
 type: Navigation
 title: Dropdown
-cover: https://gw.alipayobjects.com/zos/alicdn/eedWN59yJ/Dropdown.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*mBBcQ6goljkAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5qm4S4Zgh2QAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A dropdown list.
@@ -17,6 +18,7 @@ When there are more than a few options to choose from, you can wrap them in a `D
 
 | Property | Description | Type | Default |  |
 | --- | --- | --- | --- | --- |
+| arrow | Whether the dropdown arrow should be open | boolean \| { pointAtCenter: boolean } | false | 3.3.0 |
 | destroyPopupOnHide | Whether destroy dropdown when hidden | boolean | false |  |
 | disabled | whether the dropdown menu is disabled | boolean | - |  |
 | getPopupContainer | to set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. [example](https://codepen.io/afc163/pen/zEjNOy?editors=0010) | Function(triggerNode) | `() => document.body` |  |
@@ -25,13 +27,13 @@ When there are more than a few options to choose from, you can wrap them in a `D
 | overlayStyle | Style of the dropdown root element | object | - |  |
 | placement | placement of pop menu: `bottomLeft` `bottom` `bottomRight` `topLeft` `top` `topRight` | String | `bottomLeft` |  |
 | trigger | the trigger mode which executes the drop-down action, hover doesn't work on mobile device | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
-| visible(v-model) | whether the dropdown menu is visible | boolean | - |  |
+| open(v-model) | whether the dropdown menu is open | boolean | - | 4.0 |
 
 ### events
 
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| visibleChange | a callback function takes an argument: `visible`, is executed when the visible state is changed. Not trigger when hidden by click item | function(visible) |
+| Events Name | Description | Arguments | Version |
+| --- | --- | --- | --- |
+| openChange | a callback function takes an argument: `open`, is executed when the open state is changed. Not trigger when hidden by click item | function(open) | 4.0 |
 
 You should use [Menu](/components/menu/) as `overlay`. The menu items and dividers are also available by using `Menu.Item` and `Menu.Divider`.
 
@@ -51,11 +53,11 @@ You should use [Menu](/components/menu/) as `overlay`. The menu items and divide
 | size | size of the button, the same as [Button](/components/button) | string | `default` |  |
 | trigger | the trigger mode which executes the drop-down action | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
 | type | type of the button, the same as [Button](/components/button) | string | `default` |  |
-| visible(v-model) | whether the dropdown menu is visible | boolean | - |  |
+| open(v-model) | whether the dropdown menu is open | boolean | - |  |
 
 ### Dropdown.Button events
 
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| click | a callback function, the same as [Button](/components/button), which will be executed when you click the button on the left | Function |
-| visibleChange | a callback function takes an argument: `visible`, is executed when the visible state is changed. Not trigger when hidden by click item | Function |
+| Events Name | Description | Arguments | Version |
+| --- | --- | --- | --- |
+| click | a callback function, the same as [Button](/components/button), which will be executed when you click the button on the left | Function |  |
+| openChange | a callback function takes an argument: `open`, is executed when the open state is changed. Not trigger when hidden by click item | Function | 4.0 |

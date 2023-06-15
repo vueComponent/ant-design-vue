@@ -50,13 +50,15 @@ Search Value Hightlight
     </template>
   </a-tree-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>();
-    const treeData = ref<TreeSelectProps['treeData']>([
+import { ref, watch } from 'vue';
+const value = ref<string>();
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    label: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
         label: 'parent 1',
         value: 'parent 1',
@@ -81,15 +83,15 @@ export default defineComponent({
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log(value.value);
-    });
-    return {
-      searchValue: ref(''),
-      value,
-      treeData,
-    };
+      {
+        label: 'parent 1-1',
+        value: 'parent 1-1',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log(value.value);
 });
+const searchValue = ref('');
 </script>

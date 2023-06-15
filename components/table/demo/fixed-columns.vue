@@ -33,9 +33,8 @@ To fix some columns and scroll inside other columns, and you must set `scroll.x`
     </template>
   </a-table>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import type { TableColumnsType } from 'ant-design-vue';
-import { defineComponent } from 'vue';
 
 const columns: TableColumnsType = [
   { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
@@ -77,13 +76,4 @@ const data: DataItem[] = [
     address: 'London Park',
   },
 ];
-
-export default defineComponent({
-  data() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>

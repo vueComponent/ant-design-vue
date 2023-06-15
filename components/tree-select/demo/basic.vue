@@ -34,13 +34,15 @@ The most basic usage.
     </template>
   </a-tree-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>();
-    const treeData = ref<TreeSelectProps['treeData']>([
+const value = ref<string>();
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    label: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
         label: 'parent 1',
         value: 'parent 1',
@@ -65,14 +67,14 @@ export default defineComponent({
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log(value.value);
-    });
-    return {
-      value,
-      treeData,
-    };
+      {
+        label: 'parent 1-1',
+        value: 'parent 1-1',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log(value.value);
 });
 </script>

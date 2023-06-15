@@ -12,6 +12,8 @@
     <Clickable />
     <Nav />
     <Progress />
+    <LabelPlacement />
+    <Inline />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -26,6 +28,8 @@ import VerticalSmall from './vertical-small.vue';
 import Vertical from './vertical.vue';
 import Clickable from './clickable.vue';
 import Progress from './progress.vue';
+import LabelPlacement from './label-placement.vue';
+import Inline from './inline.vue';
 import Nav from './nav.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -47,6 +51,8 @@ export default defineComponent({
     Clickable,
     Nav,
     Progress,
+    LabelPlacement,
+    Inline,
   },
   setup() {
     return {};

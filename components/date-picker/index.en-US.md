@@ -2,7 +2,8 @@
 category: Components
 type: Data Entry
 title: DatePicker
-cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*xXA9TJ8BTioAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 To select or input a date.
@@ -83,7 +84,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | dateRender | Custom rendering function for date cells | v-slot:dateRender="{current, today}" | - |  |
 | disabled | Determine whether the DatePicker is disabled | boolean | false |  |
 | disabledDate | Specify the date that cannot be selected | (currentDate: dayjs) => boolean | - |  |
-| format | To set the date format, refer to [dayjs](https://day.js.org/). When an array is provided, all values are used for parsing and first value is used for formatting, support [Custom Format](#components-date-picker-demo-format) | [formatType](#formatType) | `YYYY-MM-DD` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/). When an array is provided, all values are used for parsing and first value is used for formatting, support [Custom Format](#components-date-picker-demo-format) | [formatType](#formattype) | `YYYY-MM-DD` |  |
 | dropdownClassName | To customize the className of the popup calendar | string | - |  |
 | getPopupContainer | To set the container of the floating layer, while the default is to create a `div` element in `body` | function(trigger) | - |  |
 | inputReadOnly | Set the `readonly` attribute of the input tag (avoids virtual keyboard on touch devices) | boolean | false |  |
@@ -93,9 +94,12 @@ The following APIs are shared by DatePicker, RangePicker.
 | open | The open state of picker | boolean | - |  |
 | picker | Set picker type | `date` \| `week` \| `month` \| `quarter` \| `year` | `date` | `quarter` |
 | placeholder | The placeholder of date input | string \| \[string,string] | - |  |
+| placement | The position where the selection box pops up | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | popupStyle | To customize the style of the popup calendar | CSSProperties | {} |  |
+| presets | The preset ranges for quick selection | { label: slot, value: [dayjs](https://day.js.org/) }[] | - | 4.0 |
 | prevIcon | The custom prev icon | slot | - | 3.0 |
 | size | To determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | `large` \| `middle` \| `small` | - |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | The custom suffix icon | v-slot:suffixIcon | - |  |
 | superNextIcon | The custom super next icon | slot | - | 3.0 |
 | superPrevIcon | The custom super prev icon | slot | - | 3.0 |
@@ -121,10 +125,10 @@ The following APIs are shared by DatePicker, RangePicker.
 | --- | --- | --- | --- | --- |
 | defaultPickerValue | To set default picker date | [dayjs](https://day.js.org/) | - |  |
 | disabledTime | To specify the time that cannot be selected | function(date) | - |  |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM-DD` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formattype) | `YYYY-MM-DD` |  |
 | renderExtraFooter | Render extra footer in panel | v-slot:renderExtraFooter="mode" | - |  |
 | showNow | Whether to show 'Now' button on panel when `showTime` is set | boolean | - |  |
-| showTime | To provide an additional time selection | object \| boolean | [TimePicker Options](/components/time-picker/#API) |  |
+| showTime | To provide an additional time selection | object \| boolean | [TimePicker Options](/components/time-picker/#api) |  |
 | showTime.defaultValue | To set default time of selected date, [demo](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/) | dayjs() |  |
 | showToday | Whether to show `Today` button | boolean | true |  |
 | value(v-model) | To set date | [dayjs](https://day.js.org/) | - |  |
@@ -140,26 +144,26 @@ The following APIs are shared by DatePicker, RangePicker.
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formattype) | `YYYY` |  |
 
 ### DatePicker\[picker=quarter]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-\QQ` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formattype) | `YYYY-\QQ` |  |
 
 ### DatePicker\[picker=month]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formattype) | `YYYY-MM` |  |
 | monthCellRender | Custom month cell content render method | v-slot:monthCellRender="{current, locale}" | - |  |
 
 ### DatePicker\[picker=week]
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-wo` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formattype) | `YYYY-wo` |  |
 
 ### RangePicker
 
@@ -170,11 +174,12 @@ The following APIs are shared by DatePicker, RangePicker.
 | defaultPickerValue | To set default picker date | \[[dayjs](https://day.js.org/), [dayjs](https://day.js.org/)] | - |  |
 | disabled | If disable start or end | \[boolean, boolean] | - |  |
 | disabledTime | To specify the time that cannot be selected | function(date: dayjs, partial: `start` \| `end`) | - |  |
-| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formatType) | `YYYY-MM-DD HH:mm:ss` |  |
+| format | To set the date format, refer to [dayjs](https://day.js.org/) | [formatType](#formattype) | `YYYY-MM-DD HH:mm:ss` |  |
+| presets | The preset ranges for quick selection | { label: slot, value: [dayjs](https://day.js.org/)\[] }[] | - | 4.0 |
 | ranges | The preseted ranges for quick selection | { \[range: string]: [dayjs](https://day.js.org/)\[] } \| { \[range: string]: () => [dayjs](https://day.js.org/)\[] } | - |  |
 | renderExtraFooter | Render extra footer in panel | v-slot:renderExtraFooter="mode" | - |  |
 | separator | Set separator between inputs | string \| v-slot:separator | `<SwapRightOutlined />` |  |
-| showTime | To provide an additional time selection | object \| boolean | [TimePicker Options](/components/time-picker/#API) |  |
+| showTime | To provide an additional time selection | object \| boolean | [TimePicker Options](/components/time-picker/#api) |  |
 | showTime.defaultValue | To set default time of selected date, [demo](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/)\[] | \[dayjs(), dayjs()] |  |
 | value(v-model) | To set date | \[[dayjs](https://day.js.org/), [dayjs](https://day.js.org/)] | - |  |
 

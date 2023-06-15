@@ -4,7 +4,8 @@ subtitle: 排版
 type: 通用
 title: Typography
 cols: 1
-cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*MLt3R6m9huoAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LT2jR41Uj2EAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 文本的基本格式。
@@ -82,7 +83,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
 ```json
   {
     text: string,
-    onCopy: function,
+    onCopy: function(event),
     tooltip: false,
   }
 ```

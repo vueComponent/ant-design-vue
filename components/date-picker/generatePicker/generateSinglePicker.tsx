@@ -5,18 +5,22 @@ import RCPicker from '../../vc-picker';
 import type { PanelMode, PickerMode } from '../../vc-picker/interface';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
-import { getPlaceholder } from '../util';
+import { getPlaceholder, transPlacement2DropdownAlign } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import { getTimeProps, Components } from '.';
 import { computed, defineComponent, ref } from 'vue';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import type { CommonProps, DatePickerProps } from './props';
 import { commonProps, datePickerProps } from './props';
 
 import devWarning from '../../vc-util/devWarning';
-import { useInjectFormItemContext } from '../../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
+import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
+import { useCompactItemContext } from '../../space/Compact';
 import type { CustomSlotsType } from '../../_util/type';
+//CSSINJS
+import useStyle from '../style';
 
 export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -52,21 +56,40 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           DatePickerProps<DateType> &
           ExtraProps;
         const formItemContext = useInjectFormItemContext();
-        devWarning(
-          !(props.monthCellContentRender || slots.monthCellContentRender),
-          'DatePicker',
-          '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
-        );
+        const formItemInputContext = FormItemInputContext.useInject();
+        // =================== Warning =====================
+        if (process.env.NODE_ENV !== 'production') {
+          devWarning(
+            picker !== 'quarter',
+            displayName || 'DatePicker',
+            `DatePicker.${displayName} is legacy usage. Please use DatePicker[picker='${picker}'] directly.`,
+          );
 
-        devWarning(
-          !attrs.getCalendarContainer,
-          'DatePicker',
-          '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
-        );
-        const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
-          'picker',
-          props,
-        );
+          devWarning(
+            !props.dropdownClassName,
+            displayName || 'DatePicker',
+            '`dropdownClassName` is deprecated. Please use `popupClassName` instead.',
+          );
+          devWarning(
+            !(props.monthCellContentRender || slots.monthCellContentRender),
+            displayName || 'DatePicker',
+            '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
+          );
+
+          devWarning(
+            !attrs.getCalendarContainer,
+            displayName || 'DatePicker',
+            '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
+          );
+        }
+
+        const { prefixCls, direction, getPopupContainer, size, rootPrefixCls, disabled } =
+          useConfigInject('picker', props);
+        const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
+        const mergedSize = computed(() => compactSize.value || size.value);
+        // style
+        const [wrapSSR, hashId] = useStyle(prefixCls);
+
         const pickerRef = ref();
         expose({
           focus: () => {
@@ -179,17 +202,21 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               : {}),
           };
           const pre = prefixCls.value;
-          return (
+          const suffixNode = (
+            <>
+              {suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)}
+              {formItemInputContext.hasFeedback && formItemInputContext.feedbackIcon}
+            </>
+          );
+          return wrapSSR(
             <RCPicker
               monthCellRender={monthCellRender}
               dateRender={dateRender}
               renderExtraFooter={renderExtraFooter}
               ref={pickerRef}
-              placeholder={getPlaceholder(mergedPicker, locale, placeholder)}
-              suffixIcon={
-                suffixIcon ||
-                (mergedPicker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
-              }
+              placeholder={getPlaceholder(locale, mergedPicker, placeholder)}
+              suffixIcon={suffixNode}
+              dropdownAlign={transPlacement2DropdownAlign(direction.value, props.placement)}
               clearIcon={clearIcon || <CloseCircleFilled />}
               allowClear={allowClear}
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
@@ -204,11 +231,19 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               locale={locale!.lang}
               class={classNames(
                 {
-                  [`${pre}-${size.value}`]: size.value,
+                  [`${pre}-${mergedSize.value}`]: mergedSize.value,
                   [`${pre}-borderless`]: !bordered,
                 },
+                getStatusClassNames(
+                  pre,
+                  getMergedStatus(formItemInputContext.status, props.status),
+                  formItemInputContext.hasFeedback,
+                ),
                 attrs.class,
+                hashId.value,
+                compactItemClassnames.value,
               )}
+              disabled={disabled.value}
               prefixCls={pre}
               getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
               generateConfig={generateConfig}
@@ -218,13 +253,18 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
               components={Components}
               direction={direction.value}
+              dropdownClassName={classNames(
+                hashId.value,
+                props.popupClassName,
+                props.dropdownClassName,
+              )}
               onChange={onChange}
               onOpenChange={onOpenChange}
               onFocus={onFocus}
               onBlur={onBlur}
               onPanelChange={onPanelChange}
               onOk={onOk}
-            />
+            />,
           );
         };
       },

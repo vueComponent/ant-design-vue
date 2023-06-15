@@ -74,9 +74,9 @@ function injectFilter<RecordType>(
   dropdownPrefixCls: string,
   columns: ColumnsType<RecordType>,
   filterStates: FilterState<RecordType>[],
-  triggerFilter: (filterState: FilterState<RecordType>) => void,
-  getPopupContainer: GetPopupContainer | undefined,
   locale: TableLocale,
+  triggerFilter: (filterState: FilterState<RecordType>) => void,
+  getPopupContainer?: GetPopupContainer | undefined,
   pos?: string,
 ): ColumnsType<RecordType> {
   return columns.map((column, index) => {
@@ -121,9 +121,9 @@ function injectFilter<RecordType>(
           dropdownPrefixCls,
           newColumn.children,
           filterStates,
+          locale,
           triggerFilter,
           getPopupContainer,
-          locale,
           columnPos,
         ),
       };
@@ -217,24 +217,44 @@ function useFilter<RecordType>({
 
   const mergedFilterStates = computed(() => {
     const collectedStates = collectFilterStates(mergedColumns.value, false);
-
-    const filteredKeysIsNotControlled = collectedStates.every(
-      ({ filteredKeys }) => filteredKeys === undefined,
-    );
+    if (collectedStates.length === 0) {
+      return collectedStates;
+    }
+    let filteredKeysIsAllNotControlled = true;
+    let filteredKeysIsAllControlled = true;
+    collectedStates.forEach(({ filteredKeys }) => {
+      if (filteredKeys !== undefined) {
+        filteredKeysIsAllNotControlled = false;
+      } else {
+        filteredKeysIsAllControlled = false;
+      }
+    });
 
     // Return if not controlled
-    if (filteredKeysIsNotControlled) {
-      return filterStates.value;
+    if (filteredKeysIsAllNotControlled) {
+      // Filter column may have been removed
+      const keyList = (mergedColumns.value || []).map((column, index) =>
+        getColumnKey(column, getColumnPos(index)),
+      );
+      return filterStates.value
+        .filter(({ key }) => keyList.includes(key))
+        .map(item => {
+          const col = mergedColumns.value[keyList.findIndex(key => key === item.key)];
+          return {
+            ...item,
+            column: {
+              ...item.column,
+              ...col,
+            },
+            forceFiltered: col.filtered,
+          };
+        });
     }
 
-    const filteredKeysIsAllControlled = collectedStates.every(
-      ({ filteredKeys }) => filteredKeys !== undefined,
-    );
-
     devWarning(
-      filteredKeysIsNotControlled || filteredKeysIsAllControlled,
+      filteredKeysIsAllControlled,
       'Table',
-      '`FilteredKeys` should all be controlled or not controlled.',
+      'Columns should all contain `filteredValue` or not contain `filteredValue`.',
     );
 
     return collectedStates;
@@ -255,9 +275,9 @@ function useFilter<RecordType>({
       dropdownPrefixCls.value,
       innerColumns,
       mergedFilterStates.value,
+      locale.value,
       triggerFilter,
       getPopupContainer.value,
-      locale.value,
     );
   };
   return [transformColumns, mergedFilterStates, filters];

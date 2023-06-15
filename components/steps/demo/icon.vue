@@ -15,44 +15,37 @@ title:
 You can use your own custom icons by setting the property `icon` for `Steps.Step`.
 </docs>
 <template>
-  <a-steps>
-    <a-step status="finish" title="Login">
-      <template #icon>
-        <user-outlined />
-      </template>
-    </a-step>
-    <a-step status="finish" title="Verification">
-      <template #icon>
-        <solution-outlined />
-      </template>
-    </a-step>
-    <a-step status="process" title="Pay">
-      <template #icon>
-        <loading-outlined />
-      </template>
-    </a-step>
-    <a-step status="wait" title="Done">
-      <template #icon>
-        <smile-outlined />
-      </template>
-    </a-step>
-  </a-steps>
+  <a-steps :items="items"></a-steps>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
+import { h } from 'vue';
 import {
   UserOutlined,
   SolutionOutlined,
   LoadingOutlined,
   SmileOutlined,
 } from '@ant-design/icons-vue';
-
-export default defineComponent({
-  components: {
-    UserOutlined,
-    SolutionOutlined,
-    LoadingOutlined,
-    SmileOutlined,
+import { StepProps } from 'ant-design-vue';
+const items = [
+  {
+    title: 'Login',
+    status: 'finish',
+    icon: h(UserOutlined),
   },
-});
+  {
+    title: 'Verification',
+    status: 'finish',
+    icon: h(SolutionOutlined),
+  },
+  {
+    title: 'Pay',
+    status: 'process',
+    icon: h(LoadingOutlined),
+  },
+  {
+    title: 'Done',
+    status: 'wait',
+    icon: h(SmileOutlined),
+  },
+] as StepProps[];
 </script>

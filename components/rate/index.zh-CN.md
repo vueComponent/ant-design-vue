@@ -3,7 +3,8 @@ category: Components
 type: 数据录入
 title: Rate
 subtitle: 评分
-cover: https://gw.alipayobjects.com/zos/alicdn/R5uiIWmxe/Rate.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*oyOcTrB12_YAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*M7_ER7GJr6wAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 评分组件。

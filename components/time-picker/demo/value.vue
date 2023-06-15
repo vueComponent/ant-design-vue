@@ -27,24 +27,16 @@ value 和 onChange 需要配合使用。也可以直接使用v-model。
     <a-time-picker :value="value2" />
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import dayjs, { Dayjs } from 'dayjs';
-import { defineComponent, ref } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const value = ref<Dayjs>();
+const value = ref<Dayjs>();
 
-    const onChange = (time: Dayjs) => {
-      console.log(time);
-      value.value = time;
-    };
+const onChange = (time: Dayjs) => {
+  console.log(time);
+  value.value = time;
+};
 
-    return {
-      value,
-      value2: ref(dayjs()),
-      onChange,
-    };
-  },
-});
+const value2 = ref(dayjs());
 </script>

@@ -33,9 +33,9 @@ You can customize icons for different nodes.
     </template>
   </a-tree>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { DownOutlined, SmileOutlined, FrownOutlined, FrownFilled } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
 import type { TreeProps } from 'ant-design-vue';
 
 const treeData: TreeProps['treeData'] = [
@@ -48,19 +48,5 @@ const treeData: TreeProps['treeData'] = [
     ],
   },
 ];
-
-export default defineComponent({
-  components: {
-    DownOutlined,
-    SmileOutlined,
-    FrownOutlined,
-    FrownFilled,
-  },
-  setup() {
-    return {
-      selectedKeys: ref(['0-0-0']),
-      treeData,
-    };
-  },
-});
+const selectedKeys = ref(['0-0-0']);
 </script>

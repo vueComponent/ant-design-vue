@@ -59,6 +59,7 @@ jspm_packages/
 dist
 lib
 es
+/locale
 _site
 yarn.lock
 package-lock.json
@@ -78,5 +79,8 @@ report.html
 
 site/src/router/demoRoutes.js
 
+components/version/version.ts
 components/version/version.tsx
+components/version/token.json
+components/version/token-meta.json
 ~component-api.json

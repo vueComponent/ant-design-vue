@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
-  ref,
+  shallowRef,
   reactive,
   watch,
   onMounted,
@@ -21,9 +21,9 @@ import {
   getFixedTop,
   getFixedBottom,
 } from './utils';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
-
+import useStyle from './style';
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;
 }
@@ -74,10 +74,11 @@ export type AffixInstance = ComponentPublicInstance<AffixProps, AffixExpose>;
 const Affix = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AAffix',
+  inheritAttrs: false,
   props: affixProps(),
-  setup(props, { slots, emit, expose }) {
-    const placeholderNode = ref();
-    const fixedNode = ref();
+  setup(props, { slots, emit, expose, attrs }) {
+    const placeholderNode = shallowRef();
+    const fixedNode = shallowRef();
     const state = reactive({
       affixStyle: undefined,
       placeholderStyle: undefined,
@@ -123,6 +124,14 @@ const Affix = defineComponent({
       const targetRect = getTargetRect(targetNode);
       const fixedTop = getFixedTop(placeholderRect, targetRect, offsetTop.value);
       const fixedBottom = getFixedBottom(placeholderRect, targetRect, offsetBottom.value);
+      if (
+        placeholderRect.top === 0 &&
+        placeholderRect.left === 0 &&
+        placeholderRect.width === 0 &&
+        placeholderRect.height === 0
+      ) {
+        return;
+      }
 
       if (fixedTop !== undefined) {
         const width = `${placeholderRect.width}px`;
@@ -245,11 +254,12 @@ const Affix = defineComponent({
     });
 
     const { prefixCls } = useConfigInject('affix', props);
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     return () => {
       const { affixStyle, placeholderStyle } = state;
       const className = classNames({
         [prefixCls.value]: affixStyle,
+        [hashId.value]: true,
       });
       const restProps = omit(props, [
         'prefixCls',
@@ -259,14 +269,15 @@ const Affix = defineComponent({
         'onChange',
         'onTestUpdatePosition',
       ]);
-      return (
+      return wrapSSR(
         <ResizeObserver onResize={updatePosition}>
-          <div {...restProps} style={placeholderStyle} ref={placeholderNode}>
+          <div {...restProps} {...attrs} ref={placeholderNode}>
+            {affixStyle && <div style={placeholderStyle} aria-hidden="true" />}
             <div class={className} ref={fixedNode} style={affixStyle}>
               {slots.default?.()}
             </div>
           </div>
-        </ResizeObserver>
+        </ResizeObserver>,
       );
     };
   },

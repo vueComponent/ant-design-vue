@@ -76,7 +76,7 @@ export default defineComponent({
   justify-content: center;
 }
 .placeholder {
-  height: 100px;
+  height: 116px;
 }
 .desc {
   margin-left: 16px;

@@ -13,15 +13,13 @@ import type { CSSMotionProps } from '../../../_util/transition';
 export interface StoreMenuInfo {
   eventKey: string;
   key: Key;
-  parentEventKeys: ComputedRef<string[]>;
+  parentEventKeys: Ref<string[]>;
   childrenEventKeys?: Ref<string[]>;
   isLeaf?: boolean;
-  parentKeys: ComputedRef<Key[]>;
+  parentKeys: Ref<Key[]>;
 }
 export interface MenuContextProps {
-  isRootMenu: Ref<boolean>;
-
-  store: Ref<Record<string, StoreMenuInfo>>;
+  rootClassName: Ref<string>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;
@@ -32,7 +30,7 @@ export interface MenuContextProps {
   rtl?: ComputedRef<boolean>;
 
   inlineCollapsed: Ref<boolean>;
-  antdMenuTheme?: ComputedRef<MenuTheme>;
+  theme?: ComputedRef<MenuTheme>;
 
   siderCollapsed?: ComputedRef<boolean>;
 
@@ -115,7 +113,6 @@ const MenuContextProvider = defineComponent({
   props: {
     mode: { type: String as PropType<MenuMode>, default: undefined },
     overflowDisabled: { type: Boolean, default: undefined },
-    isRootMenu: { type: Boolean, default: undefined },
   },
   setup(props, { slots }) {
     const menuContext = useInjectMenu();
@@ -124,9 +121,6 @@ const MenuContextProvider = defineComponent({
     // 不需要 watch 变化
     if (props.mode !== undefined) {
       newContext.mode = toRef(props, 'mode');
-    }
-    if (props.isRootMenu !== undefined) {
-      newContext.isRootMenu = toRef(props, 'isRootMenu');
     }
     if (props.overflowDisabled !== undefined) {
       newContext.overflowDisabled = toRef(props, 'overflowDisabled');

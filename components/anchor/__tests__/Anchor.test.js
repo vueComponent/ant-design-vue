@@ -48,7 +48,7 @@ describe('Anchor Render', () => {
                 currentActiveLink.value = current;
               }}
             >
-              <Link href="http://www.example.com/#API" title="API" />
+              <Link href="http://www.example.com/#api" title="API" />
             </Anchor>
           );
         },
@@ -56,8 +56,8 @@ describe('Anchor Render', () => {
       { sync: false },
     );
     await sleep();
-    wrapper.find('a[href="http://www.example.com/#API"]').trigger('click');
-    expect(currentActiveLink.value).toBe('http://www.example.com/#API');
+    wrapper.find('a[href="http://www.example.com/#api"]').trigger('click');
+    expect(currentActiveLink.value).toBe('http://www.example.com/#api');
   });
   /*
     it('Anchor render perfectly for complete href - scroll', done => {
@@ -68,7 +68,7 @@ describe('Anchor Render', () => {
               <div>
                 <div id="API">Hello</div>
                 <Anchor ref="anchor">
-                  <Link href="http://www.example.com/#API" title="API" />
+                  <Link href="http://www.example.com/#api" title="API" />
                 </Anchor>
               </div>
             );
@@ -78,7 +78,7 @@ describe('Anchor Render', () => {
       );
       wrapper.vm.$nextTick(() => {
         wrapper.vm.$refs.anchor.handleScroll();
-        expect(wrapper.vm.$refs.anchor.$data.activeLink).toBe('http://www.example.com/#API');
+        expect(wrapper.vm.$refs.anchor.$data.activeLink).toBe('http://www.example.com/#api');
         done();
       });
     });
@@ -92,7 +92,7 @@ describe('Anchor Render', () => {
                 <div>
                   <div id="API">Hello</div>
                   <Anchor ref="anchor">
-                    <Link href="##API" title="API" />
+                    <Link href="##api" title="API" />
                   </Anchor>
                 </div>
               );
@@ -101,8 +101,8 @@ describe('Anchor Render', () => {
           { sync: false, attachTo: 'body' },
         );
         await asyncExpect(() => {
-          wrapper.vm.$refs.anchor.handleScrollTo('##API');
-          expect(wrapper.vm.$refs.anchor.$data.activeLink).toBe('##API');
+          wrapper.vm.$refs.anchor.handleScrollTo('##api');
+          expect(wrapper.vm.$refs.anchor.$data.activeLink).toBe('##api');
           expect(scrollToSpy).not.toHaveBeenCalled();
         });
         await asyncExpect(() => {
@@ -116,7 +116,7 @@ describe('Anchor Render', () => {
             render() {
               return (
                 <Anchor ref="anchor">
-                  <Link href="#API" title="API" />
+                  <Link href="#api" title="API" />
                 </Anchor>
               );
             },
@@ -141,14 +141,14 @@ describe('Anchor Render', () => {
             },
             render() {
               return (
-                <Anchor ref="anchor">{this.showLink ? <Link href="#API" title="API" /> : null}</Anchor>
+                <Anchor ref="anchor">{this.showLink ? <Link href="#api" title="API" /> : null}</Anchor>
               );
             },
           },
           { sync: false, attachTo: 'body' },
         );
         await asyncExpect(() => {
-          expect(wrapper.vm.$refs.anchor.links).toEqual(['#API']);
+          expect(wrapper.vm.$refs.anchor.links).toEqual(['#api']);
           wrapper.setProps({ showLink: false });
         });
         await asyncExpect(() => {
@@ -172,12 +172,12 @@ describe('Anchor Render', () => {
             sync: false,
             attachTo: 'body',
             props: {
-              href: '#API',
+              href: '#api',
             },
           },
         );
         await asyncExpect(() => {
-          expect(wrapper.vm.$refs.anchor.links).toEqual(['#API']);
+          expect(wrapper.vm.$refs.anchor.links).toEqual(['#api']);
           wrapper.setProps({ href: '#API_1' });
         });
         await asyncExpect(() => {
@@ -190,7 +190,7 @@ describe('Anchor Render', () => {
         let link;
         const handleClick = (...arg) => ([event, link] = arg);
 
-        const href = '#API';
+        const href = '#api';
         const title = 'API';
 
         const anchorRef = Vue.ref(null);

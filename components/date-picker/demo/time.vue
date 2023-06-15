@@ -28,35 +28,24 @@ This property provide an additional time selection. When `showTime` is an Object
     />
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { Dayjs } from 'dayjs';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    const onChange = (value: Dayjs, dateString: string) => {
-      console.log('Selected Time: ', value);
-      console.log('Formatted Selected Time: ', dateString);
-    };
 
-    const onOk = (value: Dayjs) => {
-      console.log('onOk: ', value);
-    };
+const onChange = (value: Dayjs, dateString: string) => {
+  console.log('Selected Time: ', value);
+  console.log('Formatted Selected Time: ', dateString);
+};
 
-    const onRangeChange = (value: [Dayjs, Dayjs], dateString: [string, string]) => {
-      console.log('Selected Time: ', value);
-      console.log('Formatted Selected Time: ', dateString);
-    };
+const onOk = (value: Dayjs) => {
+  console.log('onOk: ', value);
+};
 
-    const onRangeOk = (value: [Dayjs, Dayjs]) => {
-      console.log('onOk: ', value);
-    };
+const onRangeChange = (value: [Dayjs, Dayjs], dateString: [string, string]) => {
+  console.log('Selected Time: ', value);
+  console.log('Formatted Selected Time: ', dateString);
+};
 
-    return {
-      onChange,
-      onOk,
-      onRangeChange,
-      onRangeOk,
-    };
-  },
-});
+const onRangeOk = (value: [Dayjs, Dayjs]) => {
+  console.log('onOk: ', value);
+};
 </script>

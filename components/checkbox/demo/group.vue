@@ -27,8 +27,8 @@ Generate a group of checkboxes from an array
   <br />
   <br />
   <a-checkbox-group v-model:value="state.value4" :options="optionsWithDisabled" disabled>
-    <template #label="{ value }">
-      <span style="color: red">{{ value }}</span>
+    <template #label="{ label }">
+      <span style="color: red">{{ label }}</span>
     </template>
   </a-checkbox-group>
 </template>
@@ -42,7 +42,7 @@ const options = [
   { label: 'Orange', value: 'Orange' },
 ];
 const optionsWithDisabled = [
-  { value: 'Apple' },
+  { label: 'Apple', value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange', disabled: false },
 ];

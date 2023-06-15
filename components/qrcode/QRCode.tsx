@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { defineComponent, shallowRef, watch, computed, watchEffect } from 'vue';
+import { defineComponent, shallowRef, watch, computed, watchEffect, toRefs, unref } from 'vue';
 import type { ImageSettings } from './interface';
 import { qrProps } from './interface';
 
@@ -261,6 +261,94 @@ export const QRCodeCanvas = defineComponent({
           <canvas {...attrs} style={[canvasStyle, attrs.style as CSSProperties]} ref={_canvas} />
           {img}
         </>
+      );
+    };
+  },
+});
+
+export const QRCodeSVG = defineComponent({
+  name: 'QRCodeSVG',
+  inheritAttrs: false,
+  props: {
+    ...qrProps(),
+    color: String,
+    level: String,
+    bgColor: String,
+    fgColor: String,
+    marginSize: Number,
+    title: String,
+  },
+  setup(props) {
+    const {
+      value,
+      size = DEFAULT_SIZE,
+      level = DEFAULT_LEVEL,
+      bgColor = DEFAULT_BGCOLOR,
+      fgColor = DEFAULT_FGCOLOR,
+      includeMargin = DEFAULT_INCLUDEMARGIN,
+      title,
+      marginSize,
+      imageSettings,
+    } = toRefs(props);
+    const _svg = shallowRef<HTMLOrSVGElement>(null);
+
+    let cells = qrcodegen.QrCode.encodeText(
+      unref(value),
+      ERROR_LEVEL_MAP[unref(level)],
+    ).getModules();
+
+    const margin = getMarginSize(unref(includeMargin), unref(marginSize));
+    const numCells = cells.length + margin * 2;
+    const calculatedImageSettings = getImageSettings(
+      cells,
+      unref(size),
+      margin,
+      unref(imageSettings),
+    );
+
+    let image = null;
+    if (imageSettings != null && calculatedImageSettings != null) {
+      if (calculatedImageSettings.excavation != null) {
+        cells = excavateModules(cells, calculatedImageSettings.excavation);
+      }
+
+      image = (
+        <image
+          xlinkHref={unref(imageSettings).src}
+          height={calculatedImageSettings.h}
+          width={calculatedImageSettings.w}
+          x={calculatedImageSettings.x + margin}
+          y={calculatedImageSettings.y + margin}
+          preserveAspectRatio="none"
+        />
+      );
+    }
+
+    // Drawing strategy: instead of a rect per module, we're going to create a
+    // single path for the dark modules and layer that on top of a light rect,
+    // for a total of 2 DOM nodes. We pay a bit more in string concat but that's
+    // way faster than DOM ops.
+    // For level 1, 441 nodes -> 2
+    // For level 40, 31329 -> 2
+    const fgPath = generatePath(cells, margin);
+
+    return () => {
+      return (
+        <svg
+          height={unref(size)}
+          width={unref(size)}
+          viewBox={`0 0 ${numCells} ${numCells}`}
+          ref={_svg}
+        >
+          {!!title && <title>{title}</title>}
+          <path
+            fill={unref(bgColor)}
+            d={`M0,0 h${numCells}v${numCells}H0z`}
+            shape-rendering="crispEdges"
+          />
+          <path fill={unref(fgColor)} d={fgPath} shape-rendering="crispEdges" />
+          {image}
+        </svg>
       );
     };
   },

@@ -12,7 +12,9 @@ export const qrProps = () => {
   return {
     size: { type: Number, default: 160 },
     value: { type: String, required: true },
+    type: stringType<'canvas' | 'svg'>('canvas'),
     color: String,
+    bgColor: String,
     includeMargin: Boolean,
     imageSettings: objectType<ImageSettings>(),
   };

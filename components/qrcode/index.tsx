@@ -8,7 +8,7 @@ import Spin from '../spin';
 import Button from '../button';
 import { ReloadOutlined } from '@ant-design/icons-vue';
 import { useToken } from '../theme/internal';
-import { QRCodeCanvas } from './QRCodeCanvas';
+import { QRCodeCanvas, QRCodeSVG } from './QRCode';
 import warning from '../_util/warning';
 import { qrcodeProps } from './interface';
 
@@ -43,6 +43,7 @@ const QRCode = defineComponent({
         size = 160,
         iconSize = 40,
         color = '#000',
+        bgColor = 'transparent',
         errorLevel = 'M',
       } = props;
       const imageSettings: QRCodeProps['imageSettings'] = {
@@ -57,7 +58,7 @@ const QRCode = defineComponent({
         value,
         size: size - (token.value.paddingSM + token.value.lineWidth) * 2,
         level: errorLevel,
-        bgColor: 'transparent',
+        bgColor,
         fgColor: color,
         imageSettings: icon ? imageSettings : undefined,
       };
@@ -69,7 +70,7 @@ const QRCode = defineComponent({
           {...attrs}
           style={[
             attrs.style as CSSProperties,
-            { width: props.size + 'px', height: props.size + 'px' },
+            { width: props.size + 'px', height: props.size + 'px', backgroundColor: props.bgColor },
           ]}
           class={[
             hashId.value,
@@ -96,7 +97,11 @@ const QRCode = defineComponent({
               )}
             </div>
           )}
-          <QRCodeCanvas ref={qrCodeCanvas} {...qrCodeProps.value} />
+          {props.type === 'canvas' ? (
+            <QRCodeCanvas ref={qrCodeCanvas} {...qrCodeProps.value} />
+          ) : (
+            <QRCodeSVG {...qrCodeProps.value} />
+          )}
         </div>,
       );
     };

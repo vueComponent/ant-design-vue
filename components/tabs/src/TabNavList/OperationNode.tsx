@@ -121,6 +121,14 @@ export default defineComponent({
       }
     });
 
+    watch(
+      () => props.tabs.length,
+      val => {
+        if(!val) {
+          setOpen(false);
+        }
+    });
+    
     return () => {
       const {
         prefixCls,
@@ -146,7 +154,6 @@ export default defineComponent({
       if (!tabs.length) {
         moreStyle.visibility = 'hidden';
         moreStyle.order = 1;
-        setOpen(false);
       }
 
       const overlayClassName = classNames({

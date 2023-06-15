@@ -25,6 +25,7 @@ Use virtual list through `height` prop.
     :height="233"
     :tree-data="treeData"
     :max-tag-count="10"
+    tree-node-filter-prop="title"
   >
     <template #title="{ title, value }">
       <span v-if="value === '0-0-1-0'" style="color: #1890ff">{{ title }}</span>

@@ -14,7 +14,7 @@ import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 export const operationNodeProps = {
   prefixCls: { type: String },
   id: { type: String },
-  tabs: { type: Object as PropType<(Tab & { closeIcon?: () => any })[]> },
+  tabs: { type: Array as PropType<(Tab & { closeIcon?: () => any })[]> },
   rtl: { type: Boolean },
   tabBarGutter: { type: Number },
   activeKey: { type: [String, Number] },
@@ -124,11 +124,12 @@ export default defineComponent({
     watch(
       () => props.tabs.length,
       val => {
-        if(!val) {
+        if (!val) {
           setOpen(false);
         }
-    });
-    
+      },
+    );
+
     return () => {
       const {
         prefixCls,

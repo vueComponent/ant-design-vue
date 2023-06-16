@@ -121,6 +121,14 @@ export default defineComponent({
       }
     });
 
+    watch(
+      () => props.tabs.length,
+      val => {
+        if(!val) {
+          setOpen(false);
+        }
+    });
+    
     return () => {
       const {
         prefixCls,

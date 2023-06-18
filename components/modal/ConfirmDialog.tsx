@@ -97,7 +97,7 @@ export default defineComponent<ConfirmDialogProps>({
         maskStyle,
         okButtonProps,
         cancelButtonProps,
-        okCancel,
+        okCancel = true,
         width = 416,
         mask = true,
         maskClosable = false,

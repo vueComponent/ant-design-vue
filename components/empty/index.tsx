@@ -36,7 +36,7 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
   const prefixCls = prefixClsRef.value;
 
   const {
-    image = defaultEmptyImg,
+    image = slots.image?.() || defaultEmptyImg,
     description = slots.description?.() || undefined,
     imageStyle,
     class: className = '',

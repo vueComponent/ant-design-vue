@@ -2,7 +2,7 @@
 
 Starting from the V3 version, the momentjs library is replaced by dayjs by default. If you need to use the momentjs or date-fns date library, you can replace it as follows:
 
-### 替换 DatePicker
+### replace DatePicker
 
 ```js
 // moment or date-fns

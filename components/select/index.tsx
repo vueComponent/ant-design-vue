@@ -36,10 +36,10 @@ export const selectProps = () => ({
     'backfill',
   ]),
   value: {
-    type: [Array, Object, String, Number] as PropType<SelectValue>,
+    type: [Array, Object, String, Number, Boolean] as PropType<SelectValue>,
   },
   defaultValue: {
-    type: [Array, Object, String, Number] as PropType<SelectValue>,
+    type: [Array, Object, String, Number, Boolean] as PropType<SelectValue>,
   },
   notFoundContent: PropTypes.any,
   suffixIcon: PropTypes.any,

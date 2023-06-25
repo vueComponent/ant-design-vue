@@ -311,12 +311,11 @@ const Preview = defineComponent({
 
     return () => {
       const { visible, prefixCls, rootClassName } = props;
-
       return (
         <Dialog
           {...attrs}
-          transitionName="zoom"
-          maskTransitionName="fade"
+          transitionName={props.transitionName}
+          maskTransitionName={props.maskTransitionName}
           closable={false}
           keyboard
           prefixCls={prefixCls}
@@ -327,19 +326,22 @@ const Preview = defineComponent({
           rootClassName={rootClassName}
           getContainer={props.getContainer}
         >
-          <ul class={`${props.prefixCls}-operations`}>
-            {tools.map(({ icon: IconType, onClick, type, disabled }) => (
-              <li
-                class={classnames(toolClassName, {
-                  [`${props.prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
-                })}
-                onClick={onClick}
-                key={type}
-              >
-                {cloneVNode(IconType, { class: iconClassName })}
-              </li>
-            ))}
-          </ul>
+          <div class={[`${props.prefixCls}-operations-wrapper`, rootClassName]}>
+            <ul class={`${props.prefixCls}-operations`}>
+              {tools.map(({ icon: IconType, onClick, type, disabled }) => (
+                <li
+                  class={classnames(toolClassName, {
+                    [`${props.prefixCls}-operations-operation-disabled`]:
+                      disabled && disabled?.value,
+                  })}
+                  onClick={onClick}
+                  key={type}
+                >
+                  {cloneVNode(IconType, { class: iconClassName })}
+                </li>
+              ))}
+            </ul>
+          </div>
           <div
             class={`${props.prefixCls}-img-wrapper`}
             style={{

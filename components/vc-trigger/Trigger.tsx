@@ -343,12 +343,14 @@ export default defineComponent({
     getRootDomNode() {
       const { getTriggerDOMNode } = this.$props;
       if (getTriggerDOMNode) {
-        const domNode = findDOMNode(this.triggerRef);
+        const domNode =
+          this.triggerRef?.$el?.nodeName === '#comment' ? null : findDOMNode(this.triggerRef);
         return findDOMNode(getTriggerDOMNode(domNode));
       }
 
       try {
-        const domNode = findDOMNode(this.triggerRef);
+        const domNode =
+          this.triggerRef?.$el?.nodeName === '#comment' ? null : findDOMNode(this.triggerRef);
         if (domNode) {
           return domNode;
         }

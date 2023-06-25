@@ -66,6 +66,7 @@ const DrawerWrapper = defineComponent({
       if ($forceRender || props.open || dom.value) {
         portal = (
           <PortalWrapper
+            autoLock
             visible={props.open}
             forceRender={$forceRender}
             getContainer={getContainer}

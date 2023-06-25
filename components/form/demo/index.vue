@@ -4,6 +4,7 @@
     <LabelWidth />
     <HorizontalLogin />
     <Layout />
+    <Disabled />
     <inlineLoginVue />
     <normalLoginVue />
     <validationVue />
@@ -32,6 +33,7 @@ import advancedSearchVue from './advanced-search.vue';
 import Basic from './basic.vue';
 import validationVue from './validation.vue';
 import CustomValidation from './custom-validation.vue';
+import Disabled from './disabled.vue';
 import DynamicFormItem from './dynamic-form-item.vue';
 import dynamicFormItemsComplexVue from './dynamic-form-items-complex.vue';
 import dynamicFormItemsVue from './dynamic-form-items.vue';
@@ -65,6 +67,7 @@ export default defineComponent({
     validateOtherVue,
     Basic,
     CustomValidation,
+    Disabled,
     DynamicFormItem,
     HorizontalLogin,
     NestedForm,

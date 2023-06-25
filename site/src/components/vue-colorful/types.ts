@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'vue';
+import type { InputHTMLAttributes } from 'vue';
 
 export interface RgbColor {
   r: number;

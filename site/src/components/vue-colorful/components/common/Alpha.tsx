@@ -1,14 +1,15 @@
 import type { PropType } from 'vue';
 import { defineComponent, toRefs, computed } from 'vue';
 
-import { Interactive, Interaction } from './Interactive';
+import type { Interaction } from './Interactive';
+import { Interactive } from './Interactive';
 import { Pointer } from './Pointer';
 
 import { hsvaToHslaString } from '../../utils/convert';
 import { formatClassName } from '../../utils/format';
 import { clamp } from '../../utils/clamp';
 import { round } from '../../utils/round';
-import { HsvaColor } from '../../types';
+import type { HsvaColor } from '../../types';
 
 export interface AlphaProps {
   hsva: HsvaColor;

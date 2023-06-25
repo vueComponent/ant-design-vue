@@ -40,7 +40,7 @@ import 'ant-design-vue/dist/reset.css';
 const app = createApp(App);
 
 app.use(Antd).mount('#app');
-`
+`;
 
 function getDeps(code: string) {
   return (code.match(/from '([^']+)';\n/g) || [])

@@ -17,12 +17,7 @@ Basic Usage.
 <template>
   <a-space direction="vertical" align="center">
     <a-qrcode :value="text" />
-    <a-input
-      v-model:value="text"
-      placeholder="-"
-      :maxlength="60"
-      @change="e => (text = e.target.value)"
-    />
+    <a-input v-model:value="text" placeholder="-" :maxlength="60" />
   </a-space>
 </template>
 

@@ -76,7 +76,7 @@ const QRCode = defineComponent({
             hashId.value,
             pre,
             {
-              [`${prefixCls}-borderless`]: !props.bordered,
+              [`${pre}-borderless`]: !props.bordered,
             },
           ]}
         >

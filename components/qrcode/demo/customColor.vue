@@ -16,9 +16,9 @@ Custom Color.
 
 <template>
   <a-space>
-    <a-qrcode value="http://www.antv.com" :color="token.colorSuccessText" />
+    <a-qrcode value="http://www.antdv.com" :color="token.colorSuccessText" />
     <a-qrcode
-      value="http://www.antv.com"
+      value="http://www.antdv.com"
       :color="token.colorInfoText"
       :bg-color="token.colorBgLayout"
     />

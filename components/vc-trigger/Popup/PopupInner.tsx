@@ -127,7 +127,10 @@ export default defineComponent({
       },
     });
     const alignDisabled = computed(() => {
-      if ((props.align as any)?.points && (status.value === 'align' || status.value === 'stable')) {
+      if (
+        (props.align as any)?.points &&
+        (status.value === 'align' || status.value === 'motion' || status.value === 'stable')
+      ) {
         return false;
       }
       return true;

@@ -42,7 +42,7 @@ const QRCode = defineComponent({
         icon = '',
         size = 160,
         iconSize = 40,
-        color = '#000',
+        color = token.value.colorText,
         bgColor = 'transparent',
         errorLevel = 'M',
       } = props;
@@ -70,7 +70,11 @@ const QRCode = defineComponent({
           {...attrs}
           style={[
             attrs.style as CSSProperties,
-            { width: props.size + 'px', height: props.size + 'px', backgroundColor: props.bgColor },
+            {
+              width: `${props.size}px`,
+              height: `${props.size}px`,
+              backgroundColor: qrCodeProps.value.bgColor,
+            },
           ]}
           class={[
             hashId.value,

@@ -15,5 +15,14 @@ Basic Usage.
 </docs>
 
 <template>
-  <a-qrcode value="https://www.antdv.com/" />
+  <a-space direction="vertical" align="center">
+    <a-qrcode :value="text" />
+    <a-input v-model:value="text" placeholder="-" :maxlength="60" />
+  </a-space>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+const text = ref('https://www.antdv.com/');
+</script>

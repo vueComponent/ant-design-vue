@@ -16,7 +16,18 @@ Custom Color.
 
 <template>
   <a-space>
-    <div><a-qrcode value="http://www.antv.com" color="#73d13d" /></div>
-    <div><a-qrcode value="http://www.antv.com" color="#1677ff" /></div>
+    <a-qrcode value="http://www.antdv.com" :color="token.colorSuccessText" />
+    <a-qrcode
+      value="http://www.antdv.com"
+      :color="token.colorInfoText"
+      :bg-color="token.colorBgLayout"
+    />
   </a-space>
 </template>
+
+<script lang="ts" setup>
+import { theme } from 'ant-design-vue';
+
+const { useToken } = theme;
+const { token } = useToken();
+</script>

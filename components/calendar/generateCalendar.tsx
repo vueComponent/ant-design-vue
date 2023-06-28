@@ -27,6 +27,10 @@ type InjectDefaultProps<Props> = Omit<
   size?: 'large' | 'default' | 'small';
 };
 
+export interface SelectInfo {
+  source: 'year' | 'month' | 'date' | 'customize';
+}
+
 // Picker Props
 export type PickerPanelBaseProps<DateType> = InjectDefaultProps<RCPickerPanelBaseProps<DateType>>;
 export type PickerPanelDateProps<DateType> = InjectDefaultProps<RCPickerPanelDateProps<DateType>>;
@@ -64,7 +68,7 @@ export interface CalendarProps<DateType> {
   onChange?: (date: DateType | string) => void;
   'onUpdate:value'?: (date: DateType | string) => void;
   onPanelChange?: (date: DateType | string, mode: CalendarMode) => void;
-  onSelect?: (date: DateType | string) => void;
+  onSelect?: (date: DateType, selectInfo: SelectInfo) => void;
   valueFormat?: string;
 }
 
@@ -217,9 +221,9 @@ function generateCalendar<
         triggerPanelChange(mergedValue.value, newMode);
       };
 
-      const onInternalSelect = (date: DateType) => {
+      const onInternalSelect = (date: DateType, source: SelectInfo['source']) => {
         triggerChange(date);
-        emit('select', maybeToString(date));
+        emit('select', maybeToString(date), { source });
       };
       // ====================== Locale ======================
       const defaultLocale = computed(() => {
@@ -317,7 +321,9 @@ function generateCalendar<
               headerRender({
                 value: mergedValue.value,
                 type: mergedMode.value,
-                onChange: onInternalSelect,
+                onChange: nextDate => {
+                  onInternalSelect(nextDate, 'customize');
+                },
                 onTypeChange: triggerModeChange,
               })
             ) : (
@@ -340,7 +346,9 @@ function generateCalendar<
               generateConfig={generateConfig}
               dateRender={dateRender}
               monthCellRender={obj => monthRender(obj, mergedLocale.value.lang)}
-              onSelect={onInternalSelect}
+              onSelect={nextDate => {
+                onInternalSelect(nextDate, panelMode.value);
+              }}
               mode={panelMode.value}
               picker={panelMode.value}
               disabledDate={mergedDisabledDate.value}

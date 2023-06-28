@@ -46,4 +46,21 @@ customize the progress dot by setting a scoped slot
 | --- | --- | --- | --- | --- |
 | change | Callback for when value change | function(date: dayjs \| string） | - |  |
 | panelChange | Callback for when panel changes | function(date: dayjs \| string, mode: string) | - |  |
-| select | Callback for when a date is selected | function(date: dayjs \| string） | - |  |
+| select | Callback for when a date is selected, include source info | function(date: dayjs \| string,info:{ source: 'year' \| 'month' \| 'date' \| 'customize' }) | - |  |
+
+### How to get date from panel click?
+
+`select` event provide `info.source` to help on this:
+
+```html
+<script lang="ts" setup>
+  const onSelect = (date, { source }) => {
+    if (source === 'date') {
+      console.log('Panel Select:', source);
+    }
+  };
+</script>
+<template>
+  <a-calendar @select="onSelect" />
+</template>
+```

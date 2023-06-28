@@ -16,11 +16,11 @@ The status can be controlled by the value `status`.
 
 <template>
   <a-space>
-    <div><a-qrcode value="http://www.antv.com" status="loading" /></div>
-    <div><a-qrcode value="http://www.antv.com" status="expired" @refresh="refreshChange" /></div>
+    <a-qrcode value="http://www.antdv.com" status="loading" />
+    <a-qrcode
+      value="http://www.antdv.com"
+      status="expired"
+      @refresh="() => console.log('refresh')"
+    />
   </a-space>
 </template>
-
-<script lang="ts" setup>
-const refreshChange = () => alert('updated');
-</script>

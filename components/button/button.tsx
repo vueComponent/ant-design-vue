@@ -13,6 +13,7 @@ import Wave from '../_util/wave';
 import buttonProps from './buttonTypes';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 import devWarning from '../vc-util/devWarning';
 import LoadingIcon from './LoadingIcon';
 import useStyle from './style';
@@ -46,6 +47,8 @@ export default defineComponent({
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const groupSizeContext = GroupSizeContext.useInject();
+    const disabledContext = useInjectDisabled();
+    const mergedDisabled = computed(() => props.disabled ?? disabledContext.value);
     const buttonNodeRef = shallowRef<HTMLElement>(null);
     const delayTimeoutRef = shallowRef(undefined);
     let isNeedInserted = false;
@@ -124,7 +127,7 @@ export default defineComponent({
     };
     const handleClick = (event: Event) => {
       // https://github.com/ant-design/ant-design/issues/30207
-      if (innerLoading.value || props.disabled) {
+      if (innerLoading.value || mergedDisabled.value) {
         event.preventDefault();
         return;
       }
@@ -178,13 +181,13 @@ export default defineComponent({
 
       isNeedInserted = children.length === 1 && !icon && !isUnBorderedButtonType(props.type);
 
-      const { type, htmlType, disabled, href, title, target } = props;
+      const { type, htmlType, href, title, target } = props;
 
       const iconType = innerLoading.value ? 'loading' : icon;
       const buttonProps = {
         ...attrs,
         title,
-        disabled,
+        disabled: mergedDisabled.value,
         class: [
           classes.value,
           attrs.class,
@@ -194,7 +197,7 @@ export default defineComponent({
         onMousedown: handleMousedown,
       };
       // https://github.com/vueComponent/ant-design-vue/issues/4930
-      if (!disabled) {
+      if (!mergedDisabled.value) {
         delete buttonProps.disabled;
       }
       const iconNode =

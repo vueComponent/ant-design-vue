@@ -61,12 +61,15 @@ export const genModalMaskStyle: GenerateStyle<TokenWithCommonCls<AliasToken>> = 
           userSelect: 'none',
         },
 
+        [`${componentCls}${token.antCls}-zoom-leave ${componentCls}-content`]: {
+          pointerEvents: 'none',
+        },
+
         [`${componentCls}-mask`]: {
           ...box('fixed'),
           zIndex: token.zIndexPopupBase,
           height: '100%',
           backgroundColor: token.colorBgMask,
-
           [`${componentCls}-hidden`]: {
             display: 'none',
           },

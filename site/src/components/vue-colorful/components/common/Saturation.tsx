@@ -1,9 +1,10 @@
 import type { PropType } from 'vue';
 import { defineComponent, toRefs } from 'vue';
 
-import { Interactive, Interaction } from './Interactive';
+import type { Interaction } from './Interactive';
+import { Interactive } from './Interactive';
 import { Pointer } from './Pointer';
-import { HsvaColor } from '../../types';
+import type { HsvaColor } from '../../types';
 import { hsvaToHslString } from '../../utils/convert';
 import { clamp } from '../../utils/clamp';
 import { round } from '../../utils/round';

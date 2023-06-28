@@ -27,12 +27,13 @@ Search Value Hightlight
     allow-clear
     tree-default-expand-all
     :tree-data="treeData"
+    tree-node-filter-prop="label"
   >
-    <template #title="{ value: val, title }">
+    <template #title="{ value: val, label }">
       <b v-if="val === 'parent 1-1'" style="color: #08c">sss</b>
       <template v-else>
         <template
-          v-for="(fragment, i) in title
+          v-for="(fragment, i) in label
             .toString()
             .split(new RegExp(`(?<=${searchValue})|(?=${searchValue})`, 'i'))"
         >
@@ -55,25 +56,35 @@ import { ref, watch } from 'vue';
 const value = ref<string>();
 const treeData = ref<TreeSelectProps['treeData']>([
   {
-    title: 'parent 1',
+    label: 'parent 1',
     value: 'parent 1',
     children: [
       {
-        title: 'parent 1-0',
-        value: 'parent 1-0',
+        label: 'parent 1',
+        value: 'parent 1',
         children: [
           {
-            title: 'my leaf',
-            value: 'leaf1',
+            label: 'parent 1-0',
+            value: 'parent 1-0',
+            children: [
+              {
+                label: 'my leaf',
+                value: 'leaf1',
+              },
+              {
+                label: 'your leaf',
+                value: 'leaf2',
+              },
+            ],
           },
           {
-            title: 'your leaf',
-            value: 'leaf2',
+            label: 'parent 1-1',
+            value: 'parent 1-1',
           },
         ],
       },
       {
-        title: 'parent 1-1',
+        label: 'parent 1-1',
         value: 'parent 1-1',
       },
     ],

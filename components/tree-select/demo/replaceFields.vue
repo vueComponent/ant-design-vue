@@ -31,6 +31,7 @@ Replace the title,key and children fields in treeNode with the corresponding fie
       label: 'name',
       value: 'value',
     }"
+    tree-node-filter-prop="name"
   ></a-tree-select>
 </template>
 <script lang="ts" setup>

@@ -39,6 +39,29 @@ exports[`renders ./components/qrcode/demo/customSize.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/qrcode/demo/customType.vue correctly 1`] = `
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;">
+    <div style="width: 160px; height: 160px;" class="ant-qrcode">
+      <!----><canvas style="height: 134px; width: 134px;"></canvas>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div style="width: 160px; height: 160px;" class="ant-qrcode">
+      <!----><svg height="134" width="134" viewBox="0 0 25 25">
+        <title></title>
+        <path fill="transparent" d="M0,0 h25v25H0z" shape-rendering="crispEdges"></path>
+        <path fill="#000" d="M0 0h7v1H0zM10 0h1v1H10zM13 0h2v1H13zM18,0 h7v1H18zM0 1h1v1H0zM6 1h1v1H6zM8 1h1v1H8zM11 1h1v1H11zM14 1h1v1H14zM18 1h1v1H18zM24,1 h1v1H24zM0 2h1v1H0zM2 2h3v1H2zM6 2h1v1H6zM9 2h2v1H9zM12 2h3v1H12zM18 2h1v1H18zM20 2h3v1H20zM24,2 h1v1H24zM0 3h1v1H0zM2 3h3v1H2zM6 3h1v1H6zM8 3h4v1H8zM13 3h1v1H13zM15 3h2v1H15zM18 3h1v1H18zM20 3h3v1H20zM24,3 h1v1H24zM0 4h1v1H0zM2 4h3v1H2zM6 4h1v1H6zM8 4h2v1H8zM11 4h4v1H11zM18 4h1v1H18zM20 4h3v1H20zM24,4 h1v1H24zM0 5h1v1H0zM6 5h1v1H6zM13 5h2v1H13zM16 5h1v1H16zM18 5h1v1H18zM24,5 h1v1H24zM0 6h7v1H0zM8 6h1v1H8zM10 6h1v1H10zM12 6h1v1H12zM14 6h1v1H14zM16 6h1v1H16zM18,6 h7v1H18zM8 7h1v1H8zM13 7h1v1H13zM15 7h2v1H15zM1 8h1v1H1zM3 8h4v1H3zM8 8h1v1H8zM10 8h1v1H10zM14 8h2v1H14zM17 8h2v1H17zM20 8h2v1H20zM23 8h1v1H23zM0 9h1v1H0zM3 9h1v1H3zM7 9h3v1H7zM11 9h1v1H11zM13 9h3v1H13zM17 9h1v1H17zM19 9h5v1H19zM0 10h1v1H0zM2 10h1v1H2zM5 10h2v1H5zM8 10h1v1H8zM11 10h1v1H11zM15 10h1v1H15zM18 10h2v1H18zM21 10h1v1H21zM24,10 h1v1H24zM1 11h1v1H1zM3 11h3v1H3zM7 11h2v1H7zM11 11h1v1H11zM14 11h1v1H14zM19 11h1v1H19zM21,11 h4v1H21zM1 12h4v1H1zM6 12h3v1H6zM11 12h8v1H11zM24,12 h1v1H24zM0 13h1v1H0zM3 13h1v1H3zM5 13h1v1H5zM7 13h1v1H7zM9 13h8v1H9zM20 13h1v1H20zM23 13h1v1H23zM0 14h2v1H0zM3 14h1v1H3zM5 14h2v1H5zM8 14h1v1H8zM13 14h5v1H13zM20,14 h5v1H20zM0 15h1v1H0zM2 15h3v1H2zM8 15h3v1H8zM12 15h3v1H12zM19 15h2v1H19zM22 15h1v1H22zM24,15 h1v1H24zM0 16h1v1H0zM5 16h2v1H5zM8 16h2v1H8zM11 16h1v1H11zM15 16h6v1H15zM22 16h2v1H22zM8 17h2v1H8zM12 17h5v1H12zM20 17h1v1H20zM23 17h1v1H23zM0 18h7v1H0zM10 18h1v1H10zM12 18h2v1H12zM16 18h1v1H16zM18 18h1v1H18zM20 18h2v1H20zM24,18 h1v1H24zM0 19h1v1H0zM6 19h1v1H6zM8 19h1v1H8zM11 19h1v1H11zM14 19h3v1H14zM20 19h1v1H20zM24,19 h1v1H24zM0 20h1v1H0zM2 20h3v1H2zM6 20h1v1H6zM8 20h2v1H8zM13 20h1v1H13zM15 20h7v1H15zM23,20 h2v1H23zM0 21h1v1H0zM2 21h3v1H2zM6 21h1v1H6zM8 21h2v1H8zM12 21h1v1H12zM14 21h1v1H14zM17 21h3v1H17zM21 21h1v1H21zM23,21 h2v1H23zM0 22h1v1H0zM2 22h3v1H2zM6 22h1v1H6zM9 22h2v1H9zM12 22h2v1H12zM16 22h2v1H16zM19 22h2v1H19zM22,22 h3v1H22zM0 23h1v1H0zM6 23h1v1H6zM8 23h3v1H8zM12 23h1v1H12zM14 23h1v1H14zM17 23h4v1H17zM22,23 h3v1H22zM0 24h7v1H0zM11 24h3v1H11zM16 24h1v1H16zM18 24h1v1H18zM21 24h1v1H21zM24,24 h1v1H24z" shape-rendering="crispEdges"></path>
+        <!---->
+      </svg>
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/qrcode/demo/download.vue correctly 1`] = `
 <div style="width: 160px; height: 160px;" class="ant-qrcode">
   <!----><canvas style="height: 134px; width: 134px;"></canvas>

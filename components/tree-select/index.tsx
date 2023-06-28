@@ -109,6 +109,8 @@ const TreeSelect = defineComponent({
     notFoundContent?: any;
     default?: any;
     leafIcon?: any;
+    tagRender?: any;
+    suffixIcon?: any;
   }>,
   setup(props, { attrs, slots, expose, emit }) {
     warning(

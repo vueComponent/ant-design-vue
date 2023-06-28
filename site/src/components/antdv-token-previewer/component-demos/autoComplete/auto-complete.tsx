@@ -2,7 +2,7 @@ import { defineComponent, ref } from 'vue';
 import { AutoComplete } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';
 
-const mockVal = (str: string, repeat: number = 1) => ({
+const mockVal = (str: string, repeat = 1) => ({
   value: str.repeat(repeat),
 });
 

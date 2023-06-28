@@ -5,7 +5,7 @@ import { Hue } from './Hue';
 import { Saturation } from './Saturation';
 import { Alpha } from './Alpha';
 
-import { ColorModel, ColorPickerBaseProps, AnyColor } from '../../types';
+import type { ColorModel, ColorPickerBaseProps, AnyColor } from '../../types';
 import { useColorManipulation } from '../../hooks/useColorManipulation';
 import { useStyleSheet } from '../../hooks/useStyleSheet';
 import { formatClassName } from '../../utils/format';

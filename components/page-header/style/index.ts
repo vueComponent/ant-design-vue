@@ -36,7 +36,7 @@ const genPageHeaderStyle: GenerateStyle<PageHeaderToken, CSSObject> = token => {
 
       [`${componentCls}-back`]: {
         marginRight: token.marginMD,
-        fontZize: token.fontSizeLG,
+        fontSize: token.fontSizeLG,
         lineHeight: 1,
 
         [`&-button`]: {

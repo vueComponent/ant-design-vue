@@ -24,6 +24,7 @@ Multiple and checkable.
     allow-clear
     :show-checked-strategy="SHOW_PARENT"
     placeholder="Please select"
+    tree-node-filter-prop="label"
   />
 </template>
 <script lang="ts" setup>
@@ -34,31 +35,31 @@ const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 
 const treeData: TreeSelectProps['treeData'] = [
   {
-    title: 'Node1',
+    label: 'Node1',
     value: '0-0',
     children: [
       {
-        title: 'Child Node1',
+        label: 'Child Node1',
         value: '0-0-0',
       },
     ],
   },
   {
-    title: 'Node2',
+    label: 'Node2',
     value: '0-1',
 
     children: [
       {
-        title: 'Child Node3',
+        label: 'Child Node3',
         value: '0-1-0',
         disabled: true,
       },
       {
-        title: 'Child Node4',
+        label: 'Child Node4',
         value: '0-1-1',
       },
       {
-        title: 'Child Node5',
+        label: 'Child Node5',
         value: '0-1-2',
       },
     ],

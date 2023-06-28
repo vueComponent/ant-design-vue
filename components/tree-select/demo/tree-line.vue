@@ -35,6 +35,7 @@ Use `treeLine` to show the line style.
       placeholder="Please select"
       :tree-line="treeLine && { showLeafIcon }"
       :tree-data="treeData"
+      tree-node-filter-prop="title"
     >
       <template #title="{ value: val, title }">
         <b v-if="val === 'parent 1-1'" style="color: #08c">sss</b>

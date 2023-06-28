@@ -13,6 +13,7 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import type { FocusEventHandler } from '../_util/EventInterface';
 import useStyle from './style';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
 export const switchProps = () => ({
@@ -69,6 +70,9 @@ const Switch = defineComponent({
   // emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown', 'blur'],
   setup(props, { attrs, slots, expose, emit }) {
     const formItemContext = useInjectFormItemContext();
+    const disabledContext = useInjectDisabled();
+    const mergedDisabled = computed(() => props.disabled ?? disabledContext.value);
+
     onBeforeMount(() => {
       warning(
         !('defaultChecked' in attrs),
@@ -107,14 +111,14 @@ const Switch = defineComponent({
 
     onMounted(() => {
       nextTick(() => {
-        if (props.autofocus && !props.disabled) {
+        if (props.autofocus && !mergedDisabled.value) {
           refSwitchNode.value.focus();
         }
       });
     });
 
     const setChecked = (check: CheckedType, e: MouseEvent | KeyboardEvent) => {
-      if (props.disabled) {
+      if (mergedDisabled.value) {
         return;
       }
       emit('update:checked', check);
@@ -151,7 +155,7 @@ const Switch = defineComponent({
       [`${prefixCls.value}-small`]: size.value === 'small',
       [`${prefixCls.value}-loading`]: props.loading,
       [`${prefixCls.value}-checked`]: checkedStatus.value,
-      [`${prefixCls.value}-disabled`]: props.disabled,
+      [`${prefixCls.value}-disabled`]: mergedDisabled.value,
       [prefixCls.value]: true,
       [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       [hashId.value]: true,
@@ -182,7 +186,7 @@ const Switch = defineComponent({
             type="button"
             role="switch"
             aria-checked={checked.value as any}
-            disabled={props.disabled || props.loading}
+            disabled={mergedDisabled.value || props.loading}
             class={[attrs.class, classNames.value]}
             ref={refSwitchNode}
           >

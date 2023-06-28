@@ -44,6 +44,9 @@ export default defineComponent({
     const formItemInputContext = FormItemInputContext.useInject();
     const radioOptionTypeContext = useInjectRadioOptionTypeContext();
     const radioGroupContext = useInjectRadioGroupContext();
+    const disabledContext = useInjectDisabled();
+    const mergedDisabled = computed(() => disabled.value ?? disabledContext.value);
+
     const vcCheckbox = ref<HTMLElement>();
 
     const { prefixCls: radioPrefixCls, direction, disabled } = useConfigInject('radio', props);
@@ -97,7 +100,7 @@ export default defineComponent({
         rProps.name = radioGroup.name.value;
         rProps.onChange = onChange;
         rProps.checked = props.value === radioGroup.value.value;
-        rProps.disabled = props.disabled || radioGroup.disabled.value;
+        rProps.disabled = mergedDisabled.value || radioGroup.disabled.value;
       } else {
         rProps.onChange = handleChange;
       }

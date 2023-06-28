@@ -27,6 +27,12 @@ The most basic usage.
       allow-clear
       tree-default-expand-all
       :tree-data="treeData"
+      :field-names="{
+        children: 'children',
+        value: 'value',
+        label: 'title',
+      }"
+      tree-node-filter-prop="title"
     >
       <template #suffixIcon><SmileOutlined /></template>
     </a-tree-select>
@@ -42,6 +48,12 @@ The most basic usage.
       show-arrow
       tree-default-expand-all
       :tree-data="treeData"
+      :field-names="{
+        children: 'children',
+        value: 'value',
+        label: 'title',
+      }"
+      tree-node-filter-prop="title"
     >
       <template #suffixIcon><SmileOutlined /></template>
     </a-tree-select>

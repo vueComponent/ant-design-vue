@@ -3,6 +3,7 @@
     <Base />
     <Icon />
     <Status />
+    <CustomType />
     <CustomSize />
     <CustomColor />
     <Download />
@@ -23,9 +24,20 @@ import CustomColor from './customColor.vue';
 import Download from './download.vue';
 import ErrorLevel from './errorLevel.vue';
 import Popover from './popover.vue';
+import CustomType from './customType.vue';
 
 export default defineComponent({
-  components: { Base, Icon, Status, CustomSize, CustomColor, Download, ErrorLevel, Popover },
+  components: {
+    Base,
+    Icon,
+    Status,
+    CustomSize,
+    CustomColor,
+    Download,
+    ErrorLevel,
+    Popover,
+    CustomType,
+  },
   category: 'Components',
   subtitle: '二维码',
   type: 'Data Display',

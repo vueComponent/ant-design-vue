@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { defineComponent, ref, toRaw, reactive } from 'vue';
 import { Form, FormItem, Input, Button, Checkbox } from 'ant-design-vue';
 import type { ComponentDemo } from '../../interface';

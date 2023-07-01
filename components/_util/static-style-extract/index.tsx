@@ -11,6 +11,28 @@ const blackList: string[] = [
   'Popover',
   'Tooltip',
   'Tour',
+  'SelectOptGroup',
+  'SelectOption',
+  'Dropdown',
+  'Anchor',
+  'QuarterPicker',
+  'MenuDivider',
+  'MenuItem',
+  'MenuItemGroup',
+  'SubMenu',
+  'MentionsOption',
+  'TableColumn',
+  'TableColumnGroup',
+  'TableSummary',
+  'TableSummaryRow',
+  'TableSummaryCell',
+  'TreeNode',
+  'TreeSelectNode',
+  'TabPane',
+  'CheckableTag',
+  'TimelineItem',
+  'LocaleProvider',
+  'QRCode',
 ];
 
 const defaultNode = () => (
@@ -19,7 +41,7 @@ const defaultNode = () => (
       .filter(name => !blackList.includes(name) && name[0] === name[0].toUpperCase())
       .map(compName => {
         const Comp = antd[compName];
-        if (compName === 'Dropdown' || compName === 'Anchor') {
+        if (compName === 'Dropdown') {
           return (
             <Comp key={compName} menu={{ items: [] }}>
               <div />

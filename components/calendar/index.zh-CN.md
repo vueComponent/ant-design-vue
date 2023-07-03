@@ -42,7 +42,24 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*-p-wQLik200AAA
 ### 事件
 
 | 事件名称 | 说明 | 回调参数 |  |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | change | 日期变化时的回调, 面板变化有可能导致日期变化 | function(date: dayjs \| string） | 无 |
 | panelChange | 日期面板变化回调 | function(date: dayjs \| string, mode: string) | 无 |
-| select | 点击选择日期回调 | function(date: dayjs \| string） | 无 |
+| select | 选择日期回调，包含来源信息 | function(date: Dayjs, info: { source: 'year' \| 'month' \| 'date' \| 'customize' }) | - |  |
+
+### 如何仅获取来自面板点击的日期？
+
+`select` 事件提供额外的来源信息，你可以通过 `info.source` 来判断来源：
+
+```html
+<script lang="ts" setup>
+  const onSelect = (date, { source }) => {
+    if (source === 'date') {
+      console.log('Panel Select:', source);
+    }
+  };
+</script>
+<template>
+  <a-calendar @select="onSelect" />
+</template>
+```

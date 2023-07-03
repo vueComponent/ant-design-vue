@@ -4,8 +4,6 @@ import type { PresetColorType } from './presetColors';
 // ======================================================================
 // 🔥🔥🔥🔥🔥🔥🔥 DO NOT MODIFY THIS. PLEASE CONTACT DESIGNER. 🔥🔥🔥🔥🔥🔥🔥
 
-type BorderRadiusType = number | `${number}px` | `${number}%`;
-
 export interface SeedToken extends PresetColorType {
   //  ----------   Color   ---------- //
 
@@ -108,7 +106,7 @@ export interface SeedToken extends PresetColorType {
    * @descEN Border radius of base components
    * @desc 基础组件的圆角大小，例如按钮、输入框、卡片等
    */
-  borderRadius: BorderRadiusType;
+  borderRadius: number;
 
   //  ----------   Size   ---------- //
 

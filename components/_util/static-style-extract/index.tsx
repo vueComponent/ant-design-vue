@@ -13,7 +13,6 @@ const blackList: string[] = [
   'Tour',
   'SelectOptGroup',
   'SelectOption',
-  'QuarterPicker',
   'MenuDivider',
   'MenuItem',
   'MenuItemGroup',
@@ -30,7 +29,6 @@ const blackList: string[] = [
   'CheckableTag',
   'TimelineItem',
   'LocaleProvider',
-  'QRCode',
 ];
 
 const defaultNode = () => (
@@ -42,6 +40,13 @@ const defaultNode = () => (
         if (compName === 'Dropdown') {
           return (
             <Comp key={compName} menu={{ items: [] }}>
+              <div />
+            </Comp>
+          );
+        }
+        if (compName === 'QRCode') {
+          return (
+            <Comp key={compName} value={''}>
               <div />
             </Comp>
           );

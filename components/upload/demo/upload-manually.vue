@@ -57,7 +57,7 @@ export default defineComponent({
     };
 
     const beforeUpload: UploadProps['beforeUpload'] = file => {
-      fileList.value = [...fileList.value, file];
+      fileList.value = [...(fileList.value || []), file];
       return false;
     };
 

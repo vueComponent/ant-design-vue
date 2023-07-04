@@ -11,10 +11,10 @@ import PropTypes from '../../../_util/vue-types';
 import useState from '../../../_util/hooks/useState';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 
-const operationNodeProps = {
+export const operationNodeProps = {
   prefixCls: { type: String },
   id: { type: String },
-  tabs: { type: Object as PropType<Tab[]> },
+  tabs: { type: Object as PropType<(Tab & { closeIcon?: () => any })[]> },
   rtl: { type: Boolean },
   tabBarGutter: { type: Number },
   activeKey: { type: [String, Number] },

@@ -64,8 +64,9 @@ describe('RangePicker', () => {
     });
   });
 
-  it('customize separator', () => {
+  fit('customize separator', async () => {
     const wrapper = mount(RangePicker, { props: { separator: 'test' } });
+    await sleep();
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

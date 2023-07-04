@@ -1,11 +1,12 @@
-import type { ExportedSelectProps } from './Select';
+import type { SelectProps } from './Select';
 import Select, { selectProps } from './Select';
 import Option from './Option';
 import OptGroup from './OptGroup';
-import { selectBaseProps } from './generate';
-import type { ExtractPropTypes } from 'vue';
+import BaseSelect from './BaseSelect';
+import type { BaseSelectProps, BaseSelectRef, BaseSelectPropsWithoutPrivate } from './BaseSelect';
+import useBaseProps from './hooks/useBaseProps';
 
-export type SelectProps<T = any> = Partial<ExtractPropTypes<ExportedSelectProps<T>>>;
-export { Option, OptGroup, selectBaseProps, selectProps };
+export { Option, OptGroup, selectProps, BaseSelect, useBaseProps };
+export type { BaseSelectProps, BaseSelectRef, BaseSelectPropsWithoutPrivate, SelectProps };
 
 export default Select;

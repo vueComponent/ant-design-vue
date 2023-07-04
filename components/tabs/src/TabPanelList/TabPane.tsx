@@ -1,42 +1,30 @@
 import { defineComponent, ref, watch, computed } from 'vue';
-import type { CSSProperties } from 'vue';
-import type { VueNode, Key } from '../../../_util/type';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 
-export interface TabPaneProps {
-  tab?: VueNode | (() => VueNode);
-  disabled?: boolean;
-  forceRender?: boolean;
-  closable?: boolean;
-  closeIcon?: () => VueNode;
+const tabPaneProps = () => ({
+  tab: PropTypes.any,
+  disabled: { type: Boolean },
+  forceRender: { type: Boolean },
+  closable: { type: Boolean },
+  animated: { type: Boolean },
+  active: { type: Boolean },
+  destroyInactiveTabPane: { type: Boolean },
 
   // Pass by TabPaneList
-  prefixCls?: string;
-  tabKey?: Key;
-  id?: string;
-  animated?: boolean;
-  active?: boolean;
-  destroyInactiveTabPane?: boolean;
-}
+  prefixCls: { type: String },
+  tabKey: { type: [String, Number] },
+  id: { type: String },
+  // closeIcon: PropTypes.any,
+});
+
+export type TabPaneProps = Partial<ExtractPropTypes<ReturnType<typeof tabPaneProps>>>;
 
 export default defineComponent({
   name: 'ATabPane',
   inheritAttrs: false,
   __ANT_TAB_PANE: true,
-  props: {
-    tab: PropTypes.any,
-    disabled: { type: Boolean },
-    forceRender: { type: Boolean },
-    closable: { type: Boolean },
-    animated: { type: Boolean },
-    active: { type: Boolean },
-    destroyInactiveTabPane: { type: Boolean },
-
-    // Pass by TabPaneList
-    prefixCls: { type: String },
-    tabKey: { type: [String, Number] },
-    id: { type: String },
-  },
+  props: tabPaneProps(),
   slots: ['closeIcon', 'tab'],
   setup(props, { attrs, slots }) {
     const visited = ref(props.forceRender);

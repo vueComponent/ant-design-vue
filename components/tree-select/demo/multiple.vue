@@ -27,7 +27,12 @@ Multiple selection usage.
     multiple
     tree-default-expand-all
     :tree-data="treeData"
-  ></a-tree-select>
+  >
+    <template #title="{ value: val, title }">
+      <b v-if="val === 'parent 1-1'" style="color: #08c">{{ val }}</b>
+      <template v-else>{{ title }}</template>
+    </template>
+  </a-tree-select>
 </template>
 <script lang="ts">
 import type { TreeSelectProps } from 'ant-design-vue';

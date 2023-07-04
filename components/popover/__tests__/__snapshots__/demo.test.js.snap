@@ -1,30 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/popover/demo/arrow-point-at-center.vue correctly 1`] = `
-<div>
-  <!----><button class="ant-btn" type="button">
-    <!----><span>Align edge / 边缘对齐</span>
-  </button>
-  <!----><button class="ant-btn" type="button">
-    <!----><span>Arrow points to center / 箭头指向中心</span>
-  </button>
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;">
+    <!----><button class="ant-btn" type="button">
+      <!----><span>Align edge / 边缘对齐</span>
+    </button>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <!----><button class="ant-btn" type="button">
+      <!----><span>Arrow points to center / 箭头指向中心</span>
+    </button>
+  </div>
+  <!---->
 </div>
 `;
 
 exports[`renders ./components/popover/demo/basic.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary" type="button">
+<!----><button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Hover me</span>
 </button>
 `;
 
 exports[`renders ./components/popover/demo/control.vue correctly 1`] = `
-<button class="ant-btn ant-btn-primary" type="button">
+<!----><button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Click me</span>
 </button>
 `;
 
 exports[`renders ./components/popover/demo/hover-with-click.vue correctly 1`] = `
-<button class="ant-btn" type="button">
+<!---->
+<!----><button class="ant-btn" type="button">
   <!----><span>Hover and click / 悬停并单击</span>
 </button>
 `;

@@ -137,7 +137,7 @@ function DatetimePanel<DateType>(_props: DatetimePanelProps<DateType>) {
             setTime(
               generateConfig,
               date,
-              showTime && typeof showTime === 'object' ? showTime.defaultValue : null,
+              !value && typeof showTime === 'object' ? showTime.defaultValue : null,
             ),
             'date',
           );
@@ -148,6 +148,7 @@ function DatetimePanel<DateType>(_props: DatetimePanelProps<DateType>) {
         format={undefined}
         {...timeProps}
         {...disabledTimes}
+        disabledTime={null}
         defaultValue={undefined}
         operationRef={timeOperationRef}
         active={activePanel.value === 'time'}

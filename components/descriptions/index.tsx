@@ -9,36 +9,45 @@ import type {
   CSSProperties,
   InjectionKey,
 } from 'vue';
-import { ref, defineComponent, onMounted, onBeforeUnmount, provide, toRef, computed } from 'vue';
+import {
+  onBeforeMount,
+  ref,
+  defineComponent,
+  onBeforeUnmount,
+  provide,
+  toRef,
+  computed,
+} from 'vue';
 import warning from '../_util/warning';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import Row from './Row';
 import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const DescriptionsItemProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   label: PropTypes.any,
-  span: PropTypes.number,
+  span: Number,
 };
 
-const descriptionsItemProp = {
-  prefixCls: PropTypes.string,
+const descriptionsItemProp = () => ({
+  prefixCls: String,
   label: PropTypes.any,
-  labelStyle: PropTypes.style,
-  contentStyle: PropTypes.style,
-  span: PropTypes.number.def(1),
-};
+  labelStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  contentStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  span: { type: Number, default: 1 },
+});
 
-export type DescriptionsItemProp = Partial<ExtractPropTypes<typeof descriptionsItemProp>>;
+export type DescriptionsItemProp = Partial<
+  ExtractPropTypes<ReturnType<typeof descriptionsItemProp>>
+>;
 
 export const DescriptionsItem = defineComponent({
   name: 'ADescriptionsItem',
-  props: descriptionsItemProp,
+  props: descriptionsItemProp(),
   slots: ['label'],
   setup(_, { slots }) {
     return () => slots.default?.();
@@ -46,6 +55,7 @@ export const DescriptionsItem = defineComponent({
 });
 
 const DEFAULT_COLUMN_MAP: Partial<Record<Breakpoint, number>> = {
+  xxxl: 3,
   xxl: 3,
   xl: 3,
   lg: 3,
@@ -78,7 +88,6 @@ function getFilledItem(node: VNode, span: number | undefined, rowRestCol: number
     clone = cloneElement(node, {
       span: rowRestCol,
     });
-
     warning(
       span === undefined,
       'Descriptions',
@@ -95,7 +104,6 @@ function getRows(children: VNode[], column: number) {
 
   let tmpRow: VNode[] = [];
   let rowRestCol = column;
-
   childNodes.forEach((node, index) => {
     const span: number | undefined = node.props?.span;
     const mergedSpan = span || 1;
@@ -121,24 +129,24 @@ function getRows(children: VNode[], column: number) {
   return rows;
 }
 
-const descriptionsProps = {
-  prefixCls: PropTypes.string,
-  bordered: PropTypes.looseBool,
-  size: PropTypes.oneOf(tuple('default', 'middle', 'small')).def('default'),
+export const descriptionsProps = () => ({
+  prefixCls: String,
+  bordered: { type: Boolean, default: undefined },
+  size: { type: String as PropType<'default' | 'middle' | 'small'>, default: 'default' },
   title: PropTypes.any,
   extra: PropTypes.any,
   column: {
     type: [Number, Object] as PropType<number | Partial<Record<Breakpoint, number>>>,
     default: (): number | Partial<Record<Breakpoint, number>> => DEFAULT_COLUMN_MAP,
   },
-  layout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
-  colon: PropTypes.looseBool,
-  labelStyle: PropTypes.style,
-  contentStyle: PropTypes.style,
-};
+  layout: String as PropType<'horizontal' | 'vertical'>,
+  colon: { type: Boolean, default: undefined },
+  labelStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  contentStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+});
 
 export type DescriptionsProps = HTMLAttributes &
-  Partial<ExtractPropTypes<typeof descriptionsProps>>;
+  Partial<ExtractPropTypes<ReturnType<typeof descriptionsProps>>>;
 
 export interface DescriptionsContextProp {
   labelStyle?: Ref<CSSProperties>;
@@ -150,22 +158,18 @@ export const descriptionsContext: InjectionKey<DescriptionsContextProp> =
 
 const Descriptions = defineComponent({
   name: 'ADescriptions',
-  props: descriptionsProps,
+  props: descriptionsProps(),
   slots: ['title', 'extra'],
   Item: DescriptionsItem,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('descriptions', props);
-
     let token: number;
-
     const screens = ref<ScreenMap>({});
-
-    onMounted(() => {
+    onBeforeMount(() => {
       token = ResponsiveObserve.subscribe(screen => {
         if (typeof props.column !== 'object') {
           return;
         }
-
         screens.value = screen;
       });
     });

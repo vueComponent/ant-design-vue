@@ -8,6 +8,8 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import type { VueNode } from '../_util/type';
 import { renderHelper } from '../_util/util';
 import { globalConfig } from '../config-provider';
+import type { NotificationInstance as VCNotificationInstance } from '../vc-notification/Notification';
+import classNames from '../_util/classNames';
 
 export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
@@ -21,9 +23,11 @@ export interface ConfigProps {
   placement?: NotificationPlacement;
   getContainer?: () => HTMLElement;
   closeIcon?: VueNode | (() => VueNode);
+  rtl?: boolean;
+  maxCount?: number;
 }
 
-const notificationInstance: { [key: string]: any } = {};
+const notificationInstance: { [key: string]: VCNotificationInstance } = {};
 let defaultDuration = 4.5;
 let defaultTop = '24px';
 let defaultBottom = '24px';
@@ -31,6 +35,8 @@ let defaultPrefixCls = '';
 let defaultPlacement: NotificationPlacement = 'topRight';
 let defaultGetContainer = () => document.body;
 let defaultCloseIcon = null;
+let rtl = false;
+let maxCount: number;
 
 function setNotificationConfig(options: ConfigProps) {
   const { duration, placement, bottom, top, getContainer, closeIcon, prefixCls } = options;
@@ -55,6 +61,12 @@ function setNotificationConfig(options: ConfigProps) {
   if (closeIcon !== undefined) {
     defaultCloseIcon = closeIcon;
   }
+  if (options.rtl !== undefined) {
+    rtl = options.rtl;
+  }
+  if (options.maxCount !== undefined) {
+    maxCount = options.maxCount;
+  }
 }
 
 function getPlacementStyle(
@@ -62,7 +74,7 @@ function getPlacementStyle(
   top: string = defaultTop,
   bottom: string = defaultBottom,
 ) {
-  let style;
+  let style: CSSProperties;
   switch (placement) {
     case 'topLeft':
       style = {
@@ -106,20 +118,28 @@ function getNotificationInstance(
     closeIcon = defaultCloseIcon,
     appContext,
   }: NotificationArgsProps,
-  callback: (n: any) => void,
+  callback: (n: VCNotificationInstance) => void,
 ) {
   const { getPrefixCls } = globalConfig();
   const prefixCls = getPrefixCls('notification', customizePrefixCls || defaultPrefixCls);
-  const cacheKey = `${prefixCls}-${placement}`;
-  if (notificationInstance[cacheKey]) {
-    callback(notificationInstance[cacheKey]);
+  const cacheKey = `${prefixCls}-${placement}-${rtl}`;
+  const cacheInstance = notificationInstance[cacheKey];
+  if (cacheInstance) {
+    Promise.resolve(cacheInstance).then(instance => {
+      callback(instance);
+    });
+
     return;
   }
+
+  const notificationClass = classNames(`${prefixCls}-${placement}`, {
+    [`${prefixCls}-rtl`]: rtl === true,
+  });
   Notification.newInstance(
     {
       name: 'notification',
       prefixCls: customizePrefixCls || defaultPrefixCls,
-      class: `${prefixCls}-${placement}`,
+      class: notificationClass,
       style: getPlacementStyle(placement, top, bottom),
       appContext,
       getContainer,
@@ -131,6 +151,8 @@ function getNotificationInstance(
         );
         return closeIconToRender;
       },
+      maxCount,
+      hasTransitionName: true,
     },
     (notification: any) => {
       notificationInstance[cacheKey] = notification;
@@ -206,25 +228,26 @@ function notice(args: NotificationArgsProps) {
   });
 }
 
-const apiBase = {
+const api: any = {
   open: notice,
   close(key: string) {
     Object.keys(notificationInstance).forEach(cacheKey =>
-      notificationInstance[cacheKey].removeNotice(key),
+      Promise.resolve(notificationInstance[cacheKey]).then(instance => {
+        instance.removeNotice(key);
+      }),
     );
   },
   config: setNotificationConfig,
   destroy() {
     Object.keys(notificationInstance).forEach(cacheKey => {
-      notificationInstance[cacheKey].destroy();
-      delete notificationInstance[cacheKey];
+      Promise.resolve(notificationInstance[cacheKey]).then(instance => {
+        instance.destroy();
+      });
+      delete notificationInstance[cacheKey]; // lgtm[js/missing-await]
     });
   },
 };
 
-type NotificationApi = typeof apiBase &
-  Record<IconType | 'warn', (args: Omit<NotificationArgsProps, 'type'>) => void>;
-const api = apiBase as any as NotificationApi;
 const iconTypes: IconType[] = ['success', 'info', 'warning', 'error'];
 iconTypes.forEach(type => {
   api[type] = args =>
@@ -235,4 +258,24 @@ iconTypes.forEach(type => {
 });
 
 api.warn = api.warning;
-export default api;
+
+export interface NotificationInstance {
+  success(args: NotificationArgsProps): void;
+  error(args: NotificationArgsProps): void;
+  info(args: NotificationArgsProps): void;
+  warning(args: NotificationArgsProps): void;
+  open(args: NotificationArgsProps): void;
+}
+
+export interface NotificationApi extends NotificationInstance {
+  warn(args: NotificationArgsProps): void;
+  close(key: string): void;
+  config(options: ConfigProps): void;
+  destroy(): void;
+}
+
+/** @private test Only function. Not work on production */
+export const getInstance = async (cacheKey: string) =>
+  process.env.NODE_ENV === 'test' ? notificationInstance[cacheKey] : null;
+
+export default api as NotificationApi;

@@ -17,8 +17,8 @@ export default defineComponent({
   name: 'AInputSearch',
   inheritAttrs: false,
   props: {
-    ...inputProps,
-    inputPrefixCls: PropTypes.string,
+    ...inputProps(),
+    inputPrefixCls: String,
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
     enterButton: PropTypes.any,
     onSearch: {

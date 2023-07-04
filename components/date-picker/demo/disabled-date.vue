@@ -68,7 +68,7 @@ export default defineComponent({
       };
     };
 
-    const disabledRangeTime = (_: Dayjs[], type: 'start' | 'end') => {
+    const disabledRangeTime = (_: Dayjs, type: 'start' | 'end') => {
       if (type === 'start') {
         return {
           disabledHours: () => range(0, 60).splice(4, 20),
@@ -87,8 +87,8 @@ export default defineComponent({
       dayjs,
       value1: ref<Dayjs>(),
       value2: ref<Dayjs>(),
-      value3: ref<Dayjs[]>([]),
-      value4: ref<Dayjs[]>([]),
+      value3: ref<[Dayjs, Dayjs]>(),
+      value4: ref<[Dayjs, Dayjs]>(),
       disabledDate,
       disabledDateTime,
       disabledRangeTime,

@@ -1,12 +1,12 @@
-import type { Data } from '../../_util/type';
-import type { ComputedRef, Ref } from 'vue';
+import type { ShallowRef, Ref } from 'vue';
 import raf from '../../_util/raf';
 import type { GetKey } from '../interface';
+import type { CacheMap } from './useHeights';
 
 export default function useScrollTo(
   containerRef: Ref<Element | undefined>,
-  mergedData: ComputedRef<any[]>,
-  heights: Ref<Data>,
+  mergedData: ShallowRef<any[]>,
+  heights: CacheMap,
   props,
   getKey: GetKey,
   collectHeight: () => void,
@@ -58,11 +58,10 @@ export default function useScrollTo(
           let itemBottom = 0;
 
           const maxLen = Math.min(data.length, index);
-
           for (let i = 0; i <= maxLen; i += 1) {
             const key = getKey(data[i]);
             itemTop = stackTop;
-            const cacheHeight = heights.value[key!];
+            const cacheHeight = heights.get(key);
             itemBottom = itemTop + (cacheHeight === undefined ? itemHeight : cacheHeight);
 
             stackTop = itemBottom;
@@ -71,7 +70,7 @@ export default function useScrollTo(
               needCollectHeight = true;
             }
           }
-
+          const scrollTop = containerRef.value.scrollTop;
           // Scroll to
           let targetTop: number | null = null;
 
@@ -84,7 +83,6 @@ export default function useScrollTo(
               break;
 
             default: {
-              const { scrollTop } = containerRef.value;
               const scrollBottom = scrollTop + height;
               if (itemTop < scrollTop) {
                 newTargetAlign = 'top';
@@ -94,7 +92,7 @@ export default function useScrollTo(
             }
           }
 
-          if (targetTop !== null && targetTop !== containerRef.value.scrollTop) {
+          if (targetTop !== null && targetTop !== scrollTop) {
             syncScrollTop(targetTop);
           }
         }

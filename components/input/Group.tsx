@@ -1,6 +1,5 @@
 import type { PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -8,9 +7,9 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 export default defineComponent({
   name: 'AInputGroup',
   props: {
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     size: { type: String as PropType<SizeType> },
-    compact: PropTypes.looseBool,
+    compact: { type: Boolean, default: undefined },
     onMouseenter: { type: Function as PropType<MouseEventHandler> },
     onMouseleave: { type: Function as PropType<MouseEventHandler> },
     onFocus: { type: Function as PropType<FocusEventHandler> },

@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes, CSSProperties } from 'vue';
+import type { ImgHTMLAttributes, CSSProperties, PropType } from 'vue';
 import { ref, watch, defineComponent, computed, onMounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
@@ -28,23 +28,19 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   fallback?: string;
   preview?: boolean | ImagePreviewType;
 }
-export const imageProps = {
-  src: PropTypes.string,
-  wrapperClassName: PropTypes.string,
-  wrapperStyle: PropTypes.style,
-  prefixCls: PropTypes.string,
-  previewPrefixCls: PropTypes.string,
+export const imageProps = () => ({
+  src: String,
+  wrapperClassName: String,
+  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  prefixCls: String,
+  previewPrefixCls: String,
   placeholder: PropTypes.any,
-  fallback: PropTypes.string,
-  preview: PropTypes.oneOfType([
-    PropTypes.looseBool,
-    PropTypes.shape({
-      visible: PropTypes.bool,
-      onVisibleChange: PropTypes.func,
-      getContainer: PropTypes.oneOfType([PropTypes.func, PropTypes.looseBool, PropTypes.string]),
-    }).loose,
-  ]).def(true),
-};
+  fallback: String,
+  preview: {
+    type: [Boolean, Object] as PropType<boolean | ImagePreviewType>,
+    default: true as boolean | ImagePreviewType,
+  },
+});
 type ImageStatus = 'normal' | 'error' | 'loading';
 
 const mergeDefaultValue = <T extends object>(obj: T, defaultValues: object): T => {
@@ -60,7 +56,7 @@ let uuid = 0;
 const ImageInternal = defineComponent({
   name: 'Image',
   inheritAttrs: false,
-  props: imageProps,
+  props: imageProps(),
   emits: ['click'],
   setup(props, { attrs, slots, emit }) {
     const prefixCls = computed(() => props.prefixCls);

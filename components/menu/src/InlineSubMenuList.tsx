@@ -31,12 +31,10 @@ export default defineComponent({
       },
       { flush: 'post' },
     );
-    const style = ref({});
-    const className = ref('');
     const mergedMotion = computed(() => {
       const m =
         motion.value || defaultMotions.value?.[fixedMode.value] || defaultMotions.value?.other;
-      const res = typeof m === 'function' ? m(style, className) : m;
+      const res = typeof m === 'function' ? m() : m;
       return { ...res, appear: props.keyPath.length <= 1 };
     });
     return () => {
@@ -46,12 +44,7 @@ export default defineComponent({
       return (
         <MenuContextProvider mode={fixedMode.value}>
           <Transition {...mergedMotion.value}>
-            <SubMenuList
-              v-show={mergedOpen.value}
-              id={props.id}
-              style={style.value}
-              class={className.value}
-            >
+            <SubMenuList v-show={mergedOpen.value} id={props.id}>
               {slots.default?.()}
             </SubMenuList>
           </Transition>

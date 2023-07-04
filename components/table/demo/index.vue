@@ -5,7 +5,6 @@
     <Bordered />
     <Ellipsis />
     <ColspanRowspan />
-    <CustomFilterPanel />
     <EditCell />
     <EditRow />
     <ExpandChildren />
@@ -14,9 +13,10 @@
     <FixedColumns />
     <FixedHeader />
     <GroupingColumns />
-    <Head />
     <MultipleSorter />
     <NestedTable />
+    <Head />
+    <CustomFilterPanel />
     <ResetFilter />
     <RowSelectionAndOperation />
     <RowSelectionCustom />
@@ -26,8 +26,8 @@
     <Size />
     <Stripe />
     <Summary />
+    <Responsive />
     <TemplateCom />
-    <bigData />
   </demo-sort>
 </template>
 
@@ -60,7 +60,7 @@ import MultipleSorter from './multiple-sorter.vue';
 import Summary from './summary.vue';
 import Sticky from './sticky.vue';
 import ResizableColumn from './resizable-column.vue';
-import bigData from './big-data.vue';
+import Responsive from './responsive.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -96,7 +96,7 @@ export default defineComponent({
     Summary,
     Sticky,
     ResizableColumn,
-    bigData,
+    Responsive,
   },
 });
 </script>

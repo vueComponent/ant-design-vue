@@ -23,6 +23,7 @@ import type {
   ValidateErrorEntity,
   ValidateOptions,
   Callbacks,
+  ValidateMessages,
 } from './interface';
 import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -60,24 +61,28 @@ export type ValidationRule = {
   trigger?: string;
 };
 
-export const formProps = {
+export const formProps = () => ({
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
   labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
-  colon: PropTypes.looseBool,
+  colon: { type: Boolean, default: undefined },
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
-  prefixCls: PropTypes.string,
+  labelWrap: { type: Boolean, default: undefined },
+  prefixCls: String,
   requiredMark: { type: [String, Boolean] as PropType<RequiredMark | ''>, default: undefined },
   /** @deprecated Will warning in future branch. Pls use `requiredMark` instead. */
-  hideRequiredMark: PropTypes.looseBool,
+  hideRequiredMark: { type: Boolean, default: undefined },
   model: PropTypes.object,
   rules: { type: Object as PropType<{ [k: string]: ValidationRule[] | ValidationRule }> },
-  validateMessages: PropTypes.object,
-  validateOnRuleChange: PropTypes.looseBool,
+  validateMessages: {
+    type: Object as PropType<ValidateMessages>,
+    default: undefined as ValidateMessages,
+  },
+  validateOnRuleChange: { type: Boolean, default: undefined },
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: { type: [Boolean, Object] as PropType<boolean | Options> },
-  onSubmit: PropTypes.func,
-  name: PropTypes.string,
+  onSubmit: Function as PropType<(e: Event) => void>,
+  name: String,
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   size: { type: String as PropType<SizeType> },
   onValuesChange: { type: Function as PropType<Callbacks['onValuesChange']> },
@@ -85,9 +90,9 @@ export const formProps = {
   onFinish: { type: Function as PropType<Callbacks['onFinish']> },
   onFinishFailed: { type: Function as PropType<Callbacks['onFinishFailed']> },
   onValidate: { type: Function as PropType<Callbacks['onValidate']> },
-};
+});
 
-export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
+export type FormProps = Partial<ExtractPropTypes<ReturnType<typeof formProps>>>;
 
 export type FormExpose = {
   resetFields: (name?: NamePath) => void;
@@ -119,14 +124,14 @@ function isEqualName(name1: NamePath, name2: NamePath) {
 const Form = defineComponent({
   name: 'AForm',
   inheritAttrs: false,
-  props: initDefaultProps(formProps, {
+  props: initDefaultProps(formProps(), {
     layout: 'horizontal',
     hideRequiredMark: false,
     colon: true,
   }),
   Item: FormItem,
   useForm,
-  emits: ['finishFailed', 'submit', 'finish', 'validate'],
+  // emits: ['finishFailed', 'submit', 'finish', 'validate'],
   setup(props, { emit, slots, expose, attrs }) {
     const size = useInjectSize(props);
     const { prefixCls, direction, form: contextForm } = useConfigInject('form', props);
@@ -145,6 +150,7 @@ const Form = defineComponent({
       }
       return true;
     });
+    const mergedColon = computed(() => props.colon ?? contextForm.value?.colon);
     const validateMessages = computed(() => {
       return {
         ...defaultValidateMessages,
@@ -168,7 +174,7 @@ const Form = defineComponent({
       delete fields[eventKey];
     };
 
-    const getFieldsByNameList = (nameList: NamePath) => {
+    const getFieldsByNameList = (nameList: NamePath[]) => {
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
       if (!provideNameList) {
@@ -180,17 +186,17 @@ const Form = defineComponent({
         );
       }
     };
-    const resetFields = (name: NamePath) => {
+    const resetFields = (name?: NamePath) => {
       if (!props.model) {
         warning(false, 'Form', 'model is required for resetFields to work.');
         return;
       }
-      getFieldsByNameList(name).forEach(field => {
+      getFieldsByNameList(name ? [name] : undefined).forEach(field => {
         field.resetField();
       });
     };
-    const clearValidate = (name: NamePath) => {
-      getFieldsByNameList(name).forEach(field => {
+    const clearValidate = (name?: NamePath) => {
+      getFieldsByNameList(name ? [name] : undefined).forEach(field => {
         field.clearValidate();
       });
     };
@@ -208,8 +214,8 @@ const Form = defineComponent({
     const validate = (...args: any[]) => {
       return validateField(...args);
     };
-    const scrollToField = (name: NamePath, options = {}) => {
-      const fields = getFieldsByNameList(name);
+    const scrollToField = (name?: NamePath, options = {}) => {
+      const fields = getFieldsByNameList(name ? [name] : undefined);
       if (fields.length) {
         const fieldId = fields[0].fieldId.value;
         const node = fieldId ? document.getElementById(fieldId) : null;
@@ -367,9 +373,10 @@ const Form = defineComponent({
       name: computed(() => props.name),
       labelAlign: computed(() => props.labelAlign),
       labelCol: computed(() => props.labelCol),
+      labelWrap: computed(() => props.labelWrap),
       wrapperCol: computed(() => props.wrapperCol),
       vertical: computed(() => props.layout === 'vertical'),
-      colon: computed(() => props.colon),
+      colon: mergedColon,
       requiredMark: mergedRequiredMark,
       validateTrigger: computed(() => props.validateTrigger),
       rules: computed(() => props.rules),

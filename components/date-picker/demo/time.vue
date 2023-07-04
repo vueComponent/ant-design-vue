@@ -23,8 +23,8 @@ This property provide an additional time selection. When `showTime` is an Object
       :show-time="{ format: 'HH:mm' }"
       format="YYYY-MM-DD HH:mm"
       :placeholder="['Start Time', 'End Time']"
-      @change="onChange"
-      @ok="onOk"
+      @change="onRangeChange"
+      @ok="onRangeOk"
     />
   </a-space>
 </template>
@@ -33,18 +33,29 @@ import { Dayjs } from 'dayjs';
 import { defineComponent } from 'vue';
 export default defineComponent({
   setup() {
-    const onChange = (value: Dayjs[], dateString: string[]) => {
+    const onChange = (value: Dayjs, dateString: string) => {
       console.log('Selected Time: ', value);
       console.log('Formatted Selected Time: ', dateString);
     };
 
-    const onOk = (value: Dayjs[]) => {
+    const onOk = (value: Dayjs) => {
+      console.log('onOk: ', value);
+    };
+
+    const onRangeChange = (value: [Dayjs, Dayjs], dateString: [string, string]) => {
+      console.log('Selected Time: ', value);
+      console.log('Formatted Selected Time: ', dateString);
+    };
+
+    const onRangeOk = (value: [Dayjs, Dayjs]) => {
       console.log('onOk: ', value);
     };
 
     return {
       onChange,
       onOk,
+      onRangeChange,
+      onRangeOk,
     };
   },
 });

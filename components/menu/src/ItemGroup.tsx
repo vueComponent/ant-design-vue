@@ -5,16 +5,16 @@ import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
 import { useMeasure } from './hooks/useKeyPath';
 
-const menuItemGroupProps = {
+export const menuItemGroupProps = () => ({
   title: PropTypes.any,
-};
+});
 
-export type MenuItemGroupProps = Partial<ExtractPropTypes<typeof menuItemGroupProps>>;
+export type MenuItemGroupProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemGroupProps>>>;
 
 export default defineComponent({
   name: 'AMenuItemGroup',
   inheritAttrs: false,
-  props: menuItemGroupProps,
+  props: menuItemGroupProps(),
   slots: ['title'],
   setup(props, { slots, attrs }) {
     const { prefixCls } = useInjectMenu();

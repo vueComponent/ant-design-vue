@@ -9,6 +9,7 @@ import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import { optionProps } from '../vc-mentions/src/Option';
+import type { KeyboardEventHandler } from '../_util/EventInterface';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -29,8 +30,8 @@ interface MentionsEntity {
 
 export type MentionPlacement = 'top' | 'bottom';
 
-const getMentions = (value = '', config: MentionsConfig): MentionsEntity[] => {
-  const { prefix = '@', split = ' ' } = config || {};
+const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] => {
+  const { prefix = '@', split = ' ' } = config;
   const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
 
   return value
@@ -58,9 +59,9 @@ const getMentions = (value = '', config: MentionsConfig): MentionsEntity[] => {
     .filter((entity): entity is MentionsEntity => !!entity && !!entity.value);
 };
 
-const mentionsProps = {
+export const mentionsProps = () => ({
   ...baseMentionsProps,
-  loading: PropTypes.looseBool,
+  loading: { type: Boolean, default: undefined },
   onFocus: {
     type: Function as PropType<(e: FocusEvent) => void>,
   },
@@ -73,18 +74,23 @@ const mentionsProps = {
   onChange: {
     type: Function as PropType<(text: string) => void>,
   },
+  onPressenter: {
+    type: Function as PropType<KeyboardEventHandler>,
+  },
+  'onUpdate:value': {
+    type: Function as PropType<(text: string) => void>,
+  },
   notFoundContent: PropTypes.any,
   defaultValue: String,
   id: String,
-};
+});
 
-export type MentionsProps = Partial<ExtractPropTypes<typeof mentionsProps>>;
+export type MentionsProps = Partial<ExtractPropTypes<ReturnType<typeof mentionsProps>>>;
 
 const Mentions = defineComponent({
   name: 'AMentions',
   inheritAttrs: false,
-  props: mentionsProps,
-  emits: ['update:value', 'change', 'focus', 'blur', 'select', 'pressenter'],
+  props: mentionsProps(),
   slots: ['notFoundContent', 'option'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);

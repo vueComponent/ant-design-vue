@@ -2,7 +2,8 @@ import type { App, Plugin } from 'vue';
 import Radio from './Radio';
 import Group from './Group';
 import Button from './RadioButton';
-
+export type { RadioProps } from './Radio';
+export type { RadioGroupProps } from './Group';
 export type { RadioChangeEventTarget, RadioChangeEvent } from './interface';
 
 Radio.Group = Group;

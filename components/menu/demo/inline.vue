@@ -69,6 +69,7 @@ Vertical menu with inline submenus.
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 import { MailOutlined, QqOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
+import type { MenuProps } from 'ant-design-vue';
 export default defineComponent({
   components: {
     MailOutlined,
@@ -79,7 +80,7 @@ export default defineComponent({
   setup() {
     const selectedKeys = ref<string[]>(['1']);
     const openKeys = ref<string[]>(['sub1']);
-    const handleClick = (e: Event) => {
+    const handleClick: MenuProps['onClick'] = e => {
       console.log('click', e);
     };
     const titleClick = (e: Event) => {

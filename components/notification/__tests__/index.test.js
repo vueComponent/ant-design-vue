@@ -1,13 +1,15 @@
 import { asyncExpect } from '../../../tests/utils';
-import notification from '..';
+import notification, { getInstance } from '..';
 import { StepBackwardOutlined } from '@ant-design/icons-vue';
 
 describe('notification', () => {
   beforeEach(() => {
+    jest.useFakeTimers();
     document.body.outerHTML = '';
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     notification.destroy();
   });
 
@@ -24,17 +26,18 @@ describe('notification', () => {
         key: '2',
       });
     });
-    await asyncExpect(() => {
-      expect(document.querySelectorAll('.ant-notification-notice').length).toBe(2);
-      notification.close('1');
-    }, 0);
-    await asyncExpect(() => {
-      expect(document.querySelectorAll('.ant-notification-notice').length).toBe(1);
-      notification.close('2');
-    }, 0);
-    await asyncExpect(() => {
-      expect(document.querySelectorAll('.ant-notification-notice').length).toBe(0);
-    }, 0);
+    await Promise.resolve();
+    expect(document.querySelectorAll('.ant-notification-notice').length).toBe(2);
+    notification.close('1');
+    jest.runAllTimers();
+    expect(
+      (await getInstance('ant-notification-topRight-false')).component.value.notices,
+    ).toHaveLength(1);
+    notification.close('2');
+    jest.runAllTimers();
+    expect(
+      (await getInstance('ant-notification-topRight-false')).component.value.notices,
+    ).toHaveLength(0);
   });
 
   it('should be able to destroy globally', async () => {

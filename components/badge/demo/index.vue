@@ -8,8 +8,8 @@
     <Change />
     <Title />
     <Colors />
-    <Link />
     <Ribbon />
+    <Link />
   </demo-sort>
 </template>
 <script lang="ts">

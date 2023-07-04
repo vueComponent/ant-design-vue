@@ -4,41 +4,40 @@ import classNames from '../_util/classNames';
 import { getPropsSlot, flattenChildren } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { getTransitionProps, Transition } from '../_util/transition';
-import type { ExtractPropTypes, CSSProperties } from 'vue';
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, computed, ref, watch } from 'vue';
-import { tuple } from '../_util/type';
 import Ribbon from './Ribbon';
 import { isPresetColor } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
+import type { PresetStatusColorType } from '../_util/colors';
 
-export const badgeProps = {
+export const badgeProps = () => ({
   /** Number to show in badge */
   count: PropTypes.any,
-  showZero: PropTypes.looseBool,
+  showZero: { type: Boolean, default: undefined },
   /** Max count to show */
-  overflowCount: PropTypes.number.def(99),
+  overflowCount: { type: Number, default: 99 },
   /** whether to show red dot without number */
-  dot: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  scrollNumberPrefixCls: PropTypes.string,
-  status: PropTypes.oneOf(tuple('success', 'processing', 'default', 'error', 'warning')),
-  // sync antd@4.6.0
-  size: PropTypes.oneOf(tuple('default', 'small')).def('default'),
-  color: PropTypes.string,
+  dot: { type: Boolean, default: undefined },
+  prefixCls: String,
+  scrollNumberPrefixCls: String,
+  status: { type: String as PropType<PresetStatusColorType> },
+  size: { type: String as PropType<'default' | 'small'>, default: 'default' },
+  color: String,
   text: PropTypes.any,
-  offset: PropTypes.arrayOf(PropTypes.oneOfType([String, Number])),
-  numberStyle: PropTypes.style,
-  title: PropTypes.string,
-};
+  offset: Array as unknown as PropType<[number | string, number | string]>,
+  numberStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  title: String,
+});
 
-export type BadgeProps = Partial<ExtractPropTypes<typeof badgeProps>>;
+export type BadgeProps = Partial<ExtractPropTypes<ReturnType<typeof badgeProps>>>;
 
 export default defineComponent({
   name: 'ABadge',
   Ribbon,
   inheritAttrs: false,
-  props: badgeProps,
+  props: badgeProps(),
   slots: ['text', 'count'],
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('badge', props);
@@ -62,7 +61,7 @@ export default defineComponent({
       () => numberedDisplayCount.value === '0' || numberedDisplayCount.value === 0,
     );
 
-    const showAsDot = computed(() => (props.dot && !isZero.value) || hasStatus.value);
+    const showAsDot = computed(() => props.dot && !isZero.value);
 
     const mergedCount = computed(() => (showAsDot.value ? '' : numberedDisplayCount.value));
 
@@ -197,7 +196,7 @@ export default defineComponent({
       const transitionProps = getTransitionProps(children ? `${pre}-zoom` : '', {
         appear: false,
       });
-      let scrollNumberStyle: CSSProperties = { ...mergedStyle, ...props.numberStyle };
+      let scrollNumberStyle: CSSProperties = { ...mergedStyle, ...(props.numberStyle as object) };
       if (color && !isPresetColor(color)) {
         scrollNumberStyle = scrollNumberStyle || {};
         scrollNumberStyle.background = color;

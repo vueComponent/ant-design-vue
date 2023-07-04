@@ -81,7 +81,7 @@ function injectFilter<RecordType>(
 ): ColumnsType<RecordType> {
   return columns.map((column, index) => {
     const columnPos = getColumnPos(index, pos);
-    const { filterMultiple = true } = column as ColumnType<RecordType>;
+    const { filterMultiple = true, filterMode, filterSearch } = column as ColumnType<RecordType>;
 
     let newColumn: ColumnsType<RecordType>[number] = column;
     const hasFilterDropdown =
@@ -101,6 +101,8 @@ function injectFilter<RecordType>(
             columnKey={columnKey}
             filterState={filterState}
             filterMultiple={filterMultiple}
+            filterMode={filterMode}
+            filterSearch={filterSearch}
             triggerFilter={triggerFilter}
             locale={locale}
             getPopupContainer={getPopupContainer}
@@ -131,7 +133,7 @@ function injectFilter<RecordType>(
   });
 }
 
-function flattenKeys(filters?: ColumnFilterItem[]) {
+export function flattenKeys(filters?: ColumnFilterItem[]) {
   let keys: FilterValue = [];
   (filters || []).forEach(({ value, children }) => {
     keys.push(value);

@@ -7,10 +7,10 @@ import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const timelineItemProps = () => ({
-  prefixCls: PropTypes.string,
-  color: PropTypes.string,
+  prefixCls: String,
+  color: String,
   dot: PropTypes.any,
-  pending: PropTypes.looseBool,
+  pending: { type: Boolean, default: undefined },
   position: PropTypes.oneOf(tuple('left', 'right', '')).def(''),
   label: PropTypes.any,
 });
@@ -38,14 +38,12 @@ export default defineComponent({
         [`${prefixCls.value}-item-head-custom`]: dot,
         [`${prefixCls.value}-item-head-${color}`]: true,
       });
+      const customColor = /blue|red|green|gray/.test(color || '') ? undefined : color;
       return (
         <li class={itemClassName}>
           {label && <div class={`${prefixCls.value}-item-label`}>{label}</div>}
           <div class={`${prefixCls.value}-item-tail`} />
-          <div
-            class={dotClassName}
-            style={{ borderColor: /blue|red|green|gray/.test(color) ? undefined : color }}
-          >
+          <div class={dotClassName} style={{ borderColor: customColor, color: customColor }}>
             {dot}
           </div>
           <div class={`${prefixCls.value}-item-content`}>{slots.default?.()}</div>

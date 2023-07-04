@@ -34,7 +34,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     const time1 = ref<Dayjs>();
-    const time2 = ref<Dayjs>();
+    const time2 = ref<[Dayjs, Dayjs]>();
 
     const onOk = (value: Dayjs) => {
       console.log('onOk: ', value);

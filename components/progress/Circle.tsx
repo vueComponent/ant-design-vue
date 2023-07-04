@@ -13,7 +13,16 @@ function getPercentage({ percent, success, successPercent }: CircleProps) {
   return [realSuccessPercent, validProgress(validProgress(percent) - realSuccessPercent)];
 }
 
+function getStrokeColor({
+  success = {},
+  strokeColor,
+}: Partial<CircleProps>): (string | Record<string, string>)[] {
+  const { strokeColor: successColor } = success;
+  return [successColor || presetPrimaryColors.green, strokeColor || null!];
+}
+
 export default defineComponent({
+  name: 'Circle',
   inheritAttrs: false,
   props: progressProps(),
   setup(props, { slots }) {
@@ -43,12 +52,13 @@ export default defineComponent({
     );
 
     // using className to style stroke color
-    const strokeColor = computed(() => [presetPrimaryColors.green, props.strokeColor || null]);
     const percent = computed(() => getPercentage(props));
     const isGradient = computed(
       () => Object.prototype.toString.call(props.strokeColor) === '[object Object]',
     );
-
+    const strokeColor = computed(() =>
+      getStrokeColor({ success: props.success, strokeColor: props.strokeColor }),
+    );
     const wrapperClassName = computed(() => ({
       [`${props.prefixCls}-inner`]: true,
       [`${props.prefixCls}-circle-gradient`]: isGradient.value,

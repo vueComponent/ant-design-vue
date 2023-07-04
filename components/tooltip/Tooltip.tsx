@@ -7,15 +7,13 @@ import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
 import { getStyle, filterEmpty, isValidElement, initDefaultProps } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import type { triggerTypes, placementTypes } from './abstractTooltipProps';
+export type { TriggerType, TooltipPlacement } from './abstractTooltipProps';
 import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import raf from '../_util/raf';
 export type { AdjustOverflow, PlacementsConfig } from './placements';
-
-export type TooltipPlacement = typeof placementTypes[number];
 
 // https://github.com/react-component/tooltip
 // https://github.com/yiminghe/dom-align
@@ -48,20 +46,16 @@ export const tooltipProps = () => ({
   title: PropTypes.any,
 });
 
-export const tooltipDefaultProps = {
+export const tooltipDefaultProps = () => ({
   trigger: 'hover',
   transitionName: 'zoom-big-fast',
-  align: () => ({}),
+  align: {},
   placement: 'top',
   mouseEnterDelay: 0.1,
   mouseLeaveDelay: 0.1,
   arrowPointAtCenter: false,
   autoAdjustOverflow: true,
-};
-
-export type TriggerTypes = typeof triggerTypes[number];
-
-export type PlacementTypes = typeof placementTypes[number];
+});
 
 export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
 
@@ -71,7 +65,7 @@ export default defineComponent({
   props: initDefaultProps(tooltipProps(), {
     trigger: 'hover',
     transitionName: 'zoom-big-fast',
-    align: () => ({}),
+    align: {},
     placement: 'top',
     mouseEnterDelay: 0.1,
     mouseLeaveDelay: 0.1,
@@ -79,7 +73,7 @@ export default defineComponent({
     autoAdjustOverflow: true,
   }),
   slots: ['title'],
-  emits: ['update:visible', 'visibleChange'],
+  // emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, getTargetContainer } = useConfigInject('tooltip', props);
 
@@ -136,51 +130,53 @@ export default defineComponent({
         })
       );
     });
-
+    const isTrueProps = (val: boolean | '') => {
+      return val || val === '';
+    };
     const getDisabledCompatibleChildren = (ele: any) => {
-      if (
-        ((typeof ele.type === 'object' &&
-          (ele.type.__ANT_BUTTON === true ||
-            ele.type.__ANT_SWITCH === true ||
-            ele.type.__ANT_CHECKBOX === true)) ||
-          ele.type === 'button') &&
-        ele.props &&
-        (ele.props.disabled || ele.props.disabled === '')
-      ) {
-        // Pick some layout related style properties up to span
-        // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
-        const { picked, omitted } = splitObject(getStyle(ele), [
-          'position',
-          'left',
-          'right',
-          'top',
-          'bottom',
-          'float',
-          'display',
-          'zIndex',
-        ]);
-        const spanStyle = {
-          display: 'inline-block', // default inline-block is important
-          ...picked,
-          cursor: 'not-allowed',
-          width: ele.props && ele.props.block ? '100%' : null,
-        };
-        const buttonStyle = {
-          ...omitted,
-          pointerEvents: 'none',
-        };
-        const child = cloneElement(
-          ele,
-          {
-            style: buttonStyle,
-          },
-          true,
-        );
-        return (
-          <span style={spanStyle} class={`${prefixCls}-disabled-compatible-wrapper`}>
-            {child}
-          </span>
-        );
+      const elementType = ele.type as any;
+      if (typeof elementType === 'object' && ele.props) {
+        if (
+          ((elementType.__ANT_BUTTON === true || elementType === 'button') &&
+            isTrueProps(ele.props.disabled)) ||
+          (elementType.__ANT_SWITCH === true &&
+            (isTrueProps(ele.props.disabled) || isTrueProps(ele.props.loading)))
+        ) {
+          // Pick some layout related style properties up to span
+          // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
+          const { picked, omitted } = splitObject(getStyle(ele), [
+            'position',
+            'left',
+            'right',
+            'top',
+            'bottom',
+            'float',
+            'display',
+            'zIndex',
+          ]);
+          const spanStyle = {
+            display: 'inline-block', // default inline-block is important
+            ...picked,
+            cursor: 'not-allowed',
+            width: ele.props && ele.props.block ? '100%' : null,
+          };
+          const buttonStyle = {
+            ...omitted,
+            pointerEvents: 'none',
+          };
+          const child = cloneElement(
+            ele,
+            {
+              style: buttonStyle,
+            },
+            true,
+          );
+          return (
+            <span style={spanStyle} class={`${prefixCls}-disabled-compatible-wrapper`}>
+              {child}
+            </span>
+          );
+        }
       }
       return ele;
     };

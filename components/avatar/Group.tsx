@@ -1,43 +1,45 @@
 import { cloneElement } from '../_util/vnode';
 import type { AvatarSize } from './Avatar';
-import Avatar, { avatarProps } from './Avatar';
+import Avatar from './Avatar';
 import Popover from '../popover';
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
 import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
-import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useProvideSize from '../_util/hooks/useSize';
 
-const groupProps = {
-  prefixCls: PropTypes.string,
-  maxCount: PropTypes.number,
-  maxStyle: {
-    type: Object as PropType<CSSProperties>,
-    default: () => ({} as CSSProperties),
-  },
-  maxPopoverPlacement: PropTypes.oneOf(tuple('top', 'bottom')).def('top'),
+export const groupProps = () => ({
+  prefixCls: String,
+  maxCount: Number,
+  maxStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  maxPopoverPlacement: { type: String as PropType<'top' | 'bottom'>, default: 'top' },
+  maxPopoverTrigger: String as PropType<'hover' | 'focus' | 'click'>,
   /*
    * Size of avatar, options: `large`, `small`, `default`
    * or a custom number size
    * */
-  size: avatarProps.size,
-};
+  size: {
+    type: [Number, String, Object] as PropType<AvatarSize>,
+    default: 'default' as AvatarSize,
+  },
+});
 
-export type AvatarGroupProps = Partial<ExtractPropTypes<typeof groupProps>> & {
-  size?: AvatarSize;
-};
+export type AvatarGroupProps = Partial<ExtractPropTypes<ReturnType<typeof groupProps>>>;
 
 const Group = defineComponent({
   name: 'AAvatarGroup',
   inheritAttrs: false,
-  props: groupProps,
+  props: groupProps(),
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('avatar-group', props);
     useProvideSize<AvatarSize>(props);
     return () => {
-      const { maxPopoverPlacement = 'top', maxCount, maxStyle } = props;
+      const {
+        maxPopoverPlacement = 'top',
+        maxCount,
+        maxStyle,
+        maxPopoverTrigger = 'hover',
+      } = props;
 
       const cls = {
         [prefixCls.value]: true,
@@ -61,7 +63,7 @@ const Group = defineComponent({
           <Popover
             key="avatar-popover-key"
             content={childrenHidden}
-            trigger="hover"
+            trigger={maxPopoverTrigger}
             placement={maxPopoverPlacement}
             overlayClassName={`${prefixCls.value}-popover`}
           >

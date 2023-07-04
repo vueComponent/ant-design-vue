@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const isWindows = require('is-windows');
 
 module.exports = function getRunCmdEnv() {
   const env = {};
@@ -14,7 +15,9 @@ module.exports = function getRunCmdEnv() {
     .filter(v => v.slice(0, 1).pop().toLowerCase() === 'path')
     .forEach(v => {
       const key = v.slice(0, 1).pop();
-      env[key] = env[key] ? `${nodeModulesBinDir}:${env[key]}` : nodeModulesBinDir;
+      env[key] = env[key]
+        ? `${nodeModulesBinDir}${isWindows() ? ';' : ':'}${env[key]}`
+        : nodeModulesBinDir;
     });
   return env;
 };

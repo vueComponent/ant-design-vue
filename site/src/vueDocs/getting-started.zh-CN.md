@@ -2,7 +2,7 @@
 
 Ant Design Vue 致力于提供给程序员**愉悦**的开发体验。
 
-> 在开始之前，推荐先学习 [Vue](https://cn.vuejs.org/) 和 [ES2015](http://babeljs.io/docs/learn-es2015/)，并正确安装和配置了 [Node.js](https://nodejs.org/) v8.9 或以上。官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识，并且已经完全掌握了 Vue 的正确开发方式。如果你刚开始学习前端或者 Vue，将 UI 框架作为你的第一步可能不是最好的主意。
+> 在开始之前，推荐先学习 [Vue](https://www.vuejs.org/) 和 [ES2015](http://babeljs.io/docs/learn-es2015/)，并正确安装和配置了 [Node.js](https://nodejs.org/) v8.9 或以上。官方指南假设你已了解关于 HTML、CSS 和 JavaScript 的中级知识，并且已经完全掌握了 Vue 的正确开发方式。如果你刚开始学习前端或者 Vue，将 UI 框架作为你的第一步可能不是最好的主意。
 
 ## 在线演示
 
@@ -36,11 +36,17 @@ $ vue create antd-demo
 
 ### 3. 使用组件
 
+#### 安装
+
 ```bash
 $ npm i --save ant-design-vue@next
 ```
 
-**完整引入**
+#### 注册
+
+如果使用 Vue 默认的模板语法，需要注册组件后方可使用，有如下三种方式注册组件：
+
+**全局完整注册**
 
 ```jsx
 import { createApp } from 'vue';
@@ -48,14 +54,14 @@ import Antd from 'ant-design-vue';
 import App from './App';
 import 'ant-design-vue/dist/antd.css';
 
-const app = createApp();
+const app = createApp(App);
 
-app.use(Antd);
+app.use(Antd).mount('#app');
 ```
 
-以上代码便完成了 Antd 的引入。需要注意的是，样式文件需要单独引入。
+以上代码便完成了 Antd 的全局注册。需要注意的是，样式文件需要单独引入。
 
-**局部导入组件**
+**全局部分注册**
 
 ```jsx
 import { createApp } from 'vue';
@@ -70,19 +76,32 @@ app.use(Button).mount('#app');
 app.config.globalProperties.$message = message;
 ```
 
-> 你可以在左侧菜单选用更多组件。
+**局部注册组件**
+
+此种方式需要分别注册组件子组件，如 Button、ButtonGroup，并且注册后仅在当前组件中有效。所以我们推荐使用上述两种方式。
+
+```html
+<template>
+  <a-button>Add</a-button>
+</template>
+<script>
+  import { Button } from 'ant-design-vue';
+  const ButtonGroup = Button.Group;
+
+  export default {
+    components: {
+      AButton: Button,
+      AButtonGroup: ButtonGroup,
+    },
+  };
+</script>
+```
 
 ## 兼容性
 
-Ant Design Vue 2.x 支持所有的现代浏览器。
+Ant Design Vue 2.x+ 支持所有的现代浏览器。
 
 如果需要支持 IE9+，你可以使用 Ant Design Vue 1.x & Vue 2.x。
-
-对于 IE 系列浏览器，需要提供 [es5-shim](https://github.com/es-shims/es5-shim) 和 [es6-shim](https://github.com/paulmillr/es6-shim) 等 Polyfills 的支持。
-
-如果你使用了 babel，强烈推荐使用 [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) 和 [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/) 来替代以上两个 shim。
-
-> 避免同时使用 babel 和 shim 两种兼容方法，以规避 [#6512](https://github.com/ant-design/ant-design/issues/6512) 中所遇问题
 
 ## 按需加载
 
@@ -103,13 +122,13 @@ import { Button } from 'ant-design-vue';
 
 > 注意，babel-plugin-import 的 `style` 属性除了引入对应组件的样式，也会引入一些必要的全局样式。如果你不需要它们，建议不要使用此属性。你可以 `import 'ant-design-vue/dist/antd.css` 手动引入，并覆盖全局样式。
 
-如果你使用的 Vite，你可以使用 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) 来进行按需加载
+如果你使用的 Vite，你可以使用 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) 来进行按需加载。但是此插件无法处理非组件模块，如 message，这种组件需要手动加载：
+
+```ts
+import { message } from 'ant-design-vue';
+import 'ant-design-vue/es/message/style/css'; //vite只能用 ant-design-vue/es 而非 ant-design-vue/lib
+```
 
 ## 配置主题和字体
 
 - [改变主题](/docs/vue/customize-theme-cn)
-
-## 小贴士
-
-- 你可以享用 `npm` 生态圈里的所有模块。
-- 虽然 Vue 官方推荐模板编写组件，不过对于复杂组件，[jsx](https://github.com/vueComponent/jsx)未必不是一个更好的选择。

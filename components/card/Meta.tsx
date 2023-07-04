@@ -1,16 +1,19 @@
+import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
+export const cardMetaProps = () => ({
+  prefixCls: String,
+  title: PropTypes.any,
+  description: PropTypes.any,
+  avatar: PropTypes.any,
+});
+export type CardGridProps = Partial<ExtractPropTypes<ReturnType<typeof cardMetaProps>>>;
 export default defineComponent({
   name: 'ACardMeta',
-  props: {
-    prefixCls: PropTypes.string,
-    title: PropTypes.any,
-    description: PropTypes.any,
-    avatar: PropTypes.any,
-  },
+  props: cardMetaProps(),
   slots: ['title', 'description', 'avatar'],
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('card', props);

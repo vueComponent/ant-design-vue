@@ -12,13 +12,25 @@ import type {
   Key,
   TableLocale,
   GetPopupContainer,
+  FilterSearchType,
 } from '../../interface';
 import FilterDropdownMenuWrapper from './FilterWrapper';
 import type { FilterState } from '.';
+import { flattenKeys } from '.';
 import { computed, defineComponent, onBeforeUnmount, ref, shallowRef, watch } from 'vue';
 import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../_util/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';
+import type { DataNode, EventDataNode } from '../../../tree';
+import type { EventHandler } from '../../../_util/EventInterface';
+import FilterSearch from './FilterSearch';
+import Tree from '../../../tree';
+import type { CheckboxChangeEvent } from '../../../checkbox/interface';
+
+interface FilterRestProps {
+  confirm?: Boolean;
+  closeDropdown?: Boolean;
+}
 
 const { SubMenu, Item: MenuItem } = Menu;
 
@@ -26,40 +38,28 @@ function hasSubMenu(filters: ColumnFilterItem[]) {
   return filters.some(({ children }) => children && children.length > 0);
 }
 
+function searchValueMatched(searchValue: string, text: any) {
+  if (typeof text === 'string' || typeof text === 'number') {
+    return text?.toString().toLowerCase().includes(searchValue.trim().toLowerCase());
+  }
+  return false;
+}
+
 function renderFilterItems({
   filters,
   prefixCls,
   filteredKeys,
   filterMultiple,
-  locale,
+  searchValue,
+  filterSearch,
 }: {
   filters: ColumnFilterItem[];
   prefixCls: string;
   filteredKeys: Key[];
   filterMultiple: boolean;
-  locale: TableLocale;
+  searchValue: string;
+  filterSearch: FilterSearchType;
 }) {
-  if (filters.length === 0) {
-    // wrapped with <div /> to avoid react warning
-    // https://github.com/ant-design/ant-design/issues/25979
-    return (
-      <MenuItem key="empty">
-        <div
-          style={{
-            margin: '16px 0',
-          }}
-        >
-          <Empty
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description={locale.filterEmptyText}
-            imageStyle={{
-              height: 24,
-            }}
-          />
-        </div>
-      </MenuItem>
-    );
-  }
   return filters.map((filter, index) => {
     const key = String(filter.value);
 
@@ -75,7 +75,8 @@ function renderFilterItems({
             prefixCls,
             filteredKeys,
             filterMultiple,
-            locale,
+            searchValue,
+            filterSearch,
           })}
         </SubMenu>
       );
@@ -83,12 +84,19 @@ function renderFilterItems({
 
     const Component = filterMultiple ? Checkbox : Radio;
 
-    return (
+    const item = (
       <MenuItem key={filter.value !== undefined ? key : index}>
         <Component checked={filteredKeys.includes(key)} />
         <span>{filter.text}</span>
       </MenuItem>
     );
+    if (searchValue.trim()) {
+      if (typeof filterSearch === 'function') {
+        return filterSearch(searchValue, filter) ? item : undefined;
+      }
+      return searchValueMatched(searchValue, filter.text) ? item : undefined;
+    }
+    return item;
   });
 }
 
@@ -99,6 +107,8 @@ export interface FilterDropdownProps<RecordType> {
   column: ColumnType<RecordType>;
   filterState?: FilterState<RecordType>;
   filterMultiple: boolean;
+  filterMode?: 'menu' | 'tree';
+  filterSearch?: boolean;
   columnKey: Key;
   triggerFilter: (filterState: FilterState<RecordType>) => void;
   locale: TableLocale;
@@ -114,6 +124,8 @@ export default defineComponent<FilterDropdownProps<any>>({
     'column',
     'filterState',
     'filterMultiple',
+    'filterMode',
+    'filterSearch',
     'columnKey',
     'triggerFilter',
     'locale',
@@ -121,6 +133,8 @@ export default defineComponent<FilterDropdownProps<any>>({
   ] as any,
   setup(props, { slots }) {
     const contextSlots = useInjectSlots();
+    const filterMode = computed(() => props.filterMode ?? 'menu');
+    const filterSearch = computed(() => props.filterSearch ?? false);
     const filterDropdownVisible = computed(() => props.column.filterDropdownVisible);
     const visible = ref(false);
     const filtered = computed(
@@ -130,7 +144,7 @@ export default defineComponent<FilterDropdownProps<any>>({
           (props.filterState.filteredKeys?.length || props.filterState.forceFiltered)
         ),
     );
-
+    const filterFlattenKeys = computed(() => flattenKeys(props.column?.filters));
     const filterDropdownRef = computed(() => {
       const { filterDropdown, slots = {}, customFilterDropdown } = props.column;
       return (
@@ -168,14 +182,27 @@ export default defineComponent<FilterDropdownProps<any>>({
       filteredKeys.value = selectedKeys;
     };
 
+    const onCheck = (keys: Key[], { node, checked }: { node: EventDataNode; checked: boolean }) => {
+      if (!props.filterMultiple) {
+        onSelectKeys({ selectedKeys: checked && node.key ? [node.key] : [] });
+      } else {
+        onSelectKeys({ selectedKeys: keys as Key[] });
+      }
+    };
+
     watch(
       propFilteredKeys,
       () => {
+        if (!visible.value) {
+          return;
+        }
         onSelectKeys({ selectedKeys: propFilteredKeys.value || [] });
       },
       { immediate: true },
     );
 
+    // const expandKeys = shallowRef(filterFlattenKeys.value.slice());
+    // const onExpandChange = keys => (expandKeys.value = keys);
     const openKeys = shallowRef([]);
 
     const openRef = ref();
@@ -191,6 +218,18 @@ export default defineComponent<FilterDropdownProps<any>>({
 
     onBeforeUnmount(() => {
       clearTimeout(openRef.value);
+    });
+
+    const searchValue = ref('');
+    const onSearch: EventHandler = e => {
+      const { value } = e.target;
+      searchValue.value = value;
+    };
+    // clear search value after close filter dropdown
+    watch(visible, () => {
+      if (!visible.value) {
+        searchValue.value = '';
+      }
     });
 
     // ======================= Submit ========================
@@ -217,10 +256,17 @@ export default defineComponent<FilterDropdownProps<any>>({
       internalTriggerFilter(filteredKeys.value);
     };
 
-    const onReset = () => {
+    const onReset = (
+      { confirm, closeDropdown }: FilterRestProps = { confirm: false, closeDropdown: false },
+    ) => {
+      if (confirm) {
+        internalTriggerFilter([]);
+      }
+      if (closeDropdown) {
+        triggerVisible(false);
+      }
+      searchValue.value = '';
       filteredKeys.value = [];
-      triggerVisible(false);
-      internalTriggerFilter([]);
     };
 
     const doFilter = ({ closeDropdown } = { closeDropdown: true }) => {
@@ -244,20 +290,152 @@ export default defineComponent<FilterDropdownProps<any>>({
     };
 
     const { direction } = useConfigInject('', props);
-    return () => {
-      const {
-        tablePrefixCls,
-        prefixCls,
-        column,
-        dropdownPrefixCls,
-        filterMultiple,
-        locale,
-        getPopupContainer,
-      } = props;
-      // ======================== Style ========================
-      const dropdownMenuClass = classNames({
-        [`${dropdownPrefixCls}-menu-without-submenu`]: !hasSubMenu(column.filters || []),
+
+    const onCheckAll = (e: CheckboxChangeEvent) => {
+      if (e.target.checked) {
+        const allFilterKeys = filterFlattenKeys.value;
+        filteredKeys.value = allFilterKeys;
+      } else {
+        filteredKeys.value = [];
+      }
+    };
+
+    const getTreeData = ({ filters }: { filters?: ColumnFilterItem[] }) =>
+      (filters || []).map((filter, index) => {
+        const key = String(filter.value);
+        const item: DataNode = {
+          title: filter.text,
+          key: filter.value !== undefined ? key : index,
+        };
+        if (filter.children) {
+          item.children = getTreeData({ filters: filter.children });
+        }
+        return item;
       });
+
+    const treeData = computed(() => getTreeData({ filters: props.column.filters }));
+    // ======================== Style ========================
+    const dropdownMenuClass = computed(() =>
+      classNames({
+        [`${props.dropdownPrefixCls}-menu-without-submenu`]: !hasSubMenu(
+          props.column.filters || [],
+        ),
+      }),
+    );
+    const getFilterComponent = () => {
+      const selectedKeys = filteredKeys.value;
+      const {
+        column,
+        locale,
+        tablePrefixCls,
+        filterMultiple,
+        dropdownPrefixCls,
+        getPopupContainer,
+        prefixCls,
+      } = props;
+      if ((column.filters || []).length === 0) {
+        return (
+          <Empty
+            image={Empty.PRESENTED_IMAGE_SIMPLE}
+            description={locale.filterEmptyText}
+            imageStyle={{
+              height: 24,
+            }}
+            style={{
+              margin: 0,
+              padding: '16px 0',
+            }}
+          />
+        );
+      }
+      if (filterMode.value === 'tree') {
+        return (
+          <>
+            <FilterSearch
+              filterSearch={filterSearch.value}
+              value={searchValue.value}
+              onChange={onSearch}
+              tablePrefixCls={tablePrefixCls}
+              locale={locale}
+            />
+            <div class={`${tablePrefixCls}-filter-dropdown-tree`}>
+              {filterMultiple ? (
+                <Checkbox
+                  class={`${tablePrefixCls}-filter-dropdown-checkall`}
+                  onChange={onCheckAll}
+                  checked={selectedKeys.length === filterFlattenKeys.value.length}
+                  indeterminate={
+                    selectedKeys.length > 0 && selectedKeys.length < filterFlattenKeys.value.length
+                  }
+                >
+                  {locale.filterCheckall}
+                </Checkbox>
+              ) : null}
+              <Tree
+                checkable
+                selectable={false}
+                blockNode
+                multiple={filterMultiple}
+                checkStrictly={!filterMultiple}
+                class={`${dropdownPrefixCls}-menu`}
+                onCheck={onCheck}
+                checkedKeys={selectedKeys}
+                selectedKeys={selectedKeys}
+                showIcon={false}
+                treeData={treeData.value}
+                autoExpandParent
+                defaultExpandAll
+                // expandedKeys={expandKeys.value as Key[]}
+                // onExpand={onExpandChange}
+                filterTreeNode={
+                  searchValue.value.trim()
+                    ? node => searchValueMatched(searchValue.value, node.title)
+                    : undefined
+                }
+              />
+            </div>
+          </>
+        );
+      }
+      return (
+        <>
+          <FilterSearch
+            filterSearch={filterSearch.value}
+            value={searchValue.value}
+            onChange={onSearch}
+            tablePrefixCls={tablePrefixCls}
+            locale={locale}
+          />
+          <Menu
+            multiple={filterMultiple}
+            prefixCls={`${dropdownPrefixCls}-menu`}
+            class={dropdownMenuClass.value}
+            onClick={onMenuClick}
+            onSelect={onSelectKeys}
+            onDeselect={onSelectKeys}
+            selectedKeys={selectedKeys}
+            getPopupContainer={getPopupContainer}
+            openKeys={openKeys.value}
+            onOpenChange={onOpenChange}
+            v-slots={{
+              default: () =>
+                renderFilterItems({
+                  filters: column.filters || [],
+                  filterSearch: filterSearch.value,
+                  prefixCls,
+                  filteredKeys: filteredKeys.value,
+                  filterMultiple,
+                  searchValue: searchValue.value,
+                }),
+            }}
+          ></Menu>
+        </>
+      );
+    };
+
+    return () => {
+      const { tablePrefixCls, prefixCls, column, dropdownPrefixCls, locale, getPopupContainer } =
+        props;
 
       let dropdownContent;
 
@@ -278,34 +456,13 @@ export default defineComponent<FilterDropdownProps<any>>({
         const selectedKeys = filteredKeys.value as any;
         dropdownContent = (
           <>
-            <Menu
-              multiple={filterMultiple}
-              prefixCls={`${dropdownPrefixCls}-menu`}
-              class={dropdownMenuClass}
-              onClick={onMenuClick}
-              onSelect={onSelectKeys}
-              onDeselect={onSelectKeys}
-              selectedKeys={selectedKeys}
-              getPopupContainer={getPopupContainer}
-              openKeys={openKeys.value}
-              onOpenChange={onOpenChange}
-              v-slots={{
-                default: () =>
-                  renderFilterItems({
-                    filters: column.filters || [],
-                    prefixCls,
-                    filteredKeys: filteredKeys.value,
-                    filterMultiple,
-                    locale,
-                  }),
-              }}
-            ></Menu>
+            {getFilterComponent()}
             <div class={`${prefixCls}-dropdown-btns`}>
               <Button
                 type="link"
                 size="small"
                 disabled={selectedKeys.length === 0}
-                onClick={onReset}
+                onClick={() => onReset()}
               >
                 {locale.filterReset}
               </Button>

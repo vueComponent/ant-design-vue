@@ -11,6 +11,7 @@
     <lazy />
     <fields-name />
     <suffix />
+    <multipleVue />
   </demo-sort>
 </template>
 <script>
@@ -25,6 +26,7 @@ import Search from './search.vue';
 import Size from './size.vue';
 import FieldsName from './fields-name.vue';
 import Suffix from './suffix.vue';
+import multipleVue from './multiple.vue';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -44,6 +46,7 @@ export default defineComponent({
     Size,
     FieldsName,
     Suffix,
+    multipleVue,
   },
 });
 </script>

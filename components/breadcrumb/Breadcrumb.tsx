@@ -14,8 +14,8 @@ export interface Route {
   children?: Omit<Route, 'children'>[];
 }
 
-const breadcrumbProps = {
-  prefixCls: PropTypes.string,
+export const breadcrumbProps = () => ({
+  prefixCls: String,
   routes: { type: Array as PropType<Route[]> },
   params: PropTypes.any,
   separator: PropTypes.any,
@@ -24,9 +24,9 @@ const breadcrumbProps = {
       (opt: { route: Route; params: unknown; routes: Route[]; paths: string[] }) => VueNode
     >,
   },
-};
+});
 
-export type BreadcrumbProps = Partial<ExtractPropTypes<typeof breadcrumbProps>>;
+export type BreadcrumbProps = Partial<ExtractPropTypes<ReturnType<typeof breadcrumbProps>>>;
 
 function getBreadcrumbName(route: Route, params: unknown) {
   if (!route.breadcrumbName) {
@@ -53,7 +53,7 @@ function defaultItemRender(opt: {
 
 export default defineComponent({
   name: 'ABreadcrumb',
-  props: breadcrumbProps,
+  props: breadcrumbProps(),
   slots: ['separator', 'itemRender'],
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('breadcrumb', props);
@@ -66,9 +66,9 @@ export default defineComponent({
       return path;
     };
 
-    const addChildPath = (paths: string[], childPath = '', params: unknown) => {
+    const addChildPath = (paths: string[], childPath: string, params: unknown) => {
       const originalPaths = [...paths];
-      const path = getPath(childPath, params);
+      const path = getPath(childPath || '', params);
       if (path) {
         originalPaths.push(path);
       }

@@ -11,14 +11,13 @@ import classNames from '../_util/classNames';
 import type { ValidateStatus } from './FormItem';
 import type { VueNode } from '../_util/type';
 import type { HTMLAttributes } from 'vue';
-import { computed, defineComponent, onUnmounted } from 'vue';
+import { computed, defineComponent } from 'vue';
 
 export interface FormItemInputMiscProps {
   prefixCls: string;
   errors: VueNode[];
   hasFeedback?: boolean;
   validateStatus?: ValidateStatus;
-  onDomErrorVisibleChange: (visible: boolean) => void;
 }
 
 export interface FormItemInputProps {
@@ -41,7 +40,6 @@ const FormItemInput = defineComponent({
     'prefixCls',
     'errors',
     'hasFeedback',
-    'validateStatus',
     'onDomErrorVisibleChange',
     'wrapperCol',
     'help',
@@ -62,19 +60,14 @@ const FormItemInput = defineComponent({
       status: computed(() => props.status),
     });
 
-    onUnmounted(() => {
-      props.onDomErrorVisibleChange(false);
-    });
-
     return () => {
       const {
         prefixCls,
         wrapperCol,
         help = slots.help?.(),
         errors = slots.errors?.(),
-        onDomErrorVisibleChange,
         hasFeedback,
-        validateStatus,
+        status,
         extra = slots.extra?.(),
       } = props;
       const baseClassName = `${prefixCls}-item`;
@@ -85,7 +78,7 @@ const FormItemInput = defineComponent({
       const className = classNames(`${baseClassName}-control`, mergedWrapperCol.class);
 
       // Should provides additional icon if `hasFeedback`
-      const IconNode = validateStatus && iconMap[validateStatus];
+      const IconNode = status && iconMap[status];
 
       return (
         <Col
@@ -105,7 +98,7 @@ const FormItemInput = defineComponent({
                 <ErrorList
                   errors={errors}
                   help={help}
-                  onDomErrorVisibleChange={onDomErrorVisibleChange}
+                  class={`${baseClassName}-explain-connected`}
                 />
                 {extra ? <div class={`${baseClassName}-extra`}>{extra}</div> : null}
               </>

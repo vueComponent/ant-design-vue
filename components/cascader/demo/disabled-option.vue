@@ -16,19 +16,12 @@ Disable option by specifying the `disabled` property in `options`.
 
 </docs>
 <template>
-  <a-cascader v-model:value="value" :options="options" />
+  <a-cascader v-model:value="value" placeholder="Please select" :options="options" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  disabled?: boolean;
-  children?: Option[];
-  code?: number;
-  [key: string]: any;
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',

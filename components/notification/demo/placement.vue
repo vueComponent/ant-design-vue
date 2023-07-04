@@ -46,6 +46,7 @@ import {
 } from '@ant-design/icons-vue';
 import { notification } from 'ant-design-vue';
 import { defineComponent } from 'vue';
+import type { NotificationPlacement } from 'ant-design-vue';
 export default defineComponent({
   components: {
     RadiusUpleftOutlined,
@@ -54,7 +55,7 @@ export default defineComponent({
     RadiusBottomrightOutlined,
   },
   setup() {
-    const openNotification = (placement: string) => {
+    const openNotification = (placement: NotificationPlacement) => {
       notification.open({
         message: `Notification ${placement}`,
         description:

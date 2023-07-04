@@ -1,82 +1,85 @@
-import type { App, Plugin, ExtractPropTypes, PropType } from 'vue';
+import type { App, Plugin, ExtractPropTypes, PropType, HTMLAttributes } from 'vue';
 import { provide, defineComponent, ref, watch, computed, toRef } from 'vue';
-import PropTypes, { withUndefined } from '../_util/vue-types';
-import type { RenderEmptyHandler } from '../config-provider';
+import PropTypes from '../_util/vue-types';
 
+import type { SpinProps } from '../spin';
 import Spin from '../spin';
 import type { PaginationConfig } from '../pagination';
-import Pagination, { paginationConfig } from '../pagination';
+import Pagination from '../pagination';
 import { Row } from '../grid';
 
 import Item from './Item';
 import { flattenChildren } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { tuple } from '../_util/type';
+import type { Key } from '../_util/type';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
+import eagerComputed from '../_util/eagerComputed';
 
-export { ListItemProps } from './Item';
+export type { ListItemProps } from './Item';
 export type { ListItemMetaProps } from './ItemMeta';
 
-export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
 
-export const ListGridType = {
-  gutter: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(Number)]),
-  column: PropTypes.number,
-  xs: PropTypes.number,
-  sm: PropTypes.number,
-  md: PropTypes.number,
-  lg: PropTypes.number,
-  xl: PropTypes.number,
-  xxl: PropTypes.number,
-  xxxl: PropTypes.number,
-};
+export type ColumnCount = number;
+export interface ListGridType {
+  gutter?: number;
+  column?: ColumnCount;
+  xs?: ColumnCount;
+  sm?: ColumnCount;
+  md?: ColumnCount;
+  lg?: ColumnCount;
+  xl?: ColumnCount;
+  xxl?: ColumnCount;
+  xxxl?: ColumnCount;
+}
 
-export const ListSize = tuple('small', 'default', 'large');
-
+export type ListSize = 'small' | 'default' | 'large';
 export type ListItemLayout = 'horizontal' | 'vertical';
 
-export const listProps = {
-  bordered: PropTypes.looseBool,
+export const listProps = () => ({
+  bordered: { type: Boolean, default: undefined },
   dataSource: PropTypes.array,
   extra: PropTypes.any,
-  grid: PropTypes.shape(ListGridType).loose,
-  itemLayout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
-  loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
+  grid: { type: Object as PropType<ListGridType>, default: undefined as ListGridType },
+  itemLayout: String as PropType<ListItemLayout>,
+  loading: {
+    type: [Boolean, Object] as PropType<boolean | (SpinProps & HTMLAttributes)>,
+    default: undefined as boolean | (SpinProps & HTMLAttributes),
+  },
   loadMore: PropTypes.any,
-  pagination: withUndefined(
-    PropTypes.oneOfType([
-      PropTypes.shape<PaginationConfig>(paginationConfig()).loose,
-      PropTypes.looseBool,
-    ]),
-  ),
-  prefixCls: PropTypes.string,
-  rowKey: PropTypes.any,
-  renderItem: PropTypes.any,
-  size: PropTypes.oneOf(ListSize),
-  split: PropTypes.looseBool,
+  pagination: {
+    type: [Boolean, Object] as PropType<false | PaginationConfig>,
+    default: undefined as false | PaginationConfig,
+  },
+  prefixCls: String,
+  rowKey: [String, Number, Function] as PropType<Key | ((item: any) => Key)>,
+  renderItem: Function as PropType<(opt: { item: any; index: number }) => any>,
+  size: String as PropType<ListSize>,
+  split: { type: Boolean, default: undefined },
   header: PropTypes.any,
   footer: PropTypes.any,
   locale: {
     type: Object as PropType<ListLocale>,
   },
-};
+});
 
 export interface ListLocale {
   emptyText: any;
 }
 
-export type ListProps = Partial<ExtractPropTypes<typeof listProps>>;
+export type ListProps = Partial<ExtractPropTypes<ReturnType<typeof listProps>>>;
 
 import { ListContextKey } from './contextKey';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 const List = defineComponent({
   name: 'AList',
   Item,
-  props: initDefaultProps(listProps, {
+  props: initDefaultProps(listProps(), {
     dataSource: [],
     bordered: false,
     split: true,
@@ -107,6 +110,8 @@ const List = defineComponent({
         paginationSize.value = paginationObj.value.pageSize;
       }
     });
+
+    const listItemsKeys: Key[] = [];
 
     const triggerPaginationEvent = (eventName: string) => (page: number, pageSize: number) => {
       paginationCurrent.value = page;
@@ -198,7 +203,7 @@ const List = defineComponent({
 
     const screens = useBreakpoint();
 
-    const currentBreakpoint = computed(() => {
+    const currentBreakpoint = eagerComputed(() => {
       for (let i = 0; i < responsiveArray.length; i += 1) {
         const breakpoint: Breakpoint = responsiveArray[i];
         if (screens.value[breakpoint]) {
@@ -225,16 +230,16 @@ const List = defineComponent({
       return undefined;
     });
 
-    const renderInnerItem = (keys: number[], item: any, index: number) => {
+    const renderInnerItem = (item: any, index: number) => {
       const renderItem = props.renderItem ?? slots.renderItem;
       if (!renderItem) return null;
 
       let key;
-
-      if (typeof props.rowKey === 'function') {
-        key = props.rowKey(item);
-      } else if (typeof props.rowKey === 'string') {
-        key = item[props.rowKey];
+      const rowKeyType = typeof props.rowKey;
+      if (rowKeyType === 'function') {
+        key = (props.rowKey as any)(item);
+      } else if (rowKeyType === 'string' || rowKeyType === 'number') {
+        key = item[props.rowKey as any];
       } else {
         key = item.key;
       }
@@ -243,7 +248,7 @@ const List = defineComponent({
         key = `list-item-${index}`;
       }
 
-      keys[index] = key;
+      listItemsKeys[index] = key;
 
       return renderItem({ item, index });
     };
@@ -253,7 +258,6 @@ const List = defineComponent({
       const footer = props.footer ?? slots.footer?.();
       const header = props.header ?? slots.header?.();
       const children = flattenChildren(slots.default?.());
-      const keys = [];
       const isSomethingAfterLastItem = !!(loadMore || props.pagination || footer);
       const classString = {
         ...classObj.value,
@@ -271,11 +275,12 @@ const List = defineComponent({
 
       let childrenContent = isLoading.value && <div style={{ minHeight: '53px' }} />;
       if (splitDataSource.value.length > 0) {
+        listItemsKeys.length = 0;
         const items = splitDataSource.value.map((item: any, index: number) =>
-          renderInnerItem(keys, item, index),
+          renderInnerItem(item, index),
         );
         const childrenList = items.map((child: any, index) => (
-          <div key={keys[index]} style={colStyle.value}>
+          <div key={listItemsKeys[index]} style={colStyle.value}>
             {child}
           </div>
         ));

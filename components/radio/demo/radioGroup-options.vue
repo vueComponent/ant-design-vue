@@ -16,30 +16,25 @@ Render radios by configuring `options`.
 
 </docs>
 <template>
-  <div>
+  <a-space direction="vertical">
     <a-radio-group v-model:value="value1" :options="plainOptions" />
-    <br />
     <a-radio-group v-model:value="value2" :options="optionsWithDisabled" />
-    <br />
     <a-radio-group v-model:value="value3" :options="plainOptions" disabled />
-    <br />
     <a-radio-group v-model:value="value1" option-type="button" :options="plainOptions" />
-    <br />
     <a-radio-group v-model:value="value2" option-type="button" :options="optionsWithDisabled" />
-    <br />
     <a-radio-group v-model:value="value3" option-type="button" :options="plainOptions" disabled />
-    <br />
-  </div>
+  </a-space>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { RadioGroupProps } from 'ant-design-vue';
 const plainOptions = ['Apple', 'Pear', 'Orange'];
 const options = [
   { label: 'Apple', value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange' },
 ];
-const optionsWithDisabled = [
+const optionsWithDisabled: RadioGroupProps['options'] = [
   { label: 'Apple', value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange', disabled: true },

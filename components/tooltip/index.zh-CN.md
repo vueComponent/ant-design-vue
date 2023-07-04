@@ -25,10 +25,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Vyyeu8jq2/Tooltp.svg
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
+| align | 该值将合并到 placement 的配置中，设置参考 [dom-align](https://github.com/yiminghe/dom-align) | Object | 无 |
 | arrowPointAtCenter | 箭头是否指向目标元素中心 | boolean | `false` |
 | autoAdjustOverflow | 气泡被遮挡时自动调整位置 | boolean | `true` |
 | color | 背景颜色 | string | 无 |
 | defaultVisible | 默认是否显隐 | boolean | false |
+| destroyTooltipOnHide | 隐藏后是否销毁 tooltip | boolean | false |
 | getPopupContainer | 浮层渲染父节点，默认渲染到 body 上 | Function(triggerNode) | () => document.body |
 | mouseEnterDelay | 鼠标移入后延时多少才显示 Tooltip，单位：秒 | number | 0.1 |
 | mouseLeaveDelay | 鼠标移出后延时多少才隐藏 Tooltip，单位：秒 | number | 0.1 |
@@ -37,8 +39,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Vyyeu8jq2/Tooltp.svg
 | placement | 气泡框位置，可选 `top` `left` `right` `bottom` `topLeft` `topRight` `bottomLeft` `bottomRight` `leftTop` `leftBottom` `rightTop` `rightBottom` | string | top |
 | trigger | 触发行为，可选 `hover/focus/click/contextmenu` | string | hover |
 | visible(v-model) | 用于手动控制浮层显隐 | boolean | false |
-| destroyTooltipOnHide | 隐藏后是否销毁 tooltip | boolean | false |
-| align | 该值将合并到 placement 的配置中，设置参考 [dom-align](https://github.com/yiminghe/dom-align) | Object | 无 |
 
 ### 事件
 

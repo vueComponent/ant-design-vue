@@ -3,7 +3,7 @@
 exports[`renders ./components/menu/demo/horizontal.vue correctly 1`] = `
 <ul class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-light" role="menu" data-menu-list="true">
   <!---->
-  <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-selected" style="opacity: 1; order: 0;" role="menuitem" tabindex="-1" data-menu-id="mail" aria-disabled="false"><span role="img" aria-label="mail" class="anticon anticon-mail ant-menu-item-icon"><svg focusable="false" class="" data-icon="mail" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z"></path></svg></span><span class="ant-menu-title-content"> Navigation One </span></li>
+  <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-selected" style="opacity: 1; order: 0; order: 0;" role="menuitem" tabindex="-1" data-menu-id="mail" aria-disabled="false"><span role="img" aria-label="mail" class="anticon anticon-mail ant-menu-item-icon"><svg focusable="false" class="" data-icon="mail" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z"></path></svg></span><span class="ant-menu-title-content"> Navigation One </span></li>
   <!---->
   <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-disabled" style="opacity: 1; order: 1;" role="menuitem" data-menu-id="app" aria-disabled="true"><span role="img" aria-label="appstore" class="anticon anticon-appstore ant-menu-item-icon"><svg focusable="false" class="" data-icon="appstore" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V212h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V212h200v200zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H212V612h200v200zm452-268H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V612h200v200z"></path></svg></span><span class="ant-menu-title-content"> Navigation Two </span></li>
   <li class="ant-menu-overflow-item ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 1; order: 2;" role="none" data-submenu-id="sub1">
@@ -15,7 +15,7 @@ exports[`renders ./components/menu/demo/horizontal.vue correctly 1`] = `
   <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 3;" role="menuitem" tabindex="-1" data-menu-id="alipay" aria-disabled="false">
     <!----><span class="ant-menu-title-content"><a href="https://antdv.com" target="_blank" rel="noopener noreferrer"> Navigation Four - Link </a></span>
   </li>
-  <li class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
+  <li class="ant-menu-overflow-item ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
     <!---->
     <div class="ant-menu-submenu-title" tabindex="-1" data-menu-id="$$__vc-menu-more__key" aria-expanded="false" aria-haspopup="true" aria-controls="$$__vc-menu-more__key-popup" aria-disabled="false"><span class="ant-menu-title-content"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></span><i class="ant-menu-submenu-arrow"></i></div>
     <!---->
@@ -316,9 +316,13 @@ exports[`renders ./components/menu/demo/sider-current.vue correctly 1`] = `
 
 exports[`renders ./components/menu/demo/switch-mode.vue correctly 1`] = `
 <div><button type="button" role="switch" aria-checked="false" class="ant-switch">
-    <!----><span class="ant-switch-inner"><!----></span>
+    <div class="ant-switch-handle">
+      <!---->
+    </div><span class="ant-switch-inner"><!----></span>
   </button> Change Mode <span class="ant-divider" style="margin: 0px 1em;"></span><button type="button" role="switch" aria-checked="false" class="ant-switch">
-    <!----><span class="ant-switch-inner"><!----></span>
+    <div class="ant-switch-handle">
+      <!---->
+    </div><span class="ant-switch-inner"><!----></span>
   </button> Change Theme <br><br>
   <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-light" style="width: 256px;" role="menu" data-menu-list="true">
     <!---->
@@ -426,7 +430,9 @@ exports[`renders ./components/menu/demo/template.vue correctly 1`] = `
 
 exports[`renders ./components/menu/demo/theme.vue correctly 1`] = `
 <div><button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
-    <!----><span class="ant-switch-inner">Dark</span>
+    <div class="ant-switch-handle">
+      <!---->
+    </div><span class="ant-switch-inner">Dark</span>
   </button><br><br>
   <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-dark" style="width: 256px;" role="menu" data-menu-list="true">
     <!---->

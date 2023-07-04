@@ -1,8 +1,7 @@
-import { inject } from 'vue';
-import { defaultConfigProvider } from '../config-provider';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 const Simple = () => {
-  const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+  const { getPrefixCls } = useConfigInject('empty', {});
   const prefixCls = getPrefixCls('empty-img-simple');
 
   return (

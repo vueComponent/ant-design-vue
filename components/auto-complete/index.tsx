@@ -1,7 +1,6 @@
-import type { App, Plugin, VNode, ExtractPropTypes } from 'vue';
+import type { App, VNode, ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, ref } from 'vue';
 import Select, { selectProps } from '../select';
-import PropTypes from '../_util/vue-types';
 import { isValidElement, flattenChildren } from '../_util/props-util';
 import warning from '../_util/warning';
 import Option from './Option';
@@ -13,15 +12,27 @@ function isSelectOptionOrSelectOptGroup(child: any): boolean {
   return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
 }
 
-const autoCompleteProps = {
-  ...selectProps(),
-  dataSource: PropTypes.array,
-  dropdownMenuStyle: PropTypes.style,
-  optionLabelProp: PropTypes.string,
+export const autoCompleteProps = () => ({
+  ...omit(selectProps(), ['loading', 'mode', 'optionLabelProp', 'labelInValue']),
+  dataSource: Array as PropType<{ value: any; text: any }[] | string[]>,
+  dropdownMenuStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: undefined as CSSProperties,
+  },
+  // optionLabelProp: String,
   dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
-};
+  prefixCls: String,
+  showSearch: { type: Boolean, default: undefined },
+  transitionName: String,
+  choiceTransitionName: { type: String, default: 'zoom' },
+  autofocus: { type: Boolean, default: undefined },
+  backfill: { type: Boolean, default: undefined },
+  // optionLabelProp: PropTypes.string.def('children'),
+  filterOption: { type: [Boolean, Function], default: false },
+  defaultActiveFirstOption: { type: Boolean, default: true },
+});
 
-export type AutoCompleteProps = Partial<ExtractPropTypes<typeof autoCompleteProps>>;
+export type AutoCompleteProps = Partial<ExtractPropTypes<ReturnType<typeof autoCompleteProps>>>;
 
 export const AutoCompleteOption = Option;
 
@@ -30,22 +41,9 @@ export const AutoCompleteOptGroup = OptGroup;
 const AutoComplete = defineComponent({
   name: 'AAutoComplete',
   inheritAttrs: false,
-  props: {
-    ...autoCompleteProps,
-    prefixCls: PropTypes.string,
-    showSearch: PropTypes.looseBool,
-    transitionName: PropTypes.string,
-    choiceTransitionName: PropTypes.string.def('zoom'),
-    autofocus: PropTypes.looseBool,
-    backfill: PropTypes.looseBool,
-    optionLabelProp: PropTypes.string.def('children'),
-    filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
-    defaultActiveFirstOption: PropTypes.looseBool.def(true),
-  },
-  emits: ['change', 'select', 'focus', 'blur'],
+  props: autoCompleteProps(),
+  // emits: ['change', 'select', 'focus', 'blur'],
   slots: ['option'],
-  Option,
-  OptGroup,
   setup(props, { slots, attrs, expose }) {
     warning(
       !('dataSource' in slots),
@@ -121,19 +119,22 @@ const AutoComplete = defineComponent({
         }
       }
 
-      const selectProps = {
-        ...omit(props, ['dataSource', 'optionLabelProp']),
-        ...attrs,
-        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
-        // optionLabelProp,
-        getInputElement,
-        notFoundContent,
-        // placeholder: '',
-        class: cls,
-        ref: selectRef,
-      };
+      const selectProps = omit(
+        {
+          ...props,
+          ...(attrs as any),
+          mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
+          // optionLabelProp,
+          getInputElement,
+          notFoundContent,
+          // placeholder: '',
+          class: cls,
+          ref: selectRef,
+        },
+        ['dataSource', 'loading'],
+      );
       return (
-        <Select {...selectProps} v-slots={{ option: slots.option }}>
+        <Select {...selectProps} v-slots={omit(slots, ['default', 'dataSource', 'options'])}>
           {optionChildren}
         </Select>
       );
@@ -142,15 +143,13 @@ const AutoComplete = defineComponent({
 });
 
 /* istanbul ignore next */
-AutoComplete.install = function (app: App) {
-  app.component(AutoComplete.name, AutoComplete);
-  app.component(AutoComplete.Option.displayName, AutoComplete.Option);
-  app.component(AutoComplete.OptGroup.displayName, AutoComplete.OptGroup);
-  return app;
-};
-
-export default AutoComplete as typeof AutoComplete &
-  Plugin & {
-    readonly Option: typeof Option;
-    readonly OptGroup: typeof OptGroup;
-  };
+export default Object.assign(AutoComplete, {
+  Option,
+  OptGroup,
+  install(app: App) {
+    app.component(AutoComplete.name, AutoComplete);
+    app.component(Option.displayName, Option);
+    app.component(OptGroup.displayName, OptGroup);
+    return app;
+  },
+});

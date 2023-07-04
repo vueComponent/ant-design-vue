@@ -2,6 +2,8 @@
 
 exports[`Switch should has click wave effect 1`] = `
 <button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
-  <!----><span class="ant-switch-inner"><!----></span>
+  <div class="ant-switch-handle">
+    <!---->
+  </div><span class="ant-switch-inner"><!----></span>
 </button>
 `;

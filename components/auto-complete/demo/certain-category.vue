@@ -21,11 +21,8 @@ Lookup-Patterns - Certain Category.
       v-model:value="value"
       class="certain-category-search"
       dropdown-class-name="certain-category-search-dropdown"
-      :dropdown-match-select-width="false"
-      :dropdown-style="{ width: '300px' }"
-      size="large"
-      style="width: 100%"
-      option-label-prop="value"
+      :dropdown-match-select-width="500"
+      style="width: 250px"
       :options="dataSource"
     >
       <template #option="item">
@@ -52,30 +49,33 @@ Lookup-Patterns - Certain Category.
           </a>
         </template>
         <template v-else>
-          {{ item.title }}
-          <span class="certain-search-item-count">{{ item.count }} people</span>
+          <div style="display: flex; justify-content: space-between">
+            {{ item.value }}
+            <span>
+              <UserOutlined />
+              {{ item.count }}
+            </span>
+          </div>
         </template>
       </template>
-      <a-input placeholder="input here">
-        <template #suffix><search-outlined class="certain-category-icon" /></template>
-      </a-input>
+      <a-input-search placeholder="input here" size="large"></a-input-search>
     </a-auto-complete>
   </div>
 </template>
 
 <script lang="ts">
-import { SearchOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import { UserOutlined } from '@ant-design/icons-vue';
 const dataSource = [
   {
     value: 'Libraries',
     options: [
       {
-        value: 'AntDesign',
+        value: 'AntDesignVue',
         count: 10000,
       },
       {
-        value: 'AntDesign UI',
+        value: 'AntDesignVue UI',
         count: 10600,
       },
     ],
@@ -84,11 +84,11 @@ const dataSource = [
     value: 'Solutions',
     options: [
       {
-        value: 'AntDesign UI FAQ',
+        value: 'AntDesignVue UI FAQ',
         count: 60100,
       },
       {
-        value: 'AntDesign FAQ',
+        value: 'AntDesignVue FAQ',
         count: 30010,
       },
     ],
@@ -97,7 +97,7 @@ const dataSource = [
     value: 'Articles',
     options: [
       {
-        value: 'AntDesign design language',
+        value: 'AntDesignVue design language',
         count: 100000,
       },
     ],
@@ -108,7 +108,7 @@ const dataSource = [
 ];
 export default defineComponent({
   components: {
-    SearchOutlined,
+    UserOutlined,
   },
   setup() {
     return {
@@ -140,29 +140,5 @@ export default defineComponent({
 
 .certain-category-search-dropdown .ant-select-dropdown-menu {
   max-height: 300px;
-}
-</style>
-
-<style scoped>
-.certain-category-search-wrapper
-  :deep(.certain-category-search.ant-select-auto-complete)
-  .ant-input-affix-wrapper
-  .ant-input-suffix {
-  right: 12px;
-}
-.certain-category-search-wrapper :deep(.certain-search-item-count) {
-  position: absolute;
-  color: #999;
-  right: 16px;
-}
-.certain-category-search-wrapper
-  :deep(.certain-category-search.ant-select-focused)
-  .certain-category-icon {
-  color: #108ee9;
-}
-.certain-category-search-wrapper :deep(.certain-category-icon) {
-  color: #6e6e6e;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  font-size: 16px;
 }
 </style>

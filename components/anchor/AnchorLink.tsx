@@ -1,23 +1,23 @@
 import type { ExtractPropTypes } from 'vue';
 import { defineComponent, nextTick, onBeforeUnmount, onMounted, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getPropsSlot } from '../_util/props-util';
+import { getPropsSlot, initDefaultProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
 
-const anchorLinkProps = {
-  prefixCls: PropTypes.string,
-  href: PropTypes.string.def('#'),
+export const anchorLinkProps = () => ({
+  prefixCls: String,
+  href: String,
   title: PropTypes.any,
-  target: PropTypes.string,
-};
+  target: String,
+});
 
-export type AnchorLinkProps = Partial<ExtractPropTypes<typeof anchorLinkProps>>;
+export type AnchorLinkProps = Partial<ExtractPropTypes<ReturnType<typeof anchorLinkProps>>>;
 
 export default defineComponent({
   name: 'AAnchorLink',
-  props: anchorLinkProps,
+  props: initDefaultProps(anchorLinkProps(), { href: '#' }),
   slots: ['title'],
   setup(props, { slots }) {
     let mergedTitle = null;

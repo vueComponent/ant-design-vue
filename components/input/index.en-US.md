@@ -20,36 +20,37 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | --- | --- | --- | --- | --- |
 | addonAfter | The label text displayed after (on the right side of) the input field. | string\|slot |  |  |
 | addonBefore | The label text displayed before (on the left side of) the input field. | string\|slot |  |  |
-| defaultValue | The initial input content | string |  |  |
+| allowClear | allow to remove input content with clear icon | boolean |  |  |
 | bordered | Whether has border style | boolean | true | 4.5.0 |
+| defaultValue | The initial input content | string |  |  |
 | disabled | Whether the input is disabled. | boolean | false |  |
 | id | The ID for input | string |  |  |
 | maxlength | max length | number |  | 1.5.0 |
 | prefix | The prefix icon for the Input. | string\|slot |  |  |
+| showCount | Whether show text count | boolean | false | 3.0 |
 | size | The size of the input box. Note: in the context of a form, the `large` size is used. Available: `large` `default` `small` | string | `default` |  |
 | suffix | The suffix icon for the Input. | string\|slot |  |  |
 | type | The type of input, see: [MDN](https://developer.mozilla.org/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)(use `<a-textarea />` instead of `type="textarea"`) | string | `text` |  |
 | value(v-model) | The input content value | string |  |  |
-| allowClear | allow to remove input content with clear icon | boolean |  |  |
 
 ### Input Events
 
-| Events Name | Description                                                        | Arguments   |
-| ----------- | ------------------------------------------------------------------ | ----------- | --- |
-| change      | callback when user input                                           | function(e) |     |
-| pressEnter  | The callback function that is triggered when Enter key is pressed. | function(e) |
+| Events Name | Description | Arguments |  |
+| --- | --- | --- | --- |
+| change | callback when user input | function(e) |  |
+| pressEnter | The callback function that is triggered when Enter key is pressed. | function(e) |  |
 
 > When `Input` is used in a `Form.Item` context, if the `Form.Item` has the `id` and `options` props defined then `value`, `defaultValue`, and `id` props of `Input` are automatically set.
 
 ### TextArea
 
-| Property | Description | Type | Default | Version |
+| Property | Description | Type | Default | Version |  |
 | --- | --- | --- | --- | --- | --- |
-| autosize | Height autosize feature, can be set to `true | false`or an object`{ minRows: 2, maxRows: 6 }` | boolean\|object | false |  |
-| defaultValue | The initial input content | string |  |  |
-| value(v-model) | The input content value | string |  |  |
-| allowClear | allow to remove input content with clear icon | boolean |  | 1.5.0 |
-| showCount | Whether show text count | boolean | false |  |
+| allowClear | allow to remove input content with clear icon | boolean |  | 1.5.0 |  |
+| autosize | Height autosize feature, can be set to \`true | false`or an object`{ minRows: 2, maxRows: 6 }\` | boolean\|object | false |  |
+| defaultValue | The initial input content | string |  |  |  |
+| showCount | Whether show text count | boolean | false |  |  |
+| value(v-model) | The input content value | string |  |  |  |
 
 ### TextArea Events
 
@@ -67,10 +68,10 @@ The rest of the props of `TextArea` are the same as the original [textarea](http
 
 ### Input.Search Events
 
-| Events Name | Description | Arguments | Version |
+| Events Name | Description | Arguments | Version |  |
 | --- | --- | --- | --- | --- |
-| search | The callback function that is triggered when you click on the search-icon or press Enter key. | function(value, event) |  |
 | loading | Search box with loading. | boolean |  |  |
+| search | The callback function that is triggered when you click on the search-icon or press Enter key. | function(value, event) |  |  |
 
 Supports all props of `Input`.
 

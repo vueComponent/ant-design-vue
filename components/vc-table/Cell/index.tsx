@@ -1,7 +1,7 @@
 import classNames from '../../_util/classNames';
 import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
-import type { CSSProperties, HTMLAttributes } from 'vue';
-import { defineComponent, isVNode, renderSlot } from 'vue';
+import type { CSSProperties } from 'vue';
+import { computed, defineComponent, isVNode, renderSlot } from 'vue';
 
 import type {
   DataIndex,
@@ -13,10 +13,21 @@ import type {
   AlignType,
   CellEllipsisType,
   TransformCellText,
+  AdditionalProps,
 } from '../interface';
 import { getPathValue, validateValue } from '../utils/valueUtil';
 import { useInjectSlots } from '../../table/context';
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
+import { useInjectHover } from '../context/HoverContext';
+import { useInjectSticky } from '../context/StickyContext';
+import { warning } from '../../vc-util/warning';
+import type { MouseEventHandler } from '../../_util/EventInterface';
+
+/** Check if cell is in hover range */
+function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {
+  const cellEndRow = cellStartRow + cellRowSpan - 1;
+  return cellStartRow <= endRow && cellEndRow >= startRow;
+}
 
 function isRenderCell<RecordType = DefaultRecordType>(
   data: RenderedCell<RecordType>,
@@ -27,8 +38,10 @@ function isRenderCell<RecordType = DefaultRecordType>(
 export interface CellProps<RecordType = DefaultRecordType> {
   prefixCls?: string;
   record?: RecordType;
-  /** `record` index. Not `column` index. */
+  /** `column` index is the real show rowIndex */
   index?: number;
+  /** the index of the record. For the render(value, record, renderIndex) */
+  renderIndex?: number;
   dataIndex?: DataIndex;
   customRender?: ColumnType<RecordType>['customRender'];
   component?: CustomizeComponent;
@@ -49,7 +62,7 @@ export interface CellProps<RecordType = DefaultRecordType> {
   /** @private Used for `expandable` with nest tree */
   appendNode?: any;
 
-  additionalProps?: HTMLAttributes;
+  additionalProps?: AdditionalProps;
 
   rowType?: 'header' | 'body' | 'footer';
 
@@ -67,6 +80,7 @@ export default defineComponent<CellProps>({
     'prefixCls',
     'record',
     'index',
+    'renderIndex',
     'dataIndex',
     'customRender',
     'component',
@@ -91,16 +105,54 @@ export default defineComponent<CellProps>({
   slots: ['appendNode'],
   setup(props, { slots }) {
     const contextSlots = useInjectSlots();
+    const { onHover, startRow, endRow } = useInjectHover();
+    const colSpan = computed(() => {
+      return (
+        props.colSpan ??
+        props.additionalProps?.colSpan ??
+        (props.additionalProps?.colspan as number)
+      );
+    });
+    const rowSpan = computed(() => {
+      return (
+        props.rowSpan ??
+        props.additionalProps?.rowSpan ??
+        (props.additionalProps?.rowspan as number)
+      );
+    });
+    const hovering = computed(() => {
+      const { index } = props;
+      return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
+    });
+    const supportSticky = useInjectSticky();
+
+    // ====================== Hover =======================
+    const onMouseenter = (event: MouseEvent, mergedRowSpan: number) => {
+      const { record, index, additionalProps } = props;
+      if (record) {
+        onHover(index, index + mergedRowSpan - 1);
+      }
+
+      additionalProps?.onMouseenter?.(event);
+    };
+
+    const onMouseleave: MouseEventHandler = event => {
+      const { record, additionalProps } = props;
+      if (record) {
+        onHover(-1, -1);
+      }
+
+      additionalProps?.onMouseleave?.(event);
+    };
     return () => {
       const {
         prefixCls,
         record,
         index,
+        renderIndex,
         dataIndex,
         customRender,
         component: Component = 'td',
-        colSpan,
-        rowSpan,
         fixLeft,
         fixRight,
         firstFixLeft,
@@ -135,10 +187,17 @@ export default defineComponent<CellProps>({
             value,
             record,
             index,
+            renderIndex,
             column: column.__originColumn__,
           });
 
           if (isRenderCell(renderData)) {
+            if (process.env.NODE_ENV !== 'production') {
+              warning(
+                false,
+                '`columns.customRender` return cell props is deprecated with perf issue, please use `customCell` instead.',
+              );
+            }
             childNode = renderData.children;
             cellProps = renderData.props;
           } else {
@@ -208,8 +267,8 @@ export default defineComponent<CellProps>({
         class: cellClassName,
         ...restCellProps
       } = cellProps || {};
-      const mergedColSpan = cellColSpan !== undefined ? cellColSpan : colSpan;
-      const mergedRowSpan = cellRowSpan !== undefined ? cellRowSpan : rowSpan;
+      const mergedColSpan = (cellColSpan !== undefined ? cellColSpan : colSpan.value) ?? 1;
+      const mergedRowSpan = (cellRowSpan !== undefined ? cellRowSpan : rowSpan.value) ?? 1;
 
       if (mergedColSpan === 0 || mergedRowSpan === 0) {
         return null;
@@ -217,8 +276,8 @@ export default defineComponent<CellProps>({
 
       // ====================== Fixed =======================
       const fixedStyle: CSSProperties = {};
-      const isFixLeft = typeof fixLeft === 'number';
-      const isFixRight = typeof fixRight === 'number';
+      const isFixLeft = typeof fixLeft === 'number' && supportSticky.value;
+      const isFixRight = typeof fixRight === 'number' && supportSticky.value;
 
       if (isFixLeft) {
         fixedStyle.position = 'sticky';
@@ -251,24 +310,30 @@ export default defineComponent<CellProps>({
         title,
         ...restCellProps,
         ...additionalProps,
-        colSpan: mergedColSpan && mergedColSpan !== 1 ? mergedColSpan : null,
-        rowSpan: mergedRowSpan && mergedRowSpan !== 1 ? mergedRowSpan : null,
+        colSpan: mergedColSpan !== 1 ? mergedColSpan : null,
+        rowSpan: mergedRowSpan !== 1 ? mergedRowSpan : null,
         class: classNames(
           cellPrefixCls,
           {
-            [`${cellPrefixCls}-fix-left`]: isFixLeft,
-            [`${cellPrefixCls}-fix-left-first`]: firstFixLeft,
-            [`${cellPrefixCls}-fix-left-last`]: lastFixLeft,
-            [`${cellPrefixCls}-fix-right`]: isFixRight,
-            [`${cellPrefixCls}-fix-right-first`]: firstFixRight,
-            [`${cellPrefixCls}-fix-right-last`]: lastFixRight,
+            [`${cellPrefixCls}-fix-left`]: isFixLeft && supportSticky.value,
+            [`${cellPrefixCls}-fix-left-first`]: firstFixLeft && supportSticky.value,
+            [`${cellPrefixCls}-fix-left-last`]: lastFixLeft && supportSticky.value,
+            [`${cellPrefixCls}-fix-right`]: isFixRight && supportSticky.value,
+            [`${cellPrefixCls}-fix-right-first`]: firstFixRight && supportSticky.value,
+            [`${cellPrefixCls}-fix-right-last`]: lastFixRight && supportSticky.value,
             [`${cellPrefixCls}-ellipsis`]: ellipsis,
             [`${cellPrefixCls}-with-append`]: appendNode,
-            [`${cellPrefixCls}-fix-sticky`]: (isFixLeft || isFixRight) && isSticky,
+            [`${cellPrefixCls}-fix-sticky`]:
+              (isFixLeft || isFixRight) && isSticky && supportSticky.value,
+            [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
           },
           additionalProps.class,
           cellClassName,
         ),
+        onMouseenter: (e: MouseEvent) => {
+          onMouseenter(e, mergedRowSpan);
+        },
+        onMouseleave,
         style: {
           ...parseStyleText(additionalProps.style as any),
           ...alignStyle,

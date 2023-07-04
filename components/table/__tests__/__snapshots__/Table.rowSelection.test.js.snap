@@ -110,15 +110,45 @@ exports[`Table.rowSelection render with default selection correctly 1`] = `
     <div class="ant-dropdown-content">
       <!---->
       <ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light" role="menu" data-menu-list="true">
-        <!---->
+        <div>
+          <!---->
+          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip" style="pointer-events: none; display: none;">
+            <div class="ant-tooltip-content">
+              <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
+              <div class="ant-tooltip-inner" role="tooltip">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
         <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="all" aria-disabled="false">
           <!----><span class="ant-dropdown-menu-title-content">Select all data</span>
         </li>
-        <!---->
+        <div>
+          <!---->
+          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip" style="pointer-events: none; display: none;">
+            <div class="ant-tooltip-content">
+              <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
+              <div class="ant-tooltip-inner" role="tooltip">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
         <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="invert" aria-disabled="false">
           <!----><span class="ant-dropdown-menu-title-content">Invert current page</span>
         </li>
-        <!---->
+        <div>
+          <!---->
+          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip" style="pointer-events: none; display: none;">
+            <div class="ant-tooltip-content">
+              <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
+              <div class="ant-tooltip-inner" role="tooltip">
+                <!---->
+              </div>
+            </div>
+          </div>
+        </div>
         <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="none" aria-disabled="false">
           <!----><span class="ant-dropdown-menu-title-content">Clear all data</span>
         </li>

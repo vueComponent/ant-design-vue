@@ -7,8 +7,8 @@ import type { SharedTimeProps } from '.';
 import { setTime as utilSetTime } from '../../utils/timeUtil';
 import { cloneElement } from '../../../_util/vnode';
 import type { VueNode } from '../../../_util/type';
-import type { Ref } from 'vue';
-import { computed, defineComponent } from 'vue';
+import type { Ref, VNode } from 'vue';
+import { onBeforeUpdate, ref, watchEffect, computed, defineComponent } from 'vue';
 
 function generateUnits(
   start: number,
@@ -60,6 +60,7 @@ const TimeBody = defineComponent({
     'disabledHours',
     'disabledMinutes',
     'disabledSeconds',
+    'disabledTime',
     'hideDisabledOptions',
     'onSelect',
   ],
@@ -85,6 +86,29 @@ const TimeBody = defineComponent({
     const minute = computed(() => (props.value ? props.generateConfig.getMinute(props.value) : -1));
     const second = computed(() => (props.value ? props.generateConfig.getSecond(props.value) : -1));
 
+    const now = ref(props.generateConfig.getNow());
+    const mergedDisabledHours = ref();
+    const mergedDisabledMinutes = ref();
+    const mergedDisabledSeconds = ref();
+    onBeforeUpdate(() => {
+      now.value = props.generateConfig.getNow();
+    });
+    watchEffect(() => {
+      if (props.disabledTime) {
+        const disabledConfig = props.disabledTime(now);
+        [mergedDisabledHours.value, mergedDisabledMinutes.value, mergedDisabledSeconds.value] = [
+          disabledConfig.disabledHours,
+          disabledConfig.disabledMinutes,
+          disabledConfig.disabledSeconds,
+        ];
+      } else {
+        [mergedDisabledHours.value, mergedDisabledMinutes.value, mergedDisabledSeconds.value] = [
+          props.disabledHours,
+          props.disabledMinutes,
+          props.disabledSeconds,
+        ];
+      }
+    });
     const setTime = (
       isNewPM: boolean | undefined,
       newHour: number,
@@ -110,7 +134,12 @@ const TimeBody = defineComponent({
 
     // ========================= Unit =========================
     const rawHours = computed(() =>
-      generateUnits(0, 23, props.hourStep ?? 1, props.disabledHours && props.disabledHours()),
+      generateUnits(
+        0,
+        23,
+        props.hourStep ?? 1,
+        mergedDisabledHours.value && mergedDisabledHours.value(),
+      ),
     );
 
     // const memorizedRawHours = useMemo(() => rawHours, rawHours, shouldUnitsUpdate);
@@ -151,7 +180,7 @@ const TimeBody = defineComponent({
         0,
         59,
         props.minuteStep ?? 1,
-        props.disabledMinutes && props.disabledMinutes(originHour.value),
+        mergedDisabledMinutes.value && mergedDisabledMinutes.value(originHour.value),
       ),
     );
 
@@ -160,7 +189,7 @@ const TimeBody = defineComponent({
         0,
         59,
         props.secondStep ?? 1,
-        props.disabledSeconds && props.disabledSeconds(originHour.value, minute),
+        mergedDisabledSeconds.value && mergedDisabledSeconds.value(originHour.value, minute),
       ),
     );
 
@@ -216,7 +245,7 @@ const TimeBody = defineComponent({
       ) {
         if (condition !== false) {
           columns.push({
-            node: cloneElement(node, {
+            node: cloneElement(node as unknown as VNode, {
               prefixCls: columnPrefixCls,
               value: columnValue,
               active: activeColumnIndex === columns.length,

@@ -1,12 +1,20 @@
-import type { FunctionalComponent } from 'vue';
+import type { ExtractPropTypes, FunctionalComponent, PropType } from 'vue';
 import omit from '../_util/omit';
 import warning from '../_util/warning';
-import type { BlockProps, EllipsisConfig } from './Base';
+import type { EllipsisConfig } from './Base';
 import Base, { baseProps } from './Base';
 
-export interface TextProps extends BlockProps {
-  ellipsis?: boolean | Omit<EllipsisConfig, 'expandable' | 'rows' | 'onExpand'>;
-}
+export const textProps = () => ({
+  ...omit(baseProps(), ['component']),
+  ellipsis: {
+    type: [Boolean, Object] as PropType<
+      boolean | Omit<EllipsisConfig, 'expandable' | 'rows' | 'onExpand'>
+    >,
+    default: undefined as boolean | Omit<EllipsisConfig, 'expandable' | 'rows' | 'onExpand'>,
+  },
+});
+
+export type TextProps = Partial<ExtractPropTypes<ReturnType<typeof textProps>>>;
 
 const Text: FunctionalComponent<TextProps> = (props, { slots, attrs }) => {
   const { ellipsis } = props;
@@ -31,6 +39,6 @@ const Text: FunctionalComponent<TextProps> = (props, { slots, attrs }) => {
 
 Text.displayName = 'ATypographyText';
 Text.inheritAttrs = false;
-Text.props = omit(baseProps(), ['component']) as any;
+Text.props = textProps();
 
 export default Text;

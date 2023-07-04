@@ -3,12 +3,11 @@ import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox/Checkbox';
 import { flattenChildren } from '../_util/props-util';
 import warning from '../_util/warning';
-import type { RadioChangeEvent } from '../radio/interface';
 import type { EventHandler } from '../_util/EventInterface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-import type { CheckboxProps } from './interface';
+import type { CheckboxChangeEvent, CheckboxProps } from './interface';
 import { CheckboxGroupContextKey, checkboxProps } from './interface';
 
 export default defineComponent({
@@ -16,7 +15,7 @@ export default defineComponent({
   inheritAttrs: false,
   __ANT_CHECKBOX: true,
   props: checkboxProps(),
-  emits: ['change', 'update:checked'],
+  // emits: ['change', 'update:checked'],
   setup(props, { emit, attrs, slots, expose }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, direction } = useConfigInject('checkbox', props);
@@ -41,7 +40,7 @@ export default defineComponent({
       );
     });
 
-    const handleChange = (event: RadioChangeEvent) => {
+    const handleChange = (event: CheckboxChangeEvent) => {
       const targetChecked = event.target.checked;
       emit('update:checked', targetChecked);
       emit('change', event);

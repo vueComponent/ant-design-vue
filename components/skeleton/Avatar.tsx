@@ -1,26 +1,25 @@
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import type { SkeletonElementProps } from './Element';
 import Element, { skeletonElementProps } from './Element';
 
-export interface AvatarProps extends Omit<SkeletonElementProps, 'shape'> {
-  shape?: 'circle' | 'square';
-}
+export const avatarProps = () => {
+  return {
+    ...skeletonElementProps(),
+    shape: String as PropType<'circle' | 'square'>,
+  };
+};
 
-export const avatarProps = initDefaultProps(
-  { ...skeletonElementProps(), shape: PropTypes.oneOf(tuple('circle', 'square')) },
-  {
-    size: 'large',
-  },
-);
+export type SkeletonAvatarProps = Partial<ExtractPropTypes<ReturnType<typeof avatarProps>>>;
 
 const SkeletonAvatar = defineComponent({
   name: 'ASkeletonAvatar',
-  props: avatarProps,
+  props: initDefaultProps(avatarProps(), {
+    size: 'default',
+    shape: 'circle',
+  }),
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
     const cls = computed(() =>

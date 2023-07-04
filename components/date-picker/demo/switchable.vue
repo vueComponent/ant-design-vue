@@ -37,7 +37,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     return {
-      type: ref('time'),
+      type: ref<any>('time'),
     };
   },
 });

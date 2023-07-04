@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Upload from '..';
-import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from '../utils';
+import { getFileItem, removeFileItem } from '../utils';
 import PropsTypes from '../../_util/vue-types';
 import { uploadListProps } from '../interface';
 import { setup, teardown } from './mock';
@@ -199,36 +199,6 @@ describe('Upload', () => {
   });
 
   describe('util', () => {
-    // https://github.com/react-component/upload/issues/36
-    it('should T() return true', () => {
-      const res = T();
-      expect(res).toBe(true);
-    });
-    it('should be able to copy file instance', () => {
-      const file = new File([], 'aaa.zip');
-      const copiedFile = fileToObject(file);
-      ['uid', 'lastModified', 'lastModifiedDate', 'name', 'size', 'type'].forEach(key => {
-        expect(key in copiedFile).toBe(true);
-      });
-    });
-    it('should be able to progress from 0.1 ', () => {
-      // 0.1 -> 0.98
-      const getPercent = genPercentAdd();
-      let curPercent = 0;
-      curPercent = getPercent(curPercent);
-      expect(curPercent).toBe(0.1);
-    });
-
-    it('should be able to progress to 0.98 ', () => {
-      // 0.1 -> 0.98
-      const getPercent = genPercentAdd();
-      let curPercent = 0;
-      for (let i = 0; i < 500; i += 1) {
-        curPercent = getPercent(curPercent);
-      }
-      expect(parseFloat(curPercent.toFixed(2))).toBe(0.98);
-    });
-
     it('should be able to get fileItem', () => {
       const file = { uid: '-1', name: 'item.jpg' };
       const fileList = [

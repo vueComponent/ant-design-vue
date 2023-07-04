@@ -23,22 +23,23 @@ Ant Design has 3 types of Tabs for different situations.
 | --- | --- | --- | --- | --- |
 | activeKey(v-model) | Current TabPane's key | string | - |  |
 | animated | Whether to change tabs with animation. Only works while `tabPosition="top"\|"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |  |
+| destroyInactiveTabPane | Whether destroy inactive TabPane when change tab | boolean | false |  |
 | hideAdd | Hide plus icon or not. Only works while `type="editable-card"` | boolean | `false` | } |
 | size | preset tab bar size | `large` \| `default` \| `small` | `default` |  |
+| tabBarGutter | The gap between tabs | number | - |  |
 | tabBarStyle | Tab bar style object | object | - |  |
 | tabPosition | Position of tabs | `top` \| `right` \| `bottom` \| `left` | `top` |  |
 | type | Basic style of tabs | `line` \| `card` \| `editable-card` | `line` |  |
-| tabBarGutter | The gap between tabs | number | - |  |
 
 ### Tabs Slots
 
-| Slot Name    | Description                    | Type              |
+| Slot Name    | Description                    | Type              |     |
 | ------------ | ------------------------------ | ----------------- | --- |
-| renderTabBar | Replace the TabBar             | { DefaultTabBar } |     |
-| leftExtra    | Extra content in tab bar left  | -                 | -   |
-| rightExtra   | Extra content in tab bar right | -                 | -   |
 | addIcon      | Customize add icon             | -                 | -   |
+| leftExtra    | Extra content in tab bar left  | -                 | -   |
 | moreIcon     | The custom icon of ellipsis    | -                 | -   |
+| renderTabBar | Replace the TabBar             | { DefaultTabBar } |     |
+| rightExtra   | Extra content in tab bar right | -                 | -   |
 
 ### Tabs Events
 

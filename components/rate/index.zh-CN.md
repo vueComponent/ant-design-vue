@@ -28,7 +28,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/R5uiIWmxe/Rate.svg
 
 ### 事件
 
-| 事件名称    | 说明                     | 回调参数                |
+| 事件名称    | 说明                     | 回调参数                |     |
 | ----------- | ------------------------ | ----------------------- | --- |
 | blur        | 失去焦点时的回调         | Function()              | -   |
 | change      | 选择时的回调             | Function(value: number) | -   |

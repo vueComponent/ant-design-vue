@@ -12,20 +12,20 @@ export const PlaceMent = tuple('top', 'bottom');
 export type Direction = 'ltr' | 'rtl';
 
 export const mentionsProps = {
-  autofocus: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
   prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  prefixCls: PropTypes.string,
-  value: PropTypes.string,
-  disabled: PropTypes.looseBool,
-  split: PropTypes.string,
-  transitionName: PropTypes.string,
+  prefixCls: String,
+  value: String,
+  disabled: { type: Boolean, default: undefined },
+  split: String,
+  transitionName: String,
   placement: PropTypes.oneOf(PlaceMent),
   character: PropTypes.any,
-  characterRender: PropTypes.func,
+  characterRender: Function,
   filterOption: {
     type: [Boolean, Function] as PropType<typeof defaultFilterOption | false>,
   },
-  validateSearch: PropTypes.func,
+  validateSearch: Function,
   getPopupContainer: {
     type: Function as PropType<() => HTMLElement>,
   },
@@ -33,7 +33,7 @@ export const mentionsProps = {
     type: Array as PropType<OptionProps>,
     default: () => undefined,
   },
-  loading: PropTypes.looseBool,
+  loading: { type: Boolean, default: undefined },
   rows: [Number, String],
   direction: { type: String as PropType<Direction> },
 };

@@ -36,10 +36,7 @@ Comment can be used as editor, user can customize the editor component.
   </a-list>
   <a-comment>
     <template #avatar>
-      <a-avatar
-        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        alt="Han Solo"
-      />
+      <a-avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
     </template>
     <template #content>
       <a-form-item>
@@ -78,7 +75,7 @@ export default defineComponent({
         comments.value = [
           {
             author: 'Han Solo',
-            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            avatar: 'https://joeschmoe.io/api/v1/random',
             content: value.value,
             datetime: dayjs().fromNow(),
           },

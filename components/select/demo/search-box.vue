@@ -33,7 +33,7 @@ Search with remote data.
 </template>
 <script lang="ts">
 import jsonp from 'fetch-jsonp';
-import querystring from 'querystring';
+import qs from 'qs';
 import { defineComponent, ref } from 'vue';
 
 let timeout: any;
@@ -47,7 +47,7 @@ function fetch(value: string, callback: any) {
   currentValue = value;
 
   function fake() {
-    const str = querystring.encode({
+    const str = qs.stringify({
       code: 'utf-8',
       q: value,
     });

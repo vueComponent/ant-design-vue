@@ -28,10 +28,11 @@ Clicking on an anchor does not record history.
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { AnchorProps } from 'ant-design-vue';
 
 export default defineComponent({
   setup() {
-    const handleClick = (e: Event, link: string) => {
+    const handleClick: AnchorProps['onClick'] = (e, link) => {
       e.preventDefault();
       console.log(link);
     };

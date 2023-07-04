@@ -57,7 +57,7 @@ export default defineComponent({
         {
           actions: ['Reply to'],
           author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          avatar: 'https://joeschmoe.io/api/v1/random',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
           datetime: dayjs().subtract(1, 'days'),
@@ -65,7 +65,7 @@ export default defineComponent({
         {
           actions: ['Reply to'],
           author: 'Han Solo',
-          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          avatar: 'https://joeschmoe.io/api/v1/random',
           content:
             'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
           datetime: dayjs().subtract(2, 'days'),

@@ -27,14 +27,15 @@ A example shows how to select a dynamic range by using `onCalendarChange` and `d
 <script lang="ts">
 import { Dayjs } from 'dayjs';
 import { defineComponent, ref } from 'vue';
+type RangeValue = [Dayjs, Dayjs];
 export default defineComponent({
   setup() {
-    const dates = ref<Dayjs[]>([]);
-    const value = ref<Dayjs[]>();
-    const hackValue = ref<Dayjs[]>();
+    const dates = ref<RangeValue>();
+    const value = ref<RangeValue>();
+    const hackValue = ref<RangeValue>();
 
     const disabledDate = (current: Dayjs) => {
-      if (!dates.value || dates.value.length === 0) {
+      if (!dates.value || (dates.value as any).length === 0) {
         return false;
       }
       const tooLate = dates.value[0] && current.diff(dates.value[0], 'days') > 7;
@@ -44,18 +45,18 @@ export default defineComponent({
 
     const onOpenChange = (open: boolean) => {
       if (open) {
-        dates.value = [];
-        hackValue.value = [];
+        dates.value = [] as any;
+        hackValue.value = [] as any;
       } else {
         hackValue.value = undefined;
       }
     };
 
-    const onChange = (val: Dayjs[]) => {
+    const onChange = (val: RangeValue) => {
       value.value = val;
     };
 
-    const onCalendarChange = (val: Dayjs[]) => {
+    const onCalendarChange = (val: RangeValue) => {
       dates.value = val;
     };
 

@@ -17,7 +17,7 @@ Upload files manually after `beforeUpload` returns `false`.
 
 <template>
   <div class="clearfix">
-    <a-upload :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
+    <a-upload :file-list="fileList" :before-upload="beforeUpload" @remove="handleRemove">
       <a-button>
         <upload-outlined></upload-outlined>
         Select File

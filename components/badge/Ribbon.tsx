@@ -1,5 +1,4 @@
 import type { LiteralUnion } from '../_util/type';
-import { tuple } from '../_util/type';
 import type { PresetColorType } from '../_util/colors';
 import { isPresetColor } from './utils';
 import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
@@ -7,19 +6,19 @@ import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-const ribbonProps = {
-  prefix: PropTypes.string,
+export const ribbonProps = () => ({
+  prefix: String,
   color: { type: String as PropType<LiteralUnion<PresetColorType, string>> },
   text: PropTypes.any,
-  placement: PropTypes.oneOf(tuple('start', 'end')).def('end'),
-};
+  placement: { type: String as PropType<'start' | 'end'>, default: 'end' },
+});
 
-export type RibbonProps = Partial<ExtractPropTypes<typeof ribbonProps>>;
+export type RibbonProps = Partial<ExtractPropTypes<ReturnType<typeof ribbonProps>>>;
 
 export default defineComponent({
   name: 'ABadgeRibbon',
   inheritAttrs: false,
-  props: ribbonProps,
+  props: ribbonProps(),
   slots: ['text'],
   setup(props, { attrs, slots }) {
     const { prefixCls, direction } = useConfigInject('ribbon', props);

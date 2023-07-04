@@ -4,42 +4,32 @@ import type { ModalFuncProps } from './Modal';
 import { destroyFns } from './Modal';
 import ConfigProvider, { globalConfigForApi } from '../config-provider';
 import omit from '../_util/omit';
+import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
+import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
+import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
+
+type ConfigUpdate = ModalFuncProps | ((prevConfig: ModalFuncProps) => ModalFuncProps);
+
+export type ModalFunc = (props: ModalFuncProps) => {
+  destroy: () => void;
+  update: (configUpdate: ConfigUpdate) => void;
+};
 
 const confirm = (config: ModalFuncProps) => {
-  const div = document.createElement('div');
-  document.body.appendChild(div);
+  const container = document.createDocumentFragment();
   let currentConfig = {
     ...omit(config, ['parentContext', 'appContext']),
     close,
     visible: true,
   } as any;
-
   let confirmDialogInstance = null;
-  function close(this: typeof close, ...args: any[]) {
-    currentConfig = {
-      ...currentConfig,
-      visible: false,
-      afterClose: destroy.bind(this, ...args),
-    };
-    update(currentConfig);
-  }
-  function update(newConfig: ModalFuncProps) {
-    currentConfig = {
-      ...currentConfig,
-      ...newConfig,
-    };
-    if (confirmDialogInstance) {
-      Object.assign(confirmDialogInstance.component.props, currentConfig);
-      confirmDialogInstance.component.update();
-    }
-  }
   function destroy(...args: any[]) {
-    if (confirmDialogInstance && div.parentNode) {
+    if (confirmDialogInstance) {
       // destroy
-      vueRender(null, div);
+      vueRender(null, container as any);
       confirmDialogInstance.component.update();
       confirmDialogInstance = null;
-      div.parentNode.removeChild(div);
     }
     const triggerCancel = args.some(param => param && param.triggerCancel);
     if (config.onCancel && triggerCancel) {
@@ -53,20 +43,49 @@ const confirm = (config: ModalFuncProps) => {
       }
     }
   }
+
+  function close(this: typeof close, ...args: any[]) {
+    currentConfig = {
+      ...currentConfig,
+      visible: false,
+      afterClose: () => {
+        if (typeof config.afterClose === 'function') {
+          config.afterClose();
+        }
+        destroy.apply(this, args);
+      },
+    };
+    update(currentConfig);
+  }
+  function update(configUpdate: ConfigUpdate) {
+    if (typeof configUpdate === 'function') {
+      currentConfig = configUpdate(currentConfig);
+    } else {
+      currentConfig = {
+        ...currentConfig,
+        ...configUpdate,
+      };
+    }
+    if (confirmDialogInstance) {
+      Object.assign(confirmDialogInstance.component.props, currentConfig);
+      confirmDialogInstance.component.update();
+    }
+  }
+
   const Wrapper = (p: ModalFuncProps) => {
     const global = globalConfigForApi;
     const rootPrefixCls = global.prefixCls;
     const prefixCls = p.prefixCls || `${rootPrefixCls}-modal`;
     return (
       <ConfigProvider {...(global as any)} notUpdateGlobalConfig={true} prefixCls={rootPrefixCls}>
-        <ConfirmDialog {...p} prefixCls={prefixCls}></ConfirmDialog>
+        <ConfirmDialog {...p} rootPrefixCls={rootPrefixCls} prefixCls={prefixCls}></ConfirmDialog>
       </ConfigProvider>
     );
   };
   function render(props: ModalFuncProps) {
     const vm = createVNode(Wrapper, { ...props });
     vm.appContext = config.parentContext || config.appContext || vm.appContext;
-    vueRender(vm, div);
+    vueRender(vm, container as any);
     return vm;
   }
 
@@ -79,3 +98,48 @@ const confirm = (config: ModalFuncProps) => {
 };
 
 export default confirm;
+
+export function withWarn(props: ModalFuncProps): ModalFuncProps {
+  return {
+    icon: () => <ExclamationCircleOutlined />,
+    okCancel: false,
+    ...props,
+    type: 'warning',
+  };
+}
+
+export function withInfo(props: ModalFuncProps): ModalFuncProps {
+  return {
+    icon: () => <InfoCircleOutlined />,
+    okCancel: false,
+    ...props,
+    type: 'info',
+  };
+}
+
+export function withSuccess(props: ModalFuncProps): ModalFuncProps {
+  return {
+    icon: () => <CheckCircleOutlined />,
+    okCancel: false,
+    ...props,
+    type: 'success',
+  };
+}
+
+export function withError(props: ModalFuncProps): ModalFuncProps {
+  return {
+    icon: () => <CloseCircleOutlined />,
+    okCancel: false,
+    ...props,
+    type: 'error',
+  };
+}
+
+export function withConfirm(props: ModalFuncProps): ModalFuncProps {
+  return {
+    icon: () => <ExclamationCircleOutlined />,
+    okCancel: true,
+    ...props,
+    type: 'confirm',
+  };
+}

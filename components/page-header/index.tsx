@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, flattenChildren, isEmptyContent } from '../_util/props-util';
@@ -12,10 +12,12 @@ import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
+import useDestroyed from '../_util/hooks/useDestroyed';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
-export const pageHeaderProps = {
+export const pageHeaderProps = () => ({
   backIcon: PropTypes.any,
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   title: PropTypes.any,
   subTitle: PropTypes.any,
   breadcrumb: PropTypes.object,
@@ -23,22 +25,25 @@ export const pageHeaderProps = {
   footer: PropTypes.any,
   extra: PropTypes.any,
   avatar: PropTypes.object,
-  ghost: PropTypes.looseBool,
-  onBack: PropTypes.func,
-};
+  ghost: { type: Boolean, default: undefined },
+  onBack: Function as PropType<MouseEventHandler>,
+});
 
-export type PageHeaderProps = Partial<ExtractPropTypes<typeof pageHeaderProps>>;
+export type PageHeaderProps = Partial<ExtractPropTypes<ReturnType<typeof pageHeaderProps>>>;
 
 const PageHeader = defineComponent({
   name: 'APageHeader',
-  props: pageHeaderProps,
-  emits: ['back'],
+  props: pageHeaderProps(),
+  // emits: ['back'],
   slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
   setup(props, { emit, slots }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
     const compact = ref(false);
+    const isDestroyed = useDestroyed();
     const onResize = ({ width }: { width: number }) => {
-      compact.value = width < 768;
+      if (!isDestroyed.value) {
+        compact.value = width < 768;
+      }
     };
     const ghost = computed(() => props.ghost ?? pageHeader.value?.ghost ?? true);
 

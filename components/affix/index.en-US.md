@@ -23,9 +23,9 @@ Please note that Affix should not cover other content on the page, especially wh
 
 ### events
 
-| Events Name | Description                              | Arguments         | Version |
-| ----------- | ---------------------------------------- | ----------------- | ------- |
-| change      | Callback for when Affix state is changed | Function(affixed) |
+| Events Name | Description                              | Arguments                   | Version |
+| ----------- | ---------------------------------------- | --------------------------- | ------- |
+| change      | Callback for when Affix state is changed | (affixed?: boolean) => void |         |
 
 **Note:** Children of `Affix` must not have the property `position: absolute`, but you can set `position: absolute` on `Affix` itself:
 
@@ -35,8 +35,12 @@ Please note that Affix should not cover other content on the page, especially wh
 
 ## FAQ
 
-### Affix bind container with `target`, sometime move out of container.
+### When binding container with `target` in Affix, elements sometimes move out of the container.
 
-We don't listen window scroll for performance consideration.
+We only listen to container scroll events for performance consideration. You can add custom listeners if you still want to, like react demo <https://codesandbox.io/s/2xyj5zr85p>
 
 Related issues：[#3938](https://github.com/ant-design/ant-design/issues/3938) [#5642](https://github.com/ant-design/ant-design/issues/5642) [#16120](https://github.com/ant-design/ant-design/issues/16120)
+
+### When Affix is ​​used in a horizontal scroll container, the position of the element `left` is incorrect.
+
+Affix is ​​generally only applicable to areas with one-way scrolling, and only supports usage in vertical scrolling containers. If you want to use it in a horizontal container, you can consider implementing with the native `position: sticky` property.

@@ -19,16 +19,16 @@ You can show the total number of data by setting `showTotal`.
   <div>
     <a-pagination
       v-model:current="current1"
+      v-model:page-size="pageSize1"
       :total="85"
       :show-total="total => `Total ${total} items`"
-      :page-size="20"
     />
     <br />
     <a-pagination
       v-model:current="current2"
+      v-model:page-size="pageSize2"
       :total="85"
       :show-total="(total, range) => `${range[0]}-${range[1]} of ${total} items`"
-      :page-size="20"
     />
   </div>
 </template>
@@ -38,12 +38,16 @@ export default defineComponent({
   setup() {
     const current1 = ref<number>(1);
     const current2 = ref<number>(2);
+    const pageSize1 = ref<number>(20);
+    const pageSize2 = ref<number>(20);
     const onChange = (pageNumber: number) => {
       console.log('Page: ', pageNumber);
     };
     return {
       current1,
       current2,
+      pageSize1,
+      pageSize2,
       onChange,
     };
   },

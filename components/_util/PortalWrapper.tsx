@@ -52,10 +52,10 @@ export default defineComponent({
   name: 'PortalWrapper',
   inheritAttrs: false,
   props: {
-    wrapperClassName: PropTypes.string,
-    forceRender: PropTypes.looseBool,
+    wrapperClassName: String,
+    forceRender: { type: Boolean, default: undefined },
     getContainer: PropTypes.any,
-    visible: PropTypes.looseBool,
+    visible: { type: Boolean, default: undefined },
   },
 
   setup(props, { slots }) {

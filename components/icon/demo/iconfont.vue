@@ -17,11 +17,11 @@ If you are using [iconfont.cn](http://iconfont.cn/), you can use the icons in yo
 </docs>
 
 <template>
-  <div class="icons-list">
+  <a-space>
     <icon-font type="icon-tuichu" />
     <icon-font type="icon-facebook" />
     <icon-font type="icon-twitter" />
-  </div>
+  </a-space>
 </template>
 <script>
 import { createFromIconfontCN } from '@ant-design/icons-vue';

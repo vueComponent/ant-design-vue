@@ -4,8 +4,13 @@ import ColumnGroup from './ColumnGroup';
 import type { TableProps, TablePaginationConfig } from './Table';
 import { defineComponent } from 'vue';
 import type { App } from 'vue';
-import { Summary, SummaryCell, SummaryRow } from '../vc-table';
-import { SELECTION_ALL, SELECTION_INVERT, SELECTION_NONE } from './hooks/useSelection';
+import { EXPAND_COLUMN, Summary, SummaryCell, SummaryRow } from '../vc-table';
+import {
+  SELECTION_ALL,
+  SELECTION_INVERT,
+  SELECTION_NONE,
+  SELECTION_COLUMN,
+} from './hooks/useSelection';
 
 export type { ColumnProps } from './Column';
 export type { ColumnsType, ColumnType, ColumnGroupType } from './interface';
@@ -34,6 +39,8 @@ export default Object.assign(Table, {
   SELECTION_ALL,
   SELECTION_INVERT,
   SELECTION_NONE,
+  SELECTION_COLUMN,
+  EXPAND_COLUMN,
   Column,
   ColumnGroup,
   Summary: TableSummary,

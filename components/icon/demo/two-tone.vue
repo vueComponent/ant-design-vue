@@ -17,11 +17,11 @@ You can set `two-tone-color` prop to specific primary color for two-tone icons.
 </docs>
 
 <template>
-  <div class="icons-list">
+  <a-space>
     <smile-two-tone />
     <heart-two-tone two-tone-color="#eb2f96" />
     <check-circle-two-tone two-tone-color="#52c41a" />
-  </div>
+  </a-space>
 </template>
 <script>
 import { SmileTwoTone, HeartTwoTone, CheckCircleTwoTone } from '@ant-design/icons-vue';

@@ -19,11 +19,7 @@ export interface BodyContextProps<RecordType = DefaultRecordType> {
   columns: ColumnsType<RecordType>;
   flattenColumns: readonly ColumnType<RecordType>[];
 
-  componentWidth: number;
   tableLayout: TableLayout;
-  fixHeader: boolean;
-  fixColumn: boolean;
-  horizonScroll: boolean;
 
   indentSize: number;
   expandableType: ExpandableType;

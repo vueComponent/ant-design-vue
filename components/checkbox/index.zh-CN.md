@@ -29,7 +29,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/8nbVbHEm_/CheckBox.svg
 
 #### 事件
 
-| 事件名称 | 说明           | 回调参数          | 版本 |
+| 事件名称 | 说明           | 回调参数          | 版本 |     |
 | -------- | -------------- | ----------------- | ---- | --- |
 | change   | 变化时回调函数 | Function(e:Event) | -    |     |
 
@@ -44,7 +44,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/8nbVbHEm_/CheckBox.svg
 
 #### 事件
 
-| 事件名称 | 说明           | 回调参数               | 版本 |
+| 事件名称 | 说明           | 回调参数               | 版本 |     |
 | -------- | -------------- | ---------------------- | ---- | --- |
 | change   | 变化时回调函数 | Function(checkedValue) | -    |     |
 

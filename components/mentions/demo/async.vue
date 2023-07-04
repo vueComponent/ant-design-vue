@@ -31,7 +31,7 @@ export default defineComponent({
   setup() {
     const value = ref<string>('');
     const loading = ref<boolean>(false);
-    const users = ref<string[]>([]);
+    const users = ref<{ login: string; avatar_url: string }[]>([]);
     const search = ref<string>('');
     const loadGithubUsers = debounce((key: string) => {
       if (!key) {

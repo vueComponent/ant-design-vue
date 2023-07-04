@@ -1,4 +1,3 @@
-import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import DropdownMenu from './DropdownMenu';
 import type { PropType } from 'vue';
@@ -43,17 +42,17 @@ const BUILT_IN_PLACEMENTS = {
 export default defineComponent({
   name: 'KeywordTrigger',
   props: {
-    loading: PropTypes.looseBool,
+    loading: { type: Boolean, default: undefined },
     options: {
       type: Array as PropType<OptionProps[]>,
       default: () => [],
     },
-    prefixCls: PropTypes.string,
-    placement: PropTypes.string,
-    visible: PropTypes.looseBool,
-    transitionName: PropTypes.string,
-    getPopupContainer: PropTypes.func,
-    direction: PropTypes.string,
+    prefixCls: String,
+    placement: String,
+    visible: { type: Boolean, default: undefined },
+    transitionName: String,
+    getPopupContainer: Function,
+    direction: String,
   },
   slots: ['notFoundContent', 'option'],
   setup(props, { slots }) {
@@ -92,9 +91,8 @@ export default defineComponent({
           popupTransitionName={transitionName}
           builtinPlacements={BUILT_IN_PLACEMENTS}
           getPopupContainer={getPopupContainer}
-        >
-          {slots.default?.()}
-        </Trigger>
+          v-slots={{ default: slots.default }}
+        ></Trigger>
       );
     };
   },

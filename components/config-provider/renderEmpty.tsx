@@ -1,17 +1,14 @@
-import { inject } from 'vue';
 import Empty from '../empty';
-import { defaultConfigProvider } from '.';
 import type { VueNode } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export interface RenderEmptyProps {
   componentName?: string;
 }
 
 const RenderEmpty = (props: RenderEmptyProps) => {
-  const configProvider = inject('configProvider', defaultConfigProvider);
+  const { prefixCls } = useConfigInject('empty', props);
   const renderHtml = (componentName?: string) => {
-    const { getPrefixCls } = configProvider;
-    const prefix = getPrefixCls('empty');
     switch (componentName) {
       case 'Table':
       case 'List':
@@ -22,7 +19,7 @@ const RenderEmpty = (props: RenderEmptyProps) => {
       case 'Cascader':
       case 'Transfer':
       case 'Mentions':
-        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} class={`${prefix}-small`} />;
+        return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} class={`${prefixCls.value}-small`} />;
 
       default:
         return <Empty />;

@@ -4,17 +4,17 @@ import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
 export const starProps = {
-  value: PropTypes.number,
-  index: PropTypes.number,
-  prefixCls: PropTypes.string,
-  allowHalf: PropTypes.looseBool,
-  disabled: PropTypes.looseBool,
+  value: Number,
+  index: Number,
+  prefixCls: String,
+  allowHalf: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
   character: PropTypes.any,
-  characterRender: PropTypes.func,
-  focused: PropTypes.looseBool,
-  count: PropTypes.number,
-  onClick: PropTypes.func,
-  onHover: PropTypes.func,
+  characterRender: Function,
+  focused: { type: Boolean, default: undefined },
+  count: Number,
+  onClick: Function,
+  onHover: Function,
 };
 
 export type StarProps = Partial<ExtractPropTypes<typeof starProps>>;

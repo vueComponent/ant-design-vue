@@ -1,7 +1,6 @@
+import type { PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { SkeletonElementProps } from './Element';
 import Element, { skeletonElementProps } from './Element';
@@ -15,7 +14,7 @@ const SkeletonInput = defineComponent({
   name: 'ASkeletonInput',
   props: {
     ...omit(skeletonElementProps(), ['shape']),
-    size: PropTypes.oneOf(tuple('large', 'small', 'default')),
+    size: String as PropType<'large' | 'small' | 'default'>,
   },
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);

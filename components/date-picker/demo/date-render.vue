@@ -51,7 +51,7 @@ export default defineComponent({
     };
     return {
       value1: ref<Dayjs>(),
-      value2: ref<Dayjs[]>([]),
+      value2: ref<[Dayjs, Dayjs]>(),
       value3: ref<Dayjs>(),
       getCurrentStyle,
     };

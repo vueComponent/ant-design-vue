@@ -1,7 +1,8 @@
-import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, HTMLAttributes, PropType } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
+import type { MouseEventHandler } from '../_util/EventInterface';
 import type { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import { OverflowContextProvider } from './context';
@@ -15,34 +16,8 @@ function defaultRenderRest<ItemType>(omittedItems: ItemType[]) {
   return `+ ${omittedItems.length} ...`;
 }
 
-export interface OverflowProps<ItemType> extends HTMLAttributes {
-  prefixCls?: string;
-  data?: ItemType[];
-  itemKey?: Key;
-  /** Used for `responsive`. It will limit render node to avoid perf issue */
-  itemWidth?: number;
-  renderItem?: (item: ItemType) => VueNode;
-  /** @private Do not use in your production. Render raw node that need wrap Item by developer self */
-  renderRawItem?: (item: ItemType, index: number) => VueNode;
-  maxCount?: number | typeof RESPONSIVE | typeof INVALIDATE;
-  renderRest?: VueNode | ((omittedItems: ItemType[]) => VueNode);
-  /** @private Do not use in your production. Render raw node that need wrap Item by developer self */
-  renderRawRest?: (omittedItems: ItemType[]) => VueNode;
-  suffix?: VueNode;
-  component?: any;
-  itemComponent?: any;
-
-  /** @private This API may be refactor since not well design */
-  onVisibleChange?: (visibleCount: number) => void;
-
-  /** When set to `full`, ssr will render full items by default and remove at client side */
-  ssr?: 'full';
-}
-
-const Overflow = defineComponent({
-  name: 'Overflow',
-  inheritAttrs: false,
-  props: {
+const overflowProps = () => {
+  return {
     id: String,
     prefixCls: String,
     data: Array,
@@ -63,7 +38,15 @@ const Overflow = defineComponent({
     onVisibleChange: Function as PropType<(visibleCount: number) => void>,
     /** When set to `full`, ssr will render full items by default and remove at client side */
     ssr: String as PropType<'full'>,
-  },
+    onMousedown: Function as PropType<MouseEventHandler>,
+  };
+};
+type InterOverflowProps = Partial<ExtractPropTypes<ReturnType<typeof overflowProps>>>;
+export type OverflowProps = HTMLAttributes & InterOverflowProps;
+const Overflow = defineComponent<OverflowProps>({
+  name: 'Overflow',
+  inheritAttrs: false,
+  props: overflowProps() as any,
   emits: ['visibleChange'],
   setup(props, { attrs, emit }) {
     const fullySSR = computed(() => props.ssr === 'full');
@@ -247,6 +230,7 @@ const Overflow = defineComponent({
         suffix,
         component: Component = 'div' as any,
         id,
+        onMousedown,
       } = props;
       const { class: className, style, ...restAttrs } = attrs;
       let suffixStyle: CSSProperties = {};
@@ -307,7 +291,7 @@ const Overflow = defineComponent({
       let restNode = () => null;
       const restContextProps = {
         order: displayRest ? mergedDisplayCount.value : Number.MAX_SAFE_INTEGER,
-        className: `${itemPrefixCls.value}-rest`,
+        className: `${itemPrefixCls.value} ${itemPrefixCls.value}-rest`,
         registerSize: registerOverflowSize,
         display: displayRest,
       };
@@ -346,6 +330,7 @@ const Overflow = defineComponent({
           id={id}
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}
+          onMousedown={onMousedown}
           {...restAttrs}
         >
           {mergedData.value.map(internalRenderItemNode)}

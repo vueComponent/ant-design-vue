@@ -12,13 +12,14 @@ import type { PanelMode, RangeValue } from '../vc-picker/interface';
 import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 export interface TimePickerLocale {
   placeholder?: string;
   rangePlaceholder?: [string, string];
 }
 
-const timePickerProps = {
+export const timePickerProps = () => ({
   format: String,
   showNow: { type: Boolean, default: undefined },
   showHour: { type: Boolean, default: undefined },
@@ -30,7 +31,7 @@ const timePickerProps = {
   secondStep: Number,
   hideDisabledOptions: { type: Boolean, default: undefined },
   popupClassName: String,
-};
+});
 
 export interface CommonTimePickerProps {
   format?: string;
@@ -63,17 +64,21 @@ function createTimePicker<
   DTimeRangePickerProps extends TimeRangePickerProps<DateType> = TimeRangePickerProps<DateType>,
 >(generateConfig: GenerateConfig<DateType>) {
   const DatePicker = generatePicker<DateType>(generateConfig, {
-    ...timePickerProps,
+    ...timePickerProps(),
     order: { type: Boolean, default: true },
   });
 
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
-
   const TimePicker = defineComponent<DTimePickerProps>({
     name: 'ATimePicker',
     inheritAttrs: false,
+    props: {
+      ...commonProps<DateType>(),
+      ...datePickerProps<DateType>(),
+      ...timePickerProps(),
+      addon: { type: Function },
+    } as any,
     slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    emits: ['change', 'openChange', 'focus', 'blur', 'ok', 'update:value', 'update:open'],
     setup(props, { slots, expose, emit, attrs }) {
       const formItemContext = useInjectFormItemContext();
       devWarning(
@@ -114,7 +119,7 @@ function createTimePicker<
         return (
           <InternalTimePicker
             {...attrs}
-            {...restProps}
+            {...omit(restProps, ['onUpdate:value', 'onUpdate:open'])}
             id={id}
             dropdownClassName={props.popupClassName}
             mode={undefined}
@@ -134,28 +139,16 @@ function createTimePicker<
     },
   });
 
-  TimePicker.props = {
-    ...commonProps<DateType>(),
-    ...datePickerProps<DateType>(),
-    ...timePickerProps,
-    addon: { type: Function },
-  };
-
   const TimeRangePicker = defineComponent<DTimeRangePickerProps>({
     name: 'ATimeRangePicker',
     inheritAttrs: false,
+    props: {
+      ...commonProps<DateType>(),
+      ...rangePickerProps<DateType>(),
+      ...timePickerProps(),
+      order: { type: Boolean, default: true },
+    } as any,
     slot: ['renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    emits: [
-      'change',
-      'panelChange',
-      'ok',
-      'openChange',
-      'update:value',
-      'update:open',
-      'calendarChange',
-      'focus',
-      'blur',
-    ],
     setup(props, { slots, expose, emit, attrs }) {
       const pickerRef = ref();
 
@@ -209,7 +202,7 @@ function createTimePicker<
         return (
           <InternalRangePicker
             {...attrs}
-            {...restProps}
+            {...omit(restProps, ['onUpdate:open', 'onUpdate:value'])}
             id={id}
             dropdownClassName={props.popupClassName}
             picker="time"
@@ -228,13 +221,6 @@ function createTimePicker<
       };
     },
   });
-
-  TimeRangePicker.props = {
-    ...commonProps<DateType>(),
-    ...rangePickerProps<DateType>(),
-    ...timePickerProps,
-    order: { type: Boolean, default: true },
-  };
 
   return {
     TimePicker,

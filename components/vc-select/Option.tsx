@@ -1,8 +1,8 @@
 import type { FunctionalComponent } from 'vue';
 
-import type { OptionCoreData } from './interface';
+import type { DefaultOptionType } from './Select';
 
-export interface OptionProps extends Omit<OptionCoreData, 'label'> {
+export interface OptionProps extends Omit<DefaultOptionType, 'label'> {
   /** Save for customize data */
   [prop: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }

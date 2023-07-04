@@ -31,11 +31,6 @@ The label of the selected item will be packed as an object for passing to the on
 import type { SelectProps } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 
-interface Value {
-  value?: string;
-  label?: string;
-}
-
 export default defineComponent({
   setup() {
     const options = ref<SelectProps['options']>([
@@ -48,11 +43,11 @@ export default defineComponent({
         label: 'Lucy (101)',
       },
     ]);
-    const handleChange = (value: Value) => {
+    const handleChange: SelectProps['onChange'] = value => {
       console.log(value); // { key: "lucy", label: "Lucy (101)" }
     };
     return {
-      value: ref<Value>({ value: 'lucy' }),
+      value: ref({ value: 'lucy' }),
       options,
       handleChange,
     };

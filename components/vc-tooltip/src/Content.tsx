@@ -3,8 +3,8 @@ import { defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
 const tooltipContentProps = {
-  prefixCls: PropTypes.string,
-  id: PropTypes.string,
+  prefixCls: String,
+  id: String,
   overlayInnerStyle: PropTypes.any,
 };
 

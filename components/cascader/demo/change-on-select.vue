@@ -16,16 +16,17 @@ Allow only select parent options.
 
 </docs>
 <template>
-  <a-cascader v-model:value="value" :options="options" change-on-select />
+  <a-cascader
+    v-model:value="value"
+    :options="options"
+    placeholder="Please select"
+    change-on-select
+  />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  children?: Option[];
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',

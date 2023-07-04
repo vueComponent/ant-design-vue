@@ -46,7 +46,7 @@ import { Dayjs } from 'dayjs';
 import { defineComponent, ref, watch } from 'vue';
 export default defineComponent({
   setup() {
-    const startValue = ref<Dayjs | undefined>();
+    const startValue = ref<Dayjs>();
     const endValue = ref<Dayjs>();
     const endOpen = ref<boolean>(false);
 

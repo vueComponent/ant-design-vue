@@ -62,6 +62,7 @@ es
 _site
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
 /coverage
 
 # 备份文件
@@ -76,3 +77,6 @@ vetur/
 report.html
 
 site/src/router/demoRoutes.js
+
+components/version/version.tsx
+~component-api.json

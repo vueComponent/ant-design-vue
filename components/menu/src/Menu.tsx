@@ -1,5 +1,5 @@
 import type { Key } from '../../_util/type';
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import { computed, defineComponent, ref, inject, watchEffect, watch, onMounted, unref } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import type { StoreMenuInfo } from './hooks/useMenuContext';
@@ -12,10 +12,11 @@ import type {
   TriggerSubMenuAction,
   MenuInfo,
   SelectInfo,
+  MenuClickEventHandler,
+  SelectEventHandler,
 } from './interface';
 import devWarning from '../../vc-util/devWarning';
 import type { CSSMotionProps } from '../../_util/transition';
-import { collapseMotion } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
 import { SiderCollapsedKey } from '../../layout/injectionKey';
 import { flattenChildren } from '../../_util/props-util';
@@ -25,16 +26,18 @@ import SubMenu from './SubMenu';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 import { cloneElement } from '../../_util/vnode';
 import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
+import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
+import collapseMotion from '../../_util/collapseMotion';
 
-export const menuProps = {
+export const menuProps = () => ({
   id: String,
   prefixCls: String,
   disabled: Boolean,
   inlineCollapsed: Boolean,
   disabledOverflow: Boolean,
   forceSubMenuRender: Boolean,
-  openKeys: Array,
-  selectedKeys: Array,
+  openKeys: Array as PropType<Key[]>,
+  selectedKeys: Array as PropType<Key[]>,
   activeKey: String, // 内部组件使用
   selectable: { type: Boolean, default: true },
   multiple: { type: Boolean, default: false },
@@ -55,24 +58,25 @@ export const menuProps = {
   getPopupContainer: Function as PropType<(node: HTMLElement) => HTMLElement>,
 
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
-};
+  onOpenChange: Function as PropType<(keys: Key[]) => void>,
+  onSelect: Function as PropType<SelectEventHandler>,
+  onDeselect: Function as PropType<SelectEventHandler>,
+  onClick: [Function, Array] as PropType<MenuClickEventHandler>,
+  onFocus: Function as PropType<FocusEventHandler>,
+  onBlur: Function as PropType<FocusEventHandler>,
+  onMousedown: Function as PropType<MouseEventHandler>,
+  'onUpdate:openKeys': Function as PropType<(keys: Key[]) => void>,
+  'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
+  'onUpdate:activeKey': Function as PropType<(key: Key) => void>,
+});
 
-export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
+export type MenuProps = Partial<ExtractPropTypes<ReturnType<typeof menuProps>>>;
 
 const EMPTY_LIST: string[] = [];
 export default defineComponent({
   name: 'AMenu',
   inheritAttrs: false,
-  props: menuProps,
-  emits: [
-    'update:openKeys',
-    'openChange',
-    'select',
-    'deselect',
-    'update:selectedKeys',
-    'click',
-    'update:activeKey',
-  ],
+  props: menuProps(),
   slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);
@@ -135,9 +139,11 @@ export default defineComponent({
     watch(
       () => props.selectedKeys,
       selectedKeys => {
-        mergedSelectedKeys.value = selectedKeys || mergedSelectedKeys.value;
+        if (selectedKeys) {
+          mergedSelectedKeys.value = selectedKeys.slice();
+        }
       },
-      { immediate: true },
+      { immediate: true, deep: true },
     );
 
     const selectedSubMenuKeys = ref([]);
@@ -208,10 +214,10 @@ export default defineComponent({
       () => props.openKeys,
       (openKeys = mergedOpenKeys.value) => {
         if (!shallowEqual(mergedOpenKeys.value, openKeys)) {
-          mergedOpenKeys.value = openKeys;
+          mergedOpenKeys.value = openKeys.slice();
         }
       },
-      { immediate: true },
+      { immediate: true, deep: true },
     );
 
     let timeout: any;
@@ -353,7 +359,7 @@ export default defineComponent({
             let icon = props.expandIcon || slots.expandIcon;
             icon = typeof icon === 'function' ? icon(opt) : icon;
             return cloneElement(
-              icon,
+              icon as unknown as VNode,
               {
                 class: `${prefixCls.value}-submenu-expand-icon`,
               },
@@ -409,9 +415,8 @@ export default defineComponent({
               <MenuContextProvider
                 key={child.key}
                 overflowDisabled={index > lastVisibleIndex.value}
-              >
-                {child}
-              </MenuContextProvider>
+                v-slots={{ default: () => child }}
+              ></MenuContextProvider>
             ));
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
@@ -419,6 +424,7 @@ export default defineComponent({
         <>
           <Overflow
             {...attrs}
+            onMousedown={props.onMousedown}
             prefixCls={`${prefixCls.value}-overflow`}
             component="ul"
             itemComponent={MenuItem}
@@ -441,9 +447,8 @@ export default defineComponent({
                     title={overflowedIndicator}
                     disabled={allVisible}
                     internalPopupClose={len === 0}
-                  >
-                    {originOmitItems}
-                  </SubMenu>
+                    v-slots={{ default: () => originOmitItems }}
+                  ></SubMenu>
                   <PathContext>
                     <SubMenu
                       eventKey={OVERFLOW_KEY}
@@ -451,9 +456,8 @@ export default defineComponent({
                       title={overflowedIndicator}
                       disabled={allVisible}
                       internalPopupClose={len === 0}
-                    >
-                      {originOmitItems}
-                    </SubMenu>
+                      v-slots={{ default: () => originOmitItems }}
+                    ></SubMenu>
                   </PathContext>
                 </>
               );

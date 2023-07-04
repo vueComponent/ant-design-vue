@@ -3,7 +3,7 @@ import { computed, defineComponent, ref } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
+import { filterEmpty, initDefaultProps } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
@@ -21,7 +21,7 @@ export type PopoverProps = Partial<ExtractPropTypes<ReturnType<typeof popoverPro
 const Popover = defineComponent({
   name: 'APopover',
   props: initDefaultProps(popoverProps(), {
-    ...tooltipDefaultProps,
+    ...tooltipDefaultProps(),
     trigger: 'hover',
     transitionName: 'zoom-big',
     placement: 'top',
@@ -39,10 +39,14 @@ const Popover = defineComponent({
     const { prefixCls, configProvider } = useConfigInject('popover', props);
     const rootPrefixCls = computed(() => configProvider.getPrefixCls());
     const getOverlay = () => {
-      const { title = slots.title?.(), content = slots.content?.() } = props;
+      const { title = filterEmpty(slots.title?.()), content = filterEmpty(slots.content?.()) } =
+        props;
+      const hasTitle = !!(Array.isArray(title) ? title.length : title);
+      const hasContent = !!(Array.isArray(content) ? content.length : title);
+      if (!hasTitle && !hasContent) return undefined;
       return (
         <>
-          {title && <div class={`${prefixCls.value}-title`}>{title}</div>}
+          {hasTitle && <div class={`${prefixCls.value}-title`}>{title}</div>}
           <div class={`${prefixCls.value}-inner-content`}>{content}</div>
         </>
       );

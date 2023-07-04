@@ -32,7 +32,7 @@ Custom paging display
 import { defineComponent } from 'vue';
 
 const baseUrl =
-  'https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/';
+  'https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/carousel/demo/';
 export default defineComponent({
   setup() {
     const getImgUrl = (i: number) => {
@@ -71,6 +71,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   filter: grayscale(100%);
+  display: block;
 }
 .ant-carousel :deep .slick-thumb li.slick-active img {
   filter: grayscale(0%);

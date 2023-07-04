@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown>
+  <a-dropdown placement="bottom">
     <a-button size="small" class="header-button">
       {{ $t('app.header.menu.more') }}
       <DownOutlined

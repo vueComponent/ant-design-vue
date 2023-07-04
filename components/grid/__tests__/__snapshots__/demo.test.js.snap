@@ -60,7 +60,7 @@ exports[`renders ./components/grid/demo/flex.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
 <p>Align Top</p>
-<div class="ant-row ant-row-center ant-row-top">
+<div class="ant-row ant-row-center ant-row-top" type="flex">
   <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
@@ -75,7 +75,7 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
   </div>
 </div>
 <p>Align Center</p>
-<div class="ant-row ant-row-space-around ant-row-middle">
+<div class="ant-row ant-row-space-around ant-row-middle" type="flex">
   <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
@@ -90,7 +90,7 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
   </div>
 </div>
 <p>Align Bottom</p>
-<div class="ant-row ant-row-space-between ant-row-bottom">
+<div class="ant-row ant-row-space-between ant-row-bottom" type="flex">
   <div class="ant-col ant-col-4">
     <p class="height-100">col-4</p>
   </div>
@@ -108,14 +108,14 @@ exports[`renders ./components/grid/demo/flex-align.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-order.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Normal</span></div>
-<div class="ant-row">
+<div class="ant-row" type="flex">
   <div class="ant-col ant-col-6 ant-col-order-4">1 col-order-4</div>
   <div class="ant-col ant-col-6 ant-col-order-3">2 col-order-3</div>
   <div class="ant-col ant-col-6 ant-col-order-2">3 col-order-2</div>
   <div class="ant-col ant-col-6 ant-col-order-1">4 col-order-1</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Responsive</span></div>
-<div class="ant-row">
+<div class="ant-row" type="flex">
   <div class="ant-col ant-col-6 ant-col-xs-order-1 ant-col-sm-order-2 ant-col-md-order-3 ant-col-lg-order-4"> 1 col-order-responsive </div>
   <div class="ant-col ant-col-6 ant-col-xs-order-2 ant-col-sm-order-1 ant-col-md-order-4 ant-col-lg-order-3"> 2 col-order-responsive </div>
   <div class="ant-col ant-col-6 ant-col-xs-order-3 ant-col-sm-order-4 ant-col-md-order-2 ant-col-lg-order-2"> 3 col-order-responsive </div>
@@ -125,17 +125,17 @@ exports[`renders ./components/grid/demo/flex-order.vue correctly 1`] = `
 
 exports[`renders ./components/grid/demo/flex-stretch.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Percentage columns</span></div>
-<div class="ant-row">
+<div class="ant-row" type="flex">
   <div class="ant-col" style="flex: 2 2 auto;">2 / 5</div>
   <div class="ant-col" style="flex: 3 3 auto;">3 / 5</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Fill rest</span></div>
-<div class="ant-row">
+<div class="ant-row" type="flex">
   <div class="ant-col" style="flex: 0 0 100px;">100px</div>
   <div class="ant-col" style="flex-basis: auto;">auto</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Raw flex style</span></div>
-<div class="ant-row">
+<div class="ant-row" type="flex">
   <div class="ant-col" style="flex: 1 1 200px;">1 1 200px</div>
   <div class="ant-col" style="flex: 0 1 300px;">0 1 300px</div>
 </div>

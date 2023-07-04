@@ -32,14 +32,10 @@ import { defineComponent } from 'vue';
 import type { TableColumnType } from 'ant-design-vue';
 // In the fifth row, other columns are merged into first column
 // by setting it's colSpan to be 0
-const renderContent = ({ index }: any) => {
-  const obj = {
-    props: {} as any,
-  };
+const sharedOnCell = (_, index) => {
   if (index === 4) {
-    obj.props.colSpan = 0;
+    return { colSpan: 0 };
   }
-  return obj;
 };
 
 const data = [
@@ -91,53 +87,42 @@ export default defineComponent({
       {
         title: 'Name',
         dataIndex: 'name',
-        customRender: ({ index }) => {
-          if (index < 4) {
-            return;
-          }
-          return {
-            props: {
-              colSpan: 5,
-            },
-          };
-        },
+        customCell: (_, index) => ({
+          colSpan: index < 4 ? 1 : 5,
+        }),
       },
       {
         title: 'Age',
         dataIndex: 'age',
-        customRender: renderContent,
+        customCell: sharedOnCell,
       },
       {
         title: 'Home phone',
         colSpan: 2,
         dataIndex: 'tel',
-        customRender: ({ index }) => {
-          const obj = {
-            props: {} as any,
-          };
+        customCell: (_, index) => {
           if (index === 2) {
-            obj.props.rowSpan = 2;
+            return { rowSpan: 2 };
           }
           // These two are merged into above cell
           if (index === 3) {
-            obj.props.rowSpan = 0;
+            return { rowSpan: 0 };
           }
           if (index === 4) {
-            obj.props.colSpan = 0;
+            return { colSpan: 0 };
           }
-          return obj;
         },
       },
       {
         title: 'Phone',
         colSpan: 0,
         dataIndex: 'phone',
-        customRender: renderContent,
+        customCell: sharedOnCell,
       },
       {
         title: 'Address',
         dataIndex: 'address',
-        customRender: renderContent,
+        customCell: sharedOnCell,
       },
     ];
     return {

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
   nextTick,
@@ -9,7 +9,6 @@ import {
   ref,
   computed,
 } from 'vue';
-import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
@@ -40,7 +39,7 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
   return rect.top;
 }
 
-const sharpMatcherRegx = /#(\S+)$/;
+const sharpMatcherRegx = /#([\S ]+)$/;
 
 type Section = {
   link: string;
@@ -49,22 +48,22 @@ type Section = {
 
 export type AnchorContainer = HTMLElement | Window;
 
-const anchorProps = {
-  prefixCls: PropTypes.string,
-  offsetTop: PropTypes.number,
-  bounds: PropTypes.number,
-  affix: PropTypes.looseBool.def(true),
-  showInkInFixed: PropTypes.looseBool.def(false),
-  getContainer: PropTypes.func.def(getDefaultContainer),
-  wrapperClass: PropTypes.string,
-  wrapperStyle: PropTypes.style,
-  getCurrentAnchor: PropTypes.func,
-  targetOffset: PropTypes.number,
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
-};
+export const anchorProps = () => ({
+  prefixCls: String,
+  offsetTop: Number,
+  bounds: Number,
+  affix: { type: Boolean, default: true },
+  showInkInFixed: { type: Boolean, default: false },
+  getContainer: Function as PropType<() => AnchorContainer>,
+  wrapperClass: String,
+  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  getCurrentAnchor: Function as PropType<() => string>,
+  targetOffset: Number,
+  onChange: Function as PropType<(currentActiveLink: string) => void>,
+  onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
+});
 
-export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>;
+export type AnchorProps = Partial<ExtractPropTypes<ReturnType<typeof anchorProps>>>;
 
 export interface AnchorState {
   scrollContainer: HTMLElement | Window;
@@ -76,8 +75,7 @@ export interface AnchorState {
 export default defineComponent({
   name: 'AAnchor',
   inheritAttrs: false,
-  props: anchorProps,
-  emits: ['change', 'click'],
+  props: anchorProps(),
   setup(props, { emit, attrs, slots, expose }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
     const inkNodeRef = ref();
@@ -129,10 +127,10 @@ export default defineComponent({
       emit('change', link);
     };
     const handleScrollTo = (link: string) => {
-      const { offsetTop, getContainer, targetOffset } = props;
+      const { offsetTop, targetOffset } = props;
 
       setCurrentActiveLink(link);
-      const container = getContainer();
+      const container = getContainer.value();
       const scrollTop = getScroll(container, true);
       const sharpLinkMatch = sharpMatcherRegx.exec(link);
       if (!sharpLinkMatch) {
@@ -152,7 +150,7 @@ export default defineComponent({
         callback: () => {
           state.animating = false;
         },
-        getContainer,
+        getContainer: getContainer.value,
       });
     };
     expose({

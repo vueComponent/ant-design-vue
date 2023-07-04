@@ -5,7 +5,6 @@ import raf from '../_util/raf';
 import { isStyleSupport } from '../_util/styleChecker';
 import Editable from './Editable';
 import measure from './util';
-import PropTypes from '../_util/vue-types';
 import type { TypographyProps } from './Typography';
 import Typography from './Typography';
 import ResizeObserver from '../vc-resize-observer';
@@ -14,7 +13,7 @@ import copy from '../_util/copy-to-clipboard';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
 import EditOutlined from '@ant-design/icons-vue/EditOutlined';
-import type { VNodeTypes, CSSProperties } from 'vue';
+import type { VNodeTypes, CSSProperties, PropType, HTMLAttributes } from 'vue';
 import {
   defineComponent,
   reactive,
@@ -52,6 +51,7 @@ export interface EditConfig {
   onEnd?: () => void;
   maxlength?: number;
   autoSize?: boolean | AutoSizeType;
+  triggerType?: ('icon' | 'text')[];
 }
 
 export interface EllipsisConfig {
@@ -61,7 +61,7 @@ export interface EllipsisConfig {
   symbol?: string;
   onExpand?: EventHandler;
   onEllipsis?: (ellipsis: boolean) => void;
-  tooltip?: boolean;
+  tooltip?: any;
 }
 
 export interface BlockProps extends TypographyProps {
@@ -94,12 +94,40 @@ interface InternalBlockProps extends BlockProps {
 
 const ELLIPSIS_STR = '...';
 
-const Base = defineComponent<InternalBlockProps>({
+export const baseProps = () => ({
+  editable: {
+    type: [Boolean, Object] as PropType<InternalBlockProps['editable']>,
+    default: undefined as InternalBlockProps['editable'],
+  },
+  copyable: {
+    type: [Boolean, Object] as PropType<InternalBlockProps['copyable']>,
+    default: undefined as InternalBlockProps['copyable'],
+  },
+  prefixCls: String,
+  component: String,
+  type: String as PropType<BaseType>,
+  disabled: { type: Boolean, default: undefined },
+  ellipsis: {
+    type: [Boolean, Object] as PropType<InternalBlockProps['ellipsis']>,
+    default: undefined as InternalBlockProps['ellipsis'],
+  },
+  code: { type: Boolean, default: undefined },
+  mark: { type: Boolean, default: undefined },
+  underline: { type: Boolean, default: undefined },
+  delete: { type: Boolean, default: undefined },
+  strong: { type: Boolean, default: undefined },
+  keyboard: { type: Boolean, default: undefined },
+  content: String,
+  'onUpdate:content': Function as PropType<(content: string) => void>,
+});
+
+const Base = defineComponent({
   name: 'Base',
   inheritAttrs: false,
-  emits: ['update:content'],
+  props: baseProps(),
+  // emits: ['update:content'],
   setup(props, { slots, attrs, emit }) {
-    const { prefixCls } = useConfigInject('typography', props);
+    const { prefixCls, direction } = useConfigInject('typography', props);
 
     const state = reactive({
       edit: false,
@@ -362,12 +390,12 @@ const Base = defineComponent<InternalBlockProps>({
     function renderEdit() {
       if (!props.editable) return;
 
-      const { tooltip } = props.editable as EditConfig;
+      const { tooltip, triggerType = ['icon'] } = props.editable as EditConfig;
       const icon = slots.editableIcon ? slots.editableIcon() : <EditOutlined role="button" />;
       const title = slots.editableTooltip ? slots.editableTooltip() : state.editStr;
       const ariaLabel = typeof title === 'string' ? title : '';
 
-      return (
+      return triggerType.indexOf('icon') !== -1 ? (
         <Tooltip key="edit" title={tooltip === false ? '' : title}>
           <TransButton
             ref={editIcon}
@@ -378,7 +406,7 @@ const Base = defineComponent<InternalBlockProps>({
             {icon}
           </TransButton>
         </Tooltip>
-      );
+      ) : null;
     }
 
     function renderCopy() {
@@ -428,6 +456,8 @@ const Base = defineComponent<InternalBlockProps>({
           onChange={onContentChange}
           onCancel={onEditCancel}
           onEnd={onEnd}
+          direction={direction.value}
+          v-slots={{ enterIcon: slots.editableEnterIcon }}
         />
       );
     }
@@ -437,7 +467,7 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     return () => {
-      const { editing } = editable.value;
+      const { editing, triggerType = ['icon'] } = editable.value;
       const children =
         props.ellipsis || props.editable
           ? props.content !== undefined
@@ -463,7 +493,7 @@ const Base = defineComponent<InternalBlockProps>({
               ...restProps
             } = {
               ...props,
-              ...attrs,
+              ...(attrs as HTMLAttributes),
             };
             const { rows, suffix, tooltip } = ellipsis.value;
 
@@ -485,6 +515,7 @@ const Base = defineComponent<InternalBlockProps>({
               'underline',
               'strong',
               'keyboard',
+              'onUpdate:content',
             ]);
 
             const cssEllipsis = canUseCSSEllipsis.value;
@@ -538,7 +569,7 @@ const Base = defineComponent<InternalBlockProps>({
                       [`${prefixCls.value}-${type}`]: type,
                       [`${prefixCls.value}-disabled`]: disabled,
                       [`${prefixCls.value}-ellipsis`]: rows,
-                      [`${prefixCls.value}-single-line`]: rows === 1,
+                      [`${prefixCls.value}-single-line`]: rows === 1 && !state.isEllipsis,
                       [`${prefixCls.value}-ellipsis-single-line`]: cssTextOverflow,
                       [`${prefixCls.value}-ellipsis-multiple-line`]: cssLineClamp,
                     },
@@ -549,6 +580,8 @@ const Base = defineComponent<InternalBlockProps>({
                     WebkitLineClamp: cssLineClamp ? rows : undefined,
                   }}
                   aria-label={ariaLabel}
+                  direction={direction.value}
+                  onClick={triggerType.indexOf('text') !== -1 ? onEditClick : () => {}}
                   {...textProps}
                 >
                   {showTooltip ? (
@@ -569,22 +602,4 @@ const Base = defineComponent<InternalBlockProps>({
   },
 });
 
-export const baseProps = () => ({
-  editable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  copyable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  prefixCls: PropTypes.string,
-  component: PropTypes.string,
-  type: PropTypes.oneOf(['secondary', 'success', 'danger', 'warning']),
-  disabled: PropTypes.looseBool,
-  ellipsis: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  code: PropTypes.looseBool,
-  mark: PropTypes.looseBool,
-  underline: PropTypes.looseBool,
-  delete: PropTypes.looseBool,
-  strong: PropTypes.looseBool,
-  keyboard: PropTypes.looseBool,
-  content: PropTypes.string,
-});
-
-Base.props = baseProps();
 export default Base;

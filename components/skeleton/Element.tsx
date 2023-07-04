@@ -1,16 +1,11 @@
-import type { CSSProperties, ExtractPropTypes, FunctionalComponent } from 'vue';
+import type { CSSProperties, ExtractPropTypes, FunctionalComponent, PropType } from 'vue';
 import classNames from '../_util/classNames';
-import { tuple } from '../_util/type';
-import PropTypes from '../_util/vue-types';
 
 export const skeletonElementProps = () => ({
-  prefixCls: PropTypes.string,
-  size: PropTypes.oneOfType([
-    PropTypes.oneOf(tuple('large', 'small', 'default')),
-    PropTypes.number,
-  ]),
-  shape: PropTypes.oneOf(tuple('circle', 'square', 'round')),
-  active: PropTypes.looseBool,
+  prefixCls: String,
+  size: [String, Number] as PropType<'large' | 'small' | 'default' | number>,
+  shape: String as PropType<'circle' | 'square' | 'round' | 'default'>,
+  active: { type: Boolean, default: undefined },
 });
 
 export type SkeletonElementProps = Partial<

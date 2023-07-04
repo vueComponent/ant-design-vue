@@ -1,4 +1,4 @@
-/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable property-no-vendor-prefix, at-rule-no-vendor-prefix */
 
 // Reboot
 //
@@ -199,6 +199,7 @@ sup {
 sub {
   bottom: -0.25em;
 }
+
 sup {
   top: -0.5em;
 }
@@ -280,10 +281,6 @@ img {
   border-style: none; // remove the border on images inside links in IE 10-.
 }
 
-svg:not(:root) {
-  overflow: hidden; // Hide the overflow in IE
-}
-
 // Avoid 300ms click delay on touch devices that support the `touch-action` CSS property.
 //
 // In particular, unlike most other browsers, IE11+Edge on Windows 10 on touch devices and IE Mobile 10-11
@@ -320,12 +317,6 @@ caption {
   color: @text-color-secondary;
   text-align: left;
   caption-side: bottom;
-}
-
-th {
-  // Matches default `<td>` alignment by inheriting from the `<body>`, or the
-  // closest parent with a set `text-align`.
-  text-align: inherit;
 }
 
 //

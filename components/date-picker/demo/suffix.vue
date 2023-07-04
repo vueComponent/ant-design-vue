@@ -28,7 +28,7 @@ Customize the suffix icon through `suffixIcon`
         <SmileOutlined />
       </template>
     </a-date-picker>
-    <a-range-picker @change="onChange">
+    <a-range-picker @change="onRangeChange">
       <template #suffixIcon>
         <SmileOutlined />
       </template>
@@ -40,7 +40,7 @@ Customize the suffix icon through `suffixIcon`
     </a-date-picker>
     <a-date-picker suffix-icon="ab" @change="onChange" />
     <a-date-picker suffix-icon="ab" placeholder="Select month" picker="month" @change="onChange" />
-    <a-range-picker suffix-icon="ab" @change="onChange" />
+    <a-range-picker suffix-icon="ab" @change="onRangeChange" />
     <a-date-picker suffix-icon="ab" placeholder="Select week" picker="week" @change="onChange" />
   </a-space>
 </template>
@@ -53,12 +53,16 @@ export default defineComponent({
     SmileOutlined,
   },
   setup() {
-    const onChange = (date: Dayjs, dateString: string[]) => {
+    const onChange = (date: Dayjs | string, dateString: string) => {
       console.log(date, dateString);
     };
 
+    const onRangeChange = (date: [Dayjs, Dayjs], dateString: [string, string]) => {
+      console.log(date, dateString);
+    };
     return {
       onChange,
+      onRangeChange,
     };
   },
 });

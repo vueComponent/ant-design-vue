@@ -23,8 +23,8 @@ Empty state placeholder.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | description | Customize description | string \| v-slot | - |  |
-| imageStyle | style of image | CSSProperties | - |  |
 | image | Customize image. Will tread as image url when string provided | string \| v-slot | false |  |
+| imageStyle | style of image | CSSProperties | - |  |
 
 ## Built-in images
 

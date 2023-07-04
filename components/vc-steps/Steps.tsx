@@ -38,7 +38,7 @@ export default defineComponent({
       finish: PropTypes.any,
       error: PropTypes.any,
     }).loose,
-    stepIcon: PropTypes.func,
+    stepIcon: Function,
   },
   slots: ['stepIcon', 'progressDot'],
   emits: ['change'],
@@ -79,7 +79,7 @@ export default defineComponent({
             // description: PropTypes.any,
             // icon: PropTypes.any,
             // status: PropTypes.oneOf(tuple('wait', 'process', 'finish', 'error')),
-            // disabled: PropTypes.looseBool,
+            // disabled: { type: Boolean, default: undefined },
             // title: PropTypes.any,
             // subTitle: PropTypes.any,
             const { prefixCls: pre = prefixCls, ...restProps } = child.props || {};

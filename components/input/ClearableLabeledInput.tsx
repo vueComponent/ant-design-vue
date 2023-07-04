@@ -1,6 +1,5 @@
 import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import type { PropType, VNode } from 'vue';
@@ -8,14 +7,7 @@ import { ref, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import type { Direction, SizeType } from '../config-provider';
 import type { MouseEventHandler } from '../_util/EventInterface';
-
-export function hasPrefixSuffix(propsAndSlots: any) {
-  return !!(propsAndSlots.prefix || propsAndSlots.suffix || propsAndSlots.allowClear);
-}
-
-function hasAddon(propsAndSlots: any) {
-  return !!(propsAndSlots.addonBefore || propsAndSlots.addonAfter);
-}
+import { getInputClassName, hasAddon, hasPrefixSuffix } from './util';
 
 const ClearableInputType = ['text', 'input'];
 
@@ -23,24 +15,25 @@ export default defineComponent({
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     inputType: PropTypes.oneOf(tuple('text', 'input')),
     value: PropTypes.any,
     defaultValue: PropTypes.any,
-    allowClear: PropTypes.looseBool,
+    allowClear: { type: Boolean, default: undefined },
     element: PropTypes.any,
-    handleReset: PropTypes.func,
-    disabled: PropTypes.looseBool,
+    handleReset: Function as PropType<MouseEventHandler>,
+    disabled: { type: Boolean, default: undefined },
     direction: { type: String as PropType<Direction> },
     size: { type: String as PropType<SizeType> },
     suffix: PropTypes.any,
     prefix: PropTypes.any,
     addonBefore: PropTypes.any,
     addonAfter: PropTypes.any,
-    readonly: PropTypes.looseBool,
-    focused: PropTypes.looseBool,
-    bordered: PropTypes.looseBool.def(true),
+    readonly: { type: Boolean, default: undefined },
+    focused: { type: Boolean, default: undefined },
+    bordered: { type: Boolean, default: true },
     triggerFocus: { type: Function as PropType<() => void> },
+    hidden: Boolean,
   },
   setup(props, { slots, attrs }) {
     const containerRef = ref();
@@ -99,6 +92,7 @@ export default defineComponent({
         direction,
         readonly,
         bordered,
+        hidden,
         addonAfter = slots.addonAfter,
         addonBefore = slots.addonBefore,
       } = props;
@@ -129,6 +123,7 @@ export default defineComponent({
           class={affixWrapperCls}
           style={attrs.style}
           onMouseup={onInputMouseUp}
+          hidden={hidden}
         >
           {prefixNode}
           {cloneElement(element, {
@@ -147,6 +142,7 @@ export default defineComponent({
         addonAfter = slots.addonAfter?.(),
         size,
         direction,
+        hidden,
       } = props;
       // Not wrap when there is not addons
       if (!hasAddon({ addonBefore, addonAfter })) {
@@ -177,7 +173,7 @@ export default defineComponent({
       // Need another wrapper for changing display:table to display:inline-block
       // and put style prop in wrapper
       return (
-        <span class={mergedGroupClassName} style={attrs.style}>
+        <span class={mergedGroupClassName} style={attrs.style} hidden={hidden}>
           <span class={mergedWrapperClassName}>
             {addonBeforeNode}
             {cloneElement(labeledElement, { style: null })}
@@ -193,6 +189,7 @@ export default defineComponent({
         allowClear,
         direction,
         bordered,
+        hidden,
         addonAfter = slots.addonAfter,
         addonBefore = slots.addonBefore,
       } = props;
@@ -212,7 +209,7 @@ export default defineComponent({
         },
       );
       return (
-        <span class={affixWrapperCls} style={attrs.style}>
+        <span class={affixWrapperCls} style={attrs.style} hidden={hidden}>
           {cloneElement(element, {
             style: null,
             value,

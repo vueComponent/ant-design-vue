@@ -10,19 +10,20 @@ import { getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
+import type { FocusEventHandler } from '../_util/EventInterface';
 
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
-const switchProps = {
-  id: PropTypes.string,
-  prefixCls: PropTypes.string,
+export const switchProps = () => ({
+  id: String,
+  prefixCls: String,
   size: PropTypes.oneOf(SwitchSizes),
-  disabled: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
   checkedChildren: PropTypes.any,
   unCheckedChildren: PropTypes.any,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  autofocus: PropTypes.looseBool,
-  loading: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
+  loading: { type: Boolean, default: undefined },
   checked: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.looseBool]),
   checkedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.looseBool]).def(
     true,
@@ -47,17 +48,19 @@ const switchProps = {
   'onUpdate:checked': {
     type: Function as PropType<(checked: CheckedType) => void>,
   },
-};
+  onBlur: Function as PropType<FocusEventHandler>,
+  onFocus: Function as PropType<FocusEventHandler>,
+});
 
-export type SwitchProps = Partial<ExtractPropTypes<typeof switchProps>>;
+export type SwitchProps = Partial<ExtractPropTypes<ReturnType<typeof switchProps>>>;
 
 const Switch = defineComponent({
   name: 'ASwitch',
   __ANT_SWITCH: true,
   inheritAttrs: false,
-  props: switchProps,
+  props: switchProps(),
   slots: ['checkedChildren', 'unCheckedChildren'],
-  emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown', 'blur'],
+  // emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown', 'blur'],
   setup(props, { attrs, slots, expose, emit }) {
     const formItemContext = useInjectFormItemContext();
     onBeforeMount(() => {
@@ -84,7 +87,7 @@ const Switch = defineComponent({
       },
     );
 
-    const { prefixCls } = useConfigInject('switch', props);
+    const { prefixCls, direction, size } = useConfigInject('switch', props);
     const refSwitchNode = ref();
     const focus = () => {
       refSwitchNode.value?.focus();
@@ -138,11 +141,12 @@ const Switch = defineComponent({
     };
 
     const classNames = computed(() => ({
-      [`${prefixCls.value}-small`]: props.size === 'small',
+      [`${prefixCls.value}-small`]: size.value === 'small',
       [`${prefixCls.value}-loading`]: props.loading,
       [`${prefixCls.value}-checked`]: checkedStatus.value,
       [`${prefixCls.value}-disabled`]: props.disabled,
       [prefixCls.value]: true,
+      [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
     }));
 
     return () => (
@@ -157,6 +161,8 @@ const Switch = defineComponent({
             'checkedValue',
             'unCheckedValue',
             'id',
+            'onChange',
+            'onUpdate:checked',
           ])}
           {...attrs}
           id={props.id ?? formItemContext.id.value}
@@ -171,7 +177,9 @@ const Switch = defineComponent({
           class={[attrs.class, classNames.value]}
           ref={refSwitchNode}
         >
-          {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
+          <div class={`${prefixCls.value}-handle`}>
+            {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
+          </div>
           <span class={`${prefixCls.value}-inner`}>
             {checkedStatus.value
               ? getPropsSlot(slots, props, 'checkedChildren')

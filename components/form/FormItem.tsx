@@ -1,4 +1,11 @@
-import type { PropType, ExtractPropTypes, ComputedRef, Ref } from 'vue';
+import type {
+  PropType,
+  ExtractPropTypes,
+  ComputedRef,
+  Ref,
+  ComponentPublicInstance,
+  HTMLAttributes,
+} from 'vue';
 import {
   watch,
   defineComponent,
@@ -20,13 +27,14 @@ import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
 import { tuple } from '../_util/type';
-import type { InternalNamePath, RuleError, RuleObject, ValidateOptions } from './interface';
+import type { InternalNamePath, Rule, RuleError, RuleObject, ValidateOptions } from './interface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';
 import type { ValidationRule } from './Form';
 import { useProvideFormItemContext } from './FormItemContext';
+import useDebounce from './utils/useDebounce';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
@@ -73,31 +81,40 @@ function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
     v: tempObj ? tempObj[keyArr[i]] : undefined,
   };
 }
-export const formItemProps = {
-  htmlFor: PropTypes.string,
-  prefixCls: PropTypes.string,
+export const formItemProps = () => ({
+  htmlFor: String,
+  prefixCls: String,
   label: PropTypes.any,
   help: PropTypes.any,
   extra: PropTypes.any,
-  labelCol: { type: Object as PropType<ColProps> },
-  wrapperCol: { type: Object as PropType<ColProps> },
-  hasFeedback: PropTypes.looseBool.def(false),
-  colon: PropTypes.looseBool,
+  labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
+  wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
+  hasFeedback: { type: Boolean, default: false },
+  colon: { type: Boolean, default: undefined },
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
   prop: { type: [String, Number, Array] as PropType<string | number | Array<string | number>> },
   name: { type: [String, Number, Array] as PropType<string | number | Array<string | number>> },
-  rules: PropTypes.oneOfType([Array, Object]),
-  autoLink: PropTypes.looseBool.def(true),
-  required: PropTypes.looseBool,
-  validateFirst: PropTypes.looseBool,
+  rules: [Array, Object] as PropType<Rule[] | Rule>,
+  autoLink: { type: Boolean, default: true },
+  required: { type: Boolean, default: undefined },
+  validateFirst: { type: Boolean, default: undefined },
   validateStatus: PropTypes.oneOf(tuple('', 'success', 'warning', 'error', 'validating')),
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
   noStyle: Boolean,
+});
+
+export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
+
+export type FormItemExpose = {
+  onFieldBlur: () => void;
+  onFieldChange: () => void;
+  clearValidate: () => void;
+  resetField: () => void;
 };
 
-export type FormItemProps = Partial<ExtractPropTypes<typeof formItemProps>>;
+export type FormItemInstance = ComponentPublicInstance<FormItemProps, FormItemExpose>;
 
 let indexGuid = 0;
 
@@ -108,7 +125,7 @@ export default defineComponent({
   name: 'AFormItem',
   inheritAttrs: false,
   __ANT_NEW_FORM_ITEM: true,
-  props: formItemProps,
+  props: formItemProps(),
   slots: ['help', 'label', 'extra'],
   setup(props, { slots, attrs, expose }) {
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);
@@ -118,7 +135,6 @@ export default defineComponent({
     const fieldName = computed(() => props.name || props.prop);
     const errors = ref([]);
     const validateDisabled = ref(false);
-    const domErrorVisible = ref(false);
     const inputRef = ref();
     const namePath = computed(() => {
       const val = fieldName.value;
@@ -288,9 +304,11 @@ export default defineComponent({
         validateDisabled.value = false;
       });
     };
-
+    const htmlFor = computed(() => {
+      return props.htmlFor === undefined ? fieldId.value : props.htmlFor;
+    });
     const onLabelClick = () => {
-      const id = fieldId.value;
+      const id = htmlFor.value;
       if (!id || !inputRef.value) {
         return;
       }
@@ -353,15 +371,24 @@ export default defineComponent({
     onBeforeUnmount(() => {
       formContext.removeField(eventKey);
     });
+    const debounceErrors = useDebounce(errors);
+    const mergedValidateStatus = computed(() => {
+      if (props.validateStatus !== undefined) {
+        return props.validateStatus;
+      } else if (debounceErrors.value.length) {
+        return 'error';
+      }
+      return validateState.value;
+    });
     const itemClassName = computed(() => ({
       [`${prefixCls.value}-item`]: true,
 
       // Status
-      [`${prefixCls.value}-item-has-feedback`]: validateState.value && props.hasFeedback,
-      [`${prefixCls.value}-item-has-success`]: validateState.value === 'success',
-      [`${prefixCls.value}-item-has-warning`]: validateState.value === 'warning',
-      [`${prefixCls.value}-item-has-error`]: validateState.value === 'error',
-      [`${prefixCls.value}-item-is-validating`]: validateState.value === 'validating',
+      [`${prefixCls.value}-item-has-feedback`]: mergedValidateStatus.value && props.hasFeedback,
+      [`${prefixCls.value}-item-has-success`]: mergedValidateStatus.value === 'success',
+      [`${prefixCls.value}-item-has-warning`]: mergedValidateStatus.value === 'warning',
+      [`${prefixCls.value}-item-has-error`]: mergedValidateStatus.value === 'error',
+      [`${prefixCls.value}-item-is-validating`]: mergedValidateStatus.value === 'validating',
       [`${prefixCls.value}-item-hidden`]: props.hidden,
     }));
     return () => {
@@ -372,7 +399,9 @@ export default defineComponent({
           {...attrs}
           class={[
             itemClassName.value,
-            domErrorVisible.value || !!help ? `${prefixCls.value}-item-with-help` : '',
+            (help !== undefined && help !== null) || debounceErrors.value.length
+              ? `${prefixCls.value}-item-with-help`
+              : '',
             attrs.class,
           ]}
           key="row"
@@ -382,7 +411,7 @@ export default defineComponent({
                 {/* Label */}
                 <FormItemLabel
                   {...props}
-                  htmlFor={fieldId.value}
+                  htmlFor={htmlFor.value}
                   required={isRequired.value}
                   requiredMark={formContext.requiredMark.value}
                   prefixCls={prefixCls.value}
@@ -392,11 +421,11 @@ export default defineComponent({
                 {/* Input Group */}
                 <FormItemInput
                   {...props}
-                  errors={help !== undefined && help !== null ? toArray(help) : errors.value}
+                  errors={
+                    help !== undefined && help !== null ? toArray(help) : debounceErrors.value
+                  }
                   prefixCls={prefixCls.value}
-                  status={validateState.value}
-                  onDomErrorVisibleChange={(v: boolean) => (domErrorVisible.value = v)}
-                  validateStatus={validateState.value}
+                  status={mergedValidateStatus.value}
                   ref={inputRef}
                   help={help}
                   extra={props.extra ?? slots.extra?.()}

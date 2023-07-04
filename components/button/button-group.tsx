@@ -1,24 +1,23 @@
 import { computed, defineComponent } from 'vue';
 import { flattenChildren } from '../_util/props-util';
-import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SizeType } from '../config-provider';
+import UnreachableException from '../_util/unreachableException';
 
-const buttonGroupProps = {
-  prefixCls: PropTypes.string,
+export const buttonGroupProps = () => ({
+  prefixCls: String,
   size: {
     type: String as PropType<SizeType>,
   },
-};
-export { buttonGroupProps };
+});
 
-export type ButtonGroupProps = Partial<ExtractPropTypes<typeof buttonGroupProps>>;
+export type ButtonGroupProps = Partial<ExtractPropTypes<ReturnType<typeof buttonGroupProps>>>;
 
 export default defineComponent({
   name: 'AButtonGroup',
-  props: buttonGroupProps,
+  props: buttonGroupProps(),
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('btn-group', props);
     const classes = computed(() => {
@@ -33,8 +32,12 @@ export default defineComponent({
         case 'small':
           sizeCls = 'sm';
           break;
-        default:
+        case 'middle':
+        case undefined:
           break;
+        default:
+          // eslint-disable-next-line no-console
+          console.warn(new UnreachableException(size).error);
       }
       return {
         [`${prefixCls.value}`]: true,

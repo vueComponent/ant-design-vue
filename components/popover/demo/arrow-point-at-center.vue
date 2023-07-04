@@ -16,7 +16,7 @@ The arrow points to the center of the target element, which set `arrowPointAtCen
 
 </docs>
 <template>
-  <div>
+  <a-space>
     <a-popover placement="topLeft">
       <template #content>
         <p>Content</p>
@@ -37,5 +37,5 @@ The arrow points to the center of the target element, which set `arrowPointAtCen
       </template>
       <a-button>Arrow points to center / 箭头指向中心</a-button>
     </a-popover>
-  </div>
+  </a-space>
 </template>

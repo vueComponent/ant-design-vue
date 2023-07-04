@@ -37,7 +37,8 @@
       </template>
       <a-col :xxxl="20" :xxl="20" :xl="19" :lg="18" :md="18" :sm="24" :xs="24">
         <section :class="mainContainerClass">
-          <TopAd :is-c-n="isZhCN" />
+          <!-- <TopAd :is-c-n="isZhCN" /> -->
+          <WWAdsVue v-if="isZhCN" />
           <Demo v-if="isDemo" :page-data="pageData" :is-zh-c-n="isZhCN">
             <component :is="matchCom" />
           </Demo>
@@ -48,13 +49,18 @@
                 v-for="h in headers"
                 :key="h.title"
                 :href="h.href || `#${slugifyTitle(h.title)}`"
-                :title="h.title"
-              ></a-anchor-link>
+                :target="h.target"
+              >
+                <template #title>
+                  <LinkOutlined v-if="h.target" />
+                  {{ isZhCN ? h.title : h.enTitle || h.title }}
+                </template>
+              </a-anchor-link>
             </a-anchor>
           </a-affix>
         </section>
         <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
-          <a-dropdown placement="topCenter">
+          <a-dropdown placement="top">
             <template #overlay>
               <a-menu
                 :selected-keys="[themeMode.theme.value]"
@@ -73,7 +79,6 @@
         <Footer />
       </a-col>
     </a-row>
-    <RightBottomAd :is-c-n="isZhCN" :is-mobile="isMobile" />
   </div>
 </template>
 <script lang="ts">
@@ -90,9 +95,10 @@ import useMenus from '../hooks/useMenus';
 import TopAd from '../components/rice/top_rice.vue';
 import Sponsors from '../components/rice/sponsors.vue';
 import RightBottomAd from '../components/rice/right_bottom_rice.vue';
-import { CloseOutlined, MenuOutlined } from '@ant-design/icons-vue';
+import { CloseOutlined, MenuOutlined, LinkOutlined } from '@ant-design/icons-vue';
 import ThemeIcon from './ThemeIcon.vue';
 import surelyVueVue from '../components/surelyVue.vue';
+import WWAdsVue from '../components/rice/WWAds.vue';
 
 const rControl = /[\u0000-\u001f]/g;
 const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
@@ -112,6 +118,8 @@ export default defineComponent({
     MenuOutlined,
     ThemeIcon,
     surelyVueVue,
+    WWAdsVue,
+    LinkOutlined,
   },
   setup() {
     const visible = ref(false);
@@ -145,6 +153,9 @@ export default defineComponent({
         route.path.indexOf('/components') === 0 && route.path.indexOf('/components/overview') !== 0
       );
     });
+    const isTablePage = computed(() => {
+      return route.path.indexOf('/components/table') === 0;
+    });
     const matchCom = computed(() => {
       return route.matched[route.matched.length - 1]?.components?.default;
     });
@@ -155,11 +166,43 @@ export default defineComponent({
         : (matchCom.value as any)?.pageData,
     );
     const headers = computed(() => {
+      let tempHeaders = (pageData.value?.headers || []).filter((h: Header) => h.level === 2);
       if (isDemo.value) {
-        return [...demos.value, { title: 'API', href: '#API' }];
-      } else {
-        return (pageData.value?.headers || []).filter((h: Header) => h.level === 2);
+        tempHeaders = [...demos.value];
+        if (isTablePage.value) {
+          tempHeaders.push(
+            ...[
+              {
+                title: '大数据渲染',
+                enTitle: 'Virtualized Table',
+                href: 'https://surely.cool/doc/performance',
+                target: '_blank',
+              },
+              {
+                title: '行拖拽排序',
+                enTitle: 'Row Drag Sort',
+                href: 'https://surely.cool/doc/dragable#drag-row',
+                target: '_blank',
+              },
+              {
+                title: '列拖拽排序',
+                enTitle: 'Column Drag Sort',
+                href: 'https://surely.cool/doc/dragable#drag-column',
+                target: '_blank',
+              },
+              {
+                title: '更多高性能示例',
+                enTitle: 'More high-performance examples ',
+                href: 'https://surely.cool',
+                target: '_blank',
+              },
+            ],
+          );
+        }
+        tempHeaders.push({ title: 'API', href: '#API' });
       }
+
+      return tempHeaders;
     });
 
     const mainContainerClass = computed(() => {

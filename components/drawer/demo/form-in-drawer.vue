@@ -18,7 +18,7 @@ Use form in drawer with submit button.
 
 <template>
   <a-button type="primary" @click="showDrawer">
-    <PlusOutlined />
+    <template #icon><PlusOutlined /></template>
     New account
   </a-button>
   <a-drawer
@@ -80,7 +80,7 @@ Use form in drawer with submit button.
             <a-date-picker
               v-model:value="form.dateTime"
               style="width: 100%"
-              :get-popup-container="trigger => trigger.parentNode"
+              :get-popup-container="trigger => trigger.parentElement"
             />
           </a-form-item>
         </a-col>
@@ -97,9 +97,11 @@ Use form in drawer with submit button.
         </a-col>
       </a-row>
     </a-form>
-    <template #footer>
-      <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button>
-      <a-button type="primary" @click="onClose">Submit</a-button>
+    <template #extra>
+      <a-space>
+        <a-button @click="onClose">Cancel</a-button>
+        <a-button type="primary" @click="onClose">Submit</a-button>
+      </a-space>
     </template>
   </a-drawer>
 </template>
@@ -117,7 +119,7 @@ export default defineComponent({
       owner: '',
       type: '',
       approver: '',
-      dateTime: '',
+      dateTime: null,
       description: '',
     });
 

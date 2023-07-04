@@ -6,7 +6,6 @@ import ResponsiveObserve from '../../_util/responsiveObserve';
 function useBreakpoint(): Ref<ScreenMap> {
   const screens = ref<ScreenMap>({});
   let token = null;
-
   onMounted(() => {
     token = ResponsiveObserve.subscribe(supportScreens => {
       screens.value = supportScreens;

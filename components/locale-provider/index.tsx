@@ -1,6 +1,5 @@
 import type { App, VNode, PropType } from 'vue';
 import { provide, defineComponent, reactive, watch } from 'vue';
-import PropTypes from '../_util/vue-types';
 import type { ModalLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
@@ -9,6 +8,7 @@ import type { TransferLocale } from '../transfer';
 import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
 import type { PaginationLocale } from '../pagination/Pagination';
 import type { TableLocale } from '../table/interface';
+import type { UploadLocale } from '../upload/interface';
 
 interface TransferLocaleForEmpty {
   description: string;
@@ -18,7 +18,6 @@ export interface Locale {
   Pagination?: PaginationLocale;
   Table?: TableLocale;
   Popconfirm?: Record<string, any>;
-  Upload?: Record<string, any>;
   Form?: {
     optional?: string;
     defaultValidateMessages: ValidateMessages;
@@ -32,11 +31,17 @@ export interface Locale {
   Modal?: ModalLocale;
   Transfer?: Partial<TransferLocale>;
   Select?: Record<string, any>;
+  Upload?: UploadLocale;
   Empty?: TransferLocaleForEmpty;
   global?: Record<string, any>;
   PageHeader?: { back: string };
   Icon?: Record<string, any>;
-  Text?: Record<string, any>;
+  Text?: {
+    edit?: any;
+    copy?: any;
+    copied?: any;
+    expand?: any;
+  };
 }
 
 export interface LocaleProviderProps {
@@ -53,7 +58,7 @@ const LocaleProvider = defineComponent({
     locale: {
       type: Object as PropType<Locale>,
     },
-    ANT_MARK__: PropTypes.string,
+    ANT_MARK__: String,
   },
   setup(props, { slots }) {
     warning(

@@ -1,5 +1,4 @@
-import { tuple } from '../_util/type';
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 import buttonTypes from '../button/buttonTypes';
@@ -17,30 +16,45 @@ type Align = {
   useCssBottom?: boolean;
   useCssTransform?: boolean;
 };
+
+export type DropdownArrowOptions = {
+  pointAtCenter?: boolean;
+};
 const dropdownProps = () => ({
-  arrow: PropTypes.looseBool,
+  arrow: {
+    type: [Boolean, Object] as PropType<boolean | DropdownArrowOptions>,
+    default: undefined,
+  },
   trigger: {
     type: [Array, String] as PropType<
       ('click' | 'hover' | 'contextmenu')[] | 'click' | 'hover' | 'contextmenu'
     >,
   },
   overlay: PropTypes.any,
-  visible: PropTypes.looseBool,
-  disabled: PropTypes.looseBool,
+  visible: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
   align: { type: Object as PropType<Align> },
-  getPopupContainer: PropTypes.func,
-  prefixCls: PropTypes.string,
-  transitionName: PropTypes.string,
-  placement: PropTypes.oneOf(
-    tuple('topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter', 'bottomRight'),
-  ),
-  overlayClassName: PropTypes.string,
-  overlayStyle: PropTypes.style,
-  forceRender: PropTypes.looseBool,
-  mouseEnterDelay: PropTypes.number,
-  mouseLeaveDelay: PropTypes.number,
-  openClassName: PropTypes.string,
-  minOverlayWidthMatchTrigger: PropTypes.looseBool,
+  getPopupContainer: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
+  prefixCls: String,
+  transitionName: String,
+  placement: String as PropType<
+    | 'topLeft'
+    | 'topCenter'
+    | 'top'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomCenter'
+    | 'bottom'
+    | 'bottomRight'
+  >,
+  overlayClassName: String,
+  overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  forceRender: { type: Boolean, default: undefined },
+  mouseEnterDelay: Number,
+  mouseLeaveDelay: Number,
+  openClassName: String,
+  minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
+  destroyPopupOnHide: { type: Boolean, default: undefined },
   onVisibleChange: {
     type: Function as PropType<(val: boolean) => void>,
   },
@@ -49,17 +63,18 @@ const dropdownProps = () => ({
   },
 });
 
-const ButtonTypesProps = buttonTypes();
+const buttonTypesProps = buttonTypes();
 const dropdownButtonProps = () => ({
   ...dropdownProps(),
-  type: ButtonTypesProps.type,
-  size: PropTypes.oneOf(tuple('small', 'large')),
-  htmlType: ButtonTypesProps.htmlType,
-  href: PropTypes.string,
-  disabled: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
+  type: buttonTypesProps.type,
+  size: String as PropType<'small' | 'large'>,
+  htmlType: buttonTypesProps.htmlType,
+  href: String,
+  disabled: { type: Boolean, default: undefined },
+  prefixCls: String,
   icon: PropTypes.any,
-  title: PropTypes.string,
+  title: String,
+  loading: buttonTypesProps.loading,
   onClick: {
     type: Function as PropType<MouseEventHandler>,
   },

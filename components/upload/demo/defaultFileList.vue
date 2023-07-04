@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-使用 `defaultFileList` 设置已上传的内容。
+使用 `fileList` 设置已上传的内容。
 
 ## en-US
 
-Use `defaultFileList` for uploaded files when page init.
+Use `fileList` for uploaded files when page init.
 </docs>
 
 <template>

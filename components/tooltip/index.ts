@@ -6,7 +6,7 @@ export type {
   AdjustOverflow,
   PlacementsConfig,
   TooltipAlignConfig,
-  PlacementTypes,
+  TooltipPlacement,
 } from './Tooltip';
 
 export { tooltipProps };

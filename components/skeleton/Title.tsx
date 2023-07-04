@@ -1,16 +1,16 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 
-export const skeletonTitleProps = {
+export const skeletonTitleProps = () => ({
   prefixCls: String,
   width: { type: [Number, String] as PropType<string | number> },
-};
+});
 
-export type SkeletonTitleProps = Partial<ExtractPropTypes<typeof skeletonTitleProps>>;
+export type SkeletonTitleProps = Partial<ExtractPropTypes<ReturnType<typeof skeletonTitleProps>>>;
 
 const SkeletonTitle = defineComponent({
   name: 'SkeletonTitle',
-  props: skeletonTitleProps,
+  props: skeletonTitleProps(),
   setup(props) {
     return () => {
       const { prefixCls, width } = props;

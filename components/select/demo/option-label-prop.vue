@@ -10,10 +10,13 @@ title:
 
 使用 `optionLabelProp` 指定回填到选择框的 `Option` 属性。
 
+或者使用 `tagRender` 插槽自定义渲染节点
+
 ## en-US
 
 Spacified the prop name of Option which will be rendered in select box.
 
+or use `tagRender` slot for custom rendering of tags.
 </docs>
 
 <template>
@@ -23,7 +26,7 @@ Spacified the prop name of Option which will be rendered in select box.
       mode="multiple"
       style="width: 100%"
       placeholder="select one country"
-      option-label-prop="label"
+      option-label-prop="children"
     >
       <a-select-option value="china" label="China">
         <span role="img" aria-label="China">🇨🇳</span>
@@ -58,6 +61,29 @@ Spacified the prop name of Option which will be rendered in select box.
     </a-select>
     <span>Note: v-slot:option support from v2.2.5</span>
   </a-space>
+  <br />
+  <br />
+  <a-space direction="vertical" style="width: 100%">
+    <a-select
+      v-model:value="value"
+      mode="multiple"
+      style="width: 100%"
+      placeholder="select one country"
+      :options="options"
+    >
+      <template #option="{ value: val, label, icon }">
+        <span role="img" :aria-label="val">{{ icon }}</span>
+        &nbsp;&nbsp;{{ label }}
+      </template>
+      <template #tagRender="{ value: val, label, closable, onClose, option }">
+        <a-tag :closable="closable" style="margin-right: 3px" @close="onClose">
+          {{ label }}&nbsp;&nbsp;
+          <span role="img" :aria-label="val">{{ option.icon }}</span>
+        </a-tag>
+      </template>
+    </a-select>
+    <span>Note: v-slot:tagRender support from v3.0</span>
+  </a-space>
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
@@ -91,7 +117,6 @@ export default defineComponent({
     watch(value, val => {
       console.log(`selected:`, val);
     });
-
     return {
       options,
       value,

@@ -11,19 +11,20 @@ const Slider = defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    defaultValue: PropTypes.number,
-    value: PropTypes.number,
-    disabled: PropTypes.looseBool,
-    autofocus: PropTypes.looseBool,
+    defaultValue: Number,
+    value: Number,
+    disabled: { type: Boolean, default: undefined },
+    autofocus: { type: Boolean, default: undefined },
     tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    reverse: PropTypes.looseBool,
-    min: PropTypes.number,
-    max: PropTypes.number,
+    reverse: { type: Boolean, default: undefined },
+    min: Number,
+    max: Number,
     ariaLabelForHandle: String,
     ariaLabelledByForHandle: String,
     ariaValueTextFormatterForHandle: String,
     startPoint: Number,
   },
+  emits: ['beforeChange', 'afterChange', 'change'],
   data() {
     const defaultValue = this.defaultValue !== undefined ? this.defaultValue : this.min;
     const value = this.value !== undefined ? this.value : defaultValue;
@@ -56,7 +57,7 @@ const Slider = defineComponent({
 
       this.setState({ sValue: nextValue });
       if (utils.isValueOutOfRange(newValue, this.$props)) {
-        this.__emit('change', nextValue);
+        this.$emit('change', nextValue);
       }
     },
     onChange(state) {
@@ -67,12 +68,12 @@ const Slider = defineComponent({
       }
 
       const changedValue = nextState.sValue;
-      this.__emit('change', changedValue);
+      this.$emit('change', changedValue);
     },
     onStart(position) {
       this.setState({ dragging: true });
       const { sValue } = this;
-      this.__emit('beforeChange', sValue);
+      this.$emit('beforeChange', sValue);
 
       const value = this.calcValueByPos(position);
 
@@ -87,7 +88,7 @@ const Slider = defineComponent({
       const { dragging } = this;
       this.removeDocumentEvents();
       if (dragging || force) {
-        this.__emit('afterChange', this.sValue);
+        this.$emit('afterChange', this.sValue);
       }
       this.setState({ dragging: false });
     },
@@ -110,7 +111,7 @@ const Slider = defineComponent({
         if (value === sValue) return;
 
         this.onChange({ sValue: value });
-        this.__emit('afterChange', value);
+        this.$emit('afterChange', value);
         this.onEnd();
       }
     },

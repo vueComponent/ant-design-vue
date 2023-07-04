@@ -36,12 +36,12 @@ Customize render list with Tree component.
           :tree-data="treeData"
           @check="
             (_, props) => {
-              onChecked(_, props, [...selectedKeys, ...targetKeys], onItemSelect);
+              onChecked(props, [...selectedKeys, ...targetKeys], onItemSelect);
             }
           "
           @select="
             (_, props) => {
-              onChecked(_, props, [...selectedKeys, ...targetKeys], onItemSelect);
+              onChecked(props, [...selectedKeys, ...targetKeys], onItemSelect);
             }
           "
         />
@@ -51,9 +51,8 @@ Customize render list with Tree component.
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import type { TreeProps } from 'ant-design-vue';
-import type { AntTreeNodeCheckedEvent } from 'ant-design-vue/es/tree';
-const tData: TreeProps['treeData'] = [
+import type { TransferProps, TreeProps } from 'ant-design-vue';
+const tData: TransferProps['dataSource'] = [
   { key: '0-0', title: '0-0' },
   {
     key: '0-1',
@@ -66,8 +65,8 @@ const tData: TreeProps['treeData'] = [
   { key: '0-2', title: '0-3' },
 ];
 
-const transferDataSource: TreeProps['treeData'] = [];
-function flatten(list: TreeProps['treeData'] = []) {
+const transferDataSource: TransferProps['dataSource'] = [];
+function flatten(list: TransferProps['dataSource'] = []) {
   list.forEach(item => {
     transferDataSource.push(item);
     flatten(item.children);
@@ -79,32 +78,28 @@ function isChecked(selectedKeys: (string | number)[], eventKey: string | number)
   return selectedKeys.indexOf(eventKey) !== -1;
 }
 
-function handleTreeData(
-  data: TreeProps['treeData'],
-  targetKeys: string[] = [],
-): TreeProps['treeData'] {
+function handleTreeData(data: TransferProps['dataSource'], targetKeys: string[] = []) {
   data.forEach(item => {
     item['disabled'] = targetKeys.includes(item.key as any);
     if (item.children) {
       handleTreeData(item.children, targetKeys);
     }
   });
-  return data;
+  return data as TreeProps['treeData'];
 }
 
 export default defineComponent({
   setup() {
     const targetKeys = ref<string[]>([]);
 
-    const dataSource = ref<TreeProps['treeData']>(transferDataSource);
+    const dataSource = ref(transferDataSource);
 
-    const treeData = computed<TreeProps['treeData']>(() => {
+    const treeData = computed(() => {
       return handleTreeData(tData, targetKeys.value);
     });
 
     const onChecked = (
-      _: Record<string, string[]>,
-      e: AntTreeNodeCheckedEvent,
+      e: Parameters<TreeProps['onCheck']>[1] | Parameters<TreeProps['onSelect']>[1],
       checkedKeys: string[],
       onItemSelect: (n: any, c: boolean) => void,
     ) => {

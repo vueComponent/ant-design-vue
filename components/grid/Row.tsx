@@ -1,8 +1,7 @@
-import type { ExtractPropTypes, CSSProperties } from 'vue';
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
-import PropTypes from '../_util/vue-types';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -18,20 +17,22 @@ export interface rowContextState {
   gutter?: [number, number];
 }
 
-const rowProps = {
-  type: PropTypes.oneOf(['flex']),
-  align: PropTypes.oneOf(RowAligns),
-  justify: PropTypes.oneOf(RowJustify),
-  prefixCls: PropTypes.string,
-  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
-  wrap: PropTypes.looseBool,
-};
+export const rowProps = () => ({
+  align: String as PropType<typeof RowAligns[number]>,
+  justify: String as PropType<typeof RowJustify[number]>,
+  prefixCls: String,
+  gutter: {
+    type: [Number, Array] as PropType<Gutter | [Gutter, Gutter]>,
+    default: 0 as Gutter | [Gutter, Gutter],
+  },
+  wrap: { type: Boolean, default: undefined },
+});
 
-export type RowProps = Partial<ExtractPropTypes<typeof rowProps>>;
+export type RowProps = Partial<ExtractPropTypes<ReturnType<typeof rowProps>>>;
 
 const ARow = defineComponent({
   name: 'ARow',
-  props: rowProps,
+  props: rowProps(),
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('row', props);
 

@@ -1,5 +1,4 @@
 import { useInjectTreeContext } from './contextTypes';
-import { getDataAndAria } from './util';
 import Indent from './Indent';
 import { convertNodePropsToEventData } from './utils/treeUtil';
 import {
@@ -16,6 +15,7 @@ import classNames from '../_util/classNames';
 import { warning } from '../vc-util/warning';
 import type { DragNodeEvent, Key } from './interface';
 import pick from 'lodash-es/pick';
+import pickAttrs from '../_util/pickAttrs';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
@@ -248,6 +248,20 @@ export default defineComponent({
       onNodeExpand(e, eventData.value);
     };
 
+    const isDraggable = () => {
+      const { data } = props;
+      const { draggable } = context.value;
+      return !!(draggable && (!draggable.nodeDraggable || draggable.nodeDraggable(data)));
+    };
+
+    // ==================== Render: Drag Handler ====================
+    const renderDragHandler = () => {
+      const { draggable, prefixCls } = context.value;
+      return draggable?.icon ? (
+        <span class={`${prefixCls}-draggable-icon`}>{draggable.icon}</span>
+      ) : null;
+    };
+
     const renderSwitcherIconDom = () => {
       const {
         switcherIcon: switcherIconFromProps = slots.switcherIcon ||
@@ -368,9 +382,9 @@ export default defineComponent({
         dragOverNodeKey,
         direction,
       } = context.value;
-      const mergedDraggable = draggable !== false;
+      const rootDraggable = draggable !== false;
       // allowDrop is calculated in Tree.tsx, there is no need for calc it here
-      const showIndicator = !disabled && mergedDraggable && dragOverNodeKey === eventKey;
+      const showIndicator = !disabled && rootDraggable && dragOverNodeKey === eventKey;
       return showIndicator
         ? dropIndicatorRender({ dropPosition, dropLevelOffset, indent, prefixCls, direction })
         : null;
@@ -396,12 +410,10 @@ export default defineComponent({
         prefixCls,
         showIcon,
         icon: treeIcon,
-        draggable,
         loadData,
         // slots: contextSlots,
       } = context.value;
       const disabled = isDisabled.value;
-      const mergedDraggable = typeof draggable === 'function' ? draggable(data) : draggable;
 
       const wrapClass = `${prefixCls}-node-content-wrapper`;
 
@@ -443,16 +455,12 @@ export default defineComponent({
             `${wrapClass}`,
             `${wrapClass}-${nodeState.value || 'normal'}`,
             !disabled && (selected || dragNodeHighlight.value) && `${prefixCls}-node-selected`,
-            !disabled && mergedDraggable && 'draggable',
           )}
-          draggable={(!disabled && mergedDraggable) || undefined}
-          aria-grabbed={(!disabled && mergedDraggable) || undefined}
           onMouseenter={onMouseEnter}
           onMouseleave={onMouseLeave}
           onContextmenu={onContextmenu}
           onClick={onSelectorClick}
           onDblclick={onSelectorDoubleClick}
-          onDragstart={mergedDraggable ? onDragStart : undefined}
         >
           {$icon}
           {$title}
@@ -478,15 +486,28 @@ export default defineComponent({
         active,
         data,
         onMousemove,
+        selectable,
         ...otherProps
       } = { ...props, ...attrs };
-      const { prefixCls, filterTreeNode, draggable, keyEntities, dropContainerKey, dropTargetKey } =
-        context.value;
+      const {
+        prefixCls,
+        filterTreeNode,
+        keyEntities,
+        dropContainerKey,
+        dropTargetKey,
+        draggingNodeKey,
+      } = context.value;
       const disabled = isDisabled.value;
-      const dataOrAriaAttributeProps = getDataAndAria(otherProps);
+      const dataOrAriaAttributeProps = pickAttrs(otherProps, { aria: true, data: true });
       const { level } = keyEntities[eventKey] || {};
       const isEndNode = isEnd[isEnd.length - 1];
-      const mergedDraggable = typeof draggable === 'function' ? draggable(data) : draggable;
+
+      const mergedDraggable = isDraggable();
+      const draggableWithoutDisabled = !disabled && mergedDraggable;
+
+      const dragging = draggingNodeKey === eventKey;
+      const ariaSelected = selectable !== undefined ? { 'aria-selected': !!selectable } : undefined;
+
       return (
         <div
           ref={domRef}
@@ -499,7 +520,9 @@ export default defineComponent({
             [`${prefixCls}-treenode-loading`]: loading,
             [`${prefixCls}-treenode-active`]: active,
             [`${prefixCls}-treenode-leaf-last`]: isEndNode,
+            [`${prefixCls}-treenode-draggable`]: draggableWithoutDisabled,
 
+            dragging,
             'drop-target': dropTargetKey === eventKey,
             'drop-container': dropContainerKey === eventKey,
             'drag-over': !disabled && dragOver,
@@ -508,15 +531,22 @@ export default defineComponent({
             'filter-node': filterTreeNode && filterTreeNode(eventData.value),
           })}
           style={attrs.style}
+          // Draggable config
+          draggable={draggableWithoutDisabled}
+          aria-grabbed={dragging}
+          onDragstart={draggableWithoutDisabled ? onDragStart : undefined}
+          // Drop config
           onDragenter={mergedDraggable ? onDragEnter : undefined}
           onDragover={mergedDraggable ? onDragOver : undefined}
           onDragleave={mergedDraggable ? onDragLeave : undefined}
           onDrop={mergedDraggable ? onDrop : undefined}
           onDragend={mergedDraggable ? onDragEnd : undefined}
           onMousemove={onMousemove}
+          {...ariaSelected}
           {...dataOrAriaAttributeProps}
         >
           <Indent prefixCls={prefixCls} level={level} isStart={isStart} isEnd={isEnd} />
+          {renderDragHandler()}
           {renderSwitcher()}
           {renderCheckbox()}
           {renderSelector()}

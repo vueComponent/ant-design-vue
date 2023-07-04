@@ -1,5 +1,5 @@
 import type { VueNode } from '../_util/type';
-import { tuple } from '../_util/type';
+
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue';
 import { getPropsSlot } from '../_util/props-util';
@@ -10,34 +10,36 @@ import { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
 import { useInjectSize } from '../_util/hooks/useSize';
+import eagerComputed from '../_util/eagerComputed';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
-export const avatarProps = {
-  prefixCls: PropTypes.string,
-  shape: PropTypes.oneOf(tuple('circle', 'square')).def('circle'),
+export const avatarProps = () => ({
+  prefixCls: String,
+  shape: { type: String as PropType<'circle' | 'square'>, default: 'circle' },
   size: {
     type: [Number, String, Object] as PropType<AvatarSize>,
     default: (): AvatarSize => 'default',
   },
-  src: PropTypes.string,
+  src: String,
   /** Srcset of image avatar */
-  srcset: PropTypes.string,
+  srcset: String,
   icon: PropTypes.any,
-  alt: PropTypes.string,
-  gap: PropTypes.number,
-  draggable: PropTypes.bool,
+  alt: String,
+  gap: Number,
+  draggable: { type: Boolean, default: undefined },
+  crossOrigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
   loadError: {
     type: Function as PropType<() => boolean>,
   },
-};
+});
 
-export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>;
+export type AvatarProps = Partial<ExtractPropTypes<ReturnType<typeof avatarProps>>>;
 
 const Avatar = defineComponent({
   name: 'AAvatar',
   inheritAttrs: false,
-  props: avatarProps,
+  props: avatarProps(),
   slots: ['icon'],
   setup(props, { slots, attrs }) {
     const isImgExist = ref(true);
@@ -50,9 +52,11 @@ const Avatar = defineComponent({
     const { prefixCls } = useConfigInject('avatar', props);
 
     const groupSize = useInjectSize();
-
+    const size = computed(() => {
+      return props.size === 'default' ? groupSize.value : props.size;
+    });
     const screens = useBreakpoint();
-    const responsiveSize = computed(() => {
+    const responsiveSize = eagerComputed(() => {
       if (typeof props.size !== 'object') {
         return undefined;
       }
@@ -125,27 +129,26 @@ const Avatar = defineComponent({
     });
 
     return () => {
-      const { shape, size: customSize, src, alt, srcset, draggable } = props;
+      const { shape, src, alt, srcset, draggable, crossOrigin } = props;
       const icon = getPropsSlot(slots, props, 'icon');
       const pre = prefixCls.value;
-      const size = customSize === 'default' ? groupSize.value : customSize;
       const classString = {
         [`${attrs.class}`]: !!attrs.class,
         [pre]: true,
-        [`${pre}-lg`]: size === 'large',
-        [`${pre}-sm`]: size === 'small',
+        [`${pre}-lg`]: size.value === 'large',
+        [`${pre}-sm`]: size.value === 'small',
         [`${pre}-${shape}`]: shape,
         [`${pre}-image`]: src && isImgExist.value,
         [`${pre}-icon`]: icon,
       };
 
       const sizeStyle: CSSProperties =
-        typeof size === 'number'
+        typeof size.value === 'number'
           ? {
-              width: `${size}px`,
-              height: `${size}px`,
-              lineHeight: `${size}px`,
-              fontSize: icon ? `${size / 2}px` : '18px',
+              width: `${size.value}px`,
+              height: `${size.value}px`,
+              lineHeight: `${size.value}px`,
+              fontSize: icon ? `${size.value / 2}px` : '18px',
             }
           : {};
 
@@ -159,6 +162,7 @@ const Avatar = defineComponent({
             srcset={srcset}
             onError={handleImgLoadError}
             alt={alt}
+            crossorigin={crossOrigin}
           />
         );
       } else if (icon) {
@@ -171,9 +175,9 @@ const Avatar = defineComponent({
           transform: transformString,
         };
         const sizeChildrenStyle =
-          typeof size === 'number'
+          typeof size.value === 'number'
             ? {
-                lineHeight: `${size}px`,
+                lineHeight: `${size.value}px`,
               }
             : {};
         childrenToRender = (

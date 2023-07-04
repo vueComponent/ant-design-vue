@@ -31,10 +31,11 @@ Large size tabs are usally used in page header, and small size could be used in 
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import type { TabsProps } from 'ant-design-vue';
 
 export default defineComponent({
   setup() {
-    const size = ref('small');
+    const size = ref<TabsProps['size']>('small');
     const activeKey = ref('1');
     return {
       size,

@@ -62,6 +62,7 @@ set resizable for drag column
 </template>
 <script lang="ts">
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
+import type { TableColumnsType } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 
 const data = [
@@ -94,9 +95,8 @@ export default defineComponent({
     DownOutlined,
   },
   setup() {
-    const columns = ref([
+    const columns = ref<TableColumnsType>([
       {
-        name: 'Name',
         dataIndex: 'name',
         key: 'name',
         resizable: true,

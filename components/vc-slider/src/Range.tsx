@@ -6,6 +6,7 @@ import Track from './common/Track';
 import createSlider from './common/createSlider';
 import * as utils from './utils';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
+import { defineComponent } from 'vue';
 
 const trimAlignValue = ({
   value,
@@ -36,26 +37,25 @@ const trimAlignValue = ({
 const rangeProps = {
   defaultValue: PropTypes.arrayOf(PropTypes.number),
   value: PropTypes.arrayOf(PropTypes.number),
-  count: PropTypes.number,
+  count: Number,
   pushable: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.number])),
-  allowCross: PropTypes.looseBool,
-  disabled: PropTypes.looseBool,
-  reverse: PropTypes.looseBool,
+  allowCross: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
+  reverse: { type: Boolean, default: undefined },
   tabindex: PropTypes.arrayOf(PropTypes.number),
-  prefixCls: PropTypes.string,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  autofocus: PropTypes.looseBool,
+  prefixCls: String,
+  min: Number,
+  max: Number,
+  autofocus: { type: Boolean, default: undefined },
   ariaLabelGroupForHandles: Array,
   ariaLabelledByGroupForHandles: Array,
   ariaValueTextFormatterGroupForHandles: Array,
-  draggableTrack: PropTypes.looseBool,
+  draggableTrack: { type: Boolean, default: undefined },
 };
-const Range = {
+const Range = defineComponent({
   name: 'Range',
-  inheritAttrs: false,
-  displayName: 'Range',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(rangeProps, {
     count: 1,
     allowCross: true,
@@ -66,6 +66,8 @@ const Range = {
     ariaLabelledByGroupForHandles: [],
     ariaValueTextFormatterGroupForHandles: [],
   }),
+  emits: ['beforeChange', 'afterChange', 'change'],
+  displayName: 'Range',
   data() {
     const { count, min, max } = this;
     const initialValue = Array(...Array(count + 1)).map(() => min);
@@ -136,7 +138,7 @@ const Range = {
         const newValues = value.map(v => {
           return utils.ensureValueInRange(v, this.$props);
         });
-        this.__emit('change', newValues);
+        this.$emit('change', newValues);
       }
     },
     onChange(state) {
@@ -159,7 +161,7 @@ const Range = {
 
       const data = { ...this.$data, ...state };
       const changedValue = data.bounds;
-      this.__emit('change', changedValue);
+      this.$emit('change', changedValue);
     },
 
     positionGetValue(position) {
@@ -176,7 +178,7 @@ const Range = {
     },
     onStart(position) {
       const { bounds } = this;
-      this.__emit('beforeChange', bounds);
+      this.$emit('beforeChange', bounds);
 
       const value = this.calcValueByPos(position);
       this.startValue = value;
@@ -203,7 +205,7 @@ const Range = {
         this.dragTrack = false;
       }
       if (sHandle !== null || force) {
-        this.__emit('afterChange', this.bounds);
+        this.$emit('afterChange', this.bounds);
       }
       this.setState({ sHandle: null });
     },
@@ -332,7 +334,7 @@ const Range = {
         // so trigger focus will invoke handler's onEnd and another handler's onStart too early,
         // cause onBeforeChange and onAfterChange receive wrong value.
         // here use setState callback to hack，but not elegant
-        this.__emit('afterChange', nextBounds);
+        this.$emit('afterChange', nextBounds);
         this.setState({}, () => {
           this.handlesRefs[nextHandle].focus();
         });
@@ -518,6 +520,6 @@ const Range = {
       };
     },
   },
-};
+});
 
 export default createSlider(Range);

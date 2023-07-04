@@ -68,13 +68,8 @@ import {
   AppstoreOutlined,
   SettingOutlined,
 } from '@ant-design/icons-vue';
+import type { MenuProps } from 'ant-design-vue';
 
-interface MenuInfo {
-  key: string;
-  keyPath: string[];
-  item: any;
-  domEvent: MouseEvent;
-}
 export default defineComponent({
   components: {
     MailOutlined,
@@ -87,8 +82,8 @@ export default defineComponent({
       selectedKeys: [],
       openKeys: [],
     });
-    const handleClick = (e: MenuInfo) => {
-      console.log('click ', e);
+    const handleClick: MenuProps['onClick'] = menuInfo => {
+      console.log('click ', menuInfo);
     };
     return {
       ...toRefs(state),

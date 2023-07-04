@@ -11,11 +11,13 @@ import { getTimeProps, Components } from '.';
 import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
+import type { CommonProps, RangePickerProps } from './props';
 import { commonProps, rangePickerProps } from './props';
 import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 import { useInjectFormItemContext } from '../../form/FormItemContext';
+import omit from '../../_util/omit';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -32,27 +34,17 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
     slots: [
       'suffixIcon',
       // 'clearIcon',
-      // 'prevIcon',
-      // 'nextIcon',
-      // 'superPrevIcon',
-      // 'superNextIcon',
+      'prevIcon',
+      'nextIcon',
+      'superPrevIcon',
+      'superNextIcon',
       // 'panelRender',
       'dateRender',
       'renderExtraFooter',
       // 'separator',
     ],
-    emits: [
-      'change',
-      'panelChange',
-      'ok',
-      'openChange',
-      'update:value',
-      'update:open',
-      'calendarChange',
-      'focus',
-      'blur',
-    ],
-    setup(props, { expose, slots, attrs, emit }) {
+    setup(_props, { expose, slots, attrs, emit }) {
+      const props = _props as unknown as CommonProps<DateType> & RangePickerProps<DateType>;
       const formItemContext = useInjectFormItemContext();
       devWarning(
         !attrs.getCalendarContainer,
@@ -161,14 +153,17 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
           id = formItemContext.id.value,
           ...restProps
         } = p;
+        delete restProps['onUpdate:value'];
+        delete restProps['onUpdate:open'];
         const { format, showTime } = p as any;
 
         let additionalOverrideProps: any = {};
-
         additionalOverrideProps = {
           ...additionalOverrideProps,
           ...(showTime ? getTimeProps({ format, picker, ...showTime }) : {}),
-          ...(picker === 'time' ? getTimeProps({ format, ...restProps, picker }) : {}),
+          ...(picker === 'time'
+            ? getTimeProps({ format, ...omit(restProps, ['disabledTime']), picker })
+            : {}),
         };
         const pre = prefixCls.value;
         return (
@@ -208,10 +203,10 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             prefixCls={pre}
             getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
             generateConfig={generateConfig}
-            prevIcon={<span class={`${pre}-prev-icon`} />}
-            nextIcon={<span class={`${pre}-next-icon`} />}
-            superPrevIcon={<span class={`${pre}-super-prev-icon`} />}
-            superNextIcon={<span class={`${pre}-super-next-icon`} />}
+            prevIcon={slots.prevIcon?.() || <span class={`${pre}-prev-icon`} />}
+            nextIcon={slots.nextIcon?.() || <span class={`${pre}-next-icon`} />}
+            superPrevIcon={slots.superPrevIcon?.() || <span class={`${pre}-super-prev-icon`} />}
+            superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
             components={Components}
             direction={direction.value}
             onChange={onChange}

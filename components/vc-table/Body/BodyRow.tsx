@@ -7,10 +7,12 @@ import { useInjectTable } from '../context/TableContext';
 import { useInjectBody } from '../context/BodyContext';
 import classNames from '../../_util/classNames';
 import { parseStyleText } from '../../_util/props-util';
+import type { MouseEventHandler } from '../../_util/EventInterface';
 
 export interface BodyRowProps<RecordType> {
   record: RecordType;
   index: number;
+  renderIndex: number;
   recordKey: Key;
   expandedKeys: Set<Key>;
   rowComponent: CustomizeComponent;
@@ -29,6 +31,7 @@ export default defineComponent<BodyRowProps<unknown>>({
   props: [
     'record',
     'index',
+    'renderIndex',
     'recordKey',
     'expandedKeys',
     'rowComponent',
@@ -74,14 +77,12 @@ export default defineComponent<BodyRowProps<unknown>>({
       () => props.customRow?.(props.record, props.index) || {},
     );
 
-    const onClick = (event, ...args) => {
+    const onClick: MouseEventHandler = (event, ...args) => {
       if (bodyContext.expandRowByClick && mergedExpandable.value) {
         onInternalTriggerExpand(props.record, event);
       }
 
-      if (additionalProps.value?.onClick) {
-        additionalProps.value.onClick(event, ...args);
-      }
+      additionalProps.value?.onClick?.(event, ...args);
     };
 
     const computeRowClassName = computed(() => {
@@ -109,10 +110,6 @@ export default defineComponent<BodyRowProps<unknown>>({
       } = props;
       const { prefixCls, fixedInfoList, transformCellText } = tableContext;
       const {
-        fixHeader,
-        fixColumn,
-        horizonScroll,
-        componentWidth,
         flattenColumns,
         expandedRowClassName,
         indentSize,
@@ -147,7 +144,23 @@ export default defineComponent<BodyRowProps<unknown>>({
             if (column.customCell) {
               additionalCellProps = column.customCell(record, index, column);
             }
-
+            // not use slot to fix https://github.com/vueComponent/ant-design-vue/issues/5295
+            const appendNode =
+              colIndex === (expandIconColumnIndex || 0) && nestExpandable.value ? (
+                <>
+                  <span
+                    style={{ paddingLeft: `${indentSize * indent}px` }}
+                    class={`${prefixCls}-row-indent indent-level-${indent}`}
+                  />
+                  {expandIcon({
+                    prefixCls,
+                    expanded: expanded.value,
+                    expandable: hasNestChildren.value,
+                    record,
+                    onExpand: onInternalTriggerExpand,
+                  })}
+                </>
+              ) : null;
             return (
               <Cell
                 cellType="body"
@@ -159,35 +172,14 @@ export default defineComponent<BodyRowProps<unknown>>({
                 key={key}
                 record={record}
                 index={index}
+                renderIndex={props.renderIndex}
                 dataIndex={dataIndex}
                 customRender={customRender}
                 {...fixedInfo}
                 additionalProps={additionalCellProps}
                 column={column}
                 transformCellText={transformCellText}
-                v-slots={{
-                  // ============= Used for nest expandable =============
-                  appendNode:
-                    colIndex === (expandIconColumnIndex || 0) && nestExpandable.value
-                      ? () => {
-                          return (
-                            <>
-                              <span
-                                style={{ paddingLeft: `${indentSize * indent}px` }}
-                                class={`${prefixCls}-row-indent indent-level-${indent}`}
-                              />
-                              {expandIcon({
-                                prefixCls,
-                                expanded: expanded.value,
-                                expandable: hasNestChildren.value,
-                                record,
-                                onExpand: onInternalTriggerExpand,
-                              })}
-                            </>
-                          );
-                        }
-                      : undefined,
-                }}
+                appendNode={appendNode}
               />
             );
           })}
@@ -214,13 +206,10 @@ export default defineComponent<BodyRowProps<unknown>>({
               computedExpandedRowClassName,
             )}
             prefixCls={prefixCls}
-            fixHeader={fixHeader}
-            fixColumn={fixColumn}
-            horizonScroll={horizonScroll}
             component={RowComponent}
-            componentWidth={componentWidth}
             cellComponent={cellComponent}
             colSpan={flattenColumns.length}
+            isEmpty={false}
           >
             {expandContent}
           </ExpandedRow>

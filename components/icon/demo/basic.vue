@@ -17,14 +17,14 @@ Import icons from `@ant-design/icons-vue`, component name of icons with differen
 </docs>
 
 <template>
-  <div class="icons-list">
+  <a-space>
     <home-outlined />
     <setting-filled />
     <smile-outlined />
     <sync-outlined spin />
     <smile-outlined :rotate="180" />
     <loading-outlined />
-  </div>
+  </a-space>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
@@ -45,9 +45,3 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.icons-list :deep(.anticon) {
-  margin-right: 6px;
-  font-size: 24px;
-}
-</style>

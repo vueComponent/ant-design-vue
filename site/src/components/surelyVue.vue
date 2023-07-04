@@ -5,7 +5,7 @@
         <img height="80" src="https://www.surely.cool/surely-vue-logo.png" alt="" />
       </div>
       <div class="desc">
-        <div class="title">高性能 Surely Vue</div>
+        <div class="title">Surely Vue</div>
         <div class="sub-title">
           构建更快的网站
           <br />

@@ -1,23 +1,31 @@
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import type { SkeletonElementProps } from './Element';
+import { initDefaultProps } from '../_util/props-util';
 import Element, { skeletonElementProps } from './Element';
 
-export interface SkeletonButtonProps extends Omit<SkeletonElementProps, 'size'> {
-  size?: 'large' | 'small' | 'default';
-}
+export const skeletonButtonProps = () => {
+  return {
+    ...skeletonElementProps(),
+    size: String as PropType<'large' | 'small' | 'default'>,
+    block: Boolean,
+  };
+};
+
+export type SkeletonButtonProps = Partial<ExtractPropTypes<ReturnType<typeof skeletonButtonProps>>>;
 
 const SkeletonButton = defineComponent({
   name: 'ASkeletonButton',
-  props: { ...skeletonElementProps(), size: PropTypes.oneOf(tuple('large', 'small', 'default')) },
+  props: initDefaultProps(skeletonButtonProps(), {
+    size: 'default',
+  }),
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
     const cls = computed(() =>
       classNames(prefixCls.value, `${prefixCls.value}-element`, {
         [`${prefixCls.value}-active`]: props.active,
+        [`${prefixCls.value}-block`]: props.block,
       }),
     );
     return () => {

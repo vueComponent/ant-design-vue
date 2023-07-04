@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import { initDefaultProps } from '../_util/props-util';
-import type { AvatarProps } from './Avatar';
+import type { SkeletonAvatarProps as AvatarProps } from './Avatar';
 import type { SkeletonTitleProps } from './Title';
 import Title from './Title';
 import type { SkeletonParagraphProps } from './Paragraph';
@@ -13,7 +13,7 @@ import Element from './Element';
 /* This only for skeleton internal. */
 type SkeletonAvatarProps = Omit<AvatarProps, 'active'>;
 
-export const skeletonProps = {
+export const skeletonProps = () => ({
   active: { type: Boolean, default: undefined },
   loading: { type: Boolean, default: undefined },
   prefixCls: String,
@@ -30,9 +30,9 @@ export const skeletonProps = {
     default: undefined as SkeletonParagraphProps | boolean,
   },
   round: { type: Boolean, default: undefined },
-};
+});
 
-export type SkeletonProps = Partial<ExtractPropTypes<typeof skeletonProps>>;
+export type SkeletonProps = Partial<ExtractPropTypes<ReturnType<typeof skeletonProps>>>;
 
 function getComponentProps<T>(prop: T | boolean | undefined): T | {} {
   if (prop && typeof prop === 'object') {
@@ -81,7 +81,7 @@ function getParagraphBasicProps(hasAvatar: boolean, hasTitle: boolean): Skeleton
 
 const Skeleton = defineComponent({
   name: 'ASkeleton',
-  props: initDefaultProps(skeletonProps, {
+  props: initDefaultProps(skeletonProps(), {
     avatar: false,
     title: true,
     paragraph: true,

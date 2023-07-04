@@ -25,13 +25,24 @@ exports[`renders ./components/modal/demo/button-props.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/confirm.vue correctly 1`] = `
-<div><button class="ant-btn" type="button">
-    <!----><span>Confirm</span>
-  </button><button class="ant-btn ant-btn-dashed" type="button">
-    <!----><span>Delete</span>
-  </button><button class="ant-btn ant-btn-dashed" type="button">
-    <!----><span>With extra props</span>
-  </button></div>
+<div class="ant-space ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+      <!----><span>Confirm</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+      <!----><span>With promise</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
+      <!----><span>Delete</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="padding-bottom: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
+      <!----><span>With extra props</span>
+    </button></div>
+  <!---->
+</div>
 `;
 
 exports[`renders ./components/modal/demo/confirm-promise.vue correctly 1`] = `
@@ -63,15 +74,24 @@ exports[`renders ./components/modal/demo/fullscreen.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/modal/demo/info.vue correctly 1`] = `
-<div><button class="ant-btn" type="button">
-    <!----><span>Info</span>
-  </button><button class="ant-btn" type="button">
-    <!----><span>Success</span>
-  </button><button class="ant-btn" type="button">
-    <!----><span>Error</span>
-  </button><button class="ant-btn" type="button">
-    <!----><span>Warning</span>
-  </button></div>
+<div class="ant-space ant-space-horizontal ant-space-align-center" style="flex-wrap: wrap; margin-bottom: -8px;">
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+      <!----><span>Info</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+      <!----><span>Success</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px; padding-bottom: 8px;"><button class="ant-btn" type="button">
+      <!----><span>Error</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="padding-bottom: 8px;"><button class="ant-btn" type="button">
+      <!----><span>Warning</span>
+    </button></div>
+  <!---->
+</div>
 `;
 
 exports[`renders ./components/modal/demo/locale.vue correctly 1`] = `
@@ -88,6 +108,14 @@ exports[`renders ./components/modal/demo/manual.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Open modal to close in 5s</span>
 </button>
+`;
+
+exports[`renders ./components/modal/demo/modal-render.vue correctly 1`] = `
+<div><button class="ant-btn ant-btn-primary" type="button">
+    <!----><span>Open Draggable Modal</span>
+  </button>
+  <!---->
+</div>
 `;
 
 exports[`renders ./components/modal/demo/position.vue correctly 1`] = `

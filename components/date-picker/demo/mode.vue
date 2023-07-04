@@ -39,9 +39,9 @@ import { Dayjs } from 'dayjs';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const mode1 = ref<string>('time');
-    const mode2 = ref<string[]>(['month', 'month']);
-    const value = ref<Dayjs[]>([]);
+    const mode1 = ref<any>('time');
+    const mode2 = ref<any>(['month', 'month']);
+    const value = ref<[Dayjs, Dayjs]>();
 
     const handleOpenChange1 = (open: boolean) => {
       if (open) {
@@ -49,15 +49,15 @@ export default defineComponent({
       }
     };
 
-    const handleChange = (val: Dayjs[]) => {
+    const handleChange = (val: [Dayjs, Dayjs]) => {
       value.value = val;
     };
 
-    const handlePanelChange1 = (_val: Dayjs[], mode: string) => {
+    const handlePanelChange1 = (_val: [Dayjs, Dayjs], mode: any) => {
       mode1.value = mode;
     };
 
-    const handlePanelChange2 = (val: Dayjs[], mode: string[]) => {
+    const handlePanelChange2 = (val: [Dayjs, Dayjs], mode: any[]) => {
       value.value = val;
       mode2.value = [
         mode[0] === 'date' ? 'month' : mode[0],

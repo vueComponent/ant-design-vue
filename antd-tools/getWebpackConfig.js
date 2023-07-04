@@ -75,7 +75,7 @@ function getWebpackConfig(modules) {
         'readline',
         'repl',
         'tls',
-      ].reduce((acc, name) => Object.assign({}, acc, { [name]: false }), {}),
+      ].reduce((acc, name) => Object.assign({}, acc, { [name]: 'empty' }), {}),
     },
 
     module: {
@@ -173,9 +173,9 @@ function getWebpackConfig(modules) {
               loader: 'less-loader',
               options: {
                 lessOptions: {
-                  sourceMap: true,
                   javascriptEnabled: true,
                 },
+                sourceMap: true,
               },
             },
           ],
@@ -274,7 +274,7 @@ All rights reserved.
     return [prodConfig, uncompressedConfig];
   }
 
-  return config;
+  return [config];
 }
 
 getWebpackConfig.webpack = webpack;

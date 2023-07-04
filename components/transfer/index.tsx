@@ -7,13 +7,13 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import type { RenderEmptyHandler } from '../config-provider';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';
@@ -64,7 +64,7 @@ export interface TransferLocale {
   removeCurrent: string;
 }
 
-export const transferProps = {
+export const transferProps = () => ({
   id: String,
   prefixCls: String,
   dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
@@ -76,7 +76,7 @@ export const transferProps = {
     type: [Function, Object] as PropType<((style: ListStyle) => CSSProperties) | CSSProperties>,
     default: () => ({}),
   },
-  operationStyle: PropTypes.style,
+  operationStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   titles: { type: Array as PropType<string[]> },
   operations: { type: Array as PropType<string[]> },
   showSearch: { type: Boolean, default: false },
@@ -90,14 +90,24 @@ export const transferProps = {
   children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
   oneWay: { type: Boolean, default: undefined },
   pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
-};
+  onChange: Function as PropType<
+    (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
+  >,
+  onSelectChange: Function as PropType<
+    (sourceSelectedKeys: string[], targetSelectedKeys: string[]) => void
+  >,
+  onSearch: Function as PropType<(direction: TransferDirection, value: string) => void>,
+  onScroll: Function as PropType<(direction: TransferDirection, e: UIEvent) => void>,
+  'onUpdate:targetKeys': Function as PropType<(keys: string[]) => void>,
+  'onUpdate:selectedKeys': Function as PropType<(keys: string[]) => void>,
+});
 
-export type TransferProps = Partial<ExtractPropTypes<typeof transferProps>>;
+export type TransferProps = Partial<ExtractPropTypes<ReturnType<typeof transferProps>>>;
 
 const Transfer = defineComponent({
   name: 'ATransfer',
   inheritAttrs: false,
-  props: transferProps,
+  props: transferProps(),
   slots: [
     'leftTitle',
     'rightTitle',
@@ -108,7 +118,7 @@ const Transfer = defineComponent({
     'rightSelectAllLabel',
     'footer',
   ],
-  emits: ['update:targetKeys', 'update:selectedKeys', 'change', 'search', 'scroll', 'selectChange'],
+  // emits: ['update:targetKeys', 'update:selectedKeys', 'change', 'search', 'scroll', 'selectChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
     const sourceSelectedKeys = ref([]);
@@ -249,14 +259,14 @@ const Transfer = defineComponent({
       emit('change', newTargetKeys, 'left', [...targetedKeys]);
     };
 
-    const handleScroll = (direction: TransferDirection, e: Event) => {
+    const handleScroll = (direction: TransferDirection, e: UIEvent) => {
       emit('scroll', direction, e);
     };
 
-    const handleLeftScroll = (e: Event) => {
+    const handleLeftScroll = (e: UIEvent) => {
       handleScroll('left', e);
     };
-    const handleRightScroll = (e: Event) => {
+    const handleRightScroll = (e: UIEvent) => {
       handleScroll('right', e);
     };
     const handleListStyle = (
@@ -351,7 +361,7 @@ const Transfer = defineComponent({
             renderList={children}
             onScroll={handleLeftScroll}
             disabled={disabled}
-            direction="left"
+            direction={direction.value === 'rtl' ? 'right' : 'left'}
             showSelectAll={showSelectAll}
             selectAllLabel={selectAllLabels[0] || slots.leftSelectAllLabel}
             pagination={mergedPagination}
@@ -389,7 +399,7 @@ const Transfer = defineComponent({
             renderList={children}
             onScroll={handleRightScroll}
             disabled={disabled}
-            direction="right"
+            direction={direction.value === 'rtl' ? 'left' : 'right'}
             showSelectAll={showSelectAll}
             selectAllLabel={selectAllLabels[1] || slots.rightSelectAllLabel}
             showRemove={oneWay}

@@ -21,12 +21,12 @@ import { filterEmpty } from '../_util/props-util';
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 
-const directoryTreeProps = {
+export const directoryTreeProps = () => ({
   ...treeProps(),
   expandAction: { type: [Boolean, String] as PropType<ExpandAction> },
-};
+});
 
-export type DirectoryTreeProps = Partial<ExtractPropTypes<typeof directoryTreeProps>>;
+export type DirectoryTreeProps = Partial<ExtractPropTypes<ReturnType<typeof directoryTreeProps>>>;
 
 function getIcon(props: AntdTreeNodeAttribute) {
   const { isLeaf, expanded } = props;
@@ -39,22 +39,22 @@ function getIcon(props: AntdTreeNodeAttribute) {
 export default defineComponent({
   name: 'ADirectoryTree',
   inheritAttrs: false,
-  props: initDefaultProps(directoryTreeProps, {
+  props: initDefaultProps(directoryTreeProps(), {
     showIcon: true,
     expandAction: 'click',
   }),
   slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
-  emits: [
-    'update:selectedKeys',
-    'update:checkedKeys',
-    'update:expandedKeys',
-    'expand',
-    'select',
-    'check',
-    'doubleclick',
-    'dblclick',
-    'click',
-  ],
+  // emits: [
+  //   'update:selectedKeys',
+  //   'update:checkedKeys',
+  //   'update:expandedKeys',
+  //   'expand',
+  //   'select',
+  //   'check',
+  //   'doubleclick',
+  //   'dblclick',
+  //   'click',
+  // ],
   setup(props, { attrs, slots, emit, expose }) {
     // convertTreeToData 兼容 a-tree-node 历史写法，未来a-tree-node移除后，删除相关代码，不要再render中调用 treeData，否则死循环
     const treeData = ref<DataNode[]>(
@@ -98,7 +98,7 @@ export default defineComponent({
         initExpandedKeys = Object.keys(keyEntities);
       } else if (props.defaultExpandParent) {
         initExpandedKeys = conductExpandParent(
-          props.expandedKeys || props.defaultExpandedKeys,
+          props.expandedKeys || props.defaultExpandedKeys || [],
           keyEntities,
         );
       } else {
@@ -203,8 +203,8 @@ export default defineComponent({
       };
 
       // Windows / Mac single pick
-      const ctrlPick: boolean = nativeEvent.ctrlKey || nativeEvent.metaKey;
-      const shiftPick: boolean = nativeEvent.shiftKey;
+      const ctrlPick: boolean = nativeEvent?.ctrlKey || nativeEvent?.metaKey;
+      const shiftPick: boolean = nativeEvent?.shiftKey;
 
       // Generate new selected keys
       let newSelectedKeys: Key[];

@@ -10,11 +10,11 @@ import {
   watchEffect,
 } from 'vue';
 import Wave from '../_util/wave';
-import buttonTypes from './buttonTypes';
-import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { flattenChildren, getPropsSlot } from '../_util/props-util';
+import buttonProps from './buttonTypes';
+import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
+import LoadingIcon from './LoadingIcon';
 
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
@@ -23,21 +23,20 @@ type Loading = boolean | number;
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
-const props = buttonTypes();
 
 function isUnborderedButtonType(type: ButtonType | undefined) {
   return type === 'text' || type === 'link';
 }
-
+export { buttonProps };
 export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
-  props,
+  props: initDefaultProps(buttonProps(), { type: 'default' }),
   slots: ['icon'],
-  emits: ['click', 'mousedown'],
+  // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
-    const { prefixCls, autoInsertSpaceInButton, direction } = useConfigInject('btn', props);
+    const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
 
     const buttonNodeRef = ref<HTMLElement>(null);
     const delayTimeoutRef = ref(undefined);
@@ -73,25 +72,17 @@ export default defineComponent({
     );
 
     const classes = computed(() => {
-      const { type, shape, size, ghost, block, danger } = props;
+      const { type, shape = 'default', ghost, block, danger } = props;
       const pre = prefixCls.value;
-      // large => lg
-      // small => sm
-      let sizeCls = '';
-      switch (size) {
-        case 'large':
-          sizeCls = 'lg';
-          break;
-        case 'small':
-          sizeCls = 'sm';
-          break;
-        default:
-          break;
-      }
+
+      const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
+      const sizeFullname = size.value;
+      const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
+
       return {
         [`${pre}`]: true,
         [`${pre}-${type}`]: type,
-        [`${pre}-${shape}`]: shape,
+        [`${pre}-${shape}`]: shape !== 'default' && shape,
         [`${pre}-${sizeCls}`]: sizeCls,
         [`${pre}-loading`]: innerLoading.value,
         [`${pre}-background-ghost`]: ghost && !isUnborderedButtonType(type),
@@ -155,13 +146,12 @@ export default defineComponent({
     });
 
     return () => {
-      const children = flattenChildren(getPropsSlot(slots, props));
-
-      const icon = getPropsSlot(slots, props, 'icon');
+      const { icon = slots.icon?.() } = props;
+      const children = flattenChildren(slots.default?.());
 
       isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
 
-      const { type, htmlType, disabled, href, title, target } = props;
+      const { type, htmlType, disabled, href, title, target, onMousedown } = props;
 
       const iconType = innerLoading.value ? 'loading' : icon;
       const buttonProps = {
@@ -174,13 +164,23 @@ export default defineComponent({
           { [`${prefixCls.value}-icon-only`]: children.length === 0 && !!iconType },
         ],
         onClick: handleClick,
+        onMousedown,
       };
       // https://github.com/vueComponent/ant-design-vue/issues/4930
       if (!disabled) {
         delete buttonProps.disabled;
       }
 
-      const iconNode = innerLoading.value ? <LoadingOutlined /> : icon;
+      const iconNode =
+        icon && !innerLoading.value ? (
+          icon
+        ) : (
+          <LoadingIcon
+            existIcon={!!icon}
+            prefixCls={prefixCls.value}
+            loading={!!innerLoading.value}
+          />
+        );
 
       const kids = children.map(child =>
         insertSpace(child, isNeedInserted && autoInsertSpace.value),
@@ -206,7 +206,11 @@ export default defineComponent({
         return buttonNode;
       }
 
-      return <Wave ref="wave">{buttonNode}</Wave>;
+      return (
+        <Wave ref="wave" disabled={!!innerLoading.value}>
+          {buttonNode}
+        </Wave>
+      );
     };
   },
 });

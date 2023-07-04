@@ -1,13 +1,13 @@
-import type { CSSProperties, VNodeTypes, FunctionalComponent } from 'vue';
-import { inject } from 'vue';
+import type { CSSProperties, FunctionalComponent, PropType } from 'vue';
 import classNames from '../_util/classNames';
-import { defaultConfigProvider } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
 import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
+import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
@@ -21,21 +21,21 @@ export interface EmptyProps {
   class?: any;
   style?: string | CSSProperties;
   imageStyle?: CSSProperties;
-  image?: VNodeTypes | null;
-  description?: VNodeTypes;
+  image?: VueNode | null;
+  description?: VueNode;
 }
 
 interface EmptyType extends FunctionalComponent<EmptyProps> {
   displayName: string;
-  PRESENTED_IMAGE_DEFAULT: VNodeTypes;
-  PRESENTED_IMAGE_SIMPLE: VNodeTypes;
+  PRESENTED_IMAGE_DEFAULT: VueNode;
+  PRESENTED_IMAGE_SIMPLE: VueNode;
 }
 
 const Empty: EmptyType = (props, { slots = {}, attrs }) => {
-  const configProvider = inject('configProvider', defaultConfigProvider);
-  const { getPrefixCls, direction } = configProvider;
+  const { direction, prefixCls: prefixClsRef } = useConfigInject('empty', props);
+  const prefixCls = prefixClsRef.value;
+
   const {
-    prefixCls: customizePrefixCls,
     image = defaultEmptyImg,
     description = slots.description?.() || undefined,
     imageStyle,
@@ -47,7 +47,6 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
     <LocaleReceiver
       componentName="Empty"
       children={(locale: Locale) => {
-        const prefixCls = getPrefixCls('empty', customizePrefixCls);
         const des = typeof description !== 'undefined' ? description : locale.description;
         const alt = typeof des === 'string' ? des : 'empty';
         let imageNode: EmptyProps['image'] = null;
@@ -62,7 +61,7 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
           <div
             class={classNames(prefixCls, className, {
               [`${prefixCls}-normal`]: image === simpleEmptyImg,
-              [`${prefixCls}-rtl`]: direction === 'rtl',
+              [`${prefixCls}-rtl`]: direction.value === 'rtl',
             })}
             {...restProps}
           >
@@ -86,10 +85,10 @@ Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 Empty.inheritAttrs = false;
 Empty.props = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   image: PropTypes.any,
   description: PropTypes.any,
-  imageStyle: PropTypes.object,
+  imageStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
 };
 
 export default withInstall(Empty);

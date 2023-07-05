@@ -34,7 +34,6 @@ const blackList: string[] = [
 const pickerMap = {
   MonthPicker: 'month',
   WeekPicker: 'week',
-  RangePicker: 'range',
   QuarterPicker: 'quarter',
 };
 

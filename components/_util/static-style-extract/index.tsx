@@ -44,7 +44,7 @@ const defaultNode = () => (
             </Comp>
           );
         }
-        if (compName === 'QRCode') {
+        if (compName === 'QRCode' || compName === 'Segmented') {
           return (
             <Comp key={compName} value={''}>
               <div />

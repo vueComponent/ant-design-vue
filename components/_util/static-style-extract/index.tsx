@@ -11,10 +11,6 @@ const blackList: string[] = [
   'Popover',
   'Tooltip',
   'Tour',
-  'MonthPicker',
-  'WeekPicker',
-  'RangePicker',
-  'QuarterPicker',
   'SelectOptGroup',
   'SelectOption',
   'MenuDivider',
@@ -35,6 +31,13 @@ const blackList: string[] = [
   'LocaleProvider',
 ];
 
+const pickerMap = {
+  MonthPicker: 'month',
+  WeekPicker: 'week',
+  RangePicker: 'range',
+  QuarterPicker: 'quarter',
+};
+
 const defaultNode = () => (
   <>
     {Object.keys(antd)
@@ -50,6 +53,11 @@ const defaultNode = () => (
         }
         if (compName === 'Anchor') {
           return <Comp key={compName} items={[]} />;
+        }
+        if (compName in pickerMap) {
+          const Comp = antd['DatePicker'];
+          const type = pickerMap[compName];
+          return <Comp key={compName} picker={type} />;
         }
         if (compName === 'QRCode' || compName === 'Segmented') {
           return (

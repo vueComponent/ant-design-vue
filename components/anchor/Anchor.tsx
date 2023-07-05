@@ -23,7 +23,6 @@ import AnchorLink from './AnchorLink';
 import PropTypes from '../_util/vue-types';
 import devWarning from '../vc-util/devWarning';
 import { arrayType } from '../_util/type';
-import canUseDom from '../_util/canUseDom';
 
 export type AnchorDirection = 'vertical' | 'horizontal';
 
@@ -93,7 +92,7 @@ export default defineComponent({
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
     const anchorDirection = computed(() => props.direction ?? 'vertical');
 
-    if (canUseDom() && process.env.NODE_ENV !== 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       devWarning(
         props.items && typeof slots.default !== 'function',
         'Anchor',

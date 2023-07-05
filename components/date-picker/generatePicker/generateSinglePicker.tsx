@@ -19,7 +19,6 @@ import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormI
 import { getMergedStatus, getStatusClassNames } from '../../_util/statusUtils';
 import { useCompactItemContext } from '../../space/Compact';
 import type { CustomSlotsType } from '../../_util/type';
-import canUseDom from '../../_util/canUseDom';
 //CSSINJS
 import useStyle from '../style';
 
@@ -59,7 +58,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
         const formItemContext = useInjectFormItemContext();
         const formItemInputContext = FormItemInputContext.useInject();
         // =================== Warning =====================
-        if (canUseDom() && process.env.NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production') {
           devWarning(
             picker !== 'quarter',
             displayName || 'DatePicker',

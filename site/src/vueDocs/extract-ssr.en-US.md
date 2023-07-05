@@ -1,6 +1,6 @@
-# SSR 静态样式导出
+# SSR Static style export
 
-我们在思考是否可以如 v3 版本一样，预先烘焙组件的样式来使前端消费，所以提出了 [\[RFC\] Static Extract style](https://github.com/ant-design/ant-design/discussions/40985)。它的思路很简单，我们只需要提前将所有的组件进行一次渲染就可以从 cache 中获得完整的样式，然后将其写入到 css 文件中即可。
+We are thinking about whether we can pre-bake the style of the component for front-end consumption like the v3 version, so we proposed [\[RFC\] Static Extract style](https://github.com/ant-design/ant-design/discussions/40985). Its idea is very simple that only need to render all the components once in advance to get the complete style from the cache, and then write it into the css file.
 
 ```tsx
 const cache = createCache();
@@ -19,7 +19,7 @@ renderToString(
 const styleText = extractStyle(cache);
 ```
 
-当然，这对于开发者而言稍微有点麻烦。所以我们提供了一个方法来实现该需求：
+Of course, this is a little cumbersome for developers. so we provide a method to fulfill this requirement:
 
 ```tsx
 import { extractStyle } from 'ant-design-vue/lib/_util/static-style-extract';
@@ -32,7 +32,7 @@ const css = extractStyle();
 fs.writeFile(...);
 ```
 
-如果开发者使用了混合主题，也可以自行实现混合需求：
+If developers use a hybrid theme, they can also implement the hybrid requirements by themselves:
 
 ```tsx
 // `node` is the components set we prepared

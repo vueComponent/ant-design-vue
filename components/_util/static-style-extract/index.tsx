@@ -11,6 +11,10 @@ const blackList: string[] = [
   'Popover',
   'Tooltip',
   'Tour',
+  'MonthPicker',
+  'WeekPicker',
+  'RangePicker',
+  'QuarterPicker',
   'SelectOptGroup',
   'SelectOption',
   'MenuDivider',
@@ -43,6 +47,9 @@ const defaultNode = () => (
               <div />
             </Comp>
           );
+        }
+        if (compName === 'Anchor') {
+          return <Comp key={compName} items={[]} />;
         }
         if (compName === 'QRCode' || compName === 'Segmented') {
           return (

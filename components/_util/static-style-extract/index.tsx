@@ -4,12 +4,7 @@ import { renderToString } from 'vue/server-renderer';
 import type { CustomRender } from './interface';
 const blackList: string[] = [
   'ConfigProvider',
-  'Drawer',
   'Grid',
-  'Modal',
-  'Popconfirm',
-  'Popover',
-  'Tooltip',
   'Tour',
   'SelectOptGroup',
   'SelectOption',

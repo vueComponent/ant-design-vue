@@ -183,7 +183,7 @@ export type { SliderProps } from './slider';
 export { default as Slider } from './slider';
 
 export type { SpaceProps } from './space';
-export { default as Space } from './space';
+export { default as Space, Compact } from './space';
 
 export type { SpinProps } from './spin';
 export { default as Spin } from './spin';

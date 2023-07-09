@@ -261,3 +261,6 @@ export { default as QRCode } from './qrcode';
 
 export type { TourProps, TourStepProps } from './tour';
 export { default as Tour } from './tour';
+
+export type { ColorPickerProps } from './color-picker';
+export { default as ColorPicker } from './color-picker';

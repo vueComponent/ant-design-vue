@@ -1,14 +1,12 @@
-// import { useEffect, useRef, useState } from 'react';
-import { ref, shallowRef, type Ref, watch, onUnmounted } from 'vue';
+import { ref, shallowRef, type Ref, watch, onUnmounted, onMounted, nextTick } from 'vue';
 import type { Color } from '../color';
 import type { TransformOffset } from '../interface';
-
 type EventType = MouseEvent | TouchEvent;
 
 type EventHandle = (e: EventType) => void;
 
 interface useColorDragProps {
-  color?: Color;
+  colorRef: Ref<Color>;
   offset?: TransformOffset;
   containerRef: Ref<HTMLDivElement>;
   targetRef: Ref<HTMLDivElement>;
@@ -38,8 +36,8 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
     onDragChange,
     onDragChangeComplete,
     calculate,
-    color,
     disabledDrag,
+    colorRef,
   } = props;
   const offsetValue = ref(offset || { x: 0, y: 0 });
   const mouseMoveRef = shallowRef<(event: MouseEvent) => void>(null);
@@ -47,9 +45,22 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
   const dragRef = shallowRef({
     flag: false,
   });
-
+  onMounted(() => {
+    nextTick(() => {
+      if (
+        Object.values(containerRef.value.getBoundingClientRect().toJSON()).some(item => item === 0)
+      ) {
+        setTimeout(() => {
+          const calcOffset = calculate?.(containerRef);
+          if (calcOffset) {
+            offsetValue.value = calcOffset;
+          }
+        }, 0);
+      }
+    });
+  });
   watch(
-    () => [color, containerRef],
+    () => [colorRef, containerRef],
     () => {
       if (dragRef.value.flag === false) {
         const calcOffset = calculate?.(containerRef);

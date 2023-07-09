@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, shallowRef } from 'vue';
+import { computed, defineComponent, ref, shallowRef, watchEffect } from 'vue';
 
 import useColorDrag from '../hooks/useColorDrag';
 import type { BaseColorPickerProps, HsbaColorType } from '../interface';
@@ -34,8 +34,11 @@ const Slider = defineComponent({
     const transformRef = shallowRef();
     const colorRef = ref(props.color);
     const type = computed(() => props.type || 'hue');
+    watchEffect(() => {
+      colorRef.value = props.color;
+    });
     const [offset, dragStartHandle] = useColorDrag({
-      color: props.color,
+      colorRef,
       targetRef: transformRef,
       containerRef: sliderRef,
       calculate: containerRef =>

@@ -32,7 +32,7 @@ export interface ColorPickerProps extends BaseColorPickerProps {
 }
 
 const ColorPicker = defineComponent({
-  name: 'AColorPicker',
+  name: 'VcColorPicker',
   props: [
     'value',
     'defaultValue',
@@ -61,9 +61,11 @@ const ColorPicker = defineComponent({
       rgb.setAlpha(1);
       return rgb.toRgbString();
     });
-    const mergeCls = classNames(`${prefixCls.value}-panel`, {
-      [`${prefixCls.value}-panel-disabled`]: disabled.value,
-    });
+    const mergeCls = computed(() =>
+      classNames(`${prefixCls.value}-panel`, {
+        [`${prefixCls.value}-panel-disabled`]: disabled.value,
+      }),
+    );
     const basicProps = computed(() => ({
       prefixCls: prefixCls.value,
       onChangeComplete: props.onChangeComplete,
@@ -110,9 +112,10 @@ const ColorPicker = defineComponent({
     expose({
       colorPickerRef,
     });
+
     return () => {
       return (
-        <div class={mergeCls} ref={colorPickerRef}>
+        <div class={mergeCls.value} ref={colorPickerRef}>
           {typeof props.panelRender === 'function'
             ? props.panelRender(defaultPanel.value)
             : defaultPanel.value}

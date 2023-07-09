@@ -402,10 +402,10 @@ export default {
     type: 'Data Display',
     title: 'Segmented',
   },
-  // colorPicker: {
-  //   category: 'Components',
-  //   subtitle: '取色器',
-  //   type: 'Data Entry',
-  //   title: 'ColorPicker (Beta)',
-  // },
+  colorPicker: {
+    category: 'Components',
+    subtitle: '取色器',
+    type: 'Data Entry',
+    title: 'ColorPicker (Beta)',
+  },
 };

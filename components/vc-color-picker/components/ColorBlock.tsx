@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 
 import classNames from '../../_util/classNames';
 
@@ -13,13 +13,15 @@ export type ColorBlockProps = {
 
 const ColorBlock = defineComponent({
   name: 'ColorBlock',
+  inheritAttrs: false,
   props: ['color', 'prefixCls', 'onClick'],
   setup(props: ColorBlockProps) {
-    const colorBlockCls = `${props.prefixCls}-color-block`;
+    const colorBlockCls = computed(() => `${props.prefixCls}-color-block`);
+
     return () => (
-      <div class={classNames(colorBlockCls)} onClick={props.onClick}>
+      <div class={classNames(colorBlockCls.value)} onClick={props.onClick}>
         <div
-          class={`${colorBlockCls}-inner`}
+          class={`${colorBlockCls.value}-inner`}
           style={{
             background: props.color,
           }}

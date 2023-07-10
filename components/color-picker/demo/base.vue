@@ -20,5 +20,5 @@ The simplest usage.
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
-const color = ref('#000');
+const color = ref('#1677FF');
 </script>

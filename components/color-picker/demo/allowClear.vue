@@ -19,4 +19,3 @@ Clear Color.
 <template>
   <a-color-picker allow-clear />
 </template>
-<script lang="ts" setup></script>

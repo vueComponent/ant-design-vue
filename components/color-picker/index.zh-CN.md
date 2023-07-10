@@ -12,8 +12,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EHL-QYJofZsAAA
 
 当用户需要自定义颜色选择的时候使用。
 
-## 代码演示
-
 ## API
 
 > 自 `antdv@4.0.0` 版本开始提供该组件。

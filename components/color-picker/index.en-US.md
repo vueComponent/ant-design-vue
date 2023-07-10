@@ -3,11 +3,6 @@ category: Components
 title: ColorPicker
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*PpY4RYNM8UcAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EHL-QYJofZsAAAAAAAAAAAAADrJ8AQ/original
-tag: New
-demo:
-  cols: 2
-group:
-  title: Data Entry
 ---
 
 Components providing color selection, Available since `5.5.0`.
@@ -15,18 +10,6 @@ Components providing color selection, Available since `5.5.0`.
 ## When To Use
 
 Used when the user needs to customize the color selection.
-
-## Examples
-
-<!-- prettier-ignore -->
-<code src="./demo/base.tsx">Basic Usage</code>
-<code src="./demo/controlled.tsx">controlled mode</code>
-<code src="./demo/disabled.tsx" debug>Disable</code>
-<code src="./demo/allowClear.tsx">Clear Color</code>
-<code src="./demo/trigger.tsx">Custom Trigger</code>
-<code src="./demo/format.tsx">Color Format</code>
-<code src="./demo/presets.tsx">Preset Colors</code>
-<code src="./demo/pure-panel.tsx" debug>Pure Render</code>
 
 ## API
 
@@ -40,9 +23,9 @@ Used when the user needs to customize the color selection.
 | value | Value of color | string \| `Color` | - |
 | defaultValue | Default value of color | string \| `Color` | - |
 | onChange | Callback when `value` is changed | `(value: Color, hex: string) => void` | - |
-| allowClear | 	Allow clearing color selected | boolean | false |
-| presets | 	Preset colors | `{ label: ReactNode, colors: Array<string \| Color> }[]` | - |
-| children | Trigger of ColorPicker | React.ReactNode | - |
+| allowClear |  Allow clearing color selected | boolean | false |
+| presets |  Preset colors | `{ label: VueNode, colors: Array<string \| Color> }[]` | - |
+| children | Trigger of ColorPicker | VueNode | - |
 | trigger | ColorPicker trigger mode | `hover` \| `click` | `click` |
 | open | Whether to show popup | boolean | - |
 | onOpenChange | Callback when `open` is changed | `(open: boolean) => void` | - |

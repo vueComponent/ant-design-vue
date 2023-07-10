@@ -17,7 +17,7 @@ Encoding formats, support `HEX`, `HSB`, `RGB`.
 </docs>
 
 <template>
-  <a-space direction="vertical" size="middle" style="{{ display: 'flex' }}">
+  <a-space direction="vertical" size="middle">
     <a-row align="middle">
       <a-space>
         <a-col>
@@ -49,7 +49,7 @@ Encoding formats, support `HEX`, `HSB`, `RGB`.
       </a-space>
     </a-row>
     <a-row align="middle">
-      <a-pace>
+      <a-space>
         <a-col>
           <a-color-picker
             v-modal:value="colorRgb"
@@ -61,7 +61,7 @@ Encoding formats, support `HEX`, `HSB`, `RGB`.
           RGB:
           <span>{{ rgbString }}</span>
         </a-col>
-      </a-pace>
+      </a-space>
     </a-row>
   </a-space>
 </template>

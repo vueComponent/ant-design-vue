@@ -1,6 +1,5 @@
 import { computed, defineComponent } from 'vue';
 import Collapse from '../../collapse';
-// import { useLocale } from '../../locale';
 import type { Color } from '../color';
 import useMergedState from '../../_util/hooks/useMergedState';
 import { ColorBlock } from '../../vc-color-picker';
@@ -36,7 +35,6 @@ const ColorPresets = defineComponent({
   props: ['prefixCls', 'presets', 'value', 'onChange', 'color'],
   setup(props: ColorPresetsProps) {
     const colorPresetsPrefixCls = computed(() => `${props.prefixCls}-presets`);
-    // const [locale] = useLocale('ColorPicker');
     const presets = computed(() => genPresetColor(props.presets));
     const [presetsValue] = useMergedState(genPresetColor(props.presets), {
       value: presets,

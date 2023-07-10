@@ -51,7 +51,7 @@ const colorPickerProps = () => ({
   },
   presets: {
     type: Array as PropType<PresetsItem[]>,
-    default: () => [],
+    default: undefined,
   },
   arrow: {
     type: [Boolean, Object] as PropType<boolean | { pointAtCenter: boolean }>,
@@ -108,7 +108,9 @@ const ColorPicker = defineComponent({
     const colorCleared = shallowRef(false);
 
     const [wrapSSR, hashId] = useStyle(prefixCls);
-
+    const handleClear = (clear: boolean) => {
+      colorCleared.value = clear;
+    };
     const handleChange = (data: Color, type?: HsbaColorType) => {
       let color: Color = generateColor(data);
       if (colorCleared.value) {
@@ -125,10 +127,6 @@ const ColorPicker = defineComponent({
       }
       emit('update:value', color, color.toHexString());
       emit('change', color, color.toHexString());
-    };
-
-    const handleClear = (clear: boolean) => {
-      colorCleared.value = clear;
     };
 
     const popoverProps: ComputedRef<PopoverProps> = computed(() => ({
@@ -150,17 +148,11 @@ const ColorPicker = defineComponent({
       format: props.format,
       onFormatChange: props.onFormatChange,
     }));
-    watch(
-      colorCleared,
-      () => {
-        if (colorCleared.value) {
-          setPopupOpen(false);
-        }
-      },
-      {
-        immediate: true,
-      },
-    );
+    watch(colorCleared, (val, oldVal) => {
+      if (!oldVal && val) {
+        setPopupOpen(false);
+      }
+    });
     return () => {
       const mergeRootCls = classNames(props.rootClassName, {
         [`${prefixCls.value}-rtl`]: direction,

@@ -42,7 +42,7 @@ const colorPickerProps = () => ({
     default: 'click',
   },
   format: {
-    type: String as PropType<ColorFormat>,
+    type: String as PropType<'hex' | 'hsb' | 'rgb'>,
     default: 'hex',
   },
   allowClear: {
@@ -98,13 +98,13 @@ const ColorPicker = defineComponent({
       value,
       defaultValue: props.defaultValue,
     });
+
     const open = computed(() => props.open);
     const [popupOpen, setPopupOpen] = useMergedState(false, {
       value: open,
       postState: openData => !props.disabled && openData,
       onChange: props.onOpenChange,
     });
-
     const colorCleared = shallowRef(false);
 
     const [wrapSSR, hashId] = useStyle(prefixCls);
@@ -128,7 +128,9 @@ const ColorPicker = defineComponent({
       emit('update:value', color, color.toHexString());
       emit('change', color, color.toHexString());
     };
-
+    const onFormatChange = (format: ColorFormat) => {
+      emit('formatChange', format);
+    };
     const popoverProps: ComputedRef<PopoverProps> = computed(() => ({
       open: popupOpen.value,
       trigger: props.trigger,
@@ -146,7 +148,7 @@ const ColorPicker = defineComponent({
       disabled: props.disabled,
       presets: props.presets,
       format: props.format,
-      onFormatChange: props.onFormatChange,
+      onFormatChange,
     }));
     watch(colorCleared, (val, oldVal) => {
       if (!oldVal && val) {

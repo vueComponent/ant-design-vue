@@ -140,6 +140,9 @@ const localeValues: Locale = {
     expired: 'QR code expired',
     refresh: 'Refresh',
   },
+  ColorPicker: {
+    presetEmpty: 'Empty',
+  },
 };
 
 export default localeValues;

@@ -49,6 +49,9 @@ export interface Locale {
     expired?: string;
     refresh?: string;
   };
+  ColorPicker?: {
+    presetEmpty: string;
+  };
 }
 
 export interface LocaleProviderProps {

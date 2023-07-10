@@ -1,13 +1,12 @@
 import { computed, defineComponent } from 'vue';
+import type { ColorPickerBaseProps, PresetsItem } from '../interface';
 import Collapse from '../../collapse';
 import type { Color } from '../color';
 import useMergedState from '../../_util/hooks/useMergedState';
 import { ColorBlock } from '../../vc-color-picker';
-import type { ColorPickerBaseProps, PresetsItem } from '../interface';
 import { generateColor } from '../util';
-import classNames from 'ant-design-vue/es/_util/classNames';
-import locale from 'ant-design-vue/es/locale';
-
+import classNames from '../../_util/classNames';
+import { useConfigContextInject } from '../../config-provider/context';
 const { Panel } = Collapse;
 
 interface ColorPresetsProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {
@@ -34,6 +33,8 @@ const ColorPresets = defineComponent({
   name: 'ColorPresets',
   props: ['prefixCls', 'presets', 'value', 'onChange', 'color'],
   setup(props: ColorPresetsProps) {
+    const conetext = useConfigContextInject();
+    const locale = computed(() => conetext.locale.value.ColorPicker);
     const colorPresetsPrefixCls = computed(() => `${props.prefixCls}-presets`);
     const presets = computed(() => genPresetColor(props.presets));
     const [presetsValue] = useMergedState(genPresetColor(props.presets), {
@@ -68,7 +69,9 @@ const ColorPresets = defineComponent({
                     />
                   ))
                 ) : (
-                  <span class={`${colorPresetsPrefixCls.value}-empty`}>{locale.presetEmpty}</span>
+                  <span class={`${colorPresetsPrefixCls.value}-empty`}>
+                    {locale.value.presetEmpty}
+                  </span>
                 )}
               </div>
             </Panel>

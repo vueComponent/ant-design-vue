@@ -25,6 +25,8 @@ import type {
   TriggerPlacement,
   TriggerType,
 } from './interface';
+import type { VueNode } from '../_util/type';
+import { useCompactItemContext } from '../space/Compact';
 
 const colorPickerProps = () => ({
   value: {
@@ -62,7 +64,7 @@ const colorPickerProps = () => ({
     default: true,
   },
   styles: {
-    type: Object as PropType<{ popup?: CSSProperties }>,
+    type: Object as PropType<{ popup?: CSSProperties; popupOverlayInner?: StyleSheet }>,
     default: () => ({}),
   },
   rootClassName: PropTypes.string,
@@ -86,6 +88,16 @@ const colorPickerProps = () => ({
     type: Boolean as PropType<PopoverProps['autoAdjustOverflow']>,
     default: true,
   },
+  onChangeComplete: {
+    type: Function as PropType<(value: Color) => void>,
+    default: () => {},
+  },
+  showText: {
+    type: [Boolean, Function] as PropType<boolean | ((color: Color) => VueNode)>,
+    default: false,
+  },
+  size: PropTypes.oneOf(['small', 'middle', 'large']),
+  destroyTooltipOnHide: PropTypes.looseBool,
 });
 
 export type ColorPickerProps = Partial<ExtractPropTypes<ReturnType<typeof colorPickerProps>>>;
@@ -109,13 +121,38 @@ const ColorPicker = defineComponent({
       postState: openData => !props.disabled && openData,
       onChange: props.onOpenChange,
     });
+    const format = computed(() => props.format);
+
+    const [formatValue, setFormatValue] = useMergedState(props.format, {
+      value: format,
+      onChange: props.onFormatChange,
+    });
+
+    // ===================== Style =====================
+    const { compactSize } = useCompactItemContext(prefixCls, direction);
+    const mergedSize = computed(() => props.size || compactSize.value);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
+    const rtlCls = computed(() => ({ [`${prefixCls.value}-rtl`]: direction.value }));
+    const mergeCls = computed(() => {
+      const mergeRootCls = classNames(props.rootClassName, rtlCls.value);
+      return classNames(
+        {
+          [`${prefixCls.value}-sm`]: mergedSize.value === 'small',
+          [`${prefixCls.value}-lg`]: mergedSize.value === 'large',
+        },
+        mergeRootCls,
+        hashId.value,
+      );
+    });
+
+    const mergePopupCls = computed(() => classNames(prefixCls.value, rtlCls.value));
+
     const colorCleared = shallowRef(false);
 
-    const [wrapSSR, hashId] = useStyle(prefixCls);
-    const handleClear = (clear: boolean) => {
-      colorCleared.value = clear;
-    };
-    const handleChange = (data: Color, type?: HsbaColorType) => {
+    const popupAllowCloseRef = shallowRef(true);
+
+    const handleChange = (data: Color, type?: HsbaColorType, pickColor?: boolean) => {
       let color: Color = generateColor(data);
       if (colorCleared.value) {
         colorCleared.value = false;
@@ -126,13 +163,26 @@ const ColorPicker = defineComponent({
           color = generateColor(hsba);
         }
       }
-      if (!props.value) {
-        setColorValue(color);
+      if (pickColor) {
+        popupAllowCloseRef.value = false;
       }
+
+      setColorValue(color);
       emit('update:value', color, color.toHexString());
       emit('change', color, color.toHexString());
     };
+
+    const handleClear = () => {
+      colorCleared.value = true;
+      emit('clear');
+    };
+    const handleChangeComplete = color => {
+      popupAllowCloseRef.value = true;
+      emit('changeComplete', generateColor(color));
+    };
+
     const onFormatChange = (format: ColorFormat) => {
+      setFormatValue(format);
       emit('formatChange', format);
     };
     const popoverProps: ComputedRef<PopoverProps> = computed(() => ({
@@ -143,6 +193,7 @@ const ColorPicker = defineComponent({
       rootClassName: props.rootClassName,
       getPopupContainer: getPopupContainer.value,
       autoAdjustOverflow: props.autoAdjustOverflow,
+      destroyTooltipOnHide: props.destroyTooltipOnHide,
     }));
     const colorBaseProps: ComputedRef<ColorPickerBaseProps> = computed(() => ({
       prefixCls: prefixCls.value,
@@ -151,24 +202,22 @@ const ColorPicker = defineComponent({
       colorCleared: colorCleared.value,
       disabled: props.disabled,
       presets: props.presets,
-      format: props.format,
+      format: formatValue.value,
       onFormatChange,
+      onChangeComplete: handleChangeComplete,
     }));
-    watch(colorCleared, (val, oldVal) => {
-      if (!oldVal && val) {
-        setPopupOpen(false);
-      }
-    });
     return () => {
-      const mergeRootCls = classNames(props.rootClassName, {
-        [`${prefixCls.value}-rtl`]: direction,
-      });
-      const mergeCls = classNames(mergeRootCls, hashId.value);
       return wrapSSR(
         <Popover
           // @ts-ignore
           style={props.styles?.popup}
-          onOpenChange={setPopupOpen}
+          // @ts-ignore
+          overlayInnerStyle={props.styles?.popupOverlayInner}
+          onOpenChange={visible => {
+            if (popupAllowCloseRef.value) {
+              setPopupOpen(visible);
+            }
+          }}
           content={
             <ColorPickerPanel
               {...colorBaseProps.value}
@@ -176,17 +225,18 @@ const ColorPicker = defineComponent({
               onClear={handleClear}
             />
           }
-          overlayClassName={prefixCls.value}
+          overlayClassName={mergePopupCls.value}
           {...popoverProps.value}
         >
           {slots.children?.() || (
             <ColorTrigger
               open={popupOpen.value}
-              class={mergeCls}
+              class={mergeCls.value}
               style={attrs.style}
               color={colorValue.value}
               prefixCls={prefixCls.value}
               disabled={props.disabled}
+              showText={props.showText}
               colorCleared={colorCleared.value}
             />
           )}

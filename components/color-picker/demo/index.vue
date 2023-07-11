@@ -6,6 +6,7 @@
     <Disabled />
     <Format />
     <Presets />
+    <TextRender />
   </demo-sort>
 </template>
 
@@ -17,6 +18,7 @@ import Controlled from './controlled.vue';
 import Disabled from './disabled.vue';
 import Format from './format.vue';
 import Presets from './presets.vue';
+import TextRender from './text-render.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -30,6 +32,7 @@ export default defineComponent({
     Disabled,
     Format,
     Presets,
+    TextRender,
   },
   setup() {
     return {};

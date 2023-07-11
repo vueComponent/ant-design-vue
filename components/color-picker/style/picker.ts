@@ -1,6 +1,6 @@
 import { CSSObject } from '../../_util/cssinjs';
 import type { GenerateStyle } from '../../theme/internal';
-import genColorBlockStyle, { getTransBg } from './color-block';
+import { getTransBg } from './color-block';
 import type { ColorPickerToken } from './index';
 
 const genPickerStyle: GenerateStyle<ColorPickerToken, CSSObject> = token => {
@@ -16,7 +16,6 @@ const genPickerStyle: GenerateStyle<ColorPickerToken, CSSObject> = token => {
     colorPickerHandlerSize,
     colorPickerHandlerSizeSM,
     colorPickerSliderHeight,
-    colorPickerPreviewSize,
   } = token;
 
   return {
@@ -58,7 +57,7 @@ const genPickerStyle: GenerateStyle<ColorPickerToken, CSSObject> = token => {
         borderRadius: colorPickerSliderHeight / 2,
         boxShadow: colorPickerInsetShadow,
       },
-      '&-alpha': getTransBg(`${colorPickerSliderHeight}px`),
+      '&-alpha': getTransBg(`${colorPickerSliderHeight}px`, token.colorFillSecondary),
       marginBottom: marginSM,
     },
 
@@ -69,8 +68,6 @@ const genPickerStyle: GenerateStyle<ColorPickerToken, CSSObject> = token => {
         flex: 1,
       },
     },
-
-    ...genColorBlockStyle(token, colorPickerPreviewSize),
   };
 };
 

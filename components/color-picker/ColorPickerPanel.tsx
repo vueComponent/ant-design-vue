@@ -1,68 +1,67 @@
 import type { HsbaColorType } from '../vc-color-picker';
 import type { ColorPickerBaseProps } from './interface';
-import type { VueNode } from '../_util/type';
 import type { Color } from './color';
 
-import { computed, defineComponent } from 'vue';
-
-import VcColorPicker from '../vc-color-picker';
+import { computed, defineComponent, provide } from 'vue';
+import { PanelPickerContext, PanelPresetsContext } from './context';
 import Divider from '../divider';
-
-import ColorClear from './components/ColorClear';
-import ColorInput from './components/ColorInput';
-import ColorPresets from './components/ColorPresets';
+import PanelPicker from './components/PanelPicker';
+import PanelPresets from './components/PanelPresets';
+import type { VueNode } from '../_util/type';
 
 interface ColorPickerPanelProps extends ColorPickerBaseProps {
   onChange?: (value?: Color, type?: HsbaColorType) => void;
   onClear?: (clear?: boolean) => void;
+  panelRender?: (
+    innerPanel: VueNode,
+    {
+      components,
+    }: {
+      components: { PanelPicker: typeof PanelPicker; PanelPresets: typeof PanelPresets };
+    },
+  ) => VueNode;
 }
 const ColorPickerPanel = defineComponent({
   name: 'ColorPickerPanel',
   inheritAttrs: false,
-  props: ['prefixCls', 'allowClear', 'presets', 'onChange', 'onClear', 'color'],
+  props: ['prefixCls', 'presets', 'onChange', 'onClear', 'color', 'panelRender'],
   setup(props: ColorPickerPanelProps, { attrs }) {
-    const colorPickerPanelPrefixCls = computed(() => `${props.prefixCls}-inner-panel`);
-    const newLocal = (panel: VueNode) => (
-      <div class={colorPickerPanelPrefixCls.value}>
-        {props.allowClear && (
-          <ColorClear
-            prefixCls={props.prefixCls}
-            value={props.color}
-            onChange={clearColor => {
-              props.onChange?.(clearColor);
-              props.onClear?.(true);
-            }}
-            {...attrs}
-          />
-        )}
-        {panel}
-        <ColorInput
-          value={props.color}
-          onChange={props.onChange}
-          prefixCls={props.prefixCls}
-          {...attrs}
-        />
+    const colorPickerPanelPrefixCls = computed(() => `${props.prefixCls}-inner-content`);
+    // ==== Inject props ===
+    const panelPickerProps = computed(() => ({
+      prefixCls: props.prefixCls,
+      value: props.color,
+      onChange: props.onChange,
+      onClear: props.onClear,
+      ...attrs,
+    }));
+    const panelPresetsProps = computed(() => ({
+      prefixCls: props.prefixCls,
+      value: props.color,
+      presets: props.presets,
+      onChange: props.onChange,
+    }));
+    // ==== Inject ===
+    provide(PanelPickerContext, panelPickerProps);
+    provide(PanelPresetsContext, panelPresetsProps);
+    // ==== Render ===
+    const innerPanel = computed(() => (
+      <>
+        <PanelPicker />
         {Array.isArray(props.presets) && (
-          <>
-            <Divider class={`${colorPickerPanelPrefixCls.value}-divider`} />
-            <ColorPresets
-              value={props.color}
-              presets={props.presets}
-              prefixCls={props.prefixCls}
-              onChange={props.onChange}
-            />
-          </>
+          <Divider class={`${colorPickerPanelPrefixCls.value}-divider`} />
         )}
-      </div>
-    );
-    const extraPanelRender = newLocal;
+        <PanelPresets />
+      </>
+    ));
     return () => (
-      <VcColorPicker
-        prefixCls={props.prefixCls}
-        value={props.color?.toHsb()}
-        onChange={props.onChange}
-        panelRender={extraPanelRender}
-      />
+      <div class={colorPickerPanelPrefixCls.value}>
+        {typeof props.panelRender === 'function'
+          ? props.panelRender(innerPanel.value, {
+              components: { Picker: PanelPicker, Presets: PanelPresets },
+            })
+          : innerPanel.value}
+      </div>
     );
   },
 });

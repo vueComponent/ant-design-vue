@@ -1,7 +1,11 @@
 /* eslint-disable class-methods-use-this */
-import { getHex } from './util';
 import type { ColorGenInput } from '../vc-color-picker';
 import { Color as RcColor } from '../vc-color-picker';
+
+export const toHexFormat = (value?: string, alpha?: boolean) =>
+  value?.replace(/[^\w/]/gi, '').slice(0, alpha ? 8 : 6) || '';
+
+export const getHex = (value?: string, alpha?: boolean) => (value ? toHexFormat(value, alpha) : '');
 
 export type Color = Pick<
   RcColor,

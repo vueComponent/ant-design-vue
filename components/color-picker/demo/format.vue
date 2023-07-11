@@ -22,7 +22,7 @@ Encoding formats, support `HEX`, `HSB`, `RGB`.
       <a-space>
         <a-col>
           <a-color-picker
-            v-modal:value="colorHex"
+            v-model:value="colorHex"
             :format="formatHex"
             @formatChange="handleFormatChange"
           />
@@ -37,7 +37,7 @@ Encoding formats, support `HEX`, `HSB`, `RGB`.
       <a-space>
         <a-col>
           <a-color-picker
-            v-modal:value="colorHsb"
+            v-model="colorHsb"
             :format="formatHsb"
             @formatChange="handleFormatChange"
           />
@@ -52,7 +52,7 @@ Encoding formats, support `HEX`, `HSB`, `RGB`.
       <a-space>
         <a-col>
           <a-color-picker
-            v-modal:value="colorRgb"
+            v-model:value="colorRgb"
             :format="formatRgb"
             @formatChange="handleFormatChange"
           />

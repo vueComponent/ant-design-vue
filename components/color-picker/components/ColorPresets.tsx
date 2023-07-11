@@ -2,7 +2,6 @@ import type { ColorPickerBaseProps, PresetsItem } from '../interface';
 import type { Color } from '../color';
 
 import { computed, defineComponent } from 'vue';
-const { Panel } = Collapse;
 
 import { useConfigContextInject } from '../../config-provider/context';
 import Collapse from '../../collapse';
@@ -11,6 +10,7 @@ import { ColorBlock } from '../../vc-color-picker';
 import { generateColor } from '../util';
 import classNames from '../../_util/classNames';
 
+const { Panel } = Collapse;
 interface ColorPresetsProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {
   presets: PresetsItem[];
   value?: Color;

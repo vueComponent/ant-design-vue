@@ -1,6 +1,7 @@
 import type { ColorInput, HSVA, Numberify } from '@ctrl/tinycolor';
-import { TinyColor } from '@ctrl/tinycolor';
 import type { ColorGenInput, HSB, HSBA } from './interface';
+
+import { TinyColor } from '@ctrl/tinycolor';
 
 export const getRoundNumber = (value: number) => Math.round(Number(value || 0));
 

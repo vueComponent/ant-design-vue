@@ -1,6 +1,7 @@
-import { defineComponent, ref, shallowRef, watchEffect } from 'vue';
-import useColorDrag from '../hooks/useColorDrag';
 import type { BaseColorPickerProps } from '../interface';
+import { defineComponent, ref, shallowRef, watchEffect } from 'vue';
+
+import useColorDrag from '../hooks/useColorDrag';
 import { calculateColor, calculateOffset } from '../util';
 
 import Handler from './Handler';

@@ -1,14 +1,15 @@
+import type { BaseColorPickerProps, HsbaColorType } from '../interface';
+
 import { computed, defineComponent, ref, shallowRef, watchEffect } from 'vue';
 
-import useColorDrag from '../hooks/useColorDrag';
-import type { BaseColorPickerProps, HsbaColorType } from '../interface';
-import { calculateColor, calculateOffset } from '../util';
-import Palette from './Palette';
+import classNames from '../../_util/classNames';
 
+import { calculateColor, calculateOffset } from '../util';
+import useColorDrag from '../hooks/useColorDrag';
+import Palette from './Palette';
 import Gradient from './Gradient';
 import Handler from './Handler';
 import Transform from './Transform';
-import classNames from 'ant-design-vue/es/_util/classNames';
 
 interface SliderProps extends BaseColorPickerProps {
   gradientColors: string[];

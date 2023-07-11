@@ -1,14 +1,17 @@
-import { computed, defineComponent, ref, watch } from 'vue';
 import type { RGB } from '../../vc-color-picker';
 import type { Color } from '../color';
 import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent, ref, watch } from 'vue';
 import { generateColor } from '../util';
+
 import ColorSteppers from './ColorSteppers';
 
 interface ColorRgbInputProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {
   value?: Color;
   onChange?: (value: Color) => void;
 }
+
 const ColorRgbInput = defineComponent({
   name: 'ColorRgbInput',
   props: ['prefixCls', 'value', 'onChange'],

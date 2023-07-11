@@ -1,10 +1,12 @@
-import { computed, defineComponent, ref, watch } from 'vue';
-
-import { getRoundNumber } from '../../vc-color-picker/color';
 import type { HSB } from '../../vc-color-picker';
 import type { Color } from '../color';
 import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent, ref, watch } from 'vue';
+
+import { getRoundNumber } from '../../vc-color-picker/color';
 import { generateColor } from '../util';
+
 import ColorSteppers from './ColorSteppers';
 
 interface ColorHsbInputProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {

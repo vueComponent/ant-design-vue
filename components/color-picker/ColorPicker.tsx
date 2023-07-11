@@ -1,13 +1,23 @@
-import { computed, defineComponent, shallowRef, watch } from 'vue';
-import PropTypes from '../_util/vue-types';
+import type { CSSProperties, ComputedRef, ExtractPropTypes, PropType } from 'vue';
 import type { HsbaColorType } from '../vc-color-picker';
 import type { PopoverProps } from '../popover';
+import type { Color } from './color';
+
+import { computed, defineComponent, shallowRef, watch } from 'vue';
+
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import Popover from '../popover';
 import theme from '../theme';
+import { generateColor } from './util';
+import PropTypes from '../_util/vue-types';
+import useMergedState from '../_util/hooks/useMergedState';
+import classNames from '../_util/classNames';
+
 import ColorPickerPanel from './ColorPickerPanel';
-import type { Color } from './color';
 import ColorTrigger from './components/ColorTrigger';
 import useColorState from './hooks/useColorState';
+import useStyle from './style';
+
 import type {
   ColorFormat,
   ColorPickerBaseProps,
@@ -15,12 +25,6 @@ import type {
   TriggerPlacement,
   TriggerType,
 } from './interface';
-import useStyle from './style/index';
-import { generateColor } from './util';
-import type { CSSProperties, ComputedRef, ExtractPropTypes, PropType } from 'vue';
-import useConfigInject from '../config-provider/hooks/useConfigInject';
-import useMergedState from '../_util/hooks/useMergedState';
-import classNames from '../_util/classNames';
 
 const colorPickerProps = () => ({
   value: {

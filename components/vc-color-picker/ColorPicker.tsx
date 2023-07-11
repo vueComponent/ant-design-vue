@@ -1,14 +1,14 @@
 import { defineComponent, type CSSProperties, computed, shallowRef } from 'vue';
+import type { BaseColorPickerProps, ColorGenInput } from './interface';
+import type { VueNode } from '../_util/type';
 
 import { ColorPickerPrefixCls, defaultColor, generateColor } from './util';
+import classNames from '../_util/classNames';
 
 import ColorBlock from './components/ColorBlock';
 import Picker from './components/Picker';
 import Slider from './components/Slider';
 import useColorState from './hooks/useColorState';
-import type { BaseColorPickerProps, ColorGenInput } from './interface';
-import type { VueNode } from '../_util/type';
-import classNames from '../_util/classNames';
 
 const hueColor = [
   'rgb(255, 0, 0) 0%',

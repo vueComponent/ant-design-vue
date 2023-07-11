@@ -1,6 +1,7 @@
 import type { Ref } from 'vue';
-import { Color } from './color';
 import type { ColorGenInput, HsbaColorType, TransformOffset } from './interface';
+
+import { Color } from './color';
 
 export const ColorPickerPrefixCls = 'rc-color-picker';
 

@@ -1,5 +1,6 @@
 import classNames from '../../_util/classNames';
 import { computed, defineComponent } from 'vue';
+
 type HandlerSize = 'default' | 'small';
 
 interface HandlerProps {

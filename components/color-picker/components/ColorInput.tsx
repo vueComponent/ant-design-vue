@@ -1,14 +1,18 @@
 import type { VNode } from 'vue';
-import { computed, defineComponent } from 'vue';
-import Select from '../../select';
 import type { Color } from '../color';
 import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent } from 'vue';
+
+import useMergedState from '../../_util/hooks/useMergedState';
+
+import Select from '../../select';
+
 import { ColorFormat } from '../interface';
 import ColorAlphaInput from './ColorAlphaInput';
 import ColorHexInput from './ColorHexInput';
 import ColorHsbInput from './ColorHsbInput';
 import ColorRgbInput from './ColorRgbInput';
-import useMergedState from '../../_util/hooks/useMergedState';
 
 interface ColorInputProps
   extends Pick<ColorPickerBaseProps, 'prefixCls' | 'format' | 'onFormatChange'> {

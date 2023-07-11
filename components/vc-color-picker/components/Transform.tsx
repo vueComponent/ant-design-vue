@@ -1,5 +1,6 @@
-import { defineComponent, shallowRef } from 'vue';
 import type { TransformOffset } from '../interface';
+import { defineComponent, shallowRef } from 'vue';
+
 const Transform = defineComponent({
   name: 'Transform',
   props: ['offset'],

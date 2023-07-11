@@ -1,7 +1,10 @@
-import { computed, defineComponent, ref, watch } from 'vue';
-import Input from '../../input';
 import type { Color } from '../color';
 import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent, ref, watch } from 'vue';
+
+import Input from '../../input';
+
 import { generateColor, toHexFormat } from '../util';
 
 interface ColorHexInputProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {

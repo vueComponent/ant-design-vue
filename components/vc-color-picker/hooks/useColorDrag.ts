@@ -1,6 +1,8 @@
-import { ref, shallowRef, type Ref, watch, onUnmounted, onMounted } from 'vue';
 import type { Color } from '../color';
 import type { TransformOffset } from '../interface';
+
+import { ref, shallowRef, type Ref, watch, onUnmounted, onMounted } from 'vue';
+
 type EventType = MouseEvent | TouchEvent;
 
 type EventHandle = (e: EventType) => void;

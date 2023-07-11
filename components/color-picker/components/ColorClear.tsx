@@ -1,6 +1,8 @@
-import { defineComponent } from 'vue';
-import type { Color } from '../color';
 import type { ColorPickerBaseProps } from '../interface';
+import type { Color } from '../color';
+
+import { defineComponent } from 'vue';
+
 import { generateColor } from '../util';
 
 interface ColorClearProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {

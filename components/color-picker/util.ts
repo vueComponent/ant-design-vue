@@ -1,6 +1,7 @@
 import type { ColorGenInput } from '../vc-color-picker';
-import { getRoundNumber } from '../vc-color-picker/color';
 import type { Color } from './color';
+
+import { getRoundNumber } from '../vc-color-picker/color';
 import { ColorFactory } from './color';
 
 export const customizePrefixCls = 'ant-color-picker';

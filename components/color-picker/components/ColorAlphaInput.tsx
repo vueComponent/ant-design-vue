@@ -1,6 +1,8 @@
-import { computed, defineComponent, ref, watch } from 'vue';
 import type { Color } from '../color';
 import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent, ref, watch } from 'vue';
+
 import { generateColor, getAlphaColor } from '../util';
 import ColorSteppers from './ColorSteppers';
 

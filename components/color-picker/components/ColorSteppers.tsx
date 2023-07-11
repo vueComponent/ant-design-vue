@@ -1,8 +1,10 @@
-import { computed, defineComponent, ref, watch } from 'vue';
 import type { VueNode } from '../../_util/type';
 import type { InputNumberProps } from '../../input-number';
-import InputNumber from '../../input-number';
 import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent, ref, watch } from 'vue';
+
+import InputNumber from '../../input-number';
 import classNames from '../../_util/classNames';
 
 interface ColorSteppersProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {
@@ -14,6 +16,7 @@ interface ColorSteppersProps extends Pick<ColorPickerBaseProps, 'prefixCls'> {
   prefix?: (prefixCls: string) => VueNode;
   formatter?: InputNumberProps['formatter'];
 }
+
 const ColorSteppers = defineComponent({
   name: 'ColorSteppers',
   props: ['prefixCls', 'value', 'min', 'max', 'onChange', 'formatter'],

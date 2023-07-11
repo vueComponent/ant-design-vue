@@ -1,7 +1,8 @@
-import { computed, defineComponent } from 'vue';
-
 import type { Color } from '../color';
 import type { HsbaColorType } from '../interface';
+
+import { computed, defineComponent } from 'vue';
+
 import { generateColor } from '../util';
 
 interface ColorBlockProps {

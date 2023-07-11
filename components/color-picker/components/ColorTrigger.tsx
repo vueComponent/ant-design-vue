@@ -1,8 +1,11 @@
-import { computed, defineComponent, shallowRef } from 'vue';
-import type { ColorPickerBaseProps } from '../interface';
-import { ColorBlock } from '../../vc-color-picker';
 import type { VueNode } from '../../_util/type';
+import type { ColorPickerBaseProps } from '../interface';
+
+import { computed, defineComponent, shallowRef } from 'vue';
+
+import { ColorBlock } from '../../vc-color-picker';
 import classNames from '../../_util/classNames';
+
 import ColorClear from './ColorClear';
 
 interface colorTriggerProps
@@ -10,6 +13,7 @@ interface colorTriggerProps
   color: Exclude<ColorPickerBaseProps['color'], undefined>;
   open?: boolean;
 }
+
 const ColorTrigger = defineComponent({
   name: 'ColorTrigger',
   props: ['prefixCls', 'colorCleared', 'disabled', 'color', 'open'],

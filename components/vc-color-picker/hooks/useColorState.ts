@@ -1,8 +1,10 @@
 import type { Ref } from 'vue';
-import { watch } from 'vue';
-import useState from '../../_util/hooks/useState';
 import type { ColorGenInput } from '../interface';
+
+import { watch } from 'vue';
+
 import { generateColor } from '../util';
+import useState from '../../_util/hooks/useState';
 
 type ColorValue = ColorGenInput | undefined;
 

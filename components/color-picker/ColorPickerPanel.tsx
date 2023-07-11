@@ -1,13 +1,16 @@
 import type { HsbaColorType } from '../vc-color-picker';
+import type { ColorPickerBaseProps } from './interface';
+import type { VueNode } from '../_util/type';
+import type { Color } from './color';
+
 import { computed, defineComponent } from 'vue';
+
 import VcColorPicker from '../vc-color-picker';
 import Divider from '../divider';
-import type { Color } from './color';
+
 import ColorClear from './components/ColorClear';
 import ColorInput from './components/ColorInput';
 import ColorPresets from './components/ColorPresets';
-import type { ColorPickerBaseProps } from './interface';
-import type { VueNode } from '../_util/type';
 
 interface ColorPickerPanelProps extends ColorPickerBaseProps {
   onChange?: (value?: Color, type?: HsbaColorType) => void;

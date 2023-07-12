@@ -1,34 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/color-picker/demo/allowClear.vue correctly 1`] = `
-<div class="ant-color-picker-trigger ant-color-picker-rtl">
+<div class="ant-color-picker-trigger">
   <div class="ant-color-picker-color-block">
     <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
   </div>
+  <!---->
 </div>
 `;
 
 exports[`renders ./components/color-picker/demo/base.vue correctly 1`] = `
-<div class="ant-color-picker-trigger ant-color-picker-rtl">
+<div class="ant-color-picker-trigger">
   <div class="ant-color-picker-color-block">
     <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
   </div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/color-picker/demo/change-completed.vue correctly 1`] = `
+<div class="ant-color-picker-trigger">
+  <div class="ant-color-picker-color-block">
+    <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+  </div>
+  <!---->
 </div>
 `;
 
 exports[`renders ./components/color-picker/demo/controlled.vue correctly 1`] = `
-<div class="ant-color-picker-trigger ant-color-picker-rtl">
+<div class="ant-color-picker-trigger">
   <div class="ant-color-picker-color-block">
     <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
   </div>
+  <!---->
 </div>
 `;
 
 exports[`renders ./components/color-picker/demo/disabled.vue correctly 1`] = `
-<div class="ant-color-picker-trigger ant-color-picker-trigger-disabled ant-color-picker-rtl">
+<div class="ant-color-picker-trigger ant-color-picker-trigger-disabled">
   <div class="ant-color-picker-color-block">
     <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
   </div>
+  <!---->
 </div>
 `;
 
@@ -39,10 +52,11 @@ exports[`renders ./components/color-picker/demo/format.vue correctly 1`] = `
       <div class="ant-space ant-space-horizontal ant-space-align-center">
         <div class="ant-space-item" style="margin-right: 8px;">
           <div class="ant-col">
-            <div class="ant-color-picker-trigger ant-color-picker-rtl">
+            <div class="ant-color-picker-trigger">
               <div class="ant-color-picker-color-block">
                 <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
               </div>
+              <!---->
             </div>
             <!---->
           </div>
@@ -61,10 +75,11 @@ exports[`renders ./components/color-picker/demo/format.vue correctly 1`] = `
       <div class="ant-space ant-space-horizontal ant-space-align-center">
         <div class="ant-space-item" style="margin-right: 8px;">
           <div class="ant-col">
-            <div class="ant-color-picker-trigger ant-color-picker-rtl">
+            <div class="ant-color-picker-trigger">
               <div class="ant-color-picker-color-block">
                 <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
               </div>
+              <!---->
             </div>
             <!---->
           </div>
@@ -83,10 +98,11 @@ exports[`renders ./components/color-picker/demo/format.vue correctly 1`] = `
       <div class="ant-space ant-space-horizontal ant-space-align-center">
         <div class="ant-space-item" style="margin-right: 8px;">
           <div class="ant-col">
-            <div class="ant-color-picker-trigger ant-color-picker-rtl">
+            <div class="ant-color-picker-trigger">
               <div class="ant-color-picker-color-block">
                 <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
               </div>
+              <!---->
             </div>
             <!---->
           </div>
@@ -103,10 +119,177 @@ exports[`renders ./components/color-picker/demo/format.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/color-picker/demo/panel-render.vue correctly 1`] = `
+<div class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div class="ant-row ant-row-middle">
+      <div class="ant-space ant-space-horizontal ant-space-align-center">
+        <div class="ant-space-item" style="margin-right: 8px;"><span>Add title:</span></div>
+        <!---->
+        <div class="ant-space-item">
+          <div class="ant-col">
+            <div class="ant-color-picker-trigger">
+              <div class="ant-color-picker-color-block">
+                <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+              </div>
+              <!---->
+            </div>
+            <!---->
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div class="ant-row ant-row-middle">
+      <div class="ant-space ant-space-horizontal ant-space-align-center">
+        <div class="ant-space-item" style="margin-right: 8px;"><span>Horizontal layout:</span></div>
+        <!---->
+        <div class="ant-space-item">
+          <div class="ant-col">
+            <div class="ant-color-picker-trigger">
+              <div class="ant-color-picker-color-block">
+                <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+              </div>
+              <!---->
+            </div>
+            <!---->
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/color-picker/demo/presets.vue correctly 1`] = `
-<div class="ant-color-picker-trigger ant-color-picker-rtl">
+<div class="ant-color-picker-trigger">
   <div class="ant-color-picker-color-block">
     <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
   </div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/color-picker/demo/size.vue correctly 1`] = `
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;">
+    <div class="ant-space ant-space-vertical">
+      <div class="ant-space-item" style="margin-bottom: 8px;">
+        <div class="ant-color-picker-trigger ant-color-picker-lg">
+          <div class="ant-color-picker-color-block">
+            <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+          </div>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <div class="ant-space-item" style="margin-bottom: 8px;">
+        <div class="ant-color-picker-trigger">
+          <div class="ant-color-picker-color-block">
+            <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+          </div>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <div class="ant-space-item">
+        <div class="ant-color-picker-trigger ant-color-picker-sm">
+          <div class="ant-color-picker-color-block">
+            <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+          </div>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div class="ant-space ant-space-vertical">
+      <div class="ant-space-item" style="margin-bottom: 8px;">
+        <div class="ant-color-picker-trigger ant-color-picker-lg">
+          <div class="ant-color-picker-color-block">
+            <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+          </div>
+          <div class="ant-color-picker-trigger-text">#1677FF</div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <div class="ant-space-item" style="margin-bottom: 8px;">
+        <div class="ant-color-picker-trigger">
+          <div class="ant-color-picker-color-block">
+            <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+          </div>
+          <div class="ant-color-picker-trigger-text">#1677FF</div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <div class="ant-space-item">
+        <div class="ant-color-picker-trigger ant-color-picker-sm">
+          <div class="ant-color-picker-color-block">
+            <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+          </div>
+          <div class="ant-color-picker-trigger-text">#1677FF</div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/color-picker/demo/text-render.vue correctly 1`] = `
+<div class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div class="ant-color-picker-trigger">
+      <div class="ant-color-picker-color-block">
+        <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+      </div>
+      <div class="ant-color-picker-trigger-text">#1677FF</div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div class="ant-color-picker-trigger">
+      <div class="ant-color-picker-color-block">
+        <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+      </div>
+      <div class="ant-color-picker-trigger-text"><span>Custom Text (#1677ff)</span></div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div class="ant-color-picker-trigger">
+      <div class="ant-color-picker-color-block">
+        <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+      </div>
+      <div class="ant-color-picker-trigger-text"><span role="img" aria-label="down" style="color: rgba(0, 0, 0, 0.25);" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></div>
+    </div>
+    <!---->
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/color-picker/demo/trigger-event.vue correctly 1`] = `
+<div class="ant-color-picker-trigger">
+  <div class="ant-color-picker-color-block">
+    <div class="ant-color-picker-color-block-inner" style="background: rgb(22, 119, 255);"></div>
+  </div>
+  <!---->
 </div>
 `;

@@ -2,8 +2,9 @@ import type { CSSProperties, ComputedRef, ExtractPropTypes, PropType } from 'vue
 import type { HsbaColorType } from '../vc-color-picker';
 import type { PopoverProps } from '../popover';
 import type { Color } from './color';
+import type { PanelRender } from './ColorPickerPanel';
 
-import { computed, defineComponent, shallowRef, watch } from 'vue';
+import { computed, defineComponent, shallowRef } from 'vue';
 
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import Popover from '../popover';
@@ -12,8 +13,8 @@ import { generateColor } from './util';
 import PropTypes from '../_util/vue-types';
 import useMergedState from '../_util/hooks/useMergedState';
 import classNames from '../_util/classNames';
-
 import ColorPickerPanel from './ColorPickerPanel';
+
 import ColorTrigger from './components/ColorTrigger';
 import useColorState from './hooks/useColorState';
 import useStyle from './style';
@@ -96,8 +97,15 @@ const colorPickerProps = () => ({
     type: [Boolean, Function] as PropType<boolean | ((color: Color) => VueNode)>,
     default: false,
   },
+
   size: PropTypes.oneOf(['small', 'middle', 'large']),
+
   destroyTooltipOnHide: PropTypes.looseBool,
+
+  panelRender: {
+    type: Function as PropType<PanelRender>,
+    default: undefined,
+  },
 });
 
 export type ColorPickerProps = Partial<ExtractPropTypes<ReturnType<typeof colorPickerProps>>>;
@@ -154,7 +162,8 @@ const ColorPicker = defineComponent({
 
     const handleChange = (data: Color, type?: HsbaColorType, pickColor?: boolean) => {
       let color: Color = generateColor(data);
-      if (colorCleared.value) {
+      const isNull = value.value === null || (!value.value && props.defaultValue === null);
+      if (colorCleared.value || isNull) {
         colorCleared.value = false;
         const hsba = color.toHsb();
         // ignore alpha slider
@@ -203,6 +212,7 @@ const ColorPicker = defineComponent({
       disabled: props.disabled,
       presets: props.presets,
       format: formatValue.value,
+      panelRender: props.panelRender,
       onFormatChange,
       onChangeComplete: handleChangeComplete,
     }));
@@ -233,7 +243,7 @@ const ColorPicker = defineComponent({
               open={popupOpen.value}
               class={mergeCls.value}
               style={attrs.style}
-              color={colorValue.value}
+              color={props.value ? generateColor(props.value) : colorValue.value}
               prefixCls={prefixCls.value}
               disabled={props.disabled}
               showText={props.showText}

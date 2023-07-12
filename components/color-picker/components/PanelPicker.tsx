@@ -30,7 +30,7 @@ const PanelPicker = defineComponent({
             {...context.value}
             onChange={clearColor => {
               context.value.onChange?.(clearColor);
-              context.value.onClear?.(clearColor);
+              context.value.onClear?.();
             }}
           />
         )}

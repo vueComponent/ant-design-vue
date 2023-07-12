@@ -8,21 +8,9 @@ const blackList: string[] = [
   'Tour',
   'SelectOptGroup',
   'SelectOption',
-  'MenuDivider',
-  'MenuItem',
-  'MenuItemGroup',
-  'SubMenu',
   'MentionsOption',
-  'TableColumn',
-  'TableColumnGroup',
-  'TableSummary',
-  'TableSummaryRow',
-  'TableSummaryCell',
   'TreeNode',
   'TreeSelectNode',
-  'TabPane',
-  'CheckableTag',
-  'TimelineItem',
   'LocaleProvider',
 ];
 
@@ -30,6 +18,20 @@ const pickerMap = {
   MonthPicker: 'month',
   WeekPicker: 'week',
   QuarterPicker: 'quarter',
+};
+
+const compChildNameMap = {
+  MenuDivider: 'Menu',
+  MenuItem: 'Menu',
+  MenuItemGroup: 'Menu',
+  SubMenu: 'Menu',
+  TableColumn: 'Table',
+  TableColumnGroup: 'Table',
+  TableSummary: 'Table',
+  TableSummaryRow: 'Table',
+  TableSummaryCell: 'Table',
+  TabPane: 'Tabs',
+  TimelineItem: 'Timeline',
 };
 
 const defaultNode = () => (
@@ -52,6 +54,14 @@ const defaultNode = () => (
           const Comp = antd['DatePicker'];
           const type = pickerMap[compName];
           return <Comp key={compName} picker={type} />;
+        }
+        if (compName in compChildNameMap) {
+          const ParentComp = antd[compChildNameMap[compName]];
+          return (
+            <ParentComp>
+              <Comp />
+            </ParentComp>
+          );
         }
         if (compName === 'QRCode' || compName === 'Segmented') {
           return (

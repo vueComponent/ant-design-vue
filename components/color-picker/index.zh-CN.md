@@ -6,7 +6,7 @@ cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*PpY4RYNM8UcAAAAAAA
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EHL-QYJofZsAAAAAAAAAAAAADrJ8AQ/original
 ---
 
-提供颜色选取的组件，自 `-` 版本开始提供该组件。
+提供颜色选取的组件，自 `4.0.0` 版本开始提供该组件。
 
 ## 何时使用
 
@@ -14,11 +14,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EHL-QYJofZsAAA
 
 ## API
 
-> 自 `antdv@-` 版本开始提供该组件。
-
-## API
-
-> 自 `antdv@-` 版本开始提供该组件。
+> 自 `antdv@4.0.0` 版本开始提供该组件。
 
 <!-- prettier-ignore -->
 | 参数 | 说明 | 类型 | 默认值 | 版本 |

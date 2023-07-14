@@ -53,7 +53,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*4wzwRIBLuqEAAA
 
 ## 事件
 
-| 名称            | 描述                                 | 类型           | 默认值 | 版本 |
+| 事件名称            | 描述                                 | 类型           | 默认值 | 版本 |
 | --------------- | ------------------------------------ | -------------- | ------ | ---- |
 | afterOpenChange | 切换抽屉时动画结束后的回调           | function(open) | 无     | 4.0  |
 | close           | 点击遮罩层或左上角叉或取消按钮的回调 | function(e)    | 无     |      |

@@ -1406,7 +1406,7 @@ Github：[https://github.com/surely-vue/table]
   <smile-outlined />
   <a-button>
     <template v-slot:icon><smile-outlined /></template>
-  </a-buttom>
+  </a-button>
 </template>
 <script>
 import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';

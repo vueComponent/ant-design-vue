@@ -183,6 +183,8 @@ declare module 'vue' {
 
     ASpace: typeof import('ant-design-vue')['Space'];
 
+    ASpaceCompact: typeof import('ant-design-vue')['Compact'];
+
     ASpin: typeof import('ant-design-vue')['Spin'];
 
     AStatistic: typeof import('ant-design-vue')['Statistic'];

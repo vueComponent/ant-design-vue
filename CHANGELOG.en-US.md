@@ -1407,7 +1407,7 @@ In 2.0, an on-demand introduction method will be adopted:
   <smile-outlined />
   <a-button>
     <template v-slot:icon><smile-outlined /></template>
-  </a-buttom>
+  </a-button>
 </template>
 <script>
 import SmileOutlined from'@ant-design/icons-vue/SmileOutlined';

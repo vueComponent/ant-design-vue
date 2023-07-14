@@ -71,11 +71,6 @@ export default defineComponent({
     };
 
     const changeVersion = (v: string) => {
-      if (v === '3x') {
-        // TODO: 3.x site
-        location.href = `https://antdv.com${route.fullPath}`;
-        return;
-      }
       location.href = `https://${v}.antdv.com${route.fullPath}`;
     };
     return {

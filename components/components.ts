@@ -261,3 +261,6 @@ export { default as QRCode } from './qrcode';
 
 export type { TourProps, TourStepProps } from './tour';
 export { default as Tour } from './tour';
+
+export type { AppProps } from './app';
+export { default as App } from './app';

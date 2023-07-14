@@ -30,7 +30,6 @@ Application wrapper for some global usages.
 App provides upstream and downstream method calls through `provide/inject`, because useApp needs to be used as a subcomponent, we recommend encapsulating App at the top level in the application.
 
 ```html
-// myPage.vue
 <template>
   <a-space>
     <a-button type="primary" @click="showMessage">Open message</a-button>
@@ -72,7 +71,7 @@ Note: App.useApp must be available under App.
 The App component can only use the token in the `ConfigProvider`, if you need to use the Token, the ConfigProvider and the App component must appear in pairs.
 
 ```html
-<a-config-provider theme="{{" ... }}>
+<a-config-provider theme="{{ ... }}">
   <a-app>...</a-app>
 </a-config-provider>
 ```
@@ -80,10 +79,10 @@ The App component can only use the token in the `ConfigProvider`, if you need to
 ### Embedded usage scenarios (if not necessary, try not to do nesting)
 
 ```html
-<a-pp>
+<a-app>
   <a-space>
     ...
     <a-app>...</a-app>
   </a-space>
-</a-pp>
+</a-app>
 ```

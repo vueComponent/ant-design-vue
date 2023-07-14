@@ -31,7 +31,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 App 组件通过 `provide/inject` 提供上下文方法调用，因而 useApp 需要作为子组件才能使用，我们推荐在应用中顶层包裹 App。
 
 ```html
-// myPage.vue
 <template>
   <a-space>
     <a-button type="primary" @click="showMessage">Open message</a-button>
@@ -73,7 +72,7 @@ App 组件通过 `provide/inject` 提供上下文方法调用，因而 useApp �
 App 组件只能在 `ConfigProvider` 之下才能使用 Design Token， 如果需要使用其样式重置能力，则 ConfigProvider 与 App 组件必须成对出现。
 
 ```html
-<a-config-provider theme="{{" ... }}>
+<a-config-provider theme="{{ ... }}">
   <a-app>...</a-app>
 </a-config-provider>
 ```
@@ -81,10 +80,10 @@ App 组件只能在 `ConfigProvider` 之下才能使用 Design Token， 如果�
 ### 内嵌使用场景（如无必要，尽量不做嵌套）
 
 ```html
-<a-pp>
+<a-app>
   <a-space>
     ...
     <a-app>...</a-app>
   </a-space>
-</a-pp>
+</a-app>
 ```

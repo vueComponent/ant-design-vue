@@ -1,6 +1,13 @@
 import PropTypes from '../../_util/vue-types';
 import type { PropType, ExtractPropTypes } from 'vue';
-import { computed, defineComponent, getCurrentInstance, ref, watch, onBeforeUnmount } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  shallowRef,
+  watch,
+  onBeforeUnmount,
+} from 'vue';
 import useProvideKeyPath, { useInjectKeyPath, useMeasure } from './hooks/useKeyPath';
 import {
   useInjectMenu,
@@ -20,7 +27,9 @@ import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import type { CustomSlotsType, Key } from '../../_util/type';
+import type { Key, CustomSlotsType } from '../../_util/type';
+import { objectType } from '../../_util/type';
+import type { ItemType, MenuTheme } from './interface';
 
 let indexGuid = 0;
 
@@ -34,9 +43,13 @@ export const subMenuProps = () => ({
   internalPopupClose: Boolean,
   eventKey: String,
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
+  theme: String as PropType<MenuTheme>,
   onMouseenter: Function as PropType<MouseEventHandler>,
   onMouseleave: Function as PropType<MouseEventHandler>,
   onTitleClick: Function as PropType<(e: MouseEvent, key: Key) => void>,
+
+  // Internal user prop
+  originItemValue: objectType<ItemType>(),
 });
 
 export type SubMenuProps = Partial<ExtractPropTypes<ReturnType<typeof subMenuProps>>>;
@@ -69,7 +82,7 @@ export default defineComponent({
       (isValid(vnodeKey) ? `sub_menu_${++indexGuid}_$$_${vnodeKey}` : (key as string));
     const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
     const keysPath = computed(() => [...parentKeys.value, key]);
-    const childrenEventKeys = ref([]);
+    const childrenEventKeys = shallowRef([]);
     const menuInfo = {
       eventKey,
       key,
@@ -95,7 +108,6 @@ export default defineComponent({
       changeActiveKeys,
       mode,
       inlineCollapsed,
-      antdMenuTheme,
       openKeys,
       overflowDisabled,
       onOpenChange,
@@ -103,6 +115,7 @@ export default defineComponent({
       unRegisterMenuInfo,
       selectedSubMenuKeys,
       expandIcon: menuExpandIcon,
+      theme,
     } = useInjectMenu();
 
     const hasKey = vnodeKey !== undefined && vnodeKey !== null;
@@ -121,8 +134,8 @@ export default defineComponent({
 
     const subMenuPrefixCls = computed(() => `${prefixCls.value}-submenu`);
     const mergedDisabled = computed(() => contextDisabled.value || props.disabled);
-    const elementRef = ref();
-    const popupRef = ref();
+    const elementRef = shallowRef();
+    const popupRef = shallowRef();
 
     // // ================================ Icon ================================
     // const mergedItemIcon = itemIcon || contextItemIcon;
@@ -137,7 +150,7 @@ export default defineComponent({
       return selectedSubMenuKeys.value.includes(key);
     });
 
-    const isActive = ref(false);
+    const isActive = shallowRef(false);
     watch(
       activeKeys,
       () => {
@@ -198,7 +211,7 @@ export default defineComponent({
     const popupClassName = computed(() =>
       classNames(
         prefixCls.value,
-        `${prefixCls.value}-${antdMenuTheme.value}`,
+        `${prefixCls.value}-${props.theme || theme.value}`,
         props.popupClassName,
       ),
     );
@@ -219,7 +232,7 @@ export default defineComponent({
       return (
         <>
           {cloneElement(
-            icon,
+            typeof icon === 'function' ? icon(props.originItemValue) : icon,
             {
               class: `${prefixCls.value}-item-icon`,
             },
@@ -242,7 +255,7 @@ export default defineComponent({
     );
     const baseTitleNode = () => {
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
-      const icon = getPropsSlot(slots, props, 'icon');
+      const icon = props.icon ?? slots.icon?.(props);
       const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
       const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
       return (
@@ -281,18 +294,19 @@ export default defineComponent({
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
       let titleNode = () => null;
       if (!overflowDisabled.value && mode.value !== 'inline') {
+        const popupOffset = mode.value === 'horizontal' ? [0, 8] : [10, 0];
         titleNode = () => (
           <PopupTrigger
             mode={triggerModeRef.value}
             prefixCls={subMenuPrefixClsValue}
             visible={!props.internalPopupClose && open.value}
             popupClassName={popupClassName.value}
-            popupOffset={props.popupOffset}
+            popupOffset={props.popupOffset || popupOffset}
             disabled={mergedDisabled.value}
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
               popup: () => (
-                <MenuContextProvider mode={subMenuTriggerModeRef.value} isRootMenu={false}>
+                <MenuContextProvider mode={subMenuTriggerModeRef.value}>
                   <SubMenuList
                     id={popupId}
                     ref={popupRef}

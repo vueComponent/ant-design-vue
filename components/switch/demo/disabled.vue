@@ -17,29 +17,18 @@ Disabled state of `Switch`.
 </docs>
 
 <template>
-  <div>
-    <a-switch v-model:checked="checked" :disabled="disabled" style="margin-bottom: 5px" />
-    <br />
+  <a-space direction="vertical">
+    <a-switch v-model:checked="checked" :disabled="disabled" />
     <a-button type="primary" @click="onToggle">Toggle disabled</a-button>
-  </div>
+  </a-space>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const checked = ref<boolean>(true);
-    const disabled = ref<boolean>(true);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const checked = ref<boolean>(true);
+const disabled = ref<boolean>(true);
 
-    const onToggle = () => {
-      disabled.value = !disabled.value;
-    };
-
-    return {
-      checked,
-      disabled,
-      onToggle,
-    };
-  },
-});
+const onToggle = () => {
+  disabled.value = !disabled.value;
+};
 </script>

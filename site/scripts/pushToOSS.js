@@ -8,9 +8,9 @@ const accessKeyId = process.env.ALI_OSS_ACCESSKEY;
 const accessKeySecret = process.env.ALI_OSS_SECRETKEY;
 
 const client = new OSS({
-  bucket: 'next-antdv',
+  bucket: '4x-antdv',
   cname: 'true',
-  endpoint: 'next-antdv.oss-cn-beijing.aliyuncs.com',
+  endpoint: '4x-antdv.oss-cn-beijing.aliyuncs.com',
   region: 'oss-cn-beijing',
   accessKeyId,
   accessKeySecret,

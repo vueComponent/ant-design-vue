@@ -150,36 +150,6 @@ function getWebpackConfig(modules) {
             },
           ],
         },
-        {
-          test: /\.less$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  plugins: ['autoprefixer'],
-                },
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'less-loader',
-              options: {
-                lessOptions: {
-                  javascriptEnabled: true,
-                },
-                sourceMap: true,
-              },
-            },
-          ],
-        },
         // Images
         {
           test: svgRegex,
@@ -200,7 +170,7 @@ function getWebpackConfig(modules) {
       new webpack.BannerPlugin(`
 ${pkg.name} v${pkg.version}
 
-Copyright 2017-present, ant-design-vue.
+Copyright 2017-present, Ant Design Vue.
 All rights reserved.
       `),
       new WebpackBar({
@@ -215,7 +185,7 @@ All rights reserved.
   };
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
-    const entry = ['./index'];
+    let entry = ['./index'];
     config.externals = [
       {
         vue: {
@@ -223,11 +193,13 @@ All rights reserved.
           commonjs2: 'vue',
           commonjs: 'vue',
           amd: 'vue',
+          module: 'vue',
         },
       },
     ];
     config.output.library = distFileBaseName;
     config.output.libraryTarget = 'umd';
+    config.output.globalObject = 'this';
     config.optimization = {
       minimizer: [
         new TerserPlugin({
@@ -238,7 +210,6 @@ All rights reserved.
         }),
       ],
     };
-
     // Development
     const uncompressedConfig = merge({}, config, {
       entry: {

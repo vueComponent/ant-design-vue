@@ -4,7 +4,7 @@ import {
   onMounted,
   onUnmounted,
   reactive,
-  ref,
+  shallowRef,
   watch,
   cloneVNode,
 } from 'vue';
@@ -62,15 +62,15 @@ const Preview = defineComponent({
   setup(props, { emit, attrs }) {
     const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right } = reactive(props.icons);
 
-    const scale = ref(1);
-    const rotate = ref(0);
+    const scale = shallowRef(1);
+    const rotate = shallowRef(0);
     const [position, setPosition] = useFrameSetState<{
       x: number;
       y: number;
     }>(initialPosition);
 
     const onClose = () => emit('close');
-    const imgRef = ref<HTMLImageElement>();
+    const imgRef = shallowRef<HTMLImageElement>();
     const originPositionRef = reactive<{
       originX: number;
       originY: number;
@@ -82,7 +82,7 @@ const Preview = defineComponent({
       deltaX: 0,
       deltaY: 0,
     });
-    const isMoving = ref(false);
+    const isMoving = shallowRef(false);
     const groupContext = context.inject();
     const { previewUrls, current, isPreviewGroup, setCurrent } = groupContext;
     const previewGroupCount = computed(() => previewUrls.value.size);
@@ -94,7 +94,7 @@ const Preview = defineComponent({
     const showLeftOrRightSwitches = computed(
       () => isPreviewGroup.value && previewGroupCount.value > 1,
     );
-    const lastWheelZoomDirection = ref({ wheelDirection: 0 });
+    const lastWheelZoomDirection = shallowRef({ wheelDirection: 0 });
 
     const onAfterClose = () => {
       scale.value = 1;
@@ -311,12 +311,11 @@ const Preview = defineComponent({
 
     return () => {
       const { visible, prefixCls, rootClassName } = props;
-
       return (
         <Dialog
           {...attrs}
-          transitionName="zoom"
-          maskTransitionName="fade"
+          transitionName={props.transitionName}
+          maskTransitionName={props.maskTransitionName}
           closable={false}
           keyboard
           prefixCls={prefixCls}
@@ -327,19 +326,22 @@ const Preview = defineComponent({
           rootClassName={rootClassName}
           getContainer={props.getContainer}
         >
-          <ul class={`${props.prefixCls}-operations`}>
-            {tools.map(({ icon: IconType, onClick, type, disabled }) => (
-              <li
-                class={classnames(toolClassName, {
-                  [`${props.prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
-                })}
-                onClick={onClick}
-                key={type}
-              >
-                {cloneVNode(IconType, { class: iconClassName })}
-              </li>
-            ))}
-          </ul>
+          <div class={[`${props.prefixCls}-operations-wrapper`, rootClassName]}>
+            <ul class={`${props.prefixCls}-operations`}>
+              {tools.map(({ icon: IconType, onClick, type, disabled }) => (
+                <li
+                  class={classnames(toolClassName, {
+                    [`${props.prefixCls}-operations-operation-disabled`]:
+                      disabled && disabled?.value,
+                  })}
+                  onClick={onClick}
+                  key={type}
+                >
+                  {cloneVNode(IconType, { class: iconClassName })}
+                </li>
+              ))}
+            </ul>
+          </div>
           <div
             class={`${props.prefixCls}-img-wrapper`}
             style={{

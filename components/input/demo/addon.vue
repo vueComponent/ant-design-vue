@@ -48,29 +48,13 @@ Using pre & post tabs example.
   </a-space>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { SettingOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    SettingOutlined,
-  },
-
-  setup() {
-    const value1 = ref<string>('mysite');
-    const value2 = ref<string>('mysite');
-    const value3 = ref<string>('Http://');
-    const value4 = ref<string>('.com');
-    const value5 = ref<string>('mysite');
-    const value6 = ref<string>('mysite');
-    return {
-      value1,
-      value2,
-      value3,
-      value4,
-      value5,
-      value6,
-    };
-  },
-});
+import { ref } from 'vue';
+const value1 = ref<string>('mysite');
+const value2 = ref<string>('mysite');
+const value3 = ref<string>('Http://');
+const value4 = ref<string>('.com');
+const value5 = ref<string>('mysite');
+const value6 = ref<string>('mysite');
 </script>

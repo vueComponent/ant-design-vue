@@ -1,4 +1,4 @@
-import { defineComponent, ref, withDirectives } from 'vue';
+import { defineComponent, shallowRef, withDirectives } from 'vue';
 import antInput from './antInputDirective';
 import PropTypes from './vue-types';
 const BaseInput = defineComponent({
@@ -8,7 +8,7 @@ const BaseInput = defineComponent({
   },
   emits: ['change', 'input'],
   setup(_p, { emit }) {
-    const inputRef = ref(null);
+    const inputRef = shallowRef(null);
     const handleChange = (e: Event) => {
       const { composing } = e.target as any;
       if ((e as any).isComposing || composing) {

@@ -1,5 +1,4 @@
 import useMergedState from '../_util/hooks/useMergedState';
-import padStart from 'lodash-es/padStart';
 import { PickerPanel } from '../vc-picker';
 import type { Locale } from '../vc-picker/interface';
 import type { GenerateConfig } from '../vc-picker/generate';
@@ -14,8 +13,11 @@ import CalendarHeader from './Header';
 import type { CustomSlotsType, VueNode } from '../_util/type';
 import type { App, PropType } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
+
+// CSSINJS
+import useStyle from './style';
 
 type InjectDefaultProps<Props> = Omit<
   Props,
@@ -24,6 +26,10 @@ type InjectDefaultProps<Props> = Omit<
   locale?: typeof enUS;
   size?: 'large' | 'default' | 'small';
 };
+
+export interface SelectInfo {
+  source: 'year' | 'month' | 'date' | 'customize';
+}
 
 // Picker Props
 export type PickerPanelBaseProps<DateType> = InjectDefaultProps<RCPickerPanelBaseProps<DateType>>;
@@ -62,7 +68,7 @@ export interface CalendarProps<DateType> {
   onChange?: (date: DateType | string) => void;
   'onUpdate:value'?: (date: DateType | string) => void;
   onPanelChange?: (date: DateType | string, mode: CalendarMode) => void;
-  onSelect?: (date: DateType | string) => void;
+  onSelect?: (date: DateType, selectInfo: SelectInfo) => void;
   valueFormat?: string;
 }
 
@@ -137,6 +143,10 @@ function generateCalendar<
     setup(p, { emit, slots, attrs }) {
       const props = p as unknown as Props;
       const { prefixCls, direction } = useConfigInject('picker', props);
+
+      // style
+      const [wrapSSR, hashId] = useStyle(prefixCls);
+
       const calendarPrefixCls = computed(() => `${prefixCls.value}-calendar`);
       const maybeToString = (date: DateType) => {
         return props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
@@ -211,9 +221,9 @@ function generateCalendar<
         triggerPanelChange(mergedValue.value, newMode);
       };
 
-      const onInternalSelect = (date: DateType) => {
+      const onInternalSelect = (date: DateType, source: SelectInfo['source']) => {
         triggerChange(date);
-        emit('select', maybeToString(date));
+        emit('select', maybeToString(date), { source });
       };
       // ====================== Locale ======================
       const defaultLocale = computed(() => {
@@ -258,7 +268,7 @@ function generateCalendar<
               )}
             >
               <div class={`${calendarPrefixCls.value}-date-value`}>
-                {padStart(String(generateConfig.getDate(date)), 2, '0')}
+                {String(generateConfig.getDate(date)).padStart(2, '0')}
               </div>
               <div class={`${calendarPrefixCls.value}-date-content`}>
                 {dateCellRender && dateCellRender({ current: date })}
@@ -293,7 +303,7 @@ function generateCalendar<
             </div>
           );
         };
-        return (
+        return wrapSSR(
           <div
             {...attrs}
             class={classNames(
@@ -304,13 +314,16 @@ function generateCalendar<
                 [`${calendarPrefixCls.value}-rtl`]: direction.value === 'rtl',
               },
               attrs.class,
+              hashId.value,
             )}
           >
             {headerRender ? (
               headerRender({
                 value: mergedValue.value,
                 type: mergedMode.value,
-                onChange: onInternalSelect,
+                onChange: nextDate => {
+                  onInternalSelect(nextDate, 'customize');
+                },
                 onTypeChange: triggerModeChange,
               })
             ) : (
@@ -333,13 +346,15 @@ function generateCalendar<
               generateConfig={generateConfig}
               dateRender={dateRender}
               monthCellRender={obj => monthRender(obj, mergedLocale.value.lang)}
-              onSelect={onInternalSelect}
+              onSelect={nextDate => {
+                onInternalSelect(nextDate, panelMode.value);
+              }}
               mode={panelMode.value}
               picker={panelMode.value}
               disabledDate={mergedDisabledDate.value}
               hideHeader
             />
-          </div>
+          </div>,
         );
       };
     },

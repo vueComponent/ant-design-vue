@@ -1,6 +1,7 @@
 import type { CustomSlotsType, Key } from '../../_util/type';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import {
+  shallowRef,
   Teleport,
   computed,
   defineComponent,
@@ -14,7 +15,7 @@ import {
 import shallowEqual from '../../_util/shallowequal';
 import type { StoreMenuInfo } from './hooks/useMenuContext';
 import useProvideMenu, { MenuContextProvider, useProvideFirstLevel } from './hooks/useMenuContext';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import type {
   MenuTheme,
   MenuMode,
@@ -38,10 +39,16 @@ import { cloneElement } from '../../_util/vnode';
 import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
 import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
 import collapseMotion from '../../_util/collapseMotion';
+import type { ItemType } from './hooks/useItems';
+import useItems from './hooks/useItems';
+import useStyle from '../style';
+import { useInjectOverride } from './OverrideContext';
 
 export const menuProps = () => ({
   id: String,
   prefixCls: String,
+  // donot use items, now only support inner use
+  items: Array as PropType<ItemType[]>,
   disabled: Boolean,
   inlineCollapsed: Boolean,
   disabledOverflow: Boolean,
@@ -58,7 +65,7 @@ export const menuProps = () => ({
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
 
   inlineIndent: { type: Number, default: 24 },
-  subMenuOpenDelay: { type: Number, default: 0.1 },
+  subMenuOpenDelay: { type: Number, default: 0 },
   subMenuCloseDelay: { type: Number, default: 0.1 },
 
   builtinPlacements: { type: Object as PropType<BuiltinPlacements> },
@@ -94,8 +101,18 @@ export default defineComponent({
     default: any;
   }>,
   setup(props, { slots, emit, attrs }) {
-    const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);
-    const store = ref<Record<string, StoreMenuInfo>>({});
+    const { direction, getPrefixCls } = useConfigInject('menu', props);
+    const override = useInjectOverride();
+    const prefixCls = computed(() => {
+      return getPrefixCls('menu', props.prefixCls || override?.prefixCls?.value);
+    });
+    const [wrapSSR, hashId] = useStyle(
+      prefixCls,
+      computed(() => {
+        return !override;
+      }),
+    );
+    const store = shallowRef<Map<string, StoreMenuInfo>>(new Map());
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
       if (siderCollapsed.value !== undefined) {
@@ -103,8 +120,8 @@ export default defineComponent({
       }
       return props.inlineCollapsed;
     });
-
-    const isMounted = ref(false);
+    const { itemsNodes } = useItems(props);
+    const isMounted = shallowRef(false);
     onMounted(() => {
       isMounted.value = true;
     });
@@ -120,6 +137,11 @@ export default defineComponent({
         'Menu',
         '`inlineCollapsed` not control Menu under Sider. Should set `collapsed` on Sider instead.',
       );
+      // devWarning(
+      //   !!props.items && !slots.default,
+      //   'Menu',
+      //   '`children` will be removed in next major version. Please use `items` instead.',
+      // );
     });
 
     const activeKeys = ref([]);
@@ -129,7 +151,7 @@ export default defineComponent({
       store,
       () => {
         const newKeyMapStore = {};
-        for (const menuInfo of Object.values(store.value)) {
+        for (const menuInfo of store.value.values()) {
           newKeyMapStore[menuInfo.key] = menuInfo;
         }
         keyMapStore.value = newKeyMapStore;
@@ -183,41 +205,40 @@ export default defineComponent({
 
     // >>>>> Trigger select
     const triggerSelection = (info: MenuInfo) => {
-      if (!props.selectable) {
-        return;
-      }
-      // Insert or Remove
-      const { key: targetKey } = info;
-      const exist = mergedSelectedKeys.value.includes(targetKey);
-      let newSelectedKeys: Key[];
+      if (props.selectable) {
+        // Insert or Remove
+        const { key: targetKey } = info;
+        const exist = mergedSelectedKeys.value.includes(targetKey);
+        let newSelectedKeys: Key[];
 
-      if (props.multiple) {
-        if (exist) {
-          newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
+        if (props.multiple) {
+          if (exist) {
+            newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
+          } else {
+            newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+          }
         } else {
-          newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+          newSelectedKeys = [targetKey];
         }
-      } else {
-        newSelectedKeys = [targetKey];
-      }
 
-      // Trigger event
-      const selectInfo: SelectInfo = {
-        ...info,
-        selectedKeys: newSelectedKeys,
-      };
-      if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
-        if (props.selectedKeys === undefined) {
-          mergedSelectedKeys.value = newSelectedKeys;
-        }
-        emit('update:selectedKeys', newSelectedKeys);
-        if (exist && props.multiple) {
-          emit('deselect', selectInfo);
-        } else {
-          emit('select', selectInfo);
+        // Trigger event
+        const selectInfo: SelectInfo = {
+          ...info,
+          selectedKeys: newSelectedKeys,
+        };
+        if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
+          if (props.selectedKeys === undefined) {
+            mergedSelectedKeys.value = newSelectedKeys;
+          }
+          emit('update:selectedKeys', newSelectedKeys);
+          if (exist && props.multiple) {
+            emit('deselect', selectInfo);
+          } else {
+            emit('select', selectInfo);
+          }
         }
       }
-
+      // Whatever selectable, always close it
       if (mergedMode.value !== 'inline' && !props.multiple && mergedOpenKeys.value.length) {
         triggerOpenKeys(EMPTY_LIST);
       }
@@ -249,7 +270,7 @@ export default defineComponent({
     const disabled = computed(() => !!props.disabled);
     const isRtl = computed(() => direction.value === 'rtl');
     const mergedMode = ref<MenuMode>('vertical');
-    const mergedInlineCollapsed = ref(false);
+    const mergedInlineCollapsed = shallowRef(false);
 
     watchEffect(() => {
       if ((props.mode === 'inline' || props.mode === 'vertical') && inlineCollapsed.value) {
@@ -258,6 +279,9 @@ export default defineComponent({
       } else {
         mergedMode.value = props.mode;
         mergedInlineCollapsed.value = false;
+      }
+      if (override?.mode?.value) {
+        mergedMode.value = override.mode.value;
       }
     });
 
@@ -272,7 +296,7 @@ export default defineComponent({
     // >>>>> Cache & Reset open keys when inlineCollapsed changed
     const inlineCacheOpenKeys = ref(mergedOpenKeys.value);
 
-    const mountRef = ref(false);
+    const mountRef = shallowRef(false);
 
     // Cache
     watch(
@@ -327,7 +351,7 @@ export default defineComponent({
       const keys = [];
       const storeValue = store.value;
       eventKeys.forEach(eventKey => {
-        const { key, childrenEventKeys } = storeValue[eventKey];
+        const { key, childrenEventKeys } = storeValue.get(eventKey);
         keys.push(key, ...getChildrenKeys(unref(childrenEventKeys)));
       });
       return keys;
@@ -340,6 +364,7 @@ export default defineComponent({
     const onInternalClick = (info: MenuInfo) => {
       emit('click', info);
       triggerSelection(info);
+      override?.onClick?.();
     };
 
     const onInternalOpenChange = (key: Key, open: boolean) => {
@@ -360,16 +385,17 @@ export default defineComponent({
     };
 
     const registerMenuInfo = (key: string, info: StoreMenuInfo) => {
-      store.value = { ...store.value, [key]: info as any };
+      store.value.set(key, info);
+      store.value = new Map(store.value);
     };
     const unRegisterMenuInfo = (key: string) => {
-      delete store.value[key];
-      store.value = { ...store.value };
+      store.value.delete(key);
+      store.value = new Map(store.value);
     };
 
     const lastVisibleIndex = ref(0);
     const expandIcon = computed<MenuProps['expandIcon']>(() =>
-      props.expandIcon || slots.expandIcon
+      props.expandIcon || slots.expandIcon || override?.expandIcon?.value
         ? opt => {
             let icon = props.expandIcon || slots.expandIcon;
             icon = typeof icon === 'function' ? icon(opt) : icon;
@@ -384,7 +410,6 @@ export default defineComponent({
         : null,
     );
     useProvideMenu({
-      store,
       prefixCls,
       activeKeys,
       openKeys: mergedOpenKeys,
@@ -400,22 +425,22 @@ export default defineComponent({
       triggerSubMenuAction: computed(() => props.triggerSubMenuAction),
       getPopupContainer: computed(() => props.getPopupContainer),
       inlineCollapsed: mergedInlineCollapsed,
-      antdMenuTheme: computed(() => props.theme),
+      theme: computed(() => props.theme),
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions.value : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
-      overflowDisabled: ref(undefined),
+      overflowDisabled: shallowRef(undefined),
       onOpenChange: onInternalOpenChange,
       onItemClick: onInternalClick,
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuKeys,
-      isRootMenu: ref(true),
       expandIcon,
       forceSubMenuRender: computed(() => props.forceSubMenuRender),
+      rootClassName: hashId,
     });
     return () => {
-      const childList = flattenChildren(slots.default?.());
+      const childList = itemsNodes.value || flattenChildren(slots.default?.());
       const allVisible =
         lastVisibleIndex.value >= childList.length - 1 ||
         mergedMode.value !== 'horizontal' ||
@@ -435,14 +460,14 @@ export default defineComponent({
             ));
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
-      return (
+      return wrapSSR(
         <Overflow
           {...attrs}
           onMousedown={props.onMousedown}
           prefixCls={`${prefixCls.value}-overflow`}
           component="ul"
           itemComponent={MenuItem}
-          class={[className.value, attrs.class]}
+          class={[className.value, attrs.class, hashId.value]}
           role="menu"
           id={props.id}
           data={wrappedChildList}
@@ -492,7 +517,7 @@ export default defineComponent({
               <PathContext>{wrappedChildList}</PathContext>
             </div>
           </Teleport>
-        </Overflow>
+        </Overflow>,
       );
     };
   },

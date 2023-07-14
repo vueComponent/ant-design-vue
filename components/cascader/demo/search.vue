@@ -25,8 +25,8 @@ Search and select options directly.
     placeholder="Please select"
   />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { CascaderProps } from 'ant-design-vue';
 import type { ShowSearchType } from 'ant-design-vue/es/cascader';
 const options: CascaderProps['options'] = [
@@ -68,17 +68,9 @@ const options: CascaderProps['options'] = [
     ],
   },
 ];
-export default defineComponent({
-  setup() {
-    const filter: ShowSearchType['filter'] = (inputValue, path) => {
-      return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
-    };
+const filter: ShowSearchType['filter'] = (inputValue, path) => {
+  return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
+};
 
-    return {
-      value: ref<string[]>([]),
-      options,
-      filter,
-    };
-  },
-});
+const value = ref<string[]>([]);
 </script>

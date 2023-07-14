@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/qrcode/demo/base.vue correctly 1`] = `
+<div style="width: 160px; height: 160px;" class="ant-qrcode">
+  <!----><canvas style="height: 134px; width: 134px;"></canvas>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/qrcode/demo/customColor.vue correctly 1`] = `
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;">
+    <div>
+      <div style="width: 160px; height: 160px;" class="ant-qrcode">
+        <!----><canvas style="height: 134px; width: 134px;"></canvas>
+        <!---->
+      </div>
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div>
+      <div style="width: 160px; height: 160px;" class="ant-qrcode">
+        <!----><canvas style="height: 134px; width: 134px;"></canvas>
+        <!---->
+      </div>
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/qrcode/demo/customSize.vue correctly 1`] = `
+<div class="ant-btn-group"><button class="ant-btn ant-btn-default" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span><span>samll</span></button><button class="ant-btn ant-btn-default" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span><span>large</span></button></div>
+<br>
+<br>
+<div style="width: 160px; height: 160px;" class="ant-qrcode">
+  <!----><canvas style="height: 134px; width: 134px;"></canvas><img src="https://www.antdv.com/assets/logo.1ef800a8.svg" style="display: none;">
+</div>
+`;
+
+exports[`renders ./components/qrcode/demo/customType.vue correctly 1`] = `
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;">
+    <div style="width: 160px; height: 160px;" class="ant-qrcode">
+      <!----><canvas style="height: 134px; width: 134px;"></canvas>
+      <!---->
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div style="width: 160px; height: 160px;" class="ant-qrcode">
+      <!----><svg height="134" width="134" viewBox="0 0 25 25">
+        <title></title>
+        <path fill="transparent" d="M0,0 h25v25H0z" shape-rendering="crispEdges"></path>
+        <path fill="#000" d="M0 0h7v1H0zM10 0h1v1H10zM13 0h2v1H13zM18,0 h7v1H18zM0 1h1v1H0zM6 1h1v1H6zM8 1h1v1H8zM11 1h1v1H11zM14 1h1v1H14zM18 1h1v1H18zM24,1 h1v1H24zM0 2h1v1H0zM2 2h3v1H2zM6 2h1v1H6zM9 2h2v1H9zM12 2h3v1H12zM18 2h1v1H18zM20 2h3v1H20zM24,2 h1v1H24zM0 3h1v1H0zM2 3h3v1H2zM6 3h1v1H6zM8 3h4v1H8zM13 3h1v1H13zM15 3h2v1H15zM18 3h1v1H18zM20 3h3v1H20zM24,3 h1v1H24zM0 4h1v1H0zM2 4h3v1H2zM6 4h1v1H6zM8 4h2v1H8zM11 4h4v1H11zM18 4h1v1H18zM20 4h3v1H20zM24,4 h1v1H24zM0 5h1v1H0zM6 5h1v1H6zM13 5h2v1H13zM16 5h1v1H16zM18 5h1v1H18zM24,5 h1v1H24zM0 6h7v1H0zM8 6h1v1H8zM10 6h1v1H10zM12 6h1v1H12zM14 6h1v1H14zM16 6h1v1H16zM18,6 h7v1H18zM8 7h1v1H8zM13 7h1v1H13zM15 7h2v1H15zM1 8h1v1H1zM3 8h4v1H3zM8 8h1v1H8zM10 8h1v1H10zM14 8h2v1H14zM17 8h2v1H17zM20 8h2v1H20zM23 8h1v1H23zM0 9h1v1H0zM3 9h1v1H3zM7 9h3v1H7zM11 9h1v1H11zM13 9h3v1H13zM17 9h1v1H17zM19 9h5v1H19zM0 10h1v1H0zM2 10h1v1H2zM5 10h2v1H5zM8 10h1v1H8zM11 10h1v1H11zM15 10h1v1H15zM18 10h2v1H18zM21 10h1v1H21zM24,10 h1v1H24zM1 11h1v1H1zM3 11h3v1H3zM7 11h2v1H7zM11 11h1v1H11zM14 11h1v1H14zM19 11h1v1H19zM21,11 h4v1H21zM1 12h4v1H1zM6 12h3v1H6zM11 12h8v1H11zM24,12 h1v1H24zM0 13h1v1H0zM3 13h1v1H3zM5 13h1v1H5zM7 13h1v1H7zM9 13h8v1H9zM20 13h1v1H20zM23 13h1v1H23zM0 14h2v1H0zM3 14h1v1H3zM5 14h2v1H5zM8 14h1v1H8zM13 14h5v1H13zM20,14 h5v1H20zM0 15h1v1H0zM2 15h3v1H2zM8 15h3v1H8zM12 15h3v1H12zM19 15h2v1H19zM22 15h1v1H22zM24,15 h1v1H24zM0 16h1v1H0zM5 16h2v1H5zM8 16h2v1H8zM11 16h1v1H11zM15 16h6v1H15zM22 16h2v1H22zM8 17h2v1H8zM12 17h5v1H12zM20 17h1v1H20zM23 17h1v1H23zM0 18h7v1H0zM10 18h1v1H10zM12 18h2v1H12zM16 18h1v1H16zM18 18h1v1H18zM20 18h2v1H20zM24,18 h1v1H24zM0 19h1v1H0zM6 19h1v1H6zM8 19h1v1H8zM11 19h1v1H11zM14 19h3v1H14zM20 19h1v1H20zM24,19 h1v1H24zM0 20h1v1H0zM2 20h3v1H2zM6 20h1v1H6zM8 20h2v1H8zM13 20h1v1H13zM15 20h7v1H15zM23,20 h2v1H23zM0 21h1v1H0zM2 21h3v1H2zM6 21h1v1H6zM8 21h2v1H8zM12 21h1v1H12zM14 21h1v1H14zM17 21h3v1H17zM21 21h1v1H21zM23,21 h2v1H23zM0 22h1v1H0zM2 22h3v1H2zM6 22h1v1H6zM9 22h2v1H9zM12 22h2v1H12zM16 22h2v1H16zM19 22h2v1H19zM22,22 h3v1H22zM0 23h1v1H0zM6 23h1v1H6zM8 23h3v1H8zM12 23h1v1H12zM14 23h1v1H14zM17 23h4v1H17zM22,23 h3v1H22zM0 24h7v1H0zM11 24h3v1H11zM16 24h1v1H16zM18 24h1v1H18zM21 24h1v1H21zM24,24 h1v1H24z" shape-rendering="crispEdges"></path>
+        <!---->
+      </svg>
+    </div>
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/qrcode/demo/download.vue correctly 1`] = `
+<div style="width: 160px; height: 160px;" class="ant-qrcode">
+  <!----><canvas style="height: 134px; width: 134px;"></canvas>
+  <!---->
+</div>
+<br>
+<br>
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Downlaod</span>
+</button>
+`;
+
+exports[`renders ./components/qrcode/demo/errorLevel.vue correctly 1`] = `
+<div style="width: 160px; height: 160px;" class="ant-qrcode">
+  <!----><canvas style="height: 134px; width: 134px;"></canvas>
+  <!---->
+</div>
+<br>
+<br>
+<div class="ant-segmented ">
+  <div class="ant-segmented-group">
+    <!----><label class="ant-segmented-item ant-segmented-item-selected"><input class="ant-segmented-item-input" type="radio">
+      <div class="ant-segmented-item-label" title="L">L</div>
+    </label><label class="ant-segmented-item"><input class="ant-segmented-item-input" type="radio">
+      <div class="ant-segmented-item-label" title="M">M</div>
+    </label><label class="ant-segmented-item"><input class="ant-segmented-item-input" type="radio">
+      <div class="ant-segmented-item-label" title="Q">Q</div>
+    </label><label class="ant-segmented-item"><input class="ant-segmented-item-input" type="radio">
+      <div class="ant-segmented-item-label" title="H">H</div>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders ./components/qrcode/demo/icon.vue correctly 1`] = `
+<div style="width: 160px; height: 160px;" class="ant-qrcode">
+  <!----><canvas style="height: 134px; width: 134px;"></canvas><img src="https://www.antdv.com/assets/logo.1ef800a8.svg" style="display: none;">
+</div>
+`;
+
+exports[`renders ./components/qrcode/demo/popover.vue correctly 1`] = `<img width="100" height="100" src="https://aliyuncdn.antdv.com/logo.png">`;
+
+exports[`renders ./components/qrcode/demo/status.vue correctly 1`] = `
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;">
+    <div>
+      <div style="width: 160px; height: 160px;" class="ant-qrcode">
+        <div class="ant-qrcode-mask">
+          <div class="ant-spin ant-spin-spinning" aria-live="polite" aria-busy="true"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
+            <!---->
+          </div>
+          <!---->
+        </div><canvas style="height: 134px; width: 134px;"></canvas>
+        <!---->
+      </div>
+    </div>
+  </div>
+  <!---->
+  <div class="ant-space-item">
+    <div>
+      <div style="width: 160px; height: 160px;" class="ant-qrcode">
+        <div class="ant-qrcode-mask">
+          <!---->
+          <p class="ant-qrcode-expired">QR code expired</p><button class="ant-btn ant-btn-link" type="button"><span role="img" aria-label="reload" class="anticon anticon-reload"><svg focusable="false" class="" data-icon="reload" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.1 209.3l-56.4 44.1C775.8 155.1 656.2 92 521.9 92 290 92 102.3 279.5 102 511.5 101.7 743.7 289.8 932 521.9 932c181.3 0 335.8-115 394.6-276.1 1.5-4.2-.7-8.9-4.9-10.3l-56.7-19.5a8 8 0 00-10.1 4.8c-1.8 5-3.8 10-5.9 14.9-17.3 41-42.1 77.8-73.7 109.4A344.77 344.77 0 01655.9 829c-42.3 17.9-87.4 27-133.8 27-46.5 0-91.5-9.1-133.8-27A341.5 341.5 0 01279 755.2a342.16 342.16 0 01-73.7-109.4c-17.9-42.4-27-87.4-27-133.9s9.1-91.5 27-133.9c17.3-41 42.1-77.8 73.7-109.4 31.6-31.6 68.4-56.4 109.3-73.8 42.3-17.9 87.4-27 133.8-27 46.5 0 91.5 9.1 133.8 27a341.5 341.5 0 01109.3 73.8c9.9 9.9 19.2 20.4 27.8 31.4l-60.2 47a8 8 0 003 14.1l175.6 43c5 1.2 9.9-2.6 9.9-7.7l.8-180.9c-.1-6.6-7.8-10.3-13-6.2z"></path></svg></span><span>Refresh</span></button>
+        </div><canvas style="height: 134px; width: 134px;"></canvas>
+        <!---->
+      </div>
+    </div>
+  </div>
+  <!---->
+</div>
+`;

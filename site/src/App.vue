@@ -1,7 +1,11 @@
 <template>
-  <a-config-provider :locale="locale">
-    <router-view />
-  </a-config-provider>
+  <a-style-provider :hash-priority="hashPriority">
+    <a-config-provider :locale="locale" :theme="themeConfig">
+      <SiteToken>
+        <router-view />
+      </SiteToken>
+    </a-config-provider>
+  </a-style-provider>
 </template>
 
 <script lang="ts">
@@ -15,6 +19,8 @@ import enUS from '../../components/locale/en_US';
 import zhCN from '../../components/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
+import { theme as antdTheme } from 'ant-design-vue';
+import SiteToken from './SiteToken.vue';
 function isZhCN(name: string) {
   return /-cn\/?$/.test(name);
 }
@@ -25,13 +31,39 @@ export interface GlobalConfig {
   responsive: Ref<null | 'narrow' | 'crowded'>;
   blocked: Ref<boolean>;
 }
+export type ThemeName = '' | 'light' | 'dark' | 'compact';
+const getAlgorithm = (themes: ThemeName[] = []) =>
+  themes
+    .filter(theme => !!theme)
+    .map(theme => {
+      if (theme === 'dark') {
+        return antdTheme.darkAlgorithm;
+      }
+      if (theme === 'compact') {
+        return antdTheme.compactAlgorithm;
+      }
+      return antdTheme.defaultAlgorithm;
+    });
+
 export default defineComponent({
+  components: {
+    SiteToken,
+  },
   setup() {
     const route = useRoute();
     const i18n = useI18n();
     const colSize = useMediaQuery();
     const isMobile = computed(() => colSize.value === 'sm' || colSize.value === 'xs');
-    const theme = ref(localStorage.getItem('theme') || 'default');
+    const theme = ref<ThemeName>((localStorage.getItem('theme') as ThemeName) || 'light');
+    const compactTheme = ref<ThemeName>((localStorage.getItem('compactTheme') as ThemeName) || '');
+    const themeConfig = computed(() => {
+      return { algorithm: getAlgorithm([...new Set([theme.value, compactTheme.value])]) };
+    });
+    const hashPriority = ref('low' as const);
+    watch(hashPriority, () => {
+      location.reload();
+    });
+    // useSiteToken();
     const responsive = computed(() => {
       if (colSize.value === 'xs') {
         return 'crowded';
@@ -47,13 +79,21 @@ export default defineComponent({
       isZhCN: computed(() => i18n.locale.value === 'zh-CN'),
       blocked: ref(false),
     };
-    const changeTheme = (t: string) => {
+    const changeTheme = (t: ThemeName) => {
       theme.value = t;
       localStorage.setItem('theme', t);
     };
+
+    const changeCompactTheme = (t: ThemeName) => {
+      compactTheme.value = t;
+      localStorage.setItem('compactTheme', t);
+    };
+
     provide('themeMode', {
       theme,
+      compactTheme,
       changeTheme,
+      changeCompactTheme,
     });
     provide(GLOBAL_CONFIG, globalConfig);
     watch(
@@ -98,7 +138,7 @@ export default defineComponent({
       },
       { immediate: true },
     );
-    return { globalConfig, locale };
+    return { globalConfig, locale, themeConfig, hashPriority };
   },
 });
 </script>

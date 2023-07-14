@@ -26,21 +26,12 @@ Vertical RadioGroup, with more radios.
     </a-radio>
   </a-radio-group>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<number>(1);
-    const radioStyle = reactive({
-      display: 'flex',
-      height: '30px',
-      lineHeight: '30px',
-    });
-
-    return {
-      value,
-      radioStyle,
-    };
-  },
+<script lang="ts" setup>
+import { reactive, ref } from 'vue';
+const value = ref<number>(1);
+const radioStyle = reactive({
+  display: 'flex',
+  height: '30px',
+  lineHeight: '30px',
 });
 </script>

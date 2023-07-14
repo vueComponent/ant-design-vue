@@ -60,34 +60,20 @@ Because the width of label is not fixed, you may need to adjust it by customizin
     <div class="search-result-list">Search Result List</div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+<script lang="ts" setup>
+import { reactive, ref } from 'vue';
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue';
 import type { FormInstance } from 'ant-design-vue';
-export default defineComponent({
-  components: {
-    DownOutlined,
-    UpOutlined,
-  },
-  setup() {
-    const expand = ref(false);
-    const formRef = ref<FormInstance>();
-    const formState = reactive({});
-    const onFinish = (values: any) => {
-      console.log('Received values of form: ', values);
-      console.log('formState: ', formState);
-    };
-    return {
-      formRef,
-      formState,
-      expand,
-      onFinish,
-    };
-  },
-});
+const expand = ref(false);
+const formRef = ref<FormInstance>();
+const formState = reactive({});
+const onFinish = (values: any) => {
+  console.log('Received values of form: ', values);
+  console.log('formState: ', formState);
+};
 </script>
 
-<style>
+<style scoped>
 #components-form-demo-advanced-search .ant-form {
   max-width: none;
 }

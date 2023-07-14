@@ -2,7 +2,8 @@
 category: Components
 type: General
 title: Button
-cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*BrFMQ5s7AAQAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Lp1kTYmSsgoAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 To trigger an operation.
@@ -66,6 +67,6 @@ It accepts all props which native buttons support.
 
 ### How to remove space between 2 chinese characters
 
-Following the Ant Design specification, we will add one space between if Button (exclude Text button and Link button) contains two Chinese characters only. If you don't need that, you can use [ConfigProvider](/components/config-provider/#API) to set `autoInsertSpaceInButton` as `false`.
+Following the Ant Design specification, we will add one space between if Button (exclude Text button and Link button) contains two Chinese characters only. If you don't need that, you can use [ConfigProvider](/components/config-provider/#api) to set `autoInsertSpaceInButton` as `false`.
 
 <img src="https://gw.alipayobjects.com/zos/antfincdn/MY%26THAPZrW/38f06cb9-293a-4b42-b183-9f443e79ffea.png" style="box-shadow: none; margin: 0; width: 100px" alt="Button with two Chinese characters"  />

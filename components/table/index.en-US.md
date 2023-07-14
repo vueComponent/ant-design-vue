@@ -3,7 +3,8 @@ category: Components
 cols: 1
 type: Data Display
 title: Table
-cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3yz3QqMlShYAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Sv8XQ50NB40AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A table displays rows of data.
@@ -72,9 +73,9 @@ Specify `dataSource` of Table as an array of data.
 | bodyCell | custom body cell by slot | v-slot:bodyCell="{text, record, index, column}" | - | 3.0 |
 | bordered | Whether to show all table borders | boolean | `false` |  |
 | childrenColumnName | The column contains children to display | string | `children` |  |
-| columns | Columns of table [config](#Column) | array | - |  |
+| columns | Columns of table [config](#column) | array | - |  |
 | components | Override default table elements | object | - |  |
-| customFilterDropdown | Customized filter overlay，need set `column.customFilterDropdown` | v-slot:customFilterDropdown="[FilterDropdownProps](#FilterDropdownProps)" | - | 3.0 |
+| customFilterDropdown | Customized filter overlay，need set `column.customFilterDropdown` | v-slot:customFilterDropdown="[FilterDropdownProps](#filterdropdownprops)" | - | 3.0 |
 | customFilterIcon | Customized filter icon | v-slot:customFilterIcon="{filtered, column}" | - | 3.0 |
 | customHeaderRow | Set props on per header row | Function(columns, index) | - |  |
 | customRow | Set props on per row | Function(record, index) | - |  |
@@ -85,6 +86,7 @@ Specify `dataSource` of Table as an array of data.
 | expandedRowKeys(v-model) | Current expanded row keys | string\[] | - |  |
 | expandedRowRender | Expanded container render for each row | Function({record, index, indent, expanded}):VNode\|v-slot | - |  |
 | expandFixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean \| string | false | 3.0 |
+| expandColumnTitle | Set the title of the expand column | v-slot | - | 4.0.0 |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| v-slot:expandIcon="props" | - |  |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
 | footer | Table footer renderer | Function(currentPageData)\| v-slot:footer="currentPageData" |  |  |
@@ -93,16 +95,16 @@ Specify `dataSource` of Table as an array of data.
 | indentSize | Indent size in pixels of tree data | number | 15 |  |
 | loading | Loading status of table | boolean\|[object](/components/spin) | `false` |  |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br /> filterReset: 'Reset' <br /> emptyText: 'No Data' |  |
-| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object |  |  |
+| pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object \| `false` |  |  |
 | rowClassName | Row's className | Function(record, index):string | - |  |
 | rowExpandable | Enable row can be expandable | (record) => boolean | - |  |
 | rowKey | Row's unique key, could be a string or function that returns a string | string\|Function(record, index):string | `key` |  |
-| rowSelection | Row selection [config](#rowSelection) | object | null |  |
+| rowSelection | Row selection [config](#rowselection) | object | null |  |
 | scroll | Whether the table can be scrollable, [config](#scroll) | object | - |  |
 | showExpandColumn | Show expand column | boolean | true | 3.0 |
 | showHeader | Whether to show table header | boolean | `true` |  |
-| showSorterTooltip | The header show next sorter direction tooltip. It will be set as the property of Tooltip if its type is object | boolean \| [Tooltip props](/components/tooltip/#API) | true | 3.0 |
-| size | Size of table | `default` \| `middle` \| `small` \| `large` | `default` |  |
+| showSorterTooltip | The header show next sorter direction tooltip. It will be set as the property of Tooltip if its type is object | boolean \| [Tooltip props](/components/tooltip/#api) | true | 3.0 |
+| size | Size of table | `middle` \| `small` \| `large` | `large` |  |
 | sortDirections | Supported sort way, could be `ascend`, `descend` | Array | \[`ascend`, `descend`] | 3.0 |
 | sticky | Set sticky header and scroll bar | boolean \| `{offsetHeader?: number, offsetScroll?: number, getContainer?: () => HTMLElement}` | - | 3.0 |
 | summary | Summary content | v-slot:summary | - | 3.0 |
@@ -157,31 +159,33 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | customRender | Renderer of the table cell. The return value should be a VNode | Function({text, record, index}) {} | - |  |
 | dataIndex | Display field of the data record, support nest path by string array | string \| string\[] | - |  |
 | defaultFilteredValue | Default filtered values | string\[] | - | 1.5.0 |
+| filterResetToDefaultFilteredValue | click the reset button, whether to restore the default filter | boolean | false | 3.3.0 |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
 | ellipsis | ellipsize cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is true. | boolean | false | 1.5.0 |
 | ellipsis | The ellipsis cell content, not working with sorter and filters for now.<br />tableLayout would be `fixed` when `ellipsis` is `true` or `{ showTitle?: boolean }` | boolean \| {showTitle?: boolean } | false | 3.0 |
-| filterDropdown | Customized filter overlay | VNode | - |  |
-| filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |  |
+| filterDropdown | Customized filter overlay | VNode \| (props: FilterDropdownProps) => VNode | - |  |
+| filterDropdownOpen | Whether `filterDropdown` is open | boolean | - | 4.0 |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |  |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |  |
 | filterIcon | Customized filter icon | ({filtered: boolean, column: Column}) | `false` |  |
 | filterMode | To specify the filter interface | 'menu' \| 'tree' | 'menu' | 3.0 |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |  |
 | filters | Filter menu config | object\[] | - |  |
-| filterSearch | Whether to be searchable for filter menu | Boolean | false | 3.0 |
+| filterSearch | Whether to be searchable for filter menu | boolean \| function(input, filter):boolean | false | boolean: 3.0 function: 3.3.0 |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |  |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |  |
 | maxWidth | Drag the maximum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | - | 3.0 |
 | minWidth | Drag the minimum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | 50 | 3.0 |
 | resizable | Whether the width can be adjusted by dragging, at this time width must be number type | boolean | - | 3.0 |
-| responsive | The list of breakpoints at which to display this column. Always visible if not set. | [Breakpoint](#Breakpoint)\[] | - | 3.0 |
+| responsive | The list of breakpoints at which to display this column. Always visible if not set. | [Breakpoint](#breakpoint)\[] | - | 3.0 |
+| rowScope | Set scope attribute for all cells in this column | `row` \| `rowgroup` | - | 4.0 |
 | sortDirections | supported sort way, could be `'ascend'`, `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |  |
-| sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |  |
+| sortOrder | Order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
 | title | Title of this column | string | - |  |
 | width | Width of this column | string\|number | - |  |
 | onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |  |
-| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |  |
+| onFilterDropdownOpenChange | Callback executed when `filterDropdownOpen` is changed, Use as a `filterDropdownOpen` event when using template or jsx | function(open) {} | - | 4.0 |
 
 #### Breakpoint
 
@@ -220,7 +224,7 @@ Properties for row selection.
 | hideSelectAll | Hide the selectAll checkbox and custom selection | boolean | false | 3.0 |
 | preserveSelectedRowKeys | Keep selection `key` even when it removed from `dataSource` | boolean | - | 3.0 |
 | selectedRowKeys | Controlled selected row keys | string\[] | \[] |  |
-| selections | Custom selection [config](#rowSelection), only displays default selections when set to `true` | object\[] \| boolean | - |  |
+| selections | Custom selection [config](#rowselection), only displays default selections when set to `true` | object\[] \| boolean | - |  |
 | type | `checkbox` or `radio` | `checkbox` \| `radio` | `checkbox` |  |
 | onChange | Callback executed when selected rows change | Function(selectedRowKeys, selectedRows) | - |  |
 | onSelect | Callback executed when select/deselect one row | Function(record, selected, selectedRows, nativeEvent) | - |  |
@@ -273,12 +277,6 @@ return <Table rowKey="uid" />;
 // or
 return <Table rowKey={record => record.uid} />;
 ```
-
-## Migrate to v3
-
-Table deprecated `column.slots`, added `v-slot:bodyCell`, `v-slot:headerCell`, custom cells, and added `column.customFilterDropdown` `v-slot:customFilterDropdown`, custom filtering Menu, added `v-slot:customFilterIcon` custom filter button, but `column.slots` is still available, we will remove it in the next major version.
-
-Besides, the breaking change is changing `dataIndex` from nest string path like `user.age` to string array path like `['user', 'age']`. This help to resolve developer should additional work on the field which contains `.`.
 
 ## FAQ
 

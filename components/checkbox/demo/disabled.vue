@@ -17,18 +17,14 @@ Disabled checkbox
 </docs>
 
 <template>
-  <a-checkbox v-model:checked="checked1" disabled />
+  <a-checkbox v-model:checked="state.checked1" disabled />
   <br />
-  <a-checkbox v-model:checked="checked2" disabled />
+  <a-checkbox v-model:checked="state.checked2" disabled />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      checked1: ref(false),
-      checked2: ref(true),
-    };
-  },
+<script lang="ts" setup>
+import { reactive } from 'vue';
+const state = reactive({
+  checked1: false,
+  checked2: true,
 });
 </script>

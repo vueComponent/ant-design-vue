@@ -6,16 +6,20 @@ import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import TimelineItem from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+
+import { tuple, booleanType } from '../_util/type';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+
+// CSSINJS
+import useStyle from './style';
 import type { CustomSlotsType } from '../_util/type';
-import { tuple } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const timelineProps = () => ({
   prefixCls: String,
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
   pendingDot: PropTypes.any,
-  reverse: { type: Boolean, default: undefined },
+  reverse: booleanType(),
   mode: PropTypes.oneOf(tuple('left', 'alternate', 'right', '')),
 });
 
@@ -24,6 +28,7 @@ export type TimelineProps = Partial<ExtractPropTypes<ReturnType<typeof timelineP
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ATimeline',
+  inheritAttrs: false,
   props: initDefaultProps(timelineProps(), {
     reverse: false,
     mode: '',
@@ -33,8 +38,12 @@ export default defineComponent({
     pendingDot?: any;
     default?: any;
   }>,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('timeline', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const getPositionCls = (ele, idx: number) => {
       const eleProps = ele.props || {};
       if (props.mode === 'alternate') {
@@ -85,14 +94,23 @@ export default defineComponent({
       const hasLabelItem = timeLineItems.some(
         item => !!(item.props?.label || item.children?.label),
       );
-      const classString = classNames(prefixCls.value, {
-        [`${prefixCls.value}-pending`]: !!pending,
-        [`${prefixCls.value}-reverse`]: !!reverse,
-        [`${prefixCls.value}-${mode}`]: !!mode && !hasLabelItem,
-        [`${prefixCls.value}-label`]: hasLabelItem,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-      });
-      return <ul class={classString}>{items}</ul>;
+      const classString = classNames(
+        prefixCls.value,
+        {
+          [`${prefixCls.value}-pending`]: !!pending,
+          [`${prefixCls.value}-reverse`]: !!reverse,
+          [`${prefixCls.value}-${mode}`]: !!mode && !hasLabelItem,
+          [`${prefixCls.value}-label`]: hasLabelItem,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        attrs.class,
+        hashId.value,
+      );
+      return wrapSSR(
+        <ul {...attrs} class={classString}>
+          {items}
+        </ul>,
+      );
     };
   },
 });

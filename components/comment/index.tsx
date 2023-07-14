@@ -4,7 +4,11 @@ import PropTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
 import type { CustomSlotsType, VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+
+// CSSINJS
+import useStyle from './style';
+
 export const commentProps = () => ({
   actions: Array,
   /** The element to display as the comment author. */
@@ -24,8 +28,8 @@ export type CommentProps = Partial<ExtractPropTypes<ReturnType<typeof commentPro
 const Comment = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AComment',
+  inheritAttrs: false,
   props: commentProps(),
-
   slots: Object as CustomSlotsType<{
     actions: any;
     author: any;
@@ -34,8 +38,12 @@ const Comment = defineComponent({
     datetime: any;
     default: any;
   }>,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('comment', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const renderNested = (prefixCls: string, children: VueNode) => {
       return <div class={`${prefixCls}-nested`}>{children}</div>;
     };
@@ -87,18 +95,21 @@ const Comment = defineComponent({
         </div>
       );
       const children = flattenChildren(slots.default?.());
-      return (
+      return wrapSSR(
         <div
+          {...attrs}
           class={[
             pre,
             {
               [`${pre}-rtl`]: direction.value === 'rtl',
             },
+            attrs.class,
+            hashId.value,
           ]}
         >
           {comment}
           {children && children.length ? renderNested(pre, children) : null}
-        </div>
+        </div>,
       );
     };
   },

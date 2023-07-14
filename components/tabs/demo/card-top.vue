@@ -36,18 +36,12 @@ Should be used at the top of container, needs to override styles.
     </a-tabs>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref('2'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const activeKey = ref('2');
 </script>
-<style>
+
+<style scoped>
 .card-container p {
   margin: 0;
 }

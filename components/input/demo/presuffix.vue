@@ -33,20 +33,8 @@ Add prefix or suffix icons inside input.
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-    InfoCircleOutlined,
-  },
-
-  setup() {
-    const userName = ref<string>('');
-    return {
-      userName,
-    };
-  },
-});
+import { ref } from 'vue';
+const userName = ref<string>('');
 </script>

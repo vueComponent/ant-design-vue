@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Watermark The watermark should render successfully  1`] = `
+<div class="watermark" style="position: relative;">
+  <!---->
+</div>
+`;

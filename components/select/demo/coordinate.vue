@@ -32,37 +32,20 @@ Using the [Cascader](/components/cascader) component is strongly recommended ins
     ></a-select>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { computed, ref, watch } from 'vue';
 const provinceData = ['Zhejiang', 'Jiangsu'];
 const cityData = {
   Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
   Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
 };
-import { defineComponent, reactive, toRefs, computed, watch } from 'vue';
-export default defineComponent({
-  setup() {
-    const province = provinceData[0];
-    const state = reactive({
-      province,
-      provinceData,
-      cityData,
-      secondCity: cityData[province][0],
-    });
-    const cities = computed(() => {
-      return cityData[state.province];
-    });
+const province = ref(provinceData[0]);
+const secondCity = ref(cityData[province.value][0]);
+const cities = computed(() => {
+  return cityData[province.value];
+});
 
-    watch(
-      () => state.province,
-      val => {
-        state.secondCity = state.cityData[val][0];
-      },
-    );
-
-    return {
-      ...toRefs(state),
-      cities,
-    };
-  },
+watch(province, val => {
+  secondCity.value = cityData[val][0];
 });
 </script>

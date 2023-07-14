@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./components/card/demo/basic.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered" style="width: 300px;">
+<div style="width: 300px;" class="ant-card  ant-card-bordered">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Default size card</div>
@@ -18,7 +18,7 @@ exports[`renders ./components/card/demo/basic.vue correctly 1`] = `
   <!---->
 </div>
 <br>
-<div class="ant-card ant-card-bordered ant-card-small" style="width: 300px;">
+<div style="width: 300px;" class="ant-card  ant-card-bordered ant-card-small">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Small size card</div>
@@ -38,7 +38,7 @@ exports[`renders ./components/card/demo/basic.vue correctly 1`] = `
 
 exports[`renders ./components/card/demo/border-less.vue correctly 1`] = `
 <div style="background: rgb(236, 236, 236); padding: 30px;">
-  <div class="ant-card" style="width: 300px;">
+  <div style="width: 300px;" class="ant-card">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Card title</div>
@@ -58,7 +58,7 @@ exports[`renders ./components/card/demo/border-less.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/flexible-content.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered ant-card-hoverable" style="width: 240px;">
+<div style="width: 240px;" class="ant-card  ant-card-bordered ant-card-hoverable">
   <!---->
   <div class="ant-card-cover"><img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"></div>
   <div class="ant-card-body">
@@ -75,7 +75,7 @@ exports[`renders ./components/card/demo/flexible-content.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/grid-card.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered ant-card-contain-grid">
+<div class="ant-card  ant-card-bordered ant-card-contain-grid">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card Title</div>
@@ -154,7 +154,7 @@ exports[`renders ./components/card/demo/in-column.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/inner.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered">
+<div class="ant-card  ant-card-bordered">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card title</div>
@@ -165,7 +165,7 @@ exports[`renders ./components/card/demo/inner.vue correctly 1`] = `
   <!---->
   <div class="ant-card-body">
     <p style="font-size: 14px; color: rgba(0, 0, 0, 0.85); margin-bottom: 16px; font-weight: 500;"> Group title </p>
-    <div class="ant-card ant-card-bordered">
+    <div class="ant-card  ant-card-bordered">
       <div class="ant-card-head">
         <div class="ant-card-head-wrapper">
           <div class="ant-card-head-title">Inner card title</div>
@@ -177,7 +177,7 @@ exports[`renders ./components/card/demo/inner.vue correctly 1`] = `
       <div class="ant-card-body"> Inner Card content </div>
       <!---->
     </div>
-    <div class="ant-card ant-card-bordered" style="margin-top: 16px;">
+    <div style="margin-top: 16px;" class="ant-card  ant-card-bordered">
       <div class="ant-card-head">
         <div class="ant-card-head-wrapper">
           <div class="ant-card-head-title">Inner card title</div>
@@ -195,7 +195,7 @@ exports[`renders ./components/card/demo/inner.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/loading.vue correctly 1`] = `
-<div class="ant-card ant-card-loading ant-card-bordered">
+<div class="ant-card  ant-card-loading ant-card-bordered">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card title</div>
@@ -205,58 +205,28 @@ exports[`renders ./components/card/demo/loading.vue correctly 1`] = `
   </div>
   <!---->
   <div class="ant-card-body">
-    <div class="ant-card-loading-content">
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-22" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-      </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-8" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col ant-col-15" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-      </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-6" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col ant-col-18" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-      </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-13" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col ant-col-9" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-      </div>
-      <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
-        <div class="ant-col ant-col-4" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col ant-col-3" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
-        <div class="ant-col ant-col-16" style="padding-left: 4px; padding-right: 4px;">
-          <div class="ant-card-loading-block"></div>
-        </div>
+    <div class="ant-skeleton ant-skeleton-active ">
+      <!---->
+      <div class="ant-skeleton-content">
+        <!---->
+        <ul class="ant-skeleton-paragraph">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li style="width: 61%;"></li>
+        </ul>
       </div>
     </div>
   </div>
   <!---->
 </div>
-<button style="margin-top: 16px;" class="ant-btn" type="button">
+<button style="margin-top: 16px;" class="ant-btn ant-btn-default" type="button">
   <!----><span>Toggle loading</span>
 </button>
 `;
 
 exports[`renders ./components/card/demo/meta.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered ant-card-hoverable" style="width: 300px;">
+<div style="width: 300px;" class="ant-card  ant-card-bordered ant-card-hoverable">
   <!---->
   <div class="ant-card-cover"><img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"></div>
   <div class="ant-card-body">
@@ -277,7 +247,7 @@ exports[`renders ./components/card/demo/meta.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/simple.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered" style="width: 300px;">
+<div style="width: 300px;" class="ant-card  ant-card-bordered">
   <!---->
   <!---->
   <div class="ant-card-body">
@@ -290,13 +260,13 @@ exports[`renders ./components/card/demo/simple.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
-<div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width: 100%;">
+<div style="width: 100%;" class="ant-card  ant-card-bordered ant-card-contain-tabs">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card title</div>
       <div class="ant-card-extra"><a href="#">More</a></div>
     </div>
-    <div class="ant-tabs ant-tabs-top ant-tabs-large ant-card-head-tabs">
+    <div class="ant-tabs ant-tabs-top  ant-tabs-large ant-card-head-tabs">
       <div role="tablist" class="ant-tabs-nav">
         <!---->
         <div class="ant-tabs-nav-wrap">
@@ -338,13 +308,13 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
 </div>
 <br>
 <br>
-<div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width: 100%;">
+<div style="width: 100%;" class="ant-card  ant-card-bordered ant-card-contain-tabs">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
       <!---->
       <!---->
     </div>
-    <div class="ant-tabs ant-tabs-top ant-tabs-large ant-card-head-tabs">
+    <div class="ant-tabs ant-tabs-top  ant-tabs-large ant-card-head-tabs">
       <div role="tablist" class="ant-tabs-nav">
         <!---->
         <div class="ant-tabs-nav-wrap">

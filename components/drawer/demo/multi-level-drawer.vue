@@ -19,7 +19,7 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks.
 <template>
   <a-button type="primary" @click="showDrawer">Open</a-button>
   <a-drawer
-    v-model:visible="visible"
+    v-model:open="open"
     title="Multi-level drawer"
     width="520"
     :closable="false"
@@ -27,12 +27,7 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks.
     @close="onClose"
   >
     <a-button type="primary" @click="showChildrenDrawer">Two-level drawer</a-button>
-    <a-drawer
-      v-model:visible="childrenDrawer"
-      title="Two-level Drawer"
-      width="320"
-      :closable="false"
-    >
+    <a-drawer v-model:open="childrenDrawer" title="Two-level Drawer" width="320" :closable="false">
       <a-button type="primary" @click="showChildrenDrawer">This is two-level drawer</a-button>
     </a-drawer>
 
@@ -42,31 +37,20 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks.
     </template>
   </a-drawer>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const visible = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-    const childrenDrawer = ref<boolean>(false);
+const childrenDrawer = ref<boolean>(false);
 
-    const showDrawer = () => {
-      visible.value = true;
-    };
-    const onClose = () => {
-      visible.value = false;
-    };
-    const showChildrenDrawer = () => {
-      childrenDrawer.value = true;
-    };
-    return {
-      visible,
-      childrenDrawer,
-      showDrawer,
-      onClose,
-      showChildrenDrawer,
-    };
-  },
-});
+const showDrawer = () => {
+  open.value = true;
+};
+const onClose = () => {
+  open.value = false;
+};
+const showChildrenDrawer = () => {
+  childrenDrawer.value = true;
+};
 </script>

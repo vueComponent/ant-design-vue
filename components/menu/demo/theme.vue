@@ -32,46 +32,12 @@ There are two built-in themes: `light` and `dark`. The default value is `light`.
       style="width: 256px"
       mode="inline"
       :theme="theme"
-    >
-      <a-menu-item key="1">
-        <template #icon>
-          <MailOutlined />
-        </template>
-        Navigation One
-      </a-menu-item>
-      <a-menu-item key="2">
-        <template #icon>
-          <CalendarOutlined />
-        </template>
-        Navigation Two
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <template #icon>
-          <AppstoreOutlined />
-        </template>
-        <template #title>Navigation Three</template>
-        <a-menu-item key="3">Option 3</a-menu-item>
-        <a-menu-item key="4">Option 4</a-menu-item>
-        <a-sub-menu key="sub1-2" title="Submenu">
-          <a-menu-item key="5">Option 5</a-menu-item>
-          <a-menu-item key="6">Option 6</a-menu-item>
-        </a-sub-menu>
-      </a-sub-menu>
-      <a-sub-menu key="sub2">
-        <template #icon>
-          <SettingOutlined />
-        </template>
-        <template #title>Navigation Four</template>
-        <a-menu-item key="7">Option 7</a-menu-item>
-        <a-menu-item key="8">Option 8</a-menu-item>
-        <a-menu-item key="9">Option 9</a-menu-item>
-        <a-menu-item key="10">Option 10</a-menu-item>
-      </a-sub-menu>
-    </a-menu>
+      :items="items"
+    />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue';
+<script lang="ts" setup>
+import { h, ref } from 'vue';
 import {
   MailOutlined,
   CalendarOutlined,
@@ -79,27 +45,87 @@ import {
   SettingOutlined,
 } from '@ant-design/icons-vue';
 import type { MenuTheme } from 'ant-design-vue';
-export default defineComponent({
-  components: {
-    MailOutlined,
-    CalendarOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
+const theme = ref<MenuTheme>('dark');
+const selectedKeys = ref(['1']);
+const openKeys = ref(['sub1']);
+const items = ref([
+  {
+    key: '1',
+    icon: () => h(MailOutlined),
+    label: 'Navigation One',
+    title: 'Navigation One',
   },
-  setup() {
-    const state = reactive({
-      theme: 'dark' as MenuTheme,
-      selectedKeys: ['1'],
-      openKeys: ['sub1'],
-    });
-    const changeTheme = (checked: boolean) => {
-      state.theme = checked ? 'dark' : 'light';
-    };
-
-    return {
-      ...toRefs(state),
-      changeTheme,
-    };
+  {
+    key: '2',
+    icon: () => h(CalendarOutlined),
+    label: 'Navigation Two',
+    title: 'Navigation Two',
   },
-});
+  {
+    key: 'sub1',
+    icon: () => h(AppstoreOutlined),
+    label: 'Navigation Three',
+    title: 'Navigation Three',
+    children: [
+      {
+        key: '3',
+        label: 'Option 3',
+        title: 'Option 3',
+      },
+      {
+        key: '4',
+        label: 'Option 4',
+        title: 'Option 4',
+      },
+      {
+        key: 'sub1-2',
+        label: 'Submenu',
+        title: 'Submenu',
+        children: [
+          {
+            key: '5',
+            label: 'Option 5',
+            title: 'Option 5',
+          },
+          {
+            key: '6',
+            label: 'Option 6',
+            title: 'Option 6',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    key: 'sub2',
+    icon: () => h(SettingOutlined),
+    label: 'Navigation Four',
+    title: 'Navigation Four',
+    children: [
+      {
+        key: '7',
+        label: 'Option 7',
+        title: 'Option 7',
+      },
+      {
+        key: '8',
+        label: 'Option 8',
+        title: 'Option 8',
+      },
+      {
+        key: '9',
+        label: 'Option 9',
+        title: 'Option 9',
+      },
+      {
+        key: '10',
+        label: 'Option 10',
+        title: 'Option 10',
+      },
+    ],
+  },
+]);
+const changeTheme = (checked: boolean) => {
+  theme.value = checked ? 'dark' : 'light';
+};
 </script>

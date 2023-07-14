@@ -1,8 +1,8 @@
 <docs>
 ---
-order: 5 
-title: 
-  zh-CN: 三种大小 
+order: 5
+title:
+  zh-CN: 三种大小
   en-US: Three sizes of Input
 ---
 
@@ -22,16 +22,9 @@ There are three sizes of an Input box: `large` (40px)、`default` (32px) and `sm
     <a-input v-model:value="value" size="small" placeholder="small size" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('');
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<string>('');
 </script>
 <style scoped>
 .components-input-demo-size .ant-input {

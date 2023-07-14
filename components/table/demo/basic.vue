@@ -58,9 +58,8 @@ Simple table with actions.
     </template>
   </a-table>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
 const columns = [
   {
     name: 'Name',
@@ -111,17 +110,4 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ];
-
-export default defineComponent({
-  components: {
-    SmileOutlined,
-    DownOutlined,
-  },
-  setup() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>

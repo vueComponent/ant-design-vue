@@ -16,7 +16,7 @@ Use `visible` prop to control the display of the card.
 
 </docs>
 <template>
-  <a-popover v-model:visible="visible" title="Title" trigger="click">
+  <a-popover v-model:open="visible" title="Title" trigger="click">
     <template #content>
       <a @click="hide">Close</a>
     </template>
@@ -24,20 +24,11 @@ Use `visible` prop to control the display of the card.
   </a-popover>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const visible = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const visible = ref<boolean>(false);
 
-    const hide = () => {
-      visible.value = false;
-    };
-
-    return {
-      visible,
-      hide,
-    };
-  },
-});
+const hide = () => {
+  visible.value = false;
+};
 </script>

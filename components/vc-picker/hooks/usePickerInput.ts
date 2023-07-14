@@ -1,5 +1,5 @@
 import type { ComputedRef, HTMLAttributes, Ref } from 'vue';
-import { onBeforeUnmount, onMounted, watch, ref, computed } from 'vue';
+import { onBeforeUnmount, onMounted, watch, shallowRef, computed } from 'vue';
 import type { FocusEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
 import { addGlobalMousedownEvent, getTargetFromEvent } from '../utils/uiUtil';
@@ -30,18 +30,18 @@ export default function usePickerInput({
   onFocus?: FocusEventHandler;
   onBlur?: FocusEventHandler;
 }): [ComputedRef<HTMLAttributes>, { focused: Ref<boolean>; typing: Ref<boolean> }] {
-  const typing = ref(false);
-  const focused = ref(false);
+  const typing = shallowRef(false);
+  const focused = shallowRef(false);
 
   /**
    * We will prevent blur to handle open event when user click outside,
    * since this will repeat trigger `onOpenChange` event.
    */
-  const preventBlurRef = ref<boolean>(false);
+  const preventBlurRef = shallowRef<boolean>(false);
 
-  const valueChangedRef = ref<boolean>(false);
+  const valueChangedRef = shallowRef<boolean>(false);
 
-  const preventDefaultRef = ref<boolean>(false);
+  const preventDefaultRef = shallowRef<boolean>(false);
 
   const inputProps = computed<HTMLAttributes>(() => ({
     onMousedown: () => {
@@ -146,7 +146,7 @@ export default function usePickerInput({
   watch(value, () => {
     valueChangedRef.value = true;
   });
-  const globalMousedownEvent = ref();
+  const globalMousedownEvent = shallowRef();
   // Global click handler
   onMounted(() => {
     globalMousedownEvent.value = addGlobalMousedownEvent((e: MouseEvent) => {

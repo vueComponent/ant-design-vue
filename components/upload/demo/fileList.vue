@@ -36,46 +36,34 @@ You can gain full control over filelist by configuring `fileList`. You can accom
     </a-button>
   </a-upload>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { UploadOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
-
-export default defineComponent({
-  components: {
-    UploadOutlined,
+const fileList = ref<UploadProps['fileList']>([
+  {
+    uid: '-1',
+    name: 'xxx.png',
+    status: 'done',
+    url: 'http://www.baidu.com/xxx.png',
   },
-  setup() {
-    const fileList = ref<UploadProps['fileList']>([
-      {
-        uid: '-1',
-        name: 'xxx.png',
-        status: 'done',
-        url: 'http://www.baidu.com/xxx.png',
-      },
-    ]);
-    const handleChange = (info: UploadChangeParam) => {
-      let resFileList = [...info.fileList];
+]);
+const handleChange = (info: UploadChangeParam) => {
+  let resFileList = [...info.fileList];
 
-      // 1. Limit the number of uploaded files
-      //    Only to show two recent uploaded files, and old ones will be replaced by the new
-      resFileList = resFileList.slice(-2);
+  // 1. Limit the number of uploaded files
+  //    Only to show two recent uploaded files, and old ones will be replaced by the new
+  resFileList = resFileList.slice(-2);
 
-      // 2. read from response and show file link
-      resFileList = resFileList.map(file => {
-        if (file.response) {
-          // Component will show file.url as link
-          file.url = file.response.url;
-        }
-        return file;
-      });
+  // 2. read from response and show file link
+  resFileList = resFileList.map(file => {
+    if (file.response) {
+      // Component will show file.url as link
+      file.url = file.response.url;
+    }
+    return file;
+  });
 
-      fileList.value = resFileList;
-    };
-    return {
-      fileList,
-      handleChange,
-    };
-  },
-});
+  fileList.value = resFileList;
+};
 </script>

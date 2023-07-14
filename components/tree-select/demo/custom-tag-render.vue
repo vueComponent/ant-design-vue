@@ -41,15 +41,18 @@ Allows for custom rendering of tags.
     </template>
   </a-tree-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
 import { TreeSelect } from 'ant-design-vue';
 const SHOW_ALL = TreeSelect.SHOW_ALL;
-export default defineComponent({
-  setup() {
-    const value = ref<string[]>(['parent 1', 'parent 1-0', 'leaf1']);
-    const treeData = ref<TreeSelectProps['treeData']>([
+const value = ref<string[]>(['parent 1', 'parent 1-0', 'leaf1']);
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    label: 'parent 1',
+    value: 'parent 1',
+    color: 'pink',
+    children: [
       {
         label: 'parent 1',
         value: 'parent 1',
@@ -79,16 +82,15 @@ export default defineComponent({
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log('select', value.value);
-    });
-
-    return {
-      value,
-      treeData,
-      SHOW_ALL,
-    };
+      {
+        label: 'parent 1-1',
+        value: 'parent 1-1',
+        color: 'blue',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log('select', value.value);
 });
 </script>

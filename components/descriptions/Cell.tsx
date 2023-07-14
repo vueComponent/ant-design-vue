@@ -11,8 +11,8 @@ interface CellProps extends HTMLAttributes {
   labelStyle?: CSSProperties;
   contentStyle?: CSSProperties;
   bordered?: boolean;
-  label?: VNodeTypes;
-  content?: VNodeTypes;
+  label?: number | VNodeTypes;
+  content?: number | VNodeTypes;
   colon?: boolean;
 }
 
@@ -49,7 +49,7 @@ const Cell: FunctionalComponent<CellProps> = props => {
   return (
     <Component class={[`${itemPrefixCls}-item`]} colSpan={span}>
       <div class={`${itemPrefixCls}-item-container`}>
-        {label && (
+        {(label || label === 0) && (
           <span
             class={[
               `${itemPrefixCls}-item-label`,
@@ -62,7 +62,7 @@ const Cell: FunctionalComponent<CellProps> = props => {
             {label}
           </span>
         )}
-        {content && (
+        {(content || content === 0) && (
           <span class={`${itemPrefixCls}-item-content`} style={contentStyle}>
             {content}
           </span>

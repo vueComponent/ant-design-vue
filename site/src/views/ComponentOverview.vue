@@ -51,7 +51,10 @@
                     </div>
                   </template>
                   <div class="components-overview-img">
-                    <img :src="component.cover" :alt="component.title" />
+                    <img
+                      :src="isDark && component.coverDark ? component.coverDark : component.cover"
+                      :alt="component.title"
+                    />
                   </div>
                 </a-card>
               </component>
@@ -76,6 +79,8 @@ export default defineComponent({
   },
   setup() {
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
+    const themeMode = inject('themeMode');
+    const isDark = computed<boolean>(() => (themeMode as any).theme.value === 'dark');
     const search = ref('');
     const inputRef = ref();
     const { dataSource } = useMenus();
@@ -87,6 +92,7 @@ export default defineComponent({
               category: 'Components',
               cols: 1,
               cover: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
+              coverDark: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
               path: 'https://surely.cool/',
               subtitle: '更强大的表格',
               title: 'Surely Table',
@@ -97,6 +103,8 @@ export default defineComponent({
               category: 'Components',
               cols: 1,
               cover: 'https://aliyuncdn.antdv.com/form/static/assets/landing-config.4f9d5425.png',
+              coverDark:
+                'https://aliyuncdn.antdv.com/form/static/assets/landing-config.4f9d5425.png',
               path: 'https://form.antdv.com/',
               subtitle: '在线表单',
               title: 'Surely Form',
@@ -135,6 +143,7 @@ export default defineComponent({
       getLocalizedPathname,
       inputRef,
       isZhCN: globalConfig?.isZhCN,
+      isDark,
     };
   },
 });

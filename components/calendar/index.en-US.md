@@ -2,7 +2,8 @@
 category: Components
 type: Data Display
 title: Calendar
-cover: https://gw.alipayobjects.com/zos/antfincdn/dPQmLq08DI/Calendar.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*nF6_To7pDSAAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*-p-wQLik200AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Container for displaying data in calendar form.
@@ -45,4 +46,21 @@ customize the progress dot by setting a scoped slot
 | --- | --- | --- | --- | --- |
 | change | Callback for when value change | function(date: dayjs \| string） | - |  |
 | panelChange | Callback for when panel changes | function(date: dayjs \| string, mode: string) | - |  |
-| select | Callback for when a date is selected | function(date: dayjs \| string） | - |  |
+| select | Callback for when a date is selected, include source info | function(date: dayjs \| string,info:{ source: 'year' \| 'month' \| 'date' \| 'customize' }) | - |  |
+
+### How to get date from panel click?
+
+`select` event provide `info.source` to help on this:
+
+```html
+<script lang="ts" setup>
+  const onSelect = (date, { source }) => {
+    if (source === 'date') {
+      console.log('Panel Select:', source);
+    }
+  };
+</script>
+<template>
+  <a-calendar @select="onSelect" />
+</template>
+```

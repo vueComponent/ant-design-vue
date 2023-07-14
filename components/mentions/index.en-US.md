@@ -2,7 +2,8 @@
 category: Components
 type: Data Entry
 title: Mentions
-cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*e4bXT7Uhi9YAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*pxR2S53P_xoAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Mention component.
@@ -16,7 +17,7 @@ When you need to mention someone or something.
 ### Mention
 
 | Property | Description | Type | Default |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | autofocus | Auto get focus when component mounted | boolean | `false` |
 | defaultValue | Default value | string |  |
 | filterOption | Customize filter option logic | false \| (input: string, option: OptionProps) => boolean |  |
@@ -25,8 +26,11 @@ When you need to mention someone or something.
 | placement | Set popup placement | `top` \| `bottom` | `bottom` |
 | prefix | Set trigger prefix keyword | string \| string\[] | '@' |
 | split | Set split string before and after selected mention | string | ' ' |
+| status | Set validation status | 'error' \| 'warning' \| 'success' \| 'validating' | - | 3.3.0 |
 | validateSearch | Customize trigger search logic | (text: string, props: MentionsProps) => void |  |
 | value(v-model) | Set value of mentions | string |  |
+| options | Option Configuration | [Options](#option) | \[] | 4.0 |
+| option | custom option label | v-slot:option="option" | - | 4.0 |
 
 ### Events
 
@@ -45,8 +49,22 @@ When you need to mention someone or something.
 | blur()  | remove focus |
 | focus() | get focus    |
 
-### Option
+### Mention.Option (< 4.0)
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | value | value of suggestion, the value will insert into input filed while selected | string | '' |
+
+### Option
+
+Support from v4.0
+
+<!-- prettier-ignore -->
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| value | value of suggestion, the value will insert into input filed while selected | string | - |
+| label | Title of the option | VueNode | () => VueNode | - |
+| disabled | Optional | boolean | - |
+| class | className | string | - |
+| style | The style of the option | CSSProperties | - |
+|payload| other data | object | - |

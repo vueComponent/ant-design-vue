@@ -2,7 +2,8 @@
 category: Components
 type: Data Display
 title: Tag
-cover: https://gw.alipayobjects.com/zos/alicdn/cH1BOLfxC/Tag.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_SBsSrKLg00AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JPNAQYrVkYkAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Tag for categorizing or markup.
@@ -16,13 +17,12 @@ Tag for categorizing or markup.
 
 ### Tag
 
-| Property         | Description                      | Type          | Default | Version |
-| ---------------- | -------------------------------- | ------------- | ------- | ------- |
-| closable         | Whether the Tag can be closed    | boolean       | `false` |         |
-| closeIcon        | Custom close icon                | VNode \| slot | -       | 2.0.0   |
-| color            | Color of the Tag                 | string        | -       |         |
-| icon             | Set the icon of tag              | VNode \| slot | -       | 2.0.0   |
-| visible(v-model) | Whether the Tag is closed or not | boolean       | `true`  |         |
+| Property  | Description                   | Type          | Default | Version |
+| --------- | ----------------------------- | ------------- | ------- | ------- |
+| closable  | Whether the Tag can be closed | boolean       | `false` |         |
+| closeIcon | Custom close icon             | VNode \| slot | -       | 2.0.0   |
+| color     | Color of the Tag              | string        | -       |         |
+| icon      | Set the icon of tag           | VNode \| slot | -       | 2.0.0   |
 
 ### Tag Events
 

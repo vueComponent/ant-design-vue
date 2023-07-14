@@ -1,6 +1,6 @@
 import Menu, { Item as MenuItem } from '../../menu';
 import type { PropType } from 'vue';
-import { onBeforeUnmount, defineComponent, inject, ref } from 'vue';
+import { onBeforeUnmount, defineComponent, inject, shallowRef } from 'vue';
 import type { OptionProps } from './Option';
 import MentionsContextKey from './MentionsContext';
 import Spin from '../../spin';
@@ -24,8 +24,8 @@ export default defineComponent({
       onFocus = noop,
       loading,
     } = inject(MentionsContextKey, {
-      activeIndex: ref(),
-      loading: ref(false),
+      activeIndex: shallowRef(),
+      loading: shallowRef(false),
     });
     let timeoutId: any;
     const onMousedown = (e: MouseEvent) => {
@@ -53,7 +53,7 @@ export default defineComponent({
         >
           {!loading.value &&
             options.map((option, index) => {
-              const { value, disabled, label = option.value } = option;
+              const { value, disabled, label = option.value, class: className, style } = option;
               return (
                 <MenuItem
                   key={value}
@@ -61,9 +61,10 @@ export default defineComponent({
                   onMouseenter={() => {
                     setActiveIndex(index);
                   }}
+                  class={className}
+                  style={style}
                 >
-                  {slots.option?.(option) ??
-                    (typeof label === 'function' ? label({ value, disabled }) : label)}
+                  {slots.option?.(option) ?? (typeof label === 'function' ? label(option) : label)}
                 </MenuItem>
               );
             })}

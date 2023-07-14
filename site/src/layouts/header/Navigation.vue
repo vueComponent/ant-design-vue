@@ -125,13 +125,9 @@ export default defineComponent({
 });
 </script>
 <style lang="less">
-@import '../../theme/static/theme.less';
-@import './index.less';
-
 #nav {
   height: 100%;
   font-size: 14px;
-  font-family: Avenir, @font-family, sans-serif;
   border: 0;
 
   &.ant-menu-horizontal {
@@ -140,17 +136,17 @@ export default defineComponent({
     & > .ant-menu-item,
     & > .ant-menu-submenu {
       min-width: (40px + 12px * 2);
-      height: @header-height;
+      height: var(--header-height);
       padding-right: 12px;
       padding-left: 12px;
-      line-height: @header-height;
+      line-height: var(--header-height);
 
       &::after {
         top: 0;
         right: 12px;
         bottom: auto;
         left: 12px;
-        border-width: @menu-item-border;
+        border-width: var(--menu-item-border);
       }
     }
 
@@ -160,7 +156,7 @@ export default defineComponent({
 
     & > .ant-menu-item-selected {
       a {
-        color: @primary-color;
+        color: var(--primary-color);
       }
     }
   }
@@ -172,11 +168,11 @@ export default defineComponent({
 }
 
 .header-link {
-  color: @site-text-color;
+  color: var(--site-text-color);
 }
 
 .ant-menu-item-active .header-link {
-  color: @primary-color;
+  color: var(--primary-color);
 }
 
 // Popover menu is only used for mobile

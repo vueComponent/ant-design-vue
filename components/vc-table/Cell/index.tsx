@@ -1,10 +1,5 @@
 import classNames from '../../_util/classNames';
-import {
-  filterEmpty,
-  flattenChildren,
-  isValidElement,
-  parseStyleText,
-} from '../../_util/props-util';
+import { filterEmpty, flattenChildren, isValidElement } from '../../_util/props-util';
 import type { CSSProperties, VNodeArrayChildren } from 'vue';
 import { Text, computed, defineComponent, isVNode, renderSlot } from 'vue';
 
@@ -347,12 +342,7 @@ export default defineComponent<CellProps>({
           onMouseenter(e, mergedRowSpan);
         },
         onMouseleave,
-        style: {
-          ...parseStyleText(additionalProps.style as any),
-          ...alignStyle,
-          ...fixedStyle,
-          ...cellStyle,
-        },
+        style: [additionalProps.style, alignStyle, fixedStyle, cellStyle],
       };
 
       return (

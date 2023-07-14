@@ -1,5 +1,73 @@
+import type { CSSProperties } from 'vue';
 import type { Key } from '../../_util/type';
 import type { MenuItemProps } from './MenuItem';
+
+// ========================= Options =========================
+interface ItemSharedProps {
+  style?: CSSProperties;
+  class?: string;
+}
+
+export interface SubMenuType extends ItemSharedProps {
+  label?: any;
+
+  children: ItemType[];
+
+  disabled?: boolean;
+
+  key: string;
+  theme?: MenuTheme;
+  rootClassName?: string;
+
+  // >>>>> Icon
+  itemIcon?: RenderIconType;
+  expandIcon?: RenderIconType;
+
+  // >>>>> Active
+  onMouseenter?: MenuHoverEventHandler;
+  onMouseleave?: MenuHoverEventHandler;
+
+  // >>>>> Popup
+  popupClassName?: string;
+  popupOffset?: number[];
+
+  // >>>>> Events
+  onClick?: MenuClickEventHandler;
+  onTitleClick?: (info: MenuTitleInfo) => void;
+  onTitleMouseenter?: MenuHoverEventHandler;
+  onTitleMouseleave?: MenuHoverEventHandler;
+}
+
+export interface MenuItemType extends ItemSharedProps {
+  label?: any;
+
+  disabled?: boolean;
+
+  itemIcon?: RenderIconType;
+
+  key: Key;
+
+  // >>>>> Active
+  onMouseenter?: MenuHoverEventHandler;
+  onMouseleave?: MenuHoverEventHandler;
+
+  // >>>>> Events
+  onClick?: MenuClickEventHandler;
+}
+
+export interface MenuItemGroupType extends ItemSharedProps {
+  type: 'group';
+
+  label?: any;
+
+  children?: ItemType[];
+}
+
+export interface MenuDividerType extends ItemSharedProps {
+  type: 'divider';
+}
+
+export type ItemType = SubMenuType | MenuItemType | MenuItemGroupType | MenuDividerType | null;
 
 export type MenuTheme = 'light' | 'dark';
 

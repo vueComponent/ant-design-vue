@@ -1,13 +1,16 @@
 import type { ExtractPropTypes, HTMLAttributes } from 'vue';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import Button from '../button';
-import classNames from '../_util/classNames';
 import Dropdown from './dropdown';
+import classNames from '../_util/classNames';
 import { initDefaultProps } from '../_util/props-util';
 import { dropdownButtonProps } from './props';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
-import useConfigInject from '../_util/hooks/useConfigInject';
+
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useStyle from './style';
 import type { CustomSlotsType } from '../_util/type';
+
 const ButtonGroup = Button.Group;
 
 export type DropdownButtonProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownButtonProps>>>;
@@ -34,20 +37,25 @@ export default defineComponent({
     const handleVisibleChange = (val: boolean) => {
       emit('update:visible', val);
       emit('visibleChange', val);
+      emit('update:open', val);
+      emit('openChange', val);
     };
 
-    const { prefixCls, direction, getPopupContainer } = useConfigInject('dropdown-button', props);
-
+    const { prefixCls, direction, getPopupContainer } = useConfigInject('dropdown', props);
+    const buttonPrefixCls = computed(() => `${prefixCls.value}-button`);
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     return () => {
       const {
         type = 'default',
         disabled,
+        danger,
         loading,
         htmlType,
         class: className = '',
         overlay = slots.overlay?.(),
         trigger,
         align,
+        open,
         visible,
         onVisibleChange: _onVisibleChange,
         placement = direction.value === 'rtl' ? 'bottomLeft' : 'bottomRight',
@@ -60,7 +68,7 @@ export default defineComponent({
         overlayStyle,
         destroyPopupOnHide,
         onClick,
-        'onUpdate:visible': _updateVisible,
+        'onUpdate:open': _updateVisible,
         ...restProps
       } = { ...props, ...attrs } as DropdownButtonProps & HTMLAttributes;
 
@@ -69,11 +77,11 @@ export default defineComponent({
         disabled,
         trigger: disabled ? [] : trigger,
         placement,
-        getPopupContainer: getPopupContainer.value,
-        onVisibleChange: handleVisibleChange,
+        getPopupContainer: getPopupContainer?.value,
+        onOpenChange: handleVisibleChange,
         mouseEnterDelay,
         mouseLeaveDelay,
-        visible,
+        open: open ?? visible,
         overlayClassName,
         overlayStyle,
         destroyPopupOnHide,
@@ -81,6 +89,7 @@ export default defineComponent({
 
       const leftButton = (
         <Button
+          danger={danger}
           type={type}
           disabled={disabled}
           loading={loading}
@@ -92,15 +101,18 @@ export default defineComponent({
         ></Button>
       );
 
-      const rightButton = <Button type={type} icon={icon} />;
+      const rightButton = <Button danger={danger} type={type} icon={icon} />;
 
-      return (
-        <ButtonGroup {...restProps} class={classNames(prefixCls.value, className)}>
+      return wrapSSR(
+        <ButtonGroup
+          {...restProps}
+          class={classNames(buttonPrefixCls.value, className, hashId.value)}
+        >
           {slots.leftButton ? slots.leftButton({ button: leftButton }) : leftButton}
           <Dropdown {...dropdownProps} v-slots={{ overlay: () => overlay }}>
             {slots.rightButton ? slots.rightButton({ button: rightButton }) : rightButton}
           </Dropdown>
-        </ButtonGroup>
+        </ButtonGroup>,
       );
     };
   },

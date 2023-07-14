@@ -4,10 +4,10 @@
     <inline />
     <inline-collapsed />
     <sider-current />
-    <switch-mode />
-    <theme />
     <vertical />
-    <TemplateSingleFile />
+    <theme />
+    <submenu-theme />
+    <switch-mode />
   </demo-sort>
 </template>
 
@@ -22,7 +22,7 @@ import SiderCurrent from './sider-current.vue';
 import SwitchMode from './switch-mode.vue';
 import Theme from './theme.vue';
 import Vertical from './vertical.vue';
-import TemplateSingleFile from './template.vue';
+import SubmenuTheme from './submenu-theme.vue';
 
 export default defineComponent({
   CN,
@@ -35,7 +35,7 @@ export default defineComponent({
     SwitchMode,
     Theme,
     Vertical,
-    TemplateSingleFile,
+    SubmenuTheme,
   },
 });
 </script>

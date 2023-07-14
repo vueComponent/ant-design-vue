@@ -3,7 +3,8 @@ category: Components
 type: 数据录入
 title: TreeSelect
 subtitle: 树选择
-cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*DfTMRYSDngEAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Y5pcQLplFu4AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 树型选择控件。
@@ -21,7 +22,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | allowClear | 显示清除按钮 | boolean | false |  |  |
 | defaultValue | 指定默认选中的条目 | string/string\[] | - |  |  |
 | disabled | 是否禁用 | boolean | false |  |  |
-| dropdownClassName | 下拉菜单的 className 属性 | string | - |  |  |
+| popupClassName | 下拉菜单的 className 属性 | string | - |  | 4.0 |
 | dropdownMatchSelectWidth | 下拉菜单和选择器同宽。默认将设置 `min-width`，当值小于选择框宽度时会被忽略。false 时会关闭虚拟滚动 | boolean \| number | true |  |  |
 | dropdownStyle | 下拉菜单的样式 | object | - |  |  |
 | fieldNames | 替换 treeNode 中 label,value,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', value: 'value' } |  | 3.0.0 |
@@ -35,12 +36,14 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | multiple | 支持多选（当设置 treeCheckable 时自动变为 true） | boolean | false |  |  |
 | notFoundContent | 当下拉列表为空时显示的内容 | slot | `Not Found` |  |  |
 | placeholder | 选择框默认文字 | string\|slot | - |  |  |
+| placement | 选择框弹出的位置 | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | replaceFields | 替换 treeNode 中 label,value,key,children 字段为 treeData 中对应的字段 | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 1.6.1 (3.0.0 废弃) |
 | searchPlaceholder | 搜索框默认文字 | string\|slot | - |  |  |
 | searchValue(v-model) | 搜索框的值，可以通过 `search` 事件获取用户输入 | string | - |  |  |
 | showCheckedStrategy | 定义选中项回填的方式。`TreeSelect.SHOW_ALL`: 显示所有选中节点(包括父节点). `TreeSelect.SHOW_PARENT`: 只显示父节点(当父节点下所有子节点都选中时). 默认只显示子节点. | enum{TreeSelect.SHOW_ALL, TreeSelect.SHOW_PARENT, TreeSelect.SHOW_CHILD } | TreeSelect.SHOW_CHILD |  |  |
 | showSearch | 在下拉中显示搜索框(仅在单选模式下生效) | boolean | false |  |  |
 | size | 选择框大小，可选 `large` `small` | string | 'default' |  |  |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |  |  |
 | tagRender | 自定义 tag 内容，多选时生效 | slot | - | 3.0 |  |
 | title | 自定义标题 | slot |  | 3.0.0 |  |
@@ -53,6 +56,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | treeExpandedKeys(v-model) | 设置展开的树节点 | string\[] \| number\[] | - |  |  |
 | treeIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |  |  |
 | treeLine | 是否展示线条样式，请参考 [Tree - showLine](/components/tree/#components-tree-demo-line) | boolean \| object | false | 3.0 |  |
+| treeLoadedKeys | （受控）已经加载的节点，需要配合 `loadData` 使用 | string[] | [] | 3.3.0 |
 | treeNodeFilterProp | 输入项过滤对应的 treeNode 属性 | string | 'value' |  |  |
 | treeNodeLabelProp | 作为显示的 prop 设置 | string | 'title' |  |  |
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |  |  |

@@ -71,6 +71,7 @@ const getSlots = ele => {
   return { ...slots, ...getScopedSlots(ele) };
 };
 
+export const skipFlattenKey = Symbol('skipFlatten');
 const flattenChildren = (children = [], filterEmpty = true) => {
   const temp = Array.isArray(children) ? children : [children];
   const res = [];
@@ -78,7 +79,11 @@ const flattenChildren = (children = [], filterEmpty = true) => {
     if (Array.isArray(child)) {
       res.push(...flattenChildren(child, filterEmpty));
     } else if (child && child.type === Fragment) {
-      res.push(...flattenChildren(child.children, filterEmpty));
+      if (child.key === skipFlattenKey) {
+        res.push(child);
+      } else {
+        res.push(...flattenChildren(child.children, filterEmpty));
+      }
     } else if (child && isVNode(child)) {
       if (filterEmpty && !isEmptyElement(child)) {
         res.push(child);

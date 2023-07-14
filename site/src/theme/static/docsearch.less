@@ -1,13 +1,13 @@
 .algolia-autocomplete {
   .ds-dropdown-menu {
     border: none;
-    box-shadow: @box-shadow-base;
+    box-shadow: var(--box-shadow-base);
 
     [class^='ds-dataset-'] {
-      background: @component-background;
+      background: var(--component-background);
       border: none;
       .algolia-docsearch-suggestion {
-        background: @component-background;
+        background: var(--component-background);
       }
     }
 
@@ -17,10 +17,10 @@
   }
 
   .algolia-docsearch-suggestion--title {
-    color: @site-text-color;
+    color: var(--site-text-color);
   }
 
   .algolia-docsearch-suggestion--highlight {
-    color: @primary-color;
+    color: var(--primary-color);
   }
 }

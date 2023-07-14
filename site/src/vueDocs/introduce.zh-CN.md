@@ -40,7 +40,7 @@
 
 - 稳定版：[![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue)
 
-你可以订阅：https://github.com/vueComponent/ant-design-vue/releases.atom 来获得稳定版发布的通知。
+你可以订阅：<https://github.com/vueComponent/ant-design-vue/releases.atom> 来获得稳定版发布的通知。
 
 ## 安装
 
@@ -49,11 +49,11 @@
 **我们推荐使用 npm 或 yarn 的方式进行开发**，不仅可在开发环境轻松调试，也可放心地在生产环境打包部署使用，享受整个生态圈和工具链带来的诸多好处。
 
 ```bash
-$ npm install ant-design-vue --save
+$ npm install ant-design-vue@4.x --save
 ```
 
 ```bash
-$ yarn add ant-design-vue
+$ yarn add ant-design-vue@4.x
 ```
 
 如果你的网络环境不佳，推荐使用 [cnpm](https://github.com/cnpm/cnpm)。
@@ -62,11 +62,11 @@ $ yarn add ant-design-vue
 
 在浏览器中使用 `script` 和 `link` 标签直接引入文件，并使用全局变量 `antd`。
 
-我们在 npm 发布包内的 `ant-design-vue/dist` 目录下提供了 `antd.js` `antd.css` 以及 `antd.min.js` `antd.min.css`。你也可以通过 [![jsdelivr](https://data.jsdelivr.com/v1/package/npm/ant-design-vue/badge)](https://www.jsdelivr.com/package/npm/ant-design-vue) 或 [UNPKG](https://unpkg.com/ant-design-vue/dist/) 进行下载。
+我们在 npm 发布包内的 `ant-design-vue/dist` 目录下提供了 `antd.js`、`antd.min.js` 和 `reset.css`。你也可以通过 [![jsdelivr](https://data.jsdelivr.com/v1/package/npm/ant-design-vue/badge)](https://www.jsdelivr.com/package/npm/ant-design-vue) 或 [UNPKG](https://unpkg.com/ant-design-vue/dist/) 进行下载。
 
 > **强烈不推荐使用已构建文件**，这样无法按需加载，而且难以获得底层依赖模块的 bug 快速修复支持。
 
-> 注意：引入 antd.js 前你需要自行引入 [dayjs](https://day.js.org/) 及其相关插件。
+> 注意：引入 `antd.js` 前你需要自行引入 `vue`、[`dayjs`](https://day.js.org/) 及其相关插件。
 
 如：
 
@@ -91,57 +91,47 @@ app.use(DatePicker);
 引入样式：
 
 ```jsx
-import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
+import 'ant-design-vue/dist/reset.css';
 ```
 
 ### 按需加载
 
-下面两种方式都可以只加载用到的组件。
+`ant-design-vue` 默认支持基于 ES modules 的 tree shaking。
 
-- 使用 [babel-plugin-import](https://github.com/ant-design/babel-plugin-import)（推荐）。
+### 自动按需引入组件
 
-  ```jsx
-  // .babelrc or babel-loader option
-  {
-    "plugins": [
-      ["import", { "libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css" }] // `style: true` 会加载 less 文件
-    ]
-  }
-  ```
+#### [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
 
-  > 注意：webpack 1 无需设置 `libraryDirectory`。
+如果你使用的是 `Vite` ，我们推荐使用 `unplugin-vue-components`
 
-  然后只需从 ant-design-vue 引入模块即可，无需单独引入样式。等同于下面手动引入的方式。
+```bash
+$ npm install unplugin-vue-components -D
+```
 
-  ```jsx
-  // babel-plugin-import 会帮助你加载 JS 和 CSS
-  import { DatePicker } from 'ant-design-vue';
-  ```
+```js
+// vite.config.js
+import { defineConfig } from 'vite';
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
+export default defineConfig({
+  plugins: [
+    // ...
+    Components({
+      resolvers: [
+        AntDesignVueResolver({
+          importStyle: false, // css in js
+        }),
+      ],
+    }),
+  ],
+});
+```
 
-- 手动引入
+然后你可以在代码中直接引入 `ant-design-vue` 的组件，插件会自动将代码转化为 `import { Button } from 'ant-design-vue'` 的形式。
 
-  ```jsx
-  import DatePicker from 'ant-design-vue/lib/date-picker'; // 加载 JS
-  import 'ant-design-vue/lib/date-picker/style/css'; // 加载 CSS
-  // import 'ant-design-vue/lib/date-picker/style';         // 加载 LESS
-  ```
-
-- Vite 按需
-
-  ```js
-  // vite.config.js
-  import Components from 'unplugin-vue-components/vite';
-  import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
-
-  export default {
-    plugins: [
-      /* ... */
-      Components({
-        resolvers: [AntDesignVueResolver()],
-      }),
-    ],
-  };
-  ```
+```jsx
+import { Button } from 'ant-design-vue';
+```
 
 ## 链接
 

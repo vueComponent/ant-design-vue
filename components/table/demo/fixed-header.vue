@@ -26,8 +26,7 @@ Display large amounts of data in scrollable view.
     :scroll="{ y: 240 }"
   />
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 const columns = [
   {
     title: 'Name',
@@ -51,13 +50,4 @@ const data = [...Array(100)].map((_, i) => ({
   age: 32,
   address: `London, Park Lane no. ${i}`,
 }));
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>

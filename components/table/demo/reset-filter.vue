@@ -33,8 +33,8 @@ Control filters and sorters by `filteredValue` and `sortOrder`.
     <a-table :columns="columns" :data-source="data" @change="handleChange" />
   </div>
 </template>
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { computed, ref } from 'vue';
 import type { TableColumnType, TableProps } from 'ant-design-vue';
 
 interface DataItem {
@@ -71,82 +71,69 @@ const data: DataItem[] = [
   },
 ];
 
-export default defineComponent({
-  setup() {
-    const filteredInfo = ref();
-    const sortedInfo = ref();
+const filteredInfo = ref();
+const sortedInfo = ref();
 
-    const columns = computed<TableColumnType[]>(() => {
-      const filtered = filteredInfo.value || {};
-      const sorted = sortedInfo.value || {};
-      return [
-        {
-          title: 'Name',
-          dataIndex: 'name',
-          key: 'name',
-          filters: [
-            { text: 'Joe', value: 'Joe' },
-            { text: 'Jim', value: 'Jim' },
-          ],
-          filteredValue: filtered.name || null,
-          onFilter: (value: string, record: DataItem) => record.name.includes(value),
-          sorter: (a: DataItem, b: DataItem) => a.name.length - b.name.length,
-          sortOrder: sorted.columnKey === 'name' && sorted.order,
-          ellipsis: true,
-        },
-        {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
-          sorter: (a: DataItem, b: DataItem) => a.age - b.age,
-          sortOrder: sorted.columnKey === 'age' && sorted.order,
-        },
-        {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
-          filters: [
-            { text: 'London', value: 'London' },
-            { text: 'New York', value: 'New York' },
-          ],
-          filteredValue: filtered.address || null,
-          onFilter: (value: string, record: DataItem) => record.address.includes(value),
-          sorter: (a: DataItem, b: DataItem) => a.address.length - b.address.length,
-          sortOrder: sorted.columnKey === 'address' && sorted.order,
-          ellipsis: true,
-        },
-      ];
-    });
-
-    const handleChange: TableProps['onChange'] = (pagination, filters, sorter) => {
-      console.log('Various parameters', pagination, filters, sorter);
-      filteredInfo.value = filters;
-      sortedInfo.value = sorter;
-    };
-    const clearFilters = () => {
-      filteredInfo.value = null;
-    };
-    const clearAll = () => {
-      filteredInfo.value = null;
-      sortedInfo.value = null;
-    };
-    const setAgeSort = () => {
-      sortedInfo.value = {
-        order: 'descend',
-        columnKey: 'age',
-      };
-    };
-
-    return {
-      data,
-      columns,
-      handleChange,
-      clearFilters,
-      clearAll,
-      setAgeSort,
-    };
-  },
+const columns = computed<TableColumnType[]>(() => {
+  const filtered = filteredInfo.value || {};
+  const sorted = sortedInfo.value || {};
+  return [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+      filters: [
+        { text: 'Joe', value: 'Joe' },
+        { text: 'Jim', value: 'Jim' },
+      ],
+      filteredValue: filtered.name || null,
+      onFilter: (value: string, record: DataItem) => record.name.includes(value),
+      sorter: (a: DataItem, b: DataItem) => a.name.length - b.name.length,
+      sortOrder: sorted.columnKey === 'name' && sorted.order,
+      ellipsis: true,
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+      key: 'age',
+      sorter: (a: DataItem, b: DataItem) => a.age - b.age,
+      sortOrder: sorted.columnKey === 'age' && sorted.order,
+    },
+    {
+      title: 'Address',
+      dataIndex: 'address',
+      key: 'address',
+      filters: [
+        { text: 'London', value: 'London' },
+        { text: 'New York', value: 'New York' },
+      ],
+      filteredValue: filtered.address || null,
+      onFilter: (value: string, record: DataItem) => record.address.includes(value),
+      sorter: (a: DataItem, b: DataItem) => a.address.length - b.address.length,
+      sortOrder: sorted.columnKey === 'address' && sorted.order,
+      ellipsis: true,
+    },
+  ];
 });
+
+const handleChange: TableProps['onChange'] = (pagination, filters, sorter) => {
+  console.log('Various parameters', pagination, filters, sorter);
+  filteredInfo.value = filters;
+  sortedInfo.value = sorter;
+};
+const clearFilters = () => {
+  filteredInfo.value = null;
+};
+const clearAll = () => {
+  filteredInfo.value = null;
+  sortedInfo.value = null;
+};
+const setAgeSort = () => {
+  sortedInfo.value = {
+    order: 'descend',
+    columnKey: 'age',
+  };
+};
 </script>
 <style scoped>
 .table-operations {

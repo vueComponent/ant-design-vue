@@ -36,22 +36,28 @@ const DrawerWrapper = defineComponent({
     };
 
     return () => {
-      const { afterVisibleChange, getContainer, wrapperClassName, forceRender, ...otherProps } =
-        props;
+      const {
+        getContainer,
+        wrapperClassName,
+        rootClassName,
+        rootStyle,
+        forceRender,
+        ...otherProps
+      } = props;
 
       let portal = null;
       if (!getContainer) {
         return (
-          <div class={wrapperClassName} ref={dom}>
-            <Child
-              v-slots={slots}
-              {...otherProps}
-              open={props.open}
-              getContainer={() => dom.value}
-              onClose={onClose}
-              onHandleClick={onHandleClick}
-            ></Child>
-          </div>
+          <Child
+            v-slots={slots}
+            {...otherProps}
+            rootClassName={rootClassName}
+            rootStyle={rootStyle}
+            open={props.open}
+            onClose={onClose}
+            onHandleClick={onHandleClick}
+            inline={true}
+          ></Child>
         );
       }
 
@@ -60,6 +66,7 @@ const DrawerWrapper = defineComponent({
       if ($forceRender || props.open || dom.value) {
         portal = (
           <PortalWrapper
+            autoLock
             visible={props.open}
             forceRender={$forceRender}
             getContainer={getContainer}
@@ -71,6 +78,8 @@ const DrawerWrapper = defineComponent({
                   v-slots={slots}
                   {...otherProps}
                   {...rest}
+                  rootClassName={rootClassName}
+                  rootStyle={rootStyle}
                   open={visible !== undefined ? visible : props.open}
                   afterVisibleChange={
                     afterClose !== undefined ? afterClose : props.afterVisibleChange

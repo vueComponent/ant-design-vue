@@ -4,7 +4,7 @@ import type { FormLabelAlign } from './interface';
 import { useInjectForm } from './context';
 import type { RequiredMark } from './Form';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
-import defaultLocale from '../locale/default';
+import defaultLocale from '../locale/en_US';
 import classNames from '../_util/classNames';
 import type { VueNode } from '../_util/type';
 import type { FunctionalComponent, HTMLAttributes } from 'vue';

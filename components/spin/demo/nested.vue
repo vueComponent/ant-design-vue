@@ -28,22 +28,9 @@ Embedding content into `Spin` will alter it into loading state.
     <a-switch v-model:checked="spinning" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const spinning = ref<boolean>(false);
-
-    const changeSpinning = () => {
-      spinning.value = !spinning.value;
-    };
-
-    return {
-      spinning,
-      changeSpinning,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const spinning = ref<boolean>(false);
 </script>
 <style scoped>
 .spin-state {

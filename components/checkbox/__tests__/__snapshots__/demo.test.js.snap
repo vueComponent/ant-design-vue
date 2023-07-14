@@ -3,7 +3,7 @@
 exports[`renders ./components/checkbox/demo/basic.vue correctly 1`] = `<label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span>Checkbox</span></label>`;
 
 exports[`renders ./components/checkbox/demo/check-all.vue correctly 1`] = `
-<div><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-indeterminate"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span><span> Check all </span></label></div>
+<div><label class="ant-checkbox-wrapper"><span class="ant-checkbox ant-checkbox-indeterminate"><input type="checkbox" class="ant-checkbox-input" aria-checked="mixed"><span class="ant-checkbox-inner"></span></span><span> Check all </span></label></div>
 <div class="ant-divider ant-divider-horizontal" role="separator">
   <!---->
 </div>
@@ -39,11 +39,11 @@ exports[`renders ./components/checkbox/demo/group.vue correctly 1`] = `
 <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="Apple"><span class="ant-checkbox-inner"></span></span><span>Apple</span></label><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value="Pear"><span class="ant-checkbox-inner"></span></span><span>Pear</span></label><label class="ant-checkbox-wrapper ant-checkbox-group-item"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="Orange"><span class="ant-checkbox-inner"></span></span><span>Orange</span></label></div>
 <br>
 <br>
-<div class="ant-checkbox-group"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-checkbox-wrapper-disabled ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-checked ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value="Apple"><span class="ant-checkbox-inner"></span></span><span><span style="color: red;">Apple</span></span></label><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value="Pear"><span class="ant-checkbox-inner"></span></span><span>Pear</span></label><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value="Orange"><span class="ant-checkbox-inner"></span></span><span>Orange</span></label></div>
+<div class="ant-checkbox-group"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-checkbox-wrapper-disabled ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-checked ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value="Apple"><span class="ant-checkbox-inner"></span></span><span><span style="color: red;">Apple</span></span></label><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value="Pear"><span class="ant-checkbox-inner"></span></span><span><span style="color: red;">Pear</span></span></label><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-checkbox-group-item"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value="Orange"><span class="ant-checkbox-inner"></span></span><span><span style="color: red;">Orange</span></span></label></div>
 `;
 
 exports[`renders ./components/checkbox/demo/layout.vue correctly 1`] = `
-<div class="ant-checkbox-group" style="width: 100%;">
+<div style="width: 100%;" class="ant-checkbox-group">
   <div class="ant-row">
     <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="A"><span class="ant-checkbox-inner"></span></span><span>A</span></label></div>
     <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="B"><span class="ant-checkbox-inner"></span></span><span>B</span></label></div>

@@ -37,8 +37,8 @@
         <a-tooltip
           v-if="!blocked"
           :title="$t(`app.demo.${copied ? 'copied' : 'copy'}`)"
-          :visible="copyTooltipVisible"
-          @visibleChange="onCopyTooltipVisibleChange"
+          :open="copyTooltipVisible"
+          @openChange="onCopyTooltipVisibleChange"
         >
           <component
             :is="copied && copyTooltipVisible ? 'CheckOutlined' : 'SnippetsOutlined'"
@@ -113,7 +113,7 @@ export default defineComponent({
     const codeRef = ref<HTMLDivElement>();
     const sectionId = computed(() => {
       const relativePath = props.jsfiddle?.relativePath || '';
-      return `${relativePath.split('/').join('-').replace('.vue', '')}`;
+      return `${relativePath.split('/').join('-').replace('.vue', '')}`.toLocaleLowerCase();
     });
     const inIframe = inject('inIframe', false);
     const iframeHeight = computed(() => props.jsfiddle?.iframe);
@@ -154,11 +154,11 @@ export default defineComponent({
       props.jsfiddle && props.jsfiddle.docHtml
         ? (
             props.jsfiddle.docHtml.replace(
-              `<h2 id="zh-CN">zh-CN <a class="header-anchor" href="#zh-CN">
+              `<h2 id="zh-cn">zh-CN <a class="header-anchor" href="#zh-cn">
           <span aria-hidden="true" class="anchor">#</span>
         </a></h2>`,
               '',
-            ).split(`<h2 id="en-US">en-US <a class="header-anchor" href="#en-US">
+            ).split(`<h2 id="en-us">en-US <a class="header-anchor" href="#en-us">
           <span aria-hidden="true" class="anchor">#</span>
         </a></h2>`)[globalConfig.isZhCN.value ? 0 : 1] || ''
           ).trim()
@@ -209,7 +209,7 @@ export default defineComponent({
         title,
       });
     });
-    const theme = computed(() => inject('themeMode', { theme: ref('default') }).theme.value);
+    const theme = computed(() => inject('themeMode', { theme: ref('light') }).theme.value);
     return {
       docHtml,
       iframeDemo,

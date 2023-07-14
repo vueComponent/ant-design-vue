@@ -98,14 +98,18 @@ export type RangeValue<DateType> = [EventValue<DateType>, EventValue<DateType>] 
 
 export type Components = {
   button?: any;
-  rangeItem?: any;
 };
 
 export type RangeList = {
-  label: string;
+  label: VueNode;
   onClick: () => void;
   onMouseenter: () => void;
   onMouseleave: () => void;
 }[];
 
 export type CustomFormat<DateType> = (value: DateType) => string;
+
+export interface PresetDate<T> {
+  label: VueNode;
+  value: T;
+}

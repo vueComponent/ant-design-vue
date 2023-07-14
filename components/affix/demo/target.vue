@@ -25,23 +25,16 @@ Set a `target` for 'Affix', which is listen to scroll event of target element (d
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const containerRef = ref();
-    return {
-      containerRef,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const containerRef = ref();
 </script>
-<style>
+<style scoped>
 #components-affix-demo-target.scrollable-container {
   height: 100px;
   overflow-y: scroll;
 }
+
 #components-affix-demo-target .background {
   padding-top: 60px;
   height: 300px;

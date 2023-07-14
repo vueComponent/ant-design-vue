@@ -10,6 +10,7 @@ import Divider from './src/Divider';
 import type { MenuDividerProps } from './src/Divider';
 import type { App, Plugin } from 'vue';
 import type { MenuTheme, MenuMode } from './src/interface';
+import type { ItemType } from './src/hooks/useItems';
 /* istanbul ignore next */
 Menu.install = function (app: App) {
   app.component(Menu.name, Menu);
@@ -32,6 +33,7 @@ export type {
   MenuTheme,
   MenuMode,
   MenuDividerProps,
+  ItemType,
 };
 export {
   SubMenu,

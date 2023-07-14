@@ -34,63 +34,48 @@ Upload files manually after `beforeUpload` returns `false`.
     </a-button>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import request from 'umi-request';
 import { UploadOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
 import type { UploadProps } from 'ant-design-vue';
 
-export default defineComponent({
-  components: {
-    UploadOutlined,
-  },
-  setup() {
-    const fileList = ref<UploadProps['fileList']>([]);
-    const uploading = ref<boolean>(false);
+const fileList = ref<UploadProps['fileList']>([]);
+const uploading = ref<boolean>(false);
 
-    const handleRemove: UploadProps['onRemove'] = file => {
-      const index = fileList.value.indexOf(file);
-      const newFileList = fileList.value.slice();
-      newFileList.splice(index, 1);
-      fileList.value = newFileList;
-    };
+const handleRemove: UploadProps['onRemove'] = file => {
+  const index = fileList.value.indexOf(file);
+  const newFileList = fileList.value.slice();
+  newFileList.splice(index, 1);
+  fileList.value = newFileList;
+};
 
-    const beforeUpload: UploadProps['beforeUpload'] = file => {
-      fileList.value = [...(fileList.value || []), file];
-      return false;
-    };
+const beforeUpload: UploadProps['beforeUpload'] = file => {
+  fileList.value = [...(fileList.value || []), file];
+  return false;
+};
 
-    const handleUpload = () => {
-      const formData = new FormData();
-      fileList.value.forEach((file: UploadProps['fileList'][number]) => {
-        formData.append('files[]', file as any);
-      });
-      uploading.value = true;
+const handleUpload = () => {
+  const formData = new FormData();
+  fileList.value.forEach((file: UploadProps['fileList'][number]) => {
+    formData.append('files[]', file as any);
+  });
+  uploading.value = true;
 
-      // You can use any AJAX library you like
-      request('https://www.mocky.io/v2/5cc8019d300000980a055e76', {
-        method: 'post',
-        data: formData,
-      })
-        .then(() => {
-          fileList.value = [];
-          uploading.value = false;
-          message.success('upload successfully.');
-        })
-        .catch(() => {
-          uploading.value = false;
-          message.error('upload failed.');
-        });
-    };
-
-    return {
-      fileList,
-      uploading,
-      handleRemove,
-      beforeUpload,
-      handleUpload,
-    };
-  },
-});
+  // You can use any AJAX library you like
+  request('https://www.mocky.io/v2/5cc8019d300000980a055e76', {
+    method: 'post',
+    data: formData,
+  })
+    .then(() => {
+      fileList.value = [];
+      uploading.value = false;
+      message.success('upload successfully.');
+    })
+    .catch(() => {
+      uploading.value = false;
+      message.error('upload failed.');
+    });
+};
 </script>

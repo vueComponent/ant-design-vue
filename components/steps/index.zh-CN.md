@@ -4,7 +4,8 @@ subtitle: 步骤条
 type: 导航
 cols: 1
 title: Steps
-cover: https://gw.alipayobjects.com/zos/antfincdn/UZYqMizXHaj/Steps.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*677sTqCpE3wAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*cFsBQLA0b7UAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 引导用户按照流程完成任务的导航条。
@@ -14,14 +15,6 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/UZYqMizXHaj/Steps.svg
 当任务复杂或者存在先后关系时，将其分解成一系列步骤，从而简化任务。
 
 ## API
-
-```jsx
-<a-steps>
-  <a-step title="第一步" />
-  <a-step title="第二步" />
-  <a-step title="第三步" />
-</a-steps>
-```
 
 ### Steps
 
@@ -39,6 +32,16 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/UZYqMizXHaj/Steps.svg
 | size | 指定大小，目前支持普通（`default`）和迷你（`small`） | string | default |  |
 | status | 指定当前步骤的状态，可选 `wait` `process` `finish` `error` | string | process |  |
 | type | 步骤条类型，有 `default` 和 `navigation` 两种 | string | `default` | 1.5.0 |
+| items | 配置选项卡内容 | [StepItem](#stepsstep)[] | [] |  |
+
+### `type="inline"` (4.0+)
+
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| current | 指定当前步骤，从 0 开始记数。在子 Step 元素中，可以通过 `status` 属性覆盖状态 | number | 0 |  |
+| initial | 起始序号，从 0 开始记数 | number | 0 |  |
+| status | 指定当前步骤的状态，可选 `wait` `process` `finish` `error` | string | `process` |  |
+| items | 配置选项卡内容，不支持 `icon` `subtitle` | [StepItem](#stepsstep) | [] |  |
 
 #### Steps 事件
 
@@ -55,6 +58,6 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/UZYqMizXHaj/Steps.svg
 | description | 步骤的详情描述，可选 | string \| slot | - |  |
 | disabled | 禁用点击 | boolean | false | 1.5.0 |
 | icon | 步骤图标的类型，可选 | string \| slot | - |  |
-| status | 指定状态。当不配置该属性时，会使用 Steps 的 `current` 来自动指定状态。可选：`wait` `process` `finish` `error` | string | wait |  |
+| status | 指定状态。当不配置该属性时，会使用 Steps 的 `current` 来自动指定状态。可选：`wait` `process` `finish` `error` | string | `wait` |  |
 | subTitle | 子标题 | string \| slot | - | 1.5.0 |
 | title | 标题 | string \| slot | - |  |

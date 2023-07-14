@@ -37,7 +37,7 @@ And, setup your vue project configuration.
 #### Install
 
 ```bash
-$ npm i --save ant-design-vue
+$ npm i --save ant-design-vue@4.x
 ```
 
 #### Component Registration
@@ -50,7 +50,7 @@ If you use Vue's default template syntax, you need to register components before
 import { createApp } from 'vue';
 import Antd from 'ant-design-vue';
 import App from './App';
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/reset.css';
 
 const app = createApp(App);
 
@@ -99,35 +99,9 @@ In this way, component sub-components, such as Button and ButtonGroup, need to b
 
 [Component list](https://github.com/vueComponent/ant-design-vue/blob/main/components/components.ts)
 
-## Compatibility
-
-Ant Design Vue 2.x supports all the modern browsers. If you want to use IE9+, you can use Ant Design Vue 1.x & Vue 2.x.
-
 ## Import on Demand
 
-we can import individual components on demand:
-
-```jsx
-import Button from 'ant-design-vue/lib/button';
-import 'ant-design-vue/lib/button/style'; // or ant-design-vue/lib/button/style/css for css format file
-```
-
-We strongly recommend using [babel-plugin-import](https://github.com/ant-design/babel-plugin-import), which can convert the following code to the 'ant-design-vue/lib/xxx' way:
-
-```jsx
-import { Button } from 'ant-design-vue';
-```
-
-And this plugin can load styles too, read [usage](https://github.com/ant-design/babel-plugin-import#usage) for more details.
-
-> FYI, babel-plugin-import's `style` option will importing some global reset styles, don't use it if you don't need those styles. You can import styles manually via `import 'ant-design-vue/dist/antd.css'` and override the global reset styles.
-
-If you use Vite, you can use [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) to load on demand. However, this plugin can only deal with components. Others such as message should be loaded manually:
-
-```ts
-import { message } from 'ant-design-vue';
-import 'ant-design-vue/es/message/style/css'; //use ant-design-vue/es instead of ant-design-vue/lib
-```
+`ant-design-vue` supports tree shaking of ES modules, so using `import { Button } from 'ant-design-vue';` would drop js code you didn't use.
 
 ## Customization
 

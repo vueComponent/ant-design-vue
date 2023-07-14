@@ -32,17 +32,11 @@ Usually used for reminders and notifications.
   </span>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { UserOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-  },
-});
 </script>
 
-<style>
+<style scoped>
 #components-avatar-demo-badge .ant-avatar {
   margin-top: 0;
   margin-right: 0;

@@ -1,13 +1,22 @@
-import type { ExtractPropTypes } from 'vue';
+import type { VueNode } from '../../_util/type';
+import { objectType, anyType } from '../../_util/type';
+import type { ExtractPropTypes, HTMLAttributes } from 'vue';
 import { defineComponent } from 'vue';
 
-export const optionProps = {
+export const baseOptionsProps = {
   value: String,
   disabled: Boolean,
-  label: [String, Number, Function],
+  payload: objectType<Record<string, any>>(),
 };
+export const optionProps = {
+  ...baseOptionsProps,
+  label: anyType<VueNode | ((o: BaseOptionsProps) => VueNode)>([]),
+};
+export type BaseOptionsProps = Partial<ExtractPropTypes<typeof baseOptionsProps>> &
+  Partial<HTMLAttributes>;
 
-export type OptionProps = Partial<ExtractPropTypes<typeof optionProps>>;
+export type OptionProps = Partial<ExtractPropTypes<typeof optionProps>> & Partial<HTMLAttributes>;
+
 export const optionOptions = {
   name: 'Option',
   props: optionProps,

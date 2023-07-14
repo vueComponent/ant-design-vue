@@ -1,5 +1,5 @@
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
-import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
 import DownloadOutlined from '@ant-design/icons-vue/DownloadOutlined';
@@ -14,54 +14,53 @@ import type {
   UploadLocale,
 } from '../interface';
 import type { VueNode } from '../../_util/type';
-import useConfigInject from '../../_util/hooks/useConfigInject';
+import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import Transition, { getTransitionProps } from '../../_util/transition';
+import { booleanType, stringType, functionType, arrayType, objectType } from '../../_util/type';
+
 export const listItemProps = () => {
   return {
     prefixCls: String,
-    locale: { type: Object as PropType<UploadLocale>, default: undefined as UploadLocale },
-    file: Object as PropType<UploadFile>,
-    items: Array as PropType<UploadFile[]>,
-    listType: String as PropType<UploadListType>,
-    isImgUrl: Function as PropType<(file: UploadFile) => boolean>,
+    locale: objectType<UploadLocale>(undefined as UploadLocale),
+    file: objectType<UploadFile>(),
+    items: arrayType<UploadFile[]>(),
+    listType: stringType<UploadListType>(),
+    isImgUrl: functionType<(file: UploadFile) => boolean>(),
 
-    showRemoveIcon: { type: Boolean, default: undefined },
-    showDownloadIcon: { type: Boolean, default: undefined },
-    showPreviewIcon: { type: Boolean, default: undefined },
-    removeIcon: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
-    downloadIcon: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
-    previewIcon: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
+    showRemoveIcon: booleanType(),
+    showDownloadIcon: booleanType(),
+    showPreviewIcon: booleanType(),
+    removeIcon: functionType<(opt: { file: UploadFile }) => VueNode>(),
+    downloadIcon: functionType<(opt: { file: UploadFile }) => VueNode>(),
+    previewIcon: functionType<(opt: { file: UploadFile }) => VueNode>(),
 
-    iconRender: Function as PropType<(opt: { file: UploadFile }) => VueNode>,
-    actionIconRender: Function as PropType<
-      (opt: {
-        customIcon: VueNode;
-        callback: () => void;
-        prefixCls: string;
-        title?: string | undefined;
-      }) => VueNode
-    >,
-    itemRender: Function as PropType<ItemRender>,
-    onPreview: Function as PropType<(file: UploadFile, e: Event) => void>,
-    onClose: Function as PropType<(file: UploadFile) => void>,
-    onDownload: Function as PropType<(file: UploadFile) => void>,
-    progress: {
-      type: Object as PropType<UploadListProgressProps>,
-      default: undefined as UploadListProgressProps,
-    },
+    iconRender: functionType<(opt: { file: UploadFile }) => VueNode>(),
+    actionIconRender:
+      functionType<
+        (opt: {
+          customIcon: VueNode;
+          callback: () => void;
+          prefixCls: string;
+          title?: string | undefined;
+        }) => VueNode
+      >(),
+    itemRender: functionType<ItemRender>(),
+    onPreview: functionType<(file: UploadFile, e: Event) => void>(),
+    onClose: functionType<(file: UploadFile) => void>(),
+    onDownload: functionType<(file: UploadFile) => void>(),
+    progress: objectType<UploadListProgressProps>(),
   };
 };
 
 export type ListItemProps = Partial<ExtractPropTypes<ReturnType<typeof listItemProps>>>;
-
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ListItem',
   inheritAttrs: false,
   props: listItemProps(),
   setup(props, { slots, attrs }) {
-    const showProgress = ref(false);
-    const progressRafRef = ref();
+    const showProgress = shallowRef(false);
+    const progressRafRef = shallowRef();
     onMounted(() => {
       progressRafRef.value = setTimeout(() => {
         showProgress.value = true;
@@ -70,6 +69,15 @@ export default defineComponent({
     onBeforeUnmount(() => {
       clearTimeout(progressRafRef.value);
     });
+    const mergedStatus = shallowRef(props.file?.status);
+    watch(
+      () => props.file?.status,
+      status => {
+        if (status !== 'removed') {
+          mergedStatus.value = status;
+        }
+      },
+    );
     const { rootPrefixCls } = useConfigInject('upload', props);
     const transitionProps = computed(() => getTransitionProps(`${rootPrefixCls.value}-fade`));
     return () => {
@@ -97,15 +105,14 @@ export default defineComponent({
       const { class: className, style } = attrs;
       // This is used for legacy span make scrollHeight the wrong value.
       // We will force these to be `display: block` with non `picture-card`
-      const spanClassName = `${prefixCls}-span`;
 
       const iconNode = iconRender({ file });
       let icon = <div class={`${prefixCls}-text-icon`}>{iconNode}</div>;
       if (listType === 'picture' || listType === 'picture-card') {
-        if (file.status === 'uploading' || (!file.thumbUrl && !file.url)) {
+        if (mergedStatus.value === 'uploading' || (!file.thumbUrl && !file.url)) {
           const uploadingClassName = {
             [`${prefixCls}-list-item-thumbnail`]: true,
-            [`${prefixCls}-list-item-file`]: file.status !== 'uploading',
+            [`${prefixCls}-list-item-file`]: mergedStatus.value !== 'uploading',
           };
           icon = <div class={uploadingClassName}>{iconNode}</div>;
         } else {
@@ -114,6 +121,7 @@ export default defineComponent({
               src={file.thumbUrl || file.url}
               alt={file.name}
               class={`${prefixCls}-list-item-image`}
+              crossorigin={file.crossOrigin}
             />
           ) : (
             iconNode
@@ -138,8 +146,7 @@ export default defineComponent({
 
       const infoUploadingClass = {
         [`${prefixCls}-list-item`]: true,
-        [`${prefixCls}-list-item-${file.status}`]: true,
-        [`${prefixCls}-list-item-list-type-${listType}`]: true,
+        [`${prefixCls}-list-item-${mergedStatus.value}`]: true,
       };
       const linkProps =
         typeof file.linkProps === 'string' ? JSON.parse(file.linkProps) : file.linkProps;
@@ -153,7 +160,7 @@ export default defineComponent({
           })
         : null;
       const downloadIcon =
-        showDownloadIcon && file.status === 'done'
+        showDownloadIcon && mergedStatus.value === 'done'
           ? actionIconRender({
               customIcon: customDownloadIcon ? customDownloadIcon({ file }) : <DownloadOutlined />,
               callback: () => onDownload(file),
@@ -165,7 +172,7 @@ export default defineComponent({
         <span
           key="download-delete"
           class={[
-            `${prefixCls}-list-item-card-actions`,
+            `${prefixCls}-list-item-actions`,
             {
               picture: listType === 'picture',
             },
@@ -176,7 +183,7 @@ export default defineComponent({
         </span>
       );
       const listItemNameClass = `${prefixCls}-list-item-name`;
-      const preview = file.url
+      const fileName = file.url
         ? [
             <a
               key="view"
@@ -220,36 +227,32 @@ export default defineComponent({
         </a>
       ) : null;
 
-      const actions = listType === 'picture-card' && file.status !== 'uploading' && (
-        <span class={`${prefixCls}-list-item-actions`}>
-          {previewIcon}
-          {file.status === 'done' && downloadIcon}
-          {removeIcon}
-        </span>
-      );
-
-      let message;
-      if (file.response && typeof file.response === 'string') {
-        message = file.response;
-      } else {
-        message = file.error?.statusText || file.error?.message || locale.uploadError;
-      }
-      const iconAndPreview = (
-        <span class={spanClassName}>
-          {icon}
-          {preview}
-        </span>
-      );
+      const pictureCardActions = listType === 'picture-card' &&
+        mergedStatus.value !== 'uploading' && (
+          <span class={`${prefixCls}-list-item-actions`}>
+            {previewIcon}
+            {mergedStatus.value === 'done' && downloadIcon}
+            {removeIcon}
+          </span>
+        );
 
       const dom = (
         <div class={infoUploadingClass}>
-          <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
-          {actions}
+          {icon}
+          {fileName}
+          {pictureCardActions}
           {showProgress.value && (
             <Transition {...transitionProps.value}>
-              <div v-show={file.status === 'uploading'} class={`${prefixCls}-list-item-progress`}>
+              <div
+                v-show={mergedStatus.value === 'uploading'}
+                class={`${prefixCls}-list-item-progress`}
+              >
                 {'percent' in file ? (
-                  <Progress {...progressProps} type="line" percent={file.percent} />
+                  <Progress
+                    {...(progressProps as UploadListProgressProps)}
+                    type="line"
+                    percent={file.percent}
+                  />
                 ) : null}
               </div>
             </Transition>
@@ -257,11 +260,15 @@ export default defineComponent({
         </div>
       );
       const listContainerNameClass = {
-        [`${prefixCls}-list-${listType}-container`]: true,
+        [`${prefixCls}-list-item-container`]: true,
         [`${className}`]: !!className,
       };
+      const message =
+        file.response && typeof file.response === 'string'
+          ? file.response
+          : file.error?.statusText || file.error?.message || locale.uploadError;
       const item =
-        file.status === 'error' ? (
+        mergedStatus.value === 'error' ? (
           <Tooltip title={message} getPopupContainer={node => node.parentNode as HTMLElement}>
             {dom}
           </Tooltip>
@@ -270,7 +277,7 @@ export default defineComponent({
         );
 
       return (
-        <div class={listContainerNameClass} style={style as CSSProperties} ref={ref}>
+        <div class={listContainerNameClass} style={style as CSSProperties}>
           {itemRender
             ? itemRender({
                 originNode: item,

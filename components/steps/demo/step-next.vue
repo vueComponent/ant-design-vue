@@ -16,9 +16,7 @@ Cooperate with the content and buttons, to represent the progress of a process.
 </docs>
 <template>
   <div>
-    <a-steps :current="current">
-      <a-step v-for="item in steps" :key="item.title" :title="item.title" />
-    </a-steps>
+    <a-steps :current="current" :items="items"></a-steps>
     <div class="steps-content">
       {{ steps[current].content }}
     </div>
@@ -35,41 +33,31 @@ Cooperate with the content and buttons, to represent the progress of a process.
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { message } from 'ant-design-vue';
-
-export default defineComponent({
-  setup() {
-    const current = ref<number>(0);
-    const next = () => {
-      current.value++;
-    };
-    const prev = () => {
-      current.value--;
-    };
-    return {
-      message,
-      current,
-      steps: [
-        {
-          title: 'First',
-          content: 'First-content',
-        },
-        {
-          title: 'Second',
-          content: 'Second-content',
-        },
-        {
-          title: 'Last',
-          content: 'Last-content',
-        },
-      ],
-      next,
-      prev,
-    };
+const current = ref<number>(0);
+const next = () => {
+  current.value++;
+};
+const prev = () => {
+  current.value--;
+};
+const steps = [
+  {
+    title: 'First',
+    content: 'First-content',
   },
-});
+  {
+    title: 'Second',
+    content: 'Second-content',
+  },
+  {
+    title: 'Last',
+    content: 'Last-content',
+  },
+];
+const items = steps.map(item => ({ key: item.title, title: item.title }));
 </script>
 <style scoped>
 .steps-content {

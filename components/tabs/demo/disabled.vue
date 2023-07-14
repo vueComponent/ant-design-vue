@@ -23,14 +23,7 @@ Disabled a tab.
     <a-tab-pane key="3" tab="Tab 3">Tab 3</a-tab-pane>
   </a-tabs>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {
-      activeKey: ref('1'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const activeKey = ref('1');
 </script>

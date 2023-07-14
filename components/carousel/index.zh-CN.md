@@ -3,7 +3,8 @@ category: Components
 type: 数据展示
 title: Carousel
 subtitle: 走马灯
-cover: https://gw.alipayobjects.com/zos/antfincdn/%24C9tmj978R/Carousel.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*bPMSSqbaTMkAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*a-58QpYnqOsAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 旋转木马，一组轮播的区域。

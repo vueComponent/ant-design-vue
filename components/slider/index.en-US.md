@@ -2,7 +2,8 @@
 category: Components
 type: Data Entry
 title: Slider
-cover: https://gw.alipayobjects.com/zos/alicdn/HZ3meFc6W/Silder.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*_4heQaUrFn4AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*XkgXTaudeosAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A Slider component for displaying current value and intervals in range.
@@ -16,9 +17,8 @@ To input a value in a range.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | autofocus | get focus when component mounted | boolean | false |  |
-| disabled | If true, the slider will not be interactable. | boolean | false |  |
+| disabled | If true, the slider will not be intractable. | boolean | false |  |
 | dots | Whether the thumb can drag over tick only. | boolean | false |  |
-| getTooltipPopupContainer | The DOM container of the Tooltip, the default behavior is to create a div element in body. | Function | () => document.body | 1.5.0 |
 | handleStyle | The style of slider handle | CSSProperties | - |  |
 | included | Make effect when `marks` not null，`true` means containment and `false` means coordinative | boolean | true |  |
 | mark | Custom tick mark of Slider, | v-slot:mark | { point: number, label: any } | 3.0 |
@@ -28,12 +28,13 @@ To input a value in a range.
 | range | dual thumb mode | boolean | false |  |
 | reverse | reverse the component | boolean | false | 1.5.0 |
 | step | The granularity the slider can step through values. Must greater than 0, and be divided by (max - min) . When `marks` no null, `step` can be `null`. | number\|null | 1 |  |
-| tipFormatter | Slider will pass its value to `tipFormatter`, and display its value in Tooltip, and hide Tooltip when return value is null. | Function\|null | IDENTITY |  |
-| tooltipPlacement | Set Tooltip display position. Ref [`Tooltip`](/components/tooltip/). | string |  | 1.5.0 |
-| tooltipVisible | If true, Tooltip will show always, or it will not show anyway, even if dragging or hovering. | Boolean |  |  |
 | trackStyle | The style of slider track | CSSProperties | - |  |
 | value(v-model) | The value of slider. When `range` is `false`, use `number`, otherwise, use `[number, number]` | number\|number\[] |  |  |
 | vertical | If true, the slider will be vertical. | Boolean | false |  |
+| tipFormatter | Slider will pass its value to `tipFormatter`, and display its value in Tooltip, and hide Tooltip when return value is null. | Function\|null | IDENTITY |  |
+| tooltipPlacement | Set Tooltip display position. Ref [`Tooltip`](/components/tooltip/). | string |  | 1.5.0 |
+| tooltipOpen | If true, Tooltip will show always, or it will not show anyway, even if dragging or hovering. | Boolean |  | 4.0 |
+| getTooltipPopupContainer | The DOM container of the Tooltip, the default behavior is to create a div element in body. | Function | () => document.body | 1.5.0 |
 
 ### events
 

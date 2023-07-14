@@ -32,24 +32,10 @@ You can show the total number of data by setting `showTotal`.
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const current1 = ref<number>(1);
-    const current2 = ref<number>(2);
-    const pageSize1 = ref<number>(20);
-    const pageSize2 = ref<number>(20);
-    const onChange = (pageNumber: number) => {
-      console.log('Page: ', pageNumber);
-    };
-    return {
-      current1,
-      current2,
-      pageSize1,
-      pageSize2,
-      onChange,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const current1 = ref<number>(1);
+const current2 = ref<number>(2);
+const pageSize1 = ref<number>(20);
+const pageSize2 = ref<number>(20);
 </script>

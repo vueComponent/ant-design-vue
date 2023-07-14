@@ -7,15 +7,17 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Line from './Line';
 import Circle from './Circle';
 import Steps from './Steps';
-import { getSuccessPercent, validProgress } from './utils';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import { getSize, getSuccessPercent, validProgress } from './utils';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
-import type { CustomSlotsType, VueNode } from '../_util/type';
+import type { VueNode, CustomSlotsType } from '../_util/type';
+import useStyle from './style';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AProgress',
+  inheritAttrs: false,
   props: initDefaultProps(progressProps(), {
     type: 'line',
     percent: 0,
@@ -29,25 +31,21 @@ export default defineComponent({
     default?: any;
     format?: any;
   }>,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('progress', props);
-    devWarning(
-      props.successPercent == undefined,
-      'Progress',
-      '`successPercent` is deprecated. Please use `success.percent` instead.',
-    );
-    const classString = computed(() => {
-      const { type, showInfo, size } = props;
-      const pre = prefixCls.value;
-      return {
-        [pre]: true,
-        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
-        [`${pre}-show-info`]: showInfo,
-        [`${pre}-${size}`]: size,
-        [`${pre}-rtl`]: direction.value === 'rtl',
-      };
-    });
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        'successPercent' in props,
+        'Progress',
+        '`successPercent` is deprecated. Please use `success.percent` instead.',
+      );
 
+      devWarning('width' in props, 'Progress', '`width` is deprecated. Please use `size` instead.');
+    }
+    const strokeColorNotArray = computed(() =>
+      Array.isArray(props.strokeColor) ? props.strokeColor[0] : props.strokeColor,
+    );
     const percentNumber = computed(() => {
       const { percent = 0 } = props;
       const successPercent = getSuccessPercent(props);
@@ -59,11 +57,32 @@ export default defineComponent({
 
     const progressStatus = computed(() => {
       const { status } = props;
-      if (progressStatuses.indexOf(status) < 0 && percentNumber.value >= 100) {
+      if (!progressStatuses.includes(status) && percentNumber.value >= 100) {
         return 'success';
       }
       return status || 'normal';
     });
+
+    const classString = computed(() => {
+      const { type, showInfo, size } = props;
+      const pre = prefixCls.value;
+      return {
+        [pre]: true,
+        [`${pre}-inline-circle`]: type === 'circle' && getSize(size, 'circle').width <= 20,
+        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
+        [`${pre}-status-${progressStatus.value}`]: true,
+        [`${pre}-show-info`]: showInfo,
+        [`${pre}-${size}`]: size,
+        [`${pre}-rtl`]: direction.value === 'rtl',
+        [hashId.value]: true,
+      };
+    });
+
+    const strokeColorNotGradient = computed(() =>
+      typeof props.strokeColor === 'string' || Array.isArray(props.strokeColor)
+        ? props.strokeColor
+        : undefined,
+    );
 
     const renderProcessInfo = () => {
       const { showInfo, format, type, percent, title } = props;
@@ -95,43 +114,47 @@ export default defineComponent({
     };
 
     return () => {
-      const { type, steps, strokeColor, title } = props;
+      const { type, steps, title } = props;
+      const { class: cls, ...restAttrs } = attrs;
       const progressInfo = renderProcessInfo();
-
       let progress: VueNode;
       // Render progress shape
       if (type === 'line') {
         progress = steps ? (
           <Steps
             {...props}
-            strokeColor={typeof strokeColor === 'string' ? strokeColor : undefined}
+            strokeColor={strokeColorNotGradient.value}
             prefixCls={prefixCls.value}
             steps={steps}
           >
             {progressInfo}
           </Steps>
         ) : (
-          <Line {...props} prefixCls={prefixCls.value}>
+          <Line
+            {...props}
+            strokeColor={strokeColorNotArray.value}
+            prefixCls={prefixCls.value}
+            direction={direction.value}
+          >
             {progressInfo}
           </Line>
         );
       } else if (type === 'circle' || type === 'dashboard') {
         progress = (
-          <Circle {...props} prefixCls={prefixCls.value}>
+          <Circle
+            {...props}
+            prefixCls={prefixCls.value}
+            strokeColor={strokeColorNotArray.value}
+            progressStatus={progressStatus.value}
+          >
             {progressInfo}
           </Circle>
         );
       }
-
-      const classNames = {
-        ...classString.value,
-        [`${prefixCls.value}-status-${progressStatus.value}`]: true,
-      };
-
-      return (
-        <div class={classNames} title={title}>
+      return wrapSSR(
+        <div role="progressbar" {...restAttrs} class={[classString.value, cls]} title={title}>
           {progress}
-        </div>
+        </div>,
       );
     };
   },

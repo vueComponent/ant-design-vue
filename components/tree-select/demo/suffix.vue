@@ -59,53 +59,39 @@ The most basic usage.
     </a-tree-select>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import { SmileOutlined } from '@ant-design/icons-vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-
-export default defineComponent({
-  components: {
-    SmileOutlined,
-  },
-  setup() {
-    const value = ref<string>();
-    const value1 = ref<string[]>([]);
-    const treeData = ref<TreeSelectProps['treeData']>([
+const value = ref<string>();
+const value1 = ref<string[]>([]);
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    title: 'parent 1',
+    value: 'parent 1',
+    children: [
       {
-        title: 'parent 1',
-        value: 'parent 1',
+        title: 'parent 1-0',
+        value: 'parent 1-0',
         children: [
           {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-              },
-            ],
+            title: 'my leaf',
+            value: 'leaf1',
           },
           {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
+            title: 'your leaf',
+            value: 'leaf2',
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log('select', value.value);
-    });
-
-    return {
-      value,
-      value1,
-      treeData,
-    };
+      {
+        title: 'parent 1-1',
+        value: 'parent 1-1',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log('select', value.value);
 });
 </script>

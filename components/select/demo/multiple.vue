@@ -26,17 +26,10 @@ Multiple selection, selecting from existing items (scroll the menu).
     @change="handleChange"
   ></a-select>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const handleChange = (value: string[]) => {
-      console.log(`selected ${value}`);
-    };
-    return {
-      handleChange,
-      value: ref(['a1', 'b2']),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const handleChange = (value: string[]) => {
+  console.log(`selected ${value}`);
+};
+const value = ref(['a1', 'b2']);
 </script>

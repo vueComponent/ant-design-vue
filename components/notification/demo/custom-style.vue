@@ -42,7 +42,7 @@ export default defineComponent({
   },
 });
 </script>
-<style>
+<style scoped>
 .notification-custom-class {
   color: red;
 }

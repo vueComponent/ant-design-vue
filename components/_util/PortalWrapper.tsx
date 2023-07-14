@@ -1,20 +1,20 @@
 import PropTypes from './vue-types';
-import switchScrollingEffect from './switchScrollingEffect';
-import setStyle from './setStyle';
 import Portal from './Portal';
 import {
   defineComponent,
-  ref,
+  shallowRef,
   watch,
   onMounted,
   onBeforeUnmount,
   onUpdated,
   getCurrentInstance,
   nextTick,
+  computed,
 } from 'vue';
 import canUseDom from './canUseDom';
-import ScrollLocker from '../vc-util/Dom/scrollLocker';
 import raf from './raf';
+import { booleanType } from './type';
+import useScrollLocker from './hooks/useScrollLocker';
 
 let openCount = 0;
 const supportDom = canUseDom();
@@ -24,17 +24,13 @@ export function getOpenCount() {
   return process.env.NODE_ENV === 'test' ? openCount : 0;
 }
 
-// https://github.com/ant-design/ant-design/issues/19340
-// https://github.com/ant-design/ant-design/issues/19332
-let cacheOverflow = {};
-
 const getParent = (getContainer: GetContainer) => {
   if (!supportDom) {
     return null;
   }
   if (getContainer) {
     if (typeof getContainer === 'string') {
-      return document.querySelectorAll(getContainer)[0];
+      return document.querySelectorAll(getContainer)[0] as HTMLElement;
     }
     if (typeof getContainer === 'function') {
       return getContainer();
@@ -57,24 +53,25 @@ export default defineComponent({
     forceRender: { type: Boolean, default: undefined },
     getContainer: PropTypes.any,
     visible: { type: Boolean, default: undefined },
+    autoLock: booleanType(),
+    didUpdate: Function,
   },
 
   setup(props, { slots }) {
-    const container = ref<HTMLElement>();
-    const componentRef = ref();
-    const rafId = ref<number>();
-    const scrollLocker = new ScrollLocker({
-      container: getParent(props.getContainer) as HTMLElement,
-    });
+    const container = shallowRef<HTMLElement>();
+    const componentRef = shallowRef();
+    const rafId = shallowRef<number>();
 
     const removeCurrentContainer = () => {
       // Portal will remove from `parentNode`.
       // Let's handle this again to avoid refactor issue.
       container.value?.parentNode?.removeChild(container.value);
+      container.value = null;
     };
+    let parent: HTMLElement = null;
     const attachToParent = (force = false) => {
       if (force || (container.value && !container.value.parentNode)) {
-        const parent = getParent(props.getContainer);
+        parent = getParent(props.getContainer);
         if (parent) {
           parent.appendChild(container.value);
           return true;
@@ -86,13 +83,13 @@ export default defineComponent({
       return true;
     };
     // attachToParent();
-
+    const defaultContainer = document.createElement('div');
     const getContainer = () => {
       if (!supportDom) {
         return null;
       }
       if (!container.value) {
-        container.value = document.createElement('div');
+        container.value = defaultContainer;
         attachToParent(true);
       }
       setWrapperClassName();
@@ -108,41 +105,33 @@ export default defineComponent({
       setWrapperClassName();
       attachToParent();
     });
-    /**
-     * Enhance ./switchScrollingEffect
-     * 1. Simulate document body scroll bar with
-     * 2. Record body has overflow style and recover when all of PortalWrapper invisible
-     * 3. Disable body scroll when PortalWrapper has open
-     *
-     * @memberof PortalWrapper
-     */
-    const switchScrolling = () => {
-      if (openCount === 1 && !Object.keys(cacheOverflow).length) {
-        switchScrollingEffect();
-        // Must be set after switchScrollingEffect
-        cacheOverflow = setStyle({
-          overflow: 'hidden',
-          overflowX: 'hidden',
-          overflowY: 'hidden',
-        });
-      } else if (!openCount) {
-        setStyle(cacheOverflow);
-        cacheOverflow = {};
-        switchScrollingEffect(true);
-      }
-    };
+
     const instance = getCurrentInstance();
+
+    useScrollLocker(
+      computed(() => {
+        return (
+          props.autoLock &&
+          props.visible &&
+          canUseDom() &&
+          (container.value === document.body || container.value === defaultContainer)
+        );
+      }),
+    );
     onMounted(() => {
       let init = false;
       watch(
         [() => props.visible, () => props.getContainer],
         ([visible, getContainer], [prevVisible, prevGetContainer]) => {
           // Update count
-          if (supportDom && getParent(props.getContainer) === document.body) {
-            if (visible && !prevVisible) {
-              openCount += 1;
-            } else if (init) {
-              openCount -= 1;
+          if (supportDom) {
+            parent = getParent(props.getContainer);
+            if (parent === document.body) {
+              if (visible && !prevVisible) {
+                openCount += 1;
+              } else if (init) {
+                openCount -= 1;
+              }
             }
           }
 
@@ -156,17 +145,6 @@ export default defineComponent({
                 : getContainer !== prevGetContainer
             ) {
               removeCurrentContainer();
-            }
-            // updateScrollLocker
-            if (
-              visible &&
-              visible !== prevVisible &&
-              supportDom &&
-              getParent(getContainer) !== scrollLocker.getContainer()
-            ) {
-              scrollLocker.reLock({
-                container: getParent(getContainer) as HTMLElement,
-              });
             }
           }
           init = true;
@@ -184,30 +162,27 @@ export default defineComponent({
     });
 
     onBeforeUnmount(() => {
-      const { visible, getContainer } = props;
-      if (supportDom && getParent(getContainer) === document.body) {
+      const { visible } = props;
+      if (supportDom && parent === document.body) {
         // 离开时不会 render， 导到离开时数值不变，改用 func 。。
         openCount = visible && openCount ? openCount - 1 : openCount;
       }
       removeCurrentContainer();
       raf.cancel(rafId.value);
     });
-
     return () => {
       const { forceRender, visible } = props;
       let portal = null;
       const childProps = {
         getOpenCount: () => openCount,
         getContainer,
-        switchScrollingEffect: switchScrolling,
-        scrollLocker,
       };
-
       if (forceRender || visible || componentRef.value) {
         portal = (
           <Portal
             getContainer={getContainer}
             ref={componentRef}
+            didUpdate={props.didUpdate}
             v-slots={{ default: () => slots.default?.(childProps) }}
           ></Portal>
         );

@@ -21,11 +21,8 @@ export default function getDataOrAriaProps(props: any) {
 
   Object.keys(props).forEach(key => {
     if (
-      (key.substr(0, 5) === 'data-' ||
-        key.substr(0, 5) === 'aria-' ||
-        key === 'role' ||
-        key === 'name') &&
-      key.substr(0, 7) !== 'data-__'
+      (key.startsWith('data-') || key.startsWith('aria-') || key === 'role' || key === 'name') &&
+      !key.startsWith('data-__')
     ) {
       retProps[key] = props[key];
     }

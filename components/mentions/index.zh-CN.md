@@ -3,7 +3,8 @@ category: Components
 type: 数据录入
 title: Mentions
 subtitle: 提及
-cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*e4bXT7Uhi9YAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*pxR2S53P_xoAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 提及组件。
@@ -17,7 +18,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
 ### Mentions
 
 | 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | autofocus | 自动获得焦点 | boolean | `false` |
 | defaultValue | 默认值 | string |  |
 | filterOption | 自定义过滤逻辑 | false \| (input: string, option: OptionProps) => boolean |  |
@@ -26,8 +27,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
 | placement | 弹出层展示位置 | `top` \| `bottom` | `bottom` |
 | prefix | 设置触发关键字 | string \| string\[] | '@' |
 | split | 设置选中项前后分隔符 | string | ' ' |
+| status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | validateSearch | 自定义触发验证逻辑 | (text: string, props: MentionsProps) => void |  |
 | value(v-model) | 设置值 | string |  |
+| options | 选项配置 | [Options](#option) | \[] | 4.0 |
+| option | 通过 option 插槽，自定义节点 | v-slot:option="option" | - | 4.0 |
 
 ### 事件
 
@@ -46,8 +50,22 @@ cover: https://gw.alipayobjects.com/zos/alicdn/jPE-itMFM/Mentions.svg
 | blur()  | 移除焦点 |
 | focus() | 获取焦点 |
 
-### Option
+### Mention.Option (< 4.0)
 
 | 参数  | 说明           | 类型   | 默认值 |
 | ----- | -------------- | ------ | ------ |
 | value | 选择时填充的值 | string | ''     |
+
+### Option
+
+Support from v4.0
+
+<!-- prettier-ignore -->
+| 参数      | 说明           | 类型                | 默认值 |
+| --------- | -------------- | ------------------- | ------ |
+| value     | 选择时填充的值 | string | number             | -      |
+| label     | 选项的标题     | VueNode | (o: Option)=> VueNode     | -      |
+| disabled  | 是否可选       | boolean             | -      |
+| class | css 类名       | string              | -      |
+| style     | 选项样式       | CSSProperties | -      |
+|payload| 其它数据 | object | - |

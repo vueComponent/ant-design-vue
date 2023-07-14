@@ -60,10 +60,10 @@ set resizable for drag column
     </template>
   </a-table>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
 import type { TableColumnsType } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
 
 const data = [
   {
@@ -89,50 +89,38 @@ const data = [
   },
 ];
 
-export default defineComponent({
-  components: {
-    SmileOutlined,
-    DownOutlined,
+const columns = ref<TableColumnsType>([
+  {
+    dataIndex: 'name',
+    key: 'name',
+    resizable: true,
+    width: 150,
   },
-  setup() {
-    const columns = ref<TableColumnsType>([
-      {
-        dataIndex: 'name',
-        key: 'name',
-        resizable: true,
-        width: 150,
-      },
-      {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-        resizable: true,
-        width: 100,
-        minWidth: 100,
-        maxWidth: 200,
-      },
-      {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-      },
-      {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-      },
-      {
-        title: 'Action',
-        key: 'action',
-      },
-    ]);
-    return {
-      data,
-      columns,
-      handleResizeColumn: (w, col) => {
-        col.width = w;
-      },
-    };
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+    resizable: true,
+    width: 100,
+    minWidth: 100,
+    maxWidth: 200,
   },
-});
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Tags',
+    key: 'tags',
+    dataIndex: 'tags',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+  },
+]);
+function handleResizeColumn(w, col) {
+  col.width = w;
+}
 </script>

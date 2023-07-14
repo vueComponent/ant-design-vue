@@ -20,50 +20,33 @@ To customize the text of the buttons, you need to set `okText` and `cancelText` 
   <div>
     <a-button type="primary" @click="showModal">Modal</a-button>
     <a-button @click="confirm">Confirm</a-button>
-    <a-modal
-      v-model:visible="visible"
-      title="Modal"
-      ok-text="确认"
-      cancel-text="取消"
-      @ok="hideModal"
-    >
+    <a-modal v-model:open="open" title="Modal" ok-text="确认" cancel-text="取消" @ok="hideModal">
       <p>Bla bla ...</p>
       <p>Bla bla ...</p>
       <p>Bla bla ...</p>
     </a-modal>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref, createVNode } from 'vue';
+import { ref, createVNode } from 'vue';
 import { Modal } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    const visible = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-    const showModal = () => {
-      visible.value = true;
-    };
-    const hideModal = () => {
-      visible.value = false;
-    };
+const showModal = () => {
+  open.value = true;
+};
+const hideModal = () => {
+  open.value = false;
+};
 
-    const confirm = () => {
-      Modal.confirm({
-        title: 'Confirm',
-        icon: createVNode(ExclamationCircleOutlined),
-        content: 'Bla bla ...',
-        okText: '确认',
-        cancelText: '取消',
-      });
-    };
-
-    return {
-      visible,
-      showModal,
-      hideModal,
-      confirm,
-    };
-  },
-});
+const confirm = () => {
+  Modal.confirm({
+    title: 'Confirm',
+    icon: createVNode(ExclamationCircleOutlined),
+    content: 'Bla bla ...',
+    okText: '确认',
+    cancelText: '取消',
+  });
+};
 </script>

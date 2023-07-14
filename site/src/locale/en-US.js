@@ -1,6 +1,3 @@
-import login from '../views/user/login/locales/en-US';
-import register from '../views/user/register/locales/en-US';
-import registerResult from '../views/user/register-result/locales/en-US';
 import theme from '../theme/en-US';
 export default {
   ...theme,
@@ -23,7 +20,4 @@ export default {
   'app.docs.components.icon.category.other': 'Application Icons',
   'app.docs.components.icon.category.logo': 'Brand and Logos',
   'app.docs.components.icon.pic-searcher.intro': 'AI Search by image is online, welcome to use! 🎉',
-  ...login,
-  ...register,
-  ...registerResult,
 };

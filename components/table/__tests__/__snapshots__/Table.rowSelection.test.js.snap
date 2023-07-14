@@ -5,6 +5,7 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
+      <!---->
       <div class="ant-table ant-table-has-fix-left">
         <!---->
         <div class="ant-table-container">
@@ -17,7 +18,7 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                 <tr>
                   <th class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-selection-column" style="position: sticky; left: 0px;" colstart="0" colend="0">
                     <!---->
-                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" aria-label="Select all"><span class="ant-checkbox-inner"></span></span>
                         <!---->
                       </label>
                       <!---->
@@ -106,58 +107,56 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
 exports[`Table.rowSelection render with default selection correctly 1`] = `
 <div>
   <!---->
-  <div class="ant-dropdown ant-slide-up-enter ant-slide-up-enter-prepare" style="pointer-events: none; display: none;">
-    <div class="ant-dropdown-content">
+  <div class="ant-dropdown ant-slide-up-enter ant-slide-up-enter-prepare ant-slide-up-enter-start" style="pointer-events: none; display: none;">
+    <!---->
+    <ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light" role="menu" data-menu-list="true">
+      <div>
+        <!---->
+        <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip ant-zoom-big-fast-enter ant-zoom-big-fast-enter-prepare ant-zoom-big-fast-enter-start" style="pointer-events: none; display: none;">
+          <div class="ant-tooltip-content">
+            <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
+            <div class="ant-tooltip-inner" role="tooltip">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </div>
+      <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" data-menu-id="all" aria-disabled="false" role="menuitem" tabindex="-1">
+        <!----><span class="ant-dropdown-menu-title-content">Select all data</span>
+      </li>
+      <div>
+        <!---->
+        <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip ant-zoom-big-fast-enter ant-zoom-big-fast-enter-prepare ant-zoom-big-fast-enter-start" style="pointer-events: none; display: none;">
+          <div class="ant-tooltip-content">
+            <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
+            <div class="ant-tooltip-inner" role="tooltip">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </div>
+      <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" data-menu-id="invert" aria-disabled="false" role="menuitem" tabindex="-1">
+        <!----><span class="ant-dropdown-menu-title-content">Invert current page</span>
+      </li>
+      <div>
+        <!---->
+        <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip ant-zoom-big-fast-enter ant-zoom-big-fast-enter-prepare ant-zoom-big-fast-enter-start" style="pointer-events: none; display: none;">
+          <div class="ant-tooltip-content">
+            <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
+            <div class="ant-tooltip-inner" role="tooltip">
+              <!---->
+            </div>
+          </div>
+        </div>
+      </div>
+      <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" data-menu-id="none" aria-disabled="false" role="menuitem" tabindex="-1">
+        <!----><span class="ant-dropdown-menu-title-content">Clear all data</span>
+      </li>
       <!---->
-      <ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light" role="menu" data-menu-list="true">
-        <div>
-          <!---->
-          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip zoom-big-fast-enter zoom-big-fast-enter-prepare" style="pointer-events: none; display: none;">
-            <div class="ant-tooltip-content">
-              <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
-              <div class="ant-tooltip-inner" role="tooltip">
-                <!---->
-              </div>
-            </div>
-          </div>
-        </div>
-        <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="all" aria-disabled="false">
-          <!----><span class="ant-dropdown-menu-title-content">Select all data</span>
-        </li>
-        <div>
-          <!---->
-          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip zoom-big-fast-enter zoom-big-fast-enter-prepare" style="pointer-events: none; display: none;">
-            <div class="ant-tooltip-content">
-              <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
-              <div class="ant-tooltip-inner" role="tooltip">
-                <!---->
-              </div>
-            </div>
-          </div>
-        </div>
-        <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="invert" aria-disabled="false">
-          <!----><span class="ant-dropdown-menu-title-content">Invert current page</span>
-        </li>
-        <div>
-          <!---->
-          <div class="ant-tooltip ant-dropdown-menu-inline-collapsed-tooltip zoom-big-fast-enter zoom-big-fast-enter-prepare" style="pointer-events: none; display: none;">
-            <div class="ant-tooltip-content">
-              <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
-              <div class="ant-tooltip-inner" role="tooltip">
-                <!---->
-              </div>
-            </div>
-          </div>
-        </div>
-        <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="none" aria-disabled="false">
-          <!----><span class="ant-dropdown-menu-title-content">Clear all data</span>
-        </li>
-        <!---->
-        <!---->
-        <!--teleport start-->
-        <!--teleport end-->
-      </ul>
-    </div>
+      <!---->
+      <!--teleport start-->
+      <!--teleport end-->
+    </ul>
   </div>
 </div>
 `;

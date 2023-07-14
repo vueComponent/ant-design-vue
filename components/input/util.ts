@@ -1,22 +1,4 @@
-import type { Direction, SizeType } from '../config-provider';
-import classNames from '../_util/classNames';
 import { filterEmpty } from '../_util/props-util';
-
-export function getInputClassName(
-  prefixCls: string,
-  bordered: boolean,
-  size?: SizeType,
-  disabled?: boolean,
-  direction?: Direction,
-) {
-  return classNames(prefixCls, {
-    [`${prefixCls}-sm`]: size === 'small',
-    [`${prefixCls}-lg`]: size === 'large',
-    [`${prefixCls}-disabled`]: disabled,
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-    [`${prefixCls}-borderless`]: !bordered,
-  });
-}
 const isValid = (value: any) => {
   return (
     value !== undefined &&

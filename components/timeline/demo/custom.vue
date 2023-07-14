@@ -27,12 +27,6 @@ Set a node as an icon or other custom element.
     <a-timeline-item>Network problems being solved 2015-09-01</a-timeline-item>
   </a-timeline>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ClockCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    ClockCircleOutlined,
-  },
-});
 </script>

@@ -11,9 +11,9 @@ import type {
 } from '../interface';
 import { getPosition, isTreeNode } from '../util';
 import { warning } from '../../vc-util/warning';
-import { camelize } from 'vue';
+
 import type { TreeNodeProps } from '../props';
-import { filterEmpty } from '../../_util/props-util';
+import { camelize, filterEmpty } from '../../_util/props-util';
 import omit from '../../_util/omit';
 import type { VueNode } from '../../_util/type';
 

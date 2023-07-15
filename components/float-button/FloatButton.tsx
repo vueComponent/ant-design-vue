@@ -1,6 +1,7 @@
 import classNames from '../_util/classNames';
 import { defineComponent, computed, ref } from 'vue';
 import Tooltip from '../tooltip';
+import Badge from '../badge';
 import Content from './FloatButtonContent';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useInjectFloatButtonGroupContext } from './context';
@@ -37,6 +38,7 @@ const FloatButton = defineComponent({
         shape = 'circle',
         description = slots.description?.(),
         tooltip,
+        badge = {},
         ...restProps
       } = props;
 
@@ -60,15 +62,17 @@ const FloatButton = defineComponent({
                 ? () => (slots.tooltip && slots.tooltip()) || tooltip
                 : undefined,
             default: () => (
-              <div class={`${prefixCls.value}-body`}>
-                <Content
-                  prefixCls={prefixCls.value}
-                  v-slots={{
-                    icon: slots.icon,
-                    description: () => description,
-                  }}
-                ></Content>
-              </div>
+              <Badge {...badge}>
+                <div class={`${prefixCls.value}-body`}>
+                  <Content
+                    prefixCls={prefixCls.value}
+                    v-slots={{
+                      icon: slots.icon,
+                      description: () => description,
+                    }}
+                  ></Content>
+                </div>
+              </Badge>
             ),
           }}
         ></Tooltip>

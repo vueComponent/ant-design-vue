@@ -21,8 +21,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| message | App 内 Message 的全局配置 | [MessageConfig](/components/message/#messageconfig) | - | 4.x |
-| notification | App 内 Notification 的全局配置 | [NotificationConfig](/components/notification/#notificationconfig) | - | 4.x |
+| message | App 内 Message 的全局配置 | [MessageConfig](/components/message-cn/#messageconfig) | - | 4.x |
+| notification | App 内 Notification 的全局配置 | [NotificationConfig](/components/notification-cn/#notificationconfig) | - | 4.x |
 
 ## 如何使用
 
@@ -31,6 +31,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAA
 App 组件通过 `provide/inject` 提供上下文方法调用，因而 useApp 需要作为子组件才能使用，我们推荐在应用中顶层包裹 App。
 
 ```html
+/*myPage.vue*/
 <template>
   <a-space>
     <a-button type="primary" @click="showMessage">Open message</a-button>
@@ -67,7 +68,18 @@ App 组件通过 `provide/inject` 提供上下文方法调用，因而 useApp �
 
 注意：App.useApp 必须在 App 之下方可使用。
 
-### 与 ConfigProvider 先后顺序
+#### 内嵌使用场景（如无必要，尽量不做嵌套）
+
+```html
+<a-app>
+  <a-space>
+    ...
+    <a-app>...</a-app>
+  </a-space>
+</a-app>
+```
+
+#### 与 ConfigProvider 先后顺序
 
 App 组件只能在 `ConfigProvider` 之下才能使用 Design Token， 如果需要使用其样式重置能力，则 ConfigProvider 与 App 组件必须成对出现。
 
@@ -77,13 +89,42 @@ App 组件只能在 `ConfigProvider` 之下才能使用 Design Token， 如果�
 </a-config-provider>
 ```
 
-### 内嵌使用场景（如无必要，尽量不做嵌套）
+#### 全局场景 (pinia 场景)
+
+```ts
+import { App } from 'ant-design-vue';
+import type { MessageInstance } from 'ant-design-vue/es/message/interface';
+import type { ModalStaticFunctions } from 'ant-design-vue/es/modal/confirm';
+import type { NotificationInstance } from 'ant-design-vue/es/notification/interface';
+
+export const useGloablStore = defineStore('global', () => {
+  const message: MessageInstance = ref();
+  const notification: NotificationInstance = ref();
+  const modal: Omit<ModalStaticFunctions, 'warn'> = ref();
+  (() => {
+    const staticFunction = App.useApp();
+    message.value = staticFunction.message;
+    modal.value = staticFunction.modal;
+    notification.value = staticFunction.notification;
+  })();
+
+  return { message, notification, modal };
+});
+```
 
 ```html
-<a-app>
+// sub page
+<template>
   <a-space>
-    ...
-    <a-app>...</a-app>
+    <a-button type="primary" @click="showMessage">Open message</a-button>
   </a-space>
-</a-app>
+</template>
+
+<script setup>
+  import { useGlobalStore } from '@/stores/global';
+  const global = useGlobalStore();
+  const showMessage = () => {
+    global.message.success('Success!');
+  };
+</script>
 ```

@@ -30,6 +30,7 @@ Application wrapper for some global usages.
 App provides upstream and downstream method calls through `provide/inject`, because useApp needs to be used as a subcomponent, we recommend encapsulating App at the top level in the application.
 
 ```html
+/*myPage.vue*/
 <template>
   <a-space>
     <a-button type="primary" @click="showMessage">Open message</a-button>
@@ -66,7 +67,18 @@ App provides upstream and downstream method calls through `provide/inject`, beca
 
 Note: App.useApp must be available under App.
 
-### 与 ConfigProvider 先后顺序
+#### Embedded usage scenarios (if not necessary, try not to do nesting)
+
+```html
+<a-app>
+  <a-space>
+    ...
+    <a-app>...</a-app>
+  </a-space>
+</a-app>
+```
+
+#### Sequence with ConfigProvider
 
 The App component can only use the token in the `ConfigProvider`, if you need to use the Token, the ConfigProvider and the App component must appear in pairs.
 
@@ -76,13 +88,42 @@ The App component can only use the token in the `ConfigProvider`, if you need to
 </a-config-provider>
 ```
 
-### Embedded usage scenarios (if not necessary, try not to do nesting)
+#### Global scene (pinia scene)
+
+```ts
+import { App } from 'ant-design-vue';
+import type { MessageInstance } from 'ant-design-vue/es/message/interface';
+import type { ModalStaticFunctions } from 'ant-design-vue/es/modal/confirm';
+import type { NotificationInstance } from 'ant-design-vue/es/notification/interface';
+
+export const useGloablStore = defineStore('global', () => {
+  const message: MessageInstance = ref();
+  const notification: NotificationInstance = ref();
+  const modal: Omit<ModalStaticFunctions, 'warn'> = ref();
+  (() => {
+    const staticFunction = App.useApp();
+    message.value = staticFunction.message;
+    modal.value = staticFunction.modal;
+    notification.value = staticFunction.notification;
+  })();
+
+  return { message, notification, modal };
+});
+```
 
 ```html
-<a-app>
+// sub page
+<template>
   <a-space>
-    ...
-    <a-app>...</a-app>
+    <a-button type="primary" @click="showMessage">Open message</a-button>
   </a-space>
-</a-app>
+</template>
+
+<script setup>
+  import { useGlobalStore } from '@/stores/global';
+  const global = useGlobalStore();
+  const showMessage = () => {
+    global.message.success('Success!');
+  };
+</script>
 ```

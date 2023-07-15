@@ -107,7 +107,7 @@ export default defineComponent({
     const statusCls = computed(() => ({
       [`${prefixCls.value}-status-dot`]: hasStatus.value,
       [`${prefixCls.value}-status-${props.status}`]: !!props.status,
-      [`${prefixCls.value}-status-${props.color}`]: isInternalColor.value,
+      [`${prefixCls.value}-color-${props.color}`]: isInternalColor.value,
     }));
 
     const statusStyle = computed(() => {
@@ -125,7 +125,7 @@ export default defineComponent({
       [`${prefixCls.value}-multiple-words`]:
         !isDotRef.value && displayCount.value && displayCount.value.toString().length > 1,
       [`${prefixCls.value}-status-${props.status}`]: !!props.status,
-      [`${prefixCls.value}-status-${props.color}`]: isInternalColor.value,
+      [`${prefixCls.value}-color-${props.color}`]: isInternalColor.value,
     }));
 
     return () => {

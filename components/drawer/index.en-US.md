@@ -54,7 +54,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 
 ## Events
 
-| Name | Description | Type | Default | Version |
+| Events Name | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | afterOpenChange | Callback after the animation ends when switching drawers. | function(open) | - | 4.0 |
 | close | Specify a callback that will be called when a user clicks mask, close button or Cancel button. | function(e) | - |  |

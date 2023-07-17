@@ -180,10 +180,13 @@ const Selector = defineComponent<SelectorProps>({
       }
     };
 
-    const onInputChange = (event: { target: { value: any } }) => {
-      let {
-        target: { value },
-      } = event;
+    const onInputChange = (e: Event | string) => {
+      let value;
+      if (typeof e === 'string') {
+        value = e;
+      } else {
+        value = (e.target as HTMLInputElement).value;
+      }
 
       // Pasted text should replace back to origin content
       if (props.tokenWithEnter && pastedText && /[\r\n]/.test(pastedText)) {

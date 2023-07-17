@@ -23,6 +23,9 @@
   <template v-else-if="iframeName === 'backtop'">
     <back-top></back-top>
   </template>
+  <template v-else-if="iframeName === 'badge'">
+    <badge></badge>
+  </template>
   <demo-sort v-else>
     <basic></basic>
     <type></type>
@@ -32,6 +35,7 @@
     <group></group>
     <group-menu></group-menu>
     <back-top></back-top>
+    <badge></badge>
   </demo-sort>
 </template>
 
@@ -44,6 +48,7 @@ import Tooltip from './tooltip.vue';
 import group from './group.vue';
 import GroupMenu from './group-menu.vue';
 import BackTop from './back-top.vue';
+import Badge from './badge.vue';
 
 import { defineComponent, provide } from 'vue';
 import US from '../index.en-US.md';
@@ -61,6 +66,7 @@ export default defineComponent({
     group,
     GroupMenu,
     BackTop,
+    Badge,
   },
   props: {
     iframeName: String,
@@ -78,6 +84,7 @@ export default defineComponent({
             'floatbutton-group': '/iframe/float-button/#floatbutton-group',
             'menu-mode': '/iframe/float-button/#menu-mode',
             backtop: '/iframe/float-button/#backtop',
+            badge: '/iframe/float-button/#badge',
           }
         : {},
     );

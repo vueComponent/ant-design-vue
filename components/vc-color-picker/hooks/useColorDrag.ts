@@ -132,6 +132,8 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
   };
 
   const onDragStart: EventHandle = e => {
+    document.removeEventListener('mousemove', mouseMoveRef.value);
+    document.removeEventListener('mouseup', mouseUpRef.value);
     if (disabledDrag.value) {
       return;
     }

@@ -1,5 +1,5 @@
 import type { BaseColorPickerProps } from '../interface';
-import { defineComponent, ref, shallowRef, watchEffect } from 'vue';
+import { computed, defineComponent, ref, shallowRef, watchEffect } from 'vue';
 
 import useColorDrag from '../hooks/useColorDrag';
 import { calculateColor, calculateOffset } from '../util';
@@ -17,6 +17,7 @@ const Picker = defineComponent({
     const pickerRef = shallowRef<HTMLDivElement>();
     const transformRef = shallowRef<HTMLDivElement>();
     const colorRef = ref(props.color);
+    const disabledDrag = computed(() => props.disabled);
     watchEffect(() => {
       colorRef.value = props.color;
     });
@@ -36,7 +37,7 @@ const Picker = defineComponent({
         props?.onChange(calcColor);
       },
       onDragChangeComplete: () => props?.onChangeComplete?.(colorRef.value),
-      disabledDrag: props.disabled,
+      disabledDrag,
     });
     return () => (
       <div

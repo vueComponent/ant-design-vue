@@ -1,7 +1,8 @@
 import type { Color } from '../color';
 import type { TransformOffset } from '../interface';
 
-import { ref, shallowRef, type Ref, watch, onUnmounted, onMounted } from 'vue';
+import { ref, shallowRef, watch, onUnmounted, onMounted, computed } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 
 type EventType = MouseEvent | TouchEvent;
 
@@ -12,12 +13,12 @@ interface useColorDragProps {
   offset?: TransformOffset;
   containerRef: Ref<HTMLDivElement>;
   targetRef: Ref<HTMLDivElement>;
-  direction?: 'x' | 'y';
+  direction?: ComputedRef<'x' | 'y'>;
   onDragChange?: (offset: TransformOffset) => void;
   onDragChangeComplete?: () => void;
   calculate?: (containerRef: Ref<HTMLDivElement>) => TransformOffset;
   /** Disabled drag */
-  disabledDrag?: boolean;
+  disabledDrag?: ComputedRef<boolean>;
 }
 
 function getPosition(e: EventType) {
@@ -100,17 +101,17 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
     const offsetX = Math.max(0, Math.min(pageX - rectX, width)) - centerOffsetX;
     const offsetY = Math.max(0, Math.min(pageY - rectY, height)) - centerOffsetY;
 
-    const calcOffset = {
+    const calcOffset = computed(() => ({
       x: offsetX,
-      y: direction === 'x' ? offsetValue.value.y : offsetY,
-    };
+      y: direction?.value === 'x' ? offsetValue.value.y : offsetY,
+    }));
 
     // Exclusion of boundary cases
     if ((targetWidth === 0 && targetHeight === 0) || targetWidth !== targetHeight) {
       return false;
     }
-    offsetValue.value = calcOffset;
-    onDragChange?.(calcOffset);
+    offsetValue.value = calcOffset.value;
+    onDragChange?.(calcOffset.value);
   };
 
   const onDragMove: EventHandle = e => {
@@ -131,7 +132,7 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
   };
 
   const onDragStart: EventHandle = e => {
-    if (disabledDrag) {
+    if (disabledDrag.value) {
       return;
     }
     updateOffset(e);

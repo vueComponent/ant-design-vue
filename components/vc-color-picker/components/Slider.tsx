@@ -35,6 +35,8 @@ const Slider = defineComponent({
     const transformRef = shallowRef();
     const colorRef = ref(props.color);
     const type = computed(() => props.type || 'hue');
+    const direction = computed<any>(() => props.direction || 'x');
+    const disabledDrag = computed(() => props.disabled);
     watchEffect(() => {
       colorRef.value = props.color;
     });
@@ -58,8 +60,8 @@ const Slider = defineComponent({
       onDragChangeComplete() {
         props.onChangeComplete?.(colorRef.value, type.value);
       },
-      direction: 'x',
-      disabledDrag: props.disabled,
+      direction,
+      disabledDrag,
     });
 
     return () => (

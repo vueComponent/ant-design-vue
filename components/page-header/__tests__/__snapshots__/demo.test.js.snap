@@ -867,7 +867,6 @@ exports[`renders ./components/page-header/demo/content.vue correctly 1`] = `
             class="ant-space-item"
           >
             
-            <!---->
             <button
               class="ant-btn ant-btn-default ant-dropdown-trigger"
               style="padding: 0px;"
@@ -898,6 +897,7 @@ exports[`renders ./components/page-header/demo/content.vue correctly 1`] = `
               </span>
               
             </button>
+            <!---->
             
           </div>
           <!---->
@@ -1663,7 +1663,6 @@ exports[`renders ./components/page-header/demo/responsive.vue correctly 1`] = `
             class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden"
           >
             
-            <!---->
             <button
               aria-controls="null-more-popup"
               aria-expanded="false"
@@ -1696,6 +1695,7 @@ exports[`renders ./components/page-header/demo/responsive.vue correctly 1`] = `
                 </svg>
               </span>
             </button>
+            <!---->
             
             <!---->
           </div>

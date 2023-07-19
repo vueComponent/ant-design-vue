@@ -146,7 +146,7 @@ export default genComponentStyleHook('PageHeader', token => {
     pageHeaderPaddingBreadcrumb: token.paddingSM,
     pageHeaderContentPaddingVertical: token.paddingSM,
     pageHeaderBackColor: token.colorTextBase,
-    pageHeaderGhostBg: 'inherit',
+    pageHeaderGhostBg: 'transparent',
     pageHeaderHeadingTitle: token.fontSizeHeading4,
     pageHeaderHeadingSubTitle: token.fontSize,
     pageHeaderTabFontSize: token.fontSizeLG,

@@ -28,7 +28,7 @@ import type { VueNode } from '../../type';
 const isClientSide = canUseDom();
 
 const SKIP_CHECK = '_skip_check_';
-
+const MULTI_VALUE = '_multi_value_';
 export type CSSProperties = Omit<CSS.PropertiesFallback<number | string>, 'animationName'> & {
   animationName?: CSS.PropertiesFallback<number | string>['animationName'] | Keyframes;
 };
@@ -39,6 +39,7 @@ export type CSSPropertiesWithMultiValues = {
     | Extract<CSSProperties[K], string>[]
     | {
         [SKIP_CHECK]: boolean;
+        [MULTI_VALUE]?: boolean;
         value: CSSProperties[K] | Extract<CSSProperties[K], string>[];
       };
 };
@@ -65,7 +66,7 @@ export function normalizeStyle(styleStr: string) {
 }
 
 function isCompoundCSSProperty(value: CSSObject[string]) {
-  return typeof value === 'object' && value && SKIP_CHECK in value;
+  return typeof value === 'object' && value && (SKIP_CHECK in value || MULTI_VALUE in value);
 }
 
 // 注入 hash 值
@@ -224,32 +225,45 @@ export const parseStyle = (
 
           styleStr += `${mergedKey}${parsedStr}`;
         } else {
+          function appendStyle(cssKey: string, cssValue: any) {
+            if (
+              process.env.NODE_ENV !== 'production' &&
+              (typeof value !== 'object' || !(value as any)?.[SKIP_CHECK])
+            ) {
+              [contentQuotesLinter, hashedAnimationLinter, ...linters].forEach(linter =>
+                linter(cssKey, cssValue, { path, hashId, parentSelectors }),
+              );
+            }
+
+            // 如果是样式则直接插入
+            const styleName = cssKey.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
+
+            // Auto suffix with px
+            let formatValue = cssValue;
+            if (!unitless[cssKey] && typeof formatValue === 'number' && formatValue !== 0) {
+              formatValue = `${formatValue}px`;
+            }
+
+            // handle animationName & Keyframe value
+            if (cssKey === 'animationName' && (cssValue as Keyframes)?._keyframe) {
+              parseKeyframes(cssValue as Keyframes);
+              formatValue = (cssValue as Keyframes).getName(hashId);
+            }
+
+            styleStr += `${styleName}:${formatValue};`;
+          }
           const actualValue = (value as any)?.value ?? value;
           if (
-            process.env.NODE_ENV !== 'production' &&
-            (typeof value !== 'object' || !(value as any)?.[SKIP_CHECK])
+            typeof value === 'object' &&
+            (value as any)?.[MULTI_VALUE] &&
+            Array.isArray(actualValue)
           ) {
-            [contentQuotesLinter, hashedAnimationLinter, ...linters].forEach(linter =>
-              linter(key, actualValue, { path, hashId, parentSelectors }),
-            );
+            actualValue.forEach(item => {
+              appendStyle(key, item);
+            });
+          } else {
+            appendStyle(key, actualValue);
           }
-
-          // 如果是样式则直接插入
-          const styleName = key.replace(/[A-Z]/g, match => `-${match.toLowerCase()}`);
-
-          // Auto suffix with px
-          let formatValue = actualValue;
-          if (!unitless[key] && typeof formatValue === 'number' && formatValue !== 0) {
-            formatValue = `${formatValue}px`;
-          }
-
-          // handle animationName & Keyframe value
-          if (key === 'animationName' && (value as Keyframes)?._keyframe) {
-            parseKeyframes(value as Keyframes);
-            formatValue = (value as Keyframes).getName(hashId);
-          }
-
-          styleStr += `${styleName}:${formatValue};`;
         }
       });
     }

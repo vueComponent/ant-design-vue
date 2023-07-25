@@ -271,13 +271,13 @@ const genTableStyle: GenerateStyle<TableToken, CSSObject> = token => {
               borderTopColor: 'transparent',
 
               '&:first-child': {
-                borderStartStartRadius: tableRadius,
-                borderEndStartRadius: tableRadius,
+                borderStartStartRadius: 0,
+                borderEndStartRadius: 0,
               },
 
               '&:last-child': {
-                borderStartEndRadius: tableRadius,
-                borderEndEndRadius: tableRadius,
+                borderStartEndRadius: 0,
+                borderEndEndRadius: 0,
               },
             },
           },

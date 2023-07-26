@@ -103,13 +103,22 @@ const Preview = defineComponent({
       emit('afterClose');
     };
 
-    const onZoomIn = () => {
-      scale.value++;
+    const onZoomIn = (isWheel?: boolean) => {
+      if (!isWheel) {
+        scale.value++;
+      } else {
+        scale.value += 0.5;
+      }
+
       setPosition(initialPosition);
     };
-    const onZoomOut = () => {
+    const onZoomOut = (isWheel?: boolean) => {
       if (scale.value > 1) {
-        scale.value--;
+        if (!isWheel) {
+          scale.value--;
+        } else {
+          scale.value -= 0.5;
+        }
       }
       setPosition(initialPosition);
     };
@@ -152,12 +161,12 @@ const Preview = defineComponent({
       },
       {
         icon: zoomIn,
-        onClick: onZoomIn,
+        onClick: () => onZoomIn(),
         type: 'zoomIn',
       },
       {
         icon: zoomOut,
-        onClick: onZoomOut,
+        onClick: () => onZoomOut(),
         type: 'zoomOut',
         disabled: computed(() => scale.value === 1),
       },
@@ -299,9 +308,9 @@ const Preview = defineComponent({
       watch([lastWheelZoomDirection], () => {
         const { wheelDirection } = lastWheelZoomDirection.value;
         if (wheelDirection > 0) {
-          onZoomOut();
+          onZoomOut(true);
         } else if (wheelDirection < 0) {
-          onZoomIn();
+          onZoomIn(true);
         }
       });
     });

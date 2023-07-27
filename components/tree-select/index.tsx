@@ -206,9 +206,11 @@ const TreeSelect = defineComponent({
     });
 
     const handleChange: TreeSelectProps['onChange'] = (...args: any[]) => {
-      emit('update:value', args[0]);
-      emit('change', ...args);
-      formItemContext.onFieldChange();
+      if (args[0] !== args[2].preValue[0]?.value) {
+        emit('update:value', args[0]);
+        emit('change', ...args);
+        formItemContext.onFieldChange();
+      }
     };
     const handleTreeExpand: TreeSelectProps['onTreeExpand'] = (keys: Key[]) => {
       emit('update:treeExpandedKeys', keys);

@@ -36,7 +36,12 @@ export default defineComponent({
     watch(
       () => props.value,
       () => {
-        stateValue.value = props.value;
+        const value = [...fixControlledValue(props.value)];
+        if (value.length > props.maxlength) {
+          stateValue.value = value.slice(0, props.maxlength).join('');
+        } else {
+          stateValue.value = props.value;
+        }
       },
     );
     watch(
@@ -103,7 +108,8 @@ export default defineComponent({
       // https://github.com/vueComponent/ant-design-vue/issues/2203
       if ((((e as any).isComposing || composing) && props.lazy) || stateValue.value === value)
         return;
-      const newVal = e.target.value;
+
+      const newVal = value;
       resolveOnChange(inputRef.value, e, triggerChange);
       setValue(newVal);
     };
@@ -200,7 +206,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <input {...omit(inputProps, ['size'])} />;
+      const inputNode = <input {...omit(inputProps, ['size'])} maxlength={undefined} />;
       return withDirectives(inputNode as VNode, [[antInputDirective]]);
     };
     const getSuffix = () => {

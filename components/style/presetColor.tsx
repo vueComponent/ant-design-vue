@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import type { CSSObject } from '../_util/cssinjs';
 import type { AliasToken, PresetColorKey } from '../theme/internal';
-import { PresetColors } from '../theme/internal';
+import { PresetColors } from '../theme/interface';
 import type { TokenWithCommonCls } from '../theme/util/genComponentStyleHook';
 
 interface CalcColor {

@@ -2,6 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue';
 import omit from '../_util/omit';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import { someType } from '../_util/type';
 import Statistic, { statisticProps } from './Statistic';
 import type { countdownValueType, FormatConfig, valueType } from './utils';
 import { formatCountdown as formatCD } from './utils';
@@ -14,7 +15,7 @@ function getTime(value?: countdownValueType) {
 export const countdownProps = () => {
   return {
     ...statisticProps(),
-    value: [Number, String, Object] as PropType<countdownValueType>,
+    value: someType<countdownValueType>([Number, String, Object]),
     format: String,
     onFinish: Function as PropType<() => void>,
     onChange: Function as PropType<(value?: countdownValueType) => void>,
@@ -67,13 +68,7 @@ export default defineComponent({
       }
     };
 
-    const formatCountdown = ({
-      value,
-      config,
-    }: {
-      value: countdownValueType;
-      config: FormatConfig;
-    }) => {
+    const formatCountdown = ({ value, config }: { value: valueType; config: FormatConfig }) => {
       const { format } = props;
       return formatCD(value, { ...config, format });
     };

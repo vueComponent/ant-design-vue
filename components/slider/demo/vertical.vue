@@ -28,31 +28,20 @@ The vertical Slider.
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, createVNode } from 'vue';
-export default defineComponent({
-  setup() {
-    const value1 = ref<number>(30);
-    const value2 = ref<[number, number]>([20, 50]);
-    const value3 = ref<[number, number]>([26, 37]);
-    const marks = ref<Record<number, any>>({
-      0: '0°C',
-      26: '26°C',
-      37: '37°C',
-      100: {
-        style: {
-          color: '#f50',
-        },
-        label: createVNode('strong', {}, '100°C'),
-      },
-    });
-
-    return {
-      value1,
-      value2,
-      value3,
-      marks,
-    };
+<script lang="ts" setup>
+import { ref, createVNode } from 'vue';
+const value1 = ref<number>(30);
+const value2 = ref<[number, number]>([20, 50]);
+const value3 = ref<[number, number]>([26, 37]);
+const marks = ref<Record<number, any>>({
+  0: '0°C',
+  26: '26°C',
+  37: '37°C',
+  100: {
+    style: {
+      color: '#f50',
+    },
+    label: createVNode('strong', {}, '100°C'),
   },
 });
 </script>

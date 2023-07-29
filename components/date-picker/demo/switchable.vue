@@ -32,13 +32,7 @@ Switch in different types of pickers by Select.
     </template>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      type: ref<any>('time'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const type = ref<any>('time');
 </script>

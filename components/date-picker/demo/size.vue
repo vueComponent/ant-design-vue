@@ -29,13 +29,7 @@ The input box comes in three sizes. `default` will be used if `size` is omitted.
     <a-date-picker :size="size" placeholder="Select Week" picker="week" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    return {
-      size: ref<any>('default'),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const size = ref<any>('default');
 </script>

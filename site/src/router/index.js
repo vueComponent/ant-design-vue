@@ -38,6 +38,23 @@ const routes = [
         },
         component: () => import('../../../components/layout/demo/index.vue'),
       },
+      {
+        path: 'float-button:lang(.*)',
+        meta: {
+          category: 'Components',
+          subtitle: '悬浮按钮',
+          type: '悬浮按钮',
+          cols: 1,
+          title: 'FloatButton',
+          cover:
+            'https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HS-wTIIwu0kAAAAAAAAAAAAADrJ8AQ/original',
+        },
+        props: route => {
+          const hash = route.hash.replace('#', '');
+          return { iframeName: hash };
+        },
+        component: () => import('../../../components/float-button/demo/index.vue'),
+      },
     ],
   },
   {
@@ -69,6 +86,16 @@ const routes = [
         component: () => import('../vueDocs/getting-started.en-US.md'),
       },
       {
+        path: 'vue/compatible-style-cn',
+        meta: { enTitle: 'Compatible Style', title: '样式兼容', category: 'docs' },
+        component: () => import('../vueDocs/compatible-style.zh-CN.md'),
+      },
+      {
+        path: 'vue/compatible-style',
+        meta: { enTitle: 'Compatible Style', title: '样式兼容', category: 'docs' },
+        component: () => import('../vueDocs/compatible-style.en-US.md'),
+      },
+      {
         path: 'vue/customize-theme-cn',
         meta: { enTitle: 'Customize Theme', title: '定制主题', category: 'docs' },
         component: () => import('../vueDocs/customize-theme.zh-CN.md'),
@@ -78,16 +105,15 @@ const routes = [
         meta: { enTitle: 'Customize Theme', title: '定制主题', category: 'docs' },
         component: () => import('../vueDocs/customize-theme.en-US.md'),
       },
-
       {
-        path: 'vue/customize-theme-variable-cn',
-        meta: { enTitle: 'Dynamic Theme (Experimental)', title: '动态主题', category: 'docs' },
-        component: () => import('../vueDocs/customize-theme-variable.zh-CN.md'),
+        path: 'vue/replace-date-cn',
+        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
+        component: () => import('../vueDocs/replace-date.zh-CN.md'),
       },
       {
-        path: 'vue/customize-theme-variable',
-        meta: { enTitle: 'Dynamic Theme (Experimental)', title: '动态主题', category: 'docs' },
-        component: () => import('../vueDocs/customize-theme-variable.en-US.md'),
+        path: 'vue/replace-date',
+        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
+        component: () => import('../vueDocs/replace-date.en-US.md'),
       },
       {
         path: 'vue/migration-v2-cn',
@@ -110,14 +136,14 @@ const routes = [
         component: () => import('../vueDocs/migration-v3.en-US.md'),
       },
       {
-        path: 'vue/replace-date-cn',
-        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
-        component: () => import('../vueDocs/replace-date.zh-CN.md'),
+        path: 'vue/migration-v4-cn',
+        meta: { enTitle: 'V3 to V4', title: '从 V3 到 V4', category: 'docs' },
+        component: () => import('../vueDocs/migration-v4.zh-CN.md'),
       },
       {
-        path: 'vue/replace-date',
-        meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
-        component: () => import('../vueDocs/replace-date.en-US.md'),
+        path: 'vue/migration-v4',
+        meta: { enTitle: 'V3 to V4', title: '从 V3 到 V4', category: 'docs' },
+        component: () => import('../vueDocs/migration-v4.en-US.md'),
       },
       {
         path: 'vue/i18n-cn',
@@ -171,6 +197,14 @@ const routes = [
       },
       { path: '', redirect: '/docs/vue/introduce/' },
     ],
+  },
+  {
+    path: '/theme-editor',
+    component: () => import('../views/theme-editor/index.vue'),
+  },
+  {
+    path: '/theme-editor-cn',
+    component: () => import('../views/theme-editor/index.vue'),
   },
   { path: '/debugger', component: () => import('../../debugger') },
   { path: '/:lang(.*)', redirect: '/components/overview' },

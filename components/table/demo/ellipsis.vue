@@ -27,8 +27,7 @@ Ellipsis cell content via setting `column.ellipsis`.
     </template>
   </a-table>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 const columns = [
   {
     title: 'Name',
@@ -90,13 +89,4 @@ const data = [
     tags: ['cool', 'teacher'],
   },
 ];
-
-export default defineComponent({
-  setup() {
-    return {
-      data,
-      columns,
-    };
-  },
-});
 </script>

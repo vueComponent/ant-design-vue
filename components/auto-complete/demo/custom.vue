@@ -32,30 +32,19 @@ Customize Input Component.
   </a-auto-complete>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref('');
-    const options = ref<{ value: string }[]>([]);
-    const onSelect = (value: string) => {
-      console.log('onSelect', value);
-    };
-    const handleSearch = (value: string) => {
-      options.value = !value
-        ? []
-        : [{ value }, { value: value + value }, { value: value + value + value }];
-    };
-    const handleKeyPress = (ev: KeyboardEvent) => {
-      console.log('handleKeyPress', ev);
-    };
-    return {
-      value,
-      options,
-      onSelect,
-      handleSearch,
-      handleKeyPress,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref('');
+const options = ref<{ value: string }[]>([]);
+const onSelect = (value: string) => {
+  console.log('onSelect', value);
+};
+const handleSearch = (value: string) => {
+  options.value = !value
+    ? []
+    : [{ value }, { value: value + value }, { value: value + value + value }];
+};
+const handleKeyPress = (ev: KeyboardEvent) => {
+  console.log('handleKeyPress', ev);
+};
 </script>

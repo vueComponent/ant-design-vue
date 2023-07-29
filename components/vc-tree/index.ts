@@ -1,4 +1,4 @@
-// base rc-tree 5.4.4
+// base rc-tree 5.6.3
 import type { TreeProps, TreeNodeProps } from './props';
 import Tree from './Tree';
 import TreeNode from './TreeNode';

@@ -54,6 +54,7 @@ export default defineComponent({
     transitionName: String,
     getPopupContainer: Function,
     direction: String,
+    dropdownClassName: String,
   },
   setup(props, { slots }) {
     const getDropdownPrefix = () => {
@@ -87,6 +88,7 @@ export default defineComponent({
           prefixCls={getDropdownPrefix()}
           popupVisible={visible}
           popup={getDropdownElement()}
+          popupClassName={props.dropdownClassName}
           popupPlacement={popupPlacement.value}
           popupTransitionName={transitionName}
           builtinPlacements={BUILT_IN_PLACEMENTS}

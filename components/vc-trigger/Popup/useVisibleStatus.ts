@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { onBeforeUnmount, ref, watch, onMounted } from 'vue';
+import { onBeforeUnmount, shallowRef, watch, onMounted } from 'vue';
 import raf from '../../_util/raf';
 
 /**
@@ -22,9 +22,9 @@ export default (
   visible: Ref<boolean>,
   doMeasure: Func,
 ): [Ref<PopupStatus>, (callback?: () => void) => void] => {
-  const status = ref<PopupStatus>(null);
-  const rafRef = ref<number>();
-  const destroyRef = ref(false);
+  const status = shallowRef<PopupStatus>(null);
+  const rafRef = shallowRef<number>();
+  const destroyRef = shallowRef(false);
   function setStatus(nextStatus: PopupStatus) {
     if (!destroyRef.value) {
       status.value = nextStatus;

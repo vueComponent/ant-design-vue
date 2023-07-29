@@ -19,7 +19,7 @@ export const slugify = (str: string): string => {
       .replace(/^\-+|\-+$/g, '')
       // ensure it doesn't start with a number (#121)
       .replace(/^(\d)/, '_$1')
-    // lowercase
-    // .toLowerCase()
+      // lowercase
+      .toLowerCase()
   );
 };

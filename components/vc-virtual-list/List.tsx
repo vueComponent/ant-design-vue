@@ -4,7 +4,6 @@ import {
   toRaw,
   onMounted,
   onUpdated,
-  ref,
   defineComponent,
   watchEffect,
   computed,
@@ -140,9 +139,9 @@ const List = defineComponent({
       },
       { immediate: true },
     );
-    const componentRef = ref<HTMLDivElement>();
-    const fillerInnerRef = ref<HTMLDivElement>();
-    const scrollBarRef = ref<any>(); // Hack on scrollbar to enable flash call
+    const componentRef = shallowRef<HTMLDivElement>();
+    const fillerInnerRef = shallowRef<HTMLDivElement>();
+    const scrollBarRef = shallowRef<any>(); // Hack on scrollbar to enable flash call
     // =============================== Item Key ===============================
     const getKey = (item: Record<string, any>) => {
       return itemKey.value(item);
@@ -189,7 +188,7 @@ const List = defineComponent({
       offset: undefined,
     });
 
-    const offsetHeight = ref(0);
+    const offsetHeight = shallowRef(0);
     onMounted(() => {
       nextTick(() => {
         offsetHeight.value = fillerInnerRef.value?.offsetHeight || 0;

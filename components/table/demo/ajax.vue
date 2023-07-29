@@ -37,10 +37,10 @@ Setting `rowSelection.preserveSelectedRowKeys` to keep the `key` when enable sel
     </template>
   </a-table>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { computed } from 'vue';
 import type { TableProps } from 'ant-design-vue';
 import { usePagination } from 'vue-request';
-import { computed, defineComponent } from 'vue';
 import axios from 'axios';
 const columns = [
   {
@@ -83,49 +83,37 @@ const queryData = (params: APIParams) => {
   return axios.get<APIResult>('https://randomuser.me/api?noinfo', { params });
 };
 
-export default defineComponent({
-  setup() {
-    const {
-      data: dataSource,
-      run,
-      loading,
-      current,
-      pageSize,
-    } = usePagination(queryData, {
-      formatResult: res => res.data.results,
-      pagination: {
-        currentKey: 'page',
-        pageSizeKey: 'results',
-      },
-    });
-
-    const pagination = computed(() => ({
-      total: 200,
-      current: current.value,
-      pageSize: pageSize.value,
-    }));
-
-    const handleTableChange: TableProps['onChange'] = (
-      pag: { pageSize: number; current: number },
-      filters: any,
-      sorter: any,
-    ) => {
-      run({
-        results: pag.pageSize!,
-        page: pag?.current,
-        sortField: sorter.field,
-        sortOrder: sorter.order,
-        ...filters,
-      });
-    };
-
-    return {
-      dataSource,
-      pagination,
-      loading,
-      columns,
-      handleTableChange,
-    };
+const {
+  data: dataSource,
+  run,
+  loading,
+  current,
+  pageSize,
+} = usePagination(queryData, {
+  formatResult: res => res.data.results,
+  pagination: {
+    currentKey: 'page',
+    pageSizeKey: 'results',
   },
 });
+
+const pagination = computed(() => ({
+  total: 200,
+  current: current.value,
+  pageSize: pageSize.value,
+}));
+
+const handleTableChange: TableProps['onChange'] = (
+  pag: { pageSize: number; current: number },
+  filters: any,
+  sorter: any,
+) => {
+  run({
+    results: pag.pageSize!,
+    page: pag?.current,
+    sortField: sorter.field,
+    sortOrder: sorter.order,
+    ...filters,
+  });
+};
 </script>

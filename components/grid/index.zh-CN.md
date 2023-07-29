@@ -4,12 +4,17 @@ subtitle: 栅格
 type: 布局
 cols: 1
 title: Grid
-cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*mfJeS6cqZrEAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*DLUwQ4B2_zQAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 24 栅格系统。
 
 ## 设计理念
+
+<div class="grid-demo">
+  <img src="https://gw.alipayobjects.com/zos/bmw-prod/9189c9ef-c601-40dc-9960-c11dbb681888.svg" alt="grid design" />
+</div>
 
 在多数业务情况下，Ant Design Vue 需要在设计区域内解决大量信息收纳的问题，因此在 12 栅格系统的基础上，我们将整个设计建议区域按照 24 等分的原则进行划分。划分之后的信息区块我们称之为『盒子』。建议横向排列的盒子数量最多四个，最少一个。『盒子』在整个屏幕上占比见上图。设计部分基于盒子的单位定制盒子内部的排版规则，以保证视觉层面的舒适感。
 
@@ -30,12 +35,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 
 ### Row
 
-| 成员 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| align | flex 布局下的垂直对齐方式：`top` `middle` `bottom` | string | `top` |
-| gutter | 栅格间隔，可以写成像素值或支持响应式的对象写法来设置水平间隔 `{ xs: 8, sm: 16, md: 24}`。或者使用数组形式同时设置 `[水平间距, 垂直间距]`（`1.5.0 后支持`）。 | number/object/array | 0 |
-| justify | flex 布局下的水平排列方式：`start` `end` `center` `space-around` `space-between` | string | `start` |
-| wrap | 是否自动换行 | boolean | false |
+| 成员 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| align | 垂直对齐方式 | `top` \| `middle` \| `bottom` \| `stretch` \| `{[key in 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl']: 'top' | 'middle' | 'bottom' | 'stretch'}` | `top` | object: 4.0 |
+| gutter | 栅格间隔，可以写成像素值或支持响应式的对象写法来设置水平间隔 `{ xs: 8, sm: 16, md: 24}`。或者使用数组形式同时设置 `[水平间距, 垂直间距]`（`1.5.0 后支持`）。 | number \| object \| array | 0 | - |
+| justify | 水平排列方式 | `start` \| `end` \| `center` \| `space-around` \| `space-between` \| `space-evenly` \| `{[key in 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl']: 'start' | 'end' | 'center' | 'space-around' | 'space-between' | 'space-evenly'}` | `start` | object: 4.0 |
+| wrap | 是否自动换行 | boolean | false | - |
 
 ### Col
 
@@ -47,12 +52,13 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 | pull | 栅格向左移动格数 | number | 0 |  |
 | push | 栅格向右移动格数 | number | 0 |  |
 | span | 栅格占位格数，为 0 时相当于 `display: none` | number | - |  |
-| xxxl | `≥2000px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - | 3.0 |
 | xs | `<576px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | sm | `≥576px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | md | `≥768px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | lg | `≥992px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | xl | `≥1200px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
 | xxl | `≥1600px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | - |  |
+
+您可以使用 [主题定制](/docs/vue/customize-theme-cn) 修改 `screen[XS|SM|MD|LG|XL|XXL]` 来修改断点值（自 4.0.0 起，[codesandbox demo](https://codesandbox.io/s/usebreakpoint-hook-ant-design-vue-4-0-0-beta-4-forked-n2k1sy?file=/src/demo.vue)）。
 
 响应式栅格的断点扩展自 [BootStrap 4 的规则](https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints)（不包含链接里 `occasionally` 的部分)。

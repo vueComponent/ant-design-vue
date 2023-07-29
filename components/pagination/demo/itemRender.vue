@@ -24,14 +24,7 @@ Use text link for prev and next button.
     </template>
   </a-pagination>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {
-      current: ref(1),
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const current = ref(1);
 </script>

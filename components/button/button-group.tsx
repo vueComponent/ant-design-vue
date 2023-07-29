@@ -1,10 +1,11 @@
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, reactive } from 'vue';
 import { flattenChildren } from '../_util/props-util';
-import useConfigInject from '../_util/hooks/useConfigInject';
-
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+import { useToken } from '../theme/internal';
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SizeType } from '../config-provider';
-import UnreachableException from '../_util/unreachableException';
+import devWarning from '../vc-util/devWarning';
+import createContext from '../_util/createContext';
 
 export const buttonGroupProps = () => ({
   prefixCls: String,
@@ -14,17 +15,23 @@ export const buttonGroupProps = () => ({
 });
 
 export type ButtonGroupProps = Partial<ExtractPropTypes<ReturnType<typeof buttonGroupProps>>>;
-
+export const GroupSizeContext = createContext<{
+  size: SizeType;
+}>();
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AButtonGroup',
   props: buttonGroupProps(),
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('btn-group', props);
+    const [, , hashId] = useToken();
+    GroupSizeContext.useProvide(
+      reactive({
+        size: computed(() => props.size),
+      }),
+    );
     const classes = computed(() => {
       const { size } = props;
-      // large => lg
-      // small => sm
       let sizeCls = '';
       switch (size) {
         case 'large':
@@ -38,12 +45,13 @@ export default defineComponent({
           break;
         default:
           // eslint-disable-next-line no-console
-          console.warn(new UnreachableException(size).error);
+          devWarning(!size, 'Button.Group', 'Invalid prop `size`.');
       }
       return {
         [`${prefixCls.value}`]: true,
         [`${prefixCls.value}-${sizeCls}`]: sizeCls,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [hashId.value]: true,
       };
     });
     return () => {

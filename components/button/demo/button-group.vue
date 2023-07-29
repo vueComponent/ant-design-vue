@@ -34,7 +34,6 @@ Debug usage
       <a-button>M</a-button>
       <a-button type="dashed">R</a-button>
     </a-button-group>
-
     <h4>With Icon</h4>
     <a-button-group>
       <a-button type="primary">
@@ -56,23 +55,17 @@ Debug usage
     </a-button-group>
   </div>
 </template>
-<script lang="ts">
+
+<script lang="ts" setup>
 import {
   LeftOutlined,
   RightOutlined,
   CloudDownloadOutlined,
   CloudOutlined,
 } from '@ant-design/icons-vue';
-export default {
-  components: {
-    LeftOutlined,
-    RightOutlined,
-    CloudDownloadOutlined,
-    CloudOutlined,
-  },
-};
 </script>
-<style>
+
+<style scoped>
 #components-button-demo-button-group > h4 {
   margin: 16px 0;
   font-size: 14px;

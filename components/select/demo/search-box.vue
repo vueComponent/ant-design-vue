@@ -31,10 +31,10 @@ Search with remote data.
     @change="handleChange"
   ></a-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import jsonp from 'fetch-jsonp';
 import qs from 'qs';
-import { defineComponent, ref } from 'vue';
 
 let timeout: any;
 let currentValue = '';
@@ -71,25 +71,15 @@ function fetch(value: string, callback: any) {
   timeout = setTimeout(fake, 300);
 }
 
-export default defineComponent({
-  setup() {
-    const data = ref<any[]>([]);
-    const value = ref();
+const data = ref<any[]>([]);
+const value = ref();
 
-    const handleSearch = (val: string) => {
-      fetch(val, (d: any[]) => (data.value = d));
-    };
-    const handleChange = (val: string) => {
-      console.log(val);
-      value.value = val;
-      fetch(val, (d: any[]) => (data.value = d));
-    };
-    return {
-      handleSearch,
-      handleChange,
-      data,
-      value,
-    };
-  },
-});
+const handleSearch = (val: string) => {
+  fetch(val, (d: any[]) => (data.value = d));
+};
+const handleChange = (val: string) => {
+  console.log(val);
+  value.value = val;
+  fetch(val, (d: any[]) => (data.value = d));
+};
 </script>

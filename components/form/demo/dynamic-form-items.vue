@@ -60,9 +60,9 @@ Bind nested fields by array name.
   </a-form>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { reactive, ref } from 'vue';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons-vue';
-import { defineComponent, reactive, ref } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 
 interface User {
@@ -70,40 +70,25 @@ interface User {
   last: string;
   id: number;
 }
-export default defineComponent({
-  components: {
-    MinusCircleOutlined,
-    PlusOutlined,
-  },
-  setup() {
-    const formRef = ref<FormInstance>();
-    const dynamicValidateForm = reactive<{ users: User[] }>({
-      users: [],
-    });
-    const removeUser = (item: User) => {
-      let index = dynamicValidateForm.users.indexOf(item);
-      if (index !== -1) {
-        dynamicValidateForm.users.splice(index, 1);
-      }
-    };
-    const addUser = () => {
-      dynamicValidateForm.users.push({
-        first: '',
-        last: '',
-        id: Date.now(),
-      });
-    };
-    const onFinish = values => {
-      console.log('Received values of form:', values);
-      console.log('dynamicValidateForm.users:', dynamicValidateForm.users);
-    };
-    return {
-      formRef,
-      dynamicValidateForm,
-      onFinish,
-      removeUser,
-      addUser,
-    };
-  },
+const formRef = ref<FormInstance>();
+const dynamicValidateForm = reactive<{ users: User[] }>({
+  users: [],
 });
+const removeUser = (item: User) => {
+  let index = dynamicValidateForm.users.indexOf(item);
+  if (index !== -1) {
+    dynamicValidateForm.users.splice(index, 1);
+  }
+};
+const addUser = () => {
+  dynamicValidateForm.users.push({
+    first: '',
+    last: '',
+    id: Date.now(),
+  });
+};
+const onFinish = values => {
+  console.log('Received values of form:', values);
+  console.log('dynamicValidateForm.users:', dynamicValidateForm.users);
+};
 </script>

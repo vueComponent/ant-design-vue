@@ -2,12 +2,13 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import type { TransferLocale } from '.';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
-import defaultLocale from '../locale/default';
+import defaultLocale from '../locale/en_US';
 import Checkbox from '../checkbox';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
+import { booleanType } from '../_util/type';
 
 function noop() {}
 
@@ -15,10 +16,10 @@ export const transferListItemProps = {
   renderedText: PropTypes.any,
   renderedEl: PropTypes.any,
   item: PropTypes.any,
-  checked: { type: Boolean, default: undefined },
+  checked: booleanType(),
   prefixCls: String,
-  disabled: { type: Boolean, default: undefined },
-  showRemove: { type: Boolean, default: undefined },
+  disabled: booleanType(),
+  showRemove: booleanType(),
   onClick: Function,
   onRemove: Function,
 };

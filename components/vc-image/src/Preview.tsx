@@ -4,7 +4,7 @@ import {
   onMounted,
   onUnmounted,
   reactive,
-  ref,
+  shallowRef,
   watch,
   cloneVNode,
 } from 'vue';
@@ -36,6 +36,8 @@ export interface PreviewProps extends Omit<IDialogChildProps, 'onClose' | 'mask'
     close?: VNode;
     left?: VNode;
     right?: VNode;
+    flipX?: VNode;
+    flipY?: VNode;
   };
 }
 
@@ -60,17 +62,20 @@ const Preview = defineComponent({
   props: previewProps,
   emits: ['close', 'afterClose'],
   setup(props, { emit, attrs }) {
-    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right } = reactive(props.icons);
+    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right, flipX, flipY } = reactive(
+      props.icons,
+    );
 
-    const scale = ref(1);
-    const rotate = ref(0);
+    const scale = shallowRef(1);
+    const rotate = shallowRef(0);
+    const flip = reactive({ x: 1, y: 1 });
     const [position, setPosition] = useFrameSetState<{
       x: number;
       y: number;
     }>(initialPosition);
 
     const onClose = () => emit('close');
-    const imgRef = ref<HTMLImageElement>();
+    const imgRef = shallowRef<HTMLImageElement>();
     const originPositionRef = reactive<{
       originX: number;
       originY: number;
@@ -82,7 +87,7 @@ const Preview = defineComponent({
       deltaX: 0,
       deltaY: 0,
     });
-    const isMoving = ref(false);
+    const isMoving = shallowRef(false);
     const groupContext = context.inject();
     const { previewUrls, current, isPreviewGroup, setCurrent } = groupContext;
     const previewGroupCount = computed(() => previewUrls.value.size);
@@ -94,7 +99,7 @@ const Preview = defineComponent({
     const showLeftOrRightSwitches = computed(
       () => isPreviewGroup.value && previewGroupCount.value > 1,
     );
-    const lastWheelZoomDirection = ref({ wheelDirection: 0 });
+    const lastWheelZoomDirection = shallowRef({ wheelDirection: 0 });
 
     const onAfterClose = () => {
       scale.value = 1;
@@ -103,13 +108,22 @@ const Preview = defineComponent({
       emit('afterClose');
     };
 
-    const onZoomIn = () => {
-      scale.value++;
+    const onZoomIn = (isWheel?: boolean) => {
+      if (!isWheel) {
+        scale.value++;
+      } else {
+        scale.value += 0.5;
+      }
+
       setPosition(initialPosition);
     };
-    const onZoomOut = () => {
+    const onZoomOut = (isWheel?: boolean) => {
       if (scale.value > 1) {
-        scale.value--;
+        if (!isWheel) {
+          scale.value--;
+        } else {
+          scale.value -= 0.5;
+        }
       }
       setPosition(initialPosition);
     };
@@ -121,6 +135,15 @@ const Preview = defineComponent({
     const onRotateLeft = () => {
       rotate.value -= 90;
     };
+
+    const onFlipX = () => {
+      flip.x = -flip.x;
+    };
+
+    const onFlipY = () => {
+      flip.y = -flip.y;
+    };
+
     const onSwitchLeft: MouseEventHandler = event => {
       event.preventDefault();
       // Without this mask close will abnormal
@@ -152,12 +175,12 @@ const Preview = defineComponent({
       },
       {
         icon: zoomIn,
-        onClick: onZoomIn,
+        onClick: () => onZoomIn(),
         type: 'zoomIn',
       },
       {
         icon: zoomOut,
-        onClick: onZoomOut,
+        onClick: () => onZoomOut(),
         type: 'zoomOut',
         disabled: computed(() => scale.value === 1),
       },
@@ -170,6 +193,16 @@ const Preview = defineComponent({
         icon: rotateLeft,
         onClick: onRotateLeft,
         type: 'rotateLeft',
+      },
+      {
+        icon: flipX,
+        onClick: onFlipX,
+        type: 'flipX',
+      },
+      {
+        icon: flipY,
+        onClick: onFlipY,
+        type: 'flipY',
       },
     ];
 
@@ -299,9 +332,9 @@ const Preview = defineComponent({
       watch([lastWheelZoomDirection], () => {
         const { wheelDirection } = lastWheelZoomDirection.value;
         if (wheelDirection > 0) {
-          onZoomOut();
+          onZoomOut(true);
         } else if (wheelDirection < 0) {
-          onZoomIn();
+          onZoomIn(true);
         }
       });
     });
@@ -311,12 +344,11 @@ const Preview = defineComponent({
 
     return () => {
       const { visible, prefixCls, rootClassName } = props;
-
       return (
         <Dialog
           {...attrs}
-          transitionName="zoom"
-          maskTransitionName="fade"
+          transitionName={props.transitionName}
+          maskTransitionName={props.maskTransitionName}
           closable={false}
           keyboard
           prefixCls={prefixCls}
@@ -327,19 +359,22 @@ const Preview = defineComponent({
           rootClassName={rootClassName}
           getContainer={props.getContainer}
         >
-          <ul class={`${props.prefixCls}-operations`}>
-            {tools.map(({ icon: IconType, onClick, type, disabled }) => (
-              <li
-                class={classnames(toolClassName, {
-                  [`${props.prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
-                })}
-                onClick={onClick}
-                key={type}
-              >
-                {cloneVNode(IconType, { class: iconClassName })}
-              </li>
-            ))}
-          </ul>
+          <div class={[`${props.prefixCls}-operations-wrapper`, rootClassName]}>
+            <ul class={`${props.prefixCls}-operations`}>
+              {tools.map(({ icon: IconType, onClick, type, disabled }) => (
+                <li
+                  class={classnames(toolClassName, {
+                    [`${props.prefixCls}-operations-operation-disabled`]:
+                      disabled && disabled?.value,
+                  })}
+                  onClick={onClick}
+                  key={type}
+                >
+                  {cloneVNode(IconType, { class: iconClassName })}
+                </li>
+              ))}
+            </ul>
+          </div>
           <div
             class={`${props.prefixCls}-img-wrapper`}
             style={{
@@ -354,7 +389,9 @@ const Preview = defineComponent({
               src={combinationSrc.value}
               alt={props.alt}
               style={{
-                transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
+                transform: `scale3d(${flip.x * scale.value}, ${flip.y * scale.value}, 1) rotate(${
+                  rotate.value
+                }deg)`,
               }}
             />
           </div>

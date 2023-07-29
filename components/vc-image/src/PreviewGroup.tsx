@@ -1,5 +1,15 @@
 import type { PropType, Ref, ComputedRef } from 'vue';
-import { ref, provide, defineComponent, inject, watch, reactive, computed, watchEffect } from 'vue';
+import {
+  ref,
+  shallowRef,
+  provide,
+  defineComponent,
+  inject,
+  watch,
+  reactive,
+  computed,
+  watchEffect,
+} from 'vue';
 import { type ImagePreviewType, mergeDefaultValue } from './Image';
 import Preview from './Preview';
 import type { PreviewProps } from './Preview';
@@ -43,7 +53,7 @@ export const context = {
   },
   inject: () => {
     return inject<GroupConsumerValue>(previewGroupContext, {
-      isPreviewGroup: ref(false),
+      isPreviewGroup: shallowRef(false),
       previewUrls: computed(() => new Map()),
       setPreviewUrls: () => {},
       current: ref(null),
@@ -163,7 +173,7 @@ const Group = defineComponent({
     );
 
     context.provide({
-      isPreviewGroup: ref(true),
+      isPreviewGroup: shallowRef(true),
       previewUrls: canPreviewUrls,
       setPreviewUrls,
       current,

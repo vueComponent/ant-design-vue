@@ -1,6 +1,14 @@
 import classNames from '../_util/classNames';
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
-import { inject, defineComponent, ref, watch, onMounted, onBeforeUnmount, provide } from 'vue';
+import {
+  inject,
+  defineComponent,
+  shallowRef,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  provide,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -8,7 +16,7 @@ import isNumeric from '../_util/isNumeric';
 import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { SiderCollapsedKey, SiderHookProviderKey } from './injectionKey';
 
 const dimensionMaxMap = {
@@ -72,10 +80,10 @@ export default defineComponent({
   setup(props, { emit, attrs, slots }) {
     const { prefixCls } = useConfigInject('layout-sider', props);
     const siderHook = inject(SiderHookProviderKey, undefined);
-    const collapsed = ref(
+    const collapsed = shallowRef(
       !!(props.collapsed !== undefined ? props.collapsed : props.defaultCollapsed),
     );
-    const below = ref(false);
+    const below = shallowRef(false);
 
     watch(
       () => props.collapsed,
@@ -95,7 +103,7 @@ export default defineComponent({
     };
 
     // ========================= Responsive =========================
-    const responsiveHandlerRef = ref<(mql: MediaQueryListEvent | MediaQueryList) => void>(
+    const responsiveHandlerRef = shallowRef<(mql: MediaQueryListEvent | MediaQueryList) => void>(
       (mql: MediaQueryListEvent | MediaQueryList) => {
         below.value = mql.matches;
         emit('breakpoint', mql.matches);

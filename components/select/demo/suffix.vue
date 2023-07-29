@@ -31,53 +31,40 @@ Basic Usage
     </a-select>
   </a-space>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { SmileOutlined, MehOutlined } from '@ant-design/icons-vue';
 import type { SelectProps } from 'ant-design-vue';
-import { defineComponent, ref } from 'vue';
+import { ref } from 'vue';
 
-export default defineComponent({
-  components: {
-    SmileOutlined,
-    MehOutlined,
-  },
-  setup() {
-    const handleChange = (value: string) => {
-      console.log(`selected ${value}`);
-    };
+const handleChange = (value: string) => {
+  console.log(`selected ${value}`);
+};
 
-    const options1 = ref<SelectProps['options']>([
-      {
-        value: 'jack',
-        label: 'Jack',
-      },
-      {
-        value: 'lucy',
-        label: 'Lucy',
-      },
-      {
-        value: 'disabled',
-        label: 'Disabled',
-        disabled: true,
-      },
-      {
-        value: 'yiminghe',
-        label: 'Yiminghe',
-      },
-    ]);
-    const options2 = ref<SelectProps['options']>([
-      {
-        value: 'lucy',
-        label: 'Lucy',
-      },
-    ]);
-    return {
-      handleChange,
-      value1: ref('lucy'),
-      value2: ref('lucy'),
-      options1,
-      options2,
-    };
+const options1 = ref<SelectProps['options']>([
+  {
+    value: 'jack',
+    label: 'Jack',
   },
-});
+  {
+    value: 'lucy',
+    label: 'Lucy',
+  },
+  {
+    value: 'disabled',
+    label: 'Disabled',
+    disabled: true,
+  },
+  {
+    value: 'yiminghe',
+    label: 'Yiminghe',
+  },
+]);
+const options2 = ref<SelectProps['options']>([
+  {
+    value: 'lucy',
+    label: 'Lucy',
+  },
+]);
+const value1 = ref('lucy');
+const value2 = ref('lucy');
 </script>

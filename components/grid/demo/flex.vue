@@ -20,7 +20,7 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
 
 <template>
   <div id="components-grid-demo-flex">
-    <p>sub-element align left</p>
+    <a-divider orientation="left">sub-element align left</a-divider>
     <a-row justify="start">
       <a-col :span="4">col-4</a-col>
       <a-col :span="4">col-4</a-col>
@@ -28,7 +28,7 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
       <a-col :span="4">col-4</a-col>
     </a-row>
 
-    <p>sub-element align center</p>
+    <a-divider orientation="left">sub-element align center</a-divider>
     <a-row justify="center">
       <a-col :span="4">col-4</a-col>
       <a-col :span="4">col-4</a-col>
@@ -36,7 +36,7 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
       <a-col :span="4">col-4</a-col>
     </a-row>
 
-    <p>sub-element align right</p>
+    <a-divider orientation="left">sub-element align right</a-divider>
     <a-row justify="end">
       <a-col :span="4">col-4</a-col>
       <a-col :span="4">col-4</a-col>
@@ -44,7 +44,7 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
       <a-col :span="4">col-4</a-col>
     </a-row>
 
-    <p>sub-element monospaced arrangement</p>
+    <a-divider orientation="left">sub-element monospaced arrangement</a-divider>
     <a-row justify="space-between">
       <a-col :span="4">col-4</a-col>
       <a-col :span="4">col-4</a-col>
@@ -52,8 +52,16 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
       <a-col :span="4">col-4</a-col>
     </a-row>
 
-    <p>sub-element align full</p>
+    <a-divider orientation="left">sub-element align full</a-divider>
     <a-row justify="space-around">
+      <a-col :span="4">col-4</a-col>
+      <a-col :span="4">col-4</a-col>
+      <a-col :span="4">col-4</a-col>
+      <a-col :span="4">col-4</a-col>
+    </a-row>
+
+    <a-divider orientation="left">sub-element align full</a-divider>
+    <a-row justify="space-evenly">
       <a-col :span="4">col-4</a-col>
       <a-col :span="4">col-4</a-col>
       <a-col :span="4">col-4</a-col>
@@ -63,7 +71,7 @@ Child elements depending on the value of the `start`,`center`, `end`,`space-betw
 </template>
 
 <style lang="less" scoped>
-#components-grid-demo-flex :deep(.ant-row) {
+:deep(#components-grid-demo-flex) [class~='ant-row'] {
   background: rgba(128, 128, 128, 0.08);
 }
 </style>

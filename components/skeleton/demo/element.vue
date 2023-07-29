@@ -58,18 +58,12 @@ Skeleton Button, Avatar, Input and Image.
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { SkeletonButtonProps, SkeletonAvatarProps } from 'ant-design-vue';
-export default defineComponent({
-  setup() {
-    return {
-      active: ref(false),
-      block: ref(false),
-      size: ref<SkeletonButtonProps['size']>('default'),
-      buttonShape: ref<SkeletonButtonProps['shape']>('default'),
-      avatarShape: ref<SkeletonAvatarProps['shape']>('circle'),
-    };
-  },
-});
+const active = ref(false);
+const block = ref(false);
+const size = ref<SkeletonButtonProps['size']>('default');
+const buttonShape = ref<SkeletonButtonProps['shape']>('default');
+const avatarShape = ref<SkeletonAvatarProps['shape']>('circle');
 </script>

@@ -1,15 +1,22 @@
 import type { App, PropType, ExtractPropTypes } from 'vue';
-import { watch, ref, defineComponent } from 'vue';
+import { computed, watch, shallowRef, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
-import { useInjectFormItemContext } from '../form/FormItemContext';
+import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import { optionProps, optionOptions } from '../vc-mentions/src/Option';
 import type { KeyboardEventHandler } from '../_util/EventInterface';
+import type { InputStatus } from '../_util/statusUtils';
+import { getStatusClassNames, getMergedStatus } from '../_util/statusUtils';
+import useStyle from './style';
+import { useProvideOverride } from '../menu/src/OverrideContext';
+import warning from '../_util/warning';
+import Spin from '../spin';
+import devWarning from '../vc-util/devWarning';
 import type { CustomSlotsType } from '../_util/type';
 
 interface MentionsConfig {
@@ -31,6 +38,9 @@ interface MentionsEntity {
 
 export type MentionPlacement = 'top' | 'bottom';
 
+function loadingFilterOption() {
+  return true;
+}
 const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] => {
   const { prefix = '@', split = ' ' } = config;
   const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
@@ -84,6 +94,7 @@ export const mentionsProps = () => ({
   notFoundContent: PropTypes.any,
   defaultValue: String,
   id: String,
+  status: String as PropType<InputStatus>,
 });
 
 export type MentionsProps = Partial<ExtractPropTypes<ReturnType<typeof mentionsProps>>>;
@@ -99,11 +110,36 @@ const Mentions = defineComponent({
     default?: any;
   }>,
   setup(props, { slots, emit, attrs, expose }) {
+    // =================== Warning =====================
+    if (process.env.NODE_ENV !== 'production') {
+      devWarning(
+        !flattenChildren(slots.default?.() || []).length,
+        'Mentions',
+        '`Mentions.Option` is deprecated. Please use `options` instead.',
+      );
+    }
     const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
-    const focused = ref(false);
-    const vcMentions = ref(null);
-    const value = ref(props.value ?? props.defaultValue ?? '');
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const focused = shallowRef(false);
+    const vcMentions = shallowRef(null);
+    const value = shallowRef(props.value ?? props.defaultValue ?? '');
     const formItemContext = useInjectFormItemContext();
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
+    useProvideOverride({
+      prefixCls: computed(() => `${prefixCls.value}-menu`),
+      mode: computed(() => 'vertical'),
+      selectable: computed(() => false),
+      onClick: () => {},
+      validator: ({ mode }) => {
+        // Warning if use other mode
+        warning(
+          !mode || mode === 'vertical',
+          'Mentions',
+          `mode="${mode}" is not supported for Mentions's Menu.`,
+        );
+      },
+    });
     watch(
       () => props.value,
       val => {
@@ -143,7 +179,7 @@ const Mentions = defineComponent({
       if (slots.notFoundContent) {
         return slots.notFoundContent();
       }
-      return renderEmpty.value('Select');
+      return renderEmpty('Select');
     };
 
     const getOptions = () => {
@@ -161,7 +197,9 @@ const Mentions = defineComponent({
     };
 
     expose({ focus, blur });
-
+    const mentionsfilterOption = computed(() =>
+      props.loading ? loadingFilterOption : props.filterOption,
+    );
     return () => {
       const {
         disabled,
@@ -170,23 +208,37 @@ const Mentions = defineComponent({
         id = formItemContext.id.value,
         ...restProps
       } = props;
+      const { hasFeedback, feedbackIcon } = formItemInputContext;
       const { class: className, ...otherAttrs } = attrs;
       const otherProps = omit(restProps, ['defaultValue', 'onUpdate:value', 'prefixCls']);
 
-      const mergedClassName = classNames(className, {
-        [`${prefixCls.value}-disabled`]: disabled,
-        [`${prefixCls.value}-focused`]: focused.value,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-      });
+      const mergedClassName = classNames(
+        {
+          [`${prefixCls.value}-disabled`]: disabled,
+          [`${prefixCls.value}-focused`]: focused.value,
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        },
+        getStatusClassNames(prefixCls.value, mergedStatus.value),
+        !hasFeedback && className,
+        hashId.value,
+      );
 
       const mentionsProps = {
         prefixCls: prefixCls.value,
         ...otherProps,
         disabled,
         direction: direction.value,
-        filterOption: props.filterOption,
+        filterOption: mentionsfilterOption.value,
         getPopupContainer,
-        options: props.options || getOptions(),
+        options: props.loading
+          ? [
+              {
+                value: 'ANTDV_SEARCHING',
+                disabled: true,
+                label: <Spin size="small" />,
+              },
+            ]
+          : props.options || getOptions(),
         class: mergedClassName,
         ...otherAttrs,
         rows,
@@ -198,12 +250,33 @@ const Mentions = defineComponent({
         value: value.value,
         id,
       };
-      return (
+      const mentions = (
         <VcMentions
           {...mentionsProps}
+          dropdownClassName={hashId.value}
           v-slots={{ notFoundContent: getNotFoundContent, option: slots.option }}
         ></VcMentions>
       );
+      if (hasFeedback) {
+        return wrapSSR(
+          <div
+            class={classNames(
+              `${prefixCls.value}-affix-wrapper`,
+              getStatusClassNames(
+                `${prefixCls.value}-affix-wrapper`,
+                mergedStatus.value,
+                hasFeedback,
+              ),
+              className,
+              hashId.value,
+            )}
+          >
+            {mentions}
+            <span class={`${prefixCls.value}-suffix`}>{feedbackIcon}</span>
+          </div>,
+        );
+      }
+      return wrapSSR(mentions);
     };
   },
 });

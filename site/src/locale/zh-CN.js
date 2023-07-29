@@ -1,6 +1,3 @@
-import login from '../views/user/login/locales/zh-CN';
-import register from '../views/user/register/locales/zh-CN';
-import registerResult from '../views/user/register-result/locales/zh-CN';
 import theme from '../theme/zh-CN';
 
 export default {
@@ -28,7 +25,4 @@ export default {
   'app.docs.components.icon.pic-searcher.upload-text': '点击/拖拽/粘贴上传图片',
   'app.docs.components.icon.pic-searcher.upload-hint':
     '我们会通过上传的图片进行匹配，得到最相似的图标',
-  ...login,
-  ...register,
-  ...registerResult,
 };

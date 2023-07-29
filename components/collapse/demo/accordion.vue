@@ -29,18 +29,8 @@ In accordion mode, only one panel can be expanded at a time.
     </a-collapse-panel>
   </a-collapse>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const activeKey = ref([]);
-    const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
-
-    return {
-      activeKey,
-      text,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const activeKey = ref([]);
+const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
 </script>

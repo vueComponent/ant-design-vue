@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ./components/tour/demo/basic.vue correctly 1`] = `
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Begin Tour</span>
+</button>
+<div class="ant-divider ant-divider-horizontal" role="separator">
+  <!---->
+</div>
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>Upload</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
+      <!----><span>Save</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span>
+    </button></div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/tour/demo/indicator.vue correctly 1`] = `
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Begin Tour</span>
+</button>
+<div class="ant-divider ant-divider-horizontal" role="separator">
+  <!---->
+</div>
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>Upload</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
+      <!----><span>Save</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span>
+    </button></div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/tour/demo/mask.vue correctly 1`] = `
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Begin Tour</span>
+</button>
+<div class="ant-divider ant-divider-horizontal" role="separator">
+  <!---->
+</div>
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>Upload</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
+      <!----><span>Save</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span>
+    </button></div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/tour/demo/non-modal.vue correctly 1`] = `
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Begin Tour</span>
+</button>
+<div class="ant-divider ant-divider-horizontal" role="separator">
+  <!---->
+</div>
+<div class="ant-space ant-space-horizontal ant-space-align-center">
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span>Upload</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
+      <!----><span>Save</span>
+    </button></div>
+  <!---->
+  <div class="ant-space-item"><button class="ant-btn ant-btn-default" type="button">
+      <!----><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span>
+    </button></div>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/tour/demo/placement.vue correctly 1`] = `
+<button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Begin Tour</span>
+</button>
+`;

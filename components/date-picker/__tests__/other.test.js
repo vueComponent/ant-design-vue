@@ -3,7 +3,7 @@ import { asyncExpect, sleep } from '../../../tests/utils';
 import dayjs from 'dayjs';
 import DatePicker from '../';
 import LocaleProvider from '../../locale-provider';
-import locale from '../../locale-provider/zh_CN';
+import locale from '../../locale/zh_CN';
 jest.mock('../../_util/Portal');
 const { MonthPicker, WeekPicker } = DatePicker;
 

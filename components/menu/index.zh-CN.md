@@ -4,7 +4,8 @@ cols: 1
 type: 导航
 title: Menu
 subtitle: 导航菜单
-cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*KeyQQL5iKkkAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 为页面和功能提供导航的菜单列表。
@@ -23,24 +24,14 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 
 ## API
 
-```html
-<template>
-  <a-menu>
-    <a-menu-item>菜单项</a-menu-item>
-    <a-sub-menu key="sub1" title="子菜单">
-      <a-menu-item>子菜单项</a-menu-item>
-    </a-sub-menu>
-  </a-menu>
-</template>
-```
-
 ### Menu
 
 | 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | forceSubMenuRender | 在子菜单展示之前就渲染进 DOM | boolean | false |
 | inlineCollapsed | inline 时菜单是否收起状态 | boolean | - |
 | inlineIndent | inline 模式的菜单缩进宽度 | number | 24 |
+| items | 菜单内容 | [ItemType\[\]](#ItemType) | - |  |
 | mode | 菜单类型，现在支持垂直、水平、和内嵌模式三种 | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | 是否允许多选 | boolean | false |
 | openKeys(v-model) | 当前展开的 SubMenu 菜单项 key 数组 | string\[] |  |
@@ -69,6 +60,66 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | icon     | 菜单图标                 | slot           |        | 2.8.0 |
 | key      | item 的唯一标志          | string         |        |       |
 | title    | 设置收缩时展示的悬浮标题 | string \| slot |        |       |
+
+### ItemType
+
+> type ItemType = [MenuItemType](#MenuItemType) | [SubMenuType](#SubMenuType) | [MenuItemGroupType](#MenuItemGroupType) | [MenuDividerType](#MenuDividerType);
+
+### MenuItemType
+
+| 参数     | 说明                     | 类型                                   | 默认值 | 版本 |
+| -------- | ------------------------ | -------------------------------------- | ------ | ---- |
+| danger   | 展示错误状态样式         | boolean                                | false  |      |
+| disabled | 是否禁用                 | boolean                                | false  |      |
+| icon     | 菜单图标                 | VueNode\|(item: MenuItemType)=>VueNode | -      |      |
+| key      | item 的唯一标志          | string                                 | -      |      |
+| label    | 菜单项标题               | VueNode                                | -      |      |
+| title    | 设置收缩时展示的悬浮标题 | string                                 | -      |      |
+
+#### SubMenuType
+
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| children | 子菜单的菜单项 | [ItemType\[\]](#ItemType) | - |  |
+| disabled | 是否禁用 | boolean | false |  |
+| icon | 菜单图标 | VueNode\|(item: SubMenuType)=>VueNode | - |  |
+| key | 唯一标志 | string | - |  |
+| label | 菜单项标题 | VueNode | - |  |
+| popupClassName | 子菜单样式，`mode="inline"` 时无效 | string | - |  |
+| popupOffset | 子菜单偏移量，`mode="inline"` 时无效 | \[number, number] | - |  |
+| onTitleClick | 点击子菜单标题 | function({ key, domEvent }) | - |  |
+| theme | 设置子菜单的主题，默认从 Menu 上继承 | `light` \| `dark` | - |  |
+
+#### MenuItemGroupType
+
+定义类型为 `group` 时，会作为分组处理:
+
+```ts
+const groupItem = {
+  type: 'group', // Must have
+  label: 'My Group',
+  children: [],
+};
+```
+
+| 参数     | 说明         | 类型                              | 默认值 | 版本 |
+| -------- | ------------ | --------------------------------- | ------ | ---- |
+| children | 分组的菜单项 | [MenuItemType\[\]](#MenuItemType) | -      |      |
+| label    | 分组标题     | ReactNode                         | -      |      |
+
+#### MenuDividerType
+
+菜单项分割线，只用在弹出菜单内，需要定义类型为 `divider`：
+
+```ts
+const dividerItem = {
+  type: 'divider', // Must have
+};
+```
+
+| 参数   | 说明     | 类型    | 默认值 | 版本 |
+| ------ | -------- | ------- | ------ | ---- |
+| dashed | 是否虚线 | boolean | false  |      |
 
 ### Menu.SubMenu
 

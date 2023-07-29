@@ -3,7 +3,8 @@ category: Components
 cols: 1
 type: Navigation
 title: Menu
-cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*KeyQQL5iKkkAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 A versatile menu for navigation.
@@ -22,24 +23,14 @@ More layouts with navigation: [Layout](/components/layout).
 
 ## API
 
-```html
-<template>
-  <a-menu>
-    <a-menu-item>Menu</a-menu-item>
-    <a-sub-menu key="sub1" title="SubMenu">
-      <a-menu-item>SubMenuItem</a-menu-item>
-    </a-sub-menu>
-  </a-menu>
-</template>
-```
-
 ### Menu
 
 | Param | Description | Type | Default value |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | forceSubMenuRender | render submenu into DOM before it shows | boolean | false |
 | inlineCollapsed | specifies the collapsed status when menu is inline mode | boolean | - |
 | inlineIndent | indent px of inline menu item on each level | number | 24 |
+| items | Menu item content | [ItemType\[\]](#ItemType) | - | 4.20.0 |
 | mode | type of the menu; `vertical`, `horizontal`, and `inline` modes are supported | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | Allow selection of multiple items | boolean | false |
 | openKeys(v-model) | array with the keys of currently opened sub menus | string\[] |  |
@@ -68,6 +59,67 @@ More layouts with navigation: [Layout](/components/layout).
 | disabled | whether menu item is disabled or not | boolean        | false         |
 | key      | unique id of the menu item           | string         |               |
 | title    | set display title for collapsed item | string \| slot |               |
+
+### ItemType
+
+> type ItemType = [MenuItemType](#MenuItemType) | [SubMenuType](#SubMenuType) | [MenuItemGroupType](#MenuItemGroupType) | [MenuDividerType](#MenuDividerType);
+
+#### MenuItemType
+
+| Param | Description | Type | Default value | Version |
+| --- | --- | --- | --- | --- |
+| danger | Display the danger style | boolean | false |  |
+| disabled | Whether menu item is disabled | boolean | false |  |
+| icon | The icon of the menu item | VueNode \| (item: MenuItemType) => VNode | - |  |
+| key | Unique ID of the menu item | string | - |  |
+| label | Menu label | VueNode | - |  |
+| title | Set display title for collapsed item | string | - |  |
+
+#### SubMenuType
+
+<!-- prettier-ignore -->
+| Property | Description | Type | Default value | Version |
+| --- | --- | --- | --- | --- |
+| children | Sub-menus or sub-menu items | [ItemType\[\]](#ItemType) | - |  |
+| disabled | Whether sub-menu is disabled | boolean | false |  |
+| icon | Icon of sub menu | VueNode \| (item: SubMenuType) => VueNode | - |  |
+| key | Unique ID of the sub-menu | string | - |  |
+| label | Menu label | VueNode | - |  |
+| popupClassName | Sub-menu class name, not working when `mode="inline"` | string | - |  |
+| popupOffset | Sub-menu offset, not working when `mode="inline"` | \[number, number] | - |  |
+| theme | Color theme of the SubMenu (inherits from Menu by default) |  | `light` \| `dark` | - |  |
+| onTitleClick | Callback executed when the sub-menu title is clicked | function({ key, domEvent }) | - |  |
+
+#### MenuItemGroupType
+
+Define `type` as `group` to make as group:
+
+```ts
+const groupItem = {
+  type: 'group', // Must have
+  label: 'My Group',
+  children: [],
+};
+```
+
+| Param    | Description            | Type                              | Default value | Version |
+| -------- | ---------------------- | --------------------------------- | ------------- | ------- |
+| children | Sub-menu items         | [MenuItemType\[\]](#MenuItemType) | -             |         |
+| label    | The title of the group | ReactNode                         | -             |         |
+
+#### MenuDividerType
+
+Divider line in between menu items, only used in vertical popup Menu or Dropdown Menu. Need define the `type` as `divider`：
+
+```ts
+const dividerItem = {
+  type: 'divider', // Must have
+};
+```
+
+| Param  | Description            | Type    | Default value | Version |
+| ------ | ---------------------- | ------- | ------------- | ------- |
+| dashed | Whether line is dashed | boolean | false         |         |
 
 ### Menu.SubMenu
 

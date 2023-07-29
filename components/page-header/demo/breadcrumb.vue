@@ -24,8 +24,7 @@ With breadcrumbs, it is suitable for deeper pages, allowing users to navigate qu
     sub-title="This is a subtitle"
   />
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 const routes = [
   {
     path: 'index',
@@ -40,11 +39,4 @@ const routes = [
     breadcrumbName: 'Third-level Menu',
   },
 ];
-export default defineComponent({
-  setup() {
-    return {
-      routes,
-    };
-  },
-});
 </script>

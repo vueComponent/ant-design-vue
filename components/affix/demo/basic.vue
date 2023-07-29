@@ -26,16 +26,8 @@ The simplest usage.
   </a-affix>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const top = ref<number>(10);
-    const bottom = ref<number>(10);
-    return {
-      top,
-      bottom,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const top = ref<number>(10);
+const bottom = ref<number>(10);
 </script>

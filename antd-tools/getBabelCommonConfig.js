@@ -20,7 +20,8 @@ module.exports = function (modules) {
       resolve('@babel/plugin-transform-runtime'),
       {
         useESModules: modules === false,
-        version: '^7.10.4',
+        version:
+          require(`${process.cwd()}/package.json`).dependencies['@babel/runtime'] || '^7.10.4',
       },
     ],
     // resolve('babel-plugin-inline-import-data-uri'),

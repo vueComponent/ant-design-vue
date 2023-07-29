@@ -28,56 +28,45 @@ Hide default plus icon, and bind event for customized trigger.
     </a-tabs>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
-export default defineComponent({
-  setup() {
-    const panes = ref<{ title: string; content: string; key: string; closable?: boolean }[]>(
-      new Array(2).fill(null).map((_, index) => {
-        const id = String(index + 1);
-        return { title: `Tab ${id}`, content: `Content of Tab Pane ${id}`, key: id };
-      }),
-    );
-    const activeKey = ref(panes.value[0].key);
-    const newTabIndex = ref(0);
+const panes = ref<{ title: string; content: string; key: string; closable?: boolean }[]>(
+  new Array(2).fill(null).map((_, index) => {
+    const id = String(index + 1);
+    return { title: `Tab ${id}`, content: `Content of Tab Pane ${id}`, key: id };
+  }),
+);
+const activeKey = ref(panes.value[0].key);
+const newTabIndex = ref(0);
 
-    const add = () => {
-      activeKey.value = `newTab${newTabIndex.value++}`;
-      panes.value.push({
-        title: `New Tab ${activeKey.value}`,
-        content: `Content of new Tab ${activeKey.value}`,
-        key: activeKey.value,
-      });
-    };
+const add = () => {
+  activeKey.value = `newTab${newTabIndex.value++}`;
+  panes.value.push({
+    title: `New Tab ${activeKey.value}`,
+    content: `Content of new Tab ${activeKey.value}`,
+    key: activeKey.value,
+  });
+};
 
-    const remove = (targetKey: string) => {
-      let lastIndex = 0;
-      panes.value.forEach((pane, i) => {
-        if (pane.key === targetKey) {
-          lastIndex = i - 1;
-        }
-      });
-      panes.value = panes.value.filter(pane => pane.key !== targetKey);
-      if (panes.value.length && activeKey.value === targetKey) {
-        if (lastIndex >= 0) {
-          activeKey.value = panes.value[lastIndex].key;
-        } else {
-          activeKey.value = panes.value[0].key;
-        }
-      }
-    };
+const remove = (targetKey: string) => {
+  let lastIndex = 0;
+  panes.value.forEach((pane, i) => {
+    if (pane.key === targetKey) {
+      lastIndex = i - 1;
+    }
+  });
+  panes.value = panes.value.filter(pane => pane.key !== targetKey);
+  if (panes.value.length && activeKey.value === targetKey) {
+    if (lastIndex >= 0) {
+      activeKey.value = panes.value[lastIndex].key;
+    } else {
+      activeKey.value = panes.value[0].key;
+    }
+  }
+};
 
-    const onEdit = (targetKey: string) => {
-      remove(targetKey);
-    };
-
-    return {
-      panes,
-      activeKey,
-      onEdit,
-      add,
-    };
-  },
-});
+const onEdit = (targetKey: string) => {
+  remove(targetKey);
+};
 </script>

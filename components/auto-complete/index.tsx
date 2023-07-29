@@ -6,7 +6,10 @@ import warning from '../_util/warning';
 import Option from './Option';
 import OptGroup from './OptGroup';
 import omit from '../_util/omit';
-import useConfigInject from '../_util/hooks/useConfigInject';
+
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+import type { InputStatus } from '../_util/statusUtils';
+
 import type { CustomSlotsType } from '../_util/type';
 
 function isSelectOptionOrSelectOptGroup(child: any): boolean {
@@ -31,6 +34,7 @@ export const autoCompleteProps = () => ({
   // optionLabelProp: PropTypes.string.def('children'),
   filterOption: { type: [Boolean, Function], default: false },
   defaultActiveFirstOption: { type: Boolean, default: true },
+  status: String as PropType<InputStatus>,
 });
 
 export type AutoCompleteProps = Partial<ExtractPropTypes<ReturnType<typeof autoCompleteProps>>>;
@@ -61,6 +65,11 @@ const AutoComplete = defineComponent({
       !('options' in slots),
       'AutoComplete',
       '`options` slot is deprecated, please use props `options` instead.',
+    );
+    warning(
+      !props.dropdownClassName,
+      'AutoComplete',
+      '`dropdownClassName` is deprecated, please use `popupClassName` instead.',
     );
     const selectRef = ref();
     const getInputElement = () => {
@@ -136,6 +145,7 @@ const AutoComplete = defineComponent({
           notFoundContent,
           // placeholder: '',
           class: cls,
+          popupClassName: props.popupClassName || props.dropdownClassName,
           ref: selectRef,
         },
         ['dataSource', 'loading'],

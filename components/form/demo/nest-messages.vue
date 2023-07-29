@@ -42,45 +42,34 @@ title:
     </a-form-item>
   </a-form>
 </template>
-<script lang="ts">
-import { defineComponent, reactive } from 'vue';
+<script lang="ts" setup>
+import { reactive } from 'vue';
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
 
-export default defineComponent({
-  setup() {
-    const layout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 16 },
-    };
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    email: '${label} is not a valid email!',
+    number: '${label} is not a valid number!',
+  },
+  number: {
+    range: '${label} must be between ${min} and ${max}',
+  },
+};
 
-    const validateMessages = {
-      required: '${label} is required!',
-      types: {
-        email: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-      },
-      number: {
-        range: '${label} must be between ${min} and ${max}',
-      },
-    };
-
-    const formState = reactive({
-      user: {
-        name: '',
-        age: undefined,
-        email: '',
-        website: '',
-        introduction: '',
-      },
-    });
-    const onFinish = (values: any) => {
-      console.log('Success:', values);
-    };
-    return {
-      formState,
-      onFinish,
-      layout,
-      validateMessages,
-    };
+const formState = reactive({
+  user: {
+    name: '',
+    age: undefined,
+    email: '',
+    website: '',
+    introduction: '',
   },
 });
+const onFinish = (values: any) => {
+  console.log('Success:', values);
+};
 </script>

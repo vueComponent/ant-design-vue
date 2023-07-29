@@ -1,8 +1,11 @@
 import type { HTMLAttributes, PropType } from 'vue';
 import { defineComponent } from 'vue';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import type { Direction } from '../config-provider';
+
+// CSSINJS
+import useStyle from './style';
 
 export interface TypographyProps extends HTMLAttributes {
   direction?: Direction;
@@ -24,6 +27,10 @@ const Typography = defineComponent({
   props: typographyProps(),
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('typography', props);
+
+    // Style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     return () => {
       const {
         prefixCls: _prefixCls,
@@ -31,17 +38,18 @@ const Typography = defineComponent({
         component: Component = 'article' as any,
         ...restProps
       } = { ...props, ...attrs };
-      return (
+      return wrapSSR(
         <Component
           {...restProps}
           class={classNames(
             prefixCls.value,
             { [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
             attrs.class,
+            hashId.value,
           )}
         >
           {slots.default?.()}
-        </Component>
+        </Component>,
       );
     };
   },

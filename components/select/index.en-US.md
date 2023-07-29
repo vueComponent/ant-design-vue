@@ -2,7 +2,8 @@
 category: Components
 type: Data Entry
 title: Select
-cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*zo76T7KQx2UAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Select component to select value from options.
@@ -32,7 +33,7 @@ Select component to select value from options.
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | defaultOpen | Initial open state of dropdown | boolean | - |  |
 | disabled | Whether disabled select | boolean | false |  |
-| dropdownClassName | className of dropdown menu | string | - |  |
+| popupClassName | className of dropdown menu | string | - | 4.0 |
 | dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |
 | dropdownMenuStyle | additional style applied to dropdown menu | object | - |  |
 | dropdownRender | Customize dropdown content | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
@@ -57,14 +58,16 @@ Select component to select value from options.
 | optionLabelProp | Which prop value of option will render as content of select. | string | `children` \| `label`(when use options) |  |
 | options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] |  |
 | placeholder | Placeholder of select | string\|slot | - |  |
+| placement | The position where the selection box pops up | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | removeIcon | The custom remove icon | VNode \| slot | - |  |
 | searchValue | The current input "search" text | string | - |  |
 | showArrow | Whether to show the drop-down arrow | boolean | single:true, multiple:false |  |
 | showSearch | Whether select is searchable | boolean | single:false, multiple:true |  |
 | size | Size of Select input. `default` `large` `small` | string | default |  |
+| status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |
 | tagRender | Customize tag render, only applies when `mode` is set to `multiple` or `tags` | slot \| (props) => any | - |  |
-| tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |  |
+| tokenSeparators | Separator used to tokenize, only applies when `mode="tags"` | string\[] | - |  |
 | value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |  |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
 
@@ -114,7 +117,7 @@ Select component to select value from options.
 
 ### The dropdown is closed when click `dropdownRender` area?
 
-See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).
+Dropdown menu will be closed if click `dropdownRender` area, you can prevent it by wrapping `@mousedown.prevent` See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).
 
 ### Why is `placeholder` not displayed?
 

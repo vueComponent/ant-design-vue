@@ -18,6 +18,8 @@
     <OptionLabelProp />
     <BigData />
     <fieldNamesVue />
+    <placementVue />
+    <statusVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -39,6 +41,8 @@ import OptionLabelProp from './option-label-prop.vue';
 import BigData from './big-data.vue';
 import Responsive from './responsive.vue';
 import fieldNamesVue from './field-names.vue';
+import placementVue from './placement.vue';
+import statusVue from './status.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -46,6 +50,8 @@ export default defineComponent({
   CN,
   US,
   components: {
+    placementVue,
+    statusVue,
     fieldNamesVue,
     Basic,
     Size,

@@ -21,24 +21,14 @@ the notification box will never close automatically.
 <template>
   <a-button type="primary" @click="openNotification">Open the notification box</a-button>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { notification } from 'ant-design-vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  setup() {
-    const openNotification = () => {
-      notification.open({
-        message: 'Notification Title',
-        description:
-          'I will never close automatically. I will be close automatically. I will never close automatically.',
-        duration: 0,
-      });
-    };
-
-    return {
-      openNotification,
-    };
-  },
-});
+const openNotification = () => {
+  notification.open({
+    message: 'Notification Title',
+    description:
+      'I will never close automatically. I will be close automatically. I will never close automatically.',
+    duration: 0,
+  });
+};
 </script>

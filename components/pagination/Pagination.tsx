@@ -1,61 +1,62 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { computed, toRef, defineComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
-import VcSelect from '../select';
-import MiniSelect from './MiniSelect';
+import MiniSelect, { MiddleSelect } from './Select';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import classNames from '../_util/classNames';
-import useConfigInject from '../_util/hooks/useConfigInject';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
+import { booleanType, arrayType, stringType, functionType, someType } from '../_util/type';
+
+// CSSINJS
+import useStyle from './style';
 
 export const paginationProps = () => ({
   total: Number,
   defaultCurrent: Number,
-  disabled: { type: Boolean, default: undefined },
+  disabled: booleanType(),
   current: Number,
   defaultPageSize: Number,
   pageSize: Number,
-  hideOnSinglePage: { type: Boolean, default: undefined },
-  showSizeChanger: { type: Boolean, default: undefined },
-  pageSizeOptions: Array as PropType<(string | number)[]>,
-  buildOptionText: Function as PropType<(opt: { value: any }) => any>,
-  showQuickJumper: {
-    type: [Boolean, Object] as PropType<boolean | { goButton?: any }>,
-    default: undefined as boolean | { goButton?: any },
-  },
-  showTotal: Function as PropType<(total: number, range: [number, number]) => any>,
-  size: String as PropType<'default' | 'small'>,
-  simple: { type: Boolean, default: undefined },
+  hideOnSinglePage: booleanType(),
+  showSizeChanger: booleanType(),
+  pageSizeOptions: arrayType<(string | number)[]>(),
+  buildOptionText: functionType<(opt: { value: any }) => any>(),
+  showQuickJumper: someType<boolean | { goButton?: any }>([Boolean, Object]),
+  showTotal: functionType<(total: number, range: [number, number]) => any>(),
+  size: stringType<'default' | 'small'>(),
+  simple: booleanType(),
   locale: Object,
   prefixCls: String,
   selectPrefixCls: String,
   totalBoundaryShowSizeChanger: Number,
   selectComponentClass: String,
-  itemRender: Function as PropType<
-    (opt: {
-      page: number;
-      type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next';
-      originalElement: any;
-    }) => any
-  >,
+  itemRender:
+    functionType<
+      (opt: {
+        page: number;
+        type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next';
+        originalElement: any;
+      }) => any
+    >(),
   role: String,
   responsive: Boolean,
-  showLessItems: { type: Boolean, default: undefined },
-  onChange: Function as PropType<(page: number, pageSize: number) => void>,
-  onShowSizeChange: Function as PropType<(current: number, size: number) => void>,
-  'onUpdate:current': Function as PropType<(current: number) => void>,
-  'onUpdate:pageSize': Function as PropType<(size: number) => void>,
+  showLessItems: booleanType(),
+  onChange: functionType<(page: number, pageSize: number) => void>(),
+  onShowSizeChange: functionType<(current: number, size: number) => void>(),
+  'onUpdate:current': functionType<(current: number) => void>(),
+  'onUpdate:pageSize': functionType<(size: number) => void>(),
 });
 
 export type PaginationPosition = 'top' | 'bottom' | 'both';
 export const paginationConfig = () => ({
   ...paginationProps(),
-  position: String as PropType<PaginationPosition>,
+  position: stringType<PaginationPosition>(),
 });
 
 export type PaginationProps = Partial<ExtractPropTypes<ReturnType<typeof paginationProps>>>;
@@ -81,7 +82,11 @@ export default defineComponent({
   props: paginationProps(),
   // emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup(props, { slots, attrs }) {
-    const { prefixCls, configProvider, direction } = useConfigInject('pagination', props);
+    const { prefixCls, configProvider, direction, size } = useConfigInject('pagination', props);
+
+    // style
+    const [wrapSSR, hashId] = useStyle(prefixCls);
+
     const selectPrefixCls = computed(() =>
       configProvider.getPrefixCls('select', props.selectPrefixCls),
     );
@@ -89,50 +94,45 @@ export default defineComponent({
     const [locale] = useLocaleReceiver('Pagination', enUS, toRef(props, 'locale'));
     const getIconsProps = (pre: string) => {
       const ellipsis = <span class={`${pre}-item-ellipsis`}>•••</span>;
-      let prevIcon = (
+      const prevIcon = (
         <button class={`${pre}-item-link`} type="button" tabindex={-1}>
-          <LeftOutlined />
+          {direction.value === 'rtl' ? <RightOutlined /> : <LeftOutlined />}
         </button>
       );
-      let nextIcon = (
+      const nextIcon = (
         <button class={`${pre}-item-link`} type="button" tabindex={-1}>
-          <RightOutlined />
+          {direction.value === 'rtl' ? <LeftOutlined /> : <RightOutlined />}
         </button>
       );
-      let jumpPrevIcon = (
+      const jumpPrevIcon = (
         <a rel="nofollow" class={`${pre}-item-link`}>
-          {/* You can use transition effects in the container :) */}
           <div class={`${pre}-item-container`}>
-            <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            {direction.value === 'rtl' ? (
+              <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            ) : (
+              <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            )}
             {ellipsis}
           </div>
         </a>
       );
-      let jumpNextIcon = (
+      const jumpNextIcon = (
         <a rel="nofollow" class={`${pre}-item-link`}>
-          {/* You can use transition effects in the container :) */}
           <div class={`${pre}-item-container`}>
-            <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            {direction.value === 'rtl' ? (
+              <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            ) : (
+              <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            )}
             {ellipsis}
           </div>
         </a>
       );
-      // change arrows direction in right-to-left direction
-      if (direction.value === 'rtl') {
-        [prevIcon, nextIcon] = [nextIcon, prevIcon];
-        [jumpPrevIcon, jumpNextIcon] = [jumpNextIcon, jumpPrevIcon];
-      }
-      return {
-        prevIcon,
-        nextIcon,
-        jumpPrevIcon,
-        jumpNextIcon,
-      };
+      return { prevIcon, nextIcon, jumpPrevIcon, jumpNextIcon };
     };
 
     return () => {
       const {
-        size,
         itemRender = slots.itemRender,
         buildOptionText = slots.buildOptionText,
         selectComponentClass,
@@ -140,24 +140,29 @@ export default defineComponent({
         ...restProps
       } = props;
 
-      const isSmall = size === 'small' || !!(breakpoint.value?.xs && !size && responsive);
+      const isSmall =
+        size.value === 'small' || !!(breakpoint.value?.xs && !size.value && responsive);
       const paginationProps = {
         ...restProps,
         ...getIconsProps(prefixCls.value),
         prefixCls: prefixCls.value,
         selectPrefixCls: selectPrefixCls.value,
-        selectComponentClass: selectComponentClass || (isSmall ? MiniSelect : VcSelect),
+        selectComponentClass: selectComponentClass || (isSmall ? MiniSelect : MiddleSelect),
         locale: locale.value,
         buildOptionText,
         ...attrs,
         class: classNames(
-          { mini: isSmall, [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
+          {
+            [`${prefixCls.value}-mini`]: isSmall,
+            [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          },
           attrs.class,
+          hashId.value,
         ),
         itemRender,
       };
 
-      return <VcPagination {...paginationProps} />;
+      return wrapSSR(<VcPagination {...paginationProps} />);
     };
   },
 });

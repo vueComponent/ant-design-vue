@@ -49,8 +49,8 @@ Customize render list with Tree component.
     </a-transfer>
   </div>
 </template>
-<script lang="ts">
-import { computed, defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { computed, ref } from 'vue';
 import type { TransferProps, TreeProps } from 'ant-design-vue';
 const tData: TransferProps['dataSource'] = [
   { key: '0-0', title: '0-0' },
@@ -85,33 +85,22 @@ function handleTreeData(treeNodes: TransferProps['dataSource'], targetKeys: stri
     children: handleTreeData(children ?? [], targetKeys),
   }));
 }
+const targetKeys = ref<string[]>([]);
 
-export default defineComponent({
-  setup() {
-    const targetKeys = ref<string[]>([]);
+const dataSource = ref(transferDataSource);
 
-    const dataSource = ref(transferDataSource);
-
-    const treeData = computed(() => {
-      return handleTreeData(tData, targetKeys.value);
-    });
-
-    const onChecked = (
-      e: Parameters<TreeProps['onCheck']>[1] | Parameters<TreeProps['onSelect']>[1],
-      checkedKeys: string[],
-      onItemSelect: (n: any, c: boolean) => void,
-    ) => {
-      const { eventKey } = e.node;
-      onItemSelect(eventKey, !isChecked(checkedKeys, eventKey));
-    };
-    return {
-      targetKeys,
-      dataSource,
-      treeData,
-      onChecked,
-    };
-  },
+const treeData = computed(() => {
+  return handleTreeData(tData, targetKeys.value);
 });
+
+const onChecked = (
+  e: Parameters<TreeProps['onCheck']>[1] | Parameters<TreeProps['onSelect']>[1],
+  checkedKeys: string[],
+  onItemSelect: (n: any, c: boolean) => void,
+) => {
+  const { eventKey } = e.node;
+  onItemSelect(eventKey, !isChecked(checkedKeys, eventKey));
+};
 </script>
 <style scoped>
 .tree-transfer .ant-transfer-list:first-child {

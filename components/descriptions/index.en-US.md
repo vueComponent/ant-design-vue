@@ -2,7 +2,8 @@
 category: Components
 type: Data Display
 title: Descriptions
-cover: https://gw.alipayobjects.com/zos/alicdn/MjtG9_FOI/Descriptions.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fHdlTpif6XQAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*d27AQJrowGAAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Display multiple read-only fields in groups.

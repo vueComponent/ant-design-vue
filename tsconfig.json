@@ -3,9 +3,11 @@
     "baseUrl": "./",
     "paths": {
       "ant-design-vue": ["components/index.ts"],
-      "ant-design-vue/es/*": ["components/*"]
+      "ant-design-vue/es/*": ["components/*"],
+      "ant-design-vue/lib/*": ["components/*"],
+      "ant-design-vue/locale/*": ["components/locale/*"]
     },
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["DOM", "ESNext"],
     "strictNullChecks": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -14,11 +16,21 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
-    "target": "esnext",
+    "target": "es6",
     "module": "esnext",
     "skipLibCheck": true,
     "allowJs": true,
-    "importsNotUsedAsValues": "preserve"
+    "importsNotUsedAsValues": "preserve",
+    "stripInternal": true
   },
-  "exclude": ["node_modules", "lib", "es", "dist", "v2-doc", "scripts", "**/__tests__/**/*"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "locale",
+    "scripts",
+    "**/__tests__/**/*",
+    "site/dist"
+  ]
 }

@@ -20,18 +20,13 @@ The following example shows how to create a popover which can be hovered and cli
     style="width: 500px"
     title="Hover title"
     trigger="hover"
-    :visible="hovered"
-    @visibleChange="handleHoverChange"
+    :open="hovered"
+    @openChange="handleHoverChange"
   >
     <template #content>
       <div>This is hover content.</div>
     </template>
-    <a-popover
-      title="Click title"
-      trigger="click"
-      :visible="clicked"
-      @visibleChange="handleClickChange"
-    >
+    <a-popover title="Click title" trigger="click" :open="clicked" @openChange="handleClickChange">
       <template #content>
         <div>
           <div>This is click content.</div>
@@ -42,35 +37,23 @@ The following example shows how to create a popover which can be hovered and cli
     </a-popover>
   </a-popover>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const clicked = ref<boolean>(false);
-    const hovered = ref<boolean>(false);
+<script lang="ts" setup>
+import { ref } from 'vue';
+const clicked = ref<boolean>(false);
+const hovered = ref<boolean>(false);
 
-    const hide = () => {
-      clicked.value = false;
-      hovered.value = false;
-    };
+const hide = () => {
+  clicked.value = false;
+  hovered.value = false;
+};
 
-    const handleHoverChange = (visible: boolean) => {
-      clicked.value = false;
-      hovered.value = visible;
-    };
+const handleHoverChange = (visible: boolean) => {
+  clicked.value = false;
+  hovered.value = visible;
+};
 
-    const handleClickChange = (visible: boolean) => {
-      clicked.value = visible;
-      hovered.value = false;
-    };
-
-    return {
-      clicked,
-      hovered,
-      hide,
-      handleHoverChange,
-      handleClickChange,
-    };
-  },
-});
+const handleClickChange = (visible: boolean) => {
+  clicked.value = visible;
+  hovered.value = false;
+};
 </script>

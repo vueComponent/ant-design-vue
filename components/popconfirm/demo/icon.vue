@@ -22,12 +22,6 @@ Set `icon` props to customize the icon.
     <a href="#">Delete</a>
   </a-popconfirm>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { QuestionCircleOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    QuestionCircleOutlined,
-  },
-});
 </script>

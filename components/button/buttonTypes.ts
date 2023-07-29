@@ -2,6 +2,8 @@ import PropTypes from '../_util/vue-types';
 
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SizeType } from '../config-provider';
+import { eventType } from '../_util/type';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
 export type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text';
 export type ButtonShape = 'default' | 'circle' | 'round';
@@ -36,12 +38,8 @@ export const buttonProps = () => ({
   href: String,
   target: String,
   title: String,
-  onClick: {
-    type: Function as PropType<(event: MouseEvent) => void>,
-  },
-  onMousedown: {
-    type: Function as PropType<(event: MouseEvent) => void>,
-  },
+  onClick: eventType<MouseEventHandler>(),
+  onMousedown: eventType<MouseEventHandler>(),
 });
 
 export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonProps>>>;

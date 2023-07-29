@@ -28,15 +28,7 @@ Use `stringMode` to support high precision decimals support.
     string-mode
   />
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>('1');
-
-    return {
-      value,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value = ref<string>('1');
 </script>

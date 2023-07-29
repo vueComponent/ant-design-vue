@@ -5,7 +5,6 @@ const getBabelCommonConfig = require('./getBabelCommonConfig');
 const merge2 = require('merge2');
 const { execSync } = require('child_process');
 const through2 = require('through2');
-const transformLess = require('./transformLess');
 const webpack = require('webpack');
 const babel = require('gulp-babel');
 const argv = require('minimist')(process.argv.slice(2));
@@ -27,14 +26,21 @@ const compareVersions = require('compare-versions');
 const getTSCommonConfig = require('./getTSCommonConfig');
 const replaceLib = require('./replaceLib');
 const sortApiTable = require('./sortApiTable');
+const { glob } = require('glob');
 
 const packageJson = require(getProjectPath('package.json'));
 const tsDefaultReporter = ts.reporter.defaultReporter();
 const cwd = process.cwd();
 const libDir = getProjectPath('lib');
 const esDir = getProjectPath('es');
+const localeDir = getProjectPath('locale');
 
 const tsConfig = getTSCommonConfig();
+
+// FIXME: hard code, not find typescript can modify the path resolution
+const localeDts = `import type { Locale } from '../lib/locale-provider';
+declare const localeValues: Locale;
+export default localeValues;`;
 
 function dist(done) {
   rimraf.sync(path.join(cwd, 'dist'));
@@ -108,6 +114,11 @@ gulp.task('tsc', () =>
   ),
 );
 
+gulp.task('clean', () => {
+  rimraf.sync(getProjectPath('_site'));
+  rimraf.sync(getProjectPath('_data'));
+});
+
 function babelify(js, modules) {
   const babelConfig = getBabelCommonConfig(modules);
   babelConfig.babelrc = false;
@@ -118,17 +129,7 @@ function babelify(js, modules) {
   const stream = js.pipe(babel(babelConfig)).pipe(
     through2.obj(function z(file, encoding, next) {
       this.push(file.clone());
-      if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
-        const content = file.contents.toString(encoding);
-        file.contents = Buffer.from(
-          content
-            .replace(/\/style\/?'/g, "/style/css'")
-            .replace(/\/style\/?"/g, '/style/css"')
-            .replace(/\.less/g, '.css'),
-        );
-        file.path = file.path.replace(/index\.(js|jsx|ts|tsx)$/, 'css.js');
-        this.push(file);
-      } else if (modules !== false) {
+      if (modules !== false) {
         const content = file.contents.toString(encoding);
         file.contents = Buffer.from(
           content
@@ -144,47 +145,9 @@ function babelify(js, modules) {
 }
 
 function compile(modules) {
-  const { compile: { transformTSFile, transformFile, includeLessFile = [] } = {} } = getConfig();
+  const { compile: { transformTSFile, transformFile } = {} } = getConfig();
   rimraf.sync(modules !== false ? libDir : esDir);
 
-  // =============================== LESS ===============================
-  const less = gulp
-    .src(['components/**/*.less'])
-    .pipe(
-      through2.obj(function (file, encoding, next) {
-        // Replace content
-        const cloneFile = file.clone();
-        const content = file.contents.toString().replace(/^\uFEFF/, '');
-
-        cloneFile.contents = Buffer.from(content);
-
-        // Clone for css here since `this.push` will modify file.path
-        const cloneCssFile = cloneFile.clone();
-
-        this.push(cloneFile);
-
-        // Transform less file
-        if (
-          file.path.match(/(\/|\\)style(\/|\\)index\.less$/) ||
-          file.path.match(/(\/|\\)style(\/|\\)v2-compatible-reset\.less$/) ||
-          includeLessFile.some(regex => file.path.match(regex))
-        ) {
-          transformLess(cloneCssFile.contents.toString(), cloneCssFile.path)
-            .then(css => {
-              cloneCssFile.contents = Buffer.from(css);
-              cloneCssFile.path = cloneCssFile.path.replace(/\.less$/, '.css');
-              this.push(cloneCssFile);
-              next();
-            })
-            .catch(e => {
-              console.error(e);
-            });
-        } else {
-          next();
-        }
-      }),
-    )
-    .pipe(gulp.dest(modules === false ? esDir : libDir));
   const assets = gulp
     .src(['components/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
@@ -259,7 +222,26 @@ function compile(modules) {
   tsResult.on('end', check);
   const tsFilesStream = babelify(tsResult.js, modules);
   const tsd = tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
-  return merge2([less, tsFilesStream, tsd, assets, transformFileStream].filter(s => s));
+  return merge2([tsFilesStream, tsd, assets, transformFileStream].filter(s => s));
+}
+
+function generateLocale() {
+  if (!fs.existsSync(localeDir)) {
+    fs.mkdirSync(localeDir);
+  }
+
+  const localeFiles = glob.sync('components/locale/*.ts?(x)');
+  localeFiles.forEach(item => {
+    const match = item.match(/components\/locale\/(.*)\.tsx?/);
+    if (match) {
+      const locale = match[1];
+      fs.writeFileSync(
+        path.join(localeDir, `${locale}.js`),
+        `module.exports = require('../lib/locale/${locale}');`,
+      );
+      fs.writeFileSync(path.join(localeDir, `${locale}.d.ts`), localeDts);
+    }
+  });
 }
 
 function tag() {
@@ -395,7 +377,10 @@ gulp.task('compile-with-es', done => {
 
 gulp.task('compile-with-lib', done => {
   console.log('[Parallel] Compile to js...');
-  compile().on('finish', done);
+  compile().on('finish', () => {
+    generateLocale();
+    done();
+  });
 });
 
 gulp.task('compile-finalize', done => {

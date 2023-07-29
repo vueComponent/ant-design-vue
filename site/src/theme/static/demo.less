@@ -12,19 +12,19 @@
   display: inline-block;
   width: 100%;
   margin: 0 0 16px;
-  border: 1px solid @site-border-color-split;
-  border-radius: @border-radius-base;
+  border: 1px solid var(--site-border-color-split);
+  border-radius: var(--border-radius-base);
   transition: all 0.2s;
   .code-box-title {
     &,
     a {
-      color: @site-text-color;
-      background: @component-background;
+      color: var(--site-text-color);
+      background: var(--component-background);
     }
   }
   &,
   .code-box-demo {
-    background-color: @component-background;
+    background-color: var(--component-background);
   }
   .markdown {
     pre {
@@ -37,7 +37,7 @@
     }
   }
   &:target {
-    border: 1px solid @primary-color;
+    border: 1px solid var(--primary-color);
   }
 
   &-expand-trigger {
@@ -65,21 +65,21 @@
     margin-left: 16px;
     padding: 1px 8px;
     color: #777;
-    background: @body-background;
-    border-radius: @border-radius-base @border-radius-base 0 0;
+    background: var(--body-background);
+    border-radius: var(--border-radius-base) var(--border-radius-base) 0 0;
     transition: background-color 0.4s;
 
     .ant-row-rtl & {
       margin-right: 16px;
       margin-left: 0;
-      border-radius: @border-radius-base 0 0 @border-radius-base;
+      border-radius: var(--border-radius-base) 0 0 var(--border-radius-base);
     }
 
     a,
     a:hover {
-      color: @site-text-color;
+      color: var(--site-text-color);
       font-weight: 500;
-      font-size: @font-size-base;
+      font-size: var(--font-size-base);
     }
   }
 
@@ -98,10 +98,10 @@
     transform: scale(0.9);
 
     .anticon {
-      color: @site-text-color-secondary;
+      color: var(--site-text-color-secondary);
       transition: all 0.3s;
       &:hover {
-        color: @site-text-color;
+        color: var(--site-text-color);
       }
     }
 
@@ -116,8 +116,8 @@
 
   &-demo {
     padding: 42px 24px 50px;
-    color: @site-text-color;
-    border-bottom: 1px solid @site-border-color-split;
+    color: var(--site-text-color);
+    border-bottom: 1px solid var(--site-border-color-split);
   }
 
   iframe {
@@ -129,8 +129,8 @@
     &.markdown {
       position: relative;
       width: 100%;
-      font-size: @font-size-base;
-      border-radius: 0 0 @border-radius-base @border-radius-base;
+      font-size: var(--font-size-base);
+      border-radius: 0 0 var(--border-radius-base) var(--border-radius-base);
       transition: background-color 0.4s;
     }
 
@@ -158,7 +158,7 @@
   }
 
   &.expand &-meta {
-    border-bottom: 1px dashed @site-border-color-split;
+    border-bottom: 1px dashed var(--site-border-color-split);
     border-radius: 0;
   }
 
@@ -204,7 +204,7 @@
   .highlight-wrapper {
     display: none;
     overflow: auto;
-    border-radius: 0 0 @border-radius-base @border-radius-base;
+    border-radius: 0 0 var(--border-radius-base) var(--border-radius-base);
 
     &-expand {
       display: block;
@@ -221,10 +221,10 @@
     pre {
       margin: 0;
       padding: 0;
-      background: @component-background;
+      background: var(--component-background);
     }
     &:not(:first-child) {
-      border-top: 1px dashed @site-border-color-split;
+      border-top: 1px dashed var(--site-border-color-split);
     }
   }
 
@@ -232,7 +232,7 @@
     display: flex;
     justify-content: center;
     padding: 12px 0;
-    border-top: 1px dashed @site-border-color-split;
+    border-top: 1px dashed var(--site-border-color-split);
     opacity: 0.7;
     transition: opacity 0.3s;
 
@@ -248,7 +248,7 @@
     width: 16px;
     height: 16px;
     margin-left: 16px;
-    color: @site-text-color-secondary;
+    color: var(--site-text-color-secondary);
     cursor: pointer;
     transition: all 0.24s;
 
@@ -266,7 +266,7 @@
     }
 
     &:hover {
-      color: @site-text-color;
+      color: var(--site-text-color);
     }
   }
 
@@ -275,7 +275,7 @@
     height: 14px;
     font-size: 14px;
     text-align: center;
-    background: @component-background;
+    background: var(--component-background);
     cursor: pointer;
     transition: transform 0.24s;
 
@@ -283,7 +283,7 @@
       transform: scale(1.2);
     }
     &.anticon-check {
-      color: @green-6 !important;
+      color: var(--green-6) !important;
       font-weight: bold;
     }
   }
@@ -326,17 +326,17 @@
     width: auto;
     margin: 0;
     code {
-      background: @component-background;
+      background: var(--component-background);
       border: none;
     }
   }
 
   &-debug {
-    border-color: @purple-3;
+    border-color: var(--purple-3);
   }
 
   &-debug &-title a {
-    color: @purple-6;
+    color: var(--purple-6);
   }
 }
 

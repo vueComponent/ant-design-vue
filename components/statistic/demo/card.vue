@@ -54,13 +54,6 @@ Display statistic data in Card.
     </a-row>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
-export default defineComponent({
-  components: {
-    ArrowUpOutlined,
-    ArrowDownOutlined,
-  },
-});
 </script>

@@ -149,7 +149,6 @@ export default defineComponent({
         class: `${prefixCls}-circle-trail`,
         style: pathStyle,
       };
-
       return (
         <svg class={`${prefixCls}-circle`} viewBox="0 0 100 100" {...restProps}>
           {gradient && (

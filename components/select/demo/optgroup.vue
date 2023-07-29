@@ -42,49 +42,39 @@ Using `OptGroup` or `options.options` to group the options.
     ></a-select>
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { UserOutlined } from '@ant-design/icons-vue';
 import type { SelectProps } from 'ant-design-vue';
-export default defineComponent({
-  components: {
-    UserOutlined,
-  },
-  setup() {
-    const handleChange = (value: string) => {
-      console.log(`selected ${value}`);
-    };
 
-    const options = ref<SelectProps['options']>([
+const handleChange = (value: string) => {
+  console.log(`selected ${value}`);
+};
+
+const options = ref<SelectProps['options']>([
+  {
+    label: 'Manager',
+    options: [
       {
-        label: 'Manager',
-        options: [
-          {
-            value: 'jack',
-            label: 'Jack',
-          },
-          {
-            value: 'lucy',
-            label: 'Lucy',
-          },
-        ],
+        value: 'jack',
+        label: 'Jack',
       },
       {
-        label: 'Engineer',
-        options: [
-          {
-            value: 'yiminghe',
-            label: 'Yiminghe',
-          },
-        ],
+        value: 'lucy',
+        label: 'Lucy',
       },
-    ]);
-
-    return {
-      value: ref(['lucy']),
-      handleChange,
-      options,
-    };
+    ],
   },
-});
+  {
+    label: 'Engineer',
+    options: [
+      {
+        value: 'yiminghe',
+        label: 'Yiminghe',
+      },
+    ],
+  },
+]);
+
+const value = ref(['lucy']);
 </script>

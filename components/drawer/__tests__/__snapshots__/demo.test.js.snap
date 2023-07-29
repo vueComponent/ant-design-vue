@@ -7,7 +7,7 @@ exports[`renders ./components/drawer/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/drawer/demo/extra.vue correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline" style="margin-right: 8px;"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>left</span></label></div>
+<div style="margin-right: 8px;" class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>left</span></label></div>
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open</span>
 </button>
@@ -22,7 +22,7 @@ exports[`renders ./components/drawer/demo/multi-level-drawer.vue correctly 1`] =
 `;
 
 exports[`renders ./components/drawer/demo/placement.vue correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline" style="margin-right: 8px;"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>left</span></label></div>
+<div style="margin-right: 8px;" class="ant-radio-group ant-radio-group-outline"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>left</span></label></div>
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open</span>
 </button>
@@ -32,27 +32,25 @@ exports[`renders ./components/drawer/demo/render-in-current.vue correctly 1`] = 
 <div style="height: 200px; overflow: hidden; position: relative; border: 1px solid #ebedf0; border-radius: 2px; padding: 48px; text-align: center; background: rgb(250, 250, 250); width: 100%;"> Render in this <div style="margin-top: 16px;"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Open</span>
     </button></div>
-  <div class="">
-    <div tabindex="-1" class="ant-drawer ant-drawer-right" style="position: absolute;">
-      <div class="ant-drawer-mask"></div>
-      <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 378px;">
-        <div class="ant-drawer-content">
-          <div class="ant-drawer-wrapper-body">
-            <div class="ant-drawer-header">
-              <div class="ant-drawer-header-title">
-                <!---->
-                <div class="ant-drawer-title">Basic Drawer</div>
-              </div>
+  <div tabindex="-1" class="ant-drawer ant-drawer-right ant-drawer-inline ">
+    <div class="ant-drawer-mask ant-drawer-mask-motion-enter ant-drawer-mask-motion-enter-prepare ant-drawer-mask-motion-enter-start" style="display: none;"></div>
+    <div class="ant-drawer-content-wrapper ant-drawer-panel-motion-right-enter ant-drawer-panel-motion-right-enter-prepare ant-drawer-panel-motion-right-enter-start" style="width: 378px; display: none;">
+      <div class="ant-drawer-content" style="position: absolute;">
+        <div class="ant-drawer-wrapper-body">
+          <div class="ant-drawer-header">
+            <div class="ant-drawer-header-title">
               <!---->
-            </div>
-            <div class="ant-drawer-body">
-              <p>Some contents...</p>
+              <div class="ant-drawer-title">Basic Drawer</div>
             </div>
             <!---->
           </div>
+          <div class="ant-drawer-body">
+            <p>Some contents...</p>
+          </div>
+          <!---->
         </div>
-        <!---->
       </div>
+      <!---->
     </div>
   </div>
 </div>

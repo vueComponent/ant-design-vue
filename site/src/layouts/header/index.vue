@@ -16,14 +16,12 @@
 
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
     </div> -->
-    <div v-if="visibleAlertBanner && isZhCN" class="alert-banner">
-      Surely Form 2.0 发布，快速定制自己的问卷平台 &nbsp;&nbsp;
-      <a href="https://form.antdv.com">立即体验</a>
-
-      <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
+    <div class="alert-banner">
+      Surely Form AI 助手内测开放申请 &nbsp;&nbsp;
+      <a target="_blank" href="https://form.antdv.com">立即申请</a>
     </div>
     <a-popover
-      v-model:visible="menuVisible"
+      v-model:open="menuVisible"
       overlay-class-name="popover-menu"
       placement="bottomRight"
       trigger="click"
@@ -48,6 +46,34 @@
         <Menu v-if="!isMobile" />
       </a-col>
     </a-row>
+    <a-modal
+      title="新版发布，邀您体验"
+      :visible="visibleAlertBanner"
+      :footer="null"
+      @update:open="visibleAlertBanner = false"
+    >
+      <ul>
+        <li class="alert-list-item">
+          <strong>Ant Design Vue 4</strong>
+          ：五大新组件，全新 Design Token
+        </li>
+        <li class="alert-list-item">
+          <strong>Surely Form</strong>
+          ：全新主题编辑， AI 问卷开放内测申请
+          <a target="_blank" href="https://form.antdv.com">立即体验</a>
+        </li>
+        <li class="alert-list-item">
+          <strong>Surely Table</strong>
+          ：支持高性能编辑模式了
+          <a target="_blank" href="https://www.surely.cool/">立即体验</a>
+        </li>
+        <li class="alert-list-item">
+          <strong>Admin Pro</strong>
+          ：已同步更新 v4 版本
+          <a target="_blank" href="https://store.antdv.com/pro/preview/workplace">立即体验</a>
+        </li>
+      </ul>
+    </a-modal>
   </header>
 </template>
 <script lang="ts">
@@ -58,7 +84,7 @@ import { computed, defineComponent, inject, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Logo from './Logo.vue';
 import Menu from './Menu.vue';
-import { UnorderedListOutlined, CloseOutlined } from '@ant-design/icons-vue';
+import { UnorderedListOutlined } from '@ant-design/icons-vue';
 import SearchBox from './SearchBox.vue';
 import { version } from 'ant-design-vue';
 export default defineComponent({
@@ -67,10 +93,13 @@ export default defineComponent({
     Menu,
     UnorderedListOutlined,
     SearchBox,
-    CloseOutlined,
+    // CloseOutlined,
   },
   setup() {
     const route = useRoute();
+    const cancelButtonProps: any = {
+      style: { display: 'none' },
+    };
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
     const isHome = computed(() => {
       return ['', 'index', 'index-cn'].includes(route.path);
@@ -128,10 +157,11 @@ export default defineComponent({
     watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
-    const visibleAlertBanner = ref(!localStorage.getItem('surelyform_v2'));
+    const alertKey = 'ant-design-vue-4-alert';
+    const visibleAlertBanner = ref(!localStorage.getItem(alertKey));
     watch(visibleAlertBanner, () => {
       if (!visibleAlertBanner.value) {
-        localStorage.setItem('surelyform_v2', version);
+        localStorage.setItem(alertKey, version);
       }
     });
     return {
@@ -148,6 +178,7 @@ export default defineComponent({
       menuVisible,
       onTriggerSearching,
       visibleAlertBanner,
+      cancelButtonProps,
     };
   },
 });
@@ -162,10 +193,9 @@ export default defineComponent({
   line-height: 28px;
   color: #8590a6;
   text-align: center;
-  background-color: #ebebeb;
+  background-color: #141414;
 }
 .alert-banner {
-  background-color: var(--ant-primary-color);
   color: #fff;
   padding: 5px;
 }
@@ -180,5 +210,8 @@ export default defineComponent({
   position: absolute;
   top: 15px;
   right: 15px;
+}
+.alert-list-item {
+  padding: 8px 0;
 }
 </style>

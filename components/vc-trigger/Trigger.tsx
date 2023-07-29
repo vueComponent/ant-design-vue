@@ -1,6 +1,6 @@
-import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
-import { computed, defineComponent, inject, provide, ref } from 'vue';
-import PropTypes from '../_util/vue-types';
+import type { HTMLAttributes } from 'vue';
+import { computed, defineComponent, inject, provide, shallowRef } from 'vue';
+import { triggerProps, noop } from './interface';
 import contains from '../vc-util/Dom/contains';
 import raf from '../_util/raf';
 import {
@@ -11,28 +11,16 @@ import {
   getSlot,
   findDOMNode,
 } from '../_util/props-util';
-import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName } from './utils/alignUtil';
 import BaseMixin from '../_util/BaseMixin';
-import Portal from '../_util/Portal';
+import Portal from '../_util/PortalWrapper';
 import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
 import supportsPassive from '../_util/supportsPassive';
-import { useInjectTrigger, useProvidePortal } from './context';
+import { useProvidePortal } from './context';
 
-function noop() {}
-function returnEmptyString() {
-  return '';
-}
-
-function returnDocument(element) {
-  if (element) {
-    return element.ownerDocument;
-  }
-  return window.document;
-}
 const ALL_HANDLERS = [
   'onClick',
   'onMousedown',
@@ -43,52 +31,12 @@ const ALL_HANDLERS = [
   'onBlur',
   'onContextmenu',
 ];
-
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'Trigger',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: {
-    action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
-    showAction: PropTypes.any.def([]),
-    hideAction: PropTypes.any.def([]),
-    getPopupClassNameFromAlign: PropTypes.any.def(returnEmptyString),
-    onPopupVisibleChange: Function as PropType<(open: boolean) => void>,
-    afterPopupVisibleChange: PropTypes.func.def(noop),
-    popup: PropTypes.any,
-    popupStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-    prefixCls: PropTypes.string.def('rc-trigger-popup'),
-    popupClassName: PropTypes.string.def(''),
-    popupPlacement: String,
-    builtinPlacements: PropTypes.object,
-    popupTransitionName: String,
-    popupAnimation: PropTypes.any,
-    mouseEnterDelay: PropTypes.number.def(0),
-    mouseLeaveDelay: PropTypes.number.def(0.1),
-    zIndex: Number,
-    focusDelay: PropTypes.number.def(0),
-    blurDelay: PropTypes.number.def(0.15),
-    getPopupContainer: Function,
-    getDocument: PropTypes.func.def(returnDocument),
-    forceRender: { type: Boolean, default: undefined },
-    destroyPopupOnHide: { type: Boolean, default: false },
-    mask: { type: Boolean, default: false },
-    maskClosable: { type: Boolean, default: true },
-    // onPopupAlign: PropTypes.func.def(noop),
-    popupAlign: PropTypes.object.def(() => ({})),
-    popupVisible: { type: Boolean, default: undefined },
-    defaultPopupVisible: { type: Boolean, default: false },
-    maskTransitionName: String,
-    maskAnimation: String,
-    stretch: String,
-    alignPoint: { type: Boolean, default: undefined }, // Maybe we can support user pass position in the future
-    autoDestroy: { type: Boolean, default: false },
-    mobile: Object,
-    getTriggerDOMNode: Function as PropType<(d?: HTMLElement) => HTMLElement>,
-    // portal context will change
-    tryPopPortal: Boolean, // no need reactive
-  },
+  props: triggerProps(),
   setup(props) {
     const align = computed(() => {
       const { popupPlacement, popupAlign, builtinPlacements } = props;
@@ -97,21 +45,22 @@ export default defineComponent({
       }
       return popupAlign;
     });
-    const { setPortal, popPortal } = useInjectTrigger(props.tryPopPortal);
-    const popupRef = ref(null);
+    const popupRef = shallowRef(null);
     const setPopupRef = val => {
       popupRef.value = val;
     };
     return {
-      popPortal,
-      setPortal,
       vcTriggerContext: inject(
         'vcTriggerContext',
-        {} as { onPopupMouseDown?: (...args: any[]) => void },
+        {} as {
+          onPopupMouseDown?: (...args: any[]) => void;
+          onPopupMouseenter?: (...args: any[]) => void;
+          onPopupMouseleave?: (...args: any[]) => void;
+        },
       ),
       popupRef,
       setPopupRef,
-      triggerRef: ref(null),
+      triggerRef: shallowRef(null),
       align,
       focusTime: null,
       clickOutsideHandler: null,
@@ -140,14 +89,6 @@ export default defineComponent({
         (this as any).fireEvents(h, e);
       };
     });
-    (this as any).setPortal?.(
-      <Portal
-        key="portal"
-        v-slots={{ default: this.getComponent }}
-        getContainer={this.getContainer}
-        didUpdate={this.handlePortalUpdate}
-      ></Portal>,
-    );
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
@@ -165,6 +106,8 @@ export default defineComponent({
   created() {
     provide('vcTriggerContext', {
       onPopupMouseDown: this.onPopupMouseDown,
+      onPopupMouseenter: this.onPopupMouseenter,
+      onPopupMouseleave: this.onPopupMouseleave,
     });
     useProvidePortal(this);
   },
@@ -256,6 +199,10 @@ export default defineComponent({
     },
 
     onPopupMouseenter() {
+      const { vcTriggerContext = {} } = this;
+      if (vcTriggerContext.onPopupMouseenter) {
+        vcTriggerContext.onPopupMouseenter();
+      }
       this.clearDelayTimer();
     },
 
@@ -269,6 +216,10 @@ export default defineComponent({
         return;
       }
       this.delaySetPopupVisible(false, this.$props.mouseLeaveDelay);
+      const { vcTriggerContext = {} } = this;
+      if (vcTriggerContext.onPopupMouseleave) {
+        vcTriggerContext.onPopupMouseleave(e);
+      }
     },
 
     onFocus(e) {
@@ -359,7 +310,6 @@ export default defineComponent({
       this.mouseDownTimeout = setTimeout(() => {
         this.hasPopupMouseDown = false;
       }, 0);
-
       if (vcTriggerContext.onPopupMouseDown) {
         vcTriggerContext.onPopupMouseDown(...args);
       }
@@ -393,12 +343,14 @@ export default defineComponent({
     getRootDomNode() {
       const { getTriggerDOMNode } = this.$props;
       if (getTriggerDOMNode) {
-        const domNode = findDOMNode(this.triggerRef);
+        const domNode =
+          this.triggerRef?.$el?.nodeName === '#comment' ? null : findDOMNode(this.triggerRef);
         return findDOMNode(getTriggerDOMNode(domNode));
       }
 
       try {
-        const domNode = findDOMNode(this.triggerRef);
+        const domNode =
+          this.triggerRef?.$el?.nodeName === '#comment' ? null : findDOMNode(this.triggerRef);
         if (domNode) {
           return domNode;
         }
@@ -445,7 +397,7 @@ export default defineComponent({
       }
       mouseProps.onMousedown = this.onPopupMouseDown;
       mouseProps[supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'] = this.onPopupMouseDown;
-      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = this;
+      const { handleGetPopupClassFromAlign, getRootDomNode, $attrs } = this;
       const {
         prefixCls,
         destroyPopupOnHide,
@@ -478,7 +430,6 @@ export default defineComponent({
         transitionName: popupTransitionName,
         maskAnimation,
         maskTransitionName,
-        getContainer,
         class: popupClassName,
         style: popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
@@ -574,7 +525,7 @@ export default defineComponent({
       this.clearDelayTimer();
       if (delay) {
         const point = event ? { pageX: event.pageX, pageY: event.pageY } : null;
-        this.delayTimer = requestAnimationTimeout(() => {
+        this.delayTimer = setTimeout(() => {
           this.setPopupVisible(visible, point);
           this.clearDelayTimer();
         }, delay);
@@ -585,7 +536,7 @@ export default defineComponent({
 
     clearDelayTimer() {
       if (this.delayTimer) {
-        cancelAnimationTimeout(this.delayTimer);
+        clearTimeout(this.delayTimer);
         this.delayTimer = null;
       }
     },
@@ -683,7 +634,7 @@ export default defineComponent({
   render() {
     const { $attrs } = this;
     const children = filterEmpty(getSlot(this));
-    const { alignPoint } = this.$props;
+    const { alignPoint, getPopupContainer } = this.$props;
 
     const child = children[0];
     this.childOriginEvents = getEvents(child);
@@ -740,23 +691,21 @@ export default defineComponent({
       newChildProps.class = childrenClassName;
     }
     const trigger = cloneElement(child, { ...newChildProps, ref: 'triggerRef' }, true, true);
-    if (this.popPortal) {
-      return trigger;
-    } else {
-      const portal = (
-        <Portal
-          key="portal"
-          v-slots={{ default: this.getComponent }}
-          getContainer={this.getContainer}
-          didUpdate={this.handlePortalUpdate}
-        ></Portal>
-      );
-      return (
-        <>
-          {portal}
-          {trigger}
-        </>
-      );
-    }
+
+    const portal = (
+      <Portal
+        key="portal"
+        v-slots={{ default: this.getComponent }}
+        getContainer={getPopupContainer && (() => getPopupContainer(this.getRootDomNode()))}
+        didUpdate={this.handlePortalUpdate}
+        visible={this.$data.sPopupVisible}
+      ></Portal>
+    );
+    return (
+      <>
+        {trigger}
+        {portal}
+      </>
+    );
   },
 });

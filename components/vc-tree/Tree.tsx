@@ -28,7 +28,6 @@ import {
   defineComponent,
   onUnmounted,
   reactive,
-  ref,
   shallowRef,
   watch,
   watchEffect,
@@ -65,6 +64,7 @@ export default defineComponent({
     disabled: false,
     checkStrictly: false,
     draggable: false,
+    expandAction: false,
     defaultExpandParent: true,
     autoExpandParent: false,
     defaultExpandAll: false,
@@ -76,9 +76,9 @@ export default defineComponent({
   }),
 
   setup(props, { attrs, slots, expose }) {
-    const destroyed = ref(false);
+    const destroyed = shallowRef(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
-    const indent = ref();
+    const indent = shallowRef();
     const selectedKeys = shallowRef<Key[]>([]);
     const checkedKeys = shallowRef<Key[]>([]);
     const halfCheckedKeys = shallowRef<Key[]>([]);
@@ -120,14 +120,14 @@ export default defineComponent({
     );
     const keyEntities = shallowRef({});
 
-    const focused = ref(false);
-    const activeKey = ref<Key>(null);
+    const focused = shallowRef(false);
+    const activeKey = shallowRef<Key>(null);
 
-    const listChanging = ref(false);
+    const listChanging = shallowRef(false);
 
     const fieldNames = computed(() => fillFieldNames(props.fieldNames));
 
-    const listRef = ref();
+    const listRef = shallowRef();
 
     let dragStartMousePosition = null;
 
@@ -617,16 +617,34 @@ export default defineComponent({
 
       dragNode = null;
     };
+    const triggerExpandActionExpand: NodeMouseEventHandler = (e, treeNode) => {
+      const { expanded, key } = treeNode;
+
+      const node = flattenNodes.value.filter(nodeItem => nodeItem.key === key)[0];
+      const eventNode = convertNodePropsToEventData({
+        ...getTreeNodeProps(key, treeNodeRequiredProps.value),
+        data: node.data,
+      });
+      setExpandedKeys(expanded ? arrDel(expandedKeys.value, key) : arrAdd(expandedKeys.value, key));
+
+      onNodeExpand(e, eventNode);
+    };
 
     const onNodeClick: NodeMouseEventHandler = (e, treeNode) => {
-      const { onClick } = props;
+      const { onClick, expandAction } = props;
+      if (expandAction === 'click') {
+        triggerExpandActionExpand(e, treeNode);
+      }
       if (onClick) {
         onClick(e, treeNode);
       }
     };
 
     const onNodeDoubleClick: NodeMouseEventHandler = (e, treeNode) => {
-      const { onDblclick } = props;
+      const { onDblclick, expandAction } = props;
+      if (expandAction === 'doubleclick' || expandAction === 'dblclick') {
+        triggerExpandActionExpand(e, treeNode);
+      }
       if (onDblclick) {
         onDblclick(e, treeNode);
       }
@@ -1107,6 +1125,8 @@ export default defineComponent({
         onContextmenu,
         onScroll,
         direction,
+        rootClassName,
+        rootStyle,
       } = props;
 
       const { class: className, style } = attrs;
@@ -1119,7 +1139,7 @@ export default defineComponent({
       );
 
       // It's better move to hooks but we just simply keep here
-      let draggableConfig: DraggableConfig;
+      let draggableConfig: DraggableConfig | false;
       if (draggable) {
         if (typeof draggable === 'object') {
           draggableConfig = draggable;
@@ -1130,6 +1150,8 @@ export default defineComponent({
         } else {
           draggableConfig = {};
         }
+      } else {
+        draggableConfig = false;
       }
       return (
         <TreeContext
@@ -1179,11 +1201,12 @@ export default defineComponent({
         >
           <div
             role="tree"
-            class={classNames(prefixCls, className, {
+            class={classNames(prefixCls, className, rootClassName, {
               [`${prefixCls}-show-line`]: showLine,
               [`${prefixCls}-focused`]: focused.value,
               [`${prefixCls}-active-focused`]: activeKey.value !== null,
             })}
+            style={rootStyle}
           >
             <NodeList
               ref={listRef}

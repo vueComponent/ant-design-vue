@@ -3,10 +3,12 @@ import { cloneVNode, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import warning from '../_util/warning';
+import type { BreadcrumbItemProps } from './BreadcrumbItem';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
+import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useStyle from './style';
 import type { CustomSlotsType, VueNode } from '../_util/type';
-import useConfigInject from '../_util/hooks/useConfigInject';
 
 export interface Route {
   path: string;
@@ -54,15 +56,16 @@ function defaultItemRender(opt: {
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ABreadcrumb',
+  inheritAttrs: false,
   props: breadcrumbProps(),
   slots: Object as CustomSlotsType<{
     separator: any;
     itemRender: { route: Route; params: any; routes: Route[]; paths: string[] };
     default: any;
   }>,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('breadcrumb', props);
-
+    const [wrapSSR, hashId] = useStyle(prefixCls);
     const getPath = (path: string, params: unknown) => {
       path = (path || '').replace(/^\//, '');
       Object.keys(params).forEach(key => {
@@ -98,27 +101,25 @@ export default defineComponent({
         let overlay = null;
         if (route.children && route.children.length) {
           overlay = (
-            <Menu>
-              {route.children.map(child => (
-                <Menu.Item key={child.path || child.breadcrumbName}>
-                  {itemRender({
-                    route: child,
-                    params,
-                    routes,
-                    paths: addChildPath(tempPaths, child.path, params),
-                  })}
-                </Menu.Item>
-              ))}
-            </Menu>
+            <Menu
+              items={route.children.map(child => ({
+                key: child.path || child.breadcrumbName,
+                label: itemRender({
+                  route: child,
+                  params,
+                  routes,
+                  paths: addChildPath(tempPaths, child.path, params),
+                }),
+              }))}
+            ></Menu>
           );
         }
-
+        const itemProps: BreadcrumbItemProps = { separator };
+        if (overlay) {
+          itemProps.overlay = overlay;
+        }
         return (
-          <BreadcrumbItem
-            overlay={overlay}
-            separator={separator}
-            key={path || route.breadcrumbName}
-          >
+          <BreadcrumbItem {...itemProps} key={path || route.breadcrumbName}>
             {itemRender({ route, params, routes, paths: tempPaths })}
           </BreadcrumbItem>
         );
@@ -156,8 +157,15 @@ export default defineComponent({
       const breadcrumbClassName = {
         [prefixCls.value]: true,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${attrs.class}`]: !!attrs.class,
+        [hashId.value]: true,
       };
-      return <div class={breadcrumbClassName}>{crumbs}</div>;
+
+      return wrapSSR(
+        <nav {...attrs} class={breadcrumbClassName}>
+          <ol>{crumbs}</ol>
+        </nav>,
+      );
     };
   },
 });

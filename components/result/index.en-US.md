@@ -2,7 +2,8 @@
 category: Components
 type: Feedback
 title: Result
-cover: https://gw.alipayobjects.com/zos/alicdn/9nepwjaLa/Result.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*-e2IRroDJyEAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*-0kxQrbHx2kAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Used to feed back the results of a series of operational tasks.

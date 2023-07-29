@@ -2,7 +2,8 @@
 category: Components
 type: Data Display
 title: List
-cover: https://gw.alipayobjects.com/zos/alicdn/5FrZKStG_/List.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EYuhSpw1iSwAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*tBzwQ7raKX8AAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Simple List.
@@ -23,10 +24,10 @@ A list can be used to display content related to a single subject. The content c
 | grid | The grid type of list. You can set grid to something like {gutter: 16, column: 4} | object | - |  |  |
 | header | List header renderer | string\|slot | - |  |  |
 | itemLayout | The layout of list, default is `horizontal`, If a vertical list is desired, set the itemLayout property to `vertical` | string | - |  |  |
-| loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://www.antdv.com/components/spin/#API) | false |  |  |
+| loading | Shows a loading indicator while the contents of the list are being fetched | boolean\|[object](https://www.antdv.com/components/spin/#api) | false |  |  |
 | loadMore | Shows a load more content | string\|slot | - |  |  |
 | locale | i18n text including empty text | object | emptyText: 'No Data' <br> |  |  |
-| pagination | Pagination [config](https://www.antdv.com/components/pagination/#API), hide it by setting it to false | boolean \| object | false |  |  |
+| pagination | Pagination [config](https://www.antdv.com/components/pagination/#api), hide it by setting it to false | boolean \| object | false |  |  |
 | renderItem | Custom item renderer, #renderItem="{item, index}" | ({item, index}) => vNode |  | - |  |
 | rowKey | Item's unique key, could be a string or function that returns a string | string\|Function(record):string | `key` |  |  |
 | split | Toggles rendering of the split under the list item | boolean | true |  |  |
@@ -39,7 +40,7 @@ Properties for pagination.
 | -------- | ------------------------------------ | --------------------------- | -------- |
 | position | specify the position of `Pagination` | 'top' \| 'bottom' \| 'both' | 'bottom' |
 
-More about pagination, please check [`Pagination`](https://www.antdv.com/components/pagination/#API).
+More about pagination, please check [`Pagination`](https://www.antdv.com/components/pagination/#api).
 
 ### List grid props
 

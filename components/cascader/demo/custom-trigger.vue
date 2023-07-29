@@ -28,8 +28,8 @@ Separate trigger button and result.
     </a-cascader>
   </span>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { CascaderProps } from 'ant-design-vue';
 const options: CascaderProps['options'] = [
   {
@@ -65,22 +65,10 @@ const options: CascaderProps['options'] = [
     ],
   },
 ];
+const value = ref<string[]>([]);
+const text = ref<string>('Unselect');
 
-export default defineComponent({
-  setup() {
-    const value = ref<string[]>([]);
-    const text = ref<string>('Unselect');
-
-    const onChange: CascaderProps['onChange'] = (_value, selectedOptions) => {
-      text.value = selectedOptions.map(o => o.label).join(', ');
-    };
-
-    return {
-      value,
-      text,
-      options,
-      onChange,
-    };
-  },
-});
+const onChange: CascaderProps['onChange'] = (_value, selectedOptions) => {
+  text.value = selectedOptions.map(o => o.label).join(', ');
+};
 </script>

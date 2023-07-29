@@ -2,7 +2,8 @@
 category: Components
 type: Feedback
 title: Skeleton
-cover: https://gw.alipayobjects.com/zos/alicdn/KpcciCJgv/Skeleton.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*uae3QbkNCm8AAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*VcjGQLSrYdcAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Provide a placeholder while you wait for content to load, or to visualise content that doesn't exist yet.
@@ -21,10 +22,10 @@ Provide a placeholder while you wait for content to load, or to visualise conten
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | active | Show animation effect | boolean | false |
-| avatar | Show avatar placeholder | boolean \| [SkeletonAvatarProps](#SkeletonAvatarProps) | false |
+| avatar | Show avatar placeholder | boolean \| [SkeletonAvatarProps](#skeletonavatarprops) | false |
 | loading | Display the skeleton when `true` | boolean | - |
-| paragraph | Show paragraph placeholder | boolean \| [SkeletonParagraphProps](#SkeletonParagraphProps) | true |
-| title | Show title placeholder | boolean \| [SkeletonTitleProps](#SkeletonTitleProps) | true |
+| paragraph | Show paragraph placeholder | boolean \| [SkeletonParagraphProps](#skeletonparagraphprops) | true |
+| title | Show title placeholder | boolean \| [SkeletonTitleProps](#skeletontitleprops) | true |
 
 ## SkeletonAvatarProps
 

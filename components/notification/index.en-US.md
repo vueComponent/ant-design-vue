@@ -2,7 +2,8 @@
 category: Components
 type: Feedback
 title: Notification
-cover: https://gw.alipayobjects.com/zos/alicdn/Jxm5nw61w/Notification.svg
+cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*6RWNQ78WtvEAAAAAAAAAAAAADrJ8AQ/original
+coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*9hTIToR-3YYAAAAAAAAAAAAADrJ8AQ/original
 ---
 
 Display a notification message globally.
@@ -25,6 +26,7 @@ To display a notification message at any of the four corners of the viewport. Ty
 - `notification.open(config)`
 - `notification.close(key: String)`
 - `notification.destroy()`
+- `notification.useNotification()`
 
 The properties of config are as follows:
 
@@ -40,7 +42,7 @@ The properties of config are as follows:
 | icon | Customized icon | VNode \| () => VNode | - |  |
 | key | The unique identifier of the Notification | string | - |  |
 | message | The title of notification box (required) | string\| VNode \| () => VNode | - |  |
-| placement | Position of Notification, can be one of `topLeft` `topRight` `bottomLeft` `bottomRight` | string | `topRight` |  |
+| placement | Position of Notification, can be one of `top` `topLeft` `topRight` `bottom` `bottomLeft` `bottomRight` | string | `topRight` | `top` `bottom` 3.3.0 |
 | style | Customized inline style | Object \| string | - |  |
 | top | Distance from the top of the viewport, when `placement` is `topRight` or `topLeft` (unit: pixels). | string | `24px` |  |
 | onClick | Specify a function that will be called when the notification is clicked | Function | - |  |
@@ -73,3 +75,33 @@ notification.config({
 | placement | Position of Notification, can be one of `topLeft` `topRight` `bottomLeft` `bottomRight` | string | `topRight` |  |
 | rtl | Whether to enable RTL mode | boolean | false |  |
 | top | Distance from the top of the viewport, when `placement` is `topRight` or `topLeft` (unit: pixels). | string | `24px` |  |
+
+## FAQ
+
+### Why I can not access context, Pinia, ConfigProvider `locale/prefixCls/theme` in notification?
+
+antdv will dynamic create Vue instance by `Vue.render` when call notification methods. Whose context is different with origin code located context.
+
+When you need context info (like ConfigProvider context), you can use `notification.useNotification` to get `api` instance and `contextHolder` node. And put it in your children:
+
+```html
+<template>
+  <contextHolder />
+  <!-- <component :is='contextHolder'/> -->
+</template>
+<script setup>
+  import { notification } from 'ant-design-vue';
+  const [notificationApi, contextHolder] = notification.useNotification();
+  notificationApi.open({
+    // ...
+  });
+</script>
+```
+
+**Note:** You must insert `contextHolder` into your children with hooks. You can use origin method if you do not need context connection.
+
+> [App Package Component](/components/app) can be used to simplify the problem of `useNotification` and other methods that need to manually implant contextHolder.
+
+### How to set static methods prefixCls ？
+
+You can config with [`ConfigProvider.config`](/components/config-provider#configproviderconfig-4130)

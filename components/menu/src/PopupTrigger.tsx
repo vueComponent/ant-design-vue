@@ -1,6 +1,6 @@
 import Trigger from '../../vc-trigger';
 import type { PropType } from 'vue';
-import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, shallowRef, watch } from 'vue';
 import type { MenuMode } from './interface';
 import { useInjectForceRender, useInjectMenu } from './hooks/useMenuContext';
 import { placements, placementsRtl } from './placements';
@@ -35,7 +35,7 @@ export default defineComponent({
   }>,
   emits: ['visibleChange'],
   setup(props, { slots, emit }) {
-    const innerVisible = ref(false);
+    const innerVisible = shallowRef(false);
     const {
       getPopupContainer,
       rtl,
@@ -43,10 +43,10 @@ export default defineComponent({
       subMenuCloseDelay,
       builtinPlacements,
       triggerSubMenuAction,
-      isRootMenu,
       forceSubMenuRender,
       motion,
       defaultMotions,
+      rootClassName,
     } = useInjectMenu();
     const forceRender = useInjectForceRender();
     const placement = computed(() =>
@@ -57,7 +57,7 @@ export default defineComponent({
 
     const popupPlacement = computed(() => popupPlacementMap[props.mode]);
 
-    const visibleRef = ref<number>();
+    const visibleRef = shallowRef<number>();
     watch(
       () => props.visible,
       visible => {
@@ -91,11 +91,10 @@ export default defineComponent({
               [`${prefixCls}-rtl`]: rtl.value,
             },
             popupClassName,
+            rootClassName.value,
           )}
           stretch={mode === 'horizontal' ? 'minWidth' : null}
-          getPopupContainer={
-            isRootMenu.value ? getPopupContainer.value : triggerNode => triggerNode.parentNode
-          }
+          getPopupContainer={getPopupContainer.value}
           builtinPlacements={placement.value}
           popupPlacement={popupPlacement.value}
           popupVisible={innerVisible.value}

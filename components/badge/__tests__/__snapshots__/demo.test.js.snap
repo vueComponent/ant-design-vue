@@ -12,9 +12,9 @@ exports[`renders ./components/badge/demo/basic.vue correctly 1`] = `
 exports[`renders ./components/badge/demo/change.vue correctly 1`] = `
 <div><span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="opacity: 0;"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
   <!----></span>
-  <div class="ant-btn-group"><button class="ant-btn" type="button">
+  <div class="ant-btn-group"><button class="ant-btn ant-btn-default" type="button">
       <!----><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span>
-    </button><button class="ant-btn" type="button">
+    </button><button class="ant-btn ant-btn-default" type="button">
       <!----><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span>
     </button></div>
 </div>
@@ -26,7 +26,7 @@ exports[`renders ./components/badge/demo/change.vue correctly 1`] = `
 <button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
   <div class="ant-switch-handle">
     <!---->
-  </div><span class="ant-switch-inner"><!----></span>
+  </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"><!----></span><span class="ant-switch-inner-unchecked"><!----></span></span>
 </button>
 `;
 
@@ -48,13 +48,13 @@ exports[`renders ./components/badge/demo/colors.vue correctly 1`] = `
   <div><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-lime"></span><span class="ant-badge-status-text">lime</span></span></div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Custom</span></div>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(255, 85, 0);"></span><span class="ant-badge-status-text">#f50</span></span>
+<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(255, 85, 0); color: rgb(255, 85, 0);"></span><span class="ant-badge-status-text">#f50</span></span>
 <br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(45, 183, 245);"></span><span class="ant-badge-status-text">#2db7f5</span></span>
+<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(45, 183, 245); color: rgb(45, 183, 245);"></span><span class="ant-badge-status-text">#2db7f5</span></span>
 <br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(135, 208, 104);"></span><span class="ant-badge-status-text">#87d068</span></span>
+<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(135, 208, 104); color: rgb(135, 208, 104);"></span><span class="ant-badge-status-text">#87d068</span></span>
 <br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(16, 142, 233);"></span><span class="ant-badge-status-text">#108ee9</span></span>
+<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot" style="background: rgb(16, 142, 233); color: rgb(16, 142, 233);"></span><span class="ant-badge-status-text">#108ee9</span></span>
 `;
 
 exports[`renders ./components/badge/demo/dot.vue correctly 1`] = `
@@ -89,8 +89,8 @@ exports[`renders ./components/badge/demo/overflow.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -106,8 +106,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -123,8 +123,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -140,8 +140,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -157,8 +157,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -174,8 +174,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -191,8 +191,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>
@@ -208,8 +208,8 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
     <div class="ant-ribbon-corner"></div>
   </div>
 </div>
-<div class="ant-ribbon-wrapper">
-  <div class="ant-card ant-card-bordered ant-card-small">
+<div class="ant-ribbon-wrapper ">
+  <div class="ant-card  ant-card-bordered ant-card-small">
     <div class="ant-card-head">
       <div class="ant-card-head-wrapper">
         <div class="ant-card-head-title">Pushes open the window</div>

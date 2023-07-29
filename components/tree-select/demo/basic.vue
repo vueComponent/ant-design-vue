@@ -1,21 +1,3 @@
-<docs>
----
-order: 0
-title:
-  zh-CN: 基本用法
-  en-US: Basic usage
----
-
-## zh-CN
-
-最简单的用法。
-
-## en-US
-
-The most basic usage.
-
-</docs>
-
 <template>
   <a-tree-select
     v-model:value="value"
@@ -34,13 +16,15 @@ The most basic usage.
     </template>
   </a-tree-select>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, watch } from 'vue';
 import type { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-export default defineComponent({
-  setup() {
-    const value = ref<string>();
-    const treeData = ref<TreeSelectProps['treeData']>([
+const value = ref<string>();
+const treeData = ref<TreeSelectProps['treeData']>([
+  {
+    label: 'root 1',
+    value: 'root 1',
+    children: [
       {
         label: 'parent 1',
         value: 'parent 1',
@@ -65,14 +49,14 @@ export default defineComponent({
           },
         ],
       },
-    ]);
-    watch(value, () => {
-      console.log(value.value);
-    });
-    return {
-      value,
-      treeData,
-    };
+      {
+        label: 'parent 2',
+        value: 'parent 2',
+      },
+    ],
   },
+]);
+watch(value, () => {
+  console.log(value.value);
 });
 </script>

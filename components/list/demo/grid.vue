@@ -25,8 +25,7 @@ Creating a grid list by setting the `grid` property of List
     </template>
   </a-list>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script lang="ts" setup>
 interface DataItem {
   title: string;
 }
@@ -44,11 +43,4 @@ const data: DataItem[] = [
     title: 'Title 4',
   },
 ];
-export default defineComponent({
-  setup() {
-    return {
-      data,
-    };
-  },
-});
 </script>

@@ -30,22 +30,16 @@ Bordered-less style component.
     <a-range-picker v-model:value="value9" picker="year" :bordered="false" />
   </a-space>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 import type { Dayjs } from 'dayjs';
-export default defineComponent({
-  setup() {
-    return {
-      value1: ref<Dayjs>(),
-      value2: ref<Dayjs>(),
-      value3: ref<Dayjs>(),
-      value4: ref<Dayjs>(),
-      value5: ref<Dayjs>(),
-      value6: ref<[Dayjs, Dayjs]>(),
-      value7: ref<[Dayjs, Dayjs]>(),
-      value8: ref<[Dayjs, Dayjs]>(),
-      value9: ref<[Dayjs, Dayjs]>(),
-    };
-  },
-});
+const value1 = ref<Dayjs>();
+const value2 = ref<Dayjs>();
+const value3 = ref<Dayjs>();
+const value4 = ref<Dayjs>();
+const value5 = ref<Dayjs>();
+const value6 = ref<[Dayjs, Dayjs]>();
+const value7 = ref<[Dayjs, Dayjs]>();
+const value8 = ref<[Dayjs, Dayjs]>();
+const value9 = ref<[Dayjs, Dayjs]>();
 </script>

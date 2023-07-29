@@ -1,6 +1,6 @@
 import { warning } from '../../vc-util/warning';
 import type { ComputedRef, Ref } from 'vue';
-import { computed, watchEffect } from 'vue';
+import { renderSlot, computed, watchEffect } from 'vue';
 import type {
   ColumnsType,
   ColumnType,
@@ -13,6 +13,7 @@ import type {
 } from '../interface';
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
 import { EXPAND_COLUMN } from '../constant';
+import { useInjectSlots } from '../../table/context';
 
 function flatColumns<RecordType>(columns: ColumnsType<RecordType>): ColumnType<RecordType>[] {
   return columns.reduce((list, column) => {
@@ -119,6 +120,7 @@ function useColumns<RecordType>(
   },
   transformColumns: Ref<(columns: ColumnsType<RecordType>) => ColumnsType<RecordType>>,
 ): [ComputedRef<ColumnsType<RecordType>>, ComputedRef<readonly ColumnType<RecordType>[]>] {
+  const contextSlots = useInjectSlots();
   // Add expand column
   const withExpandColumns = computed<ColumnsType<RecordType>>(() => {
     if (expandable.value) {
@@ -177,7 +179,7 @@ function useColumns<RecordType>(
           class: `${prefixCls.value}-expand-icon-col`,
           columnType: 'EXPAND_COLUMN',
         },
-        title: '',
+        title: renderSlot(contextSlots.value, 'expandColumnTitle', {}, () => ['']),
         fixed: fixedColumn,
         class: `${prefixCls.value}-row-expand-icon-cell`,
         width: expandColumnWidth.value,

@@ -2,175 +2,181 @@
 
 exports[`DatePicker prop locale should works 1`] = `
 <div class="ant-picker">
-  <div class="ant-picker-input"><input readonly="" placeholder="Избери дата" title="2000-01-01" size="12" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></span><span class="ant-picker-clear" role="button"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span></div>
+  <div class="ant-picker-input"><input readonly="" placeholder="Избери дата" title="2000-01-01" size="12" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span>
+    <!----></span><span class="ant-picker-clear" role="button"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span>
+  </div>
+  <div style="pointer-events: none; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;"></div>
   <div>
     <!---->
     <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
-        <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
-          <div class="ant-picker-date-panel">
-            <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn"><span class="ant-picker-super-prev-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn"><span class="ant-picker-prev-icon"></span></button>
-              <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Jan</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2000</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn"><span class="ant-picker-next-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn"><span class="ant-picker-super-next-icon"></span></button>
+        <div class="ant-picker-panel-layout">
+          <!---->
+          <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
+            <div class="ant-picker-date-panel">
+              <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn"><span class="ant-picker-super-prev-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn"><span class="ant-picker-prev-icon"></span></button>
+                <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Jan</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2000</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn"><span class="ant-picker-next-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn"><span class="ant-picker-super-next-icon"></span></button>
+              </div>
+              <div class="ant-picker-body">
+                <table class="ant-picker-content">
+                  <thead>
+                    <tr>
+                      <th>Su</th>
+                      <th>Mo</th>
+                      <th>Tu</th>
+                      <th>We</th>
+                      <th>Th</th>
+                      <th>Fr</th>
+                      <th>Sa</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td title="1999-12-26" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">26</div>
+                      </td>
+                      <td title="1999-12-27" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">27</div>
+                      </td>
+                      <td title="1999-12-28" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">28</div>
+                      </td>
+                      <td title="1999-12-29" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">29</div>
+                      </td>
+                      <td title="1999-12-30" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">30</div>
+                      </td>
+                      <td title="1999-12-31" class="ant-picker-cell ant-picker-cell-end">
+                        <div class="ant-picker-cell-inner">31</div>
+                      </td>
+                      <td title="2000-01-01" class="ant-picker-cell ant-picker-cell-start ant-picker-cell-in-view ant-picker-cell-selected">
+                        <div class="ant-picker-cell-inner">1</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="2000-01-02" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">2</div>
+                      </td>
+                      <td title="2000-01-03" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">3</div>
+                      </td>
+                      <td title="2000-01-04" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">4</div>
+                      </td>
+                      <td title="2000-01-05" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">5</div>
+                      </td>
+                      <td title="2000-01-06" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">6</div>
+                      </td>
+                      <td title="2000-01-07" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">7</div>
+                      </td>
+                      <td title="2000-01-08" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">8</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="2000-01-09" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">9</div>
+                      </td>
+                      <td title="2000-01-10" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">10</div>
+                      </td>
+                      <td title="2000-01-11" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">11</div>
+                      </td>
+                      <td title="2000-01-12" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">12</div>
+                      </td>
+                      <td title="2000-01-13" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">13</div>
+                      </td>
+                      <td title="2000-01-14" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">14</div>
+                      </td>
+                      <td title="2000-01-15" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">15</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="2000-01-16" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">16</div>
+                      </td>
+                      <td title="2000-01-17" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">17</div>
+                      </td>
+                      <td title="2000-01-18" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">18</div>
+                      </td>
+                      <td title="2000-01-19" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">19</div>
+                      </td>
+                      <td title="2000-01-20" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">20</div>
+                      </td>
+                      <td title="2000-01-21" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">21</div>
+                      </td>
+                      <td title="2000-01-22" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">22</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="2000-01-23" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">23</div>
+                      </td>
+                      <td title="2000-01-24" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">24</div>
+                      </td>
+                      <td title="2000-01-25" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">25</div>
+                      </td>
+                      <td title="2000-01-26" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">26</div>
+                      </td>
+                      <td title="2000-01-27" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">27</div>
+                      </td>
+                      <td title="2000-01-28" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">28</div>
+                      </td>
+                      <td title="2000-01-29" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">29</div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td title="2000-01-30" class="ant-picker-cell ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">30</div>
+                      </td>
+                      <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
+                        <div class="ant-picker-cell-inner">31</div>
+                      </td>
+                      <td title="2000-02-01" class="ant-picker-cell ant-picker-cell-start">
+                        <div class="ant-picker-cell-inner">1</div>
+                      </td>
+                      <td title="2000-02-02" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">2</div>
+                      </td>
+                      <td title="2000-02-03" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">3</div>
+                      </td>
+                      <td title="2000-02-04" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">4</div>
+                      </td>
+                      <td title="2000-02-05" class="ant-picker-cell">
+                        <div class="ant-picker-cell-inner">5</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="ant-picker-body">
-              <table class="ant-picker-content">
-                <thead>
-                  <tr>
-                    <th>Su</th>
-                    <th>Mo</th>
-                    <th>Tu</th>
-                    <th>We</th>
-                    <th>Th</th>
-                    <th>Fr</th>
-                    <th>Sa</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td title="1999-12-26" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">26</div>
-                    </td>
-                    <td title="1999-12-27" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">27</div>
-                    </td>
-                    <td title="1999-12-28" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">28</div>
-                    </td>
-                    <td title="1999-12-29" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">29</div>
-                    </td>
-                    <td title="1999-12-30" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">30</div>
-                    </td>
-                    <td title="1999-12-31" class="ant-picker-cell ant-picker-cell-end">
-                      <div class="ant-picker-cell-inner">31</div>
-                    </td>
-                    <td title="2000-01-01" class="ant-picker-cell ant-picker-cell-start ant-picker-cell-in-view ant-picker-cell-selected">
-                      <div class="ant-picker-cell-inner">1</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td title="2000-01-02" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">2</div>
-                    </td>
-                    <td title="2000-01-03" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">3</div>
-                    </td>
-                    <td title="2000-01-04" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">4</div>
-                    </td>
-                    <td title="2000-01-05" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">5</div>
-                    </td>
-                    <td title="2000-01-06" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">6</div>
-                    </td>
-                    <td title="2000-01-07" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">7</div>
-                    </td>
-                    <td title="2000-01-08" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">8</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td title="2000-01-09" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">9</div>
-                    </td>
-                    <td title="2000-01-10" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">10</div>
-                    </td>
-                    <td title="2000-01-11" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">11</div>
-                    </td>
-                    <td title="2000-01-12" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">12</div>
-                    </td>
-                    <td title="2000-01-13" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">13</div>
-                    </td>
-                    <td title="2000-01-14" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">14</div>
-                    </td>
-                    <td title="2000-01-15" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">15</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td title="2000-01-16" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">16</div>
-                    </td>
-                    <td title="2000-01-17" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">17</div>
-                    </td>
-                    <td title="2000-01-18" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">18</div>
-                    </td>
-                    <td title="2000-01-19" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">19</div>
-                    </td>
-                    <td title="2000-01-20" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">20</div>
-                    </td>
-                    <td title="2000-01-21" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">21</div>
-                    </td>
-                    <td title="2000-01-22" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">22</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td title="2000-01-23" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">23</div>
-                    </td>
-                    <td title="2000-01-24" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">24</div>
-                    </td>
-                    <td title="2000-01-25" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">25</div>
-                    </td>
-                    <td title="2000-01-26" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">26</div>
-                    </td>
-                    <td title="2000-01-27" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">27</div>
-                    </td>
-                    <td title="2000-01-28" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">28</div>
-                    </td>
-                    <td title="2000-01-29" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">29</div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td title="2000-01-30" class="ant-picker-cell ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">30</div>
-                    </td>
-                    <td title="2000-01-31" class="ant-picker-cell ant-picker-cell-end ant-picker-cell-in-view">
-                      <div class="ant-picker-cell-inner">31</div>
-                    </td>
-                    <td title="2000-02-01" class="ant-picker-cell ant-picker-cell-start">
-                      <div class="ant-picker-cell-inner">1</div>
-                    </td>
-                    <td title="2000-02-02" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">2</div>
-                    </td>
-                    <td title="2000-02-03" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">3</div>
-                    </td>
-                    <td title="2000-02-04" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">4</div>
-                    </td>
-                    <td title="2000-02-05" class="ant-picker-cell">
-                      <div class="ant-picker-cell-inner">5</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="ant-picker-footer">
+              <!---->
+              <!----><a class="ant-picker-today-btn">Днес</a>
             </div>
-          </div>
-          <div class="ant-picker-footer">
-            <!---->
-            <!----><a class="ant-picker-today-btn">Днес</a>
           </div>
         </div>
       </div>

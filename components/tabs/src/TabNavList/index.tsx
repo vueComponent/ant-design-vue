@@ -16,9 +16,10 @@ import OperationNode from './OperationNode';
 import { useInjectTabs } from '../TabContext';
 import useTouchMove from '../hooks/useTouchMove';
 import AddButton from './AddButton';
+import { objectType, functionType } from '../../../_util/type';
 import type { CustomSlotsType, Key } from '../../../_util/type';
 import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
-import { onBeforeUnmount, defineComponent, ref, watch, watchEffect, computed } from 'vue';
+import { shallowRef, onBeforeUnmount, defineComponent, watch, watchEffect, computed } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 import useSyncState from '../hooks/useSyncState';
 import useState from '../../../_util/hooks/useState';
@@ -36,14 +37,18 @@ export const tabNavListProps = () => {
     tabPosition: { type: String as PropType<TabPosition> },
     activeKey: { type: [String, Number] },
     rtl: { type: Boolean },
-    animated: { type: Object as PropType<AnimatedConfig>, default: undefined as AnimatedConfig },
-    editable: { type: Object as PropType<EditableConfig> },
+    animated: objectType<AnimatedConfig>(),
+    editable: objectType<EditableConfig>(),
     moreIcon: PropTypes.any,
     moreTransitionName: { type: String },
     mobile: { type: Boolean },
     tabBarGutter: { type: Number },
     renderTabBar: { type: Function as PropType<RenderTabBar> },
-    locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
+    locale: objectType<TabsLocale>(),
+    popupClassName: String,
+    getPopupContainer: functionType<
+      ((triggerNode?: HTMLElement | undefined) => HTMLElement) | undefined
+    >(),
     onTabClick: {
       type: Function as PropType<(activeKey: Key, e: MouseEvent | KeyboardEvent) => void>,
     },
@@ -74,10 +79,10 @@ export default defineComponent({
   emits: ['tabClick', 'tabScroll'],
   setup(props, { attrs, slots }) {
     const { tabs, prefixCls } = useInjectTabs();
-    const tabsWrapperRef = ref<HTMLDivElement>();
-    const tabListRef = ref<HTMLDivElement>();
-    const operationsRef = ref<{ $el: HTMLDivElement }>();
-    const innerAddButtonRef = ref();
+    const tabsWrapperRef = shallowRef<HTMLDivElement>();
+    const tabListRef = shallowRef<HTMLDivElement>();
+    const operationsRef = shallowRef<{ $el: HTMLDivElement }>();
+    const innerAddButtonRef = shallowRef();
     const [setRef, btnRefs] = useRefs();
     const tabPositionTopOrBottom = computed(
       () => props.tabPosition === 'top' || props.tabPosition === 'bottom',
@@ -106,8 +111,8 @@ export default defineComponent({
     // ========================== Util =========================
     const operationsHiddenClassName = computed(() => `${prefixCls.value}-nav-operations-hidden`);
 
-    const transformMin = ref(0);
-    const transformMax = ref(0);
+    const transformMin = shallowRef(0);
+    const transformMax = shallowRef(0);
 
     watchEffect(() => {
       if (!tabPositionTopOrBottom.value) {
@@ -133,7 +138,7 @@ export default defineComponent({
     };
 
     // ========================= Mobile ========================
-    const touchMovingRef = ref<any>();
+    const touchMovingRef = shallowRef<any>();
     const [lockAnimation, setLockAnimation] = useState<number>();
 
     const doLockAnimation = () => {
@@ -227,8 +232,8 @@ export default defineComponent({
       }
     };
 
-    const visibleStart = ref(0);
-    const visibleEnd = ref(0);
+    const visibleStart = shallowRef(0);
+    const visibleEnd = shallowRef(0);
 
     watchEffect(() => {
       let unit: 'width' | 'height';
@@ -333,7 +338,7 @@ export default defineComponent({
     const activeTabOffset = computed(() => tabOffsets.value.get(props.activeKey));
 
     // Delay set ink style to avoid remove tab blink
-    const inkBarRafRef = ref<number>();
+    const inkBarRafRef = shallowRef<number>();
     const cleanInkBarRaf = () => {
       raf.cancel(inkBarRafRef.value);
     };

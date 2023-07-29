@@ -23,17 +23,8 @@ Input type of password.
     <a-textarea v-model:value="value2" placeholder="textarea with clear icon" allow-clear />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const value1 = ref<string>('');
-    const value2 = ref<string>('');
-
-    return {
-      value1,
-      value2,
-    };
-  },
-});
+<script lang="ts" setup>
+import { ref } from 'vue';
+const value1 = ref<string>('');
+const value2 = ref<string>('');
 </script>

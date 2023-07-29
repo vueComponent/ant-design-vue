@@ -20,10 +20,10 @@ Make it pop up under some conditions.
   <div>
     <a-popconfirm
       title="Are you sure delete this task?"
-      :visible="visible"
+      :open="visible"
       ok-text="Yes"
       cancel-text="No"
-      @visibleChange="handleVisibleChange"
+      @openChange="handleVisibleChange"
       @confirm="confirm"
       @cancel="cancel"
     >
@@ -35,44 +35,33 @@ Make it pop up under some conditions.
     <a-checkbox v-model:checked="condition" />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
+import { ref } from 'vue';
 import { message } from 'ant-design-vue';
-import { ref, defineComponent } from 'vue';
-export default defineComponent({
-  setup() {
-    const visible = ref<boolean>(false);
-    const condition = ref<boolean>(true);
+const visible = ref<boolean>(false);
+const condition = ref<boolean>(true);
 
-    const confirm = () => {
-      visible.value = false;
-      message.success('Next step.');
-    };
+const confirm = () => {
+  visible.value = false;
+  message.success('Next step.');
+};
 
-    const cancel = () => {
-      visible.value = false;
-      message.error('Click on cancel.');
-    };
+const cancel = () => {
+  visible.value = false;
+  message.error('Click on cancel.');
+};
 
-    const handleVisibleChange = (bool: boolean) => {
-      if (!bool) {
-        visible.value = false;
-        return;
-      }
-      // Determining condition before show the popconfirm.
-      console.log(condition.value);
-      if (condition.value) {
-        confirm(); // next step
-      } else {
-        visible.value = true;
-      }
-    };
-    return {
-      visible,
-      condition,
-      confirm,
-      cancel,
-      handleVisibleChange,
-    };
-  },
-});
+const handleVisibleChange = (bool: boolean) => {
+  if (!bool) {
+    visible.value = false;
+    return;
+  }
+  // Determining condition before show the popconfirm.
+  console.log(condition.value);
+  if (condition.value) {
+    confirm(); // next step
+  } else {
+    visible.value = true;
+  }
+};
 </script>

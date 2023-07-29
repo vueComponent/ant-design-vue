@@ -36,6 +36,8 @@ export interface PreviewProps extends Omit<IDialogChildProps, 'onClose' | 'mask'
     close?: VNode;
     left?: VNode;
     right?: VNode;
+    flipX?: VNode;
+    flipY?: VNode;
   };
 }
 
@@ -60,10 +62,13 @@ const Preview = defineComponent({
   props: previewProps,
   emits: ['close', 'afterClose'],
   setup(props, { emit, attrs }) {
-    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right } = reactive(props.icons);
+    const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right, flipX, flipY } = reactive(
+      props.icons,
+    );
 
     const scale = shallowRef(1);
     const rotate = shallowRef(0);
+    const flip = reactive({ x: 1, y: 1 });
     const [position, setPosition] = useFrameSetState<{
       x: number;
       y: number;
@@ -130,6 +135,15 @@ const Preview = defineComponent({
     const onRotateLeft = () => {
       rotate.value -= 90;
     };
+
+    const onFlipX = () => {
+      flip.x = -flip.x;
+    };
+
+    const onFlipY = () => {
+      flip.y = -flip.y;
+    };
+
     const onSwitchLeft: MouseEventHandler = event => {
       event.preventDefault();
       // Without this mask close will abnormal
@@ -179,6 +193,16 @@ const Preview = defineComponent({
         icon: rotateLeft,
         onClick: onRotateLeft,
         type: 'rotateLeft',
+      },
+      {
+        icon: flipX,
+        onClick: onFlipX,
+        type: 'flipX',
+      },
+      {
+        icon: flipY,
+        onClick: onFlipY,
+        type: 'flipY',
       },
     ];
 
@@ -365,7 +389,9 @@ const Preview = defineComponent({
               src={combinationSrc.value}
               alt={props.alt}
               style={{
-                transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
+                transform: `scale3d(${flip.x * scale.value}, ${flip.y * scale.value}, 1) rotate(${
+                  rotate.value
+                }deg)`,
               }}
             />
           </div>

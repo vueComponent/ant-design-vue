@@ -11,6 +11,7 @@ import ZoomOutOutlined from '@ant-design/icons-vue/ZoomOutOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import SwapOutlined from '@ant-design/icons-vue/SwapOutlined';
 import useStyle from './style';
 import { anyType } from '../_util/type';
 
@@ -22,6 +23,8 @@ export const icons = {
   close: <CloseOutlined />,
   left: <LeftOutlined />,
   right: <RightOutlined />,
+  flipX: <SwapOutlined />,
+  flipY: <SwapOutlined rotate={90} />,
 };
 const previewGroupProps = () => ({
   previewPrefixCls: String,

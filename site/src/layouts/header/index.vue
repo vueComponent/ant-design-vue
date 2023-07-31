@@ -191,16 +191,13 @@ export default defineComponent({
   z-index: 100;
   padding: 16px;
   line-height: 28px;
-  color: #8590a6;
   text-align: center;
-  background-color: #141414;
 }
 .alert-banner {
-  color: #fff;
   padding: 5px;
 }
 .alert-banner a {
-  color: #fff;
+  color: inherit;
   text-decoration: underline;
 }
 .alert-banner .close-icon {

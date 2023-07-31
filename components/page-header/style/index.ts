@@ -26,7 +26,7 @@ const genPageHeaderStyle: GenerateStyle<PageHeaderToken, CSSObject> = token => {
       padding: `${token.pageHeaderPaddingVertical}px ${token.pageHeaderPadding}px`,
       backgroundColor: token.colorBgContainer,
 
-      [`${componentCls}-ghost`]: {
+      [`&${componentCls}-ghost`]: {
         backgroundColor: token.pageHeaderGhostBg,
       },
 
@@ -146,7 +146,7 @@ export default genComponentStyleHook('PageHeader', token => {
     pageHeaderPaddingBreadcrumb: token.paddingSM,
     pageHeaderContentPaddingVertical: token.paddingSM,
     pageHeaderBackColor: token.colorTextBase,
-    pageHeaderGhostBg: 'inherit',
+    pageHeaderGhostBg: 'transparent',
     pageHeaderHeadingTitle: token.fontSizeHeading4,
     pageHeaderHeadingSubTitle: token.fontSize,
     pageHeaderTabFontSize: token.fontSizeLG,

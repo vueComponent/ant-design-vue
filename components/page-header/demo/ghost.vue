@@ -19,7 +19,7 @@ The default PageHeader is a transparent background. In some cases, PageHeader ne
 <template>
   <div class="demo-page-header" style="background-color: #f5f5f5; padding: 24px">
     <a-page-header
-      :ghost="false"
+      :ghost="ghost"
       title="Title"
       sub-title="This is a subtitle"
       @back="() => $router.go(-1)"
@@ -42,7 +42,12 @@ The default PageHeader is a transparent background. In some cases, PageHeader ne
       </a-descriptions>
     </a-page-header>
   </div>
+  <a-checkbox v-model:checked="ghost" style="margin-top: 0.5rem">toggle ghost</a-checkbox>
 </template>
+<script lang="ts" setup>
+import { ref } from 'vue';
+const ghost = ref(false);
+</script>
 <style scoped>
 .demo-page-header :deep(tr:last-child td) {
   padding-bottom: 0;

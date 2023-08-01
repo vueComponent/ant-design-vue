@@ -38,7 +38,7 @@ customize the progress dot by setting a scoped slot
 | monthFullCellRender | Customize the display of the month cell by setting a scoped slot, the returned content will override the cell | v-slot:monthFullCellRender="{current: dayjs}" | - |  |
 | validRange | to set valid range | \[[dayjs](https://day.js.org/), [dayjs](https://day.js.org/)] | - |  |
 | value(v-model) | The current selected date | [dayjs](https://day.js.org/) | current date |  |
-| valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string，[date formats](https://day.js.org/docs/en/display/format) | - |  |
+| valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string, [date formats](https://day.js.org/docs/en/display/format) | - |  |
 
 ### events
 

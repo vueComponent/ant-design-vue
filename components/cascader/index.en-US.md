@@ -45,7 +45,7 @@ Cascade selection box.
 | placeholder | input placeholder | string | 'Please select' |  |
 | placement | Use preset popup align config from builtinPlacements | `bottomLeft` \| `bottomRight` \| `topLeft` \| `topRight` | `bottomLeft` | 3.0 |
 | removeIcon | The custom remove icon | slot | - | 3.2 |
-| searchValue | Set search value，Need work with `showSearch` | string | - | 3.0 |
+| searchValue | Set search value, Need work with `showSearch` | string | - | 3.0 |
 | showSearch | Whether show search input in single mode. | boolean \| [object](#showsearch) | false |  |
 | size | input size | `large` \| `default` \| `small` | `default` |  |
 | status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |

@@ -74,7 +74,6 @@ const InputNumber = defineComponent({
 
     const mergedValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
     const focused = shallowRef(false);
-    const focusFromPosition = shallowRef([]);
     watch(
       () => props.value,
       () => {
@@ -184,22 +183,7 @@ const InputNumber = defineComponent({
           hashId.value,
         );
         element = (
-          <div
-            class={affixWrapperCls}
-            style={style}
-            onMousedown={e => {
-              focusFromPosition.value = [e.pageX, e.pageY];
-            }}
-            onMouseup={e => {
-              if (
-                focusFromPosition.value?.length &&
-                focusFromPosition.value[0] == e.pageX &&
-                focusFromPosition.value[1] == e.pageY
-              ) {
-                inputNumberRef.value!.focus();
-              }
-            }}
-          >
+          <div class={affixWrapperCls} style={style} onClick={focus}>
             {hasPrefix && <span class={`${preCls}-prefix`}>{prefix}</span>}
             {element}
             {hasFeedback && <span class={`${preCls}-suffix`}>{feedbackIcon}</span>}

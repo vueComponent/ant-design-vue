@@ -14,7 +14,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits } from 'vue';
 import { Form } from 'ant-design-vue';
 
 export type Currency = 'rmb' | 'dollar';

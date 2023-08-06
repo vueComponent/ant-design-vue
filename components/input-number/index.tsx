@@ -183,11 +183,7 @@ const InputNumber = defineComponent({
           hashId.value,
         );
         element = (
-          <div
-            class={affixWrapperCls}
-            style={style}
-            onMouseup={() => inputNumberRef.value!.focus()}
-          >
+          <div class={affixWrapperCls} style={style} onClick={focus}>
             {hasPrefix && <span class={`${preCls}-prefix`}>{prefix}</span>}
             {element}
             {hasFeedback && <span class={`${preCls}-suffix`}>{feedbackIcon}</span>}

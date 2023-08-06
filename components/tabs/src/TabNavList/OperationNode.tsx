@@ -142,6 +142,7 @@ export default defineComponent({
         onTabClick,
         popupClassName,
       } = props;
+      if (!tabs.length) return null;
       const dropdownPrefix = `${prefixCls}-dropdown`;
 
       const dropdownAriaLabel = locale?.dropdownAriaLabel;

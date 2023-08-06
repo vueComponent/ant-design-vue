@@ -219,7 +219,8 @@ export default defineComponent<ConfirmDialogProps>({
                   buttonProps={okButtonProps}
                   prefixCls={`${rootPrefixCls}-btn`}
                 >
-                  {okText || (mergedOkCancel ? mergedLocal.okText : mergedLocal.justOkText)}
+                  {renderSomeContent(okText) ||
+                    (mergedOkCancel ? mergedLocal.okText : mergedLocal.justOkText)}
                 </ActionButton>
               </div>
             )}

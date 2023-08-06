@@ -144,6 +144,7 @@ export default defineComponent({
         rtl,
         onTabClick,
       } = props;
+      if (!tabs.length) return null;
       const dropdownPrefix = `${prefixCls}-dropdown`;
 
       const dropdownAriaLabel = locale?.dropdownAriaLabel;

@@ -106,6 +106,16 @@ const routes = [
         component: () => import('../vueDocs/customize-theme.en-US.md'),
       },
       {
+        path: 'vue/ssr-extract-ssr',
+        meta: { enTitle: 'SSR Static style export', title: 'SSR 静态样式导出', category: 'docs' },
+        component: () => import('../vueDocs/extract-ssr.en-US.md'),
+      },
+      {
+        path: 'vue/ssr-extract-ssr-cn',
+        meta: { enTitle: 'SSR Static style export', title: 'SSR 静态样式导出', category: 'docs' },
+        component: () => import('../vueDocs/extract-ssr.zh-CN.md'),
+      },
+      {
         path: 'vue/replace-date-cn',
         meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
         component: () => import('../vueDocs/replace-date.zh-CN.md'),

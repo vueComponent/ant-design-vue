@@ -183,6 +183,8 @@ declare module 'vue' {
 
     ASpace: typeof import('ant-design-vue')['Space'];
 
+    ASpaceCompact: typeof import('ant-design-vue')['Compact'];
+
     ASpin: typeof import('ant-design-vue')['Spin'];
 
     AStatistic: typeof import('ant-design-vue')['Statistic'];
@@ -266,6 +268,8 @@ declare module 'vue' {
     AWatermark: typeof import('ant-design-vue')['Watermark'];
 
     AColorPicker: typeof import('ant-design-vue')['ColorPicker'];
+
+    AStyleProvider: typeof import('ant-design-vue')['StyleProvider'];
   }
 }
 export {};

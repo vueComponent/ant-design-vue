@@ -144,6 +144,7 @@ export default defineComponent({
           autocomplete={autocomplete.value}
           onBlur={handleBlur}
           onFocus={handleFocus}
+          prefix={prefix}
           suffix={suffixNode}
           allowClear={allowClear}
           addonAfter={

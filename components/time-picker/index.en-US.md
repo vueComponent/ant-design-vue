@@ -40,7 +40,7 @@ By clicking the input box, you can select a time from a popup panel.
 | suffixIcon | The custom suffix icon | v-slot:suffixIcon | - |  |
 | use12Hours | Display as 12 hours format, with default format `h:mm:ss a` | boolean | false |  |
 | value(v-model) | To set time | [dayjs](https://day.js.org/) | - |  |
-| valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string，[date formats](https://day.js.org/docs/en/display/format) | - |  |
+| valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string, [date formats](https://day.js.org/docs/en/display/format) | - |  |
 
 #### DisabledTime
 

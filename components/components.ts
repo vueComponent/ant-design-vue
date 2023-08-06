@@ -183,7 +183,7 @@ export type { SliderProps } from './slider';
 export { default as Slider } from './slider';
 
 export type { SpaceProps } from './space';
-export { default as Space } from './space';
+export { default as Space, Compact } from './space';
 
 export type { SpinProps } from './spin';
 export { default as Spin } from './spin';
@@ -264,3 +264,6 @@ export { default as Tour } from './tour';
 
 export type { ColorPickerProps } from './color-picker';
 export { default as ColorPicker } from './color-picker';
+
+export type { AppProps } from './app';
+export { default as App } from './app';

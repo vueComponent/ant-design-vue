@@ -68,6 +68,7 @@ export default defineComponent({
   width: 100%;
   height: 100px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .logo {
   width: 80px;

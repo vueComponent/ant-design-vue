@@ -51,6 +51,15 @@ export default {
     };
   },
   watch: {
+    autoplay(newValue, oldValue) {
+      if (!oldValue && newValue) {
+        this.handleAutoPlay('playing');
+      } else if (newValue) {
+        this.handleAutoPlay('update');
+      } else {
+        this.pause('paused');
+      }
+    },
     __propsSymbol__() {
       const nextProps = this.$props;
       const spec = {

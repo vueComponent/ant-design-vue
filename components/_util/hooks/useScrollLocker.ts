@@ -2,6 +2,7 @@ import type { Ref } from 'vue';
 import { computed, watchEffect } from 'vue';
 import { updateCSS, removeCSS } from '../../vc-util/Dom/dynamicCSS';
 import getScrollBarSize from '../../_util/getScrollBarSize';
+import canUseDom from '../../_util/canUseDom';
 
 const UNIQUE_ID = `vc-util-locker-${Date.now()}`;
 
@@ -24,6 +25,9 @@ export default function useScrollLocker(lock?: Ref<boolean>) {
 
   watchEffect(
     onClear => {
+      if (!canUseDom()) {
+        return;
+      }
       if (mergedLock.value) {
         const scrollbarSize = getScrollBarSize();
         const isOverflow = isBodyOverflowing();

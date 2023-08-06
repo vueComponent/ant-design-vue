@@ -681,7 +681,7 @@ const Table = defineComponent({
           {...attrs}
           {...props}
           columns={columns || []}
-          expandedRowRender={slots.expandedRowRender}
+          expandedRowRender={slots.expandedRowRender || props.expandedRowRender}
           contextSlots={{ ...slots }} // use new object, 否则slot热更新失效，原因需进一步探究
           v-slots={slots}
         />

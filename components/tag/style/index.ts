@@ -14,6 +14,7 @@ interface TagToken extends FullToken<'Tag'> {
   tagDefaultColor: string;
   tagIconSize: number;
   tagPaddingHorizontal: number;
+  tagBorderlessBg: string;
 }
 
 // ============================== Styles ==============================
@@ -31,6 +32,9 @@ const genTagStatusStyle = (
       color: token[`color${cssVariableType}`],
       background: token[`color${capitalizedCssVariableType}Bg`],
       borderColor: token[`color${capitalizedCssVariableType}Border`],
+      [`&${token.componentCls}-borderless`]: {
+        borderColor: 'transparent',
+      },
     },
   };
 };
@@ -47,6 +51,9 @@ const genPresetStyle = (token: TagToken) =>
         color: token.colorTextLightSolid,
         background: darkColor,
         borderColor: darkColor,
+      },
+      [`&${token.componentCls}-borderless`]: {
+        borderColor: 'transparent',
       },
     },
   }));
@@ -138,6 +145,10 @@ const genBaseStyle = (token: TagToken): CSSObject => {
         marginInlineStart: paddingInline,
       },
     },
+    [`${componentCls}-borderless`]: {
+      borderColor: 'transparent',
+      background: token.tagBorderlessBg,
+    },
   };
 };
 
@@ -158,6 +169,7 @@ export default genComponentStyleHook('Tag', token => {
     tagDefaultColor,
     tagIconSize: fontSizeIcon - 2 * lineWidth, // Tag icon is much more smaller
     tagPaddingHorizontal: 8, // Fixed padding.
+    tagBorderlessBg: token.colorFillTertiary,
   });
 
   return [

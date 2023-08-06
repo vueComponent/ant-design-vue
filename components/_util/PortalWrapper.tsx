@@ -83,7 +83,7 @@ export default defineComponent({
       return true;
     };
     // attachToParent();
-    const defaultContainer = document.createElement('div');
+    const defaultContainer = canUseDom() && document.createElement('div');
     const getContainer = () => {
       if (!supportDom) {
         return null;

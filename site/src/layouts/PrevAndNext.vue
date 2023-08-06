@@ -21,8 +21,8 @@
           ></path>
         </svg>
       </span>
-      <span>{{ prev.title }}</span>
-      <span v-if="isZhCN" class="chinese">{{ prev.subtitle }}</span>
+      <span v-if="isZhCN" class="chinese">{{ prev.subtitle || prev.title }}</span>
+      <span v-else>{{ prev.enTitle || prev.title }}</span>
     </router-link>
     <router-link
       v-if="next"
@@ -30,8 +30,8 @@
       class="next-page"
       :to="getLocalizedPathname(next.path, isZhCN)"
     >
-      <span>{{ next.title }}</span>
-      <span v-if="isZhCN" class="chinese">{{ next.subtitle }}</span>
+      <span v-if="isZhCN" class="chinese">{{ next.subtitle || next.title }}</span>
+      <span v-else>{{ next.enTitle || next.title }}</span>
       <span role="img" aria-label="right" class="anticon anticon-right footer-nav-icon-after">
         <svg
           viewBox="64 64 896 896"
@@ -65,4 +65,3 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="less" scoped></style>

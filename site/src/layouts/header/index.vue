@@ -48,7 +48,7 @@
     </a-row>
     <a-modal
       title="新版发布，邀您体验"
-      :visible="visibleAlertBanner"
+      :open="visibleAlertBanner"
       :footer="null"
       @update:open="visibleAlertBanner = false"
     >

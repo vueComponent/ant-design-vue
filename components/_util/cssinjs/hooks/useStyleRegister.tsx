@@ -413,7 +413,7 @@ export default function useStyleRegister(
 // ============================================================================
 // ==                                  SSR                                   ==
 // ============================================================================
-export function extractStyle(cache: Cache) {
+export function extractStyle(cache: Cache, plain = false) {
   // prefix with `style` is used for `useStyleRegister` to cache style context
   const styleKeys = Array.from(cache.cache.keys()).filter(key => key.startsWith('style%'));
 
@@ -424,7 +424,9 @@ export function extractStyle(cache: Cache) {
   styleKeys.forEach(key => {
     const [styleStr, tokenKey, styleId]: [string, string, string] = cache.cache.get(key)![1];
 
-    styleText += `<style ${ATTR_TOKEN}="${tokenKey}" ${ATTR_MARK}="${styleId}">${styleStr}</style>`;
+    styleText += plain
+      ? styleStr
+      : `<style ${ATTR_TOKEN}="${tokenKey}" ${ATTR_MARK}="${styleId}">${styleStr}</style>`;
   });
 
   return styleText;

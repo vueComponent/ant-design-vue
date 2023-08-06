@@ -46,7 +46,7 @@ import type { ComponentToken as TypographyComponentToken } from '../../typograph
 import type { ComponentToken as UploadComponentToken } from '../../upload/style';
 import type { ComponentToken as TourComponentToken } from '../../tour/style';
 import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
-// import type { ComponentToken as AppComponentToken } from '../../app/style';
+import type { ComponentToken as AppComponentToken } from '../../app/style';
 import type { ComponentToken as WaveToken } from '../../_util/wave/style';
 
 export interface ComponentTokenMap {
@@ -112,7 +112,7 @@ export interface ComponentTokenMap {
   Progress?: ProgressComponentToken;
   Tour?: TourComponentToken;
   QRCode?: QRCodeComponentToken;
-  //   App?: AppComponentToken;
+  App?: AppComponentToken;
 
   //   /** @private Internal TS definition. Do not use. */
   Wave?: WaveToken;

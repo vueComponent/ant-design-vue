@@ -88,7 +88,7 @@ export const useStyleProvider = (props: UseStyleProviderProps) => {
   const parentContext = useStyleInject();
   const context = shallowRef<Partial<StyleContextProps>>({ ...defaultStyleContext });
   watch(
-    [props, parentContext],
+    [() => unref(props), parentContext],
     () => {
       const mergedContext: Partial<StyleContextProps> = {
         ...parentContext.value,

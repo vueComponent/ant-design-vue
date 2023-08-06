@@ -103,7 +103,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | suffixIcon | The custom suffix icon | v-slot:suffixIcon | - |  |
 | superNextIcon | The custom super next icon | slot | - | 3.0 |
 | superPrevIcon | The custom super prev icon | slot | - | 3.0 |
-| valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string，[date formats](https://day.js.org/docs/en/display/format) | - |  |
+| valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string, [date formats](https://day.js.org/docs/en/display/format) | - |  |
 
 ### Common Events
 

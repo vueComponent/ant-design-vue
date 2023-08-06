@@ -9,6 +9,7 @@ import { useProvideFloatButtonGroupContext } from './context';
 import { findDOMNode, initDefaultProps } from '../_util/props-util';
 import { floatButtonGroupProps } from './interface';
 import type { FloatButtonGroupProps } from './interface';
+import canUseDom from '../_util/canUseDom';
 
 // CSSINJS
 import useStyle from './style';
@@ -74,6 +75,9 @@ const FloatButtonGroup = defineComponent({
     watch(
       computed(() => props.trigger),
       value => {
+        if (!canUseDom()) {
+          return;
+        }
         document.removeEventListener('click', onClick);
         if (value === 'click') {
           document.addEventListener('click', onClick);

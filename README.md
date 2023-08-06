@@ -39,7 +39,7 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Using npm or yarn
 
-**We recommend using npm or yarn to install**，it not only makes development easier，but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
+**We recommend using npm or yarn to install**, it not only makes development easier, but also allow you to take advantage of the rich ecosystem of Javascript packages and tooling.
 
 ```bash
 $ npm install ant-design-vue --save
@@ -49,7 +49,7 @@ $ npm install ant-design-vue --save
 $ yarn add ant-design-vue
 ```
 
-If you are in a bad network environment，you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
+If you are in a bad network environment, you can try other registries and tools like [cnpm](https://github.com/cnpm/cnpm).
 
 ## Links
 

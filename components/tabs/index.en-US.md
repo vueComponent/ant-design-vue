@@ -62,7 +62,7 @@ Ant Design has 3 types of Tabs for different situations.
 
 ### Tabs.TabPane Slots
 
-| 插槽名称  | 说明                                            | 参数 |
-| --------- | ----------------------------------------------- | ---- |
-| closeIcon | 自定义关闭图标，`在 type="editable-card"`时有效 | -    |
-| tab       | Show text in TabPane's head                     | -    |
+| Slot Name | Description                                                   | Arguments |
+| --------- | ------------------------------------------------------------- | --------- |
+| closeIcon | Customize close icon, Only works while `type="editable-card"` | -         |
+| tab       | Show text in TabPane's head                                   | -         |

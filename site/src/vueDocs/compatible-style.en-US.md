@@ -10,7 +10,7 @@ Ant Design Vue supports the last 2 versions of modern browsers. If you need to b
 Ant Design Vue default using CSS-in-JS with `:where` Selector to reduce priority to avoid user additional adjust style cost when updating. If you want to support old browser (or some other CSS framework selector priority conflict like TailwindCSS), you can use `StyleProvider` to adjust this behavior :
 
 ```html
-// `hashPriority` 默认为 `low`，配置为 `high` 后， // 会移除 `:where` 选择器封装
+// Config `hashPriority` to `high` instead of default `low`, which will remove `:where` wrapper
 <template>
   <a-style-provider hash-priority="high">
     <MyApp />
@@ -31,14 +31,14 @@ Note:
 
 1、After turning off the `:where` downgrade, you may need to manually adjust the priority of some styles.
 
-2、hashPriority not support change，you can reload for new value.
+2、hashPriority not support change, you can reload for new value.
 
 ### CSS Logical Properties
 
 To unify LTR and RTL styles, Ant Design Vue uses CSS logical properties. For example, the original `margin-left` is replaced by `margin-inline-start`, so that it is the starting position spacing under both LTR and RTL. If you need to be compatible with older browsers, you can configure `transformers` through the `StyleProvider` of `@ant-design/cssinjs`:
 
 ```html
-// `transformers` 提供预处理功能将样式进行转换
+// `transformers` provides a way to transform CSS properties
 <template>
   <a-style-provider :transformers="[legacyLogicalPropertiesTransformer]">
     <MyApp />

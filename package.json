@@ -164,7 +164,7 @@
     "docsearch.js": "^2.6.3",
     "duplicate-package-checker-webpack-plugin": "^3.0.0",
     "enquire-js": "^0.2.1",
-    "esbuild": "~0.12.29",
+    "esbuild": "~0.19.0",
     "esbuild-loader": "^3.0.0",
     "escape-html": "^1.0.3",
     "eslint": "^8.3.0",

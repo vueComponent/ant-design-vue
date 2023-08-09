@@ -24,6 +24,7 @@ const IconDisplay = defineComponent({
   data() {
     return {
       theme: ThemeType.Outlined,
+      searchVal: '',
     };
   },
   methods: {
@@ -42,7 +43,10 @@ const IconDisplay = defineComponent({
             category: key,
             icons: iconList
               .map(iconName => iconName + theme)
-              .filter(iconName => allIcons[iconName]),
+              .filter(iconName => {
+                if (iconName.toLowerCase().includes(this.searchVal.trim().toLowerCase()))
+                  return allIcons[iconName];
+              }),
           };
         })
         .filter(({ icons }) => !!icons.length)
@@ -62,18 +66,30 @@ const IconDisplay = defineComponent({
     return (
       <div>
         <h3 style="margin: 1.6em 0 .6em;">{this.$t('app.docs.components.icon.pick-theme')}</h3>
-        <a-radio-group value={this.theme} onChange={this.handleChangeTheme}>
-          <a-radio-button value={ThemeType.Outlined}>
-            <Icon component={OutlinedIcon} /> {this.$t('app.docs.components.icon.outlined')}
-          </a-radio-button>
-          <a-radio-button value={ThemeType.Filled}>
-            <Icon component={FilledIcon} /> {this.$t('app.docs.components.icon.filled')}
-          </a-radio-button>
-          <a-radio-button value={ThemeType.TwoTone}>
-            <Icon component={TwoToneIcon} /> {this.$t('app.docs.components.icon.two-tone')}
-          </a-radio-button>
-        </a-radio-group>
-        {this.renderCategories()}
+        <div style="display: flex;">
+          <a-radio-group value={this.theme} onChange={this.handleChangeTheme}>
+            <a-radio-button value={ThemeType.Outlined}>
+              <Icon component={OutlinedIcon} /> {this.$t('app.docs.components.icon.outlined')}
+            </a-radio-button>
+            <a-radio-button value={ThemeType.Filled}>
+              <Icon component={FilledIcon} /> {this.$t('app.docs.components.icon.filled')}
+            </a-radio-button>
+            <a-radio-button value={ThemeType.TwoTone}>
+              <Icon component={TwoToneIcon} /> {this.$t('app.docs.components.icon.two-tone')}
+            </a-radio-button>
+          </a-radio-group>
+           {' '}
+          <a-input-search
+            style="flex: 1 1 0%; margin-inline-start: 16px;"
+            placeholder={this.$t('app.docs.components.icon.search.placeholder')}
+            v-model:value={this.searchVal}
+          />
+        </div>
+        {this.renderCategories().length === 0 ? (
+          <a-empty style="padding: 12px 0;" />
+        ) : (
+          this.renderCategories()
+        )}
       </div>
     );
   },

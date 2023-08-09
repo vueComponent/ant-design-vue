@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renders ./components/auto-complete/demo/allow-clear.vue correctly 1`] = `
+<div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-allow-clear ant-select-show-search">
+  <!---->
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
+    <!----><span class="ant-select-selection-placeholder">Clearable</span>
+  </div>
+  <!---->
+  <!---->
+  <!---->
+</div>
+<br>
+<br>
+<div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-allow-clear ant-select-show-search">
+  <!---->
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
+    <!----><span class="ant-select-selection-placeholder">Customized clear icon</span>
+  </div>
+  <!---->
+  <!---->
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/auto-complete/demo/basic.vue correctly 1`] = `
 <div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-show-search">
   <!---->
@@ -7,6 +30,18 @@ exports[`renders ./components/auto-complete/demo/basic.vue correctly 1`] = `
   <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
     <!----><span class="ant-select-selection-placeholder">input here</span>
   </div>
+  <!---->
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/auto-complete/demo/border-less.vue correctly 1`] = `
+<div style="width: 200px;" class="ant-select ant-select-borderless ant-select-show-search ant-select-auto-complete ant-select-single ant-select-show-search">
+  <!---->
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><input type="search" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></span>
+    <!----><span class="ant-select-selection-placeholder">border less</span>
+  </div>
+  <!---->
   <!---->
   <!---->
 </div>

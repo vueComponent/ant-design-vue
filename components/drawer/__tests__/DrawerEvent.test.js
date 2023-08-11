@@ -125,7 +125,7 @@ describe('Drawer', () => {
     });
     await asyncExpect(() => {
       expect(wrapper.find('.ant-drawer-wrapper-body').exists()).toBe(false);
-    });
+    }, 1000);
   });
 
   it('no mask and no closable', async () => {

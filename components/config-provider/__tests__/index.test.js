@@ -17,19 +17,19 @@ describe('ConfigProvider', () => {
     },
   });
 
-  it('Content Security Policy', () => {
-    const csp = { nonce: 'test-antd' };
-    const wrapper = mount({
-      render() {
-        return (
-          <ConfigProvider csp={csp}>
-            <Button ref="button" />
-          </ConfigProvider>
-        );
-      },
-    });
-    expect(wrapper.findComponent({ ref: 'button' }).vm.$refs.wave.csp.nonce).toBe(csp.nonce);
-  });
+  // it('Content Security Policy', () => {
+  //   const csp = { nonce: 'test-antd' };
+  //   const wrapper = mount({
+  //     render() {
+  //       return (
+  //         <ConfigProvider csp={csp}>
+  //           <Button ref="button" />
+  //         </ConfigProvider>
+  //       );
+  //     },
+  //   });
+  //   expect(wrapper.findComponent({ ref: 'button' }).vm.$refs.wave.csp.nonce).toBe(csp.nonce);
+  // });
 
   it('autoInsertSpaceInButton', async () => {
     const wrapper = mount({

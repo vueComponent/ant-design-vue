@@ -6,6 +6,7 @@ exports[`TimePicker not render clean icon when allowClear is false 1`] = `
     <!----></span>
     <!---->
   </div>
+  <div style="pointer-events: none; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;"></div>
   <!---->
 </div>
 `;

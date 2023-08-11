@@ -1686,46 +1686,7 @@ exports[`renders ./components/page-header/demo/responsive.vue correctly 1`] = `
               />
             </div>
           </div>
-          <div
-            class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden"
-          >
-            
-            <button
-              aria-controls="null-more-popup"
-              aria-expanded="false"
-              aria-haspopup="listbox"
-              aria-hidden="true"
-              class="ant-tabs-nav-more"
-              id="null-more"
-              style="visibility: hidden; order: 1;"
-              tabindex="-1"
-              type="button"
-            >
-              <span
-                aria-label="ellipsis"
-                class="anticon anticon-ellipsis"
-                role="img"
-              >
-                <svg
-                  aria-hidden="true"
-                  class=""
-                  data-icon="ellipsis"
-                  fill="currentColor"
-                  focusable="false"
-                  height="1em"
-                  viewBox="64 64 896 896"
-                  width="1em"
-                >
-                  <path
-                    d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
-                  />
-                </svg>
-              </span>
-            </button>
-            <!---->
-            
-            <!---->
-          </div>
+          <!---->
           <!---->
           <!---->
         </div>

@@ -91,47 +91,56 @@ exports[`renders ./components/tree/demo/context-menu.vue correctly 1`] = `
         <div style="display: flex; flex-direction: column;" class="ant-tree-list-holder-inner">
           <div class="ant-tree-treenode ant-tree-treenode-switcher-open ant-tree-treenode-leaf-last" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher_open"><span role="img" aria-label="caret-down" class="anticon anticon-caret-down ant-tree-switcher-icon"><svg focusable="false" class="" data-icon="caret-down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"></path></svg></span></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-open" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher_open"><span role="img" aria-label="caret-down" class="anticon anticon-caret-down ant-tree-switcher-icon"><svg focusable="false" class="" data-icon="caret-down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"></path></svg></span></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-0</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-0</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-close" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span><span class="ant-tree-indent-unit ant-tree-indent-unit-start"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher-noop"><!----></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-0-0</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-0-0</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-close" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span><span class="ant-tree-indent-unit ant-tree-indent-unit-start"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher-noop"><!----></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-0-1</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-0-1</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-close ant-tree-treenode-leaf-last" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span><span class="ant-tree-indent-unit ant-tree-indent-unit-start"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher-noop"><!----></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-0-2</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-0-2</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-open ant-tree-treenode-leaf-last" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher_open"><span role="img" aria-label="caret-down" class="anticon anticon-caret-down ant-tree-switcher-icon"><svg focusable="false" class="" data-icon="caret-down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"></path></svg></span></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-1</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-open"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-1</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-close" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span><span class="ant-tree-indent-unit ant-tree-indent-unit-end"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher-noop"><!----></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-1-0</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-1-0</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-close" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span><span class="ant-tree-indent-unit ant-tree-indent-unit-end"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher-noop"><!----></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-1-1</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-1-1</span>
+            <!----></span>
             <!----></span>
           </div>
           <div class="ant-tree-treenode ant-tree-treenode-switcher-close ant-tree-treenode-leaf-last" draggable="false" aria-grabbed="false"><span aria-hidden="true" class="ant-tree-indent"><span class="ant-tree-indent-unit ant-tree-indent-unit-start ant-tree-indent-unit-end"></span><span class="ant-tree-indent-unit ant-tree-indent-unit-end"></span></span>
             <!----><span class="ant-tree-switcher ant-tree-switcher-noop"><!----></span>
-            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><!----><span class="ant-dropdown-trigger">0-0-1-2</span></span>
+            <!----><span title="" class="ant-tree-node-content-wrapper ant-tree-node-content-wrapper-normal"><!----><span class="ant-tree-title"><span class="ant-dropdown-trigger">0-0-1-2</span>
+            <!----></span>
             <!----></span>
           </div>
         </div>

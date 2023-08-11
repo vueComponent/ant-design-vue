@@ -1,10 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Drawer from '..';
 import Button from '../../button';
-import { asyncExpect } from '../../../tests/utils';
-export function $$(className) {
-  return document.body.querySelectorAll(className);
-}
+
 const MultiDrawer = {
   props: {
     placement: {
@@ -14,42 +11,38 @@ const MultiDrawer = {
   },
   data() {
     return {
-      visible: false,
+      open: false,
       childrenDrawer: false,
     };
   },
   methods: {
     showDrawer() {
-      this.visible = true;
+      this.open = true;
     },
     onClose() {
-      this.visible = false;
+      this.open = false;
     },
     showChildrenDrawer() {
       this.childrenDrawer = true;
-    },
-    onChildrenDrawerClose() {
-      this.childrenDrawer = false;
     },
   },
   render() {
     const drawerProps = {
       title: 'Multi-level drawer',
       width: 520,
-      visible: this.visible,
+      open: this.open,
       getContainer: false,
-      class: 'test_drawer',
+      class: 'first-level',
       placement: this.placement,
       onClose: this.onClose,
     };
     const childrenDrawerProps = {
       title: 'Two-level Drawer',
       width: 320,
-      class: 'Two-level',
-      visible: this.childrenDrawer,
+      class: 'second-level',
+      open: this.childrenDrawer,
       getContainer: false,
       placement: this.placement,
-      onClose: this.onChildrenDrawerClose,
     };
     const buttonProps = {
       type: 'primary',
@@ -105,17 +98,18 @@ describe('Drawer', () => {
       },
       sync: false,
     });
-    await asyncExpect(() => {
-      wrapper.find('#open_drawer').trigger('click');
-    }, 0);
-    await asyncExpect(() => {
-      wrapper.find('#open_two_drawer').trigger('click');
-    }, 0);
-    await asyncExpect(() => {
-      const translateX = wrapper.find('.test_drawer').element.style.transform;
-      expect(translateX).toEqual('translateX(-180px)');
-      expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
-    }, 1000);
+
+    const triggerClick = async selector => {
+      wrapper.find(selector).trigger('click');
+      await wrapper.vm.$nextTick();
+    };
+
+    await triggerClick('#open_drawer');
+    await triggerClick('#open_two_drawer');
+
+    const translateX = wrapper.findAll('.ant-drawer-content-wrapper').at(0).element.style.transform;
+    expect(translateX).toEqual('translateX(-180px)');
+    expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
   });
 
   it('render left MultiDrawer', async () => {
@@ -126,17 +120,17 @@ describe('Drawer', () => {
       },
       sync: false,
     });
-    await asyncExpect(() => {
-      wrapper.find('#open_drawer').trigger('click');
-    }, 0);
-    await asyncExpect(() => {
-      wrapper.find('#open_two_drawer').trigger('click');
-    }, 0);
-    await asyncExpect(() => {
-      const translateX = wrapper.find('.test_drawer').element.style.transform;
-      expect(translateX).toEqual('translateX(180px)');
-      expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
-    }, 1000);
+    const triggerClick = async selector => {
+      wrapper.find(selector).trigger('click');
+      await wrapper.vm.$nextTick();
+    };
+
+    await triggerClick('#open_drawer');
+    await triggerClick('#open_two_drawer');
+
+    const translateX = wrapper.findAll('.ant-drawer-content-wrapper').at(0).element.style.transform;
+    expect(translateX).toEqual('translateX(180px)');
+    expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
   });
 
   it('render top MultiDrawer', async () => {
@@ -146,16 +140,16 @@ describe('Drawer', () => {
       },
       sync: false,
     });
-    await asyncExpect(() => {
-      wrapper.find('#open_drawer').trigger('click');
-    }, 0);
-    await asyncExpect(() => {
-      wrapper.find('#open_two_drawer').trigger('click');
-    }, 0);
-    await asyncExpect(() => {
-      const translateY = wrapper.find('.test_drawer').element.style.transform;
-      expect(translateY).toEqual('translateY(180px)');
-      expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
-    }, 1000);
+    const triggerClick = async selector => {
+      wrapper.find(selector).trigger('click');
+      await wrapper.vm.$nextTick();
+    };
+
+    await triggerClick('#open_drawer');
+    await triggerClick('#open_two_drawer');
+
+    const translateY = wrapper.findAll('.ant-drawer-content-wrapper').at(0).element.style.transform;
+    expect(translateY).toEqual('translateY(180px)');
+    expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
   });
 });

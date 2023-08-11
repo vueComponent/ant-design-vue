@@ -27,6 +27,7 @@ export const ColorInput = defineComponent({
   },
   setup(props, { attrs }) {
     const { color } = toRefs(props);
+    // eslint-disable-next-line vue/no-setup-props-destructure
     const { escape, validate, format, process } = props;
 
     const value = ref(escape(color.value));

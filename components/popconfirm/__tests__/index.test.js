@@ -22,7 +22,7 @@ describe('Popconfirm', () => {
               cancelText="No"
               mouseEnterDelay={0}
               mouseLeaveDelay={0}
-              onVisibleChange={onVisibleChange}
+              onOpenChange={onVisibleChange}
             >
               <span>Delete</span>
             </Popconfirm>

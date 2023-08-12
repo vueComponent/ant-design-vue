@@ -213,7 +213,7 @@ useForm(modelRef, ruleRef, [options]);
 
 ```ts
 /*
- modelRef`, `ruleRef` must be responsive data
+ `modelRef`, `ruleRef` must be responsive data
 */
 
 interface Props {

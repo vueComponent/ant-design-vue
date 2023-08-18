@@ -163,4 +163,30 @@ describe('Input.Password', () => {
       expect(wrapper.findAll('.anticon-sync').length).toBe(1);
     }, 100);
   });
+
+  it('should support visibilityToggle(boolean)', async () => {
+    const wrapper = mount(Input.Password, { props: { visibilityToggle: false }, sync: false });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-eye').length).toBe(0);
+    }, 100);
+  });
+
+  it('should support visible', async () => {
+    const cbMock = jest.fn();
+    const wrapper = mount({
+      render() {
+        return <Password {...{ 'onUpdate:visible': cbMock }} visible="false"></Password>;
+      },
+    });
+
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-eye').length).toBe(1);
+    }, 100);
+
+    await asyncExpect(() => {
+      wrapper.find('.anticon-eye').trigger('click');
+    }, 100);
+
+    expect(cbMock).toHaveBeenCalledWith(false);
+  });
 });

@@ -94,6 +94,8 @@ Supports all props of `Input`.
 
 #### Input.Password (Added in 1.14.0)
 
-| Property         | Description                | Type    | Default |
-| ---------------- | -------------------------- | ------- | ------- |
-| visibilityToggle | Whether show toggle button | boolean | true    |
+| Property         | Description                                            | Type    | Default |
+| ---------------- | ------------------------------------------------------ | ------- | ------- |
+| visible(v-model) | password visibility                                    | boolean | false   |
+| iconRender       | Custom toggle button                                   | slot    | -       |
+| visibilityToggle | Whether show toggle button or control password visible | boolean | true    |

@@ -19,7 +19,7 @@ Add prefix or suffix icons inside input.
   <div class="components-input-demo-presuffix">
     <a-input v-model:value="userName" placeholder="Basic usage">
       <template #prefix>
-        <user-outlined type="user" />
+        <user-outlined />
       </template>
       <template #suffix>
         <a-tooltip title="Extra information">

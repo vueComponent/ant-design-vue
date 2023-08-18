@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <div v-if="headers.length" class="toc-affix" :style="y > 60 ? 'position:fixed; top: 16px;' : ''">
+  <div v-if="headers.length" class="toc-affix" :style="y > 102 ? 'position:fixed; top: 16px;' : ''">
     <a-anchor style="width: 160px" :items="headers">
       <template #customTitle="item">
         <LinkOutlined v-if="item.target" />

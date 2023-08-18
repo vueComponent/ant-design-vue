@@ -31,6 +31,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*WERTQ6qvgEYAAA
 | allowClear | 支持清除, 单选模式有效 | boolean | false |  |
 | autofocus | 自动获取焦点 | boolean | false |  |
 | backfill | 使用键盘选择选项的时候把选中项回填到输入框中 | boolean | false |  |
+| bordered | 是否有边框 | boolean | true | 4.0 |
+| clearIcon | 使用插槽自定义清除按钮 | slot | `<CloseCircleFilled />` | 4.0 |
 | default (自定义输入框) | 自定义输入框 | slot | `<Input />` |  |
 | defaultActiveFirstOption | 是否默认高亮第一个选项。 | boolean | true |  |
 | defaultOpen | 是否默认展开下拉菜单 | boolean | - |  |

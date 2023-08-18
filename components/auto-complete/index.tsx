@@ -54,6 +54,7 @@ const AutoComplete = defineComponent({
     default: any;
     notFoundContent: any;
     dataSource: any;
+    clearIcon: any;
   }>,
   setup(props, { slots, attrs, expose }) {
     warning(

@@ -4,7 +4,6 @@ import Input from '..';
 // import Form from '../../form';
 import focusTest from '../../../tests/shared/focusTest';
 import { WifiOutlined, SyncOutlined } from '@ant-design/icons-vue';
-import { ref } from 'vue';
 
 const { TextArea, Password } = Input;
 
@@ -172,16 +171,12 @@ describe('Input.Password', () => {
     }, 100);
   });
 
-  it('should support visibilityToggle', async () => {
+  it('should support visible and update:visible', async () => {
     const cbMock = jest.fn();
-    const wrapper = mount(Input.Password, {
-      props: {
-        visibilityToggle: {
-          visible: ref(true),
-          onVisibleChange: cbMock,
-        },
+    const wrapper = mount({
+      render() {
+        return <Password {...{ 'onUpdate:visible': cbMock }} visible="false"></Password>;
       },
-      sync: false,
     });
 
     await asyncExpect(() => {
@@ -192,8 +187,6 @@ describe('Input.Password', () => {
       wrapper.find('.anticon-eye').trigger('click');
     }, 100);
 
-    await asyncExpect(() => {
-      expect(cbMock).toHaveBeenCalledWith(false);
-    }, 100);
+    expect(cbMock).toHaveBeenCalledWith(false);
   });
 });

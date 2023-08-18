@@ -6,10 +6,10 @@ import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import type { InputProps } from './inputProps';
 import inputProps from './inputProps';
-import { computed, defineComponent, shallowRef, watch, watchEffect } from 'vue';
+import type { PropType } from 'vue';
+import { computed, defineComponent, shallowRef, watchEffect } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
-import { functionType } from '../_util/type';
 
 const ActionMap = {
   click: 'onClick',
@@ -28,7 +28,7 @@ export default defineComponent({
     action: { type: String, default: 'click' },
     visibilityToggle: { type: Boolean, default: true },
     visible: { type: Boolean, default: undefined },
-    'onUpdate:visible': functionType<(visible: boolean) => void>,
+    'onUpdate:visible': Function as PropType<(visible: boolean) => void>,
     iconRender: Function,
   },
   setup(props, { slots, attrs, expose, emit }) {
@@ -38,10 +38,8 @@ export default defineComponent({
       if (disabled) {
         return;
       }
-      if (props.visible === undefined) {
-        visible.value = !visible.value;
-      }
-      emit('update:visible', !visible.value);
+      visible.value = !visible.value;
+      emit('update:visible', visible.value);
     };
     watchEffect(() => {
       if (props.visible !== undefined) {

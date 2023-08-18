@@ -24,13 +24,13 @@ Input type of password.
         <EyeInvisibleOutlined v-else></EyeInvisibleOutlined>
       </template>
     </a-input-password>
+    <a-input-password
+      v-model:value="value3"
+      placeholder="input password"
+      :visibility-toggle="false"
+    />
     <a-space>
-      <a-input-password
-        v-model:value="value3"
-        placeholder="input password"
-        :visibility-toggle="toggle"
-      />
-      <a-button @click="visible = !visible">{{ visible ? 'Hide' : 'Show' }}</a-button>
+      <a-input-password v-model:value="value4" placeholder="input password" :visible="true" />
     </a-space>
   </a-space>
 </template>
@@ -40,15 +40,5 @@ import { EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons-vue';
 const value = ref<string>('');
 const value2 = ref<string>('');
 const value3 = ref<string>('');
-
-const visible = ref<boolean>(false);
-const onVisibleChange = (_visible: boolean) => {
-  visible.value = _visible;
-  console.log(_visible);
-};
-
-const toggle = {
-  visible,
-  onVisibleChange,
-};
+const value4 = ref<string>('');
 </script>

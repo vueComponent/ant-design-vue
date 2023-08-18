@@ -211,7 +211,7 @@ useForm(modelRef, ruleRef, [options]);
 
 ```ts
 /*
- modelRef`, `ruleRef` 必须是响应式数据
+ `modelRef`, `ruleRef` 必须是响应式数据
 */
 
 interface Props {

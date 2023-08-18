@@ -23,6 +23,7 @@ Tag for categorizing or markup.
 | closeIcon | Custom close icon             | VNode \| slot | -       | 2.0.0   |
 | color     | Color of the Tag              | string        | -       |         |
 | icon      | Set the icon of tag           | VNode \| slot | -       | 2.0.0   |
+| bordered  | Whether has border style      | boolean       | `true`  | 4.x     |
 
 ### Tag Events
 

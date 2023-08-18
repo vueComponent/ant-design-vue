@@ -30,6 +30,7 @@ export const tagProps = () => ({
   onClick: eventType<(e: MouseEvent) => void>(),
   'onUpdate:visible': Function as PropType<(vis: boolean) => void>,
   icon: PropTypes.any,
+  bordered: { type: Boolean, default: true },
 });
 
 export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<typeof tagProps>>>;
@@ -98,6 +99,7 @@ const Tag = defineComponent({
         [`${prefixCls.value}-has-color`]: props.color && !isInternalColor.value,
         [`${prefixCls.value}-hidden`]: !visible.value,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${prefixCls.value}-borderless`]: !props.bordered,
       }),
     );
     const handleClick = (e: MouseEvent) => {

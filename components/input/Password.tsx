@@ -6,26 +6,17 @@ import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import type { InputProps } from './inputProps';
 import inputProps from './inputProps';
-import type { PropType, Ref, ShallowRef } from 'vue';
-import { computed, defineComponent, shallowRef, watch } from 'vue';
+import { computed, defineComponent, shallowRef, watch, watchEffect } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
-
-type VisibilityToggleProps =
-  | boolean
-  | {
-      visible: Ref<boolean>;
-      onVisibleChange: (visible: boolean) => void;
-    };
+import { functionType } from '../_util/type';
 
 const ActionMap = {
   click: 'onClick',
   hover: 'onMouseover',
 };
-
 const defaultIconRender = (visible: boolean) =>
   visible ? <EyeOutlined /> : <EyeInvisibleOutlined />;
-
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'AInputPassword',
@@ -35,28 +26,28 @@ export default defineComponent({
     prefixCls: String,
     inputPrefixCls: String,
     action: { type: String, default: 'click' },
-    visibilityToggle: {
-      type: [Boolean, Object] as PropType<VisibilityToggleProps>,
-      default: true,
-    },
-    iconRender: Function,
+    visibilityToggle: { type: Boolean, default: true },
     visible: { type: Boolean, default: undefined },
-    onUpdate:visible: Function as PropType<(visible: boolean) => void>;
+    'onUpdate:visible': functionType<(visible: boolean) => void>,
+    iconRender: Function,
   },
-  setup(props, { slots, attrs, expose }) {
+  setup(props, { slots, attrs, expose, emit }) {
     const visible = shallowRef(false);
-    const onVisibleChange(v: boolean) {
-       const { disabled } = props;
-        if (disabled) {
-          return;
-        }
-        props['onUpdate:visible']?.(!v);
-    }
-    watchEffect(()=> {
-      if(props.visible !== undefined) {
-        visible.value = props.visible;
+    const onVisibleChange = () => {
+      const { disabled } = props;
+      if (disabled) {
+        return;
       }
-    })
+      if (props.visible === undefined) {
+        visible.value = !visible.value;
+      }
+      emit('update:visible', !visible.value);
+    };
+    watchEffect(() => {
+      if (props.visible !== undefined) {
+        visible.value = !!props.visible;
+      }
+    });
     const inputRef = shallowRef();
     const focus = () => {
       inputRef.value?.focus();
@@ -94,9 +85,7 @@ export default defineComponent({
     const renderPassword = () => {
       const { size, visibilityToggle, ...restProps } = props;
 
-      const suffixIcon =
-        (typeof visibilityToggle === 'boolean' ? visibilityToggle : true) &&
-        getIcon(prefixCls.value);
+      const suffixIcon = visibilityToggle && getIcon(prefixCls.value);
       const inputClassName = classNames(prefixCls.value, attrs.class, {
         [`${prefixCls.value}-${size}`]: !!size,
       });

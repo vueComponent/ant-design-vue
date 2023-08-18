@@ -171,7 +171,7 @@ describe('Input.Password', () => {
     }, 100);
   });
 
-  it('should support visible and update:visible', async () => {
+  it('should support visible', async () => {
     const cbMock = jest.fn();
     const wrapper = mount({
       render() {

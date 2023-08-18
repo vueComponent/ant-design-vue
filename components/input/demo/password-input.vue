@@ -30,7 +30,12 @@ Input type of password.
       :visibility-toggle="false"
     />
     <a-space>
-      <a-input-password v-model:value="value4" placeholder="input password" :visible="true" />
+      <a-input-password
+        v-model:value="value4"
+        v-model:visible="visible"
+        placeholder="input password"
+      />
+      <a-button @click="visible = !visible">{{ visible ? 'Hide' : 'Show' }}</a-button>
     </a-space>
   </a-space>
 </template>
@@ -41,4 +46,6 @@ const value = ref<string>('');
 const value2 = ref<string>('');
 const value3 = ref<string>('');
 const value4 = ref<string>('');
+
+const visible = ref<boolean>(true);
 </script>

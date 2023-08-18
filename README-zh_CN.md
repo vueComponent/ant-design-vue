@@ -102,3 +102,11 @@ Support us with a monthly donation and help us continue our activities. [[Become
 <a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
 
 ## [更多赞助者 (通过 Patreon、支付宝、微信、paypal 等等)](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)
+
+## 贡献者
+
+感谢所有为 ant-design-vue 做出贡献的人!
+
+<a href="https://github.com/vueComponent/ant-design-vue/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=vueComponent/ant-design-vue&max=100&columns=15" />
+</a>

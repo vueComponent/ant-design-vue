@@ -40,33 +40,23 @@ export default defineComponent({
       default: true,
     },
     iconRender: Function,
+    visible: { type: Boolean, default: undefined },
+    onUpdate:visible: Function as PropType<(visible: boolean) => void>;
   },
   setup(props, { slots, attrs, expose }) {
-    let visible: ShallowRef<boolean> = undefined;
-
-    if (typeof props.visibilityToggle === 'boolean') {
-      visible = shallowRef(false);
-    } else {
-      visible = shallowRef(props.visibilityToggle.visible);
-      // eslint-disable-next-line vue/no-setup-props-destructure
-      const { visibilityToggle } = props;
-      function _onVisibleChange(visible: boolean) {
-        visibilityToggle.onVisibleChange(visible);
-      }
-
-      watch(visible, () => {
-        _onVisibleChange(visible.value);
-      });
+    const visible = shallowRef(false);
+    const onVisibleChange(v: boolean) {
+       const { disabled } = props;
+        if (disabled) {
+          return;
+        }
+        props['onUpdate:visible']?.(!v);
     }
-
-    const onVisibleChange = () => {
-      const { disabled } = props;
-      if (disabled) {
-        return;
+    watchEffect(()=> {
+      if(props.visible !== undefined) {
+        visible.value = props.visible;
       }
-      visible.value = !visible.value;
-    };
-
+    })
     const inputRef = shallowRef();
     const focus = () => {
       inputRef.value?.focus();

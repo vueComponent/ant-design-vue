@@ -4,6 +4,7 @@ import Input from '..';
 // import Form from '../../form';
 import focusTest from '../../../tests/shared/focusTest';
 import { WifiOutlined, SyncOutlined } from '@ant-design/icons-vue';
+import { ref } from 'vue';
 
 const { TextArea, Password } = Input;
 
@@ -161,6 +162,38 @@ describe('Input.Password', () => {
     }, 100);
     await asyncExpect(() => {
       expect(wrapper.findAll('.anticon-sync').length).toBe(1);
+    }, 100);
+  });
+
+  it('should support visibilityToggle(boolean)', async () => {
+    const wrapper = mount(Input.Password, { props: { visibilityToggle: false }, sync: false });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-eye').length).toBe(0);
+    }, 100);
+  });
+
+  it('should support visibilityToggle', async () => {
+    const cbMock = jest.fn();
+    const wrapper = mount(Input.Password, {
+      props: {
+        visibilityToggle: {
+          visible: ref(true),
+          onVisibleChange: cbMock,
+        },
+      },
+      sync: false,
+    });
+
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-eye').length).toBe(1);
+    }, 100);
+
+    await asyncExpect(() => {
+      wrapper.find('.anticon-eye').trigger('click');
+    }, 100);
+
+    await asyncExpect(() => {
+      expect(cbMock).toHaveBeenCalledWith(false);
     }, 100);
   });
 });

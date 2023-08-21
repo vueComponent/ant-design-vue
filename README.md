@@ -26,6 +26,12 @@ English | [简体中文](./README-zh_CN.md)
 - A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
 
+## Getting started & staying tuned with us.
+
+Star us, and you will receive all releases notifications from GitHub without any delay!
+
+![star us](https://user-images.githubusercontent.com/6937879/261937060-e0501ab3-9388-4712-a25d-3f2ba2271865.gif)
+
 ## Environment Support
 
 - Modern browsers. v1.x support Internet Explorer 9+ (with [polyfills](https://www.antdv.com/docs/vue/getting-started/#compatibility))

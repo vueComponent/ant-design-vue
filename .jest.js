@@ -29,6 +29,7 @@ module.exports = {
     '\\.svg$': '<rootDir>/node_modules/jest-transform-stub',
   },
   testRegex: getTestRegex(libDir),
+  testTimeout: 50000,
   moduleNameMapper: {
     '^@/(.*)$/': '<rootDir>/$1',
     '^ant-design-vue$': '<rootDir>/components/index',

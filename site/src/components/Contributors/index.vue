@@ -2,16 +2,22 @@
 import { ref, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import { REPO_PATH } from './constants';
+import dayjs from 'dayjs';
 
 defineProps({
   isZn: Boolean,
 });
+
 const route = useRoute();
 const contributors = ref([]);
+const lastCommitTime = ref(0);
+
 const filterData = data => {
   const arr = [];
   data.forEach(item => {
     if (!!item.author?.login || !!item.author?.html_url || !!item.author?.avatar_url) {
+      lastCommitTime.value = Math.max(lastCommitTime.value, +new Date(item.commit.author.date));
+
       arr.push({
         login: item.author.login,
         url: item.author.html_url,
@@ -46,18 +52,33 @@ watchEffect(() => {
 </script>
 
 <template>
-  <ul v-if="contributors.length > 0" class="acss-1ppw8kl">
-    <li v-for="item in contributors" :key="item.login">
-      <a-tooltip :title="`${isZn ? '文档贡献者：' : 'contribotors: '}${item.login}`">
-        <a :href="item.url" target="_blank">
-          <a-avatar :src="item.avatar" size="small" />
-        </a>
-      </a-tooltip>
-    </li>
-  </ul>
+  <div class="contributors-list">
+    <ul v-if="contributors.length > 0" class="acss-1ppw8kl">
+      <li v-for="item in contributors" :key="item.login">
+        <a-tooltip :title="`${isZn ? '文档贡献者：' : 'Contributor: '}${item.login}`">
+          <a :href="item.url" target="_blank">
+            <a-avatar :src="item.avatar" size="small" />
+          </a>
+        </a-tooltip>
+      </li>
+    </ul>
+    <span>
+      {{ isZn ? '最后更新' : 'Last updated' }} : {{ dayjs(lastCommitTime).format('YYYY/MM/DD') }}
+    </span>
+  </div>
 </template>
 
 <style scoped>
+.contributors-list {
+  margin-top: 120px !important;
+  display: flex;
+  gap: 8px;
+}
+
+.contributors-list span {
+  color: var(--primary-color);
+}
+
 .acss-1ppw8kl {
   display: -webkit-box;
   display: -webkit-flex;
@@ -67,8 +88,8 @@ watchEffect(() => {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-top: 120px !important;
   clear: both;
+  flex: 1;
 }
 
 .acss-1ppw8kl li {

@@ -50,6 +50,7 @@ const DrawerWrapper = defineComponent({
               getContainer={() => dom.value}
               onClose={onClose}
               onHandleClick={onHandleClick}
+              afterVisibleChange={afterVisibleChange}
             ></Child>
           </div>
         );

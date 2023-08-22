@@ -5,7 +5,7 @@ import unitless from '@emotion/unitless';
 import type { CSSObject } from '..';
 import type { Transformer } from './interface';
 
-interface Options {
+export interface Options {
   /**
    * The root font size.
    * @default 16

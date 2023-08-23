@@ -45,7 +45,7 @@ export default defineComponent({
       });
     });
     onBeforeUnmount(() => {
-      if (container && container.parentNode) {
+      if (container && container.tagName !== 'BODY' && container.parentNode) {
         container.parentNode.removeChild(container);
       }
     });

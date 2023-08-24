@@ -67,6 +67,16 @@ export default defineComponent({
   setup(props, { expose, slots }) {
     const cacheRef = ref<{ element?: HTMLElement; point?: TargetPoint; align?: AlignType }>({});
     const nodeRef = ref();
+
+    function avoidOverrideStyle(source: HTMLElement) {
+      if (props.style) {
+        const style = props.style;
+        Object.keys(style).forEach(key => {
+          source.style[key] = style[key];
+        });
+      }
+    }
+
     const [forceAlign, cancelForceAlign] = useBuffer(
       () => {
         const {
@@ -91,13 +101,7 @@ export default defineComponent({
           // We only align when element is visible
           if (element && isVisible(element)) {
             result = alignElement(source, element, latestAlign);
-
-            if (props.style) {
-              const style = props.style;
-              Object.keys(style).forEach(key => {
-                source.style[key] = style[key];
-              });
-            }
+            avoidOverrideStyle(source);
           } else if (point) {
             result = alignPoint(source, point, latestAlign);
           }

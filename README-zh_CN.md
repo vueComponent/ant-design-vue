@@ -26,6 +26,12 @@ An enterprise-class UI components based on Ant Design and Vue 3.
 - 开箱即用的高质量 Vue 组件。
 - 共享 [Ant Design of React](http://ant-design.gitee.io/docs/spec/introduce-cn) 设计工具体系。
 
+## 关注我们
+
+收藏加关注，第一时间获取更新动态！
+
+![star us](https://user-images.githubusercontent.com/6937879/261937060-e0501ab3-9388-4712-a25d-3f2ba2271865.gif)
+
 ## 支持环境
 
 - 现代浏览器。1.x 版本支持 IE 9+（需要 [polyfills](https://www.antdv.com/docs/vue/getting-started-cn/#兼容性)）
@@ -102,3 +108,11 @@ Support us with a monthly donation and help us continue our activities. [[Become
 <a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
 
 ## [更多赞助者 (通过 Patreon、支付宝、微信、paypal 等等)](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)
+
+## 贡献者
+
+感谢所有为 ant-design-vue 做出贡献的人!
+
+<a href="https://github.com/vueComponent/ant-design-vue/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=vueComponent/ant-design-vue&max=100&columns=15" />
+</a>

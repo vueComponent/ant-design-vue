@@ -17,22 +17,19 @@ Compact Mode for form component.
 </docs>
 
 <template>
-  <div class="site-space-compact-wrapper">
+  <a-space direction="vertical" size="middle" class="site-space-compact-wrapper">
     <a-space-compact block>
       <a-input :style="{ width: '20%' }" default-value="0571" />
       <a-input :style="{ width: '30%' }" default-value="26888888" />
     </a-space-compact>
-    <br />
     <a-space-compact block size="small">
       <a-input :style="{ width: 'calc(100% - 200px)' }" default-value="https://ant.design" />
       <a-button type="primary">Submit</a-button>
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-input :style="{ width: 'calc(100% - 200px)' }" default-value="https://ant.design" />
       <a-button type="primary">Submit</a-button>
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-input
         :style="{ width: 'calc(100% - 200px)' }"
@@ -44,7 +41,6 @@ Compact Mode for form component.
         </a-button>
       </a-tooltip>
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-select default-value="Zhejiang" allow-clear>
         <a-select-option value="Zhejiang">Zhejiang</a-select-option>
@@ -52,7 +48,6 @@ Compact Mode for form component.
       </a-select>
       <a-input :style="{ width: '50%' }" default-value="Xihu District, Hangzhou" />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-select allow-clear mode="multiple" default-value="Zhejianggggg" :style="{ width: '50%' }">
         <a-select-option value="Zhejianggggg">Zhejianggggg</a-select-option>
@@ -60,13 +55,11 @@ Compact Mode for form component.
       </a-select>
       <a-input :style="{ width: '50%' }" default-value="Xihu District, Hangzhou" />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-input-search :style="{ width: '30%' }" default-value="0571" />
       <a-input-search allow-clear :style="{ width: '50%' }" default-value="26888888" />
       <a-input-search :style="{ width: '20%' }" default-value="+1" />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-select default-value="Option1">
         <a-select-option value="Option1">Option1</a-select-option>
@@ -75,23 +68,19 @@ Compact Mode for form component.
       <a-input :style="{ width: '50%' }" default-value="input content" />
       <a-input-number :default-value="12" />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-input :style="{ width: '50%' }" default-value="input content" />
       <a-date-picker :style="{ width: '50%' }" />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-range-picker :style="{ width: '70%' }" />
       <a-input :style="{ width: '30%' }" default-value="input content" />
       <a-button type="primary">查询</a-button>
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-input :style="{ width: '30%' }" default-value="input content" />
       <a-range-picker :style="{ width: '70%' }" />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-select default-value="Option1-1">
         <a-select-option value="Option1-1">Option1-1</a-select-option>
@@ -102,7 +91,6 @@ Compact Mode for form component.
         <a-select-option value="Option2-2">Option2-2</a-select-option>
       </a-select>
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-select default-value="1">
         <a-select-option value="1">Between</a-select-option>
@@ -129,7 +117,6 @@ Compact Mode for form component.
         placeholder="Maximum"
       />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-select default-value="Sign Up" :style="{ width: '30%' }">
         <a-select-option value="Sign Up">Sign Up</a-select-option>
@@ -141,7 +128,6 @@ Compact Mode for form component.
         :options="[{ value: 'text 1' }, { value: 'text 2' }]"
       />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-time-picker :style="{ width: '70%' }" />
       <a-cascader
@@ -183,7 +169,6 @@ Compact Mode for form component.
         placeholder="Select Address"
       />
     </a-space-compact>
-    <br />
     <a-space-compact block>
       <a-time-range-picker />
       <a-tree-select
@@ -198,8 +183,7 @@ Compact Mode for form component.
       ></a-tree-select>
       <a-button type="primary">Submit</a-button>
     </a-space-compact>
-    <br />
-  </div>
+  </a-space>
 </template>
 
 <script lang="ts" setup>

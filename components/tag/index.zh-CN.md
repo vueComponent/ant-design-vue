@@ -24,6 +24,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JPNAQYrVkYkAAA
 | closeIcon | 自定义关闭按钮   | VNode \| slot | -      | 2.0.0 |
 | color     | 标签色           | string        | -      |       |
 | icon      | 设置图标         | VNode \| slot | -      | 2.0.0 |
+| bordered  | 是否有边框       | boolean       | `true` | 4.x   |
 
 ### 事件
 

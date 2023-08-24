@@ -44,7 +44,7 @@ const CheckableTag = defineComponent({
 
     return () => {
       return wrapSSR(
-        <span {...attrs} class={cls.value} onClick={handleClick}>
+        <span {...attrs} class={[cls.value, attrs.class]} onClick={handleClick}>
           {slots.default?.()}
         </span>,
       );

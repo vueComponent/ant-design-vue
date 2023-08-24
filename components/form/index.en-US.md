@@ -209,11 +209,11 @@ const useForm = Form.useForm;
 useForm(modelRef, ruleRef, [options]);
 ```
 
-参数说明：
+Parameter Description:
 
 ```ts
 /*
- modelRef`, `ruleRef` must be responsive data
+ `modelRef`, `ruleRef` must be responsive data
 */
 
 interface Props {

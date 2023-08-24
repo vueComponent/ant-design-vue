@@ -230,6 +230,8 @@ const ImageInternal = defineComponent({
         sizes,
         srcset,
         usemap,
+        width,
+        height,
         class: cn(
           `${prefixCls}-img`,
           {
@@ -238,7 +240,7 @@ const ImageInternal = defineComponent({
           cls,
         ),
         style: {
-          height,
+          height: toSizePx(height),
           ...(style as CSSProperties),
         },
       };

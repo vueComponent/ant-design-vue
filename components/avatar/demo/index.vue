@@ -36,10 +36,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-[id^='components-avatar-demo-'] .ant-avatar {
-  margin-top: 16px;
-  margin-right: 16px;
-}
-</style>

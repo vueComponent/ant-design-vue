@@ -230,15 +230,6 @@ export const genInputGroupStyle = (token: InputToken): CSSObject => {
       ...genInputSmallStyle(token),
     },
 
-    // Fix https://github.com/ant-design/ant-design/issues/5754
-    [`&-lg ${antCls}-select-single ${antCls}-select-selector`]: {
-      height: token.controlHeightLG,
-    },
-
-    [`&-sm ${antCls}-select-single ${antCls}-select-selector`]: {
-      height: token.controlHeightSM,
-    },
-
     [`> ${componentCls}`]: {
       display: 'table-cell',
 
@@ -499,6 +490,45 @@ export const genInputGroupStyle = (token: InputToken): CSSObject => {
             borderEndStartRadius: token.borderRadius,
           },
         },
+      },
+    },
+
+    [`&&-sm ${antCls}-btn`]: {
+      fontSize: token.fontSizeSM,
+      height: token.controlHeightSM,
+      lineHeight: 'normal',
+    },
+
+    [`&&-lg ${antCls}-btn`]: {
+      fontSize: token.fontSizeLG,
+      height: token.controlHeightLG,
+      lineHeight: 'normal',
+    },
+
+    // Fix https://github.com/ant-design/ant-design/issues/5754
+    [`&&-lg ${antCls}-select-single ${antCls}-select-selector`]: {
+      height: `${token.controlHeightLG}px`,
+
+      [`${antCls}-select-selection-item, ${antCls}-select-selection-placeholder`]: {
+        // -2 is for the border size & override default
+        lineHeight: `${token.controlHeightLG - 2}px`,
+      },
+
+      [`${antCls}-select-selection-search-input`]: {
+        height: `${token.controlHeightLG}px`,
+      },
+    },
+
+    [`&&-sm ${antCls}-select-single ${antCls}-select-selector`]: {
+      height: `${token.controlHeightSM}px`,
+
+      [`${antCls}-select-selection-item, ${antCls}-select-selection-placeholder`]: {
+        // -2 is for the border size & override default
+        lineHeight: `${token.controlHeightSM - 2}px`,
+      },
+
+      [`${antCls}-select-selection-search-input`]: {
+        height: `${token.controlHeightSM}px`,
       },
     },
   };

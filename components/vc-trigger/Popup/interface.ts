@@ -1,5 +1,5 @@
 import type { Point, AlignType, StretchType, MobileConfig } from '../interface';
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 
 export const innerProps = {
   visible: Boolean,
@@ -47,6 +47,7 @@ export const popupProps = {
   mobile: { type: Object as PropType<MobileConfig> },
   maskAnimation: String,
   maskTransitionName: String,
+  style: Object as PropType<CSSProperties>,
 };
 
 export type PopupProps = Partial<ExtractPropTypes<typeof popupProps>> & {

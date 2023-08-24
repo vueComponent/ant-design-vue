@@ -1,4 +1,4 @@
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import {
   nextTick,
   defineComponent,
@@ -37,6 +37,7 @@ export const alignProps = {
   monitorBufferTime: Number,
   monitorWindowResize: Boolean,
   disabled: Boolean,
+  style: Object as PropType<CSSProperties>,
 };
 
 interface MonitorRef {
@@ -90,6 +91,13 @@ export default defineComponent({
           // We only align when element is visible
           if (element && isVisible(element)) {
             result = alignElement(source, element, latestAlign);
+
+            if (props.style) {
+              const style = props.style;
+              Object.keys(style).forEach(key => {
+                source.style[key] = style[key];
+              });
+            }
           } else if (point) {
             result = alignPoint(source, point, latestAlign);
           }

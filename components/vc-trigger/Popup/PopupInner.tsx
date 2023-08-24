@@ -192,6 +192,7 @@ export default defineComponent({
                   disabled={alignDisabled.value}
                   align={align}
                   onAlign={onInternalAlign}
+                  style={mergedStyle as any}
                   v-slots={{
                     default: () => (
                       <div

@@ -45,15 +45,14 @@ export default defineComponent({
     onMounted(() => {
       watch(
         () => props.disabled,
-        () => {
+        (newV, oldV) => {
           clear();
           nextTick(() => {
             const node = findDOMNode(instance);
 
-            if (!node || node.nodeType !== 1 || props.disabled) {
+            if (!node || node.nodeType !== 1 || props.disabled || (!newV && oldV)) {
               return;
             }
-
             // Click handler
             const onClick = (e: MouseEvent) => {
               // Fix radio button click twice

@@ -90,6 +90,7 @@ const data = [
 ];
 
 const onChange: TableProps<TableData>['onChange'] = (pagination, filters, sorter, extra) => {
+  // eslint-disable-next-line
   console.log('params', pagination, filters, sorter, extra);
 };
 

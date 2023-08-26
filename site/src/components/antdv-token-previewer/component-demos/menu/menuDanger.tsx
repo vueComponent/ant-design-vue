@@ -24,6 +24,7 @@ const items: MenuProps['items'] = [
 
 const Demo = () => {
   const onClick: MenuProps['onClick'] = e => {
+    // eslint-disable-next-line
     console.log('click ', e);
   };
 

@@ -13,7 +13,7 @@
     <slot />
     <!-- <GoogleAds v-if="showAd" :key="`goo-${route.path}`" /> -->
     <section class="markdown api-container" v-html="api"></section>
-    <Contributor :isZn="isZhCN" />
+    <Contributor :is-zn="isZhCN" />
   </article>
 </template>
 <script lang="ts">

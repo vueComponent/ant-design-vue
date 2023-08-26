@@ -19,8 +19,8 @@ Input type of password.
   <a-space direction="vertical" size="middle" style="width: 100%">
     <a-input-password v-model:value="value" placeholder="input password" />
     <a-input-password v-model:value="value2" placeholder="input password">
-      <template #iconRender="visible">
-        <EyeTwoTone v-if="visible"></EyeTwoTone>
+      <template #iconRender="visible1">
+        <EyeTwoTone v-if="visible1"></EyeTwoTone>
         <EyeInvisibleOutlined v-else></EyeInvisibleOutlined>
       </template>
     </a-input-password>

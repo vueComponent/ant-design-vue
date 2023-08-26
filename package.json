@@ -53,7 +53,7 @@
     "lint:components": "eslint --fix --ext .jsx,.js,.ts,.tsx ./components",
     "lint:demo": "eslint --fix components/*/demo/*.vue",
     "lint:md": "eslint --fix *.md",
-    "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx'",
+    "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx' --no-error-on-unmatched-pattern",
     "lint:site": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx,vue ./site",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
     "codecov": "codecov",

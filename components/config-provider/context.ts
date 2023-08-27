@@ -156,6 +156,7 @@ export const defaultConfigProvider: ConfigProviderInnerProps = {
   },
   iconPrefixCls: computed(() => defaultIconPrefixCls),
   getPopupContainer: computed(() => () => document.body),
+  direction: computed(() => 'ltr'),
 };
 
 export const useConfigContextInject = () => {

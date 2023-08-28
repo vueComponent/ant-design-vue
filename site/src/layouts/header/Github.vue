@@ -65,7 +65,8 @@ export default defineComponent({
   }
 
   .github-icon {
-    font-size: 16px;
+    font-size: 18px;
+    color: var(--text-color);
   }
 
   .gh-count {

@@ -20,19 +20,7 @@
       Surely Form AI 助手内测开放申请 &nbsp;&nbsp;
       <a target="_blank" href="https://form.antdv.com">立即申请</a>
     </div>
-    <a-popover
-      v-model:open="menuVisible"
-      overlay-class-name="popover-menu"
-      placement="bottomRight"
-      trigger="click"
-      arrow-point-at-center
-    >
-      <UnorderedListOutlined class="nav-phone-icon" />
-      <template #content>
-        <Menu :is-mobile="isMobile" />
-      </template>
-    </a-popover>
-    <a-row :style="{ flexFlow: 'nowrap', height: 64 }">
+    <a-row :style="{ flexFlow: 'nowrap', height: 64, position: 'relative' }">
       <a-col v-bind="colProps[0]">
         <Logo />
       </a-col>
@@ -45,6 +33,18 @@
         />
         <Menu v-if="!isMobile" />
       </a-col>
+      <a-popover
+        v-model:open="menuOpen"
+        overlay-class-name="popover-menu"
+        placement="bottomRight"
+        trigger="click"
+        arrow-point-at-center
+      >
+        <UnorderedListOutlined class="nav-phone-icon" />
+        <template #content>
+          <Menu :is-mobile="isMobile" />
+        </template>
+      </a-popover>
     </a-row>
     <a-modal
       title="新版发布，邀您体验"
@@ -105,7 +105,7 @@ export default defineComponent({
       return ['', 'index', 'index-cn'].includes(route.path);
     });
 
-    const menuVisible = ref(false);
+    const menuOpen = ref(false);
     const colProps = isHome.value
       ? [{ flex: 'none' }, { flex: 'auto' }]
       : [
@@ -175,7 +175,7 @@ export default defineComponent({
         'home-header': isHome.value,
       },
       colProps,
-      menuVisible,
+      menuOpen,
       onTriggerSearching,
       visibleAlertBanner,
       cancelButtonProps,

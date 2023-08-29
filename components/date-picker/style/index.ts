@@ -1286,7 +1286,7 @@ const genPickerStyle: GenerateStyle<PickerToken> = token => {
             background: colorBgElevated,
             borderRadius: borderRadiusLG,
             boxShadow: boxShadowSecondary,
-            transition: `margin ${motionDurationSlow}`,
+            transition: `transform ${motionDurationSlow} ease-out`,
 
             // ======================== Layout ========================
             [`${componentCls}-panel-layout`]: {

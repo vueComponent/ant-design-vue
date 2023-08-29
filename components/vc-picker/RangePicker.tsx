@@ -1125,7 +1125,7 @@ function RangerPicker<DateType>() {
           return (
             <div
               class={`${prefixCls}-panel-container`}
-              style={{ marginLeft: `${panelLeft.value}px` }}
+              style={{ transform: `translateX(${panelLeft.value}px)` }}
               ref={panelDivRef}
               onMousedown={e => {
                 e.preventDefault();

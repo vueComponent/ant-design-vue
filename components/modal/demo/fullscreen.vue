@@ -45,7 +45,7 @@ const handleOk = (e: MouseEvent) => {
   open.value = false;
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .full-modal {
   .ant-modal {
     max-width: 100%;

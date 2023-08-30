@@ -101,7 +101,7 @@ const resetForm = () => {
   formRef.value.resetFields();
 };
 const removeDomain = (item: Domain) => {
-  let index = dynamicValidateForm.domains.indexOf(item);
+  const index = dynamicValidateForm.domains.indexOf(item);
   if (index !== -1) {
     dynamicValidateForm.domains.splice(index, 1);
   }

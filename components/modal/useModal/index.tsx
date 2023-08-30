@@ -12,15 +12,15 @@ import destroyFns from '../destroyFns';
 let uuid = 0;
 
 interface ElementsHolderRef {
-  addModal: (modal: () => JSX.Element) => () => void;
+  addModal: (modal: () => VueNode) => () => void;
 }
 
 const ElementsHolder = defineComponent({
   name: 'ElementsHolder',
   inheritAttrs: false,
   setup(_, { expose }) {
-    const modals = shallowRef<(() => JSX.Element)[]>([]);
-    const addModal = (modal: () => JSX.Element) => {
+    const modals = shallowRef<(() => VueNode)[]>([]);
+    const addModal = (modal: () => VueNode) => {
       modals.value.push(modal);
       modals.value = modals.value.slice();
       return () => {

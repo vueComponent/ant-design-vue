@@ -13,6 +13,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,

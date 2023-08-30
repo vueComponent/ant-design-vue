@@ -16,7 +16,7 @@ import { getMotionName, getUUID } from './util';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'Dialog',
+  name: 'VcDialog',
   inheritAttrs: false,
   props: initDefaultProps(
     {

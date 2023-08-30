@@ -54,7 +54,7 @@
     "lint:demo": "eslint --fix components/*/demo/*.vue",
     "lint:md": "eslint --fix *.md",
     "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx'",
-    "lint:site": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx,vue ./site",
+    "lint:site": "eslint --fix -c ./.eslintrc.js --ext .jsx,.js,.ts,.tsx,vue ./site",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
     "codecov": "codecov",
     "routes": "node site/scripts/genrateRoutes.js",

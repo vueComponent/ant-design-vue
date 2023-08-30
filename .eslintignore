@@ -8,5 +8,6 @@ lib/
 _site/
 dist/
 site/dist/
-components/version/version.tsx
+components/version/version.ts
 site/src/router/demoRoutes.js
+locale/

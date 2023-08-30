@@ -12,7 +12,7 @@ export type ContentRef = {
 };
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'Content',
+  name: 'DialogContent',
   inheritAttrs: false,
   props: {
     ...dialogPropTypes(),

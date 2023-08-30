@@ -206,7 +206,7 @@ describe('Locale Provider', () => {
         return null;
       },
     };
-    for (let locale of locales) {
+    for (const locale of locales) {
       document.body.innerHTML = '';
       mount(
         {

@@ -91,7 +91,7 @@ export interface HeaderProps<RecordType = DefaultRecordType> {
 }
 
 export default defineComponent<HeaderProps>({
-  name: 'Header',
+  name: 'TableHeader',
   inheritAttrs: false,
   props: ['columns', 'flattenColumns', 'stickyOffsets', 'customHeaderRow'] as any,
   setup(props) {

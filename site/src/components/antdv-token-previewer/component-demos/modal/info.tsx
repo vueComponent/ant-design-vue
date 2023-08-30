@@ -15,6 +15,7 @@ const Demo = defineComponent({
           </div>
         ),
         onOk() {
+          // eslint-disable-next-line no-console
           console.log('i am ok');
         },
       });

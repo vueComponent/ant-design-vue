@@ -107,7 +107,7 @@ describe('message', () => {
 
   // https:// github.com/ant-design/ant-design/issues/8201
   it('should hide message correctly', async () => {
-    let hide = message.loading('Action in progress..', 0);
+    const hide = message.loading('Action in progress..', 0);
     await Promise.resolve();
     expect(document.querySelectorAll('.ant-message-notice').length).toBe(1);
     hide();

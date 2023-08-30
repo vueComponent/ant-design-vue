@@ -368,7 +368,7 @@ function pub(done) {
   }
 }
 
-let startTime = new Date();
+const startTime = new Date();
 gulp.task('compile-with-es', done => {
   console.log('start compile at ', startTime);
   console.log('[Parallel] Compile to es...');
@@ -452,7 +452,7 @@ gulp.task(
           newVersion.trim() === version
         ) {
           // eslint-disable-next-line no-unused-vars
-          runCmd('npm', ['run', 'pub'], code => {
+          runCmd('npm', ['run', 'pub'], _code => {
             done();
           });
         } else {

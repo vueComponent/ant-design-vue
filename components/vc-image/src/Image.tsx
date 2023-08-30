@@ -64,7 +64,7 @@ export const mergeDefaultValue = <T extends object>(obj: T, defaultValues: objec
 let uuid = 0;
 const ImageInternal = defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'Image',
+  name: 'VcImage',
   inheritAttrs: false,
   props: imageProps(),
   emits: ['click', 'error'],

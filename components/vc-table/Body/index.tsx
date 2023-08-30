@@ -22,7 +22,7 @@ export interface BodyProps<RecordType> {
 }
 
 export default defineComponent<BodyProps<any>>({
-  name: 'Body',
+  name: 'TableBody',
   props: [
     'data',
     'getRowKey',

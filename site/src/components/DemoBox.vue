@@ -182,7 +182,7 @@ export default defineComponent({
       type.value = type.value === 'TS' ? 'JS' : 'TS';
     };
     const handleCodeSandbox = () => {
-      const code = codeRef.value!.innerText;
+      const code = codeRef.value.innerText;
       const params = getCodeSandboxParams(code, {
         title: `${title.value} - ant-design-vue@${packageInfo.version}`,
       });

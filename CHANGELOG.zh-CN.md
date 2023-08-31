@@ -10,6 +10,15 @@
 
 ---
 
+## 4.0.2
+
+- 🐞 修复 useMessage 导致 body 被移除问题 [#6880](https://github.com/vueComponent/ant-design-vue/issues/6880)
+- 🐞 修复 Button loading 切换后，水波纹效果不消失问题 [#6895](https://github.com/vueComponent/ant-design-vue/issues/6895)
+- 🐞 修复 Image 关闭后 flip 没有重置问题 [#6913](https://github.com/vueComponent/ant-design-vue/issues/6913)
+- 🐞 修复 ImageGroup 动画效果丢失问题 [#6898](https://github.com/vueComponent/ant-design-vue/issues/6898)
+- 🐞 修复 Modal 缺少 onUpdate:open 属性声明 [#6876](https://github.com/vueComponent/ant-design-vue/issues/6876)
+- 🐞 修复 Transfer 的 Checkbox 边缘处会触发多次 click 问题 [#6902](https://github.com/vueComponent/ant-design-vue/issues/6902)
+
 ## 4.0.1
 
 - 🌟 FloatButton 添加 Badge 支持 [#6738](https://github.com/vueComponent/ant-design-vue/issues/6738)

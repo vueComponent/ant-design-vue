@@ -10,6 +10,15 @@
 
 ---
 
+## 4.0.2
+
+- 🐞 Fix useMessage causing body to be removed [#6880](https://github.com/vueComponent/ant-design-vue/issues/6880)
+- 🐞 Fix the problem that the water ripple effect does not disappear after Button loading is switched [#6895](https://github.com/vueComponent/ant-design-vue/issues/6895)
+- 🐞 Fixed the problem that flip does not reset after Image is closed [#6913](https://github.com/vueComponent/ant-design-vue/issues/6913)
+- 🐞 Fix ImageGroup animation effect loss problem [#6898](https://github.com/vueComponent/ant-design-vue/issues/6898)
+- 🐞 Fix Modal missing onUpdate:open attribute declaration [#6876](https://github.com/vueComponent/ant-design-vue/issues/6876)
+- 🐞 Fixed the issue of multiple clicks being triggered at the edge of Transfer's Checkbox [#6902](https://github.com/vueComponent/ant-design-vue/issues/6902)
+
 ## 4.0.1
 
 - 🌟 FloatButton add Badge support [#6738](https://github.com/vueComponent/ant-design-vue/issues/6738)

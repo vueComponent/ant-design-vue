@@ -82,6 +82,22 @@
         <slot v-if="type === 'TS'" name="htmlCode" />
         <slot v-else name="jsVersionHtml" />
       </div>
+      <div class="code-box-actions code-box-actions-bottom">
+        <a-tooltip :title="$t(`app.demo.code.hide`)">
+          <span class="code-expand-icon code-box-code-action">
+            <img
+              alt="expand code"
+              :src="
+                theme === 'dark'
+                  ? 'https://gw.alipayobjects.com/zos/antfincdn/CjZPwcKUG3/OpROPHYqWmrMDBFMZtKF.svg'
+                  : 'https://gw.alipayobjects.com/zos/antfincdn/4zAaozCvUH/unexpand.svg'
+              "
+              :class="'code-expand-icon-show'"
+              @click="handleCodeExpand($event, sectionId)"
+            />
+          </span>
+        </a-tooltip>
+      </div>
     </section>
   </section>
 </template>
@@ -164,10 +180,16 @@ export default defineComponent({
           ).trim()
         : '',
     );
-    const handleCodeExpand = () => {
+    const handleCodeExpand = (_, sectionId?) => {
       if (globalConfig.blocked.value) {
         warning();
         return;
+      }
+      if (sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView();
+        }
       }
       codeExpand.value = !codeExpand.value;
     };

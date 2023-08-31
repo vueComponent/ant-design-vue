@@ -77,7 +77,7 @@ describe('Descriptions', () => {
       },
     });
     expect(errorSpy).toHaveBeenCalledWith(
-      'Warning: [antdv: Descriptions] Sum of column `span` in a line not match `column` of Descriptions.',
+      'Warning: [ant-design-vue: Descriptions] Sum of column `span` in a line not match `column` of Descriptions.',
     );
   });
 

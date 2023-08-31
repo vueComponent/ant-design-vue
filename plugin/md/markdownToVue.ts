@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import LRUCache from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import type { MarkdownOptions, MarkdownParsedData, MarkdownRenderer } from './markdown/markdown';
 import { createMarkdownRenderer } from './markdown/markdown';
 import { deeplyParseHeader } from './utils/parseHeader';

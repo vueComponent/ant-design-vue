@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Table from '..';
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 
 const columns = [
   { title: 'Column 1', dataIndex: 'address', key: '1' },
@@ -54,7 +54,7 @@ describe('Table', () => {
       },
       { sync: false },
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });
@@ -69,7 +69,7 @@ describe('Table', () => {
       },
       { sync: false },
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });
@@ -91,7 +91,7 @@ describe('Table', () => {
       },
       { sync: false },
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });
@@ -106,7 +106,7 @@ describe('Table', () => {
       },
       { sync: false },
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });

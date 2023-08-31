@@ -39,7 +39,7 @@ describe('Calendar', () => {
       wrapper.findAll('.ant-picker-cell')[0].trigger('click');
     }, 0);
     await asyncExpect(() => {
-      expect(onSelect).toHaveBeenCalledWith(expect.anything());
+      expect(onSelect).toHaveBeenCalled();
       const value = onSelect.mock.calls[0][0];
       expect(dayjs.isDayjs(value)).toBe(true);
     });
@@ -288,15 +288,7 @@ describe('Calendar', () => {
     const end = new dayjs('2019-11-01');
     const onValueChange = jest.fn();
     await createWrapper(start, end, value, onValueChange);
-    expect(onValueChange).toHaveBeenCalledWith(value.year('2019').month('3'));
-  });
-  it('if value.month > end.month, set value.month to end.month1', async () => {
-    const value = new dayjs('1990-01-03');
-    const start = new dayjs('2019-04-01');
-    const end = new dayjs('2019-11-01');
-    const onValueChange = jest.fn();
-    await createWrapper(start, end, value, onValueChange);
-    expect(onValueChange).toHaveBeenCalledWith(value.year('2019').month('3'));
+    expect(onValueChange).toHaveBeenCalledWith(...[value.year(2019).month(3), 'year']);
   });
 
   it('if start.month > value.month, set value.month to start.month ', async () => {
@@ -305,7 +297,7 @@ describe('Calendar', () => {
     const end = new dayjs('2019-03-01');
     const onValueChange = jest.fn();
     await createWrapper(start, end, value, onValueChange);
-    expect(onValueChange).toHaveBeenCalledWith(value.year('2019').month('10'));
+    expect(onValueChange).toHaveBeenCalledWith(...[value.year(2019).month(10), 'year']);
   });
 
   it('onMonthChange should work correctly', async () => {
@@ -338,7 +330,7 @@ describe('Calendar', () => {
     openSelect(wrapper, '.ant-picker-calendar-month-select');
     await sleep(100);
     clickSelectItem(wrapper);
-    expect(onValueChange).toHaveBeenCalledWith(value.month(10));
+    expect(onValueChange).toHaveBeenCalledWith(...[value.year(2018).month(10), 'month']);
   });
 
   it('onTypeChange should work correctly', () => {

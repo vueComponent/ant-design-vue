@@ -90,9 +90,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
 <form style="margin: 16px 0px;" class="ant-form ant-form-inline">
   <div class="ant-form-item">
     <div class="ant-row ant-form-row">
-      <div class="ant-col ant-form-item-label"><label class="" title="Active">Active
-          <!---->
-        </label></div>
+      <div class="ant-col ant-form-item-label"><label class="" title="Active">Active</label></div>
       <div class="ant-col ant-form-item-control">
         <div class="ant-form-item-control-input">
           <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
@@ -109,9 +107,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
   </div>
   <div class="ant-form-item">
     <div class="ant-row ant-form-row">
-      <div class="ant-col ant-form-item-label"><label class="" title="Button Block">Button Block
-          <!---->
-        </label></div>
+      <div class="ant-col ant-form-item-label"><label class="" title="Button Block">Button Block</label></div>
       <div class="ant-col ant-form-item-control">
         <div class="ant-form-item-control-input">
           <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
@@ -128,9 +124,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
   </div>
   <div class="ant-form-item">
     <div class="ant-row ant-form-row">
-      <div class="ant-col ant-form-item-label"><label class="" title="Size">Size
-          <!---->
-        </label></div>
+      <div class="ant-col ant-form-item-label"><label class="" title="Size">Size</label></div>
       <div class="ant-col ant-form-item-control">
         <div class="ant-form-item-control-input">
           <div class="ant-form-item-control-input-content">
@@ -145,9 +139,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
   </div>
   <div class="ant-form-item">
     <div class="ant-row ant-form-row">
-      <div class="ant-col ant-form-item-label"><label class="" title="Button Shape">Button Shape
-          <!---->
-        </label></div>
+      <div class="ant-col ant-form-item-label"><label class="" title="Button Shape">Button Shape</label></div>
       <div class="ant-col ant-form-item-control">
         <div class="ant-form-item-control-input">
           <div class="ant-form-item-control-input-content">
@@ -162,9 +154,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
   </div>
   <div class="ant-form-item">
     <div class="ant-row ant-form-row">
-      <div class="ant-col ant-form-item-label"><label class="" title="Avatar Shape">Avatar Shape
-          <!---->
-        </label></div>
+      <div class="ant-col ant-form-item-label"><label class="" title="Avatar Shape">Avatar Shape</label></div>
       <div class="ant-col ant-form-item-control">
         <div class="ant-form-item-control-input">
           <div class="ant-form-item-control-input-content">

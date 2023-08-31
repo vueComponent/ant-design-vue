@@ -27,7 +27,7 @@ exports[`renders ./components/progress/demo/circle.vue correctly 1`] = `
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-    </svg><span class="ant-progress-text"><span role="img" aria-label="close" class="anticon anticon-close"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></div>
+    </svg><span class="ant-progress-text"><span role="img" aria-label="close" class="anticon anticon-close"><svg focusable="false" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"></path></svg><!----></span></span></div>
 </div>
 <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-success ant-progress-show-info ant-progress-default">
   <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -41,7 +41,7 @@ exports[`renders ./components/progress/demo/circle.vue correctly 1`] = `
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-    </svg><span class="ant-progress-text"><span role="img" aria-label="check" class="anticon anticon-check"><svg focusable="false" class="" data-icon="check" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg></span></span></div>
+    </svg><span class="ant-progress-text"><span role="img" aria-label="check" class="anticon anticon-check"><svg focusable="false" data-icon="check" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg><!----></span></span></div>
 </div>
 `;
 
@@ -61,21 +61,21 @@ exports[`renders ./components/progress/demo/circle-dynamic.vue correctly 1`] = `
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
       </svg><span class="ant-progress-text" title="0%">0%</span></div>
   </div>
-  <div class="ant-btn-group"><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span></button><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span></button></div>
+  <div class="ant-btn-group"><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg><!----></span></button><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"></path></svg><!----></span></button></div>
 </div>
 `;
 
 exports[`renders ./components/progress/demo/circle-micro.vue correctly 1`] = `
 <div>
   <div role="progressbar" class="ant-progress ant-progress-inline-circle ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-12">
-    <div class="ant-progress-inner" style="width: 12px; height: 12px; font-size: 7.8px;">
-      <!----><span><svg class="ant-progress-circle" viewBox="0 0 100 100"><!----><path d="M 50,50 m 0,-40
+    <div class="ant-progress-inner" style="width: 12px; height: 12px; font-size: 7.8px;"><span><svg class="ant-progress-circle" viewBox="0 0 100 100"><!----><path d="M 50,50 m 0,-40
    a 40,40 0 1 1 0,80
    a 40,40 0 1 1 0,-80" stroke="#e6f4ff" stroke-linecap="round" stroke-width="20" fill-opacity="0" class="ant-progress-circle-trail" style="stroke: #e6f4ff; stroke-dasharray: 251.32741228718345px 251.32741228718345px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path><path d="M 50,50 m 0,-40
    a 40,40 0 1 1 0,80
    a 40,40 0 1 1 0,-80" stroke="" stroke-linecap="round" stroke-width="20" opacity="1" fill-opacity="0" class="ant-progress-circle-path" style="stroke-dasharray: 150.79644737231007px 251.32741228718345px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path><path d="M 50,50 m 0,-40
    a 40,40 0 1 1 0,80
    a 40,40 0 1 1 0,-80" stroke="" stroke-linecap="round" stroke-width="20" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 251.32741228718345px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path></svg></span>
+      <!---->
     </div>
   </div><span>代码发布</span>
 </div>
@@ -108,7 +108,7 @@ exports[`renders ./components/progress/demo/circle-mini.vue correctly 1`] = `
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-    </svg><span class="ant-progress-text"><span role="img" aria-label="close" class="anticon anticon-close"><svg focusable="false" class="" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg></span></span></div>
+    </svg><span class="ant-progress-text"><span role="img" aria-label="close" class="anticon anticon-close"><svg focusable="false" data-icon="close" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"></path></svg><!----></span></span></div>
 </div>
 <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-success ant-progress-show-info ant-progress-80">
   <div class="ant-progress-inner" style="width: 80px; height: 80px; font-size: 18px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -122,7 +122,7 @@ exports[`renders ./components/progress/demo/circle-mini.vue correctly 1`] = `
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-    </svg><span class="ant-progress-text"><span role="img" aria-label="check" class="anticon anticon-check"><svg focusable="false" class="" data-icon="check" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg></span></span></div>
+    </svg><span class="ant-progress-text"><span role="img" aria-label="check" class="anticon anticon-check"><svg focusable="false" data-icon="check" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg><!----></span></span></div>
 </div>
 `;
 
@@ -155,7 +155,7 @@ exports[`renders ./components/progress/demo/dynamic.vue correctly 1`] = `
       </div>
     </div><span class="ant-progress-text" title="0%">0%</span>
   </div>
-  <div class="ant-btn-group"><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span></button><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span></button></div>
+  <div class="ant-btn-group"><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg><!----></span></button><button class="ant-btn ant-btn-default ant-btn-icon-only" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"></path></svg><!----></span></button></div>
 </div>
 `;
 
@@ -260,7 +260,7 @@ exports[`renders ./components/progress/demo/gradient-line.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text"><span role="img" aria-label="check" class="anticon anticon-check"><svg focusable="false" class="" data-icon="check" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg></span></span></div>
+      </svg><span class="ant-progress-text"><span role="img" aria-label="check" class="anticon anticon-check"><svg focusable="false" data-icon="check" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg><!----></span></span></div>
   </div>
 </div>
 `;
@@ -288,7 +288,7 @@ exports[`renders ./components/progress/demo/line.vue correctly 1`] = `
       <div class="ant-progress-bg" style="width: 70%; height: 8px;"></div>
       <!---->
     </div>
-  </div><span class="ant-progress-text"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span>
+  </div><span class="ant-progress-text"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"></path></svg><!----></span></span>
 </div>
 <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-success ant-progress-show-info ant-progress-default">
   <div class="ant-progress-outer" style="width: 100%; height: 8px;">
@@ -296,7 +296,7 @@ exports[`renders ./components/progress/demo/line.vue correctly 1`] = `
       <div class="ant-progress-bg" style="width: 100%; height: 8px;"></div>
       <!---->
     </div>
-  </div><span class="ant-progress-text"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg></span></span>
+  </div><span class="ant-progress-text"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg><!----></span></span>
 </div>
 <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-default">
   <div class="ant-progress-outer" style="width: 100%; height: 8px;">
@@ -333,7 +333,7 @@ exports[`renders ./components/progress/demo/line-mini.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 70%; height: 6px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span></span>
+    </div><span class="ant-progress-text"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"></path></svg><!----></span></span>
   </div>
   <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-success ant-progress-show-info ant-progress-small">
     <div class="ant-progress-outer" style="width: 100%; height: 6px;">
@@ -341,7 +341,7 @@ exports[`renders ./components/progress/demo/line-mini.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 100%; height: 6px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg></span></span>
+    </div><span class="ant-progress-text"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg><!----></span></span>
   </div>
 </div>
 `;
@@ -389,7 +389,6 @@ exports[`renders ./components/progress/demo/linecap.vue correctly 1`] = `
 
 exports[`renders ./components/progress/demo/segment.vue correctly 1`] = `
 <div>
-  <!---->
   <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
     <div class="ant-progress-outer" style="width: 100%; height: 8px;">
       <div class="ant-progress-inner">
@@ -428,6 +427,7 @@ exports[`renders ./components/progress/demo/segment.vue correctly 1`] = `
    a 47,47 0 1 1 0,94" stroke="" stroke-linecap="round" stroke-width="6" opacity="1" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 66.09291283123217px 295.3097094374406px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
       </svg><span class="ant-progress-text" title="60%">60%</span></div>
   </div>
+  <!---->
 </div>
 `;
 
@@ -505,14 +505,14 @@ exports[`renders ./components/progress/demo/size.vue correctly 1`] = `
     <!---->
     <div class="ant-space-item">
       <div role="progressbar" class="ant-progress ant-progress-inline-circle ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-20">
-        <div class="ant-progress-inner" style="width: 20px; height: 20px; font-size: 9px;">
-          <!----><span><svg class="ant-progress-circle" viewBox="0 0 100 100"><!----><path d="M 50,50 m 0,-42.5
+        <div class="ant-progress-inner" style="width: 20px; height: 20px; font-size: 9px;"><span><svg class="ant-progress-circle" viewBox="0 0 100 100"><!----><path d="M 50,50 m 0,-42.5
    a 42.5,42.5 0 1 1 0,85
    a 42.5,42.5 0 1 1 0,-85" stroke-linecap="round" stroke-width="15" fill-opacity="0" class="ant-progress-circle-trail" style="stroke-dasharray: 267.0353755551324px 267.0353755551324px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path><path d="M 50,50 m 0,-42.5
    a 42.5,42.5 0 1 1 0,85
    a 42.5,42.5 0 1 1 0,-85" stroke="" stroke-linecap="round" stroke-width="15" opacity="1" fill-opacity="0" class="ant-progress-circle-path" style="stroke-dasharray: 133.5176877775662px 267.0353755551324px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path><path d="M 50,50 m 0,-42.5
    a 42.5,42.5 0 1 1 0,85
    a 42.5,42.5 0 1 1 0,-85" stroke="" stroke-linecap="round" stroke-width="15" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 267.0353755551324px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path></svg></span>
+          <!---->
         </div>
       </div>
     </div>
@@ -555,14 +555,14 @@ exports[`renders ./components/progress/demo/size.vue correctly 1`] = `
     <!---->
     <div class="ant-space-item">
       <div role="progressbar" class="ant-progress ant-progress-circle ant-progress-status-normal ant-progress-show-info ant-progress-20">
-        <div class="ant-progress-inner" style="width: 20px; height: 20px; font-size: 9px;">
-          <!----><span><svg class="ant-progress-circle" viewBox="0 0 100 100"><!----><path d="M 50,50 m 0,42.5
+        <div class="ant-progress-inner" style="width: 20px; height: 20px; font-size: 9px;"><span><svg class="ant-progress-circle" viewBox="0 0 100 100"><!----><path d="M 50,50 m 0,42.5
    a 42.5,42.5 0 1 1 0,-85
    a 42.5,42.5 0 1 1 0,85" stroke-linecap="round" stroke-width="15" fill-opacity="0" class="ant-progress-circle-trail" style="stroke-dasharray: 192.03537555513242px 267.0353755551324px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path><path d="M 50,50 m 0,42.5
    a 42.5,42.5 0 1 1 0,-85
    a 42.5,42.5 0 1 1 0,85" stroke="" stroke-linecap="round" stroke-width="15" opacity="1" fill-opacity="0" class="ant-progress-circle-path" style="stroke-dasharray: 96.01768777756621px 267.0353755551324px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path><path d="M 50,50 m 0,42.5
    a 42.5,42.5 0 1 1 0,-85
    a 42.5,42.5 0 1 1 0,85" stroke="" stroke-linecap="round" stroke-width="15" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 267.0353755551324px; stroke-dashoffset: -37.5px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path></svg></span>
+          <!---->
         </div>
       </div>
     </div>
@@ -614,41 +614,52 @@ exports[`renders ./components/progress/demo/size.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/progress/demo/steps.vue correctly 1`] = `
-<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
-  <div class="ant-progress-steps-outer">
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="50%">50%</span>
+<div style="width: 100%;" class="ant-space ant-space-vertical">
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+      <div class="ant-progress-steps-outer">
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="50%">50%</span>
+      </div>
+    </div>
   </div>
-</div>
-<br>
-<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
-  <div class="ant-progress-steps-outer">
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="30%">30%</span>
+  <!---->
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+      <div class="ant-progress-steps-outer">
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="30%">30%</span>
+      </div>
+    </div>
   </div>
-</div>
-<br>
-<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-success ant-progress-show-info ant-progress-small">
-  <div class="ant-progress-steps-outer">
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div><span class="ant-progress-text"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg></span></span>
+  <!---->
+  <div class="ant-space-item" style="margin-bottom: 8px;">
+    <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-success ant-progress-show-info ant-progress-small">
+      <div class="ant-progress-steps-outer">
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 2px; height: 8px;"></div><span class="ant-progress-text"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg><!----></span></span>
+      </div>
+    </div>
   </div>
-</div>
-<br>
-<div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
-  <div class="ant-progress-steps-outer">
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(245, 34, 45); width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="60%">60%</span>
+  <!---->
+  <div class="ant-space-item">
+    <div role="progressbar" class="ant-progress ant-progress-line ant-progress-status-normal ant-progress-show-info ant-progress-default">
+      <div class="ant-progress-steps-outer">
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(82, 196, 26); width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item ant-progress-steps-item-active" style="background-color: rgb(245, 34, 45); width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
+        <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="60%">60%</span>
+      </div>
+    </div>
   </div>
+  <!---->
 </div>
 `;

@@ -10,7 +10,7 @@ describe('Popconfirm', () => {
   //   preventDefault: expect.any(Function),
   // })
   it('should popup Popconfirm dialog', async () => {
-    const onVisibleChange = jest.fn();
+    const onOpenChange = jest.fn();
 
     mount(
       {
@@ -22,7 +22,7 @@ describe('Popconfirm', () => {
               cancelText="No"
               mouseEnterDelay={0}
               mouseLeaveDelay={0}
-              onVisibleChange={onVisibleChange}
+              onOpenChange={onOpenChange}
             >
               <span>Delete</span>
             </Popconfirm>
@@ -37,12 +37,12 @@ describe('Popconfirm', () => {
       triggerNode.dispatchEvent(new MouseEvent('click'));
     });
     await asyncExpect(() => {
-      expect(onVisibleChange).toHaveBeenLastCalledWith(true, undefined);
+      expect(onOpenChange).toHaveBeenLastCalledWith(true, undefined);
       expect($$('.popconfirm-test').length).toBe(1);
       triggerNode.dispatchEvent(new MouseEvent('click'));
     }, 1000);
     await asyncExpect(() => {
-      expect(onVisibleChange).toHaveBeenLastCalledWith(false, undefined);
+      expect(onOpenChange).toHaveBeenLastCalledWith(false, undefined);
     });
   });
 

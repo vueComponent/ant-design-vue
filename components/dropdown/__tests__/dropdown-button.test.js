@@ -10,7 +10,7 @@ describe('DropdownButton', () => {
       },
       disabled: false,
       trigger: ['hover'],
-      visible: true,
+      open: true,
     };
 
     const wrapper = mount(Dropdown.Button, {

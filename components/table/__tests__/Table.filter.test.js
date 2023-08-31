@@ -1,4 +1,4 @@
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import { asyncExpect, sleep } from '../../../tests/utils';
 import Table from '..';
@@ -60,7 +60,7 @@ describe('Table.filter', () => {
 
   it('renders filter correctly', done => {
     const wrapper = mount(Table, getTableOptions());
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });
@@ -129,7 +129,7 @@ describe('Table.filter', () => {
       },
     });
 
-    Vue.nextTick(() => {
+    nextTick(() => {
       const dropdownWrapper = mount({
         render() {
           return wrapper.find({ name: 'Trigger' }).vm.getComponent();
@@ -164,7 +164,7 @@ describe('Table.filter', () => {
         },
       ],
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       dropdown = wrapper.find({ name: 'ADropdown' });
       expect(dropdown.props().visible).toBe(false);
       done();
@@ -212,7 +212,7 @@ describe('Table.filter', () => {
         },
       ],
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.findAll('tbody tr').length).toBe(4);
       done();
     });
@@ -240,7 +240,7 @@ describe('Table.filter', () => {
         },
       ],
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.findAll('tbody tr').length).toBe(4);
       done();
     });

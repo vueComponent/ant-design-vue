@@ -41,8 +41,14 @@ export default defineComponent({
     });
     const api = computed(() => {
       return `
-      <h2 id="api"><span>API</span><a href="#api" class="anchor">#</a></h2>
-      ${docHtml.value.split('<h2 id="api">API <a class="header-anchor" href="#api">')[1]}
+      <h2 id="api">API <a class="header-anchor" href="#api"><span aria-hidden="true" class="anchor">#</span></a></h2>
+      ${
+        docHtml.value.split(
+          `<h2 id="api">API <a class="header-anchor" href="#api">
+          <span aria-hidden="true" class="anchor">#</span>
+        </a></h2>`,
+        )[1]
+      }
       `;
     });
     return { frontmatter, description, api, route, showAd, docHtml };

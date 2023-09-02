@@ -12,7 +12,7 @@
         </li> -->
         <li v-if="isCN && isEffective(effectiveTime.kkb)" class="sponsorsItem">
           <a href="https://datayi.cn/w/Y9J3M2vR" target="_blank">
-            <img height="66" src="https://qn.antdv.com/kaikeba_ssr.jpeg" alt="kaikeba" />
+            <img height="66" src="https://aliyuncdn.antdv.com/kaikeba_ssr.jpeg" alt="kaikeba" />
           </a>
         </li>
         <li class="sponsorsItem" style="padding: 10px 0">

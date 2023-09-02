@@ -4,7 +4,7 @@
       href="https://time.geekbang.org/course/intro/100024601?code=KHKYcoBU6vZa8nMglg7AWfDxxi3BWrz9INAzAY3umPk%3D"
       target="_blank"
     >
-      <img width="150" alt="Vue 实战教程" src="https://qn.antdv.com/geektime-vue.jpeg" />
+      <img width="150" alt="Vue 实战教程" src="https://aliyuncdn.antdv.com/geektime-vue.jpeg" />
     </a>
     <div class="close" @click="visible = false">
       <close-outlined />

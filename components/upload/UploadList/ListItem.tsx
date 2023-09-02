@@ -108,7 +108,7 @@ export default defineComponent({
 
       const iconNode = iconRender({ file });
       let icon = <div class={`${prefixCls}-text-icon`}>{iconNode}</div>;
-      if (listType === 'picture' || listType === 'picture-card') {
+      if (listType === 'picture' || listType === 'picture-card' || listType === 'picture-circle') {
         if (mergedStatus.value === 'uploading' || (!file.thumbUrl && !file.url)) {
           const uploadingClassName = {
             [`${prefixCls}-list-item-thumbnail`]: true,
@@ -168,7 +168,7 @@ export default defineComponent({
               title: locale.downloadFile,
             })
           : null;
-      const downloadOrDelete = listType !== 'picture-card' && (
+      const downloadOrDelete = listType !== 'picture-card' && listType !== 'picture-circle' && (
         <span
           key="download-delete"
           class={[
@@ -227,7 +227,7 @@ export default defineComponent({
         </a>
       ) : null;
 
-      const pictureCardActions = listType === 'picture-card' &&
+      const pictureCardActions = (listType === 'picture-card' || listType === 'picture-circle') &&
         mergedStatus.value !== 'uploading' && (
           <span class={`${prefixCls}-list-item-actions`}>
             {previewIcon}

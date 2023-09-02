@@ -51,7 +51,11 @@ export default defineComponent({
       motionAppear.value == true;
     });
     watchEffect(() => {
-      if (props.listType !== 'picture' && props.listType !== 'picture-card') {
+      if (
+        props.listType !== 'picture' &&
+        props.listType !== 'picture-card' &&
+        props.listType !== 'picture-circle'
+      ) {
         return;
       }
       (props.items || []).forEach((file: InternalUploadFile) => {
@@ -108,7 +112,7 @@ export default defineComponent({
       let icon: VueNode = isLoading ? <LoadingOutlined /> : <PaperClipOutlined />;
       if (props.listType === 'picture') {
         icon = isLoading ? <LoadingOutlined /> : fileIcon;
-      } else if (props.listType === 'picture-card') {
+      } else if (props.listType === 'picture-card' || props.listType === 'picture-circle') {
         icon = isLoading ? props.locale.uploading : fileIcon;
       }
       return icon;
@@ -160,12 +164,16 @@ export default defineComponent({
       delete motion.onAfterLeave;
       const motionConfig = {
         ...getTransitionGroupProps(
-          `${prefixCls.value}-${props.listType === 'picture-card' ? 'animate-inline' : 'animate'}`,
+          `${prefixCls.value}-${
+            props.listType === 'picture-card' || props.listType === 'picture-circle'
+              ? 'animate-inline'
+              : 'animate'
+          }`,
         ),
         class: listClassNames.value,
         appear: motionAppear.value,
       };
-      return props.listType !== 'picture-card'
+      return props.listType !== 'picture-card' && props.listType !== 'picture-circle'
         ? {
             ...motion,
             ...motionConfig,

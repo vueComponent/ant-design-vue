@@ -71,7 +71,7 @@ export interface UploadLocale {
 }
 
 export type UploadType = 'drag' | 'select';
-export type UploadListType = 'text' | 'picture' | 'picture-card';
+export type UploadListType = 'text' | 'picture' | 'picture-card' | 'picture-circle';
 export type UploadListProgressProps = Omit<ProgressProps, 'percent' | 'type'> & {
   class?: string;
   style?: CSSProperties;

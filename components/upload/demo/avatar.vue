@@ -37,6 +37,23 @@ Click to upload user's avatar, and validate size and format of picture with `bef
       <div class="ant-upload-text">Upload</div>
     </div>
   </a-upload>
+  <a-upload
+    v-model:file-list="fileList"
+    name="avatar"
+    list-type="picture-circle"
+    class="avatar-uploader"
+    :show-upload-list="false"
+    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    :before-upload="beforeUpload"
+    @change="handleChange"
+  >
+    <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
+    <div v-else>
+      <loading-outlined v-if="loading"></loading-outlined>
+      <plus-outlined v-else></plus-outlined>
+      <div class="ant-upload-text">Upload</div>
+    </div>
+  </a-upload>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';
@@ -85,17 +102,8 @@ const beforeUpload = (file: UploadProps['fileList'][number]) => {
 };
 </script>
 <style scoped>
-.avatar-uploader > .ant-upload {
-  width: 128px;
-  height: 128px;
-}
-.ant-upload-select-picture-card i {
-  font-size: 32px;
-  color: #999;
-}
-
-.ant-upload-select-picture-card .ant-upload-text {
+.ant-upload-select-picture-card .ant-upload-text,
+.ant-upload-select-picture-circle .ant-upload-text {
   margin-top: 8px;
-  color: #666;
 }
 </style>

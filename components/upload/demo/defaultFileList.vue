@@ -31,9 +31,10 @@ const fileList = ref<UploadProps['fileList']>([
   {
     uid: '1',
     name: 'xxx.png',
-    status: 'done',
+    status: 'uploading',
     response: 'Server Error 500', // custom error message to show
     url: 'http://www.baidu.com/xxx.png',
+    percent: 33,
   },
   {
     uid: '2',

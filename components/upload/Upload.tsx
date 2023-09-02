@@ -370,15 +370,18 @@ export default defineComponent({
         delete rcUploadProps.id;
       }
 
-      const rtlCls = {
+      const wrapperCls = classNames(`${prefixCls.value}-wrapper`, className, hashId.value, {
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
-      };
+        [`${prefixCls.value}-picture-card-wrapper`]: listType === 'picture-card',
+        [`${prefixCls.value}-picture-circle-wrapper`]: listType === 'picture-circle',
+      });
 
       if (type === 'drag') {
         const dragCls = classNames(
+          hashId.value,
           prefixCls.value,
+          `${prefixCls.value}-drag`,
           {
-            [`${prefixCls.value}-drag`]: true,
             [`${prefixCls.value}-drag-uploading`]: mergedFileList.value.some(
               file => file.status === 'uploading',
             ),
@@ -391,10 +394,7 @@ export default defineComponent({
         );
 
         return wrapSSR(
-          <span
-            {...attrs}
-            class={classNames(`${prefixCls.value}-wrapper`, rtlCls, className, hashId.value)}
-          >
+          <span {...attrs} class={wrapperCls}>
             <div
               class={dragCls}
               onDrop={onFileDrop}
@@ -416,11 +416,8 @@ export default defineComponent({
         );
       }
 
-      const uploadButtonCls = classNames(prefixCls.value, {
-        [`${prefixCls.value}-select`]: true,
-        [`${prefixCls.value}-select-${listType}`]: true,
+      const uploadButtonCls = classNames(prefixCls.value, `${prefixCls.value}-select`, {
         [`${prefixCls.value}-disabled`]: mergedDisabled.value,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       });
       const children = flattenChildren(slots.default?.());
       const renderUploadButton = (uploadButtonStyle?: CSSProperties) => (
@@ -429,27 +426,15 @@ export default defineComponent({
         </div>
       );
 
-      if (listType === 'picture-card') {
+      if (listType === 'picture-card' || listType === 'picture-circle') {
         return wrapSSR(
-          <span
-            {...attrs}
-            class={classNames(
-              `${prefixCls.value}-wrapper`,
-              `${prefixCls.value}-picture-card-wrapper`,
-              rtlCls,
-              attrs.class,
-              hashId.value,
-            )}
-          >
+          <span {...attrs} class={wrapperCls}>
             {renderUploadList(renderUploadButton, !!(children && children.length))}
           </span>,
         );
       }
       return wrapSSR(
-        <span
-          {...attrs}
-          class={classNames(`${prefixCls.value}-wrapper`, rtlCls, attrs.class, hashId.value)}
-        >
+        <span {...attrs} class={wrapperCls}>
           {renderUploadButton(children && children.length ? undefined : { display: 'none' })}
           {renderUploadList()}
         </span>,

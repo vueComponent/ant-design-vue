@@ -34,7 +34,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 | iconRender | 自定义显示 icon | v-slot:iconRender="{file: UploadFile, listType?: UploadListType}" | - | 3.0 |  |
 | isImageUrl | 自定义缩略图是否使用 &lt;img /> 标签进行显示 | (file: UploadFile) => boolean | - | 3.0 |  |
 | itemRender | 自定义上传列表项 | v-slot:itemRender="{originNode: VNode, file: UploadFile, fileList: object\[], actions: { download: function, preview: function, remove: function }" | - | 3.0 |  |
-| listType | 上传列表的内建样式，支持三种基本样式 `text`, `picture` 和 `picture-card` | string | `text` |  |  |
+| listType | 上传列表的内建样式，支持三种基本样式 `text`, `picture`, `picture-card` 和 `picture-circle` | string | `text` | `picture-circle`(4.0) |  |
 | maxCount | 限制上传数量。当为 1 时，始终用最新上传的文件代替当前文件 | number | - | 3.0 |  |
 | method | 上传请求的 http method | string | `post` | 1.5.0 |  |
 | multiple | 是否支持多选文件，`ie10+` 支持。开启后按住 ctrl 可选择多个文件。 | boolean | false |  |  |

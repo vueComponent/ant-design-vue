@@ -1,6 +1,7 @@
 import { Keyframes } from '../../_util/cssinjs';
 import type { UploadToken } from '.';
 import type { GenerateStyle } from '../../theme/internal';
+import { initFadeMotion } from '../../style/motion';
 
 const uploadAnimateInlineIn = new Keyframes('uploadAnimateInlineIn', {
   from: {
@@ -43,6 +44,9 @@ const genMotionStyle: GenerateStyle<UploadToken> = token => {
           animationName: uploadAnimateInlineOut,
         },
       },
+    },
+    {
+      [`${componentCls}-wrapper`]: initFadeMotion(token),
     },
     uploadAnimateInlineIn,
     uploadAnimateInlineOut,

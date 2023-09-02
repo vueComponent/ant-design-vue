@@ -4,6 +4,7 @@
     <Avatar />
     <DefaultFileList />
     <PictureCard />
+    <PictureCircle />
     <FileList />
     <Drag />
     <PictureStyle />
@@ -35,6 +36,7 @@ import maxCountVue from './max-count.vue';
 import uploadCustomActionIconVue from './upload-custom-action-icon.vue';
 import uploadPngOnlyVue from './upload-png-only.vue';
 import customRenderVue from './custom-render.vue';
+import PictureCircle from './picture-circle.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -59,6 +61,7 @@ export default defineComponent({
     uploadCustomActionIconVue,
     uploadPngOnlyVue,
     customRenderVue,
+    PictureCircle,
   },
   setup() {
     return {};

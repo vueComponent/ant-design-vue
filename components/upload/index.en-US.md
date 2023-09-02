@@ -33,7 +33,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | iconRender | Custom show icon | v-slot:iconRender="{file: UploadFile, listType?: UploadListType}" | - | 3.0 |  |
 | isImageUrl | Customize if render &lt;img /> in thumbnail | (file: UploadFile) => boolean | - | 3.0 |  |
 | itemRender | Custom item of uploadList | v-slot:itemRender="{originNode: VNode, file: UploadFile, fileList: object\[], actions: { download: function, preview: function, remove: function }" | - | 3.0 |  |
-| listType | Built-in stylesheets, support for three types: `text`, `picture` or `picture-card` | string | `text` |  |  |
+| listType | Built-in stylesheets, support for three types: `text`, `picture`, `picture-card` or `picture-circle` | string | `text` | `picture-circle`(4.0) |  |
 | maxCount | Limit the number of uploaded files. Will replace current one when `maxCount` is `1` | number | - | 3.0 |  |
 | method | http method of upload request | string | `post` | 1.5.0 |  |
 | multiple | Whether to support selected multiple file. `IE10+` supported. You can select multiple files with CTRL holding down while multiple is set to be true | boolean | false |  |  |

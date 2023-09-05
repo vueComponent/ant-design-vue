@@ -41,7 +41,6 @@ Add or remove form items dynamically.
       <MinusCircleOutlined
         v-if="dynamicValidateForm.domains.length > 1"
         class="dynamic-delete-button"
-        :disabled="dynamicValidateForm.domains.length === 1"
         @click="removeDomain(domain)"
       />
     </a-form-item>

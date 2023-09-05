@@ -68,6 +68,13 @@ module.exports = {
         'vue/no-reserved-component-names': 'off',
       },
     },
+    {
+      files: ['*.json'],
+      rules: {
+        'comma-dangle': 'off',
+        semi: 'off',
+      },
+    },
   ],
   rules: {
     '@typescript-eslint/no-explicit-any': 0,

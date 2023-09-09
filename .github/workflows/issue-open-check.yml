@@ -4,8 +4,16 @@ on:
   issues:
     types: [opened]
 
+
+permissions:
+  contents: read
+
 jobs:
-  check-issue:
+  issue-open-check:
+    permissions:
+      contents: read  # for visiky/dingtalk-release-notify to get latest release
+      issues: write  # for actions-cool/issues-helper to update issues
+      pull-requests: write  # for actions-cool/issues-helper to update PRs
     runs-on: ubuntu-latest
     steps:
       - uses: actions-cool/check-user-permission@v1.0.0
@@ -15,7 +23,7 @@ jobs:
 
       - name: check invalid
         if: (contains(github.event.issue.body, 'issue-helper') == false) && (steps.checkUser.outputs.result == 'false') 
-        uses: actions-cool/issues-helper@v1.2
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment,add-labels,close-issue'
           issue-number: ${{ github.event.issue.number }}

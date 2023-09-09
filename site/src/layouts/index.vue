@@ -13,22 +13,20 @@
       <template v-if="isMobile">
         <a-drawer
           key="mobile-menu"
+          v-model:visible="visible"
           :closable="false"
           placement="left"
           class="drawer drawer-left"
-          :visible="visible"
           wrapper-class-name="drawer-wrapper"
           width="60%"
         >
           <surelyVueVue />
           <Menu :menus="dataSource" :active-menu-item="activeMenuItem" :is-zh-c-n="isZhCN" />
-          <template #handle>
-            <div class="drawer-handle" @click="handleClickShowButton">
-              <close-outlined v-if="visible" :style="iconStyle" />
-              <MenuOutlined v-else :style="iconStyle" />
-            </div>
-          </template>
         </a-drawer>
+        <div class="drawer-handle" @click="handleClickShowButton">
+          <close-outlined v-if="visible" :style="iconStyle" />
+          <MenuOutlined v-else :style="iconStyle" />
+        </div>
       </template>
       <template v-else>
         <a-col :xxxl="4" :xxl="4" :xl="5" :lg="6" :md="6" :sm="24" :xs="24" class="main-menu">

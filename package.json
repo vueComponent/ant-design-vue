@@ -280,7 +280,7 @@
   },
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
-    "@ant-design/icons-vue": "^6.1.0",
+    "@ant-design/icons-vue": "^7.0.0",
     "@babel/runtime": "^7.10.5",
     "@ctrl/tinycolor": "^3.5.0",
     "@emotion/hash": "^0.9.0",

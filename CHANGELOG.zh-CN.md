@@ -10,6 +10,11 @@
 
 ---
 
+## 4.0.3
+
+- 🐞 修复 shadow Dom 下样式丢失问题 [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)
+- 🐞 升级 Icon 依赖，修复 shadow Dom 下 icon css 丢失问题 [#6914](https://github.com/vueComponent/ant-design-vue/issues/6914)
+
 ## 4.0.2
 
 - 🐞 修复 useMessage 导致 body 被移除问题 [#6880](https://github.com/vueComponent/ant-design-vue/issues/6880)

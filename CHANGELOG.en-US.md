@@ -10,6 +10,11 @@
 
 ---
 
+## 4.0.3
+
+- 🐞 Fix the problem of style loss under shadow Dom [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)
+- 🐞 Upgrade Icon dependency and fix icon css missing problem under shadow Dom [#6914](https://github.com/vueComponent/ant-design-vue/issues/6914)
+
 ## 4.0.2
 
 - 🐞 Fix useMessage causing body to be removed [#6880](https://github.com/vueComponent/ant-design-vue/issues/6880)

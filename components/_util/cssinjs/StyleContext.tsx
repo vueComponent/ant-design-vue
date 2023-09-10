@@ -4,7 +4,6 @@ import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
 import { arrayType, booleanType, objectType, someType, stringType, withInstall } from '../type';
-import initDefaultProps from '../props-util/initDefaultProps';
 export const ATTR_TOKEN = 'data-token-hash';
 export const ATTR_MARK = 'data-css-hash';
 export const ATTR_CACHE_PATH = 'data-cache-path';
@@ -25,7 +24,10 @@ export function createCache() {
       (style as any)[CSS_IN_JS_INSTANCE] = (style as any)[CSS_IN_JS_INSTANCE] || cssinjsInstanceId;
 
       // Not force move if no head
-      document.head.insertBefore(style, firstChild);
+      // Not force move if no head
+      if ((style as any)[CSS_IN_JS_INSTANCE] === cssinjsInstanceId) {
+        document.head.insertBefore(style, firstChild);
+      }
     });
 
     // Deduplicate of moved styles
@@ -83,12 +85,16 @@ const defaultStyleContext: StyleContextProps = {
   defaultCache: true,
   hashPriority: 'low',
 };
+// fix: https://github.com/vueComponent/ant-design-vue/issues/6912
 export const useStyleInject = () => {
-  return inject(StyleContextKey, shallowRef({ ...defaultStyleContext }));
+  return inject(StyleContextKey, shallowRef({ ...defaultStyleContext, cache: createCache() }));
 };
 export const useStyleProvider = (props: UseStyleProviderProps) => {
   const parentContext = useStyleInject();
-  const context = shallowRef<Partial<StyleContextProps>>({ ...defaultStyleContext });
+  const context = shallowRef<Partial<StyleContextProps>>({
+    ...defaultStyleContext,
+    cache: createCache(),
+  });
   watch(
     [() => unref(props), parentContext],
     () => {
@@ -144,7 +150,7 @@ export const StyleProvider = withInstall(
   defineComponent({
     name: 'AStyleProvider',
     inheritAttrs: false,
-    props: initDefaultProps(styleProviderProps(), defaultStyleContext),
+    props: styleProviderProps(),
     setup(props, { slots }) {
       useStyleProvider(props);
       return () => slots.default?.();

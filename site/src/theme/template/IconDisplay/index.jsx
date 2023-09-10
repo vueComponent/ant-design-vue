@@ -40,7 +40,7 @@ const IconDisplay = defineComponent({
 
       return Object.keys(categories)
         .map(key => {
-          let iconList = categories[key];
+          const iconList = categories[key];
 
           return {
             category: key,

@@ -7,4 +7,7 @@ es/
 lib/
 _site/
 dist/
-components/version/version.tsx
+site/dist/
+components/version/version.ts
+site/src/router/demoRoutes.js
+locale/

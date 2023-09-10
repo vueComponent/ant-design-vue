@@ -6,7 +6,7 @@ import { propTypes } from './types';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'Line',
+  name: 'ProgressLine',
   props: initDefaultProps(propTypes, defaultProps),
   setup(props) {
     const percentList = computed(() => {

@@ -12,6 +12,7 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import SwapOutlined from '@ant-design/icons-vue/SwapOutlined';
+import { getTransitionName } from '../_util/transition';
 import useStyle from './style';
 import { anyType } from '../_util/type';
 
@@ -38,7 +39,7 @@ const InternalPreviewGroup = defineComponent({
   inheritAttrs: false,
   props: previewGroupProps(),
   setup(props, { attrs, slots }) {
-    const { prefixCls } = useConfigInject('image', props);
+    const { prefixCls, rootPrefixCls } = useConfigInject('image', props);
     const previewPrefixCls = computed(() => `${prefixCls.value}-preview`);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const mergedPreview = computed(() => {
@@ -51,6 +52,12 @@ const InternalPreviewGroup = defineComponent({
       return {
         ..._preview,
         rootClassName: hashId.value,
+        transitionName: getTransitionName(rootPrefixCls.value, 'zoom', _preview.transitionName),
+        maskTransitionName: getTransitionName(
+          rootPrefixCls.value,
+          'fade',
+          _preview.maskTransitionName,
+        ),
       };
     });
     return () => {

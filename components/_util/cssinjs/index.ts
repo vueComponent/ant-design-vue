@@ -11,6 +11,8 @@ import { createTheme, Theme } from './theme';
 import type { Transformer } from './transformers/interface';
 import legacyLogicalPropertiesTransformer from './transformers/legacyLogicalProperties';
 import px2remTransformer from './transformers/px2rem';
+import { supportLogicProps, supportWhere } from './util';
+
 const cssinjs = {
   Theme,
   createTheme,
@@ -66,6 +68,10 @@ export type {
   Linter,
   StyleContextProps,
   StyleProviderProps,
+};
+
+export const _experimental = {
+  supportModernCSS: () => supportWhere() && supportLogicProps(),
 };
 
 export default cssinjs;

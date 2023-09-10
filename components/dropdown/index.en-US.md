@@ -16,8 +16,9 @@ When there are more than a few options to choose from, you can wrap them in a `D
 
 ### Dropdown
 
-| Property | Description | Type | Default |  |
+| Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
+| align | this value will be merged into placement's config, please refer to the settings [dom-align](https://github.com/yiminghe/dom-align) | Object | - |  |
 | arrow | Whether the dropdown arrow should be open | boolean \| { pointAtCenter: boolean } | false | 3.3.0 |
 | destroyPopupOnHide | Whether destroy dropdown when hidden | boolean | false |  |
 | disabled | whether the dropdown menu is disabled | boolean | - |  |

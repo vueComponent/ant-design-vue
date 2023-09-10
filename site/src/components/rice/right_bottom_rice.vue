@@ -29,13 +29,13 @@ export default {
       ads: [
         {
           alt: 'geektime',
-          img: 'https://qn.antdv.com/geektime-web-small.jpg',
+          img: 'https://aliyuncdn.antdv.com/geektime-web-small.jpg',
           href: 'http://gk.link/a/10l8O',
           visible: isEffective('2020-09-03 10:00:00', '2020-10-04 10:00:00'),
         },
         {
           alt: 'powerproject',
-          img: 'https://qn.antdv.com/powerproject.jpeg?v=20200327',
+          img: 'https://aliyuncdn.antdv.com/powerproject.jpeg?v=20200327',
           href: 'http://www.powerproject.com.cn',
           visible: isEffective('2020-03-27 17:00:00', '2020-09-28 17:00:00'),
         },

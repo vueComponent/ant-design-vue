@@ -15,6 +15,7 @@ interface Options {
   csp?: { nonce?: string };
   prepend?: Prepend;
   mark?: string;
+  priority?: number;
 }
 
 function getMark({ mark }: Options = {}) {

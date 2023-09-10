@@ -25,8 +25,6 @@ When requiring users to interact with the application, but without jumping to a 
 | closeIcon | custom close icon | VNode \| slot | - |  |
 | confirmLoading | Whether to apply loading visual effect for OK button or not | boolean | false |  |
 | destroyOnClose | Whether to unmount child components on onClose | boolean | false |  |
-| dialogClass | className of floating layer. | string | - |  |
-| dialogStyle | Style of floating layer, typically used at least for adjusting the position. | object | - |  |
 | footer | Footer content, set as `:footer="null"` when you don't need default buttons | string\|slot | OK and Cancel buttons |  |
 | forceRender | Force render Modal | boolean | false |  |
 | getContainer | Return the mount node for Modal | (instance): HTMLElement | () => document.body |  |

@@ -653,6 +653,7 @@ const Table = defineComponent({
     footer?: any;
     summary?: any;
     expandedRowRender?: any;
+    expandColumnTitle?: any;
     bodyCell?: {
       text: any;
       value: any;

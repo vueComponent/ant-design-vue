@@ -15,7 +15,7 @@ export const node = function (value) {
  * @return {Boolean}
  */
 export const nodeList = function (value) {
-  let type = Object.prototype.toString.call(value);
+  const type = Object.prototype.toString.call(value);
 
   return (
     value !== undefined &&
@@ -42,7 +42,7 @@ export const string = function (value) {
  * @return {Boolean}
  */
 export const fn = function (value) {
-  let type = Object.prototype.toString.call(value);
+  const type = Object.prototype.toString.call(value);
 
   return type === '[object Function]';
 };

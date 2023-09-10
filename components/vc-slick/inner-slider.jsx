@@ -310,7 +310,7 @@ export default {
       };
     },
     checkImagesLoad() {
-      let images =
+      const images =
         (this.list &&
           this.list.querySelectorAll &&
           this.list.querySelectorAll('.slick-slide img')) ||

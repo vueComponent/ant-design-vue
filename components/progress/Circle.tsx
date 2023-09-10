@@ -23,7 +23,7 @@ const getMinPercent = (width: number): number => (CIRCLE_MIN_STROKE_WIDTH / widt
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'Circle',
+  name: 'ProgressCircle',
   inheritAttrs: false,
   props: initDefaultProps(circleProps(), {
     trailColor: null as unknown as string,

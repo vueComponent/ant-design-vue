@@ -104,6 +104,8 @@ const Preview = defineComponent({
     const onAfterClose = () => {
       scale.value = 1;
       rotate.value = 0;
+      flip.x = 1;
+      flip.y = 1;
       setPosition(initialPosition);
       emit('afterClose');
     };

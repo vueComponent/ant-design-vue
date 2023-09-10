@@ -214,7 +214,7 @@ describe('Typography', () => {
     });
 
     describe('copyable', () => {
-      // eslint-disable-next-line no-unused-vars
+      // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
       function copyTest(name, text, target, icon) {
         it(name, async () => {
           jest.useFakeTimers();

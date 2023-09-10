@@ -31,6 +31,8 @@ export interface PropOptions<T = any, D = T> {
 }
 
 declare type VNodeChildAtom = VNode | string | number | boolean | null | undefined | void;
+
+// eslint-disable-next-line no-undef
 export type VueNode = VNodeChildAtom | VNodeChildAtom[] | JSX.Element;
 
 export const withInstall = <T>(comp: T) => {

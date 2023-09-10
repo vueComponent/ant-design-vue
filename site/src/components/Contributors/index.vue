@@ -52,8 +52,8 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="contributors-list">
-    <ul v-if="contributors.length > 0" class="acss-1ppw8kl">
+  <div v-if="contributors.length > 0" class="contributors-list">
+    <ul class="acss-1ppw8kl">
       <li v-for="item in contributors" :key="item.login">
         <a-tooltip :title="`${isZn ? '文档贡献者：' : 'Contributor: '}${item.login}`">
           <a :href="item.url" target="_blank">

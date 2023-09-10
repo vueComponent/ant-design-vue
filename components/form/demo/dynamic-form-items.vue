@@ -75,7 +75,7 @@ const dynamicValidateForm = reactive<{ users: User[] }>({
   users: [],
 });
 const removeUser = (item: User) => {
-  let index = dynamicValidateForm.users.indexOf(item);
+  const index = dynamicValidateForm.users.indexOf(item);
   if (index !== -1) {
     dynamicValidateForm.users.splice(index, 1);
   }

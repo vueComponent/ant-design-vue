@@ -7,7 +7,7 @@ export interface SummaryProps {
 
 let indexGuid = 0;
 const Summary = defineComponent<SummaryProps>({
-  name: 'Summary',
+  name: 'TableSummary',
   props: ['fixed'] as any,
   setup(props, { slots }) {
     const tableContext = useInjectTable();

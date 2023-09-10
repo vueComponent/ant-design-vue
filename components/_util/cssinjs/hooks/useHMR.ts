@@ -16,7 +16,8 @@ if (
   process.env.NODE_ENV !== 'production' &&
   typeof module !== 'undefined' &&
   module &&
-  (module as any).hot
+  (module as any).hot &&
+  typeof window !== 'undefined'
 ) {
   const win = window as any;
   if (typeof win.webpackHotUpdate === 'function') {

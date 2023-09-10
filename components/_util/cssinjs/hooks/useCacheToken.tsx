@@ -1,5 +1,5 @@
 import hash from '@emotion/hash';
-import { ATTR_TOKEN, CSS_IN_JS_INSTANCE, CSS_IN_JS_INSTANCE_ID } from '../StyleContext';
+import { ATTR_TOKEN, CSS_IN_JS_INSTANCE, useStyleInject } from '../StyleContext';
 import type Theme from '../theme/Theme';
 import useGlobalCache from './useGlobalCache';
 import { flattenToken, token2key } from '../util';
@@ -12,7 +12,7 @@ const EMPTY_OVERRIDE = {};
 // This helps developer not to do style override directly on the hash id.
 const hashPrefix = process.env.NODE_ENV !== 'production' ? 'css-dev-only-do-not-override' : 'css';
 
-export interface Option<DerivativeToken> {
+export interface Option<DerivativeToken, DesignToken> {
   /**
    * Generate token with salt.
    * This is used to generate different hashId even same derivative token for different version.
@@ -30,6 +30,18 @@ export interface Option<DerivativeToken> {
    * It's ok to useMemo outside but this has better cache strategy.
    */
   formatToken?: (mergedToken: any) => DerivativeToken;
+  /**
+   * Get final token with origin token, override token and theme.
+   * The parameters do not contain formatToken since it's passed by user.
+   * @param origin The original token.
+   * @param override Extra tokens to override.
+   * @param theme Theme instance. Could get derivative token by `theme.getDerivativeToken`
+   */
+  getComputedToken?: (
+    origin: DesignToken,
+    override: object,
+    theme: Theme<any, any>,
+  ) => DerivativeToken;
 }
 
 const tokenKeys = new Map<string, number>();
@@ -37,20 +49,22 @@ function recordCleanToken(tokenKey: string) {
   tokenKeys.set(tokenKey, (tokenKeys.get(tokenKey) || 0) + 1);
 }
 
-function removeStyleTags(key: string) {
+function removeStyleTags(key: string, instanceId: string) {
   if (typeof document !== 'undefined') {
     const styles = document.querySelectorAll(`style[${ATTR_TOKEN}="${key}"]`);
 
     styles.forEach(style => {
-      if ((style as any)[CSS_IN_JS_INSTANCE] === CSS_IN_JS_INSTANCE_ID) {
+      if ((style as any)[CSS_IN_JS_INSTANCE] === instanceId) {
         style.parentNode?.removeChild(style);
       }
     });
   }
 }
 
+const TOKEN_THRESHOLD = 0;
+
 // Remove will check current keys first
-function cleanTokenStyle(tokenKey: string) {
+function cleanTokenStyle(tokenKey: string, instanceId: string) {
   tokenKeys.set(tokenKey, (tokenKeys.get(tokenKey) || 0) - 1);
 
   const tokenKeyList = Array.from(tokenKeys.keys());
@@ -60,13 +74,36 @@ function cleanTokenStyle(tokenKey: string) {
     return count <= 0;
   });
 
-  if (cleanableKeyList.length < tokenKeyList.length) {
+  // Should keep tokens under threshold for not to insert style too often
+  if (tokenKeyList.length - cleanableKeyList.length > TOKEN_THRESHOLD) {
     cleanableKeyList.forEach(key => {
-      removeStyleTags(key);
+      removeStyleTags(key, instanceId);
       tokenKeys.delete(key);
     });
   }
 }
+
+export const getComputedToken = <DerivativeToken = object, DesignToken = DerivativeToken>(
+  originToken: DesignToken,
+  overrideToken: object,
+  theme: Theme<any, any>,
+  format?: (token: DesignToken) => DerivativeToken,
+) => {
+  const derivativeToken = theme.getDerivativeToken(originToken);
+
+  // Merge with override
+  let mergedDerivativeToken = {
+    ...derivativeToken,
+    ...overrideToken,
+  };
+
+  // Format if needed
+  if (format) {
+    mergedDerivativeToken = format(mergedDerivativeToken);
+  }
+
+  return mergedDerivativeToken;
+};
 
 /**
  * Cache theme derivative token as global shared one
@@ -78,8 +115,10 @@ function cleanTokenStyle(tokenKey: string) {
 export default function useCacheToken<DerivativeToken = object, DesignToken = DerivativeToken>(
   theme: Ref<Theme<any, any>>,
   tokens: Ref<Partial<DesignToken>[]>,
-  option: Ref<Option<DerivativeToken>> = ref({}),
+  option: Ref<Option<DerivativeToken, DesignToken>> = ref({}),
 ) {
+  const style = useStyleInject();
+
   // Basic - We do basic cache here
   const mergedToken = computed(() => Object.assign({}, ...tokens.value));
   const tokenStr = computed(() => flattenToken(mergedToken.value));
@@ -94,19 +133,15 @@ export default function useCacheToken<DerivativeToken = object, DesignToken = De
       overrideTokenStr.value,
     ]),
     () => {
-      const { salt = '', override = EMPTY_OVERRIDE, formatToken } = option.value;
-      const derivativeToken = theme.value.getDerivativeToken(mergedToken.value);
-
-      // Merge with override
-      let mergedDerivativeToken = {
-        ...derivativeToken,
-        ...override,
-      };
-
-      // Format if needed
-      if (formatToken) {
-        mergedDerivativeToken = formatToken(mergedDerivativeToken);
-      }
+      const {
+        salt = '',
+        override = EMPTY_OVERRIDE,
+        formatToken,
+        getComputedToken: compute,
+      } = option.value;
+      const mergedDerivativeToken = compute
+        ? compute(mergedToken.value, override, theme.value)
+        : getComputedToken(mergedToken.value, override, theme.value, formatToken);
 
       // Optimize for `useStyleRegister` performance
       const tokenKey = token2key(mergedDerivativeToken, salt);
@@ -120,7 +155,7 @@ export default function useCacheToken<DerivativeToken = object, DesignToken = De
     },
     cache => {
       // Remove token will remove all related style
-      cleanTokenStyle(cache[0]._tokenKey);
+      cleanTokenStyle(cache[0]._tokenKey, style.value?.cache.instanceId);
     },
   );
 

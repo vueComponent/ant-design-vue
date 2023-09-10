@@ -1,19 +1,19 @@
-import isPlainObject from 'lodash-es/isPlainObject';
 import classNames from '../classNames';
-import { isVNode, Fragment, Comment, Text, h } from 'vue';
+import { isVNode, Fragment, Comment, Text } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from '../util';
 import isValid from '../isValid';
 import initDefaultProps from './initDefaultProps';
+import type { VueInstance } from '../hooks/_vueuse/unrefElement';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
 // }
 
-const splitAttrs = attrs => {
+const splitAttrs = (attrs: any) => {
   const allAttrs = Object.keys(attrs);
-  const eventAttrs = {};
-  const onEvents = {};
-  const extraAttrs = {};
+  const eventAttrs: Record<string, any> = {};
+  const onEvents: Record<string, any> = {};
+  const extraAttrs: Record<string, any> = {};
   for (let i = 0, l = allAttrs.length; i < l; i++) {
     const key = allAttrs[i];
     if (isOn(key)) {
@@ -25,7 +25,7 @@ const splitAttrs = attrs => {
   }
   return { onEvents, events: eventAttrs, extraAttrs };
 };
-const parseStyleText = (cssText = '', camel) => {
+const parseStyleText = (cssText = '', camel = false) => {
   const res = {};
   const listDelimiter = /;(?![^(]*\))/g;
   const propertyDelimiter = /:(.+)/;
@@ -42,33 +42,8 @@ const parseStyleText = (cssText = '', camel) => {
   return res;
 };
 
-const hasProp = (instance, prop) => {
+const hasProp = (instance: any, prop: string) => {
   return instance[prop] !== undefined;
-};
-// 重构后直接使用 hasProp 替换
-const slotHasProp = (slot, prop) => {
-  return hasProp(slot, prop);
-};
-
-const getScopedSlots = ele => {
-  return (ele.data && ele.data.scopedSlots) || {};
-};
-
-const getSlots = ele => {
-  let componentOptions = ele.componentOptions || {};
-  if (ele.$vnode) {
-    componentOptions = ele.$vnode.componentOptions || {};
-  }
-  const children = ele.children || componentOptions.children || [];
-  const slots = {};
-  children.forEach(child => {
-    if (!isEmptyElement(child)) {
-      const name = (child.data && child.data.slot) || 'default';
-      slots[name] = slots[name] || [];
-      slots[name].push(child);
-    }
-  });
-  return { ...slots, ...getScopedSlots(ele) };
 };
 
 export const skipFlattenKey = Symbol('skipFlatten');
@@ -97,39 +72,29 @@ const flattenChildren = (children = [], filterEmpty = true) => {
   return res;
 };
 
-const getSlot = (self, name = 'default', options = {}) => {
+const getSlot = (self: any, name = 'default', options = {}) => {
   if (isVNode(self)) {
     if (self.type === Fragment) {
-      return name === 'default' ? flattenChildren(self.children) : [];
+      return name === 'default' ? flattenChildren(self.children as any[]) : [];
     } else if (self.children && self.children[name]) {
       return flattenChildren(self.children[name](options));
     } else {
       return [];
     }
   } else {
-    let res = self.$slots[name] && self.$slots[name](options);
+    const res = self.$slots[name] && self.$slots[name](options);
     return flattenChildren(res);
   }
 };
 
-const getAllChildren = ele => {
-  let componentOptions = ele.componentOptions || {};
-  if (ele.$vnode) {
-    componentOptions = ele.$vnode.componentOptions || {};
-  }
-  return ele.children || componentOptions.children || [];
-};
-const getSlotOptions = () => {
-  throw Error('使用 .type 直接取值');
-};
-const findDOMNode = instance => {
+const findDOMNode = (instance: any) => {
   let node = instance?.vnode?.el || (instance && (instance.$el || instance));
   while (node && !node.tagName) {
     node = node.nextSibling;
   }
   return node;
 };
-const getOptionProps = instance => {
+const getOptionProps = (instance: VueInstance) => {
   const res = {};
   if (instance.$ && instance.$.vnode) {
     const props = instance.$.vnode.props || {};
@@ -146,7 +111,7 @@ const getOptionProps = instance => {
     Object.keys(originProps).forEach(key => {
       props[camelize(key)] = originProps[key];
     });
-    const options = instance.type.props || {};
+    const options = (instance.type as any).props || {};
     Object.keys(options).forEach(k => {
       const v = resolvePropValue(options, props, k, props[k]);
       if (v !== undefined || k in props) {
@@ -156,7 +121,7 @@ const getOptionProps = instance => {
   }
   return res;
 };
-const getComponent = (instance, prop = 'default', options = instance, execute = true) => {
+const getComponent = (instance: any, prop = 'default', options = instance, execute = true) => {
   let com = undefined;
   if (instance.$) {
     const temp = instance[prop];
@@ -184,94 +149,13 @@ const getComponent = (instance, prop = 'default', options = instance, execute = 
   }
   return com;
 };
-const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
-  if (instance.$createElement) {
-    // const h = instance.$createElement;
-    const temp = instance[prop];
-    if (temp !== undefined) {
-      return typeof temp === 'function' && execute ? temp(h, options) : temp;
-    }
-    return (
-      (instance.$scopedSlots[prop] && execute && instance.$scopedSlots[prop](options)) ||
-      instance.$scopedSlots[prop] ||
-      instance.$slots[prop] ||
-      undefined
-    );
-  } else {
-    // const h = instance.context.$createElement;
-    const temp = getPropsData(instance)[prop];
-    if (temp !== undefined) {
-      return typeof temp === 'function' && execute ? temp(h, options) : temp;
-    }
-    const slotScope = getScopedSlots(instance)[prop];
-    if (slotScope !== undefined) {
-      return typeof slotScope === 'function' && execute ? slotScope(h, options) : slotScope;
-    }
-    const slotsProp = [];
-    const componentOptions = instance.componentOptions || {};
-    (componentOptions.children || []).forEach(child => {
-      if (child.data && child.data.slot === prop) {
-        if (child.data.attrs) {
-          delete child.data.attrs.slot;
-        }
-        if (child.tag === 'template') {
-          slotsProp.push(child.children);
-        } else {
-          slotsProp.push(child);
-        }
-      }
-    });
-    return slotsProp.length ? slotsProp : undefined;
-  }
-};
 
-const getAllProps = ele => {
-  let props = getOptionProps(ele);
-  if (ele.$) {
-    props = { ...props, ...this.$attrs };
-  } else {
-    props = { ...ele.props, ...props };
-  }
-  return props;
-};
-
-const getPropsData = ins => {
-  const vnode = ins.$ ? ins.$ : ins;
-  const res = {};
-  const originProps = vnode.props || {};
-  const props = {};
-  Object.keys(originProps).forEach(key => {
-    props[camelize(key)] = originProps[key];
-  });
-  const options = isPlainObject(vnode.type) ? vnode.type.props : {};
-  options &&
-    Object.keys(options).forEach(k => {
-      const v = resolvePropValue(options, props, k, props[k]);
-      if (k in props) {
-        // 仅包含 props，不包含默认值
-        res[k] = v;
-      }
-    });
-  return { ...props, ...res }; // 合并事件、未声明属性等
-};
-const getValueByProp = (ele, prop) => {
-  return getPropsData(ele)[prop];
-};
-
-const getAttrs = ele => {
-  let data = ele.data;
-  if (ele.$vnode) {
-    data = ele.$vnode.data;
-  }
-  return data ? data.attrs || {} : {};
-};
-
-const getKey = ele => {
-  let key = ele.key;
+const getKey = (ele: any) => {
+  const key = ele.key;
   return key;
 };
 
-export function getEvents(ele = {}, on = true) {
+export function getEvents(ele: any = {}, on = true) {
   let props = {};
   if (ele.$) {
     props = { ...props, ...ele.$attrs };
@@ -281,27 +165,9 @@ export function getEvents(ele = {}, on = true) {
   return splitAttrs(props)[on ? 'onEvents' : 'events'];
 }
 
-export function getEvent(child, event) {
-  return child.props && child.props[event];
-}
-
-// 获取 xxx.native 或者 原生标签 事件
-export function getDataEvents(child) {
-  let events = {};
-  if (child.data && child.data.on) {
-    events = child.data.on;
-  }
-  return { ...events };
-}
-
-// use getListeners instead this.$listeners
-// https://github.com/vueComponent/ant-design-vue/issues/1705
-export function getListeners(context) {
-  return (context.$vnode ? context.$vnode.componentOptions.listeners : context.$listeners) || {};
-}
-export function getClass(ele) {
+export function getClass(ele: any) {
   const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
-  let tempCls = props.class || {};
+  const tempCls = props.class || {};
   let cls = {};
   if (typeof tempCls === 'string') {
     tempCls.split(' ').forEach(c => {
@@ -318,7 +184,7 @@ export function getClass(ele) {
   }
   return cls;
 }
-export function getStyle(ele, camel) {
+export function getStyle(ele: any, camel?: boolean) {
   const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
   let style = props.style || {};
   if (typeof style === 'string') {
@@ -332,19 +198,19 @@ export function getStyle(ele, camel) {
   return style;
 }
 
-export function getComponentName(opts) {
+export function getComponentName(opts: any) {
   return opts && (opts.Ctor.options.name || opts.tag);
 }
 
-export function isFragment(c) {
+export function isFragment(c: any) {
   return c.length === 1 && c[0].type === Fragment;
 }
 
-export function isEmptyContent(c) {
+export function isEmptyContent(c: any) {
   return c === undefined || c === null || c === '' || (Array.isArray(c) && c.length === 0);
 }
 
-export function isEmptyElement(c) {
+export function isEmptyElement(c: any) {
   return (
     c &&
     (c.type === Comment ||
@@ -353,11 +219,11 @@ export function isEmptyElement(c) {
   );
 }
 
-export function isEmptySlot(c) {
+export function isEmptySlot(c: any) {
   return !c || c().every(isEmptyElement);
 }
 
-export function isStringElement(c) {
+export function isStringElement(c: any) {
   return c && c.type === Text;
 }
 
@@ -375,7 +241,7 @@ export function filterEmpty(children = []) {
   return res.filter(c => !isEmptyElement(c));
 }
 
-export function filterEmptyWithUndefined(children) {
+export function filterEmptyWithUndefined(children: any[]) {
   if (children) {
     const coms = filterEmpty(children);
     return coms.length ? coms : undefined;
@@ -384,34 +250,18 @@ export function filterEmptyWithUndefined(children) {
   }
 }
 
-export function mergeProps() {
-  const args = [].slice.call(arguments, 0);
-  const props = {};
-  args.forEach((p = {}) => {
-    for (const [k, v] of Object.entries(p)) {
-      props[k] = props[k] || {};
-      if (isPlainObject(v)) {
-        Object.assign(props[k], v);
-      } else {
-        props[k] = v;
-      }
-    }
-  });
-  return props;
-}
-
-function isValidElement(element) {
+function isValidElement(element: any) {
   if (Array.isArray(element) && element.length === 1) {
     element = element[0];
   }
   return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node
 }
 
-function getPropsSlot(slots, props, prop = 'default') {
+function getPropsSlot(slots: any, props: any, prop = 'default') {
   return props[prop] ?? slots[prop]?.();
 }
 
-export const getTextFromElement = ele => {
+export const getTextFromElement = (ele: any) => {
   if (isValidElement(ele) && isStringElement(ele[0])) {
     return ele[0].children;
   }
@@ -422,21 +272,12 @@ export {
   hasProp,
   getOptionProps,
   getComponent,
-  getComponentFromProp,
-  getSlotOptions,
-  slotHasProp,
-  getPropsData,
   getKey,
-  getAttrs,
-  getValueByProp,
   parseStyleText,
   initDefaultProps,
   isValidElement,
   camelize,
-  getSlots,
   getSlot,
-  getAllProps,
-  getAllChildren,
   findDOMNode,
   flattenChildren,
   getPropsSlot,

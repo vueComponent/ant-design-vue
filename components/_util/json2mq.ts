@@ -3,7 +3,7 @@
  * https://github.com/akiran/json2mq.git
  */
 
-const camel2hyphen = function (str) {
+const camel2hyphen = function (str: string) {
   return str
     .replace(/[A-Z]/g, function (match) {
       return '-' + match.toLowerCase();
@@ -11,12 +11,12 @@ const camel2hyphen = function (str) {
     .toLowerCase();
 };
 
-const isDimension = function (feature) {
+const isDimension = function (feature: string) {
   const re = /[height|width]$/;
   return re.test(feature);
 };
 
-const obj2mq = function (obj) {
+const obj2mq = function (obj: { [x: string]: any }) {
   let mq = '';
   const features = Object.keys(obj);
   features.forEach(function (feature, index) {
@@ -40,7 +40,7 @@ const obj2mq = function (obj) {
   return mq;
 };
 
-export default function (query) {
+export default function (query: any[]) {
   let mq = '';
   if (typeof query === 'string') {
     return query;

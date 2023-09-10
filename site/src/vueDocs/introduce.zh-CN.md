@@ -5,7 +5,7 @@
 <div class="pic-plus">
   <img width="150" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
   <span>+</span>
-  <img width="160" src="https://qn.antdv.com/vue.png" />
+  <img width="160" src="https://aliyuncdn.antdv.com/vue.png" />
 </div>
 
 <style>

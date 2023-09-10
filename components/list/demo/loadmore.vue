@@ -12,7 +12,7 @@ title:
 
 ## en-US
 
-Load more list with `loadMore` property.
+Load more list with `loadMore` slot.
 
 </docs>
 

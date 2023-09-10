@@ -85,7 +85,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*ylFATY6w-ygAAA
 | label | label 标签的文本 | string\|slot |  |  |
 | labelAlign | 标签文本对齐方式 | 'left' \| 'right' | 'right' |  |
 | labelCol | label 标签布局，同 `<Col>` 组件，设置 `span` `offset` 值，如 `{span: 3, offset: 12}` 或 `sm: {span: 3, offset: 12}` | [object](/components/grid-cn/#col) |  |  |
-| name | 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的 | string |  |  |
+| name | 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的 | [NamePath](#namepath) |  |  |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |  |
 | rules | 表单验证规则 | object \| array |  |  |
 | validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | boolean | false | 2.0.0 |

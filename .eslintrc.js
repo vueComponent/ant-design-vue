@@ -15,9 +15,20 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',
-    'prettier',
+    '@vue/typescript/recommended',
+    '@vue/prettier',
+    // 'prettier',
   ],
+  // extends: [
+  //   'eslint:recommended',
+  //   'plugin:vue/vue3-recommended',
+  //   '@vue/typescript/recommended',
+  //   '@vue/prettier',
+  // ],
   plugins: ['markdown', 'jest', '@typescript-eslint', 'import'],
+  globals: {
+    defineProps: 'readonly',
+  },
   overrides: [
     {
       files: ['*.md'],
@@ -28,12 +39,11 @@ module.exports = {
     },
     {
       files: ['*.ts', '*.tsx'],
-      extends: ['@vue/typescript/recommended', '@vue/prettier', '@vue/prettier/@typescript-eslint'],
+      // extends: ['@vue/typescript/recommended', '@vue/prettier'],
       parserOptions: {
         project: './tsconfig.json',
       },
       rules: {
-        '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/ban-types': 0,
         '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 0,
@@ -51,17 +61,21 @@ module.exports = {
       parser: 'vue-eslint-parser',
       parserOptions: {
         parser: '@typescript-eslint/parser',
+        ecmaVersion: 2021,
       },
       rules: {
         'no-console': 'off',
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          { vars: 'all', args: 'after-used', ignoreRestSiblings: true },
-        ],
+        'vue/no-reserved-component-names': 'off',
       },
     },
   ],
   rules: {
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { vars: 'all', args: 'after-used', ignoreRestSiblings: true, argsIgnorePattern: '^_' },
+    ],
     'import/no-named-as-default': 'off',
     'import/namespace': [2, { allowComputed: true }],
     'import/no-named-as-default-member': 'off',

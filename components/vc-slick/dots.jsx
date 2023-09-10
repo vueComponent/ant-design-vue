@@ -42,18 +42,18 @@ const Dots = (_, { attrs }) => {
   const mouseEvents = { onMouseenter, onMouseover, onMouseleave };
   let dots = [];
   for (let i = 0; i < dotCount; i++) {
-    let _rightBound = (i + 1) * slidesToScroll - 1;
-    let rightBound = infinite ? _rightBound : clamp(_rightBound, 0, slideCount - 1);
-    let _leftBound = rightBound - (slidesToScroll - 1);
-    let leftBound = infinite ? _leftBound : clamp(_leftBound, 0, slideCount - 1);
+    const _rightBound = (i + 1) * slidesToScroll - 1;
+    const rightBound = infinite ? _rightBound : clamp(_rightBound, 0, slideCount - 1);
+    const _leftBound = rightBound - (slidesToScroll - 1);
+    const leftBound = infinite ? _leftBound : clamp(_leftBound, 0, slideCount - 1);
 
-    let className = classnames({
+    const className = classnames({
       'slick-active': infinite
         ? currentSlide >= leftBound && currentSlide <= rightBound
         : currentSlide === leftBound,
     });
 
-    let dotOptions = {
+    const dotOptions = {
       message: 'dots',
       index: i,
       slidesToScroll,

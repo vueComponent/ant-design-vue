@@ -32,7 +32,7 @@ const getSlideClasses = spec => {
   } else {
     focusedSlide = spec.targetSlide;
   }
-  let slickCurrent = index === focusedSlide;
+  const slickCurrent = index === focusedSlide;
   return {
     'slick-slide': true,
     'slick-active': slickActive,

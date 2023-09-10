@@ -1,18 +1,25 @@
-name: Issue Reply
+name: Issue Labeled
 
 on:
   issues:
     types: [labeled]
 
+permissions:
+  contents: read
+
 jobs:
-  issue-reply:
+  issue-labeled:
+    permissions:
+      issues: write  # for actions-cool/issues-helper to update issues
+      pull-requests: write  # for actions-cool/issues-helper to update PRs
     runs-on: ubuntu-latest
     steps:
-      - name: Need Reproduce
+     - name: Need Reproduce
         if: github.event.label.name == '🤔 Need Reproduce'
-        uses: actions-cool/issues-helper@v1.2
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment'
+          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
             Hello @${{ github.event.issue.user.login }}. Please provide a online reproduction by forking this [link for vue2](https://codesandbox.io/s/2wpk21kzvr)、 [link for vue3](https://codesandbox.io/s/agitated-franklin-1w72v) or a minimal GitHub repository. Make sure to choose the correct version.
@@ -21,9 +28,10 @@ jobs:
       
       - name: help wanted
         if: github.event.label.name == 'help wanted'
-        uses: actions-cool/issues-helper@v1.2
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment'
+          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
             Hello @${{ github.event.issue.user.login }}. We totally like your proposal/feedback, welcome to send us a Pull Request for it. Please send your Pull Request to proper branch, fill the Pull Request Template here, provide changelog/TypeScript/documentation/test cases if needed and make sure CI passed, we will review it soon. We appreciate your effort in advance and looking forward to your contribution!
@@ -32,12 +40,37 @@ jobs:
 
       - name: Usage
         if: github.event.label.name == 'Usage'
-        uses: actions-cool/issues-helper@v1.2
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'create-comment, close-issue'
+          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
             Hello @${{ github.event.issue.user.login }}, we use GitHub issues to trace bugs or discuss plans of Ant Design Vue. So, please don't ask usage questions here. You can try to open a new discussion in [antdv discussions](https://github.com/vueComponent/ant-design-vue/discussions), select `Q&A` to ask questions, also can ask questions on [Stack Overflow](http://stackoverflow.com/questions/) or [Segment Fault](https://segmentfault.com).
 
             你好 @${{ github.event.issue.user.login }}，Ant Design Vue Issue 板块是用于 bug 反馈与需求讨论的地方。请勿询问如何使用的问题，你可以试着在 [antdv discussions](https://github.com/vueComponent/ant-design-vue/discussions) 新开一个 discussion，选择 `Q&A` 类别进行提问，也可以在 [Stack Overflow](http://stackoverflow.com/questions/) 或者 [Segment Fault](https://segmentfault.com/) 中提问。
-            
+
+      - name: 1.x
+        if: github.event.label.name == '1.x'
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment,close-issue'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hi @${{ github.event.issue.user.login }}. Current version (1.x) is off the maintenance period. We may not accept pull request or fix bug with it anymore. This topic will be auto closed.
+
+            你好 @${{ github.event.issue.user.login }}，当前版本（1.x）已经过了维护期。我们不会再接受对其的相关 PR 与 issue。当前 topic 会被自动关闭。
+
+      - name: 2.x
+        if: github.event.label.name == '2.x'
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: 'create-comment,close-issue'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hi @${{ github.event.issue.user.login }}. Current version (2.x) is off the maintenance period. We may not accept pull request or fix bug with it anymore. This topic will be auto closed.
+
+            你好 @${{ github.event.issue.user.login }}，当前版本（2.x）已经过了维护期。我们不会再接受对其的相关 PR 与 issue。当前 topic 会被自动关闭。
+  

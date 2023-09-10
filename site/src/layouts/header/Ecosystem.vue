@@ -27,7 +27,12 @@
         <a-popover placement="right">
           <a>{{ isZhCN ? '微信' : 'WeChat' }}</a>
           <template #content>
-            <img width="160" height="160" alt="wechat" src="https://qn.antdv.com/wechat.jpeg" />
+            <img
+              width="160"
+              height="160"
+              alt="wechat"
+              src="https://aliyuncdn.antdv.com/wechat.jpeg"
+            />
           </template>
         </a-popover>
       </a-menu-item>

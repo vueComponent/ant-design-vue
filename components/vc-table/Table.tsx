@@ -150,7 +150,7 @@ export interface TableProps<RecordType = DefaultRecordType> {
 }
 
 export default defineComponent<TableProps<DefaultRecordType>>({
-  name: 'Table',
+  name: 'VcTable',
   inheritAttrs: false,
   props: [
     'prefixCls',

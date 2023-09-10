@@ -8,7 +8,7 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import { eventType, objectType } from '../_util/type';
-import type { CustomSlotsType } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 
 export const breadcrumbItemProps = () => ({
   prefixCls: String,
@@ -38,7 +38,7 @@ export default defineComponent({
      * if overlay is have
      * Wrap a Dropdown
      */
-    const renderBreadcrumbNode = (breadcrumbItem: JSX.Element, prefixCls: string) => {
+    const renderBreadcrumbNode = (breadcrumbItem: VueNode, prefixCls: string) => {
       const overlay = getPropsSlot(slots, props, 'overlay');
       if (overlay) {
         return (
@@ -59,7 +59,7 @@ export default defineComponent({
       const separator = getPropsSlot(slots, props, 'separator') ?? '/';
       const children = getPropsSlot(slots, props);
       const { class: cls, style, ...restAttrs } = attrs;
-      let link: JSX.Element;
+      let link: VueNode;
       if (props.href !== undefined) {
         link = (
           <a class={`${prefixCls.value}-link`} onClick={handleClick} {...restAttrs}>

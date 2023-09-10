@@ -59,7 +59,7 @@ const formState = reactive<FormState>({
   checkPass: '',
   age: undefined,
 });
-let checkAge = async (_rule: Rule, value: number) => {
+const checkAge = async (_rule: Rule, value: number) => {
   if (!value) {
     return Promise.reject('Please input the age');
   }
@@ -73,7 +73,7 @@ let checkAge = async (_rule: Rule, value: number) => {
     }
   }
 };
-let validatePass = async (_rule: Rule, value: string) => {
+const validatePass = async (_rule: Rule, value: string) => {
   if (value === '') {
     return Promise.reject('Please input the password');
   } else {
@@ -83,7 +83,7 @@ let validatePass = async (_rule: Rule, value: string) => {
     return Promise.resolve();
   }
 };
-let validatePass2 = async (_rule: Rule, value: string) => {
+const validatePass2 = async (_rule: Rule, value: string) => {
   if (value === '') {
     return Promise.reject('Please input the password again');
   } else if (value !== formState.pass) {

@@ -1,7 +1,7 @@
 import type { Color } from '../color';
 import type { TransformOffset } from '../interface';
 
-import { ref, shallowRef, watch, onUnmounted, onMounted, computed } from 'vue';
+import { ref, shallowRef, watch, onUnmounted, computed } from 'vue';
 import type { ComputedRef, Ref } from 'vue';
 
 type EventType = MouseEvent | TouchEvent;
@@ -12,7 +12,7 @@ interface useColorDragProps {
   colorRef: Ref<Color>;
   offset?: TransformOffset;
   containerRef: Ref<HTMLDivElement>;
-  targetRef: Ref<HTMLDivElement>;
+  targetRef: Ref<{ transformDomRef: HTMLDivElement }>;
   direction?: ComputedRef<'x' | 'y'>;
   onDragChange?: (offset: TransformOffset) => void;
   onDragChangeComplete?: () => void;
@@ -45,25 +45,15 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
   const offsetValue = ref(offset || { x: 0, y: 0 });
   const mouseMoveRef = shallowRef<(event: MouseEvent) => void>(null);
   const mouseUpRef = shallowRef<(event: MouseEvent) => void>(null);
-  const dragRef = shallowRef({
-    flag: false,
-  });
-  const initOffset = () => {
-    if (offsetValue.value.x !== 0 || offsetValue.value.y !== 0) return;
-    if (
-      Object.values(containerRef.value.getBoundingClientRect().toJSON()).some(item => item === 0)
-    ) {
-      requestAnimationFrame(initOffset);
-      return;
-    }
+  const dragRef = shallowRef({ flag: false });
+
+  setTimeout(() => {
     const calcOffset = calculate?.(containerRef);
     if (calcOffset) {
       offsetValue.value = calcOffset;
     }
-  };
-  onMounted(() => {
-    initOffset();
   });
+
   watch(
     () => [colorRef, containerRef],
     () => {
@@ -76,8 +66,10 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
     },
     {
       deep: true,
+      flush: 'post',
     },
   );
+
   onUnmounted(() => {
     document.removeEventListener('mousemove', mouseMoveRef.value);
     document.removeEventListener('mouseup', mouseUpRef.value);
@@ -90,10 +82,8 @@ function useColorDrag(props: useColorDragProps): [Ref<TransformOffset>, EventHan
   const updateOffset: EventHandle = e => {
     const { pageX, pageY } = getPosition(e);
     const { x: rectX, y: rectY, width, height } = containerRef.value.getBoundingClientRect();
-    const { width: targetWidth, height: targetHeight } = targetRef.value
-      // @ts-ignore
-      .getRef()
-      .getBoundingClientRect();
+    const { width: targetWidth, height: targetHeight } =
+      targetRef.value?.transformDomRef.getBoundingClientRect();
 
     const centerOffsetX = targetWidth / 2;
     const centerOffsetY = targetHeight / 2;

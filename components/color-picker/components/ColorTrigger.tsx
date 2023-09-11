@@ -56,7 +56,7 @@ const ColorTrigger = defineComponent({
       return null;
     });
     expose({
-      getRef: () => colorTriggerRef.value,
+      colorTriggerRef,
     });
 
     return () => (

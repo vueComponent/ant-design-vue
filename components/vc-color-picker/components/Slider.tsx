@@ -44,8 +44,7 @@ const Slider = defineComponent({
       colorRef,
       targetRef: transformRef,
       containerRef: sliderRef,
-      calculate: containerRef =>
-        calculateOffset(containerRef, transformRef, props.color, type.value),
+      calculate: containerRef => calculateOffset(containerRef, transformRef, colorRef, type.value),
       onDragChange: offsetValue => {
         const calcColor = calculateColor({
           offset: offsetValue,

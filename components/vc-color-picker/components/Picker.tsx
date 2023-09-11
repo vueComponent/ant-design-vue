@@ -15,7 +15,7 @@ const Picker = defineComponent({
   props: ['color', 'prefixCls', 'onChange', 'onChangeComplete', 'disabled'],
   setup(props: PickerProps) {
     const pickerRef = shallowRef<HTMLDivElement>();
-    const transformRef = shallowRef<HTMLDivElement>();
+    const transformRef = shallowRef<{ transformDomRef: HTMLDivElement }>();
     const colorRef = ref(props.color);
     const disabledDrag = computed(() => props.disabled);
     watchEffect(() => {
@@ -25,7 +25,7 @@ const Picker = defineComponent({
       colorRef,
       containerRef: pickerRef,
       targetRef: transformRef,
-      calculate: containerRef => calculateOffset(containerRef, transformRef, colorRef.value),
+      calculate: containerRef => calculateOffset(containerRef, transformRef, colorRef),
       onDragChange: offsetValue => {
         const calcColor = calculateColor({
           offset: offsetValue,

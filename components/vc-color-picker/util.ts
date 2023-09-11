@@ -17,16 +17,15 @@ export const defaultColor = generateColor('#1677ff');
 export const calculateColor = (props: {
   offset: TransformOffset;
   containerRef: Ref<HTMLDivElement>;
-  targetRef: Ref<HTMLDivElement>;
+  targetRef: Ref<{ transformDomRef: HTMLDivElement }>;
   color?: Color;
   type?: HsbaColorType;
 }): Color => {
   const { offset, targetRef, containerRef, color, type } = props;
-  const { width, height } = containerRef.value.getBoundingClientRect();
-  const { width: targetWidth, height: targetHeight } = targetRef.value
-    // @ts-ignore
-    .getRef()
-    .getBoundingClientRect();
+  const height = containerRef.value.offsetHeight;
+  const width = containerRef.value.offsetWidth;
+  const { width: targetWidth, height: targetHeight } =
+    targetRef.value?.transformDomRef.getBoundingClientRect();
 
   const centerOffsetX = targetWidth / 2;
   const centerOffsetY = targetHeight / 2;
@@ -61,19 +60,16 @@ export const calculateColor = (props: {
 
 export const calculateOffset = (
   containerRef: Ref<HTMLDivElement>,
-  targetRef: Ref<HTMLDivElement>,
-  color?: Color,
+  targetRef: Ref<{ transformDomRef: HTMLDivElement }>,
+  color?: Ref<Color>,
   type?: HsbaColorType,
 ): TransformOffset => {
   const { width, height } = containerRef.value.getBoundingClientRect();
-  const { width: targetWidth, height: targetHeight } = targetRef.value
-    // @ts-ignore
-    .getRef()
-    .getBoundingClientRect();
+  const { width: targetWidth, height: targetHeight } =
+    targetRef.value.transformDomRef?.getBoundingClientRect();
   const centerOffsetX = targetWidth / 2;
   const centerOffsetY = targetHeight / 2;
-  const hsb = color.toHsb();
-
+  const hsb = color.value.toHsb();
   // Exclusion of boundary cases
   if ((targetWidth === 0 && targetHeight === 0) || targetWidth !== targetHeight) {
     return;

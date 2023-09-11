@@ -10,15 +10,13 @@ const Transform = defineComponent({
     },
     { slots, expose },
   ) {
-    const transformRef = shallowRef<HTMLDivElement>();
+    const transformDomRef = shallowRef<HTMLDivElement>();
     expose({
-      getRef: () => {
-        return transformRef.value;
-      },
+      transformDomRef,
     });
     return () => (
       <div
-        ref={transformRef}
+        ref={transformDomRef}
         style={{
           position: 'absolute',
           left: `${props.offset.x}px`,

@@ -109,6 +109,7 @@ const ColorPicker = defineComponent({
         </div>
       </>
     ));
+
     expose({
       colorPickerRef,
     });

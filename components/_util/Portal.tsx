@@ -1,5 +1,13 @@
 import PropTypes from './vue-types';
-import { defineComponent, nextTick, onBeforeMount, onUpdated, Teleport, watch } from 'vue';
+import {
+  defineComponent,
+  nextTick,
+  onBeforeMount,
+  onMounted,
+  onUpdated,
+  Teleport,
+  watch,
+} from 'vue';
 import { useInjectPortal } from '../vc-trigger/context';
 
 export default defineComponent({
@@ -17,6 +25,8 @@ export default defineComponent({
     const { shouldRender } = useInjectPortal();
     onBeforeMount(() => {
       isSSR = false;
+    });
+    onMounted(() => {
       if (shouldRender.value) {
         container = props.getContainer();
       }

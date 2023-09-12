@@ -46,7 +46,7 @@ export default {
       ].filter(ad => ad.visible),
       enAds: [
         {
-          img: 'https://qn.antdv.com/TheBigRichGroup.png',
+          img: 'https://aliyuncdn.antdv.com/TheBigRichGroup.png',
           href: 'https://thebigrichgroup.com/',
           visible: isEffective('2020-09-18 17:00:00', '2021-07-09 17:00:00'),
         },

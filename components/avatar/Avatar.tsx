@@ -11,7 +11,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
 import eagerComputed from '../_util/eagerComputed';
 import useStyle from './style';
-import { useInjectSize } from './SizeContext';
+import { useAvatarInjectContext } from './AvatarContext';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
@@ -56,9 +56,9 @@ const Avatar = defineComponent({
 
     const { prefixCls } = useConfigInject('avatar', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const groupSize = useInjectSize();
+    const avatarCtx = useAvatarInjectContext();
     const size = computed(() => {
-      return props.size === 'default' ? groupSize.value : props.size;
+      return props.size === 'default' ? avatarCtx.size : props.size;
     });
     const screens = useBreakpoint();
     const responsiveSize = eagerComputed(() => {
@@ -135,6 +135,7 @@ const Avatar = defineComponent({
 
     return () => {
       const { shape, src, alt, srcset, draggable, crossOrigin } = props;
+      const mergeShape = avatarCtx.shape ?? shape;
       const icon = getPropsSlot(slots, props, 'icon');
       const pre = prefixCls.value;
       const classString = {
@@ -142,7 +143,7 @@ const Avatar = defineComponent({
         [pre]: true,
         [`${pre}-lg`]: size.value === 'large',
         [`${pre}-sm`]: size.value === 'small',
-        [`${pre}-${shape}`]: shape,
+        [`${pre}-${mergeShape}`]: true,
         [`${pre}-image`]: src && isImgExist.value,
         [`${pre}-icon`]: icon,
         [hashId.value]: true,

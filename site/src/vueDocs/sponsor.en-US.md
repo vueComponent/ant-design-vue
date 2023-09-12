@@ -9,7 +9,7 @@ We accept donations through these channels:
 <div>
 <a href="https://www.paypal.me/tangjinzhou" target="_blank">PayPal</a>
 <br/>
-<a href="https://qn.antdv.com/alipay-and-wechat.png" target="_blank">Alipay or WeChat</a>
+<a href="https://aliyuncdn.antdv.com/alipay-and-wechat.png" target="_blank">Alipay or WeChat</a>
 </div>
 
 ## Recurring Pledges

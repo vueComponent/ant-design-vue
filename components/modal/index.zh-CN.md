@@ -28,8 +28,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fBrgSJBmavgAAA
 | closeIcon | 自定义关闭图标 | VNode \| slot | - |  |
 | confirmLoading | 确定按钮 loading | boolean | 无 |  |
 | destroyOnClose | 关闭时销毁 Modal 里的子元素 | boolean | false |  |
-| dialogClass | 可用于设置浮层的类名 | string | - |  |
-| dialogStyle | 可用于设置浮层的样式，调整浮层位置等 | object | - |  |
 | footer | 底部内容，当不需要默认底部按钮时，可以设为 `:footer="null"` | string\|slot | 确定取消按钮 |  |
 | forceRender | 强制渲染 Modal | boolean | false |  |
 | getContainer | 指定 Modal 挂载的 HTML 节点 | (instance): HTMLElement | () => document.body |  |

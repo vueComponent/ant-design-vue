@@ -6,6 +6,7 @@ import type { ComponentDemo } from '../../interface';
 import options from './data';
 
 const handleChange = (value: any) => {
+  // eslint-disable-next-line no-console
   console.log(`selected ${value}`);
 };
 

@@ -102,7 +102,7 @@ watch(
   },
 );
 const removeSight = (item: Sights) => {
-  let index = dynamicValidateForm.sights.indexOf(item);
+  const index = dynamicValidateForm.sights.indexOf(item);
   if (index !== -1) {
     dynamicValidateForm.sights.splice(index, 1);
   }

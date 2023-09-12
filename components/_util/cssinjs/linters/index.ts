@@ -3,3 +3,4 @@ export { default as hashedAnimationLinter } from './hashedAnimationLinter';
 export type { Linter } from './interface';
 export { default as legacyNotSelectorLinter } from './legacyNotSelectorLinter';
 export { default as logicalPropertiesLinter } from './logicalPropertiesLinter';
+export { default as parentSelectorLinter } from './parentSelectorLinter';

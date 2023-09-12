@@ -2,6 +2,7 @@ html {
   &.rtl {
     direction: rtl;
   }
+  scroll-behavior: smooth;
 }
 
 body {
@@ -19,14 +20,14 @@ a {
 
 .main-wrapper {
   position: relative;
-  padding: 40px 0 0;
+  padding: 0;
   background: var(--component-background);
 }
 
 .main-container {
   position: relative;
   min-height: 500px;
-  padding: 0 170px 32px 64px;
+  padding: 40px 170px 32px 64px;
   background: var(--component-background);
 
   .ant-row-rtl & {
@@ -45,11 +46,6 @@ a {
 
   &:hover &-inner {
     overflow-y: auto;
-  }
-
-  > div,
-  > div > div {
-    height: 100%;
   }
 }
 

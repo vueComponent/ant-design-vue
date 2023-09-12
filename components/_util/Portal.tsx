@@ -1,13 +1,5 @@
 import PropTypes from './vue-types';
-import {
-  defineComponent,
-  nextTick,
-  onBeforeMount,
-  onBeforeUnmount,
-  onUpdated,
-  Teleport,
-  watch,
-} from 'vue';
+import { defineComponent, nextTick, onBeforeMount, onUpdated, Teleport, watch } from 'vue';
 import { useInjectPortal } from '../vc-trigger/context';
 
 export default defineComponent({
@@ -44,11 +36,11 @@ export default defineComponent({
         }
       });
     });
-    onBeforeUnmount(() => {
-      if (container && container.parentNode) {
-        container.parentNode.removeChild(container);
-      }
-    });
+    // onBeforeUnmount(() => {
+    //   if (container && container.parentNode) {
+    //     container.parentNode.removeChild(container);
+    //   }
+    // });
     return () => {
       if (!shouldRender.value) return null;
       if (isSSR) {

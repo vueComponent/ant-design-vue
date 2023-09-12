@@ -23,7 +23,7 @@ export interface MaskProps {
   zIndex?: number;
 }
 const Mask = defineComponent({
-  name: 'Mask',
+  name: 'TourMask',
   props: {
     prefixCls: { type: String },
     pos: objectType<PosInfo>(), //	获取引导卡片指向的元素

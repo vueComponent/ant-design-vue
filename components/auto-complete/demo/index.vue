@@ -7,6 +7,8 @@
     <certain-category />
     <uncertain-category />
     <statusVue />
+    <border-less />
+    <allow-clear />
   </demo-sort>
 </template>
 
@@ -18,6 +20,8 @@ import NonCaseSensitive from './non-case-sensitive.vue';
 import CertainCategory from './certain-category.vue';
 import UncertainCategory from './uncertain-category.vue';
 import statusVue from './status.vue';
+import BorderLess from './border-less.vue';
+import AllowClear from './allow-clear.vue';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -34,6 +38,8 @@ export default defineComponent({
     NonCaseSensitive,
     CertainCategory,
     UncertainCategory,
+    BorderLess,
+    AllowClear,
   },
   setup() {
     return {};

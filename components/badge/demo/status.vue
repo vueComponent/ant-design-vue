@@ -1,7 +1,7 @@
 <docs>
 ---
 order: 4
-title: 
+title:
   zh-CN: 状态点
   en-US: Status
 ---
@@ -22,13 +22,12 @@ Standalone badge with status.
   <a-badge status="processing" />
   <a-badge status="warning" />
   <br />
-  <a-badge status="success" text="Success" />
-  <br />
-  <a-badge status="error" text="Error" />
-  <br />
-  <a-badge status="default" text="Default" />
-  <br />
-  <a-badge status="processing" text="Processing" />
-  <br />
-  <a-badge status="warning" text="warning" />
+
+  <a-space direction="vertical">
+    <a-badge status="success" text="Success" />
+    <a-badge status="error" text="Error" />
+    <a-badge status="default" text="Default" />
+    <a-badge status="processing" text="Processing" />
+    <a-badge status="warning" text="warning" />
+  </a-space>
 </template>

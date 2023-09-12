@@ -1,8 +1,10 @@
-function onCompositionStart(e) {
+import type { Directive } from 'vue';
+
+function onCompositionStart(e: any) {
   e.target.composing = true;
 }
 
-function onCompositionEnd(e) {
+function onCompositionEnd(e: any) {
   // prevent triggering an input event for no reason
   if (!e.target.composing) return;
   e.target.composing = false;
@@ -15,10 +17,15 @@ function trigger(el, type) {
   el.dispatchEvent(e);
 }
 
-export function addEventListener(el, event, handler, options) {
+export function addEventListener(
+  el: HTMLElement,
+  event: string,
+  handler: EventListenerOrEventListenerObject,
+  options?: boolean | AddEventListenerOptions,
+) {
   el.addEventListener(event, handler, options);
 }
-const antInput = {
+const antInput: Directive = {
   created(el, binding) {
     if (!binding.modifiers || !binding.modifiers.lazy) {
       addEventListener(el, 'compositionstart', onCompositionStart);

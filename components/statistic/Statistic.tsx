@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
@@ -9,7 +9,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 // CSSINJS
 import useStyle from './style';
 import { anyType, booleanType, functionType, someType, vNodeType } from '../_util/type';
-import type { CustomSlotsType } from '../_util/type';
+import type { CustomSlotsType, VueNode } from '../_util/type';
 
 export const statisticProps = () => ({
   prefixCls: String,
@@ -18,7 +18,7 @@ export const statisticProps = () => ({
   format: String,
   value: someType<valueType>([Number, String, Object]),
   valueStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
-  valueRender: functionType<(node: VNode | JSX.Element) => VNode | JSX.Element>(),
+  valueRender: functionType<(node: VueNode) => VueNode>(),
   formatter: anyType<Formatter>(),
   precision: Number,
   prefix: vNodeType(),
@@ -60,7 +60,7 @@ export default defineComponent({
       const formatter = props.formatter ?? (slots.formatter as unknown as Formatter);
       // data-for-update just for update component
       // https://github.com/vueComponent/ant-design-vue/pull/3170
-      let valueNode = (
+      let valueNode: VueNode = (
         <StatisticNumber
           data-for-update={Date.now()}
           {...{ ...props, prefixCls: pre, value, formatter }}

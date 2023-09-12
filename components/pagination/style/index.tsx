@@ -399,7 +399,7 @@ const genPaginationJumpStyle: GenerateStyle<PaginationToken, CSSObject> = token 
         border: `${token.lineWidth}px ${token.lineType} transparent`,
         borderRadius: token.borderRadius,
         outline: 'none',
-        transition: `border ${token.motionDurationMid}`,
+        transition: `all ${token.motionDurationMid}`,
       },
 
       [`&:focus-visible ${componentCls}-item-link`]: {

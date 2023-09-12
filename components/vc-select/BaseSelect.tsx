@@ -28,7 +28,7 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, isValidElement } from '../_util/props-util';
 import isMobile from '../vc-util/isMobile';
@@ -721,7 +721,7 @@ export default defineComponent({
       // ============================= Arrow ==============================
       const mergedShowArrow =
         showArrow !== undefined ? showArrow : loading || (!multiple.value && mode !== 'combobox');
-      let arrowNode: VNode | JSX.Element;
+      let arrowNode: VueNode;
 
       if (mergedShowArrow) {
         arrowNode = (
@@ -742,7 +742,7 @@ export default defineComponent({
       }
 
       // ============================= Clear ==============================
-      let clearNode: VNode | JSX.Element;
+      let clearNode: VueNode;
       const onClearMouseDown: MouseEventHandler = () => {
         onClear?.();
 
@@ -851,7 +851,7 @@ export default defineComponent({
         ></SelectTrigger>
       );
       // >>> Render
-      let renderNode: VNode | JSX.Element;
+      let renderNode: VueNode;
 
       // Render raw
       if (customizeRawInputElement) {

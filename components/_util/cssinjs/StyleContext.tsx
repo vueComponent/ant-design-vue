@@ -4,26 +4,30 @@ import CacheEntity from './Cache';
 import type { Linter } from './linters/interface';
 import type { Transformer } from './transformers/interface';
 import { arrayType, booleanType, objectType, someType, stringType, withInstall } from '../type';
-import initDefaultProps from '../props-util/initDefaultProps';
 export const ATTR_TOKEN = 'data-token-hash';
 export const ATTR_MARK = 'data-css-hash';
-export const ATTR_DEV_CACHE_PATH = 'data-dev-cache-path';
+export const ATTR_CACHE_PATH = 'data-cache-path';
 
 // Mark css-in-js instance in style element
 export const CSS_IN_JS_INSTANCE = '__cssinjs_instance__';
-export const CSS_IN_JS_INSTANCE_ID = Math.random().toString(12).slice(2);
 
 export function createCache() {
+  const cssinjsInstanceId = Math.random().toString(12).slice(2);
+
+  // Tricky SSR: Move all inline style to the head.
+  // PS: We do not recommend tricky mode.
   if (typeof document !== 'undefined' && document.head && document.body) {
     const styles = document.body.querySelectorAll(`style[${ATTR_MARK}]`) || [];
     const { firstChild } = document.head;
 
     Array.from(styles).forEach(style => {
-      (style as any)[CSS_IN_JS_INSTANCE] =
-        (style as any)[CSS_IN_JS_INSTANCE] || CSS_IN_JS_INSTANCE_ID;
+      (style as any)[CSS_IN_JS_INSTANCE] = (style as any)[CSS_IN_JS_INSTANCE] || cssinjsInstanceId;
 
       // Not force move if no head
-      document.head.insertBefore(style, firstChild);
+      // Not force move if no head
+      if ((style as any)[CSS_IN_JS_INSTANCE] === cssinjsInstanceId) {
+        document.head.insertBefore(style, firstChild);
+      }
     });
 
     // Deduplicate of moved styles
@@ -31,7 +35,7 @@ export function createCache() {
     Array.from(document.querySelectorAll(`style[${ATTR_MARK}]`)).forEach(style => {
       const hash = style.getAttribute(ATTR_MARK)!;
       if (styleHash[hash]) {
-        if ((style as any)[CSS_IN_JS_INSTANCE] === CSS_IN_JS_INSTANCE_ID) {
+        if ((style as any)[CSS_IN_JS_INSTANCE] === cssinjsInstanceId) {
           style.parentNode?.removeChild(style);
         }
       } else {
@@ -40,7 +44,7 @@ export function createCache() {
     });
   }
 
-  return new CacheEntity();
+  return new CacheEntity(cssinjsInstanceId);
 }
 
 export type HashPriority = 'low' | 'high';
@@ -81,12 +85,16 @@ const defaultStyleContext: StyleContextProps = {
   defaultCache: true,
   hashPriority: 'low',
 };
+// fix: https://github.com/vueComponent/ant-design-vue/issues/6912
 export const useStyleInject = () => {
-  return inject(StyleContextKey, shallowRef({ ...defaultStyleContext }));
+  return inject(StyleContextKey, shallowRef({ ...defaultStyleContext, cache: createCache() }));
 };
 export const useStyleProvider = (props: UseStyleProviderProps) => {
   const parentContext = useStyleInject();
-  const context = shallowRef<Partial<StyleContextProps>>({ ...defaultStyleContext });
+  const context = shallowRef<Partial<StyleContextProps>>({
+    ...defaultStyleContext,
+    cache: createCache(),
+  });
   watch(
     [() => unref(props), parentContext],
     () => {
@@ -142,7 +150,7 @@ export const StyleProvider = withInstall(
   defineComponent({
     name: 'AStyleProvider',
     inheritAttrs: false,
-    props: initDefaultProps(styleProviderProps(), defaultStyleContext),
+    props: styleProviderProps(),
     setup(props, { slots }) {
       useStyleProvider(props);
       return () => slots.default?.();

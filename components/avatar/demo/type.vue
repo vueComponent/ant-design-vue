@@ -16,20 +16,22 @@ Image, Icon and letter are supported, and the latter two kinds avatar can have c
 </docs>
 
 <template>
-  <a-avatar>
-    <template #icon>
-      <UserOutlined />
-    </template>
-  </a-avatar>
-  <a-avatar>U</a-avatar>
-  <a-avatar :size="40">USER</a-avatar>
-  <a-avatar src="https://joeschmoe.io/api/v1/random" />
-  <a-avatar style="color: #f56a00; background-color: #fde3cf">U</a-avatar>
-  <a-avatar style="background-color: #87d068">
-    <template #icon>
-      <UserOutlined />
-    </template>
-  </a-avatar>
+  <a-space :size="16" wrap>
+    <a-avatar>
+      <template #icon>
+        <UserOutlined />
+      </template>
+    </a-avatar>
+    <a-avatar>U</a-avatar>
+    <a-avatar :size="40">USER</a-avatar>
+    <a-avatar src="https://www.antdv.com/assets/logo.1ef800a8.svg" />
+    <a-avatar style="color: #f56a00; background-color: #fde3cf">U</a-avatar>
+    <a-avatar style="background-color: #87d068">
+      <template #icon>
+        <UserOutlined />
+      </template>
+    </a-avatar>
+  </a-space>
 </template>
 
 <script lang="ts" setup>

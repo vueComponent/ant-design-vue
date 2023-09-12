@@ -12,17 +12,25 @@
       </p>
     </section>
     <a-divider></a-divider>
-    <a-input
-      ref="inputRef"
-      v-model:value="search"
-      :placeholder="$t('app.components.overview.search')"
-      class="components-overview-search"
-      auto-focus
-    >
-      <template #suffix>
-        <SearchOutlined />
-      </template>
-    </a-input>
+    <a-affix :offset-top="32" @change="handleAffixChange">
+      <div
+        class="components-overview-affix"
+        :class="{ 'components-overview-affixed': searchBarAffixed }"
+      >
+        <a-input
+          ref="inputRef"
+          v-model:value="search"
+          :placeholder="$t('app.components.overview.search')"
+          class="components-overview-search"
+          auto-focus
+          :style="{ fontSize: searchBarAffixed ? '18px' : '' }"
+        >
+          <template #suffix>
+            <SearchOutlined />
+          </template>
+        </a-input>
+      </div>
+    </a-affix>
     <a-divider></a-divider>
     <template v-for="group in menuItems" :key="group.title">
       <div class="components-overview">
@@ -84,6 +92,12 @@ export default defineComponent({
     const search = ref('');
     const inputRef = ref();
     const { dataSource } = useMenus();
+
+    const searchBarAffixed = ref(false);
+    function handleAffixChange(affixed?: boolean) {
+      searchBarAffixed.value = affixed;
+    }
+
     const menuItems = computed(() => {
       return [
         {
@@ -144,6 +158,8 @@ export default defineComponent({
       inputRef,
       isZhCN: globalConfig?.isZhCN,
       isDark,
+      searchBarAffixed,
+      handleAffixChange,
     };
   },
 });

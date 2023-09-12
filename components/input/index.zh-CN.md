@@ -95,6 +95,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sBqqTatJ-AkAAA
 
 #### Input.Password (1.14.0 中新增)
 
-| 参数             | 说明             | 类型    | 默认值 |
-| ---------------- | ---------------- | ------- | ------ |
-| visibilityToggle | 是否显示切换按钮 | boolean | true   |
+| 参数             | 说明                             | 类型    | 默认值 |
+| ---------------- | -------------------------------- | ------- | ------ |
+| visible(v-model) | 密码是否可见                     | boolean | false  |
+| iconRender       | 自定义切换按钮                   | slot    | -      |
+| visibilityToggle | 是否显示切换按钮或者控制密码显隐 | boolean | true   |

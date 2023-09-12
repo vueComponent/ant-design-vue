@@ -125,7 +125,7 @@ export const baseProps = () => ({
 
 const Base = defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'Base',
+  name: 'TypographyBase',
   inheritAttrs: false,
   props: baseProps(),
   // emits: ['update:content'],

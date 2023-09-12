@@ -18,7 +18,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
 
 </docs>
 <template>
-  <div class="site-input-group-wrapper">
+  <a-space class="site-input-group-wrapper" direction="vertical" size="middle">
     <a-input-group size="large">
       <a-row :gutter="8">
         <a-col :span="5">
@@ -29,12 +29,10 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         </a-col>
       </a-row>
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-input v-model:value="value1" style="width: 20%" />
       <a-input v-model:value="value2" style="width: 30%" />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-select v-model:value="value3">
         <a-select-option value="Zhejiang">Zhejiang</a-select-option>
@@ -42,7 +40,6 @@ Note: You don't need `Col` to control the width in the `compact` mode.
       </a-select>
       <a-input v-model:value="value4" style="width: 50%" />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-select v-model:value="value5">
         <a-select-option value="Option1">Option1</a-select-option>
@@ -50,12 +47,10 @@ Note: You don't need `Col` to control the width in the `compact` mode.
       </a-select>
       <a-input v-model:value="value6" style="width: 50%" />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-input v-model:value="value7" style="width: 50%" />
       <a-date-picker v-model:value="value8" style="width: 50%" />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-select v-model:value="value9">
         <a-select-option value="Option1-1">Option1-1</a-select-option>
@@ -66,7 +61,6 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         <a-select-option value="Option2-2">Option2-2</a-select-option>
       </a-select>
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-select v-model:value="value11">
         <a-select-option value="1">Between</a-select-option>
@@ -91,7 +85,6 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         placeholder="Maximum"
       />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-select v-model:value="value15">
         <a-select-option value="Sign Up">Sign Up</a-select-option>
@@ -104,7 +97,6 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         placeholder="Email"
       />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-select v-model:value="value17" style="width: 30%">
         <a-select-option value="Home">Home</a-select-option>
@@ -117,12 +109,10 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         placeholder="Select Address"
       />
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-input v-model:value="value19" style="width: calc(100% - 200px)" />
       <a-button type="primary">Submit</a-button>
     </a-input-group>
-    <br />
     <a-input-group compact>
       <a-input v-model:value="value20" style="width: calc(100% - 200px)" />
       <a-tooltip title="copy git url">
@@ -131,7 +121,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         </a-button>
       </a-tooltip>
     </a-input-group>
-  </div>
+  </a-space>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue';

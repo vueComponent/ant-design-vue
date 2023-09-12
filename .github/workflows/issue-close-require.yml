@@ -4,12 +4,15 @@ on:
   schedule:
     - cron: "0 0 * * *"
 
+permissions:
+  contents: read
+  
 jobs:
   close-issues:
     runs-on: ubuntu-latest
     steps:
       - name: need reproduce
-        uses: actions-cool/issues-helper@v1.7
+        uses: actions-cool/issues-helper@v3
         with:
           actions: 'close-issues'
           labels: '🤔 Need Reproduce'

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.antdv.com/">
-    <img width="200" src="https://qn.antdv.com/logo.png">
+    <img width="200" src="https://aliyuncdn.antdv.com/logo.png">
   </a>
 </p>
 
@@ -25,6 +25,12 @@ English | [简体中文](./README-zh_CN.md)
 - An enterprise-class UI design system for desktop applications.
 - A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
+
+## Getting started & staying tuned with us.
+
+Star us, and you will receive all releases notifications from GitHub without any delay!
+
+![star us](https://user-images.githubusercontent.com/6937879/261937060-e0501ab3-9388-4712-a25d-3f2ba2271865.gif)
 
 ## Environment Support
 
@@ -75,13 +81,15 @@ ant-design-vue is an MIT-licensed open source project. In order to achieve bette
 - [Patreon](https://www.patreon.com/tangjinzhou)
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
-- [支付宝或微信](https://qn.antdv.com/alipay-and-wechat.png)
+- [支付宝或微信](https://aliyuncdn.antdv.com/alipay-and-wechat.png)
 
 ## Sponsors
 
 Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/ant-design-vue#sponsor)]
 
 <a href="http://www.jeecg.com/" target="_blank"><img src="https://aliyuncdn.antdv.com/jeecg-logo.png" height="64"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/10/avatar.svg"></a>
+
+## [More Sponsor (From Patreon、alipay、wechat、paypal...)](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)
 
 ## Contributors
 
@@ -90,8 +98,6 @@ Thank you to all the people who already contributed to ant-design-vue!
 <a href="https://github.com/vueComponent/ant-design-vue/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=vueComponent/ant-design-vue&max=100&columns=15" />
 </a>
-
-## [More Sponsor (From Patreon、alipay、wechat、paypal...)](https://github.com/vueComponent/ant-design-vue/blob/master/BACKERS.md)
 
 [![Let's fund issues in this repository](https://issuehunt.io/static/embed/issuehunt-button-v1.svg)](https://issuehunt.io/repos/104172832)
 

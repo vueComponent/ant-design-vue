@@ -76,7 +76,7 @@ const state = reactive({
 });
 const onOpenChange = (openKeys: string[]) => {
   const latestOpenKey = openKeys.find(key => state.openKeys.indexOf(key) === -1);
-  if (state.rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
+  if (state.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
     state.openKeys = openKeys;
   } else {
     state.openKeys = latestOpenKey ? [latestOpenKey] : [];

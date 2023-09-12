@@ -1,6 +1,6 @@
 <template>
   <Header />
-  <div v-if="headers.length" class="toc-affix" :style="y > 60 ? 'position:fixed; top: 16px;' : ''">
+  <div v-if="headers.length" class="toc-affix" :style="y > 102 ? 'position:fixed; top: 16px;' : ''">
     <a-anchor style="width: 160px" :items="headers">
       <template #customTitle="item">
         <LinkOutlined v-if="item.target" />
@@ -13,22 +13,20 @@
       <template v-if="isMobile">
         <a-drawer
           key="mobile-menu"
+          v-model:visible="visible"
           :closable="false"
           placement="left"
           class="drawer drawer-left"
-          :visible="visible"
           wrapper-class-name="drawer-wrapper"
           width="60%"
         >
           <surelyVueVue />
           <Menu :menus="dataSource" :active-menu-item="activeMenuItem" :is-zh-c-n="isZhCN" />
-          <template #handle>
-            <div class="drawer-handle" @click="handleClickShowButton">
-              <close-outlined v-if="visible" :style="iconStyle" />
-              <MenuOutlined v-else :style="iconStyle" />
-            </div>
-          </template>
         </a-drawer>
+        <div class="drawer-handle" @click="handleClickShowButton">
+          <close-outlined v-if="visible" :style="iconStyle" />
+          <MenuOutlined v-else :style="iconStyle" />
+        </div>
       </template>
       <template v-else>
         <a-col :xxxl="4" :xxl="4" :xl="5" :lg="6" :md="6" :sm="24" :xs="24" class="main-menu">
@@ -298,6 +296,11 @@ export default defineComponent({
 });
 </script>
 <style lang="less" scoped>
+.toc-affix {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(10px);
+}
+
 .toc-affix :deep(.ant-anchor) {
   font-size: 12px;
   max-width: 110px;
@@ -307,15 +310,6 @@ export default defineComponent({
   }
   .ant-anchor-ink-ball {
     display: none;
-  }
-}
-
-[data-theme='dark'] .toc-affix :deep(.ant-anchor) {
-  .ant-anchor-link {
-    border-left: 2px solid #303030;
-  }
-  .ant-anchor-link-active {
-    border-left: 2px solid #177ddc;
   }
 }
 </style>

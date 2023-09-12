@@ -10,6 +10,47 @@
 
 ---
 
+## 4.0.3
+
+- 🐞 修复 shadow Dom 下样式丢失问题 [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)
+- 🐞 升级 Icon 依赖，修复 shadow Dom 下 icon css 丢失问题 [#6914](https://github.com/vueComponent/ant-design-vue/issues/6914)
+
+## 4.0.2
+
+- 🐞 修复 useMessage 导致 body 被移除问题 [#6880](https://github.com/vueComponent/ant-design-vue/issues/6880)
+- 🐞 修复 Button loading 切换后，水波纹效果不消失问题 [#6895](https://github.com/vueComponent/ant-design-vue/issues/6895)
+- 🐞 修复 Image 关闭后 flip 没有重置问题 [#6913](https://github.com/vueComponent/ant-design-vue/issues/6913)
+- 🐞 修复 ImageGroup 动画效果丢失问题 [#6898](https://github.com/vueComponent/ant-design-vue/issues/6898)
+- 🐞 修复 Modal 缺少 onUpdate:open 属性声明 [#6876](https://github.com/vueComponent/ant-design-vue/issues/6876)
+- 🐞 修复 Transfer 的 Checkbox 边缘处会触发多次 click 问题 [#6902](https://github.com/vueComponent/ant-design-vue/issues/6902)
+
+## 4.0.1
+
+- 🌟 FloatButton 添加 Badge 支持 [#6738](https://github.com/vueComponent/ant-design-vue/issues/6738)
+- 🌟 Image 预览放大缩小灵敏度调整 [#6784](https://github.com/vueComponent/ant-design-vue/issues/6784)
+- 🌟 Image 新增翻转特性 [#6785](https://github.com/vueComponent/ant-design-vue/issues/6785)
+- 🌟 新增 App 组件，用于提供上下文 [#6735](https://github.com/vueComponent/ant-design-vue/issues/6735)
+- 🌟 样式抽离特性用于 SSR [#6757](https://github.com/vueComponent/ant-design-vue/issues/6757)
+- 🌟 支持 px2rem [#6817](https://github.com/vueComponent/ant-design-vue/issues/6817)
+- 🌟 Tag 支持无边框模式 [#6819](https://github.com/vueComponent/ant-design-vue/issues/6819)
+- 🌟 Avatar group 模式支持 shape [#6822](https://github.com/vueComponent/ant-design-vue/issues/6822)
+- 🌟 AutoComplete 支持无边框和自定义 clearIcon [#6829](https://github.com/vueComponent/ant-design-vue/issues/6829)
+- 🌟 InputPassword 支持受控 visible [#6863](https://github.com/vueComponent/ant-design-vue/issues/6863)
+- 🐞 修复 InputGroup 在 large 时样式错位问题 [#6866](https://github.com/vueComponent/ant-design-vue/issues/6866)
+- 🐞 修复 Checkable Tag 无法自定义 class 问题 [#6854](https://github.com/vueComponent/ant-design-vue/issues/6854)
+- 🐞 修复 Tabs 动画模式下渲染问题 [#6855](https://github.com/vueComponent/ant-design-vue/issues/6855)
+- 🐞 修复 Image height 属性不生效问题 [#6840](https://github.com/vueComponent/ant-design-vue/issues/6840)
+- 🐞 修复 InputNumber 触发 mouseup 事件问题 [#6772](https://github.com/vueComponent/ant-design-vue/issues/6772)
+- 🐞 修复 Tabs 折叠时 Dropdown 样式问题 [#6757](https://github.com/vueComponent/ant-design-vue/issues/6757)
+- 🐞 修复 Table expandedRowRender 属性不生效 [#6783](https://github.com/vueComponent/ant-design-vue/issues/6783)
+- 🐞 修复 dayjs 未打包进 dist 问题 [#6767](https://github.com/vueComponent/ant-design-vue/issues/6767)
+- 🐞 解决 clipPath 浏览器兼容问题 [#6770](https://github.com/vueComponent/ant-design-vue/issues/6770)
+- 🐞 修复 Carousel autoplay 响应式问题 [#6768](https://github.com/vueComponent/ant-design-vue/issues/6768)
+- 🐞 修复 PageHeader ghost 样式问题 [#6761](https://github.com/vueComponent/ant-design-vue/issues/6761)
+- 🐞 修复 Checkbox 没有触发 Form 校验问题 [#6741](https://github.com/vueComponent/ant-design-vue/issues/6741)
+- 🐞 修复 Input prefix 属性未生效问题 [#6810](https://github.com/vueComponent/ant-design-vue/issues/6810)
+- 🐞 修复 Badge 在 Avatar 中样式问题 [#6874](https://github.com/vueComponent/ant-design-vue/issues/6874)
+
 ## 4.0
 
 ### 🔥🔥🔥 4.0 正式版发布 🔥🔥🔥

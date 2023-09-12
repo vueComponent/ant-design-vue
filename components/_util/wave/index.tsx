@@ -41,21 +41,20 @@ export default defineComponent({
       const node = findDOMNode(instance);
       node.removeEventListener('click', onClick, true);
     };
-
     onMounted(() => {
       watch(
         () => props.disabled,
         () => {
           clear();
           nextTick(() => {
-            const node = findDOMNode(instance);
-
+            const node: HTMLElement = findDOMNode(instance);
+            node?.removeEventListener('click', onClick, true);
             if (!node || node.nodeType !== 1 || props.disabled) {
               return;
             }
 
             // Click handler
-            const onClick = (e: MouseEvent) => {
+            onClick = (e: MouseEvent) => {
               // Fix radio button click twice
               if (
                 (e.target as HTMLElement).tagName === 'INPUT' ||

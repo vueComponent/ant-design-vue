@@ -185,8 +185,8 @@ export const tableProps = () => {
   };
 };
 
-const InteralTable = defineComponent({
-  name: 'InteralTable',
+const InternalTable = defineComponent({
+  name: 'InternalTable',
   inheritAttrs: false,
   props: initDefaultProps(
     {
@@ -653,6 +653,7 @@ const Table = defineComponent({
     footer?: any;
     summary?: any;
     expandedRowRender?: any;
+    expandColumnTitle?: any;
     bodyCell?: {
       text: any;
       value: any;
@@ -676,7 +677,7 @@ const Table = defineComponent({
     return () => {
       const columns = props.columns || convertChildrenToColumns(slots.default?.());
       return (
-        <InteralTable
+        <InternalTable
           ref={table}
           {...attrs}
           {...props}

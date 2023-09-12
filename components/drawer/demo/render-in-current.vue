@@ -27,7 +27,6 @@ Render in current dom. custom container, check `getContainer`.
       padding: '48px',
       textAlign: 'center',
       background: '#fafafa',
-      width: '100%',
     }"
   >
     Render in this

@@ -35,7 +35,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5-ArSLl5UBsAAA
 | dropdownStyle | 自定义浮层样式 | CSSProperties | {} | 3.0 |
 | expandIcon | 自定义次级菜单展开图标 | slot | - | 3.0 |
 | expandTrigger | 次级菜单的展开方式 | `click` \| `hover` | 'click' |  |
-| fieldNames | 自定义 options 中 label name children 的字段 | object | `{ label: 'label', value: 'value', children: 'children' }` |  |
+| fieldNames | 自定义 options 中 `label` `value` `children` 的字段 | object | `{ label: 'label', value: 'value', children: 'children' }` |  |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |  |
 | loadData | 用于动态加载选项，无法与 `showSearch` 一起使用 | `(selectedOptions) => void` | - |  |
 | maxTagCount | 最多显示多少个 tag，响应式模式会对性能产生损耗 | number \| `responsive` | - | 3.0 |

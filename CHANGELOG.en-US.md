@@ -10,6 +10,47 @@
 
 ---
 
+## 4.0.3
+
+- 🐞 Fix the problem of style loss under shadow Dom [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)
+- 🐞 Upgrade Icon dependency and fix icon css missing problem under shadow Dom [#6914](https://github.com/vueComponent/ant-design-vue/issues/6914)
+
+## 4.0.2
+
+- 🐞 Fix useMessage causing body to be removed [#6880](https://github.com/vueComponent/ant-design-vue/issues/6880)
+- 🐞 Fix the problem that the water ripple effect does not disappear after Button loading is switched [#6895](https://github.com/vueComponent/ant-design-vue/issues/6895)
+- 🐞 Fixed the problem that flip does not reset after Image is closed [#6913](https://github.com/vueComponent/ant-design-vue/issues/6913)
+- 🐞 Fix ImageGroup animation effect loss problem [#6898](https://github.com/vueComponent/ant-design-vue/issues/6898)
+- 🐞 Fix Modal missing onUpdate:open attribute declaration [#6876](https://github.com/vueComponent/ant-design-vue/issues/6876)
+- 🐞 Fixed the issue of multiple clicks being triggered at the edge of Transfer's Checkbox [#6902](https://github.com/vueComponent/ant-design-vue/issues/6902)
+
+## 4.0.1
+
+- 🌟 FloatButton add Badge support [#6738](https://github.com/vueComponent/ant-design-vue/issues/6738)
+- 🌟 Image preview zoom in and out sensitivity adjustment [#6784](https://github.com/vueComponent/ant-design-vue/issues/6784)
+- 🌟 Add flip feature to Image [#6785](https://github.com/vueComponent/ant-design-vue/issues/6785)
+- 🌟 Add App component to provide context [#6735](https://github.com/vueComponent/ant-design-vue/issues/6735)
+- 🌟 Style extraction feature for SSR [#6757](https://github.com/vueComponent/ant-design-vue/issues/6757)
+- 🌟 Support px2rem [#6817](https://github.com/vueComponent/ant-design-vue/issues/6817)
+- 🌟 Tag supports borderless mode [#6819](https://github.com/vueComponent/ant-design-vue/issues/6819)
+- 🌟 Avatar group mode supports shape [#6822](https://github.com/vueComponent/ant-design-vue/issues/6822)
+- 🌟 AutoComplete supports borderless and custom clearIcon [#6829](https://github.com/vueComponent/ant-design-vue/issues/6829)
+- 🌟 InputPassword supports controlled visible [#6863](https://github.com/vueComponent/ant-design-vue/issues/6863)
+- 🐞 Fix the style misalignment problem when InputGroup is large [#6866](https://github.com/vueComponent/ant-design-vue/issues/6866)
+- 🐞 Fix the problem that Checkable Tag cannot customize class [#6854](https://github.com/vueComponent/ant-design-vue/issues/6854)
+- 🐞 Fix the rendering problem in Tabs animation mode [#6855](https://github.com/vueComponent/ant-design-vue/issues/6855)
+- 🐞 Fix the problem that the Image height attribute does not take effect [#6840](https://github.com/vueComponent/ant-design-vue/issues/6840)
+- 🐞 Fix InputNumber trigger mouseup event [#6772](https://github.com/vueComponent/ant-design-vue/issues/6772)
+- 🐞 Fix the Dropdown style problem when Tabs are collapsed [#6757](https://github.com/vueComponent/ant-design-vue/issues/6757)
+- 🐞 Fix Table expandedRowRender property does not take effect [#6783](https://github.com/vueComponent/ant-design-vue/issues/6783)
+- 🐞 Fix dayjs not packaged into dist [#6767](https://github.com/vueComponent/ant-design-vue/issues/6767)
+- 🐞 Fix clipPath browser compatibility issue [#6770](https://github.com/vueComponent/ant-design-vue/issues/6770)
+- 🐞 Fix Carousel autoplay responsive problem [#6768](https://github.com/vueComponent/ant-design-vue/issues/6768)
+- 🐞 Fix PageHeader ghost style problem [#6761](https://github.com/vueComponent/ant-design-vue/issues/6761)
+- 🐞 Fix Checkbox not triggering Form validation [#6741](https://github.com/vueComponent/ant-design-vue/issues/6741)
+- 🐞 Fix the problem that the Input prefix attribute does not take effect [#6810](https://github.com/vueComponent/ant-design-vue/issues/6810)
+- 🐞 Fix Badge style problem in Avatar [#6874](https://github.com/vueComponent/ant-design-vue/issues/6874)
+
 ## 4.0
 
 ### 🔥🔥🔥 4.0 official version released 🔥🔥🔥

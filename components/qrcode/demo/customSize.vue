@@ -18,7 +18,7 @@ Custom Size.
   <a-button-group>
     <a-button @click="decline">
       <template #icon><MinusOutlined /></template>
-      samll
+      small
     </a-button>
     <a-button @click="increase">
       <template #icon><PlusOutlined /></template>

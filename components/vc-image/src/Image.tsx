@@ -97,9 +97,6 @@ const ImageInternal = defineComponent({
       onChange: onPreviewVisibleChange,
     });
 
-    watch(isShowPreview, (val, preVal) => {
-      onPreviewVisibleChange(val, preVal);
-    });
     const status = ref<ImageStatus>(isCustomPlaceholder.value ? 'loading' : 'normal');
     watch(
       () => props.src,

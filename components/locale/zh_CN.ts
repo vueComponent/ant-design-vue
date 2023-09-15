@@ -139,6 +139,9 @@ const localeValues: Locale = {
     expired: '二维码已过期',
     refresh: '点击刷新',
   },
+  ColorPicker: {
+    presetEmpty: '暂无',
+  },
 };
 
 export default localeValues;

@@ -267,6 +267,8 @@ declare module 'vue' {
 
     AWatermark: typeof import('ant-design-vue')['Watermark'];
 
+    AColorPicker: typeof import('ant-design-vue')['ColorPicker'];
+
     AStyleProvider: typeof import('ant-design-vue')['StyleProvider'];
   }
 }

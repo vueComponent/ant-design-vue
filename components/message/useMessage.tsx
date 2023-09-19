@@ -80,7 +80,6 @@ const Holder = defineComponent({
         <CloseOutlined class={`${prefixCls.value}-close-icon`} />
       </span>
     );
-    debugger;
     // ============================== Origin ===============================
     const [api, holder] = useVcNotification({
       //@ts-ignore

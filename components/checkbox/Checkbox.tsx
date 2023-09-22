@@ -15,6 +15,7 @@ import warning from '../_util/warning';
 import type { EventHandler } from '../_util/EventInterface';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 import type { CheckboxChangeEvent, CheckboxProps } from './interface';
 import { CheckboxGroupContextKey, checkboxProps } from './interface';
@@ -33,6 +34,8 @@ export default defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const { prefixCls, direction, disabled } = useConfigInject('checkbox', props);
+
+    const contextDisabled = useInjectDisabled();
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
 
@@ -94,7 +97,7 @@ export default defineComponent({
         };
         checkboxProps.name = checkboxGroup.name.value;
         checkboxProps.checked = checkboxGroup.mergedValue.value.includes(props.value);
-        checkboxProps.disabled = mergedDisabled.value || checkboxGroup.disabled.value;
+        checkboxProps.disabled = mergedDisabled.value || contextDisabled.value;
         checkboxProps.indeterminate = indeterminate;
       } else {
         checkboxProps.onChange = handleChange;
@@ -129,7 +132,6 @@ export default defineComponent({
             {...checkboxProps}
             class={checkboxClass}
             ref={checkboxRef}
-            disabled={mergedDisabled.value}
           />
           {children.length ? <span>{children}</span> : null}
         </label>,

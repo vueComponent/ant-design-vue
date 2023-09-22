@@ -22,7 +22,7 @@ const imageOptions = {
   limit: 10000,
 };
 
-function getWebpackConfig(modules) {
+function getWebpackConfig(modules, esm = false) {
   const pkg = require(getProjectPath('package.json'));
   const babelConfig = require('./getBabelCommonConfig')(modules || false);
 
@@ -185,7 +185,7 @@ All rights reserved.
   };
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
-    const entry = ['./index'];
+    let entry = ['./index'];
     config.externals = [
       {
         vue: {
@@ -197,9 +197,25 @@ All rights reserved.
         },
       },
     ];
-    config.output.library = distFileBaseName;
-    config.output.libraryTarget = 'umd';
-    config.output.globalObject = 'this';
+    if (esm) {
+      entry = ['./index.esm'];
+      config.experiments = {
+        ...config.experiments,
+        outputModule: true,
+      };
+      config.output.chunkFormat = 'module';
+      config.output.library = {
+        type: 'module',
+      };
+      config.target = 'es2019';
+    } else {
+      config.output.libraryTarget = 'umd';
+      config.output.library = distFileBaseName;
+      config.output.globalObject = 'this';
+    }
+
+    const entryName = esm ? `${distFileBaseName}.esm` : distFileBaseName;
+
     config.optimization = {
       minimizer: [
         new TerserPlugin({
@@ -213,7 +229,7 @@ All rights reserved.
     // Development
     const uncompressedConfig = merge({}, config, {
       entry: {
-        [distFileBaseName]: entry,
+        [entryName]: entry,
       },
       mode: 'development',
       plugins: [
@@ -226,7 +242,7 @@ All rights reserved.
     // Production
     const prodConfig = merge({}, config, {
       entry: {
-        [`${distFileBaseName}.min`]: entry,
+        [`${entryName}.min`]: entry,
       },
       mode: 'production',
       plugins: [

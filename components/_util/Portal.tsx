@@ -23,14 +23,23 @@ export default defineComponent({
     // getContainer 不会改变，不用响应式
     let container: HTMLElement;
     const { shouldRender } = useInjectPortal();
-    onBeforeMount(() => {
-      isSSR = false;
-    });
-    onMounted(() => {
+
+    function setContainer() {
       if (shouldRender.value) {
         container = props.getContainer();
       }
+    }
+
+    onBeforeMount(() => {
+      isSSR = false;
+      // drawer
+      setContainer();
     });
+    onMounted(() => {
+      // https://github.com/vueComponent/ant-design-vue/issues/6937
+      setContainer();
+    });
+
     const stopWatch = watch(shouldRender, () => {
       if (shouldRender.value && !container) {
         container = props.getContainer();

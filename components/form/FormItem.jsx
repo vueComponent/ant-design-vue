@@ -119,7 +119,7 @@ export default {
     collectContext() {
       if (this.FormContext.form && this.FormContext.form.templateContext) {
         const { templateContext } = this.FormContext.form;
-        const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b) => {
+        const vnodes = Object.values(templateContext.$slots || {}).reduce((a, b = []) => {
           return [...a, ...b];
         }, []);
         const isSlot = comeFromSlot(vnodes, this.$vnode);

@@ -220,7 +220,7 @@
     "object-assign": "^4.1.1",
     "postcss": "^8.2.12",
     "postcss-loader": "^6.0.0",
-    "prettier": "^2.2.0",
+    "prettier": "^3.0.3",
     "pretty-quick": "^3.0.0",
     "prismjs": "^1.23.0",
     "progress": "^2.0.3",

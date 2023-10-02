@@ -25,6 +25,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import type { RenderFunc, SharedConfig } from './interface';
 import supportsPassive from '../_util/supportsPassive';
+import { debounce } from 'lodash-es';
 
 const EMPTY_DATA = [];
 
@@ -488,7 +489,11 @@ const List = defineComponent({
       sharedConfig,
       setInstance,
       mergedData,
+      scrollBarRef,
     } = this;
+    const mousemove = () => {
+      scrollBarRef?.delayHidden();
+    };
     return (
       <div
         style={{
@@ -497,6 +502,7 @@ const List = defineComponent({
         }}
         class={mergedClassName}
         {...restProps}
+        onMousemove={debounce(mousemove, 500)}
       >
         <Component
           class={`${prefixCls}-holder`}

@@ -76,6 +76,9 @@ const AutoComplete = defineComponent({
     const getInputElement = () => {
       const children = flattenChildren(slots.default?.());
       const element = children.length ? children[0] : undefined;
+      if (props.placeholder && element) {
+        element.props.placeholder = undefined;
+      }
       return element;
     };
 

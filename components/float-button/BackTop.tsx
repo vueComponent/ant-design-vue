@@ -25,7 +25,6 @@ import { useInjectFloatButtonGroupContext } from './context';
 const BackTop = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ABackTop',
-  inheritAttrs: false,
   props: initDefaultProps(backTopProps(), {
     visibilityHeight: 400,
     target: () => window,
@@ -126,6 +125,7 @@ const BackTop = defineComponent({
           [`${attrs.class}`]: attrs.class,
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         },
+        type: props.type,
       };
 
       const transitionProps = getTransitionProps('fade');

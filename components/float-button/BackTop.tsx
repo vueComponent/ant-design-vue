@@ -25,6 +25,7 @@ import { useInjectFloatButtonGroupContext } from './context';
 const BackTop = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ABackTop',
+  inheritAttrs: false,
   props: initDefaultProps(backTopProps(), {
     visibilityHeight: 400,
     target: () => window,
@@ -109,23 +110,21 @@ const BackTop = defineComponent({
     });
     const floatButtonGroupContext = useInjectFloatButtonGroupContext();
     return () => {
-      const defaultElement = (
-        <div class={`${prefixCls.value}-content`}>
-          <div class={`${prefixCls.value}-icon`}>
-            <VerticalAlignTopOutlined />
-          </div>
-        </div>
-      );
+      const { description, type, shape, tooltip, badge } = props;
+
       const floatButtonProps = {
         ...attrs,
-        shape: floatButtonGroupContext?.shape.value || props.shape,
+        shape: floatButtonGroupContext?.shape.value || shape,
         onClick: scrollToTop,
         class: {
           [`${prefixCls.value}`]: true,
           [`${attrs.class}`]: attrs.class,
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         },
-        type: props.type,
+        description,
+        type,
+        tooltip,
+        badge,
       };
 
       const transitionProps = getTransitionProps('fade');
@@ -133,8 +132,7 @@ const BackTop = defineComponent({
         <Transition {...transitionProps}>
           <FloatButton v-show={state.visible} {...floatButtonProps} ref={domRef}>
             {{
-              icon: () => <VerticalAlignTopOutlined />,
-              default: () => slots.default?.() || defaultElement,
+              icon: () => slots.default?.() || slots.icon?.() || <VerticalAlignTopOutlined />,
             }}
           </FloatButton>
         </Transition>,

@@ -90,8 +90,7 @@ const Holder = defineComponent({
       closable: false,
       closeIcon: mergedCloseIcon,
       duration: props.duration ?? DEFAULT_DURATION,
-      getContainer: () =>
-        props.staticGetContainer?.() || getPopupContainer.value?.() || document.body,
+      getContainer: props.staticGetContainer ?? getPopupContainer.value,
       maxCount: props.maxCount,
       onAllRemoved: props.onAllRemoved,
     });

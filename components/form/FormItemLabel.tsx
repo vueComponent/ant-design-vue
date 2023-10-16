@@ -9,7 +9,7 @@ import classNames from '../_util/classNames';
 import type { VueNode } from '../_util/type';
 import type { FunctionalComponent, HTMLAttributes } from 'vue';
 import Tooltip from '../tooltip';
-import { QuestionCircleOutlined } from '@ant-design/icons-vue';
+import QuestionCircleOutlined from '@ant-design/icons-vue/QuestionCircleOutlined';
 
 export interface FormItemLabelProps {
   colon?: boolean;
@@ -75,7 +75,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
     labelChildren = (
       <>
         {labelChildren}
-        {slots.tooltip ? slots.tooltip?.({ className: `${prefixCls}-item-tooltip` }) : tooltipNode}
+        {slots.tooltip ? slots.tooltip?.({ class: `${prefixCls}-item-tooltip` }) : tooltipNode}
       </>
     );
   }

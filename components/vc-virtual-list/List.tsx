@@ -491,7 +491,6 @@ const List = defineComponent({
       sharedConfig,
       setInstance,
       mergedData,
-      scrollBarRef,
     } = this;
     return (
       <div

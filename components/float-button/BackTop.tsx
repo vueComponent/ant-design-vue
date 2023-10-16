@@ -132,7 +132,7 @@ const BackTop = defineComponent({
         <Transition {...transitionProps}>
           <FloatButton v-show={state.visible} {...floatButtonProps} ref={domRef}>
             {{
-              icon: () => slots.default?.() || slots.icon?.() || <VerticalAlignTopOutlined />,
+              icon: () => slots.icon?.() || <VerticalAlignTopOutlined />,
             }}
           </FloatButton>
         </Transition>,

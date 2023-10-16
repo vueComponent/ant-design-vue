@@ -24,7 +24,7 @@ export default (name: string, props: Record<any, any>) => {
     () => props.getTargetContainer ?? configProvider.getTargetContainer?.value,
   );
   const getPopupContainer = computed(
-    () => props.getPopupContainer ?? configProvider.getPopupContainer?.value,
+    () => props.getContainer ?? props.getPopupContainer ?? configProvider.getPopupContainer?.value,
   );
 
   const dropdownMatchSelectWidth = computed<boolean | number>(

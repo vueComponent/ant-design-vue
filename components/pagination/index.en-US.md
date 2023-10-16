@@ -29,7 +29,7 @@ A long list can be divided into several pages using `Pagination`, and only one p
 | hideOnSinglePage | Whether to hide pager on single page | boolean | false |  |
 | itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode \| v-slot | - |  |
 | pageSize(v-model) | number of data items per page | number | - |  |
-| pageSizeOptions | specify the sizeChanger options | string\[] | \['10', '20', '30', '40'] |  |
+| pageSizeOptions | specify the sizeChanger options | string\[] \| number\[] | \['10', '20', '50', '100'] |  |
 | responsive | If `size` is not specified, `Pagination` would resize according to the width of the window | boolean | - | 3.1 |
 | showLessItems | Show less page items | boolean | false | 1.5.0 |
 | showQuickJumper | determine whether you can jump to pages directly | boolean | false |  |

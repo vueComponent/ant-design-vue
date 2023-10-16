@@ -93,7 +93,8 @@ function PanelBody<DateType>(_props: PanelBodyProps<DateType>) {
               (picker === 'year' && Number(title) % 10 === 9),
             ...getCellClassName(currentDate),
           })}
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation();
             if (!disabled) {
               onSelect(currentDate);
             }

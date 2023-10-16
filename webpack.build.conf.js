@@ -39,6 +39,7 @@ function externalDayjs(config) {
 }
 
 const webpackConfig = getWebpackConfig(false);
+const webpackESMConfig = getWebpackConfig(false, true);
 
 if (process.env.RUN_ENV === 'PRODUCTION') {
   webpackConfig.forEach(config => {
@@ -72,4 +73,4 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
   });
 }
 
-module.exports = [...webpackConfig];
+module.exports = [...webpackConfig, ...webpackESMConfig];

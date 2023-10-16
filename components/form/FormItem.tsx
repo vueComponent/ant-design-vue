@@ -126,6 +126,7 @@ export const formItemProps = () => ({
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
   noStyle: Boolean,
+  tooltip: String,
 });
 
 export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
@@ -155,6 +156,7 @@ export default defineComponent({
     label: any;
     extra: any;
     default: any;
+    tooltip: any;
   }>,
   setup(props, { slots, attrs, expose }) {
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);
@@ -327,7 +329,7 @@ export default defineComponent({
       const value = fieldValue.value;
       const prop = getPropByPath(model, namePath.value, true);
       if (Array.isArray(value)) {
-        prop.o[prop.k] = [].concat(initialValue.value);
+        prop.o[prop.k] = [].concat(initialValue.value ?? []);
       } else {
         prop.o[prop.k] = initialValue.value;
       }
@@ -505,7 +507,8 @@ export default defineComponent({
                     requiredMark={formContext.requiredMark.value}
                     prefixCls={prefixCls.value}
                     onClick={onLabelClick}
-                    label={props.label ?? slots.label?.()}
+                    label={props.label}
+                    v-slots={{ label: slots.label, tooltip: slots.tooltip }}
                   />
                   {/* Input Group */}
                   <FormItemInput

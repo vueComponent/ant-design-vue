@@ -10,6 +10,17 @@
 
 ---
 
+## 4.0.4
+
+- 🌟 Added esm target file
+- 🌟 Added tooltip attribute to FormItem [#7014](https://github.com/vueComponent/ant-design-vue/issues/7014)
+- 🐞 Fix useMessage getContainer not taking effect [#6942](https://github.com/vueComponent/ant-design-vue/issues/6942)
+- 🐞 Fix the problem of Image triggering onPreviewVisibleChange event multiple times [#6945](https://github.com/vueComponent/ant-design-vue/issues/6945)
+- 🐞 Fix the problem that Checkbox global disabled does not take effect [#6970](https://github.com/vueComponent/ant-design-vue/issues/6970)
+- 🐞 Fix Drawer contentWrapperStyle not taking effect [#6983](https://github.com/vueComponent/ant-design-vue/issues/6983)
+- 🐞 Optimize Select Dropdown and other drop-down list scroll bar display hidden logic [#6987](https://github.com/vueComponent/ant-design-vue/issues/6987)
+- 🐞 Fix the problem of hiding when there are components such as input in the drop-down list such as Select Dropdown [#7020](https://github.com/vueComponent/ant-design-vue/issues/7020)
+
 ## 4.0.3
 
 - 🐞 Fix the problem of style loss under shadow Dom [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)

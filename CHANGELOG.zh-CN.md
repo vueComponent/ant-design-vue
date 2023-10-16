@@ -10,6 +10,17 @@
 
 ---
 
+## 4.0.4
+
+- 🌟 新增 esm 目标文件
+- 🌟 FormItem 新增 tooltip 属性 [#7014](https://github.com/vueComponent/ant-design-vue/issues/7014)
+- 🐞 修复 useMessage getContainer 不生效问题 [#6942](https://github.com/vueComponent/ant-design-vue/issues/6942)
+- 🐞 修复 Image 多次触发 onPreviewVisibleChange 事件问题 [#6945](https://github.com/vueComponent/ant-design-vue/issues/6945)
+- 🐞 修复 Checkbox 全局 disabled 不生效问题 [#6970](https://github.com/vueComponent/ant-design-vue/issues/6970)
+- 🐞 修复 Drawer contentWrapperStyle 不生效问题 [#6983](https://github.com/vueComponent/ant-design-vue/issues/6983)
+- 🐞 优化 Select Dropdown 等下拉列表滚动条显示隐藏逻辑 [#6987](https://github.com/vueComponent/ant-design-vue/issues/6987)
+- 🐞 修复 Select Dropdown 等下拉列表中有 input 等组件时，隐藏问题 [#7020](https://github.com/vueComponent/ant-design-vue/issues/7020)
+
 ## 4.0.3
 
 - 🐞 修复 shadow Dom 下样式丢失问题 [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)

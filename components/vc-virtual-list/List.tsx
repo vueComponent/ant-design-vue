@@ -442,7 +442,9 @@ const List = defineComponent({
       },
       { flush: 'post' },
     );
-
+    const delayHideScrollBar = () => {
+      scrollBarRef.value?.delayHidden();
+    };
     return {
       state,
       mergedData,
@@ -457,11 +459,10 @@ const List = defineComponent({
       sharedConfig,
       scrollBarRef,
       fillerInnerRef,
+      delayHideScrollBar,
     };
   },
-  const delayHideScrollBar = () => {
-    scrollBarRef.value?.delayHidden();
-  };
+
   render() {
     const {
       prefixCls = 'rc-virtual-list',
@@ -491,6 +492,7 @@ const List = defineComponent({
       sharedConfig,
       setInstance,
       mergedData,
+      delayHideScrollBar,
     } = this;
     return (
       <div

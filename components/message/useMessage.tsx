@@ -1,7 +1,7 @@
 import { shallowRef, computed, defineComponent } from 'vue';
 import { useNotification as useVcNotification } from '../vc-notification';
 import type { NotificationAPI } from '../vc-notification';
-import CloseOutlined from '@ant-design/icons-vue';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import useStyle from './style';
 import type {
   MessageInstance,
@@ -80,7 +80,6 @@ const Holder = defineComponent({
         <CloseOutlined class={`${prefixCls.value}-close-icon`} />
       </span>
     );
-
     // ============================== Origin ===============================
     const [api, holder] = useVcNotification({
       //@ts-ignore

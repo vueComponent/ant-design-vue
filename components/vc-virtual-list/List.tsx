@@ -459,6 +459,9 @@ const List = defineComponent({
       fillerInnerRef,
     };
   },
+  const delayHideScrollBar = () => {
+    scrollBarRef.value?.delayHidden();
+  };
   render() {
     const {
       prefixCls = 'rc-virtual-list',
@@ -503,6 +506,7 @@ const List = defineComponent({
           style={componentStyle}
           ref="componentRef"
           onScroll={onFallbackScroll}
+          onMouseenter={delayHideScrollBar}
         >
           <Filler
             prefixCls={prefixCls}

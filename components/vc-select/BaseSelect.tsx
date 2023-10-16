@@ -27,6 +27,7 @@ import {
   toRefs,
   watch,
   watchEffect,
+  ref,
 } from 'vue';
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
@@ -280,6 +281,7 @@ export default defineComponent({
     const triggerRef = shallowRef<RefTriggerProps>(null);
     const selectorRef = shallowRef<RefSelectorProps>(null);
     const listRef = shallowRef<RefOptionListProps>(null);
+    const blurRef = ref<boolean>(false);
 
     /** Used for component focused management */
     const [mockFocused, setMockFocused, cancelSetMockFocused] = useDelayReset();
@@ -339,10 +341,10 @@ export default defineComponent({
     const onToggleOpen = (newOpen?: boolean) => {
       const nextOpen = newOpen !== undefined ? newOpen : !mergedOpen.value;
 
-      if (innerOpen.value !== nextOpen && !props.disabled) {
+      if (!props.disabled) {
         setInnerOpen(nextOpen);
-        if (props.onDropdownVisibleChange) {
-          props.onDropdownVisibleChange(nextOpen);
+        if (mergedOpen.value !== nextOpen) {
+          props.onDropdownVisibleChange && props.onDropdownVisibleChange(nextOpen);
         }
       }
     };
@@ -412,6 +414,9 @@ export default defineComponent({
       () => {
         if (innerOpen.value && !!props.disabled) {
           setInnerOpen(false);
+        }
+        if (props.disabled && !blurRef.value) {
+          setMockFocused(false);
         }
       },
       { immediate: true },
@@ -524,9 +529,12 @@ export default defineComponent({
     };
 
     const onContainerBlur: FocusEventHandler = (...args) => {
+      blurRef.value = true;
+
       setMockFocused(false, () => {
         focusRef.value = false;
-        onToggleOpen(false);
+        blurRef.value = false;
+        //onToggleOpen(false);
       });
 
       if (props.disabled) {

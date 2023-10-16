@@ -71,6 +71,8 @@ export interface SelectTriggerProps {
   onPopupVisibleChange?: (visible: boolean) => void;
 
   onPopupMouseEnter: () => void;
+  onPopupFocusin: () => void;
+  onPopupFocusout: () => void;
 }
 
 const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
@@ -97,6 +99,8 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
     getTriggerDOMNode: Function,
     onPopupVisibleChange: Function as PropType<(open: boolean) => void>,
     onPopupMouseEnter: Function,
+    onPopupFocusin: Function,
+    onPopupFocusout: Function,
   } as any,
   setup(props, { slots, attrs, expose }) {
     const builtInPlacements = computed(() => {
@@ -129,6 +133,8 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
         getTriggerDOMNode,
         onPopupVisibleChange,
         onPopupMouseEnter,
+        onPopupFocusin,
+        onPopupFocusout,
       } = restProps as SelectTriggerProps;
       const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
@@ -167,7 +173,12 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
           v-slots={{
             default: slots.default,
             popup: () => (
-              <div ref={popupRef} onMouseenter={onPopupMouseEnter}>
+              <div
+                ref={popupRef}
+                onMouseenter={onPopupMouseEnter}
+                onFocusin={onPopupFocusin}
+                onFocusout={onPopupFocusout}
+              >
                 {popupNode}
               </div>
             ),

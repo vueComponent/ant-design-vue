@@ -510,7 +510,6 @@ export default defineComponent({
     // ========================== Focus / Blur ==========================
     /** Record real focus status */
     const focusRef = shallowRef(false);
-
     const onContainerFocus: FocusEventHandler = (...args) => {
       setMockFocused(true);
 
@@ -527,14 +526,16 @@ export default defineComponent({
 
       focusRef.value = true;
     };
-
+    const popupFocused = ref(false);
     const onContainerBlur: FocusEventHandler = (...args) => {
+      if (popupFocused.value) {
+        return;
+      }
       blurRef.value = true;
-
       setMockFocused(false, () => {
         focusRef.value = false;
         blurRef.value = false;
-        //onToggleOpen(false);
+        onToggleOpen(false);
       });
 
       if (props.disabled) {
@@ -556,6 +557,12 @@ export default defineComponent({
       if (props.onBlur) {
         props.onBlur(...args);
       }
+    };
+    const onPopupFocusin = () => {
+      popupFocused.value = true;
+    };
+    const onPopupFocusout = () => {
+      popupFocused.value = false;
     };
     provide('VCSelectContainerEvent', {
       focus: onContainerFocus,
@@ -818,6 +825,8 @@ export default defineComponent({
           getTriggerDOMNode={() => selectorDomRef.current}
           onPopupVisibleChange={onTriggerVisibleChange}
           onPopupMouseEnter={onPopupMouseEnter}
+          onPopupFocusin={onPopupFocusin}
+          onPopupFocusout={onPopupFocusout}
           v-slots={{
             default: () => {
               return customizeRawInputElement ? (

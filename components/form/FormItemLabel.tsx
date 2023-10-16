@@ -9,22 +9,7 @@ import classNames from '../_util/classNames';
 import type { VueNode } from '../_util/type';
 import type { FunctionalComponent, HTMLAttributes } from 'vue';
 import Tooltip from '../tooltip';
-import type { TooltipProps } from '../tooltip';
 import { QuestionCircleOutlined } from '@ant-design/icons-vue';
-
-function toTooltipProps(tooltip) {
-  if (!tooltip) {
-    return null;
-  }
-
-  if (typeof tooltip === 'object') {
-    return tooltip as TooltipProps;
-  }
-
-  return {
-    title: tooltip,
-  };
-}
 
 export interface FormItemLabelProps {
   colon?: boolean;
@@ -36,7 +21,7 @@ export interface FormItemLabelProps {
   required?: boolean;
   prefixCls: string;
   onClick: Function;
-  tooltip: string | TooltipProps;
+  tooltip: string;
 }
 
 const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, emit, attrs }) => {
@@ -79,11 +64,10 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
 
   // Tooltip
   if (props.tooltip || slots.tooltip) {
-    const tooltipProps = toTooltipProps(props.tooltip);
     const tooltipNode = (
       <span class={`${prefixCls}-item-tooltip`}>
-        <Tooltip {...tooltipProps}>
-          {slots.icon ? slots.icon?.() : <QuestionCircleOutlined />}
+        <Tooltip title={props.tooltip}>
+          <QuestionCircleOutlined />
         </Tooltip>
       </span>
     );

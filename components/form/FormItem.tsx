@@ -51,7 +51,6 @@ import { FormItemInputContext, useProvideFormItemContext } from './FormItemConte
 import useDebounce from './utils/useDebounce';
 import classNames from '../_util/classNames';
 import useStyle from './style';
-import type { TooltipProps } from '../tooltip';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = (typeof ValidateStatuses)[number];
@@ -127,7 +126,7 @@ export const formItemProps = () => ({
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
   noStyle: Boolean,
-  tooltip: [String, Object] as PropType<string | TooltipProps>,
+  tooltip: String,
 });
 
 export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
@@ -157,7 +156,6 @@ export default defineComponent({
     label: any;
     extra: any;
     default: any;
-    icon: any;
     tooltip: any;
   }>,
   setup(props, { slots, attrs, expose }) {
@@ -510,7 +508,7 @@ export default defineComponent({
                     prefixCls={prefixCls.value}
                     onClick={onLabelClick}
                     label={props.label}
-                    v-slots={{ icon: slots.icon, label: slots.label, tooltip: slots.tooltip }}
+                    v-slots={{ label: slots.label, tooltip: slots.tooltip }}
                   />
                   {/* Input Group */}
                   <FormItemInput

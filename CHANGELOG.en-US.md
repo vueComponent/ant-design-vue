@@ -10,6 +10,10 @@
 
 ---
 
+## 4.0.5
+
+- 🐞 Fix cssinjs performance issue [#7023](https://github.com/vueComponent/ant-design-vue/issues/7023)
+
 ## 4.0.4
 
 - 🌟 Added esm target file

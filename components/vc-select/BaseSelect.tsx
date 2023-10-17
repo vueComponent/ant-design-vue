@@ -341,11 +341,9 @@ export default defineComponent({
     const onToggleOpen = (newOpen?: boolean) => {
       const nextOpen = newOpen !== undefined ? newOpen : !mergedOpen.value;
 
-      if (!props.disabled) {
+      if (mergedOpen.value !== nextOpen && !props.disabled) {
         setInnerOpen(nextOpen);
-        if (mergedOpen.value !== nextOpen) {
-          props.onDropdownVisibleChange && props.onDropdownVisibleChange(nextOpen);
-        }
+        props.onDropdownVisibleChange && props.onDropdownVisibleChange(nextOpen);
       }
     };
 

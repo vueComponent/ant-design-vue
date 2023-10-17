@@ -33,10 +33,10 @@ More layouts with navigation: [Layout](/components/layout).
 | items | Menu item content | [ItemType\[\]](#ItemType) | - | 4.20.0 |
 | mode | type of the menu; `vertical`, `horizontal`, and `inline` modes are supported | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | Allow selection of multiple items | boolean | false |
-| openKeys(v-model) | array with the keys of currently opened sub menus | string\[] |  |
+| openKeys(v-model) | array with the keys of currently opened sub menus | (string \| number)[] |  |
 | overflowedIndicator | Customized the ellipsis icon when menu is collapsed horizontally | slot | `<EllipsisOutlined />` |
 | selectable | allow selecting menu items | boolean | true |
-| selectedKeys(v-model) | array with the keys of currently selected menu items | string\[] |  |
+| selectedKeys(v-model) | array with the keys of currently selected menu items | (string \| number)[] |  |
 | style | style of the root node | object |  |
 | subMenuCloseDelay | delay time to hide submenu when mouse leave, unit: second | number | 0.1 |
 | subMenuOpenDelay | delay time to show submenu when mouse enter, unit: second | number | 0 |
@@ -49,7 +49,7 @@ More layouts with navigation: [Layout](/components/layout).
 | --- | --- | --- |
 | click | callback executed when a menu item is clicked | function({ item, key, keyPath }) |
 | deselect | callback executed when a menu item is deselected, only supported for multiple mode | function({ item, key, selectedKeys }) |
-| openChange | called when open/close sub menu | function(openKeys: string\[]) |
+| openChange | called when open/close sub menu | function(openKeys: (string \| number)[]) |
 | select | callback executed when a menu item is selected | function({ item, key, selectedKeys }) |
 
 ### Menu.Item
@@ -57,7 +57,7 @@ More layouts with navigation: [Layout](/components/layout).
 | Param    | Description                          | Type           | Default value |
 | -------- | ------------------------------------ | -------------- | ------------- |
 | disabled | whether menu item is disabled or not | boolean        | false         |
-| key      | unique id of the menu item           | string         |               |
+| key      | unique id of the menu item           | string \| number         |               |
 | title    | set display title for collapsed item | string \| slot |               |
 
 ### ItemType
@@ -71,7 +71,7 @@ More layouts with navigation: [Layout](/components/layout).
 | danger | Display the danger style | boolean | false |  |
 | disabled | Whether menu item is disabled | boolean | false |  |
 | icon | The icon of the menu item | VueNode \| (item: MenuItemType) => VNode | - |  |
-| key | Unique ID of the menu item | string | - |  |
+| key | Unique ID of the menu item | string \| number | - |  |
 | label | Menu label | VueNode | - |  |
 | title | Set display title for collapsed item | string | - |  |
 
@@ -83,7 +83,7 @@ More layouts with navigation: [Layout](/components/layout).
 | children | Sub-menus or sub-menu items | [ItemType\[\]](#ItemType) | - |  |
 | disabled | Whether sub-menu is disabled | boolean | false |  |
 | icon | Icon of sub menu | VueNode \| (item: SubMenuType) => VueNode | - |  |
-| key | Unique ID of the sub-menu | string | - |  |
+| key | Unique ID of the sub-menu | string \| number | - |  |
 | label | Menu label | VueNode | - |  |
 | popupClassName | Sub-menu class name, not working when `mode="inline"` | string | - |  |
 | popupOffset | Sub-menu offset, not working when `mode="inline"` | \[number, number] | - |  |
@@ -127,7 +127,7 @@ const dividerItem = {
 | --- | --- | --- | --- | --- |
 | disabled | whether sub menu is disabled or not | boolean | false |  |
 | expandIcon | Customized expandIcon | slot | arrow icon | ｜ |
-| key | Unique ID of the sub menu, required | string |  |  |
+| key | Unique ID of the sub menu, required | string \| number |  |  |
 | popupClassName | Sub-menu class name | string |  | 1.5.0 |
 | popupOffset | Sub-menu offset, not working when `mode="inline"` | \[number, number] | - |  |
 | title | title of the sub menu | string\|slot |  |  |

@@ -10,6 +10,10 @@
 
 ---
 
+## 4.0.6
+
+- 🐞 修复 4.0.4 引入的 Dropdown onVisibleChange 失效问题 [#7031](https://github.com/vueComponent/ant-design-vue/issues/7031)
+
 ## 4.0.5
 
 - 🐞 修复 cssinjs 性能问题 [#7023](https://github.com/vueComponent/ant-design-vue/issues/7023)

@@ -136,14 +136,10 @@ export default defineComponent({
 
     const handleEditConfigChange = (newcontent, _, status) => {
       themeConfigContent.value = newcontent;
-      if (
-        status.contentErrors &&
-        Array.isArray(status.contentErrors.validationErrors) &&
-        status.contentErrors.validationErrors.length === 0
-      ) {
-        editThemeFormatRight.value = true;
-      } else {
+      if (status.contentErrors && status.contentErrors.parseError) {
         editThemeFormatRight.value = false;
+      } else {
+        editThemeFormatRight.value = true;
       }
     };
 

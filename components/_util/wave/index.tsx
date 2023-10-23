@@ -26,7 +26,7 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const instance = getCurrentInstance();
-    const { prefixCls } = useConfigInject('wave', props);
+    const { prefixCls, wave } = useConfigInject('wave', props);
 
     // ============================== Style ===============================
     const [, hashId] = useStyle(prefixCls);
@@ -35,6 +35,7 @@ export default defineComponent({
     const showWave = useWave(
       instance,
       computed(() => classNames(prefixCls.value, hashId.value)),
+      wave,
     );
     let onClick: (e: MouseEvent) => void;
     const clear = () => {

@@ -92,3 +92,5 @@ export function someType<T>(types?: any[], defaultVal?: T) {
 }
 
 export type CustomSlotsType<T> = SlotsType<T>;
+
+export type AnyObject = Record<PropertyKey, any>;

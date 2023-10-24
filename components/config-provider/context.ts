@@ -151,6 +151,9 @@ export interface ConfigProviderInnerProps {
   wave?: ComputedRef<{
     disabled?: boolean;
   }>;
+  flex?: ComputedRef<{
+    vertical?: boolean;
+  }>;
 }
 
 export const configProviderKey: InjectionKey<ConfigProviderInnerProps> = Symbol('configProvider');

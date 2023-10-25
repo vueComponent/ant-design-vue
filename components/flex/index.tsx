@@ -14,7 +14,7 @@ import createFlexClassNames from './utils';
 const AFlex = defineComponent({
   name: 'AFlex',
   inheritAttrs: false,
-  props: { ...flexProps },
+  props: flexProps(),
   setup(props, { slots, attrs }) {
     const { flex: ctxFlex, direction: ctxDirection } = useConfigContextInject();
     const { prefixCls } = useConfigInject('flex', props);

@@ -81,6 +81,7 @@ export type PickerSharedProps<DateType> = {
   // Events
   onChange?: (value: DateType | null, dateString: string) => void;
   onOpenChange?: (open: boolean) => void;
+  onPanelChange?: (values: RangeValue<DateType>, modes: [PanelMode, PanelMode]) => void;
   onFocus?: FocusEventHandler;
   onBlur?: FocusEventHandler;
   onMousedown?: MouseEventHandler;
@@ -176,6 +177,7 @@ function Picker<DateType>() {
       'inputRender',
       'onChange',
       'onOpenChange',
+      'onPanelChange',
       'onFocus',
       'onBlur',
       'onMousedown',

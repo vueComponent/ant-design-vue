@@ -212,7 +212,7 @@ const Watermark = defineComponent({
       renderWatermark();
     });
     watch(
-      () => props,
+      () => [props, token.value.colorFill, token.value.fontSizeLG],
       () => {
         renderWatermark();
       },

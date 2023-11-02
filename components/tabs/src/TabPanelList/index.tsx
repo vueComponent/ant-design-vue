@@ -28,26 +28,13 @@ export default defineComponent({
   setup(props) {
     const { tabs, prefixCls } = useInjectTabs();
     return () => {
-      const { id, activeKey, animated, tabPosition, rtl, destroyInactiveTabPane } = props;
+      const { id, activeKey, animated, tabPosition, destroyInactiveTabPane } = props;
       const tabPaneAnimated = animated.tabPane;
       const pre = prefixCls.value;
-      const activeIndex = tabs.value.findIndex(tab => tab.key === activeKey);
+
       return (
         <div class={`${pre}-content-holder`}>
-          <div
-            class={[
-              `${pre}-content`,
-              `${pre}-content-${tabPosition}`,
-              {
-                [`${pre}-content-animated`]: tabPaneAnimated,
-              },
-            ]}
-            style={
-              activeIndex && tabPaneAnimated
-                ? { [rtl ? 'marginRight' : 'marginLeft']: `-${activeIndex}00%` }
-                : null
-            }
-          >
+          <div class={[`${pre}-content`, `${pre}-content-${tabPosition}`]}>
             {tabs.value.map(tab => {
               return cloneElement(tab.node, {
                 key: tab.key,

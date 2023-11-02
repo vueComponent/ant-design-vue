@@ -1,7 +1,8 @@
-import { defineComponent, ref, watch, computed } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import type { CSSProperties, ExtractPropTypes } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 import type { CustomSlotsType } from '../../../_util/type';
+import Transition, { getTransitionProps } from '../../../_util/transition';
 
 const tabPaneProps = () => ({
   tab: PropTypes.any,
@@ -45,36 +46,31 @@ export default defineComponent({
       },
       { immediate: true },
     );
-    const mergedStyle = computed<CSSProperties>(() => {
-      if (!props.active) {
-        if (props.animated) {
-          return {
-            visibility: 'hidden',
-            height: 0,
-            overflowY: 'hidden',
-          };
-        } else {
-          return { display: 'none' };
-        }
-      }
-      return {};
-    });
 
     return () => {
       const { prefixCls, forceRender, id, active, tabKey } = props;
-      return (
+
+      const tabPaneEl = active && (
         <div
+          v-show={active}
           id={id && `${id}-panel-${tabKey}`}
           role="tabpanel"
           tabindex={active ? 0 : -1}
           aria-labelledby={id && `${id}-tab-${tabKey}`}
           aria-hidden={!active}
-          style={[mergedStyle.value, attrs.style as CSSProperties]}
-          class={[`${prefixCls}-tabpane`, active && `${prefixCls}-tabpane-active`, attrs.class]}
+          style={[attrs.style as CSSProperties]}
+          class={[`${prefixCls}-tabpane`, attrs.class]}
         >
           {(active || visited.value || forceRender) && slots.default?.()}
         </div>
       );
+
+      if (props.animated) {
+        const transitionProps = getTransitionProps(`${prefixCls}-switch`);
+        return <Transition {...transitionProps}>{tabPaneEl}</Transition>;
+      } else {
+        return tabPaneEl;
+      }
     };
   },
 });

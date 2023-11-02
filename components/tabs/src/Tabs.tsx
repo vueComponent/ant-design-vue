@@ -172,8 +172,8 @@ const InternalTabs = defineComponent({
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const rtl = computed(() => direction.value === 'rtl');
     const mergedAnimated = computed<AnimatedConfig>(() => {
-      const { animated, tabPosition } = props;
-      if (animated === false || ['left', 'right'].includes(tabPosition)) {
+      const { animated } = props;
+      if (animated === false) {
         return {
           inkBar: false,
           tabPane: false,

@@ -48,6 +48,7 @@
                   <span>{{ isZhCN ? n.title : n.enTitle || n.title }}</span>
                   <span v-if="isZhCN" class="chinese">{{ n.subtitle }}</span>
                 </router-link>
+                <a-tag v-if="n.tag" color="green" style="margin-left: auto">{{ n.tag }}</a-tag>
               </a-menu-item>
             </template>
           </a-menu-item-group>

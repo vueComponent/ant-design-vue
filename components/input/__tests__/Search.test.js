@@ -35,7 +35,7 @@ describe('Input.Search', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
-  it('should support ReactNode suffix without error', () => {
+  it('should support VueNode suffix without error', () => {
     const fn = () => {
       mount({
         render() {

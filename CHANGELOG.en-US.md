@@ -10,6 +10,14 @@
 
 ---
 
+## 4.0.6
+
+- 🐞 Fix the Dropdown onVisibleChange failure issue introduced in 4.0.4 [#7031](https://github.com/vueComponent/ant-design-vue/issues/7031)
+
+## 4.0.5
+
+- 🐞 Fix cssinjs performance issue [#7023](https://github.com/vueComponent/ant-design-vue/issues/7023)
+
 ## 4.0.4
 
 - 🌟 Added esm target file

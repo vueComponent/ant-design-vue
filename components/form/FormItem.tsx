@@ -308,7 +308,7 @@ export default defineComponent({
       const value = fieldValue.value;
       const prop = getPropByPath(model, namePath.value, true);
       if (Array.isArray(value)) {
-        prop.o[prop.k] = [].concat(initialValue.value);
+        prop.o[prop.k] = [].concat(initialValue.value ?? []);
       } else {
         prop.o[prop.k] = initialValue.value;
       }

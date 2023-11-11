@@ -48,6 +48,7 @@ import type { ComponentToken as TourComponentToken } from '../../tour/style';
 import type { ComponentToken as QRCodeComponentToken } from '../../qrcode/style';
 import type { ComponentToken as AppComponentToken } from '../../app/style';
 import type { ComponentToken as WaveToken } from '../../_util/wave/style';
+import type { ComponentToken as FlexToken } from '../../flex/style';
 
 export interface ComponentTokenMap {
   Affix?: {};
@@ -116,4 +117,5 @@ export interface ComponentTokenMap {
 
   //   /** @private Internal TS definition. Do not use. */
   Wave?: WaveToken;
+  Flex?: FlexToken;
 }

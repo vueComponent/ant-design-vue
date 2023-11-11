@@ -264,3 +264,6 @@ export { default as Tour } from './tour';
 
 export type { AppProps } from './app';
 export { default as App } from './app';
+
+export type { FlexProps } from './flex';
+export { default as Flex } from './flex';

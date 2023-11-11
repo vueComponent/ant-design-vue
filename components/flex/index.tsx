@@ -1,9 +1,8 @@
-import { defineComponent, shallowRef } from 'vue';
+import { computed, defineComponent } from 'vue';
 import type { CSSProperties } from 'vue';
 import { useConfigContextInject } from '../config-provider/context';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
-import classNames from '../_util/classNames';
 import { isPresetSize } from '../_util/gapSize';
 import omit from '../_util/omit';
 import { withInstall } from '../_util/type';
@@ -19,26 +18,20 @@ const AFlex = defineComponent({
     const { flex: ctxFlex, direction: ctxDirection } = useConfigContextInject();
     const { prefixCls } = useConfigInject('flex', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
-    const flexRef = shallowRef();
-
+    const mergedCls = computed(() => [
+      prefixCls.value,
+      hashId.value,
+      createFlexClassNames(prefixCls.value, props),
+      {
+        [`${prefixCls.value}-rtl`]: ctxDirection.value === 'rtl',
+        [`${prefixCls.value}-gap-${props.gap}`]: isPresetSize(props.gap),
+        [`${prefixCls.value}-vertical`]: props.vertical ?? ctxFlex?.value.vertical,
+      },
+    ]);
     return () => {
-      const { flex, gap, vertical = false, component: Component = 'div', ...othersProps } = props;
+      const { flex, gap, component: Component = 'div', ...othersProps } = props;
 
-      const mergedVertical = vertical ?? ctxFlex?.value.vertical;
-
-      const mergedCls = classNames(
-        attrs.class,
-        prefixCls.value,
-        hashId.value,
-        createFlexClassNames(prefixCls.value, props),
-        {
-          [`${prefixCls.value}-rtl`]: ctxDirection.value === 'rtl',
-          [`${prefixCls.value}-gap-${gap}`]: isPresetSize(gap),
-          [`${prefixCls.value}-vertical`]: mergedVertical,
-        },
-      );
-
-      const mergedStyle = { ...(attrs.style as CSSProperties) };
+      const mergedStyle: CSSProperties = {};
 
       if (flex) {
         mergedStyle.flex = flex;
@@ -50,10 +43,9 @@ const AFlex = defineComponent({
 
       return wrapSSR(
         <Component
-          ref={flexRef.value}
-          class={mergedCls}
-          style={mergedStyle}
-          {...omit(othersProps, ['justify', 'wrap', 'align'])}
+          class={[attrs.class, mergedCls.value]}
+          style={[attrs.style as CSSProperties, mergedStyle]}
+          {...omit(othersProps, ['justify', 'wrap', 'align', 'vertical'])}
         >
           {slots.default?.()}
         </Component>,

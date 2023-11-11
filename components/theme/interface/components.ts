@@ -114,8 +114,8 @@ export interface ComponentTokenMap {
   Tour?: TourComponentToken;
   QRCode?: QRCodeComponentToken;
   App?: AppComponentToken;
+  Flex?: FlexToken;
 
   //   /** @private Internal TS definition. Do not use. */
   Wave?: WaveToken;
-  Flex?: FlexToken;
 }

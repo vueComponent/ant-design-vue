@@ -10,6 +10,17 @@
 
 ---
 
+## 4.0.7
+
+- 🌟 新增 Flex 组件 [#7052](https://github.com/vueComponent/ant-design-vue/issues/7052)
+- 🌟 ConfigProvider 新增 wave 配置 [#7036](https://github.com/vueComponent/ant-design-vue/issues/7036)
+- 🌟 Watermark 支持暗黑模式 [#7067](https://github.com/vueComponent/ant-design-vue/issues/7067)
+- 🐞 修复 Space 重复 Key 问题 [#7048](https://github.com/vueComponent/ant-design-vue/issues/7048)
+- 🐞 修复 Upload disabled 优先级错误问题 [#7047](https://github.com/vueComponent/ant-design-vue/issues/7047)
+- 🐞 修复 Carousel 在 jsx 中渲染错误问题 [#7077](https://github.com/vueComponent/ant-design-vue/issues/7077)
+- 🐞 修复 Message 偏移位置问题 [#7093](https://github.com/vueComponent/ant-design-vue/issues/7093)
+- 🐞 修复 Collapse 自定义 prefix 时动画失效问题 [#7074](https://github.com/vueComponent/ant-design-vue/issues/7074)
+
 ## 4.0.6
 
 - 🐞 修复 4.0.4 引入的 Dropdown onVisibleChange 失效问题 [#7031](https://github.com/vueComponent/ant-design-vue/issues/7031)

@@ -17,9 +17,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*-p-wQLik200AAA
 
 **注意：**Calendar 部分 locale 是从 value 中读取，所以请先正确设置 dayjs 的 locale。
 
-```html
-// 默认语言为 en-US，所以如果需要使用其他语言，推荐在入口文件全局设置 locale // import dayjs from
-'dayjs'; // import 'dayjs/locale/zh-cn'; // dayjs.locale('zh-cn');
+```jsx
+// 默认语言为 en-US，所以如果需要使用其他语言，推荐在入口文件全局设置 locale
+// import dayjs from 'dayjs';
+// import 'dayjs/locale/zh-cn';
+// dayjs.locale('zh-cn');
 
 <a-calendar v-model:value="value" @panelChange="onPanelChange" @select="onSelect"></a-calendar>
 ```

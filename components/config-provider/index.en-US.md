@@ -64,6 +64,7 @@ Some components use dynamic style to support wave effect. You can config `csp` p
 | space | Set Space `size`, ref [Space](/components/space) | { size: `small` \| `middle` \| `large` \| `number` } | - | 3.0 |
 | transformCellText | Table data can be changed again before rendering. The default configuration of general user empty data. | Function({ text, column, record, index }) => any | - | 1.5.4 |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
+| wave | Config wave effect | { disabled?: boolean } | - | 4.0.7 |
 
 ### ConfigProvider.config() `3.0.0+`
 

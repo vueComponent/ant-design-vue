@@ -34,7 +34,6 @@ export default defineComponent({
     accept: '',
     showUploadList: true,
     listType: 'text', // or picture
-    disabled: false,
     supportServerRender: true,
   }),
   setup(props, { slots, attrs, expose }) {

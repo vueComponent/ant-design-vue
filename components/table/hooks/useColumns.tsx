@@ -5,6 +5,7 @@ import type { ContextSlots } from '../context';
 import type { TransformColumns, ColumnsType } from '../interface';
 import { SELECTION_COLUMN } from './useSelection';
 import { EXPAND_COLUMN } from '../../vc-table';
+import { INTERNAL_COL_DEFINE } from '../../vc-table';
 
 function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: Ref<ContextSlots>) {
   const $slots = contextSlots.value;
@@ -26,7 +27,10 @@ function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: R
       }
     });
 
-    if (contextSlots.value.headerCell && !column.slots?.title) {
+    const isExPandColumn =
+      cloneColumn.__originColumn__[INTERNAL_COL_DEFINE]?.columnType === 'EXPAND_COLUMN';
+
+    if (contextSlots.value.headerCell && !column.slots?.title && !isExPandColumn) {
       cloneColumn.title = renderSlot(
         contextSlots.value,
         'headerCell',

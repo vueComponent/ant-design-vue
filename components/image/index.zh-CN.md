@@ -24,6 +24,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LVQ3R5JjjJEAAA
 | placeholder | 加载占位, 为 `true` 时使用默认占位 | boolean \| slot | - | 2.0.0 |
 | preview | 预览参数，为 `false` 时禁用 | boolean \| [previewType](#previewtype) | true | 2.0.0 |
 | src | 图片地址 | string | - | 2.0.0 |
+| toolbarRender | 自定义工具栏 | slot \| [toolbarRenderType](#toolbarRenderType) | - | 4.0.8 |
 | previewMask | 自定义 mask | false \| function \| slot | - | 3.2.0 |
 | width | 图像宽度 | string \| number | - | 2.0.0 |
 
@@ -43,6 +44,37 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LVQ3R5JjjJEAAA
   src?: string;
   maskClassName?: string;
   current?: number;
+}
+```
+
+### TransformType
+
+```ts
+{
+  x: number;
+  y: number;
+  rotate: number;
+  scale: number;
+  flipX: boolean;
+  flipY: boolean;
+}
+```
+
+### toolbarRenderType
+
+```ts
+{
+  actions: {
+    onFlipY: () => void;
+    onFlipX: () => void;
+    onRotateLeft: () => void;
+    onRotateRight: () => void;
+    onZoomOut: () => void;
+    onZoomIn: () => void;
+  };
+  transform: TransformType,
+  current: number;
+  total: number;
 }
 ```
 

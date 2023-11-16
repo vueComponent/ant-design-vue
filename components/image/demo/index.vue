@@ -7,6 +7,7 @@
     <previewGroupVisibleVue />
     <previewSrc />
     <controlled-preview />
+    <toolbar-render />
   </demo-sort>
 </template>
 
@@ -18,6 +19,7 @@ import previewSrc from './preview-src.vue';
 import PreviewGroup from './preview-group.vue';
 import ControlledPreview from './controlled-preview.vue';
 import previewGroupVisibleVue from './preview-group-visible.vue';
+import ToolbarRender from './toolbar-render.vue';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -33,6 +35,7 @@ export default defineComponent({
     PreviewGroup,
     ControlledPreview,
     previewGroupVisibleVue,
+    ToolbarRender,
   },
 });
 </script>

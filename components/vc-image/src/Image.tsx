@@ -292,6 +292,7 @@ const ImageInternal = defineComponent({
               getContainer={getPreviewContainer.value}
               icons={icons}
               rootClassName={rootClassName}
+              v-slots={{ closeIcon: slots.closeIcon, toolbarRender: slots.toolbarRender }}
             />
           )}
         </>

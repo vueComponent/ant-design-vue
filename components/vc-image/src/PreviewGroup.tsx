@@ -198,6 +198,7 @@ const Group = defineComponent({
             src={canPreviewUrls.value.get(current.value)}
             icons={props.icons}
             getContainer={getPreviewContainer.value}
+            v-slots={{ closeIcon: slots.closeIcon, toolbarRender: slots.toolbarRender }}
           />
         </>
       );

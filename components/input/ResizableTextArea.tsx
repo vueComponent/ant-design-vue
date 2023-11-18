@@ -110,13 +110,7 @@ const ResizableTextArea = defineComponent({
       const cls = classNames(prefixCls, attrs.class, {
         [`${prefixCls}-disabled`]: disabled,
       });
-      const style = [
-        attrs.style,
-        textareaStyles.value,
-        resizeStatus.value === RESIZE_STATUS_RESIZING
-          ? { overflowX: 'hidden', overflowY: 'hidden' }
-          : null,
-      ];
+      const style = [attrs.style, textareaStyles.value];
       const textareaProps: any = {
         ...otherProps,
         ...attrs,

@@ -7,7 +7,7 @@
     <previewGroupVisibleVue />
     <previewSrc />
     <controlled-preview />
-    <ToolbarRender />
+    <toolbar-render />
   </demo-sort>
 </template>
 

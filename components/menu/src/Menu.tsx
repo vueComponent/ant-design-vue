@@ -341,7 +341,7 @@ export default defineComponent({
     const rootPrefixCls = computed(() => getPrefixCls());
     const defaultMotions = computed(() => ({
       horizontal: { name: `${rootPrefixCls.value}-slide-up` },
-      inline: collapseMotion,
+      inline: collapseMotion(`${rootPrefixCls.value}-motion-collapse`),
       other: { name: `${rootPrefixCls.value}-zoom-big` },
     }));
 

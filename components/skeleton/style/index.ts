@@ -22,6 +22,7 @@ interface SkeletonToken extends FullToken<'Skeleton'> {
   skeletonTitleCls: string;
   skeletonParagraphCls: string;
   skeletonButtonCls: string;
+  skeletonCardCls: string;
   skeletonInputCls: string;
   skeletonImageCls: string;
   imageSizeBase: number;
@@ -212,6 +213,60 @@ const genSkeletonElementButton = (token: SkeletonToken): CSSObject => {
   };
 };
 
+const genSkeletonElementCardShape = (
+  token: SkeletonToken,
+  size: number,
+  buttonCls: string,
+): CSSObject => {
+  const { skeletonButtonCls } = token;
+  return {
+    [`${buttonCls}${skeletonButtonCls}-circle`]: {
+      width: size,
+      minWidth: size,
+      borderRadius: '50%',
+    },
+    [`${buttonCls}${skeletonButtonCls}-round`]: {
+      borderRadius: size,
+    },
+  };
+};
+const genSkeletonElementCardSize = (size: number): CSSObject => ({
+  width: size * 2,
+  minWidth: size * 2,
+  ...genSkeletonElementCommonSize(size),
+});
+const genSkeletonElementCard = (token: SkeletonToken): CSSObject => {
+  const {
+    borderRadiusSM,
+    skeletonCardCls,
+    controlHeight,
+    controlHeightLG,
+    controlHeightSM,
+    color,
+  } = token;
+  return {
+    [`${skeletonCardCls}`]: {
+      display: 'inline-flex',
+      verticalAlign: 'top',
+      background: color,
+      borderRadius: borderRadiusSM,
+      width: controlHeight * 6,
+      minWidth: controlHeight * 10,
+      ...genSkeletonElementCardSize(controlHeight * 6),
+    },
+    ...genSkeletonElementCardShape(token, controlHeight * 10, skeletonCardCls),
+
+    [`${skeletonCardCls}-lg`]: {
+      ...genSkeletonElementButtonSize(controlHeightLG * 6),
+    },
+    ...genSkeletonElementCardShape(token, controlHeightLG * 10, `${skeletonCardCls}-lg`),
+
+    [`${skeletonCardCls}-sm`]: {
+      ...genSkeletonElementButtonSize(controlHeightSM * 6),
+    },
+    ...genSkeletonElementCardShape(token, controlHeightSM * 8, `${skeletonCardCls}-sm`),
+  };
+};
 // =============================== Base ===============================
 const genBaseStyle: GenerateStyle<SkeletonToken> = (token: SkeletonToken) => {
   const {
@@ -222,6 +277,7 @@ const genBaseStyle: GenerateStyle<SkeletonToken> = (token: SkeletonToken) => {
     skeletonButtonCls,
     skeletonInputCls,
     skeletonImageCls,
+    skeletonCardCls,
     controlHeight,
     controlHeightLG,
     controlHeightSM,
@@ -324,6 +380,7 @@ const genBaseStyle: GenerateStyle<SkeletonToken> = (token: SkeletonToken) => {
       ...genSkeletonElementAvatar(token),
       ...genSkeletonElementInput(token),
       ...genSkeletonElementImage(token),
+      ...genSkeletonElementCard(token),
     },
     // Skeleton Block Button, Input
     [`${componentCls}${componentCls}-block`]: {
@@ -345,7 +402,8 @@ const genBaseStyle: GenerateStyle<SkeletonToken> = (token: SkeletonToken) => {
         ${skeletonAvatarCls},
         ${skeletonButtonCls},
         ${skeletonInputCls},
-        ${skeletonImageCls}
+        ${skeletonImageCls},
+        ${skeletonCardCls}
       `]: {
         ...genSkeletonColor(token),
       },
@@ -366,6 +424,7 @@ export default genComponentStyleHook(
       skeletonButtonCls: `${componentCls}-button`,
       skeletonInputCls: `${componentCls}-input`,
       skeletonImageCls: `${componentCls}-image`,
+      skeletonCardCls: `${componentCls}-card`,
       imageSizeBase: token.controlHeight * 1.5,
       skeletonTitleHeight: token.controlHeight / 2,
       skeletonBlockRadius: token.borderRadiusSM,

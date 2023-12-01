@@ -221,6 +221,8 @@ function RangerPicker<DateType>() {
       'allowEmpty',
       'allowClear',
       'suffixIcon',
+      'prevIcon',
+      'nextIcon',
       'clearIcon',
       'pickerRef',
       'inputReadOnly',

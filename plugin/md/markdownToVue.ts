@@ -86,7 +86,7 @@ ${vueCode?.trim()}
   const scriptContent = fetchCode(vueCode, 'scriptContent');
   let jsCode = (await tsToJs(scriptContent))?.trim();
   jsCode = jsCode
-    ? `<script>
+    ? `<script setup>
 ${jsCode}
 </script>`
     : '';
@@ -134,7 +134,7 @@ async function genDocCode(content: string, pageData: PageData) {
   return `
 <template><article class="markdown">${pageData.html}</article></template>
 
-<script setup>
+<script>
 import ColorChunk from '@/components/ColorChunk';
 import TokenTable from '@/components/TokenTable';
 import ComponentTokenTable from '@/components/ComponentTokenTable';

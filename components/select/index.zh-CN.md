@@ -42,7 +42,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | fieldNames | 自定义节点 label、value、options 的字段 | object | { label: `label`, value: `value`, options: `options` } | 3.0 |
 | filterOption | 是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 `true`，反之则返回 `false`。 | `boolean` \| `function(inputValue, option)` | true |  |
 | filterSort | 搜索时对筛选结果项的排序函数, 类似[Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)里的 compareFunction | (optionA: Option, optionB: Option) => number | - | 3.0 |
-| firstActiveValue | 默认高亮的选项 | string\|string\[] | - |  |
+| firstActiveValue | 默认高亮的选项 | string \| string\[] | - |  |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | function(triggerNode) | () => document.body |  |
 | labelInValue | 是否把每个选项的 label 包装到 value 中，会把 Select 的 value 类型从 `string` 变为 `{key: string, label: vNodes, originLabel: any}` 的格式, originLabel（3.1） 保持原始类型，如果通过 a-select-option children 构造的节点，该值是是个函数（即 a-select-option 的默认插槽） | boolean | false |  |
 | listHeight | 设置弹窗滚动高度 | number | 256 |  |
@@ -56,7 +56,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | option | 通过 option 插槽，自定义节点 | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |
 | optionFilterProp | 搜索时过滤对应的 option 属性，不支持 children | string | value |  |
 | optionLabelProp | 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 `value`。 | string | `children` \| `label`(设置 options 时) |  |
-| options | options 数据，如果设置则不需要手动构造 selectOption 节点 | array&lt;{value, label, [disabled, key, title]}> | \[] |  |
+| options | options 数据，如果设置则不需要手动构造 selectOption 节点 | Array&lt;{value, label, [disabled, key, title]}> | \[] |  |
 | placeholder | 选择框默认文字 | string\|slot | - |  |
 | placement | 选择框弹出的位置 | `bottomLeft` `bottomRight` `topLeft` `topRight` | bottomLeft | 3.3.0 |
 | removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |  |
@@ -78,7 +78,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
 | blur | 失去焦点的时回调 | function |
-| change | 选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数 | function(value, option:Option/Array&lt;Option>) |
+| change | 选中 option，或 input 的 value 变化（combobox 模式下）时，调用此函数 | function(value, option:Option \| Array&lt;Option>) |
 | deselect | 取消选中时调用，参数为选中项的 value (或 key) 值，仅在 multiple 或 tags 模式下生效 | function(value，option:Option) |
 | dropdownVisibleChange | 展开下拉菜单的回调 | function(open) |
 | focus | 获得焦点时回调 | function |

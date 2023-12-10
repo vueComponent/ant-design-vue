@@ -182,8 +182,8 @@ export default defineComponent({
 
     // ===================== Calculate =====================
     getSpinHeight() {
-      const { height, count } = this.$props;
-      let baseHeight = (height / count) * 10;
+      const { height, scrollHeight } = this.$props;
+      let baseHeight = (height / scrollHeight) * 100;
       baseHeight = Math.max(baseHeight, MIN_SIZE);
       baseHeight = Math.min(baseHeight, height / 2);
       return Math.floor(baseHeight);

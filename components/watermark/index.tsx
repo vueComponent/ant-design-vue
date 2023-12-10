@@ -4,6 +4,7 @@ import { getStyleStr, getPixelRatio, rotateWatermark, reRendering } from './util
 import { arrayType, objectType, someType, withInstall } from '../_util/type';
 import { useMutationObserver } from '../_util/hooks/_vueuse/useMutationObserver';
 import { initDefaultProps } from '../_util/props-util';
+import { useToken } from '../theme/internal';
 
 /**
  * Base size of the canvas, 1 for parallel layout and 2 for alternate layout
@@ -42,6 +43,7 @@ const Watermark = defineComponent({
     gap: [100, 100],
   }),
   setup(props, { slots, attrs }) {
+    const [, token] = useToken();
     const containerRef = shallowRef<HTMLDivElement>();
     const watermarkRef = shallowRef<HTMLDivElement>();
     const stopObservation = shallowRef(false);
@@ -51,11 +53,11 @@ const Watermark = defineComponent({
     const gapYCenter = computed(() => gapY.value / 2);
     const offsetLeft = computed(() => props.offset?.[0] ?? gapXCenter.value);
     const offsetTop = computed(() => props.offset?.[1] ?? gapYCenter.value);
-    const fontSize = computed(() => props.font?.fontSize ?? 16);
+    const fontSize = computed(() => props.font?.fontSize ?? token.value.fontSizeLG);
     const fontWeight = computed(() => props.font?.fontWeight ?? 'normal');
     const fontStyle = computed(() => props.font?.fontStyle ?? 'normal');
     const fontFamily = computed(() => props.font?.fontFamily ?? 'sans-serif');
-    const color = computed(() => props.font?.color ?? 'rgba(0, 0, 0, 0.15)');
+    const color = computed(() => props.font?.color ?? token.value.colorFill);
     const markStyle = computed(() => {
       const markStyle: CSSProperties = {
         zIndex: props.zIndex ?? 9,
@@ -210,7 +212,7 @@ const Watermark = defineComponent({
       renderWatermark();
     });
     watch(
-      () => props,
+      () => [props, token.value.colorFill, token.value.fontSizeLG],
       () => {
         renderWatermark();
       },

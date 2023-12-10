@@ -442,7 +442,9 @@ const List = defineComponent({
       },
       { flush: 'post' },
     );
-
+    const delayHideScrollBar = () => {
+      scrollBarRef.value?.delayHidden();
+    };
     return {
       state,
       mergedData,
@@ -457,8 +459,10 @@ const List = defineComponent({
       sharedConfig,
       scrollBarRef,
       fillerInnerRef,
+      delayHideScrollBar,
     };
   },
+
   render() {
     const {
       prefixCls = 'rc-virtual-list',
@@ -488,6 +492,7 @@ const List = defineComponent({
       sharedConfig,
       setInstance,
       mergedData,
+      delayHideScrollBar,
     } = this;
     return (
       <div
@@ -503,6 +508,7 @@ const List = defineComponent({
           style={componentStyle}
           ref="componentRef"
           onScroll={onFallbackScroll}
+          onMouseenter={delayHideScrollBar}
         >
           <Filler
             prefixCls={prefixCls}

@@ -15,7 +15,7 @@ export interface SubMenuType extends ItemSharedProps {
 
   disabled?: boolean;
 
-  key: string;
+  key: Key;
   theme?: MenuTheme;
   rootClassName?: string;
 

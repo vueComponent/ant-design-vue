@@ -10,6 +10,36 @@
 
 ---
 
+## 4.0.7
+
+- 🌟 新增 Flex 组件 [#7052](https://github.com/vueComponent/ant-design-vue/issues/7052)
+- 🌟 ConfigProvider 新增 wave 配置 [#7036](https://github.com/vueComponent/ant-design-vue/issues/7036)
+- 🌟 Watermark 支持暗黑模式 [#7067](https://github.com/vueComponent/ant-design-vue/issues/7067)
+- 🐞 修复 Space 重复 Key 问题 [#7048](https://github.com/vueComponent/ant-design-vue/issues/7048)
+- 🐞 修复 Upload disabled 优先级错误问题 [#7047](https://github.com/vueComponent/ant-design-vue/issues/7047)
+- 🐞 修复 Carousel 在 jsx 中渲染错误问题 [#7077](https://github.com/vueComponent/ant-design-vue/issues/7077)
+- 🐞 修复 Message 偏移位置问题 [#7093](https://github.com/vueComponent/ant-design-vue/issues/7093)
+- 🐞 修复 Collapse 自定义 prefix 时动画失效问题 [#7074](https://github.com/vueComponent/ant-design-vue/issues/7074)
+
+## 4.0.6
+
+- 🐞 修复 4.0.4 引入的 Dropdown onVisibleChange 失效问题 [#7031](https://github.com/vueComponent/ant-design-vue/issues/7031)
+
+## 4.0.5
+
+- 🐞 修复 cssinjs 性能问题 [#7023](https://github.com/vueComponent/ant-design-vue/issues/7023)
+
+## 4.0.4
+
+- 🌟 新增 esm 目标文件
+- 🌟 FormItem 新增 tooltip 属性 [#7014](https://github.com/vueComponent/ant-design-vue/issues/7014)
+- 🐞 修复 useMessage getContainer 不生效问题 [#6942](https://github.com/vueComponent/ant-design-vue/issues/6942)
+- 🐞 修复 Image 多次触发 onPreviewVisibleChange 事件问题 [#6945](https://github.com/vueComponent/ant-design-vue/issues/6945)
+- 🐞 修复 Checkbox 全局 disabled 不生效问题 [#6970](https://github.com/vueComponent/ant-design-vue/issues/6970)
+- 🐞 修复 Drawer contentWrapperStyle 不生效问题 [#6983](https://github.com/vueComponent/ant-design-vue/issues/6983)
+- 🐞 优化 Select Dropdown 等下拉列表滚动条显示隐藏逻辑 [#6987](https://github.com/vueComponent/ant-design-vue/issues/6987)
+- 🐞 修复 Select Dropdown 等下拉列表中有 input 等组件时，隐藏问题 [#7020](https://github.com/vueComponent/ant-design-vue/issues/7020)
+
 ## 4.0.3
 
 - 🐞 修复 shadow Dom 下样式丢失问题 [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)

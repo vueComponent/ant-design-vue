@@ -6,6 +6,7 @@ type: 其它
 title: App
 cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*TBTSR4PyVmkAAAAAAAAAAAAADrJ8AQ/original
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JGb3RIzyOCkAAAAAAAAAAAAADrJ8AQ/original
+tag: New
 ---
 
 新的包裹组件，提供重置样式和提供消费上下文的默认环境。

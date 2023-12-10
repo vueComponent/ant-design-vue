@@ -4,7 +4,7 @@ import { onBeforeUnmount, nextTick, Transition, watch, defineComponent, computed
 import { anyType } from '../../_util/type';
 import type { SegmentedValue } from './segmented';
 
-type ThumbReact = {
+type ThumbRect = {
   left: number;
   right: number;
   width: number;
@@ -20,7 +20,7 @@ export interface MotionThumbInterface {
   direction?: 'ltr' | 'rtl';
 }
 
-const calcThumbStyle = (targetElement: HTMLElement | null | undefined): ThumbReact =>
+const calcThumbStyle = (targetElement: HTMLElement | null | undefined): ThumbRect =>
   targetElement
     ? {
         left: targetElement.offsetLeft,
@@ -58,8 +58,8 @@ const MotionThumb = defineComponent({
       return ele?.offsetParent && ele;
     };
 
-    const prevStyle = ref<ThumbReact>(null);
-    const nextStyle = ref<ThumbReact>(null);
+    const prevStyle = ref<ThumbRect>(null);
+    const nextStyle = ref<ThumbRect>(null);
 
     watch(
       () => props.value,

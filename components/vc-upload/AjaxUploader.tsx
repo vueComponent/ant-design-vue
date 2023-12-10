@@ -302,6 +302,7 @@ export default defineComponent({
             type="file"
             ref={fileInput}
             onClick={e => e.stopPropagation()} // https://github.com/ant-design/ant-design/issues/19948
+            onCancel={e => e.stopPropagation()}
             key={uid.value}
             style={{ display: 'none' }}
             accept={accept}

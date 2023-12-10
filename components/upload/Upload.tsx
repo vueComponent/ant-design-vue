@@ -44,7 +44,7 @@ export default defineComponent({
     // style
     const [wrapSSR, hashId] = useStyle(prefixCls);
     const disabledContext = useInjectDisabled();
-    const mergedDisabled = computed(() => disabledContext.value ?? disabled.value);
+    const mergedDisabled = computed(() => disabled.value ?? disabledContext.value);
 
     const [mergedFileList, setMergedFileList] = useMergedState(props.defaultFileList || [], {
       value: toRef(props, 'fileList'),

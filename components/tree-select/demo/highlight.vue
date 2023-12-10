@@ -60,12 +60,12 @@ const treeData = ref<TreeSelectProps['treeData']>([
     value: 'parent 1',
     children: [
       {
-        label: 'parent 1',
-        value: 'parent 1',
+        label: 'parent 1-0',
+        value: 'parent 1-0',
         children: [
           {
-            label: 'parent 1-0',
-            value: 'parent 1-0',
+            label: 'parent 1-0-0',
+            value: 'parent 1-0-0',
             children: [
               {
                 label: 'my leaf',
@@ -78,8 +78,8 @@ const treeData = ref<TreeSelectProps['treeData']>([
             ],
           },
           {
-            label: 'parent 1-1',
-            value: 'parent 1-1',
+            label: 'parent 1-0-1',
+            value: 'parent 1-0-1',
           },
         ],
       },

@@ -88,6 +88,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*ylFATY6w-ygAAA
 | name | 表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的 | [NamePath](#namepath) |  |  |
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |  |
 | rules | 表单验证规则 | object \| array |  |  |
+| tooltip | 配置提示信息 | string \| slot |  | 4.0.4 |
 | validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | boolean | false | 2.0.0 |
 | validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string |  |  |
 | validateTrigger | 设置字段校验的时机 | string \| string\[] | `change` | 2.0.0 |

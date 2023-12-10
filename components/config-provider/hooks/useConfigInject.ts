@@ -24,7 +24,7 @@ export default (name: string, props: Record<any, any>) => {
     () => props.getTargetContainer ?? configProvider.getTargetContainer?.value,
   );
   const getPopupContainer = computed(
-    () => props.getPopupContainer ?? configProvider.getPopupContainer?.value,
+    () => props.getContainer ?? props.getPopupContainer ?? configProvider.getPopupContainer?.value,
   );
 
   const dropdownMatchSelectWidth = computed<boolean | number>(
@@ -42,6 +42,10 @@ export default (name: string, props: Record<any, any>) => {
   );
   const disabled = computed<boolean>(() => props.disabled ?? disabledContext.value);
   const csp = computed(() => props.csp ?? configProvider.csp);
+  const wave = computed<{
+    disabled?: boolean;
+  }>(() => props.wave ?? configProvider.wave.value);
+
   return {
     configProvider,
     prefixCls,
@@ -63,5 +67,6 @@ export default (name: string, props: Record<any, any>) => {
     iconPrefixCls,
     disabled,
     select: configProvider.select,
+    wave,
   };
 };

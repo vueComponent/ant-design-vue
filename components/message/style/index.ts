@@ -71,6 +71,8 @@ const genMessageStyle: GenerateStyle<MessageToken> = token => {
         ...resetComponent(token),
         position: 'fixed',
         top: marginXS,
+        left: '50%',
+        transform: 'translateX(-50%)',
         width: '100%',
         pointerEvents: 'none',
         zIndex: zIndexPopup,

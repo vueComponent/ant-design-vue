@@ -39,6 +39,7 @@ function main() {
   app.bootstrap({
     // typedoc options here
     entryPoints: ['components/theme/interface/index.ts'],
+    skipErrorChecking: true,
   });
 
   const project = app.convert();

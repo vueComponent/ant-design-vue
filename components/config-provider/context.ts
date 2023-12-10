@@ -105,6 +105,9 @@ export const configProviderProps = () => ({
   select: objectType<{
     showSearch?: boolean;
   }>(),
+  wave: objectType<{
+    disabled?: boolean;
+  }>(),
 });
 
 export type ConfigProviderProps = Partial<ExtractPropTypes<ReturnType<typeof configProviderProps>>>;
@@ -145,6 +148,12 @@ export interface ConfigProviderInnerProps {
   componentSize?: ComputedRef<SizeType>;
   componentDisabled?: ComputedRef<boolean>;
   transformCellText?: ComputedRef<(tableProps: TransformCellTextProps) => any>;
+  wave?: ComputedRef<{
+    disabled?: boolean;
+  }>;
+  flex?: ComputedRef<{
+    vertical?: boolean;
+  }>;
 }
 
 export const configProviderKey: InjectionKey<ConfigProviderInnerProps> = Symbol('configProvider');

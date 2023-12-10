@@ -27,7 +27,7 @@ We preset a series of colorful tag styles for use in different situations. You c
     <a-tag color="blue">blue</a-tag>
     <a-tag color="purple">purple</a-tag>
   </div>
-  <h4 style="margin: '16px 0'">Custom:</h4>
+  <h4 style="margin: 16px 0">Custom:</h4>
   <div>
     <a-tag color="#f50">#f50</a-tag>
     <a-tag color="#2db7f5">#2db7f5</a-tag>

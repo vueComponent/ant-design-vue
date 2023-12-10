@@ -10,6 +10,36 @@
 
 ---
 
+## 4.0.7
+
+- 🌟 Added Flex component [#7052](https://github.com/vueComponent/ant-design-vue/issues/7052)
+- 🌟 ConfigProvider adds wave configuration [#7036](https://github.com/vueComponent/ant-design-vue/issues/7036)
+- 🌟 Watermark supports dark mode [#7067](https://github.com/vueComponent/ant-design-vue/issues/7067)
+- 🐞 Fix Space duplicate Key problem [#7048](https://github.com/vueComponent/ant-design-vue/issues/7048)
+- 🐞 Fix Upload disabled priority error issue [#7047](https://github.com/vueComponent/ant-design-vue/issues/7047)
+- 🐞 Fix Carousel rendering error in jsx [#7077](https://github.com/vueComponent/ant-design-vue/issues/7077)
+- 🐞 Fix Message offset position problem [#7093](https://github.com/vueComponent/ant-design-vue/issues/7093)
+- 🐞 Fix the problem of animation failure when using Collapse custom prefix [#7074](https://github.com/vueComponent/ant-design-vue/issues/7074)
+
+## 4.0.6
+
+- 🐞 Fix the Dropdown onVisibleChange failure issue introduced in 4.0.4 [#7031](https://github.com/vueComponent/ant-design-vue/issues/7031)
+
+## 4.0.5
+
+- 🐞 Fix cssinjs performance issue [#7023](https://github.com/vueComponent/ant-design-vue/issues/7023)
+
+## 4.0.4
+
+- 🌟 Added esm target file
+- 🌟 Added tooltip attribute to FormItem [#7014](https://github.com/vueComponent/ant-design-vue/issues/7014)
+- 🐞 Fix useMessage getContainer not taking effect [#6942](https://github.com/vueComponent/ant-design-vue/issues/6942)
+- 🐞 Fix the problem of Image triggering onPreviewVisibleChange event multiple times [#6945](https://github.com/vueComponent/ant-design-vue/issues/6945)
+- 🐞 Fix the problem that Checkbox global disabled does not take effect [#6970](https://github.com/vueComponent/ant-design-vue/issues/6970)
+- 🐞 Fix Drawer contentWrapperStyle not taking effect [#6983](https://github.com/vueComponent/ant-design-vue/issues/6983)
+- 🐞 Optimize Select Dropdown and other drop-down list scroll bar display hidden logic [#6987](https://github.com/vueComponent/ant-design-vue/issues/6987)
+- 🐞 Fix the problem of hiding when there are components such as input in the drop-down list such as Select Dropdown [#7020](https://github.com/vueComponent/ant-design-vue/issues/7020)
+
 ## 4.0.3
 
 - 🐞 Fix the problem of style loss under shadow Dom [#6912](https://github.com/vueComponent/ant-design-vue/issues/6912)

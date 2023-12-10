@@ -10,6 +10,17 @@
 
 ---
 
+## 4.0.7
+
+- 🌟 Added Flex component [#7052](https://github.com/vueComponent/ant-design-vue/issues/7052)
+- 🌟 ConfigProvider adds wave configuration [#7036](https://github.com/vueComponent/ant-design-vue/issues/7036)
+- 🌟 Watermark supports dark mode [#7067](https://github.com/vueComponent/ant-design-vue/issues/7067)
+- 🐞 Fix Space duplicate Key problem [#7048](https://github.com/vueComponent/ant-design-vue/issues/7048)
+- 🐞 Fix Upload disabled priority error issue [#7047](https://github.com/vueComponent/ant-design-vue/issues/7047)
+- 🐞 Fix Carousel rendering error in jsx [#7077](https://github.com/vueComponent/ant-design-vue/issues/7077)
+- 🐞 Fix Message offset position problem [#7093](https://github.com/vueComponent/ant-design-vue/issues/7093)
+- 🐞 Fix the problem of animation failure when using Collapse custom prefix [#7074](https://github.com/vueComponent/ant-design-vue/issues/7074)
+
 ## 4.0.6
 
 - 🐞 Fix the Dropdown onVisibleChange failure issue introduced in 4.0.4 [#7031](https://github.com/vueComponent/ant-design-vue/issues/7031)

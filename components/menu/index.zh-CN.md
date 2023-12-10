@@ -105,7 +105,7 @@ const groupItem = {
 | 参数     | 说明         | 类型                              | 默认值 | 版本 |
 | -------- | ------------ | --------------------------------- | ------ | ---- |
 | children | 分组的菜单项 | [MenuItemType\[\]](#MenuItemType) | -      |      |
-| label    | 分组标题     | ReactNode                         | -      |      |
+| label    | 分组标题     | VueNode                         | -      |      |
 
 #### MenuDividerType
 

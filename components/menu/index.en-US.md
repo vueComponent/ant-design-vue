@@ -105,7 +105,7 @@ const groupItem = {
 | Param    | Description            | Type                              | Default value | Version |
 | -------- | ---------------------- | --------------------------------- | ------------- | ------- |
 | children | Sub-menu items         | [MenuItemType\[\]](#MenuItemType) | -             |         |
-| label    | The title of the group | ReactNode                         | -             |         |
+| label    | The title of the group | VueNode                         | -             |         |
 
 #### MenuDividerType
 

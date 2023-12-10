@@ -23,7 +23,7 @@ import { formatValue, isEqual, parseValue } from './utils/dateUtil';
 import getDataOrAriaProps, { toArray } from './utils/miscUtil';
 import type { ContextOperationRefProps } from './PanelContext';
 import { useProvidePanel } from './PanelContext';
-import type { CustomFormat, PickerMode, PresetDate } from './interface';
+import type { CustomFormat, PanelMode, PickerMode, PresetDate, RangeValue } from './interface';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
 import usePickerInput from './hooks/usePickerInput';
 import useTextValueMapping from './hooks/useTextValueMapping';
@@ -81,6 +81,7 @@ export type PickerSharedProps<DateType> = {
   // Events
   onChange?: (value: DateType | null, dateString: string) => void;
   onOpenChange?: (open: boolean) => void;
+  onPanelChange?: (values: RangeValue<DateType>, modes: [PanelMode, PanelMode]) => void;
   onFocus?: FocusEventHandler;
   onBlur?: FocusEventHandler;
   onMousedown?: MouseEventHandler;
@@ -176,6 +177,7 @@ function Picker<DateType>() {
       'inputRender',
       'onChange',
       'onOpenChange',
+      'onPanelChange',
       'onFocus',
       'onBlur',
       'onMousedown',

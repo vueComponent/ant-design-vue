@@ -230,7 +230,6 @@ const ConfigProvider = defineComponent({
         algorithm && (!Array.isArray(algorithm) || algorithm.length > 0)
           ? createTheme(algorithm)
           : undefined;
-
       return {
         ...rest,
         theme: themeObj,

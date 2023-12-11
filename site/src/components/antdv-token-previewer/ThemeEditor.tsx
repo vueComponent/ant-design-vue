@@ -61,12 +61,13 @@ const ThemeEditor = defineComponent({
 
     const aliasOpen = ref<boolean>(false);
 
-    const { theme, infoFollowPrimary, onInfoFollowPrimaryChange, updateRef } = useControlledTheme({
-      theme: customTheme,
-      defaultTheme,
-      onChange: props.onThemeChange,
-      darkAlgorithm,
-    });
+    const { theme, infoFollowPrimary, onInfoFollowPrimaryChange, updateRef, compiledTokens } =
+      useControlledTheme({
+        theme: customTheme,
+        defaultTheme,
+        onChange: props.onThemeChange,
+        darkAlgorithm,
+      });
 
     const handleTokenSelect: TokenPanelProProps['onTokenSelect'] = (token, type) => {
       const tokens = typeof token === 'string' ? (token ? [token] : []) : token;
@@ -118,7 +119,8 @@ const ThemeEditor = defineComponent({
     });
 
     const relatedComponents = computed(() => {
-      return computedSelectedTokens.value ? getRelatedComponents(computedSelectedTokens.value) : [];
+      const compiledTokenNames = Object.keys(compiledTokens.value);
+      return computedSelectedTokens.value ? getRelatedComponents(compiledTokenNames) : [];
     });
 
     expose({

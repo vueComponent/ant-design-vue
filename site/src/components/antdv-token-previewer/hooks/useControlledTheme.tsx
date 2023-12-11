@@ -1,14 +1,15 @@
 import type { DerivativeFunc } from 'ant-design-vue/es/_util/cssinjs';
 import { theme as antTheme } from 'ant-design-vue';
 import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
-import type { Ref } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
 import { watchEffect, ref, computed } from 'vue';
 import type { MutableTheme, Theme } from '../interface';
 import deepUpdateObj from '../utils/deepUpdateObj';
 import getDesignToken from '../utils/getDesignToken';
 import getValueByPath from '../utils/getValueByPath';
+import type { MapToken } from 'ant-design-vue/es/theme/interface';
 
-const { darkAlgorithm: defaultDark, compactAlgorithm, defaultAlgorithm } = antTheme;
+const { darkAlgorithm: defaultDark, compactAlgorithm, defaultAlgorithm, defaultSeed } = antTheme;
 
 export type ThemeCode = 'light' | 'dark' | 'compact';
 export const themeMap: Record<ThemeCode, DerivativeFunc<any, any>> = {
@@ -29,6 +30,7 @@ export type UseControlledTheme = (options: {
   infoFollowPrimary: Ref<boolean>;
   onInfoFollowPrimaryChange: (value: boolean) => void;
   updateRef: () => void;
+  compiledTokens: ComputedRef<MapToken>;
 };
 
 const useControlledTheme: UseControlledTheme = ({ theme: customTheme, defaultTheme, onChange }) => {
@@ -79,6 +81,11 @@ const useControlledTheme: UseControlledTheme = ({ theme: customTheme, defaultThe
     }
   };
 
+  const compiledTokens = computed(() => {
+    const token = Object.assign(defaultSeed, customTheme.value.config.token);
+    return defaultAlgorithm(token);
+  });
+
   return {
     theme: computed(() => ({
       ...theme.value,
@@ -92,6 +99,7 @@ const useControlledTheme: UseControlledTheme = ({ theme: customTheme, defaultThe
       themeRef.value = theme.value;
       forceUpdate();
     },
+    compiledTokens,
   };
 };
 

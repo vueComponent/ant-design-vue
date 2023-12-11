@@ -134,14 +134,14 @@ export default (prefixCls: Ref<string>, injectStyle: Ref<boolean>): UseComponent
         return [];
       }
 
-      const { borderRadius, colorTextLightSolid, colorBgDefault, borderRadiusOuter } = token;
+      const { borderRadius, colorTextLightSolid, colorBgSpotlight, borderRadiusOuter } = token;
 
       const TooltipToken = mergeToken<TooltipToken>(token, {
         // default variables
         tooltipMaxWidth: 250,
         tooltipColor: colorTextLightSolid,
         tooltipBorderRadius: borderRadius,
-        tooltipBg: colorBgDefault,
+        tooltipBg: colorBgSpotlight,
         tooltipRadiusOuter: borderRadiusOuter > 4 ? 4 : borderRadiusOuter,
       });
 

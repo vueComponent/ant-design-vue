@@ -44,5 +44,5 @@ const handleChange: SelectProps['onChange'] = value => {
   console.log(value); // { key: "lucy", label: "Lucy (101)" }
 };
 
-const value = ref('lucy');
+const value = ref({ value: 'lucy', label: 'Lucy (101)' });
 </script>

@@ -21,7 +21,7 @@ import statisticToken, { merge as mergeToken, statistic } from './util/statistic
 import type { VueNode } from '../_util/type';
 import { objectType } from '../_util/type';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import { defineComponent, provide, computed, inject, watchEffect, ref } from 'vue';
+import { unref, defineComponent, provide, computed, inject, watchEffect, ref } from 'vue';
 import { toReactive } from '../_util/toReactive';
 
 const defaultTheme = createTheme(defaultDerivative);
@@ -61,26 +61,30 @@ export interface DesignTokenContext {
   hashed?: string | boolean;
 }
 //defaultConfig
-const DesignTokenContextKey: InjectionKey<DesignTokenContext> = Symbol('DesignTokenContext');
+const DesignTokenContextKey: InjectionKey<ComputedRef<DesignTokenContext>> =
+  Symbol('DesignTokenContext');
 
 export const globalDesignTokenApi = ref<DesignTokenContext>();
 
-export const useDesignTokenProvider = (value: DesignTokenContext) => {
+export const useDesignTokenProvider = (value: ComputedRef<DesignTokenContext>) => {
   provide(DesignTokenContextKey, value);
   watchEffect(() => {
-    globalDesignTokenApi.value = value;
+    globalDesignTokenApi.value = toReactive(value);
   });
 };
 
 export const useDesignTokenInject = () => {
-  return inject(DesignTokenContextKey, globalDesignTokenApi.value || defaultConfig);
+  return inject(
+    DesignTokenContextKey,
+    computed(() => globalDesignTokenApi.value || defaultConfig),
+  );
 };
 export const DesignTokenProvider = defineComponent({
   props: {
     value: objectType<DesignTokenContext>(),
   },
   setup(props, { slots }) {
-    useDesignTokenProvider(toReactive(computed(() => props.value)));
+    useDesignTokenProvider(computed(() => props.value));
     return () => {
       return slots.default?.();
     };
@@ -92,9 +96,11 @@ export function useToken(): [
   ComputedRef<GlobalToken>,
   ComputedRef<string>,
 ] {
-  const designTokenContext = inject<DesignTokenContext>(
-    DesignTokenContextKey,
-    globalDesignTokenApi.value || defaultConfig,
+  const designTokenContext = unref(
+    inject<ComputedRef<DesignTokenContext>>(
+      DesignTokenContextKey,
+      computed(() => globalDesignTokenApi.value || defaultConfig),
+    ),
   );
 
   const salt = computed(() => `${version}-${designTokenContext.hashed || ''}`);

@@ -237,6 +237,9 @@ const Watermark = defineComponent({
     };
     useMutationObserver(containerRef, onMutate, {
       attributes: true,
+      subtree: true,
+      childList: true,
+      attributeFilter: ['style', 'class'],
     });
     return () => {
       return (

@@ -1,6 +1,7 @@
 // import { StyleProvider } from '../../cssinjs';
 import { extractStyle } from '../index';
 import { ConfigProvider } from '../../../components';
+import { theme } from '../../../index';
 
 const testGreenColor = '#008000';
 describe('Static-Style-Extract', () => {
@@ -24,6 +25,25 @@ describe('Static-Style-Extract', () => {
       );
     });
     expect(cssText).toContain(testGreenColor);
+    expect(cssText).toMatchSnapshot();
+  });
+
+  it('should extract static styles with customTheme and customStyle', () => {
+    const cssText = extractStyle(node => {
+      return (
+        <ConfigProvider
+          theme={{
+            algorithm: theme.darkAlgorithm,
+            token: {
+              colorPrimary: testGreenColor,
+            },
+          }}
+        >
+          {node}
+        </ConfigProvider>
+      );
+    });
+    expect(cssText).toContain('#037003');
     expect(cssText).toMatchSnapshot();
   });
   // it('with custom hashPriority', () => {

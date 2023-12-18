@@ -27,7 +27,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 | customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | function | 无 |  |  |
 | data | 上传所需参数或返回上传参数的方法 | object\|(file) => object | 无 |  |  |
 | directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false | 3.0 |  |
-| disabled | 是否禁用 | boolean | false |  |  |
+| disabled | 是否禁用 | boolean | - |  |  |
 | downloadIcon | 自定义下载 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
 | fileList | 已经上传的文件列表（受控） | object\[] | 无 |  |  |
 | headers | 设置上传的请求头部，IE10 以上有效 | object | 无 |  |  |

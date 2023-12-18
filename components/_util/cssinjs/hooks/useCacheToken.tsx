@@ -90,7 +90,6 @@ export const getComputedToken = <DerivativeToken = object, DesignToken = Derivat
   format?: (token: DesignToken) => DerivativeToken,
 ) => {
   const derivativeToken = theme.getDerivativeToken(originToken);
-
   // Merge with override
   let mergedDerivativeToken = {
     ...derivativeToken,
@@ -150,7 +149,6 @@ export default function useCacheToken<DerivativeToken = object, DesignToken = De
 
       const hashId = `${hashPrefix}-${hash(tokenKey)}`;
       mergedDerivativeToken._hashId = hashId; // Not used
-
       return [mergedDerivativeToken, hashId];
     },
     cache => {

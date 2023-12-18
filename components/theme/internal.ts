@@ -21,8 +21,16 @@ import statisticToken, { merge as mergeToken, statistic } from './util/statistic
 import type { VueNode } from '../_util/type';
 import { objectType } from '../_util/type';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import { unref, defineComponent, provide, computed, inject, watchEffect, ref } from 'vue';
-import { toReactive } from '../_util/toReactive';
+import {
+  triggerRef,
+  unref,
+  defineComponent,
+  provide,
+  computed,
+  inject,
+  watch,
+  shallowRef,
+} from 'vue';
 
 const defaultTheme = createTheme(defaultDerivative);
 
@@ -64,13 +72,18 @@ export interface DesignTokenContext {
 const DesignTokenContextKey: InjectionKey<ComputedRef<DesignTokenContext>> =
   Symbol('DesignTokenContext');
 
-export const globalDesignTokenApi = ref<DesignTokenContext>();
+export const globalDesignTokenApi = shallowRef<DesignTokenContext>();
 
 export const useDesignTokenProvider = (value: ComputedRef<DesignTokenContext>) => {
   provide(DesignTokenContextKey, value);
-  watchEffect(() => {
-    globalDesignTokenApi.value = toReactive(value);
-  });
+  watch(
+    value,
+    () => {
+      globalDesignTokenApi.value = unref(value);
+      triggerRef(globalDesignTokenApi);
+    },
+    { immediate: true, deep: true },
+  );
 };
 
 export const useDesignTokenInject = () => {
@@ -96,23 +109,24 @@ export function useToken(): [
   ComputedRef<GlobalToken>,
   ComputedRef<string>,
 ] {
-  const designTokenContext = unref(
-    inject<ComputedRef<DesignTokenContext>>(
-      DesignTokenContextKey,
-      computed(() => globalDesignTokenApi.value || defaultConfig),
-    ),
+  const designTokenContext = inject<ComputedRef<DesignTokenContext>>(
+    DesignTokenContextKey,
+    computed(() => globalDesignTokenApi.value || defaultConfig),
   );
 
-  const salt = computed(() => `${version}-${designTokenContext.hashed || ''}`);
+  const salt = computed(() => `${version}-${designTokenContext.value.hashed || ''}`);
 
-  const mergedTheme = computed(() => designTokenContext.theme || defaultTheme);
+  const mergedTheme = computed(() => designTokenContext.value.theme || defaultTheme);
 
   const cacheToken = useCacheToken<GlobalToken, SeedToken>(
     mergedTheme,
-    computed(() => [defaultSeedToken, designTokenContext.token]),
+    computed(() => [defaultSeedToken, designTokenContext.value.token]),
     computed(() => ({
       salt: salt.value,
-      override: { override: designTokenContext.token, ...designTokenContext.components },
+      override: {
+        override: designTokenContext.value.token,
+        ...designTokenContext.value.components,
+      },
       formatToken,
     })),
   );
@@ -120,7 +134,7 @@ export function useToken(): [
   return [
     mergedTheme,
     computed(() => cacheToken.value[0]),
-    computed(() => (designTokenContext.hashed ? cacheToken.value[1] : '')),
+    computed(() => (designTokenContext.value.hashed ? cacheToken.value[1] : '')),
   ];
 }
 

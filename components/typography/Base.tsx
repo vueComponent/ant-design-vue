@@ -166,6 +166,7 @@ const Base = defineComponent({
     });
     onMounted(() => {
       state.clientRendered = true;
+      syncEllipsis();
     });
 
     onBeforeUnmount(() => {
@@ -180,7 +181,7 @@ const Base = defineComponent({
           resizeOnNextFrame();
         });
       },
-      { flush: 'post', deep: true, immediate: true },
+      { flush: 'post', deep: true },
     );
 
     watchEffect(() => {
@@ -296,7 +297,12 @@ const Base = defineComponent({
     );
 
     // ============== Ellipsis ==============
-    function resizeOnNextFrame() {
+    function resizeOnNextFrame(sizeInfo?: { width: number; height: number }) {
+      if (sizeInfo) {
+        const { width, height } = sizeInfo;
+        if (!width || !height) return;
+      }
+
       raf.cancel(state.rafId);
       state.rafId = raf(() => {
         // Do not bind `syncEllipsis`. It need for test usage on prototype

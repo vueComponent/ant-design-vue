@@ -426,8 +426,8 @@ function RangerPicker<DateType>() {
         ],
         () => {
           arrowLeft.value = 0;
-          if (mergedOpen.value && mergedActivePickerIndex.value) {
-            if (startInputDivRef.value && separatorRef.value && panelDivRef.value) {
+          if (mergedActivePickerIndex.value) {
+            if (startInputDivRef.value && separatorRef.value) {
               arrowLeft.value = startInputDivWidth.value + separatorWidth.value;
               if (
                 panelDivWidth.value &&

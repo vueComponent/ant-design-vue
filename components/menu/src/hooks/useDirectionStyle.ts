@@ -9,7 +9,7 @@ export default function useDirectionStyle(level: ComputedRef<number>): ComputedR
     mode.value !== 'inline'
       ? null
       : rtl.value
-      ? { paddingRight: `${level.value * inlineIndent.value}px` }
-      : { paddingLeft: `${level.value * inlineIndent.value}px` },
+        ? { paddingRight: `${level.value * inlineIndent.value}px` }
+        : { paddingLeft: `${level.value * inlineIndent.value}px` },
   );
 }

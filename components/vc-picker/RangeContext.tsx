@@ -46,7 +46,7 @@ export const RangeContextProvider = defineComponent({
   props: {
     value: {
       type: Object as PropType<RangeContextProviderValue>,
-      default: () => ({} as RangeContextProviderValue),
+      default: () => ({}) as RangeContextProviderValue,
     },
   },
   setup(props, { slots }) {

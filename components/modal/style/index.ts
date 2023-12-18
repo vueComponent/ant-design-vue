@@ -4,6 +4,7 @@ import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import type { TokenWithCommonCls } from '../../theme/util/genComponentStyleHook';
 import { clearFix, genFocusStyle, resetComponent } from '../../style';
 import { CSSProperties } from 'vue';
+import type { CSSInterpolation } from '../../_util/cssinjs';
 
 /** Component only token. Which will handle additional calculation of alias token */
 export interface ComponentToken {
@@ -84,7 +85,7 @@ export const genModalMaskStyle: GenerateStyle<TokenWithCommonCls<AliasToken>> = 
       },
     },
     { [`${componentCls}-root`]: initFadeMotion(token) },
-  ];
+  ] as CSSInterpolation;
 };
 
 const genModalStyle: GenerateStyle<ModalToken> = token => {

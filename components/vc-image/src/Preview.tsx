@@ -52,7 +52,7 @@ export const previewProps = {
   rootClassName: String,
   icons: {
     type: Object as PropType<PreviewProps['icons']>,
-    default: () => ({} as PreviewProps['icons']),
+    default: () => ({}) as PreviewProps['icons'],
   },
 };
 const Preview = defineComponent({

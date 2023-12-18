@@ -33,8 +33,8 @@ export function useElementSize(
         box === 'border-box'
           ? entry.borderBoxSize
           : box === 'content-box'
-          ? entry.contentBoxSize
-          : entry.devicePixelContentBoxSize;
+            ? entry.contentBoxSize
+            : entry.devicePixelContentBoxSize;
 
       if (boxSize) {
         width.value = boxSize.reduce((acc, { inlineSize }) => acc + inlineSize, 0);

@@ -37,12 +37,15 @@ function fixBrowserByTimeout(node) {
     const animationDuration = parseFloat(getStyleProperty(node, 'animation-duration')) || 0;
     const time = Math.max(transitionDuration + transitionDelay, animationDuration + animationDelay);
     // sometimes, browser bug
-    node.rcEndAnimTimeout = setTimeout(() => {
-      node.rcEndAnimTimeout = null;
-      if (node.rcEndListener) {
-        node.rcEndListener();
-      }
-    }, time * 1000 + 200);
+    node.rcEndAnimTimeout = setTimeout(
+      () => {
+        node.rcEndAnimTimeout = null;
+        if (node.rcEndListener) {
+          node.rcEndListener();
+        }
+      },
+      time * 1000 + 200,
+    );
   }
 }
 

@@ -496,8 +496,8 @@ const Base = defineComponent({
             ? props.content
             : slots.default?.()
           : slots.default
-          ? slots.default()
-          : props.content;
+            ? slots.default()
+            : props.content;
 
       if (editing.value) {
         return renderEditInput();

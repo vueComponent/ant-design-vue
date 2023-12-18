@@ -563,9 +563,8 @@ describe('Table.rowSelection', () => {
     }
 
     function clickItem() {
-      wrapper.findAll(
-        'tbody .ant-table-selection-column .ant-checkbox-input',
-      )[0].element.checked = true;
+      wrapper.findAll('tbody .ant-table-selection-column .ant-checkbox-input')[0].element.checked =
+        true;
       wrapper.findAll('tbody .ant-table-selection-column .ant-checkbox-input')[0].trigger('change');
     }
 

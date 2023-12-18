@@ -57,8 +57,8 @@ export type MaybeReadonlyRef<T> = (() => T) | ComputedRef<T>;
 export type DeepMaybeRef<T> = T extends Ref<infer V>
   ? MaybeRef<V>
   : T extends Array<any> | object
-  ? { [K in keyof T]: DeepMaybeRef<T[K]> }
-  : MaybeRef<T>;
+    ? { [K in keyof T]: DeepMaybeRef<T[K]> }
+    : MaybeRef<T>;
 
 /**
  * Infers the element type of an array

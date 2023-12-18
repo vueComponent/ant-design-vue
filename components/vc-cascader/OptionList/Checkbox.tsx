@@ -23,8 +23,8 @@ export default function Checkbox({
     typeof mergedCheckable === 'function'
       ? mergedCheckable()
       : typeof mergedCheckable === 'boolean'
-      ? null
-      : mergedCheckable;
+        ? null
+        : mergedCheckable;
   return (
     <span
       class={{

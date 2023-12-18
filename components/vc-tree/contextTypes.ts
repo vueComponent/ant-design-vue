@@ -108,7 +108,7 @@ export const TreeContext = defineComponent({
 export const useInjectTreeContext = () => {
   return inject(
     TreeContextKey,
-    computed(() => ({} as TreeContextProps)),
+    computed(() => ({}) as TreeContextProps),
   );
 };
 type KeysStateKeyType = {

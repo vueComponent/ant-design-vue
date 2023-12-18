@@ -155,7 +155,10 @@ export default defineComponent({
         props.jsfiddle &&
         props.jsfiddle.title &&
         props.jsfiddle?.title['en-US'] &&
-        String(props.jsfiddle?.title['en-US']).split(' ').join('-').toLowerCase()
+        String(props.jsfiddle?.title['en-US'])
+          .split(' ')
+          .join('-')
+          .toLowerCase()
       );
     });
     const onCopyTooltipVisibleChange = (visible: boolean) => {

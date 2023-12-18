@@ -17,7 +17,7 @@ const getItem = (
     children,
     label,
     type,
-  } as MenuItem);
+  }) as MenuItem;
 
 const items: MenuProps['items'] = [
   getItem('Navigation One', 'sub1', <MailOutlined />, [

@@ -22,6 +22,9 @@ export const innerProps = {
   point: { type: Object as PropType<Point> },
   getRootDomNode: { type: Function as PropType<() => HTMLElement> },
   getClassNameFromAlign: { type: Function as PropType<(align: AlignType) => string> },
+  onAlign: {
+    type: Function as PropType<(popupDomNode: HTMLElement, align: AlignType) => void>,
+  },
   onMouseenter: { type: Function as PropType<(align: MouseEvent) => void> },
   onMouseleave: { type: Function as PropType<(align: MouseEvent) => void> },
   onMousedown: { type: Function as PropType<(align: MouseEvent) => void> },

@@ -5,12 +5,12 @@ import showWaveEffect from './WaveEffect';
 export default function useWave(
   instance: ComponentInternalInstance | null,
   className: Ref<string>,
-  wave: ComputedRef<{ disabled?: boolean }>,
+  wave?: ComputedRef<{ disabled?: boolean }>,
 ): VoidFunction {
   function showWave() {
     const node = findDOMNode(instance);
 
-    if (wave.value?.disabled || !node) {
+    if (wave?.value?.disabled || !node) {
       return;
     }
 

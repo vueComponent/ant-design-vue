@@ -30,7 +30,7 @@ More layouts with navigation: [Layout](/components/layout).
 | forceSubMenuRender | render submenu into DOM before it shows | boolean | false |
 | inlineCollapsed | specifies the collapsed status when menu is inline mode | boolean | - |
 | inlineIndent | indent px of inline menu item on each level | number | 24 |
-| items | Menu item content | [ItemType\[\]](#ItemType) | - | 4.20.0 |
+| items | Menu item content | [ItemType\[\]](#itemtype) | - | 4.20.0 |
 | mode | type of the menu; `vertical`, `horizontal`, and `inline` modes are supported | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | Allow selection of multiple items | boolean | false |
 | openKeys(v-model) | array with the keys of currently opened sub menus | (string \| number)[] |  |
@@ -54,15 +54,15 @@ More layouts with navigation: [Layout](/components/layout).
 
 ### Menu.Item
 
-| Param    | Description                          | Type           | Default value |
-| -------- | ------------------------------------ | -------------- | ------------- |
-| disabled | whether menu item is disabled or not | boolean        | false         |
-| key      | unique id of the menu item           | string \| number         |               |
-| title    | set display title for collapsed item | string \| slot |               |
+| Param    | Description                          | Type             | Default value |
+| -------- | ------------------------------------ | ---------------- | ------------- |
+| disabled | whether menu item is disabled or not | boolean          | false         |
+| key      | unique id of the menu item           | string \| number |               |
+| title    | set display title for collapsed item | string \| slot   |               |
 
 ### ItemType
 
-> type ItemType = [MenuItemType](#MenuItemType) | [SubMenuType](#SubMenuType) | [MenuItemGroupType](#MenuItemGroupType) | [MenuDividerType](#MenuDividerType);
+> type ItemType = [MenuItemType](#menuitemtype) | [SubMenuType](#submenutype) | [MenuItemGroupType](#menuitemgrouptype) | [MenuDividerType](#menudividertype);
 
 #### MenuItemType
 
@@ -80,7 +80,7 @@ More layouts with navigation: [Layout](/components/layout).
 <!-- prettier-ignore -->
 | Property | Description | Type | Default value | Version |
 | --- | --- | --- | --- | --- |
-| children | Sub-menus or sub-menu items | [ItemType\[\]](#ItemType) | - |  |
+| children | Sub-menus or sub-menu items | [ItemType\[\]](#itemtype) | - |  |
 | disabled | Whether sub-menu is disabled | boolean | false |  |
 | icon | Icon of sub menu | VueNode \| (item: SubMenuType) => VueNode | - |  |
 | key | Unique ID of the sub-menu | string \| number | - |  |
@@ -104,8 +104,8 @@ const groupItem = {
 
 | Param    | Description            | Type                              | Default value | Version |
 | -------- | ---------------------- | --------------------------------- | ------------- | ------- |
-| children | Sub-menu items         | [MenuItemType\[\]](#MenuItemType) | -             |         |
-| label    | The title of the group | VueNode                         | -             |         |
+| children | Sub-menu items         | [MenuItemType\[\]](#menuitemtype) | -             |         |
+| label    | The title of the group | VueNode                           | -             |         |
 
 #### MenuDividerType
 

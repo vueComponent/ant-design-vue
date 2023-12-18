@@ -10,6 +10,18 @@
 
 ---
 
+## 4.0.8
+
+- 🐞 修复在 Nuxt 下 theme 响应式失效问题 [#7180](https://github.com/vueComponent/ant-design-vue/issues/7180)
+- 🐞 修复 Wave 引起的报错问题 [#7108](https://github.com/vueComponent/ant-design-vue/issues/7108)
+- 🐞 修复 Upload disabled 继承问题 [#7110](https://github.com/vueComponent/ant-design-vue/issues/7110)
+- 🐞 修复 Tooltip popupAlign 未生效问题 [#7112](https://github.com/vueComponent/ant-design-vue/issues/7112)
+- 🐞 修复 Typography 闪动问题 [#7146](https://github.com/vueComponent/ant-design-vue/issues/7146)
+- 🐞 修复 RangePicker prevIcon nextIcon 未生效问题 [#7127](https://github.com/vueComponent/ant-design-vue/issues/7127)
+- 🐞 修复 watermark 未监听子元素变动问题 [#7149](https://github.com/vueComponent/ant-design-vue/issues/7149)
+- 🐞 修复 Menu 动画丢失问题 [#7130](https://github.com/vueComponent/ant-design-vue/issues/7130)
+- 🐞 修复 TextArea autosize 时光标变化问题 [#7121](https://github.com/vueComponent/ant-design-vue/issues/7121)
+
 ## 4.0.7
 
 - 🌟 新增 Flex 组件 [#7052](https://github.com/vueComponent/ant-design-vue/issues/7052)

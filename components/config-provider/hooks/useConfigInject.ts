@@ -44,7 +44,7 @@ export default (name: string, props: Record<any, any>) => {
   const csp = computed(() => props.csp ?? configProvider.csp);
   const wave = computed<{
     disabled?: boolean;
-  }>(() => props.wave ?? configProvider.wave.value);
+  }>(() => props.wave ?? configProvider.wave?.value);
 
   return {
     configProvider,

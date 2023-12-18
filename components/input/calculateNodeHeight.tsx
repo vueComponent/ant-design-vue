@@ -1,21 +1,19 @@
-// Thanks to https://github.com/andreypopp/react-textarea-autosize/
-
 import type { CSSProperties } from 'vue';
-
 /**
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
 
 const HIDDEN_TEXTAREA_STYLE = `
- min-height:0 !important;
- max-height:none !important;
- height:0 !important;
- visibility:hidden !important;
- overflow:hidden !important;
- position:absolute !important;
- z-index:-1000 !important;
- top:0 !important;
- right:0 !important
+  min-height:0 !important;
+  max-height:none !important;
+  height:0 !important;
+  visibility:hidden !important;
+  overflow:hidden !important;
+  position:absolute !important;
+  z-index:-1000 !important;
+  top:0 !important;
+  right:0 !important;
+  pointer-events: none !important;
 `;
 
 const SIZING_STYLE = [
@@ -36,6 +34,7 @@ const SIZING_STYLE = [
   'border-width',
   'box-sizing',
   'word-break',
+  'white-space',
 ];
 
 export interface NodeType {
@@ -45,7 +44,7 @@ export interface NodeType {
   boxSizing: string;
 }
 
-const computedStyleCache: { [key: string]: NodeType } = {};
+const computedStyleCache: Record<string, NodeType> = {};
 let hiddenTextarea: HTMLTextAreaElement;
 
 export function calculateNodeStyling(node: HTMLElement, useCache = false) {
@@ -88,7 +87,7 @@ export function calculateNodeStyling(node: HTMLElement, useCache = false) {
   return nodeInfo;
 }
 
-export default function calculateNodeHeight(
+export default function calculateAutoSizeStyle(
   uiTextNode: HTMLTextAreaElement,
   useCache = false,
   minRows: number | null = null,
@@ -122,10 +121,11 @@ export default function calculateNodeHeight(
   hiddenTextarea.setAttribute('style', `${sizingStyle};${HIDDEN_TEXTAREA_STYLE}`);
   hiddenTextarea.value = uiTextNode.value || uiTextNode.placeholder || '';
 
-  let minHeight = Number.MIN_SAFE_INTEGER;
-  let maxHeight = Number.MAX_SAFE_INTEGER;
-  let height = hiddenTextarea.scrollHeight;
+  let minHeight: number | undefined = undefined;
+  let maxHeight: number | undefined = undefined;
   let overflowY: any;
+
+  let height = hiddenTextarea.scrollHeight;
 
   if (boxSizing === 'border-box') {
     // border-box: add border, since height = content + padding + border
@@ -155,11 +155,19 @@ export default function calculateNodeHeight(
       height = Math.min(maxHeight, height);
     }
   }
-  return {
+
+  const style: CSSProperties = {
     height: `${height}px`,
-    minHeight: `${minHeight}px`,
-    maxHeight: `${maxHeight}px`,
     overflowY,
     resize: 'none',
   };
+
+  if (minHeight) {
+    style.minHeight = `${minHeight}px`;
+  }
+  if (maxHeight) {
+    style.maxHeight = `${maxHeight}px`;
+  }
+
+  return style;
 }

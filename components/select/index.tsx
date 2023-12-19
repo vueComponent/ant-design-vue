@@ -172,6 +172,7 @@ const Select = defineComponent({
         {
           [`${prefixCls.value}-lg`]: mergedSize.value === 'large',
           [`${prefixCls.value}-sm`]: mergedSize.value === 'small',
+          [`${prefixCls.value}-md`]: mergedSize.value === 'middle',
           [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
           [`${prefixCls.value}-borderless`]: !props.bordered,
           [`${prefixCls.value}-in-form-item`]: formItemInputContext.isFormItemInput,

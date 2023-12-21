@@ -157,6 +157,43 @@ export default defineComponent<ConfirmDialogProps>({
 
       const mergedLocal = locale.value;
 
+      function isThenable<T>(thing?: PromiseLike<T>): boolean {
+        return !!(thing && thing.then);
+      }
+
+      const handlePromiseOnOk = (returnValueOfOnOk?: PromiseLike<any>) => {
+        if (!isThenable(returnValueOfOnOk)) {
+          return;
+        }
+        returnValueOfOnOk!.then(
+          (...args: any[]) => {
+            close(...args);
+          },
+          (e: Error) => {
+            // See: https://github.com/ant-design/ant-design/issues/6183
+            return Promise.reject(e);
+          },
+        );
+      };
+
+      const handleCancel = (e?: MouseEvent) => {
+        if (!onCancel) {
+          close(e);
+          return;
+        }
+        let returnValueOfOnOk: PromiseLike<any>;
+        if (onCancel.length) {
+          returnValueOfOnOk = onCancel(close);
+        } else {
+          returnValueOfOnOk = onCancel();
+          if (!returnValueOfOnOk) {
+            close(e);
+            return;
+          }
+        }
+        handlePromiseOnOk(returnValueOfOnOk);
+      };
+
       const cancelButton = mergedOkCancel && (
         <ActionButton
           actionFn={onCancel}
@@ -176,7 +213,7 @@ export default defineComponent<ConfirmDialogProps>({
             { [`${confirmPrefixCls}-centered`]: !!centered },
             wrapClassName,
           )}
-          onCancel={e => close?.({ triggerCancel: true }, e)}
+          onCancel={e => handleCancel(e)}
           open={open}
           title=""
           footer=""

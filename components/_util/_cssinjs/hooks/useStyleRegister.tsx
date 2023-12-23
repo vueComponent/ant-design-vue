@@ -283,9 +283,9 @@ export function uniqueHash(path: (string | number)[], styleStr: string) {
   return hash(`${path.join('%')}${styleStr}`);
 }
 
-function Empty() {
-  return null;
-}
+// function Empty() {
+//   return null;
+// }
 
 export const STYLE_PREFIX = 'style';
 
@@ -347,7 +347,8 @@ export default function useStyleRegister(
     isMergedClientSide = styleContext.value.mock === 'client';
   }
 
-  const cacheStyle = useGlobalCache<StyleCacheValue>(
+  // const [cacheStyle[0], cacheStyle[1], cacheStyle[2]]
+  useGlobalCache<StyleCacheValue>(
     STYLE_PREFIX,
     fullPath,
     // Create cache if needed
@@ -431,28 +432,29 @@ export default function useStyleRegister(
   );
 
   return (node: VueNode) => {
-    let styleNode: VueNode;
+    return node;
+    // let styleNode: VueNode;
 
-    if (!styleContext.value.ssrInline || isMergedClientSide || !styleContext.value.defaultCache) {
-      styleNode = <Empty />;
-    } else {
-      styleNode = (
-        <style
-          {...{
-            [ATTR_TOKEN]: cacheStyle.value[1],
-            [ATTR_MARK]: cacheStyle.value[2],
-          }}
-          innerHTML={cacheStyle.value[0]}
-        />
-      );
-    }
+    // if (!styleContext.value.ssrInline || isMergedClientSide || !styleContext.value.defaultCache) {
+    //   styleNode = <Empty />;
+    // } else {
+    //   styleNode = (
+    //     <style
+    //       {...{
+    //         [ATTR_TOKEN]: cacheStyle.value[1],
+    //         [ATTR_MARK]: cacheStyle.value[2],
+    //       }}
+    //       innerHTML={cacheStyle.value[0]}
+    //     />
+    //   );
+    // }
 
-    return (
-      <>
-        {styleNode}
-        {node}
-      </>
-    );
+    // return (
+    //   <>
+    //     {styleNode}
+    //     {node}
+    //   </>
+    // );
   };
 }
 

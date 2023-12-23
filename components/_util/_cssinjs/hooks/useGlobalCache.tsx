@@ -25,6 +25,8 @@ export default function useGlobalCache<CacheType>(
   const styleContext = useStyleInject();
   const fullPath = shallowRef([]);
   const deps = shallowRef('');
+  const res = shallowRef<CacheType>();
+
   watchEffect(() => {
     fullPath.value = [prefix, ...keyPath.value];
     deps.value = [prefix, ...keyPath.value].join('_');
@@ -61,6 +63,7 @@ export default function useGlobalCache<CacheType>(
     deps,
     () => {
       buildCache();
+      res.value = styleContext.value.cache.get(fullPath.value)![1];
     },
     { immediate: true },
   );
@@ -76,6 +79,7 @@ export default function useGlobalCache<CacheType>(
   }
 
   const cacheContent = cacheEntity![1];
+  res.value = cacheEntity![1];
 
   // Remove if no need anymore
   useCompatibleInsertionEffect(
@@ -88,7 +92,7 @@ export default function useGlobalCache<CacheType>(
       // which will clear cache on the first time.
       buildCache(([times, cache]) => {
         if (polyfill && times === 0) {
-          onCacheEffect?.(cacheContent);
+          onCacheEffect?.(res.value);
         }
         return [times + 1, cache];
       });
@@ -122,5 +126,5 @@ export default function useGlobalCache<CacheType>(
     buildCache();
   });
 
-  return cacheContent;
+  return res;
 }

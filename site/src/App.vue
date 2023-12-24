@@ -20,6 +20,7 @@ import zhCN from '../../components/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import { theme as antdTheme } from 'ant-design-vue';
+import type { ThemeConfig } from '../../components/config-provider/context';
 import SiteToken from './SiteToken.vue';
 function isZhCN(name: string) {
   return /-cn\/?$/.test(name);
@@ -57,7 +58,10 @@ export default defineComponent({
     const theme = ref<ThemeName>((localStorage.getItem('theme') as ThemeName) || 'light');
     const compactTheme = ref<ThemeName>((localStorage.getItem('compactTheme') as ThemeName) || '');
     const themeConfig = computed(() => {
-      return { algorithm: getAlgorithm([...new Set([theme.value, compactTheme.value])]) };
+      return {
+        algorithm: getAlgorithm([...new Set([theme.value, compactTheme.value])]),
+        cssVar: true,
+      } as ThemeConfig;
     });
     const hashPriority = ref('low' as const);
     watch(hashPriority, () => {

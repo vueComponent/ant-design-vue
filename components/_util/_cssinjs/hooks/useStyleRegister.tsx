@@ -319,22 +319,6 @@ export default function useStyleRegister(
   }>,
   styleFn: () => CSSInterpolation,
 ) {
-  //   const { token, path, hashId, layer, nonce, clientOnly, order = 0 } = info;
-  //   const {
-  //     autoClear,
-  //     mock,
-  //     defaultCache,
-  //     hashPriority,
-  //     container,
-  //     ssrInline,
-  //     transformers,
-  //     linters,
-  //     cache,
-  //   } = React.useContext(StyleContext);
-  //   const tokenKey = token._tokenKey as string;
-
-  //   const fullPath = [tokenKey, ...path];
-
   const styleContext = useStyleInject();
 
   const tokenKey = computed(() => info.value.token._tokenKey as string);
@@ -472,8 +456,8 @@ export const extract: ExtractStyle<StyleCacheValue> = (cache, effectStyles, opti
   // ====================== Style ======================
   // Used for rc-util
   const sharedAttrs = {
-    'data-rc-order': 'prependQueue',
-    'data-rc-priority': `${order}`,
+    'data-vc-order': 'prependQueue',
+    'data-vc-priority': `${order}`,
   };
 
   keyStyleText = toStyleStr(styleStr, tokenKey, styleId, sharedAttrs, plain);

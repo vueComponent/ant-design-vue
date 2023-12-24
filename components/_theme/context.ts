@@ -1,9 +1,18 @@
-import type { ShallowRef, InjectionKey, ExtractPropTypes } from 'vue';
-import { defineComponent, inject, provide, shallowRef, unref, watch } from 'vue';
+import type { ShallowRef, InjectionKey, ExtractPropTypes, ComputedRef } from 'vue';
+import {
+  defineComponent,
+  inject,
+  provide,
+  shallowRef,
+  unref,
+  triggerRef,
+  watch,
+  computed,
+} from 'vue';
 import type { Theme } from '../_util/_cssinjs';
 import { createTheme } from '../_util/_cssinjs';
 
-import { objectType, someType, withInstall } from '../_util/type';
+import { objectType, someType } from '../_util/type';
 import type { AliasToken, MapToken, OverrideToken, SeedToken } from './interface';
 import defaultDerivative from './themes/default';
 import defaultSeedToken from './themes/seed';
@@ -14,6 +23,8 @@ export const defaultTheme = createTheme(defaultDerivative);
 // To ensure snapshot stable. We disable hashed in test env.
 const DesignTokenContextKey: InjectionKey<ShallowRef<Partial<DesignTokenProviderProps>>> =
   Symbol('DesignTokenContextKey');
+
+export const globalDesignTokenApi = shallowRef<DesignTokenProviderProps>();
 
 export const defaultConfig = {
   token: defaultSeedToken,
@@ -33,7 +44,7 @@ export const styleProviderProps = () => ({
   /** Just merge `token` & `override` at top to save perf */
   override: objectType<{ override: Partial<AliasToken> } & ComponentsToken>(),
   hashed: someType<string | boolean>(),
-  cssVar: objectType<{
+  cssVar: someType<{
     prefix?: string;
     key?: string;
   }>(),
@@ -45,7 +56,7 @@ export interface DesignTokenProviderProps {
   theme?: Theme<SeedToken, MapToken>;
   components?: ComponentsToken;
   /** Just merge `token` & `override` at top to save perf */
-  override: { override: Partial<AliasToken> } & ComponentsToken;
+  override?: { override: Partial<AliasToken> } & ComponentsToken;
   hashed?: string | boolean;
   cssVar?: {
     prefix?: string;
@@ -54,19 +65,21 @@ export interface DesignTokenProviderProps {
 }
 
 export const useDesignTokenInject = () => {
-  return inject(DesignTokenContextKey, shallowRef(defaultConfig));
+  return inject(
+    DesignTokenContextKey,
+    computed(() => globalDesignTokenApi.value || defaultConfig),
+  );
 };
 
-export const useDesignTokenProvider = (props: DesignTokenProviderProps) => {
+export const useDesignTokenProvider = (props: ComputedRef<DesignTokenProviderProps>) => {
   const parentContext = useDesignTokenInject();
   const context = shallowRef<Partial<DesignTokenProviderProps>>(defaultConfig);
   watch(
-    [() => unref(props), parentContext],
-    () => {
+    computed(() => [props.value, parentContext.value]),
+    ([propsValue, parentContextValue]) => {
       const mergedContext: Partial<DesignTokenProviderProps> = {
-        ...parentContext.value,
+        ...parentContextValue,
       };
-      const propsValue = unref(props);
       Object.keys(propsValue).forEach(key => {
         const value = propsValue[key];
         if (propsValue[key] !== undefined) {
@@ -75,23 +88,25 @@ export const useDesignTokenProvider = (props: DesignTokenProviderProps) => {
       });
 
       context.value = mergedContext;
+      globalDesignTokenApi.value = unref(mergedContext as any);
+      triggerRef(globalDesignTokenApi);
     },
-    { immediate: true },
+    { immediate: true, deep: true },
   );
   provide(DesignTokenContextKey, context);
   return context;
 };
 
-export const StyleProvider = withInstall(
-  defineComponent({
-    name: 'ADesignTokenProvider',
-    inheritAttrs: false,
-    props: styleProviderProps(),
-    setup(props, { slots }) {
-      useDesignTokenProvider(props);
-      return () => slots.default?.();
-    },
-  }),
-);
+export const DesignTokenProvider = defineComponent({
+  props: {
+    value: objectType<DesignTokenProviderProps>(),
+  },
+  setup(props, { slots }) {
+    useDesignTokenProvider(computed(() => props.value));
+    return () => {
+      return slots.default?.();
+    };
+  },
+});
 
-export default { useDesignTokenInject, useDesignTokenProvider };
+export default { useDesignTokenInject, useDesignTokenProvider, DesignTokenProvider };

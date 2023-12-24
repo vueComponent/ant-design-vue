@@ -20,7 +20,7 @@ import statisticToken, { merge as mergeToken } from './util/statistic';
 import useResetIconStyle from './util/useResetIconStyle';
 import calc from './util/calc';
 
-export { defaultConfig } from './context';
+export { defaultConfig, DesignTokenProvider } from './context';
 export {
   PresetColors,
   genComponentStyleHook,

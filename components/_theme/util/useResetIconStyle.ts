@@ -16,7 +16,7 @@ const useResetIconStyle = (iconPrefixCls: Ref<string>, csp?: Ref<CSPConfig>) => 
       token,
       hashId: '',
       path: ['ant-design-icons', iconPrefixCls.value],
-      nonce: () => csp && csp.value.nonce!,
+      nonce: () => csp.value && csp.value.nonce,
     })),
     () =>
       [

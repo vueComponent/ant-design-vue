@@ -78,13 +78,14 @@ export default function useGlobalCache<CacheType>(
     cacheEntity = styleContext.value.cache.get(fullPath.value);
   }
 
-  const cacheContent = cacheEntity![1];
   res.value = cacheEntity![1];
 
   // Remove if no need anymore
   useCompatibleInsertionEffect(
     () => {
-      onCacheEffect?.(cacheContent);
+      const cacheEntity = styleContext.value.cache.get(fullPath.value);
+      onCacheEffect?.(cacheEntity![1]);
+      res.value = cacheEntity![1];
     },
     polyfill => {
       // It's bad to call build again in effect.
@@ -92,7 +93,9 @@ export default function useGlobalCache<CacheType>(
       // which will clear cache on the first time.
       buildCache(([times, cache]) => {
         if (polyfill && times === 0) {
-          onCacheEffect?.(res.value);
+          const cacheEntity = styleContext.value.cache.get(fullPath.value);
+          onCacheEffect?.(cacheEntity![1]);
+          res.value = cacheEntity![1];
         }
         return [times + 1, cache];
       });

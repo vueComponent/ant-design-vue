@@ -17,7 +17,7 @@ import statisticToken, { merge as mergeToken } from './statistic';
 import useResetIconStyle from './useResetIconStyle';
 
 import type { Ref } from 'vue';
-import { defineComponent, computed, createVNode } from 'vue';
+import { defineComponent, computed, createVNode, Fragment } from 'vue';
 import { useConfigContextInject } from '../../config-provider/context';
 import type { VueNode } from 'ant-design-vue/es/_util/type';
 import { objectType } from 'ant-design-vue/es/_util/type';
@@ -193,7 +193,7 @@ export default function genComponentStyleHook<C extends OverrideComponent>(
         theme: theme.value,
         token: token.value,
         hashId: hashId.value,
-        nonce: () => csp.value.nonce!,
+        nonce: () => csp.value && csp.value.nonce,
         clientOnly: options.clientOnly,
 
         // antd is always at top of styles
@@ -244,11 +244,11 @@ export default function genComponentStyleHook<C extends OverrideComponent>(
           format: options.format,
         });
 
-        if (cssVar) {
+        if (cssVar.value) {
           Object.keys(defaultComponentToken).forEach(key => {
             defaultComponentToken[key] = `var(${token2CSSVar(
               key,
-              getCompVarPrefix(component, cssVar.value.prefix),
+              getCompVarPrefix(component, cssVar.value?.prefix),
             )})`;
           });
         }
@@ -365,33 +365,36 @@ const genCSSVarRegister = <C extends OverrideComponent>(
     },
     setup(props) {
       const [, realToken] = useToken();
-      useCSSVarRegister(
-        {
-          path: [props.component],
-          prefix: props.cssVar.prefix,
-          key: props.cssVar.key!,
-          unitless: {
-            ...unitless,
-            ...compUnitless,
+
+      return () => {
+        useCSSVarRegister(
+          {
+            path: [props.component],
+            prefix: props.cssVar.prefix,
+            key: props.cssVar.key!,
+            unitless: {
+              ...unitless,
+              ...compUnitless,
+            },
+            ignore,
+            token: realToken.value,
+            scope: props.rootCls,
           },
-          ignore,
-          token: realToken.value,
-          scope: props.rootCls,
-        },
-        () => {
-          const defaultToken = getDefaultComponentToken(component, realToken, getDefaultToken);
-          const componentToken = getComponentToken(component, realToken, defaultToken, {
-            format: options?.format,
-            deprecatedTokens: options?.deprecatedTokens,
-          });
-          Object.keys(defaultToken).forEach(key => {
-            componentToken[prefixToken(key)] = componentToken[key];
-            delete componentToken[key];
-          });
-          return componentToken;
-        },
-      );
-      return null;
+          () => {
+            const defaultToken = getDefaultComponentToken(component, realToken, getDefaultToken);
+            const componentToken = getComponentToken(component, realToken, defaultToken, {
+              format: options?.format,
+              deprecatedTokens: options?.deprecatedTokens,
+            });
+            Object.keys(defaultToken).forEach(key => {
+              componentToken[prefixToken(key)] = componentToken[key];
+              delete componentToken[key];
+            });
+            return componentToken;
+          },
+        );
+        return null;
+      };
     },
   });
 
@@ -401,16 +404,16 @@ const genCSSVarRegister = <C extends OverrideComponent>(
     return [
       (node: VueNode): VueNode =>
         injectStyle && cssVar.value
-          ? createVNode('Fragment', null, [
+          ? createVNode(Fragment, null, [
               createVNode(CSSVarRegister, {
-                rootCls,
+                rootCls: rootCls.value,
                 cssVar: cssVar.value,
                 component,
               }),
               node,
             ])
           : node,
-      cssVar.value.key,
+      computed(() => cssVar.value?.key),
     ] as const;
   };
 

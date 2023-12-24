@@ -119,15 +119,8 @@ export default function useToken(): [
   ComputedRef<GlobalToken>,
   ComputedRef<string>,
   ComputedRef<GlobalToken>,
-  cssVar?: ComputedRef<DesignTokenProviderProps['cssVar']>,
+  ComputedRef<DesignTokenProviderProps['cssVar']>,
 ] {
-  //   const {
-  //     token: rootDesignToken,
-  //     hashed,
-  //     theme,
-  //     override,
-  //     cssVar,
-  //   } = React.useContext(DesignTokenContext);
   const designToken = useDesignTokenInject();
 
   const salt = computed(() => `${version}-${designToken.value.hashed || ''}`);

@@ -86,7 +86,7 @@ ${vueCode?.trim()}
   const scriptContent = fetchCode(vueCode, 'scriptContent');
   let jsCode = (await tsToJs(scriptContent))?.trim();
   jsCode = jsCode
-    ? `<script>
+    ? `<script setup>
 ${jsCode}
 </script>`
     : '';
@@ -139,13 +139,13 @@ import ColorChunk from '@/components/ColorChunk';
 import TokenTable from '@/components/TokenTable';
 import ComponentTokenTable from '@/components/ComponentTokenTable';
 
-export default { 
+export default {
     components: {
         ColorChunk,
-        TokenTable, 
+        TokenTable,
         ComponentTokenTable
-    }, 
-    pageData: ${JSON.stringify(pageData)} 
+    },
+    pageData: ${JSON.stringify(pageData)}
 }
 </script>
 ${fetchCode(content, 'style')}

@@ -31,7 +31,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAA
 | forceSubMenuRender | 在子菜单展示之前就渲染进 DOM | boolean | false |
 | inlineCollapsed | inline 时菜单是否收起状态 | boolean | - |
 | inlineIndent | inline 模式的菜单缩进宽度 | number | 24 |
-| items | 菜单内容 | [ItemType\[\]](#ItemType) | - |  |
+| items | 菜单内容 | [ItemType\[\]](#itemtype) | - |  |
 | mode | 菜单类型，现在支持垂直、水平、和内嵌模式三种 | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | 是否允许多选 | boolean | false |
 | openKeys(v-model) | 当前展开的 SubMenu 菜单项 key 数组 | (string \| number)[] |  |
@@ -45,25 +45,25 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAA
 
 ### Menu 事件
 
-| 事件名称   | 说明                               | 回调参数                              |
-| ---------- | ---------------------------------- | ------------------------------------- |
-| click      | 点击 MenuItem 调用此函数           | function({ item, key, keyPath })      |
-| deselect   | 取消选中时调用，仅在 multiple 生效 | function({ item, key, selectedKeys }) |
-| openChange | SubMenu 展开/关闭的回调            | function(openKeys: (string \| number)[])         |
-| select     | 被选中时调用                       | function({ item, key, selectedKeys }) |
+| 事件名称   | 说明                               | 回调参数                                 |
+| ---------- | ---------------------------------- | ---------------------------------------- |
+| click      | 点击 MenuItem 调用此函数           | function({ item, key, keyPath })         |
+| deselect   | 取消选中时调用，仅在 multiple 生效 | function({ item, key, selectedKeys })    |
+| openChange | SubMenu 展开/关闭的回调            | function(openKeys: (string \| number)[]) |
+| select     | 被选中时调用                       | function({ item, key, selectedKeys })    |
 
 ### Menu.Item
 
-| 参数     | 说明                     | 类型           | 默认值 | 版本  |
-| -------- | ------------------------ | -------------- | ------ | ----- |
-| disabled | 是否禁用                 | boolean        | false  |       |
-| icon     | 菜单图标                 | slot           |        | 2.8.0 |
-| key      | item 的唯一标志          | string \| number         |        |       |
-| title    | 设置收缩时展示的悬浮标题 | string \| slot |        |       |
+| 参数     | 说明                     | 类型             | 默认值 | 版本  |
+| -------- | ------------------------ | ---------------- | ------ | ----- |
+| disabled | 是否禁用                 | boolean          | false  |       |
+| icon     | 菜单图标                 | slot             |        | 2.8.0 |
+| key      | item 的唯一标志          | string \| number |        |       |
+| title    | 设置收缩时展示的悬浮标题 | string \| slot   |        |       |
 
 ### ItemType
 
-> type ItemType = [MenuItemType](#MenuItemType) | [SubMenuType](#SubMenuType) | [MenuItemGroupType](#MenuItemGroupType) | [MenuDividerType](#MenuDividerType);
+> type ItemType = [MenuItemType](#menuitemtype) | [SubMenuType](#submenutype) | [MenuItemGroupType](#menuitemgrouptype) | [MenuDividerType](#menudividertype);
 
 ### MenuItemType
 
@@ -72,7 +72,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAA
 | danger   | 展示错误状态样式         | boolean                                | false  |      |
 | disabled | 是否禁用                 | boolean                                | false  |      |
 | icon     | 菜单图标                 | VueNode\|(item: MenuItemType)=>VueNode | -      |      |
-| key      | item 的唯一标志          | string \| number                                 | -      |      |
+| key      | item 的唯一标志          | string \| number                       | -      |      |
 | label    | 菜单项标题               | VueNode                                | -      |      |
 | title    | 设置收缩时展示的悬浮标题 | string                                 | -      |      |
 
@@ -80,7 +80,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Vn4XSqJFAxcAAA
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| children | 子菜单的菜单项 | [ItemType\[\]](#ItemType) | - |  |
+| children | 子菜单的菜单项 | [ItemType\[\]](#itemtype) | - |  |
 | disabled | 是否禁用 | boolean | false |  |
 | icon | 菜单图标 | VueNode\|(item: SubMenuType)=>VueNode | - |  |
 | key | 唯一标志 | string \| number | - |  |
@@ -104,8 +104,8 @@ const groupItem = {
 
 | 参数     | 说明         | 类型                              | 默认值 | 版本 |
 | -------- | ------------ | --------------------------------- | ------ | ---- |
-| children | 分组的菜单项 | [MenuItemType\[\]](#MenuItemType) | -      |      |
-| label    | 分组标题     | VueNode                         | -      |      |
+| children | 分组的菜单项 | [MenuItemType\[\]](#menuitemtype) | -      |      |
+| label    | 分组标题     | VueNode                           | -      |      |
 
 #### MenuDividerType
 
@@ -128,7 +128,7 @@ const dividerItem = {
 | disabled       | 是否禁用                             | boolean           | false    |       |
 | expandIcon     | 自定义 Menu 展开收起图标             | slot              | 箭头图标 |       |
 | icon           | 菜单图标                             | slot              |          | 2.8.0 |
-| key            | 唯一标志, 必填                       | string \| number           |          |       |
+| key            | 唯一标志, 必填                       | string \| number  |          |       |
 | popupClassName | 子菜单样式                           | string            |          | 1.5.0 |
 | popupOffset    | 子菜单偏移量，`mode="inline"` 时无效 | \[number, number] | -        |       |
 | title          | 子菜单项值                           | string\|slot      |          |       |

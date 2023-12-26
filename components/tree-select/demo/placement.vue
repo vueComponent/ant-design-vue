@@ -37,9 +37,9 @@ You can manually specify the position of the popup via `placement`.
     :dropdown-match-select-width="false"
     tree-node-filter-prop="label"
   >
-    <template #title="{ value: val, title }">
+    <template #title="{ value: val, label }">
       <b v-if="val === 'parent 1-1'" style="color: #08c">sss</b>
-      <template v-else>{{ title }}</template>
+      <template v-else>{{ label }}</template>
     </template>
   </a-tree-select>
 </template>

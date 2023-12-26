@@ -10,6 +10,18 @@
 
 ---
 
+## 4.0.8
+
+- 🐞 Fix theme responsiveness failure issue under Nuxt [#7180](https://github.com/vueComponent/ant-design-vue/issues/7180)
+- 🐞 Fix error reporting caused by Wave [#7108](https://github.com/vueComponent/ant-design-vue/issues/7108)
+- 🐞 Fix Upload disabled inheritance issue [#7110](https://github.com/vueComponent/ant-design-vue/issues/7110)
+- 🐞 Fix Tooltip popupAlign not taking effect [#7112](https://github.com/vueComponent/ant-design-vue/issues/7112)
+- 🐞 Fix Typography flashing problem [#7146](https://github.com/vueComponent/ant-design-vue/issues/7146)
+- 🐞 Fix the issue that RangePicker prevIcon nextIcon does not take effect [#7127](https://github.com/vueComponent/ant-design-vue/issues/7127)
+- 🐞 Fixed the issue of watermark not monitoring child element changes [#7149](https://github.com/vueComponent/ant-design-vue/issues/7149)
+- 🐞 Fix Menu animation missing issue [#7130](https://github.com/vueComponent/ant-design-vue/issues/7130)
+- 🐞 Fix the cursor change issue when TextArea autosize [#7121](https://github.com/vueComponent/ant-design-vue/issues/7121)
+
 ## 4.0.7
 
 - 🌟 Added Flex component [#7052](https://github.com/vueComponent/ant-design-vue/issues/7052)

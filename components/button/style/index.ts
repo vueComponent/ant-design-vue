@@ -495,7 +495,6 @@ const genBlockButtonStyle: GenerateStyle<ButtonToken> = token => {
 // ============================== Export ==============================
 export default genComponentStyleHook('Button', token => {
   const { controlTmpOutline, paddingContentHorizontal } = token;
-
   const buttonToken = mergeToken<ButtonToken>(token, {
     colorOutlineDefault: controlTmpOutline,
     buttonPaddingHorizontal: paddingContentHorizontal,

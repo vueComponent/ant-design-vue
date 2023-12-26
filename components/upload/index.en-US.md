@@ -26,7 +26,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 | customRequest | override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest | function | - |  |  |
 | data | Uploading params or function which can return uploading params. | object\|function(file) | - |  |  |
 | directory | Support upload whole directory（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false | 3.0 |  |
-| disabled | disable upload button | boolean | false |  |  |
+| disabled | disable upload button | boolean | - |  |  |
 | downloadIcon | custom download icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
 | fileList | List of files that have been uploaded (controlled). Here is a common issue [#2423](https://github.com/ant-design/ant-design/issues/2423) when using it | object\[] | - |  |  |
 | headers | Set request headers, valid above IE10. | object | - |  |  |

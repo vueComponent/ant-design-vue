@@ -79,8 +79,8 @@ export interface FilterConfirmProps {
   closeDropdown: boolean;
 }
 export interface FilterResetProps {
-  confirm?: Boolean;
-  closeDropdown?: Boolean;
+  confirm?: boolean;
+  closeDropdown?: boolean;
 }
 
 export interface FilterDropdownProps<RecordType> {

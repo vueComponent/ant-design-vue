@@ -269,8 +269,8 @@ interface FilterConfirmProps {
 }
 
 interface FilterResetProps {
-  confirm?: Boolean;
-  closeDropdown?: Boolean;
+  confirm?: boolean;
+  closeDropdown?: boolean;
 }
 ```
 

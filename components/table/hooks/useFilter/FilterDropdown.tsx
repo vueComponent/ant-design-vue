@@ -29,8 +29,8 @@ import devWarning from '../../../vc-util/devWarning';
 import isEqual from '../../../vc-util/isEqual';
 
 interface FilterResetProps {
-  confirm?: Boolean;
-  closeDropdown?: Boolean;
+  confirm?: boolean;
+  closeDropdown?: boolean;
 }
 
 const { SubMenu, Item: MenuItem } = Menu;

@@ -190,8 +190,9 @@ const List = defineComponent({
 
     const offsetHeight = shallowRef(0);
     onMounted(() => {
-      nextTick(() => {
+      const timer = setTimeout(() => {
         offsetHeight.value = fillerInnerRef.value?.offsetHeight || 0;
+        clearTimeout(timer);
       });
     });
     onUpdated(() => {

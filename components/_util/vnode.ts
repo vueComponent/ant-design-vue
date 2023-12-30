@@ -51,3 +51,8 @@ export function deepCloneElement<T, U>(
     return cloned;
   }
 }
+
+export function triggerVNodeUpdate(instance: VNode) {
+  instance.component.effect.dirty = true;
+  instance.component.update();
+}

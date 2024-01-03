@@ -71,8 +71,7 @@ const confirm = (config: ModalFuncProps) => {
       };
     }
     if (confirmDialogInstance) {
-      Object.assign(confirmDialogInstance.component.props, currentConfig);
-      triggerVNodeUpdate(confirmDialogInstance);
+      triggerVNodeUpdate(confirmDialogInstance, currentConfig, container);
     }
   }
 

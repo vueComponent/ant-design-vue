@@ -3,6 +3,7 @@ import ConfirmDialog from './ConfirmDialog';
 import type { ModalFuncProps } from './Modal';
 import ConfigProvider, { globalConfigForApi } from '../config-provider';
 import omit from '../_util/omit';
+import { triggerVNodeUpdate } from '../_util/vnode';
 
 import { getConfirmLocale } from './locale';
 import destroyFns from './destroyFns';
@@ -70,8 +71,7 @@ const confirm = (config: ModalFuncProps) => {
       };
     }
     if (confirmDialogInstance) {
-      Object.assign(confirmDialogInstance.component.props, currentConfig);
-      confirmDialogInstance.component.update();
+      triggerVNodeUpdate(confirmDialogInstance, currentConfig, container);
     }
   }
 

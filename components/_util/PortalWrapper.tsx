@@ -7,7 +7,6 @@ import {
   onMounted,
   onBeforeUnmount,
   onUpdated,
-  getCurrentInstance,
   nextTick,
   computed,
 } from 'vue';
@@ -61,6 +60,7 @@ export default defineComponent({
     const container = shallowRef<HTMLElement>();
     const componentRef = shallowRef();
     const rafId = shallowRef<number>();
+    const triggerUpdate = shallowRef(1);
     const defaultContainer = canUseDom() && document.createElement('div');
     const removeCurrentContainer = () => {
       // Portal will remove from `parentNode`.
@@ -105,8 +105,6 @@ export default defineComponent({
       setWrapperClassName();
       attachToParent();
     });
-
-    const instance = getCurrentInstance();
 
     useScrollLocker(
       computed(() => {
@@ -155,7 +153,7 @@ export default defineComponent({
       nextTick(() => {
         if (!attachToParent()) {
           rafId.value = raf(() => {
-            instance.update();
+            triggerUpdate.value += 1;
           });
         }
       });
@@ -177,7 +175,7 @@ export default defineComponent({
         getOpenCount: () => openCount,
         getContainer,
       };
-      if (forceRender || visible || componentRef.value) {
+      if (triggerUpdate.value && (forceRender || visible || componentRef.value)) {
         portal = (
           <Portal
             getContainer={getContainer}

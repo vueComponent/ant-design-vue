@@ -10,6 +10,10 @@
 
 ---
 
+## 4.1.0
+
+- 🐞 适配 vue 3.4 [#7239](https://github.com/vueComponent/ant-design-vue/issues/7239)
+
 ## 4.0.8
 
 - 🐞 修复在 Nuxt 下 theme 响应式失效问题 [#7180](https://github.com/vueComponent/ant-design-vue/issues/7180)

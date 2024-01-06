@@ -10,9 +10,10 @@ import Button from '../../button';
 import ListItem from './ListItem';
 import type { HTMLAttributes } from 'vue';
 import {
+  triggerRef,
+  watch,
   computed,
   defineComponent,
-  getCurrentInstance,
   onMounted,
   shallowRef,
   watchEffect,
@@ -46,15 +47,26 @@ export default defineComponent({
   }),
   setup(props, { slots, expose }) {
     const motionAppear = shallowRef(false);
-    const instance = getCurrentInstance();
     onMounted(() => {
       motionAppear.value == true;
     });
+    const mergedItems = shallowRef([]);
+    watch(
+      () => props.items,
+      (val = []) => {
+        mergedItems.value = val.slice();
+      },
+      {
+        immediate: true,
+        deep: true,
+      },
+    );
     watchEffect(() => {
       if (props.listType !== 'picture' && props.listType !== 'picture-card') {
         return;
       }
-      (props.items || []).forEach((file: InternalUploadFile) => {
+      let hasUpdate = false;
+      (props.items || []).forEach((file: InternalUploadFile, index) => {
         if (
           typeof document === 'undefined' ||
           typeof window === 'undefined' ||
@@ -69,11 +81,17 @@ export default defineComponent({
         if (props.previewFile) {
           props.previewFile(file.originFileObj as File).then((previewDataUrl: string) => {
             // Need append '' to avoid dead loop
-            file.thumbUrl = previewDataUrl || '';
-            instance.update();
+            const thumbUrl = previewDataUrl || '';
+            if (thumbUrl !== file.thumbUrl) {
+              mergedItems.value[index].thumbUrl = thumbUrl;
+              hasUpdate = true;
+            }
           });
         }
       });
+      if (hasUpdate) {
+        triggerRef(mergedItems);
+      }
     });
 
     // ============================= Events =============================
@@ -177,7 +195,6 @@ export default defineComponent({
         listType,
         locale,
         isImageUrl: isImgUrl,
-        items = [],
         showPreviewIcon,
         showRemoveIcon,
         showDownloadIcon,
@@ -190,6 +207,7 @@ export default defineComponent({
         appendActionVisible,
       } = props;
       const appendActionDom = appendAction?.();
+      const items = mergedItems.value;
       return (
         <TransitionGroup {...transitionGroupProps.value} tag="div">
           {items.map(file => {

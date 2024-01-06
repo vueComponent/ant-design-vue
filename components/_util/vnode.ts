@@ -1,6 +1,6 @@
 import { filterEmpty } from './props-util';
 import type { VNode, VNodeProps } from 'vue';
-import { cloneVNode, isVNode } from 'vue';
+import { cloneVNode, isVNode, render as VueRender } from 'vue';
 import warning from './warning';
 import type { RefObject } from './createRef';
 type NodeProps = Record<string, any> &
@@ -50,4 +50,8 @@ export function deepCloneElement<T, U>(
     }
     return cloned;
   }
+}
+
+export function triggerVNodeUpdate(vm: VNode, attrs: Record<string, any>, dom: any) {
+  VueRender(cloneVNode(vm, { ...attrs }), dom);
 }

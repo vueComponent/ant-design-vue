@@ -19,7 +19,6 @@ import type { ScrollConfig, ScrollTo } from '../vc-virtual-list/List';
 import {
   computed,
   defineComponent,
-  getCurrentInstance,
   onBeforeUnmount,
   onMounted,
   provide,
@@ -593,10 +592,10 @@ export default defineComponent({
 
     // ============================= Dropdown ==============================
     const containerWidth = ref<number>(null);
-    const instance = getCurrentInstance();
+    // const instance = getCurrentInstance();
     const onPopupMouseEnter = () => {
       // We need force update here since popup dom is render async
-      instance.update();
+      // instance.update();
     };
     onMounted(() => {
       watch(

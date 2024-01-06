@@ -4,13 +4,12 @@ import setStyle from './setStyle';
 import Portal from './Portal';
 import {
   defineComponent,
-  ref,
   watch,
   onMounted,
   onBeforeUnmount,
   onUpdated,
-  getCurrentInstance,
   nextTick,
+  shallowRef,
 } from 'vue';
 import canUseDom from './canUseDom';
 import ScrollLocker from '../vc-util/Dom/scrollLocker';
@@ -60,9 +59,10 @@ export default defineComponent({
   },
 
   setup(props, { slots }) {
-    const container = ref<HTMLElement>();
-    const componentRef = ref();
-    const rafId = ref<number>();
+    const container = shallowRef<HTMLElement>();
+    const componentRef = shallowRef();
+    const rafId = shallowRef<number>();
+    const triggerUpdate = shallowRef(1);
     const scrollLocker = new ScrollLocker({
       container: getParent(props.getContainer) as HTMLElement,
     });
@@ -131,7 +131,7 @@ export default defineComponent({
         switchScrollingEffect(true);
       }
     };
-    const instance = getCurrentInstance();
+
     onMounted(() => {
       let init = false;
       watch(
@@ -177,7 +177,7 @@ export default defineComponent({
       nextTick(() => {
         if (!attachToParent()) {
           rafId.value = raf(() => {
-            instance.update();
+            triggerUpdate.value += 1;
           });
         }
       });
@@ -203,7 +203,7 @@ export default defineComponent({
         scrollLocker,
       };
 
-      if (forceRender || visible || componentRef.value) {
+      if (triggerUpdate.value && (forceRender || visible || componentRef.value)) {
         portal = (
           <Portal
             getContainer={getContainer}

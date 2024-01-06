@@ -4,6 +4,7 @@ import type { ModalFuncProps } from './Modal';
 import { destroyFns } from './Modal';
 import ConfigProvider, { globalConfigForApi } from '../config-provider';
 import omit from '../_util/omit';
+import { triggerVNodeUpdate } from '../_util/vnode';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
@@ -28,7 +29,6 @@ const confirm = (config: ModalFuncProps) => {
     if (confirmDialogInstance) {
       // destroy
       vueRender(null, container as any);
-      confirmDialogInstance.component.update();
       confirmDialogInstance = null;
     }
     const triggerCancel = args.some(param => param && param.triggerCancel);
@@ -67,8 +67,7 @@ const confirm = (config: ModalFuncProps) => {
       };
     }
     if (confirmDialogInstance) {
-      Object.assign(confirmDialogInstance.component.props, currentConfig);
-      confirmDialogInstance.component.update();
+      triggerVNodeUpdate(confirmDialogInstance, currentConfig, container);
     }
   }
 

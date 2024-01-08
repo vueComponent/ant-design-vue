@@ -10,6 +10,10 @@
 
 ---
 
+## 4.1.0
+
+- 🐞 support vue 3.4 [#7239](https://github.com/vueComponent/ant-design-vue/issues/7239)
+
 ## 4.0.8
 
 - 🐞 Fix theme responsiveness failure issue under Nuxt [#7180](https://github.com/vueComponent/ant-design-vue/issues/7180)

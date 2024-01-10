@@ -179,7 +179,7 @@ function useColumns<RecordType>(
           class: `${prefixCls.value}-expand-icon-col`,
           columnType: 'EXPAND_COLUMN',
         },
-        title: contextSlots.value?.expandColumnTitle
+        title: contextSlots.value.expandColumnTitle
           ? renderSlot(contextSlots.value, 'expandColumnTitle', {}, () => [''])
           : null,
         fixed: fixedColumn,

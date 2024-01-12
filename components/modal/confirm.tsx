@@ -48,10 +48,10 @@ const confirm = (config: ModalFuncProps) => {
       ...currentConfig,
       open: false,
       afterClose: () => {
+        destroy.apply(this, args);
         if (typeof config.afterClose === 'function') {
           config.afterClose();
         }
-        destroy.apply(this, args);
       },
     };
     // Legacy support

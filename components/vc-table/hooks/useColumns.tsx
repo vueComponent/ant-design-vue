@@ -1,6 +1,6 @@
 import { warning } from '../../vc-util/warning';
 import type { ComputedRef, Ref } from 'vue';
-import { renderSlot, computed, watchEffect } from 'vue';
+import { computed, watchEffect } from 'vue';
 import type {
   ColumnsType,
   ColumnType,
@@ -179,7 +179,7 @@ function useColumns<RecordType>(
           class: `${prefixCls.value}-expand-icon-col`,
           columnType: 'EXPAND_COLUMN',
         },
-        title: contextSlots.value.expandColumnTitle?.(),
+        title: contextSlots.value.expandColumnTitle?.() || '',
         fixed: fixedColumn,
         class: `${prefixCls.value}-row-expand-icon-cell`,
         width: expandColumnWidth.value,

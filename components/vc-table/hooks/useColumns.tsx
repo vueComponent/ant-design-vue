@@ -14,6 +14,7 @@ import type {
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
 import { EXPAND_COLUMN } from '../constant';
 import { useInjectSlots } from '../../table/context';
+import { customRenderSlot } from 'ant-design-vue/es/_util/vnode';
 
 function flatColumns<RecordType>(columns: ColumnsType<RecordType>): ColumnType<RecordType>[] {
   return columns.reduce((list, column) => {
@@ -179,7 +180,7 @@ function useColumns<RecordType>(
           class: `${prefixCls.value}-expand-icon-col`,
           columnType: 'EXPAND_COLUMN',
         },
-        title: contextSlots.value.expandColumnTitle?.() || '',
+        title: customRenderSlot(contextSlots.value, 'expandColumnTitle', {}, () => ['']),
         fixed: fixedColumn,
         class: `${prefixCls.value}-row-expand-icon-cell`,
         width: expandColumnWidth.value,

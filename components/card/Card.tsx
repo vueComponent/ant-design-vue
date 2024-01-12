@@ -11,6 +11,7 @@ import useStyle from './style';
 import Skeleton from '../skeleton';
 import type { CustomSlotsType } from '../_util/type';
 import { customRenderSlot } from '../_util/vnode';
+
 export interface CardTabListType {
   key: string;
   tab: any;

@@ -56,6 +56,18 @@ export function triggerVNodeUpdate(vm: VNode, attrs: Record<string, any>, dom: a
   VueRender(cloneVNode(vm, { ...attrs }), dom);
 }
 
+const ensureValidVNode = (slot: VNodeArrayChildren) => {
+  return slot.some(child => {
+    if (!isVNode(child)) return true;
+    if (child.type === Comment) return false;
+    if (child.type === Fragment && !ensureValidVNode(child.children as VNodeArrayChildren))
+      return false;
+    return true;
+  })
+    ? slot
+    : null;
+};
+
 export function customRenderSlot(
   slots: Slots,
   name: string,
@@ -63,19 +75,6 @@ export function customRenderSlot(
   fallback?: () => VNodeArrayChildren,
 ) {
   const slot = slots[name]?.(props) || [];
-
-  const ensureValidVNode = (slot: VNodeArrayChildren) => {
-    return slot.some(child => {
-      if (!isVNode(child)) return true;
-      if (child.type === Comment) return false;
-      if (child.type === Fragment && !ensureValidVNode(child.children as VNodeArrayChildren))
-        return false;
-      return true;
-    })
-      ? slot
-      : null;
-  };
-
   if (ensureValidVNode(slot)) {
     return slot;
   }

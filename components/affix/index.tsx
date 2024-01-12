@@ -246,7 +246,7 @@ const Affix = defineComponent({
     const { prefixCls } = useConfigInject('affix', props);
 
     return () => {
-      const { affixStyle, placeholderStyle, status } = state;
+      const { affixStyle, placeholderStyle } = state;
       const className = classNames({
         [prefixCls.value]: affixStyle,
       });
@@ -260,8 +260,7 @@ const Affix = defineComponent({
       ]);
       return (
         <ResizeObserver onResize={updatePosition}>
-          <div {...restProps} ref={placeholderNode} data-measure-status={status}>
-            {affixStyle && <div style={placeholderStyle} aria-hidden="true" />}
+          <div {...restProps} style={placeholderStyle} ref={placeholderNode}>
             <div class={className} ref={fixedNode} style={affixStyle}>
               {slots.default?.()}
             </div>

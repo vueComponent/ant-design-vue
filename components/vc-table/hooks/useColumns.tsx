@@ -14,7 +14,7 @@ import type {
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
 import { EXPAND_COLUMN } from '../constant';
 import { useInjectSlots } from '../../table/context';
-import { customRenderSlot } from 'ant-design-vue/es/_util/vnode';
+import { customRenderSlot } from '../../_util/vnode';
 
 function flatColumns<RecordType>(columns: ColumnsType<RecordType>): ColumnType<RecordType>[] {
   return columns.reduce((list, column) => {

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { watch, computed, defineComponent, ref, TransitionGroup } from 'vue';
+import { shallowRef, computed, defineComponent, ref, TransitionGroup } from 'vue';
 import type { NoticeProps } from './Notice';
 import Notice from './Notice';
 import type { CSSMotionProps } from '../_util/transition';
@@ -51,6 +51,7 @@ export interface NotificationInstance {
   destroy: () => void;
   add: (noticeProps: NoticeContent) => void;
   component: Notification;
+  setNotices: (notice: NotificationState) => void;
 }
 
 export interface HookNotificationProps {
@@ -62,7 +63,7 @@ export interface HookNotificationProps {
   hashId?: string;
   // Hook Notification
   remove: (key: Key) => void;
-  notices: NotificationState;
+  // notices: NotificationState;
   getStyles?: (placement?: Placement) => CSSProperties;
   getClassName?: (placement?: Placement) => string;
   onAllRemoved?: VoidFunction;
@@ -93,9 +94,26 @@ const Notification = defineComponent<HookNotificationProps>({
     'onAllRemoved',
     'getContainer',
   ] as any,
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, expose }) {
     const hookRefs = new Map<Key, HTMLDivElement>();
-    const notices = computed(() => props.notices);
+    const notices = shallowRef<NotificationState>([]);
+    const setNotices = (_notices: NotificationState) => {
+      notices.value = _notices;
+
+      const nextPlacements = {} as any;
+      // init placements with animation
+      Object.keys(placements.value).forEach(placement => {
+        nextPlacements[placement] = [];
+      });
+      _notices.forEach(config => {
+        const { placement = 'topRight' } = config.notice;
+        if (placement) {
+          nextPlacements[placement] = nextPlacements[placement] || [];
+          nextPlacements[placement].push(config);
+        }
+      });
+      placements.value = nextPlacements;
+    };
     const transitionProps = computed(() => {
       let name = props.transitionName;
       if (!name && props.animation) {
@@ -116,27 +134,12 @@ const Notification = defineComponent<HookNotificationProps>({
       }
       return getTransitionGroupProps(name);
     });
-
     const remove = (key: Key) => props.remove(key);
     const placements = ref({} as Record<Placement, NotificationState>);
-    watch(notices, () => {
-      const nextPlacements = {} as any;
-      // init placements with animation
-      Object.keys(placements.value).forEach(placement => {
-        nextPlacements[placement] = [];
-      });
-      props.notices.forEach(config => {
-        const { placement = 'topRight' } = config.notice;
-        if (placement) {
-          nextPlacements[placement] = nextPlacements[placement] || [];
-          nextPlacements[placement].push(config);
-        }
-      });
-      placements.value = nextPlacements;
-    });
-
     const placementList = computed(() => Object.keys(placements.value) as Placement[]);
-
+    expose({
+      setNotices,
+    });
     return () => {
       const { prefixCls, closeIcon = slots.closeIcon?.({ prefixCls }) } = props;
       const noticeNodes = placementList.value.map(placement => {
@@ -204,6 +207,7 @@ const Notification = defineComponent<HookNotificationProps>({
           Reflect.deleteProperty(placements.value, placement);
           props.onAllRemoved?.();
         }
+
         return (
           <div
             key={placement}

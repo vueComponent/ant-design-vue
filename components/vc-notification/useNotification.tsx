@@ -1,10 +1,10 @@
 import type { CSSProperties } from 'vue';
 import { shallowRef, watch, computed } from 'vue';
 import HookNotification, { getUuid } from './HookNotification';
-import type { NotificationInstance, OpenConfig, Placement } from './Notification';
+import type { OpenConfig, Placement } from './Notification';
 import type { CSSMotionProps } from '../_util/transition';
 import type { Key, VueNode } from '../_util/type';
-import type { HolderReadyCallback, NoticeContent } from './HookNotification';
+import type { HolderReadyCallback, NoticeContent, NotificationInstance } from './HookNotification';
 
 const defaultGetContainer = () => document.body;
 
@@ -104,16 +104,19 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
       updatedNotices.push({ notice, holderCallback } as any);
     }
     notices.value = updatedNotices;
+    notificationsRef.value?.setNotices(updatedNotices);
   };
   const removeNotice = (removeKey: Key) => {
     notices.value = notices.value.filter(({ notice: { key, userPassKey } }) => {
       const mergedKey = userPassKey || key;
       return mergedKey !== removeKey;
     });
+    notificationsRef.value?.setNotices(notices.value);
   };
 
   const destroy = () => {
     notices.value = [];
+    notificationsRef.value?.setNotices([]);
   };
 
   const contextHolder = computed(() => (
@@ -121,7 +124,6 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
       ref={notificationsRef}
       prefixCls={prefixCls}
       maxCount={maxCount}
-      notices={notices.value}
       remove={removeNotice}
       getClassName={getClassName}
       getStyles={getStyles}
@@ -129,7 +131,7 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
       hashId={rootConfig.hashId}
       onAllRemoved={onAllRemoved}
       getContainer={getContainer}
-    ></HookNotification>
+    />
   ));
 
   const taskQueue = shallowRef([] as Task[]);

@@ -335,6 +335,7 @@ export default defineComponent({
                       <TokenInput
                         hideTheme={themes.value.length === 1}
                         theme={theme}
+                        canReset={undefined}
                         onChange={value => handleTokenChange(theme, value)}
                         value={
                           getValueByPath(theme.config, [...tokenPath.value, tokenName.value]) ??

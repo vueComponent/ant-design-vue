@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Table from '..';
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 import mountTest from '../../../tests/shared/mountTest';
 import { sleep } from '../../../tests/utils';
 
@@ -41,7 +41,7 @@ describe('Table', () => {
       { sync: false },
     );
 
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });
@@ -121,7 +121,7 @@ describe('Table', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });

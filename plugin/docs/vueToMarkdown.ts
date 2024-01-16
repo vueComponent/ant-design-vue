@@ -1,5 +1,5 @@
 import path from 'path';
-import LRUCache from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import slash from 'slash';
 import fetchCode from '../md/utils/fetchCode';
 

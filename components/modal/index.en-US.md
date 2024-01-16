@@ -72,8 +72,8 @@ The items listed above are all functions, expecting a settings object as paramet
 | centered | Centered Modal | boolean | `false` |  |
 | class | class of container | string | - |  |
 | closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | `false` |  |
-| content | Content | string\|VNode \|function(h) | - |  |
-| footer | Footer content, set as `footer: null` when you don't need default buttons | string\|VNode \|function(h) | - | 4.0.0 |
+| content | Content | string\|VNode \|function() | - |  |
+| footer | Footer content, set as `footer: null` when you don't need default buttons | string\|VNode \|function() | - | 4.0.0 |
 | icon | custom icon (`Added in 1.14.0`) | VNode \|()=>VNode | - |  |
 | keyboard | Whether support press esc to close | boolean | true |  |
 | mask | Whether show mask or not. | boolean | true |  |
@@ -81,7 +81,7 @@ The items listed above are all functions, expecting a settings object as paramet
 | okButtonProps | The ok button props | [ButtonProps](/components/button) | - |  |
 | okText | Text of the OK button | string | `OK` |  |
 | okType | Button `type` of the OK button | string | `primary` |  |
-| title | Title | string\|VNode \|function(h) | - |  |
+| title | Title | string\|VNode \|function() | - |  |
 | width | Width of the modal dialog | string\|number | 416 |  |
 | wrapClassName | The class name of the container of the modal dialog | string | - | 3.2.3 |
 | zIndex | The `z-index` of the Modal | number | 1000 |  |

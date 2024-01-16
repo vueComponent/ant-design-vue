@@ -23,7 +23,7 @@ import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import eagerComputed from '../../_util/eagerComputed';
-import { customRenderSlot } from 'ant-design-vue/es/_util/vnode';
+import { customRenderSlot } from '../../_util/vnode';
 
 /** Check if cell is in hover range */
 function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {

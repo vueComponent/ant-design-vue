@@ -1,5 +1,5 @@
 import devWarning from '../../vc-util/devWarning';
-import type { Ref, VNode } from 'vue';
+import type { Ref } from 'vue';
 import type { ContextSlots } from '../context';
 import type { TransformColumns, ColumnsType } from '../interface';
 import { SELECTION_COLUMN } from './useSelection';
@@ -35,7 +35,7 @@ function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: R
           column,
         },
         () => [column.title as any],
-      ) as VNode[];
+      );
     }
     if ('children' in cloneColumn && Array.isArray(cloneColumn.children)) {
       cloneColumn.children = fillSlots(cloneColumn.children, contextSlots);

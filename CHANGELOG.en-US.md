@@ -10,6 +10,16 @@
 
 ---
 
+## 4.1.1
+
+- 🌟 QRcode adds scanned status [#7242](https://github.com/vueComponent/ant-design-vue/issues/7242)
+- 🐞 Fix css prefix issue in nuxt [#7256](https://github.com/vueComponent/ant-design-vue/issues/7256)
+- 🐞 Fix dropdown closing issue [#7246](https://github.com/vueComponent/ant-design-vue/issues/7246)
+- 🐞 Fix divider vertical dashed not display issue [#7218](https://github.com/vueComponent/ant-design-vue/issues/7218)
+- 🐞 Fix hook mode message console warning issue [#7281](https://github.com/vueComponent/ant-design-vue/issues/7281)
+- 🐞 Fix table expansion error reporting under vue 3.4 [#7265](https://github.com/vueComponent/ant-design-vue/issues/7265)
+- 🐞 Fix table group filter status error issue [#7233](https://github.com/vueComponent/ant-design-vue/issues/7233)
+
 ## 4.1.0
 
 - 🐞 support vue 3.4 [#7239](https://github.com/vueComponent/ant-design-vue/issues/7239)

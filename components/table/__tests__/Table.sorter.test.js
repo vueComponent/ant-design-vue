@@ -1,4 +1,4 @@
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '../../../tests/utils';
 import Table from '..';
@@ -46,7 +46,7 @@ describe('Table.sorter', () => {
 
   it('renders sorter icon correctly', done => {
     const wrapper = mount(Table, getTableOptions());
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.find('thead').html()).toMatchSnapshot();
       done();
     });
@@ -62,7 +62,7 @@ describe('Table.sorter', () => {
         },
       ),
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom']);
       done();
     });
@@ -78,7 +78,7 @@ describe('Table.sorter', () => {
         },
       ),
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(renderedNames(wrapper)).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry']);
       done();
     });
@@ -112,7 +112,7 @@ describe('Table.sorter', () => {
         columns: [{ ...column, sortOrder: 'ascend' }],
       }),
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack', 'Jerry', 'Lucy', 'Tom']);
       done();
     });
@@ -183,7 +183,7 @@ describe('Table.sorter', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(renderedNames(wrapper)).toEqual(['Tom', 'Lucy', 'Jack', 'Jerry']);
       done();
     });

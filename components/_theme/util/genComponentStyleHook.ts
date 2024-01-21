@@ -4,6 +4,7 @@ import { token2CSSVar, useCSSVarRegister, useStyleRegister } from '../../_util/_
 import warning from '../../_util/warning';
 import { genCommonStyle, genLinkStyle } from '../../style';
 import type {
+  AliasToken,
   ComponentTokenMap,
   GlobalToken,
   OverrideToken,
@@ -66,11 +67,9 @@ export type GenStyleFn<C extends OverrideComponent> = (
 export type GetDefaultToken<C extends OverrideComponent> =
   | null
   | OverrideTokenWithoutDerivative[C]
-  | ((token: GlobalToken) => OverrideTokenWithoutDerivative[C]);
-
-export type FormatComponentToken<C extends OverrideComponent> = (
-  token: NonNullable<OverrideTokenWithoutDerivative[C]>,
-) => NonNullable<OverrideTokenWithoutDerivative[C]>;
+  | ((
+      token: AliasToken & Partial<OverrideTokenWithoutDerivative[C]>,
+    ) => OverrideTokenWithoutDerivative[C]);
 
 const getDefaultComponentToken = <C extends OverrideComponent>(
   component: C,
@@ -78,7 +77,7 @@ const getDefaultComponentToken = <C extends OverrideComponent>(
   getDefaultToken: GetDefaultToken<C>,
 ) => {
   if (typeof getDefaultToken === 'function') {
-    return getDefaultToken(mergeToken<GlobalToken>(token.value, token.value[component] ?? {}));
+    return getDefaultToken(mergeToken<any>(token.value, token.value[component] ?? {}));
   }
   return getDefaultToken ?? {};
 };
@@ -89,7 +88,6 @@ const getComponentToken = <C extends OverrideComponent>(
   defaultToken: OverrideTokenWithoutDerivative[C],
   options?: {
     deprecatedTokens?: [ComponentTokenKey<C>, ComponentTokenKey<C>][];
-    format?: FormatComponentToken<C>;
   },
 ) => {
   const customToken = { ...(token.value[component] as ComponentToken<C>) };
@@ -99,9 +97,9 @@ const getComponentToken = <C extends OverrideComponent>(
       if (process.env.NODE_ENV !== 'production') {
         warning(
           !customToken?.[oldTokenKey],
-          `The token '${String(oldTokenKey)}' of ${component} had deprecated, use '${String(
-            newTokenKey,
-          )}' instead.`,
+          `Component Token \`${String(
+            oldTokenKey,
+          )}\` of ${component} is deprecated. Please use \`${String(newTokenKey)}\` instead.`,
         );
       }
 
@@ -111,10 +109,7 @@ const getComponentToken = <C extends OverrideComponent>(
       }
     });
   }
-  let mergedToken: any = { ...defaultToken, ...customToken };
-  if (options?.format) {
-    mergedToken = options.format(mergedToken);
-  }
+  const mergedToken: any = { ...defaultToken, ...customToken };
 
   // Remove same value as global token to minimize size
   Object.keys(mergedToken).forEach(key => {
@@ -137,10 +132,7 @@ const getCompVarPrefix = (component: string, prefix?: string) =>
 export default function genComponentStyleHook<C extends OverrideComponent>(
   componentName: C | [C, string],
   styleFn: GenStyleFn<C>,
-  getDefaultToken?:
-    | null
-    | OverrideTokenWithoutDerivative[C]
-    | ((token: GlobalToken) => OverrideTokenWithoutDerivative[C]),
+  getDefaultToken?: GetDefaultToken<C>,
   options: {
     resetStyle?: boolean;
     // Deprecated token key map [["oldTokenKey", "newTokenKey"], ["oldTokenKey", "newTokenKey"]]
@@ -153,7 +145,6 @@ export default function genComponentStyleHook<C extends OverrideComponent>(
      * Set order of component style. Default is -999.
      */
     order?: number;
-    format?: FormatComponentToken<C>;
     injectStyle?: boolean;
   } = {},
 ) {
@@ -241,7 +232,6 @@ export default function genComponentStyleHook<C extends OverrideComponent>(
         const componentCls = `.${prefixCls.value}`;
         const componentToken = getComponentToken(component, realToken, defaultComponentToken, {
           deprecatedTokens: options.deprecatedTokens,
-          format: options.format,
         });
 
         if (cssVar.value) {
@@ -338,7 +328,7 @@ const genCSSVarRegister = <C extends OverrideComponent>(
       [key in ComponentTokenKey<C>]: boolean;
     };
     deprecatedTokens?: [ComponentTokenKey<C>, ComponentTokenKey<C>][];
-    format?: FormatComponentToken<C>;
+
     injectStyle?: boolean;
   },
 ) => {
@@ -383,7 +373,6 @@ const genCSSVarRegister = <C extends OverrideComponent>(
           () => {
             const defaultToken = getDefaultComponentToken(component, realToken, getDefaultToken);
             const componentToken = getComponentToken(component, realToken, defaultToken, {
-              format: options?.format,
               deprecatedTokens: options?.deprecatedTokens,
             });
             Object.keys(defaultToken).forEach(key => {
@@ -427,11 +416,6 @@ export const genStyleHooks = <C extends OverrideComponent>(
   options?: {
     resetStyle?: boolean;
     deprecatedTokens?: [ComponentTokenKey<C>, ComponentTokenKey<C>][];
-    /**
-     * Chance to format component token with user input.
-     * Useful when need calculated token as css variables.
-     */
-    format?: FormatComponentToken<C>;
     /**
      * Component tokens that do not need unit.
      */

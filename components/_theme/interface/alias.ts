@@ -566,7 +566,7 @@ export interface AliasToken extends MapToken {
   screenXLMax: number;
   /**
    * @nameZH 屏幕宽度（像素） - 超超大屏幕
-   * @nameEN Screen width (pixels) - Extra extra large screens
+   * @nameEN Screen width (pixels) - Extra extra large screens.
    * @desc 控制超超大屏幕的屏幕宽度。
    * @descEN Control the screen width of extra extra large screens.
    */
@@ -587,7 +587,7 @@ export interface AliasToken extends MapToken {
   screenXXLMax: number;
   /**
    * @nameZH 屏幕宽度（像素） - 超超超大屏幕
-   * @nameEN Screen width (pixels) - Extra extra extra large screens
+   * @nameEN Screen width (pixels) - Extra extra extra large screens.
    * @desc 控制超超超大屏幕的屏幕宽度。
    * @descEN Control the screen width of extra extra extra large screens.
    */
@@ -599,6 +599,7 @@ export interface AliasToken extends MapToken {
    * @descEN Control the minimum width of extra extra extra large screens.
    */
   screenXXXLMin: number;
+
   /**
    * @deprecated
    * Used for DefaultButton, Switch which has default outline

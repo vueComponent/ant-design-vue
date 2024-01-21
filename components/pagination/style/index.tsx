@@ -9,6 +9,8 @@ import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { genFocusOutline, genFocusStyle, resetComponent } from '../../style';
 
+export interface ComponentToken {}
+
 interface PaginationToken extends InputToken<FullToken<'Pagination'>> {
   paginationItemSize: number;
   paginationFontFamily: string;

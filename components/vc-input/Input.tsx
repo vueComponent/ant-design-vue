@@ -1,14 +1,6 @@
 // base 0.0.1-alpha.7
-import type { VNode } from 'vue';
-import {
-  onMounted,
-  defineComponent,
-  getCurrentInstance,
-  nextTick,
-  shallowRef,
-  watch,
-  withDirectives,
-} from 'vue';
+import type { ComponentPublicInstance, VNode } from 'vue';
+import { onMounted, defineComponent, nextTick, shallowRef, watch, withDirectives } from 'vue';
 import classNames from '../_util/classNames';
 import type { ChangeEvent, FocusEventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
@@ -33,6 +25,7 @@ export default defineComponent({
     const stateValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
     const focused = shallowRef(false);
     const inputRef = shallowRef<HTMLInputElement>();
+    const rootRef = shallowRef<ComponentPublicInstance>();
     watch(
       () => props.value,
       () => {
@@ -80,7 +73,6 @@ export default defineComponent({
     const triggerChange = (e: Event) => {
       emit('change', e);
     };
-    const instance = getCurrentInstance();
     const setValue = (value: string | number, callback?: Function) => {
       if (stateValue.value === value) {
         return;
@@ -90,7 +82,7 @@ export default defineComponent({
       } else {
         nextTick(() => {
           if (inputRef.value.value !== stateValue.value) {
-            instance.update();
+            rootRef.value?.$forceUpdate();
           }
         });
       }
@@ -245,6 +237,7 @@ export default defineComponent({
         <BaseInput
           {...rest}
           {...attrs}
+          ref={rootRef}
           prefixCls={prefixCls}
           inputElement={getInputElement()}
           handleReset={handleReset}

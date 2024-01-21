@@ -8,9 +8,13 @@ import { ref, computed } from 'vue';
 
 const EMPTY_OVERRIDE = {};
 
+const isProduction = process.env.NODE_ENV === 'production';
+// nuxt generate when NODE_ENV is prerender
+const isPrerender = process.env.NODE_ENV === 'prerender';
+
 // Generate different prefix to make user selector break in production env.
 // This helps developer not to do style override directly on the hash id.
-const hashPrefix = process.env.NODE_ENV !== 'production' ? 'css-dev-only-do-not-override' : 'css';
+const hashPrefix = (!isProduction && !isPrerender) ? 'css-dev-only-do-not-override' : 'css';
 
 export interface Option<DerivativeToken, DesignToken> {
   /**

@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'vue';
-import { shallowRef, watch, computed } from 'vue';
+import { shallowRef, watch } from 'vue';
 import HookNotification, { getUuid } from './HookNotification';
 import type { NotificationInstance, OpenConfig, Placement } from './Notification';
 import type { CSSMotionProps } from '../_util/transition';
@@ -116,7 +116,7 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
     notices.value = [];
   };
 
-  const contextHolder = computed(() => (
+  const contextHolder = () => (
     <HookNotification
       ref={notificationsRef}
       prefixCls={prefixCls}
@@ -130,7 +130,7 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
       onAllRemoved={onAllRemoved}
       getContainer={getContainer}
     ></HookNotification>
-  ));
+  );
 
   const taskQueue = shallowRef([] as Task[]);
   // ========================= Refs =========================
@@ -178,5 +178,5 @@ export default function useNotification(rootConfig: NotificationConfig = {}) {
   });
 
   // ======================== Return ========================
-  return [api, () => contextHolder.value] as const;
+  return [api, contextHolder] as const;
 }

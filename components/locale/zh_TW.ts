@@ -132,6 +132,11 @@ const localeValues: Locale = {
   Image: {
     preview: '預覽',
   },
+  QRCode: {
+    expired: '二維碼過期',
+    refresh: '點擊刷新',
+    scanned: '已掃描',
+  },
 };
 
 export default localeValues;

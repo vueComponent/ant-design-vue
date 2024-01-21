@@ -176,7 +176,6 @@ const Affix = defineComponent({
         affixStyle: undefined,
         placeholderStyle: undefined,
       });
-      currentInstance.update();
       // Test if `updatePosition` called
       if (process.env.NODE_ENV === 'test') {
         emit('testUpdatePosition');
@@ -256,7 +255,7 @@ const Affix = defineComponent({
     const { prefixCls } = useConfigInject('affix', props);
     const [wrapSSR, hashId] = useStyle(prefixCls);
     return () => {
-      const { affixStyle, placeholderStyle } = state;
+      const { affixStyle, placeholderStyle, status } = state;
       const className = classNames({
         [prefixCls.value]: affixStyle,
         [hashId.value]: true,
@@ -271,7 +270,7 @@ const Affix = defineComponent({
       ]);
       return wrapSSR(
         <ResizeObserver onResize={updatePosition}>
-          <div {...restProps} {...attrs} ref={placeholderNode}>
+          <div {...restProps} {...attrs} ref={placeholderNode} data-measure-status={status}>
             {affixStyle && <div style={placeholderStyle} aria-hidden="true" />}
             <div class={className} ref={fixedNode} style={affixStyle}>
               {slots.default?.()}

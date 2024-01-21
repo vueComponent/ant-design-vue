@@ -187,6 +187,17 @@ export function getFilterData<RecordType>(
   }, data);
 }
 
+function getMergedColumns<RecordType>(
+  rawMergedColumns: ColumnsType<RecordType>,
+): ColumnsType<RecordType> {
+  return rawMergedColumns.flatMap(column => {
+    if ('children' in column) {
+      return [column, ...getMergedColumns(column.children || [])];
+    }
+    return [column];
+  });
+}
+
 interface FilterConfig<RecordType> {
   prefixCls: Ref<string>;
   dropdownPrefixCls: Ref<string>;
@@ -202,7 +213,7 @@ interface FilterConfig<RecordType> {
 function useFilter<RecordType>({
   prefixCls,
   dropdownPrefixCls,
-  mergedColumns,
+  mergedColumns: rawMergedColumns,
   locale,
   onFilterChange,
   getPopupContainer,
@@ -211,6 +222,8 @@ function useFilter<RecordType>({
   Ref<FilterState<RecordType>[]>,
   Ref<Record<string, FilterValue | null>>,
 ] {
+  const mergedColumns = computed(() => getMergedColumns(rawMergedColumns.value));
+
   const [filterStates, setFilterStates] = useState<FilterState<RecordType>[]>(
     collectFilterStates(mergedColumns.value, true),
   );

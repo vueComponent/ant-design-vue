@@ -5,6 +5,8 @@ import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent } from '../../style';
 import genFormValidateMotionStyle from './explain';
 
+export interface ComponentToken {}
+
 export interface FormToken extends FullToken<'Form'> {
   formItemCls: string;
   rootPrefixCls: string;

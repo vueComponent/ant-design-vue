@@ -1,6 +1,7 @@
-import { useStyleRegister } from '../../_util/cssinjs';
+import type { CSSObject } from '../../_util/_cssinjs';
+import { useStyleRegister } from '../../_util/_cssinjs';
 import { resetIcon } from '../../style';
-import { useToken } from '../../theme/internal';
+import { useToken } from '../../_theme/internal';
 import { computed, Ref } from 'vue';
 
 const useStyle = (iconPrefixCls: Ref<string>) => {
@@ -13,16 +14,17 @@ const useStyle = (iconPrefixCls: Ref<string>) => {
       hashId: '',
       path: ['ant-design-icons', iconPrefixCls.value],
     })),
-    () => [
-      {
-        [`.${iconPrefixCls.value}`]: {
-          ...resetIcon(),
-          [`.${iconPrefixCls.value} .${iconPrefixCls.value}-icon`]: {
-            display: 'block',
+    () =>
+      [
+        {
+          [`.${iconPrefixCls.value}`]: {
+            ...resetIcon(),
+            [`.${iconPrefixCls.value} .${iconPrefixCls.value}-icon`]: {
+              display: 'block',
+            },
           },
         },
-      },
-    ],
+      ] as CSSObject[],
   );
 };
 

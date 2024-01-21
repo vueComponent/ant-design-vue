@@ -14,18 +14,18 @@ tag: New
 
 ## API
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| value | 扫描后的地址 | string | - |
-| type | 渲染类型 | `'canvas'` \| `'svg'` | `canvas` |
-| icon | 二维码中图片的地址（目前只支持图片地址） | string | - |
-| size | 二维码大小 | number | 160 |
-| iconSize | 二维码中图片的大小 | number | 40 |
-| color | 二维码颜色 | string | `#000` |
-| bgColor | 二维码背景颜色 | string | `transparent` |
-| bordered | 是否有边框 | boolean | `true` |
-| errorLevel | 二维码纠错等级 | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` |
-| status | 二维码状态 | `active` \| `expired` \| `loading ` | `active` |
+| 参数 | 说明 | 类型 | 默认值 | version |
+| --- | --- | --- | --- | --- |
+| value | 扫描后的地址 | string | - |  |
+| type | 渲染类型 | `'canvas'` \| `'svg'` | `canvas` |  |
+| icon | 二维码中图片的地址（目前只支持图片地址） | string | - |  |
+| size | 二维码大小 | number | 160 |  |
+| iconSize | 二维码中图片的大小 | number | 40 |  |
+| color | 二维码颜色 | string | `#000` |  |
+| bgColor | 二维码背景颜色 | string | `transparent` |  |
+| bordered | 是否有边框 | boolean | `true` |  |
+| errorLevel | 二维码纠错等级 | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` |  |
+| status | 二维码状态 | `active` \| `expired` \| `loading` \| `scanned` | `active` | scanned: 4.0.9 |
 
 ### 事件
 

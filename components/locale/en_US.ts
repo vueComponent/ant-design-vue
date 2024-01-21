@@ -139,6 +139,7 @@ const localeValues: Locale = {
   QRCode: {
     expired: 'QR code expired',
     refresh: 'Refresh',
+    scanned: 'Scanned',
   },
 };
 

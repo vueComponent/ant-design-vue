@@ -34,7 +34,7 @@ export type CSSProperties = Omit<CSS.PropertiesFallback<number | string>, 'anima
 export type CSSPropertiesWithMultiValues = {
   [K in keyof CSSProperties]:
     | CSSProperties[K]
-    | Extract<CSSProperties[K], string>[]
+    | readonly Extract<CSSProperties[K], string>[]
     | {
         [SKIP_CHECK]?: boolean;
         [MULTI_VALUE]?: boolean;
@@ -44,7 +44,7 @@ export type CSSPropertiesWithMultiValues = {
 
 export type CSSPseudos = { [K in CSS.Pseudos]?: CSSObject };
 
-type ArrayCSSInterpolation = CSSInterpolation[];
+type ArrayCSSInterpolation = readonly CSSInterpolation[];
 
 export type InterpolationPrimitive = null | undefined | boolean | number | string | CSSObject;
 

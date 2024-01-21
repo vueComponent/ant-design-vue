@@ -1,7 +1,7 @@
 import { scrollTo, waitElementReady } from '../../utils/uiUtil';
 import { useInjectPanel } from '../../PanelContext';
 import classNames from '../../../_util/classNames';
-import { ref, onBeforeUnmount, watch, defineComponent, nextTick } from 'vue';
+import { ref, onBeforeUnmount, watch, defineComponent, nextTick, shallowRef } from 'vue';
 
 export type Unit = {
   label: any;
@@ -24,7 +24,7 @@ export default defineComponent<TimeUnitColumnProps>({
   setup(props) {
     const { open } = useInjectPanel();
 
-    const ulRef = ref<HTMLUListElement>(null);
+    const ulRef = shallowRef<HTMLElement>(null);
     const liRefs = ref<Map<number, HTMLElement | null>>(new Map());
     const scrollRef = ref<Function>();
 
@@ -33,7 +33,7 @@ export default defineComponent<TimeUnitColumnProps>({
       () => {
         const li = liRefs.value.get(props.value!);
         if (li && open.value !== false) {
-          scrollTo(ulRef.value!, li.offsetTop, 120);
+          scrollTo(ulRef.value, li.offsetTop, 120);
         }
       },
     );

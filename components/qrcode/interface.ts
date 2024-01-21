@@ -28,7 +28,7 @@ export const qrcodeProps = () => {
     icon: String,
     iconSize: { type: Number, default: 40 },
 
-    status: stringType<'active' | 'expired' | 'loading'>('active'),
+    status: stringType<'active' | 'expired' | 'loading' | 'scanned'>('active'),
     bordered: { type: Boolean, default: true },
   };
 };

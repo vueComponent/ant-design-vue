@@ -160,7 +160,6 @@ export default defineComponent({
     };
 
     const handleThemeChange = newTheme => {
-      console.log(21412, newTheme);
       theme.value = newTheme.config;
     };
 

@@ -3,6 +3,8 @@ import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent } from '../../style';
 
+export interface ComponentToken {}
+
 interface StatisticToken extends FullToken<'Statistic'> {
   statisticTitleFontSize: number;
   statisticContentFontSize: number;

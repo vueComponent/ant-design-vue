@@ -6,6 +6,8 @@ import type { DerivativeToken } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { genFocusOutline, resetComponent } from '../../style';
 
+export interface ComponentToken {}
+
 // ============================ Keyframes =============================
 const treeNodeFX = new Keyframes('ant-tree-node-fx-do-not-use', {
   '0%': {

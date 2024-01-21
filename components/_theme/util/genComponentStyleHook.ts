@@ -356,9 +356,9 @@ const genCSSVarRegister = <C extends OverrideComponent>(
     setup(props) {
       const [, realToken] = useToken();
 
-      return () => {
-        useCSSVarRegister(
-          {
+      useCSSVarRegister(
+        computed(() => {
+          return {
             path: [props.component],
             prefix: props.cssVar.prefix,
             key: props.cssVar.key!,
@@ -369,19 +369,22 @@ const genCSSVarRegister = <C extends OverrideComponent>(
             ignore,
             token: realToken.value,
             scope: props.rootCls,
-          },
-          () => {
-            const defaultToken = getDefaultComponentToken(component, realToken, getDefaultToken);
-            const componentToken = getComponentToken(component, realToken, defaultToken, {
-              deprecatedTokens: options?.deprecatedTokens,
-            });
-            Object.keys(defaultToken).forEach(key => {
-              componentToken[prefixToken(key)] = componentToken[key];
-              delete componentToken[key];
-            });
-            return componentToken;
-          },
-        );
+          };
+        }),
+        () => {
+          const defaultToken = getDefaultComponentToken(component, realToken, getDefaultToken);
+          const componentToken = getComponentToken(component, realToken, defaultToken, {
+            deprecatedTokens: options?.deprecatedTokens,
+          });
+          Object.keys(defaultToken).forEach(key => {
+            componentToken[prefixToken(key)] = componentToken[key];
+            delete componentToken[key];
+          });
+          return componentToken;
+        },
+      );
+
+      return () => {
         return null;
       };
     },

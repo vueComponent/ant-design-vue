@@ -1,10 +1,9 @@
 import { useStyleInject } from '../StyleContext';
 import type { KeyType } from '../Cache';
 import useCompatibleInsertionEffect from './useCompatibleInsertionEffect';
-import useEffectCleanupRegister from './useEffectCleanupRegister';
 import useHMR from './useHMR';
 import type { ShallowRef, Ref } from 'vue';
-import { onBeforeUnmount, watch, watchEffect, shallowRef } from 'vue';
+import { onBeforeUnmount, watch, computed } from 'vue';
 
 export type ExtractStyle<CacheValue> = (
   cache: CacheValue,
@@ -23,23 +22,15 @@ export default function useGlobalCache<CacheType>(
   onCacheEffect?: (cachedValue: CacheType) => void,
 ): ShallowRef<CacheType> {
   const styleContext = useStyleInject();
-  const fullPath = shallowRef([]);
-  const deps = shallowRef('');
-  const res = shallowRef<CacheType>();
-
-  watchEffect(() => {
-    fullPath.value = [prefix, ...keyPath.value];
-    deps.value = [prefix, ...keyPath.value].join('_');
-  });
-
-  const register = useEffectCleanupRegister(deps);
+  const globalCache = computed(() => styleContext.value?.cache);
+  const deps = computed(() => [prefix, ...keyPath.value].join('%'));
 
   const HMRUpdate = useHMR();
 
   type UpdaterArgs = [times: number, cache: CacheType];
 
   const buildCache = (updater?: (data: UpdaterArgs) => UpdaterArgs) => {
-    styleContext.value.cache.update(fullPath.value, prevCache => {
+    globalCache.value.update(deps.value, prevCache => {
       const [times = 0, cache] = prevCache || [undefined, undefined];
 
       // HMR should always ignore cache since developer may change it
@@ -58,34 +49,30 @@ export default function useGlobalCache<CacheType>(
     });
   };
 
-  // Create cache
-  watch(
-    deps,
-    () => {
-      buildCache();
-      res.value = styleContext.value.cache.get(fullPath.value)![1];
-    },
-    { immediate: true },
-  );
+  watch(deps, () => {
+    buildCache();
+  });
 
-  let cacheEntity = styleContext.value.cache.get(fullPath.value);
+  let cacheEntity = globalCache.value.get(deps.value);
 
   // HMR clean the cache but not trigger `useMemo` again
   // Let's fallback of this
   // ref https://github.com/ant-design/cssinjs/issues/127
   if (process.env.NODE_ENV !== 'production' && !cacheEntity) {
     buildCache();
-    cacheEntity = styleContext.value.cache.get(fullPath.value);
+    cacheEntity = globalCache.value.get(deps.value);
   }
 
-  res.value = cacheEntity![1];
+  const cacheContent = computed(
+    () =>
+      (globalCache.value.get(deps.value) && globalCache.value.get(deps.value)![1]) ||
+      cacheEntity![1],
+  );
 
   // Remove if no need anymore
   useCompatibleInsertionEffect(
     () => {
-      const cacheEntity = styleContext.value.cache.get(fullPath.value);
-      onCacheEffect?.(cacheEntity![1]);
-      res.value = cacheEntity![1];
+      onCacheEffect?.(cacheContent.value);
     },
     polyfill => {
       // It's bad to call build again in effect.
@@ -93,28 +80,19 @@ export default function useGlobalCache<CacheType>(
       // which will clear cache on the first time.
       buildCache(([times, cache]) => {
         if (polyfill && times === 0) {
-          const cacheEntity = styleContext.value.cache.get(fullPath.value);
-          onCacheEffect?.(cacheEntity![1]);
-          res.value = cacheEntity![1];
+          onCacheEffect?.(cacheContent.value);
         }
         return [times + 1, cache];
       });
 
       return () => {
-        styleContext.value.cache.update(fullPath.value, prevCache => {
+        globalCache.value.update(deps.value, prevCache => {
           const [times = 0, cache] = prevCache || [];
           const nextCount = times - 1;
-
-          if (nextCount === 0) {
-            // Always remove styles in useEffect callback
-            register(() => {
-              // With polyfill, registered callback will always be called synchronously
-              // But without polyfill, it will be called in effect clean up,
-              // And by that time this cache is cleaned up.
-              if (polyfill || !styleContext.value.cache.get(fullPath.value)) {
-                onCacheRemove?.(cache, false);
-              }
-            });
+          if (nextCount <= 0) {
+            if (polyfill || !globalCache.value.get(deps.value)) {
+              onCacheRemove?.(cache, false);
+            }
             return null;
           }
 
@@ -129,5 +107,5 @@ export default function useGlobalCache<CacheType>(
     buildCache();
   });
 
-  return res;
+  return cacheContent;
 }

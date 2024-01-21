@@ -12,12 +12,12 @@ class Entity {
   /** @private Internal cache map. Do not access this directly */
   cache = new Map<string, ValueType>();
 
-  get(keys: KeyType[]): ValueType | null {
-    return this.cache.get(keys.join(SPLIT)) || null;
+  get(keys: KeyType[] | string): ValueType | null {
+    return this.cache.get(Array.isArray(keys) ? keys.join(SPLIT) : keys) || null;
   }
 
-  update(keys: KeyType[], valueFn: (origin: ValueType | null) => ValueType | null) {
-    const path = keys.join(SPLIT);
+  update(keys: KeyType[] | string, valueFn: (origin: ValueType | null) => ValueType | null) {
+    const path = Array.isArray(keys) ? keys.join(SPLIT) : keys;
     const prevValue = this.cache.get(path)!;
     const nextValue = valueFn(prevValue);
 

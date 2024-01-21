@@ -1,27 +1,41 @@
 import type { Ref, ShallowRef } from 'vue';
-import { ref, watch, onUnmounted, onMounted } from 'vue';
 
-const useLayoutEffect = (
-  callback: (mount: boolean) => void | VoidFunction,
+import { shallowRef, ref, watch, nextTick, onMounted, onUnmounted } from 'vue';
+
+function useLayoutEffect(
+  fn: (mount: boolean) => void | VoidFunction,
   deps?: Ref<any> | Ref<any>[] | ShallowRef<any> | ShallowRef<any>[],
-) => {
-  const firstMountRef = ref(true);
+) {
+  const firstMount = shallowRef(true);
+  const cleanupFn = ref(null);
+  let stopWatch = null;
 
-  watch(
+  stopWatch = watch(
     deps,
     () => {
-      callback(firstMountRef.value);
+      nextTick(() => {
+        if (cleanupFn.value) {
+          cleanupFn.value();
+        }
+        cleanupFn.value = fn(firstMount.value);
+      });
     },
-    { immediate: true },
+    { immediate: true, flush: 'post' },
   );
 
   onMounted(() => {
-    firstMountRef.value = false;
+    firstMount.value = false;
   });
+
   onUnmounted(() => {
-    firstMountRef.value = true;
+    if (cleanupFn.value) {
+      cleanupFn.value();
+    }
+    if (stopWatch) {
+      stopWatch();
+    }
   });
-};
+}
 
 export const useLayoutUpdateEffect = (callback, deps) => {
   useLayoutEffect(firstMount => {

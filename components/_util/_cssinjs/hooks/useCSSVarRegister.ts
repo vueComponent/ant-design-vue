@@ -1,11 +1,12 @@
-import { removeCSS, updateCSS } from '../../../vc-util/Dom/dynamicCSS';
+import { updateCSS } from '../../../vc-util/Dom/dynamicCSS';
 import { ATTR_MARK, ATTR_TOKEN, CSS_IN_JS_INSTANCE, useStyleInject } from '../StyleContext';
-import { isClientSide, toStyleStr } from '../util';
+import { isClientSide, token2key, toStyleStr } from '../util';
 import type { TokenWithCSSVar } from '../util/css-variables';
 import { transformToken } from '../util/css-variables';
 import type { ExtractStyle } from './useGlobalCache';
 import useGlobalCache from './useGlobalCache';
 import { uniqueHash } from './useStyleRegister';
+import type { ComputedRef } from 'vue';
 import { computed } from 'vue';
 
 export const CSS_VAR_PREFIX = 'cssVar';
@@ -13,12 +14,52 @@ export const CSS_VAR_PREFIX = 'cssVar';
 type CSSVarCacheValue<V, T extends Record<string, V> = Record<string, V>> = [
   cssVarToken: TokenWithCSSVar<V, T>,
   cssVarStr: string,
+  tokenKey: string,
   styleId: string,
   cssVarKey: string,
 ];
 
+const tokenKeys = new Map<string, number>();
+function recordCleanToken(tokenKey: string) {
+  tokenKeys.set(tokenKey, (tokenKeys.get(tokenKey) || 0) + 1);
+}
+
+function removeStyleTags(key: string, instanceId: string) {
+  if (typeof document !== 'undefined') {
+    const styles = document.querySelectorAll(`style[${ATTR_MARK}="${key}"]`);
+
+    styles.forEach(style => {
+      if ((style as any)[CSS_IN_JS_INSTANCE] === instanceId) {
+        style.parentNode?.removeChild(style);
+      }
+    });
+  }
+}
+
+const TOKEN_THRESHOLD = 0;
+
+// Remove will check current keys first
+function cleanTokenStyle(tokenKey: string, instanceId: string) {
+  tokenKeys.set(tokenKey, (tokenKeys.get(tokenKey) || 0) - 1);
+
+  const tokenKeyList = Array.from(tokenKeys.keys());
+  const cleanableKeyList = tokenKeyList.filter(key => {
+    const count = tokenKeys.get(key) || 0;
+
+    return count <= 0;
+  });
+
+  // Should keep tokens under threshold for not to insert style too often
+  if (tokenKeyList.length - cleanableKeyList.length > TOKEN_THRESHOLD) {
+    cleanableKeyList.forEach(key => {
+      removeStyleTags(key, instanceId);
+      tokenKeys.delete(key);
+    });
+  }
+}
+
 const useCSSVarRegister = <V, T extends Record<string, V>>(
-  config: {
+  config: ComputedRef<{
     path: string[];
     key: string;
     prefix?: string;
@@ -26,16 +67,18 @@ const useCSSVarRegister = <V, T extends Record<string, V>>(
     ignore?: Record<string, boolean>;
     scope?: string;
     token: any;
-  },
+  }>,
   fn: () => T,
 ) => {
-  const { key, prefix, unitless, ignore, token, scope = '' } = config;
-
   const styleContext = useStyleInject();
-  const { _tokenKey: tokenKey } = token;
 
   const stylePath = computed(() => {
-    return [...config.path, key, scope, tokenKey];
+    return [
+      ...config.value.path,
+      config.value.key,
+      config.value.scope || '',
+      config.value.token?._tokenKey,
+    ];
   });
 
   const cache = useGlobalCache<CSSVarCacheValue<V, T>>(
@@ -43,25 +86,32 @@ const useCSSVarRegister = <V, T extends Record<string, V>>(
     stylePath,
     () => {
       const originToken = fn();
-      const [mergedToken, cssVarsStr] = transformToken<V, T>(originToken, key, {
-        prefix,
-        unitless,
-        ignore,
-        scope,
+      const [mergedToken, cssVarsStr] = transformToken<V, T>(originToken, config.value.key, {
+        prefix: config.value.prefix,
+        unitless: config.value.unitless,
+        ignore: config.value.ignore,
+        scope: config.value.scope || '',
       });
+
+      const tokenKey = token2key(mergedToken, '');
+
       const styleId = uniqueHash(stylePath.value, cssVarsStr);
-      return [mergedToken, cssVarsStr, styleId, key];
+
+      recordCleanToken(tokenKey);
+      return [mergedToken, cssVarsStr, tokenKey, styleId, config.value.key];
     },
-    ([, , styleId]) => {
+    ([, , tokenKey]) => {
       if (isClientSide) {
-        removeCSS(styleId, { mark: ATTR_MARK });
+        // Remove token will remove all related style
+        cleanTokenStyle(tokenKey, styleContext.value?.cache?.instanceId);
       }
     },
-    ([, cssVarsStr, styleId]) => {
+    ([, cssVarsStr, tokenKey]) => {
       if (!cssVarsStr) {
         return;
       }
-      const style = updateCSS(cssVarsStr, styleId, {
+
+      const style = updateCSS(cssVarsStr, tokenKey, {
         mark: ATTR_MARK,
         prepend: 'queue',
         attachTo: styleContext.value.container,
@@ -71,7 +121,7 @@ const useCSSVarRegister = <V, T extends Record<string, V>>(
       (style as any)[CSS_IN_JS_INSTANCE] = styleContext.value.cache?.instanceId;
 
       // Used for `useCacheToken` to remove on batch when token removed
-      style.setAttribute(ATTR_TOKEN, key);
+      style.setAttribute(ATTR_TOKEN, config.value.key);
     },
   );
 

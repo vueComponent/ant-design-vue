@@ -258,10 +258,19 @@ interface FilterDropdownProps {
   setSelectedKeys: (selectedKeys: Key[]) => void;
   selectedKeys: Key[];
   confirm: (param?: FilterConfirmProps) => void;
-  clearFilters?: () => void;
+  clearFilters?: (param?: FilterResetProps) => void;
   filters?: ColumnFilterItem[];
   visible: boolean;
   column: ColumnType;
+}
+
+interface FilterConfirmProps {
+  closeDropdown: boolean;
+}
+
+interface FilterResetProps {
+  confirm?: boolean;
+  closeDropdown?: boolean;
 }
 ```
 

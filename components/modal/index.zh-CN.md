@@ -76,8 +76,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fBrgSJBmavgAAA
 | centered | 垂直居中展示 Modal | boolean | `false` |  |
 | class | 容器类名 | string | - |  |
 | closable | 是否显示右上角的关闭按钮 | boolean | `false` |  |
-| content | 内容 | string \|VNode \|function(h) | 无 |  |
-| footer | 底部内容，当不需要默认底部按钮时，可以设为 `footer: null` | string \|VNode \|function(h) | - | 4.0.0 |
+| content | 内容 | string \|VNode \|function() | 无 |  |
+| footer | 底部内容，当不需要默认底部按钮时，可以设为 `footer: null` | string \|VNode \|function() | - | 4.0.0 |
 | icon | 自定义图标（1.14.0 新增） | VNode \| ()=>VNode | - |  |
 | keyboard | 是否支持键盘 esc 关闭 | boolean | true |  |
 | mask | 是否展示遮罩 | boolean | true |  |
@@ -85,7 +85,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*fBrgSJBmavgAAA
 | okButtonProps | ok 按钮 props | [ButtonProps](/components/button) | - |  |
 | okText | 确认按钮文字 | string | 确定 |  |
 | okType | 确认按钮类型 | string | primary |  |
-| title | 标题 | string\|VNode \|function(h) | 无 |  |
+| title | 标题 | string\|VNode \|function() | 无 |  |
 | width | 宽度 | string\|number | 416 |  |
 | wrapClassName | 对话框外层容器的类名 | string | - | 3.2.3 |
 | zIndex | 设置 Modal 的 `z-index` | number | 1000 |  |

@@ -10,6 +10,16 @@
 
 ---
 
+## 4.1.1
+
+- 🌟 QRcode 新增 scanned 状态 [#7242](https://github.com/vueComponent/ant-design-vue/issues/7242)
+- 🐞 修复 css prefix 在 nuxt 问题 [#7256](https://github.com/vueComponent/ant-design-vue/issues/7256)
+- 🐞 修复 dropdown 关闭问题 [#7246](https://github.com/vueComponent/ant-design-vue/issues/7246)
+- 🐞 修复 divider vertical dashed 不显示问题 [#7218](https://github.com/vueComponent/ant-design-vue/issues/7218)
+- 🐞 修复 hook 模式 message 控制台 warning 问题 [#7281](https://github.com/vueComponent/ant-design-vue/issues/7281)
+- 🐞 修复 table 展开在 vue 3.4 下报错问题 [#7265](https://github.com/vueComponent/ant-design-vue/issues/7265)
+- 🐞 修复 table group 过滤状态错误问题 [#7233](https://github.com/vueComponent/ant-design-vue/issues/7233)
+
 ## 4.1.0
 
 - 🐞 适配 vue 3.4 [#7239](https://github.com/vueComponent/ant-design-vue/issues/7239)

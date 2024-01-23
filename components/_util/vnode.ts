@@ -1,6 +1,6 @@
 import { filterEmpty } from './props-util';
-import type { VNode, VNodeProps } from 'vue';
-import { cloneVNode, isVNode, render as VueRender } from 'vue';
+import type { Slots, VNode, VNodeArrayChildren, VNodeProps } from 'vue';
+import { cloneVNode, isVNode, Comment, Fragment, render as VueRender } from 'vue';
 import warning from './warning';
 import type { RefObject } from './createRef';
 type NodeProps = Record<string, any> &
@@ -54,4 +54,29 @@ export function deepCloneElement<T, U>(
 
 export function triggerVNodeUpdate(vm: VNode, attrs: Record<string, any>, dom: any) {
   VueRender(cloneVNode(vm, { ...attrs }), dom);
+}
+
+const ensureValidVNode = (slot: VNodeArrayChildren | null) => {
+  return (slot || []).some(child => {
+    if (!isVNode(child)) return true;
+    if (child.type === Comment) return false;
+    if (child.type === Fragment && !ensureValidVNode(child.children as VNodeArrayChildren))
+      return false;
+    return true;
+  })
+    ? slot
+    : null;
+};
+
+export function customRenderSlot(
+  slots: Slots,
+  name: string,
+  props: Record<string, unknown>,
+  fallback?: () => VNodeArrayChildren,
+) {
+  const slot = slots[name]?.(props);
+  if (ensureValidVNode(slot)) {
+    return slot;
+  }
+  return fallback?.();
 }

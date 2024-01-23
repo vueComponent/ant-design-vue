@@ -13,18 +13,18 @@ Used when the link needs to be converted into a QR Code.
 
 ## API
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| value | scanned link | string | - |
-| type | render type | `'canvas'` \| `'svg'` | `canvas` |
-| icon | include image url (only image link are supported) | string | - |
-| size | QRCode size | number | 128 |
-| iconSize | include image size | number | 32 |
-| color | QRCode Color | string | `#000` |
-| bgColor | QRCode Background Color | string | `transparent` |
-| bordered | Whether has border style | boolean | `true` |
-| errorLevel | Error Code Level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` |
-| status | QRCode status | `active` \| `expired` \| `loading ` | `active` |
+| Property | Description | Type | Default | version |
+| --- | --- | --- | --- | --- |
+| value | scanned link | string | - |  |
+| type | render type | `'canvas'` \| `'svg'` | `canvas` |  |
+| icon | include image url (only image link are supported) | string | - |  |
+| size | QRCode size | number | 128 |  |
+| iconSize | include image size | number | 32 |  |
+| color | QRCode Color | string | `#000` |  |
+| bgColor | QRCode Background Color | string | `transparent` |  |
+| bordered | Whether has border style | boolean | `true` |  |
+| errorLevel | Error Code Level | `'L'` \| `'M'` \| `'Q'` \| `'H'` | `'M'` |  |
+| status | QRCode status | `active` \| `expired` \| `loading` \| `scanned` | `active` | scanned: 4.0.9 |
 
 ### events
 

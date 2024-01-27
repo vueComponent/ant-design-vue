@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-可以预设常用的日期范围以提高用户体验。
+可以预设常用的日期范围以提高用户体验。自 `4.1.1` 开始，preset value 支持回调函数返回值方式。
 
 ## en-US
 
-We can set presetted ranges to RangePicker to improve user experience.
+We can set presetted ranges to RangePicker to improve user experience. Since `4.1.1`, preset value supports callback function.
 
 </docs>
 
@@ -24,7 +24,13 @@ We can set presetted ranges to RangePicker to improve user experience.
       style="width: 400px"
       show-time
       format="YYYY/MM/DD HH:mm:ss"
-      :presets="rangePresets"
+      :presets="[
+        {
+          label: 'Now ~ Eod',
+          value: () => [dayjs(), dayjs().endOf('day')], // 5.8.0+ support function
+        },
+        ...rangePresets,
+      ]"
       @change="onRangeChange"
     />
   </a-space>

@@ -232,6 +232,7 @@ export default defineComponent({
           'onUpdate:expandedKeys',
           'onUpdate:selectedKeys',
           'onDoubleclick',
+          'draggable',
         ]),
         showLine: Boolean(showLine),
         dropIndicatorRender,

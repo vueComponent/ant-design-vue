@@ -17,7 +17,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 ### Tree props
 
 | Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | allowDrop | Whether to allow dropping on the node | ({ dropNode, dropPosition }) => boolean | - |  |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | false |  |
 | blockNode | Whether treeNode fill remaining horizontal space | boolean | false |  |
@@ -26,7 +26,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | checkStrictly | Check treeNode precisely; parent treeNode and children treeNodes are not associated | boolean | false |  |
 | defaultExpandAll | Whether to expand all treeNodes by default | boolean | false |  |
 | disabled | whether disabled the tree | bool | false |  |
-| draggable | Specifies whether this Tree is draggable (IE > 8) | boolean | false |  |
+| draggable | Specifies whether this Tree is draggable (IE > 8) | `boolean | ((node: DataNode) => boolean) | { icon?: VueNode | false, nodeDraggable?: (node: DataNode) => boolean }` | false |  |
 | expandedKeys(v-model) | (Controlled) Specifies the keys of the expanded treeNodes | string\[] \| number\[] | \[] |  |
 | fieldNames | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } | 3.0.0 |
 | filterTreeNode | Defines a function to filter (highlight) treeNodes. When the function returns `true`, the corresponding treeNode will be highlighted | function(node) | - |  |

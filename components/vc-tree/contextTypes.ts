@@ -16,7 +16,7 @@ import type {
   FlattenNode,
 } from './interface';
 
-import type { DraggableConfig } from './Tree';
+import type { DraggableConfig } from './props';
 
 export type NodeMouseEventParams = {
   event: MouseEvent;

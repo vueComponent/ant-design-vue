@@ -6,7 +6,7 @@ import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { DataNode, EventDataNode, FieldNames, Key, ScrollTo } from '../vc-tree/interface';
-import type { TreeNodeProps } from '../vc-tree/props';
+import type { DraggableConfig, DraggableFn, TreeNodeProps } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { SwitcherIconProps } from './utils/iconUtil';
@@ -16,6 +16,7 @@ import devWarning from '../vc-util/devWarning';
 import { warning } from '../vc-util/warning';
 import omit from '../_util/omit';
 import { booleanType, someType, arrayType, functionType, objectType } from '../_util/type';
+import HolderOutlined from '@ant-design/icons-vue/HolderOutlined';
 
 // CSSINJS
 import useStyle from './style';
@@ -119,7 +120,7 @@ export const treeProps = () => {
     selectable: booleanType(),
 
     loadedKeys: arrayType<Key[]>(),
-    draggable: booleanType(),
+    draggable: someType<boolean | DraggableConfig | DraggableFn>([Boolean, Object, Function]),
     showIcon: booleanType(),
     icon: functionType<(nodeProps: AntdTreeNodeAttribute) => any>(),
     switcherIcon: PropTypes.any,
@@ -222,6 +223,7 @@ export default defineComponent({
         itemHeight = 28,
         onDoubleclick,
         onDblclick,
+        draggable,
       } = props as TreeProps;
       const newProps = {
         ...attrs,
@@ -238,6 +240,31 @@ export default defineComponent({
         itemHeight,
       };
       const children = slots.default ? filterEmpty(slots.default()) : undefined;
+      const draggableConfigFunc = () => {
+        if (!draggable) {
+          return false;
+        }
+
+        let mergedDraggable: DraggableConfig = {};
+        switch (typeof draggable) {
+          case 'function':
+            mergedDraggable.nodeDraggable = draggable;
+            break;
+          case 'object':
+            mergedDraggable = { ...(draggable as DraggableConfig) };
+            break;
+          default:
+            break;
+          // Do nothing
+        }
+
+        if (mergedDraggable.icon !== false) {
+          mergedDraggable.icon = mergedDraggable.icon || <HolderOutlined />;
+        }
+
+        return mergedDraggable;
+      };
+      const draggableConfig = draggableConfigFunc();
       return wrapSSR(
         <VcTree
           {...newProps}
@@ -255,6 +282,7 @@ export default defineComponent({
             attrs.class,
             hashId.value,
           )}
+          draggable={draggableConfig}
           direction={direction.value}
           checkable={checkable}
           selectable={selectable}

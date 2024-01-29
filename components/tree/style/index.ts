@@ -162,6 +162,8 @@ export const genBaseStyle = (prefixCls: string, token: TreeToken): CSSObject => 
         },
 
         '&-draggable': {
+          cursor: 'grab',
+
           [`${treeCls}-draggable-icon`]: {
             width: treeTitleHeight,
             lineHeight: `${treeTitleHeight}px`,

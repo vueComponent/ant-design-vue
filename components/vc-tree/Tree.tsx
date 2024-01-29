@@ -35,7 +35,7 @@ import {
   toRaw,
 } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import type { CheckInfo, DraggableFn } from './props';
+import type { CheckInfo, DraggableConfig, DraggableFn } from './props';
 import { treeProps } from './props';
 import { warning } from '../vc-util/warning';
 import KeyCode from '../_util/KeyCode';
@@ -44,11 +44,6 @@ import pickAttrs from '../_util/pickAttrs';
 import useMaxLevel from './useMaxLevel';
 
 const MAX_RETRY_TIMES = 10;
-
-export type DraggableConfig = {
-  icon?: any;
-  nodeDraggable?: DraggableFn;
-};
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -1145,7 +1140,7 @@ export default defineComponent({
           draggableConfig = draggable;
         } else if (typeof draggable === 'function') {
           draggableConfig = {
-            nodeDraggable: draggable,
+            nodeDraggable: draggable as DraggableFn,
           };
         } else {
           draggableConfig = {};

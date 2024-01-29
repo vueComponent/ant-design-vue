@@ -18,7 +18,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1GeUQJPTGUYAAA
 ### Tree props
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |  |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | allowDrop | 是否允许拖拽时放置在该节点 | ({ dropNode, dropPosition }) => boolean | - |  |
 | autoExpandParent | 是否自动展开父节点 | boolean | false |  |  |
 | blockNode | 是否节点占据一行 | boolean | false |  |  |
@@ -27,7 +27,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1GeUQJPTGUYAAA
 | checkStrictly | checkable 状态下节点选择完全受控（父子节点选中状态不再关联） | boolean | false |  |  |
 | defaultExpandAll | 默认展开所有树节点, 如果是异步数据，需要在数据返回后再实例化，建议用 v-if="data.length"；当有 expandedKeys 时，defaultExpandAll 将失效 | boolean | false |  |  |
 | disabled | 将树禁用 | bool | false |  |  |
-| draggable | 设置节点可拖拽 | boolean | false |  |  |
+| draggable | 设置节点可拖拽 | `boolean | ((node: DataNode) => boolean) | { icon?: VueNode | false, nodeDraggable?: (node: DataNode) => boolean }` | false |  |  |
 | expandedKeys(v-model) | （受控）展开指定的树节点 | string\[] \| number\[] | \[] |  |  |
 | fieldNames | 替换 treeNode 中 title,key,children 字段为 treeData 中对应的字段 | object | {children:'children', title:'title', key:'key' } | 3.0.0 |  |
 | filterTreeNode | 按需筛选树节点（高亮），返回 true | function(node) | - |  |  |

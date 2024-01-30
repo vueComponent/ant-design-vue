@@ -13,7 +13,7 @@ import type { Breakpoint } from '../_util/responsiveObserve';
 import type { INTERNAL_SELECTION_ITEM } from './hooks/useSelection';
 import type { VueNode } from '../_util/type';
 import { tuple } from '../_util/type';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, VNodeArrayChildren } from 'vue';
 // import { TableAction } from './Table';
 
 export type { GetRowKey, ExpandableConfig };
@@ -68,7 +68,10 @@ export interface ColumnTitleProps<RecordType> {
   filters?: Record<string, FilterValue>;
 }
 
-export type ColumnTitle<RecordType> = VueNode | ((props: ColumnTitleProps<RecordType>) => VueNode);
+type ColumnTitleNode = VueNode | VNodeArrayChildren;
+export type ColumnTitle<RecordType> =
+  | ColumnTitleNode
+  | ((props: ColumnTitleProps<RecordType>) => ColumnTitleNode);
 
 export type FilterValue = (Key | boolean)[];
 export type FilterKey = Key[] | null;

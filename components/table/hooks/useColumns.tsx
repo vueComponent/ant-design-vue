@@ -1,10 +1,10 @@
 import devWarning from '../../vc-util/devWarning';
-import { renderSlot } from 'vue';
 import type { Ref } from 'vue';
 import type { ContextSlots } from '../context';
 import type { TransformColumns, ColumnsType } from '../interface';
 import { SELECTION_COLUMN } from './useSelection';
 import { EXPAND_COLUMN } from '../../vc-table';
+import { customRenderSlot } from '../../_util/vnode';
 
 function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: Ref<ContextSlots>) {
   const $slots = contextSlots.value;
@@ -27,7 +27,7 @@ function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: R
     });
 
     if (contextSlots.value.headerCell && !column.slots?.title) {
-      cloneColumn.title = renderSlot(
+      cloneColumn.title = customRenderSlot(
         contextSlots.value,
         'headerCell',
         {

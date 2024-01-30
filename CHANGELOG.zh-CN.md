@@ -10,6 +10,11 @@
 
 ---
 
+## 4.1.2
+
+- 🐞 修复 table resize 在 vue 3.4 下报错问题 [#7291](https://github.com/vueComponent/ant-design-vue/issues/7291)
+- 🐞 修复 Segmented title 属性不显示问题 [#7302](https://github.com/vueComponent/ant-design-vue/issues/7302)
+
 ## 4.1.1
 
 - 🌟 QRcode 新增 scanned 状态 [#7242](https://github.com/vueComponent/ant-design-vue/issues/7242)

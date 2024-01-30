@@ -117,7 +117,7 @@ Select component to select value from options.
 
 ### The dropdown is closed when click `dropdownRender` area?
 
-Dropdown menu will be closed if click `dropdownRender` area, you can prevent it by wrapping `@mousedown.prevent` See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).
+Dropdown menu will be closed if click `dropdownRender` area, you can prevent the default behavior of a click event, See the [dropdownRender example](#components-select-demo-custom-dropdown-menu).
 
 ### Why is `placeholder` not displayed?
 

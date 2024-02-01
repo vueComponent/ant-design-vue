@@ -84,6 +84,12 @@
               <CompactIcon />
             </template>
           </a-float-button>
+          <a-tooltip placement="left">
+            <template #title>
+              <span>{{ $t('app.floatButton.back-top') }}</span>
+            </template>
+            <a-back-top />
+          </a-tooltip>
         </a-float-button-group>
         <!-- <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
           <a-dropdown placement="top">

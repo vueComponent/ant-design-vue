@@ -73,6 +73,7 @@ If you are in a bad network environment, you can try other registries and tools 
 | [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | The library function, implemented in the DOM template, can use the custom event of the ant-design-vue component (camelCase) |
 | [@formily/antdv](https://github.com/formilyjs/antdv) | The Library with Formily and ant-design-vue |
 | [@ant-design-vue/nuxt](https://github.com/vueComponent/ant-design-vue-nuxt) | A nuxt module for ant-design-vue |
+| [vscode-common-intellisense](https://github.com/Simon-He95/vscode-common-intellisense) | A VS Code extension that provides better intellisense to ant-design-vue developers |
 
 ## Donation
 

@@ -10,6 +10,8 @@ import { findDOMNode, initDefaultProps } from '../_util/props-util';
 import { floatButtonGroupProps } from './interface';
 import type { FloatButtonGroupProps } from './interface';
 import canUseDom from '../_util/canUseDom';
+import VueDragResizeRotate from '@gausszhou/vue3-drag-resize-rotate';
+import '@gausszhou/vue3-drag-resize-rotate/lib/bundle.esm.css';
 
 // CSSINJS
 import useStyle from './style';
@@ -105,34 +107,43 @@ const FloatButtonGroup = defineComponent({
       const transitionProps = getTransitionProps(`${groupPrefixCls}-wrap`);
 
       return wrapSSR(
-        <div ref={floatButtonGroupRef} {...attrs} class={groupCls} {...hoverAction.value}>
-          {trigger && ['click', 'hover'].includes(trigger) ? (
-            <>
-              <Transition {...transitionProps}>
-                <div v-show={open.value} class={wrapperCls}>
-                  {slots.default && slots.default()}
-                </div>
-              </Transition>
-              <FloatButton
-                ref={floatButtonRef}
-                type={type}
-                shape={shape}
-                tooltip={tooltip}
-                description={description}
-                v-slots={{
-                  icon: () =>
-                    open.value
-                      ? slots.closeIcon?.() || <CloseOutlined />
-                      : slots.icon?.() || <FileTextOutlined />,
-                  tooltip: slots.tooltip,
-                  description: slots.description,
-                }}
-              ></FloatButton>
-            </>
-          ) : (
-            slots.default?.()
-          )}
-        </div>,
+        <VueDragResizeRotate
+          resizable={false}
+          x={24}
+          y={48}
+          w={40}
+          h={40}
+          style="position: fixed;inset-inline-end: 24px;inset-block-end: 48px;border: none;z-index: 10;"
+        >
+          <div ref={floatButtonGroupRef} {...attrs} class={groupCls} {...hoverAction.value}>
+            {trigger && ['click', 'hover'].includes(trigger) ? (
+              <>
+                <Transition {...transitionProps}>
+                  <div v-show={open.value} class={wrapperCls}>
+                    {slots.default && slots.default()}
+                  </div>
+                </Transition>
+                <FloatButton
+                  ref={floatButtonRef}
+                  type={type}
+                  shape={shape}
+                  tooltip={tooltip}
+                  description={description}
+                  v-slots={{
+                    icon: () =>
+                      open.value
+                        ? slots.closeIcon?.() || <CloseOutlined />
+                        : slots.icon?.() || <FileTextOutlined />,
+                    tooltip: slots.tooltip,
+                    description: slots.description,
+                  }}
+                ></FloatButton>
+              </>
+            ) : (
+              slots.default?.()
+            )}
+          </div>
+        </VueDragResizeRotate>,
       );
     };
   },

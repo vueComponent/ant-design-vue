@@ -282,8 +282,8 @@ export default defineComponent({
       return total > totalBoundaryShowSizeChanger;
     },
     runIfEnter(event, callback, ...restParams) {
-      event.preventDefault();
       if (event.key === 'Enter' || event.charCode === 13) {
+        event.preventDefault();
         callback(...restParams);
       }
     },

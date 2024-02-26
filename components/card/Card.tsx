@@ -1,5 +1,5 @@
 import type { VNodeTypes, PropType, VNode, ExtractPropTypes, CSSProperties } from 'vue';
-import { isVNode, defineComponent, renderSlot } from 'vue';
+import { isVNode, defineComponent } from 'vue';
 import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
@@ -10,6 +10,7 @@ import isPlainObject from 'lodash-es/isPlainObject';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import type { CustomSlotsType } from '../_util/type';
+import { customRenderSlot } from '../_util/vnode';
 export interface CardTabListType {
   key: string;
   tab: any;
@@ -173,7 +174,7 @@ const Card = defineComponent({
                 `tabList slots is deprecated, Please use \`customTab\` instead.`,
               );
               let tab = temp !== undefined ? temp : slots[name] ? slots[name](item) : null;
-              tab = renderSlot(slots, 'customTab', item as any, () => [tab]);
+              tab = customRenderSlot(slots, 'customTab', item as any, () => [tab]);
               return <TabPane tab={tab} key={item.key} disabled={item.disabled} />;
             })}
           </Tabs>

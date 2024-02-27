@@ -311,6 +311,8 @@ const Calendar = {
         onSelect={this.onDateInputSelect}
         inputMode={inputMode}
         inputReadOnly={inputReadOnly}
+        onFocus={() => this.__emit('handleFocus')}
+        onBlur={() => this.__emit('handleBlur')}
       />
     ) : null;
     const children = [];

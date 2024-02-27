@@ -141,12 +141,14 @@ const DateInput = {
     },
     onFocus() {
       this.setState({ hasFocus: true });
+      this.__emit('focus');
     },
     onBlur() {
       this.setState((prevState, prevProps) => ({
         hasFocus: false,
         str: formatDate(prevProps.value, prevProps.format),
       }));
+      this.__emit('blur');
     },
     onKeyDown(event) {
       const { keyCode } = event;

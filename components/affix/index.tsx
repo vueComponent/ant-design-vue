@@ -167,7 +167,6 @@ const Affix = defineComponent({
         affixStyle: undefined,
         placeholderStyle: undefined,
       });
-      currentInstance.update();
       // Test if `updatePosition` called
       if (process.env.NODE_ENV === 'test') {
         emit('testUpdatePosition');

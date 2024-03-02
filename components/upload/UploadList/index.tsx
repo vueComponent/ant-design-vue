@@ -9,7 +9,16 @@ import type { ButtonProps } from '../../button';
 import Button from '../../button';
 import ListItem from './ListItem';
 import type { HTMLAttributes } from 'vue';
-import { computed, defineComponent, getCurrentInstance, onMounted, ref, watchEffect } from 'vue';
+import {
+  triggerRef,
+  watch,
+  shallowRef,
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  watchEffect,
+} from 'vue';
 import { filterEmpty, initDefaultProps, isValidElement } from '../../_util/props-util';
 import type { VueNode } from '../../_util/type';
 import useConfigInject from '../../_util/hooks/useConfigInject';
@@ -39,15 +48,26 @@ export default defineComponent({
   }),
   setup(props, { slots, expose }) {
     const motionAppear = ref(false);
-    const instance = getCurrentInstance();
     onMounted(() => {
       motionAppear.value == true;
     });
+    const mergedItems = shallowRef([]);
+    watch(
+      () => props.items,
+      (val = []) => {
+        mergedItems.value = val.slice();
+      },
+      {
+        immediate: true,
+        deep: true,
+      },
+    );
     watchEffect(() => {
       if (props.listType !== 'picture' && props.listType !== 'picture-card') {
         return;
       }
-      (props.items || []).forEach((file: InternalUploadFile) => {
+      let hasUpdate = false;
+      (props.items || []).forEach((file: InternalUploadFile, index) => {
         if (
           typeof document === 'undefined' ||
           typeof window === 'undefined' ||
@@ -62,11 +82,17 @@ export default defineComponent({
         if (props.previewFile) {
           props.previewFile(file.originFileObj as File).then((previewDataUrl: string) => {
             // Need append '' to avoid dead loop
-            file.thumbUrl = previewDataUrl || '';
-            instance.update();
+            const thumbUrl = previewDataUrl || '';
+            if (thumbUrl !== file.thumbUrl) {
+              mergedItems.value[index].thumbUrl = thumbUrl;
+              hasUpdate = true;
+            }
           });
         }
       });
+      if (hasUpdate) {
+        triggerRef(mergedItems);
+      }
     });
 
     // ============================= Events =============================
@@ -160,7 +186,6 @@ export default defineComponent({
         listType,
         locale,
         isImageUrl: isImgUrl,
-        items = [],
         showPreviewIcon,
         showRemoveIcon,
         showDownloadIcon,
@@ -173,6 +198,7 @@ export default defineComponent({
         appendActionVisible,
       } = props;
       const appendActionDom = appendAction?.();
+      const items = mergedItems.value;
       return (
         <TransitionGroup {...transitionGroupProps.value} tag="div">
           {items.map(file => {

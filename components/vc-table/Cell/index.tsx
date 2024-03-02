@@ -6,7 +6,7 @@ import {
   parseStyleText,
 } from '../../_util/props-util';
 import type { CSSProperties, VNodeArrayChildren } from 'vue';
-import { Text, computed, defineComponent, isVNode, renderSlot } from 'vue';
+import { Text, computed, defineComponent, isVNode } from 'vue';
 
 import type {
   DataIndex,
@@ -28,6 +28,7 @@ import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import eagerComputed from '../../_util/eagerComputed';
+import { customRenderSlot } from '../../_util/vnode';
 
 /** Check if cell is in hover range */
 function inHoverRange(cellStartRow: number, cellRowSpan: number, startRow: number, endRow: number) {
@@ -228,7 +229,7 @@ export default defineComponent<CellProps>({
           contextSlots.value.bodyCell &&
           !column.slots?.customRender
         ) {
-          const child = renderSlot(
+          const child = customRenderSlot(
             contextSlots.value,
             'bodyCell',
             {

@@ -50,7 +50,7 @@ const AutoComplete = defineComponent({
   props: autoCompleteProps(),
   // emits: ['change', 'select', 'focus', 'blur'],
   slots: Object as CustomSlotsType<{
-    options: any;
+    option: any;
     default: any;
     notFoundContent: any;
     dataSource: any;
@@ -104,7 +104,7 @@ const AutoComplete = defineComponent({
         [`${prefixCls.value}-auto-complete`]: true,
       };
       if (props.options === undefined) {
-        const childArray = slots.dataSource?.() || slots.options?.() || [];
+        const childArray = slots.dataSource?.() || slots.option?.() || [];
         if (childArray.length && isSelectOptionOrSelectOptGroup(childArray[0])) {
           optionChildren = childArray;
         } else {
@@ -152,7 +152,7 @@ const AutoComplete = defineComponent({
         ['dataSource', 'loading'],
       );
       return (
-        <Select {...selectProps} v-slots={omit(slots, ['default', 'dataSource', 'options'])}>
+        <Select {...selectProps} v-slots={omit(slots, ['default', 'dataSource', 'option'])}>
           {optionChildren}
         </Select>
       );

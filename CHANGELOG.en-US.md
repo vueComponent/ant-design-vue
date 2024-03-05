@@ -10,6 +10,11 @@
 
 ---
 
+## 4.1.2
+
+- 🐞 Fix table resize error reporting under vue 3.4 [#7291](https://github.com/vueComponent/ant-design-vue/issues/7291)
+- 🐞 Fix the problem that the Segmented title attribute is not displayed [#7302](https://github.com/vueComponent/ant-design-vue/issues/7302)
+
 ## 4.1.1
 
 - 🌟 QRcode adds scanned status [#7242](https://github.com/vueComponent/ant-design-vue/issues/7242)

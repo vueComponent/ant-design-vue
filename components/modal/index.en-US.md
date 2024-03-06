@@ -155,3 +155,5 @@ When you need context information (for example, using a globally registered comp
   });
 </script>
 ```
+
+> [App Package Component](/components/app) can be used to simplify the problem of `useModal` and other methods that need to manually implant contextHolder.

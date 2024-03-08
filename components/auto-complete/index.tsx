@@ -152,7 +152,7 @@ const AutoComplete = defineComponent({
         ['dataSource', 'loading'],
       );
       return (
-        <Select {...selectProps} v-slots={omit(slots, ['default', 'dataSource', 'option'])}>
+        <Select {...selectProps} v-slots={omit(slots, ['default', 'dataSource'])}>
           {optionChildren}
         </Select>
       );

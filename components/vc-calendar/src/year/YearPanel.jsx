@@ -92,14 +92,7 @@ export default {
           [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
         };
-        let clickHandler = noop;
-        if (yearData.year < startYear) {
-          clickHandler = this.previousDecade;
-        } else if (yearData.year > endYear) {
-          clickHandler = this.nextDecade;
-        } else {
-          clickHandler = chooseYear.bind(this, yearData.year);
-        }
+        let clickHandler = chooseYear.bind(this, yearData.year);
         return (
           <td
             role="gridcell"

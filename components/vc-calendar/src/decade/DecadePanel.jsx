@@ -81,13 +81,7 @@ export default {
         };
         const content = `${dStartDecade}-${dEndDecade}`;
         let clickHandler = noop;
-        if (isLast) {
-          clickHandler = this.previousCentury;
-        } else if (isNext) {
-          clickHandler = this.nextCentury;
-        } else {
-          clickHandler = chooseDecade.bind(this, dStartDecade);
-        }
+        clickHandler = chooseDecade.bind(this, dStartDecade);
         return (
           <td key={dStartDecade} onClick={clickHandler} role="gridcell" class={classNameMap}>
             <a class={`${prefixCls}-decade`}>{content}</a>

@@ -1,4 +1,4 @@
-import type { PropType, Ref, ComputedRef } from 'vue';
+import type { PropType, Ref, ComputedRef, ImgHTMLAttributes } from 'vue';
 import {
   ref,
   shallowRef,
@@ -33,6 +33,7 @@ export interface GroupConsumerProps {
 interface PreviewUrl {
   url: string;
   canPreview: boolean;
+  imgCommonProps: ImgHTMLAttributes;
 }
 
 export interface GroupConsumerValue extends GroupConsumerProps {
@@ -43,7 +44,12 @@ export interface GroupConsumerValue extends GroupConsumerProps {
   setCurrent: (current: number) => void;
   setShowPreview: (isShowPreview: boolean) => void;
   setMousePosition: (mousePosition: null | { x: number; y: number }) => void;
-  registerImage: (id: number, url: string, canPreview?: boolean) => () => void;
+  registerImage: (
+    id: number,
+    url: string,
+    canPreview?: boolean,
+    imgCommonProps?: ImgHTMLAttributes,
+  ) => () => void;
   rootClassName?: string;
 }
 const previewGroupContext = Symbol('previewGroupContext');
@@ -125,6 +131,7 @@ const Group = defineComponent({
       previewUrls.set(id, {
         url,
         canPreview,
+        imgCommonProps: {},
       });
     };
     const setCurrent = (val: number) => {
@@ -134,13 +141,14 @@ const Group = defineComponent({
       mousePosition.value = val;
     };
 
-    const registerImage = (id: number, url: string, canPreview = true) => {
+    const registerImage = (id: number, url: string, canPreview = true, imgCommonProps = {}) => {
       const unRegister = () => {
         previewUrls.delete(id);
       };
       previewUrls.set(id, {
         url,
         canPreview,
+        imgCommonProps,
       });
       return unRegister;
     };
@@ -198,6 +206,7 @@ const Group = defineComponent({
             src={canPreviewUrls.value.get(current.value)}
             icons={props.icons}
             getContainer={getPreviewContainer.value}
+            imgCommonProps={previewUrls.get(current.value)?.imgCommonProps}
           />
         </>
       );

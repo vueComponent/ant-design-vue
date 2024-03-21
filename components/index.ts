@@ -28,6 +28,10 @@ export const install = function (app: App) {
 
 export { version, cssinjs };
 
+/**
+ * Test Pull Request
+ */
+
 export default {
   version,
   install,

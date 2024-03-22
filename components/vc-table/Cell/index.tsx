@@ -104,7 +104,6 @@ export default defineComponent<CellProps>({
     'transformCellText',
   ] as any,
   setup(props, { slots }) {
-
     const hoverRef = ref(null)
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
@@ -121,6 +120,10 @@ export default defineComponent<CellProps>({
         props.additionalProps?.rowSpan ??
         (props.additionalProps?.rowspan as number)
       );
+    });
+    const hovering = eagerComputed(() => {
+      const { index } = props;
+      return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
     });
     const supportSticky = useInjectSticky();
 
@@ -201,6 +204,7 @@ export default defineComponent<CellProps>({
             renderIndex,
             column: column.__originColumn__,
           });
+
           if (isRenderCell(renderData)) {
             if (process.env.NODE_ENV !== 'production') {
               warning(
@@ -214,6 +218,7 @@ export default defineComponent<CellProps>({
             childNode = renderData;
           }
         }
+
         if (
           !(INTERNAL_COL_DEFINE in column) &&
           cellType === 'body' &&
@@ -274,7 +279,6 @@ export default defineComponent<CellProps>({
       } = cellProps || {};
       const mergedColSpan = (cellColSpan !== undefined ? cellColSpan : colSpan.value) ?? 1;
       const mergedRowSpan = (cellRowSpan !== undefined ? cellRowSpan : rowSpan.value) ?? 1;
-      
       if (mergedColSpan === 0 || mergedRowSpan === 0) {
         return null;
       }
@@ -299,6 +303,7 @@ export default defineComponent<CellProps>({
       if (align) {
         alignStyle.textAlign = align;
       }
+
       // ====================== Render ======================
       let title: string;
       const ellipsisConfig: CellEllipsisType = ellipsis === true ? { showTitle: true } : ellipsis;
@@ -311,10 +316,6 @@ export default defineComponent<CellProps>({
       }
 
       // AddEventListener Hover  
-      const hovering = eagerComputed(() => {
-        const { index } = props;
-        return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
-      });
       watch([rowSpan,startRow,endRow],()=>{
         hoverRef.value?.setAttribute("class",classNames(
           cellPrefixCls,
@@ -338,7 +339,7 @@ export default defineComponent<CellProps>({
         [`${cellPrefixCls}-fix-sticky`]:
           (isFixLeft || isFixRight) && isSticky && supportSticky.value,
       }
-      
+
       const componentProps = {
         title,
         ...restCellProps,
@@ -357,6 +358,7 @@ export default defineComponent<CellProps>({
         onMouseleave,
         style: [additionalProps.style, alignStyle, fixedStyle, cellStyle],
       };
+
       return (
         <Component {...componentProps} ref={hoverRef}>
           {appendNode}

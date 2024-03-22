@@ -82,6 +82,7 @@ ant-design-vue is an MIT-licensed open source project. In order to achieve bette
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
 - [支付宝或微信](https://aliyuncdn.antdv.com/alipay-and-wechat.png)
+- ETH: 0x30cc48515d8ae9fefa20ab87226ad7e8ab9c3bc2
 
 ## Sponsors
 

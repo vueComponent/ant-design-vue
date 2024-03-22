@@ -1,8 +1,7 @@
 import classNames from '../../_util/classNames';
 import { filterEmpty, flattenChildren, isValidElement } from '../../_util/props-util';
 import type { CSSProperties, VNodeArrayChildren } from 'vue';
-import { Text, computed, defineComponent, isVNode } from 'vue';
-
+import { Text, computed, defineComponent, isVNode, ref, watch } from 'vue';
 import type {
   DataIndex,
   ColumnType,
@@ -22,7 +21,6 @@ import { useInjectHover } from '../context/HoverContext';
 import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import eagerComputed from '../../_util/eagerComputed';
 import { customRenderSlot } from '../../_util/vnode';
 
 /** Check if cell is in hover range */
@@ -105,6 +103,8 @@ export default defineComponent<CellProps>({
     'transformCellText',
   ] as any,
   setup(props, { slots }) {
+    
+    const hoverRef = ref(null)
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
     const colSpan = computed(() => {
@@ -121,10 +121,14 @@ export default defineComponent<CellProps>({
         (props.additionalProps?.rowspan as number)
       );
     });
-    const hovering = eagerComputed(() => {
+    watch([rowSpan,startRow,endRow],()=>{
       const { index } = props;
-      return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
-    });
+      if(inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value)){
+        hoverRef.value?.setAttribute("class",`ant-table-cell ${props.prefixCls}-cell-row-hover`)
+      }else{
+        hoverRef.value?.setAttribute("class",`ant-table-cell`)
+      }
+    })
     const supportSticky = useInjectSticky();
 
     // ====================== Hover =======================
@@ -203,7 +207,7 @@ export default defineComponent<CellProps>({
             renderIndex,
             column: column.__originColumn__,
           });
-
+          
           if (isRenderCell(renderData)) {
             if (process.env.NODE_ENV !== 'production') {
               warning(
@@ -217,7 +221,7 @@ export default defineComponent<CellProps>({
             childNode = renderData;
           }
         }
-
+        
         if (
           !(INTERNAL_COL_DEFINE in column) &&
           cellType === 'body' &&
@@ -303,7 +307,6 @@ export default defineComponent<CellProps>({
       if (align) {
         alignStyle.textAlign = align;
       }
-
       // ====================== Render ======================
       let title: string;
       const ellipsisConfig: CellEllipsisType = ellipsis === true ? { showTitle: true } : ellipsis;
@@ -314,7 +317,7 @@ export default defineComponent<CellProps>({
           title = getTitle([childNode]);
         }
       }
-
+      
       const componentProps = {
         title,
         ...restCellProps,
@@ -334,7 +337,6 @@ export default defineComponent<CellProps>({
             [`${cellPrefixCls}-with-append`]: appendNode,
             [`${cellPrefixCls}-fix-sticky`]:
               (isFixLeft || isFixRight) && isSticky && supportSticky.value,
-            [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
           },
           additionalProps.class,
           cellClassName,
@@ -345,9 +347,9 @@ export default defineComponent<CellProps>({
         onMouseleave,
         style: [additionalProps.style, alignStyle, fixedStyle, cellStyle],
       };
-
+     
       return (
-        <Component {...componentProps}>
+        <Component {...componentProps} ref={hoverRef}>
           {appendNode}
           {childNode}
           {slots.dragHandle?.()}

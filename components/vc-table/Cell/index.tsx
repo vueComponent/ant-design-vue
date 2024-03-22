@@ -2,6 +2,7 @@ import classNames from '../../_util/classNames';
 import { filterEmpty, flattenChildren, isValidElement } from '../../_util/props-util';
 import type { CSSProperties, VNodeArrayChildren } from 'vue';
 import { Text, computed, defineComponent, isVNode, ref, watch } from 'vue';
+import eagerComputed from '../../_util/eagerComputed';
 import type {
   DataIndex,
   ColumnType,
@@ -103,7 +104,7 @@ export default defineComponent<CellProps>({
     'transformCellText',
   ] as any,
   setup(props, { slots }) {
-    
+
     const hoverRef = ref(null)
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
@@ -121,14 +122,6 @@ export default defineComponent<CellProps>({
         (props.additionalProps?.rowspan as number)
       );
     });
-    watch([rowSpan,startRow,endRow],()=>{
-      const { index } = props;
-      if(inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value)){
-        hoverRef.value?.setAttribute("class",`ant-table-cell ${props.prefixCls}-cell-row-hover`)
-      }else{
-        hoverRef.value?.setAttribute("class",`ant-table-cell`)
-      }
-    })
     const supportSticky = useInjectSticky();
 
     // ====================== Hover =======================
@@ -190,6 +183,7 @@ export default defineComponent<CellProps>({
       // ==================== Child Node ====================
       let cellProps: CellType;
       let childNode;
+      let componentPropsCommonClassName
       const children = slots.default?.();
       if (validateValue(children) || cellType === 'header') {
         childNode = children;
@@ -207,7 +201,6 @@ export default defineComponent<CellProps>({
             renderIndex,
             column: column.__originColumn__,
           });
-          
           if (isRenderCell(renderData)) {
             if (process.env.NODE_ENV !== 'production') {
               warning(
@@ -221,7 +214,6 @@ export default defineComponent<CellProps>({
             childNode = renderData;
           }
         }
-        
         if (
           !(INTERNAL_COL_DEFINE in column) &&
           cellType === 'body' &&
@@ -282,7 +274,7 @@ export default defineComponent<CellProps>({
       } = cellProps || {};
       const mergedColSpan = (cellColSpan !== undefined ? cellColSpan : colSpan.value) ?? 1;
       const mergedRowSpan = (cellRowSpan !== undefined ? cellRowSpan : rowSpan.value) ?? 1;
-
+      
       if (mergedColSpan === 0 || mergedRowSpan === 0) {
         return null;
       }
@@ -317,6 +309,35 @@ export default defineComponent<CellProps>({
           title = getTitle([childNode]);
         }
       }
+
+      // AddEventListener Hover  
+      const hovering = eagerComputed(() => {
+        const { index } = props;
+        return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
+      });
+      watch([rowSpan,startRow,endRow],()=>{
+        hoverRef.value?.setAttribute("class",classNames(
+          cellPrefixCls,
+          {
+            ...componentPropsCommonClassName,
+              [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
+          },
+          additionalProps.class,
+          cellClassName,
+        ))
+      })
+      componentPropsCommonClassName = {
+        [`${cellPrefixCls}-fix-left`]: isFixLeft && supportSticky.value,
+        [`${cellPrefixCls}-fix-left-first`]: firstFixLeft && supportSticky.value,
+        [`${cellPrefixCls}-fix-left-last`]: lastFixLeft && supportSticky.value,
+        [`${cellPrefixCls}-fix-right`]: isFixRight && supportSticky.value,
+        [`${cellPrefixCls}-fix-right-first`]: firstFixRight && supportSticky.value,
+        [`${cellPrefixCls}-fix-right-last`]: lastFixRight && supportSticky.value,
+        [`${cellPrefixCls}-ellipsis`]: ellipsis,
+        [`${cellPrefixCls}-with-append`]: appendNode,
+        [`${cellPrefixCls}-fix-sticky`]:
+          (isFixLeft || isFixRight) && isSticky && supportSticky.value,
+      }
       
       const componentProps = {
         title,
@@ -326,18 +347,7 @@ export default defineComponent<CellProps>({
         rowSpan: mergedRowSpan !== 1 ? mergedRowSpan : null,
         class: classNames(
           cellPrefixCls,
-          {
-            [`${cellPrefixCls}-fix-left`]: isFixLeft && supportSticky.value,
-            [`${cellPrefixCls}-fix-left-first`]: firstFixLeft && supportSticky.value,
-            [`${cellPrefixCls}-fix-left-last`]: lastFixLeft && supportSticky.value,
-            [`${cellPrefixCls}-fix-right`]: isFixRight && supportSticky.value,
-            [`${cellPrefixCls}-fix-right-first`]: firstFixRight && supportSticky.value,
-            [`${cellPrefixCls}-fix-right-last`]: lastFixRight && supportSticky.value,
-            [`${cellPrefixCls}-ellipsis`]: ellipsis,
-            [`${cellPrefixCls}-with-append`]: appendNode,
-            [`${cellPrefixCls}-fix-sticky`]:
-              (isFixLeft || isFixRight) && isSticky && supportSticky.value,
-          },
+          componentPropsCommonClassName,
           additionalProps.class,
           cellClassName,
         ),
@@ -347,7 +357,6 @@ export default defineComponent<CellProps>({
         onMouseleave,
         style: [additionalProps.style, alignStyle, fixedStyle, cellStyle],
       };
-     
       return (
         <Component {...componentProps} ref={hoverRef}>
           {appendNode}

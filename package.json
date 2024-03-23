@@ -121,7 +121,7 @@
     "@types/lru-cache": "^5.1.0",
     "@types/markdown-it": "^10.0.2",
     "@types/node": "^14.0.0",
-    "@types/postcss-load-config": "^2.0.1",
+    "@types/postcss-load-config": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-legacy": "^2.2.0",

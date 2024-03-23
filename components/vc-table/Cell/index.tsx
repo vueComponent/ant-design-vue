@@ -1,8 +1,8 @@
 import classNames from '../../_util/classNames';
 import { filterEmpty, flattenChildren, isValidElement } from '../../_util/props-util';
 import type { CSSProperties, VNodeArrayChildren } from 'vue';
-import { Text, computed, defineComponent, isVNode } from 'vue';
-
+import { Text, computed, defineComponent, isVNode, ref, watch } from 'vue';
+import eagerComputed from '../../_util/eagerComputed';
 import type {
   DataIndex,
   ColumnType,
@@ -22,7 +22,6 @@ import { useInjectHover } from '../context/HoverContext';
 import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import eagerComputed from '../../_util/eagerComputed';
 import { customRenderSlot } from '../../_util/vnode';
 
 /** Check if cell is in hover range */
@@ -105,6 +104,7 @@ export default defineComponent<CellProps>({
     'transformCellText',
   ] as any,
   setup(props, { slots }) {
+    const hoverRef = ref(null)
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
     const colSpan = computed(() => {
@@ -186,6 +186,7 @@ export default defineComponent<CellProps>({
       // ==================== Child Node ====================
       let cellProps: CellType;
       let childNode;
+      let componentPropsCommonClassName
       const children = slots.default?.();
       if (validateValue(children) || cellType === 'header') {
         childNode = children;
@@ -278,7 +279,6 @@ export default defineComponent<CellProps>({
       } = cellProps || {};
       const mergedColSpan = (cellColSpan !== undefined ? cellColSpan : colSpan.value) ?? 1;
       const mergedRowSpan = (cellRowSpan !== undefined ? cellRowSpan : rowSpan.value) ?? 1;
-
       if (mergedColSpan === 0 || mergedRowSpan === 0) {
         return null;
       }
@@ -315,6 +315,31 @@ export default defineComponent<CellProps>({
         }
       }
 
+      // AddEventListener Hover  
+      watch([rowSpan,startRow,endRow],()=>{
+        hoverRef.value?.setAttribute("class",classNames(
+          cellPrefixCls,
+          {
+            ...componentPropsCommonClassName,
+              [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
+          },
+          additionalProps.class,
+          cellClassName,
+        ))
+      })
+      componentPropsCommonClassName = {
+        [`${cellPrefixCls}-fix-left`]: isFixLeft && supportSticky.value,
+        [`${cellPrefixCls}-fix-left-first`]: firstFixLeft && supportSticky.value,
+        [`${cellPrefixCls}-fix-left-last`]: lastFixLeft && supportSticky.value,
+        [`${cellPrefixCls}-fix-right`]: isFixRight && supportSticky.value,
+        [`${cellPrefixCls}-fix-right-first`]: firstFixRight && supportSticky.value,
+        [`${cellPrefixCls}-fix-right-last`]: lastFixRight && supportSticky.value,
+        [`${cellPrefixCls}-ellipsis`]: ellipsis,
+        [`${cellPrefixCls}-with-append`]: appendNode,
+        [`${cellPrefixCls}-fix-sticky`]:
+          (isFixLeft || isFixRight) && isSticky && supportSticky.value,
+      }
+
       const componentProps = {
         title,
         ...restCellProps,
@@ -323,19 +348,7 @@ export default defineComponent<CellProps>({
         rowSpan: mergedRowSpan !== 1 ? mergedRowSpan : null,
         class: classNames(
           cellPrefixCls,
-          {
-            [`${cellPrefixCls}-fix-left`]: isFixLeft && supportSticky.value,
-            [`${cellPrefixCls}-fix-left-first`]: firstFixLeft && supportSticky.value,
-            [`${cellPrefixCls}-fix-left-last`]: lastFixLeft && supportSticky.value,
-            [`${cellPrefixCls}-fix-right`]: isFixRight && supportSticky.value,
-            [`${cellPrefixCls}-fix-right-first`]: firstFixRight && supportSticky.value,
-            [`${cellPrefixCls}-fix-right-last`]: lastFixRight && supportSticky.value,
-            [`${cellPrefixCls}-ellipsis`]: ellipsis,
-            [`${cellPrefixCls}-with-append`]: appendNode,
-            [`${cellPrefixCls}-fix-sticky`]:
-              (isFixLeft || isFixRight) && isSticky && supportSticky.value,
-            [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
-          },
+          componentPropsCommonClassName,
           additionalProps.class,
           cellClassName,
         ),
@@ -347,7 +360,7 @@ export default defineComponent<CellProps>({
       };
 
       return (
-        <Component {...componentProps}>
+        <Component {...componentProps} ref={hoverRef}>
           {appendNode}
           {childNode}
           {slots.dragHandle?.()}

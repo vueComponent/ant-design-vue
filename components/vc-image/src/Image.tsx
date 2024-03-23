@@ -12,6 +12,7 @@ import PreviewGroup, { context } from './PreviewGroup';
 import type { IDialogChildProps } from '../../vc-dialog/IDialogPropTypes';
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
 import type { PreviewProps } from './Preview';
+import { COMMON_PROPS } from './common';
 
 export type ImagePreviewType = Omit<
   IDialogChildProps,
@@ -88,6 +89,16 @@ const ImageInternal = defineComponent({
     const previewVisible = computed(() => preview.value.visible);
     const getPreviewContainer = computed(() => preview.value.getContainer);
     const isControlled = computed(() => previewVisible.value !== undefined);
+
+    const imgCommonProps = computed<ImgHTMLAttributes>(() => {
+      const commonProps = {};
+      COMMON_PROPS.forEach(key => {
+        if (attrs[key]) {
+          commonProps[key] = attrs[key];
+        }
+      });
+      return commonProps;
+    });
 
     const onPreviewVisibleChange = (val, preval) => {
       preview.value.onVisibleChange?.(val, preval);
@@ -176,7 +187,12 @@ const ImageInternal = defineComponent({
             return () => {};
           }
 
-          unRegister = registerImage(currentId.value, src.value, canPreview.value);
+          unRegister = registerImage(
+            currentId.value,
+            src.value,
+            canPreview.value,
+            imgCommonProps.value,
+          );
 
           if (!canPreview.value) {
             unRegister();
@@ -202,31 +218,15 @@ const ImageInternal = defineComponent({
         wrapperStyle,
         rootClassName,
       } = props;
-      const {
-        width,
-        height,
-        crossorigin,
-        decoding,
-        alt,
-        sizes,
-        srcset,
-        usemap,
-        class: cls,
-        style,
-      } = attrs as ImgHTMLAttributes;
+      const { width, height, class: cls, style } = attrs as ImgHTMLAttributes;
       const { icons, maskClassName, ...dialogProps } = preview.value;
 
       const wrappperClass = cn(prefixCls, wrapperClassName, rootClassName, {
         [`${prefixCls}-error`]: isError.value,
       });
       const mergedSrc = isError.value && fallback ? fallback : src.value;
-      const imgCommonProps = {
-        crossorigin,
-        decoding,
-        alt,
-        sizes,
-        srcset,
-        usemap,
+      const commonProps = {
+        ...imgCommonProps.value,
         width,
         height,
         class: cn(
@@ -241,7 +241,6 @@ const ImageInternal = defineComponent({
           ...(style as CSSProperties),
         },
       };
-
       return (
         <>
           <div
@@ -260,7 +259,7 @@ const ImageInternal = defineComponent({
             }}
           >
             <img
-              {...imgCommonProps}
+              {...commonProps}
               {...(isError.value && fallback
                 ? {
                     src: fallback,
@@ -288,10 +287,10 @@ const ImageInternal = defineComponent({
               onClose={onPreviewClose}
               mousePosition={mousePosition.value}
               src={mergedSrc}
-              alt={alt}
               getContainer={getPreviewContainer.value}
               icons={icons}
               rootClassName={rootClassName}
+              imgCommonProps={imgCommonProps.value}
             />
           )}
         </>

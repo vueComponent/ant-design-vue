@@ -8,7 +8,7 @@ import {
   watch,
   cloneVNode,
 } from 'vue';
-import type { VNode, PropType } from 'vue';
+import type { VNode, PropType, ImgHTMLAttributes } from 'vue';
 
 import classnames from '../../_util/classNames';
 import Dialog from '../../vc-dialog';
@@ -39,6 +39,7 @@ export interface PreviewProps extends Omit<IDialogChildProps, 'onClose' | 'mask'
     flipX?: VNode;
     flipY?: VNode;
   };
+  imgCommonProps?: ImgHTMLAttributes;
 }
 
 const initialPosition = {
@@ -53,6 +54,10 @@ export const previewProps = {
   icons: {
     type: Object as PropType<PreviewProps['icons']>,
     default: () => ({} as PreviewProps['icons']),
+  },
+  imgCommonProps: {
+    type: Object as PropType<PreviewProps['imgCommonProps']>,
+    default: () => ({}),
   },
 };
 const Preview = defineComponent({
@@ -345,7 +350,7 @@ const Preview = defineComponent({
     });
 
     return () => {
-      const { visible, prefixCls, rootClassName } = props;
+      const { visible, prefixCls, rootClassName, imgCommonProps } = props;
       return (
         <Dialog
           {...attrs}
@@ -384,12 +389,12 @@ const Preview = defineComponent({
             }}
           >
             <img
+              {...imgCommonProps}
               onMousedown={onMouseDown}
               onDblclick={onDoubleClick}
               ref={imgRef}
               class={`${props.prefixCls}-img`}
               src={combinationSrc.value}
-              alt={props.alt}
               style={{
                 transform: `scale3d(${flip.x * scale.value}, ${flip.y * scale.value}, 1) rotate(${
                   rotate.value

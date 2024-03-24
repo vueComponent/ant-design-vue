@@ -30,8 +30,8 @@ export const getTransitionProps = (transitionName: string, opt: TransitionProps 
         enterFromClass: `${transitionName}-enter ${transitionName}-enter-prepare ${transitionName}-enter-start`,
         enterActiveClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
         enterToClass: `${transitionName}-enter ${transitionName}-enter-active`,
-        leaveFromClass: ` ${transitionName}-leave`,
-        leaveActiveClass: `${transitionName}-leave ${transitionName}-leave-active`,
+        leaveFromClass: `${transitionName}-leave ${transitionName}-leave-prepare ${transitionName}-leave-start`,
+        leaveActiveClass: `${transitionName}-leave ${transitionName}-leave-prepare`,
         leaveToClass: `${transitionName}-leave ${transitionName}-leave-active`,
         ...opt,
       }

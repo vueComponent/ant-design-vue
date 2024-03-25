@@ -172,7 +172,7 @@ export default defineComponent({
     const handleChange = (e: Event) => {
       const { composing } = e.target as any;
       let triggerValue = (e.target as any).value;
-      compositing.value = !!((e as any).isComposing || composing);
+      compositing.value = !!((e as any).isComposing && composing);
       if ((compositing.value && props.lazy) || stateValue.value === triggerValue) return;
 
       if (hasMaxLength.value) {

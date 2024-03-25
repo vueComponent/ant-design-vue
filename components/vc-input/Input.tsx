@@ -93,8 +93,7 @@ export default defineComponent({
     const handleChange = (e: ChangeEvent) => {
       const { value, composing } = e.target as any;
       // https://github.com/vueComponent/ant-design-vue/issues/2203
-      if ((((e as any).isComposing || composing) && props.lazy) || stateValue.value === value)
-        return;
+      if (((e as any).isComposing && composing && props.lazy) || stateValue.value === value) return;
       const newVal = e.target.value;
       resolveOnChange(inputRef.value, e, triggerChange);
       setValue(newVal);

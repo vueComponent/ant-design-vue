@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Table from '..';
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 import { asyncExpect, sleep } from '../../../tests/utils';
 
 describe('Table.pagination', () => {
@@ -40,7 +40,7 @@ describe('Table.pagination', () => {
 
   it('renders pagination correctly', done => {
     const wrapper = mount(Table, getTableOptions());
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });
@@ -89,7 +89,7 @@ describe('Table.pagination', () => {
   it('repaginates when pageSize change', () => {
     const wrapper = mount(Table, getTableOptions());
     wrapper.setProps({ pagination: { pageSize: 1 } });
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(renderedNames(wrapper)).toEqual(['Jack']);
     });
   });
@@ -109,7 +109,7 @@ describe('Table.pagination', () => {
         onChange: handleChange,
       }),
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       const pager = wrapper.findAllComponents({ name: 'Pager' });
       pager[pager.length - 1].trigger('click');
 
@@ -141,10 +141,10 @@ describe('Table.pagination', () => {
   // https://codepen.io/afc163/pen/dVeNoP?editors=001
   it('should have pager when change pagination from false to undefined', done => {
     const wrapper = mount(Table, getTableOptions({ pagination: false }));
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.findAll('.ant-pagination')).toHaveLength(0);
       wrapper.setProps({ pagination: undefined });
-      Vue.nextTick(() => {
+      nextTick(() => {
         expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
         expect(wrapper.findAll('.ant-pagination-item-active')).toHaveLength(1);
         done();
@@ -188,10 +188,10 @@ describe('Table.pagination', () => {
   // https://github.com/ant-design/ant-design/issues/5259
   it('change to correct page when data source changes', done => {
     const wrapper = mount(Table, getTableOptions({ pagination: { pageSize: 1 } }));
-    Vue.nextTick(() => {
+    nextTick(() => {
       wrapper.find('.ant-pagination-item-3').trigger('click');
       wrapper.setProps({ dataSource: [data[0]] });
-      Vue.nextTick(() => {
+      nextTick(() => {
         expect(wrapper.find('.ant-pagination-item-1').classes()).toContain(
           'ant-pagination-item-active',
         );

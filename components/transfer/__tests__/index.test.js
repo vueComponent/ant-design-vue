@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Transfer from '..';
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 import { sleep, asyncExpect } from '../../../tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
 
@@ -111,7 +111,7 @@ describe('Transfer', () => {
         sync: false,
       },
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       wrapper.findAll('.ant-btn')[0].trigger('click'); // move selected keys to right list
       expect(handleChange).toHaveBeenCalledWith(['a', 'b'], 'right', ['a']);
       done();
@@ -129,7 +129,7 @@ describe('Transfer', () => {
         sync: false,
       },
     );
-    Vue.nextTick(() => {
+    nextTick(() => {
       wrapper.findAll('.ant-btn')[0].trigger('click');
       expect(handleChange).toHaveBeenCalledWith(['b'], 'right', ['b']);
       done();
@@ -203,7 +203,7 @@ describe('Transfer', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       wrapper
         .findAll('.ant-transfer-list-header input[type="checkbox"]')
         .filter(n => {
@@ -224,7 +224,7 @@ describe('Transfer', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       wrapper
         .findAll('.ant-transfer-list-header input[type="checkbox"]')
         .filter(n => {
@@ -258,11 +258,11 @@ describe('Transfer', () => {
       },
     );
 
-    Vue.nextTick(() => {
+    nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'a';
       input.trigger('input');
-      Vue.nextTick(() => {
+      nextTick(() => {
         expect(
           wrapper
             .findAll('.ant-transfer-list-content')[0]
@@ -297,11 +297,11 @@ describe('Transfer', () => {
       },
     );
 
-    Vue.nextTick(() => {
+    nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'content2';
       input.trigger('input');
-      Vue.nextTick(() => {
+      nextTick(() => {
         expect(
           wrapper
             .findAll('.ant-transfer-list')[0]
@@ -330,11 +330,11 @@ describe('Transfer', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'content2';
       input.trigger('input');
-      Vue.nextTick(() => {
+      nextTick(() => {
         wrapper
           .findAll('.ant-transfer-list')[0]
           .findAll('.ant-transfer-list-header input[type="checkbox"]')
@@ -370,11 +370,11 @@ describe('Transfer', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'content2';
       input.trigger('input');
-      Vue.nextTick(() => {
+      nextTick(() => {
         wrapper
           .findAll('.ant-transfer-list')[0]
           .findAll('.ant-transfer-list-header input[type="checkbox"]')
@@ -382,7 +382,7 @@ describe('Transfer', () => {
             return !n.element.checked;
           })
           .trigger('change');
-        Vue.nextTick(() => {
+        nextTick(() => {
           wrapper.findAll('.ant-btn')[0].trigger('click');
           expect(handleChange).toHaveBeenCalledWith(['1', '3', '4'], 'right', ['1']);
           done();
@@ -407,7 +407,7 @@ describe('Transfer', () => {
       },
       sync: false,
     });
-    Vue.nextTick(() => {
+    nextTick(() => {
       wrapper
         .findAll('.ant-transfer-list-content-item')
         .filter(n => {
@@ -419,12 +419,12 @@ describe('Transfer', () => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'a';
       input.trigger('input');
-      Vue.nextTick(() => {
+      nextTick(() => {
         wrapper
           .findAll('.ant-transfer-list')[0]
           .findAll('.ant-transfer-list-header input[type="checkbox"]')
           .trigger('change');
-        Vue.nextTick(() => {
+        nextTick(() => {
           expect(handleSelectChange).toHaveBeenLastCalledWith(['b', 'a'], []);
           wrapper
             .findAll('.ant-transfer-list')[0]

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import * as Vue from 'vue';
+import { nextTick } from 'vue';
 import Upload from '..';
 import { errorRequest, successRequest } from './requests';
 import PropsTypes from '../../_util/vue-types';
@@ -51,7 +51,7 @@ describe('Upload List', () => {
       sync: false,
     };
     const wrapper = mount(Upload, props);
-    Vue.nextTick(() => {
+    nextTick(() => {
       fileList.forEach((file, i) => {
         const linkNode = wrapper.findAll('.ant-upload-list-item-thumbnail')[i];
         const imgNode = wrapper.findAll('.ant-upload-list-item-thumbnail img')[i];
@@ -191,7 +191,7 @@ describe('Upload List', () => {
           files: [mockFile],
         },
       });
-      Vue.nextTick(() => {
+      nextTick(() => {
         expect(wrapper.vm.sFileList.length).toBe(fileList.length + 1);
         expect(handleChange.mock.calls[0][0].fileList).toHaveLength(3);
         done();
@@ -423,7 +423,7 @@ describe('Upload List', () => {
       sync: false,
     };
     const wrapper = mount(Upload, props);
-    Vue.nextTick(() => {
+    nextTick(() => {
       expect(wrapper.html()).toMatchSnapshot();
       done();
     });

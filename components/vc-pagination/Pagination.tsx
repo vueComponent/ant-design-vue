@@ -283,6 +283,7 @@ export default defineComponent({
     },
     runIfEnter(event, callback, ...restParams) {
       if (event.key === 'Enter' || event.charCode === 13) {
+        event.preventDefault();
         callback(...restParams);
       }
     },

@@ -4,7 +4,9 @@ import { placements } from './placements';
 import Content from './Content';
 import { getPropsSlot } from '../../_util/props-util';
 import type { CSSProperties, PropType } from 'vue';
-import { defineComponent, shallowRef, watchEffect } from 'vue';
+import { defineComponent, inject, shallowRef, unref, watchEffect } from 'vue';
+import { popupContextKey } from '../../vc-trigger/Popup/context';
+
 function noop() {}
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -42,10 +44,17 @@ export default defineComponent({
 
     const getPopupElement = () => {
       const { prefixCls, tipId, overlayInnerStyle } = props;
+
+      const injectData = inject(popupContextKey, {
+        arrow: true,
+      });
+      const arrow = unref(injectData.arrow);
       return [
-        <div class={`${prefixCls}-arrow`} key="arrow">
-          {getPropsSlot(slots, props, 'arrowContent')}
-        </div>,
+        arrow ? (
+          <div class={`${prefixCls}-arrow`} key="arrow">
+            {getPropsSlot(slots, props, 'arrowContent')}
+          </div>
+        ) : null,
         <Content
           key="content"
           prefixCls={prefixCls}

@@ -5,9 +5,11 @@ import type { CSSProperties } from 'vue';
 import {
   computed,
   defineComponent,
+  inject,
   shallowRef,
   toRef,
   Transition,
+  unref,
   watch,
   withModifiers,
 } from 'vue';
@@ -20,6 +22,7 @@ import type { PopupInnerProps } from './interface';
 import { innerProps } from './interface';
 import { getTransitionProps } from '../../_util/transition';
 import supportsPassive from '../../_util/supportsPassive';
+import { popupContextKey } from './context';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -171,7 +174,18 @@ export default defineComponent({
       if (childNode.length > 1) {
         childNode = <div class={`${prefixCls}-content`}>{childNode}</div>;
       }
-      const mergedClassName = classNames(prefixCls, attrs.class, alignedClassName.value);
+
+      const injectData = inject(popupContextKey, {
+        arrow: true,
+      });
+
+      const arrow = unref(injectData.arrow);
+      const mergedClassName = classNames(
+        prefixCls,
+        attrs.class,
+        alignedClassName.value,
+        !arrow && `${prefixCls}-arrow-hidden`,
+      );
       const hasAnimate = visible.value || !props.visible;
       const transitionProps = hasAnimate ? getTransitionProps(motion.value.name, motion.value) : {};
 

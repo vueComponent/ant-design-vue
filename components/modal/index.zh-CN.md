@@ -159,3 +159,5 @@ router.beforeEach((to, from, next) => {
   });
 </script>
 ```
+
+> 可通过 [App 包裹组件](/components/app-cn) 简化`useModal`等方法需要手动植入 contextHolder 的问题。

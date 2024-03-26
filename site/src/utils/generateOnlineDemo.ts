@@ -43,10 +43,11 @@ app.use(Antd).mount('#app');
 `;
 
 function getDeps(code: string) {
+  const deps = Object.assign({}, packageInfo.dependencies, packageInfo.devDependencies);
   return (code.match(/from '([^']+)';\n/g) || [])
     .map(v => v.slice(6, v.length - 3))
     .reduce((prevV, dep) => {
-      prevV[dep] = 'latest';
+      prevV[dep] = deps[dep] || 'latest';
       return prevV;
     }, {});
 }

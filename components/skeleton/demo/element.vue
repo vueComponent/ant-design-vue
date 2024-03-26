@@ -21,6 +21,7 @@ Skeleton Button, Avatar, Input and Image.
     <a-skeleton-button :active="active" :size="size" :shape="buttonShape" :block="block" />
     <a-skeleton-avatar :active="active" :size="size" :shape="avatarShape" />
     <a-skeleton-input style="width: 200px" :active="active" :size="size" />
+    <a-skeleton-card style="width: 200px" :active="active" :size="size" />
   </a-space>
   <br />
   <br />

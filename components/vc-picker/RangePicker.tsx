@@ -489,8 +489,12 @@ function RangerPicker<DateType>() {
         }, 0);
       }
 
-      function triggerChange(newValue: RangeValue<DateType>, sourceIndex: 0 | 1) {
-        let values = newValue;
+      function triggerChange(
+        newValue: RangeValue<DateType> | (() => RangeValue<DateType>),
+        sourceIndex: 0 | 1,
+      ) {
+        const isFunction = typeof newValue === 'function';
+        let values = isFunction ? newValue() : newValue;
         let startValue = getValue(values, 0);
         let endValue = getValue(values, 1);
         const {

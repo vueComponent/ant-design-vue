@@ -270,8 +270,11 @@ function Picker<DateType>() {
       });
 
       // ============================ Trigger ============================
-      const triggerChange = (newValue: DateType | null) => {
+      const triggerChange = (newValue: DateType | (() => DateType) | null) => {
         const { onChange, generateConfig, locale } = props;
+        if (typeof newValue === 'function') {
+          newValue = (newValue as () => DateType)();
+        }
         setSelectedValue(newValue);
         setInnerValue(newValue);
 

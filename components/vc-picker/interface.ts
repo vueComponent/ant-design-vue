@@ -94,6 +94,7 @@ export type DisabledTime<DateType> = (date: DateType | null) => DisabledTimes;
 export type OnPanelChange<DateType> = (value: DateType, mode: PanelMode) => void;
 
 export type EventValue<DateType> = DateType | null;
+
 export type RangeValue<DateType> = [EventValue<DateType>, EventValue<DateType>] | null;
 
 export type Components = {
@@ -111,5 +112,5 @@ export type CustomFormat<DateType> = (value: DateType) => string;
 
 export interface PresetDate<T> {
   label: VueNode;
-  value: T;
+  value: T | (() => T);
 }

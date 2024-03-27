@@ -10,6 +10,8 @@ export const innerProps = {
   destroyPopupOnHide: Boolean,
   forceRender: Boolean,
 
+  arrow: { type: Boolean, default: true },
+
   // Legacy Motion
   animation: [String, Object],
   transitionName: String,

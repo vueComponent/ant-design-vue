@@ -210,6 +210,7 @@ const Tour = defineComponent({
           />
           <Trigger
             {...restProps}
+            arrow={!!restProps.arrow}
             builtinPlacements={
               !curStep.value.target
                 ? undefined

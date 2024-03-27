@@ -15,7 +15,7 @@ Support show, hide or keep arrow in the center.
 </docs>
 
 <template>
-  <div id="components-a-tooltip-demo-placement">
+  <div id="components-a-tooltip-demo-arrow">
     <div style="margin-bottom: 24px">
       <a-radio-group v-model:value="arrow" button-style="solid">
         <a-radio-button :value="true">show</a-radio-button>
@@ -119,7 +119,7 @@ const mergedArrow = computed(() => {
 });
 </script>
 <style scoped>
-:deep(#components-a-tooltip-demo-placement) .ant-btn {
+:deep(#components-a-tooltip-demo-arrow) .ant-btn {
   width: 70px;
   text-align: center;
   padding: 0;

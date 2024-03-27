@@ -59,7 +59,6 @@ const Popover = defineComponent({
         </>
       );
     };
-
     return () => {
       const overlayCls = classNames(props.overlayClassName, hashId.value);
       return wrapSSR(

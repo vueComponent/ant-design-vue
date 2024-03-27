@@ -47,9 +47,8 @@ export default defineComponent({
     const getPopupElement = () => {
       const { prefixCls, tipId, overlayInnerStyle } = props;
 
-      const showArrow = !!props.arrow;
       return [
-        showArrow ? (
+        !!props.arrow ? (
           <div class={`${prefixCls}-arrow`} key="arrow">
             {getPropsSlot(slots, props, 'arrowContent')}
           </div>

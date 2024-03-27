@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-import { computed, defineComponent, provide, ref, toRef } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import { filterEmpty, initDefaultProps } from '../_util/props-util';
@@ -11,7 +11,6 @@ import { tooltipDefaultProps } from '../tooltip/Tooltip';
 import useStyle from './style';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
-import { popupContextKey } from '../vc-trigger/Popup/context';
 
 export const popoverProps = () => ({
   ...abstractTooltipProps(),
@@ -60,10 +59,6 @@ const Popover = defineComponent({
         </>
       );
     };
-
-    provide(popupContextKey, {
-      arrow: toRef(props, 'arrow'),
-    });
 
     return () => {
       const overlayCls = classNames(props.overlayClassName, hashId.value);

@@ -4,8 +4,7 @@ import { placements } from './placements';
 import Content from './Content';
 import { getPropsSlot } from '../../_util/props-util';
 import type { CSSProperties, PropType } from 'vue';
-import { defineComponent, inject, shallowRef, unref, watchEffect } from 'vue';
-import { popupContextKey } from '../../vc-trigger/Popup/context';
+import { defineComponent, shallowRef, watchEffect } from 'vue';
 
 function noop() {}
 export default defineComponent({
@@ -38,6 +37,9 @@ export default defineComponent({
     popupVisible: { type: Boolean, default: undefined },
     onVisibleChange: Function,
     onPopupAlign: Function,
+    arrow: {
+      type: [Boolean, Object] as PropType<boolean | { pointAtCenter: boolean }>,
+    },
   },
   setup(props, { slots, attrs, expose }) {
     const triggerDOM = shallowRef();
@@ -45,12 +47,9 @@ export default defineComponent({
     const getPopupElement = () => {
       const { prefixCls, tipId, overlayInnerStyle } = props;
 
-      const injectData = inject(popupContextKey, {
-        arrow: true,
-      });
-      const arrow = unref(injectData.arrow);
+      const showArrow = !!props.arrow;
       return [
-        arrow ? (
+        showArrow ? (
           <div class={`${prefixCls}-arrow`} key="arrow">
             {getPropsSlot(slots, props, 'arrowContent')}
           </div>
@@ -131,6 +130,7 @@ export default defineComponent({
         onPopupVisibleChange: props.onVisibleChange || (noop as any),
         onPopupAlign: props.onPopupAlign || noop,
         ref: triggerDOM,
+        arrow: !!props.arrow,
         popup: getPopupElement(),
       };
       return <Trigger {...triggerProps} v-slots={{ default: slots.default }}></Trigger>;

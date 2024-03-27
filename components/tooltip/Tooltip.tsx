@@ -288,6 +288,7 @@ export default defineComponent({
         ...attrs,
         ...(props as TooltipProps),
         prefixCls: prefixCls.value,
+        arrow: !!props.arrow,
         getPopupContainer: getPopupContainer?.value,
         builtinPlacements: tooltipPlacements.value,
         visible: tempVisible,

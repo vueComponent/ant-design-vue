@@ -145,11 +145,16 @@ export default defineComponent({
     });
 
     const tooltipPlacements = computed(() => {
-      const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = props;
+      const { builtinPlacements, autoAdjustOverflow, arrow, arrowPointAtCenter } = props;
+      let mergedArrowPointAtCenter = arrowPointAtCenter;
+
+      if (typeof arrow === 'object') {
+        mergedArrowPointAtCenter = arrow.pointAtCenter ?? arrowPointAtCenter;
+      }
       return (
         builtinPlacements ||
         getPlacements({
-          arrowPointAtCenter,
+          arrowPointAtCenter: mergedArrowPointAtCenter,
           autoAdjustOverflow,
         })
       );

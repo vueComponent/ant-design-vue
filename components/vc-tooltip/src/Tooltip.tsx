@@ -37,9 +37,7 @@ export default defineComponent({
     popupVisible: { type: Boolean, default: undefined },
     onVisibleChange: Function,
     onPopupAlign: Function,
-    arrow: {
-      type: [Boolean, Object] as PropType<boolean | { pointAtCenter: boolean }>,
-    },
+    arrow: { type: Boolean, default: true },
   },
   setup(props, { slots, attrs, expose }) {
     const triggerDOM = shallowRef();

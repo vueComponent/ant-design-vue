@@ -192,6 +192,8 @@ export default defineComponent({
     const sliderProps = {
       ...this.$attrs,
       ...settings,
+      // fix: https://github.com/vueComponent/ant-design-vue/issues/7461
+      slidesToShow: Math.min(settings.slidesToShow, children.length),
       children: newChildren,
       ref: this.innerSliderRefHandler,
     };

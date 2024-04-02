@@ -17,11 +17,7 @@ Support show, hide or keep arrow in the center.
 <template>
   <div id="components-a-tooltip-demo-arrow">
     <div style="margin-bottom: 24px">
-      <a-radio-group v-model:value="arrow" button-style="solid">
-        <a-radio-button :value="true">show</a-radio-button>
-        <a-radio-button :value="false">hidden</a-radio-button>
-        <a-radio-button :value="'center'">center</a-radio-button>
-      </a-radio-group>
+      <a-segmented v-model:value="arrow" :options="options" />
     </div>
     <div :style="{ marginLeft: `${buttonWidth}px`, whiteSpace: 'nowrap' }">
       <a-tooltip placement="topLeft" :arrow="mergedArrow">
@@ -109,13 +105,31 @@ Support show, hide or keep arrow in the center.
 import { ref, computed } from 'vue';
 const buttonWidth = 70;
 
-const arrow = ref<{ pointAtCenter: boolean } | boolean>(true);
+const arrow = ref<string>('show');
 
+const options = [
+  {
+    label: 'Show',
+    value: 'show',
+  },
+  {
+    label: 'Hide',
+    value: 'hide',
+  },
+  {
+    label: 'Center',
+    value: 'center',
+  },
+];
 const mergedArrow = computed(() => {
-  if (typeof arrow.value === 'string') {
-    return { pointAtCenter: true };
+  switch (arrow.value) {
+    case 'show':
+      return true;
+    case 'hide':
+      return false;
+    case 'center':
+      return { pointAtCenter: true };
   }
-  return arrow.value;
 });
 </script>
 <style scoped>

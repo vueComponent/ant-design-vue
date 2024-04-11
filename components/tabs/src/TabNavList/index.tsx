@@ -314,11 +314,13 @@ export default defineComponent({
           const btnRef = btnRefs.value.get(key);
           const btnNode = (btnRef as any)?.$el || btnRef;
           if (btnNode) {
+            // fix get offset number not correct
+            const { width, height, left, top } = btnNode.getBoundingClientRect();
             newSizes.set(key, {
-              width: btnNode.offsetWidth,
-              height: btnNode.offsetHeight,
-              left: btnNode.offsetLeft,
-              top: btnNode.offsetTop,
+              width,
+              height,
+              left,
+              top,
             });
           }
         });

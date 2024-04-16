@@ -97,7 +97,7 @@ import type { MessageInstance } from 'ant-design-vue/es/message/interface';
 import type { ModalStaticFunctions } from 'ant-design-vue/es/modal/confirm';
 import type { NotificationInstance } from 'ant-design-vue/es/notification/interface';
 
-export const useGloablStore = defineStore('global', () => {
+export const useGlobalStore = defineStore('global', () => {
   const message: MessageInstance = ref();
   const notification: NotificationInstance = ref();
   const modal: Omit<ModalStaticFunctions, 'warn'> = ref();

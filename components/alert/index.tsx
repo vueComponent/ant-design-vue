@@ -90,6 +90,8 @@ const Alert = defineComponent({
     };
 
     const animationEnd = () => {
+      // 根据closing判断是否由用户点击关闭（使用isShow控制组件也会触发 transitionProps 里的事件）
+      if (!closing.value) return;
       closing.value = false;
       closed.value = true;
       props.afterClose?.();
@@ -167,9 +169,11 @@ const Alert = defineComponent({
         css: true,
         onAfterLeave: animationEnd,
         onBeforeLeave: (node: HTMLDivElement) => {
+          if (!closing.value) return;
           node.style.maxHeight = `${node.offsetHeight}px`;
         },
         onLeave: (node: HTMLDivElement) => {
+          if (!closing.value) return;
           node.style.maxHeight = '0px';
         },
       });

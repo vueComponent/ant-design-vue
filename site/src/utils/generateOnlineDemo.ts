@@ -60,46 +60,23 @@ export function getCodeSandboxParams(code: string, meta: Meta): string {
   return getParameters({
     files: {
       'package.json': {
-        content: JSON.stringify({
-          title: meta.title,
-          type: 'module',
-          scripts: {
-            dev: 'vite',
-            build: 'vue-tsc --noEmit && vite build',
-            preview: 'vite preview',
-          },
-          dependencies: {
-            ...getDeps(code),
-            vue: packageInfo.dependencies.vue,
-            'ant-design-vue': packageInfo.version,
-          },
-          devDependencies: {
-            '@vitejs/plugin-vue': '^3.0.3',
-            less: '^4.1.3',
-            typescript: '^4.6.4',
-            vite: '^3.0.7',
-            'vue-tsc': '^0.39.5',
-          },
-        }),
-        isBinary: false,
-      },
-      'vite.config.ts': {
-        content: `
-        import { defineConfig } from "vite";
-        import vue from "@vitejs/plugin-vue";
-        
-        // https://vitejs.dev/config/
-        export default defineConfig({
-          plugins: [vue()],
-          css: {
-            preprocessorOptions: {
-              less: {
-                javascriptEnabled: true,
-              },
+        content: JSON.stringify(
+          {
+            title: meta.title,
+            dependencies: {
+              ...getDeps(code),
+              vue: packageInfo.peerDependencies.vue,
+              'ant-design-vue': packageInfo.version,
             },
+            devDependencies: {
+              '@vue/cli-plugin-babel': '~4.5.0',
+              typescript: '^4.0.5',
+            },
+            browserslist: ['> 0.2%', 'not dead'],
           },
-        });        
-        `,
+          undefined,
+          2,
+        ),
         isBinary: false,
       },
       'index.html': {

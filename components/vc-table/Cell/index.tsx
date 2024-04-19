@@ -104,7 +104,6 @@ export default defineComponent<CellProps>({
     'transformCellText',
   ] as any,
   setup(props, { slots }) {
-    const hoverRef = ref(null)
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
     const colSpan = computed(() => {
@@ -157,6 +156,29 @@ export default defineComponent<CellProps>({
         return vnode;
       }
     };
+
+    // AddEventListener Hover
+    const hoverRef = ref(null);
+    let componentPropsCommonClassName;
+    let additionalProps;
+    let cellPrefixCls;
+    let cellProps: CellType;
+    let cellClassName;
+    watch([rowSpan, startRow, endRow], () => {
+      hoverRef.value?.setAttribute(
+        'class',
+        classNames(
+          cellPrefixCls,
+          {
+            ...componentPropsCommonClassName,
+            [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
+          },
+          additionalProps.class,
+          cellClassName,
+        ),
+      );
+    });
+
     return () => {
       const {
         prefixCls,
@@ -173,7 +195,6 @@ export default defineComponent<CellProps>({
         firstFixRight,
         lastFixRight,
         appendNode = slots.appendNode?.(),
-        additionalProps = {},
         ellipsis,
         align,
         rowType,
@@ -181,12 +202,10 @@ export default defineComponent<CellProps>({
         column = {},
         cellType,
       } = props;
-      const cellPrefixCls = `${prefixCls}-cell`;
-
+      cellPrefixCls = `${prefixCls}-cell`;
+      additionalProps = props.additionalProps ? props.additionalProps : {};
       // ==================== Child Node ====================
-      let cellProps: CellType;
       let childNode;
-      let componentPropsCommonClassName
       const children = slots.default?.();
       if (validateValue(children) || cellType === 'header') {
         childNode = children;
@@ -274,9 +293,9 @@ export default defineComponent<CellProps>({
         colSpan: cellColSpan,
         rowSpan: cellRowSpan,
         style: cellStyle,
-        class: cellClassName,
         ...restCellProps
       } = cellProps || {};
+      cellClassName = cellProps ? cellProps.class : '';
       const mergedColSpan = (cellColSpan !== undefined ? cellColSpan : colSpan.value) ?? 1;
       const mergedRowSpan = (cellRowSpan !== undefined ? cellRowSpan : rowSpan.value) ?? 1;
       if (mergedColSpan === 0 || mergedRowSpan === 0) {
@@ -315,18 +334,6 @@ export default defineComponent<CellProps>({
         }
       }
 
-      // AddEventListener Hover  
-      watch([rowSpan,startRow,endRow],()=>{
-        hoverRef.value?.setAttribute("class",classNames(
-          cellPrefixCls,
-          {
-            ...componentPropsCommonClassName,
-              [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
-          },
-          additionalProps.class,
-          cellClassName,
-        ))
-      })
       componentPropsCommonClassName = {
         [`${cellPrefixCls}-fix-left`]: isFixLeft && supportSticky.value,
         [`${cellPrefixCls}-fix-left-first`]: firstFixLeft && supportSticky.value,
@@ -338,7 +345,7 @@ export default defineComponent<CellProps>({
         [`${cellPrefixCls}-with-append`]: appendNode,
         [`${cellPrefixCls}-fix-sticky`]:
           (isFixLeft || isFixRight) && isSticky && supportSticky.value,
-      }
+      };
 
       const componentProps = {
         title,

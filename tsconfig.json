@@ -22,7 +22,8 @@
     "skipLibCheck": true,
     "allowJs": true,
     "importsNotUsedAsValues": "preserve",
-    "stripInternal": true
+    "stripInternal": true,
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",

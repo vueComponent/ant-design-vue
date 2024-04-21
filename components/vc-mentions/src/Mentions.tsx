@@ -60,8 +60,7 @@ export default defineComponent({
       emit('change', val);
     };
 
-    const onChange: EventHandler = ({ target: { value, composing }, isComposing }) => {
-      if (isComposing || composing) return;
+    const onChange: EventHandler = ({ target: { value } }) => {
       triggerChange(value);
     };
 

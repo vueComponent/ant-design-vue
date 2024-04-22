@@ -6,7 +6,6 @@ import { genWebTypes } from './web-types';
 import { outputFileSync, readFileSync } from 'fs-extra';
 import type { Options, VueTag } from './type';
 import { getComponentName, normalizePath, toKebabCase } from './utils';
-import { genVeturAttributes, genVeturTags } from './vetur';
 import { flatMap } from 'lodash';
 
 async function readMarkdown(options: Options): Promise<Map<String, VueTag>> {
@@ -78,13 +77,6 @@ export async function parseAndWrite(options: Options): Promise<Number> {
   const tagsFromTypings = await readTypings(options);
   const tags = mergeTags([tagsFromMarkdown, tagsFromTypings]);
   const webTypes = genWebTypes(tags, options);
-  const veturTags = genVeturTags(tags);
-  const veturAttributes = genVeturAttributes(tags);
-  outputFileSync(join(options.outputDir, 'tags.json'), JSON.stringify(veturTags, null, 2));
-  outputFileSync(
-    join(options.outputDir, 'attributes.json'),
-    JSON.stringify(veturAttributes, null, 2),
-  );
   outputFileSync(join(options.outputDir, 'web-types.json'), JSON.stringify(webTypes, null, 2));
   return tags.length;
 }

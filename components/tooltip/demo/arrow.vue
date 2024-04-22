@@ -128,6 +128,7 @@ const mergedArrow = computed(() => {
     case 'hide':
       return false;
     case 'center':
+    default:
       return { pointAtCenter: true };
   }
 });

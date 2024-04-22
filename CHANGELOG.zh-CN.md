@@ -10,6 +10,22 @@
 
 ---
 
+## 4.2.0
+
+- 🌟 优化 layout 组件切换 dark 模式时 textColor 变化 [#7498](https://github.com/vueComponent/ant-design-vue/issues/7498)
+- 🌟 Tooltip 新增 arrow 隐藏配置 [#7459](https://github.com/vueComponent/ant-design-vue/issues/7459)
+- 🌟 优化 Table hover 性能 [#7451](https://github.com/vueComponent/ant-design-vue/issues/7451)
+- 🐞 修复 useForm 校验时更改 model，导致校验错误问题 [#ffd4d8](https://github.com/vueComponent/ant-design-vue/commit/ffd4d8fe927f9ea40cbb6358ad997c447bd9a74e)
+- 🐞 修复 Tabs 折叠计算错误问题 [#7491](https://github.com/vueComponent/ant-design-vue/issues/7491)
+- 🐞 修复 Qrcode 缺少类型提示问题 [#7502](https://github.com/vueComponent/ant-design-vue/issues/7502)
+- 🐞 修复 Menu 在 SSR 下渲染错误问题 [#7349](https://github.com/vueComponent/ant-design-vue/issues/7349)
+- 🐞 修复 Select、Cascader 在 SSR 下渲染错误问题 [#7377](https://github.com/vueComponent/ant-design-vue/issues/7377)
+- 🐞 修复 AutoComplete 缺少 option slot 声明问题 [#7396](https://github.com/vueComponent/ant-design-vue/issues/7396)
+- 🐞 修复 Textarea autoSize 不生效问题 [#7478](https://github.com/vueComponent/ant-design-vue/issues/7478)
+- 🐞 修复 Pagination 回车键触发两次翻页问题 [#7368](https://github.com/vueComponent/ant-design-vue/issues/7368)
+- 🐞 修复输入框输入中文问题 [#7391](https://github.com/vueComponent/ant-design-vue/issues/7391)[#7516](https://github.com/vueComponent/ant-design-vue/issues/7516)
+- 🐞 修复 Carousel beforeChange current 参数错误问题 [#7419](https://github.com/vueComponent/ant-design-vue/issues/7419)
+
 ## 4.1.2
 
 - 🐞 修复 table resize 在 vue 3.4 下报错问题 [#7291](https://github.com/vueComponent/ant-design-vue/issues/7291)

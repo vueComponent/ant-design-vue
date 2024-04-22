@@ -10,6 +10,22 @@
 
 ---
 
+## 4.2.0
+
+- 🌟 Optimize the textColor change when the layout component switches to dark mode [#7498](https://github.com/vueComponent/ant-design-vue/issues/7498)
+- 🌟 Tooltip added arrow hidden configuration [#7459](https://github.com/vueComponent/ant-design-vue/issues/7459)
+- 🌟 Optimize Table hover performance [#7451](https://github.com/vueComponent/ant-design-vue/issues/7451)
+- 🐞 Fixed the problem of changing the model during useForm verification, resulting in verification errors [#ffd4d8](https://github.com/vueComponent/ant-design-vue/commit/ffd4d8fe927f9ea40cbb6358ad997c447bd9a74e)
+- 🐞 Fix Tabs folding calculation error issue [#7491](https://github.com/vueComponent/ant-design-vue/issues/7491)
+- 🐞 Fix Qrcode missing type hint issue [#7502](https://github.com/vueComponent/ant-design-vue/issues/7502)
+- 🐞 Fix Menu rendering error under SSR [#7349](https://github.com/vueComponent/ant-design-vue/issues/7349)
+- 🐞 Fix Select and Cascader rendering errors under SSR [#7377](https://github.com/vueComponent/ant-design-vue/issues/7377)
+- 🐞 Fix AutoComplete missing option slot declaration issue [#7396](https://github.com/vueComponent/ant-design-vue/issues/7396)
+- 🐞 Fix Textarea autoSize not taking effect [#7478](https://github.com/vueComponent/ant-design-vue/issues/7478)
+- 🐞 Fix Pagination’s Enter key triggering two page turns [#7368](https://github.com/vueComponent/ant-design-vue/issues/7368)
+- 🐞 Fix the problem of Chinese input in the input box [#7391](https://github.com/vueComponent/ant-design-vue/issues/7391)[#7516](https://github.com/vueComponent/ant- design-vue/issues/7516)
+- 🐞 Fix Carousel beforeChange current parameter error issue [#7419](https://github.com/vueComponent/ant-design-vue/issues/7419)
+
 ## 4.1.2
 
 - 🐞 Fix table resize error reporting under vue 3.4 [#7291](https://github.com/vueComponent/ant-design-vue/issues/7291)

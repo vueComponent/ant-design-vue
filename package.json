@@ -216,7 +216,6 @@
     "mockdate": "^2.0.2",
     "moment": "^2.29.1",
     "nprogress": "^0.2.0",
-    "object-assign": "^4.1.1",
     "postcss": "^8.2.12",
     "postcss-loader": "^6.0.0",
     "prettier": "^2.2.0",
@@ -308,10 +307,6 @@
     "dist/*",
     "*.css"
   ],
-  "vetur": {
-    "tags": "vetur/tags.json",
-    "attributes": "vetur/attributes.json"
-  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-git",

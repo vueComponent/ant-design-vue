@@ -116,7 +116,7 @@ function convertItemsToNodes(
 export default function useItems(props: MenuProps) {
   const itemsNodes = shallowRef([]);
   const hasItmes = shallowRef(false);
-  const store = shallowRef<Map<string, StoreMenuInfo>>(new Map());
+  const store = shallowRef(new Map<string, StoreMenuInfo>());
   watch(
     () => props.items,
     () => {

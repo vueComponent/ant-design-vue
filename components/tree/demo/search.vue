@@ -27,9 +27,9 @@ Searchable Tree.
     >
       <template #title="{ title }">
         <span v-if="title.indexOf(searchValue) > -1">
-          {{ title.substr(0, title.indexOf(searchValue)) }}
+          {{ title.substring(0, title.indexOf(searchValue)) }}
           <span style="color: #f50">{{ searchValue }}</span>
-          {{ title.substr(title.indexOf(searchValue) + searchValue.length) }}
+          {{ title.substring(title.indexOf(searchValue) + searchValue.length) }}
         </span>
         <span v-else>{{ title }}</span>
       </template>

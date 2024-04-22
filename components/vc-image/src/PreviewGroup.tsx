@@ -95,7 +95,7 @@ const Group = defineComponent({
         ? mergeDefaultValue(props.preview, defaultValues)
         : defaultValues;
     });
-    const previewUrls = reactive<Map<number, PreviewUrl>>(new Map());
+    const previewUrls = reactive(new Map<number, PreviewUrl>());
     const current = ref<number>();
 
     const previewVisible = computed(() => preview.value.visible);

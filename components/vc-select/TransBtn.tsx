@@ -1,4 +1,4 @@
-import { cloneVNode } from 'vue';
+import { cloneVNode, isVNode } from 'vue';
 import type { VNode, FunctionalComponent, PropType } from 'vue';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
@@ -24,7 +24,7 @@ const TransBtn: TransBtnType = (props, { slots }) => {
   if (typeof customizeIcon === 'function') {
     icon = customizeIcon(customizeIconProps);
   } else {
-    icon = cloneVNode(customizeIcon as VNode);
+    icon = isVNode(customizeIcon) ? cloneVNode(customizeIcon as VNode) : customizeIcon;
   }
 
   return (

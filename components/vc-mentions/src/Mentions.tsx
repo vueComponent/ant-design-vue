@@ -4,7 +4,6 @@ import {
   watchEffect,
   defineComponent,
   provide,
-  withDirectives,
   ref,
   reactive,
   onUpdated,
@@ -24,9 +23,10 @@ import KeywordTrigger from './KeywordTrigger';
 import { vcMentionsProps, defaultProps } from './mentionsProps';
 import type { OptionProps } from './Option';
 import MentionsContextKey from './MentionsContext';
-import antInputDirective from '../../_util/antInputDirective';
 import omit from '../../_util/omit';
 import type { EventHandler } from '../../_util/EventInterface';
+import type { BaseInputExpose } from '../../_util/BaseInput';
+import BaseInput from '../../_util/BaseInput';
 
 export type MentionsProps = Partial<ExtractPropTypes<typeof vcMentionsProps>>;
 
@@ -40,7 +40,7 @@ export default defineComponent({
   emits: ['change', 'select', 'search', 'focus', 'blur', 'pressenter'],
   setup(props, { emit, attrs, expose, slots }) {
     const measure = ref(null);
-    const textarea = ref(null);
+    const textarea = ref<BaseInputExpose>(null);
     const focusId = ref();
     const state = reactive({
       value: props.value || '',
@@ -60,8 +60,7 @@ export default defineComponent({
       emit('change', val);
     };
 
-    const onChange: EventHandler = ({ target: { value, composing }, isComposing }) => {
-      if (isComposing || composing) return;
+    const onChange: EventHandler = ({ target: { value } }) => {
       triggerChange(value);
     };
 
@@ -194,13 +193,13 @@ export default defineComponent({
         measureLocation: state.measureLocation,
         targetText: mentionValue,
         prefix: state.measurePrefix,
-        selectionStart: textarea.value.selectionStart,
+        selectionStart: textarea.value.getSelectionStart(),
         split,
       });
       triggerChange(text);
       stopMeasure(() => {
         // We need restore the selection position
-        setInputSelection(textarea.value, selectionLocation);
+        setInputSelection(textarea.value.input as HTMLTextAreaElement, selectionLocation);
       });
 
       emit('select', option, state.measurePrefix);
@@ -243,7 +242,7 @@ export default defineComponent({
     onUpdated(() => {
       nextTick(() => {
         if (state.measuring) {
-          measure.value.scrollTop = textarea.value.scrollTop;
+          measure.value.scrollTop = textarea.value.getScrollTop();
         }
       });
     });
@@ -279,7 +278,7 @@ export default defineComponent({
       };
       return (
         <div class={classNames(prefixCls, className)} style={style as CSSProperties}>
-          {withDirectives(<textarea ref={textarea} {...textareaProps} />, [[antInputDirective]])}
+          <BaseInput {...textareaProps} ref={textarea} tag="textarea"></BaseInput>
           {measuring && (
             <div ref={measure} class={`${prefixCls}-measure`}>
               {state.value.slice(0, measureLocation)}

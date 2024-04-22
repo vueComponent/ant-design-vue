@@ -42,7 +42,6 @@ const useSiteToken = () => {
       :root {
         --header-height: ${tokenValue.headerHeight}px;
         --menu-item-border: ${tokenValue.menuItemBorder}px;
-        --mobile-max-width: ${tokenValue.mobileMaxWidth}px;
 
         --primary-color: ${tokenValue.colorPrimary};
         --component-background: ${tokenValue.colorBgContainer};

@@ -50,6 +50,8 @@ const AutoComplete = defineComponent({
   props: autoCompleteProps(),
   // emits: ['change', 'select', 'focus', 'blur'],
   slots: Object as CustomSlotsType<{
+    option: any;
+    // deprecated, should use props `options` instead, not slot
     options: any;
     default: any;
     notFoundContent: any;

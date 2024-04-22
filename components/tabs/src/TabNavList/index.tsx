@@ -64,6 +64,34 @@ interface ExtraContentProps {
   extra?: (info?: { position: 'left' | 'right' }) => TabBarExtraContent;
 }
 
+const getTabSize = (tab: HTMLElement, containerRect: { x: number; y: number }) => {
+  // tabListRef
+  const { offsetWidth, offsetHeight, offsetTop, offsetLeft } = tab;
+  const { width, height, x, y } = tab.getBoundingClientRect();
+
+  // Use getBoundingClientRect to avoid decimal inaccuracy
+  if (Math.abs(width - offsetWidth) < 1) {
+    return [width, height, x - containerRect.x, y - containerRect.y];
+  }
+
+  return [offsetWidth, offsetHeight, offsetLeft, offsetTop];
+};
+
+// const getSize = (refObj: ShallowRef<HTMLElement>) => {
+//   const { offsetWidth = 0, offsetHeight = 0 } = refObj.value || {};
+
+//   // Use getBoundingClientRect to avoid decimal inaccuracy
+//   if (refObj.value) {
+//     const { width, height } = refObj.value.getBoundingClientRect();
+
+//     if (Math.abs(width - offsetWidth) < 1) {
+//       return [width, height];
+//     }
+//   }
+
+//   return [offsetWidth, offsetHeight];
+// };
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   name: 'TabNavList',
@@ -288,7 +316,29 @@ export default defineComponent({
 
       return ([visibleStart.value, visibleEnd.value] = [startIndex, endIndex]);
     });
+    const updateTabSizes = () => {
+      setTabSizes(() => {
+        const newSizes: TabSizeMap = new Map();
+        const listRect = tabListRef.value?.getBoundingClientRect();
+        tabs.value.forEach(({ key }) => {
+          const btnRef = btnRefs.value.get(key);
+          const btnNode = (btnRef as any)?.$el || btnRef;
+          if (btnNode) {
+            const [width, height, left, top] = getTabSize(btnNode, listRect);
+            newSizes.set(key, { width, height, left, top });
+          }
+        });
+        return newSizes;
+      });
+    };
 
+    watch(
+      () => tabs.value.map(tab => tab.key).join('%%'),
+      () => {
+        updateTabSizes();
+      },
+      { flush: 'post' },
+    );
     const onListHolderResize = () => {
       // Update wrapper records
       const offsetWidth = tabsWrapperRef.value?.offsetWidth || 0;
@@ -308,22 +358,7 @@ export default defineComponent({
       setWrapperScrollHeight(newWrapperScrollHeight);
 
       // Update buttons records
-      setTabSizes(() => {
-        const newSizes: TabSizeMap = new Map();
-        tabs.value.forEach(({ key }) => {
-          const btnRef = btnRefs.value.get(key);
-          const btnNode = (btnRef as any)?.$el || btnRef;
-          if (btnNode) {
-            newSizes.set(key, {
-              width: btnNode.offsetWidth,
-              height: btnNode.offsetHeight,
-              left: btnNode.offsetLeft,
-              top: btnNode.offsetTop,
-            });
-          }
-        });
-        return newSizes;
-      });
+      updateTabSizes();
     };
 
     // ======================== Dropdown =======================

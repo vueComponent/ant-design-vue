@@ -27,6 +27,15 @@ function generateUnits(
   return units;
 }
 
+function getAbleTime(container: Unit[], defaultVal: number) {
+  const ableTime = container.find(item => !item.disabled);
+  return defaultVal >= 0
+    ? defaultVal
+    : ableTime && ableTime.value >= 0
+    ? ableTime.value
+    : defaultVal;
+}
+
 export type BodyOperationRef = {
   onUpDown: (diff: number) => void;
 };
@@ -118,11 +127,9 @@ const TimeBody = defineComponent({
     ) => {
       let newDate = props.value || props.generateConfig.getNow();
 
-      const mergedHour = newHour < 0 ? minutes.value.find(hour => !hour.disabled).value : newHour;
-      const mergedMinute =
-        newMinute < 0 ? minutes.value.find(minute => !minute.disabled).value : newMinute;
-      const mergedSecond =
-        newSecond < 0 ? seconds.value.find(second => !second.disabled).value : newSecond;
+      const mergedHour = getAbleTime(hours.value, newHour);
+      const mergedMinute = getAbleTime(minutes.value, newMinute);
+      const mergedSecond = getAbleTime(seconds.value, newSecond);
 
       newDate = utilSetTime(
         props.generateConfig,
@@ -184,11 +191,7 @@ const TimeBody = defineComponent({
         59,
         props.minuteStep ?? 1,
         mergedDisabledMinutes.value &&
-          mergedDisabledMinutes.value(
-            originHour.value < 0
-              ? rawHours.value.find(rawHour => !rawHour.disabled).value
-              : originHour.value,
-          ),
+          mergedDisabledMinutes.value(getAbleTime(rawHours.value, originHour.value)),
       ),
     );
 
@@ -199,12 +202,8 @@ const TimeBody = defineComponent({
         props.secondStep ?? 1,
         mergedDisabledSeconds.value &&
           mergedDisabledSeconds.value(
-            originHour.value < 0
-              ? rawHours.value.find(rawHour => !rawHour.disabled).value
-              : originHour.value,
-            minute.value < 0
-              ? minutes.value.find(rawMinute => !rawMinute.disabled).value
-              : minute.value,
+            getAbleTime(rawHours.value, originHour.value),
+            getAbleTime(minutes.value, minute.value),
           ),
       ),
     );

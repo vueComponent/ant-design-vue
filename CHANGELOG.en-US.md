@@ -10,6 +10,10 @@
 
 ---
 
+## 4.2.1
+
+- 🐞 fix Input clear action error [#7523](https://github.com/vueComponent/ant-design-vue/issues/7523)
+
 ## 4.2.0
 
 - 🌟 Optimize the textColor change when the layout component switches to dark mode [#7498](https://github.com/vueComponent/ant-design-vue/issues/7498)

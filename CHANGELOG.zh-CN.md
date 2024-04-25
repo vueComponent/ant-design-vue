@@ -10,6 +10,10 @@
 
 ---
 
+## 4.2.1
+
+- 🐞 修复 Input 清空操作才报错问题 [#7523](https://github.com/vueComponent/ant-design-vue/issues/7523)
+
 ## 4.2.0
 
 - 🌟 优化 layout 组件切换 dark 模式时 textColor 变化 [#7498](https://github.com/vueComponent/ant-design-vue/issues/7498)

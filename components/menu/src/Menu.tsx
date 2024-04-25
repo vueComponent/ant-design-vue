@@ -112,7 +112,7 @@ export default defineComponent({
         return !override;
       }),
     );
-    const store = shallowRef<Map<string, StoreMenuInfo>>(new Map());
+    const store = shallowRef(new Map<string, StoreMenuInfo>());
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
       if (siderCollapsed.value !== undefined) {

@@ -33,7 +33,7 @@ export default defineComponent({
     itemRender: functionType<(item: Record<string, any>, stepItem: VueNode) => VueNode>(),
   },
   emits: ['change'],
-  setup(props, { slots, emit }) {
+  setup(props, { slots, emit, attrs }) {
     const onStepClick = (next: number) => {
       const { current } = props;
       if (current !== next) {
@@ -66,7 +66,7 @@ export default defineComponent({
         progressDot: mergedProgressDot,
         stepIcon,
         icons,
-        onStepClick,
+        onStepClick: attrs['onChange'] && onStepClick,
       };
       // fix tail color
       if (status === 'error' && index === current - 1) {

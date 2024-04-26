@@ -4,6 +4,7 @@ import { createTheme, useCacheToken, useStyleRegister } from '../_util/cssinjs';
 import version from '../version';
 import type {
   AliasToken,
+  ComponentTokenMap,
   GlobalToken,
   MapToken,
   OverrideToken,
@@ -33,6 +34,9 @@ import {
 } from 'vue';
 
 const defaultTheme = createTheme(defaultDerivative);
+
+export type OverrideTokenWithoutDerivative = ComponentTokenMap;
+export type OverrideComponent = keyof OverrideTokenWithoutDerivative;
 
 export {
   // colors
@@ -144,3 +148,10 @@ export type GenerateStyle<
   ComponentToken extends object = AliasToken,
   ReturnType = CSSInterpolation,
 > = (token: ComponentToken) => ReturnType;
+
+export type GetDefaultToken<C extends OverrideComponent> =
+  | null
+  | OverrideTokenWithoutDerivative[C]
+  | ((
+      token: AliasToken & Partial<OverrideTokenWithoutDerivative[C]>,
+    ) => OverrideTokenWithoutDerivative[C]);

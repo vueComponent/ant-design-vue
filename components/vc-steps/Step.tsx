@@ -157,7 +157,7 @@ export default defineComponent({
         onClick: onClick || noop,
       };
 
-      if (onStepClick && !disabled) {
+      if (!!onStepClick && !disabled) {
         accessibilityProps.role = 'button';
         accessibilityProps.tabindex = 0;
         accessibilityProps.onClick = onItemClick;

@@ -1,4 +1,4 @@
-import type { ComponentTokenMap } from 'ant-design-vue/es/theme/interface';
+import type { ComponentTokenMap } from 'ant-design-vue/es/_theme/interface';
 
 export interface TokenMeta {
   type: string;

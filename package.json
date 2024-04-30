@@ -222,7 +222,6 @@
     "pretty-quick": "^3.0.0",
     "prismjs": "^1.23.0",
     "progress": "^2.0.3",
-    "qs": "^6.10.3",
     "raw-loader": "^4.0.2",
     "remark-frontmatter": "^2.0.0",
     "remark-parse": "^8.0.0",

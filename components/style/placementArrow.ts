@@ -209,7 +209,9 @@ export default function getArrowStyle<Token extends TokenWithCommonCls<AliasToke
       // Offset the popover to account for the dropdown arrow
       // >>>>> Top
       [connectArrowCls(
-        [`&-placement-topLeft`, `&-placement-top`, `&-placement-topRight`],
+        [`&-placement-topLeft`, `&-placement-top`, `&-placement-topRight`].map(
+          cls => (cls += ':not(&-arrow-hidden)'),
+        ),
         showArrowCls,
       )]: {
         paddingBottom: dropdownArrowDistance,
@@ -217,7 +219,9 @@ export default function getArrowStyle<Token extends TokenWithCommonCls<AliasToke
 
       // >>>>> Bottom
       [connectArrowCls(
-        [`&-placement-bottomLeft`, `&-placement-bottom`, `&-placement-bottomRight`],
+        [`&-placement-bottomLeft`, `&-placement-bottom`, `&-placement-bottomRight`].map(
+          cls => (cls += ':not(&-arrow-hidden)'),
+        ),
         showArrowCls,
       )]: {
         paddingTop: dropdownArrowDistance,
@@ -225,7 +229,9 @@ export default function getArrowStyle<Token extends TokenWithCommonCls<AliasToke
 
       // >>>>> Left
       [connectArrowCls(
-        [`&-placement-leftTop`, `&-placement-left`, `&-placement-leftBottom`],
+        [`&-placement-leftTop`, `&-placement-left`, `&-placement-leftBottom`].map(
+          cls => (cls += ':not(&-arrow-hidden)'),
+        ),
         showArrowCls,
       )]: {
         paddingRight: {
@@ -236,7 +242,9 @@ export default function getArrowStyle<Token extends TokenWithCommonCls<AliasToke
 
       // >>>>> Right
       [connectArrowCls(
-        [`&-placement-rightTop`, `&-placement-right`, `&-placement-rightBottom`],
+        [`&-placement-rightTop`, `&-placement-right`, `&-placement-rightBottom`].map(
+          cls => (cls += ':not(&-arrow-hidden)'),
+        ),
         showArrowCls,
       )]: {
         paddingLeft: {

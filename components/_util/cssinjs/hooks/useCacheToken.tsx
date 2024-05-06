@@ -14,7 +14,7 @@ const isPrerender = process.env.NODE_ENV === 'prerender';
 
 // Generate different prefix to make user selector break in production env.
 // This helps developer not to do style override directly on the hash id.
-const hashPrefix = (!isProduction && !isPrerender) ? 'css-dev-only-do-not-override' : 'css';
+const hashPrefix = !isProduction && !isPrerender ? 'css-dev-only-do-not-override' : 'css';
 
 export interface Option<DerivativeToken, DesignToken> {
   /**

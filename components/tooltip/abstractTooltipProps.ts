@@ -35,7 +35,12 @@ export default () => ({
   mouseEnterDelay: Number,
   mouseLeaveDelay: Number,
   getPopupContainer: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
+  /**@deprecated Please use `arrow={{ pointAtCenter: true }}` instead. */
   arrowPointAtCenter: { type: Boolean, default: undefined },
+  arrow: {
+    type: [Boolean, Object] as PropType<boolean | { pointAtCenter?: boolean }>,
+    default: true as boolean | { pointAtCenter?: boolean },
+  },
   autoAdjustOverflow: {
     type: [Boolean, Object] as PropType<boolean | AdjustOverflow>,
     default: undefined as boolean | AdjustOverflow,

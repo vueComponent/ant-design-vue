@@ -34,7 +34,6 @@ Search with remote data.
 <script lang="ts" setup>
 import { ref } from 'vue';
 import jsonp from 'fetch-jsonp';
-import qs from 'qs';
 
 let timeout: any;
 let currentValue = '';
@@ -47,11 +46,11 @@ function fetch(value: string, callback: any) {
   currentValue = value;
 
   function fake() {
-    const str = qs.stringify({
+    const params = new URLSearchParams({
       code: 'utf-8',
       q: value,
     });
-    jsonp(`https://suggest.taobao.com/sug?${str}`)
+    jsonp(`https://suggest.taobao.com/sug?${params}`)
       .then(response => response.json())
       .then(d => {
         if (currentValue === value) {

@@ -12,7 +12,7 @@ export default function getScroll(
   const method = top ? 'scrollTop' : 'scrollLeft';
   let result = 0;
   if (isWindow(target)) {
-    result = target[top ? 'pageYOffset' : 'pageXOffset'];
+    result = target[top ? 'scrollY' : 'scrollX'];
   } else if (target instanceof Document) {
     result = target.documentElement[method];
   } else if (target instanceof HTMLElement) {

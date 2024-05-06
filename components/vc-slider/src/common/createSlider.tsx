@@ -210,7 +210,7 @@ export default function createSlider(Component) {
         if (vertical) {
           return reverse ? rect.bottom : rect.top;
         }
-        return window.pageXOffset + (reverse ? rect.right : rect.left);
+        return window.scrollX + (reverse ? rect.right : rect.left);
       },
       getSliderLength() {
         const slider = this.sliderRef;

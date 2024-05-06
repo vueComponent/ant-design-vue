@@ -45,6 +45,7 @@ const genLayoutStyle: GenerateStyle<LayoutToken, CSSObject> = token => {
       display: 'flex',
       flex: 'auto',
       flexDirection: 'column',
+      color: colorText,
 
       /* fix firefox can't set height smaller than content on flex item */
       minHeight: 0,

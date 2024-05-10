@@ -16,7 +16,7 @@ Mouse to click, focus and move in.
 
 </docs>
 <template>
-  <div>
+  <div id="components-popover-demo-triggerType">
     <a-popover title="Title" trigger="hover">
       <template #content>
         <p>Content</p>

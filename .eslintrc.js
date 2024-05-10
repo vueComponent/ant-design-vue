@@ -27,6 +27,7 @@ module.exports = {
   // ],
   plugins: ['markdown', 'jest', '@typescript-eslint', 'import'],
   globals: {
+    h: true,
     defineProps: 'readonly',
   },
   overrides: [
@@ -107,8 +108,5 @@ module.exports = {
       },
     ],
     'vue/multi-word-component-names': 'off',
-  },
-  globals: {
-    h: true,
   },
 };

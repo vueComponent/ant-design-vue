@@ -236,6 +236,7 @@ const TreeSelect = defineComponent({
         switcherIcon = slots.switcherIcon?.(),
         fieldNames = props.replaceFields,
         id = formItemContext.id.value,
+        placeholder = slots.placeholder?.(),
       } = props;
       const { isFormItemInput, hasFeedback, feedbackIcon } = formItemInputContext;
       // ===================== Icons =====================
@@ -342,6 +343,7 @@ const TreeSelect = defineComponent({
             maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
             placement={placement.value}
             showArrow={hasFeedback || showArrow}
+            placeholder={placeholder}
           />,
         ),
       );

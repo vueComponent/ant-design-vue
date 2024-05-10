@@ -34,6 +34,11 @@ const localeValues: Locale = {
     triggerAsc: 'Нажмите для сортировки по возрастанию',
     cancelSort: 'Нажмите, чтобы отменить сортировку',
   },
+  Tour: {
+    Next: 'Вперёд',
+    Previous: 'Назад',
+    Finish: 'Готово',
+  },
   Modal: {
     okText: 'OK',
     cancelText: 'Отмена',
@@ -78,6 +83,7 @@ const localeValues: Locale = {
     back: 'Назад',
   },
   Form: {
+    optional: '(опционально)',
     defaultValidateMessages: {
       default: 'Ошибка проверки поля ${label}',
       required: 'Пожалуйста, введите ${label}',
@@ -127,6 +133,11 @@ const localeValues: Locale = {
   },
   Image: {
     preview: 'Предпросмотр',
+  },
+  QRCode: {
+    expired: 'QR код просрочен',
+    refresh: 'Обновить',
+    scanned: 'Отсканирован',
   },
 };
 

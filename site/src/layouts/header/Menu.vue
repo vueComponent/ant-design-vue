@@ -56,7 +56,7 @@ export default defineComponent({
         location: { pathname },
       } = window;
       const currentProtocol = `${window.location.protocol}//`;
-      const currentHref = window.location.href.substr(currentProtocol.length);
+      const currentHref = window.location.href.substring(currentProtocol.length);
 
       if (isLocalStorageNameSupported()) {
         localStorage.setItem('locale', isZhCN(pathname) ? 'en-US' : 'zh-CN');

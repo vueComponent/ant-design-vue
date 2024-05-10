@@ -13,7 +13,7 @@
       <template v-if="isMobile">
         <a-drawer
           key="mobile-menu"
-          v-model:visible="visible"
+          v-model:open="visible"
           :closable="false"
           placement="left"
           class="drawer drawer-left"

@@ -6,10 +6,10 @@ import Options from './Options';
 import LOCALE from './locale/zh_CN';
 import KEYCODE from './KeyCode';
 import classNames from '../_util/classNames';
-import { defineComponent, withDirectives } from 'vue';
-import antInput from '../_util/antInputDirective';
+import { defineComponent } from 'vue';
 import { cloneElement } from '../_util/vnode';
 import firstNotUndefined from '../_util/firstNotUndefined';
+import BaseInput from '../_util/BaseInput';
 
 // 是否是正整数
 function isInteger(value) {
@@ -181,7 +181,6 @@ export default defineComponent({
       }
     },
     handleKeyUp(e) {
-      if (e.isComposing || e.target.composing) return;
       const value = this.getValidValue(e);
       const stateCurrentInputValue = this.stateCurrentInputValue;
 
@@ -283,6 +282,7 @@ export default defineComponent({
     },
     runIfEnter(event, callback, ...restParams) {
       if (event.key === 'Enter' || event.charCode === 13) {
+        event.preventDefault();
         callback(...restParams);
       }
     },
@@ -422,19 +422,16 @@ export default defineComponent({
             title={showTitle ? `${stateCurrent}/${allPages}` : null}
             class={`${prefixCls}-simple-pager`}
           >
-            {withDirectives(
-              <input
-                type="text"
-                value={this.stateCurrentInputValue}
-                disabled={disabled}
-                onKeydown={this.handleKeyDown}
-                onKeyup={this.handleKeyUp}
-                onInput={this.handleKeyUp}
-                onChange={this.handleKeyUp}
-                size="3"
-              />,
-              [[antInput]],
-            )}
+            <BaseInput
+              type="text"
+              value={this.stateCurrentInputValue}
+              disabled={disabled}
+              onKeydown={this.handleKeyDown}
+              onKeyup={this.handleKeyUp}
+              onInput={this.handleKeyUp}
+              onChange={this.handleKeyUp}
+              size="3"
+            ></BaseInput>
             <span class={`${prefixCls}-slash`}>／</span>
             {allPages}
           </li>

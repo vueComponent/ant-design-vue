@@ -12,27 +12,37 @@ The following CodeSandbox demo is the simplest use case, and it's also a good ha
 
 ## Import ant-design-vue
 
-### 1. Installation
+### 1. Create a New Project
 
-[vue-cli](https://github.com/vuejs/vue-cli)
+If you need to create a new project, you can use [Vite](https://github.com/vitejs/vite), [Rsbuild](https://github.com/web-infra-dev/rsbuild), or [Vue CLI](https://github.com/vuejs/vue-cli).
+
+Please initialize the project using the command line:
+
+- Vite:
+
+```bash
+$ npm create vite@latest
+```
+
+- Rsbuild:
+
+```bash
+$ npm create rsbuild@latest
+```
+
+- Vue CLI:
 
 ```bash
 $ npm install -g @vue/cli
 # OR
 $ yarn global add @vue/cli
-```
 
-### 2. Create a New Project
-
-A new project can be created using CLI tools.
-
-```bash
 $ vue create antd-demo
 ```
 
-And, setup your vue project configuration.
+> Vue CLI is no longer maintained, so it is not recommended to use.
 
-### 3. Use antd's Components
+### 2. Use antd's Components
 
 #### Install
 
@@ -95,7 +105,7 @@ In this way, component sub-components, such as Button and ButtonGroup, need to b
 </script>
 ```
 
-### 4. Component list
+### 3. Component list
 
 [Component list](https://github.com/vueComponent/ant-design-vue/blob/main/components/components.ts)
 

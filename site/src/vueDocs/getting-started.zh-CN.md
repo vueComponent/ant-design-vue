@@ -12,29 +12,39 @@ Ant Design Vue 致力于提供给程序员**愉悦**的开发体验。
 
 ## 引入 ant-design-vue
 
-### 1. 安装脚手架工具
+### 1. 新建项目
 
-[vue-cli](https://github.com/vuejs/vue-cli)
+如果你需要新建一个项目，可以使用 [Vite](https://github.com/vitejs/vite)、[Rsbuild](https://github.com/web-infra-dev/rsbuild) 或 [Vue CLI](https://github.com/vuejs/vue-cli)。
+
+请使用命令行来初始化项目：
+
+- Vite:
+
+```bash
+$ npm create vite@latest
+```
+
+- Rsbuild:
+
+```bash
+$ npm create rsbuild@latest
+```
+
+- Vue CLI:
 
 ```bash
 $ npm install -g @vue/cli
 # OR
 $ yarn global add @vue/cli
-```
 
-### 2. 创建一个项目
-
-使用命令行进行初始化。
-
-```bash
 $ vue create antd-demo
 ```
 
-并配置项目。
+> Vue CLI 已经停止迭代，因此不推荐使用。
 
 若安装缓慢报错，可尝试用 `cnpm` 或别的镜像源自行安装：`rm -rf node_modules && cnpm install`。
 
-### 3. 使用组件
+### 2. 使用组件
 
 #### 安装
 

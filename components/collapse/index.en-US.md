@@ -20,7 +20,7 @@ A content area which can be collapsed and expanded.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | accordion | If `true`, `Collapse` renders as `Accordion` | boolean | `false` |  |
-| activeKey(v-model) | Key of the active panel | string\[] \| string <br> number\[] \| number | No default value. In `accordion` mode, it's the key of the first panel. |  |
+| activeKey(v-model) | Key of the active panel | string\[] \| string <br> number\[] \| number | No default value. In [accordion mode](#components-collapse-demo-accordion), it's the key of the first panel. |  |
 | bordered | Toggles rendering of the border around the collapse block | boolean | `true` |  |
 | collapsible | Specify whether the panels of children be collapsible or the trigger area of collapsible | `header` \| `icon` \| `disabled` | - | 4.0 |
 | destroyInactivePanel | Destroy Inactive Panel | boolean | `false` |  |

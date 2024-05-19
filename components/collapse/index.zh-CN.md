@@ -20,8 +20,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sir-TK0HkWcAAA
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| accordion | 手风琴模式 | boolean | `false` |  |
-| activeKey(v-model) | 当前激活 tab 面板的 key | string\[] \| string <br> number\[] \| number | 默认无，accordion 模式下默认第一个元素 |  |
+| accordion | 手风琴模式，始终只有一个面板处在激活状态 | boolean | `false` |  |
+| activeKey(v-model) | 当前激活 tab 面板的 key | string\[] \| string <br> number\[] \| number | 默认无，[手风琴模式](#components-collapse-demo-accordion)下默认第一个元素 |  |
 | bordered | 带边框风格的折叠面板 | boolean | `true` |  |
 | collapsible | 所有子面板是否可折叠或指定可折叠触发区域 | `header` \| `icon` \| `disabled` | - | 4.0 |
 | destroyInactivePanel | 销毁折叠隐藏的面板 | boolean | `false` |  |

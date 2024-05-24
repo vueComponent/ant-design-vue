@@ -23,7 +23,7 @@ const props = {
   searchValue: String,
   inputRef: PropTypes.any,
   placeholder: PropTypes.any,
-  compositionStatus: PropTypes.objectOf(PropTypes.bool).def({ value: false }),
+  compositionStatus: PropTypes.shape({ value: PropTypes.bool }).def({ value: false }),
   disabled: { type: Boolean, default: undefined },
   mode: String,
   showSearch: { type: Boolean, default: undefined },

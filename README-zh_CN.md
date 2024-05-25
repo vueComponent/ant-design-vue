@@ -73,6 +73,7 @@ $ yarn add ant-design-vue
 | [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | 在 DOM 模板中，您可以使用 ant-design-vue 组件的自定义事件（camelCase） |
 | [@formily/antdv](https://github.com/formilyjs/antdv) | 这是一个结合了 Formily 和 ant-design-vue 的组件库 |
 | [@ant-design-vue/nuxt](https://github.com/vueComponent/ant-design-vue-nuxt) | ant-design-vue 的 nuxt 模块扩展 |
+| [@cabloy/front-antdv](https://github.com/cabloy/cabloy-front/tree/main/cabloy-front-antdv) | 一款支持 IOC 容器的 Vue3 框架。有了 IOC 容器的加持，定义响应式状态不再需要 ref/reactive，也不再需要 ref.value |
 
 ## 问答
 

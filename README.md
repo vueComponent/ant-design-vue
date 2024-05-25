@@ -73,6 +73,7 @@ If you are in a bad network environment, you can try other registries and tools 
 | [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | The library function, implemented in the DOM template, can use the custom event of the ant-design-vue component (camelCase) |
 | [@formily/antdv](https://github.com/formilyjs/antdv) | The Library with Formily and ant-design-vue |
 | [@ant-design-vue/nuxt](https://github.com/vueComponent/ant-design-vue-nuxt) | A nuxt module for ant-design-vue |
+| [@cabloy/front-antdv](https://github.com/cabloy/cabloy-front/tree/main/cabloy-front-antdv) | A vue3 framework with ioc container. With the support of ioc container, defining reactive states no longer needs ref/reactive, nor ref.value |
 
 ## Donation
 

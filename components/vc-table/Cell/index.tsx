@@ -4,9 +4,11 @@ import {
   flattenChildren,
   isValidElement,
   parseStyleText,
+  findDOMNode
 } from '../../_util/props-util';
 import type { CSSProperties, VNodeArrayChildren } from 'vue';
-import { Text, computed, defineComponent, isVNode, renderSlot } from 'vue';
+import { Text, computed, defineComponent, isVNode, renderSlot, watch, shallowRef } from 'vue';
+import { addClass, removeClass } from '../../vc-util/Dom/class';
 
 import type {
   DataIndex,
@@ -161,6 +163,16 @@ export default defineComponent<CellProps>({
         return vnode;
       }
     };
+    const hoverRef = shallowRef(null);
+    watch([hovering, () => props.prefixCls, hoverRef], () => {
+      const cellDom = findDOMNode(hoverRef.value);
+      if (!cellDom) return;
+      if (hovering.value) {
+        addClass(cellDom, `${props.prefixCls}-cell-row-hover`);
+      } else {
+        removeClass(cellDom, `${props.prefixCls}-cell-row-hover`);
+      }
+    });
     return () => {
       const {
         prefixCls,
@@ -242,7 +254,7 @@ export default defineComponent<CellProps>({
               const fallback = childNode === undefined ? value : childNode;
               return [
                 (typeof fallback === 'object' && isValidElement(fallback)) ||
-                typeof fallback !== 'object'
+                  typeof fallback !== 'object'
                   ? fallback
                   : null,
               ];
@@ -337,8 +349,7 @@ export default defineComponent<CellProps>({
             [`${cellPrefixCls}-ellipsis`]: ellipsis,
             [`${cellPrefixCls}-with-append`]: appendNode,
             [`${cellPrefixCls}-fix-sticky`]:
-              (isFixLeft || isFixRight) && isSticky && supportSticky.value,
-            [`${cellPrefixCls}-row-hover`]: !cellProps && hovering.value,
+              (isFixLeft || isFixRight) && isSticky && supportSticky.value
           },
           additionalProps.class,
           cellClassName,
@@ -356,7 +367,7 @@ export default defineComponent<CellProps>({
       };
 
       return (
-        <Component {...componentProps}>
+        <Component {...componentProps} ref={hoverRef}>
           {appendNode}
           {childNode}
           {slots.dragHandle?.()}

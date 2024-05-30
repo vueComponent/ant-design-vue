@@ -22,7 +22,6 @@ import { useInjectHover } from '../context/HoverContext';
 import { useInjectSticky } from '../context/StickyContext';
 import { warning } from '../../vc-util/warning';
 import type { MouseEventHandler } from '../../_util/EventInterface';
-import eagerComputed from '../../_util/eagerComputed';
 import { customRenderSlot } from '../../_util/vnode';
 import { addClass, removeClass } from '../../vc-util/Dom/class';
 
@@ -122,7 +121,7 @@ export default defineComponent<CellProps>({
         (props.additionalProps?.rowspan as number)
       );
     });
-    const hovering = eagerComputed(() => {
+    const hovering = computed(() => {
       const { index } = props;
       return inHoverRange(index, rowSpan.value || 1, startRow.value, endRow.value);
     });

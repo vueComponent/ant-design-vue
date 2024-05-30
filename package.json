@@ -166,7 +166,7 @@
     "esbuild": "~0.12.29",
     "esbuild-loader": "^3.0.0",
     "escape-html": "^1.0.3",
-    "eslint": "^8.3.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.24.2",

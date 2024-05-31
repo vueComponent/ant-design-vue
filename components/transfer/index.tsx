@@ -106,6 +106,8 @@ export const transferProps = () => ({
   oneWay: booleanType(),
   pagination: someType<PaginationType>([Object, Boolean]),
   status: stringType<InputStatus>(),
+  // 右侧目标添加顺序 unshift | push，默认unshift添加到顶部，push则追加到尾部
+  targetOrder: stringType<'unshift' | 'push'>(),
   onChange:
     functionType<
       (targetKeys: string[], direction: TransferDirection, moveKeys: string[]) => void
@@ -177,7 +179,7 @@ const Transfer = defineComponent({
     };
 
     const moveTo = (direction: TransferDirection) => {
-      const { targetKeys = [], dataSource = [] } = props;
+      const { targetKeys = [], targetOrder, dataSource = [] } = props;
       const moveKeys = direction === 'right' ? sourceSelectedKeys.value : targetSelectedKeys.value;
       const dataSourceDisabledKeysMap = groupDisabledKeysMap(dataSource);
       // filter the disabled options
@@ -187,7 +189,9 @@ const Transfer = defineComponent({
       // move items to target box
       const newTargetKeys =
         direction === 'right'
-          ? newMoveKeys.concat(targetKeys)
+          ? targetOrder === 'push'
+            ? targetKeys.concat(newMoveKeys)
+            : newMoveKeys.concat(targetKeys)
           : targetKeys.filter(targetKey => !newMoveKeysMap.has(targetKey));
 
       // empty checked keys

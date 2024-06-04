@@ -12,7 +12,7 @@ interface SelectorProps extends InnerSelectorProps {
   optionLabelRender: Function;
 
   // placeholder
-  compositionStatus: Ref<boolean>;
+  compositionStatus: boolean;
 }
 const props = {
   inputElement: PropTypes.any,
@@ -23,7 +23,7 @@ const props = {
   searchValue: String,
   inputRef: PropTypes.any,
   placeholder: PropTypes.any,
-  compositionStatus: PropTypes.shape({ value: PropTypes.bool }).def({ value: false }),
+  compositionStatus: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
   mode: String,
   showSearch: { type: Boolean, default: undefined },
@@ -71,7 +71,7 @@ const SingleSelector = defineComponent<SelectorProps>({
     const hasTextInput = computed(() =>
       props.mode !== 'combobox' && !props.open && !props.showSearch
         ? false
-        : !!inputValue.value || props.compositionStatus.value,
+        : !!inputValue.value || props.compositionStatus,
     );
 
     const title = computed(() => {

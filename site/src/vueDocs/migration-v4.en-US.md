@@ -153,7 +153,7 @@ Remove `babel-plugin-import` from package.json and modify `.babelrc`:
 
 ### Legacy browser support
 
-Ant Design Vue v4 using `:where` css selector to reduce CSS-in-JS hash priority. You can use `StyleProvider` to cancel this function. Please ref [Compatible adjustment](/docs/vue/customize-theme#compatible-adjustment).
+Ant Design Vue v4 using `:where` css selector to reduce CSS-in-JS hash priority. You can use `StyleProvider` to cancel this function. Please ref [Compatible adjustment](/docs/vue/compatible-style).
 
 ## Encounter problems
 

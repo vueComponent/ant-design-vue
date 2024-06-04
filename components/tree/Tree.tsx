@@ -224,6 +224,7 @@ export default defineComponent({
         onDblclick,
       } = props as TreeProps;
       const newProps = {
+        dropIndicatorRender,
         ...attrs,
         ...omit(props, [
           'onUpdate:checkedKeys',
@@ -232,7 +233,6 @@ export default defineComponent({
           'onDoubleclick',
         ]),
         showLine: Boolean(showLine),
-        dropIndicatorRender,
         fieldNames,
         icon,
         itemHeight,

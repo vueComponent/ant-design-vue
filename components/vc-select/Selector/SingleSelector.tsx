@@ -1,7 +1,7 @@
 import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
 import type { InnerSelectorProps } from './interface';
-import { Fragment, Ref, computed, defineComponent, shallowRef, watch } from 'vue';
+import { Fragment, computed, defineComponent, shallowRef, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
 import useInjectLegacySelectContext from '../../vc-tree-select/LegacyContext';
@@ -10,8 +10,6 @@ interface SelectorProps extends InnerSelectorProps {
   inputElement: VueNode;
   activeValue: string;
   optionLabelRender: Function;
-
-  // placeholder
   compositionStatus: boolean;
 }
 const props = {
@@ -92,6 +90,13 @@ const SingleSelector = defineComponent<SelectorProps>({
         </span>
       );
     };
+    const handleInput = (e: Event) => {
+      const composing = (e.target as any).composing;
+      if (!composing) {
+        inputChanged.value = true;
+        props.onInputChange(e);
+      }
+    };
 
     return () => {
       const {
@@ -109,7 +114,6 @@ const SingleSelector = defineComponent<SelectorProps>({
         optionLabelRender,
         onInputKeyDown,
         onInputMouseDown,
-        onInputChange,
         onInputPaste,
         onInputCompositionStart,
         onInputCompositionEnd,
@@ -153,10 +157,7 @@ const SingleSelector = defineComponent<SelectorProps>({
               value={inputValue.value}
               onKeydown={onInputKeyDown}
               onMousedown={onInputMouseDown}
-              onChange={e => {
-                inputChanged.value = true;
-                onInputChange(e as any);
-              }}
+              onChange={handleInput}
               onPaste={onInputPaste}
               onCompositionstart={onInputCompositionStart}
               onCompositionend={onInputCompositionEnd}

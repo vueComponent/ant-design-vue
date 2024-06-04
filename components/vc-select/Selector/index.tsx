@@ -124,7 +124,7 @@ const Selector = defineComponent<SelectorProps>({
   } as any,
   setup(props, { expose }) {
     const inputRef = createRef();
-    let compositionStatus = ref(false);
+    const compositionStatus = ref(false);
 
     // ====================== Input ======================
     const [getInputMouseDown, setInputMouseDown] = useLock(0);

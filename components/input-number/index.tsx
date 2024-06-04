@@ -72,7 +72,7 @@ const InputNumber = defineComponent({
 
     const mergedSize = computed(() => compactSize.value || size.value);
 
-    const mergedValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
+    const mergedValue = shallowRef(props.value ?? props.defaultValue);
     const focused = shallowRef(false);
     watch(
       () => props.value,

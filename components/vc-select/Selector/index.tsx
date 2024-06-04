@@ -256,7 +256,7 @@ const Selector = defineComponent<SelectorProps>({
         onInputMouseDown: onInternalInputMouseDown,
         onInputChange,
         onInputPaste,
-        compositionStatus,
+        compositionStatus: compositionStatus.value,
         onInputCompositionStart,
         onInputCompositionEnd,
       };

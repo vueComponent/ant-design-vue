@@ -3,6 +3,7 @@ import { computed, defineComponent, shallowRef, ref, watch } from 'vue';
 import PropTypes from './vue-types';
 import type { BaseInputInnerExpose } from './BaseInputInner';
 import BaseInputInner from './BaseInputInner';
+import { styleObjectToString } from '../vc-util/Dom/css';
 
 export interface BaseInputExpose {
   focus: () => void;
@@ -32,7 +33,7 @@ const BaseInput = defineComponent({
       default: 'input',
     },
     size: PropTypes.string,
-    style: PropTypes.style,
+    style: PropTypes.oneOfType([String, Object]),
     class: PropTypes.string,
   },
   emits: [
@@ -134,13 +135,18 @@ const BaseInput = defineComponent({
     const handlePaste = (e: ClipboardEvent) => {
       emit('paste', e);
     };
+    const styleString = computed(() => {
+      return props.style && typeof props.style !== 'string'
+        ? styleObjectToString(props.style)
+        : props.style;
+    });
     return () => {
-      const { tag: Tag, style, ...restProps } = props;
+      const { style, lazy, ...restProps } = props;
       return (
         <BaseInputInner
           {...restProps}
           {...attrs}
-          style={JSON.stringify(style)}
+          style={styleString.value}
           onInput={handleInput}
           onChange={handleChange}
           onBlur={handleBlur}

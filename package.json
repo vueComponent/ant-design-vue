@@ -126,7 +126,7 @@
     "@typescript-eslint/parser": "^5.4.0",
     "@vitejs/plugin-legacy": "^2.2.0",
     "@vitejs/plugin-vue": "^3.0.0",
-    "@vitejs/plugin-vue-jsx": "^2.0.0",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/babel-plugin-jsx": "^1.0.0",
     "@vue/cli-plugin-eslint": "^5.0.0",
     "@vue/eslint-config-prettier": "^8.0.0",

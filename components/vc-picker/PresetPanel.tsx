@@ -22,7 +22,8 @@ export default defineComponent({
             {props.presets.map(({ label, value }, index) => (
               <li
                 key={index}
-                onClick={() => {
+                onClick={e => {
+                  e.stopPropagation();
                   props.onClick(value);
                 }}
                 onMouseenter={() => {

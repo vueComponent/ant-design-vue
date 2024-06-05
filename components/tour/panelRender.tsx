@@ -119,7 +119,7 @@ const panelRender = defineComponent({
                         size="small"
                         class={classNames(`${prefixCls}-prev-btn`, prevButtonProps?.className)}
                       >
-                        {prevButtonProps?.children ?? contextLocale.Previous}
+                        {prevButtonProps?.children ? prevButtonProps?.children() : contextLocale.Previous}
                       </Button>
                     ) : null}
                     <Button
@@ -129,7 +129,7 @@ const panelRender = defineComponent({
                       size="small"
                       class={classNames(`${prefixCls}-next-btn`, nextButtonProps?.className)}
                     >
-                      {nextButtonProps?.children ??
+                      {nextButtonProps?.children ? nextButtonProps?.children() :
                         (isLastStep.value ? contextLocale.Finish : contextLocale.Next)}
                     </Button>
                   </div>

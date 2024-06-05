@@ -41,6 +41,7 @@ By clicking the input box, you can select a time from a popup panel.
 | use12Hours | Display as 12 hours format, with default format `h:mm:ss a` | boolean | false |  |
 | value(v-model) | To set time | [dayjs](https://day.js.org/) | - |  |
 | valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string, [date formats](https://day.js.org/docs/en/display/format) | - |  |
+| separator | The custom separator icon | v-slot:separator | - |  |
 
 #### DisabledTime
 

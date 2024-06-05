@@ -59,7 +59,7 @@ export default defineComponent({
     });
     const getIcon = (prefixCls: string) => {
       const { action, iconRender = slots.iconRender || defaultIconRender } = props;
-      const iconTrigger = ActionMap[action!] || '';
+      const iconTrigger = ActionMap[action] || '';
       const icon = iconRender(visible.value);
       const iconProps = {
         [iconTrigger]: onVisibleChange,

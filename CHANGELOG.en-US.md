@@ -10,6 +10,16 @@
 
 ---
 
+## 4.2.2
+
+- 🐞 Fix TreeSelect placeholder slot invalid [#7545](https://github.com/vueComponent/ant-design-vue/issues/7545)
+- 🐞 Fix Tree slot responsive invalid issue [40ad45](https://github.com/vueComponent/ant-design-vue/commit/40ad45bc05b2bf9d0a2445d9f6ff365468ba90b7)
+- 🐞 Fix FloatButton target type error issue [#7576](https://github.com/vueComponent/ant-design-vue/issues/7576)
+- 🐞 Fix FormItem className error issue [#7582](https://github.com/vueComponent/ant-design-vue/issues/7582)
+- 🐞 Fix Input Cannot input problem under lazy [#7543](https://github.com/vueComponent/ant-design-vue/issues/7543)
+- 🐞 Fix the problem that placeholder is not hidden when inputting Chinese in Select [#7611](https://github.com/vueComponent/ant-design-vue/issues/7611)
+- 🐞 Fix the problem that the pop-up window flashes when clicking the preset option in DatePicker [#7550](https://github.com/vueComponent/ant-design-vue/issues/7550)
+
 ## 4.2.1
 
 - 🐞 fix Input clear action error [#7523](https://github.com/vueComponent/ant-design-vue/issues/7523)

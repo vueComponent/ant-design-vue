@@ -121,7 +121,13 @@ export function styleToString(style: CSSStyleDeclaration) {
 }
 
 export function styleObjectToString(style: Record<string, string>) {
-  return Object.keys(style)
-    .map(name => `${name}: ${style[name]};`)
-    .join('');
+  return Object.keys(style).reduce((acc, name) => {
+    const styleValue = style[name];
+    if (typeof styleValue === 'undefined' || styleValue === null) {
+      return acc;
+    }
+
+    acc += `${name}: ${style[name]};`;
+    return acc;
+  }, '');
 }

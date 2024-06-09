@@ -21,16 +21,16 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |  |
 | --- | --- | --- | --- | --- | --- |
-| accept | 接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | 无 |  |  |
-| action | 上传的地址 | string\|(file) => `Promise` | 无 |  |  |
-| beforeUpload | 上传文件之前的钩子，参数为上传的文件，若返回 `false` 则停止上传。支持返回一个 Promise 对象，Promise 对象 reject 时则停止上传，resolve 时开始上传（ resolve 传入 `File` 或 `Blob` 对象则上传 resolve 传入对象）。 | (file, fileList) => `boolean` \| `Promise` | 无 |  |
-| customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | function | 无 |  |  |
-| data | 上传所需参数或返回上传参数的方法 | object\|(file) => object | 无 |  |  |
+| accept | 接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | - |  |  |
+| action | 上传的地址 | string\|(file) => `Promise` | - |  |  |
+| beforeUpload | 上传文件之前的钩子，参数为上传的文件，若返回 `false` 则停止上传。支持返回一个 Promise 对象，Promise 对象 reject 时则停止上传，resolve 时开始上传（ resolve 传入 `File` 或 `Blob` 对象则上传 resolve 传入对象）。 | (file, fileList) => `boolean` \| `Promise` | - |  |
+| customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | function | - |  |  |
+| data | 上传所需参数或返回上传参数的方法 | object\|(file) => object | - |  |  |
 | directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false | 3.0 |  |
 | disabled | 是否禁用 | boolean | - |  |  |
 | downloadIcon | 自定义下载 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
-| fileList | 已经上传的文件列表（受控） | object\[] | 无 |  |  |
-| headers | 设置上传的请求头部，IE10 以上有效 | object | 无 |  |  |
+| fileList | 已经上传的文件列表（受控） | object\[] | - |  |  |
+| headers | 设置上传的请求头部，IE10 以上有效 | object | - |  |  |
 | iconRender | 自定义显示 icon | v-slot:iconRender="{file: UploadFile, listType?: UploadListType}" | - | 3.0 |  |
 | isImageUrl | 自定义缩略图是否使用 &lt;img /> 标签进行显示 | (file: UploadFile) => boolean | - | 3.0 |  |
 | itemRender | 自定义上传列表项 | v-slot:itemRender="{originNode: VNode, file: UploadFile, fileList: object\[], actions: { download: function, preview: function, remove: function }" | - | 3.0 |  |
@@ -40,7 +40,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 | multiple | 是否支持多选文件，`ie10+` 支持。开启后按住 ctrl 可选择多个文件。 | boolean | false |  |  |
 | name | 发到后台的文件参数名 | string | `file` |  |  |
 | openFileDialogOnClick | 点击打开文件对话框 | boolean | true | 3.0 |  |
-| previewFile | 自定义文件预览逻辑 | (file: File \| Blob) => Promise&lt;dataURL: string> | 无 | 1.5.0 |  |
+| previewFile | 自定义文件预览逻辑 | (file: File \| Blob) => Promise&lt;dataURL: string> | - | 1.5.0 |  |
 | previewIcon | 自定义预览 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
 | progress | 自定义进度条样式 | [ProgressProps](/components/progress/#api)（仅支持 `type="line"`） | { strokeWidth: 2, showInfo: false } | 3.0 |  |
 | removeIcon | 自定义删除 icon | v-slot:iconRender="{file: UploadFile}" | - | 3.0 |  |
@@ -52,11 +52,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*l1nlSryXib8AAA
 
 | 事件名称 | 说明 | 回调参数 | 版本 |  |
 | --- | --- | --- | --- | --- |
-| change | 上传文件改变时的状态，详见 [change](#change) | function | 无 |  |
+| change | 上传文件改变时的状态，详见 [change](#change) | function | - |  |
 | download | 点击下载文件时的回调，如果没有指定，则默认跳转到文件 url 对应的标签页。 | function(file): void | 跳转新标签页 | 1.5.0 |
 | drop | 当文件被拖入上传区域时执行的回调功能 | (event: DragEvent) => void | - | 3.0 |
-| preview | 点击文件链接或预览图标时的回调 | function(file) | 无 |  |
-| reject | 拖拽文件不符合 accept 类型时的回调 | function(fileList) | 无 |  |
+| preview | 点击文件链接或预览图标时的回调 | function(file) | - |  |
+| reject | 拖拽文件不符合 accept 类型时的回调 | function(fileList) | - |  |
 | remove   | 点击移除文件时的回调，返回值为 false 时不移除。支持返回一个 Promise 对象，Promise 对象 resolve(false) 或 reject 时不移除 | function(file): boolean \| Promise | -   | 3.0 |
 
 ### UploadFile

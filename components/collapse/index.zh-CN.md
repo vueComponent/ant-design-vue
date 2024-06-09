@@ -42,6 +42,6 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sir-TK0HkWcAAA
 | collapsible | 是否可折叠或指定可折叠触发区域 | `header` \| `disabled` | -      | 3.0   |
 | extra       | 自定义渲染每个面板右上角的内容 | VNode \| slot          | -      | 1.5.0 |
 | forceRender | 被隐藏时是否渲染 DOM 结构      | boolean                | false  |       |
-| header      | 面板头内容                     | string\|slot           | 无     |       |
-| key         | 对应 activeKey                 | string \| number       | 无     |       |
+| header      | 面板头内容                     | string\|slot           | -      |       |
+| key         | 对应 activeKey                 | string \| number       | -      |       |
 | showArrow   | 是否展示当前面板上的箭头       | boolean                | `true` |       |

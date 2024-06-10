@@ -12,8 +12,8 @@
 
 ## 4.2.3
 
-- 🌟 TourStep 自定义 Button，支持函数 children [#7628](https://github.com/vueComponent/ant-design-vue/pull/7628)
-- 🐞 修复 Select 和 Cascader 搜索多选模式下，输入值被隐藏问题 [#7640](https://github.com/vueComponent/ant-design-vue/issues/7640)
+- 🌟 TourStep custom Button, support function children [#7628](https://github.com/vueComponent/ant-design-vue/pull/7628)
+- 🐞 Fix the problem that the input value is hidden in Select and Cascader search multi-select mode [#7640](https://github.com/vueComponent/ant-design-vue/issues/7640)
 
 ## 4.2.2
 

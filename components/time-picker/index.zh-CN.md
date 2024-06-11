@@ -60,7 +60,7 @@ type DisabledTime = (now: Dayjs) => {
 | 事件名称   | 说明                  | 回调参数                                                  |
 | ---------- | --------------------- | --------------------------------------------------------- |
 | change     | 时间发生变化的回调    | function(time: dayjs \| string, timeString: string): void |
-| openChange | 面板打开/关闭时的回调 | (open: boolean): void                                   |
+| openChange | 面板打开/关闭时的回调 | (open: boolean): void                                     |
 
 ## 方法
 

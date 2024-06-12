@@ -1,6 +1,9 @@
 import type { PropType } from 'vue';
-import { defineComponent, shallowRef, ref, watch } from 'vue';
+import { computed, defineComponent, shallowRef, ref, watch } from 'vue';
 import PropTypes from './vue-types';
+import type { BaseInputInnerExpose } from './BaseInputInner';
+import BaseInputInner from './BaseInputInner';
+import { styleObjectToString } from '../vc-util/Dom/css';
 
 export interface BaseInputExpose {
   focus: () => void;
@@ -30,6 +33,8 @@ const BaseInput = defineComponent({
       default: 'input',
     },
     size: PropTypes.string,
+    style: PropTypes.oneOfType([String, Object]),
+    class: PropTypes.string,
   },
   emits: [
     'change',
@@ -40,9 +45,11 @@ const BaseInput = defineComponent({
     'compositionstart',
     'compositionend',
     'keyup',
+    'paste',
+    'mousedown',
   ],
   setup(props, { emit, attrs, expose }) {
-    const inputRef = shallowRef(null);
+    const inputRef = shallowRef<BaseInputInnerExpose>(null);
     const renderValue = ref();
     const isComposing = ref(false);
     watch(
@@ -68,6 +75,7 @@ const BaseInput = defineComponent({
       const event = document.createEvent('HTMLEvents');
       event.initEvent('input', true, true);
       e.target.dispatchEvent(event);
+      handleChange(e);
     };
     const handleInput = (e: Event) => {
       if (isComposing.value && props.lazy) {
@@ -114,19 +122,31 @@ const BaseInput = defineComponent({
     expose({
       focus,
       blur,
-      input: inputRef,
+      input: computed(() => inputRef.value?.input),
       setSelectionRange,
       select,
-      getSelectionStart: () => inputRef.value?.selectionStart,
-      getSelectionEnd: () => inputRef.value?.selectionEnd,
-      getScrollTop: () => inputRef.value?.scrollTop,
+      getSelectionStart: () => inputRef.value?.getSelectionStart(),
+      getSelectionEnd: () => inputRef.value?.getSelectionEnd(),
+      getScrollTop: () => inputRef.value?.getScrollTop(),
+    });
+    const handleMousedown = (e: MouseEvent) => {
+      emit('mousedown', e);
+    };
+    const handlePaste = (e: ClipboardEvent) => {
+      emit('paste', e);
+    };
+    const styleString = computed(() => {
+      return props.style && typeof props.style !== 'string'
+        ? styleObjectToString(props.style)
+        : props.style;
     });
     return () => {
-      const { tag: Tag, ...restProps } = props;
+      const { style, lazy, ...restProps } = props;
       return (
-        <Tag
+        <BaseInputInner
           {...restProps}
           {...attrs}
+          style={styleString.value}
           onInput={handleInput}
           onChange={handleChange}
           onBlur={handleBlur}
@@ -137,6 +157,8 @@ const BaseInput = defineComponent({
           onCompositionend={onCompositionend}
           onKeyup={handleKeyUp}
           onKeydown={handleKeyDown}
+          onPaste={handlePaste}
+          onMousedown={handleMousedown}
         />
       );
     };

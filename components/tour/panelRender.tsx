@@ -1,5 +1,6 @@
 import { computed, defineComponent, toRefs } from 'vue';
 import classNames from '../_util/classNames';
+import { isFunction } from '../_util/util';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import { tourStepProps } from './interface';
 import type { TourBtnProps } from './interface';
@@ -119,7 +120,9 @@ const panelRender = defineComponent({
                         size="small"
                         class={classNames(`${prefixCls}-prev-btn`, prevButtonProps?.className)}
                       >
-                        {prevButtonProps?.children ?? contextLocale.Previous}
+                        {isFunction(prevButtonProps?.children)
+                          ? prevButtonProps.children()
+                          : prevButtonProps?.children ?? contextLocale.Previous}
                       </Button>
                     ) : null}
                     <Button
@@ -129,8 +132,11 @@ const panelRender = defineComponent({
                       size="small"
                       class={classNames(`${prefixCls}-next-btn`, nextButtonProps?.className)}
                     >
-                      {nextButtonProps?.children ??
-                        (isLastStep.value ? contextLocale.Finish : contextLocale.Next)}
+                      {isFunction(nextButtonProps?.children)
+                        ? nextButtonProps?.children()
+                        : isLastStep.value
+                        ? contextLocale.Finish
+                        : contextLocale.Next}
                     </Button>
                   </div>
                 </div>

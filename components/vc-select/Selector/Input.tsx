@@ -48,7 +48,6 @@ const Input = defineComponent({
   setup(props) {
     let blurTimeout = null;
     const VCSelectContainerEvent = inject('VCSelectContainerEvent') as any;
-
     return () => {
       const {
         prefixCls,
@@ -97,6 +96,7 @@ const Input = defineComponent({
             ref: inputRef,
             disabled,
             tabindex,
+            lazy: false,
             autocomplete: autocomplete || 'off',
             autofocus,
             class: classNames(`${prefixCls}-selection-search-input`, inputNode?.props?.class),

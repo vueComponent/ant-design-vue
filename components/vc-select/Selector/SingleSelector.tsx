@@ -10,6 +10,7 @@ interface SelectorProps extends InnerSelectorProps {
   inputElement: VueNode;
   activeValue: string;
   optionLabelRender: Function;
+  compositionStatus: boolean;
 }
 const props = {
   inputElement: PropTypes.any,
@@ -20,6 +21,7 @@ const props = {
   searchValue: String,
   inputRef: PropTypes.any,
   placeholder: PropTypes.any,
+  compositionStatus: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
   mode: String,
   showSearch: { type: Boolean, default: undefined },
@@ -65,7 +67,9 @@ const SingleSelector = defineComponent<SelectorProps>({
 
     // Not show text when closed expect combobox mode
     const hasTextInput = computed(() =>
-      props.mode !== 'combobox' && !props.open && !props.showSearch ? false : !!inputValue.value,
+      props.mode !== 'combobox' && !props.open && !props.showSearch
+        ? false
+        : !!inputValue.value || props.compositionStatus,
     );
 
     const title = computed(() => {
@@ -86,6 +90,13 @@ const SingleSelector = defineComponent<SelectorProps>({
         </span>
       );
     };
+    const handleInput = (e: Event) => {
+      const composing = (e.target as any).composing;
+      if (!composing) {
+        inputChanged.value = true;
+        props.onInputChange(e);
+      }
+    };
 
     return () => {
       const {
@@ -103,7 +114,6 @@ const SingleSelector = defineComponent<SelectorProps>({
         optionLabelRender,
         onInputKeyDown,
         onInputMouseDown,
-        onInputChange,
         onInputPaste,
         onInputCompositionStart,
         onInputCompositionEnd,
@@ -147,10 +157,7 @@ const SingleSelector = defineComponent<SelectorProps>({
               value={inputValue.value}
               onKeydown={onInputKeyDown}
               onMousedown={onInputMouseDown}
-              onChange={e => {
-                inputChanged.value = true;
-                onInputChange(e as any);
-              }}
+              onChange={handleInput}
               onPaste={onInputPaste}
               onCompositionstart={onInputCompositionStart}
               onCompositionend={onInputCompositionEnd}

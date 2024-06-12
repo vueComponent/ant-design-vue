@@ -48,9 +48,8 @@ const computedStyleCache: Record<string, NodeType> = {};
 let hiddenTextarea: HTMLTextAreaElement;
 
 export function calculateNodeStyling(node: HTMLElement, useCache = false) {
-  const nodeRef = (node.getAttribute('id') ||
-    node.getAttribute('data-reactid') ||
-    node.getAttribute('name')) as string;
+  const nodeRef =
+    node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
 
   if (useCache && computedStyleCache[nodeRef]) {
     return computedStyleCache[nodeRef];
@@ -103,7 +102,7 @@ export default function calculateAutoSizeStyle(
   // Fix wrap="off" issue
   // https://github.com/ant-design/ant-design/issues/6577
   if (uiTextNode.getAttribute('wrap')) {
-    hiddenTextarea.setAttribute('wrap', uiTextNode.getAttribute('wrap') as string);
+    hiddenTextarea.setAttribute('wrap', uiTextNode.getAttribute('wrap'));
   } else {
     hiddenTextarea.removeAttribute('wrap');
   }

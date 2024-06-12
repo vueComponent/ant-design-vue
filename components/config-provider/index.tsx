@@ -1,4 +1,4 @@
-import type { App, Plugin, WatchStopHandle } from 'vue';
+import type { App, MaybeRef, Plugin, WatchStopHandle } from 'vue';
 import { watch, computed, reactive, defineComponent, watchEffect } from 'vue';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
@@ -7,7 +7,6 @@ import LocaleProvider, { ANT_MARK } from '../locale-provider';
 
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
-import type { MaybeRef } from '../_util/type';
 import message from '../message';
 import notification from '../notification';
 import { registerTheme } from './cssVariables';

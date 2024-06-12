@@ -49,15 +49,15 @@ const hasProp = (instance: any, prop: string) => {
 export const skipFlattenKey = Symbol('skipFlatten');
 const flattenChildren = (children = [], filterEmpty = true) => {
   const temp = Array.isArray(children) ? children : [children];
-  const res = [];
+  let res = [];
   temp.forEach(child => {
     if (Array.isArray(child)) {
-      res.push(...flattenChildren(child, filterEmpty));
+      res = res.concat(flattenChildren(child, filterEmpty));
     } else if (child && child.type === Fragment) {
       if (child.key === skipFlattenKey) {
         res.push(child);
       } else {
-        res.push(...flattenChildren(child.children, filterEmpty));
+        res = res.concat(flattenChildren(child.children, filterEmpty));
       }
     } else if (child && isVNode(child)) {
       if (filterEmpty && !isEmptyElement(child)) {

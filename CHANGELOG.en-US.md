@@ -10,6 +10,11 @@
 
 ---
 
+## 4.2.3
+
+- 🌟 TourStep custom Button, support function children [#7628](https://github.com/vueComponent/ant-design-vue/pull/7628)
+- 🐞 Fix the problem that the input value is hidden in Select and Cascader search multi-select mode [#7640](https://github.com/vueComponent/ant-design-vue/issues/7640)
+
 ## 4.2.2
 
 - 🐞 Fix TreeSelect placeholder slot invalid [#7545](https://github.com/vueComponent/ant-design-vue/issues/7545)

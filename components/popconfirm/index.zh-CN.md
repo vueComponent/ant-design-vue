@@ -27,7 +27,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*HrFtQ6jJJFQAAA
 | okText | 确认按钮文字 | string\|slot | 确定 |  |
 | okType | 确认按钮类型 | string | primary |  |
 | showCancel | 是否显示取消按钮 | boolean | true | 3.0 |
-| title | 确认框的描述 | string\|slot | 无 |  |
+| title | 确认框的描述 | string\|slot | - |  |
 | description | 确认内容的详细描述 | string\|slot | - | 4.0 |
 | open (v-model) | 是否显示 | boolean | - | 4.0 |
 

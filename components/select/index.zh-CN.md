@@ -111,7 +111,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | 参数  | 说明 | 类型                      | 默认值 |
 | ----- | ---- | ------------------------- | ------ |
 | key   |      | string                    | -      |
-| label | 组名 | string\|function(h)\|slot | 无     |
+| label | 组名 | string\|function(h)\|slot | -      |
 
 ## FAQ
 

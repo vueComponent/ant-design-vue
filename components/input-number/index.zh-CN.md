@@ -34,7 +34,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1uH-R5kLAMIAAA
 | parser | 指定从 formatter 里转换回数字的方式，和 formatter 搭配使用 | function( string): number | - |  |
 | precision | 数值精度 | number | - |  |
 | prefix | 带有前缀图标的 input | slot | - | 3.0 |
-| size | 输入框大小 | string | 无 |  |
+| size | 输入框大小 | string | - |  |
 | status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | step | 每次改变步数，可以为小数 | number\|string | 1 |  |
 | stringMode | 字符值模式，开启后支持高精度小数。同时 `change` 事件将返回 string 类型 | boolean | false | 3.0 |

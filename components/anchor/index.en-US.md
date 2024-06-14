@@ -22,7 +22,7 @@ For displaying anchor hyperlinks on page and jumping between them.
 | affix | Fixed mode of Anchor | boolean | true |  |
 | bounds | Bounding distance of anchor area | number | 5(px) |  |
 | getContainer | Scrolling container | () => HTMLElement | () => window |  |
-| getCurrentAnchor | Customize the anchor highlight | (activeLink: string) => string | - | activeLink(3.3) |
+| getCurrentAnchor | Customize the anchor highlight | (activeLink: string) => string | - |  |
 | offsetBottom | Pixels to offset from bottom when calculating position of scroll | number | - |  |
 | offsetTop | Pixels to offset from top when calculating position of scroll | number | 0 |  |
 | showInkInFixed | Whether show ink-square when `：affix="false"` | boolean | false |  |

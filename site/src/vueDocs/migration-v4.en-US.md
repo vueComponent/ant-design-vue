@@ -58,6 +58,7 @@ This document will help you upgrade from ant-design-vue `3.x` version to ant-des
   - Tag `visible` is removed.
   - Slider `tooltip` related API converged to `tooltip` property.
   - Table `filterDropdownVisible` changed to `filterDropdownOpen`.
+  - Progress `width` changed to `size`
 
 ```diff
 <template>

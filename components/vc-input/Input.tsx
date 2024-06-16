@@ -181,7 +181,7 @@ export default defineComponent({
         ),
         ref: inputRef,
         key: 'ant-input',
-        size: htmlSize,
+        size: htmlSize ? String(htmlSize) : undefined,
         type,
         lazy: props.lazy,
       };
@@ -191,7 +191,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <BaseInputCore {...omit(inputProps, ['size'])} />;
+      const inputNode = <BaseInputCore {...inputProps} />;
       return inputNode;
     };
     const getSuffix = () => {

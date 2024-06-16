@@ -10,8 +10,6 @@ const genOTPInputStyle: GenerateStyle<InputToken> = (token: InputToken) => {
       alignItems: 'center',
       flexWrap: 'nowrap',
       columnGap: paddingXS,
-      padding: 0,
-      // border: 'none',
 
       '&-rtl': {
         direction: 'rtl',

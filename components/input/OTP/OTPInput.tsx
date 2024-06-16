@@ -14,6 +14,7 @@ export default defineComponent({
     value: { type: String, default: undefined },
     mask: { type: [Boolean, String], default: false },
     onChange: { type: Function as PropType<(index: number, value: string) => void> },
+    onActiveChange: Function as PropType<(nextIndex: number) => void>,
   },
   setup(props, { attrs, expose }) {
     const inputRef = shallowRef();
@@ -27,8 +28,7 @@ export default defineComponent({
         inputRef.value.select();
       });
     };
-    const handleSyncMouseDown = e => {
-      e.preventDefault();
+    const handleSyncMouseDown = () => {
       syncSelection();
     };
     // ======================= Event handlers =================
@@ -39,6 +39,30 @@ export default defineComponent({
     const focus = () => {
       inputRef.value?.focus();
       syncSelection();
+    };
+
+    const activeSelection = () => {
+      if (document.activeElement === inputRef.value.input.input) {
+        syncSelection();
+      }
+    };
+
+    const onInternalKeydown = ({ key }) => {
+      if (key === 'ArrowLeft') {
+        props.onActiveChange(props.index - 1);
+      } else if (key === 'ArrowRight') {
+        props.onActiveChange(props.index + 1);
+      }
+
+      activeSelection();
+    };
+
+    const onInternalKeyUp = ({ key }) => {
+      if (key === 'Backspace' && !props.value) {
+        props.onActiveChange(props.index - 1);
+      }
+
+      activeSelection();
     };
 
     expose({
@@ -55,8 +79,8 @@ export default defineComponent({
         onInput={onInternalChange}
         onMousedown={handleSyncMouseDown}
         onMouseUp={handleSyncMouseDown}
-        onKeydown={syncSelection}
-        onKeyup={syncSelection}
+        onKeydown={onInternalKeydown}
+        onKeyup={onInternalKeyUp}
       />
     );
   },

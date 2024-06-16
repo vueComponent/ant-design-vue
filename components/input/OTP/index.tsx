@@ -67,6 +67,10 @@ export default defineComponent({
     };
 
     // ======================= Change handlers =================
+    const onInputActiveChange = (nextIndex: number) => {
+      refs.value[nextIndex]?.focus();
+    };
+
     const onInputChange = (index: number, value: string) => {
       const nextValueCells = patchValue(index, value);
       const nextIndex = Math.min(index + value.length, props.length);
@@ -111,6 +115,7 @@ export default defineComponent({
                 value={singleValue}
                 htmlSize={1}
                 onChange={onInputChange}
+                onActiveChange={onInputActiveChange}
                 autofocus={index === 0 && autofocus}
               />
             );

@@ -65,7 +65,7 @@ export default defineComponent({
     expose({
       focus,
       blur,
-      input: computed(() => (inputRef.value.input as any)?.input),
+      input: computed(() => inputRef.value.input),
       stateValue,
       setSelectionRange,
       select,

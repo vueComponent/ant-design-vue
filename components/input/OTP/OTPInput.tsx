@@ -1,5 +1,5 @@
 import Input from '../Input';
-import { PropType, computed, defineComponent, nextTick, shallowRef } from 'vue';
+import { PropType, computed, defineComponent, shallowRef } from 'vue';
 import inputProps from '../inputProps';
 import omit from '../../_util/omit';
 import { type ChangeEventHandler } from '../../_util/EventInterface';

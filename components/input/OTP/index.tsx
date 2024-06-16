@@ -1,14 +1,14 @@
-import { PropType, defineComponent, nextTick, reactive, ref } from 'vue';
+import { PropType, defineComponent, reactive, ref } from 'vue';
 import inputProps from '../inputProps';
-import { FormItemInputContext } from 'ant-design-vue/es/form/FormItemContext';
+import { FormItemInputContext } from '../../form/FormItemContext';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
-import classNames from 'ant-design-vue/es/_util/classNames';
+import classNames from '../../_util/classNames';
 import useStyle from '../style/otp';
 import OTPInput from './OTPInput';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'OTP',
+  name: 'AOTP',
   inheritAttrs: false,
   props: {
     ...inputProps(),

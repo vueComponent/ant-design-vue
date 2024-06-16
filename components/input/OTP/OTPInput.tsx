@@ -6,7 +6,7 @@ import { type ChangeEventHandler } from '../../_util/EventInterface';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
-  name: 'OTPInput',
+  name: 'AOTPInput',
   inheritAttrs: false,
   props: {
     ...inputProps(),

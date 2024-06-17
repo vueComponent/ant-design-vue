@@ -46,6 +46,7 @@ export const baseInputProps = () => {
     readonly: { type: Boolean, default: undefined },
     handleReset: Function as PropType<MouseEventHandler>,
     hidden: { type: Boolean, default: undefined },
+    valueModifiers: { type: Object, default: undefined },
   };
 };
 export const inputProps = () => ({

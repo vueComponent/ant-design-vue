@@ -1,10 +1,11 @@
-import { PropType, defineComponent, reactive, ref } from 'vue';
+import { PropType, computed, defineComponent, ref } from 'vue';
 import inputProps from '../inputProps';
 import { FormItemInputContext } from '../../form/FormItemContext';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import useStyle from '../style/otp';
 import OTPInput from './OTPInput';
+import { type InputStatus, getMergedStatus } from '../../_util/statusUtils';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -17,16 +18,18 @@ export default defineComponent({
     formatter: { type: Function as PropType<(arg: string) => string>, default: undefined },
     defaultValue: { type: String, default: undefined },
     mask: { type: [String, Boolean], default: false },
+    status: { type: String as PropType<InputStatus>, default: undefined },
   },
   setup(props, { attrs }) {
     const { prefixCls, direction, size } = useConfigInject('otp', props);
     // Style
     const [wrapSSR, hashId] = useStyle(prefixCls);
+
     // ==================== Provider =========================
-    const proxyFormContext = reactive({
-      // TODO:
-    });
-    FormItemInputContext.useProvide(proxyFormContext);
+    const formItemInputContext = FormItemInputContext.useInject();
+    const mergedStatus = computed(
+      () => getMergedStatus(formItemInputContext.status, props.status) as InputStatus,
+    );
 
     const refs = ref([]);
     const strToArr = (str: string) => (str || '').split('');
@@ -121,6 +124,7 @@ export default defineComponent({
                 value={singleValue}
                 htmlSize={1}
                 onChange={onInputChange}
+                status={mergedStatus.value}
                 onActiveChange={onInputActiveChange}
                 autofocus={index === 0 && autofocus}
                 {...inputShardProps}

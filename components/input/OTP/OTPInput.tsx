@@ -3,6 +3,7 @@ import { PropType, computed, defineComponent, shallowRef } from 'vue';
 import inputProps from '../inputProps';
 import omit from '../../_util/omit';
 import { type ChangeEventHandler } from '../../_util/EventInterface';
+import { type InputStatus } from '../../_util/statusUtils';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -15,6 +16,7 @@ export default defineComponent({
     mask: { type: [Boolean, String], default: false },
     onChange: { type: Function as PropType<(index: number, value: string) => void> },
     onActiveChange: Function as PropType<(nextIndex: number) => void>,
+    status: { type: String as PropType<InputStatus>, default: undefined },
   },
   setup(props, { attrs, expose }) {
     const inputRef = shallowRef();

@@ -28,12 +28,16 @@ export default defineComponent({
         inputRef.value.select();
       });
     };
-    const handleSyncMouseDown = () => {
-      syncSelection();
-    };
+
     // ======================= Event handlers =================
     const onInternalChange: ChangeEventHandler = e => {
-      props.onChange(props.index, e.target.value);
+      const value = e.target.value;
+      props.onChange(props.index, value);
+
+      if (typeof props.mask === 'string' && value) {
+        // force update input value
+        e.target.value = props.mask;
+      }
     };
 
     const focus = () => {
@@ -77,10 +81,11 @@ export default defineComponent({
         class={attrs.class}
         value={internalValue.value}
         onInput={onInternalChange}
-        onMousedown={handleSyncMouseDown}
-        onMouseUp={handleSyncMouseDown}
+        onMousedown={syncSelection}
+        onMouseUp={syncSelection}
         onKeydown={onInternalKeydown}
         onKeyup={onInternalKeyUp}
+        type={props.mask === true ? 'password' : 'text'}
       />
     );
   },

@@ -16,6 +16,7 @@ export default defineComponent({
     onChange: { type: Function as PropType<(value: string) => void>, default: undefined },
     formatter: { type: Function as PropType<(arg: string) => string>, default: undefined },
     defaultValue: { type: String, default: undefined },
+    mask: { type: [String, Boolean], default: false },
   },
   setup(props, { attrs }) {
     const { prefixCls, direction, size } = useConfigInject('otp', props);
@@ -100,9 +101,10 @@ export default defineComponent({
         attrs.class,
         hashId.value,
       );
-      const { length, autofocus, disabled } = props;
+      const { length, autofocus, disabled, mask } = props;
       const inputShardProps = {
         disabled,
+        mask,
       };
 
       return wrapSSR(

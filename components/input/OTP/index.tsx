@@ -100,7 +100,11 @@ export default defineComponent({
         attrs.class,
         hashId.value,
       );
-      const { length, autofocus } = props;
+      const { length, autofocus, disabled } = props;
+      const inputShardProps = {
+        disabled,
+      };
+
       return wrapSSR(
         <div class={cls}>
           {Array.from({ length }).map((_, index) => {
@@ -117,6 +121,7 @@ export default defineComponent({
                 onChange={onInputChange}
                 onActiveChange={onInputActiveChange}
                 autofocus={index === 0 && autofocus}
+                {...inputShardProps}
               />
             );
           })}

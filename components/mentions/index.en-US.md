@@ -16,7 +16,7 @@ When you need to mention someone or something.
 
 ### Mention
 
-| Property | Description | Type | Default |
+| Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | autofocus | Auto get focus when component mounted | boolean | `false` |
 | defaultValue | Default value | string |  |
@@ -31,6 +31,7 @@ When you need to mention someone or something.
 | value(v-model) | Set value of mentions | string |  |
 | options | Option Configuration | [Options](#option) | \[] | 4.0 |
 | option | custom option label | v-slot:option="option" | - | 4.0 |
+| keyboardPrediction | Supports predictive keyboards or complex input methods such as Chinese | boolean | false | 4.2.4 |
 
 ### Events
 

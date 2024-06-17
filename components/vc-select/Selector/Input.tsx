@@ -36,6 +36,7 @@ export const inputProps = {
   onCompositionend: { type: Function as PropType<CompositionEventHandler> },
   onFocus: { type: Function as PropType<FocusEventHandler> },
   onBlur: { type: Function as PropType<FocusEventHandler> },
+  keyboardPrediction: { type: Boolean, default: undefined },
 };
 
 export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>;
@@ -71,6 +72,7 @@ const Input = defineComponent({
         open,
         inputRef,
         attrs,
+        keyboardPrediction,
       } = props;
 
       let inputNode: any = inputElement || <BaseInput></BaseInput>;
@@ -97,6 +99,7 @@ const Input = defineComponent({
             disabled,
             tabindex,
             lazy: false,
+            keyboardPrediction,
             autocomplete: autocomplete || 'off',
             autofocus,
             class: classNames(`${prefixCls}-selection-search-input`, inputNode?.props?.class),

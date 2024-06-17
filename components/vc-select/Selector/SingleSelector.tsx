@@ -38,6 +38,7 @@ const props = {
   onInputMouseDown: Function,
   onInputCompositionStart: Function,
   onInputCompositionEnd: Function,
+  keyboardPrediction: { type: Boolean, default: undefined },
 };
 const SingleSelector = defineComponent<SelectorProps>({
   name: 'SingleSelector',
@@ -117,6 +118,7 @@ const SingleSelector = defineComponent<SelectorProps>({
         onInputPaste,
         onInputCompositionStart,
         onInputCompositionEnd,
+        keyboardPrediction,
       } = props;
       const item = values[0];
       let titleNode = null;
@@ -163,6 +165,7 @@ const SingleSelector = defineComponent<SelectorProps>({
               onCompositionend={onInputCompositionEnd}
               tabindex={tabindex}
               attrs={pickAttrs(props, true)}
+              keyboardPrediction={keyboardPrediction}
             />
           </span>
 

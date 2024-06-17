@@ -66,6 +66,8 @@ export interface SelectorProps {
    * This may be removed after React provides replacement of `findDOMNode`
    */
   domRef: () => HTMLDivElement;
+
+  keyboardPrediction: boolean;
 }
 export interface RefSelectorProps {
   focus: () => void;
@@ -121,6 +123,7 @@ const Selector = defineComponent<SelectorProps>({
      * This may be removed after React provides replacement of `findDOMNode`
      */
     domRef: Function,
+    keyboardPrediction: { type: Boolean, default: undefined },
   } as any,
   setup(props, { expose }) {
     const inputRef = createRef();

@@ -67,6 +67,7 @@ const props = {
   onInputMouseDown: Function,
   onInputCompositionStart: Function,
   onInputCompositionEnd: Function,
+  keyboardPrediction: { type: Boolean, default: undefined },
 };
 
 const onPreventMouseDown = (event: MouseEvent) => {
@@ -234,6 +235,7 @@ const SelectSelector = defineComponent<SelectorProps>({
         onInputMouseDown,
         onInputCompositionStart,
         onInputCompositionEnd,
+        keyboardPrediction,
       } = props;
       // >>> Input Node
       const inputNode = (
@@ -264,6 +266,7 @@ const SelectSelector = defineComponent<SelectorProps>({
             attrs={pickAttrs(props, true)}
             onFocus={() => (focused.value = true)}
             onBlur={() => (focused.value = false)}
+            keyboardPrediction={keyboardPrediction}
           />
 
           {/* Measure Node */}

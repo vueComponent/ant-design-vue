@@ -54,6 +54,7 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | defaultValue | The initial input content | string |  |  |  |
 | showCount | Whether show text count | boolean | false |  |  |
 | value(v-model) | The input content value | string |  |  |  |
+| keyboardPrediction | Supports predictive keyboards or complex input methods such as Chinese | boolean | false | 4.2.4 |
 
 ### TextArea Events
 

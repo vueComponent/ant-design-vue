@@ -33,6 +33,7 @@ const textAreaProps = () => ({
   onCompositionstart: eventType<CompositionEventHandler>(),
   onCompositionend: eventType<CompositionEventHandler>(),
   valueModifiers: Object,
+  keyboardPrediction: { type: Boolean, default: undefined },
 });
 
 export { textAreaProps };

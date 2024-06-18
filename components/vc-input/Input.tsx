@@ -62,9 +62,14 @@ export default defineComponent({
       inputRef.value.input?.select();
     };
 
+    const rootInputForceUpdate = () => {
+      inputRef.value?.rootInputForceUpdate();
+    };
+
     expose({
       focus,
       blur,
+      rootInputForceUpdate,
       input: computed(() => inputRef.value.input),
       stateValue,
       setSelectionRange,

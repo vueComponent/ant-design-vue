@@ -19,6 +19,7 @@ export interface BaseInputExpose {
   getSelectionEnd: () => number | null;
   getScrollTop: () => number | null;
   setScrollTop: (scrollTop: number) => void;
+  rootInputForceUpdate: () => void;
 }
 const BaseInput = defineComponent({
   compatConfig: { MODE: 3 },
@@ -119,12 +120,18 @@ const BaseInput = defineComponent({
     const select = () => {
       inputRef.value?.select();
     };
+
+    const rootInputForceUpdate = () => {
+      inputRef.value?.rootInputForceUpdate();
+    };
+
     expose({
       focus,
       blur,
       input: computed(() => inputRef.value?.input),
       setSelectionRange,
       select,
+      rootInputForceUpdate,
       getSelectionStart: () => inputRef.value?.getSelectionStart(),
       getSelectionEnd: () => inputRef.value?.getSelectionEnd(),
       getScrollTop: () => inputRef.value?.getScrollTop(),

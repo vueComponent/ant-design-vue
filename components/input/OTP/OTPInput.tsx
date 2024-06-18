@@ -1,5 +1,5 @@
 import Input from '../Input';
-import { PropType, computed, defineComponent, shallowRef } from 'vue';
+import { PropType, computed, defineComponent, nextTick, shallowRef } from 'vue';
 import inputProps from '../inputProps';
 import omit from '../../_util/omit';
 import { type ChangeEventHandler } from '../../_util/EventInterface';
@@ -26,9 +26,14 @@ export default defineComponent({
     });
 
     const syncSelection = () => {
+      inputRef.value.select();
       requestAnimationFrame(() => {
         inputRef.value.select();
       });
+    };
+
+    const forceUpdate = () => {
+      inputRef.value.input?.rootInputForceUpdate?.();
     };
 
     // ======================= Event handlers =================
@@ -36,10 +41,12 @@ export default defineComponent({
       const value = e.target.value;
       props.onChange(props.index, value);
 
-      if (typeof props.mask === 'string' && value) {
-        // force update input value
-        e.target.value = props.mask;
-      }
+      // Edge:  If the value after the formatter is the same as the original value
+      // the Input component will not be updated, and since the input is not controlled
+      // it will result in an inconsistent UI with the value.
+      nextTick(() => {
+        forceUpdate();
+      });
     };
 
     const focus = () => {
@@ -83,6 +90,7 @@ export default defineComponent({
         class={attrs.class}
         value={internalValue.value}
         onInput={onInternalChange}
+        onFocus={syncSelection}
         onMousedown={syncSelection}
         onMouseUp={syncSelection}
         onKeydown={onInternalKeydown}

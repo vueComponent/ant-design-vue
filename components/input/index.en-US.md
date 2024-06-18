@@ -99,3 +99,22 @@ Supports all props of `Input`.
 | visible(v-model) | password visibility                                    | boolean | false   |
 | iconRender       | Custom toggle button                                   | slot    | -       |
 | visibilityToggle | Whether show toggle button or control password visible | boolean | true    |
+
+### Input.OTP
+
+| Property | Description | Type | Default |
+| --- | --- | --- | --- |
+| defaultValue | Default value | string | - |
+| disabled | Whether the input is disabled | string | - |
+| formatter | Format display, blank fields will be filled with `` | (value: string) => string | - |
+| mask | Custom display, the original value will not be modified | boolean | false |
+| length | The number of input elements | number | 6 |
+| status | Set validation status | `error` \| `warning` | - |
+| size | The size of the input box | `small` \| `middle` \| `large` | `middle` |
+| value | The input content value | string | - |
+
+#### Input.OTP Events
+
+| Events Name | Description                            | Arguments               | Version |     |
+| ----------- | -------------------------------------- | ----------------------- | ------- | --- |
+| change      | Trigger when all the fields are filled | function(value: string) | -       |     |

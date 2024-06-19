@@ -137,7 +137,6 @@ describe('OTP', () => {
 
   it('support mask prop', async () => {
     const onChange = jest.fn();
-    const internalValue = 'search'.split('');
     const wrapper = mount(OTP, { props: { mask: '🔒', onChange }, sync: false });
 
     await asyncExpect(async () => {
@@ -149,6 +148,8 @@ describe('OTP', () => {
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith('search');
       expect(getInputAllText(inputAll)).toBe('🔒🔒🔒🔒🔒🔒');
+
+      wrapper.unmount();
     });
   });
 });

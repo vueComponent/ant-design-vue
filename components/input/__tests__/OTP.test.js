@@ -113,4 +113,42 @@ describe('OTP', () => {
       wrapper.unmount();
     });
   });
+
+  it('formatter', async () => {
+    const onChange = jest.fn();
+    const wrapper = mount(OTP, {
+      props: { formatter: txt => txt.toUpperCase(), onChange },
+      sync: false,
+    });
+
+    await asyncExpect(async () => {
+      const inputAll = wrapper.findAll('input');
+      const internalValue = 'search'.split('');
+      for (let i = 0; i < inputAll.length; i++) {
+        await inputAll[i].setValue(internalValue[i]);
+      }
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith('SEARCH');
+
+      wrapper.unmount();
+    });
+  });
+
+  it('support mask prop', async () => {
+    const onChange = jest.fn();
+    const internalValue = 'search'.split('');
+    const wrapper = mount(OTP, { props: { mask: '🔒', onChange }, sync: false });
+
+    await asyncExpect(async () => {
+      const inputAll = wrapper.findAll('input');
+      const internalValue = 'search'.split('');
+      for (let i = 0; i < inputAll.length; i++) {
+        await inputAll[i].setValue(internalValue[i]);
+      }
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith('search');
+      expect(getInputAllText(inputAll)).toBe('🔒🔒🔒🔒🔒🔒');
+    });
+  });
 });

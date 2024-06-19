@@ -1,4 +1,4 @@
-import { PropType, computed, defineComponent, ref } from 'vue';
+import { PropType, computed, defineComponent, ref, watchEffect } from 'vue';
 import inputProps from '../inputProps';
 import { FormItemInputContext } from '../../form/FormItemContext';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
@@ -36,6 +36,13 @@ export default defineComponent({
     // keep reactive
     const internalFormatter = (txt: string) => (props.formatter ? props.formatter(txt) : txt);
     const valueCells = ref<string[]>(strToArr(internalFormatter(props.defaultValue || '')));
+
+    watchEffect(() => {
+      if (typeof props.value !== 'undefined' && props.value !== null) {
+        valueCells.value = strToArr(String(props.value));
+      }
+    });
+
     const patchValue = (index: number, txt: string) => {
       let nextCells = valueCells.value.slice();
 

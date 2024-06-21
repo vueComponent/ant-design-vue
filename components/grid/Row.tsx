@@ -39,7 +39,7 @@ export const rowProps = () => ({
   justify: someType<(typeof RowJustify)[number] | ResponsiveJustify>([String, Object]),
   prefixCls: String,
   gutter: someType<Gutter | [Gutter, Gutter]>([Number, Array, Object], 0),
-  wrap: { type: Boolean, default: undefined },
+  wrap: { type: Boolean, default: false },
 });
 
 export type RowProps = Partial<ExtractPropTypes<ReturnType<typeof rowProps>>>;

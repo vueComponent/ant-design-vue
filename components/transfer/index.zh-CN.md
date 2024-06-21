@@ -39,6 +39,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*yv12S4sSRAEAAA
 | showSelectAll | 是否展示全选勾选框 | boolean | true |  |
 | status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | targetKeys(v-model) | 显示在右侧框数据的 key 集合 | string\[] | \[] |  |
+| targetOrder | 右侧列表元素的排序策略：若为 push，则新加入的元素排在最后；若为 unshift，则新加入的元素排在最前，默认 排在最前 | 'unshift' \| 'push' | - | 4.2.2 |
 | titles | 标题集合，顺序从左至右 | string\[] | \['', ''] |  |
 
 ### 事件

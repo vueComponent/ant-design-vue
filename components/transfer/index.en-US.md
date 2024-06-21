@@ -38,6 +38,7 @@ One or more elements can be selected from either column, one click on the proper
 | showSelectAll | Show select all checkbox on the header | boolean | true |  |
 | status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | targetKeys(v-model) | A set of keys of elements that are listed on the right column. | string\[] | \[] |  |
+| targetOrder | order strategy for elements in the target list. If set to push, the newly added elements will be pushed to the bottom. If set to unshift, the newly added elements will be inserted on the top, defualt on the top | 'unshift' \| 'push' | - | 4.2.2 |
 | titles | A set of titles that are sorted from left to right. | string\[] | - |  |
 
 ### events

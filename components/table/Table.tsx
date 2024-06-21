@@ -672,7 +672,7 @@ const Table = defineComponent({
       table,
     });
     return () => {
-      const columns = props.columns || convertChildrenToColumns(slots.default?.());
+      const columns = props.columns || reactive(convertChildrenToColumns(slots.default?.()));
       return (
         <InternalTable
           ref={table}

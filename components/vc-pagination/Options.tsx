@@ -19,6 +19,7 @@ export default defineComponent({
     rootPrefixCls: String,
     selectPrefixCls: String,
     goButton: PropTypes.any,
+    keyboardPrediction: { type: Boolean, default: undefined },
   },
   setup(props) {
     const goInputText = ref('');
@@ -91,6 +92,7 @@ export default defineComponent({
         selectPrefixCls,
         pageSize,
         disabled,
+        keyboardPrediction,
       } = props;
       const prefixCls = `${rootPrefixCls}-options`;
       let changeSelect = null;
@@ -155,6 +157,7 @@ export default defineComponent({
               onChange={handleChange}
               onKeyup={go}
               onBlur={handleBlur}
+              keyboardPrediction={keyboardPrediction}
             ></BaseInput>
             {locale.page}
             {gotoButton}

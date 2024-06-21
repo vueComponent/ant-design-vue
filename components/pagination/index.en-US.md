@@ -39,6 +39,7 @@ A long list can be divided into several pages using `Pagination`, and only one p
 | simple | whether to use simple mode | boolean | - |  |
 | size | specify the size of `Pagination`, can be set to `small` | string | "" |  |
 | total | total number of data items | number | 0 |  |
+| keyboardPrediction | Supports predictive keyboards or complex input methods such as Chinese | boolean | false | 4.2.4 |
 
 ### events
 

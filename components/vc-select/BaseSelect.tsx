@@ -235,6 +235,7 @@ export const baseSelectPropsWithoutPrivate = () => {
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,
     onMouseleave: Function as PropType<(e: MouseEvent) => void>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
+    keyboardPrediction: { type: Boolean, default: undefined },
   };
 };
 const baseSelectProps = () => {

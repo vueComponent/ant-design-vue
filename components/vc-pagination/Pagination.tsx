@@ -58,6 +58,7 @@ export default defineComponent({
     jumpPrevIcon: PropTypes.any,
     jumpNextIcon: PropTypes.any,
     totalBoundaryShowSizeChanger: PropTypes.number.def(50),
+    keyboardPrediction: { type: Boolean, default: undefined },
   },
   data() {
     const props = this.$props;
@@ -350,6 +351,7 @@ export default defineComponent({
       selectComponentClass,
       selectPrefixCls,
       pageSizeOptions,
+      keyboardPrediction,
     } = this.$props;
     const { stateCurrent, statePageSize } = this;
     const { class: className, ...restAttrs } = splitAttrs(this.$attrs).extraAttrs;
@@ -431,6 +433,7 @@ export default defineComponent({
               onInput={this.handleKeyUp}
               onChange={this.handleKeyUp}
               size="3"
+              keyboardPrediction={keyboardPrediction}
             ></BaseInput>
             <span class={`${prefixCls}-slash`}>／</span>
             {allPages}

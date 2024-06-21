@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { computed, defineComponent, shallowRef } from 'vue';
+import { computed, defineComponent, shallowRef, Transition } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -11,7 +11,7 @@ import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { getTransitionProps, Transition } from '../_util/transition';
+import { getTransitionProps } from '../_util/transition';
 import { isValidElement } from '../_util/props-util';
 import { tuple, withInstall } from '../_util/type';
 import { cloneElement } from '../_util/vnode';

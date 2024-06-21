@@ -72,8 +72,10 @@ const BaseInput = defineComponent({
       isComposing.value = false;
       (e.target as any).composing = false;
       emit('compositionend', e);
-      const event = document.createEvent('HTMLEvents');
-      event.initEvent('input', true, true);
+      const event = new Event('input', {
+        bubbles: true,
+        cancelable: true,
+      });
       e.target.dispatchEvent(event);
       handleChange(e);
     };

@@ -9,6 +9,7 @@
     <size />
     <block />
     <danger />
+    <linear-gradient />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -24,11 +25,13 @@ import Danger from './danger.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
+import LinearGradient from 'ant-design-vue/es/button/demo/linear-gradient.vue';
 
 export default defineComponent({
   CN,
   US,
   components: {
+    LinearGradient,
     Basic,
     Disabled,
     Ghost,

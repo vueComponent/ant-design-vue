@@ -19,7 +19,7 @@ export default function createSlider(Component) {
     id: String,
     min: Number,
     max: Number,
-    step: Number,
+    step: Number || null,
     marks: PropTypes.object,
     included: { type: Boolean, default: undefined },
     prefixCls: String,

@@ -35,6 +35,7 @@ const BaseInput = defineComponent({
     size: PropTypes.string,
     style: PropTypes.oneOfType([String, Object]),
     class: PropTypes.string,
+    valueModifiers: PropTypes.object,
   },
   emits: [
     'change',
@@ -86,6 +87,9 @@ const BaseInput = defineComponent({
     };
 
     const handleBlur = (e: Event) => {
+      if (props?.valueModifiers?.trim) {
+        (e.target as HTMLInputElement).value = (e.target as HTMLInputElement).value.trim();
+      }
       emit('blur', e);
     };
     const handleFocus = (e: Event) => {

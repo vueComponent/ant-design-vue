@@ -1,5 +1,5 @@
 import type { PropType } from 'vue';
-import { defineComponent, shallowRef } from 'vue';
+import { defineComponent, getCurrentInstance, shallowRef } from 'vue';
 import PropTypes from './vue-types';
 
 export interface BaseInputInnerExpose {
@@ -16,6 +16,7 @@ export interface BaseInputInnerExpose {
   getSelectionEnd: () => number | null;
   getScrollTop: () => number | null;
   setScrollTop: (scrollTop: number) => void;
+  rootInputForceUpdate: () => void;
 }
 const BaseInputInner = defineComponent({
   compatConfig: { MODE: 3 },
@@ -76,12 +77,18 @@ const BaseInputInner = defineComponent({
     const select = () => {
       inputRef.value?.select();
     };
+
+    const ins = getCurrentInstance();
+    const rootInputForceUpdate = () => {
+      ins.proxy.$forceUpdate();
+    };
     expose({
       focus,
       blur,
       input: inputRef,
       setSelectionRange,
       select,
+      rootInputForceUpdate,
       getSelectionStart: () => inputRef.value?.selectionStart,
       getSelectionEnd: () => inputRef.value?.selectionEnd,
       getScrollTop: () => inputRef.value?.scrollTop,

@@ -91,6 +91,8 @@ export const inputProps = () => ({
   onPressEnter: Function as PropType<KeyboardEventHandler>,
   onKeydown: Function as PropType<KeyboardEventHandler>,
   onKeyup: Function as PropType<KeyboardEventHandler>,
+  onMousedown: { type: Function as PropType<MouseEventHandler>, default: undefined },
+  onMouseUp: { type: Function as PropType<MouseEventHandler>, default: undefined },
   onFocus: Function as PropType<FocusEventHandler>,
   onBlur: Function as PropType<FocusEventHandler>,
   onChange: Function as PropType<ChangeEventHandler>,

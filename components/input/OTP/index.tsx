@@ -1,4 +1,4 @@
-import { PropType, computed, defineComponent, ref, watchEffect } from 'vue';
+import { type PropType, computed, defineComponent, ref, watchEffect } from 'vue';
 import inputProps from '../inputProps';
 import { FormItemInputContext } from '../../form/FormItemContext';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';

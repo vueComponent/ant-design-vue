@@ -350,7 +350,7 @@ const Base = defineComponent({
         findDOMNode(contentRef.value),
         { rows, suffix },
         props.content,
-        renderOperations(true),
+        () => renderOperations(true),
         ELLIPSIS_STR,
       );
 

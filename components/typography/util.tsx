@@ -63,7 +63,7 @@ export default (
   originElement: HTMLElement,
   option: Option,
   content: string,
-  fixedContent: VNodeTypes[],
+  fixedContentRender: () => VNodeTypes[],
   ellipsisStr: string,
 ): {
   content: VNodeTypes;
@@ -91,7 +91,7 @@ export default (
             {content}
             {suffix}
           </span>
-          <span style={wrapperStyle}>{fixedContent}</span>
+          <span style={wrapperStyle}>{fixedContentRender()}</span>
         </div>
       );
     },

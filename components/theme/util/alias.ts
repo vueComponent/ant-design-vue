@@ -2,6 +2,7 @@ import { TinyColor } from '@ctrl/tinycolor';
 import type { AliasToken, MapToken, OverrideToken, SeedToken } from '../interface';
 import getAlphaColor from './getAlphaColor';
 import seedToken from '../themes/seed';
+import { removeUnit } from '../../_util/cssinjs/util';
 
 /** Raw merge of `@ant-design/cssinjs` token. Which need additional process */
 type RawMergedToken = MapToken & OverrideToken & { override: Partial<AliasToken> };
@@ -84,10 +85,10 @@ export default function formatToken(derivativeToken: RawMergedToken): AliasToken
     controlOutline: getAlphaColor(mergedToken.colorPrimaryBg, mergedToken.colorBgContainer),
 
     lineType: mergedToken.lineType,
-    borderRadius: mergedToken.borderRadius,
-    borderRadiusXS: mergedToken.borderRadiusXS,
-    borderRadiusSM: mergedToken.borderRadiusSM,
-    borderRadiusLG: mergedToken.borderRadiusLG,
+    borderRadius: removeUnit(mergedToken.borderRadius),
+    borderRadiusXS: removeUnit(mergedToken.borderRadiusXS),
+    borderRadiusSM: removeUnit(mergedToken.borderRadiusSM),
+    borderRadiusLG: removeUnit(mergedToken.borderRadiusLG),
 
     fontWeightStrong: 600,
 

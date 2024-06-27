@@ -1,3 +1,4 @@
+import { removeUnit } from '../../../_util/cssinjs/util';
 import type { MapToken } from '../../interface';
 
 const genRadius = (
@@ -6,6 +7,8 @@ const genRadius = (
   MapToken,
   'borderRadiusXS' | 'borderRadiusSM' | 'borderRadiusLG' | 'borderRadius' | 'borderRadiusOuter'
 > => {
+  radiusBase = removeUnit(radiusBase);
+
   let radiusLG = radiusBase;
   let radiusSM = radiusBase;
   let radiusXS = radiusBase;

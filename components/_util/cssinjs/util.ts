@@ -116,3 +116,10 @@ export function supportLogicProps(): boolean {
 
   return canLogic!;
 }
+
+export function removeUnit(num: string | number): number {
+  if (typeof num === 'number') {
+    return num;
+  }
+  return Number(num.replace('px', ''));
+}

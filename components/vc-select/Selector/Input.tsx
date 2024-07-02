@@ -1,8 +1,7 @@
 import { cloneElement } from '../../_util/vnode';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
-import { defineComponent, inject, withDirectives } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
-import antInput from '../../_util/antInputDirective';
 import classNames from '../../_util/classNames';
 import type {
   FocusEventHandler,
@@ -12,6 +11,7 @@ import type {
   CompositionEventHandler,
   ClipboardEventHandler,
 } from '../../_util/EventInterface';
+import BaseInput from '../../_util/BaseInput';
 
 export const inputProps = {
   inputRef: PropTypes.any,
@@ -48,7 +48,6 @@ const Input = defineComponent({
   setup(props) {
     let blurTimeout = null;
     const VCSelectContainerEvent = inject('VCSelectContainerEvent') as any;
-
     return () => {
       const {
         prefixCls,
@@ -74,7 +73,7 @@ const Input = defineComponent({
         attrs,
       } = props;
 
-      let inputNode: any = inputElement || withDirectives((<input />) as VNode, [[antInput]]);
+      let inputNode: any = inputElement || <BaseInput></BaseInput>;
 
       const inputProps = inputNode.props || {};
       const {
@@ -97,6 +96,7 @@ const Input = defineComponent({
             ref: inputRef,
             disabled,
             tabindex,
+            lazy: false,
             autocomplete: autocomplete || 'off',
             autofocus,
             class: classNames(`${prefixCls}-selection-search-input`, inputNode?.props?.class),

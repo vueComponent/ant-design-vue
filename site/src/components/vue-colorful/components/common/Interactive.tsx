@@ -36,8 +36,8 @@ const getRelativePosition = (
   const pointer = isTouch(event) ? getTouchPoint(event.touches, touchId) : (event as MouseEvent);
 
   return {
-    left: clamp((pointer.pageX - (rect.left + getParentWindow(node).pageXOffset)) / rect.width),
-    top: clamp((pointer.pageY - (rect.top + getParentWindow(node).pageYOffset)) / rect.height),
+    left: clamp((pointer.pageX - (rect.left + getParentWindow(node).scrollX)) / rect.width),
+    top: clamp((pointer.pageY - (rect.top + getParentWindow(node).scrollY)) / rect.height),
   };
 };
 

@@ -64,13 +64,13 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*Y5pcQLplFu4AAA
 
 ### 事件
 
-| 事件名称              | 说明                   | 回调参数                      | 版本 |
-| --------------------- | ---------------------- | ----------------------------- | ---- |
-| change                | 选中树节点时调用此函数 | function(value, label, extra) |      |
-| dropdownVisibleChange | 展开下拉菜单的回调     | function(open)                | 3.0  |
-| search                | 文本框值变化时回调     | function(value: string)       |      |
-| select                | 被选中时调用           | function(value, node, extra)  |      |
-| treeExpand            | 展开节点时调用         | function(expandedKeys)        |      |
+| 事件名称 | 说明 | 回调参数 | 版本 |
+| --- | --- | --- | --- |
+| change | 选中树节点或输入值发生变化时调用此函数 | function(value, label, extra) |  |
+| dropdownVisibleChange | 展开下拉菜单的回调 | function(open) | 3.0 |
+| search | 文本框值变化时回调 | function(value: string) |  |
+| select | 树节点被选中时调用 | function(value, node, extra) |  |
+| treeExpand | 展开树节点时调用 | function(expandedKeys) |  |
 
 ### Tree 方法
 

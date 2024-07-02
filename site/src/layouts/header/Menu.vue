@@ -37,7 +37,7 @@ import More from './More.vue';
 import Navigation from './Navigation.vue';
 import Ecosystem from './Ecosystem.vue';
 import { version } from 'ant-design-vue';
-import { isZhCN, isLocalStorageNameSupported, getLocalizedPathname } from '../../utils/util';
+import { isZhCN, getLocalizedPathname } from '../../utils/util';
 import { useRoute } from 'vue-router';
 export default defineComponent({
   name: 'HeaderMenu',
@@ -56,11 +56,9 @@ export default defineComponent({
         location: { pathname },
       } = window;
       const currentProtocol = `${window.location.protocol}//`;
-      const currentHref = window.location.href.substr(currentProtocol.length);
+      const currentHref = window.location.href.substring(currentProtocol.length);
 
-      if (isLocalStorageNameSupported()) {
-        localStorage.setItem('locale', isZhCN(pathname) ? 'en-US' : 'zh-CN');
-      }
+      localStorage.setItem('locale', isZhCN(pathname) ? 'en-US' : 'zh-CN');
 
       window.location.href =
         currentProtocol +

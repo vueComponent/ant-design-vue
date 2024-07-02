@@ -1,4 +1,4 @@
-import type { VNode, CSSProperties } from 'vue';
+import type { CSSProperties } from 'vue';
 import {
   computed,
   watchEffect,
@@ -7,16 +7,16 @@ import {
   onBeforeUnmount,
   ref,
   defineComponent,
-  withDirectives,
 } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
-import antInput from '../_util/antInputDirective';
 import omit from '../_util/omit';
 import { textAreaProps } from './inputProps';
 import calculateAutoSizeStyle from './calculateNodeHeight';
+import type { BaseInputExpose } from '../_util/BaseInput';
+import BaseInput from '../_util/BaseInput';
 
 const RESIZE_START = 0;
 const RESIZE_MEASURING = 1;
@@ -30,7 +30,7 @@ const ResizableTextArea = defineComponent({
   setup(props, { attrs, emit, expose }) {
     let nextFrameActionId: any;
     let resizeFrameId: any;
-    const textAreaRef = ref();
+    const textAreaRef = ref<BaseInputExpose>();
     const textareaStyles = ref({});
     const resizeStatus = ref(RESIZE_STABLE);
     onBeforeUnmount(() => {
@@ -41,12 +41,12 @@ const ResizableTextArea = defineComponent({
     // https://github.com/ant-design/ant-design/issues/21870
     const fixFirefoxAutoScroll = () => {
       try {
-        if (document.activeElement === textAreaRef.value) {
-          const currentStart = textAreaRef.value.selectionStart;
-          const currentEnd = textAreaRef.value.selectionEnd;
-          const scrollTop = textAreaRef.value.scrollTop;
+        if (textAreaRef.value && document.activeElement === textAreaRef.value.input) {
+          const currentStart = textAreaRef.value.getSelectionStart();
+          const currentEnd = textAreaRef.value.getSelectionEnd();
+          const scrollTop = textAreaRef.value.getScrollTop();
           textAreaRef.value.setSelectionRange(currentStart, currentEnd);
-          textAreaRef.value.scrollTop = scrollTop;
+          textAreaRef.value.setScrollTop(scrollTop);
         }
       } catch (e) {
         // Fix error in Chrome:
@@ -77,7 +77,7 @@ const ResizableTextArea = defineComponent({
           startResize();
         }
       },
-      { immediate: true, flush: 'post' },
+      { immediate: true },
     );
     const autoSizeStyle = ref<CSSProperties>();
     watch(
@@ -88,7 +88,7 @@ const ResizableTextArea = defineComponent({
           resizeStatus.value = RESIZE_MEASURING;
         } else if (resizeStatus.value === RESIZE_MEASURING) {
           const textareaStyles = calculateAutoSizeStyle(
-            textAreaRef.value,
+            textAreaRef.value.input as HTMLTextAreaElement,
             false,
             minRows.value,
             maxRows.value,
@@ -127,7 +127,7 @@ const ResizableTextArea = defineComponent({
 
     expose({
       resizeTextarea,
-      textArea: textAreaRef,
+      textArea: computed(() => textAreaRef.value?.input),
       instance,
     });
     warning(
@@ -146,7 +146,6 @@ const ResizableTextArea = defineComponent({
         'defaultValue',
         'allowClear',
         'type',
-        'lazy',
         'maxlength',
         'valueModifiers',
       ]);
@@ -175,9 +174,7 @@ const ResizableTextArea = defineComponent({
       }
       return (
         <ResizeObserver onResize={onInternalResize} disabled={!needAutoSize.value}>
-          {withDirectives((<textarea {...textareaProps} ref={textAreaRef} />) as VNode, [
-            [antInput],
-          ])}
+          <BaseInput {...textareaProps} ref={textAreaRef} tag="textarea"></BaseInput>
         </ResizeObserver>
       );
     };

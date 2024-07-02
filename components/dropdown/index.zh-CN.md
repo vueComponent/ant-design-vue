@@ -22,7 +22,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5qm4S4Zgh2QAAA
 
 | 参数 | 说明 | 类型 | 默认值 |  |
 | --- | --- | --- | --- | --- |
-| align | 该值将合并到 placement 的配置中，设置参考 [dom-align](https://github.com/yiminghe/dom-align) | Object | 无 |  |
+| align | 该值将合并到 placement 的配置中，设置参考 [dom-align](https://github.com/yiminghe/dom-align) | Object | - |  |
 | arrow | 下拉框箭头是否显示 | boolean \| { pointAtCenter: boolean } | false | 3.3.0 |
 | destroyPopupOnHide | 关闭后是否销毁 Dropdown | boolean | false | 3.0 |
 | disabled | 菜单是否禁用 | boolean | - |  |

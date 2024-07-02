@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "4.1.1",
+  "version": "4.2.3",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -74,7 +74,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vueComponent/ant-design-vue.git"
+    "url": "https://github.com/vueComponent/ant-design-vue.git"
   },
   "license": "MIT",
   "funding": {
@@ -216,14 +216,12 @@
     "mockdate": "^2.0.2",
     "moment": "^2.29.1",
     "nprogress": "^0.2.0",
-    "object-assign": "^4.1.1",
     "postcss": "^8.2.12",
     "postcss-loader": "^6.0.0",
     "prettier": "^2.2.0",
     "pretty-quick": "^3.0.0",
     "prismjs": "^1.23.0",
     "progress": "^2.0.3",
-    "qs": "^6.10.3",
     "raw-loader": "^4.0.2",
     "remark-frontmatter": "^2.0.0",
     "remark-parse": "^8.0.0",
@@ -308,10 +306,6 @@
     "dist/*",
     "*.css"
   ],
-  "vetur": {
-    "tags": "vetur/tags.json",
-    "attributes": "vetur/attributes.json"
-  },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-git",

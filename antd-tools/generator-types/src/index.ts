@@ -6,7 +6,6 @@ import { genWebTypes } from './web-types';
 import { outputFileSync, readFileSync } from 'fs-extra';
 import type { Options, VueTag } from './type';
 import { getComponentName, normalizePath, toKebabCase } from './utils';
-import { genVeturAttributes, genVeturTags } from './vetur';
 import { flatMap } from 'lodash';
 
 async function readMarkdown(options: Options): Promise<Map<String, VueTag>> {
@@ -22,13 +21,13 @@ async function readMarkdown(options: Options): Promise<Map<String, VueTag>> {
       return formatter(mdParser(fileContent), componentName, kebabComponentName, options.tagPrefix);
     })
     .filter(item => item) as VueTag[][];
-  const tags: Map<String, VueTag> = new Map();
+  const tags = new Map<String, VueTag>();
   flatMap(data, item => item).forEach(mergedTag => mergeTag(tags, mergedTag));
   return tags;
 }
 
 function readTypings(options: Options): Map<String, VueTag> {
-  const tags: Map<String, VueTag> = new Map();
+  const tags = new Map<String, VueTag>();
   const fileContent = readFileSync(options.typingsPath, 'utf-8');
   fileContent
     .split('\n')
@@ -62,7 +61,7 @@ function mergeTag(tags: Map<String, VueTag>, mergedTag: VueTag) {
 
 function mergeTags(mergedTagsArr: Map<String, VueTag>[]): VueTag[] {
   if (mergedTagsArr.length === 1) return [...mergedTagsArr[0].values()];
-  const tags: Map<String, VueTag> = new Map();
+  const tags = new Map<String, VueTag>();
   if (mergedTagsArr.length === 0) return [];
   mergedTagsArr.forEach(mergedTags => {
     mergedTags.forEach(mergedTag => mergeTag(tags, mergedTag));
@@ -78,13 +77,6 @@ export async function parseAndWrite(options: Options): Promise<Number> {
   const tagsFromTypings = await readTypings(options);
   const tags = mergeTags([tagsFromMarkdown, tagsFromTypings]);
   const webTypes = genWebTypes(tags, options);
-  const veturTags = genVeturTags(tags);
-  const veturAttributes = genVeturAttributes(tags);
-  outputFileSync(join(options.outputDir, 'tags.json'), JSON.stringify(veturTags, null, 2));
-  outputFileSync(
-    join(options.outputDir, 'attributes.json'),
-    JSON.stringify(veturAttributes, null, 2),
-  );
   outputFileSync(join(options.outputDir, 'web-types.json'), JSON.stringify(webTypes, null, 2));
   return tags.length;
 }

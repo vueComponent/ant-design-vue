@@ -110,7 +110,7 @@ export default defineComponent({
       () => {
         treeData.value =
           props.treeData !== undefined
-            ? toRaw(props.treeData).slice()
+            ? props.treeData.slice()
             : convertTreeToData(toRaw(props.children));
       },
       {

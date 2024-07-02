@@ -10,7 +10,7 @@
 
 <div align="center">
 
-An enterprise-class UI components based on Ant Design and Vue 3.
+基于 Ant Design 和 Vue 3 的企业级 UI 组件库。
 
 ![test](https://github.com/vueComponent/ant-design-vue/workflows/test/badge.svg) [![codecov](https://img.shields.io/codecov/c/github/vueComponent/ant-design-vue/master.svg?style=flat-square)](https://codecov.io/gh/vueComponent/ant-design-vue) [![npm package](https://img.shields.io/npm/v/ant-design-vue.svg?style=flat-square)](https://www.npmjs.org/package/ant-design-vue) [![NPM downloads](http://img.shields.io/npm/dm/ant-design-vue.svg?style=flat-square)](http://www.npmtrends.com/ant-design-vue) [![backers](https://opencollective.com/ant-design-vue/backers/badge.svg)](#backers) [![sponsors](https://opencollective.com/ant-design-vue/sponsors/badge.svg)](#sponsors) [![extension-for-VSCode](https://img.shields.io/badge/extension%20for-VSCode-blue.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper) [![issues-helper](https://img.shields.io/badge/Issues%20Manage%20By-issues--helper-orange?style=flat-square)](https://github.com/actions-cool/issues-helper)
 
@@ -88,22 +88,23 @@ ant-design-vue 是 MIT 协议的开源项目。为了项目能够更好的持续
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
 - [支付宝或微信](https://aliyuncdn.antdv.com/alipay-and-wechat.png)
+- ETH: 0x30cc48515d8ae9fefa20ab87226ad7e8ab9c3bc2
 
-## Sponsors
+## 赞助商
 
-Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/ant-design-vue#sponsor)]
+成为赞助商，并在 Github 上的自述文件上获得您的徽标，并链接到您的网站。 [[成为赞助商](https://opencollective.com/ant-design-vue#sponsor)]
 
 <a href="http://www.jeecg.com/" target="_blank"><img src="https://aliyuncdn.antdv.com/jeecg-logo.png" height="64"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/sponsor/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/10/avatar.svg"></a>
 
-## Backers
+## 支持者
 
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/ant-design-vue#backer)]
+每月捐款支持我们，帮助我们继续我们的活动。 [[成为支持者](https://opencollective.com/ant-design-vue#backer)]
 
 <a href="https://github.com/chuzhixin/vue-admin-beautiful" target="_blank"><img width="64" style="border-radius: 50%;" src="https://gitee.com/chu1204505056/image/raw/master/vue-admin-beautiful.png" title="vue-admin-beautiful"></a> <a href="https://opencollective.com/ant-design-vue/backer/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/0/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/1/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/2/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/3/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/3/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/4/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/4/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/5/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/5/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/6/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/6/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/7/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/7/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/8/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/8/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/9/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/9/avatar.svg"></a> <a href="https://opencollective.com/ant-design-vue/backer/10/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/10/avatar.svg"></a>
 
 ## Patreon
 
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://www.patreon.com/tangjinzhou)]
+每月捐款支持我们，帮助我们继续我们的活动。 [[成为支持者](https://www.patreon.com/tangjinzhou)]
 
 <a href="https://www.mokeyjay.com" target="_blank"><img  width="64" style="border-radius: 50%;" src="https://www.mokeyjay.com/headimg.png" title="donation by Patreon"></a>
 

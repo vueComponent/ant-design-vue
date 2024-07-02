@@ -112,7 +112,7 @@ export default defineComponent({
         return !override;
       }),
     );
-    const store = shallowRef<Map<string, StoreMenuInfo>>(new Map());
+    const store = shallowRef(new Map<string, StoreMenuInfo>());
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
       if (siderCollapsed.value !== undefined) {
@@ -439,15 +439,17 @@ export default defineComponent({
       forceSubMenuRender: computed(() => props.forceSubMenuRender),
       rootClassName: hashId,
     });
+
+    const getChildrenList = () => itemsNodes.value || flattenChildren(slots.default?.());
     return () => {
-      const childList = itemsNodes.value || flattenChildren(slots.default?.());
+      const childList = getChildrenList();
       const allVisible =
         lastVisibleIndex.value >= childList.length - 1 ||
         mergedMode.value !== 'horizontal' ||
         props.disabledOverflow;
       // >>>>> Children
-      const wrappedChildList =
-        mergedMode.value !== 'horizontal' || props.disabledOverflow
+      const getWrapperList = childList => {
+        return mergedMode.value !== 'horizontal' || props.disabledOverflow
           ? childList
           : // Need wrap for overflow dropdown that do not response for open
             childList.map((child, index) => (
@@ -458,6 +460,7 @@ export default defineComponent({
                 v-slots={{ default: () => child }}
               ></MenuContextProvider>
             ));
+      };
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
       return wrapSSR(
@@ -470,7 +473,7 @@ export default defineComponent({
           class={[className.value, attrs.class, hashId.value]}
           role="menu"
           id={props.id}
-          data={wrappedChildList}
+          data={getWrapperList(childList)}
           renderRawItem={node => node}
           renderRawRest={omitItems => {
             // We use origin list since wrapped list use context to prevent open
@@ -514,7 +517,7 @@ export default defineComponent({
         >
           <Teleport to="body">
             <div style={{ display: 'none' }} aria-hidden>
-              <PathContext>{wrappedChildList}</PathContext>
+              <PathContext>{getWrapperList(getChildrenList())}</PathContext>
             </div>
           </Teleport>
         </Overflow>,

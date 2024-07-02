@@ -58,7 +58,7 @@ export function getHandleCenterPosition(vertical: boolean, handle: HTMLElement) 
   const coords = handle.getBoundingClientRect();
   return vertical
     ? coords.top + coords.height * 0.5
-    : window.pageXOffset + coords.left + coords.width * 0.5;
+    : window.scrollX + coords.left + coords.width * 0.5;
 }
 
 export function ensureValueInRange(val: number, { max, min }: { max?: number; min?: number }) {

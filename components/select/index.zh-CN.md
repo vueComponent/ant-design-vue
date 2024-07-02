@@ -111,13 +111,13 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | 参数  | 说明 | 类型                      | 默认值 |
 | ----- | ---- | ------------------------- | ------ |
 | key   |      | string                    | -      |
-| label | 组名 | string\|function(h)\|slot | 无     |
+| label | 组名 | string\|function(h)\|slot | -      |
 
 ## FAQ
 
 ### 点击 `dropdownRender` 里的内容浮层关闭怎么办？
 
-自定义内容点击时会关闭浮层，如果不喜欢关闭，可以添加 `@mousedown.prevent` 进行阻止。 看下 [dropdownRender 例子](/components/select-cn/#components-select-demo-custom-dropdown) 里的说明。
+自定义内容点击时会关闭浮层，如果不喜欢关闭，可以通过取消点击事件的默认行为进行阻止。 看下 [dropdownRender 例子](#components-select-demo-custom-dropdown-menu) 里的说明。
 
 ### 为什么 `placeholder` 不显示 ？
 

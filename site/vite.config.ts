@@ -9,7 +9,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 export default {
   resolve: {
     alias: {
-      vue: 'vue/dist/vue.esm-bundler.js',
+      vue:
+        process.env.NODE_ENV === 'production'
+          ? 'vue/dist/vue.runtime.esm-browser.prod.js'
+          : 'vue/dist/vue.esm-bundler.js',
       'ant-design-vue/es': path.resolve(__dirname, '../components'),
       'ant-design-vue': path.resolve(__dirname, '../components'),
       '@': path.resolve(__dirname, './src'),

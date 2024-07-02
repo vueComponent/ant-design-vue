@@ -40,7 +40,7 @@ export function fillFieldNames(fieldNames?: FieldNames): Required<FieldNames> {
  * Warning if TreeNode do not provides key
  */
 export function warningWithoutKey(treeData: DataNode[], fieldNames: FieldNames) {
-  const keys: Map<string, boolean> = new Map();
+  const keys = new Map<string, boolean>();
 
   function dig(list: DataNode[], path = '') {
     (list || []).forEach(treeNode => {

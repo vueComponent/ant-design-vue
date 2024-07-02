@@ -27,6 +27,7 @@ The following APIs are shared by Tooltip, Popconfirm, Popover.
 | --- | --- | --- | --- | --- |
 | align | this value will be merged into placement's config, please refer to the settings [dom-align](https://github.com/yiminghe/dom-align) | Object | - |  |
 | arrowPointAtCenter | Whether the arrow is pointed at the center of target | boolean | `false` |  |
+| arrow | Change arrow's visible state and change whether the arrow is pointed at the center of target. | boolean \| { pointAtCenter: boolean} | `true` | 4.2.0 |
 | autoAdjustOverflow | Whether to adjust popup placement automatically when popup is off screen | boolean | `true` |  |
 | color | The background color | string | - |  |
 | destroyTooltipOnHide | Whether to destroy tooltip on hide | boolean | false |  |

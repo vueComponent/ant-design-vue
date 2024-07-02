@@ -1,6 +1,6 @@
 // base 0.0.1-alpha.7
-import type { ComponentPublicInstance, VNode } from 'vue';
-import { onMounted, defineComponent, nextTick, shallowRef, watch, withDirectives } from 'vue';
+import type { ComponentPublicInstance } from 'vue';
+import { computed, onMounted, defineComponent, nextTick, shallowRef, watch } from 'vue';
 import classNames from '../_util/classNames';
 import type { ChangeEvent, FocusEventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
@@ -14,8 +14,8 @@ import {
   resolveOnChange,
   triggerFocus,
 } from './utils/commonUtils';
-import antInputDirective from '../_util/antInputDirective';
 import BaseInput from './BaseInput';
+import BaseInputCore, { type BaseInputExpose } from '../_util/BaseInput';
 
 export default defineComponent({
   name: 'VCInput',
@@ -24,7 +24,7 @@ export default defineComponent({
   setup(props, { slots, attrs, expose, emit }) {
     const stateValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
     const focused = shallowRef(false);
-    const inputRef = shallowRef<HTMLInputElement>();
+    const inputRef = shallowRef<BaseInputExpose>();
     const rootRef = shallowRef<ComponentPublicInstance>();
     watch(
       () => props.value,
@@ -42,12 +42,12 @@ export default defineComponent({
     );
     const focus = (option?: InputFocusOptions) => {
       if (inputRef.value) {
-        triggerFocus(inputRef.value, option);
+        triggerFocus(inputRef.value.input, option);
       }
     };
 
     const blur = () => {
-      inputRef.value?.blur();
+      inputRef.value.input?.blur();
     };
 
     const setSelectionRange = (
@@ -55,17 +55,17 @@ export default defineComponent({
       end: number,
       direction?: 'forward' | 'backward' | 'none',
     ) => {
-      inputRef.value?.setSelectionRange(start, end, direction);
+      inputRef.value.input?.setSelectionRange(start, end, direction);
     };
 
     const select = () => {
-      inputRef.value?.select();
+      inputRef.value.input?.select();
     };
 
     expose({
       focus,
       blur,
-      input: inputRef,
+      input: computed(() => (inputRef.value.input as any)?.input),
       stateValue,
       setSelectionRange,
       select,
@@ -81,7 +81,7 @@ export default defineComponent({
         stateValue.value = value;
       } else {
         nextTick(() => {
-          if (inputRef.value.value !== stateValue.value) {
+          if (inputRef.value.input.value !== stateValue.value) {
             rootRef.value?.$forceUpdate();
           }
         });
@@ -91,12 +91,10 @@ export default defineComponent({
       });
     };
     const handleChange = (e: ChangeEvent) => {
-      const { value, composing } = e.target as any;
-      // https://github.com/vueComponent/ant-design-vue/issues/2203
-      if ((((e as any).isComposing || composing) && props.lazy) || stateValue.value === value)
-        return;
+      const { value } = e.target as any;
+      if (stateValue.value === value) return;
       const newVal = e.target.value;
-      resolveOnChange(inputRef.value, e, triggerChange);
+      resolveOnChange(inputRef.value.input as HTMLInputElement, e, triggerChange);
       setValue(newVal);
     };
 
@@ -118,7 +116,7 @@ export default defineComponent({
     };
 
     const handleReset = (e: MouseEvent) => {
-      resolveOnChange(inputRef.value, e, triggerChange);
+      resolveOnChange(inputRef.value.input as HTMLInputElement, e, triggerChange);
       setValue('', () => {
         focus();
       });
@@ -185,6 +183,7 @@ export default defineComponent({
         key: 'ant-input',
         size: htmlSize,
         type,
+        lazy: props.lazy,
       };
       if (valueModifiers.lazy) {
         delete inputProps.onInput;
@@ -192,8 +191,8 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <input {...omit(inputProps, ['size'])} />;
-      return withDirectives(inputNode as VNode, [[antInputDirective]]);
+      const inputNode = <BaseInputCore {...omit(inputProps, ['size'])} />;
+      return inputNode;
     };
     const getSuffix = () => {
       const { maxlength, suffix = slots.suffix?.(), showCount, prefixCls } = props;

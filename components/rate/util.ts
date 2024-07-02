@@ -1,5 +1,5 @@
 function getScroll(w: Window) {
-  let ret = w.pageXOffset;
+  let ret = w.scrollX;
   const method = 'scrollLeft';
   if (typeof ret !== 'number') {
     const d = w.document;

@@ -6,6 +6,7 @@ import classNames from '../../_util/classNames';
 import useStyle from '../style/otp';
 import OTPInput from './OTPInput';
 import { type InputStatus, getMergedStatus } from '../../_util/statusUtils';
+import warning from '../../_util/warning';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -116,6 +117,14 @@ export default defineComponent({
         disabled,
         mask,
       };
+
+      if (process.env.NODE_ENV !== 'production') {
+        warning(
+          !(typeof mask === 'string' && mask.length > 1),
+          'Input.OTP',
+          '`mask` prop should be a single character.',
+        );
+      }
 
       return wrapSSR(
         <div class={cls}>

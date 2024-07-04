@@ -160,6 +160,17 @@ describe('OTP', () => {
       expect(errSpy).toHaveBeenLastCalledWith(
         'Warning: [ant-design-vue: Input.OTP] `mask` prop should be a single character.',
       );
+      errSpy.mockRestore();
+      wrapper.unmount();
+    });
+  });
+
+  it('should not throw warning when mask length <= 1', async () => {
+    const errSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const wrapper = mount(OTP, { props: { mask: 'a' }, sync: true });
+    await asyncExpect(async () => {
+      expect(errSpy).not.toBeCalled();
+      errSpy.mockRestore();
       wrapper.unmount();
     });
   });

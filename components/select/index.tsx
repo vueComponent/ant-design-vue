@@ -24,6 +24,7 @@ import { useCompactItemContext } from '../space/Compact';
 import useStyle from './style';
 import { useInjectDisabled } from '../config-provider/DisabledContext';
 import devWarning from '../vc-util/devWarning';
+import warning from '../_util/warning';
 
 import type { CustomSlotsType } from '../_util/type';
 
@@ -214,7 +215,15 @@ const Select = defineComponent({
         id = formItemContext.id.value,
         placeholder = slots.placeholder?.(),
         showArrow,
+        maxCount,
       } = props;
+
+      warning(
+        !(typeof maxCount !== undefined && !isMultiple.value),
+        'Select',
+        '`maxCount` only works with mode `multiple` or `tags`',
+      );
+
       const { hasFeedback, feedbackIcon } = formItemInputContext;
       const {} = configProvider;
 
@@ -296,6 +305,7 @@ const Select = defineComponent({
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
           showArrow={hasFeedback || showArrow}
           disabled={mergedDisabled.value}
+          maxCount={isMultiple.value ? maxCount : undefined}
         ></RcSelect>,
       );
     };

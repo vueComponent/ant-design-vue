@@ -9,7 +9,7 @@ import { computed, defineComponent, nextTick, reactive, toRaw, watch } from 'vue
 import List from '../vc-virtual-list';
 import useMemo from '../_util/hooks/useMemo';
 import { isPlatformMac } from './utils/platformUtil';
-
+import { isValidCount } from './utils/valueUtil';
 import type { EventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
 import useBaseProps from './hooks/useBaseProps';
@@ -47,6 +47,11 @@ const OptionList = defineComponent({
       [() => baseProps.open, () => props.flattenOptions],
       next => next[0],
     );
+
+    const overMaxCount = computed(() => {
+      const { multiple, maxCount, rawValues } = props;
+      return multiple && isValidCount(maxCount) && maxCount <= rawValues.size;
+    });
 
     // =========================== List ===========================
     const listRef = createRef();
@@ -313,6 +318,8 @@ const OptionList = defineComponent({
                 // Option
                 const selected = isSelected(value);
 
+                const mergedDisabled = disabled || (!selected && overMaxCount.value);
+
                 const optionPrefixCls = `${itemPrefixCls.value}-option`;
                 const optionClassName = classNames(
                   itemPrefixCls.value,
@@ -321,8 +328,8 @@ const OptionList = defineComponent({
                   className,
                   {
                     [`${optionPrefixCls}-grouped`]: groupOption,
-                    [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
-                    [`${optionPrefixCls}-disabled`]: disabled,
+                    [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !mergedDisabled,
+                    [`${optionPrefixCls}-disabled`]: mergedDisabled,
                     [`${optionPrefixCls}-selected`]: selected,
                   },
                 );
@@ -351,13 +358,13 @@ const OptionList = defineComponent({
                       if (otherProps.onMousemove) {
                         otherProps.onMousemove(e);
                       }
-                      if (activeIndex === itemIndex || disabled) {
+                      if (activeIndex === itemIndex || mergedDisabled) {
                         return;
                       }
                       setActive(itemIndex);
                     }}
                     onClick={e => {
-                      if (!disabled) {
+                      if (!mergedDisabled) {
                         onSelectValue(value);
                       }
                       if (otherProps.onClick) {

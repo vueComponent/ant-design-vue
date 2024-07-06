@@ -563,6 +563,8 @@ export default defineComponent({
         listHeight: toRef(props, 'listHeight'),
         listItemHeight: toRef(props, 'listItemHeight'),
         childrenAsData,
+        multiple,
+        maxCount: toRef(props, 'maxCount'),
       } as unknown as SelectContextProps),
     );
 

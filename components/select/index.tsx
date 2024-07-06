@@ -53,7 +53,7 @@ export const selectProps = () => ({
   suffixIcon: PropTypes.any,
   itemIcon: PropTypes.any,
   size: stringType<SizeType>(),
-  mode: stringType<'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE'>(),
+  mode: stringType<'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE' | 'combobox'>(),
   bordered: booleanType(true),
   transitionName: String,
   choiceTransitionName: stringType(''),

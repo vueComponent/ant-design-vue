@@ -50,7 +50,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | maxTagPlaceholder | 隐藏 tag 时显示的内容 | slot \| function(omittedValues) | - |  |
 | maxTagTextLength | 最大显示的 tag 文本长度 | number | - |  |
 | menuItemSelectedIcon | 自定义当前选中的条目图标 | VNode \| slot | - |  |
-| mode | 设置 Select 的模式为多选或标签 | 'multiple' \| 'tags' \| 'combobox' | - |  |
+| mode | 设置 Select 的模式为多选或标签 | 'multiple' \| 'tags' | - |  |
 | notFoundContent | 当下拉列表为空时显示的内容 | string\|slot | `Not Found` |  |
 | open | 是否展开下拉菜单 | boolean | - |  |
 | option | 通过 option 插槽，自定义节点 | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |

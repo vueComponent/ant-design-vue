@@ -29,6 +29,8 @@ export default defineComponent({
         size: {
           width: number;
           height: number;
+          originWidth: number;
+          originHeight: number;
           offsetWidth: number;
           offsetHeight: number;
         },
@@ -84,6 +86,8 @@ export default defineComponent({
           Promise.resolve().then(() => {
             onResize(
               {
+                originWidth: width,
+                originHeight: height,
                 ...size,
                 offsetWidth,
                 offsetHeight,

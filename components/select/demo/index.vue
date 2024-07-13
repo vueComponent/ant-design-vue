@@ -20,6 +20,7 @@
     <fieldNamesVue />
     <placementVue />
     <statusVue />
+    <MaxCountVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -43,6 +44,7 @@ import Responsive from './responsive.vue';
 import fieldNamesVue from './field-names.vue';
 import placementVue from './placement.vue';
 import statusVue from './status.vue';
+import MaxCountVue from './select-max-count.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -70,6 +72,7 @@ export default defineComponent({
     OptionLabelProp,
     BigData,
     Responsive,
+    MaxCountVue,
   },
   setup() {
     return {};

@@ -70,6 +70,7 @@ Select component to select value from options.
 | tokenSeparators | Separator used to tokenize, only applies when `mode="tags"` | string\[] | - |  |
 | value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |  |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
+| maxCount | The max number of items can be selected, only applies when mode is `multiple` or `tags` | number | - |  |
 
 > Note, if you find that the drop-down menu scrolls with the page, or you need to trigger Select in other popup layers, please try to use `getPopupContainer={triggerNode => triggerNode.parentElement}` to fix the drop-down popup rendering node in the parent element of the trigger .
 

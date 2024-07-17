@@ -89,7 +89,7 @@ const BaseInput = defineComponent({
       // ensure that the native inputs are controlled
       // see: https://github.com/vueComponent/ant-design-vue/issues/7720
       nextTick(() => {
-        if (props.value !== undefined) {
+        if (props.value !== undefined && el.value !== props.value) {
           el.value = props.value;
         }
       });

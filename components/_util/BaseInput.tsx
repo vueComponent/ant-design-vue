@@ -1,5 +1,5 @@
 import type { PropType } from 'vue';
-import { computed, defineComponent, shallowRef, ref, watch } from 'vue';
+import { computed, defineComponent, shallowRef, ref, watch, nextTick } from 'vue';
 import PropTypes from './vue-types';
 import type { BaseInputInnerExpose } from './BaseInputInner';
 import BaseInputInner from './BaseInputInner';
@@ -78,11 +78,21 @@ const BaseInput = defineComponent({
       handleChange(e);
     };
     const handleInput = (e: Event) => {
+      const el = e.target as HTMLInputElement;
+
       if (isComposing.value && props.lazy) {
-        renderValue.value = (e.target as HTMLInputElement).value;
+        renderValue.value = el.value;
         return;
       }
       emit('input', e);
+
+      // ensure that the native inputs are controlled
+      // see: https://github.com/vueComponent/ant-design-vue/issues/7720
+      nextTick(() => {
+        if (props.value !== undefined) {
+          el.value = props.value;
+        }
+      });
     };
 
     const handleBlur = (e: Event) => {

@@ -39,6 +39,7 @@ import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
+import { useShowNow } from './hooks/useShowNow';
 
 export type PickerPanelSharedProps<DateType> = {
   prefixCls?: string;
@@ -552,6 +553,7 @@ function PickerPanel<DateType>() {
         let rangesNode: VueNode;
 
         if (!hideRanges?.value) {
+          const mergedShowNow = useShowNow(picker, mergedMode.value, showNow);
           extraFooter = getExtraFooter(prefixCls, mergedMode.value, renderExtraFooter);
           rangesNode = getRanges({
             prefixCls,
@@ -559,7 +561,7 @@ function PickerPanel<DateType>() {
             needConfirmButton: needConfirmButton.value,
             okDisabled: !mergedValue.value || (disabledDate && disabledDate(mergedValue.value)),
             locale,
-            showNow,
+            showNow: mergedShowNow,
             onNow: needConfirmButton.value && onNow,
             onOk: () => {
               if (mergedValue.value) {

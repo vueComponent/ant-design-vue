@@ -371,7 +371,7 @@ function PickerPanel<DateType>() {
           lowerBoundTime[1], // minute
           lowerBoundTime[2], // second
         );
-        triggerSelect(adjustedNow, 'submit');
+        triggerSelect(adjustedNow, 'submit', true);
       };
 
       const classString = computed(() => {

@@ -43,7 +43,7 @@ export default {
       panelSentinelEnd = <Sentinel setRef={setPanelSentinelEnd} nextElement={sentinelEnd} />;
     }
     return (
-      <div class={cls} role="tabpanel" aria-hidden={active ? 'false' : 'true'}>
+      <div class={cls} role="tabpanel">
         {panelSentinelStart}
         {shouldRender ? children : placeholder}
         {panelSentinelEnd}

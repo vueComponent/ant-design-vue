@@ -189,4 +189,20 @@ describe('Input.Password', () => {
 
     expect(cbMock).toHaveBeenCalledWith(false);
   });
+
+  it('should support count formatter', async () => {
+    const wrapper = mount(Input, {
+      props: {
+        maxlength: 3,
+        value: '123',
+        showCount: {
+          formatter: ({ value, count, maxlength }) => `${value}, ${count}, ${maxlength}`,
+        },
+      },
+    });
+    await asyncExpect(() => {
+      expect(wrapper.find('input').element.value).toBe('123');
+      expect(wrapper.find('.ant-input-show-count-suffix').element?.innerHTML).toBe('123, 3, 3');
+    }, 100);
+  });
 });

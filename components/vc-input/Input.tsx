@@ -200,10 +200,11 @@ export default defineComponent({
       const hasMaxLength = Number(maxlength) > 0;
 
       if (suffix || showCount) {
-        const valueLength = [...fixControlledValue(stateValue.value)].length;
+        const internalValue = fixControlledValue(stateValue.value);
+        const valueLength = [...internalValue].length;
         const dataCount =
           typeof showCount === 'object'
-            ? showCount.formatter({ count: valueLength, maxlength })
+            ? showCount.formatter({ count: valueLength, maxlength, value: internalValue })
             : `${valueLength}${hasMaxLength ? ` / ${maxlength}` : ''}`;
 
         return (

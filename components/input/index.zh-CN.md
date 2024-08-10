@@ -30,7 +30,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sBqqTatJ-AkAAA
 | id | 输入框的 id | string |  |  |
 | maxlength | 最大长度 | number |  | 1.5.0 |
 | prefix | 带有前缀图标的 input | string\|slot |  |  |
-| showCount | 是否展示字数 | boolean | false | 3.0 |
+| showCount | 是否展示字数 | boolean \| { formatter: (info: { value: string, count: number, maxlength?: number }) => VNode } | false | 3.0 |
 | status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | size | 控件大小。注：标准表单内的输入框大小限制为 `middle`。可选 `large` `middle` `small` | string | - |  |
 | suffix | 带有后缀图标的 input | string\|slot |  |  |
@@ -53,7 +53,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sBqqTatJ-AkAAA
 | allowClear | 可以点击清除图标删除内容 | boolean |  | 1.5.0 |  |
 | autosize | 自适应内容高度，可设置为 `true | false` 或对象：`{ minRows: 2, maxRows: 6 }` | boolean\|object | false |  |
 | defaultValue | 输入框默认内容 | string |  |  |  |
-| showCount | 是否展示字数 | boolean | false |  |  |
+| showCount | 是否展示字数 | boolean \| { formatter: (info: { value: string, count: number, maxlength?: number }) => VNode } | false |  |  |
 | value(v-model) | 输入框内容 | string |  |  |  |
 
 ### TextArea 事件

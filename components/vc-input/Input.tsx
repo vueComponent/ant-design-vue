@@ -270,7 +270,7 @@ export default defineComponent({
           prefixCls={prefixCls}
           inputElement={getInputElement()}
           handleReset={handleReset}
-          value={fixControlledValue(stateValue.value)}
+          value={fixControlledValue(mergedValue.value)}
           focused={focused.value}
           triggerFocus={focus}
           suffix={getSuffix()}

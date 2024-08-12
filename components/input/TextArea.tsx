@@ -12,7 +12,7 @@ import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import { textAreaProps } from './inputProps';
 import type { InputFocusOptions } from '../vc-input/utils/commonUtils';
-import { fixControlledValue, resolveOnChange, triggerFocus } from '../vc-input/utils/commonUtils';
+import { fixControlledValue, resolveOnChange, triggerFocus, fixEmojiLength, setTriggerValue } from '../vc-input/utils/commonUtils';
 import classNames from '../_util/classNames';
 import { FormItemInputContext, useInjectFormItemContext } from '../form/FormItemContext';
 import type { FocusEventHandler } from '../_util/EventInterface';
@@ -24,30 +24,6 @@ import { getMergedStatus, getStatusClassNames } from '../_util/statusUtils';
 // CSSINJS
 import useStyle from './style';
 import { useInjectDisabled } from '../config-provider/DisabledContext';
-
-function fixEmojiLength(value: string, maxLength: number) {
-  return [...(value || '')].slice(0, maxLength).join('');
-}
-
-function setTriggerValue(
-  isCursorInEnd: boolean,
-  preValue: string,
-  triggerValue: string,
-  maxLength: number,
-) {
-  let newTriggerValue = triggerValue;
-  if (isCursorInEnd) {
-    // 光标在尾部，直接截断
-    newTriggerValue = fixEmojiLength(triggerValue, maxLength);
-  } else if (
-    [...(preValue || '')].length < triggerValue.length &&
-    [...(triggerValue || '')].length > maxLength
-  ) {
-    // 光标在中间，如果最后的值超过最大值，则采用原先的值
-    newTriggerValue = preValue;
-  }
-  return newTriggerValue;
-}
 
 export default defineComponent({
   compatConfig: { MODE: 3 },

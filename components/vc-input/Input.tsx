@@ -1,12 +1,13 @@
 // base 0.0.1-alpha.7
 import type { ComponentPublicInstance } from 'vue';
-import { computed, onMounted, defineComponent, nextTick, shallowRef, watch } from 'vue';
+import { computed, onMounted, defineComponent, nextTick, shallowRef, watch, ref, watchEffect} from 'vue';
 import classNames from '../_util/classNames';
 import type { ChangeEvent, FocusEventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
 import type { InputProps } from './inputProps';
 import { inputProps } from './inputProps';
 import type { InputFocusOptions } from './utils/commonUtils';
+import { fixEmojiLength, setTriggerValue} from './utils/emotionUtils';
 import {
   fixControlledValue,
   hasAddon,
@@ -17,6 +18,7 @@ import {
 import BaseInput from './BaseInput';
 import BaseInputCore, { type BaseInputExpose } from '../_util/BaseInput';
 
+
 export default defineComponent({
   name: 'VCInput',
   inheritAttrs: false,
@@ -26,6 +28,9 @@ export default defineComponent({
     const focused = shallowRef(false);
     const inputRef = shallowRef<BaseInputExpose>();
     const rootRef = shallowRef<ComponentPublicInstance>();
+    const hasMaxLength = computed(() => Number(props.maxlength) > 0);
+    const mergedValue = ref('');
+
     watch(
       () => props.value,
       () => {
@@ -90,12 +95,37 @@ export default defineComponent({
         callback && callback();
       });
     };
+
+    watchEffect(() => {
+      let val = fixControlledValue(stateValue.value) as string;
+      if (hasMaxLength.value && (props.value === null || props.value === undefined)) {
+        // fix #27612 将value转为数组进行截取，解决 '😂'.length === 2 等emoji表情导致的截取乱码的问题
+        val = fixEmojiLength(val, props.maxlength);
+      }
+      mergedValue.value = val;
+    });
+
     const handleChange = (e: ChangeEvent) => {
       const { value } = e.target as any;
       if (stateValue.value === value) return;
-      const newVal = e.target.value;
-      resolveOnChange(inputRef.value.input as HTMLInputElement, e, triggerChange);
-      setValue(newVal);
+      const target = e.target as any;
+      let triggerValue = (e.target as any).value;
+      if (hasMaxLength.value) {
+        const isCursorInEnd =
+          target.selectionStart >= props.maxlength! + 1 ||
+          target.selectionStart === triggerValue.length ||
+          !target.selectionStart;
+
+        triggerValue = setTriggerValue(
+          isCursorInEnd,
+          mergedValue.value as string,
+          triggerValue,
+          props.maxlength!,
+        );
+      }
+
+      resolveOnChange(e.currentTarget as any, e, triggerChange, triggerValue);
+      setValue(triggerValue);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -191,7 +221,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <BaseInputCore {...omit(inputProps, ['size'])} />;
+      const inputNode = <BaseInputCore {...omit(inputProps, ['size', 'maxlength'])} />;
       return inputNode;
     };
     const getSuffix = () => {
@@ -200,7 +230,7 @@ export default defineComponent({
       const hasMaxLength = Number(maxlength) > 0;
 
       if (suffix || showCount) {
-        const valueLength = [...fixControlledValue(stateValue.value)].length;
+        const valueLength = [...fixControlledValue(mergedValue.value)].length;
         const dataCount =
           typeof showCount === 'object'
             ? showCount.formatter({ count: valueLength, maxlength })

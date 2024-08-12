@@ -102,3 +102,27 @@ export function triggerFocus(
     }
   }
 }
+
+export function fixEmojiLength(value: string, maxLength: number) {
+  return [...(value || '')].slice(0, maxLength).join('');
+}
+
+export function setTriggerValue(
+  isCursorInEnd: boolean,
+  preValue: string,
+  triggerValue: string,
+  maxLength: number,
+) {
+  let newTriggerValue = triggerValue;
+  if (isCursorInEnd) {
+    // 光标在尾部，直接截断
+    newTriggerValue = fixEmojiLength(triggerValue, maxLength);
+  } else if (
+    [...(preValue || '')].length < triggerValue.length &&
+    [...(triggerValue || '')].length > maxLength
+  ) {
+    // 光标在中间，如果最后的值超过最大值，则采用原先的值
+    newTriggerValue = preValue;
+  }
+  return newTriggerValue;
+}

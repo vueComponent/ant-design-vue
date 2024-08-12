@@ -1,13 +1,5 @@
 import type { CSSProperties } from 'vue';
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  nextTick,
-  shallowRef,
-  watch,
-  watchEffect,
-} from 'vue';
+import { computed, defineComponent, getCurrentInstance, nextTick, shallowRef, watch } from 'vue';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import { textAreaProps } from './inputProps';
@@ -60,7 +52,7 @@ export default defineComponent({
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
     const stateValue = shallowRef(props.value ?? props.defaultValue);
     const resizableTextArea = shallowRef();
-    const mergedValue = shallowRef('');
+    const mergedValue = computed(() => fixControlledValue(stateValue.value));
     const { prefixCls, size, direction } = useConfigInject('input', props);
 
     // Style
@@ -236,18 +228,20 @@ export default defineComponent({
       resizableTextArea,
     });
 
-    watchEffect(() => {
-      let val = fixControlledValue(stateValue.value);
-      if (
-        !compositing.value &&
-        hasMaxLength.value &&
-        (props.value === null || props.value === undefined)
-      ) {
-        // fix #27612 将value转为数组进行截取，解决 '😂'.length === 2 等emoji表情导致的截取乱码的问题
-        val = fixEmojiLength(val, props.maxlength);
-      }
-      mergedValue.value = val;
-    });
+    // fix 对于一些特殊的 emoji表情，例如 [...'🧑‍🌾'].length // ['🧑', '‍', '🌾']
+    // 这类特殊 emoji 进行字符串迭代时计算的 length 与 '😂'.length 计算所产生的预期不符
+    // watchEffect(() => {
+    //   let val = fixControlledValue(stateValue.value);
+    //   if (
+    //     !compositing.value &&
+    //     hasMaxLength.value &&
+    //     (props.value === null || props.value === undefined)
+    //   ) {
+    //     // fix #27612 将value转为数组进行截取，解决 '😂'.length === 2 等emoji表情导致的截取乱码的问题
+    //     val = fixEmojiLength(val, props.maxlength);
+    //   }
+    //   mergedValue.value = val;
+    // });
     return () => {
       const { maxlength, bordered = true, hidden } = props;
       const { style, class: customClass } = attrs;
@@ -274,7 +268,7 @@ export default defineComponent({
       );
 
       if (showCount.value || formItemInputContext.hasFeedback) {
-        const valueLength = [...mergedValue.value].length;
+        const valueLength = mergedValue.value.length;
         let dataCount: VueNode = '';
         if (typeof showCount.value === 'object') {
           dataCount = showCount.value.formatter({

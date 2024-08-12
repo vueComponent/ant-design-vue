@@ -32,6 +32,36 @@ describe('Input', () => {
     });
     expect(wrapper.findAll('.ant-input-clear-icon-hidden').length).toBeTruthy();
   });
+
+  it('should support count formatter', async () => {
+    const wrapper = mount(Input, {
+      props: {
+        maxlength: 3,
+        value: '123',
+        showCount: {
+          formatter: ({ value, count, maxlength }) => `${value}, ${count}, ${maxlength}`,
+        },
+      },
+    });
+    await asyncExpect(() => {
+      expect(wrapper.find('input').element.value).toBe('123');
+      expect(wrapper.find('.ant-input-show-count-suffix').element?.innerHTML).toBe('123, 3, 3');
+    }, 100);
+  });
+
+  it('showCount should show the default length of the string', async () => {
+    const wrapper = mount(Input, {
+      props: {
+        maxlength: 3,
+        value: '🤔',
+        showCount: true,
+      },
+    });
+    await asyncExpect(() => {
+      expect(wrapper.find('input').element.value).toBe('🤔');
+      expect(wrapper.find('.ant-input-show-count-suffix').element?.innerHTML).toBe('2 / 3');
+    }, 100);
+  });
 });
 
 describe('TextArea', () => {
@@ -78,6 +108,13 @@ describe('TextArea', () => {
     expect(wrapper.find('.ant-input-textarea-show-count')).toBeTruthy();
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+
+  it("maxlength should be in the textarea's props", async () => {
+    const wrapper = mount(TextArea, { attrs: { maxlength: 10 }, sync: false });
+    await asyncExpect(() => {
+      expect(wrapper.find('textarea').attributes().maxlength).toBe('10');
     });
   });
 });
@@ -188,21 +225,5 @@ describe('Input.Password', () => {
     }, 100);
 
     expect(cbMock).toHaveBeenCalledWith(false);
-  });
-
-  it('should support count formatter', async () => {
-    const wrapper = mount(Input, {
-      props: {
-        maxlength: 3,
-        value: '123',
-        showCount: {
-          formatter: ({ value, count, maxlength }) => `${value}, ${count}, ${maxlength}`,
-        },
-      },
-    });
-    await asyncExpect(() => {
-      expect(wrapper.find('input').element.value).toBe('123');
-      expect(wrapper.find('.ant-input-show-count-suffix').element?.innerHTML).toBe('123, 3, 3');
-    }, 100);
   });
 });

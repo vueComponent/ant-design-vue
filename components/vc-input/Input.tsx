@@ -201,7 +201,7 @@ export default defineComponent({
 
       if (suffix || showCount) {
         const internalValue = fixControlledValue(stateValue.value);
-        const valueLength = [...internalValue].length;
+        const valueLength = internalValue.length;
         const dataCount =
           typeof showCount === 'object'
             ? showCount.formatter({ count: valueLength, maxlength, value: internalValue })

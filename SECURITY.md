@@ -1,17 +1,6 @@
-# Security Policy
+# 希望加入表单组建read-only 模式 
 
-## Supported Versions
+## 4.2.3
 
-Use this section to tell people about which versions of your project are currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x     | :white_check_mark: |
-| 2.x     | :x:                |
-| 3.x     | :white_check_mark: |
-
-## Reporting a Vulnerability
-
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a reported vulnerability, what to expect if the vulnerability is accepted or declined, etc.
+起因：表单级联数据详情回显，只用value disabled 回显非常不优雅，且样式不好自定义，后端查数据也不方便。
+期望：所有表单组件加 只读回显模式，方便此类场景！

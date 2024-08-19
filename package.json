@@ -219,7 +219,7 @@
     "postcss": "^8.2.12",
     "postcss-loader": "^6.0.0",
     "prettier": "^3.3.0",
-    "pretty-quick": "^3.0.0",
+    "pretty-quick": "^4.0.0",
     "prismjs": "^1.23.0",
     "progress": "^2.0.3",
     "raw-loader": "^4.0.2",

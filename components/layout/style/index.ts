@@ -124,7 +124,7 @@ const genLayoutStyle: GenerateStyle<LayoutToken, CSSObject> = token => {
         },
 
         '&-trigger': {
-          position: 'fixed',
+          position: 'sticky',
           bottom: 0,
           zIndex: 1,
           height: layoutTriggerHeight,

@@ -507,13 +507,7 @@ function Picker<DateType>() {
         }
 
         const panel = (
-          <div
-            class={`${prefixCls}-panel-container`}
-            ref={panelDivRef}
-            onMousedown={e => {
-              e.preventDefault();
-            }}
-          >
+          <div class={`${prefixCls}-panel-container`} ref={panelDivRef}>
             {panelNode}
           </div>
         );

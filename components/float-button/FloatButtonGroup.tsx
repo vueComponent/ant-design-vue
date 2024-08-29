@@ -1,8 +1,8 @@
-import { defineComponent, ref, computed, watch, onBeforeUnmount } from 'vue';
+import { defineComponent, ref, computed, watch, onBeforeUnmount, Transition } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import FileTextOutlined from '@ant-design/icons-vue/FileTextOutlined';
 import classNames from '../_util/classNames';
-import { getTransitionProps, Transition } from '../_util/transition';
+import { getTransitionProps } from '../_util/transition';
 import FloatButton, { floatButtonPrefixCls } from './FloatButton';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useProvideFloatButtonGroupContext } from './context';

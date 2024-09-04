@@ -143,9 +143,9 @@ export default defineComponent({
               onMousedown={onMousedown}
               onMouseup={onMouseup}
             >
-              <div tabindex={0} ref={sentinelStartRef} style={sentinelStyle} aria-hidden="true" />
+              <div tabindex={0} ref={sentinelStartRef} style={sentinelStyle} />
               {modalRender ? modalRender({ originVNode: content }) : content}
-              <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} aria-hidden="true" />
+              <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} />
             </div>
           ) : null}
         </Transition>

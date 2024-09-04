@@ -209,10 +209,14 @@ const SelectSelector = defineComponent<SelectorProps>({
 
     const handleInput = (e: Event) => {
       const composing = (e.target as any).composing;
-      targetValue.value = (e.target as any).value;
+
       if (!composing) {
         props.onInputChange(e);
       }
+
+      // if inputValue is not change
+      targetValue.value = inputValue.value;
+      (e.target as any).value = inputValue.value;
     };
 
     return () => {

@@ -33,11 +33,11 @@ tag: New
 | target | 相当于 a 标签的 target 属性，href 存在时生效 | string | - |  |
 | badge | 带徽标数字的悬浮按钮（不支持 status 以及相关属性） | [BadgeProps](/components/badge-cn#api) | - |  |
 
-### common events
+### 共同的事件
 
-| 事件名称 | 说明                                    | 回调参数          | 版本 |
-| -------- | --------------------------------------- | ----------------- | ---- |
-| click    | Set the handler to handle `click` event | `(event) => void` | -    |
+| 事件名称 | 说明                          | 回调参数          | 版本 |
+| -------- | ----------------------------- | ----------------- | ---- |
+| click    | 设置处理 `click` 事件的处理器 | `(event) => void` | -    |
 
 ### FloatButton.Group
 
@@ -47,7 +47,7 @@ tag: New
 | trigger       | 触发方式（有触发方式为菜单模式） | `click` \| `hover`   | -        |      |
 | open(v-model) | 受控展开                         | boolean              | -        |      |
 
-### FloatButton.Group Events
+### FloatButton.Group 事件
 
 | 事件名称   | 说明             | 回调参数                | 版本 |
 | ---------- | ---------------- | ----------------------- | ---- |

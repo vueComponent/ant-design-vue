@@ -188,12 +188,12 @@ describe('Select', () => {
       await asyncExpect(async () => {
         const inputEl = wrapper.find('.ant-select-selection-search-input');
 
-        inputEl.setValue('1,2,3');
         await inputEl.trigger('paste', {
           clipboardData: {
-            getData: jest.fn().mockReturnValue('1,2,3'),
+            getData: () => '1,2,3',
           },
         });
+        await inputEl.setValue('1,2,3');
 
         expect(inputEl.element.value).toBe('');
         const tagsElements = wrapper.findAll('.ant-select-selection-item');

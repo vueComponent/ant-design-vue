@@ -343,6 +343,14 @@ export default defineComponent({
       if (mergedOpen.value !== nextOpen && !props.disabled) {
         setInnerOpen(nextOpen);
         props.onDropdownVisibleChange && props.onDropdownVisibleChange(nextOpen);
+
+        if (!nextOpen && popupFocused.value) {
+          popupFocused.value = false;
+          setMockFocused(false, () => {
+            focusRef.value = false;
+            blurRef.value = false;
+          });
+        }
       }
     };
 

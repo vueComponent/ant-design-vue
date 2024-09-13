@@ -10,6 +10,10 @@
 
 ---
 
+## 4.2.4
+
+- 🐞 修复 Wave 内存泄漏问题
+
 ## 4.2.3
 
 - 🌟 TourStep 自定义 Button，支持函数 children [#7628](https://github.com/vueComponent/ant-design-vue/pull/7628)

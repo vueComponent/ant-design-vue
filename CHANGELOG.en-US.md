@@ -10,6 +10,10 @@
 
 ---
 
+## 4.2.4
+
+- 🐞 Fix Wave memory leak problem
+
 ## 4.2.3
 
 - 🌟 TourStep custom Button, support function children [#7628](https://github.com/vueComponent/ant-design-vue/pull/7628)

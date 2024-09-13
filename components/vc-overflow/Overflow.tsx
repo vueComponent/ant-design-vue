@@ -39,14 +39,15 @@ const overflowProps = () => {
     /** When set to `full`, ssr will render full items by default and remove at client side */
     ssr: String as PropType<'full'>,
     onMousedown: Function as PropType<MouseEventHandler>,
+    role: String,
   };
 };
 type InterOverflowProps = Partial<ExtractPropTypes<ReturnType<typeof overflowProps>>>;
 export type OverflowProps = HTMLAttributes & InterOverflowProps;
-const Overflow = defineComponent<OverflowProps>({
+const Overflow = defineComponent({
   name: 'Overflow',
   inheritAttrs: false,
-  props: overflowProps() as any,
+  props: overflowProps(),
   emits: ['visibleChange'],
   setup(props, { attrs, emit, slots }) {
     const fullySSR = computed(() => props.ssr === 'full');
@@ -331,6 +332,7 @@ const Overflow = defineComponent<OverflowProps>({
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}
           onMousedown={onMousedown}
+          role={props.role}
           {...restAttrs}
         >
           {mergedData.value.map(internalRenderItemNode)}

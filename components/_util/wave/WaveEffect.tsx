@@ -159,6 +159,12 @@ function showWaveEffect(node: HTMLElement, className: string) {
   node?.insertBefore(holder, node?.firstChild);
 
   render(<WaveEffect target={node} className={className} />, holder);
+  return () => {
+    render(null, holder);
+    if (holder.parentElement) {
+      holder.parentElement.removeChild(holder);
+    }
+  };
 }
 
 export default showWaveEffect;

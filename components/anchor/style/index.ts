@@ -102,7 +102,7 @@ const genSharedAnchorStyle: GenerateStyle<AnchorToken> = (token): CSSObject => {
         },
       },
 
-      [`${componentCls}-fixed ${componentCls}-ink ${componentCls}-ink`]: {
+      [`${componentCls}-fixed ${componentCls}-ink ${componentCls}-ink-ball`]: {
         display: 'none',
       },
     },

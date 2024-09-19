@@ -47,7 +47,6 @@ const onLoadData: TreeProps['loadData'] = treeNode => {
         { title: 'Child Node', key: `${treeNode.eventKey}-0` },
         { title: 'Child Node', key: `${treeNode.eventKey}-1` },
       ];
-      treeData.value = [...treeData.value];
       resolve();
     }, 1000);
   });

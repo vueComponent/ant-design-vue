@@ -62,10 +62,15 @@ export default defineComponent({
       inputRef.value.input?.select();
     };
 
+    const rootInputForceUpdate = () => {
+      inputRef.value?.rootInputForceUpdate();
+    };
+
     expose({
       focus,
       blur,
-      input: computed(() => (inputRef.value.input as any)?.input),
+      rootInputForceUpdate,
+      input: computed(() => inputRef.value.input),
       stateValue,
       setSelectionRange,
       select,
@@ -181,7 +186,7 @@ export default defineComponent({
         ),
         ref: inputRef,
         key: 'ant-input',
-        size: htmlSize,
+        size: htmlSize ? String(htmlSize) : undefined,
         type,
         lazy: props.lazy,
       };
@@ -191,7 +196,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <BaseInputCore {...omit(inputProps, ['size'])} />;
+      const inputNode = <BaseInputCore {...inputProps} />;
       return inputNode;
     };
     const getSuffix = () => {

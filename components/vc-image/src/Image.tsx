@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes, CSSProperties, PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { ref, watch, defineComponent, computed, onMounted, onUnmounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
@@ -203,8 +203,6 @@ const ImageInternal = defineComponent({
         placeholder,
         wrapperStyle,
         rootClassName,
-      } = props;
-      const {
         width,
         height,
         crossorigin,
@@ -215,7 +213,7 @@ const ImageInternal = defineComponent({
         usemap,
         class: cls,
         style,
-      } = attrs as ImgHTMLAttributes;
+      } = { ...props, ...attrs } as any;
       const { icons, maskClassName, ...dialogProps } = preview.value;
 
       const wrappperClass = cn(prefixCls, wrapperClassName, rootClassName, {

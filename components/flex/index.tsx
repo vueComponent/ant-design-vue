@@ -9,6 +9,7 @@ import { withInstall } from '../_util/type';
 import type { FlexProps } from './interface';
 import { flexProps } from './interface';
 import createFlexClassNames from './utils';
+import { isNumber } from '../_util/hooks/_vueuse/is';
 
 const AFlex = defineComponent({
   name: 'AFlex',
@@ -38,7 +39,11 @@ const AFlex = defineComponent({
       }
 
       if (gap && !isPresetSize(gap)) {
-        mergedStyle.gap = `${gap}px`;
+        if (isNumber(gap)) {
+          mergedStyle.gap = `${gap}px`;
+        } else {
+          mergedStyle.gap = gap;
+        }
       }
 
       return wrapSSR(

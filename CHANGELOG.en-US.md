@@ -10,6 +10,11 @@
 
 ---
 
+## 4.2.5
+
+- 🐞 Fix Empty component memory leak problem
+- 🐞 Fix Image width & height property not working problem
+
 ## 4.2.4
 
 - 🐞 Fix Wave memory leak problem

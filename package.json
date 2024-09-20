@@ -170,7 +170,7 @@
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-jest": "^28.0.0",
     "eslint-plugin-markdown": "^2.0.0",
     "eslint-plugin-no-explicit-type-exports": "^0.12.0",
     "eslint-plugin-prettier": "^3.1.0",

@@ -75,11 +75,6 @@ const AutoComplete = defineComponent({
       '`dropdownClassName` is deprecated, please use `popupClassName` instead.',
     );
     const selectRef = ref();
-    const getInputElement = () => {
-      const children = flattenChildren(slots.default?.());
-      const element = children.length ? children[0] : undefined;
-      return element;
-    };
 
     const focus = () => {
       selectRef.value?.focus();
@@ -96,6 +91,8 @@ const AutoComplete = defineComponent({
     const { prefixCls } = useConfigInject('select', props);
     return () => {
       const { size, dataSource, notFoundContent = slots.notFoundContent?.() } = props;
+      const childNodes = flattenChildren(slots.default?.());
+      const getInputElement = childNodes.length ? () => childNodes[0] : undefined;
       let optionChildren: VNode[];
       const { class: className } = attrs;
       const cls = {

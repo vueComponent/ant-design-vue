@@ -146,7 +146,6 @@ const ResizableTextArea = defineComponent({
         'defaultValue',
         'allowClear',
         'type',
-        'maxlength',
         'valueModifiers',
       ]);
       const cls = classNames(prefixCls, attrs.class, {

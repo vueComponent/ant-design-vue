@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '../../../tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Input from '..';
 // import Form from '../../form';
 import focusTest from '../../../tests/shared/focusTest';
@@ -188,5 +188,51 @@ describe('Input.Password', () => {
     }, 100);
 
     expect(cbMock).toHaveBeenCalledWith(false);
+  });
+
+  it('input controlled when value is valid', async () => {
+    const wrapper = mount(Input, { props: { value: 'hello' }, sync: false });
+    await asyncExpect(() => {
+      jest.useFakeTimers();
+
+      const input = wrapper.find('.ant-input');
+      expect(input.element.value).toBe('hello');
+
+      input.setValue('changed');
+      input.trigger('input', { value: 'changed' });
+
+      const timer = sleep(100);
+      jest.runAllTimers();
+
+      timer.then(() => {
+        expect(input.element.value).toBe('hello');
+
+        jest.useRealTimers();
+        wrapper.unmount();
+      });
+    }, 0);
+  });
+
+  it('input no controlled when value is undefined', async () => {
+    const wrapper = mount(Input, { props: { value: undefined }, sync: false });
+    await asyncExpect(() => {
+      jest.useFakeTimers();
+
+      const input = wrapper.find('.ant-input');
+      expect(input.element.value).toBe('');
+
+      input.setValue('changed');
+      input.trigger('input', { value: 'changed' });
+
+      const timer = sleep(100);
+      jest.runAllTimers();
+
+      timer.then(() => {
+        expect(input.element.value).toBe('changed');
+
+        jest.useRealTimers();
+        wrapper.unmount();
+      });
+    }, 0);
   });
 });

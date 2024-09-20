@@ -281,7 +281,7 @@
     "@babel/runtime": "^7.10.5",
     "@ctrl/tinycolor": "^3.5.0",
     "@emotion/hash": "^0.9.0",
-    "@emotion/unitless": "^0.8.0",
+    "@emotion/unitless": "^0.10.0",
     "@simonwep/pickr": "~1.8.0",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^4.0.0",

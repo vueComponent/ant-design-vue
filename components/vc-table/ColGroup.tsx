@@ -24,7 +24,10 @@ function ColGroup<RecordType>({ colWidths, columns, columCount }: ColGroupProps<
       cols.unshift(
         <col
           key={i}
-          style={{ width: typeof width === 'number' ? `${width}px` : width }}
+          style={{ 
+            width: typeof width === 'number' ? `${width}px` : width,
+            minWidth: typeof column.minWidth === 'number' ? `${column.minWidth}px` : column.minWidth
+          }}
           {...restAdditionalProps}
         />,
       );

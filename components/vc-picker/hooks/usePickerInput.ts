@@ -124,7 +124,8 @@ export default function usePickerInput({
           }
         }, 0);
       } else if (open.value) {
-        triggerOpen(false);
+        // The blur event will not close it, as the element might be focused within the panel.
+        // triggerOpen(false);
 
         if (valueChangedRef.value) {
           onSubmit();

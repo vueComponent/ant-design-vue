@@ -1135,9 +1135,6 @@ function RangerPicker<DateType>() {
               class={`${prefixCls}-panel-container`}
               style={{ marginLeft: `${panelLeft.value}px` }}
               ref={panelDivRef}
-              onMousedown={e => {
-                e.preventDefault();
-              }}
             >
               {mergedNodes}
             </div>

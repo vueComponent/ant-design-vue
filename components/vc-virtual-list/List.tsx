@@ -195,7 +195,8 @@ const List = defineComponent({
       });
     });
     onUpdated(() => {
-      nextTick(() => {
+      // for: wait for dropdown render slot finished
+      setTimeout(() => {
         offsetHeight.value = fillerInnerRef.value?.offsetHeight || 0;
       });
     });

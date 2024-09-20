@@ -70,6 +70,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | tokenSeparators | 自动分词的分隔符，仅在 `mode="tags"` 时生效 | string\[] | - |  |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|number\|number\[] | - |  |
 | virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 3.0 |
+| maxCount | 指定可选中的最多 items 数量，仅在 mode 为 `multiple` 或 `tags` 时生效 | number | - |  |
 
 > 注意，如果发现下拉菜单跟随页面滚动，或者需要在其他弹层中触发 Select，请尝试使用 `getPopupContainer={triggerNode => triggerNode.parentNode}` 将下拉弹层渲染节点固定在触发器的父元素中。
 

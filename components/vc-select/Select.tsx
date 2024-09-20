@@ -148,6 +148,7 @@ export function selectProps<
     menuItemSelectedIcon: PropTypes.any,
 
     mode: String as PropType<'combobox' | 'multiple' | 'tags'>,
+    maxCount: { type: Number, default: undefined },
     labelInValue: { type: Boolean, default: undefined },
     value: PropTypes.any,
     defaultValue: PropTypes.any,
@@ -562,6 +563,8 @@ export default defineComponent({
         listHeight: toRef(props, 'listHeight'),
         listItemHeight: toRef(props, 'listItemHeight'),
         childrenAsData,
+        multiple,
+        maxCount: toRef(props, 'maxCount'),
       } as unknown as SelectContextProps),
     );
 

@@ -126,3 +126,7 @@ export function getSeparatedContent(text: string, tokens: string[]): string[] {
   const list = separate(text, tokens);
   return match ? list : null;
 }
+
+export function isValidCount(count?: number) {
+  return typeof count === 'number' && !Number.isNaN(count);
+}

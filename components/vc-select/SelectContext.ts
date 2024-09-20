@@ -23,6 +23,8 @@ export interface SelectContextProps {
   listHeight?: number;
   listItemHeight?: number;
   childrenAsData?: boolean;
+  multiple: boolean;
+  maxCount: number;
 }
 
 const SelectContextKey: InjectionKey<SelectContextProps> = Symbol('SelectContextKey');

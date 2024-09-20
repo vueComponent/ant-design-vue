@@ -35,6 +35,7 @@ const BaseInput = defineComponent({
     size: PropTypes.string,
     style: PropTypes.oneOfType([String, Object]),
     class: PropTypes.string,
+    keyboardPrediction: PropTypes.bool,
   },
   emits: [
     'change',
@@ -64,13 +65,17 @@ const BaseInput = defineComponent({
       emit('change', e);
     };
     const onCompositionstart = (e: CompositionEvent) => {
-      isComposing.value = true;
-      (e.target as any).composing = true;
+      if (props.keyboardPrediction) {
+        isComposing.value = true;
+        (e.target as any).composing = true;
+      }
       emit('compositionstart', e);
     };
     const onCompositionend = (e: CompositionEvent) => {
-      isComposing.value = false;
-      (e.target as any).composing = false;
+      if (props.keyboardPrediction) {
+        isComposing.value = false;
+        (e.target as any).composing = false;
+      }
       emit('compositionend', e);
       const event = document.createEvent('HTMLEvents');
       event.initEvent('input', true, true);

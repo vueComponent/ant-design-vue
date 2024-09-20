@@ -25,4 +25,5 @@ export interface InnerSelectorProps {
   onInputPaste: EventHandler;
   onInputCompositionStart: EventHandler;
   onInputCompositionEnd: EventHandler;
+  keyboardPrediction: boolean;
 }

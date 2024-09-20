@@ -17,7 +17,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*pxR2S53P_xoAAA
 
 ### Mentions
 
-| 参数 | 说明 | 类型 | 默认值 |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | autofocus | 自动获得焦点 | boolean | `false` |
 | defaultValue | 默认值 | string |  |
@@ -32,6 +32,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*pxR2S53P_xoAAA
 | value(v-model) | 设置值 | string |  |
 | options | 选项配置 | [Options](#option) | \[] | 4.0 |
 | option | 通过 option 插槽，自定义节点 | v-slot:option="option" | - | 4.0 |
+| keyboardPrediction | 支持预测键盘或复杂输入法（如中文） | boolean | false | 4.2.4 |
 
 ### 事件
 

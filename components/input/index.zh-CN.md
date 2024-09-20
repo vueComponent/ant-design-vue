@@ -55,6 +55,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*sBqqTatJ-AkAAA
 | defaultValue | 输入框默认内容 | string |  |  |  |
 | showCount | 是否展示字数 | boolean | false |  |  |
 | value(v-model) | 输入框内容 | string |  |  |  |
+| keyboardPrediction | 支持预测键盘或复杂输入法（如中文） | boolean | false | 4.2.4 |
 
 ### TextArea 事件
 

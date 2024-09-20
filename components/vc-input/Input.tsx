@@ -231,7 +231,7 @@ export default defineComponent({
       }
     });
     return () => {
-      const { prefixCls, disabled, ...rest } = props;
+      const { prefixCls, disabled, valueModifiers, ...rest } = props;
       return (
         <BaseInput
           {...rest}
@@ -245,6 +245,7 @@ export default defineComponent({
           triggerFocus={focus}
           suffix={getSuffix()}
           disabled={disabled}
+          valueModifiers={valueModifiers}
           v-slots={slots}
         />
       );

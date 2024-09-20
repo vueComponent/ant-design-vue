@@ -72,10 +72,12 @@ export default defineComponent({
         affixWrapperClassName,
         wrapperClassName,
         groupClassName,
+        valueModifiers,
       } = props;
       let element = cloneElement(inputElement, {
         value,
         hidden,
+        valueModifiers,
       });
       // ================== Prefix & Suffix ================== //
       if (hasPrefixSuffix({ prefix, suffix, allowClear })) {

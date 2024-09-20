@@ -75,7 +75,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*1GeUQJPTGUYAAA
 | disableCheckbox | 禁掉 checkbox | boolean | false |  |
 | disabled | 禁掉响应 | boolean | false |  |
 | icon | 自定义图标。可接收组件，props 为当前节点 props | slot\|slot-scope | - |  |
-| isLeaf | 设置为叶子节点(设置了`loadData`时有效) | boolean | false |  |
+| isLeaf | 设置为叶子节点(设置了`loadData`时有效) | boolean | - |  |
 | key | 被树的 (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys 属性所用。注意：整个树范围内的所有节点的 key 值不能重复！ | string \| number | 内部计算出的节点位置 |  |
 | selectable | 设置节点是否可被选中 | boolean | true |  |
 | style | 节点的 style | string\|object | - |  |

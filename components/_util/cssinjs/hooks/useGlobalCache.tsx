@@ -2,7 +2,7 @@ import { useStyleInject } from '../StyleContext';
 import type { KeyType } from '../Cache';
 import useHMR from './useHMR';
 import type { ShallowRef, Ref } from 'vue';
-import { onBeforeUnmount, watch, watchEffect, shallowRef } from 'vue';
+import { onBeforeUnmount, watch, shallowRef } from 'vue';
 export default function useClientCache<CacheType>(
   prefix: string,
   keyPath: Ref<KeyType[]>,
@@ -12,9 +12,9 @@ export default function useClientCache<CacheType>(
   const styleContext = useStyleInject();
   const fullPathStr = shallowRef('');
   const res = shallowRef<CacheType>();
-  watchEffect(() => {
+  watch([() => prefix, () => keyPath.value], () => {
     fullPathStr.value = [prefix, ...keyPath.value].join('%');
-  });
+  }, { immediate: true });
   const HMRUpdate = useHMR();
   const clearCache = (pathStr: string) => {
     styleContext.value.cache.update(pathStr, prevCache => {

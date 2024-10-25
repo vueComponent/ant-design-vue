@@ -35,7 +35,7 @@ export const paginationProps = () => ({
   prefixCls: String,
   selectPrefixCls: String,
   totalBoundaryShowSizeChanger: Number,
-  selectComponentClass: String,
+  selectComponentClass: [String, Object],
   itemRender:
     functionType<
       (opt: {

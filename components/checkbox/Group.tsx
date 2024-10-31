@@ -53,11 +53,11 @@ export default defineComponent({
 
     const registeredValues = ref(new Map());
     watch(triggerUpdate, () => {
-      const valuseMap = new Map();
+      const valuesMap = new Map();
       for (const value of registeredValuesMap.value.values()) {
-        valuseMap.set(value, true);
+        valuesMap.set(value, true);
       }
-      registeredValues.value = valuseMap;
+      registeredValues.value = valuesMap;
     });
 
     const toggleOption = (option: CheckboxOptionType) => {

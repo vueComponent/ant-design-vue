@@ -119,7 +119,6 @@ export const treeProps = () => {
     selectable: booleanType(),
 
     loadedKeys: arrayType<Key[]>(),
-    draggable: booleanType(),
     showIcon: booleanType(),
     icon: functionType<(nodeProps: AntdTreeNodeAttribute) => any>(),
     switcherIcon: PropTypes.any,

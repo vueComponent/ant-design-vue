@@ -26,7 +26,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | checkStrictly | Check treeNode precisely; parent treeNode and children treeNodes are not associated | boolean | false |  |
 | defaultExpandAll | Whether to expand all treeNodes by default | boolean | false |  |
 | disabled | whether disabled the tree | bool | false |  |
-| draggable | Specifies whether this Tree is draggable (IE > 8) | boolean | false |  |
+| draggable | Specifies whether this Tree or the node is draggable. Use `icon: false` to disable drag handler icon (IE > 8) | boolean \| ((node: TreeNode) => boolean) \| { icon?: VNode \| false, nodeDraggable?: (node: TreeNode) => boolean } | false |  |
 | expandedKeys(v-model) | (Controlled) Specifies the keys of the expanded treeNodes | string\[] \| number\[] | \[] |  |
 | fieldNames | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } | 3.0.0 |
 | filterTreeNode | Defines a function to filter (highlight) treeNodes. When the function returns `true`, the corresponding treeNode will be highlighted | function(node) | - |  |

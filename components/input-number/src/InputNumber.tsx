@@ -569,6 +569,7 @@ export default defineComponent({
               value={inputValue.value}
               disabled={disabled}
               readonly={readonly}
+              type="text"
               onFocus={(e: FocusEvent) => {
                 focus.value = true;
                 emit('focus', e);

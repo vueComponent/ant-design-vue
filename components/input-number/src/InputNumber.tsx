@@ -395,6 +395,11 @@ export default defineComponent({
       }
     };
 
+    // Solve the issue of the event triggering sequence when entering numbers in chinese input (Safari)
+    const onBeforeInput = () => {
+      userTypingRef.value = true;
+    };
+
     const onKeyDown: KeyboardEventHandler = event => {
       const { which } = event;
       userTypingRef.value = true;
@@ -577,6 +582,7 @@ export default defineComponent({
               onBlur={onBlur}
               onCompositionstart={onCompositionStart}
               onCompositionend={onCompositionEnd}
+              onBeforeinput={onBeforeInput}
             />
           </div>
         </div>

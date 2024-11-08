@@ -1,4 +1,12 @@
-import { computed, defineComponent, onBeforeUnmount, onMounted, shallowRef, watch } from 'vue';
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  shallowRef,
+  watch,
+  Transition,
+} from 'vue';
 import type { ExtractPropTypes, CSSProperties } from 'vue';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
@@ -15,7 +23,7 @@ import type {
 } from '../interface';
 import type { VueNode } from '../../_util/type';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
-import Transition, { getTransitionProps } from '../../_util/transition';
+import { getTransitionProps } from '../../_util/transition';
 import { booleanType, stringType, functionType, arrayType, objectType } from '../../_util/type';
 
 export const listItemProps = () => {

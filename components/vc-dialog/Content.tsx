@@ -1,7 +1,7 @@
 import type { CSSProperties, PropType } from 'vue';
-import { computed, ref, defineComponent, nextTick } from 'vue';
+import { Transition, computed, ref, defineComponent, nextTick } from 'vue';
 import type { MouseEventHandler } from '../_util/EventInterface';
-import Transition, { getTransitionProps } from '../_util/transition';
+import { getTransitionProps } from '../_util/transition';
 import dialogPropTypes from './IDialogPropTypes';
 import { offset } from './util';
 const sentinelStyle = { width: 0, height: 0, overflow: 'hidden', outline: 'none' };
@@ -143,9 +143,9 @@ export default defineComponent({
               onMousedown={onMousedown}
               onMouseup={onMouseup}
             >
-              <div tabindex={0} ref={sentinelStartRef} style={sentinelStyle} aria-hidden="true" />
+              <div tabindex={0} ref={sentinelStartRef} style={sentinelStyle} inert/>
               {modalRender ? modalRender({ originVNode: content }) : content}
-              <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} aria-hidden="true" />
+              <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} inert/>
             </div>
           ) : null}
         </Transition>

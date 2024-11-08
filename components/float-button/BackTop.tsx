@@ -1,5 +1,5 @@
 import VerticalAlignTopOutlined from '@ant-design/icons-vue/VerticalAlignTopOutlined';
-import { getTransitionProps, Transition } from '../_util/transition';
+import { getTransitionProps } from '../_util/transition';
 import {
   defineComponent,
   nextTick,
@@ -10,6 +10,7 @@ import {
   ref,
   watch,
   onDeactivated,
+  Transition,
 } from 'vue';
 import FloatButton, { floatButtonPrefixCls } from './FloatButton';
 import useConfigInject from '../config-provider/hooks/useConfigInject';

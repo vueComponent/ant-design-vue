@@ -159,6 +159,52 @@ describe('Select', () => {
     }, 500);
   });
 
+  it('The select trigger should be blur when the panel is closed.', async () => {
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Select
+              dropdownRender={() => {
+                return <input id="dropdownRenderInput" />;
+              }}
+            />
+          );
+        },
+      },
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
+    await asyncExpect(async () => {
+      await wrapper.find('.ant-select-selector').trigger('mousedown');
+      await wrapper.find('.ant-select-selection-search-input').trigger('focus');
+    });
+
+    await asyncExpect(async () => {
+      const el = wrapper.find('.ant-select');
+
+      expect(el.classes()).toContain('ant-select-focused');
+      $$('#dropdownRenderInput')[0].focus();
+
+      expect(el.classes()).toContain('ant-select-focused');
+
+      document.body.dispatchEvent(
+        new MouseEvent('mousedown', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        }),
+      );
+    }, 100);
+
+    await asyncExpect(async () => {
+      const el = wrapper.find('.ant-select');
+      expect(el.classes()).not.toContain('ant-select-focused');
+    }, 200);
+  });
+
   describe('Select Custom Icons', () => {
     it('should support customized icons', () => {
       const wrapper = mount({

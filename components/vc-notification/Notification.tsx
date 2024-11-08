@@ -2,6 +2,7 @@ import { getTransitionGroupProps } from '../_util/transition';
 import type { Key, VueNode } from '../_util/type';
 import type { CSSProperties } from 'vue';
 import {
+  toRaw,
   shallowRef,
   createVNode,
   computed,
@@ -72,10 +73,10 @@ type NotificationState = {
   holderCallback?: HolderReadyCallback;
 }[];
 
-const Notification = defineComponent<NotificationProps>({
+const Notification = defineComponent({
   name: 'Notification',
   inheritAttrs: false,
-  props: ['prefixCls', 'transitionName', 'animation', 'maxCount', 'closeIcon', 'hashId'] as any,
+  props: ['prefixCls', 'transitionName', 'animation', 'maxCount', 'closeIcon', 'hashId'],
   setup(props, { attrs, expose, slots }) {
     const hookRefs = new Map<Key, HTMLDivElement>();
     const notices = ref<NotificationState>([]);
@@ -125,7 +126,7 @@ const Notification = defineComponent<NotificationProps>({
     };
 
     const remove = (removeKey: Key) => {
-      notices.value = notices.value.filter(({ notice: { key, userPassKey } }) => {
+      notices.value = toRaw(notices.value as any).filter(({ notice: { key, userPassKey } }) => {
         const mergedKey = userPassKey || key;
         return mergedKey !== removeKey;
       });

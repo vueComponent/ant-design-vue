@@ -21,7 +21,7 @@ tag: New
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| block | 将宽度调整为父元素宽度的选项 | boolean | 无 |  |
+| block | 将宽度调整为父元素宽度的选项 | boolean | - |  |
 | disabled | 是否禁用 | boolean | false |  |
 | options | 数据化配置选项内容 | string[] \| number[] \| SegmentedOption[] | [] |  |
 | size | 控件尺寸 | `large` \| `middle` \| `small` | - |  |

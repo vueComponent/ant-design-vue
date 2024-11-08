@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { defineComponent, h } from 'vue';
 import type { CSSProperties, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -10,9 +10,6 @@ import { anyType, objectType, withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 
 import useStyle from './style';
-
-const defaultEmptyImg = <DefaultEmptyImg />;
-const simpleEmptyImg = <SimpleEmptyImg />;
 
 interface Locale {
   description?: string;
@@ -40,13 +37,16 @@ const Empty = defineComponent({
     return () => {
       const prefixCls = prefixClsRef.value;
       const {
-        image = slots.image?.() || defaultEmptyImg,
+        image: mergedImage = slots.image?.() || h(DefaultEmptyImg),
         description = slots.description?.() || undefined,
         imageStyle,
         class: className = '',
         ...restProps
       } = { ...props, ...attrs };
-
+      const image =
+        typeof mergedImage === 'function' ? (mergedImage as () => VueNode)() : mergedImage;
+      const isNormal =
+        typeof image === 'object' && 'type' in image && (image.type as any).PRESENTED_IMAGE_SIMPLE;
       return wrapSSR(
         <LocaleReceiver
           componentName="Empty"
@@ -64,7 +64,7 @@ const Empty = defineComponent({
             return (
               <div
                 class={classNames(prefixCls, className, hashId.value, {
-                  [`${prefixCls}-normal`]: image === simpleEmptyImg,
+                  [`${prefixCls}-normal`]: isNormal,
                   [`${prefixCls}-rtl`]: direction.value === 'rtl',
                 })}
                 {...restProps}
@@ -85,7 +85,7 @@ const Empty = defineComponent({
   },
 });
 
-Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
-Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
+Empty.PRESENTED_IMAGE_DEFAULT = () => h(DefaultEmptyImg);
+Empty.PRESENTED_IMAGE_SIMPLE = () => h(SimpleEmptyImg);
 
 export default withInstall(Empty);

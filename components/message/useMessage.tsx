@@ -47,7 +47,9 @@ const Holder = defineComponent({
     'rtl',
     'transitionName',
     'onAllRemoved',
-  ] as any,
+    'animation',
+    'staticGetContainer',
+  ],
   setup(props, { expose }) {
     const { getPrefixCls, getPopupContainer } = useConfigInject('message', props);
 

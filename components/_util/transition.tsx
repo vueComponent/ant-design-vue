@@ -5,7 +5,7 @@ import type {
   TransitionGroupProps,
   TransitionProps,
 } from 'vue';
-import { nextTick, Transition, TransitionGroup } from 'vue';
+import { nextTick } from 'vue';
 import { tuple } from './type';
 
 const SelectPlacements = tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight');
@@ -126,6 +126,4 @@ const getTransitionName = (rootPrefixCls: string, motion: string, transitionName
   return `${rootPrefixCls}-${motion}`;
 };
 
-export { Transition, TransitionGroup, collapseMotion, getTransitionName, getTransitionDirection };
-
-export default Transition;
+export { collapseMotion, getTransitionName, getTransitionDirection };

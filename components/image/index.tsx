@@ -13,10 +13,10 @@ export type ImageProps = Partial<
   ExtractPropTypes<ReturnType<typeof imageProps>> &
     Omit<ImgHTMLAttributes, 'placeholder' | 'onClick'>
 >;
-const Image = defineComponent<ImageProps>({
+const Image = defineComponent({
   name: 'AImage',
   inheritAttrs: false,
-  props: imageProps() as any,
+  props: imageProps(),
   setup(props, { slots, attrs }) {
     const { prefixCls, rootPrefixCls, configProvider } = useConfigInject('image', props);
     // Style

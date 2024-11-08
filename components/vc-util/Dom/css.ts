@@ -112,3 +112,22 @@ export function getOffset(node: any) {
       (docElem.clientTop || document.body.clientTop || 0),
   };
 }
+
+export function styleToString(style: CSSStyleDeclaration) {
+  // There are some different behavior between Firefox & Chrome.
+  // We have to handle this ourself.
+  const styleNames = Array.prototype.slice.apply(style);
+  return styleNames.map(name => `${name}: ${style.getPropertyValue(name)};`).join('');
+}
+
+export function styleObjectToString(style: Record<string, string>) {
+  return Object.keys(style).reduce((acc, name) => {
+    const styleValue = style[name];
+    if (typeof styleValue === 'undefined' || styleValue === null) {
+      return acc;
+    }
+
+    acc += `${name}: ${style[name]};`;
+    return acc;
+  }, '');
+}

@@ -38,10 +38,10 @@ function setTriggerValue(
   let newTriggerValue = triggerValue;
   if (isCursorInEnd) {
     // 光标在尾部，直接截断
-    newTriggerValue = fixEmojiLength(triggerValue, maxLength!);
+    newTriggerValue = fixEmojiLength(triggerValue, maxLength);
   } else if (
     [...(preValue || '')].length < triggerValue.length &&
-    [...(triggerValue || '')].length > maxLength!
+    [...(triggerValue || '')].length > maxLength
   ) {
     // 光标在中间，如果最后的值超过最大值，则采用原先的值
     newTriggerValue = preValue;
@@ -58,7 +58,7 @@ export default defineComponent({
     const formItemContext = useInjectFormItemContext();
     const formItemInputContext = FormItemInputContext.useInject();
     const mergedStatus = computed(() => getMergedStatus(formItemInputContext.status, props.status));
-    const stateValue = shallowRef(props.value === undefined ? props.defaultValue : props.value);
+    const stateValue = shallowRef(props.value ?? props.defaultValue);
     const resizableTextArea = shallowRef();
     const mergedValue = shallowRef('');
     const { prefixCls, size, direction } = useConfigInject('input', props);
@@ -79,7 +79,7 @@ export default defineComponent({
     const onInternalCompositionStart = (e: CompositionEvent) => {
       compositing.value = true;
       // 拼音输入前保存一份旧值
-      oldCompositionValueRef.value = mergedValue.value as string;
+      oldCompositionValueRef.value = mergedValue.value;
       // 保存旧的光标位置
       oldSelectionStartRef.value = (e.currentTarget as any).selectionStart;
       emit('compositionstart', e);
@@ -94,7 +94,7 @@ export default defineComponent({
           oldSelectionStartRef.value === oldCompositionValueRef.value?.length;
         triggerValue = setTriggerValue(
           isCursorInEnd,
-          oldCompositionValueRef.value as string,
+          oldCompositionValueRef.value,
           triggerValue,
           props.maxlength,
         );
@@ -177,14 +177,14 @@ export default defineComponent({
         // 1. 复制粘贴超过maxlength的情况 2.未超过maxlength的情况
         const target = e.target as any;
         const isCursorInEnd =
-          target.selectionStart >= props.maxlength! + 1 ||
+          target.selectionStart >= props.maxlength + 1 ||
           target.selectionStart === triggerValue.length ||
           !target.selectionStart;
         triggerValue = setTriggerValue(
           isCursorInEnd,
-          mergedValue.value as string,
+          mergedValue.value,
           triggerValue,
-          props.maxlength!,
+          props.maxlength,
         );
       }
       resolveOnChange(e.currentTarget as any, e, triggerChange, triggerValue);
@@ -237,7 +237,7 @@ export default defineComponent({
     });
 
     watchEffect(() => {
-      let val = fixControlledValue(stateValue.value) as string;
+      let val = fixControlledValue(stateValue.value);
       if (
         !compositing.value &&
         hasMaxLength.value &&

@@ -1,5 +1,5 @@
-import { defineComponent } from 'vue';
-import Transition, { getTransitionProps } from '../_util/transition';
+import { defineComponent, Transition } from 'vue';
+import { getTransitionProps } from '../_util/transition';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },

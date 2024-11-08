@@ -77,7 +77,7 @@ export interface CellProps<RecordType = DefaultRecordType> {
 
   transformCellText?: TransformCellText<RecordType>;
 }
-export default defineComponent<CellProps>({
+export default defineComponent({
   name: 'Cell',
   props: [
     'prefixCls',
@@ -104,7 +104,7 @@ export default defineComponent<CellProps>({
     'column',
     'cellType',
     'transformCellText',
-  ] as any,
+  ],
   setup(props, { slots }) {
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
@@ -318,7 +318,7 @@ export default defineComponent<CellProps>({
 
       // ====================== Render ======================
       let title: string;
-      const ellipsisConfig: CellEllipsisType = ellipsis === true ? { showTitle: true } : ellipsis;
+      const ellipsisConfig = ellipsis === true ? { showTitle: true } : ellipsis;
       if (ellipsisConfig && (ellipsisConfig.showTitle || rowType === 'header')) {
         if (typeof childNode === 'string' || typeof childNode === 'number') {
           title = childNode.toString();

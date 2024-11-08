@@ -108,7 +108,7 @@ function useColumns<RecordType>(
     prefixCls?: Ref<string>;
     columns?: Ref<ColumnsType<RecordType>>;
     expandable: Ref<boolean>;
-    expandedKeys: Ref<Set<Key>>;
+    expandedKeys: ComputedRef<Set<Key>>;
     getRowKey: Ref<GetRowKey<RecordType>>;
     onTriggerExpand: TriggerEventHandler<RecordType>;
     expandIcon?: Ref<RenderExpandIcon<RecordType>>;

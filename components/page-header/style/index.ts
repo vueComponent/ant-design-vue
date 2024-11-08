@@ -4,6 +4,8 @@ import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent, textEllipsis } from '../../style';
 import { operationUnit } from '../../style';
 
+export interface ComponentToken {}
+
 interface PageHeaderToken extends FullToken<'PageHeader'> {
   pageHeaderPadding: number;
   pageHeaderPaddingVertical: number;

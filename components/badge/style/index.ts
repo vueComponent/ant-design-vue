@@ -4,6 +4,8 @@ import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { genPresetColor, resetComponent } from '../../style';
 
+export interface ComponentToken {}
+
 interface BadgeToken extends FullToken<'Badge'> {
   badgeFontHeight: number;
   badgeZIndex: number | string;

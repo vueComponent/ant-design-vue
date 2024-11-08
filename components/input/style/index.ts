@@ -5,6 +5,8 @@ import type { GlobalToken } from '../../theme/interface';
 import { clearFix, resetComponent } from '../../style';
 import { genCompactItemStyle } from '../../style/compact-item';
 
+export interface ComponentToken {}
+
 export type InputToken<T extends GlobalToken = FullToken<'Input'>> = T & {
   inputAffixPadding: number;
   inputPaddingVertical: number;

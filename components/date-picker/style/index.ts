@@ -22,6 +22,8 @@ import type { TokenWithCommonCls } from '../../theme/util/genComponentStyleHook'
 import { resetComponent, roundedArrow, textEllipsis } from '../../style';
 import { genCompactItemStyle } from '../../style/compact-item';
 
+export interface ComponentToken {}
+
 export interface ComponentToken {
   presetsWidth: number;
   presetsMaxWidth: number;

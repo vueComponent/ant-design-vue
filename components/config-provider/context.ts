@@ -5,9 +5,9 @@ import type { RequiredMark } from '../form/Form';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { TransformCellTextProps } from '../table/interface';
 import type { Locale } from '../locale-provider';
-import type { DerivativeFunc } from '../_util/cssinjs';
-import type { AliasToken, SeedToken } from '../theme/internal';
-import type { MapToken, OverrideToken } from '../theme/interface';
+import type { DerivativeFunc } from '../_util/_cssinjs';
+import type { AliasToken, SeedToken } from '../_theme/internal';
+import type { MapToken, OverrideToken } from '../_theme/interface';
 import type { VueNode } from '../_util/type';
 import { objectType } from '../_util/type';
 
@@ -57,6 +57,18 @@ export interface ThemeConfig {
   algorithm?: MappingAlgorithm | MappingAlgorithm[];
   hashed?: boolean;
   inherit?: boolean;
+  cssVar?:
+    | {
+        /**
+         * Prefix for css variable, default to `antd`.
+         */
+        prefix?: string;
+        /**
+         * Unique key for theme, should be set manually < react@18.
+         */
+        key?: string;
+      }
+    | boolean;
 }
 
 export const configProviderProps = () => ({

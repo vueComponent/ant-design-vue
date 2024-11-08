@@ -14,14 +14,14 @@ export default defineComponent<MeasureCellProps>({
     const tdRef = ref<HTMLTableCellElement>();
     onMounted(() => {
       if (tdRef.value) {
-        emit('columnResize', props.columnKey, tdRef.value.offsetWidth);
+        emit('columnResize', props.columnKey, tdRef.value.getBoundingClientRect().width);
       }
     });
     return () => {
       return (
         <VCResizeObserver
-          onResize={({ offsetWidth }) => {
-            emit('columnResize', props.columnKey, offsetWidth);
+          onResize={({ originWidth }) => {
+            emit('columnResize', props.columnKey, originWidth);
           }}
         >
           <td ref={tdRef} style={{ padding: 0, border: 0, height: 0 }}>

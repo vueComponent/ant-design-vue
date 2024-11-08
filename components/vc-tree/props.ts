@@ -110,6 +110,10 @@ export type AllowDrop<TreeDataType extends BasicDataNode = DataNode> = (
 ) => boolean;
 
 export type DraggableFn = (node: DataNode) => boolean;
+export type DraggableConfig = {
+  icon?: any;
+  nodeDraggable?: DraggableFn;
+};
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 export const treeProps = () => ({
   prefixCls: String,
@@ -131,7 +135,7 @@ export const treeProps = () => ({
   multiple: { type: Boolean, default: undefined },
   checkable: { type: Boolean, default: undefined },
   checkStrictly: { type: Boolean, default: undefined },
-  draggable: { type: [Function, Boolean] as PropType<DraggableFn | boolean> },
+  draggable: { type: [Function, Boolean] as PropType<DraggableConfig | DraggableFn | boolean> },
   defaultExpandParent: { type: Boolean, default: undefined },
   autoExpandParent: { type: Boolean, default: undefined },
   defaultExpandAll: { type: Boolean, default: undefined },

@@ -1,4 +1,4 @@
-import { useToken } from '../../_theme/internal';
+import { useToken } from '../../theme/internal';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 

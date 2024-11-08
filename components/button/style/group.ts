@@ -1,6 +1,6 @@
-import type { CSSObject } from '../../_util/_cssinjs';
+import type { CSSObject } from '../../_util/cssinjs';
 import type { ButtonToken } from './token';
-import type { GenerateStyle } from '../../_theme/internal';
+import type { GenerateStyle } from '../../theme/internal';
 
 const genButtonBorderStyle = (buttonTypeCls: string, borderColor: string) => ({
   // Border

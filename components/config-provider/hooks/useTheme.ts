@@ -1,5 +1,5 @@
 import type { ThemeConfig } from '../context';
-import { defaultConfig } from '../../_theme/internal';
+import { defaultConfig } from '../../theme/internal';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 import devWarning from '../../vc-util/warning';

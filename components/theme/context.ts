@@ -9,8 +9,8 @@ import {
   watch,
   computed,
 } from 'vue';
-import type { Theme } from '../_util/_cssinjs';
-import { createTheme } from '../_util/_cssinjs';
+import type { Theme } from '../_util/cssinjs';
+import { createTheme } from '../_util/cssinjs';
 
 import { objectType, someType } from '../_util/type';
 import type { AliasToken, MapToken, OverrideToken, SeedToken } from './interface';

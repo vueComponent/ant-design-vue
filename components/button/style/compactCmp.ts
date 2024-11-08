@@ -3,10 +3,10 @@ import type { ButtonToken } from './token';
 import { prepareComponentToken, prepareToken } from './token';
 import { genCompactItemStyle } from '../../style/compact-item';
 import { genCompactItemVerticalStyle } from '../../style/compact-item-vertical';
-import type { GenerateStyle } from '../../_theme/internal';
-import { genSubStyleComponent } from '../../_theme/internal';
-import type { CSSObject } from '../../_util/_cssinjs';
-import { unit } from '../../_util/_cssinjs';
+import type { GenerateStyle } from '../../theme/internal';
+import { genSubStyleComponent } from '../../theme/internal';
+import type { CSSObject } from '../../_util/cssinjs';
+import { unit } from '../../_util/cssinjs';
 
 const genButtonCompactStyle: GenerateStyle<ButtonToken, CSSObject> = token => {
   const { componentCls, calc } = token;

@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'vue';
-import type { FullToken, GetDefaultToken } from '../../_theme/internal';
-import { getLineHeight, mergeToken } from '../../_theme/internal';
-import type { GenStyleFn } from '../../_theme/util/genComponentStyleHook';
+import type { FullToken, GetDefaultToken } from '../../theme/internal';
+import { getLineHeight, mergeToken } from '../../theme/internal';
+import type { GenStyleFn } from '../../theme/util/genComponentStyleHook';
 
 /** Component only token. Which will handle additional calculation of alias token */
 export interface ComponentToken {

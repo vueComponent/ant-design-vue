@@ -1,9 +1,9 @@
-import type { CSSObject } from '../../_util/_cssinjs';
-import { unit } from '../../_util/_cssinjs';
+import type { CSSObject } from '../../_util/cssinjs';
+import { unit } from '../../_util/cssinjs';
 
 import { genFocusStyle } from '../../style';
-import type { GenerateStyle } from '../../_theme/internal';
-import { genStyleHooks, mergeToken } from '../../_theme/internal';
+import type { GenerateStyle } from '../../theme/internal';
+import { genStyleHooks, mergeToken } from '../../theme/internal';
 import genGroupStyle from './group';
 import type { ButtonToken, ComponentToken } from './token';
 import { prepareComponentToken, prepareToken } from './token';

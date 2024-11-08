@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import type { CSSObject } from '../../_util/_cssinjs';
+import type { CSSObject } from '../../_util/cssinjs';
 import type { AliasToken, PresetColorKey } from '../internal';
 import { PresetColors } from '../interface';
 import type { TokenWithCommonCls } from './genComponentStyleHook';

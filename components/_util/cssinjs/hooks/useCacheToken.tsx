@@ -1,20 +1,19 @@
 import hash from '@emotion/hash';
-import { ATTR_TOKEN, CSS_IN_JS_INSTANCE, useStyleInject } from '../StyleContext';
+import { updateCSS } from '../../../vc-util/Dom/dynamicCSS';
+import { ATTR_MARK, ATTR_TOKEN, CSS_IN_JS_INSTANCE, useStyleInject } from '../StyleContext';
 import type Theme from '../theme/Theme';
+import { flattenToken, memoResult, token2key, toStyleStr } from '../util';
+import { transformToken } from '../util/css-variables';
+import type { ExtractStyle } from './useGlobalCache';
 import useGlobalCache from './useGlobalCache';
-import { flattenToken, token2key } from '../util';
 import type { Ref } from 'vue';
 import { ref, computed } from 'vue';
 
 const EMPTY_OVERRIDE = {};
 
-const isProduction = process.env.NODE_ENV === 'production';
-// nuxt generate when NODE_ENV is prerender
-const isPrerender = process.env.NODE_ENV === 'prerender';
-
 // Generate different prefix to make user selector break in production env.
 // This helps developer not to do style override directly on the hash id.
-const hashPrefix = !isProduction && !isPrerender ? 'css-dev-only-do-not-override' : 'css';
+const hashPrefix = process.env.NODE_ENV !== 'production' ? 'css-dev-only-do-not-override' : 'css';
 
 export interface Option<DerivativeToken, DesignToken> {
   /**
@@ -46,6 +45,22 @@ export interface Option<DerivativeToken, DesignToken> {
     override: object,
     theme: Theme<any, any>,
   ) => DerivativeToken;
+
+  /**
+   * Transform token to css variables.
+   */
+  cssVar?: {
+    /** Prefix for css variables */
+    prefix?: string;
+    /** Tokens that should not be appended with unit */
+    unitless?: Record<string, boolean>;
+    /** Tokens that should not be transformed to css variables */
+    ignore?: Record<string, boolean>;
+    /** Tokens that preserves origin value */
+    preserve?: Record<string, boolean>;
+    /** Key for current theme. Useful for customizing and should be unique */
+    key?: string;
+  };
 }
 
 const tokenKeys = new Map<string, number>();
@@ -94,6 +109,7 @@ export const getComputedToken = <DerivativeToken = object, DesignToken = Derivat
   format?: (token: DesignToken) => DerivativeToken,
 ) => {
   const derivativeToken = theme.getDerivativeToken(originToken);
+
   // Merge with override
   let mergedDerivativeToken = {
     ...derivativeToken,
@@ -108,6 +124,16 @@ export const getComputedToken = <DerivativeToken = object, DesignToken = Derivat
   return mergedDerivativeToken;
 };
 
+export const TOKEN_PREFIX = 'token';
+
+type TokenCacheValue<DerivativeToken> = [
+  token: DerivativeToken & { _tokenKey: string; _themeKey: string },
+  hashId: string,
+  realToken: DerivativeToken & { _tokenKey: string },
+  cssVarStr: string,
+  cssVarKey: string,
+];
+
 /**
  * Cache theme derivative token as global shared one
  * @param theme Theme entity
@@ -119,21 +145,27 @@ export default function useCacheToken<DerivativeToken = object, DesignToken = De
   theme: Ref<Theme<any, any>>,
   tokens: Ref<Partial<DesignToken>[]>,
   option: Ref<Option<DerivativeToken, DesignToken>> = ref({}),
-) {
-  const style = useStyleInject();
+): Ref<TokenCacheValue<DerivativeToken>> {
+  const styleContext = useStyleInject();
 
   // Basic - We do basic cache here
-  const mergedToken = computed(() => Object.assign({}, ...tokens.value));
-  const tokenStr = computed(() => flattenToken(mergedToken.value));
-  const overrideTokenStr = computed(() => flattenToken(option.value.override || EMPTY_OVERRIDE));
+  const mergedToken = computed(() =>
+    memoResult(() => Object.assign({}, ...tokens.value), tokens.value),
+  );
 
-  const cachedToken = useGlobalCache<[DerivativeToken & { _tokenKey: string }, string]>(
-    'token',
+  const tokenStr = computed(() => flattenToken(mergedToken.value));
+  const overrideTokenStr = computed(() => flattenToken(option.value.override ?? EMPTY_OVERRIDE));
+
+  const cssVarStr = computed(() => (option.value.cssVar ? flattenToken(option.value.cssVar) : ''));
+
+  const cachedToken = useGlobalCache<TokenCacheValue<DerivativeToken>>(
+    TOKEN_PREFIX,
     computed(() => [
-      option.value.salt || '',
-      theme.value.id,
+      option.value.salt ?? '',
+      theme.value?.id,
       tokenStr.value,
       overrideTokenStr.value,
+      cssVarStr.value,
     ]),
     () => {
       const {
@@ -141,25 +173,82 @@ export default function useCacheToken<DerivativeToken = object, DesignToken = De
         override = EMPTY_OVERRIDE,
         formatToken,
         getComputedToken: compute,
+        cssVar,
       } = option.value;
-      const mergedDerivativeToken = compute
+      let mergedDerivativeToken = compute
         ? compute(mergedToken.value, override, theme.value)
         : getComputedToken(mergedToken.value, override, theme.value, formatToken);
+
+      // Replace token value with css variables
+      const actualToken = { ...mergedDerivativeToken };
+      let cssVarsStr = '';
+      if (!!cssVar) {
+        [mergedDerivativeToken, cssVarsStr] = transformToken(mergedDerivativeToken, cssVar.key!, {
+          prefix: cssVar.prefix,
+          ignore: cssVar.ignore,
+          unitless: cssVar.unitless,
+          preserve: cssVar.preserve,
+        });
+      }
 
       // Optimize for `useStyleRegister` performance
       const tokenKey = token2key(mergedDerivativeToken, salt);
       mergedDerivativeToken._tokenKey = tokenKey;
-      recordCleanToken(tokenKey);
+      actualToken._tokenKey = token2key(actualToken, salt);
+
+      const themeKey = cssVar?.key ?? tokenKey;
+      mergedDerivativeToken._themeKey = themeKey;
+      recordCleanToken(themeKey);
 
       const hashId = `${hashPrefix}-${hash(tokenKey)}`;
       mergedDerivativeToken._hashId = hashId; // Not used
-      return [mergedDerivativeToken, hashId];
+
+      return [mergedDerivativeToken, hashId, actualToken, cssVarsStr, cssVar?.key || ''];
     },
     cache => {
       // Remove token will remove all related style
-      cleanTokenStyle(cache[0]._tokenKey, style.value?.cache.instanceId);
+      cleanTokenStyle(cache[0]._themeKey, styleContext.value?.cache?.instanceId);
+    },
+    ([token, , , cssVarsStr]) => {
+      const { cssVar } = option.value;
+      if (cssVar && cssVarsStr) {
+        const style = updateCSS(cssVarsStr, hash(`css-variables-${token._themeKey}`), {
+          mark: ATTR_MARK,
+          prepend: 'queue',
+          attachTo: styleContext.value?.container,
+          priority: -999,
+        });
+
+        (style as any)[CSS_IN_JS_INSTANCE] = styleContext.value?.cache?.instanceId;
+
+        // Used for `useCacheToken` to remove on batch when token removed
+        style.setAttribute(ATTR_TOKEN, token._themeKey);
+      }
     },
   );
 
   return cachedToken;
 }
+
+export const extract: ExtractStyle<TokenCacheValue<any>> = (cache, _effectStyles, options) => {
+  const [, , realToken, styleStr, cssVarKey] = cache;
+  const { plain } = options || {};
+
+  if (!styleStr) {
+    return null;
+  }
+
+  const styleId = realToken._tokenKey;
+  const order = -999;
+
+  // ====================== Style ======================
+  // Used for rc-util
+  const sharedAttrs = {
+    'data-vc-order': 'prependQueue',
+    'data-vc-priority': `${order}`,
+  };
+
+  const styleText = toStyleStr(styleStr, cssVarKey, styleId, sharedAttrs, plain);
+
+  return [order, styleId, styleText];
+};

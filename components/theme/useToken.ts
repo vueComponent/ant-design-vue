@@ -1,5 +1,5 @@
-import type { Theme } from '../_util/_cssinjs';
-import { useCacheToken } from '../_util/_cssinjs';
+import type { Theme } from '../_util/cssinjs';
+import { useCacheToken } from '../_util/cssinjs';
 
 import version from '../version';
 import type { DesignTokenProviderProps } from './context';

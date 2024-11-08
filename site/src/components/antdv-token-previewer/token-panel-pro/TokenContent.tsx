@@ -11,7 +11,7 @@ import {
 } from 'ant-design-vue';
 import type { MutableTheme, SelectedToken } from '../interface';
 import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
-import seed from 'ant-design-vue/es/_theme/themes/seed';
+import seed from 'ant-design-vue/es/theme/themes/seed';
 import tokenMeta from 'ant-design-vue/es/version/token-meta.json';
 import classNames from 'ant-design-vue/es/_util/classNames';
 

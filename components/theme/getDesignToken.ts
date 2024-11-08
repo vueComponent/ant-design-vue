@@ -1,4 +1,4 @@
-import { createTheme, getComputedToken } from '../_util/_cssinjs';
+import { createTheme, getComputedToken } from '../_util/cssinjs';
 import type { ThemeConfig } from '../config-provider/context';
 import type { AliasToken } from './interface';
 import defaultDerivative from './themes/default';

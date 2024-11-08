@@ -1,4 +1,4 @@
-import { unit } from '../../_util/_cssinjs';
+import { unit } from '../../_util/cssinjs';
 
 export default function genMaxMin(type: 'css' | 'js') {
   if (type === 'js') {

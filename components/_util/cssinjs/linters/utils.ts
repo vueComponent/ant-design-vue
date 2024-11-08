@@ -6,8 +6,8 @@ export function lintWarning(message: string, info: LinterInfo) {
 
   devWarning(
     false,
-    `[Ant Design Vue CSS-in-JS] ${path ? `Error in '${path}': ` : ''}${message}${
-      parentSelectors.length ? ` Selector info: ${parentSelectors.join(' -> ')}` : ''
+    `[Ant Design Vue CSS-in-JS] ${path ? `Error in ${path}: ` : ''}${message}${
+      parentSelectors.length ? ` Selector: ${parentSelectors.join(' | ')}` : ''
     }`,
   );
 }

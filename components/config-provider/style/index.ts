@@ -1,7 +1,7 @@
-import type { CSSObject } from '../../_util/_cssinjs';
-import { useStyleRegister } from '../../_util/_cssinjs';
+import type { CSSObject } from '../../_util/cssinjs';
+import { useStyleRegister } from '../../_util/cssinjs';
 import { resetIcon } from '../../style';
-import { useToken } from '../../_theme/internal';
+import { useToken } from '../../theme/internal';
 import { computed, Ref } from 'vue';
 
 const useStyle = (iconPrefixCls: Ref<string>) => {

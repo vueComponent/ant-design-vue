@@ -14,7 +14,7 @@ import defaultLocale from '../locale/en_US';
 import type { ValidateMessages } from '../form/interface';
 import useStyle from './style';
 import useTheme from './hooks/useTheme';
-import defaultSeedToken from '../_theme/themes/seed';
+import defaultSeedToken from '../theme/themes/seed';
 import type { ConfigProviderInnerProps, ConfigProviderProps, Theme, ThemeConfig } from './context';
 import {
   useConfigContextProvider,
@@ -25,8 +25,8 @@ import {
 } from './context';
 import { useProviderSize } from './SizeContext';
 import { useProviderDisabled } from './DisabledContext';
-import { createTheme } from '../_util/_cssinjs';
-import { defaultTheme, DesignTokenProvider } from '../_theme/context';
+import { createTheme } from '../_util/cssinjs';
+import { defaultTheme, DesignTokenProvider } from '../theme/context';
 
 export type {
   ConfigProviderProps,

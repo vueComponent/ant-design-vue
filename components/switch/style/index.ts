@@ -1,9 +1,9 @@
-import type { CSSObject } from '../../_util/_cssinjs';
-import { unit } from '../../_util/_cssinjs';
+import type { CSSObject } from '../../_util/cssinjs';
+import { unit } from '../../_util/cssinjs';
 import { TinyColor } from '@ctrl/tinycolor';
 import { genFocusStyle, resetComponent } from '../../style';
-import type { FullToken, GenerateStyle, GetDefaultToken } from '../../_theme/internal';
-import { genStyleHooks, mergeToken } from '../../_theme/internal';
+import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/internal';
+import { genStyleHooks, mergeToken } from '../../theme/internal';
 
 export interface ComponentToken {
   /**

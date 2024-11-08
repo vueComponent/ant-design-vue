@@ -223,4 +223,28 @@ describe('Select', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
+
+  describe('Select tags mode', () => {
+    it('Automatic word segmentation mode supports pasting.', async () => {
+      const wrapper = mount(Select, {
+        props: { mode: 'tags', tokenSeparators: [','] },
+        sync: false,
+      });
+
+      await asyncExpect(async () => {
+        const inputEl = wrapper.find('.ant-select-selection-search-input');
+
+        await inputEl.trigger('paste', {
+          clipboardData: {
+            getData: () => '1,2,3',
+          },
+        });
+        await inputEl.setValue('1,2,3');
+
+        expect(inputEl.element.value).toBe('');
+        const tagsElements = wrapper.findAll('.ant-select-selection-item');
+        expect(tagsElements.length).toBe(3);
+      }, 100);
+    });
+  });
 });

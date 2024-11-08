@@ -89,6 +89,7 @@ Specify `dataSource` of Table as an array of data.
 | expandColumnTitle | Set the title of the expand column | v-slot | - | 4.0.0 |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| v-slot:expandIcon="props" | - |  |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
+| expandColumnWidth | Set the width of the expand column | number | `auto` |  |
 | footer | Table footer renderer | Function(currentPageData)\| v-slot:footer="currentPageData" |  |  |
 | getPopupContainer | the render container of dropdowns in table | (triggerNode) => HTMLElement | `() => TableHtmlElement` | 1.5.0 |
 | headerCell | custom head cell by slot | v-slot:headerCell="{title, column}" | - | 3.0 |

@@ -49,9 +49,13 @@ export default function useGlobalCache<CacheType>(
     });
   };
 
-  watch(deps, () => {
-    buildCache();
-  });
+  watch(
+    deps,
+    () => {
+      buildCache();
+    },
+    { immediate: true },
+  );
 
   let cacheEntity = globalCache.value.get(deps.value);
 

@@ -1,14 +1,6 @@
-import { getCurrentInstance } from 'vue';
-import _ from 'lodash';
-
+let uid = 0;
 const useThemeKey = () => {
-  const instance = getCurrentInstance();
-
-  if (!instance) {
-    return _.uniqueId() + '';
-  }
-
-  return instance.uid + '';
+  return 'themekey' + uid++;
 };
 
 export default useThemeKey;

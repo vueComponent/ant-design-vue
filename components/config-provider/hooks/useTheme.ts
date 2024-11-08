@@ -2,16 +2,13 @@ import type { ThemeConfig } from '../context';
 import { defaultConfig } from '../../_theme/internal';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
-import useThemeKey from './useThemeKey';
 import devWarning from '../../vc-util/warning';
-
+const themeKey = 'antdvtheme';
 export default function useTheme(theme?: Ref<ThemeConfig>, parentTheme?: Ref<ThemeConfig>) {
   const themeConfig = computed(() => theme?.value || {});
   const parentThemeConfig = computed<ThemeConfig>(() =>
     themeConfig.value.inherit === false || !parentTheme?.value ? defaultConfig : parentTheme.value,
   );
-
-  const themeKey = useThemeKey();
 
   if (process.env.NODE_ENV !== 'production') {
     const cssVarEnabled = themeConfig.value.cssVar || parentThemeConfig.value.cssVar;
@@ -43,6 +40,7 @@ export default function useTheme(theme?: Ref<ThemeConfig>, parentTheme?: Ref<The
     });
 
     const cssVarKey = `css-var-${themeKey.replace(/:/g, '')}`;
+
     const mergedCssVar = (themeConfig.value.cssVar ?? parentThemeConfig.value.cssVar) && {
       prefix: 'ant', // Default to ant
       ...(typeof parentThemeConfig.value.cssVar === 'object' ? parentThemeConfig.value.cssVar : {}),

@@ -64,39 +64,24 @@ export interface DesignTokenProviderProps {
   };
 }
 
+export const useDesignTokenProvider = (value: ComputedRef<DesignTokenProviderProps>) => {
+  provide(DesignTokenContextKey, value);
+  watch(
+    value,
+    () => {
+      globalDesignTokenApi.value = unref(value);
+      triggerRef(globalDesignTokenApi);
+    },
+    { immediate: true, deep: true },
+  );
+};
+
 export const useDesignTokenInject = () => {
   return inject(
     DesignTokenContextKey,
     computed(() => globalDesignTokenApi.value || defaultConfig),
   );
 };
-
-export const useDesignTokenProvider = (props: ComputedRef<DesignTokenProviderProps>) => {
-  const parentContext = useDesignTokenInject();
-  const context = shallowRef<Partial<DesignTokenProviderProps>>(defaultConfig);
-  watch(
-    computed(() => [props.value, parentContext.value]),
-    ([propsValue, parentContextValue]) => {
-      const mergedContext: Partial<DesignTokenProviderProps> = {
-        ...parentContextValue,
-      };
-      Object.keys(propsValue).forEach(key => {
-        const value = propsValue[key];
-        if (propsValue[key] !== undefined) {
-          mergedContext[key] = value;
-        }
-      });
-
-      context.value = mergedContext;
-      globalDesignTokenApi.value = unref(mergedContext as any);
-      triggerRef(globalDesignTokenApi);
-    },
-    { immediate: true, deep: true },
-  );
-  provide(DesignTokenContextKey, context);
-  return context;
-};
-
 export const DesignTokenProvider = defineComponent({
   props: {
     value: objectType<DesignTokenProviderProps>(),

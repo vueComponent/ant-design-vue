@@ -1,5 +1,6 @@
 import { useToken } from '../../_theme/internal';
 import type { Ref } from 'vue';
+import { computed } from 'vue';
 
 /**
  * This hook is only for cssVar to add root className for components.
@@ -9,7 +10,7 @@ import type { Ref } from 'vue';
 const useCSSVarCls = (prefixCls: Ref<string>) => {
   const [, , , , cssVar] = useToken();
 
-  return cssVar.value ? `${prefixCls.value}-css-var` : '';
+  return computed(() => (cssVar.value ? `${prefixCls.value}-css-var` : ''));
 };
 
 export default useCSSVarCls;

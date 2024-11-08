@@ -203,8 +203,9 @@ const SelectSelector = defineComponent<SelectorProps>({
         typeof maxTagPlaceholder === 'function'
           ? maxTagPlaceholder(omittedValues)
           : maxTagPlaceholder;
-
-      return defaultRenderSelector(content, content, false);
+      const title = omittedValues.map(item => item.label).join('，')
+      
+      return defaultRenderSelector(title, content, false);
     }
 
     const handleInput = (e: Event) => {

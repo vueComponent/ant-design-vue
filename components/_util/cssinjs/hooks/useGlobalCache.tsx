@@ -12,7 +12,7 @@ export default function useClientCache<CacheType>(
   const styleContext = useStyleInject();
   const fullPathStr = shallowRef('');
   const res = shallowRef<CacheType>();
-  watch([() => prefix, () => keyPath.value], () => {
+  watch(() => keyPath.value, () => {
     fullPathStr.value = [prefix, ...keyPath.value].join('%');
   }, { immediate: true });
   const HMRUpdate = useHMR();

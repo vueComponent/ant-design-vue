@@ -196,7 +196,7 @@ export default defineComponent({
                   ref={alignRef}
                   monitorWindowResize
                   disabled={alignDisabled.value}
-                  align={align}
+                  align={align as any}
                   onAlign={onInternalAlign}
                   v-slots={{
                     default: () => (

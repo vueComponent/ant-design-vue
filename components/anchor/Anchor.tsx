@@ -23,6 +23,7 @@ import AnchorLink from './AnchorLink';
 import PropTypes from '../_util/vue-types';
 import devWarning from '../vc-util/devWarning';
 import { arrayType } from '../_util/type';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 export type AnchorDirection = 'vertical' | 'horizontal';
 
@@ -39,8 +40,7 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
 
   if (rect.width || rect.height) {
     if (container === window) {
-      container = element.ownerDocument!.documentElement!;
-      return rect.top - container.clientTop;
+      return rect.top - element.ownerDocument!.documentElement!.clientTop;
     }
     return rect.top - (container as HTMLElement).getBoundingClientRect().top;
   }
@@ -70,6 +70,7 @@ export const anchorProps = () => ({
   targetOffset: Number,
   items: arrayType<AnchorLinkItemProps[]>(),
   direction: PropTypes.oneOf(['vertical', 'horizontal'] as AnchorDirection[]).def('vertical'),
+  replace: Boolean,
   onChange: Function as PropType<(currentActiveLink: string) => void>,
   onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
 });
@@ -91,7 +92,7 @@ export default defineComponent({
   setup(props, { emit, attrs, slots, expose }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
     const anchorDirection = computed(() => props.direction ?? 'vertical');
-
+    const rootCls = useCSSVarCls(prefixCls);
     if (process.env.NODE_ENV !== 'production') {
       devWarning(
         props.items && typeof slots.default !== 'function',
@@ -133,7 +134,7 @@ export default defineComponent({
         const target = document.getElementById(sharpLinkMatch[1]);
         if (target) {
           const top = getOffsetTop(target, container);
-          if (top < offsetTop + bounds) {
+          if (top <= offsetTop + bounds) {
             linkSections.push({
               link,
               top,
@@ -170,7 +171,7 @@ export default defineComponent({
       }
 
       const container = getContainer.value();
-      const scrollTop = getScroll(container, true);
+      const scrollTop = getScroll(container);
       const eleOffsetTop = getOffsetTop(targetElement, container);
       let y = scrollTop + eleOffsetTop;
       y -= targetOffset !== undefined ? targetOffset : offsetTop || 0;
@@ -277,6 +278,7 @@ export default defineComponent({
                 title={title}
                 customTitleProps={option}
                 v-slots={{ customTitle: slots.customTitle }}
+                replace={props.replace}
               >
                 {anchorDirection.value === 'vertical' ? createNestedLink(children) : null}
               </AnchorLink>
@@ -284,7 +286,7 @@ export default defineComponent({
           })
         : null;
 
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
     return () => {
       const { offsetTop, affix, showInkInFixed } = props;
@@ -296,6 +298,8 @@ export default defineComponent({
       const wrapperClass = classNames(hashId.value, props.wrapperClass, `${pre}-wrapper`, {
         [`${pre}-wrapper-horizontal`]: anchorDirection.value === 'horizontal',
         [`${pre}-rtl`]: direction.value === 'rtl',
+        [rootCls.value]: true,
+        [cssVarCls.value]: true,
       });
 
       const anchorClass = classNames(pre, {

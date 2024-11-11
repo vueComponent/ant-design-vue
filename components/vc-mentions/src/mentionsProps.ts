@@ -33,6 +33,7 @@ export const mentionsProps = {
   loading: { type: Boolean, default: undefined },
   rows: [Number, String],
   direction: { type: String as PropType<Direction> },
+  keyboardPrediction: { type: Boolean, default: undefined },
 };
 
 export const vcMentionsProps = {

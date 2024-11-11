@@ -101,6 +101,7 @@ export const inputProps = () => ({
   valueModifiers: Object,
   hidden: { type: Boolean, default: undefined },
   status: String as PropType<InputStatus>,
+  keyboardPrediction: { type: Boolean, default: undefined },
 });
 export type InputProps = Partial<ExtractPropTypes<ReturnType<typeof inputProps>>>;
 

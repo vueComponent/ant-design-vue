@@ -33,6 +33,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*WM86SrBC8TsAAA
 | simple | 当添加该属性时，显示为简单分页 | boolean | - |  |
 | size | 当为「small」时，是小尺寸分页 | string | "" |  |
 | total | 数据总数 | number | 0 |  |
+| keyboardPrediction | 支持预测键盘或复杂输入法（如中文） | boolean | false | 4.2.4 |
 
 ### 事件
 

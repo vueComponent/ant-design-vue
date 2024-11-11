@@ -4,6 +4,8 @@ import { getFileItem, removeFileItem } from '../utils';
 import PropsTypes from '../../_util/vue-types';
 import { uploadListProps } from '../interface';
 import { setup, teardown } from './mock';
+import { asyncExpect, createMockFileList } from '../../../tests/utils';
+import { nextTick } from 'vue';
 
 uploadListProps.items = PropsTypes.any;
 
@@ -194,6 +196,44 @@ describe('Upload', () => {
         target: {
           files: [mockFile],
         },
+      });
+    }, 0);
+  });
+
+  it("should show upload list when customRequest's onSuccess is called", async () => {
+    const props = {
+      props: {
+        maxCount: 1,
+        customRequest: ({ onSuccess, file }) => {
+          onSuccess(null, file);
+        },
+      },
+      slots: {
+        default: '<button>upload</button>',
+      },
+      sync: false,
+    };
+
+    const wrapper = mount(Upload, props);
+    await asyncExpect(async () => {
+      const mockFile = new File(['foo'], 'foo.png', {
+        type: 'image/png',
+      });
+      const fileInput = wrapper.find('input[type="file"]');
+      const fileList = createMockFileList([mockFile]);
+
+      Object.defineProperty(fileInput.element, 'files', {
+        value: fileList,
+        writable: false,
+      });
+
+      await fileInput.trigger('change');
+
+      await nextTick(() => {
+        expect(wrapper.find('.ant-upload-list-item-name').text()).toBe('foo.png');
+        expect(wrapper.find('.ant-upload-text-icon > span').classes()).not.toContain(
+          'anticon-loading',
+        );
       });
     }, 0);
   });

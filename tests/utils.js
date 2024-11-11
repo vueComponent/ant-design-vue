@@ -26,3 +26,29 @@ export function asyncExpect(fn, timeout) {
   });
 }
 export const sleep = (timeout = 0) => new Promise(resolve => setTimeout(resolve, timeout));
+
+export const createMockFileList = (files = []) => {
+  const fileList = {
+    length: files.length,
+    item(index) {
+      return this[index];
+    },
+    [Symbol.iterator]() {
+      let index = 0;
+      const items = [...files];
+      return {
+        next() {
+          if (index < items.length) {
+            return { value: items[index++], done: false };
+          }
+          return { done: true };
+        },
+      };
+    },
+  };
+
+  files.forEach((file, index) => {
+    fileList[index] = file;
+  });
+  return files;
+};

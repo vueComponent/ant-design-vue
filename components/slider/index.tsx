@@ -18,6 +18,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
 import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import { useInjectDisabled } from '../config-provider/DisabledContext';
 import type { FocusEventHandler } from '../_util/EventInterface';
 
 // CSSINJS
@@ -118,6 +119,7 @@ const Slider = defineComponent({
 
     const formItemContext = useInjectFormItemContext();
     const sliderRef = ref();
+    const disabled = useInjectDisabled();
     const visibles = ref<Visibles>({});
     const toggleTooltipOpen = (index: number, visible: boolean) => {
       visibles.value[index] = visible;
@@ -213,6 +215,7 @@ const Slider = defineComponent({
             draggableTrack={draggableTrack}
             class={cls}
             ref={sliderRef}
+            disabled={props.disabled ?? disabled.value}
             handle={(info: HandleGeneratorInfo) =>
               handleWithTooltip({
                 tooltipPrefixCls,
@@ -235,6 +238,7 @@ const Slider = defineComponent({
           step={restProps.step!}
           class={cls}
           ref={sliderRef}
+          disabled={props.disabled ?? disabled.value}
           handle={(info: HandleGeneratorInfo) =>
             handleWithTooltip({
               tooltipPrefixCls,

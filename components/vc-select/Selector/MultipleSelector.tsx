@@ -2,7 +2,7 @@ import TransBtn from '../TransBtn';
 import type { InnerSelectorProps } from './interface';
 import Input from './Input';
 import type { Ref, PropType } from 'vue';
-import { ref, watchEffect, computed, defineComponent, onMounted, shallowRef, watch } from 'vue';
+import { computed, defineComponent, onMounted, shallowRef, watch } from 'vue';
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
@@ -86,21 +86,22 @@ const SelectSelector = defineComponent<SelectorProps>({
     const selectionPrefixCls = computed(() => `${props.prefixCls}-selection`);
 
     // ===================== Search ======================
-    const inputValue = computed(() =>
-      props.open || props.mode === 'tags' ? props.searchValue : '',
-    );
+    const inputValue = computed({
+      get() {
+        return props.open || props.mode === 'tags' ? props.searchValue : '';
+      },
+      set() {
+        // noop
+      },
+    });
     const inputEditable: Ref<boolean> = computed(
       () =>
         props.mode === 'tags' || ((props.showSearch && (props.open || focused.value)) as boolean),
     );
-    const targetValue = ref('');
-    watchEffect(() => {
-      targetValue.value = inputValue.value;
-    });
     // We measure width and set to the input immediately
     onMounted(() => {
       watch(
-        targetValue,
+        inputValue,
         () => {
           inputWidth.value = measureRef.value.scrollWidth;
         },
@@ -209,7 +210,7 @@ const SelectSelector = defineComponent<SelectorProps>({
 
     const handleInput = (e: Event) => {
       const composing = (e.target as any).composing;
-      targetValue.value = (e.target as any).value;
+      inputValue.value = (e.target as any).value;
       if (!composing) {
         props.onInputChange(e);
       }
@@ -253,7 +254,7 @@ const SelectSelector = defineComponent<SelectorProps>({
             autocomplete={autocomplete}
             editable={inputEditable.value}
             activeDescendantId={activeDescendantId}
-            value={targetValue.value}
+            value={inputValue.value}
             onKeydown={onInputKeyDown}
             onMousedown={onInputMouseDown}
             onChange={handleInput}
@@ -268,7 +269,7 @@ const SelectSelector = defineComponent<SelectorProps>({
 
           {/* Measure Node */}
           <span ref={measureRef} class={`${selectionPrefixCls.value}-search-mirror`} aria-hidden>
-            {targetValue.value}&nbsp;
+            {inputValue.value}&nbsp;
           </span>
         </div>
       );

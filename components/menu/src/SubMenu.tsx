@@ -257,14 +257,15 @@ export default defineComponent({
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
       const icon = props.icon ?? slots.icon?.(props);
       const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
-      const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
+      const originTitle = getPropsSlot(slots, props, 'title');
+      const title = renderTitle(originTitle, icon);
       return (
         <div
           style={directionStyle.value}
           class={`${subMenuPrefixClsValue}-title`}
           tabindex={mergedDisabled.value ? null : -1}
           ref={elementRef}
-          title={typeof title === 'string' ? title : null}
+          title={typeof originTitle === 'string' ? originTitle : null}
           data-menu-id={key}
           aria-expanded={open.value}
           aria-haspopup

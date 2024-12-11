@@ -448,7 +448,7 @@ export default defineComponent({
         }
 
         // We only manage open state here, close logic should handle by list component
-        if (!mergedOpen.value) {
+        if (!mergedOpen.value && !props.emptyOptions) {
           onToggleOpen(true);
         }
       }

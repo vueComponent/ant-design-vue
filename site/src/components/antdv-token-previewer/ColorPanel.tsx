@@ -2,10 +2,11 @@ import type { InputProps } from 'ant-design-vue';
 import { ConfigProvider, Input, InputNumber, Select, theme } from 'ant-design-vue';
 import classNames from 'ant-design-vue/es/_util/classNames';
 import type { PropType } from 'vue';
-import { defineComponent, watchEffect, watch, computed, toRefs, ref } from 'vue';
+import { defineComponent, watchEffect, computed, toRefs, ref } from 'vue';
 import { HexColorPicker, RgbaColorPicker } from '../vue-colorful';
 import tinycolor from 'tinycolor2';
 import makeStyle from './utils/makeStyle';
+import type { ValueType } from 'ant-design-vue/es/input-number/src/utils/MiniDecimal';
 
 const { useToken } = theme;
 
@@ -168,24 +169,42 @@ const RgbColorInput = defineComponent({
   setup(props) {
     const { value, alpha } = toRefs(props);
 
-    watch(value, val => {
-      props.onChange(val);
-    });
-
+    const handleChange = (val: ValueType, key: 'r' | 'g' | 'b' | 'a') => {
+      value.value[key] = val;
+      props.onChange(value.value);
+    };
     return () => {
       return (
         <div class="color-panel-rgba-input">
           <ConfigProvider theme={{ components: { InputNumber: { handleWidth: 12 } } }}>
             <div class="color-panel-rgba-input-part">
-              <InputNumber min={0} max={255} size="small" v-model={[value.value.r, 'value']} />
+              <InputNumber
+                min={0}
+                max={255}
+                size="small"
+                value={value.value.r}
+                onChange={val => handleChange(val, 'r')}
+              />
               <div class="color-panel-mode-title">R</div>
             </div>
             <div class="color-panel-rgba-input-part">
-              <InputNumber min={0} max={255} size="small" v-model={[value.value.g, 'value']} />
+              <InputNumber
+                min={0}
+                max={255}
+                size="small"
+                value={value.value.g}
+                onChange={val => handleChange(val, 'g')}
+              />
               <div class="color-panel-mode-title">G</div>
             </div>
             <div class="color-panel-rgba-input-part">
-              <InputNumber min={0} max={255} size="small" v-model={[value.value.b, 'value']} />
+              <InputNumber
+                min={0}
+                max={255}
+                size="small"
+                value={value.value.b}
+                onChange={val => handleChange(val, 'b')}
+              />
               <div class="color-panel-mode-title">B</div>
             </div>
             {alpha.value && (
@@ -195,7 +214,8 @@ const RgbColorInput = defineComponent({
                   max={1}
                   step={0.01}
                   size="small"
-                  v-model={[value.value.a, 'value']}
+                  value={value.value.a}
+                  onChange={val => handleChange(val, 'a')}
                 />
                 <div class="color-panel-mode-title">A</div>
               </div>

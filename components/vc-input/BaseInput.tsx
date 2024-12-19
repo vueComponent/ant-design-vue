@@ -14,6 +14,7 @@ export default defineComponent({
     const containerRef = ref();
     const onInputMouseDown: MouseEventHandler = e => {
       if (containerRef.value?.contains(e.target as Element)) {
+        e.preventDefault();
         const { triggerFocus } = props;
         triggerFocus?.();
       }

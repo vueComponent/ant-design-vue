@@ -12,7 +12,7 @@ export default defineComponent({
   props: baseInputProps(),
   setup(props, { slots, attrs }) {
     const containerRef = ref();
-    const onInputMouseDown: MouseEventHandler = e => {
+    const onInputClick: MouseEventHandler = e => {
       if (containerRef.value?.contains(e.target as Element)) {
         const { triggerFocus } = props;
         triggerFocus?.();
@@ -104,7 +104,7 @@ export default defineComponent({
             class={affixWrapperCls}
             style={attrs.style as CSSProperties}
             hidden={!hasAddon({ addonAfter, addonBefore }) && hidden}
-            onMousedown={onInputMouseDown}
+            onClick={onInputClick}
             ref={containerRef}
           >
             {prefix && <span class={`${prefixCls}-prefix`}>{prefix}</span>}

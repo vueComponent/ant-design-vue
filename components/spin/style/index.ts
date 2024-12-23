@@ -42,6 +42,12 @@ const genSpinStyle: GenerateStyle<SpinToken> = (token: SpinToken): CSSObject => 
 
     '&-nested-loading': {
       position: 'relative',
+      [`> div`]: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+      },
+
       [`> div > ${token.componentCls}`]: {
         position: 'absolute',
         top: 0,

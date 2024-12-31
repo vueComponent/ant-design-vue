@@ -63,7 +63,7 @@ Select component to select value from options.
 | searchValue | The current input "search" text | string | - |  |
 | showArrow | Whether to show the drop-down arrow | boolean | single:true, multiple:false |  |
 | showSearch | Whether select is searchable | boolean | single:false, multiple:true |  |
-| size | Size of Select input. `default` `large` `small` | string | default |  |
+| size | Size of Select input. `middle` `large` `small` | string | middle |  |
 | status | Set validation status | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | The custom suffix icon | VNode \| slot | - |  |
 | tagRender | Customize tag render, only applies when `mode` is set to `multiple` or `tags` | slot \| (props) => any | - |  |

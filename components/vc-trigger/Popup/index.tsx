@@ -5,7 +5,6 @@ import MobilePopupInner from './MobilePopupInner';
 import PopupInner from './PopupInner';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Popup',
   inheritAttrs: false,
   props: popupProps,

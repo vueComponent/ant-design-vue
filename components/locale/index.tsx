@@ -61,7 +61,6 @@ export interface LocaleProviderProps {
 export const ANT_MARK = 'internalMark';
 
 const LocaleProvider = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ALocaleProvider',
   props: {
     locale: {

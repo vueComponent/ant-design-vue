@@ -18,7 +18,6 @@ const ActionMap = {
 const defaultIconRender = (visible: boolean) =>
   visible ? <EyeOutlined /> : <EyeInvisibleOutlined />;
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AInputPassword',
   inheritAttrs: false,
   props: {

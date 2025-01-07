@@ -41,7 +41,6 @@ export const VcStepProps = () => ({
 
 export type VCStepProps = Partial<ExtractPropTypes<ReturnType<typeof VcStepProps>>>;
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Step',
   inheritAttrs: false,
   props: VcStepProps(),

@@ -32,7 +32,6 @@ const ALL_HANDLERS = [
   'onContextmenu',
 ];
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Trigger',
   mixins: [BaseMixin],
   inheritAttrs: false,

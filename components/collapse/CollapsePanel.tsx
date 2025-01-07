@@ -10,7 +10,6 @@ import type { CustomSlotsType } from '../_util/type';
 export { collapsePanelProps };
 export type CollapsePanelProps = Partial<ExtractPropTypes<ReturnType<typeof collapsePanelProps>>>;
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ACollapsePanel',
   inheritAttrs: false,
   props: initDefaultProps(collapsePanelProps(), {

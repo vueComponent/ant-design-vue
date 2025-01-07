@@ -93,7 +93,6 @@ const getTabSize = (tab: HTMLElement, containerRect: { x: number; y: number }) =
 // };
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TabNavList',
   inheritAttrs: false,
   props: tabNavListProps(),

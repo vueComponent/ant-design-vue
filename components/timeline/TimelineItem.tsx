@@ -19,7 +19,6 @@ export const timelineItemProps = () => ({
 export type TimelineItemProps = Partial<ExtractPropTypes<ReturnType<typeof timelineItemProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ATimelineItem',
   props: initDefaultProps(timelineItemProps(), {
     color: 'blue',

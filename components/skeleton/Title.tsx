@@ -9,7 +9,6 @@ export const skeletonTitleProps = () => ({
 export type SkeletonTitleProps = Partial<ExtractPropTypes<ReturnType<typeof skeletonTitleProps>>>;
 
 const SkeletonTitle = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'SkeletonTitle',
   props: skeletonTitleProps(),
   setup(props) {

@@ -17,7 +17,6 @@ export const ribbonProps = () => ({
 export type RibbonProps = Partial<ExtractPropTypes<ReturnType<typeof ribbonProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ABadgeRibbon',
   inheritAttrs: false,
   props: ribbonProps(),

@@ -5,7 +5,6 @@ import type { EventHandler } from '../_util/EventInterface';
 import BaseInput from '../_util/BaseInput';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   props: {
     disabled: { type: Boolean, default: undefined },
     changeSize: Function,

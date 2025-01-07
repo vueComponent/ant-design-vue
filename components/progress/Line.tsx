@@ -71,7 +71,6 @@ export const handleGradient = (
 };
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ProgressLine',
   inheritAttrs: false,
   props: lineProps(),

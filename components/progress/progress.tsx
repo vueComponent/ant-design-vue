@@ -15,7 +15,6 @@ import type { VueNode, CustomSlotsType } from '../_util/type';
 import useStyle from './style';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AProgress',
   inheritAttrs: false,
   props: initDefaultProps(progressProps(), {

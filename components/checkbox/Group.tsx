@@ -9,7 +9,6 @@ import { CheckboxGroupContextKey, checkboxGroupProps } from './interface';
 import useStyle from './style';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ACheckboxGroup',
   inheritAttrs: false,
   props: checkboxGroupProps(),

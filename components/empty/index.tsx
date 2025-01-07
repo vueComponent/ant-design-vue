@@ -26,7 +26,6 @@ export type EmptyProps = Partial<ExtractPropTypes<ReturnType<typeof emptyProps>>
 
 const Empty = defineComponent({
   name: 'AEmpty',
-  compatConfig: { MODE: 3 },
   inheritAttrs: false,
   props: emptyProps(),
   setup(props, { slots = {}, attrs }) {

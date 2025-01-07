@@ -84,7 +84,6 @@ export interface AnchorState {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AAnchor',
   inheritAttrs: false,
   props: anchorProps(),

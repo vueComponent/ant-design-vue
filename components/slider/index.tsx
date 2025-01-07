@@ -90,7 +90,6 @@ export type SliderProps = Partial<ExtractPropTypes<ReturnType<typeof sliderProps
 export type Visibles = { [index: number]: boolean };
 
 const Slider = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ASlider',
   inheritAttrs: false,
   props: sliderProps(),

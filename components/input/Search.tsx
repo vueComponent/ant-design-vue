@@ -17,7 +17,6 @@ import omit from '../_util/omit';
 import inputProps from './inputProps';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AInputSearch',
   inheritAttrs: false,
   props: {

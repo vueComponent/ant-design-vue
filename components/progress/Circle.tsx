@@ -22,7 +22,6 @@ const CIRCLE_MIN_STROKE_WIDTH = 3;
 const getMinPercent = (width: number): number => (CIRCLE_MIN_STROKE_WIDTH / width) * 100;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ProgressCircle',
   inheritAttrs: false,
   props: initDefaultProps(circleProps(), {

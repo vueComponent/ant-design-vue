@@ -50,7 +50,6 @@ function setTriggerValue(
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ATextarea',
   inheritAttrs: false,
   props: textAreaProps(),

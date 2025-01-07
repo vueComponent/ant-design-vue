@@ -186,7 +186,6 @@ function toRawValues(value: ValueType): SingleValueType[] {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Cascader',
   inheritAttrs: false,
   props: initDefaultProps(internalCascaderProps(), {}),

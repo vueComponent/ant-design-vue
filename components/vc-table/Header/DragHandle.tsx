@@ -31,7 +31,6 @@ type HandleEvent = MouseEvent & TouchEvent;
 
 const defaultMinWidth = 50;
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'DragHandle',
   props: {
     prefixCls: String,

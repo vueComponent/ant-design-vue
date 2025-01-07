@@ -40,7 +40,6 @@ export const pageHeaderProps = () => ({
 export type PageHeaderProps = Partial<ExtractPropTypes<ReturnType<typeof pageHeaderProps>>>;
 
 const PageHeader = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'APageHeader',
   inheritAttrs: false,
   props: pageHeaderProps(),

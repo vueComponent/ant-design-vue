@@ -16,7 +16,6 @@ const popupPlacementMap = {
   'vertical-right': 'leftTop',
 };
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'PopupTrigger',
   inheritAttrs: false,
   props: {

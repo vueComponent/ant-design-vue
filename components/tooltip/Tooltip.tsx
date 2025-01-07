@@ -69,7 +69,6 @@ export const tooltipDefaultProps = () => ({
 export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ATooltip',
   inheritAttrs: false,
   props: initDefaultProps(tooltipProps(), {

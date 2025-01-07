@@ -39,7 +39,6 @@ export default function createSlider(Component) {
     draggableTrack: { type: Boolean, default: undefined },
   };
   return defineComponent({
-    compatConfig: { MODE: 3 },
     name: 'CreateSlider',
     mixins: [BaseMixin, Component],
     inheritAttrs: false,

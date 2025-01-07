@@ -30,7 +30,6 @@ const HackSlot = (_, { slots }) => {
 };
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AUploadList',
   props: initDefaultProps(uploadListProps(), {
     listType: 'text', // or picture

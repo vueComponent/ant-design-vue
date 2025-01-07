@@ -7,7 +7,6 @@ import * as utils from './utils';
 import { defineComponent } from 'vue';
 
 const Slider = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Slider',
   mixins: [BaseMixin],
   inheritAttrs: false,

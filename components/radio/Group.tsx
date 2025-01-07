@@ -41,7 +41,6 @@ export const radioGroupProps = () => ({
 export type RadioGroupProps = Partial<ExtractPropTypes<ReturnType<typeof radioGroupProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ARadioGroup',
   inheritAttrs: false,
   props: radioGroupProps(),

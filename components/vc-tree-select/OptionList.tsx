@@ -32,7 +32,6 @@ interface TreeEventInfo {
 type ReviseRefOptionListProps = Omit<RefOptionListProps, 'scrollTo'> & { scrollTo: ScrollTo };
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'OptionList',
   inheritAttrs: false,
   setup(_, { slots, expose }) {

@@ -9,7 +9,6 @@ export interface AddButtonProps {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AddButton',
   inheritAttrs: false,
   props: {

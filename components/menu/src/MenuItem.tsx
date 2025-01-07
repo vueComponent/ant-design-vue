@@ -42,7 +42,6 @@ export const menuItemProps = () => ({
 export type MenuItemProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AMenuItem',
   inheritAttrs: false,
   props: menuItemProps(),

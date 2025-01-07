@@ -72,7 +72,6 @@ export type AffixExpose = {
 
 export type AffixInstance = ComponentPublicInstance<AffixProps, AffixExpose>;
 const Affix = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AAffix',
   inheritAttrs: false,
   props: affixProps(),

@@ -20,7 +20,6 @@ import useStyle from './style';
 import { useInjectDisabled } from '../config-provider/DisabledContext';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AInput',
   inheritAttrs: false,
   props: inputProps(),

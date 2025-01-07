@@ -24,7 +24,6 @@ export interface FormItemInputProps {
 }
 
 const FormItemInput = defineComponent({
-  compatConfig: { MODE: 3 },
   slots: Object as CustomSlotsType<{
     help: any;
     errors: any;

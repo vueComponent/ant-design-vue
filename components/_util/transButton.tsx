@@ -15,7 +15,6 @@ const inlineStyle = {
 };
 
 const TransButton = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TransButton',
   inheritAttrs: false,
   props: {

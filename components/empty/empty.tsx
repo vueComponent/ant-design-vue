@@ -4,7 +4,6 @@ import type { CSSProperties } from 'vue';
 import { defineComponent, computed } from 'vue';
 
 const Empty = defineComponent({
-  compatConfig: { MODE: 3 },
   setup() {
     const [, token] = useToken();
 

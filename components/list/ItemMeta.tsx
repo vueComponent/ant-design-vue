@@ -14,7 +14,6 @@ export const listItemMetaProps = () => ({
 export type ListItemMetaProps = Partial<ExtractPropTypes<ReturnType<typeof listItemMetaProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AListItemMeta',
   props: listItemMetaProps(),
   displayName: 'AListItemMeta', // 兼容历史函数式组件

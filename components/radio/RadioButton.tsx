@@ -4,7 +4,6 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { useProvideRadioOptionTypeContext } from './context';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ARadioButton',
   inheritAttrs: false,
   props: radioProps(),

@@ -11,7 +11,6 @@ export type ContentRef = {
   changeActive: (next: boolean) => void;
 };
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'DialogContent',
   inheritAttrs: false,
   props: {

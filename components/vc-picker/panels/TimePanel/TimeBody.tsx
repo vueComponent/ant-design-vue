@@ -42,7 +42,6 @@ export type TimeBodyProps<DateType> = {
 } & SharedTimeProps<DateType>;
 
 const TimeBody = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TimeBody',
   inheritAttrs: false,
   props: [

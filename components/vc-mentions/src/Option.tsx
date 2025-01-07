@@ -25,6 +25,5 @@ export const optionOptions = {
   },
 };
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   ...optionOptions,
 });

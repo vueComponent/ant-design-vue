@@ -21,7 +21,6 @@ export interface BaseInputExpose {
   setScrollTop: (scrollTop: number) => void;
 }
 const BaseInput = defineComponent({
-  compatConfig: { MODE: 3 },
   inheritAttrs: false,
   props: {
     disabled: PropTypes.looseBool,

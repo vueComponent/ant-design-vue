@@ -16,7 +16,6 @@ import { treeNodeProps } from './props';
 import collapseMotion from '../_util/collapseMotion';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'MotionTreeNode',
   inheritAttrs: false,
   props: {

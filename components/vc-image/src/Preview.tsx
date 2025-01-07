@@ -56,7 +56,6 @@ export const previewProps = {
   },
 };
 const Preview = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Preview',
   inheritAttrs: false,
   props: previewProps,

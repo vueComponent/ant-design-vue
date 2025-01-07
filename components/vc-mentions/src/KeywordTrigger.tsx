@@ -40,7 +40,6 @@ const BUILT_IN_PLACEMENTS = {
 };
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'KeywordTrigger',
   props: {
     loading: { type: Boolean, default: undefined },

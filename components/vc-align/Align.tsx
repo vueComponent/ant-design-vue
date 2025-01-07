@@ -59,7 +59,6 @@ function getPoint(point: TargetType) {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Align',
   props: alignProps,
   emits: ['align'],

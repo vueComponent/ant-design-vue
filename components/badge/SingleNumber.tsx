@@ -45,7 +45,6 @@ function getOffset(start: number, end: number, unit: -1 | 1) {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'SingleNumber',
   props: {
     prefixCls: String,

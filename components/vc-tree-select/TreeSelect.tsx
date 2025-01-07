@@ -206,7 +206,6 @@ function isRawValue(value: RawValueType | LabeledValueType): value is RawValueTy
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TreeSelect',
   inheritAttrs: false,
   props: initDefaultProps(treeSelectProps(), {

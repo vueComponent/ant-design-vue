@@ -4,7 +4,6 @@ import type { CSSProperties } from 'vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Pager',
   inheritAttrs: false,
   props: {

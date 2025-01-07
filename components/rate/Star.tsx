@@ -19,7 +19,6 @@ export const starProps = {
 export type StarProps = Partial<ExtractPropTypes<typeof starProps>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Star',
   inheritAttrs: false,
   props: starProps,

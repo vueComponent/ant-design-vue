@@ -1,5 +1,6 @@
 /** Two char of 't' 'b' 'c' 'l' 'r'. Example: 'lt' */
 export type AlignPoint = string;
+export type OffsetType = number | `${number}%`;
 
 export interface AlignType {
   /**
@@ -11,12 +12,12 @@ export interface AlignType {
    * offset source node by offset[0] in x and offset[1] in y.
    * If offset contains percentage string value, it is relative to sourceNode region.
    */
-  offset?: number[];
+  offset?: OffsetType[];
   /**
    * offset target node by offset[0] in x and offset[1] in y.
    * If targetOffset contains percentage string value, it is relative to targetNode region.
    */
-  targetOffset?: number[];
+  targetOffset?: OffsetType[];
   /**
    * If adjustX field is true, will adjust source node in x direction if source node is invisible.
    * If adjustY field is true, will adjust source node in y direction if source node is invisible.

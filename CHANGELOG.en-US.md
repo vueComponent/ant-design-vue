@@ -10,6 +10,13 @@
 
 ---
 
+## 4.2.6
+
+- 🐞 Fix Modal component aria-hidden error problem under chrome [#7823](https://github.com/vueComponent/ant-design-vue/issues/7823)
+- 🐞 Fix the problem that the built-in input method of Safari automatically fills in the decimal point when inputting Chinese [#7918](https://github.com/vueComponent/ant-design-vue/issues/7918)
+- 🐞 Fix InputNumber component disabled style problem [#7776](https://github.com/vueComponent/ant-design-vue/issues/7776)
+- 🐞 Fix Select cannot lose focus problem [#7819](https://github.com/vueComponent/ant-design-vue/issues/7819)
+
 ## 4.2.5
 
 - 🐞 Fix Empty component memory leak problem

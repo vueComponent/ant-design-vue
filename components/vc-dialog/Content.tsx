@@ -5,7 +5,7 @@ import { getTransitionProps } from '../_util/transition';
 import dialogPropTypes from './IDialogPropTypes';
 import { offset } from './util';
 const sentinelStyle = { width: 0, height: 0, overflow: 'hidden', outline: 'none' };
-
+const entityStyle = { outline: 'none' };
 export type ContentRef = {
   focus: () => void;
   changeActive: (next: boolean) => void;
@@ -28,14 +28,14 @@ export default defineComponent({
     const dialogRef = ref<HTMLDivElement>();
     expose({
       focus: () => {
-        sentinelStartRef.value?.focus();
+        sentinelStartRef.value?.focus({ preventScroll: true });
       },
       changeActive: next => {
         const { activeElement } = document;
         if (next && activeElement === sentinelEndRef.value) {
-          sentinelStartRef.value.focus();
+          sentinelStartRef.value.focus({ preventScroll: true });
         } else if (!next && activeElement === sentinelStartRef.value) {
-          sentinelEndRef.value.focus();
+          sentinelEndRef.value.focus({ preventScroll: true });
         }
       },
     });
@@ -143,9 +143,10 @@ export default defineComponent({
               onMousedown={onMousedown}
               onMouseup={onMouseup}
             >
-              <div tabindex={0} ref={sentinelStartRef} style={sentinelStyle} aria-hidden="true" />
-              {modalRender ? modalRender({ originVNode: content }) : content}
-              <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} aria-hidden="true" />
+              <div tabindex={0} ref={sentinelStartRef} style={entityStyle}>
+                {modalRender ? modalRender({ originVNode: content }) : content}
+              </div>
+              <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} />
             </div>
           ) : null}
         </Transition>

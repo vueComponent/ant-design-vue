@@ -63,7 +63,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | searchValue | 控制搜索文本 | string | - |  |
 | showArrow | 是否显示下拉小箭头 | boolean | 单选为 true,多选为 false |  |
 | showSearch | 配置是否可搜索 | boolean | 单选为 false,多选为 true |  |
-| size | 选择框大小，可选 `large` `small` | string | default |  |
+| size | 选择框大小，可选 `middle` `large` `small` | string | middle |  |
 | status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |  |
 | tagRender | 自定义 tag 内容 render，仅在 `mode` 为 `multiple` 或 `tags` 时生效 | slot \| (props) => any | - | 3.0 |

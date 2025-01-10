@@ -187,8 +187,8 @@ The following APIs are shared by DatePicker, RangePicker.
 
 | Events Name | Description | Arguments | Version |  |
 | --- | --- | --- | --- | --- |
-| calendarChange | Callback function, can be executed when the start time or the end time of the range is changing. | function(dates: \[dayjs, dayjs], dateStrings: \[string, string], info: { range:`start`\|`end` }) | - |  |
-| change | a callback function, can be executed when the selected time is changing | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string]) |  |  |
+| calendarChange | Callback function, can be executed when the start time or the end time of the range is changing. | function(dates: \[dayjs, dayjs] \| null, dateStrings: \[string, string], info: { range:`start`\|`end` }) | - |  |
+| change | a callback function, can be executed when the selected time is changing | function(dates: \[dayjs, dayjs] \| \[string, string] \| null, dateStrings: \[string, string]) |  |  |
 | ok | callback when click ok button | function(dates: \[dayjs, dayjs] \| \[string, string]) |  |  |
 
 #### formatType

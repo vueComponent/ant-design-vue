@@ -54,7 +54,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | --- | --- | --- | --- | --- |
 | finish | Trigger after submitting the form and verifying data successfully | function(values) | - | 2.0.0 |
 | finishFailed | Trigger after submitting the form and verifying data failed | function({ values, errorFields, outOfDate }) | - | 2.0.0 |
-| submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |  |  |
+| submit | Define a function that will be executed as a callback after the form submission event is triggered. | Function(e:Event) |  |  |
 | validate | triggers after a form item is validated | Function(name, status, errorMsgs) |  |  |
 
 ### Methods

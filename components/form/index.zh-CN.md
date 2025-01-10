@@ -55,7 +55,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*ylFATY6w-ygAAA
 | --- | --- | --- | --- | --- |
 | finish | 提交表单且数据验证成功后回调事件 | function(values) | - | 2.0.0 |
 | finishFailed | 提交表单且数据验证失败后回调事件 | function({ values, errorFields, outOfDate }) | - | 2.0.0 |
-| submit | 数据验证成功后回调事件 | Function(e:Event) | ｜ |  |
+| submit | 表单提交后回调事件 | Function(e:Event) | ｜ |  |
 | validate | 任一表单项被校验后触发 | Function(name, status, errorMsgs) |  |  |
 
 ### 方法

@@ -32,6 +32,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LVQ3R5JjjJEAAA
 | 事件名称 | 说明         | 回调参数               | 版本  |
 | -------- | ------------ | ---------------------- | ----- |
 | error    | 加载错误回调 | (event: Event) => void | 3.2.0 |
+| load     | 加载成功回调 | (event: Event) => void | 4.3.0 |
 
 ### previewType
 

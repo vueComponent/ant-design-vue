@@ -28,9 +28,10 @@ Previewable image.
 
 ### events
 
-| Events Name | Description          | Arguments              | Version |
-| ----------- | -------------------- | ---------------------- | ------- |
-| error       | Load failed callback | (event: Event) => void | 3.2.0   |
+| Events Name | Description              | Arguments              | Version |
+| ----------- | ------------------------ | ---------------------- | ------- |
+| error       | Load failed callback     | (event: Event) => void | 3.2.0   |
+| load        | Load successful callback | (event: Event) => void | 4.3.0   |
 
 ### previewType
 

@@ -50,6 +50,9 @@ export const imageProps = () => ({
   onError: {
     type: Function as PropType<HTMLImageElement['onerror']>,
   },
+  onLoad: {
+    type: Function as PropType<HTMLImageElement['onload']>,
+  },
 });
 export type ImageProps = Partial<ReturnType<typeof imageProps>>;
 export type ImageStatus = 'normal' | 'error' | 'loading';
@@ -69,7 +72,7 @@ const ImageInternal = defineComponent({
   name: 'VcImage',
   inheritAttrs: false,
   props: imageProps(),
-  emits: ['click', 'error'],
+  emits: ['click', 'error', 'load'],
   setup(props, { attrs, slots, emit }) {
     const prefixCls = computed(() => props.prefixCls);
     const previewPrefixCls = computed(() => `${prefixCls.value}-preview`);
@@ -118,8 +121,9 @@ const ImageInternal = defineComponent({
     } = groupContext;
     const currentId = ref(uuid++);
     const canPreview = computed(() => props.preview && !isError.value);
-    const onLoad = () => {
+    const onLoad = (e: Event) => {
       status.value = 'normal';
+      emit('load', e);
     };
     const onError = (e: Event) => {
       status.value = 'error';
@@ -158,16 +162,6 @@ const ImageInternal = defineComponent({
       }
     };
 
-    const img = ref<HTMLImageElement>(null);
-    watch(
-      () => img,
-      () => {
-        if (status.value !== 'loading') return;
-        if (img.value.complete && (img.value.naturalWidth || img.value.naturalHeight)) {
-          onLoad();
-        }
-      },
-    );
     let unRegister = () => {};
     onMounted(() => {
       watch(
@@ -266,7 +260,6 @@ const ImageInternal = defineComponent({
                     src: fallback,
                   }
                 : { onLoad, onError, src: imgSrc })}
-              ref={img}
             />
 
             {status.value === 'loading' && (

@@ -181,7 +181,7 @@
     "glob": "^7.1.2",
     "globby": "^11.1.0",
     "gray-matter": "^4.0.3",
-    "gulp": "^4.0.1",
+    "gulp": "^5.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-strip-code": "^0.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",

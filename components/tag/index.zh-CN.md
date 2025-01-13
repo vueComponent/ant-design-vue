@@ -28,9 +28,9 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*JPNAQYrVkYkAAA
 
 ### 事件
 
-| 事件名称 | 说明         | 回调参数    |
-| -------- | ------------ | ----------- |
-| close    | 关闭时的回调 | (e) => void |
+| 事件名称 | 说明                                                       | 回调参数    |
+| -------- | ---------------------------------------------------------- | ----------- |
+| close    | 关闭时的回调（可通过 `e.preventDefault()` 来阻止默认行为） | (e) => void |
 
 ### Tag.CheckableTag
 

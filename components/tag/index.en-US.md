@@ -27,9 +27,9 @@ Tag for categorizing or markup.
 
 ### Tag Events
 
-| Events Name | Description                          | Arguments   |
-| ----------- | ------------------------------------ | ----------- |
-| close       | Callback executed when tag is closed | (e) => void |
+| Events Name | Description | Arguments |
+| --- | --- | --- |
+| close | Callback executed when tag is closed（Default behavior can be blocked by `e.preventDefault()`） | (e) => void |
 
 ### Tag.CheckableTag
 

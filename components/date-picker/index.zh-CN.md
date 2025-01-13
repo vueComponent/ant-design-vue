@@ -188,8 +188,8 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*3OpRQKcygo8AAA
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string], info: { range:`start`\|`end` }) |
-| change | 日期范围发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string]) |
+| calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string] \| null, dateStrings: \[string, string], info: { range:`start`\|`end` }) |
+| change | 日期范围发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string] \| null, dateStrings: \[string, string]) |
 | ok | 点击确定按钮的回调 | function(dates: \[dayjs, dayjs] \| \[string, string]) |
 
 #### formatType

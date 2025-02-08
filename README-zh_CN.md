@@ -73,6 +73,7 @@ $ yarn add ant-design-vue
 | [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | 在 DOM 模板中，您可以使用 ant-design-vue 组件的自定义事件（camelCase） |
 | [@formily/antdv](https://github.com/formilyjs/antdv) | 这是一个结合了 Formily 和 ant-design-vue 的组件库 |
 | [@ant-design-vue/nuxt](https://github.com/vueComponent/ant-design-vue-nuxt) | ant-design-vue 的 nuxt 模块扩展 |
+| [ant-design-x-vue](https://github.com/wzc520pyfm/ant-design-x-vue) | 基于 Ant Design X 设计规范的 Vue AI 界面解决方案 |
 
 ## 问答
 

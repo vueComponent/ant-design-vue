@@ -166,6 +166,12 @@ export default function createSlider(Component) {
         }
       },
       onBlur(e) {
+        // Prevent triggering blur when focus shifts from the slider handle to the slider container.
+        // This avoids ending the drag operation if the user clicks within the slider area.
+        if(this.sliderRef === e.relatedTarget) {
+          return;
+        }
+
         if (!this.dragTrack) {
           this.onEnd();
         }

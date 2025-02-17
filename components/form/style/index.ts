@@ -357,7 +357,6 @@ const genInlineStyle: GenerateStyle<FormToken> = token => {
         flex: 'none',
         flexWrap: 'nowrap',
         marginInlineEnd: token.margin,
-        marginBottom: 0,
 
         '&-with-help': {
           marginBottom: token.marginLG,

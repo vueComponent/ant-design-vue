@@ -240,6 +240,8 @@ export default defineComponent({
           //     warning(false, '`label` of `value` is not same as `label` in Select options.');
           //   }
           // }
+        } else {
+          rawKey = rawValue;
         }
 
         return {

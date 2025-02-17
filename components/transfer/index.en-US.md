@@ -6,12 +6,7 @@ cover: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*EAApQ5ephigAAAAAAA
 coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*yv12S4sSRAEAAAAAAAAAAAAADrJ8AQ/original
 ---
 
-Alert component for feedback.
-
 ## When To Use
-
-- When you need to show alert messages to users.
-- When you need a persistent static container which is closable by user actions.
 
 Transfer the elements between two columns in an intuitive and efficient way.
 

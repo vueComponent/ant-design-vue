@@ -42,7 +42,6 @@ const TreeSelectLegacyContextPropsKey: InjectionKey<LegacyContextProps> = Symbol
 );
 
 // export const LegacySelectContext = defineComponent({
-//  compatConfig: { MODE: 3 },
 //   name: 'SelectContext',
 //   props: {
 //     value: { type: Object as PropType<LegacyContextProps> },

@@ -62,7 +62,6 @@ export const listItemProps = () => {
 
 export type ListItemProps = Partial<ExtractPropTypes<ReturnType<typeof listItemProps>>>;
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ListItem',
   inheritAttrs: false,
   props: listItemProps(),

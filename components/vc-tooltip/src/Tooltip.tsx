@@ -8,7 +8,6 @@ import { defineComponent, shallowRef, watchEffect } from 'vue';
 
 function noop() {}
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Tooltip',
   inheritAttrs: false,
   props: {

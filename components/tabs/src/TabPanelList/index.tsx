@@ -14,7 +14,6 @@ export interface TabPanelListProps {
   destroyInactiveTabPane?: boolean;
 }
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TabPanelList',
   inheritAttrs: false,
   props: {

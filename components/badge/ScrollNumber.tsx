@@ -18,7 +18,6 @@ const scrollNumberProps = {
 export type ScrollNumberProps = Partial<ExtractPropTypes<typeof scrollNumberProps>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ScrollNumber',
   inheritAttrs: false,
   props: scrollNumberProps,

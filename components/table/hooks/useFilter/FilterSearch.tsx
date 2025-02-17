@@ -5,7 +5,6 @@ import Input from '../../../input';
 import { stringType, someType, functionType, objectType } from '../../../_util/type';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'FilterSearch',
   inheritAttrs: false,
   props: {

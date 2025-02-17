@@ -79,7 +79,6 @@ export type ListProps = Partial<ExtractPropTypes<ReturnType<typeof listProps>>>;
 import { ListContextKey } from './contextKey';
 
 const List = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AList',
   inheritAttrs: false,
   Item,

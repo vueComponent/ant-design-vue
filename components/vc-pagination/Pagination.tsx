@@ -26,7 +26,6 @@ function calculatePage(p, state, props) {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Pagination',
   mixins: [BaseMixin],
   inheritAttrs: false,

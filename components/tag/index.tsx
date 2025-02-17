@@ -36,7 +36,6 @@ export const tagProps = () => ({
 export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<typeof tagProps>>>;
 
 const Tag = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ATag',
   inheritAttrs: false,
   props: tagProps(),

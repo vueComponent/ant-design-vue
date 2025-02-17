@@ -16,7 +16,6 @@ import useStyle from './style';
 export const floatButtonPrefixCls = 'float-btn';
 
 const FloatButton = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AFloatButton',
   inheritAttrs: false,
   props: initDefaultProps(floatButtonProps(), { type: 'default', shape: 'circle' }),

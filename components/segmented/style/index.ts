@@ -144,6 +144,8 @@ const genSegmentedStyle: GenerateStyle<SegmentedToken> = (token: SegmentedToken)
         height: '100%',
         padding: `${token.paddingXXS}px 0`,
         borderRadius: token.borderRadiusSM,
+        transition: `transform ${token.motionDurationSlow} ${token.motionEaseInOut}, width ${token.motionDurationSlow} ${token.motionEaseInOut}`,
+        willChange: 'transform, width',
 
         [`& ~ ${componentCls}-item:not(${componentCls}-item-selected):not(${componentCls}-item-disabled)::after`]:
           {
@@ -180,12 +182,6 @@ const genSegmentedStyle: GenerateStyle<SegmentedToken> = (token: SegmentedToken)
       // disabled styles
       ...getItemDisabledStyle(`&-disabled ${componentCls}-item`, token),
       ...getItemDisabledStyle(`${componentCls}-item-disabled`, token),
-
-      // transition effect when `appear-active`
-      [`${componentCls}-thumb-motion-appear-active`]: {
-        transition: `transform ${token.motionDurationSlow} ${token.motionEaseInOut}, width ${token.motionDurationSlow} ${token.motionEaseInOut}`,
-        willChange: 'transform, width',
-      },
     },
   };
 };

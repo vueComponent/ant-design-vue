@@ -62,7 +62,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | removeIcon | 自定义的多选框清除图标 | VNode \| slot | - |  |
 | searchValue | 控制搜索文本 | string | - |  |
 | showArrow | 是否显示下拉小箭头 | boolean | 单选为 true,多选为 false |  |
-| showSearch | 配置是否可搜索 | boolean | 单选为 false,多选为 true |  |
+| showSearch | 配置是否可搜索 (需要设置 `filterOption` 为 `false`) | boolean | 单选为 false,多选为 true |  |
 | size | 选择框大小，可选 `middle` `large` `small` | string | middle |  |
 | status | 设置校验状态 | 'error' \| 'warning' | - | 3.3.0 |
 | suffixIcon | 自定义的选择框后缀图标 | VNode \| slot | - |  |
@@ -86,7 +86,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | mouseenter | 鼠标移入时回调 | function |
 | mouseleave | 鼠标移出时回调 | function |
 | popupScroll | 下拉列表滚动时的回调 | function |
-| search | 文本框值变化时回调(需要设置 filterOption 为 false) | function(value: string) |
+| search | 文本框值变化时回调 | function(value: string) |
 | select | 被选中时调用，参数为选中项的 value (或 key) 值 | function(value, option:Option) |
 
 ### Select Methods

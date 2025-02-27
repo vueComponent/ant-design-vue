@@ -86,7 +86,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5oPiTqPxGAUAAA
 | mouseenter | 鼠标移入时回调 | function |
 | mouseleave | 鼠标移出时回调 | function |
 | popupScroll | 下拉列表滚动时的回调 | function |
-| search | 文本框值变化时回调 | function(value: string) |
+| search | 文本框值变化时回调(需要设置 filterOption 为 false) | function(value: string) |
 | select | 被选中时调用，参数为选中项的 value (或 key) 值 | function(value, option:Option) |
 
 ### Select Methods

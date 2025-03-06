@@ -15,7 +15,6 @@ import Mask from './Mask';
 import { getMotionName, getUUID } from './util';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'VcDialog',
   inheritAttrs: false,
   props: initDefaultProps(

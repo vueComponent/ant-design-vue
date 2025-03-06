@@ -24,7 +24,6 @@ const OverflowContextProviderKey: InjectionKey<
 > = Symbol('OverflowContextProviderKey');
 
 export const OverflowContextProvider = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'OverflowContextProvider',
   inheritAttrs: false,
   props: {

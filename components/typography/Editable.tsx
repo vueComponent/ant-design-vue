@@ -26,7 +26,6 @@ const editableProps = () => ({
 });
 export type EditableProps = Partial<ExtractPropTypes<ReturnType<typeof editableProps>>>;
 const Editable = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Editable',
   inheritAttrs: false,
   props: editableProps(),

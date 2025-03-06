@@ -5,7 +5,6 @@ import { OverflowContextProvider, useInjectOverflowContext } from './context';
 import Item from './Item';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'RawItem',
   inheritAttrs: false,
   props: {

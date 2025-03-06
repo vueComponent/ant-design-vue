@@ -10,7 +10,6 @@ import { cloneElement } from '../_util/vnode';
 import type { Status, StepIconRender } from './interface';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Steps',
   props: {
     type: PropTypes.string.def('default'),

@@ -19,7 +19,6 @@ function getPageY(e: MouseEvent | TouchEvent) {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ScrollBar',
   inheritAttrs: false,
   props: {

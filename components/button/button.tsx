@@ -33,7 +33,6 @@ function isUnBorderedButtonType(type: ButtonType | undefined) {
 }
 export { buttonProps };
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,

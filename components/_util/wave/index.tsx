@@ -19,7 +19,6 @@ export interface WaveProps {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Wave',
   props: {
     disabled: Boolean,

@@ -45,7 +45,6 @@ export const inputNumberProps = () => ({
 export type InputNumberProps = Partial<ExtractPropTypes<ReturnType<typeof inputNumberProps>>>;
 
 const InputNumber = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AInputNumber',
   inheritAttrs: false,
   props: inputNumberProps(),

@@ -163,7 +163,6 @@ function isRawValue(value: DraftValueType): value is RawValueType {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'VcSelect',
   inheritAttrs: false,
   props: initDefaultProps(selectProps(), {

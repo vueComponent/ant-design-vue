@@ -30,7 +30,6 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
   extraProps: ExtraProps,
 ) {
   const RangePicker = defineComponent({
-    compatConfig: { MODE: 3 },
     name: 'ARangePicker',
     inheritAttrs: false,
     props: {

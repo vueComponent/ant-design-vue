@@ -1,4 +1,4 @@
-import { defineComponent, shallowRef, computed } from 'vue';
+import { defineComponent, shallowRef, computed, nextTick } from 'vue';
 import type { ExtractPropTypes, FunctionalComponent } from 'vue';
 import classNames from '../../_util/classNames';
 import useConfigInject from '../../config-provider/hooks/useConfigInject';
@@ -75,6 +75,10 @@ const SegmentedOption: FunctionalComponent<
     }
 
     emit('change', event, value);
+
+    nextTick(() => {
+      (event.target as HTMLInputElement).checked = checked;
+    });
   };
 
   return (

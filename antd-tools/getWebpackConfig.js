@@ -195,6 +195,13 @@ All rights reserved.
           amd: 'vue',
           module: 'vue',
         },
+        dayjs: {
+          root: 'dayjs',
+          commonjs2: 'dayjs',
+          commonjs: 'dayjs',
+          amd: 'dayjs',
+          module: 'dayjs',
+        },
       },
     ];
     if (esm) {

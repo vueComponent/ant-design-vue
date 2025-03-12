@@ -65,7 +65,6 @@ type TreeToken = DerivativeToken & {
 export const genBaseStyle = (prefixCls: string, token: TreeToken): CSSObject => {
   const { treeCls, treeNodeCls, treeNodePadding, treeTitleHeight } = token;
 
-  const treeCheckBoxMarginVertical = (treeTitleHeight - token.fontSizeLG) / 2;
   const treeCheckBoxMarginHorizontal = token.paddingXS;
 
   return {
@@ -260,7 +259,6 @@ export const genBaseStyle = (prefixCls: string, token: TreeToken): CSSObject => 
       [`${treeCls}-checkbox`]: {
         top: 'initial',
         marginInlineEnd: treeCheckBoxMarginHorizontal,
-        marginBlockStart: treeCheckBoxMarginVertical,
       },
 
       // >>> Title

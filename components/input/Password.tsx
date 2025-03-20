@@ -7,7 +7,7 @@ import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import type { InputProps } from './inputProps';
 import inputProps from './inputProps';
 import type { PropType } from 'vue';
-import { computed, defineComponent, shallowRef, watchEffect } from 'vue';
+import { computed, defineComponent, onMounted, shallowRef, watchEffect } from 'vue';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import omit from '../_util/omit';
 
@@ -53,6 +53,21 @@ export default defineComponent({
     const blur = () => {
       inputRef.value?.blur();
     };
+    onMounted(() => {
+      if (navigator.userAgent.includes('Edg')) {
+        if (!document.getElementById('edge-hide-password-style')) {
+          const style = document.createElement('style');
+          style.id = 'edge-hide-password-style';
+          style.innerHTML = `
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear {
+          display: none;
+        }
+      `;
+          document.head.appendChild(style);
+        }
+      }
+    });
     expose({
       focus,
       blur,

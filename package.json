@@ -186,7 +186,7 @@
     "gulp-strip-code": "^0.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
     "html-webpack-plugin": "^5.3.1",
-    "husky": "^6.0.0",
+    "husky": "^9.0.0",
     "ignore-emit-webpack-plugin": "^2.0.6",
     "is-windows": "^1.0.2",
     "jest": "^28.1.2",

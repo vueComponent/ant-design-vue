@@ -1,7 +1,7 @@
-import PropTypes from '../_util/vue-types';
-import classNames from '../_util/classNames';
 import type { CSSProperties } from 'vue';
 import { defineComponent } from 'vue';
+import classNames from '../_util/classNames';
+import PropTypes from '../_util/vue-types';
 
 export default defineComponent({
   compatConfig: { MODE: 3 },
@@ -25,7 +25,7 @@ export default defineComponent({
       type: Function,
     },
   },
-  eimt: ['click', 'keypress'],
+  emits: ['click', 'keypress'],
   setup(props, { emit, attrs }) {
     const handleClick = () => {
       emit('click', props.page);

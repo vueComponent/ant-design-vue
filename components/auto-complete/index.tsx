@@ -39,9 +39,9 @@ export const autoCompleteProps = () => ({
 
 export type AutoCompleteProps = Partial<ExtractPropTypes<ReturnType<typeof autoCompleteProps>>>;
 
-export const AutoCompleteOption = Option;
+export const AAutoCompleteOption = Option;
 
-export const AutoCompleteOptGroup = OptGroup;
+export const AAutoCompleteOptGroup = OptGroup;
 
 const AutoComplete = defineComponent({
   compatConfig: { MODE: 3 },

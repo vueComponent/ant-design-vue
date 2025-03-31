@@ -153,17 +153,17 @@ const Steps = defineComponent({
 });
 
 /* istanbul ignore next */
-export const Step = defineComponent({
+export const AStep = defineComponent({
   compatConfig: { MODE: 3 },
   ...(VcStep as any),
   name: 'AStep',
   props: VcStepProps(),
 });
 export default Object.assign(Steps, {
-  Step,
+  AStep,
   install: (app: App) => {
     app.component(Steps.name, Steps);
-    app.component(Step.name, Step);
+    app.component(AStep.name, AStep);
     return app;
   },
 });

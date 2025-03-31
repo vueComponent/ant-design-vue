@@ -167,7 +167,7 @@ Tag.install = function (app: App) {
   return app;
 };
 
-export { CheckableTag };
+export { CheckableTag as ACheckableTag };
 
 export default Tag as typeof Tag &
   Plugin & {

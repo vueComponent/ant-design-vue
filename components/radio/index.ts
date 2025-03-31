@@ -17,7 +17,7 @@ Radio.install = function (app: App) {
   return app;
 };
 
-export { Button, Group, Button as RadioButton, Group as RadioGroup };
+export { Button, Group, Button as ARadioButton, Group as ARadioGroup };
 export default Radio as typeof Radio &
   Plugin & {
     readonly Group: typeof Group;

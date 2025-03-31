@@ -24,10 +24,10 @@ Typography.install = function (app: App) {
 };
 
 export {
-  Text as TypographyText,
-  Title as TypographyTitle,
-  Paragraph as TypographyParagraph,
-  Link as TypographyLink,
+  Text as ATypographyText,
+  Title as ATypographyTitle,
+  Paragraph as ATypographyParagraph,
+  Link as ATypographyLink,
 };
 
 export default Typography as typeof Typography &

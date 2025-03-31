@@ -76,7 +76,7 @@ Image.install = function (app: App) {
   return app;
 };
 
-export { PreviewGroup as ImagePreviewGroup };
+export { PreviewGroup as AImagePreviewGroup };
 
 export default Image as typeof Image &
   Plugin & {

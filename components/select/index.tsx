@@ -309,8 +309,8 @@ Select.install = function (app: App) {
   return app;
 };
 
-export const SelectOption = Select.Option;
-export const SelectOptGroup = Select.OptGroup;
+export const ASelectOption = Select.Option;
+export const ASelectOptGroup = Select.OptGroup;
 export default Select as typeof Select &
   Plugin & {
     readonly Option: typeof Option;

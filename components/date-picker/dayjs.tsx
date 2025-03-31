@@ -14,25 +14,32 @@ export type MonthPickerProps = Omit<PickerDateProps<Dayjs>, 'picker'> & ExtraDat
 export type WeekPickerProps = Omit<PickerDateProps<Dayjs>, 'picker'> & ExtraDatePickerProps<Dayjs>;
 export type RangePickerProps = BaseRangePickerProps<Dayjs> & ExtraRangePickerProps<Dayjs>;
 
-const { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker, RangePicker } =
-  generatePicker<Dayjs>(dayjsGenerateConfig);
+const {
+  DatePicker: ADatePicker,
+  WeekPicker: AWeekPicker,
+  MonthPicker: AMonthPicker,
+  YearPicker: AYearPicker,
+  TimePicker: ATimePicker,
+  QuarterPicker: AQuarterPicker,
+  RangePicker: ARangePicker,
+} = generatePicker<Dayjs>(dayjsGenerateConfig);
 
 /* istanbul ignore next */
-export { RangePicker, WeekPicker, MonthPicker, QuarterPicker };
+export { ARangePicker, AWeekPicker, AMonthPicker, AQuarterPicker };
 
-export default Object.assign(DatePicker, {
-  WeekPicker,
-  MonthPicker,
-  YearPicker,
-  RangePicker,
-  TimePicker,
-  QuarterPicker,
+export default Object.assign(ADatePicker, {
+  AWeekPicker,
+  AMonthPicker,
+  AYearPicker,
+  ARangePicker,
+  ATimePicker,
+  AQuarterPicker,
   install: (app: App) => {
-    app.component(DatePicker.name, DatePicker);
-    app.component(RangePicker.name, RangePicker);
-    app.component(MonthPicker.name, MonthPicker);
-    app.component(WeekPicker.name, WeekPicker);
-    app.component(QuarterPicker.name, QuarterPicker);
+    app.component(ADatePicker.name, ADatePicker);
+    app.component(ARangePicker.name, ARangePicker);
+    app.component(AMonthPicker.name, AMonthPicker);
+    app.component(AWeekPicker.name, AWeekPicker);
+    app.component(AQuarterPicker.name, AQuarterPicker);
     return app;
   },
 });

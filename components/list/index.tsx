@@ -337,7 +337,7 @@ List.install = function (app: App) {
   return app;
 };
 
-export { ItemMeta as ListItemMeta, Item as ListItem };
+export { ItemMeta as AListItemMeta, Item as AListItem };
 
 export default List as typeof List &
   Plugin & {

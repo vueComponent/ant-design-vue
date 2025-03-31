@@ -27,11 +27,11 @@ const TableSummary = Object.assign(Summary, {
 /* istanbul ignore next */
 export {
   tableProps,
-  TableSummary,
-  TableSummaryRow,
-  TableSummaryCell,
-  Column as TableColumn,
-  ColumnGroup as TableColumnGroup,
+  TableSummary as ATableSummary,
+  TableSummaryRow as ATableSummaryRow,
+  TableSummaryCell as ATableSummaryCell,
+  Column as ATableColumn,
+  ColumnGroup as ATableColumnGroup,
 };
 
 export default Object.assign(Table, {

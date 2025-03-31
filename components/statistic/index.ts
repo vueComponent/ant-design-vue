@@ -12,7 +12,7 @@ Statistic.install = function (app: App) {
   return app;
 };
 
-export const StatisticCountdown = Statistic.Countdown;
+export const AStatisticCountdown = Statistic.Countdown;
 
 export default Statistic as typeof Statistic &
   Plugin & {

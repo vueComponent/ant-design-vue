@@ -5,7 +5,7 @@ import Dragger from './Dragger';
 export type { UploadProps, UploadListProps, UploadChangeParam, UploadFile } from './interface';
 
 /* istanbul ignore next */
-export const UploadDragger = Dragger;
+export const AUploadDragger = Dragger;
 
 export default Object.assign(Upload, {
   Dragger,

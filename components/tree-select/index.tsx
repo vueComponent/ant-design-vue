@@ -352,7 +352,7 @@ const TreeSelect = defineComponent({
 });
 
 /* istanbul ignore next */
-export const TreeSelectNode = TreeNode;
+export const ATreeSelectNode = TreeNode;
 export default Object.assign(TreeSelect, {
   TreeNode,
   SHOW_ALL: SHOW_ALL as typeof SHOW_ALL,
@@ -360,7 +360,7 @@ export default Object.assign(TreeSelect, {
   SHOW_CHILD: SHOW_CHILD as typeof SHOW_CHILD,
   install: (app: App) => {
     app.component(TreeSelect.name, TreeSelect);
-    app.component(TreeSelectNode.displayName, TreeSelectNode);
+    app.component(ATreeSelectNode.displayName, ATreeSelectNode);
     return app;
   },
 });

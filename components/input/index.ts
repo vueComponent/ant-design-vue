@@ -21,10 +21,10 @@ Input.install = function (app: App) {
 };
 
 export {
-  Group as InputGroup,
-  Search as InputSearch,
-  TextArea as Textarea,
-  Password as InputPassword,
+  Group as AInputGroup,
+  Search as AInputSearch,
+  TextArea as ATextarea,
+  Password as AInputPassword,
 };
 
 export default Input as typeof Input &

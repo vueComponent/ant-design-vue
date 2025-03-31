@@ -36,13 +36,13 @@ export type {
   ItemType,
 };
 export {
-  SubMenu,
+  SubMenu as ASubMenu,
   MenuItem as Item,
-  MenuItem,
+  MenuItem as AMenuItem,
   ItemGroup,
-  ItemGroup as MenuItemGroup,
+  ItemGroup as AMenuItemGroup,
   Divider,
-  Divider as MenuDivider,
+  Divider as AMenuDivider,
 };
 
 export default Menu as typeof Menu &

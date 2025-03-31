@@ -1,26 +1,26 @@
 import type { App, Plugin } from 'vue';
 import Breadcrumb from './Breadcrumb';
-import BreadcrumbItem from './BreadcrumbItem';
-import BreadcrumbSeparator from './BreadcrumbSeparator';
+import ABreadcrumbItem from './BreadcrumbItem';
+import ABreadcrumbSeparator from './BreadcrumbSeparator';
 
 export type { BreadcrumbProps } from './Breadcrumb';
 export type { BreadcrumbItemProps } from './BreadcrumbItem';
 export type { BreadcrumbSeparatorProps } from './BreadcrumbSeparator';
 
-Breadcrumb.Item = BreadcrumbItem;
-Breadcrumb.Separator = BreadcrumbSeparator;
+Breadcrumb.Item = ABreadcrumbItem;
+Breadcrumb.Separator = ABreadcrumbSeparator;
 
 /* istanbul ignore next */
 Breadcrumb.install = function (app: App) {
   app.component(Breadcrumb.name, Breadcrumb);
-  app.component(BreadcrumbItem.name, BreadcrumbItem);
-  app.component(BreadcrumbSeparator.name, BreadcrumbSeparator);
+  app.component(ABreadcrumbItem.name, ABreadcrumbItem);
+  app.component(ABreadcrumbSeparator.name, ABreadcrumbSeparator);
   return app;
 };
 
-export { BreadcrumbItem, BreadcrumbSeparator };
+export { ABreadcrumbItem, ABreadcrumbSeparator };
 export default Breadcrumb as typeof Breadcrumb &
   Plugin & {
-    readonly Item: typeof BreadcrumbItem;
-    readonly Separator: typeof BreadcrumbSeparator;
+    readonly Item: typeof ABreadcrumbItem;
+    readonly Separator: typeof ABreadcrumbSeparator;
   };

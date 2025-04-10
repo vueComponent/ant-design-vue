@@ -79,8 +79,9 @@ type APIResult = {
   }[];
 };
 
-const queryData = (params: APIParams) => {
-  return axios.get<APIResult>('https://randomuser.me/api?noinfo', { params });
+const queryData = async (params: APIParams) => {
+  const res = await axios.get<APIResult>('https://randomuser.me/api?noinfo', { params })
+  return res.data.results;
 };
 
 const {
@@ -90,7 +91,6 @@ const {
   current,
   pageSize,
 } = usePagination(queryData, {
-  formatResult: res => res.data.results,
   pagination: {
     currentKey: 'page',
     pageSizeKey: 'results',

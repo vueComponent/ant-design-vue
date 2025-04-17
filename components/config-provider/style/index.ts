@@ -12,6 +12,7 @@ const useStyle = (iconPrefixCls: Ref<string>) => {
       token: token.value,
       hashId: '',
       path: ['ant-design-icons', iconPrefixCls.value],
+      layer: { name: 'antd' },
     })),
     () => [
       {

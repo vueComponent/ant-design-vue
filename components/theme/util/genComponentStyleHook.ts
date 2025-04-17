@@ -55,6 +55,7 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
         token: token.value,
         hashId: hashId.value,
         path: ['Shared', rootPrefixCls.value],
+        layer: { name: 'antd' },
       };
     });
     // Generate style for all a tags in antd component.
@@ -70,6 +71,7 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
         token: token.value,
         hashId: hashId.value,
         path: [component, prefixCls.value, iconPrefixCls.value],
+        layer: { name: 'antd' },
       };
     });
     return [

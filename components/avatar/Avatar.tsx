@@ -179,7 +179,7 @@ const Avatar = defineComponent({
       } else if (icon) {
         childrenToRender = icon;
       } else if (isMounted.value || scale.value !== 1) {
-        const transformString = `scale(${scale.value}) translateX(-50%)`;
+        const transformString = `scale(${scale.value})`;
         const childrenStyle: CSSProperties = {
           msTransform: transformString,
           WebkitTransform: transformString,

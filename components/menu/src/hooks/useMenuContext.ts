@@ -23,6 +23,7 @@ export interface MenuContextProps {
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;
+  cssVarCls: ComputedRef<string>;
   openKeys: Ref<Key[]>;
   selectedKeys: Ref<Key[]>;
 

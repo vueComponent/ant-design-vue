@@ -103,6 +103,7 @@ export default defineComponent({
 
     const {
       prefixCls,
+      cssVarCls,
       activeKeys,
       disabled: contextDisabled,
       changeActiveKeys,
@@ -210,6 +211,7 @@ export default defineComponent({
 
     const popupClassName = computed(() =>
       classNames(
+        cssVarCls.value,
         prefixCls.value,
         `${prefixCls.value}-${props.theme || theme.value}`,
         props.popupClassName,

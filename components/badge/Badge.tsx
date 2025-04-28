@@ -9,6 +9,7 @@ import { defineComponent, computed, ref, watch, Transition } from 'vue';
 import Ribbon from './Ribbon';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import isNumeric from '../_util/isNumeric';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 import useStyle from './style';
 import type { PresetColorKey } from '../theme/interface';
 import type { LiteralUnion, CustomSlotsType } from '../_util/type';
@@ -49,7 +50,8 @@ export default defineComponent({
   }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('badge', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
     // ================================ Misc ================================
     const numberedDisplayCount = computed(() => {
@@ -189,6 +191,8 @@ export default defineComponent({
           [`${pre}-rtl`]: direction.value === 'rtl',
         },
         attrs.class,
+        cssVarCls.value,
+        rootCls.value,
         hashId.value,
       );
 

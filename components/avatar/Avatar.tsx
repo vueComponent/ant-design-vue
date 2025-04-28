@@ -12,6 +12,7 @@ import ResizeObserver from '../vc-resize-observer';
 import eagerComputed from '../_util/eagerComputed';
 import useStyle from './style';
 import { useAvatarInjectContext } from './AvatarContext';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
@@ -55,7 +56,8 @@ const Avatar = defineComponent({
     const avatarNodeRef = shallowRef<HTMLElement>(null);
 
     const { prefixCls } = useConfigInject('avatar', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const avatarCtx = useAvatarInjectContext();
     const size = computed(() => {
       return props.size === 'default' ? avatarCtx.size : props.size;
@@ -146,6 +148,8 @@ const Avatar = defineComponent({
         [`${pre}-${mergeShape}`]: true,
         [`${pre}-image`]: src && isImgExist.value,
         [`${pre}-icon`]: icon,
+        [cssVarCls.value]: true,
+        [rootCls.value]: true,
         [hashId.value]: true,
       };
 

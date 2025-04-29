@@ -41,6 +41,7 @@ import pick from 'lodash-es/pick';
 import PropTypes from '../../_util/vue-types';
 import type { MouseEventHandler } from '../../_util/EventInterface';
 import omit from '../../_util/omit';
+import useCSSVarCls from '../../config-provider/hooks/useCssVarCls';
 import useStyle from '../style';
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -169,7 +170,8 @@ const InternalTabs = defineComponent({
       'tabs',
       props,
     );
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const rtl = computed(() => direction.value === 'rtl');
     const mergedAnimated = computed<AnimatedConfig>(() => {
       const { animated, tabPosition } = props;
@@ -322,6 +324,8 @@ const InternalTabs = defineComponent({
             pre,
             `${pre}-${mergedTabPosition.value}`,
             {
+              [cssVarCls.value]: true,
+              [rootCls.value]: true,
               [hashId.value]: true,
               [`${pre}-${size.value}`]: size.value,
               [`${pre}-card`]: ['card', 'editable-card'].includes(type as string),

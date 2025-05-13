@@ -53,8 +53,8 @@ const Steps = (_: any, { attrs }) => {
       (!included && point === upperBound) ||
       (included && point <= upperBound && point >= lowerBound);
     let style = vertical
-      ? { ...dotStyle, [reverse ? 'top' : 'bottom']: offset }
-      : { ...dotStyle, [reverse ? 'right' : 'left']: offset };
+      ? { ...dotStyle, [reverse ? 'top' : 'bottom']: offset, transform: 'translateY(50%)' }
+      : { ...dotStyle, [reverse ? 'right' : 'left']: offset, transform: 'translateX(-50%)' };
     if (isActived) {
       style = { ...style, ...activeDotStyle };
     }

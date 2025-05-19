@@ -142,6 +142,7 @@ const Select = defineComponent({
       getPopupContainer,
       disabled,
       select,
+      dropdownMatchSelectWidth: configDropdownMatchSelectWidth,
     } = useConfigInject('select', props);
     const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
     const mergedSize = computed(() => compactSize.value || contextSize.value);
@@ -266,9 +267,9 @@ const Select = defineComponent({
         <RcSelect
           ref={selectRef}
           virtual={virtual}
-          dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           {...selectProps}
           {...attrs}
+          dropdownMatchSelectWidth={dropdownMatchSelectWidth ?? configDropdownMatchSelectWidth.value}
           showSearch={props.showSearch ?? select?.value?.showSearch}
           placeholder={placeholder}
           listHeight={listHeight}

@@ -8,7 +8,7 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale/en_US';
 import type { CSSProperties } from 'vue';
 import { computed, defineComponent, onMounted, ref, toRef } from 'vue';
-import { flattenChildren, initDefaultProps } from '../_util/props-util';
+import { filterEmpty, flattenChildren, initDefaultProps } from '../_util/props-util';
 import useMergedState from '../_util/hooks/useMergedState';
 import devWarning from '../vc-util/devWarning';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
@@ -299,6 +299,9 @@ export default defineComponent({
       defaultLocale.Upload,
       computed(() => props.locale),
     );
+    const HackSlot = (_, { slots }) => {
+      return filterEmpty(slots.default?.())[0];
+    };
     const renderUploadList = (button?: () => VueNode, buttonVisible?: boolean) => {
       const {
         removeIcon,
@@ -340,7 +343,13 @@ export default defineComponent({
           v-slots={{ ...slots }}
         />
       ) : (
-        button?.()
+        button ? (
+          <HackSlot
+            key="__ant_upload_appendAction"
+            v-show={!!buttonVisible}
+            v-slots={{ default: button }}
+          ></HackSlot>
+        ) : null
       );
     };
     return () => {

@@ -94,11 +94,18 @@ export default function getPlacements(config: PlacementsConfig) {
     },
   };
   Object.keys(placementMap).forEach(key => {
+    const centerIndex = key.search(/[A-Z]/);
+    let pointsKey: Direction = key;
+    if (centerIndex > 0) {
+      pointsKey = key.substring(0, centerIndex);
+    }
     placementMap[key] = arrowPointAtCenter
       ? {
           ...placementMap[key],
           overflow: getOverflowOptions(autoAdjustOverflow),
+          points: placementMap[pointsKey].points,
           targetOffset,
+          offset: targetOffset,
         }
       : {
           ...placements[key],

@@ -17,7 +17,9 @@ When part of the page is waiting for asynchronous data or during a rendering pro
 | Property | Description | Type | Default Value | Version |
 | --- | --- | --- | --- | --- |
 | delay | specifies a delay in milliseconds for loading state (prevent flush) | number (milliseconds) | - |  |
+| fullscreen | Display a backdrop with the `Spin` component | boolean | false |  |
 | indicator | vue node of the spinning indicator | vNode \|slot | - |  |
+| percent | The progress percentage, when set to `auto`, it will be an indeterminate progress | number \| 'auto' | - |  |
 | size | size of Spin, options: `small`, `default` and `large` | string | `default` |  |
 | spinning | whether Spin is visible | boolean | true |  |
 | tip | customize description content when Spin has children | string \| slot | - | slot 3.0 |

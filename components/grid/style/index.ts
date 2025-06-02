@@ -2,6 +2,8 @@ import type { CSSObject } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 
+export interface ComponentToken {}
+
 interface GridRowToken extends FullToken<'Grid'> {}
 
 interface GridColToken extends FullToken<'Grid'> {

@@ -69,7 +69,7 @@ pnpm-lock.yaml
 # 备份文件
 /components/test/*
 list.txt
-
+.history
 site/dev.js
 
 # IDE 语法提示临时文件

@@ -72,11 +72,11 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LT2jR41Uj2EAAA
 | --- | --- | --- | --- | --- |
 | copyableIcon | 自定义拷贝图标 | `{ copied: boolean }` | `copied ? <CheckOutlined /> : <CopyOutlined />` |  |
 | copyableTooltip | 自定义提示文案，当 `copyable.tooltip = false` 时关闭 | `{ copied: boolean }` | `copied ? '复制成功' : '复制'` |  |
+| editableEnterIcon | 在编辑段中自定义“enter”图标 | `{className: string}` | `<EnterOutlined />` | 3.0 |
 | editableIcon | 自定义编辑图标 | - | &lt;EditOutlined /> |  |
 | editableTooltip | 自定义提示文本，当 `editable.tooltip = false` 时关闭 | - | `编辑` |  |
 | ellipsisSymbol | 自定义展开描述文案 | - | - |  |
 | ellipsisTooltip | 省略时，展示提示信息 | - | - |  |
-| enterEnterIcon | 在编辑段中自定义“enter”图标 | `{className: string}` | `<EnterOutlined />` | 3.0 |
 
 ### copyable
 

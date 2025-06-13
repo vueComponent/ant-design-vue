@@ -121,7 +121,6 @@ export const globalConfig = () => ({
 });
 
 const ConfigProvider = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AConfigProvider',
   inheritAttrs: false,
   props: configProviderProps(),

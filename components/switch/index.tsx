@@ -57,7 +57,6 @@ export const switchProps = () => ({
 export type SwitchProps = Partial<ExtractPropTypes<ReturnType<typeof switchProps>>>;
 
 const Switch = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ASwitch',
   __ANT_SWITCH: true,
   inheritAttrs: false,

@@ -24,7 +24,6 @@ import { CheckboxGroupContextKey, checkboxProps } from './interface';
 import useStyle from './style';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ACheckbox',
   inheritAttrs: false,
   __ANT_CHECKBOX: true,

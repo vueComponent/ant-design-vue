@@ -29,7 +29,6 @@ export interface AnchorLinkItemProps {
 export type AnchorLinkProps = Partial<ExtractPropTypes<ReturnType<typeof anchorLinkProps>>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AAnchorLink',
   inheritAttrs: false,
   props: initDefaultProps(anchorLinkProps(), { href: '#' }),

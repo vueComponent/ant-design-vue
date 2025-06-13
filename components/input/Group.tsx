@@ -9,7 +9,6 @@ import classNames from '../_util/classNames';
 import useStyle from './style';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AInputGroup',
   inheritAttrs: false,
   props: {

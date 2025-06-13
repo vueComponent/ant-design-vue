@@ -124,7 +124,6 @@ export const baseProps = () => ({
 });
 
 const Base = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TypographyBase',
   inheritAttrs: false,
   props: baseProps(),

@@ -151,7 +151,6 @@ export interface ModalLocale {
 }
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AModal',
   inheritAttrs: false,
   props: initDefaultProps(modalProps(), {

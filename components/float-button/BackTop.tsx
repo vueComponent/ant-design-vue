@@ -24,7 +24,6 @@ import useStyle from './style';
 import { useInjectFloatButtonGroupContext } from './context';
 
 const BackTop = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ABackTop',
   inheritAttrs: false,
   props: initDefaultProps(backTopProps(), {

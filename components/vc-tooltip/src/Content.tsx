@@ -11,7 +11,6 @@ const tooltipContentProps = {
 export type TooltipContentProps = Partial<ExtractPropTypes<typeof tooltipContentProps>>;
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'TooltipContent',
   props: tooltipContentProps,
   setup(props: TooltipContentProps, { slots }) {

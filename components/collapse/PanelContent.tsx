@@ -3,7 +3,6 @@ import { collapsePanelProps } from './commonProps';
 import classNames from '../_util/classNames';
 
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'PanelContent',
   props: collapsePanelProps(),
   setup(props, { slots }) {

@@ -19,7 +19,6 @@ import type { CustomSlotsType } from '../_util/type';
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
 const Dropdown = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'ADropdown',
   inheritAttrs: false,
   props: initDefaultProps(dropdownProps(), {

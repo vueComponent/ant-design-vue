@@ -104,7 +104,6 @@ function isEqualName(name1: NamePath, name2: NamePath) {
 }
 
 const Form = defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'AForm',
   inheritAttrs: false,
   props: initDefaultProps(formProps(), {

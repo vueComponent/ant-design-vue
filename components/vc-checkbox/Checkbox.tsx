@@ -20,7 +20,6 @@ export const checkboxProps = {
   required: Boolean,
 };
 export default defineComponent({
-  compatConfig: { MODE: 3 },
   name: 'Checkbox',
   inheritAttrs: false,
   props: initDefaultProps(checkboxProps, {

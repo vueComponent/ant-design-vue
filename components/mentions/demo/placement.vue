@@ -3,7 +3,7 @@
 order: 4
 title:
   zh-CN: 向上展开
-  en-US: Placemen
+  en-US: Placement
 ---
 
 ## zh-CN

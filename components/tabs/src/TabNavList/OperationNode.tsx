@@ -1,4 +1,4 @@
-import Menu, { MenuItem } from '../../../menu';
+import Menu, { AMenuItem } from '../../../menu';
 import Dropdown from '../../../vc-dropdown';
 import type { Tab, TabsLocale, EditableConfig } from '../interface';
 import AddButton from './AddButton';
@@ -190,7 +190,7 @@ export default defineComponent({
                 {tabs.map(tab => {
                   const removable = editable && tab.closable !== false && !tab.disabled;
                   return (
-                    <MenuItem
+                    <AMenuItem
                       key={tab.key}
                       id={`${popupId.value}-${tab.key}`}
                       role="option"
@@ -212,7 +212,7 @@ export default defineComponent({
                           {tab.closeIcon?.() || editable.removeIcon?.() || '×'}
                         </button>
                       )}
-                    </MenuItem>
+                    </AMenuItem>
                   );
                 })}
               </Menu>

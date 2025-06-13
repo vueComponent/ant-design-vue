@@ -1,273 +1,273 @@
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 declare module 'vue' {
   export interface GlobalComponents {
-    AAffix: typeof import('ant-design-vue')['Affix'];
+    AAffix: typeof import('ant-design-vue')['AAffix'];
 
-    AAlert: typeof import('ant-design-vue')['Alert'];
+    AAlert: typeof import('ant-design-vue')['AAlert'];
 
-    AAnchor: typeof import('ant-design-vue')['Anchor'];
+    AAnchor: typeof import('ant-design-vue')['AAnchor'];
 
-    AAnchorLink: typeof import('ant-design-vue')['AnchorLink'];
+    AAnchorLink: typeof import('ant-design-vue')['AAnchorLink'];
 
-    AAutoComplete: typeof import('ant-design-vue')['AutoComplete'];
+    AAutoComplete: typeof import('ant-design-vue')['AAutoComplete'];
 
-    AAutoCompleteOptGroup: typeof import('ant-design-vue')['AutoCompleteOptGroup'];
+    AAutoCompleteOptGroup: typeof import('ant-design-vue')['AAutoCompleteOptGroup'];
 
-    AAutoCompleteOption: typeof import('ant-design-vue')['AutoCompleteOption'];
+    AAutoCompleteOption: typeof import('ant-design-vue')['AAutoCompleteOption'];
 
-    AAvatar: typeof import('ant-design-vue')['Avatar'];
+    AAvatar: typeof import('ant-design-vue')['AAvatar'];
 
-    AAvatarGroup: typeof import('ant-design-vue')['AvatarGroup'];
+    AAvatarGroup: typeof import('ant-design-vue')['AAvatarGroup'];
 
-    ABadge: typeof import('ant-design-vue')['Badge'];
+    ABadge: typeof import('ant-design-vue')['ABadge'];
 
-    ABadgeRibbon: typeof import('ant-design-vue')['BadgeRibbon'];
+    ABadgeRibbon: typeof import('ant-design-vue')['ABadgeRibbon'];
 
-    ABreadcrumb: typeof import('ant-design-vue')['Breadcrumb'];
+    ABreadcrumb: typeof import('ant-design-vue')['ABreadcrumb'];
 
-    ABreadcrumbItem: typeof import('ant-design-vue')['BreadcrumbItem'];
+    ABreadcrumbItem: typeof import('ant-design-vue')['ABreadcrumbItem'];
 
-    ABreadcrumbSeparator: typeof import('ant-design-vue')['BreadcrumbSeparator'];
+    ABreadcrumbSeparator: typeof import('ant-design-vue')['ABreadcrumbSeparator'];
 
-    AButton: typeof import('ant-design-vue')['Button'];
+    AButton: typeof import('ant-design-vue')['AButton'];
 
-    AButtonGroup: typeof import('ant-design-vue')['ButtonGroup'];
+    AButtonGroup: typeof import('ant-design-vue')['AButtonGroup'];
 
-    ACalendar: typeof import('ant-design-vue')['Calendar'];
+    ACalendar: typeof import('ant-design-vue')['ACalendar'];
 
-    ACard: typeof import('ant-design-vue')['Card'];
+    ACard: typeof import('ant-design-vue')['ACard'];
 
-    ACardGrid: typeof import('ant-design-vue')['CardGrid'];
+    ACardGrid: typeof import('ant-design-vue')['ACardGrid'];
 
-    ACardMeta: typeof import('ant-design-vue')['CardMeta'];
+    ACardMeta: typeof import('ant-design-vue')['ACardMeta'];
 
-    ACarousel: typeof import('ant-design-vue')['Carousel'];
+    ACarousel: typeof import('ant-design-vue')['ACarousel'];
 
-    ACascader: typeof import('ant-design-vue')['Cascader'];
+    ACascader: typeof import('ant-design-vue')['ACascader'];
 
-    ACheckableTag: typeof import('ant-design-vue')['CheckableTag'];
+    ACheckableTag: typeof import('ant-design-vue')['ACheckableTag'];
 
-    ACheckbox: typeof import('ant-design-vue')['Checkbox'];
+    ACheckbox: typeof import('ant-design-vue')['ACheckbox'];
 
-    ACheckboxGroup: typeof import('ant-design-vue')['CheckboxGroup'];
+    ACheckboxGroup: typeof import('ant-design-vue')['ACheckboxGroup'];
 
-    ACol: typeof import('ant-design-vue')['Col'];
+    ACol: typeof import('ant-design-vue')['ACol'];
 
-    ACollapse: typeof import('ant-design-vue')['Collapse'];
+    ACollapse: typeof import('ant-design-vue')['ACollapse'];
 
-    ACollapsePanel: typeof import('ant-design-vue')['CollapsePanel'];
+    ACollapsePanel: typeof import('ant-design-vue')['ACollapsePanel'];
 
-    AComment: typeof import('ant-design-vue')['Comment'];
+    AComment: typeof import('ant-design-vue')['AComment'];
 
-    AConfigProvider: typeof import('ant-design-vue')['ConfigProvider'];
+    AConfigProvider: typeof import('ant-design-vue')['AConfigProvider'];
 
-    AStyleProvider: typeof import('ant-design-vue')['StyleProvider'];
+    AStyleProvider: typeof import('ant-design-vue')['AStyleProvider'];
 
-    ADatePicker: typeof import('ant-design-vue')['DatePicker'];
+    ADatePicker: typeof import('ant-design-vue')['ADatePicker'];
 
-    ADescriptions: typeof import('ant-design-vue')['Descriptions'];
+    ADescriptions: typeof import('ant-design-vue')['ADescriptions'];
 
-    ADescriptionsItem: typeof import('ant-design-vue')['DescriptionsItem'];
+    ADescriptionsItem: typeof import('ant-design-vue')['ADescriptionsItem'];
 
-    ADirectoryTree: typeof import('ant-design-vue')['DirectoryTree'];
+    ADirectoryTree: typeof import('ant-design-vue')['ADirectoryTree'];
 
-    ADivider: typeof import('ant-design-vue')['Divider'];
+    ADivider: typeof import('ant-design-vue')['ADivider'];
 
-    ADrawer: typeof import('ant-design-vue')['Drawer'];
+    ADrawer: typeof import('ant-design-vue')['ADrawer'];
 
-    ADropdown: typeof import('ant-design-vue')['Dropdown'];
+    ADropdown: typeof import('ant-design-vue')['ADropdown'];
 
-    ADropdownButton: typeof import('ant-design-vue')['DropdownButton'];
+    ADropdownButton: typeof import('ant-design-vue')['ADropdownButton'];
 
-    AEmpty: typeof import('ant-design-vue')['Empty'];
+    AEmpty: typeof import('ant-design-vue')['AEmpty'];
 
-    AForm: typeof import('ant-design-vue')['Form'];
+    AForm: typeof import('ant-design-vue')['AForm'];
 
-    AFormItem: typeof import('ant-design-vue')['FormItem'];
+    AFormItem: typeof import('ant-design-vue')['AFormItem'];
 
-    AFormItemRest: typeof import('ant-design-vue')['FormItemRest'];
+    AFormItemRest: typeof import('ant-design-vue')['AFormItemRest'];
 
-    AImage: typeof import('ant-design-vue')['Image'];
+    AImage: typeof import('ant-design-vue')['AImage'];
 
-    AImagePreviewGroup: typeof import('ant-design-vue')['ImagePreviewGroup'];
+    AImagePreviewGroup: typeof import('ant-design-vue')['AImagePreviewGroup'];
 
-    AInput: typeof import('ant-design-vue')['Input'];
+    AInput: typeof import('ant-design-vue')['AInput'];
 
-    AInputGroup: typeof import('ant-design-vue')['InputGroup'];
+    AInputGroup: typeof import('ant-design-vue')['AInputGroup'];
 
-    AInputNumber: typeof import('ant-design-vue')['InputNumber'];
+    AInputNumber: typeof import('ant-design-vue')['AInputNumber'];
 
-    AInputPassword: typeof import('ant-design-vue')['InputPassword'];
+    AInputPassword: typeof import('ant-design-vue')['AInputPassword'];
 
-    AInputSearch: typeof import('ant-design-vue')['InputSearch'];
+    AInputSearch: typeof import('ant-design-vue')['AInputSearch'];
 
-    ALayout: typeof import('ant-design-vue')['Layout'];
+    ALayout: typeof import('ant-design-vue')['ALayout'];
 
-    ALayoutContent: typeof import('ant-design-vue')['LayoutContent'];
+    ALayoutContent: typeof import('ant-design-vue')['ALayoutContent'];
 
-    ALayoutFooter: typeof import('ant-design-vue')['LayoutFooter'];
+    ALayoutFooter: typeof import('ant-design-vue')['ALayoutFooter'];
 
-    ALayoutHeader: typeof import('ant-design-vue')['LayoutHeader'];
+    ALayoutHeader: typeof import('ant-design-vue')['ALayoutHeader'];
 
-    ALayoutSider: typeof import('ant-design-vue')['LayoutSider'];
+    ALayoutSider: typeof import('ant-design-vue')['ALayoutSider'];
 
-    AList: typeof import('ant-design-vue')['List'];
+    AList: typeof import('ant-design-vue')['AList'];
 
-    AListItem: typeof import('ant-design-vue')['ListItem'];
+    AListItem: typeof import('ant-design-vue')['AListItem'];
 
-    AListItemMeta: typeof import('ant-design-vue')['ListItemMeta'];
+    AListItemMeta: typeof import('ant-design-vue')['AListItemMeta'];
 
-    ALocaleProvider: typeof import('ant-design-vue')['LocaleProvider'];
+    ALocaleProvider: typeof import('ant-design-vue')['ALocaleProvider'];
 
-    AMentions: typeof import('ant-design-vue')['Mentions'];
+    AMentions: typeof import('ant-design-vue')['AMentions'];
 
-    AMentionsOption: typeof import('ant-design-vue')['MentionsOption'];
+    AMentionsOption: typeof import('ant-design-vue')['AMentionsOption'];
 
-    AMenu: typeof import('ant-design-vue')['Menu'];
+    AMenu: typeof import('ant-design-vue')['AMenu'];
 
-    AMenuDivider: typeof import('ant-design-vue')['MenuDivider'];
+    AMenuDivider: typeof import('ant-design-vue')['AMenuDivider'];
 
-    AMenuItem: typeof import('ant-design-vue')['MenuItem'];
+    AMenuItem: typeof import('ant-design-vue')['AMenuItem'];
 
-    AMenuItemGroup: typeof import('ant-design-vue')['MenuItemGroup'];
+    AMenuItemGroup: typeof import('ant-design-vue')['AMenuItemGroup'];
 
-    AModal: typeof import('ant-design-vue')['Modal'];
+    AModal: typeof import('ant-design-vue')['AModal'];
 
-    AMonthPicker: typeof import('ant-design-vue')['MonthPicker'];
+    AMonthPicker: typeof import('ant-design-vue')['AMonthPicker'];
 
-    APageHeader: typeof import('ant-design-vue')['PageHeader'];
+    APageHeader: typeof import('ant-design-vue')['APageHeader'];
 
-    APagination: typeof import('ant-design-vue')['Pagination'];
+    APnation: typeof import('ant-design-vue')['APagination'];
 
-    APopconfirm: typeof import('ant-design-vue')['Popconfirm'];
+    APopconfirm: typeof import('ant-design-vue')['APopconfirm'];
 
-    APopover: typeof import('ant-design-vue')['Popover'];
+    APopover: typeof import('ant-design-vue')['APopover'];
 
-    AProgress: typeof import('ant-design-vue')['Progress'];
+    AProgress: typeof import('ant-design-vue')['AProgress'];
 
-    AQuarterPicker: typeof import('ant-design-vue')['QuarterPicker'];
+    AQuarterPicker: typeof import('ant-design-vue')['AQuarterPicker'];
 
-    ARadio: typeof import('ant-design-vue')['Radio'];
+    ARadio: typeof import('ant-design-vue')['ARadio'];
 
-    ARadioButton: typeof import('ant-design-vue')['RadioButton'];
+    ARadioButton: typeof import('ant-design-vue')['ARadioButton'];
 
-    ARadioGroup: typeof import('ant-design-vue')['RadioGroup'];
+    ARadioGroup: typeof import('ant-design-vue')['ARadioGroup'];
 
-    ARangePicker: typeof import('ant-design-vue')['RangePicker'];
+    ARangePicker: typeof import('ant-design-vue')['ARangePicker'];
 
-    ARate: typeof import('ant-design-vue')['Rate'];
+    ARate: typeof import('ant-design-vue')['ARate'];
 
-    AResult: typeof import('ant-design-vue')['Result'];
+    AResult: typeof import('ant-design-vue')['AResult'];
 
-    ARow: typeof import('ant-design-vue')['Row'];
+    ARow: typeof import('ant-design-vue')['ARow'];
 
-    ASelect: typeof import('ant-design-vue')['Select'];
+    ASelect: typeof import('ant-design-vue')['ASelect'];
 
-    ASegmented: typeof import('ant-design-vue')['Segmented'];
+    ASegmented: typeof import('ant-design-vue')['ASegmented'];
 
-    ASelectOptGroup: typeof import('ant-design-vue')['SelectOptGroup'];
+    ASelectOptGroup: typeof import('ant-design-vue')['ASelectOptGroup'];
 
-    ASelectOption: typeof import('ant-design-vue')['SelectOption'];
+    ASelectOption: typeof import('ant-design-vue')['ASelectOption'];
 
-    ASkeleton: typeof import('ant-design-vue')['Skeleton'];
+    ASkeleton: typeof import('ant-design-vue')['ASkeleton'];
 
-    ASkeletonAvatar: typeof import('ant-design-vue')['SkeletonAvatar'];
+    ASkeletonAvatar: typeof import('ant-design-vue')['ASkeletonAvatar'];
 
-    ASkeletonButton: typeof import('ant-design-vue')['SkeletonButton'];
+    ASkeletonButton: typeof import('ant-design-vue')['ASkeletonButton'];
 
-    ASkeletonImage: typeof import('ant-design-vue')['SkeletonImage'];
+    ASkeletonImage: typeof import('ant-design-vue')['ASkeletonImage'];
 
-    ASkeletonInput: typeof import('ant-design-vue')['SkeletonInput'];
+    ASkeletonInput: typeof import('ant-design-vue')['ASkeletonInput'];
 
-    ASlider: typeof import('ant-design-vue')['Slider'];
+    ASlider: typeof import('ant-design-vue')['ASlider'];
 
-    ASpace: typeof import('ant-design-vue')['Space'];
+    ASpace: typeof import('ant-design-vue')['ASpace'];
 
-    ASpaceCompact: typeof import('ant-design-vue')['Compact'];
+    ASpaceCompact: typeof import('ant-design-vue')['ACompact'];
 
-    ASpin: typeof import('ant-design-vue')['Spin'];
+    ASpin: typeof import('ant-design-vue')['ASpin'];
 
-    AStatistic: typeof import('ant-design-vue')['Statistic'];
+    AStatistic: typeof import('ant-design-vue')['AStatistic'];
 
-    AStatisticCountdown: typeof import('ant-design-vue')['StatisticCountdown'];
+    AStatisticCountdown: typeof import('ant-design-vue')['AStatisticCountdown'];
 
-    AStep: typeof import('ant-design-vue')['Step'];
+    AStep: typeof import('ant-design-vue')['AStep'];
 
-    ASteps: typeof import('ant-design-vue')['Steps'];
+    ASteps: typeof import('ant-design-vue')['ASteps'];
 
-    ASubMenu: typeof import('ant-design-vue')['SubMenu'];
+    ASubMenu: typeof import('ant-design-vue')['ASubMenu'];
 
-    ASwitch: typeof import('ant-design-vue')['Switch'];
+    ASwitch: typeof import('ant-design-vue')['ASwitch'];
 
-    ATabPane: typeof import('ant-design-vue')['TabPane'];
+    ATabPane: typeof import('ant-design-vue')['ATabPane'];
 
-    ATable: typeof import('ant-design-vue')['Table'];
+    ATable: typeof import('ant-design-vue')['ATable'];
 
-    ATableColumn: typeof import('ant-design-vue')['TableColumn'];
+    ATableColumn: typeof import('ant-design-vue')['ATableColumn'];
 
-    ATableColumnGroup: typeof import('ant-design-vue')['TableColumnGroup'];
+    ATableColumnGroup: typeof import('ant-design-vue')['ATableColumnGroup'];
 
-    ATableSummary: typeof import('ant-design-vue')['TableSummary'];
+    ATableSummary: typeof import('ant-design-vue')['ATableSummary'];
 
-    ATableSummaryCell: typeof import('ant-design-vue')['TableSummaryCell'];
+    ATableSummaryCell: typeof import('ant-design-vue')['ATableSummaryCell'];
 
-    ATableSummaryRow: typeof import('ant-design-vue')['TableSummaryRow'];
+    ATableSummaryRow: typeof import('ant-design-vue')['ATableSummaryRow'];
 
-    ATabs: typeof import('ant-design-vue')['Tabs'];
+    ATabs: typeof import('ant-design-vue')['ATabs'];
 
-    ATag: typeof import('ant-design-vue')['Tag'];
+    ATag: typeof import('ant-design-vue')['ATag'];
 
-    ATextarea: typeof import('ant-design-vue')['Textarea'];
+    ATextarea: typeof import('ant-design-vue')['ATextarea'];
 
-    ATimePicker: typeof import('ant-design-vue')['TimePicker'];
+    ATimePicker: typeof import('ant-design-vue')['ATimePicker'];
 
-    ATimeRangePicker: typeof import('ant-design-vue')['TimeRangePicker'];
+    ATimeRangePicker: typeof import('ant-design-vue')['ATimeRangePicker'];
 
-    ATimeline: typeof import('ant-design-vue')['Timeline'];
+    ATimeline: typeof import('ant-design-vue')['ATimeline'];
 
-    ATimelineItem: typeof import('ant-design-vue')['TimelineItem'];
+    ATimelineItem: typeof import('ant-design-vue')['ATimelineItem'];
 
-    ATooltip: typeof import('ant-design-vue')['Tooltip'];
+    ATooltip: typeof import('ant-design-vue')['ATooltip'];
 
-    ATransfer: typeof import('ant-design-vue')['Transfer'];
+    ATransfer: typeof import('ant-design-vue')['ATransfer'];
 
-    ATree: typeof import('ant-design-vue')['Tree'];
+    ATree: typeof import('ant-design-vue')['ATree'];
 
-    ATreeNode: typeof import('ant-design-vue')['TreeNode'];
+    ATreeNode: typeof import('ant-design-vue')['ATreeNode'];
 
-    ATreeSelect: typeof import('ant-design-vue')['TreeSelect'];
+    ATreeSelect: typeof import('ant-design-vue')['ATreeSelect'];
 
-    ATreeSelectNode: typeof import('ant-design-vue')['TreeSelectNode'];
+    ATreeSelectNode: typeof import('ant-design-vue')['ATreeSelectNode'];
 
-    ATypography: typeof import('ant-design-vue')['Typography'];
+    ATypography: typeof import('ant-design-vue')['ATypography'];
 
-    ATypographyLink: typeof import('ant-design-vue')['TypographyLink'];
+    ATypographyLink: typeof import('ant-design-vue')['ATypographyLink'];
 
-    ATypographyParagraph: typeof import('ant-design-vue')['TypographyParagraph'];
+    ATypographyParagraph: typeof import('ant-design-vue')['ATypographyParagraph'];
 
-    ATypographyText: typeof import('ant-design-vue')['TypographyText'];
+    ATypographyText: typeof import('ant-design-vue')['ATypographyText'];
 
-    ATypographyTitle: typeof import('ant-design-vue')['TypographyTitle'];
+    ATypographyTitle: typeof import('ant-design-vue')['ATypographyTitle'];
 
-    AUpload: typeof import('ant-design-vue')['Upload'];
+    AUpload: typeof import('ant-design-vue')['AUpload'];
 
-    AUploadDragger: typeof import('ant-design-vue')['UploadDragger'];
+    AUploadDragger: typeof import('ant-design-vue')['AUploadDragger'];
 
-    AWeekPicker: typeof import('ant-design-vue')['WeekPicker'];
+    AWeekPicker: typeof import('ant-design-vue')['AWeekPicker'];
 
-    AQrCode: typeof import('ant-design-vue')['QRCode'];
+    AQrCode: typeof import('ant-design-vue')['AQRCode'];
 
-    ATour: typeof import('ant-design-vue')['Tour'];
+    ATour: typeof import('ant-design-vue')['ATour'];
 
-    AFloatButton: typeof import('ant-design-vue')['FloatButton'];
+    AFloatButton: typeof import('ant-design-vue')['AFloatButton'];
 
-    AFloatButtonGroup: typeof import('ant-design-vue')['FloatButtonGroup'];
+    AFloatButtonGroup: typeof import('ant-design-vue')['AFloatButtonGroup'];
 
-    ABackTop: typeof import('ant-design-vue')['BackTop'];
+    ABackTop: typeof import('ant-design-vue')['ABackTop'];
 
-    AWatermark: typeof import('ant-design-vue')['Watermark'];
+    AWatermark: typeof import('ant-design-vue')['AWatermark'];
 
-    AFlex: typeof import('ant-design-vue')['Flex'];
+    AFlex: typeof import('ant-design-vue')['AFlex'];
   }
 }
 export {};

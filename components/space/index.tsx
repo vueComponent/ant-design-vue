@@ -154,7 +154,7 @@ Space.install = function (app: App) {
   return app;
 };
 
-export { Compact };
+export { Compact as ACompact };
 
 export default Space as typeof Space &
   Plugin & {

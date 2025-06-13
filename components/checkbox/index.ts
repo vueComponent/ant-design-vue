@@ -1,19 +1,19 @@
 import type { App, Plugin } from 'vue';
 import Checkbox from './Checkbox';
-import CheckboxGroup from './Group';
+import ACheckboxGroup from './Group';
 export type { CheckboxProps, CheckboxGroupProps, CheckboxOptionType } from './interface';
 export { checkboxProps, checkboxGroupProps } from './interface';
 
-Checkbox.Group = CheckboxGroup;
+Checkbox.Group = ACheckboxGroup;
 
 /* istanbul ignore next */
 Checkbox.install = function (app: App) {
   app.component(Checkbox.name, Checkbox);
-  app.component(CheckboxGroup.name, CheckboxGroup);
+  app.component(ACheckboxGroup.name, ACheckboxGroup);
   return app;
 };
-export { CheckboxGroup };
+export { ACheckboxGroup };
 export default Checkbox as typeof Checkbox &
   Plugin & {
-    readonly Group: typeof CheckboxGroup;
+    readonly Group: typeof ACheckboxGroup;
   };

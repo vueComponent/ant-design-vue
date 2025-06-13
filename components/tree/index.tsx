@@ -26,7 +26,7 @@ export type {
 
 const TreeNode = VcTreeNode;
 
-export { DirectoryTree, TreeNode };
+export { DirectoryTree as ADirectoryTree, TreeNode as ATreeNode };
 
 export default Object.assign(Tree, {
   DirectoryTree,

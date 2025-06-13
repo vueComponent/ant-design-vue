@@ -1,7 +1,7 @@
 import type { App, Plugin } from 'vue';
 import FloatButton from './FloatButton';
-import FloatButtonGroup from './FloatButtonGroup';
-import BackTop from './BackTop';
+import AFloatButtonGroup from './FloatButtonGroup';
+import ABackTop from './BackTop';
 
 import type {
   FloatButtonProps,
@@ -22,21 +22,21 @@ export type {
   FloatButtonSize,
 };
 
-FloatButton.Group = FloatButtonGroup;
-FloatButton.BackTop = BackTop;
+FloatButton.Group = AFloatButtonGroup;
+FloatButton.BackTop = ABackTop;
 
 /* istanbul ignore next */
 FloatButton.install = function (app: App) {
   app.component(FloatButton.name, FloatButton);
-  app.component(FloatButtonGroup.name, FloatButtonGroup);
-  app.component(BackTop.name, BackTop);
+  app.component(AFloatButtonGroup.name, AFloatButtonGroup);
+  app.component(ABackTop.name, ABackTop);
   return app;
 };
 
-export { FloatButtonGroup, BackTop };
+export { AFloatButtonGroup, ABackTop };
 
 export default FloatButton as typeof FloatButton &
   Plugin & {
-    readonly Group: typeof FloatButtonGroup;
-    readonly BackTop: typeof BackTop;
+    readonly Group: typeof AFloatButtonGroup;
+    readonly BackTop: typeof ABackTop;
   };

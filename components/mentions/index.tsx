@@ -282,7 +282,7 @@ const Mentions = defineComponent({
 });
 
 /* istanbul ignore next */
-export const MentionsOption = defineComponent({
+export const AMentionsOption = defineComponent({
   compatConfig: { MODE: 3 },
   ...optionOptions,
   name: 'AMentionsOption',
@@ -290,11 +290,11 @@ export const MentionsOption = defineComponent({
 });
 
 export default Object.assign(Mentions, {
-  Option: MentionsOption,
+  Option: AMentionsOption,
   getMentions,
   install: (app: App) => {
     app.component(Mentions.name, Mentions);
-    app.component(MentionsOption.name, MentionsOption);
+    app.component(AMentionsOption.name, AMentionsOption);
     return app;
   },
 });

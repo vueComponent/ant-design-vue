@@ -17,12 +17,12 @@ export const install = function (app: App) {
   app.use(cssinjs.StyleProvider);
   app.config.globalProperties.$message = components.message;
   app.config.globalProperties.$notification = components.notification;
-  app.config.globalProperties.$info = components.Modal.info;
-  app.config.globalProperties.$success = components.Modal.success;
-  app.config.globalProperties.$error = components.Modal.error;
-  app.config.globalProperties.$warning = components.Modal.warning;
-  app.config.globalProperties.$confirm = components.Modal.confirm;
-  app.config.globalProperties.$destroyAll = components.Modal.destroyAll;
+  app.config.globalProperties.$info = components.AModal.info;
+  app.config.globalProperties.$success = components.AModal.success;
+  app.config.globalProperties.$error = components.AModal.error;
+  app.config.globalProperties.$warning = components.AModal.warning;
+  app.config.globalProperties.$confirm = components.AModal.confirm;
+  app.config.globalProperties.$destroyAll = components.AModal.destroyAll;
   return app;
 };
 

@@ -13,7 +13,7 @@ Timeline.install = function (app: App) {
   app.component(TimelineItem.name, TimelineItem);
   return app;
 };
-export { TimelineItem, timelineProps, timelineItemProps };
+export { TimelineItem as ATimelineItem, timelineProps, timelineItemProps };
 export default Timeline as typeof Timeline &
   Plugin & {
     readonly Item: typeof TimelineItem;

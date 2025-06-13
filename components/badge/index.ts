@@ -9,7 +9,7 @@ Badge.install = function (app: App) {
   return app;
 };
 
-export { Ribbon as BadgeRibbon };
+export { Ribbon as ABadgeRibbon };
 
 export default Badge as typeof Badge &
   Plugin & {

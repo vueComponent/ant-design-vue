@@ -30,7 +30,13 @@ Skeleton.install = function (app: App) {
   app.component(Skeleton.Title.name, SkeletonTitle);
   return app;
 };
-export { SkeletonButton, SkeletonAvatar, SkeletonInput, SkeletonImage, SkeletonTitle };
+export {
+  SkeletonButton as ASkeletonButton,
+  SkeletonAvatar as ASkeletonAvatar,
+  SkeletonInput as ASkeletonInput,
+  SkeletonImage as ASkeletonImage,
+  SkeletonTitle as ASkeletonTitle,
+};
 export default Skeleton as typeof Skeleton &
   Plugin & {
     readonly Button: typeof SkeletonButton;

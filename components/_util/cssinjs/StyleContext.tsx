@@ -32,7 +32,6 @@ export function createCache() {
       (style as any)[CSS_IN_JS_INSTANCE] = (style as any)[CSS_IN_JS_INSTANCE] || cssinjsInstanceId;
 
       // Not force move if no head
-      // Not force move if no head
       if ((style as any)[CSS_IN_JS_INSTANCE] === cssinjsInstanceId) {
         document.head.insertBefore(style, firstChild);
       }

@@ -13,6 +13,7 @@ export const anchorLinkProps = () => ({
   href: String,
   title: anyType<VueNode | ((item: any) => VueNode)>(),
   target: String,
+  replace: Boolean,
   /* private use  */
   customTitleProps: objectType<AnchorLinkItemProps>(),
 });
@@ -53,6 +54,10 @@ export default defineComponent({
       const { href } = props;
       contextHandleClick(e, { title: mergedTitle, href });
       scrollTo(href);
+      if (props.replace) {
+        e.preventDefault();
+        window.location.replace(href);
+      }
     };
 
     watch(

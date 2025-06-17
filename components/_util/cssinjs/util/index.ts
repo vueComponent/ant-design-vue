@@ -1,12 +1,37 @@
 import hash from '@emotion/hash';
-import { removeCSS, updateCSS } from '../../vc-util/Dom/dynamicCSS';
-import canUseDom from '../canUseDom';
+import canUseDom from '../../canUseDom';
+import { removeCSS, updateCSS } from '../../../vc-util/Dom/dynamicCSS';
+import { ATTR_MARK, ATTR_TOKEN } from '../StyleContext';
+import { Theme } from '../theme';
 
-import { Theme } from './theme';
+// Create a cache for memo concat
+type NestWeakMap<T> = WeakMap<object, NestWeakMap<T> | T>;
+const resultCache: NestWeakMap<object> = new WeakMap();
+const RESULT_VALUE = {};
+
+export function memoResult<T extends object, R>(callback: () => R, deps: T[]): R {
+  let current: WeakMap<any, any> = resultCache;
+  for (let i = 0; i < deps.length; i += 1) {
+    const dep = deps[i];
+    if (!current.has(dep)) {
+      current.set(dep, new WeakMap());
+    }
+    current = current.get(dep)!;
+  }
+
+  if (!current.has(RESULT_VALUE)) {
+    current.set(RESULT_VALUE, callback());
+  }
+
+  return current.get(RESULT_VALUE);
+}
 
 // Create a cache here to avoid always loop generate
 const flattenTokenCache = new WeakMap<any, string>();
 
+/**
+ * Flatten token to string, this will auto cache the result when token not change
+ */
 export function flattenToken(token: any) {
   let str = flattenTokenCache.get(token) || '';
 
@@ -115,4 +140,40 @@ export function supportLogicProps(): boolean {
   }
 
   return canLogic!;
+}
+
+export const isClientSide = canUseDom();
+
+export function unit(num: string | number) {
+  if (typeof num === 'number') {
+    return `${num}px`;
+  }
+  return num;
+}
+
+export function toStyleStr(
+  style: string,
+  tokenKey?: string,
+  styleId?: string,
+  customizeAttrs: Record<string, string> = {},
+  plain = false,
+) {
+  if (plain) {
+    return style;
+  }
+  const attrs: Record<string, string | undefined> = {
+    ...customizeAttrs,
+    [ATTR_TOKEN]: tokenKey,
+    [ATTR_MARK]: styleId,
+  };
+
+  const attrStr = Object.keys(attrs)
+    .map(attr => {
+      const val = attrs[attr];
+      return val ? `${attr}="${val}"` : null;
+    })
+    .filter(v => v)
+    .join(' ');
+
+  return `<style ${attrStr}>${style}</style>`;
 }

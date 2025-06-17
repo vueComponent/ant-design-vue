@@ -2,6 +2,7 @@ import canUseDom from '../../_util/canUseDom';
 import contains from './contains';
 
 const APPEND_ORDER = 'data-vc-order';
+const APPEND_PRIORITY = 'data-vc-priority';
 const MARK_KEY = `vc-util-key`;
 
 const containerCache = new Map<ContainerType, Node & ParentNode>();
@@ -14,8 +15,12 @@ interface Options {
   attachTo?: ContainerType;
   csp?: { nonce?: string };
   prepend?: Prepend;
-  mark?: string;
+  /**
+   * Config the `priority` of `prependQueue`. Default is `0`.
+   * It's useful if you need to insert style before other style.
+   */
   priority?: number;
+  mark?: string;
 }
 
 function getMark({ mark }: Options = {}) {
@@ -56,10 +61,16 @@ export function injectCSS(css: string, option: Options = {}) {
     return null;
   }
 
-  const { csp, prepend } = option;
+  const { csp, prepend, priority = 0 } = option;
+  const mergedOrder = getOrder(prepend);
+  const isPrependQueue = mergedOrder === 'prependQueue';
 
   const styleNode = document.createElement('style');
-  styleNode.setAttribute(APPEND_ORDER, getOrder(prepend));
+  styleNode.setAttribute(APPEND_ORDER, mergedOrder);
+
+  if (isPrependQueue && priority) {
+    styleNode.setAttribute(APPEND_PRIORITY, `${priority}`);
+  }
 
   if (csp?.nonce) {
     styleNode.nonce = csp?.nonce;
@@ -71,10 +82,18 @@ export function injectCSS(css: string, option: Options = {}) {
 
   if (prepend) {
     // If is queue `prepend`, it will prepend first style and then append rest style
-    if (prepend === 'queue') {
-      const existStyle = findStyles(container).filter(node =>
-        ['prepend', 'prependQueue'].includes(node.getAttribute(APPEND_ORDER)),
-      );
+    if (isPrependQueue) {
+      const existStyle = findStyles(container).filter(node => {
+        // Ignore style which not injected by rc-util with prepend
+        if (!['prepend', 'prependQueue'].includes(node.getAttribute(APPEND_ORDER))) {
+          return false;
+        }
+
+        // Ignore style which priority less then new style
+        const nodePriority = Number(node.getAttribute(APPEND_PRIORITY) || 0);
+        return priority >= nodePriority;
+      });
+
       if (existStyle.length) {
         container.insertBefore(styleNode, existStyle[existStyle.length - 1].nextSibling);
 

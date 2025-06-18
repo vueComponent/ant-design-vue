@@ -151,7 +151,7 @@ const SelectSelector = defineComponent<SelectorProps>({
     ) {
       const onMouseDown = (e: MouseEvent) => {
         onPreventMouseDown(e);
-        props.onToggleOpen(!open);
+        props.onToggleOpen(!props.open);
       };
       let originData = option;
       // For TreeSelect

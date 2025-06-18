@@ -29,6 +29,7 @@ import eagerComputed from '../_util/eagerComputed';
 
 // CSSINJS
 import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 export type { ListItemProps } from './Item';
 export type { ListItemMetaProps } from './ItemMeta';
@@ -110,7 +111,8 @@ const List = defineComponent({
     const { prefixCls, direction, renderEmpty } = useConfigInject('list', props);
 
     // Style
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
     const paginationObj = computed(() =>
       props.pagination && typeof props.pagination === 'object' ? props.pagination : {},
@@ -274,7 +276,9 @@ const List = defineComponent({
           [`${prefixCls.value}-something-after-last-item`]: isSomethingAfterLastItem,
         },
         attrs.class,
+        cssVarCls.value,
         hashId.value,
+        rootCls.value,
       );
       const paginationContent = props.pagination ? (
         <div class={`${prefixCls.value}-pagination`}>

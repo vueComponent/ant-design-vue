@@ -33,7 +33,7 @@ Customizing the header and footer of list by setting `header` and `footer` prope
       <div>Footer</div>
     </template>
   </a-list>
-  <h3 :style="{ marginBottom: '16px' }">Default Size</h3>
+  <h3 :style="{ margin: '16px 0' }">Default Size</h3>
   <a-list bordered :data-source="data">
     <template #renderItem="{ item }">
       <a-list-item>{{ item }}</a-list-item>

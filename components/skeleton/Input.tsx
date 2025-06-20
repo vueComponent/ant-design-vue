@@ -6,6 +6,7 @@ import type { SkeletonElementProps } from './Element';
 import Element, { skeletonElementProps } from './Element';
 import omit from '../_util/omit';
 import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 export interface SkeletonInputProps extends Omit<SkeletonElementProps, 'size' | 'shape'> {
   size?: 'large' | 'small' | 'default';
@@ -22,7 +23,8 @@ const SkeletonInput = defineComponent({
   },
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const cls = computed(() =>
       classNames(
         prefixCls.value,
@@ -31,7 +33,9 @@ const SkeletonInput = defineComponent({
           [`${prefixCls.value}-active`]: props.active,
           [`${prefixCls.value}-block`]: props.block,
         },
+        rootCls.value,
         hashId.value,
+        cssVarCls.value,
       ),
     );
     return () => {

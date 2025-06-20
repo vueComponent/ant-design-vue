@@ -5,6 +5,7 @@ import omit from '../_util/omit';
 import type { SkeletonElementProps } from './Element';
 import { skeletonElementProps } from './Element';
 import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 export type SkeletonImageProps = Omit<SkeletonElementProps, 'size' | 'shape' | 'active'>;
 
@@ -17,9 +18,16 @@ const SkeletonImage = defineComponent({
   props: omit(skeletonElementProps(), ['size', 'shape', 'active']),
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const cls = computed(() =>
-      classNames(prefixCls.value, `${prefixCls.value}-element`, hashId.value),
+      classNames(
+        prefixCls.value,
+        `${prefixCls.value}-element`,
+        rootCls.value,
+        hashId.value,
+        cssVarCls.value,
+      ),
     );
     return () => {
       return wrapSSR(

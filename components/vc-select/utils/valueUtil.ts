@@ -2,11 +2,13 @@ import type { BaseOptionType, DefaultOptionType, RawValueType, FieldNames } from
 import { warning } from '../../vc-util/warning';
 import type { FlattenOptionData } from '../interface';
 
-function getKey(data: BaseOptionType, index: number) {
+function getKey(data: BaseOptionType, index: number, fieldNames?: FieldNames) {
   const { key } = data;
   let value: RawValueType;
 
-  if ('value' in data) {
+  if (fieldNames && fieldNames.value && data[fieldNames.value] !== undefined) {
+    ({ [fieldNames.value]: value } = data);
+  } else if ('value' in data) {
     ({ value } = data);
   }
 
@@ -54,7 +56,7 @@ export function flattenOptions<OptionType extends BaseOptionType = DefaultOption
         const value = data[fieldValue];
         // Option
         flattenList.push({
-          key: getKey(data, flattenList.length),
+          key: getKey(data, flattenList.length, fieldNames),
           groupOption: isGroupOption,
           data,
           label,
@@ -67,7 +69,7 @@ export function flattenOptions<OptionType extends BaseOptionType = DefaultOption
         }
         // Option Group
         flattenList.push({
-          key: getKey(data, flattenList.length),
+          key: getKey(data, flattenList.length, fieldNames),
           group: true,
           data,
           label: grpLabel,

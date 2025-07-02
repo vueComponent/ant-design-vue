@@ -30,7 +30,7 @@ export default function Mask(props: MaskProps) {
 
   return (
     <Transition appear {...motion}>
-      <div v-if={visible} style={{ zIndex }} class={`${prefixCls}-mask`} />
+      <div v-show={visible} style={{ zIndex }} class={`${prefixCls}-mask`} />
     </Transition>
   );
 }

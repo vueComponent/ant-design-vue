@@ -27,10 +27,11 @@ import useStyle from './style';
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;
 }
-enum AffixStatus {
-  None,
-  Prepare,
-}
+const AFFIX_STATUS_NONE = 0;
+const AFFIX_STATUS_PREPARE = 1;
+
+type AffixStatus = typeof AFFIX_STATUS_NONE | typeof AFFIX_STATUS_PREPARE;
+
 export interface AffixState {
   affixStyle?: CSSProperties;
   placeholderStyle?: CSSProperties;
@@ -82,7 +83,7 @@ const Affix = defineComponent({
     const state = reactive({
       affixStyle: undefined,
       placeholderStyle: undefined,
-      status: AffixStatus.None,
+      status: AFFIX_STATUS_NONE,
       lastAffix: false,
       prevTarget: null,
       timeout: null,
@@ -98,7 +99,12 @@ const Affix = defineComponent({
     const measure = () => {
       const { status, lastAffix } = state;
       const { target } = props;
-      if (status !== AffixStatus.Prepare || !fixedNode.value || !placeholderNode.value || !target) {
+      if (
+        status !== AFFIX_STATUS_PREPARE ||
+        !fixedNode.value ||
+        !placeholderNode.value ||
+        !target
+      ) {
         return;
       }
 
@@ -108,7 +114,7 @@ const Affix = defineComponent({
       }
 
       const newState = {
-        status: AffixStatus.None,
+        status: AFFIX_STATUS_NONE,
       } as AffixState;
       const placeholderRect = getTargetRect(placeholderNode.value as HTMLElement);
 
@@ -172,7 +178,7 @@ const Affix = defineComponent({
     };
     const prepareMeasure = () => {
       Object.assign(state, {
-        status: AffixStatus.Prepare,
+        status: AFFIX_STATUS_PREPARE,
         affixStyle: undefined,
         placeholderStyle: undefined,
       });
@@ -253,12 +259,13 @@ const Affix = defineComponent({
     });
 
     const { prefixCls } = useConfigInject('affix', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls);
     return () => {
       const { affixStyle, placeholderStyle, status } = state;
       const className = classNames({
         [prefixCls.value]: affixStyle,
         [hashId.value]: true,
+        [cssVarCls.value]: true,
       });
       const restProps = omit(props, [
         'prefixCls',

@@ -4,6 +4,8 @@ import type { AliasToken, FullToken, GenerateStyle } from '../../theme/internal'
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { genTreeStyle } from '../../tree/style';
 
+export interface ComponentToken {}
+
 interface TreeSelectToken extends FullToken<'TreeSelect'> {
   treePrefixCls: string;
 }

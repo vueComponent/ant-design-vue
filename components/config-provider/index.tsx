@@ -15,7 +15,7 @@ import type { ValidateMessages } from '../form/interface';
 import useStyle from './style';
 import useTheme from './hooks/useTheme';
 import defaultSeedToken from '../theme/themes/seed';
-import type { ConfigProviderInnerProps, ConfigProviderProps, Theme } from './context';
+import type { ConfigProviderInnerProps, ConfigProviderProps, Theme, ThemeConfig } from './context';
 import {
   useConfigContextProvider,
   useConfigContextInject,
@@ -26,7 +26,7 @@ import {
 import { useProviderSize } from './SizeContext';
 import { useProviderDisabled } from './DisabledContext';
 import { createTheme } from '../_util/cssinjs';
-import { DesignTokenProvider } from '../theme/internal';
+import { defaultTheme, DesignTokenProvider } from '../theme/context';
 
 export type {
   ConfigProviderProps,
@@ -226,19 +226,47 @@ const ConfigProvider = defineComponent({
 
     // ================================ Dynamic theme ================================
     const memoTheme = computed(() => {
-      const { algorithm, token, ...rest } = mergedTheme.value || {};
+      const { algorithm, token, components, cssVar, ...rest } = mergedTheme.value || {};
       const themeObj =
         algorithm && (!Array.isArray(algorithm) || algorithm.length > 0)
           ? createTheme(algorithm)
-          : undefined;
+          : defaultTheme;
+
+      const parsedComponents: any = {};
+      Object.entries(components || {}).forEach(([componentName, componentToken]) => {
+        const parsedToken: typeof componentToken & { theme?: typeof defaultTheme } = {
+          ...componentToken,
+        };
+        if ('algorithm' in parsedToken) {
+          if (parsedToken.algorithm === true) {
+            parsedToken.theme = themeObj;
+          } else if (
+            Array.isArray(parsedToken.algorithm) ||
+            typeof parsedToken.algorithm === 'function'
+          ) {
+            parsedToken.theme = createTheme(parsedToken.algorithm as any);
+          }
+          delete parsedToken.algorithm;
+        }
+        parsedComponents[componentName] = parsedToken;
+      });
+
+      const mergedToken = {
+        ...defaultSeedToken,
+        ...token,
+      };
+
       return {
         ...rest,
         theme: themeObj,
 
-        token: {
-          ...defaultSeedToken,
-          ...token,
+        token: mergedToken,
+        components: parsedComponents,
+        override: {
+          override: mergedToken,
+          ...parsedComponents,
         },
+        cssVar: cssVar as Exclude<ThemeConfig['cssVar'], boolean>,
       };
     });
     const validateMessagesRef = computed(() => {

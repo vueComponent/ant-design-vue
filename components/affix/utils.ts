@@ -9,8 +9,11 @@ export function getTargetRect(target: BindElement): DOMRect {
     : ({ top: 0, bottom: window.innerHeight } as DOMRect);
 }
 
-export function getFixedTop(placeholderRect: DOMRect, targetRect: DOMRect, offsetTop: number) {
-  if (offsetTop !== undefined && targetRect.top > placeholderRect.top - offsetTop) {
+export function getFixedTop(placeholderRect: DOMRect, targetRect: DOMRect, offsetTop?: number) {
+  if (
+    offsetTop !== undefined &&
+    Math.round(targetRect.top) > Math.round(placeholderRect.top) - offsetTop
+  ) {
     return `${offsetTop + targetRect.top}px`;
   }
   return undefined;
@@ -19,9 +22,12 @@ export function getFixedTop(placeholderRect: DOMRect, targetRect: DOMRect, offse
 export function getFixedBottom(
   placeholderRect: DOMRect,
   targetRect: DOMRect,
-  offsetBottom: number,
+  offsetBottom?: number,
 ) {
-  if (offsetBottom !== undefined && targetRect.bottom < placeholderRect.bottom + offsetBottom) {
+  if (
+    offsetBottom !== undefined &&
+    Math.round(targetRect.bottom) < Math.round(placeholderRect.bottom) + offsetBottom
+  ) {
     const targetBottomOffset = window.innerHeight - targetRect.bottom;
     return `${offsetBottom + targetBottomOffset}px`;
   }
@@ -29,7 +35,7 @@ export function getFixedBottom(
 }
 
 // ======================== Observer ========================
-const TRIGGER_EVENTS = [
+const TRIGGER_EVENTS: (keyof WindowEventMap)[] = [
   'resize',
   'scroll',
   'touchstart',

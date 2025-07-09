@@ -1,146 +1,51 @@
-import type { CSSInterpolation, Theme } from '../_util/cssinjs';
-import { createTheme, useCacheToken, useStyleRegister } from '../_util/cssinjs';
+import { useStyleRegister } from '../_util/cssinjs';
 
-import version from '../version';
 import type {
   AliasToken,
-  GlobalToken,
-  MapToken,
-  OverrideToken,
-  PresetColorType,
+  GenerateStyle,
   PresetColorKey,
+  PresetColorType,
   SeedToken,
+  UseComponentStyleResult,
 } from './interface';
 import { PresetColors } from './interface';
-import defaultDerivative from './themes/default';
-import defaultSeedToken from './themes/seed';
-import formatToken from './util/alias';
-import type { FullToken } from './util/genComponentStyleHook';
-import genComponentStyleHook from './util/genComponentStyleHook';
-import statisticToken, { merge as mergeToken, statistic } from './util/statistic';
-import type { VueNode } from '../_util/type';
-import { objectType } from '../_util/type';
-import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import {
-  triggerRef,
-  unref,
-  defineComponent,
-  provide,
-  computed,
-  inject,
-  watch,
-  shallowRef,
-} from 'vue';
+import useToken from './useToken';
+import type { FullToken, GetDefaultToken } from './util/genComponentStyleHook';
+import genComponentStyleHook, {
+  genSubStyleComponent,
+  genStyleHooks,
+} from './util/genComponentStyleHook';
+import genPresetColor from './util/genPresetColor';
+import statisticToken, { merge as mergeToken } from './util/statistic';
+import useResetIconStyle from './util/useResetIconStyle';
+import calc from './util/calc';
+import { getLineHeight } from './themes/shared/genFontSizes';
 
-const defaultTheme = createTheme(defaultDerivative);
-
+export { defaultConfig, DesignTokenProvider } from './context';
 export {
-  // colors
   PresetColors,
-  // Statistic
-  statistic,
-  statisticToken,
-  mergeToken,
-  // hooks
-  useStyleRegister,
   genComponentStyleHook,
+  genSubStyleComponent,
+  genPresetColor,
+  genStyleHooks,
+  mergeToken,
+  statisticToken,
+  calc,
+  getLineHeight,
+  // hooks
+  useResetIconStyle,
+  useStyleRegister,
+  useToken,
 };
 export type {
-  SeedToken,
   AliasToken,
-  PresetColorType,
-  PresetColorKey,
   // FIXME: Remove this type
   AliasToken as DerivativeToken,
   FullToken,
+  GenerateStyle,
+  PresetColorKey,
+  PresetColorType,
+  SeedToken,
+  UseComponentStyleResult,
+  GetDefaultToken,
 };
-
-// ================================ Context =================================
-// To ensure snapshot stable. We disable hashed in test env.
-export const defaultConfig = {
-  token: defaultSeedToken,
-  hashed: true,
-};
-
-export interface DesignTokenContext {
-  token: Partial<AliasToken>;
-  theme?: Theme<SeedToken, MapToken>;
-  components?: OverrideToken;
-  hashed?: string | boolean;
-}
-//defaultConfig
-const DesignTokenContextKey: InjectionKey<ComputedRef<DesignTokenContext>> =
-  Symbol('DesignTokenContext');
-
-export const globalDesignTokenApi = shallowRef<DesignTokenContext>();
-
-export const useDesignTokenProvider = (value: ComputedRef<DesignTokenContext>) => {
-  provide(DesignTokenContextKey, value);
-  watch(
-    value,
-    () => {
-      globalDesignTokenApi.value = unref(value);
-      triggerRef(globalDesignTokenApi);
-    },
-    { immediate: true, deep: true },
-  );
-};
-
-export const useDesignTokenInject = () => {
-  return inject(
-    DesignTokenContextKey,
-    computed(() => globalDesignTokenApi.value || defaultConfig),
-  );
-};
-export const DesignTokenProvider = defineComponent({
-  props: {
-    value: objectType<DesignTokenContext>(),
-  },
-  setup(props, { slots }) {
-    useDesignTokenProvider(computed(() => props.value));
-    return () => {
-      return slots.default?.();
-    };
-  },
-});
-// ================================== Hook ==================================
-export function useToken(): [
-  ComputedRef<Theme<SeedToken, MapToken>>,
-  ComputedRef<GlobalToken>,
-  ComputedRef<string>,
-] {
-  const designTokenContext = inject<ComputedRef<DesignTokenContext>>(
-    DesignTokenContextKey,
-    computed(() => globalDesignTokenApi.value || defaultConfig),
-  );
-
-  const salt = computed(() => `${version}-${designTokenContext.value.hashed || ''}`);
-
-  const mergedTheme = computed(() => designTokenContext.value.theme || defaultTheme);
-
-  const cacheToken = useCacheToken<GlobalToken, SeedToken>(
-    mergedTheme,
-    computed(() => [defaultSeedToken, designTokenContext.value.token]),
-    computed(() => ({
-      salt: salt.value,
-      override: {
-        override: designTokenContext.value.token,
-        ...designTokenContext.value.components,
-      },
-      formatToken,
-    })),
-  );
-
-  return [
-    mergedTheme,
-    computed(() => cacheToken.value[0]),
-    computed(() => (designTokenContext.value.hashed ? cacheToken.value[1] : '')),
-  ];
-}
-
-export type UseComponentStyleResult = [(node: VueNode) => VueNode, Ref<string>];
-
-export type GenerateStyle<
-  ComponentToken extends object = AliasToken,
-  ReturnType = CSSInterpolation,
-> = (token: ComponentToken) => ReturnType;

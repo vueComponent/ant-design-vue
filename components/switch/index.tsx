@@ -98,7 +98,7 @@ const Switch = defineComponent({
     );
 
     const { prefixCls, direction, size } = useConfigInject('switch', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
     const refSwitchNode = ref();
     const focus = () => {
       refSwitchNode.value?.focus();
@@ -159,10 +159,11 @@ const Switch = defineComponent({
       [prefixCls.value]: true,
       [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       [hashId.value]: true,
+      [cssVarCls.value]: true,
     }));
 
     return () =>
-      wrapSSR(
+      wrapCSSVar(
         <Wave>
           <button
             {...omit(props, [

@@ -6,10 +6,10 @@ export type { BasicProps as LayoutProps } from './layout';
 export type { SiderProps } from './Sider';
 
 /* istanbul ignore next */
-export const LayoutHeader = Header;
-export const LayoutFooter = Footer;
-export const LayoutSider = Sider;
-export const LayoutContent = Content;
+export const ALayoutHeader = Header;
+export const ALayoutFooter = Footer;
+export const ALayoutSider = Sider;
+export const ALayoutContent = Content;
 
 export default Object.assign(Layout, {
   Header,

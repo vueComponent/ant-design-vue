@@ -16,4 +16,4 @@ export default Tabs as typeof Tabs &
     readonly TabPane: typeof TabPane;
   };
 
-export { TabPane };
+export { TabPane as ATabPane };

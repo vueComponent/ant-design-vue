@@ -47,7 +47,7 @@ export type DescriptionsItemProp = Partial<
   ExtractPropTypes<ReturnType<typeof descriptionsItemProp>>
 >;
 
-export const DescriptionsItem = defineComponent({
+export const ADescriptionsItem = defineComponent({
   compatConfig: { MODE: 3 },
   name: 'ADescriptionsItem',
   props: descriptionsItemProp(),
@@ -168,7 +168,7 @@ const Descriptions = defineComponent({
     extra?: any;
     default?: any;
   }>,
-  Item: DescriptionsItem,
+  Item: ADescriptionsItem,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('descriptions', props);
     let token: number;
@@ -260,5 +260,5 @@ Descriptions.install = function (app: App) {
 };
 export default Descriptions as typeof Descriptions &
   Plugin & {
-    readonly Item: typeof DescriptionsItem;
+    readonly Item: typeof ADescriptionsItem;
   };

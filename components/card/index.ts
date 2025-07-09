@@ -16,7 +16,7 @@ Card.install = function (app: App) {
   return app;
 };
 
-export { Meta as CardMeta, Grid as CardGrid };
+export { Meta as ACardMeta, Grid as ACardGrid };
 
 export default Card as typeof Card &
   Plugin & {

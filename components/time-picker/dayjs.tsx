@@ -16,7 +16,7 @@ export interface TimePickerProps extends Omit<PickerTimeProps<Dayjs>, 'picker'> 
 }
 
 /* istanbul ignore next */
-export { TimePicker, TimeRangePicker };
+export { TimePicker, TimeRangePicker as ATimeRangePicker };
 export default Object.assign(TimePicker, {
   TimePicker,
   TimeRangePicker,

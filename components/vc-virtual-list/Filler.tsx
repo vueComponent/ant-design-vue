@@ -23,7 +23,11 @@ const Filter: FunctionalComponent<FillerProps> = (
   };
 
   if (offset !== undefined) {
-    outerStyle = { height: `${height}px`, position: 'relative', overflow: 'hidden' };
+    outerStyle = {
+      height: `${height}px`,
+      ...(offset === 0 ? {} : { position: 'relative' }),
+      overflow: 'hidden',
+    };
 
     innerStyle = {
       ...innerStyle,

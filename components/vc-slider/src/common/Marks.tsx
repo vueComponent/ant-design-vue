@@ -40,7 +40,8 @@ const Marks = (_: any, { attrs, slots }: any) => {
       });
 
       const bottomStyle = {
-        marginBottom: '-50%',
+        transform: `translateY(${reverse ? `-50%` : `50%`})`,
+        msTransform: `translateY(${reverse ? `-50%` : `50%`})`,
         [reverse ? 'top' : 'bottom']: `${((point - min) / range) * 100}%`,
       };
 

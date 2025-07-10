@@ -108,7 +108,7 @@ const genSharedDividerStyle: GenerateStyle<DividerToken> = (token): CSSObject =>
         },
       },
 
-      [`&-horizontal${componentCls}-with-text-start`]: {
+      [`&-horizontal${componentCls}-with-text-left`]: {
         '&::before': {
           width: `calc(${orientationMargin} * 100%)`,
         },
@@ -117,7 +117,7 @@ const genSharedDividerStyle: GenerateStyle<DividerToken> = (token): CSSObject =>
         },
       },
 
-      [`&-horizontal${componentCls}-with-text-end`]: {
+      [`&-horizontal${componentCls}-with-text-right`]: {
         '&::before': {
           width: `calc(100% - ${orientationMargin} * 100%)`,
         },
@@ -178,7 +178,7 @@ const genSharedDividerStyle: GenerateStyle<DividerToken> = (token): CSSObject =>
         fontSize: token.fontSize,
       },
 
-      [`&-horizontal${componentCls}-with-text-start${componentCls}-no-default-orientation-margin-start`]:
+      [`&-horizontal${componentCls}-with-text-left${componentCls}-no-default-orientation-margin-left`]:
         {
           '&::before': {
             width: 0,
@@ -193,7 +193,7 @@ const genSharedDividerStyle: GenerateStyle<DividerToken> = (token): CSSObject =>
           },
         },
 
-      [`&-horizontal${componentCls}-with-text-end${componentCls}-no-default-orientation-margin-end`]:
+      [`&-horizontal${componentCls}-with-text-right${componentCls}-no-default-orientation-margin-right`]:
         {
           '&::before': {
             width: '100%',

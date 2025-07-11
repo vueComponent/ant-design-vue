@@ -413,7 +413,11 @@ function RangerPicker<DateType>() {
       const { width: panelDivWidth } = useElementSize(panelDivRef);
       const { width: arrowWidth } = useElementSize(arrowRef);
       const { width: startInputDivWidth } = useElementSize(startInputDivRef);
-      const { width: separatorWidth } = useElementSize(separatorRef);
+      const { width: separatorWidth } = useElementSize(
+        separatorRef,
+        { width: 0, height: 0 },
+        { box: 'border-box' },
+      );
       watch(
         [
           mergedActivePickerIndex,

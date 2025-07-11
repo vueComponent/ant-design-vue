@@ -290,6 +290,7 @@ const ConfigProvider = defineComponent({
 });
 
 ConfigProvider.config = setGlobalConfig;
+ConfigProvider.useConfigContextInject = useConfigContextInject;
 
 ConfigProvider.install = function (app: App) {
   app.component(ConfigProvider.name, ConfigProvider);
@@ -298,4 +299,5 @@ ConfigProvider.install = function (app: App) {
 export default ConfigProvider as typeof ConfigProvider &
   Plugin & {
     readonly config: typeof setGlobalConfig;
+    readonly useConfigContextInject: typeof useConfigContextInject;
   };

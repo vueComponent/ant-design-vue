@@ -438,6 +438,7 @@ export default defineComponent({
 
     // KeyDown
     const onInternalKeyDown: KeyboardEventHandler = (event, ...rest) => {
+      event.preventDefault();
       const clearLock = getClearLock();
       const { which } = event;
 
@@ -809,68 +810,76 @@ export default defineComponent({
 
       // >>> Selector
       const selectorNode = (
-        <SelectTrigger
-          ref={triggerRef}
-          disabled={disabled}
-          prefixCls={prefixCls}
-          visible={triggerOpen.value}
-          popupElement={optionList}
-          containerWidth={containerWidth.value}
-          animation={animation}
-          transitionName={transitionName}
-          dropdownStyle={dropdownStyle}
-          dropdownClassName={dropdownClassName}
-          direction={direction}
-          dropdownMatchSelectWidth={dropdownMatchSelectWidth}
-          dropdownRender={dropdownRender}
-          dropdownAlign={dropdownAlign}
-          placement={placement}
-          getPopupContainer={getPopupContainer}
-          empty={emptyOptions}
-          getTriggerDOMNode={() => selectorDomRef.current}
-          onPopupVisibleChange={onTriggerVisibleChange}
-          onPopupMouseEnter={onPopupMouseEnter}
-          onPopupFocusin={onPopupFocusin}
-          onPopupFocusout={onPopupFocusout}
-          v-slots={{
-            default: () => {
-              return customizeRawInputElement ? (
-                isValidElement(customizeRawInputElement) &&
-                  cloneElement(
-                    customizeRawInputElement,
-                    {
-                      ref: selectorDomRef,
-                    },
-                    false,
-                    true,
-                  )
-              ) : (
-                <Selector
-                  {...props}
-                  domRef={selectorDomRef}
-                  prefixCls={prefixCls}
-                  inputElement={customizeInputElement}
-                  ref={selectorRef}
-                  id={id}
-                  showSearch={mergedShowSearch.value}
-                  mode={mode}
-                  activeDescendantId={activeDescendantId}
-                  tagRender={tagRender}
-                  optionLabelRender={optionLabelRender}
-                  values={displayValues}
-                  open={mergedOpen.value}
-                  onToggleOpen={onToggleOpen}
-                  activeValue={activeValue}
-                  searchValue={mergedSearchValue.value}
-                  onSearch={onInternalSearch}
-                  onSearchSubmit={onInternalSearchSubmit}
-                  onRemove={onSelectorRemove}
-                  tokenWithEnter={tokenWithEnter.value}
-                />
-              );
-            },
-          }}
-        ></SelectTrigger>
+        <div
+          {...domProps}
+          class={mergedClassName}
+          onMousedown={onInternalMouseDown}
+          onKeydown={onInternalKeyDown}
+          onKeyup={onInternalKeyUp}
+        >
+          <SelectTrigger
+            ref={triggerRef}
+            disabled={disabled}
+            prefixCls={prefixCls}
+            visible={triggerOpen.value}
+            popupElement={optionList}
+            containerWidth={containerWidth.value}
+            animation={animation}
+            transitionName={transitionName}
+            dropdownStyle={dropdownStyle}
+            dropdownClassName={dropdownClassName}
+            direction={direction}
+            dropdownMatchSelectWidth={dropdownMatchSelectWidth}
+            dropdownRender={dropdownRender}
+            dropdownAlign={dropdownAlign}
+            placement={placement}
+            getPopupContainer={getPopupContainer}
+            empty={emptyOptions}
+            getTriggerDOMNode={() => selectorDomRef.current}
+            onPopupVisibleChange={onTriggerVisibleChange}
+            onPopupMouseEnter={onPopupMouseEnter}
+            onPopupFocusin={onPopupFocusin}
+            onPopupFocusout={onPopupFocusout}
+            v-slots={{
+              default: () => {
+                return customizeRawInputElement ? (
+                  isValidElement(customizeRawInputElement) &&
+                    cloneElement(
+                      customizeRawInputElement,
+                      {
+                        ref: selectorDomRef,
+                      },
+                      false,
+                      true,
+                    )
+                ) : (
+                  <Selector
+                    {...props}
+                    domRef={selectorDomRef}
+                    prefixCls={prefixCls}
+                    inputElement={customizeInputElement}
+                    ref={selectorRef}
+                    id={id}
+                    showSearch={mergedShowSearch.value}
+                    mode={mode}
+                    activeDescendantId={activeDescendantId}
+                    tagRender={tagRender}
+                    optionLabelRender={optionLabelRender}
+                    values={displayValues}
+                    open={mergedOpen.value}
+                    onToggleOpen={onToggleOpen}
+                    activeValue={activeValue}
+                    searchValue={mergedSearchValue.value}
+                    onSearch={onInternalSearch}
+                    onSearchSubmit={onInternalSearchSubmit}
+                    onRemove={onSelectorRemove}
+                    tokenWithEnter={tokenWithEnter.value}
+                  />
+                );
+              },
+            }}
+          ></SelectTrigger>
+        </div>
       );
       // >>> Render
       let renderNode: VueNode;
@@ -910,7 +919,6 @@ export default defineComponent({
               </span>
             )}
             {selectorNode}
-
             {arrowNode}
             {clearNode}
           </div>

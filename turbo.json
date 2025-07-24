@@ -1,0 +1,38 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.stories.{ts,tsx,mdx}"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**", "storybook-static/**"]
+    },
+    "build:dev": {
+      "dependsOn": ["^build:dev"],
+      "outputs": ["dist/**"]
+    },
+    "build:story": {},
+    "preview": {
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "dependsOn": ["^lint", "tsc"]
+    },
+    "tsc": {
+      "dependsOn": ["^tsg"]
+    },
+    "tsg": {
+      "dependsOn": ["^tsg"],
+      "outputs": ["dist/types/**"]
+    },
+    "test": {
+      "dependsOn": ["build:dev"],
+      "cache": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build:dev"],
+      "interactive": false
+    }
+  }
+}

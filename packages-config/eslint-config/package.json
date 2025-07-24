@@ -1,0 +1,27 @@
+{
+  "name": "@ant-design-vue/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./typescript": {
+      "import": "./eslint.config.typescript.js",
+      "types": "./config.d.ts"
+    },
+    "./vue": {
+      "import": "./eslint.config.vue.js",
+      "types": "./config.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.56.0",
+    "@types/eslint__js": "^8.42.3",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-check-file": "^2.8.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^7.17.0",
+    "globby": "^14.1.0"
+  }
+}

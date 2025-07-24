@@ -1,0 +1,32 @@
+{
+  "name": "@ant-design-vue/vite-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./typescript": {
+      "import": "./vite.config.typescript.js",
+      "types": "./config.d.ts"
+    },
+    "./vue": {
+      "import": "./vite.config.vue.js",
+      "types": "./config.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vitejs/plugin-vue": "^5.1.3",
+    "vite": "^5.3.5",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "peerDependencies": {
+    "@vitejs/plugin-vue": "*",
+    "typescript": "*",
+    "vite": "5",
+    "vite-plugin-dts": "*"
+  }
+}

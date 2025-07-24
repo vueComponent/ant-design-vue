@@ -1,0 +1,11 @@
+{
+  "extends": "@ant-design-vue/typescript-config/tsconfig.vue.json",
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.d.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./assets/*"]
+    }
+  }
+}

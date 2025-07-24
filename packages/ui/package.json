@@ -1,0 +1,88 @@
+{
+  "name": "ant-design-vue",
+  "version": "5.0.0-alpha.1",
+  "title": "Ant Design Vue",
+  "description": "An enterprise-class UI design language and Vue-based implementation",
+  "keywords": [
+    "vue",
+    "vue3",
+    "ant",
+    "design",
+    "antd",
+    "vueComponent",
+    "component",
+    "components",
+    "ui",
+    "framework",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "dev": "vite build --watch --mode development",
+    "lint": "eslint . --fix",
+    "tsc": "tsc --noEmit",
+    "tsg": "tsc --declaration --declarationMap --emitDeclarationOnly --noEmit false --outDir dist/types"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./style.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ant-design-vue/core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ant-design-vue/table/issues"
+  },
+  "license": "MIT",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/src/index.d.ts",
+  "files": [
+    "dist",
+    "src/style",
+    "typings"
+  ],
+  "sideEffects": [
+    "dist/*",
+    "*.less"
+  ],
+  "peerDependencies": {
+    "vue": "^3.2.34"
+  },
+  "dependencies": {
+    "@ant-design/colors": "^7.0.0",
+    "@ant-design/icons-vue": "^6.0.1",
+    "@floating-ui/dom": "^1.6.13",
+    "@floating-ui/vue": "^1.1.6",
+    "lodash-es": "^4.17.21",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "devDependencies": {
+    "@ant-design-vue/eslint-config": "*",
+    "@ant-design-vue/prettier-config": "*",
+    "@ant-design-vue/tailwind-config": "*",
+    "@ant-design-vue/typescript-config": "*",
+    "@ant-design-vue/vite-config": "*",
+    "@tailwindcss/vite": "^4.1.3",
+    "@vitejs/plugin-vue": "^5.1.3",
+    "@vueuse/core": "^12.0.0",
+    "@types/node": "^20.19.7",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.0.14",
+    "typescript": "^5.8.2",
+    "vite": "^5.3.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-svg-loader": "^5.1.0",
+    "vue": "^3.4.34",
+    "vue-tsc": "^3.0.3"
+  }
+}

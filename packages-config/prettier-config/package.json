@@ -1,0 +1,22 @@
+{
+  "name": "@ant-design-vue/prettier-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./prettier.config.base.js",
+      "types": "./config.d.ts"
+    },
+    "./tailwind": {
+      "import": "./prettier.config.tailwind.js",
+      "types": "./config.d.ts"
+    }
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  },
+  "peerDependencies": {
+    "prettier-plugin-tailwindcss": "*"
+  }
+}

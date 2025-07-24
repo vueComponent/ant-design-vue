@@ -1,0 +1,35 @@
+@import 'tailwindcss' source(none);
+@import './themes/light.css';
+@plugin '@tailwindcss/typography';
+
+@utility text-tint-* {
+  color: color-mix(in srgb, --value(--color- *, [ *]), white calc(--modifier(integer) * 1%));
+}
+
+@utility text-shade-* {
+  color: color-mix(in srgb, --value(--color- *, [ *]), black calc(--modifier(integer) * 1%));
+}
+
+@utility bg-tint-* {
+  background-color: color-mix(
+    in srgb,
+    --value(--color- *, [ *]),
+    white calc(--modifier(integer) * 1%)
+  );
+}
+
+@utility bg-shade-* {
+  background-color: color-mix(
+    in srgb,
+    --value(--color- *, [ *]),
+    black calc(--modifier(integer) * 1%)
+  );
+}
+
+@utility border-tint-* {
+  border-color: color-mix(in srgb, --value(--color- *, [ *]), white calc(--modifier(integer) * 1%));
+}
+
+@utility border-shade-* {
+  border-color: color-mix(in srgb, --value(--color- *, [ *]), black calc(--modifier(integer) * 1%));
+}

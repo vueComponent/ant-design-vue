@@ -1,0 +1,17 @@
+@import '@ant-design-vue/tailwind-config';
+
+@source '../index.html';
+@source '../src/**/*.{vue,ts}';
+@source '../../../node_modules/ant-design-vue/dist/lib.mjs';
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-base-300) transparent;
+}
+*:focus-visible {
+  outline: none;
+}
+
+.shiki.github-dark,
+.dark-scrollbar {
+  scrollbar-color: rgba(121, 121, 121, 0.4) transparent;
+}

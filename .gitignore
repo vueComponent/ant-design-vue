@@ -66,9 +66,6 @@ package-lock.json
 pnpm-lock.yaml
 /coverage
 
-# 备份文件
-/components/test/*
-list.txt
 
 site/dev.js
 
@@ -77,10 +74,39 @@ vetur/
 
 report.html
 
-site/src/router/demoRoutes.js
 
-components/version/version.ts
-components/version/version.tsx
-components/version/token.json
-components/version/token-meta.json
-~component-api.json
+
+# Local env files
+.env
+.env.*
+!.env.template
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+.next/
+out/
+build/
+dist/
+storybook-static/
+
+
+# Debug
+npm-debug.log*
+
+# Misc
+.DS_Store
+*.pem
+vite.config.*.timestamp*
+*.tsbuildinfo
+*.log
+
+.npmrc
+.tsup/

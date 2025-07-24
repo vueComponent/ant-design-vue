@@ -27,6 +27,6 @@ title:
 import { reactive } from 'vue';
 const state = reactive({
   checked1: true,
-  checked2: false,
+  checked2: true,
 });
 </script>

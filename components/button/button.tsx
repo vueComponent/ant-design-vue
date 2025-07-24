@@ -45,7 +45,7 @@ export default defineComponent({
   // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
     const groupSizeContext = GroupSizeContext.useInject();
     const disabledContext = useInjectDisabled();
     const mergedDisabled = computed(() => props.disabled ?? disabledContext.value);
@@ -95,6 +95,7 @@ export default defineComponent({
         compactItemClassnames.value,
         {
           [hashId.value]: true,
+          [cssVarCls.value]: true,
           [`${pre}`]: true,
           [`${pre}-${shape}`]: shape !== 'default' && shape,
           [`${pre}-${type}`]: type,
@@ -216,7 +217,7 @@ export default defineComponent({
       );
 
       if (href !== undefined) {
-        return wrapSSR(
+        return wrapCSSVar(
           <a {...buttonProps} href={href} target={target} ref={buttonNodeRef}>
             {iconNode}
             {kids}
@@ -239,7 +240,7 @@ export default defineComponent({
         );
       }
 
-      return wrapSSR(buttonNode);
+      return wrapCSSVar(buttonNode);
     };
   },
 });

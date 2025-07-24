@@ -60,7 +60,7 @@ const BackTop = defineComponent({
 
     const handleScroll = throttleByAnimationFrame((e: Event | { target: any }) => {
       const { visibilityHeight } = props;
-      const scrollTop = getScroll(e.target, true);
+      const scrollTop = getScroll(e.target);
       state.visible = scrollTop >= visibilityHeight;
     });
 

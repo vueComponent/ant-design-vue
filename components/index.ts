@@ -2,7 +2,7 @@ import type { App } from 'vue';
 
 import * as components from './components';
 import { default as version } from './version';
-import cssinjs from './_util/cssinjs';
+import * as cssinjs from './_util/cssinjs';
 export * from './components';
 export * from './_util/cssinjs';
 

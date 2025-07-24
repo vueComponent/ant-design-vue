@@ -3,6 +3,8 @@ import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { genFocusStyle, resetComponent } from '../../style';
 
+export interface ComponentToken {}
+
 interface BreadcrumbToken extends FullToken<'Breadcrumb'> {
   breadcrumbBaseColor: string;
   breadcrumbFontSize: number;

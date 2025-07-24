@@ -70,7 +70,7 @@ const Alert = defineComponent({
   props: alertProps(),
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, direction } = useConfigInject('alert', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls);
     const closing = shallowRef(false);
     const closed = shallowRef(false);
     const alertNode = shallowRef();
@@ -134,6 +134,7 @@ const Alert = defineComponent({
         [`${prefixClsValue}-closable`]: closable,
         [`${prefixClsValue}-rtl`]: direction.value === 'rtl',
         [hashId.value]: true,
+        [cssVarCls.value]: true,
       });
 
       const closeIcon = closable ? (

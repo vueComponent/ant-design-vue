@@ -1,5 +1,5 @@
-import canUseDom from '../../../../_util/canUseDom';
-import { ATTR_MARK } from '../../StyleContext';
+import canUseDom from '../../canUseDom';
+import { ATTR_MARK } from '../StyleContext';
 
 export const ATTR_CACHE_MAP = 'data-ant-cssinjs-cache-path';
 

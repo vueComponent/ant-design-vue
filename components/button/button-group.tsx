@@ -45,7 +45,11 @@ export default defineComponent({
           break;
         default:
           // eslint-disable-next-line no-console
-          devWarning(!size, 'Button.Group', 'Invalid prop `size`.');
+          devWarning(
+            !size || ['large', 'small', 'middle'].includes(size),
+            'Button.Group',
+            'Invalid prop `size`.',
+          );
       }
       return {
         [`${prefixCls.value}`]: true,

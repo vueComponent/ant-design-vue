@@ -3,6 +3,8 @@ import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import { resetComponent, textEllipsis } from '../../style';
 
+export interface ComponentToken {}
+
 interface DescriptionsToken extends FullToken<'Descriptions'> {
   descriptionsTitleMarginBottom: number;
   descriptionsExtraColor: string;

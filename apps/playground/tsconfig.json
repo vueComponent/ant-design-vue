@@ -5,7 +5,8 @@
   "compilerOptions": {
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./assets/*"]
+      "~/*": ["./assets/*"],
+      "ant-design-vue": ["./../../packages/ui/src/index.ts"]
     }
   }
 }

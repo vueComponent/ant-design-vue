@@ -1,0 +1,4 @@
+{
+  "extends": "@ant-design-vue/typescript-config/tsconfig.node.json",
+  "include": ["vite.config.*"]
+}

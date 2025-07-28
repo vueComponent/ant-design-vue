@@ -37,14 +37,33 @@ const locales = {
   },
 };
 
-export function useColumns(): Exclude<TableProps<TokenData>['columns'], undefined> {
+/**
+ * 生成表格列配置，包含排序和筛选功能
+ * @param data - 表格数据，用于生成筛选选项
+ * @returns 表格列配置
+ */
+export function useColumns(
+  data?: TokenData[],
+): Exclude<TableProps<TokenData>['columns'], undefined> {
   const [locale] = useLocale(locales);
+
+  // 生成token名称的筛选选项
+  const nameFilters = data
+    ? Array.from(new Set(data.map(item => item.name))).map(name => ({
+        text: name,
+        value: name,
+      }))
+    : [];
 
   return [
     {
       title: locale.value.token,
       key: 'name',
       dataIndex: 'name',
+      sorter: (a: TokenData, b: TokenData) => a.name.localeCompare(b.name),
+      filters: nameFilters,
+      onFilter: (value: string, record: TokenData) => record.name.includes(value),
+      filterSearch: true,
     },
     {
       title: locale.value.description,
@@ -79,7 +98,6 @@ const TokenTable = defineComponent({
     const token = computed(() => SiteToken.value.token);
 
     const [, lang] = useLocale(locales);
-    const columns = useColumns();
 
     const data = computed<TokenData[]>(() => {
       return Object.entries(tokenMeta)
@@ -91,6 +109,8 @@ const TokenTable = defineComponent({
           value: (defaultToken as any)[token],
         }));
     });
+
+    const columns = useColumns(data.value);
 
     return () => {
       return (

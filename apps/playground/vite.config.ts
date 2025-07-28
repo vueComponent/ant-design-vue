@@ -15,7 +15,6 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src'),
       '~': resolve(__dirname, './assets'),
-      'ant-design-vue': resolve(__dirname, '../../packages/ui/src/index.ts'),
     },
   },
 })

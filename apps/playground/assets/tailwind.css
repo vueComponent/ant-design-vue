@@ -1,8 +1,6 @@
-@import '@ant-design-vue/tailwind-config';
-
+@import 'tailwindcss' source(none);
 @source '../index.html';
 @source '../src/**/*.{vue,ts}';
-@source '../../../node_modules/ant-design-vue/dist/lib.mjs';
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-base-300) transparent;

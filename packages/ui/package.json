@@ -1,6 +1,6 @@
 {
-  "name": "ant-design-vue",
-  "version": "5.0.0-alpha.1",
+  "name": "@ant-design-vue/ui",
+  "version": "1.0.0-alpha.1",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -27,12 +27,20 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.umd.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/lib.mjs",
+      "require": "./dist/lib.cjs",
+      "default": "./dist/lib.mjs"
     },
     "./style.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
+      "import": "./dist/lib.css",
+      "require": "./dist/lib.css",
+      "default": "./dist/lib.css"
+    },
+    "./tailwind.css": {
+      "import": "./dist/tailwind.css",
+      "require": "./dist/tailwind.css",
+      "default": "./dist/tailwind.css"
     }
   },
   "repository": {
@@ -43,9 +51,9 @@
     "url": "https://github.com/ant-design-vue/table/issues"
   },
   "license": "MIT",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.esm.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/lib.cjs",
+  "module": "./dist/lib.mjs",
+  "types": "./dist/types/index.d.ts",
   "files": [
     "dist",
     "src/style",
@@ -69,7 +77,6 @@
   "devDependencies": {
     "@ant-design-vue/eslint-config": "*",
     "@ant-design-vue/prettier-config": "*",
-    "@ant-design-vue/tailwind-config": "*",
     "@ant-design-vue/typescript-config": "*",
     "@ant-design-vue/vite-config": "*",
     "@tailwindcss/vite": "^4.1.3",

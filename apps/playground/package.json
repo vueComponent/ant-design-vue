@@ -13,7 +13,7 @@
   "dependencies": {
     "@floating-ui/vue": "^1.1.5",
     "@heroicons/vue": "^2.1.5",
-    "ant-design-vue": "*",
+    "@ant-design-vue/ui": "*",
     "@simonwep/pickr": "^1.9.1",
     "@trpc/client": "^11.0.0",
     "@trpc/server": "^11.0.0",
@@ -27,7 +27,6 @@
   "devDependencies": {
     "@ant-design-vue/eslint-config": "*",
     "@ant-design-vue/prettier-config": "*",
-    "@ant-design-vue/tailwind-config": "*",
     "@ant-design-vue/typescript-config": "*",
     "@ant-design-vue/vite-config": "*",
     "@tailwindcss/vite": "^4.1.3",

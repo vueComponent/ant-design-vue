@@ -11,13 +11,19 @@ export default extendsConfig(vue(__dirname), {
   },
   plugins: [tailwindcss()],
   build: {
-    lib: {
-      name: 'antd',
-      entry: {
-        lib: resolve(__dirname, 'src/index.ts'),
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        // inlineDynamicImports: false,
+        manualChunks(id) {
+          if (id.includes('tailwind.css')) {
+            return 'tailwind'
+          }
+          if (id.includes('.css')) {
+            return 'lib'
+          }
+        },
       },
-      formats: ['umd'],
-      fileName: (format, entryName) => `${entryName}.${format}.js`,
     },
   },
 })

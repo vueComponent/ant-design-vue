@@ -1,0 +1,5 @@
+@reference '../../../style/tailwind.css';
+
+.ant-btn {
+  @apply text-primary-content;
+}

@@ -124,7 +124,7 @@
     "@types/postcss-load-config": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "@vitejs/plugin-legacy": "^2.2.0",
+    "@vitejs/plugin-legacy": "^7.0.0",
     "@vitejs/plugin-vue": "^3.0.0",
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "@vue/babel-plugin-jsx": "^1.0.0",

@@ -1,4 +1,4 @@
-@import 'tailwindcss' source(none);
+@import '@ant-design-vue/tailwind-config';
 @source '../index.html';
 @source '../src/**/*.{vue,ts}';
 * {

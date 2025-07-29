@@ -79,6 +79,7 @@
     "@ant-design-vue/prettier-config": "*",
     "@ant-design-vue/typescript-config": "*",
     "@ant-design-vue/vite-config": "*",
+    "@ant-design-vue/tailwind-config": "*",
     "@tailwindcss/vite": "^4.1.3",
     "@vitejs/plugin-vue": "^5.1.3",
     "@vueuse/core": "^12.0.0",

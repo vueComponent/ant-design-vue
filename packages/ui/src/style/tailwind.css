@@ -1,1 +1,3 @@
+@import '@ant-design-vue/tailwind-config';
 @import './base.css';
+@source '../components/**/*.{vue,ts,css}';

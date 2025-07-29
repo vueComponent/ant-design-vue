@@ -6,9 +6,9 @@ import lib from './vite.config.lib.js'
 /**
  * @type {import('./index.d.ts').GetUserConfig}
  */
-export default dirname =>
+export default (dirname, overwriteLib) =>
   extendsConfig(
-    lib(dirname),
+    lib(dirname, overwriteLib),
     defineConfig(({ mode }) => {
       return {
         plugins: [vue()],

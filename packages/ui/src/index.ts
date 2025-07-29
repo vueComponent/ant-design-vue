@@ -1,4 +1,4 @@
-import './style/index.css'
+import './style/tailwind.css'
 import { App } from 'vue'
 
 import * as components from './components'

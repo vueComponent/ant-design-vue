@@ -8,7 +8,7 @@ import dts from 'vite-plugin-dts'
 /**
  * @type {import('./index.d.ts').GetUserConfig}
  */
-export default dirname =>
+export default (dirname, overwriteLib) =>
   defineConfig(({ mode }) => {
     const pkg = JSON.parse(readFileSync(resolve(dirname, './package.json'), 'utf-8'))
     const isDev = mode === 'development'
@@ -23,20 +23,22 @@ export default dirname =>
         }),
       ],
       build: {
-        lib: {
-          entry: {
-            lib: resolve(dirname, 'src/index.ts'),
-          },
-          formats: ['es', 'cjs'],
-          fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'mjs' : 'cjs'}`,
-        },
+        lib: overwriteLib
+          ? undefined
+          : {
+              entry: {
+                lib: resolve(dirname, 'src/index.ts'),
+              },
+              formats: ['es', 'cjs'],
+              fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'mjs' : 'cjs'}`,
+            },
         rollupOptions: {
           external: isDev
             ? id => {
                 if (pkg.peerDependencies && id in pkg.peerDependencies) {
                   return true
                 }
-                if (/^@(ant-design-vue)\//.test(id) || id === 'ant-design-vue') {
+                if (/^@(ant-design-vue)\//.test(id)) {
                   return true
                 }
                 return false

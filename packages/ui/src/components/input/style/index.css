@@ -1,0 +1,9 @@
+/* Input component styles */
+.ant-input {
+  transition: all 0.2s ease-in-out;
+}
+
+.ant-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

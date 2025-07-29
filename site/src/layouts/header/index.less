@@ -1,11 +1,14 @@
 @import './SearchBox.less';
 
 #header {
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   max-width: 100%;
   background: var(--component-background);
   box-shadow: var(--box-shadow);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 
   .menu-row {
     display: flex;

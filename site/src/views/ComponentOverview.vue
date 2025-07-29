@@ -12,7 +12,7 @@
       </p>
     </section>
     <a-divider></a-divider>
-    <a-affix :offset-top="32" @change="handleAffixChange">
+    <a-affix :offset-top="96" @change="handleAffixChange">
       <div
         class="components-overview-affix"
         :class="{ 'components-overview-affixed': searchBarAffixed }"

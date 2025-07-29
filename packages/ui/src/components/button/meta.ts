@@ -6,9 +6,61 @@ export const buttonProps = {
    * Specifies the visual style variant of the button
    * @default 'primary'
    */
-  type: {
-    type: String as PropType<'primary' | 'secondary'>,
-    default: 'primary',
+  variant: {
+    type: String as PropType<'solid' | 'outlined' | 'text' | 'link' | 'dashed' | 'filled'>,
+    default: 'solid',
+  },
+
+  /**
+   * Specifies the size of the button
+   * @default 'md'
+   */
+  size: {
+    type: String as PropType<'sm' | 'md' | 'lg'>,
+    default: 'md',
+  },
+
+  /**
+   * Specifies the shape of the button
+   * @default 'default'
+   */
+  shape: {
+    type: String as PropType<'default' | 'circle' | 'round'>,
+    default: 'default',
+  },
+
+  /**
+   * Specifies the loading state of the button
+   * @default false
+   */
+  loading: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * Specifies the disabled state of the button
+   * @default false
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * Specifies the danger state of the button
+   * @default false
+   */
+  danger: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * Specifies the color of the button
+   */
+  color: {
+    type: String,
   },
 } as const
 
@@ -31,6 +83,14 @@ export const buttonSlots = {
    * Main content slot for the button text or custom content
    */
   default: (_: any) => null as any,
+  /**
+   * Slot for the button icon
+   */
+  icon: (_: any) => null as any,
+  /**
+   * Slot for the button loading indicator
+   */
+  loading: (_: any) => null as any,
 } as const
 
 export type ButtonSlots = typeof buttonSlots

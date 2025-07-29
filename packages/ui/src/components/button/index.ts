@@ -2,7 +2,6 @@ import { App, Plugin } from 'vue'
 import Button from './Button.vue'
 import './style/index.css'
 
-// 导出组件
 export { default as Button } from './Button.vue'
 export * from './meta'
 

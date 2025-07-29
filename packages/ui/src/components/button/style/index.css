@@ -1,5 +1,50 @@
 @reference '../../../style/tailwind.css';
 
 .ant-btn {
-  @apply text-primary-content;
+  @apply relative;
+  @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-1 whitespace-nowrap;
+  @apply border-1 text-sm;
+  @apply box-border rounded-md px-4 transition-all duration-200 select-none;
+  &:where(.ant-btn-disabled) {
+    @apply cursor-not-allowed;
+  }
+  &:where(.ant-btn-loading) {
+    @apply cursor-default opacity-50;
+  }
+
+  &:where(.ant-btn-solid) {
+    @apply border-none bg-[var(--bg-color)] text-[var(--bg-color-content)];
+    @apply not-disabled:hover:bg-[var(--bg-color-hover)] not-disabled:active:bg-[var(--bg-color-active)];
+  }
+  &:where(.ant-btn-outlined),
+  &:where(.ant-btn-dashed) {
+    @apply border-[var(--border-color-tint-30)] bg-transparent text-[var(--text-color)];
+    @apply not-disabled:hover:border-[var(--border-color-hover)] not-disabled:hover:text-[var(--text-color-hover)] not-disabled:active:border-[var(--border-color-active)] not-disabled:active:text-[var(--text-color-active)];
+    @apply disabled:border-[var(--border-color-tint-80)];
+  }
+  &:where(.ant-btn-text) {
+    @apply border-none bg-transparent text-[var(--text-color)];
+    @apply not-disabled:hover:bg-[var(--bg-color-tint-90)] not-disabled:hover:text-[var(--text-color-hover)];
+  }
+
+  &:where(.ant-btn-link) {
+    @apply border-none bg-transparent text-[var(--text-color)] not-disabled:hover:text-[var(--text-color-hover)];
+  }
+  &:where(.ant-btn-dashed) {
+    @apply border-dashed;
+  }
+  &:where(.ant-btn-filled) {
+    @apply border-none bg-[var(--bg-color-tint-90)] text-[var(--text-color)] not-disabled:hover:text-[var(--text-color-hover)];
+    @apply not-disabled:hover:bg-[var(--bg-color-tint-80)] not-disabled:active:bg-[var(--bg-color-tint-80)];
+  }
+
+  &:where(.ant-btn-sm) {
+    @apply h-6 text-xs;
+  }
+  &:where(.ant-btn-md) {
+    @apply h-8 text-sm;
+  }
+  &:where(.ant-btn-lg) {
+    @apply h-10 text-base;
+  }
 }

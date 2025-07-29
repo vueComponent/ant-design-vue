@@ -1,5 +1,4 @@
 @import 'tailwindcss' source(none);
-@plugin '@tailwindcss/typography';
 
 @utility text-tint-* {
   color: color-mix(in srgb, --value(--color-*, [*]), white calc(--modifier(integer) * 1%));

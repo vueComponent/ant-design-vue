@@ -21,20 +21,20 @@ import {
 } from 'ant-design-vue';
 import './LayoutExample.less';
 import {
-  UserOutlined,
-  AppstoreOutlined,
-  ShopOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  ExportOutlined,
-  FilterOutlined,
-  MailOutlined,
-  SettingOutlined,
-  DollarOutlined,
-  PercentageOutlined,
-  RiseOutlined,
-  FallOutlined,
-} from '@ant-design/icons-vue';
+  PhUser,
+  PhSquaresFour,
+  PhStorefront,
+  PhList,
+  PhX,
+  PhDownload,
+  PhFunnel,
+  PhEnvelope,
+  PhGear,
+  PhCurrencyDollar,
+  PhPercent,
+  PhTrendUp,
+  PhTrendDown,
+} from '@phosphor-icons/vue';
 import { ref, onMounted, watch } from 'vue';
 import { Area } from '@antv/g2plot';
 import logo from '../../../assets/logo.svg';
@@ -253,7 +253,7 @@ const LayoutExample = defineComponent({
         ],
         onFilter: (value: any, record: any) => record.address.includes(value),
         filterIcon: ({ filtered }: { filtered: boolean }) => (
-          <FilterOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
+          <PhFunnel weight="bold" style={{ color: filtered ? '#1890ff' : undefined }} />
         ),
       },
       {
@@ -386,7 +386,7 @@ const LayoutExample = defineComponent({
               onSelect={handleMenuSelect}
               style={{ height: '100%', borderRight: 0 }}
             >
-              <Menu.SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
+              <Menu.SubMenu key="sub1" icon={<PhEnvelope weight="bold" />} title="Navigation One">
                 <Menu.ItemGroup title="Item 1">
                   <Menu.Item key="1">Option 1</Menu.Item>
                   <Menu.Item key="2">Option 2</Menu.Item>
@@ -396,7 +396,11 @@ const LayoutExample = defineComponent({
                   <Menu.Item key="4">Option 4</Menu.Item>
                 </Menu.ItemGroup>
               </Menu.SubMenu>
-              <Menu.SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
+              <Menu.SubMenu
+                key="sub2"
+                icon={<PhSquaresFour weight="bold" />}
+                title="Navigation Two"
+              >
                 <Menu.Item key="5">Option 5</Menu.Item>
                 <Menu.Item key="6">Option 6</Menu.Item>
                 <Menu.SubMenu key="sub3" title="Submenu">
@@ -404,7 +408,7 @@ const LayoutExample = defineComponent({
                   <Menu.Item key="8">Option 8</Menu.Item>
                 </Menu.SubMenu>
               </Menu.SubMenu>
-              <Menu.SubMenu key="sub4" icon={<SettingOutlined />} title="Navigation Three">
+              <Menu.SubMenu key="sub4" icon={<PhGear weight="bold" />} title="Navigation Three">
                 <Menu.Item key="9">Option 9</Menu.Item>
                 <Menu.Item key="10">Option 10</Menu.Item>
                 <Menu.Item key="11">Option 11</Menu.Item>
@@ -427,7 +431,7 @@ const LayoutExample = defineComponent({
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Button
                   type="text"
-                  icon={collapsed.value ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                  icon={collapsed.value ? <PhList weight="bold" /> : <PhX weight="bold" />}
                   onClick={toggleCollapsed}
                   style={{
                     fontSize: '16px',
@@ -464,7 +468,7 @@ const LayoutExample = defineComponent({
                       <Statistic
                         title={
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <UserOutlined />
+                            <PhUser weight="bold" />
                             活跃用户
                           </div>
                         }
@@ -477,13 +481,17 @@ const LayoutExample = defineComponent({
                         suffix="人"
                       />
                       <Tag
-                        icon={<RiseOutlined />}
+                        icon={<PhTrendUp weight="bold" />}
                         color="success"
                         style={{
                           marginTop: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          width: 'fit-content',
                         }}
                       >
-                        +12.5%
+                        12.5%
                       </Tag>
                     </Card>
                   </Col>
@@ -492,7 +500,7 @@ const LayoutExample = defineComponent({
                       <Statistic
                         title={
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <DollarOutlined />
+                            <PhCurrencyDollar weight="bold" />
                             总收入
                           </div>
                         }
@@ -505,13 +513,17 @@ const LayoutExample = defineComponent({
                         suffix="万元"
                       />
                       <Tag
-                        icon={<FallOutlined />}
+                        icon={<PhTrendDown weight="bold" />}
                         color="error"
                         style={{
                           marginTop: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          width: 'fit-content',
                         }}
                       >
-                        -3.2%
+                        3.2%
                       </Tag>
                     </Card>
                   </Col>
@@ -520,7 +532,7 @@ const LayoutExample = defineComponent({
                       <Statistic
                         title={
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <PercentageOutlined />
+                            <PhPercent weight="bold" />
                             转化率
                           </div>
                         }
@@ -533,13 +545,17 @@ const LayoutExample = defineComponent({
                         suffix="%"
                       />
                       <Tag
-                        icon={<RiseOutlined />}
+                        icon={<PhTrendUp weight="bold" />}
                         color="success"
                         style={{
                           marginTop: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          width: 'fit-content',
                         }}
                       >
-                        +8.7%
+                        8.7%
                       </Tag>
                     </Card>
                   </Col>
@@ -548,7 +564,7 @@ const LayoutExample = defineComponent({
                       <Statistic
                         title={
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <ShopOutlined />
+                            <PhStorefront weight="bold" />
                             订单量
                           </div>
                         }
@@ -561,13 +577,17 @@ const LayoutExample = defineComponent({
                         suffix="单"
                       />
                       <Tag
-                        icon={<RiseOutlined />}
+                        icon={<PhTrendUp weight="bold" />}
                         color="success"
                         style={{
                           marginTop: '8px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px',
+                          width: 'fit-content',
                         }}
                       >
-                        +15.3%
+                        15.3%
                       </Tag>
                     </Card>
                   </Col>
@@ -650,7 +670,7 @@ const LayoutExample = defineComponent({
                       placeholder="搜索用户"
                       allowClear
                       style={{ width: '200px' }}
-                      onSearch={value => {
+                      onSearch={() => {
                         // Handle search
                       }}
                     />
@@ -669,7 +689,16 @@ const LayoutExample = defineComponent({
                         { label: '已禁用', value: 'disabled' },
                       ]}
                     />
-                    <Button type="primary" icon={<ExportOutlined />} onClick={showExportModal}>
+                    <Button
+                      type="primary"
+                      icon={<PhDownload weight="bold" />}
+                      onClick={showExportModal}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                      }}
+                    >
                       导出数据
                     </Button>
                   </div>

@@ -17,19 +17,13 @@ import {
   Segmented,
   Input,
   DatePicker,
+  Modal,
 } from 'ant-design-vue';
 import './LayoutExample.less';
 import {
   UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
   AppstoreOutlined,
-  TeamOutlined,
   ShopOutlined,
-  ArrowUpOutlined,
-  ArrowDownOutlined,
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   ExportOutlined,
@@ -60,8 +54,10 @@ const LayoutExample = defineComponent({
     const tableViewMode = ref<string>('all');
     const tableFilterStatus = ref<string>('all');
     const chartContainer = ref<HTMLDivElement>();
+    const contentContainer = ref<HTMLDivElement>();
     let areaChart: Area | null = null;
     const dateRange = ref<[any, any] | null>(null);
+    const exportModalVisible = ref<boolean>(false);
 
     // 根据选中的菜单项计算应该展开的父级菜单
     const getDefaultOpenKeys = () => {
@@ -97,6 +93,28 @@ const LayoutExample = defineComponent({
      */
     const toggleCollapsed = () => {
       collapsed.value = !collapsed.value;
+    };
+
+    /**
+     * 显示导出数据模态框
+     */
+    const showExportModal = () => {
+      exportModalVisible.value = true;
+    };
+
+    /**
+     * 隐藏导出数据模态框
+     */
+    const hideExportModal = () => {
+      exportModalVisible.value = false;
+    };
+
+    /**
+     * 处理导出确认
+     */
+    const handleExportConfirm = () => {
+      // 这里可以添加实际的导出逻辑
+      hideExportModal();
     };
 
     /**
@@ -199,13 +217,12 @@ const LayoutExample = defineComponent({
       { deep: true },
     );
 
-    const onCollapse = (collapsedState: boolean, type: string) => {
+    const onCollapse = (collapsedState: boolean) => {
       collapsed.value = collapsedState;
-      console.log('Collapsed:', collapsedState, 'Type:', type);
     };
 
-    const onBreakpoint = (broken: boolean) => {
-      console.log('Breakpoint triggered:', broken);
+    const onBreakpoint = () => {
+      // Handle breakpoint changes
     };
 
     /**
@@ -364,7 +381,6 @@ const LayoutExample = defineComponent({
             <Menu
               mode="inline"
               selectedKeys={selectedKeys.value}
-              defaultOpenKeys={getDefaultOpenKeys()}
               openKeys={openKeys.value}
               onOpenChange={handleOpenChange}
               onSelect={handleMenuSelect}
@@ -435,6 +451,7 @@ const LayoutExample = defineComponent({
               </div>
             </Header>
             <Content
+              ref={contentContainer}
               style={{
                 margin: `${token.value.margin}px ${token.value.marginSM}px`,
                 minHeight: 'calc(100vh - 54px)',
@@ -574,7 +591,6 @@ const LayoutExample = defineComponent({
                       value={dateRange.value}
                       onChange={dates => {
                         dateRange.value = dates;
-                        console.log('选择日期范围:', dates);
                       }}
                       placeholder={['开始日期', '结束日期']}
                       style={{ width: '240px' }}
@@ -608,7 +624,6 @@ const LayoutExample = defineComponent({
                       value={tableViewMode.value}
                       onChange={value => {
                         tableViewMode.value = value as string;
-                        console.log('表格视图模式:', value);
                       }}
                       style={{ fontWeight: 'normal' }}
                       options={[
@@ -636,16 +651,15 @@ const LayoutExample = defineComponent({
                       allowClear
                       style={{ width: '200px' }}
                       onSearch={value => {
-                        console.log('搜索:', value);
+                        // Handle search
                       }}
                     />
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     <Select
                       value={tableFilterStatus.value}
-                      onChange={value => {
-                        tableFilterStatus.value = value as string;
-                        console.log('表格筛选状态:', value);
+                      onChange={_value => {
+                        tableFilterStatus.value = _value as string;
                       }}
                       style={{ width: '120px' }}
                       options={[
@@ -655,13 +669,7 @@ const LayoutExample = defineComponent({
                         { label: '已禁用', value: 'disabled' },
                       ]}
                     />
-                    <Button
-                      type="primary"
-                      icon={<ExportOutlined />}
-                      onClick={() => {
-                        console.log('导出数据');
-                      }}
-                    >
+                    <Button type="primary" icon={<ExportOutlined />} onClick={showExportModal}>
                       导出数据
                     </Button>
                   </div>
@@ -711,6 +719,19 @@ const LayoutExample = defineComponent({
             </Content>
           </Layout>
         </Layout>
+
+        {/* 导出数据模态框 */}
+        <Modal
+          title="导出数据"
+          open={exportModalVisible.value}
+          onOk={handleExportConfirm}
+          onCancel={hideExportModal}
+          okText="确认导出"
+          cancelText="取消"
+        >
+          <p>确定要导出当前数据吗？</p>
+          <p>导出的数据将包含当前筛选条件下的所有记录。</p>
+        </Modal>
       </div>
     );
   },

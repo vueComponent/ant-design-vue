@@ -1,21 +1,17 @@
-import { inject, InjectionKey, provide, Reactive } from 'vue'
+import { inject, InjectionKey, provide } from 'vue'
+import { ThemeProps } from './meta'
 
-type ThemeType = Reactive<{
-  appearance: 'light' | 'dark'
-  primaryColor: string
-  dangerColor: string
-}>
-
-const ThemeSymbol: InjectionKey<ThemeType> = Symbol('theme')
+const ThemeSymbol: InjectionKey<ThemeProps> = Symbol('theme')
 
 export const useThemeInject = () => {
   return inject(ThemeSymbol, {
     appearance: 'light',
     primaryColor: '#1677ff',
     dangerColor: '#ff4d4f',
-  })
+    darkBackgroundColor: '#141414',
+  } as ThemeProps)
 }
 
-export const useThemeProvide = (theme: ThemeType) => {
+export const useThemeProvide = (theme: ThemeProps) => {
   provide(ThemeSymbol, theme)
 }

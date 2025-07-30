@@ -1,5 +1,6 @@
 import { PropType, ExtractPublicPropTypes } from 'vue'
 
+export const defaultColor = '#1677FF'
 // Theme Props
 export const themeProps = {
   /**
@@ -16,15 +17,15 @@ export const themeProps = {
    */
   primaryColor: {
     type: String,
-    default: '#1677FF',
+    default: defaultColor,
   },
   /**
-   * Specifies the danger color of the component
-   * @default '#ff4d4f'
+   * Specifies the background color of the component, only used in dark mode
+   * @default '#141414'
    */
-  dangerColor: {
+  backgroundColor: {
     type: String,
-    default: '#ff4d4f',
+    default: '#141414',
   },
 } as const
 

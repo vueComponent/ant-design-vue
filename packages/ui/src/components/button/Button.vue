@@ -14,6 +14,7 @@ import { buttonProps, buttonEmits, ButtonSlots } from './meta'
 import { getCssVarColor } from '@/utils/colorAlgorithm'
 import { useThemeInject } from '../theme/hook'
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
+import { defaultColor } from '../theme/meta'
 
 const props = defineProps(buttonProps)
 
@@ -28,7 +29,7 @@ const color = computed(() => {
   }
 
   if (props.danger) {
-    return theme.dangerColor
+    return 'red'
   }
 
   return theme.primaryColor
@@ -46,7 +47,12 @@ const rootClass = computed(() => {
   }
 })
 const cssVars = computed(() => {
-  return getCssVarColor(color.value)
+  return color.value.toLowerCase() !== defaultColor.toLowerCase()
+    ? getCssVarColor(color.value, {
+        appearance: theme.appearance,
+        backgroundColor: theme.backgroundColor,
+      })
+    : {}
 })
 
 const handleClick = (event: MouseEvent) => {

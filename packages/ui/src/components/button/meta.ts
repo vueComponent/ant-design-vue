@@ -62,6 +62,20 @@ export const buttonProps = {
   color: {
     type: String,
   },
+
+  /**
+   * Specifies the href of the button
+   */
+  href: {
+    type: String,
+  },
+
+  /**
+   * Specifies the target of the button
+   */
+  target: {
+    type: String,
+  },
 } as const
 
 export type ButtonProps = ExtractPublicPropTypes<typeof buttonProps>

@@ -19,4 +19,11 @@
   --color-warning-content: #ffffff;
   --color-error: #ff3333;
   --color-error-content: #ffffff;
+
+  --neutral-color: #000000e0;
+  --neutral-secondary: #000000a6;
+  --neutral-disabled: #00000040;
+  --neutral-border: #d9d9d9;
+  --neutral-separator: #0505050f;
+  --neutral-bg: #f5f5f5;
 }

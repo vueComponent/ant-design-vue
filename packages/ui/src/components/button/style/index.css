@@ -2,40 +2,55 @@
 
 .ant-btn {
   @apply relative;
-  @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-1 whitespace-nowrap;
+  @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap;
   @apply border-1 text-sm;
   @apply box-border rounded-md px-4 transition-all duration-200 select-none;
-  &:where(.ant-btn-disabled) {
-    @apply cursor-not-allowed;
-  }
+
   &:where(.ant-btn-loading) {
-    @apply cursor-default opacity-50;
+    @apply cursor-default opacity-65;
   }
 
-  &:where(.ant-btn-solid) {
-    @apply border-none bg-[var(--bg-color)] text-[var(--bg-color-content)];
-    @apply not-disabled:hover:bg-[var(--bg-color-hover)] not-disabled:active:bg-[var(--bg-color-active)];
+  &:where(.ant-btn-solid:not(:disabled)) {
+    @apply border-none bg-[var(--accent-color)] text-[var(--accent-color-content)];
+    @apply hover:bg-[var(--accent-color-hover)] active:bg-[var(--accent-color-active)];
   }
-  &:where(.ant-btn-outlined),
-  &:where(.ant-btn-dashed) {
-    @apply border-[var(--border-color-tint-30)] bg-transparent text-[var(--text-color)];
-    @apply not-disabled:hover:border-[var(--border-color-hover)] not-disabled:hover:text-[var(--text-color-hover)] not-disabled:active:border-[var(--border-color-active)] not-disabled:active:text-[var(--text-color-active)];
-    @apply disabled:border-[var(--border-color-tint-80)];
+  &:where(.ant-btn-outlined:not(:disabled)),
+  &:where(.ant-btn-dashed:not(:disabled)) {
+    @apply border-[var(--accent-color)] bg-transparent text-[var(--accent-color)];
+    @apply hover:text-[var(--accent-color-hover)] active:border-[var(--accent-color-active)] active:text-[var(--accent-color-active)];
+    @apply border-[var(--accent-color-active)] hover:border-[var(--accent-color-hover)];
   }
-  &:where(.ant-btn-text) {
-    @apply border-none bg-transparent text-[var(--text-color)];
-    @apply not-disabled:hover:bg-[var(--bg-color-tint-90)] not-disabled:hover:text-[var(--text-color-hover)];
+  &:where(.ant-btn-text:not(.ant-btn-custom-color):not(:disabled)) {
+    @apply border-none bg-transparent text-[var(--neutral-color)];
+    @apply hover:bg-[var(--neutral-disabled-bg)];
+  }
+  &:where(.ant-btn-text.ant-btn-custom-color:not(:disabled)) {
+    @apply border-none bg-transparent text-[var(--accent-color)];
+    @apply hover:bg-[var(--accent-color-1)] hover:text-[var(--accent-color-hover)];
   }
 
-  &:where(.ant-btn-link) {
-    @apply border-none bg-transparent text-[var(--text-color)] not-disabled:hover:text-[var(--text-color-hover)];
+  &:where(.ant-btn-link:not(:disabled)) {
+    @apply border-none bg-transparent text-[var(--accent-color)] hover:text-[var(--accent-color-hover)];
   }
   &:where(.ant-btn-dashed) {
     @apply border-dashed;
   }
-  &:where(.ant-btn-filled) {
-    @apply border-none bg-[var(--bg-color-tint-90)] text-[var(--text-color)] not-disabled:hover:text-[var(--text-color-hover)];
-    @apply not-disabled:hover:bg-[var(--bg-color-tint-80)] not-disabled:active:bg-[var(--bg-color-tint-80)];
+  &:where(.ant-btn-filled:not(:disabled)) {
+    @apply border-none bg-[var(--accent-color-1)] text-[var(--accent-color)] hover:text-[var(--accent-color-hover)];
+    @apply hover:bg-[var(--accent-color-2)] active:bg-[var(--accent-color-3)] active:text-[var(--accent-color-active)];
+  }
+
+  &:where(.ant-btn-disabled) {
+    @apply cursor-not-allowed;
+    @apply border-[var(--neutral-border)] bg-[var(--neutral-disabled-bg)] text-[var(--neutral-disabled)];
+  }
+  &:where(.ant-btn-disabled.ant-btn-text),
+  &:where(.ant-btn-disabled.ant-btn-link) {
+    @apply border-none bg-transparent;
+  }
+
+  &:where(.ant-btn-disabled.ant-btn-filled) {
+    @apply border-none;
   }
 
   &:where(.ant-btn-sm) {

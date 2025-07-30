@@ -1,37 +1,37 @@
 <template>
-  <button :class="rootClass" @click="$emit('click', $event)" :disabled="disabled" :style="cssVars">
-    <slot name="loading"></slot>
+  <button :class="rootClass" @click="handleClick" :disabled="disabled" :style="cssVars">
+    <slot name="loading">
+      <LoadingOutlined v-if="loading" />
+    </slot>
     <slot name="icon"></slot>
-    <slot></slot>
+    <span><slot></slot></span>
   </button>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, Fragment } from 'vue'
 import { buttonProps, buttonEmits, ButtonSlots } from './meta'
 import { getCssVarColor } from '@/utils/colorAlgorithm'
+import { useThemeInject } from '../theme/hook'
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
 
 const props = defineProps(buttonProps)
 
-defineEmits(buttonEmits)
+const emit = defineEmits(buttonEmits)
 defineSlots<ButtonSlots>()
 
-// todo: color value should from theme provider
+const theme = useThemeInject()
+
 const color = computed(() => {
-  if (props.disabled) {
-    return 'rgba(0,0,0,0.25)'
-  }
   if (props.color) {
     return props.color
   }
+
   if (props.danger) {
-    return '#ff4d4f'
-  }
-  if (props.variant === 'text') {
-    return '#000000'
+    return theme.dangerColor
   }
 
-  return '#1677ff'
+  return theme.primaryColor
 })
 
 const rootClass = computed(() => {
@@ -42,9 +42,17 @@ const rootClass = computed(() => {
     'ant-btn-danger': props.danger,
     'ant-btn-loading': props.loading,
     'ant-btn-disabled': props.disabled,
+    'ant-btn-custom-color': props.color || props.danger,
   }
 })
 const cssVars = computed(() => {
   return getCssVarColor(color.value)
 })
+
+const handleClick = (event: MouseEvent) => {
+  emit('click', event)
+  if (props.href) {
+    window.open(props.href, props.target)
+  }
+}
 </script>

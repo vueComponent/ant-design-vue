@@ -1,0 +1,21 @@
+@reference '../../../style/tailwind.css';
+
+.ant-wave-motion {
+  @apply absolute;
+  @apply bg-transparent;
+  @apply pointer-events-none;
+  @apply box-border;
+  @apply text-accent;
+  @apply opacity-20;
+  box-shadow: 0 0 0 0 currentcolor;
+
+  &:where(.ant-wave-motion-appear) {
+    transition:
+      box-shadow 0.4s cubic-bezier(0.08, 0.82, 0.17, 1),
+      opacity 2s cubic-bezier(0.08, 0.82, 0.17, 1);
+    &:where(.ant-wave-motion-appear-active) {
+      @apply opacity-0;
+      box-shadow: 0 0 0 6px currentcolor;
+    }
+  }
+}

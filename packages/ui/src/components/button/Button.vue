@@ -1,5 +1,12 @@
 <template>
-  <button :class="rootClass" @click="handleClick" :disabled="disabled" :style="cssVars">
+  <button
+    ref="buttonRef"
+    :class="rootClass"
+    @click="handleClick"
+    :disabled="disabled"
+    :style="cssVars"
+  >
+    <Wave :target="buttonRef" />
     <slot name="loading">
       <LoadingOutlined v-if="loading" />
     </slot>
@@ -9,15 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, Fragment } from 'vue'
+import { computed, ref } from 'vue'
 import { buttonProps, buttonEmits, ButtonSlots } from './meta'
 import { getCssVarColor } from '@/utils/colorAlgorithm'
 import { useThemeInject } from '../theme/hook'
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
 import { defaultColor } from '../theme/meta'
+import { Wave } from '../wave'
 
 const props = defineProps(buttonProps)
-
+const buttonRef = ref<HTMLButtonElement | null>(null)
 const emit = defineEmits(buttonEmits)
 defineSlots<ButtonSlots>()
 

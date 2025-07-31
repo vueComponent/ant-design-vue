@@ -12,12 +12,12 @@ import {
   theme,
   Table,
   Tag,
-  Divider,
   Select,
   Segmented,
-  Input,
   DatePicker,
   Modal,
+  Rate,
+  Divider,
 } from 'ant-design-vue';
 import './LayoutExample.less';
 import {
@@ -35,7 +35,7 @@ import {
   PhTrendUp,
   PhTrendDown,
 } from '@phosphor-icons/vue';
-import { ref, onMounted, watch } from 'vue';
+import { reactive, ref, onMounted, watch } from 'vue';
 import { Area } from '@antv/g2plot';
 import logo from '../../../assets/logo.svg';
 
@@ -58,6 +58,11 @@ const LayoutExample = defineComponent({
     let areaChart: Area | null = null;
     const dateRange = ref<[any, any] | null>(null);
     const exportModalVisible = ref<boolean>(false);
+    const ratingValue = ref<number>(4);
+    const paginationState = reactive({
+      current: 1,
+      pageSize: 5,
+    });
 
     // 根据选中的菜单项计算应该展开的父级菜单
     const getDefaultOpenKeys = () => {
@@ -137,6 +142,12 @@ const LayoutExample = defineComponent({
         { month: '4月', value: 4800, type: '用户数' },
         { month: '5月', value: 4200, type: '用户数' },
         { month: '6月', value: 5100, type: '用户数' },
+        { month: '1月', value: 180, type: '错误数' },
+        { month: '2月', value: 220, type: '错误数' },
+        { month: '3月', value: 150, type: '错误数' },
+        { month: '4月', value: 280, type: '错误数' },
+        { month: '5月', value: 190, type: '错误数' },
+        { month: '6月', value: 240, type: '错误数' },
       ];
 
       areaChart = new Area(chartContainer.value, {
@@ -145,7 +156,7 @@ const LayoutExample = defineComponent({
         yField: 'value',
         seriesField: 'type',
         isStack: true,
-        color: [token.value.colorPrimary, token.value.colorSuccess],
+        color: [token.value.colorPrimary, token.value.colorSuccess, token.value.colorWarning],
         smooth: true,
         areaStyle: {
           fillOpacity: 0.6,
@@ -154,23 +165,74 @@ const LayoutExample = defineComponent({
           size: 2,
         },
         point: {
-          size: 4,
+          size: 0, // 默认不显示节点
           shape: 'circle',
-          style: {
-            fill: 'white',
-            stroke: token.value.colorPrimary,
-            lineWidth: 2,
+          style: (datum: any) => {
+            const colors = [
+              token.value.colorPrimary,
+              token.value.colorSuccess,
+              token.value.colorWarning,
+            ];
+            let colorIndex = 0;
+            if (datum.type === '访问量') colorIndex = 0;
+            else if (datum.type === '用户数') colorIndex = 1;
+            else if (datum.type === '错误数') colorIndex = 2;
+            return {
+              fill: token.value.colorBgContainer,
+              stroke: colors[colorIndex],
+              lineWidth: 2,
+            };
           },
         },
+        // 配置hover状态下的节点显示
+        state: {
+          active: {
+            style: {
+              lineWidth: 3,
+            },
+          },
+        },
+        interactions: [
+          {
+            type: 'element-active',
+          },
+          {
+            type: 'element-highlight',
+          },
+        ],
         xAxis: {
           label: {
             autoHide: true,
             autoRotate: false,
+            style: {
+              fill: token.value.colorText,
+            },
+          },
+          grid: {
+            line: {
+              style: {
+                stroke: token.value.colorBorder,
+                lineWidth: 1,
+                lineDash: [4, 5],
+              },
+            },
           },
         },
         yAxis: {
           label: {
             formatter: (v: string) => `${v}`,
+            style: {
+              fill: token.value.colorText,
+            },
+          },
+          grid: {
+            line: {
+              style: {
+                stroke: token.value.colorBorder,
+                lineWidth: 1,
+                lineDash: [4, 5],
+              },
+            },
           },
         },
         meta: {
@@ -183,12 +245,48 @@ const LayoutExample = defineComponent({
         },
         legend: {
           position: 'top-left',
+          itemSpacing: 20,
+          marker: {
+            symbol: 'square',
+            style: {
+              r: 4,
+            },
+          },
+          itemName: {
+            style: {
+              fill: token.value.colorText,
+              fontSize: 12,
+            },
+          },
         },
+        padding: [60, 20, 40, 40],
         tooltip: {
           shared: true,
           showCrosshairs: true,
           crosshairs: {
             type: 'x',
+          },
+          formatter: (datum: any) => {
+            return {
+              name: datum.type,
+              value: `${datum.value.toLocaleString()}`,
+            };
+          },
+          domStyles: {
+            'g2-tooltip': {
+              backgroundColor: token.value.colorBgContainer,
+              border: `1px solid ${token.value.colorBorder}`,
+              borderRadius: `${token.value.borderRadius}px`,
+              boxShadow: token.value.boxShadow,
+              color: token.value.colorText,
+            },
+            'g2-tooltip-title': {
+              color: token.value.colorTextHeading,
+              fontWeight: '500',
+            },
+            'g2-tooltip-list-item': {
+              color: token.value.colorText,
+            },
           },
         },
       });
@@ -225,6 +323,14 @@ const LayoutExample = defineComponent({
       // Handle breakpoint changes
     };
 
+    const rowSelection = reactive({
+      type: 'checkbox' as const,
+      selectedRowKeys: [] as string[],
+      onChange: (keys: string[]) => {
+        rowSelection.selectedRowKeys = keys;
+      },
+    });
+
     /**
      * 表格列配置
      */
@@ -253,7 +359,10 @@ const LayoutExample = defineComponent({
         ],
         onFilter: (value: any, record: any) => record.address.includes(value),
         filterIcon: ({ filtered }: { filtered: boolean }) => (
-          <PhFunnel weight="bold" style={{ color: filtered ? '#1890ff' : undefined }} />
+          <PhFunnel
+            weight="bold"
+            style={{ color: filtered ? token.value.colorPrimary : undefined }}
+          />
         ),
       },
       {
@@ -306,6 +415,41 @@ const LayoutExample = defineComponent({
         address: '杭州市西湖区文三路269号',
         tags: ['后端', 'Java'],
       },
+      {
+        key: '6',
+        name: '孙八',
+        age: 26,
+        address: '成都市高新区天府大道中段1366号',
+        tags: ['测试', 'Python'],
+      },
+      {
+        key: '7',
+        name: '周九',
+        age: 31,
+        address: '武汉市洪山区珞喻路1037号',
+        tags: ['运维', 'Linux'],
+      },
+      {
+        key: '8',
+        name: '吴十',
+        age: 29,
+        address: '西安市雁塔区高新六路38号',
+        tags: ['产品', 'Agile'],
+      },
+      {
+        key: '9',
+        name: '郑十一',
+        age: 33,
+        address: '南京市建邺区江东中路347号',
+        tags: ['设计', 'Figma'],
+      },
+      {
+        key: '10',
+        name: '王十二',
+        age: 27,
+        address: '长沙市岳麓区麓山南路932号',
+        tags: ['前端', 'React'],
+      },
     ];
 
     return () => (
@@ -314,6 +458,9 @@ const LayoutExample = defineComponent({
           maxWidth: '1400px',
           margin: '0 auto',
           width: '100%',
+          borderRadius: `${token.value.borderRadius}px`,
+          boxShadow: token.value.boxShadowSecondary,
+          overflow: 'hidden',
         }}
       >
         <Layout>
@@ -327,7 +474,8 @@ const LayoutExample = defineComponent({
             onCollapse={onCollapse}
             onBreakpoint={onBreakpoint}
             style={{
-              minHeight: '100vh',
+              minHeight: 'auto',
+              overflow: 'hidden',
             }}
           >
             {/* Logo 区域 */}
@@ -421,7 +569,7 @@ const LayoutExample = defineComponent({
               style={{
                 background: token.value.colorBgContainer,
                 padding: '0 24px',
-                boxShadow: '0 1px 4px rgba(0,21,41,.08)',
+                boxShadow: token.value.boxShadow,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -445,7 +593,7 @@ const LayoutExample = defineComponent({
                   <Avatar
                     size="small"
                     style={{
-                      backgroundColor: '#1890ff',
+                      backgroundColor: token.value.colorPrimary,
                       cursor: 'pointer',
                     }}
                   >
@@ -457,12 +605,12 @@ const LayoutExample = defineComponent({
             <Content
               ref={contentContainer}
               style={{
-                margin: `${token.value.margin}px ${token.value.marginSM}px`,
+                margin: `${token.value.margin}px ${token.value.margin}px`,
                 minHeight: 'calc(100vh - 54px)',
               }}
             >
               <div style={{ width: '100%' }}>
-                <Row gutter={[16, 16]}>
+                <Row gutter={[token.value.margin, token.value.margin]}>
                   <Col xs={24} sm={12} md={6}>
                     <Card>
                       <Statistic
@@ -629,34 +777,17 @@ const LayoutExample = defineComponent({
 
               {/* 数据表格组件 */}
               <Card
-                style={{ marginTop: `${token.value.margin}px` }}
-                title={
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      width: '100%',
-                    }}
-                  >
-                    <span style={{ fontSize: '16px', fontWeight: 'bold' }}>数据管理</span>
-                    <Segmented
-                      value={tableViewMode.value}
-                      onChange={value => {
-                        tableViewMode.value = value as string;
-                      }}
-                      style={{ fontWeight: 'normal' }}
-                      options={[
-                        { label: '全部', value: 'all' },
-                        { label: '开发者', value: 'developer' },
-                        { label: '管理者', value: 'manager' },
-                        { label: '设计师', value: 'designer' },
-                      ]}
-                    />
-                  </div>
-                }
+                style={{
+                  marginTop: `${token.value.margin}px`,
+                  background: 'transparent',
+                  border: 'none',
+                  boxShadow: 'none',
+                }}
+                bodyStyle={{
+                  padding: 0,
+                }}
               >
-                {/* 搜索和控制栏 */}
+                {/* 控制栏 */}
                 <div
                   style={{
                     display: 'flex',
@@ -665,17 +796,19 @@ const LayoutExample = defineComponent({
                     marginBottom: `${token.value.marginSM}px`,
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <Input.Search
-                      placeholder="搜索用户"
-                      allowClear
-                      style={{ width: '200px' }}
-                      onSearch={() => {
-                        // Handle search
-                      }}
-                    />
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                  <Segmented
+                    value={tableViewMode.value}
+                    onChange={value => {
+                      tableViewMode.value = value as string;
+                    }}
+                    options={[
+                      { label: '全部', value: 'all' },
+                      { label: '开发者', value: 'developer' },
+                      { label: '管理者', value: 'manager' },
+                      { label: '设计师', value: 'designer' },
+                    ]}
+                  />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <Select
                       value={tableFilterStatus.value}
                       onChange={_value => {
@@ -703,7 +836,29 @@ const LayoutExample = defineComponent({
                     </Button>
                   </div>
                 </div>
-                <Table columns={tableColumns} dataSource={tableData} pagination={{ pageSize: 5 }}>
+                <Table
+                  columns={tableColumns}
+                  dataSource={tableData}
+                  rowSelection={rowSelection}
+                  pagination={{
+                    current: paginationState.current,
+                    pageSize: paginationState.pageSize,
+                    total: tableData.length,
+                    showTotal: total => {
+                      const selectedCount = rowSelection.selectedRowKeys.length;
+                      if (selectedCount > 0) {
+                        return `已选择 ${selectedCount} 项 / 共 ${total} 项`;
+                      }
+                      return `共 ${total} 项`;
+                    },
+                    pageSizeOptions: ['5', '10', '20', '50'],
+                    showSizeChanger: true,
+                    onChange: (page, pageSize) => {
+                      paginationState.current = page;
+                      paginationState.pageSize = pageSize;
+                    },
+                  }}
+                >
                   {{
                     headerCell: ({ column }: { column: any }) => {
                       if (column.key === 'name') {
@@ -712,7 +867,7 @@ const LayoutExample = defineComponent({
                     },
                     bodyCell: ({ column, record }: { column: any; record: any }) => {
                       if (column.key === 'name') {
-                        return <a style={{ color: token.value.colorPrimary }}>{record.name}</a>;
+                        return <span>{record.name}</span>;
                       } else if (column.key === 'tags') {
                         return (
                           <span>
@@ -724,7 +879,7 @@ const LayoutExample = defineComponent({
                                     ? 'volcano'
                                     : tag.length > 3
                                       ? 'geekblue'
-                                      : 'green'
+                                      : 'success'
                                 }
                               >
                                 {tag.toUpperCase()}
@@ -745,6 +900,28 @@ const LayoutExample = defineComponent({
                   }}
                 </Table>
               </Card>
+
+              {/* 评分组件 */}
+              <div style={{ marginTop: `${token.value.margin}px`, textAlign: 'center' }}>
+                <div style={{ display: 'inline-block' }}>
+                  <span>
+                    <Rate
+                      value={ratingValue.value}
+                      onChange={(value: number) => {
+                        ratingValue.value = value;
+                      }}
+                      tooltips={['terrible', 'bad', 'normal', 'good', 'wonderful']}
+                      style={{ fontSize: '20px' }}
+                      allowHalf
+                    />
+                    <span class="ant-rate-text" style={{ marginLeft: '8px' }}>
+                      {ratingValue.value > 0
+                        ? ['terrible', 'bad', 'normal', 'good', 'wonderful'][ratingValue.value - 1]
+                        : ''}
+                    </span>
+                  </span>
+                </div>
+              </div>
             </Content>
           </Layout>
         </Layout>

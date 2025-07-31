@@ -31,6 +31,9 @@
               </template>
             </Suspense>
           </a-modal>
+          <a-button class="theme-editor-header-actions" @click="handleExportJson">
+            {{ locale.exportJson }}
+          </a-button>
           <a-button class="theme-editor-header-actions" @click="handleExport">
             {{ locale.export }}
           </a-button>
@@ -62,6 +65,9 @@ import Header from '../../layouts/header/index.vue';
 
 // antd换肤编辑器
 import { enUS, ThemeEditor, zhCN } from '../../components/antdv-token-previewer';
+import getDesignToken from '../../components/antdv-token-previewer/utils/getDesignToken';
+import { seedRelatedMap } from '../../components/antdv-token-previewer/meta/TokenRelation';
+import seedToken from 'ant-design-vue/es/theme/themes/seed';
 
 import type { ThemeConfig } from '../../../../components/config-provider/context';
 
@@ -143,8 +149,142 @@ export default defineComponent({
       }
     };
 
+    /**
+     * 导出主题配置文件
+     */
     const handleExport = () => {
       const file = new File([JSON.stringify(theme.value, null, 2)], `Ant Design Vue Theme.json`, {
+        type: 'text/json; charset=utf-8;',
+      });
+      const tmpLink = document.createElement('a');
+      const objectUrl = URL.createObjectURL(file);
+
+      tmpLink.href = objectUrl;
+      tmpLink.download = file.name;
+      document.body.appendChild(tmpLink);
+      tmpLink.click();
+
+      document.body.removeChild(tmpLink);
+      URL.revokeObjectURL(objectUrl);
+    };
+
+    /**
+     * 导出JSON文件，按照设计令牌标准格式，只包含修改过的受影响的变量
+     */
+    const handleExportJson = () => {
+      // 获取当前主题的token配置
+      const currentToken = theme.value.token || {};
+
+      // 找出修改过的seed token
+      const modifiedSeedTokens = [];
+      Object.keys(currentToken).forEach(key => {
+        if (seedToken[key] !== undefined && currentToken[key] !== seedToken[key]) {
+          modifiedSeedTokens.push(key);
+        }
+      });
+
+      // 如果没有修改任何seed token，提示用户
+      if (modifiedSeedTokens.length === 0) {
+        console.warn('没有检测到任何修改的seed token');
+        return;
+      }
+
+      // 获取完整的计算后的token值
+      const computedTokens = getDesignToken({
+        token: currentToken,
+        algorithm: theme.value.algorithm,
+        components: theme.value.components || {},
+      });
+
+      // 收集所有受影响的变量
+      const affectedTokens = {};
+      modifiedSeedTokens.forEach(seedKey => {
+        // 添加修改的seed token本身
+        affectedTokens[seedKey] = computedTokens[seedKey];
+
+        // 添加相关的Map Token
+        const relatedMapTokens = seedRelatedMap[seedKey] || [];
+        relatedMapTokens.forEach(mapTokenKey => {
+          if (computedTokens[mapTokenKey] !== undefined) {
+            affectedTokens[mapTokenKey] = computedTokens[mapTokenKey];
+          }
+        });
+      });
+
+      // 按照设计令牌标准格式组织数据
+      const formatTokensForExport = tokens => {
+        const result = {
+          Colors: {
+            Brand: {
+              Primary: {},
+              Success: {},
+              Error: {},
+              Warning: {},
+              Info: {},
+            },
+          },
+        };
+
+        /**
+         * 根据实际颜色值生成对应的引用格式
+         * @param {string} tokenKey - token名称
+         * @param {string} tokenValue - 实际颜色值
+         * @returns {string} 引用格式或实际颜色值
+         */
+        const generateColorReference = (tokenKey, tokenValue) => {
+          // 如果是主色，直接使用颜色值
+          if (
+            tokenKey === 'colorPrimary' ||
+            tokenKey === 'colorSuccess' ||
+            tokenKey === 'colorError' ||
+            tokenKey === 'colorWarning' ||
+            tokenKey === 'colorInfo'
+          ) {
+            return tokenValue;
+          }
+
+          // 对于衍生的token，直接使用实际的颜色值
+          return tokenValue;
+        };
+
+        Object.keys(tokens).forEach(tokenKey => {
+          const tokenValue = tokens[tokenKey];
+          const referenceValue = generateColorReference(tokenKey, tokenValue);
+          const tokenData = {
+            $type: 'color',
+            $value: referenceValue,
+          };
+
+          // 根据token名称分类到Brand下的不同子类别
+          if (tokenKey.includes('Primary') || tokenKey === 'colorPrimary') {
+            result.Colors.Brand.Primary[tokenKey] = tokenData;
+          } else if (tokenKey.includes('Success')) {
+            result.Colors.Brand.Success[tokenKey] = tokenData;
+          } else if (tokenKey.includes('Error')) {
+            result.Colors.Brand.Error[tokenKey] = tokenData;
+          } else if (tokenKey.includes('Warning')) {
+            result.Colors.Brand.Warning[tokenKey] = tokenData;
+          } else if (tokenKey.includes('Info')) {
+            result.Colors.Brand.Info[tokenKey] = tokenData;
+          } else {
+            // 其他颜色放在Brand.Primary下
+            result.Colors.Brand.Primary[tokenKey] = tokenData;
+          }
+        });
+
+        // 清理空的分类
+        Object.keys(result.Colors.Brand).forEach(category => {
+          if (Object.keys(result.Colors.Brand[category]).length === 0) {
+            delete result.Colors.Brand[category];
+          }
+        });
+
+        return result;
+      };
+
+      const exportData = formatTokensForExport(affectedTokens);
+
+      const file = new File([JSON.stringify(exportData, null, 2)], `Design Tokens.json`, {
         type: 'text/json; charset=utf-8;',
       });
       const tmpLink = document.createElement('a');
@@ -207,6 +347,7 @@ export default defineComponent({
       handleEditConfig,
       handleEditConfigChange,
       handleExport,
+      handleExportJson,
 
       // 皮肤编辑器的国际化
       zhCN,

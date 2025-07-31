@@ -8,6 +8,7 @@
         </a-typography-title>
 
         <div>
+          <!-- 编辑主题配置弹窗 -->
           <a-modal
             v-model:open="editModelOpen"
             :title="locale.editModelTitle"
@@ -31,6 +32,90 @@
               </template>
             </Suspense>
           </a-modal>
+
+          <!-- 保存到云端弹窗 -->
+          <a-modal
+            v-model:open="saveToCloudModalOpen"
+            :title="locale.saveToCloudModalTitle"
+            :width="500"
+            :ok-text="locale.confirm"
+            :cancel-text="locale.cancel"
+            :confirm-loading="saveToCloudLoading"
+            @ok="handleSaveToCloudConfirm"
+            @cancel="handleSaveToCloudCancel"
+          >
+            <a-form :model="saveToCloudForm" layout="vertical">
+              <a-form-item :label="locale.themeName" required>
+                <a-input
+                  v-model:value="saveToCloudForm.name"
+                  :placeholder="locale.themeNamePlaceholder"
+                />
+              </a-form-item>
+              <a-form-item :label="locale.themeDescription">
+                <a-textarea
+                  v-model:value="saveToCloudForm.description"
+                  :placeholder="locale.themeDescriptionPlaceholder"
+                  :rows="3"
+                />
+              </a-form-item>
+            </a-form>
+          </a-modal>
+
+          <!-- 从云端加载弹窗 -->
+          <a-modal
+            v-model:open="loadFromCloudModalOpen"
+            :title="locale.loadFromCloudModalTitle"
+            :width="800"
+            :footer="null"
+            @cancel="handleLoadFromCloudCancel"
+          >
+            <a-spin :spinning="loadFromCloudLoading">
+              <div
+                v-if="cloudThemeConfigs.length === 0 && !loadFromCloudLoading"
+                style="text-align: center; padding: 40px 0"
+              >
+                <a-empty :description="locale.noThemeConfigs" />
+              </div>
+              <a-table
+                v-else
+                :columns="cloudThemeColumns"
+                :data-source="cloudThemeConfigs"
+                :pagination="false"
+                size="small"
+              >
+                <template #bodyCell="{ column, record }">
+                  <template v-if="column.key === 'createdAt'">
+                    {{ formatDate(record.created_at) }}
+                  </template>
+                  <template v-else-if="column.key === 'updatedAt'">
+                    {{ formatDate(record.updated_at) }}
+                  </template>
+                  <template v-else-if="column.key === 'actions'">
+                    <a-space>
+                      <a-button type="primary" size="small" @click="handleLoadThemeConfig(record)">
+                        {{ locale.load }}
+                      </a-button>
+                      <a-popconfirm
+                        :title="locale.confirmDelete"
+                        @confirm="handleDeleteThemeConfig(record.id)"
+                      >
+                        <a-button type="primary" danger size="small">
+                          {{ locale.delete }}
+                        </a-button>
+                      </a-popconfirm>
+                    </a-space>
+                  </template>
+                </template>
+              </a-table>
+            </a-spin>
+          </a-modal>
+
+          <a-button class="theme-editor-header-actions" @click="handleLoadFromCloud">
+            {{ locale.loadFromCloud }}
+          </a-button>
+          <a-button class="theme-editor-header-actions" @click="handleSaveToCloud">
+            {{ locale.saveToCloud }}
+          </a-button>
           <a-button class="theme-editor-header-actions" @click="handleExportJson">
             {{ locale.exportJson }}
           </a-button>
@@ -69,12 +154,27 @@ import getDesignToken from '../../components/antdv-token-previewer/utils/getDesi
 import { seedRelatedMap } from '../../components/antdv-token-previewer/meta/TokenRelation';
 import seedToken from 'ant-design-vue/es/theme/themes/seed';
 
+// Supabase 服务
+import { ThemeConfigService } from '../../utils/supabase';
+
 import type { ThemeConfig } from '../../../../components/config-provider/context';
 
 const ANT_DESIGN_VUE_V4_THEME_EDITOR_THEME = 'ant-design-vue-v4-theme-editor-theme';
 
 function isObject(target: any) {
   return Object.prototype.toString.call(target) === '[object Object]';
+}
+
+// 格式化日期
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 export default defineComponent({
@@ -97,6 +197,49 @@ export default defineComponent({
       text: '{}',
       json: undefined,
     });
+
+    // 云端保存相关状态
+    const saveToCloudModalOpen = ref<boolean>(false);
+    const saveToCloudLoading = ref<boolean>(false);
+    const saveToCloudForm = ref({
+      name: '',
+      description: '',
+    });
+
+    // 云端加载相关状态
+    const loadFromCloudModalOpen = ref<boolean>(false);
+    const loadFromCloudLoading = ref<boolean>(false);
+    const cloudThemeConfigs = ref([]);
+
+    // 云端主题配置表格列定义
+    const cloudThemeColumns = [
+      {
+        title: locale.value.themeName,
+        dataIndex: 'name',
+        key: 'name',
+      },
+      {
+        title: locale.value.themeDescription,
+        dataIndex: 'description',
+        key: 'description',
+        ellipsis: true,
+      },
+      {
+        title: locale.value.createdAt,
+        key: 'createdAt',
+        width: 150,
+      },
+      {
+        title: locale.value.updatedAt,
+        key: 'updatedAt',
+        width: 150,
+      },
+      {
+        title: locale.value.actions,
+        key: 'actions',
+        width: 120,
+      },
+    ];
 
     const getTheme = () => {
       const storedConfig = localStorage.getItem(ANT_DESIGN_VUE_V4_THEME_EDITOR_THEME);
@@ -146,6 +289,95 @@ export default defineComponent({
         editThemeFormatRight.value = false;
       } else {
         editThemeFormatRight.value = true;
+      }
+    };
+
+    // 云端保存相关方法
+    const handleSaveToCloud = () => {
+      saveToCloudForm.value.name = '';
+      saveToCloudForm.value.description = '';
+      saveToCloudModalOpen.value = true;
+    };
+
+    const handleSaveToCloudCancel = () => {
+      saveToCloudModalOpen.value = false;
+    };
+
+    const handleSaveToCloudConfirm = async () => {
+      if (!saveToCloudForm.value.name.trim()) {
+        message.error('请输入主题名称');
+        return;
+      }
+
+      saveToCloudLoading.value = true;
+      try {
+        const result = await ThemeConfigService.saveThemeConfig(
+          theme.value,
+          saveToCloudForm.value.name.trim(),
+          saveToCloudForm.value.description.trim(),
+        );
+
+        if (result.success) {
+          message.success(locale.value.saveToCloudSuccessfully);
+          saveToCloudModalOpen.value = false;
+        } else {
+          message.error(result.message || locale.value.saveToCloudFailed);
+        }
+      } catch (error) {
+        console.error('保存到云端失败:', error);
+        message.error(locale.value.saveToCloudFailed);
+      } finally {
+        saveToCloudLoading.value = false;
+      }
+    };
+
+    // 云端加载相关方法
+    const handleLoadFromCloud = async () => {
+      loadFromCloudModalOpen.value = true;
+      loadFromCloudLoading.value = true;
+
+      try {
+        const result = await ThemeConfigService.getAllThemeConfigs();
+        if (result.success) {
+          cloudThemeConfigs.value = result.data;
+        } else {
+          message.error(result.message || locale.value.loadFromCloudFailed);
+        }
+      } catch (error) {
+        console.error('从云端加载失败:', error);
+        message.error(locale.value.loadFromCloudFailed);
+      } finally {
+        loadFromCloudLoading.value = false;
+      }
+    };
+
+    const handleLoadFromCloudCancel = () => {
+      loadFromCloudModalOpen.value = false;
+    };
+
+    const handleLoadThemeConfig = record => {
+      theme.value = record.config;
+      setTheme(record.config);
+      message.success(locale.value.loadFromCloudSuccessfully);
+      loadFromCloudModalOpen.value = false;
+    };
+
+    const handleDeleteThemeConfig = async id => {
+      try {
+        const result = await ThemeConfigService.deleteThemeConfig(id);
+        if (result.success) {
+          message.success(locale.value.deleteSuccessfully);
+          // 重新加载列表
+          const refreshResult = await ThemeConfigService.getAllThemeConfigs();
+          if (refreshResult.success) {
+            cloudThemeConfigs.value = refreshResult.data;
+          }
+        } else {
+          message.error(result.message || locale.value.deleteFailed);
+        }
+      } catch (error) {
+        console.error('删除失败:', error);
+        message.error(locale.value.deleteFailed);
       }
     };
 
@@ -332,6 +564,7 @@ export default defineComponent({
     return {
       locale,
       lang,
+      formatDate,
 
       theme,
       handleThemeChange,
@@ -348,6 +581,23 @@ export default defineComponent({
       handleEditConfigChange,
       handleExport,
       handleExportJson,
+
+      // 云端保存和加载相关
+      saveToCloudModalOpen,
+      saveToCloudLoading,
+      saveToCloudForm,
+      loadFromCloudModalOpen,
+      loadFromCloudLoading,
+      cloudThemeConfigs,
+      cloudThemeColumns,
+
+      handleSaveToCloud,
+      handleSaveToCloudCancel,
+      handleSaveToCloudConfirm,
+      handleLoadFromCloud,
+      handleLoadFromCloudCancel,
+      handleLoadThemeConfig,
+      handleDeleteThemeConfig,
 
       // 皮肤编辑器的国际化
       zhCN,

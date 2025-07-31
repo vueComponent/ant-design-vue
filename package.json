@@ -285,6 +285,7 @@
     "@emotion/unitless": "^0.8.0",
     "@phosphor-icons/vue": "^2.2.1",
     "@simonwep/pickr": "~1.8.0",
+    "@supabase/supabase-js": "^2.53.0",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^4.0.0",
     "csstype": "^3.1.1",

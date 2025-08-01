@@ -459,7 +459,13 @@ export default defineComponent({
      * 导出主题配置文件
      */
     const handleExport = () => {
-      const file = new File([JSON.stringify(theme.value, null, 2)], `Ant Design Vue Theme.json`, {
+      // 根据主题来源生成文件名
+      let fileName = 'Ant Design Vue Theme.json';
+      if (currentThemeSource.value === 'cloud' && currentThemeName.value) {
+        fileName = `${currentThemeName.value}.json`;
+      }
+
+      const file = new File([JSON.stringify(theme.value, null, 2)], fileName, {
         type: 'text/json; charset=utf-8;',
       });
       const tmpLink = document.createElement('a');
@@ -590,7 +596,13 @@ export default defineComponent({
 
       const exportData = formatTokensForExport(affectedTokens);
 
-      const file = new File([JSON.stringify(exportData, null, 2)], `Design Tokens.json`, {
+      // 根据主题来源生成文件名
+      let fileName = 'Design Tokens.json';
+      if (currentThemeSource.value === 'cloud' && currentThemeName.value) {
+        fileName = `${currentThemeName.value}.json`;
+      }
+
+      const file = new File([JSON.stringify(exportData, null, 2)], fileName, {
         type: 'text/json; charset=utf-8;',
       });
       const tmpLink = document.createElement('a');

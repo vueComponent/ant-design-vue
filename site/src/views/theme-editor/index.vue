@@ -3,9 +3,22 @@
   <div class="theme-editor">
     <a-config-provider :theme="{ inherit: false }">
       <div class="theme-editor-header">
-        <a-typography-title :level="5" :style="{ margin: 0 }">
-          {{ locale.title }}
-        </a-typography-title>
+        <div class="theme-editor-title">
+          <a-typography-title :level="5" :style="{ margin: 0 }">
+            {{ locale.title }}
+          </a-typography-title>
+          <!-- 状态标识标签 -->
+          <a-tag
+            :color="currentThemeSource === 'local' ? 'blue' : 'green'"
+            class="theme-source-tag"
+          >
+            {{
+              currentThemeSource === 'local'
+                ? locale.localCache
+                : `${locale.cloudTheme}: ${currentThemeName}`
+            }}
+          </a-tag>
+        </div>
 
         <div>
           <!-- 编辑主题配置弹窗 -->
@@ -36,7 +49,9 @@
           <!-- 保存到云端弹窗 -->
           <a-modal
             v-model:open="saveToCloudModalOpen"
-            :title="locale.saveToCloudModalTitle"
+            :title="
+              currentThemeSource === 'local' ? locale.saveToCloudModalTitle : locale.updateToCloud
+            "
             :width="500"
             :ok-text="locale.confirm"
             :cancel-text="locale.cancel"
@@ -49,6 +64,7 @@
                 <a-input
                   v-model:value="saveToCloudForm.name"
                   :placeholder="locale.themeNamePlaceholder"
+                  :disabled="currentThemeSource === 'cloud'"
                 />
               </a-form-item>
               <a-form-item :label="locale.themeDescription">
@@ -114,7 +130,7 @@
             {{ locale.loadFromCloud }}
           </a-button>
           <a-button class="theme-editor-header-actions" @click="handleSaveToCloud">
-            {{ locale.saveToCloud }}
+            {{ currentThemeSource === 'local' ? locale.saveToCloud : locale.updateToCloud }}
           </a-button>
           <a-button class="theme-editor-header-actions" @click="handleExportJson">
             {{ locale.exportJson }}
@@ -197,6 +213,11 @@ export default defineComponent({
       text: '{}',
       json: undefined,
     });
+
+    // 当前主题状态管理
+    const currentThemeSource = ref<'local' | 'cloud'>('local'); // 'local' 表示本地缓存，'cloud' 表示云端主题
+    const currentThemeName = ref<string>(''); // 当前云端主题名称
+    const currentThemeId = ref<string>(''); // 当前云端主题ID
 
     // 云端保存相关状态
     const saveToCloudModalOpen = ref<boolean>(false);
@@ -294,8 +315,15 @@ export default defineComponent({
 
     // 云端保存相关方法
     const handleSaveToCloud = () => {
-      saveToCloudForm.value.name = '';
-      saveToCloudForm.value.description = '';
+      if (currentThemeSource.value === 'cloud') {
+        // 如果是云端主题，预填充当前主题信息
+        saveToCloudForm.value.name = currentThemeName.value;
+        saveToCloudForm.value.description = ''; // 可以从当前主题获取描述
+      } else {
+        // 如果是本地缓存，清空表单
+        saveToCloudForm.value.name = '';
+        saveToCloudForm.value.description = '';
+      }
       saveToCloudModalOpen.value = true;
     };
 
@@ -311,21 +339,53 @@ export default defineComponent({
 
       saveToCloudLoading.value = true;
       try {
-        const result = await ThemeConfigService.saveThemeConfig(
-          theme.value,
-          saveToCloudForm.value.name.trim(),
-          saveToCloudForm.value.description.trim(),
-        );
+        let result;
+
+        if (currentThemeSource.value === 'cloud' && currentThemeId.value) {
+          // 更新现有的云端主题
+          result = await ThemeConfigService.updateThemeConfig(
+            currentThemeId.value,
+            theme.value,
+            saveToCloudForm.value.name.trim(),
+            saveToCloudForm.value.description.trim(),
+          );
+
+          if (result.success) {
+            message.success(locale.value.updateToCloudSuccessfully);
+            // 更新当前主题信息
+            currentThemeName.value = saveToCloudForm.value.name.trim();
+          } else {
+            message.error(result.message || locale.value.updateToCloudFailed);
+          }
+        } else {
+          // 创建新的云端主题
+          result = await ThemeConfigService.saveThemeConfig(
+            theme.value,
+            saveToCloudForm.value.name.trim(),
+            saveToCloudForm.value.description.trim(),
+          );
+
+          if (result.success) {
+            message.success(locale.value.saveToCloudSuccessfully);
+            // 切换到云端主题状态
+            currentThemeSource.value = 'cloud';
+            currentThemeName.value = saveToCloudForm.value.name.trim();
+            currentThemeId.value = result.data.id;
+          } else {
+            message.error(result.message || locale.value.saveToCloudFailed);
+          }
+        }
 
         if (result.success) {
-          message.success(locale.value.saveToCloudSuccessfully);
           saveToCloudModalOpen.value = false;
-        } else {
-          message.error(result.message || locale.value.saveToCloudFailed);
         }
       } catch (error) {
         console.error('保存到云端失败:', error);
-        message.error(locale.value.saveToCloudFailed);
+        const errorMessage =
+          currentThemeSource.value === 'cloud'
+            ? locale.value.updateToCloudFailed
+            : locale.value.saveToCloudFailed;
+        message.error(errorMessage);
       } finally {
         saveToCloudLoading.value = false;
       }
@@ -358,6 +418,12 @@ export default defineComponent({
     const handleLoadThemeConfig = record => {
       theme.value = record.config;
       setTheme(record.config);
+
+      // 更新当前主题状态
+      currentThemeSource.value = 'cloud';
+      currentThemeName.value = record.name;
+      currentThemeId.value = record.id;
+
       message.success(locale.value.loadFromCloudSuccessfully);
       loadFromCloudModalOpen.value = false;
     };
@@ -367,6 +433,14 @@ export default defineComponent({
         const result = await ThemeConfigService.deleteThemeConfig(id);
         if (result.success) {
           message.success(locale.value.deleteSuccessfully);
+
+          // 如果删除的是当前正在使用的主题，切换回本地缓存状态
+          if (currentThemeId.value === id) {
+            currentThemeSource.value = 'local';
+            currentThemeName.value = '';
+            currentThemeId.value = '';
+          }
+
           // 重新加载列表
           const refreshResult = await ThemeConfigService.getAllThemeConfigs();
           if (refreshResult.success) {
@@ -582,6 +656,11 @@ export default defineComponent({
       handleExport,
       handleExportJson,
 
+      // 当前主题状态
+      currentThemeSource,
+      currentThemeName,
+      currentThemeId,
+
       // 云端保存和加载相关
       saveToCloudModalOpen,
       saveToCloudLoading,
@@ -622,6 +701,17 @@ export default defineComponent({
       &:last-child {
         margin-right: 0;
       }
+    }
+  }
+
+  &-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .theme-source-tag {
+      font-size: 12px;
+      margin: 0;
     }
   }
 }

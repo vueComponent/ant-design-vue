@@ -34,6 +34,12 @@ export default {
     delete: '删除',
     cancel: '取消',
     confirm: '确定',
+    // 新增的状态标识文本
+    localCache: '本地缓存',
+    cloudTheme: '云端主题',
+    updateToCloud: '更新到云端',
+    updateToCloudSuccessfully: '更新到云端成功',
+    updateToCloudFailed: '更新到云端失败',
   },
   en: {
     title: 'Theme Editor',
@@ -70,5 +76,11 @@ export default {
     delete: 'Delete',
     cancel: 'Cancel',
     confirm: 'Confirm',
+    // 新增的状态标识文本
+    localCache: 'Local Cache',
+    cloudTheme: 'Cloud Theme',
+    updateToCloud: 'Update to Cloud',
+    updateToCloudSuccessfully: 'Updated to cloud successfully',
+    updateToCloudFailed: 'Failed to update to cloud',
   },
 };

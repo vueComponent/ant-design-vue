@@ -20,7 +20,43 @@
           </a-tag>
         </div>
 
-        <div>
+        <!-- 中间图标区域 -->
+        <div class="theme-editor-icons">
+          <a-tooltip :title="locale.loadFromCloud">
+            <div class="icon-button" @click="handleLoadFromCloud">
+              <template v-if="currentThemeSource === 'cloud'">
+                <PhCloudCheck :size="20" weight="regular" />
+              </template>
+              <template v-else>
+                <PhCloudArrowDown :size="20" weight="regular" />
+              </template>
+            </div>
+          </a-tooltip>
+          <a-tooltip
+            :title="currentThemeSource === 'local' ? locale.saveToCloud : locale.updateToCloud"
+          >
+            <div class="icon-button" @click="handleSaveToCloud">
+              <template v-if="currentThemeSource === 'local'">
+                <PhCloudArrowUp :size="20" weight="regular" />
+              </template>
+              <template v-else>
+                <a-badge
+                  :dot="currentThemeSource === 'cloud' && hasCloudThemeModified"
+                  color="#52c41a"
+                >
+                  <PhArrowsClockwise :size="20" weight="regular" />
+                </a-badge>
+              </template>
+            </div>
+          </a-tooltip>
+          <a-tooltip :title="locale.exportJson">
+            <div class="icon-button" @click="handleExportJson">
+              <PhDownloadSimple :size="20" weight="regular" />
+            </div>
+          </a-tooltip>
+        </div>
+
+        <div class="theme-editor-actions">
           <!-- 编辑主题配置弹窗 -->
           <a-modal
             v-model:open="editModelOpen"
@@ -126,15 +162,6 @@
             </a-spin>
           </a-modal>
 
-          <a-button class="theme-editor-header-actions" @click="handleLoadFromCloud">
-            {{ locale.loadFromCloud }}
-          </a-button>
-          <a-button class="theme-editor-header-actions" @click="handleSaveToCloud">
-            {{ currentThemeSource === 'local' ? locale.saveToCloud : locale.updateToCloud }}
-          </a-button>
-          <a-button class="theme-editor-header-actions" @click="handleExportJson">
-            {{ locale.exportJson }}
-          </a-button>
           <a-button class="theme-editor-header-actions" @click="handleExport">
             {{ locale.export }}
           </a-button>
@@ -163,6 +190,15 @@ import { useLocale } from '../../i18n';
 import locales from './locales';
 
 import Header from '../../layouts/header/index.vue';
+
+// 导入 Phosphor Icons
+import {
+  PhCloudArrowDown,
+  PhCloudArrowUp,
+  PhArrowsClockwise,
+  PhDownloadSimple,
+  PhCloudCheck,
+} from '@phosphor-icons/vue';
 
 // antd换肤编辑器
 import { enUS, ThemeEditor, zhCN } from '../../components/antdv-token-previewer';
@@ -199,6 +235,12 @@ export default defineComponent({
     Header,
     ThemeEditor,
     JSONEditor: defineAsyncComponent(() => import('./JSONEditor/index.vue')), // 异步组件加载json编辑器
+    // 注册 Phosphor Icons 组件
+    PhCloudArrowDown,
+    PhCloudArrowUp,
+    PhArrowsClockwise,
+    PhDownloadSimple,
+    PhCloudCheck,
   },
   setup() {
     // 国际化
@@ -218,6 +260,7 @@ export default defineComponent({
     const currentThemeSource = ref<'local' | 'cloud'>('local'); // 'local' 表示本地缓存，'cloud' 表示云端主题
     const currentThemeName = ref<string>(''); // 当前云端主题名称
     const currentThemeId = ref<string>(''); // 当前云端主题ID
+    const hasCloudThemeModified = ref<boolean>(false); // 云端主题是否有修改
 
     // 云端保存相关状态
     const saveToCloudModalOpen = ref<boolean>(false);
@@ -354,6 +397,7 @@ export default defineComponent({
             message.success(locale.value.updateToCloudSuccessfully);
             // 更新当前主题信息
             currentThemeName.value = saveToCloudForm.value.name.trim();
+            hasCloudThemeModified.value = false; // 重置修改状态
           } else {
             message.error(result.message || locale.value.updateToCloudFailed);
           }
@@ -371,6 +415,7 @@ export default defineComponent({
             currentThemeSource.value = 'cloud';
             currentThemeName.value = saveToCloudForm.value.name.trim();
             currentThemeId.value = result.data.id;
+            hasCloudThemeModified.value = false; // 重置修改状态
           } else {
             message.error(result.message || locale.value.saveToCloudFailed);
           }
@@ -423,6 +468,7 @@ export default defineComponent({
       currentThemeSource.value = 'cloud';
       currentThemeName.value = record.name;
       currentThemeId.value = record.id;
+      hasCloudThemeModified.value = false; // 重置修改状态
 
       message.success(locale.value.loadFromCloudSuccessfully);
       loadFromCloudModalOpen.value = false;
@@ -439,6 +485,7 @@ export default defineComponent({
             currentThemeSource.value = 'local';
             currentThemeName.value = '';
             currentThemeId.value = '';
+            hasCloudThemeModified.value = false;
           }
 
           // 重新加载列表
@@ -619,6 +666,11 @@ export default defineComponent({
 
     const handleThemeChange = newTheme => {
       theme.value = newTheme.config;
+
+      // 如果当前是云端主题，标记为已修改
+      if (currentThemeSource.value === 'cloud') {
+        hasCloudThemeModified.value = true;
+      }
     };
 
     nextTick(() => {
@@ -672,6 +724,7 @@ export default defineComponent({
       currentThemeSource,
       currentThemeName,
       currentThemeId,
+      hasCloudThemeModified,
 
       // 云端保存和加载相关
       saveToCloudModalOpen,
@@ -693,6 +746,13 @@ export default defineComponent({
       // 皮肤编辑器的国际化
       zhCN,
       enUS,
+
+      // Phosphor Icons
+      PhCloudArrowDown,
+      PhCloudArrowUp,
+      PhArrowsClockwise,
+      PhDownloadSimple,
+      PhCloudCheck,
     };
   },
 });
@@ -725,6 +785,46 @@ export default defineComponent({
       font-size: 12px;
       margin: 0;
     }
+  }
+
+  &-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 0;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-color);
+  background: transparent;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+}
+
+[data-theme='dark'] .icon-button {
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
   }
 }
 </style>

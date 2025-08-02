@@ -528,25 +528,18 @@ export default defineComponent({
     };
 
     /**
-     * 导出JSON文件，按照设计令牌标准格式，只包含修改过的受影响的变量
+     * 导出JSON文件，按照设计令牌标准格式，包含所有修改过的变量
      */
     const handleExportJson = () => {
       // 获取当前主题的token配置
       const currentToken = theme.value.token || {};
 
-      // 找出修改过的seed token
-      const modifiedSeedTokens = [];
-      Object.keys(currentToken).forEach(key => {
-        if (seedToken[key] !== undefined && currentToken[key] !== seedToken[key]) {
-          modifiedSeedTokens.push(key);
-        }
+      // 获取默认的token值用于对比
+      const defaultTokens = getDesignToken({
+        token: {},
+        algorithm: theme.value.algorithm,
+        components: {},
       });
-
-      // 如果没有修改任何seed token，提示用户
-      if (modifiedSeedTokens.length === 0) {
-        console.warn('没有检测到任何修改的seed token');
-        return;
-      }
 
       // 获取完整的计算后的token值
       const computedTokens = getDesignToken({
@@ -555,93 +548,264 @@ export default defineComponent({
         components: theme.value.components || {},
       });
 
-      // 收集所有受影响的变量
-      const affectedTokens = {};
-      modifiedSeedTokens.forEach(seedKey => {
-        // 添加修改的seed token本身
-        affectedTokens[seedKey] = computedTokens[seedKey];
+      // 找出所有修改过的token（包括seed token和其他token）
+      const modifiedTokens = {};
 
-        // 添加相关的Map Token
-        const relatedMapTokens = seedRelatedMap[seedKey] || [];
-        relatedMapTokens.forEach(mapTokenKey => {
-          if (computedTokens[mapTokenKey] !== undefined) {
-            affectedTokens[mapTokenKey] = computedTokens[mapTokenKey];
-          }
-        });
+      // 检查所有当前token与默认值的差异
+      Object.keys(computedTokens).forEach(key => {
+        if (defaultTokens[key] !== computedTokens[key]) {
+          modifiedTokens[key] = computedTokens[key];
+        }
       });
 
-      // 按照设计令牌标准格式组织数据
+      // 同时检查直接设置的token
+      Object.keys(currentToken).forEach(key => {
+        if (currentToken[key] !== undefined) {
+          modifiedTokens[key] = computedTokens[key] || currentToken[key];
+        }
+      });
+
+      // 如果没有修改任何token，提示用户
+      if (Object.keys(modifiedTokens).length === 0) {
+        console.warn('没有检测到任何修改的token');
+        return;
+      }
+
+      console.log('检测到修改的token:', Object.keys(modifiedTokens));
+
+      /**
+       * 按照设计令牌标准格式组织数据
+       * 参考格式：Colors/Neutral/Bg/colorBgContainer
+       * @param {Object} tokens - 需要导出的token对象
+       * @returns {Object} 格式化后的JSON结构
+       */
       const formatTokensForExport = tokens => {
         const result = {
           Colors: {
+            Neutral: {
+              Text: {},
+              Icon: {},
+              Bg: {},
+              Border: {},
+              Fill: {},
+            },
             Brand: {
               Primary: {},
               Success: {},
-              Error: {},
               Warning: {},
               Info: {},
+              Error: {},
             },
           },
         };
 
         /**
-         * 根据实际颜色值生成对应的引用格式
+         * 根据token名称确定其在结构中的位置
          * @param {string} tokenKey - token名称
-         * @param {string} tokenValue - 实际颜色值
-         * @returns {string} 引用格式或实际颜色值
+         * @returns {Object} 包含分类路径的对象
          */
-        const generateColorReference = (tokenKey, tokenValue) => {
-          // 如果是主色，直接使用颜色值
+        const getTokenCategory = tokenKey => {
+          // 主色相关 - 放在Brand.Primary下
           if (
+            tokenKey.includes('Primary') ||
             tokenKey === 'colorPrimary' ||
-            tokenKey === 'colorSuccess' ||
-            tokenKey === 'colorError' ||
-            tokenKey === 'colorWarning' ||
-            tokenKey === 'colorInfo'
+            tokenKey === 'colorPrimaryBg' ||
+            tokenKey === 'colorPrimaryBgHover' ||
+            tokenKey === 'colorPrimaryBorder' ||
+            tokenKey === 'colorPrimaryBorderHover' ||
+            tokenKey === 'colorPrimaryHover' ||
+            tokenKey === 'colorPrimaryActive' ||
+            tokenKey === 'colorPrimaryText' ||
+            tokenKey === 'colorPrimaryTextHover' ||
+            tokenKey === 'colorPrimaryTextActive'
           ) {
-            return tokenValue;
+            return { mainCategory: 'Brand', category: 'Primary', subcategory: null };
           }
 
-          // 对于衍生的token，直接使用实际的颜色值
-          return tokenValue;
+          // 成功色相关 - 放在Brand.Success下
+          if (
+            tokenKey.includes('Success') ||
+            tokenKey === 'colorSuccess' ||
+            tokenKey === 'colorSuccessBg' ||
+            tokenKey === 'colorSuccessBgHover' ||
+            tokenKey === 'colorSuccessBorder' ||
+            tokenKey === 'colorSuccessBorderHover' ||
+            tokenKey === 'colorSuccessHover' ||
+            tokenKey === 'colorSuccessActive' ||
+            tokenKey === 'colorSuccessText' ||
+            tokenKey === 'colorSuccessTextHover' ||
+            tokenKey === 'colorSuccessTextActive'
+          ) {
+            return { mainCategory: 'Brand', category: 'Success', subcategory: null };
+          }
+
+          // 错误色相关 - 放在Brand.Error下
+          if (
+            tokenKey.includes('Error') ||
+            tokenKey === 'colorError' ||
+            tokenKey === 'colorErrorBg' ||
+            tokenKey === 'colorErrorBgHover' ||
+            tokenKey === 'colorErrorBorder' ||
+            tokenKey === 'colorErrorBorderHover' ||
+            tokenKey === 'colorErrorHover' ||
+            tokenKey === 'colorErrorActive' ||
+            tokenKey === 'colorErrorText' ||
+            tokenKey === 'colorErrorTextHover' ||
+            tokenKey === 'colorErrorTextActive'
+          ) {
+            return { mainCategory: 'Brand', category: 'Error', subcategory: null };
+          }
+
+          // 警告色相关 - 放在Brand.Warning下
+          if (
+            tokenKey.includes('Warning') ||
+            tokenKey === 'colorWarning' ||
+            tokenKey === 'colorWarningBg' ||
+            tokenKey === 'colorWarningBgHover' ||
+            tokenKey === 'colorWarningBorder' ||
+            tokenKey === 'colorWarningBorderHover' ||
+            tokenKey === 'colorWarningHover' ||
+            tokenKey === 'colorWarningActive' ||
+            tokenKey === 'colorWarningText' ||
+            tokenKey === 'colorWarningTextHover' ||
+            tokenKey === 'colorWarningTextActive'
+          ) {
+            return { mainCategory: 'Brand', category: 'Warning', subcategory: null };
+          }
+
+          // 信息色相关 - 放在Brand.Info下
+          if (
+            tokenKey.includes('Info') ||
+            tokenKey === 'colorInfo' ||
+            tokenKey === 'colorInfoBg' ||
+            tokenKey === 'colorInfoBgHover' ||
+            tokenKey === 'colorInfoBorder' ||
+            tokenKey === 'colorInfoBorderHover' ||
+            tokenKey === 'colorInfoHover' ||
+            tokenKey === 'colorInfoActive' ||
+            tokenKey === 'colorInfoText' ||
+            tokenKey === 'colorInfoTextHover' ||
+            tokenKey === 'colorInfoTextActive'
+          ) {
+            return { mainCategory: 'Brand', category: 'Info', subcategory: null };
+          }
+
+          // 链接色相关 - 放在Neutral.Text下
+          if (
+            tokenKey.includes('Link') ||
+            tokenKey === 'colorLink' ||
+            tokenKey === 'colorLinkHover' ||
+            tokenKey === 'colorLinkActive'
+          ) {
+            return { mainCategory: 'Neutral', category: 'Text', subcategory: null };
+          }
+
+          // 文本相关 - 放在Neutral.Text下
+          if (
+            tokenKey.includes('Text') ||
+            tokenKey === 'colorText' ||
+            tokenKey === 'colorTextSecondary' ||
+            tokenKey === 'colorTextTertiary' ||
+            tokenKey === 'colorTextQuaternary' ||
+            tokenKey === 'colorTextHeading' ||
+            tokenKey === 'colorTextLabel' ||
+            tokenKey === 'colorTextDescription' ||
+            tokenKey === 'colorTextDisabled' ||
+            tokenKey === 'colorTextPlaceholder' ||
+            tokenKey === 'colorTextLightSolid'
+          ) {
+            return { mainCategory: 'Neutral', category: 'Text', subcategory: null };
+          }
+
+          // 图标相关 - 放在Neutral.Icon下
+          if (
+            tokenKey.includes('Icon') ||
+            tokenKey === 'colorIcon' ||
+            tokenKey === 'colorIconHover'
+          ) {
+            return { mainCategory: 'Neutral', category: 'Icon', subcategory: null };
+          }
+
+          // 背景相关 - 放在Neutral.Bg下
+          if (
+            tokenKey.includes('Bg') ||
+            tokenKey === 'colorBgContainer' ||
+            tokenKey === 'colorBgElevated' ||
+            tokenKey === 'colorBgLayout' ||
+            tokenKey === 'colorBgMask' ||
+            tokenKey === 'colorBgSpotlight' ||
+            tokenKey === 'colorBgBase' ||
+            tokenKey === 'colorBgContainerDisabled' ||
+            tokenKey === 'colorBgTextActive' ||
+            tokenKey === 'colorBgTextHover' ||
+            tokenKey === 'colorBorderBg'
+          ) {
+            return { mainCategory: 'Neutral', category: 'Bg', subcategory: null };
+          }
+
+          // 边框相关 - 放在Neutral.Border下
+          if (
+            tokenKey.includes('Border') ||
+            tokenKey === 'colorBorder' ||
+            tokenKey === 'colorBorderSecondary' ||
+            tokenKey === 'colorSplit'
+          ) {
+            return { mainCategory: 'Neutral', category: 'Border', subcategory: null };
+          }
+
+          // 填充相关 - 放在Neutral.Fill下
+          if (
+            tokenKey.includes('Fill') ||
+            tokenKey === 'colorFill' ||
+            tokenKey === 'colorFillSecondary' ||
+            tokenKey === 'colorFillTertiary' ||
+            tokenKey === 'colorFillQuaternary' ||
+            tokenKey === 'colorFillContent' ||
+            tokenKey === 'colorFillContentHover' ||
+            tokenKey === 'colorFillAlter' ||
+            tokenKey === 'colorFillAlterSolid'
+          ) {
+            return { mainCategory: 'Neutral', category: 'Fill', subcategory: null };
+          }
+
+          // 默认放在Brand.Primary下
+          return { mainCategory: 'Brand', category: 'Primary', subcategory: null };
         };
 
         Object.keys(tokens).forEach(tokenKey => {
           const tokenValue = tokens[tokenKey];
-          const referenceValue = generateColorReference(tokenKey, tokenValue);
+          const { mainCategory, category } = getTokenCategory(tokenKey);
+
           const tokenData = {
             $type: 'color',
-            $value: referenceValue,
+            $value: tokenValue,
           };
 
-          // 根据token名称分类到Brand下的不同子类别
-          if (tokenKey.includes('Primary') || tokenKey === 'colorPrimary') {
-            result.Colors.Brand.Primary[tokenKey] = tokenData;
-          } else if (tokenKey.includes('Success')) {
-            result.Colors.Brand.Success[tokenKey] = tokenData;
-          } else if (tokenKey.includes('Error')) {
-            result.Colors.Brand.Error[tokenKey] = tokenData;
-          } else if (tokenKey.includes('Warning')) {
-            result.Colors.Brand.Warning[tokenKey] = tokenData;
-          } else if (tokenKey.includes('Info')) {
-            result.Colors.Brand.Info[tokenKey] = tokenData;
-          } else {
-            // 其他颜色放在Brand.Primary下
-            result.Colors.Brand.Primary[tokenKey] = tokenData;
+          // 确保分类存在
+          if (!result.Colors[mainCategory][category]) {
+            result.Colors[mainCategory][category] = {};
           }
+
+          result.Colors[mainCategory][category][tokenKey] = tokenData;
         });
 
         // 清理空的分类
-        Object.keys(result.Colors.Brand).forEach(category => {
-          if (Object.keys(result.Colors.Brand[category]).length === 0) {
-            delete result.Colors.Brand[category];
+        ['Neutral', 'Brand'].forEach(mainCat => {
+          Object.keys(result.Colors[mainCat]).forEach(category => {
+            if (Object.keys(result.Colors[mainCat][category]).length === 0) {
+              delete result.Colors[mainCat][category];
+            }
+          });
+          // 如果整个主分类都是空的，也删除它
+          if (Object.keys(result.Colors[mainCat]).length === 0) {
+            delete result.Colors[mainCat];
           }
         });
 
         return result;
       };
 
-      const exportData = formatTokensForExport(affectedTokens);
+      const exportData = formatTokensForExport(modifiedTokens);
 
       // 根据主题来源生成文件名
       let fileName = 'Design Tokens.json';

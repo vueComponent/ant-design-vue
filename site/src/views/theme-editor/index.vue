@@ -203,8 +203,6 @@ import {
 // antd换肤编辑器
 import { enUS, ThemeEditor, zhCN } from '../../components/antdv-token-previewer';
 import getDesignToken from '../../components/antdv-token-previewer/utils/getDesignToken';
-import { seedRelatedMap } from '../../components/antdv-token-previewer/meta/TokenRelation';
-import seedToken from 'ant-design-vue/es/theme/themes/seed';
 
 // Supabase 服务
 import { ThemeConfigService } from '../../utils/supabase';
@@ -506,13 +504,7 @@ export default defineComponent({
      * 导出主题配置文件
      */
     const handleExport = () => {
-      // 根据主题来源生成文件名
-      let fileName = 'Ant Design Vue Theme.json';
-      if (currentThemeSource.value === 'cloud' && currentThemeName.value) {
-        fileName = `${currentThemeName.value}.json`;
-      }
-
-      const file = new File([JSON.stringify(theme.value, null, 2)], fileName, {
+      const file = new File([JSON.stringify(theme.value, null, 2)], 'theme.json', {
         type: 'text/json; charset=utf-8;',
       });
       const tmpLink = document.createElement('a');

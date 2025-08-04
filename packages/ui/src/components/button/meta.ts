@@ -107,4 +107,4 @@ export const buttonSlots = {
   loading: (_: any) => null as any,
 } as const
 
-export type ButtonSlots = typeof buttonSlots
+export type ButtonSlots = Partial<typeof buttonSlots>

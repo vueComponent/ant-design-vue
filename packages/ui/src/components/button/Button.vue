@@ -65,7 +65,7 @@ const cssVars = computed(() => {
 
 const handleClick = (event: MouseEvent) => {
   emit('click', event)
-  if (props.href) {
+  if (props.href !== undefined && props.href !== null) {
     window.open(props.href, props.target)
   }
 }

@@ -1,11 +1,11 @@
-import { UserConfig, UserConfigFnObject } from 'vite'
+import { UserConfigFnObject, ViteUserConfig } from 'vitest/config.js'
 
 export type GetUserConfig = (
   dirname: string,
   overwriteLib?: boolean,
-) => UserConfig | UserConfigFnObject
+) => ViteUserConfig | UserConfigFnObject
 
 export declare function extendsConfig(
-  base: UserConfig | UserConfigFnObject,
-  overwrite: UserConfig | UserConfigFnObject,
+  base: ViteUserConfig | UserConfigFnObject,
+  overwrite: ViteUserConfig | UserConfigFnObject,
 ): UserConfigFnObject

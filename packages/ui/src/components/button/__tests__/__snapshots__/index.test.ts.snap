@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button > should render correctly 1`] = `
+"<button class="ant-btn ant-btn-solid ant-btn-md">
+  <!--v-if-->
+  <!--v-if--><span></span>
+</button>"
+`;

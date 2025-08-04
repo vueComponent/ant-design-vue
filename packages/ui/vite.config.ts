@@ -4,6 +4,7 @@ import { resolve } from 'node:path'
 import tailwindcss from '@tailwindcss/vite'
 import { readdirSync, statSync } from 'node:fs'
 import dts from 'vite-plugin-dts'
+import pkg from './package.json'
 
 // 获取所有组件目录
 function getComponents() {
@@ -34,6 +35,21 @@ export default extendsConfig(vue(__dirname, true), {
     },
   },
   plugins: [tailwindcss()],
+  test: {
+    alias: {
+      [pkg.name]: resolve(__dirname, './src'),
+    },
+    globals: true,
+    environment: 'jsdom',
+    testTimeout: 5000,
+    coverage: {
+      include: ['src/**/*.{ts,vue}'],
+      provider: 'v8',
+      allowExternal: true,
+      reporter: ['text', 'json', 'html'],
+    },
+    setupFiles: [resolve(__dirname, './test/setup.ts')],
+  },
   build: {
     cssCodeSplit: true,
     lib: {

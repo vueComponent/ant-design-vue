@@ -14,7 +14,10 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "dev:apps": "turbo dev --filter=\"./apps/*\"",
-    "lint": "turbo lint"
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "test:ui": "turbo test -- --ui",
+    "coverage": "turbo test -- --coverage"
   },
   "devDependencies": {
     "@ant-design-vue/eslint-config": "*",
@@ -22,6 +25,7 @@
     "@ant-design-vue/typescript-config": "*",
     "@types/node": "^20.0.0",
     "eslint": "^8.56.0",
+    "vitest": "^3.2.4",
     "prettier": "^3.3.3",
     "esbuild": "^0.25.8",
     "turbo": "^2.4.4",

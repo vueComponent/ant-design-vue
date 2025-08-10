@@ -17,16 +17,16 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { buttonProps, buttonEmits, ButtonSlots } from './meta'
+import { ButtonSlots, ButtonProps, ButtonEmits, buttonDefaultProps } from './meta'
 import { getCssVarColor } from '@/utils/colorAlgorithm'
 import { useThemeInject } from '../theme/hook'
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
 import { defaultColor } from '../theme/meta'
 import { Wave } from '../wave'
 
-const props = defineProps(buttonProps)
+const props = withDefaults(defineProps<ButtonProps>(), buttonDefaultProps)
 const buttonRef = ref<HTMLButtonElement | null>(null)
-const emit = defineEmits(buttonEmits)
+const emit = defineEmits<ButtonEmits>()
 defineSlots<ButtonSlots>()
 
 const theme = useThemeInject()

@@ -1,0 +1,5 @@
+@reference '../../../style/tailwind.css';
+
+.ant-affix {
+  @apply fixed z-10;
+}

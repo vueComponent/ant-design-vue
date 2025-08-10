@@ -74,7 +74,8 @@
     "@floating-ui/vue": "^1.1.6",
     "lodash-es": "^4.17.21",
     "@ctrl/tinycolor": "^4.0.0",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "@vueuse/core": "^13.6.0"
   },
   "devDependencies": {
     "@ant-design-vue/eslint-config": "*",

@@ -2,6 +2,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     AButton: typeof import('@ant-design-vue/ui').Button
+    AAffix: typeof import('@ant-design-vue/ui').Affix
   }
 }
 export {}

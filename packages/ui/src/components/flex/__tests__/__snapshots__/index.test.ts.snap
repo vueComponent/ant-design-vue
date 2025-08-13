@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Flex > should render correctly 1`] = `
+"<div class="ant-flex">
+  <div>test</div>
+</div>"
+`;

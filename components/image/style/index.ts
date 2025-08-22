@@ -193,6 +193,9 @@ export const genImagePreviewStyle: GenerateStyle<ImageToken> = (token: ImageToke
           transition: `transform ${motionDurationSlow} ${motionEaseOut} 0s`,
           userSelect: 'none',
           pointerEvents: 'auto',
+          '&-placeholder': {
+            position: 'absolute',
+          },
 
           '&-wrapper': {
             ...genBoxStyle(),
@@ -214,7 +217,6 @@ export const genImagePreviewStyle: GenerateStyle<ImageToken> = (token: ImageToke
             },
           },
         },
-
         [`${previewCls}-moving`]: {
           [`${previewCls}-preview-img`]: {
             cursor: 'grabbing',

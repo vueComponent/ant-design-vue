@@ -3,9 +3,8 @@ import { defaultConfig } from '../../theme/internal';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 import devWarning from '../../vc-util/warning';
-import { cssVarPrefix } from '../../theme/util/themeTokenUtil';
 
-const themeKey = cssVarPrefix;
+const themeKey = 'antdvtheme';
 export default function useTheme(theme?: Ref<ThemeConfig>, parentTheme?: Ref<ThemeConfig>) {
   const themeConfig = computed(() => theme?.value || {});
   const parentThemeConfig = computed<ThemeConfig>(() =>

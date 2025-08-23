@@ -3,6 +3,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 import useStyle from './style';
 
 export const dividerProps = () => ({
@@ -34,7 +35,8 @@ const Divider = defineComponent({
   props: dividerProps(),
   setup(props, { slots, attrs }) {
     const { prefixCls: prefixClsRef, direction } = useConfigInject('divider', props);
-    const [wrapSSR, hashId] = useStyle(prefixClsRef);
+    const rootCls = useCSSVarCls(prefixClsRef);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixClsRef, rootCls);
     const hasCustomMarginLeft = computed(
       () => props.orientation === 'left' && props.orientationMargin != null,
     );
@@ -46,6 +48,8 @@ const Divider = defineComponent({
       const prefixCls = prefixClsRef.value;
       return {
         [prefixCls]: true,
+        [cssVarCls.value]: true,
+        [rootCls.value]: true,
         [hashId.value]: !!hashId.value,
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-dashed`]: !!dashed,

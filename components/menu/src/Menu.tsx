@@ -43,6 +43,7 @@ import type { ItemType } from './hooks/useItems';
 import useItems from './hooks/useItems';
 import useStyle from '../style';
 import { useInjectOverride } from './OverrideContext';
+import useCSSVarCls from '../../config-provider/hooks/useCssVarCls';
 
 export const menuProps = () => ({
   id: String,
@@ -106,8 +107,10 @@ export default defineComponent({
     const prefixCls = computed(() => {
       return getPrefixCls('menu', props.prefixCls || override?.prefixCls?.value);
     });
-    const [wrapSSR, hashId] = useStyle(
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(
       prefixCls,
+      rootCls,
       computed(() => {
         return !override;
       }),
@@ -336,6 +339,8 @@ export default defineComponent({
         [`${prefixCls.value}-inline-collapsed`]: mergedInlineCollapsed.value,
         [`${prefixCls.value}-rtl`]: isRtl.value,
         [`${prefixCls.value}-${props.theme}`]: true,
+        [rootCls.value]: true,
+        [cssVarCls.value]: true,
       };
     });
     const rootPrefixCls = computed(() => getPrefixCls());
@@ -411,6 +416,7 @@ export default defineComponent({
     );
     useProvideMenu({
       prefixCls,
+      cssVarCls: computed(() => `${rootCls.value} ${cssVarCls.value}`),
       activeKeys,
       openKeys: mergedOpenKeys,
       selectedKeys: mergedSelectedKeys,

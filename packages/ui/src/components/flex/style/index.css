@@ -1,0 +1,95 @@
+@reference '../../../style/tailwind.css';
+
+.ant-flex {
+  @apply flex;
+  @apply m-0;
+  @apply p-0;
+  &:where(.ant-flex-vertical) {
+    @apply flex-col;
+  }
+  &:where(.ant-flex-rtl) {
+    @apply flex-row-reverse;
+  }
+  /* gap */
+  &:where(.ant-flex-gap-small) {
+    @apply gap-[8px];
+  }
+  &:where(.ant-flex-gap-middle) {
+    @apply gap-[16px];
+  }
+  &:where(.ant-flex-gap-large) {
+    @apply gap-[32px];
+  }
+  /* wrap */
+  &:where(.ant-flex-wrap-wrap) {
+    @apply flex-wrap;
+  }
+  &:where(.ant-flex-wrap-nowrap) {
+    @apply flex-nowrap;
+  }
+  &:where(.ant-flex-wrap-wrap-reverse) {
+    @apply flex-wrap-reverse;
+  }
+  /* align */
+  &:where(.ant-flex-align-center) {
+    @apply items-center;
+  }
+  &:where(.ant-flex-align-start) {
+    @apply items-start;
+  }
+  &:where(.ant-flex-align-end) {
+    @apply items-end;
+  }
+  &:where(.ant-flex-align-flex-start) {
+    @apply items-start;
+  }
+  &:where(.ant-flex-align-flex-end) {
+    @apply items-end;
+  }
+  &:where(.ant-flex-align-self-start) {
+    @apply self-start;
+  }
+  &:where(.ant-flex-align-self-end) {
+    @apply self-end;
+  }
+  &:where(.ant-flex-align-baseline) {
+    @apply items-baseline;
+  }
+  &:where(.ant-flex-align-normal) {
+    @apply content-normal;
+  }
+  &:where(.ant-flex-align-stretch) {
+    @apply items-stretch;
+  }
+  /* justify */
+  &:where(.ant-flex-justify-flex-start) {
+    @apply justify-start;
+  }
+  &:where(.ant-flex-justify-flex-end) {
+    @apply justify-end;
+  }
+  &:where(.ant-flex-justify-start) {
+    @apply justify-start;
+  }
+  &:where(.ant-flex-justify-end) {
+    @apply justify-end;
+  }
+  &:where(.ant-flex-justify-center) {
+    @apply justify-center;
+  }
+  &:where(.ant-flex-justify-space-between) {
+    @apply justify-between;
+  }
+  &:where(.ant-flex-justify-space-around) {
+    @apply justify-around;
+  }
+  &:where(.ant-flex-justify-space-evenly) {
+    @apply justify-evenly;
+  }
+  &:where(.ant-flex-justify-stretch) {
+    @apply justify-stretch;
+  }
+  &:where(.ant-flex-justify-normal) {
+    @apply justify-normal;
+  }
+}

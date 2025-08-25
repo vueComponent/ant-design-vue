@@ -19,6 +19,7 @@ import collapseMotion from '../_util/collapseMotion';
 import type { CustomSlotsType } from '../_util/type';
 
 // CSSINJS
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 import useStyle from './style';
 
 type Key = number | string;
@@ -63,7 +64,8 @@ export default defineComponent({
     const { prefixCls, direction, rootPrefixCls } = useConfigInject('collapse', props);
 
     // style
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
     const iconPosition = computed(() => {
       const { expandIconPosition } = props;
@@ -186,6 +188,8 @@ export default defineComponent({
           [`${prefixCls.value}-ghost`]: !!ghost,
           [attrs.class as string]: !!attrs.class,
         },
+        cssVarCls.value,
+        rootCls.value,
         hashId.value,
       );
       return wrapSSR(

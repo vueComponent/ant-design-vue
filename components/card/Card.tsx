@@ -7,6 +7,7 @@ import type { SizeType } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 import useStyle from './style';
 import Skeleton from '../skeleton';
 import type { CustomSlotsType } from '../_util/type';
@@ -67,7 +68,8 @@ const Card = defineComponent({
   }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction, size } = useConfigInject('card', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const getAction = (actions: VNodeTypes[]) => {
       const actionList = actions.map((action, index) =>
         (isVNode(action) && !isEmptyElement(action)) || !isVNode(action) ? (
@@ -112,6 +114,8 @@ const Card = defineComponent({
       const pre = prefixCls.value;
       const classString = {
         [`${pre}`]: true,
+        [cssVarCls.value]: true,
+        [rootCls.value]: true,
         [hashId.value]: true,
         [`${pre}-loading`]: loading,
         [`${pre}-bordered`]: bordered,

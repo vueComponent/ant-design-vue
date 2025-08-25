@@ -10,6 +10,7 @@ import Paragraph from './Paragraph';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import Element from './Element';
 import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 /* This only for skeleton internal. */
 type SkeletonAvatarProps = Omit<AvatarProps, 'active'>;
@@ -90,7 +91,8 @@ const Skeleton = defineComponent({
   }),
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('skeleton', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
 
     return () => {
       const { loading, avatar, title, paragraph, active, round } = props;
@@ -155,7 +157,9 @@ const Skeleton = defineComponent({
           [`${pre}-active`]: active,
           [`${pre}-rtl`]: direction.value === 'rtl',
           [`${pre}-round`]: round,
+          [rootCls.value]: true,
           [hashId.value]: true,
+          [cssVarCls.value]: true,
         });
 
         return wrapSSR(

@@ -5,6 +5,7 @@ import useConfigInject from '../config-provider/hooks/useConfigInject';
 import { initDefaultProps } from '../_util/props-util';
 import Element, { skeletonElementProps } from './Element';
 import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 
 export const skeletonButtonProps = () => {
   return {
@@ -24,7 +25,8 @@ const SkeletonButton = defineComponent({
   }),
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const cls = computed(() =>
       classNames(
         prefixCls.value,
@@ -33,6 +35,8 @@ const SkeletonButton = defineComponent({
           [`${prefixCls.value}-active`]: props.active,
           [`${prefixCls.value}-block`]: props.block,
         },
+        rootCls.value,
+        cssVarCls.value,
         hashId.value,
       ),
     );

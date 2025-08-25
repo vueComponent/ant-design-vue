@@ -8,6 +8,7 @@ import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 import type { CustomSlotsType, VueNode } from '../_util/type';
 
 export interface Route {
@@ -65,7 +66,8 @@ export default defineComponent({
   }>,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('breadcrumb', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const getPath = (path: string, params: unknown) => {
       path = (path || '').replace(/^\//, '');
       Object.keys(params).forEach(key => {
@@ -158,6 +160,8 @@ export default defineComponent({
         [prefixCls.value]: true,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         [`${attrs.class}`]: !!attrs.class,
+        [rootCls.value]: true,
+        [cssVarCls.value]: true,
         [hashId.value]: true,
       };
 

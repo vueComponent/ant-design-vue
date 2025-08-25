@@ -1,6 +1,7 @@
 import type { CustomSlotsType, LiteralUnion } from '../_util/type';
 import type { PresetColorType } from '../_util/colors';
-import useStyle from './style';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
+import useStyle from './style/ribbon';
 import { isPresetColor } from '../_util/colors';
 import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
@@ -27,7 +28,8 @@ export default defineComponent({
   }>,
   setup(props, { attrs, slots }) {
     const { prefixCls, direction } = useConfigInject('ribbon', props);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     const colorInPreset = computed(() => isPresetColor(props.color, false));
     const ribbonCls = computed(() => [
       prefixCls.value,
@@ -46,7 +48,10 @@ export default defineComponent({
         cornerColorStyle.color = props.color;
       }
       return wrapSSR(
-        <div class={`${prefixCls.value}-wrapper ${hashId.value}`} {...restAttrs}>
+        <div
+          class={`${prefixCls.value}-wrapper ${cssVarCls.value} ${rootCls.value} ${hashId.value}`}
+          {...restAttrs}
+        >
           {slots.default?.()}
           <div
             class={[ribbonCls.value, className, hashId.value]}

@@ -6,6 +6,7 @@ import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
 import { computed, defineComponent, watchEffect } from 'vue';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
+import useCSSVarCls from '../config-provider/hooks/useCssVarCls';
 import useStyle from './style';
 import { useAvatarProviderContext } from './AvatarContext';
 
@@ -36,7 +37,8 @@ const Group = defineComponent({
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('avatar', props);
     const groupPrefixCls = computed(() => `${prefixCls.value}-group`);
-    const [wrapSSR, hashId] = useStyle(prefixCls);
+    const rootCls = useCSSVarCls(prefixCls);
+    const [wrapSSR, hashId, cssVarCls] = useStyle(prefixCls, rootCls);
     watchEffect(() => {
       const context = { size: props.size, shape: props.shape };
       useAvatarProviderContext(context);
@@ -54,6 +56,8 @@ const Group = defineComponent({
         [groupPrefixCls.value]: true,
         [`${groupPrefixCls.value}-rtl`]: direction.value === 'rtl',
         [`${attrs.class}`]: !!attrs.class,
+        [cssVarCls.value]: true,
+        [rootCls.value]: true,
         [hashId.value]: true,
       };
 

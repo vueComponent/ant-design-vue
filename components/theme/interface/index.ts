@@ -6,6 +6,8 @@ import type { SeedToken } from './seeds';
 import type { VueNode } from '../..//_util/type';
 import type { Ref } from 'vue';
 
+export type { FullToken, OverrideComponent, GetDefaultToken, GenStyleFn } from './cssinjs-utils';
+
 export type MappingAlgorithm = DerivativeFunc<SeedToken, MapToken>;
 
 export type OverrideToken = {

@@ -43,6 +43,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*LVQ3R5JjjJEAAA
   src?: string;
   maskClassName?: string;
   current?: number;
+  placeholder?: VNode | boolean;
 }
 ```
 

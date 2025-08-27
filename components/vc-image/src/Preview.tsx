@@ -7,11 +7,15 @@ import {
   shallowRef,
   watch,
   cloneVNode,
+  ref,
+  isVNode,
+  nextTick,
 } from 'vue';
-import type { VNode, PropType } from 'vue';
-
+import type { VNode, Ref, PropType } from 'vue';
+import type { ImageStatus } from './Image';
 import classnames from '../../_util/classNames';
 import Dialog from '../../vc-dialog';
+import Spin from '../../spin';
 import { type IDialogChildProps, dialogPropTypes } from '../../vc-dialog/IDialogPropTypes';
 import { getOffset } from '../../vc-util/Dom/css';
 import addEventListener from '../../vc-util/Dom/addEventListener';
@@ -49,6 +53,11 @@ export const previewProps = {
   ...dialogPropTypes(),
   src: String,
   alt: String,
+  fallback: String,
+  placeholder: {
+    type: Object as PropType<VNode | boolean>,
+    default: () => true,
+  },
   rootClassName: String,
   icons: {
     type: Object as PropType<PreviewProps['icons']>,
@@ -65,7 +74,20 @@ const Preview = defineComponent({
     const { rotateLeft, rotateRight, zoomIn, zoomOut, close, left, right, flipX, flipY } = reactive(
       props.icons,
     );
+    // 判断是否是自定义placeholder
+    const isCustomPlaceholder = computed(() => isVNode(props.placeholder));
+    const isDefaultPlaceholder = computed(() => {
+      return props.placeholder === true;
+    });
+    const hasPlaceholder = computed(() => isCustomPlaceholder.value || isDefaultPlaceholder.value);
+    const status: Ref<ImageStatus> = ref(hasPlaceholder.value ? 'loading' : 'normal');
 
+    watch(
+      () => props.src,
+      () => {
+        status.value = 'loading';
+      },
+    );
     const scale = shallowRef(1);
     const rotate = shallowRef(0);
     const flip = reactive({ x: 1, y: 1 });
@@ -386,6 +408,11 @@ const Preview = defineComponent({
             <img
               onMousedown={onMouseDown}
               onDblclick={onDoubleClick}
+              onLoad={() => {
+                nextTick(() => {
+                  status.value = 'normal';
+                });
+              }}
               ref={imgRef}
               class={`${props.prefixCls}-img`}
               src={combinationSrc.value}
@@ -396,6 +423,12 @@ const Preview = defineComponent({
                 }deg)`,
               }}
             />
+            {isDefaultPlaceholder.value && status.value === 'loading' && (
+              <Spin size="large" class={`${props.prefixCls}-img-placeholder`}></Spin>
+            )}
+            {isCustomPlaceholder.value && status.value === 'loading' && (
+              <div class={`${props.prefixCls}-img-placeholder`}>{props.placeholder}</div>
+            )}
           </div>
           {showLeftOrRightSwitches.value && (
             <div

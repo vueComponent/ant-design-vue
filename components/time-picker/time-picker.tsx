@@ -77,6 +77,34 @@ function createTimePicker<
   });
 
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
+  
+  const usePickerExpose = (pickerRef: Ref) => ({
+    focus: () => pickerRef.value?.focus?.(),
+    blur: () => pickerRef.value?.blur?.(),
+  });
+
+  const useFormItemEvents = (emit: any, formItemContext: any) => ({
+    onChange: (value: any, dateString: any) => {
+      emit('update:value', value);
+      emit('change', value, dateString);
+      formItemContext.onFieldChange();
+    },
+    onBlur: (e: FocusEvent) => {
+      emit('blur', e);
+      formItemContext.onFieldBlur();
+    }
+  });
+
+  const useCommonEvents = (emit: any) => ({
+    onOpenChange: (open: boolean) => {
+      emit('update:open', open);
+      emit('openChange', open);
+    },
+    onFocus: (e: FocusEvent) => {
+      emit('focus', e);
+    }
+  });
+
   const TimePicker = defineComponent<DTimePickerProps>({
     name: 'ATimePicker',
     inheritAttrs: false,
@@ -96,53 +124,37 @@ function createTimePicker<
     setup(p, { slots, expose, emit, attrs }) {
       const props = p as unknown as DTimePickerProps;
       const formItemContext = useInjectFormItemContext();
+      const pickerRef = ref();
+      
       devWarning(
         !(slots.addon || props.addon),
         'TimePicker',
         '`addon` is deprecated. Please use `v-slot:renderExtraFooter` instead.',
       );
-      const pickerRef = ref();
-      expose({
-        focus: () => {
-          pickerRef.value?.focus();
-        },
-        blur: () => {
-          pickerRef.value?.blur();
-        },
-      });
-      const onChange = (value: DateType | string, dateString: string) => {
-        emit('update:value', value);
-        emit('change', value, dateString);
-        formItemContext.onFieldChange();
-      };
-      const onOpenChange = (open: boolean) => {
-        emit('update:open', open);
-        emit('openChange', open);
-      };
-      const onFocus = (e: FocusEvent) => {
-        emit('focus', e);
-      };
-      const onBlur = (e: FocusEvent) => {
-        emit('blur', e);
-        formItemContext.onFieldBlur();
-      };
+      
+      expose(usePickerExpose(pickerRef));
+      
+      const { onChange, onBlur } = useFormItemEvents(emit, formItemContext);
+      const { onOpenChange, onFocus } = useCommonEvents(emit);
+      
       const onOk = (value: DateType) => {
         emit('ok', value);
       };
+      
       return () => {
         const { id = formItemContext.id.value } = props;
-        //restProps.addon
+        const renderExtraFooter = props.addon || slots.addon || props.renderExtraFooter || slots.renderExtraFooter;
+        const omittedProps = omit(props, ['onUpdate:value', 'onUpdate:open']);
+        
         return (
           <InternalTimePicker
             {...attrs}
-            {...omit(props, ['onUpdate:value', 'onUpdate:open'])}
+            {...omittedProps}
             id={id}
             dropdownClassName={props.popupClassName}
             mode={undefined}
             ref={pickerRef}
-            renderExtraFooter={
-              props.addon || slots.addon || props.renderExtraFooter || slots.renderExtraFooter
-            }
+            renderExtraFooter={renderExtraFooter}
             onChange={onChange}
             onOpenChange={onOpenChange}
             onFocus={onFocus}
@@ -174,42 +186,23 @@ function createTimePicker<
       const props = p as unknown as DTimeRangePickerProps;
       const pickerRef = ref();
       const formItemContext = useInjectFormItemContext();
-      expose({
-        focus: () => {
-          pickerRef.value?.focus();
-        },
-        blur: () => {
-          pickerRef.value?.blur();
-        },
-      });
-      const onChange = (
-        values: RangeValue<string> | RangeValue<DateType>,
-        dateStrings: [string, string],
-      ) => {
-        emit('update:value', values);
-        emit('change', values, dateStrings);
-        formItemContext.onFieldChange();
-      };
-      const onOpenChange = (open: boolean) => {
-        emit('update:open', open);
-        emit('openChange', open);
-      };
-      const onFocus = (e: FocusEvent) => {
-        emit('focus', e);
-      };
-      const onBlur = (e: FocusEvent) => {
-        emit('blur', e);
-        formItemContext.onFieldBlur();
-      };
+      
+      expose(usePickerExpose(pickerRef));
+      
+      const { onChange, onBlur } = useFormItemEvents(emit, formItemContext);
+      const { onOpenChange, onFocus } = useCommonEvents(emit);
+      
       const onPanelChange = (
         values: RangeValue<string> | RangeValue<DateType>,
         modes: [PanelMode, PanelMode],
       ) => {
         emit('panelChange', values, modes);
       };
+      
       const onOk = (values: RangeValue<string | DateType>) => {
         emit('ok', values);
       };
+      
       const onCalendarChange: RangePickerSharedProps<DateType>['onCalendarChange'] = (
         values: RangeValue<string> | RangeValue<DateType>,
         dateStrings: [string, string],
@@ -217,12 +210,15 @@ function createTimePicker<
       ) => {
         emit('calendarChange', values, dateStrings, info);
       };
+      
       return () => {
         const { id = formItemContext.id.value } = props;
+        const omittedProps = omit(props, ['onUpdate:open', 'onUpdate:value'] as any);
+        
         return (
           <InternalRangePicker
             {...attrs}
-            {...omit(props, ['onUpdate:open', 'onUpdate:value'] as any)}
+            {...omittedProps}
             id={id}
             dropdownClassName={props.popupClassName}
             picker="time"

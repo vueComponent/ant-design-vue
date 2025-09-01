@@ -20,7 +20,7 @@ export type ImagePreviewType = Omit<
   src?: string;
   visible?: boolean;
   fallback?: string;
-  placeholder?: VNode | boolean;
+  placeholder?: boolean | (() => VNode);
   onVisibleChange?: (value: boolean, prevValue: boolean) => void;
   getContainer?: GetContainer | false;
   maskClassName?: string;

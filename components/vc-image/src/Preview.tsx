@@ -8,7 +8,6 @@ import {
   watch,
   cloneVNode,
   ref,
-  isVNode,
   nextTick,
 } from 'vue';
 import type { VNode, Ref, PropType } from 'vue';
@@ -32,6 +31,7 @@ export interface PreviewProps extends Omit<IDialogChildProps, 'onClose' | 'mask'
   src?: string;
   alt?: string;
   rootClassName?: string;
+  placeholder?: boolean | (() => VNode);
   icons?: {
     rotateLeft?: VNode;
     rotateRight?: VNode;
@@ -55,7 +55,7 @@ export const previewProps = {
   alt: String,
   fallback: String,
   placeholder: {
-    type: Object as PropType<VNode | boolean>,
+    type: [Boolean, Function] as PropType<boolean | (() => VNode)>,
     default: () => true,
   },
   rootClassName: String,
@@ -75,7 +75,8 @@ const Preview = defineComponent({
       props.icons,
     );
     // 判断是否是自定义placeholder
-    const isCustomPlaceholder = computed(() => isVNode(props.placeholder));
+    const isCustomPlaceholder = computed(() => typeof props.placeholder === 'function');
+
     const isDefaultPlaceholder = computed(() => {
       return props.placeholder === true;
     });
@@ -88,6 +89,10 @@ const Preview = defineComponent({
         status.value = 'loading';
       },
     );
+    const renderPlaceholder = () => {
+      const { placeholder } = props;
+      return typeof placeholder === 'function' ? placeholder() : placeholder;
+    };
     const scale = shallowRef(1);
     const rotate = shallowRef(0);
     const flip = reactive({ x: 1, y: 1 });
@@ -427,7 +432,7 @@ const Preview = defineComponent({
               <Spin size="large" class={`${props.prefixCls}-img-placeholder`}></Spin>
             )}
             {isCustomPlaceholder.value && status.value === 'loading' && (
-              <div class={`${props.prefixCls}-img-placeholder`}>{props.placeholder}</div>
+              <div class={`${props.prefixCls}-img-placeholder`}>{renderPlaceholder()}</div>
             )}
           </div>
           {showLeftOrRightSwitches.value && (

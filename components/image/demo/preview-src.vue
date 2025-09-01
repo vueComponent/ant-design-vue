@@ -18,18 +18,18 @@ You can set different preview image. You can also customize the loading placehol
 
 <template>
   <a-image
-    :width="200"
     src="https://aliyuncdn.antdv.com/logo.png"
+    :width="200"
     :preview="{
-      src: 'http://47.100.102.7:11501/admin-api/infra/file/24/get//algorithm/execute/2025/08/20/20210628_iPhoneSE_YL_42_1755674307938_1755674703040.jpg',
-      placeholder: h(CustomLoadingComp),
+      src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      placeholder: () => CustomLoadingComp,
     }"
   />
   <a-image
     :width="200"
     src="https://aliyuncdn.antdv.com/logo.png"
     :preview="{
-      src: 'http://47.100.102.7:11501/admin-api/infra/file/24/get//algorithm/execute/2025/08/20/20210628_iPhoneSE_YL_42_1755674307938_1755674703040.jpg',
+      src: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
       placeholder: true,
     }"
   />

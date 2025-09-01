@@ -19,12 +19,12 @@ Previewable image.
 | --- | --- | --- | --- | --- |
 | alt | Image description | string | - | 2.0.0 |
 | fallback | Load failure fault-tolerant src | string | - | 2.0.0 |
-| height | Image height | string \| number | - | 2.0.0 |
-| placeholder | Load placeholder, use default placeholder when set `true` | boolean \| slot | - | 2.0.0 |
-| preview | preview config, disabled when `false` | boolean \| [previewType](#previewtype) | true | 2.0.0 |
+| height | Image height | string\| number | - | 2.0.0 |
+| placeholder | Load placeholder, use default placeholder when set `true` | boolean\| slot | - | 2.0.0 |
+| preview | preview config, disabled when `false` | boolean\| [previewType](#previewtype) | true | 2.0.0 |
 | src | Image path | string | - | 2.0.0 |
-| previewMask | custom mask | false \| function \| slot | - | 3.2.0 |
-| width | Image width | string \| number | - | 2.0.0 |
+| previewMask | custom mask | false\| function \| slot | - | 3.2.0 |
+| width | Image width | string\| number | - | 2.0.0 |
 
 ### events
 
@@ -38,11 +38,12 @@ Previewable image.
 {
   visible?: boolean;
   onVisibleChange?: (visible, prevVisible) => void;
-  getContainer?: string | HTMLElement | (() => HTMLElement);
+  getContainer: string | HTMLElement | (() => HTMLElement);
   src?: string;
   maskClassName?: string;
   current?: number;
+  placeholder?: (() => vNode) | boolean;
 }
 ```
 
-Other attributes [&lt;img>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Attributes)
+Other attributes [&lt;img&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Attributes)

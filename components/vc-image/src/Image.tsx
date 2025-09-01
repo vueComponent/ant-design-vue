@@ -1,4 +1,4 @@
-import type { CSSProperties, PropType } from 'vue';
+import type { CSSProperties, PropType, VNode } from 'vue';
 import { ref, watch, defineComponent, computed, onMounted, onUnmounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
@@ -19,6 +19,8 @@ export type ImagePreviewType = Omit<
 > & {
   src?: string;
   visible?: boolean;
+  fallback?: string;
+  placeholder?: boolean | (() => VNode);
   onVisibleChange?: (value: boolean, prevValue: boolean) => void;
   getContainer?: GetContainer | false;
   maskClassName?: string;
@@ -79,6 +81,7 @@ const ImageInternal = defineComponent({
         onVisibleChange: () => {},
         getContainer: undefined,
       };
+
       return typeof props.preview === 'object'
         ? mergeDefaultValue(props.preview, defaultValues)
         : defaultValues;
@@ -288,6 +291,7 @@ const ImageInternal = defineComponent({
               onClose={onPreviewClose}
               mousePosition={mousePosition.value}
               src={mergedSrc}
+              placeholder={preview.value.placeholder}
               alt={alt}
               getContainer={getPreviewContainer.value}
               icons={icons}

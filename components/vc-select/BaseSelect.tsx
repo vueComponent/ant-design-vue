@@ -840,6 +840,7 @@ export default defineComponent({
                     customizeRawInputElement,
                     {
                       ref: selectorDomRef,
+                      tabindex: 0,
                     },
                     false,
                     true,
@@ -877,7 +878,11 @@ export default defineComponent({
 
       // Render raw
       if (customizeRawInputElement) {
-        renderNode = selectorNode;
+        renderNode = (
+          <div onKeydown={onInternalKeyDown} onKeyup={onInternalKeyUp}>
+            {selectorNode}
+          </div>
+        );
       } else {
         renderNode = (
           <div

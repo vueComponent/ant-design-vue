@@ -21,7 +21,7 @@ If you want specific control over the positioning and placement of the `Icon`, t
 
 <template>
   <a-space direction="vertical">
-    <a-space warp>
+    <a-space wrap>
       <a-tooltip title="search">
         <a-button type="primary" shape="circle" :icon="h(SearchOutlined)" />
       </a-tooltip>
@@ -32,7 +32,7 @@ If you want specific control over the positioning and placement of the `Icon`, t
       </a-tooltip>
       <a-button :icon="h(SearchOutlined)">Search</a-button>
     </a-space>
-    <a-space warp>
+    <a-space wrap>
       <a-tooltip title="search">
         <a-button shape="circle" :icon="h(SearchOutlined)" />
       </a-tooltip>

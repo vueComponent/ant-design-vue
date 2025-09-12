@@ -1,0 +1,152 @@
+@reference '../../../style/tailwind.css';
+
+.ant-divider {
+  @apply box-border; 
+  @apply m-0;
+  @apply p-0;
+  @apply text-black/[0.88];
+  @apply text-sm;
+  @apply leading-[1.5714285714285714];
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  list-style: none;
+  border-block-start: 1px solid rgba(5, 5, 5, 0.06);
+
+  &:where(.ant-divider-vertical) {
+    @apply relative;
+    @apply top-[-0.06em];
+    @apply inline-block;
+    @apply h-3.5;
+    @apply mx-[1em];
+    @apply my-0;
+    @apply align-middle;
+    border-top: 0;
+    border-inline-start: 1px solid rgba(5, 5, 5, 0.06);
+  }
+
+  &:where(.ant-divider-horizontal) {
+    @apply flex;
+    @apply clear-both;
+    @apply w-full;
+    @apply min-w-full;
+    /* @apply my-6;
+    @apply mx-0; */
+    margin: 24px 0;
+  }
+
+  &:where(.ant-divider-horizontal.ant-divider-with-text) {
+    @apply flex;
+    @apply items-center;
+    @apply font-medium;
+    @apply text-[16px];
+    @apply whitespace-nowrap;
+    @apply text-center;
+    margin: 16px 0;
+    border-block-start: 0 rgba(5, 5, 5, 0.06);
+    color: rgba(0, 0, 0, 0.88);
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text)::before, &:where(.ant-divider-horizontal.ant-divider-with-text)::after{
+      @apply relative;
+      @apply w-2/4;
+      border-block-start: 1px solid transparent;
+      border-block-start-color: inherit;
+      border-block-end: 0;
+      transform: translateY(50%);
+      content: '';
+  }
+
+  &:where(.ant-dividerhorizontal.ant-divider-with-text-start)::before{
+    width: calc(0.05px * 100%);
+  }
+  &:where(.ant-dividerhorizontal.ant-divider-with-text-start)::after {
+    width: calc(100% - 0.05px * 100%);
+  }
+  &:where(.ant-dividerhorizontal.ant-divider-with-text-end)::before{
+    width: calc(100% - 0.05px * 100%);
+  }
+  &:where(.ant-dividerhorizontal.ant-divider-with-text-end)::after {
+    width: calc(0.05px * 100%);
+  }
+
+  .ant-divider-inner-text {
+    @apply inline-block;
+    @apply py-0;
+    @apply px-[1em];
+  }
+
+  &:where(.ant-divider-dashed) {
+    background: none;
+    border-color: rgba(5, 5, 5, 0.06);
+    @apply border-dashed;
+    border-width: 1px 0 0;
+  }
+
+  &:where(.ant-divider-horizontal.ant-divider-with-text.ant-divider-dashed)::before,  &:where(.ant-divider-horizontal.ant-divider-with-text.ant-divider-dashed)::after {
+    border-style: dashed none none;
+  }
+
+  &:where(.ant-divider-vertical.ant-divider-dashed) {
+    @apply border-s-1;
+    border-inline-end: 0;
+    border-block-start: 0;
+    border-block-end: 0;
+  }
+
+   &:where(.ant-divider-dotted) {
+    background: none;
+    border-color: rgba(5, 5, 5, 0.06);
+    @apply border-dotted;
+    border-width: 1px 0 0;
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text.ant-divider-dotted)::before,  &:where(.ant-divider-horizontal.ant-divider-with-text.ant-divider-dotted)::after {
+    border-style: dotted none none;
+  }
+  &:where(.ant-divider-vertical.ant-divider-dotted) {
+    @apply border-s-1;
+    border-inline-end: 0;
+    border-block-start: 0;
+    border-block-end: 0;
+  }
+
+  &:where(.ant-divider-plain.ant-divider-with-text) {
+    color: rgba(0, 0, 0, 0.88);
+    @apply font-normal;
+    @apply text-[14px];
+  }
+  
+  &:where(.ant-divider-horizontal.ant-divider-with-text-start.ant-divider-no-default-orientation-margin-start) {
+    .ant-divider-inner-text {
+      @apply ms-0;
+    }
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text-start.ant-divider-no-default-orientation-margin-start)::before {
+    @apply w-0;
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text-start.ant-divider-no-default-orientation-margin-start)::after {
+    @apply w-full;
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text-end.ant-divider-no-default-orientation-margin-end) {
+    .ant-divider-inner-text {
+      @apply ms-0;
+    }
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text-end.ant-divider-no-default-orientation-margin-end)::before {
+    @apply w-full;
+  }
+  &:where(.ant-divider-horizontal.ant-divider-with-text-end.ant-divider-no-default-orientation-margin-end)::after {
+    @apply w-0;
+  }
+}
+
+.ant-divider {
+  &:where(.ant-divider-horizontal) {
+    &:where(.ant-divider) {
+      &:where(.ant-divider-sm) {
+        @apply my-[8px];
+      }
+      &:where(.ant-divider-md) {
+        @apply my-[16px];
+      }
+    }
+  }
+}

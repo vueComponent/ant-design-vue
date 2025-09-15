@@ -200,6 +200,16 @@ export const genBasicInputStyle = (token: InputToken): CSSObject => ({
   '&-textarea-rtl': {
     direction: 'rtl',
   },
+
+  // Hide default browser search clear button
+  '&[type="search"]::-webkit-search-cancel-button': {
+    display: 'none',
+  },
+  '&[type="search"]::-ms-clear': {
+    display: 'none',
+    width: 0,
+    height: 0,
+  },
 });
 
 export const genInputGroupStyle = (token: InputToken): CSSObject => {

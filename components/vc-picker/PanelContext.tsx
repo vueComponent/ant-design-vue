@@ -23,6 +23,9 @@ export type PanelContextProps = {
 
   /** Only used for TimePicker and this is a deprecated prop */
   defaultOpenValue?: Ref<any>;
+
+  /** Double click state for RangePicker */
+  isDoubleClickRef?: Ref<boolean>;
 };
 
 const PanelContextKey: InjectionKey<PanelContextProps> = Symbol('PanelContextProps');

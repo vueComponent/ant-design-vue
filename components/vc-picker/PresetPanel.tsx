@@ -1,12 +1,17 @@
 import { defineComponent } from 'vue';
+import type { PresetDate } from './interface';
 
 export default defineComponent({
   name: 'PresetPanel',
   props: {
     prefixCls: String,
     presets: {
-      type: Array,
+      type: Array as () => PresetDate<any>[],
       default: () => [],
+    },
+    currentPreset: {
+      type: Object as () => PresetDate<any> | null,
+      default: null,
     },
     onClick: Function,
     onHover: Function,
@@ -19,21 +24,24 @@ export default defineComponent({
       return (
         <div class={`${props.prefixCls}-presets`}>
           <ul>
-            {props.presets.map(({ label, value }, index) => (
+            {props.presets.map(preset => (
               <li
-                key={index}
+                key={preset.key}
+                class={{
+                  [`${props.prefixCls}-preset-active`]: props.currentPreset?.key === preset.key,
+                }}
                 onClick={e => {
                   e.stopPropagation();
-                  props.onClick(value);
+                  props.onClick(preset.value, preset);
                 }}
                 onMouseenter={() => {
-                  props.onHover?.(value);
+                  props.onHover?.(preset.value);
                 }}
                 onMouseleave={() => {
                   props.onHover?.(null);
                 }}
               >
-                {label}
+                {preset.label}
               </li>
             ))}
           </ul>

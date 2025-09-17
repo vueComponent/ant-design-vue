@@ -17,6 +17,7 @@
     <Suffix />
     <statusVue />
     <placementVue />
+    <AutoFillWholeDay />
   </demo-sort>
 </template>
 <script>
@@ -36,6 +37,7 @@ import Suffix from './suffix.vue';
 import Bordered from './bordered.vue';
 import RangePicker from './range-picker.vue';
 import placementVue from './placement.vue';
+import AutoFillWholeDay from './auto-fill-whole-day.vue';
 import statusVue from './status.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -62,6 +64,7 @@ export default defineComponent({
     SelectInRnage,
     Bordered,
     RangePicker,
+    AutoFillWholeDay,
   },
 });
 </script>

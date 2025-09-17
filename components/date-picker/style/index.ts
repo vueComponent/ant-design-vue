@@ -961,6 +961,7 @@ const genPickerStyle: GenerateStyle<PickerToken> = token => {
     controlItemBgHover,
     presetsWidth,
     presetsMaxWidth,
+    fontWeightStrong,
   } = token;
 
   return [
@@ -1325,6 +1326,12 @@ const genPickerStyle: GenerateStyle<PickerToken> = token => {
 
                   '&:hover': {
                     background: controlItemBgHover,
+                  },
+
+                  [`&${componentCls}-preset-active`]: {
+                    background: controlItemBgActive,
+                    color: colorPrimary,
+                    fontWeight: fontWeightStrong,
                   },
                 },
               },

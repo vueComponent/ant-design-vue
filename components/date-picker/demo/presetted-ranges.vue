@@ -40,25 +40,31 @@ const onChange = (date: Dayjs) => {
     console.log('Clear');
   }
 };
-const onRangeChange = (dates: RangeValue, dateStrings: string[]) => {
-  if (dates) {
-    console.log('From: ', dates[0], ', to: ', dates[1]);
+const onRangeChange = (values: RangeValue, dateStrings: [string, string], currentPreset?: any) => {
+  if (values) {
+    console.log('From: ', values[0], ', to: ', values[1]);
     console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
+    if (currentPreset) {
+      console.log('Selected preset key: ', currentPreset.key);
+      console.log('Selected preset label: ', currentPreset.label);
+    } else {
+      console.log('Manual selection (no preset)');
+    }
   } else {
     console.log('Clear');
   }
 };
 
 const presets = ref([
-  { label: 'Yesterday', value: dayjs().add(-1, 'd') },
-  { label: 'Last Week', value: dayjs().add(-7, 'd') },
-  { label: 'Last Month', value: dayjs().add(-1, 'month') },
+  { label: 'Yesterday', value: dayjs().add(-1, 'd'), key: 'yesterday' },
+  { label: 'Last Week', value: dayjs().add(-7, 'd'), key: 'lastweek' },
+  { label: 'Last Month', value: dayjs().add(-1, 'month'), key: 'lastmonth' },
 ]);
 
 const rangePresets = ref([
-  { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()] },
-  { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()] },
-  { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()] },
-  { label: 'Last 90 Days', value: [dayjs().add(-90, 'd'), dayjs()] },
+  { label: 'Last 7 Days', value: [dayjs().add(-7, 'd'), dayjs()], key: 'last7days' },
+  { label: 'Last 14 Days', value: [dayjs().add(-14, 'd'), dayjs()], key: 'last14days' },
+  { label: 'Last 30 Days', value: [dayjs().add(-30, 'd'), dayjs()], key: 'last30days' },
+  { label: 'Last 90 Days', value: [dayjs().add(-90, 'd'), dayjs()], key: 'last90days' },
 ]);
 </script>

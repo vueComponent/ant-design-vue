@@ -112,4 +112,11 @@ export type CustomFormat<DateType> = (value: DateType) => string;
 export interface PresetDate<T> {
   label: VueNode;
   value: T;
+  key: string; // 重要，需要用key来高亮选中状态
 }
+
+// 扩展的 onChange 回调类型，values 和 formatString 都包含第三个 preset 元素
+export type RangePickerOnChange<DateType> = (
+  values: [DateType | null, DateType | null, PresetDate<RangeValue<DateType>> | null],
+  formatString: [string, string, string | null],
+) => void;

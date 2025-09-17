@@ -13,7 +13,7 @@ import useConfigInject from '../../config-provider/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import type { CommonProps, RangePickerProps } from './props';
 import { commonProps, rangePickerProps } from './props';
-import type { PanelMode, RangeValue } from '../../vc-picker/interface';
+import type { PanelMode, RangeValue, RangePickerOnChange } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import { FormItemInputContext, useInjectFormItemContext } from '../../form/FormItemContext';
 import omit from '../../_util/omit';
@@ -84,13 +84,18 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
           pickerRef.value?.blur();
         },
       });
-      const maybeToStrings = (dates: DateType[]) => {
+      const maybeToStrings = (dates: RangeValue<DateType>) => {
         return props.valueFormat ? generateConfig.toString(dates, props.valueFormat) : dates;
       };
-      const onChange = (dates: RangeValue<DateType>, dateStrings: [string, string]) => {
-        const values = maybeToStrings(dates);
-        emit('update:value', values);
-        emit('change', values, dateStrings);
+      const onChange: RangePickerOnChange<DateType> = (values, formatStrings) => {
+        const [startValue, endValue, currentPreset] = values;
+        const [startStr, endStr] = formatStrings;
+        const dates: RangeValue<DateType> = [startValue, endValue];
+        const dateStrings: [string, string] = [startStr, endStr];
+
+        const processedValues = maybeToStrings(dates);
+        emit('update:value', processedValues);
+        emit('change', processedValues, dateStrings, currentPreset);
         formItemContext.onFieldChange();
       };
       const onOpenChange = (open: boolean) => {
@@ -109,7 +114,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         emit('panelChange', values, modes);
       };
       const onOk = (dates: DateType[]) => {
-        const value = maybeToStrings(dates);
+        const value = props.valueFormat ? generateConfig.toString(dates, props.valueFormat) : dates;
         emit('ok', value);
       };
       const onCalendarChange: RangePickerSharedProps<DateType>['onCalendarChange'] = (

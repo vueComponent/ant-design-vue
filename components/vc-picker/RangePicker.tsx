@@ -5,6 +5,7 @@ import type {
   RangeValue,
   EventValue,
   PresetDate,
+  RangePickerOnChange,
 } from './interface';
 import type { PickerBaseProps, PickerDateProps, PickerTimeProps } from './Picker';
 import type { SharedTimeProps } from './panels/TimePanel';
@@ -108,7 +109,7 @@ export type RangePickerSharedProps<DateType> = {
   separator?: VueNode;
   allowEmpty?: [boolean, boolean];
   mode?: [PanelMode, PanelMode];
-  onChange?: (values: RangeValue<DateType>, formatString: [string, string]) => void;
+  onChange?: RangePickerOnChange<DateType>;
   onCalendarChange?: (
     values: RangeValue<DateType>,
     formatString: [string, string],
@@ -133,6 +134,10 @@ export type RangePickerSharedProps<DateType> = {
   nextIcon?: VueNode;
   superPrevIcon?: VueNode;
   superNextIcon?: VueNode;
+  /** 双击日期时自动设置为开始和结束日期 */
+  autoFill?: boolean;
+  /** 在 showTime 模式下，是否设置为整天（开始时间 00:00:00，结束时间 23:59:59） */
+  isWholeDay?: boolean;
 };
 
 type OmitPickerProps<Props> = Omit<
@@ -258,6 +263,8 @@ function RangerPicker<DateType>() {
       'nextIcon',
       'superPrevIcon',
       'superNextIcon',
+      'autoFill',
+      'isWholeDay',
     ] as any,
     setup(props, { attrs, expose }) {
       const needConfirmButton = computed(
@@ -318,6 +325,31 @@ function RangerPicker<DateType>() {
             ? values
             : reorderValues(values, props.generateConfig),
       });
+
+      // ========================= Current Preset =========================
+      const [currentPreset, setCurrentPreset] = useState<PresetDate<RangeValue<DateType>> | null>(
+        null,
+      );
+
+      // 检查当前值是否匹配某个 preset
+      const checkAndSetPreset = (values: RangeValue<DateType>) => {
+        if (!values || !values[0] || !values[1]) {
+          setCurrentPreset(null);
+          return;
+        }
+
+        const matchedPreset = presetList.value.find(preset => {
+          if (!preset.value || !preset.value[0] || !preset.value[1]) {
+            return false;
+          }
+          return (
+            isEqual(props.generateConfig, values[0], preset.value[0]) &&
+            isEqual(props.generateConfig, values[1], preset.value[1])
+          );
+        });
+
+        setCurrentPreset(matchedPreset || null);
+      };
 
       // =========================== View Date ===========================
       // Config view panel
@@ -491,7 +523,11 @@ function RangerPicker<DateType>() {
         }, 0);
       }
 
-      function triggerChange(newValue: RangeValue<DateType>, sourceIndex: 0 | 1) {
+      function triggerChange(
+        newValue: RangeValue<DateType>,
+        sourceIndex: 0 | 1,
+        fromPreset = false,
+      ) {
         let values = newValue;
         let startValue = getValue(values, 0);
         let endValue = getValue(values, 1);
@@ -541,7 +577,32 @@ function RangerPicker<DateType>() {
           }
         }
 
+        // Handle isWholeDay: set time to 00:00:00 for start and 23:59:59 for end when showTime is true
+        if (props.isWholeDay && showTime && values && values[0] && values[1]) {
+          const startDate = values[0];
+          const endDate = values[1];
+
+          // Set start time to 00:00:00
+          const startWithTime = generateConfig.setHour(
+            generateConfig.setMinute(generateConfig.setSecond(startDate, 0), 0),
+            0,
+          );
+
+          // Set end time to 23:59:59
+          const endWithTime = generateConfig.setHour(
+            generateConfig.setMinute(generateConfig.setSecond(endDate, 59), 59),
+            23,
+          );
+
+          values = [startWithTime, endWithTime];
+        }
+
         setSelectedValue(values);
+
+        // 如果不是通过 preset 触发的，清除 currentPreset
+        if (!fromPreset) {
+          setCurrentPreset(null);
+        }
 
         const startStr =
           values && values[0]
@@ -577,7 +638,10 @@ function RangerPicker<DateType>() {
             (!isEqual(generateConfig, getValue(mergedValue.value, 0), startValue) ||
               !isEqual(generateConfig, getValue(mergedValue.value, 1), endValue))
           ) {
-            onChange(values, [startStr, endStr]);
+            onChange(
+              [startValue, endValue, currentPreset.value],
+              [startStr, endStr, currentPreset.value?.key || null],
+            );
           }
         }
 
@@ -720,7 +784,7 @@ function RangerPicker<DateType>() {
           ) {
             return false;
           }
-          triggerChange(selectedValue.value, index);
+          triggerChange(selectedValue.value, index, false);
           resetText();
         },
         onCancel: () => {
@@ -824,6 +888,11 @@ function RangerPicker<DateType>() {
         setSelectedValue(mergedValue.value);
       });
 
+      // 当 mergedValue 变化时，检查是否匹配某个 preset
+      watch(mergedValue, newValue => {
+        checkAndSetPreset(newValue);
+      });
+
       // ============================ Warning ============================
       if (process.env.NODE_ENV !== 'production') {
         watchEffect(() => {
@@ -887,6 +956,37 @@ function RangerPicker<DateType>() {
             ...showTime,
             defaultValue: getValue(timeDefaultValues, mergedActivePickerIndex.value) || undefined,
           };
+        }
+
+        // Handle isWholeDay: set default time values for start and end
+        if (props.isWholeDay && showTime) {
+          const now = generateConfig.getNow();
+          let defaultTime: DateType;
+
+          if (mergedActivePickerIndex.value === 0) {
+            // Start time: 00:00:00
+            defaultTime = generateConfig.setHour(
+              generateConfig.setMinute(generateConfig.setSecond(now, 0), 0),
+              0,
+            );
+          } else {
+            // End time: 23:59:59
+            defaultTime = generateConfig.setHour(
+              generateConfig.setMinute(generateConfig.setSecond(now, 59), 59),
+              23,
+            );
+          }
+
+          if (typeof showTime === 'object') {
+            panelShowTime = {
+              ...showTime,
+              defaultValue: defaultTime,
+            };
+          } else {
+            panelShowTime = {
+              defaultValue: defaultTime,
+            };
+          }
         }
 
         let panelDateRender: DateRender<DateType> | null = null;
@@ -971,7 +1071,7 @@ function RangerPicker<DateType>() {
       }
 
       const onContextSelect = (date: DateType, type: 'key' | 'mouse' | 'submit') => {
-        const values = updateValues(selectedValue.value, date, mergedActivePickerIndex.value);
+        let values = updateValues(selectedValue.value, date, mergedActivePickerIndex.value);
         const currentIndex = mergedActivePickerIndex.value;
         const isDoubleClick = isDoubleClickRef.value;
         const shouldSwitch = type === 'mouse' && needConfirmButton.value && isDoubleClick;
@@ -979,13 +1079,28 @@ function RangerPicker<DateType>() {
         // Reset double click state
         isDoubleClickRef.value = false;
 
+        // Handle autoFill: when double-clicking and autoFill is enabled, set the same date for both start and end
+        if (props.autoFill && isDoubleClick && type === 'mouse') {
+          values = [date, date];
+        }
+
         if (type === 'submit' || (type !== 'key' && !needConfirmButton.value) || shouldSwitch) {
           // triggerChange will also update selected values
-          triggerChange(values, mergedActivePickerIndex.value);
+          triggerChange(values, mergedActivePickerIndex.value, false);
 
-          // If double click, switch to next input
-          // But check if both inputs are complete, if so don't switch to avoid animation before popup closes
-          if (shouldSwitch) {
+          // If autoFill is enabled and we have both values, close the panel
+          if (
+            props.autoFill &&
+            isDoubleClick &&
+            type === 'mouse' &&
+            values &&
+            values[0] &&
+            values[1]
+          ) {
+            triggerOpen(false, mergedActivePickerIndex.value);
+          } else if (shouldSwitch) {
+            // If double click, switch to next input
+            // But check if both inputs are complete, if so don't switch to avoid animation before popup closes
             const startValue = getValue(values, 0);
             const endValue = getValue(values, 1);
             const bothValuesComplete = startValue && endValue;
@@ -1074,7 +1189,7 @@ function RangerPicker<DateType>() {
             onOk: () => {
               if (getValue(selectedValue.value, mergedActivePickerIndex.value)) {
                 // triggerChangeOld(selectedValue.value);
-                triggerChange(selectedValue.value, mergedActivePickerIndex.value);
+                triggerChange(selectedValue.value, mergedActivePickerIndex.value, false);
                 if (onOk) {
                   onOk(selectedValue.value);
                 }
@@ -1129,8 +1244,10 @@ function RangerPicker<DateType>() {
               <PresetPanel
                 prefixCls={prefixCls}
                 presets={presetList.value}
-                onClick={nextValue => {
-                  triggerChange(nextValue, null);
+                currentPreset={currentPreset.value}
+                onClick={(nextValue, preset) => {
+                  setCurrentPreset(preset);
+                  triggerChange(nextValue, null, true);
                   triggerOpen(false, mergedActivePickerIndex.value);
                 }}
                 onHover={hoverValue => {
@@ -1207,7 +1324,7 @@ function RangerPicker<DateType>() {
                   values = updateValues(values, null, 1);
                 }
 
-                triggerChange(values, null);
+                triggerChange(values, null, false);
                 triggerOpen(false, mergedActivePickerIndex.value);
               }}
               class={`${prefixCls}-clear`}

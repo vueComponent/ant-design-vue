@@ -107,7 +107,7 @@ export default defineComponent({
               cols: 1,
               cover: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
               coverDark: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
-              path: 'https://surely.cool/',
+              path: 'https://surelyvue.com/',
               subtitle: '更强大的表格',
               title: 'Surely Table',
               type: 'Advanced And Powerful',

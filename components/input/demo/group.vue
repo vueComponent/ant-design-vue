@@ -179,7 +179,7 @@ const value15 = ref<string>('Sign Up');
 const value16 = ref<string>('');
 const value17 = ref<string>('Home');
 const value18 = ref<string[]>([]);
-const value19 = ref<string>('https://surely.cool');
+const value19 = ref<string>('https://surelyvue.com');
 const value20 = ref<string>('https://antdv.com');
 </script>
 <style scoped>

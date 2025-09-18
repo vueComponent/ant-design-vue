@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <a-carousel autoplay>
-      <a style="display: inline-block" href="https://www.surely.cool/" target="_blank">
+      <a style="display: inline-block" href="https://www.surelyvue.com/" target="_blank">
         <div :class="cls">
           <div class="logo">
-            <img height="80" src="https://www.surely.cool/surely-vue-logo.png" alt="" />
+            <img height="80" src="https://www.surelyvue.com/surely-vue-logo.png" alt="" />
           </div>
           <div class="desc">
             <div class="title">Surely Table</div>

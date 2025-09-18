@@ -65,7 +65,7 @@
         <li class="alert-list-item">
           <strong>Surely Table</strong>
           ：支持高性能编辑模式了
-          <a target="_blank" href="https://www.surely.cool/">立即体验</a>
+          <a target="_blank" href="https://www.surelyvue.com/">立即体验</a>
         </li>
         <li class="alert-list-item">
           <strong>Admin Pro</strong>

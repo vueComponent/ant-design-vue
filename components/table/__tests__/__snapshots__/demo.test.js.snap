@@ -127,7 +127,7 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/table/demo/big-data.vue correctly 1`] = `
-<iframe src="https://www.surely.cool/for-ant-demo" height="400"></iframe>
+<iframe src="https://www.surelyvue.com/for-ant-demo" height="400"></iframe>
 <!--v-if-->
 `;
 

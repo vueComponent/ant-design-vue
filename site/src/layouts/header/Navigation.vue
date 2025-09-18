@@ -25,7 +25,7 @@
       </template>
       <a-menu-item key="surely-table">
         <a
-          href="https://www.surely.cool"
+          href="https://www.surelyvue.com"
           target="_blank"
           rel="noopener noreferrer"
           style="position: relative"

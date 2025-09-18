@@ -1,0 +1,8 @@
+{
+  "name": "antdv-v4",
+  "compatibility_date": "2025-09-18",
+  "assets": {
+    "directory": "./site/dist",
+    "not_found_handling": "single-page-application"
+  }
+}

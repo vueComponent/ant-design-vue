@@ -4,5 +4,15 @@
   "assets": {
     "directory": "./site/dist",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "antdv.com/*",
+      "zone_name": "antdv.com"
+    },
+    {
+      "pattern": "www.antdv.com/*",
+      "zone_name": "antdv.com"
+    }
+  ]
 }

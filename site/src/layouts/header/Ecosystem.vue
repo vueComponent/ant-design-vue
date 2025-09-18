@@ -23,19 +23,6 @@
       <a-menu-item key="awesome">
         <a target="_blank" href="https://github.com/vueComponent/ant-design-vue-awesome">Awesome</a>
       </a-menu-item>
-      <a-menu-item key="wechat">
-        <a-popover placement="right">
-          <a>{{ isZhCN ? '微信' : 'WeChat' }}</a>
-          <template #content>
-            <img
-              width="160"
-              height="160"
-              alt="wechat"
-              src="https://aliyuncdn.antdv.com/wechat.jpeg"
-            />
-          </template>
-        </a-popover>
-      </a-menu-item>
       <a-menu-item key="qq1">
         <a>QQ 1群(217490093) 已满</a>
       </a-menu-item>

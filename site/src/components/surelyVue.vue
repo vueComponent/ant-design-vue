@@ -1,21 +1,6 @@
 <template>
   <div class="container">
     <a-carousel autoplay>
-      <a style="display: inline-block" href="https://form.antdv.com/" target="_blank">
-        <div :class="cls">
-          <div class="logo">
-            <img height="80" src="https://aliyuncdn.antdv.com/form/static/logo-blue.png" alt="" />
-          </div>
-          <div class="desc">
-            <!-- <div class="title">Surely Form</div> -->
-            <div class="sub-title">
-              <strong>雪梨表单、为您定制</strong>
-              <br />
-              专属的调研，投票、NPS、报名等系统
-            </div>
-          </div>
-        </div>
-      </a>
       <a style="display: inline-block" href="https://www.surely.cool/" target="_blank">
         <div :class="cls">
           <div class="logo">

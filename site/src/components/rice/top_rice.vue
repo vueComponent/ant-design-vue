@@ -44,13 +44,7 @@ export default {
           visible: isEffective('2020-09-11 17:00:00', '2021-03-11 17:00:00'),
         },
       ].filter(ad => ad.visible),
-      enAds: [
-        {
-          img: 'https://aliyuncdn.antdv.com/TheBigRichGroup.png',
-          href: 'https://thebigrichgroup.com/',
-          visible: isEffective('2020-09-18 17:00:00', '2021-07-09 17:00:00'),
-        },
-      ].filter(ad => ad.visible),
+      enAds: [].filter(ad => ad.visible),
     };
   },
   computed: {

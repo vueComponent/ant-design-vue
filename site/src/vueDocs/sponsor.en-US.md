@@ -8,8 +8,6 @@ We accept donations through these channels:
 
 <div>
 <a href="https://www.paypal.me/tangjinzhou" target="_blank">PayPal</a>
-<br/>
-<a href="https://aliyuncdn.antdv.com/alipay-and-wechat.png" target="_blank">Alipay or WeChat</a>
 </div>
 
 ## Recurring Pledges
@@ -33,7 +31,7 @@ You can consult me by email [antdv@foxmail.com](antdv@foxmail.com).
 Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/ant-design-vue#sponsor)]
 
 <div>
-<a href="http://www.jeecg.com/" target="_blank"><img src="https://aliyuncdn.antdv.com/jeecg-logo.png" height="64"></a>
+<a href="http://www.jeecg.com/" target="_blank"><img src="https://www.antdv.com/jeecg-logo.png" height="64"></a>
 <a href="https://opencollective.com/ant-design-vue/sponsor/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/ant-design-vue/sponsor/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/1/avatar.svg"></a>
 <a href="https://opencollective.com/ant-design-vue/sponsor/2/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/sponsor/2/avatar.svg"></a>

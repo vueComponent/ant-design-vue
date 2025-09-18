@@ -113,18 +113,6 @@ export default defineComponent({
               type: 'Advanced And Powerful',
               target: '_blank',
             },
-            {
-              category: 'Components',
-              cols: 1,
-              cover: 'https://aliyuncdn.antdv.com/form/static/assets/landing-config.4f9d5425.png',
-              coverDark:
-                'https://aliyuncdn.antdv.com/form/static/assets/landing-config.4f9d5425.png',
-              path: 'https://form.antdv.com/',
-              subtitle: '在线表单',
-              title: 'Surely Form',
-              type: 'Advanced And Powerful',
-              target: '_blank',
-            },
           ],
           enTitle: 'Advanced And Powerful',
           title: '更强大',

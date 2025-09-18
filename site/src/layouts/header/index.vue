@@ -1,25 +1,5 @@
 <template>
   <header id="header" :class="headerClassName">
-    <!-- <div v-if="visibleAdblockBanner" class="adblock-banner">
-      <template v-if="isZhCN">
-        我们检测到你可能使用了 AdBlock 或 Adblock
-        Plus，它会影响到正常功能的使用（如复制、展开代码等）。
-        <br />
-        你可以将 Ant Design Vue 加入白名单，以便我们更好地提供服务。
-      </template>
-      <template v-else>
-        We have detected that you may use AdBlock or Adblock Plus, which will affect the use of
-        normal functions (such as copying, expanding code, etc.)
-        <br />
-        You can add Ant Design Vue to the whitelist so that we can provide better services.
-      </template>
-
-      <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
-    </div> -->
-    <div class="alert-banner">
-      Surely Form AI 助手内测开放申请 &nbsp;&nbsp;
-      <a target="_blank" href="https://form.antdv.com">立即申请</a>
-    </div>
     <a-row :style="{ flexFlow: 'nowrap', height: 64, position: 'relative' }">
       <a-col v-bind="colProps[0]">
         <Logo />
@@ -56,11 +36,6 @@
         <li class="alert-list-item">
           <strong>Ant Design Vue 4</strong>
           ：五大新组件，全新 Design Token
-        </li>
-        <li class="alert-list-item">
-          <strong>Surely Form</strong>
-          ：全新主题编辑， AI 问卷开放内测申请
-          <a target="_blank" href="https://form.antdv.com">立即体验</a>
         </li>
         <li class="alert-list-item">
           <strong>Surely Table</strong>
@@ -157,13 +132,13 @@ export default defineComponent({
     watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
-    const alertKey = 'ant-design-vue-4-alert';
-    const visibleAlertBanner = ref(!localStorage.getItem(alertKey));
-    watch(visibleAlertBanner, () => {
-      if (!visibleAlertBanner.value) {
-        localStorage.setItem(alertKey, version);
-      }
-    });
+    // const alertKey = 'ant-design-vue-4-alert';
+    const visibleAlertBanner = ref(false);
+    // watch(visibleAlertBanner, () => {
+    //   if (!visibleAlertBanner.value) {
+    //     localStorage.setItem(alertKey, version);
+    //   }
+    // });
     return {
       isZhCN: globalConfig.isZhCN,
       isMobile: globalConfig.isMobile,

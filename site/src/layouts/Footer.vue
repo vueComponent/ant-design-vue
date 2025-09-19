@@ -60,12 +60,9 @@
             </div>
           </div>
         </a-col>
-        <a-col :md="6" :sm="24" :xs="24">
+        <!-- <a-col :md="6" :sm="24" :xs="24">
           <div class="footer-center">
             <h2>{{ isCN ? '友情链接' : 'Links' }}</h2>
-            <div v-if="showJeecg">
-              <a href="http://www.jeecg.com/" target="_blank">Jeecg</a>
-            </div>
             <div>
               <a href="https://cn.vuejs.org/" target="_blank">Vue</a>
             </div>
@@ -79,8 +76,8 @@
               <a href="https://antdv.formilyjs.org/" target="_blank">@formily/antdv</a>
             </div>
           </div>
-        </a-col>
-        <a-col :md="6" :sm="24" :xs="24">
+        </a-col> -->
+        <a-col :md="12" :sm="24" :xs="24">
           <div class="footer-center">
             <h2>
               <img
@@ -88,27 +85,16 @@
                 class="title-icon"
                 src="https://gw.alipayobjects.com/zos/rmsportal/nBVXkrFdWHxbZlmMbsaH.svg"
               />
-              <span>{{ isCN ? '更多产品' : 'More Products' }}</span>
+              <span>{{ isCN ? '友情链接' : 'Links' }}</span>
             </h2>
             <div>
-              <a href="https://antv.alipay.com/" rel="noopener noreferrer" target="_blank">AntV</a>
+              <a href="https://www.demoget.com?atp=tangjinzhou" target="_blank">DemoGet</a>
               <span>-</span>
-              <span>{{ isCN ? '数据可视化' : 'Data Visualization' }}</span>
-            </div>
-            <div>
-              <a href="https://eggjs.org/" rel="noopener noreferrer" target="_blank">Egg</a>
-              <span>-</span>
-              <span>{{ isCN ? '企业级 Node 开发框架' : 'Enterprise Node Framework' }}</span>
+              <span>{{ isCN ? '好看好用的录屏工具' : 'Beautiful Screen Recordings' }}</span>
             </div>
           </div>
         </a-col>
       </a-row>
-    </div>
-    <div style="padding: 10px 144px">
-      备案号：
-      <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">浙ICP备19034671号</a>
-      &nbsp;&nbsp;&nbsp; 增值电信业务经营许可证：
-      <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">浙B2-20220161</a>
     </div>
   </footer>
 </template>

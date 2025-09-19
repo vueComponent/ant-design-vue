@@ -3,9 +3,9 @@
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "scripts": {
-    "dev": "node --max_old_space_size=4096 build/dev.js",
-    "start": "cross-env PORT=3001 NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --config build/webpack.dev.conf.js",
-    "site": "node --max_old_space_size=4096 scripts/run.js _site",
+    "dev": "node --openssl-legacy-provider --max_old_space_size=4096 build/dev.js",
+    "start": "cross-env PORT=3001 NODE_ENV=development node --openssl-legacy-provider --max_old_space_size=4096 node_modules/webpack-dev-server/bin/webpack-dev-server.js --config build/webpack.dev.conf.js",
+    "build": "node --openssl-legacy-provider --max_old_space_size=4096 scripts/run.js _site",
     "copy": "node scripts/run.js copy-html",
     "prettier": "prettier -c --write '**/*'",
     "pretty-quick": "pretty-quick"

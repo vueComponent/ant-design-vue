@@ -1,0 +1,14 @@
+{
+  "name": "antdv-v1",
+  "compatibility_date": "2025-09-19",
+  "assets": {
+    "directory": "./antdv-demo/_site",
+    "not_found_handling": "single-page-application"
+  },
+  "routes": [
+    {
+      "pattern": "1x.antdv.com/*",
+      "zone_name": "antdv.com"
+    }
+  ]
+}

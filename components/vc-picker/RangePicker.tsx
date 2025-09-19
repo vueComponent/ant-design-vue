@@ -320,10 +320,64 @@ function RangerPicker<DateType>() {
       const [mergedValue, setInnerValue] = useMergedState<RangeValue<DateType>>(null, {
         value: toRef(props, 'value'),
         defaultValue: props.defaultValue,
-        postState: values =>
-          props.picker === 'time' && !props.order
+        postState: values => {
+          // 处理包含preset的value格式 [date, date, preset]
+          if (
+            values &&
+            Array.isArray(values) &&
+            (values as any).length === 3 &&
+            (values as any)[2]
+          ) {
+            const preset = (values as any)[2];
+            // 如果preset有value属性，使用preset的value作为日期范围
+            if (preset.value && Array.isArray(preset.value) && preset.value.length === 2) {
+              const presetValues = preset.value;
+
+              // 检查preset.value是否是函数，如果是则执行函数获取当前值
+              let startValue =
+                typeof presetValues[0] === 'function' ? presetValues[0]() : presetValues[0];
+              let endValue =
+                typeof presetValues[1] === 'function' ? presetValues[1]() : presetValues[1];
+
+              // 判断props.isWholeDay是否为true，如果为false，则使用当前时间的时分秒
+              if (!props.isWholeDay) {
+                const now = props.generateConfig.getNow();
+                const currentHour = props.generateConfig.getHour(now);
+                const currentMinute = props.generateConfig.getMinute(now);
+                const currentSecond = props.generateConfig.getSecond(now);
+
+                startValue = props.generateConfig.setHour(
+                  props.generateConfig.setMinute(
+                    props.generateConfig.setSecond(startValue, currentSecond),
+                    currentMinute,
+                  ),
+                  currentHour,
+                );
+                endValue = props.generateConfig.setHour(
+                  props.generateConfig.setMinute(
+                    props.generateConfig.setSecond(endValue, currentSecond),
+                    currentMinute,
+                  ),
+                  currentHour,
+                );
+              }
+
+              if (startValue && endValue) {
+                // 设置当前preset
+                setCurrentPreset(preset);
+                // 返回preset计算出的日期范围
+                return props.picker === 'time' && !props.order
+                  ? [startValue, endValue]
+                  : reorderValues([startValue, endValue], props.generateConfig);
+              }
+            }
+          }
+
+          // 处理普通格式的value
+          return props.picker === 'time' && !props.order
             ? values
-            : reorderValues(values, props.generateConfig),
+            : reorderValues(values, props.generateConfig);
+        },
       });
 
       // ========================= Current Preset =========================
@@ -597,6 +651,61 @@ function RangerPicker<DateType>() {
           values = [startWithTime, endWithTime];
         }
 
+        // 如果通过preset触发，且preset有value属性，重新计算日期范围
+        if (
+          fromPreset &&
+          currentPreset.value &&
+          Array.isArray(currentPreset.value) &&
+          currentPreset.value.length === 2
+        ) {
+          const presetValues = currentPreset.value;
+          // 检查preset.value是否是函数，如果是则执行函数获取当前值
+          const presetStartValue =
+            typeof presetValues[0] === 'function' ? presetValues[0]() : presetValues[0];
+          const presetEndValue =
+            typeof presetValues[1] === 'function' ? presetValues[1]() : presetValues[1];
+
+          if (presetStartValue && presetEndValue) {
+            // 如果启用了isWholeDay，应用时间设置
+            if (props.isWholeDay && showTime) {
+              const startWithTime = generateConfig.setHour(
+                generateConfig.setMinute(generateConfig.setSecond(presetStartValue, 0), 0),
+                0,
+              );
+              const endWithTime = generateConfig.setHour(
+                generateConfig.setMinute(generateConfig.setSecond(presetEndValue, 59), 59),
+                23,
+              );
+              values = [startWithTime, endWithTime];
+            } else if (showTime) {
+              // 如果未启用isWholeDay但启用了showTime，使用当前时间的时分秒
+              const now = generateConfig.getNow();
+              const currentHour = generateConfig.getHour(now);
+              const currentMinute = generateConfig.getMinute(now);
+              const currentSecond = generateConfig.getSecond(now);
+
+              const startWithCurrentTime = generateConfig.setHour(
+                generateConfig.setMinute(
+                  generateConfig.setSecond(presetStartValue, currentSecond),
+                  currentMinute,
+                ),
+                currentHour,
+              );
+              const endWithCurrentTime = generateConfig.setHour(
+                generateConfig.setMinute(
+                  generateConfig.setSecond(presetEndValue, currentSecond),
+                  currentMinute,
+                ),
+                currentHour,
+              );
+              values = [startWithCurrentTime, endWithCurrentTime];
+            } else {
+              // 如果没有启用showTime，保持preset的原始时间
+              values = [presetStartValue, presetEndValue];
+            }
+          }
+        }
+
         setSelectedValue(values);
 
         // 如果不是通过 preset 触发的，清除 currentPreset
@@ -638,9 +747,11 @@ function RangerPicker<DateType>() {
             (!isEqual(generateConfig, getValue(mergedValue.value, 0), startValue) ||
               !isEqual(generateConfig, getValue(mergedValue.value, 1), endValue))
           ) {
+            // 如果通过preset触发，传递preset信息
+            const presetToPass = fromPreset ? currentPreset.value : currentPreset.value;
             onChange(
-              [startValue, endValue, currentPreset.value],
-              [startStr, endStr, currentPreset.value?.key || null],
+              [startValue, endValue, presetToPass],
+              [startStr, endStr, presetToPass?.key || null],
             );
           }
         }
@@ -1247,7 +1358,63 @@ function RangerPicker<DateType>() {
                 currentPreset={currentPreset.value}
                 onClick={(nextValue, preset) => {
                   setCurrentPreset(preset);
-                  triggerChange(nextValue, null, true);
+                  // 如果preset有value属性，使用preset的value作为日期范围
+                  let valuesToUse = nextValue;
+                  if (preset.value && Array.isArray(preset.value) && preset.value.length === 2) {
+                    const presetValues = preset.value;
+                    // 检查preset.value是否是函数，如果是则执行函数获取当前值
+                    const presetStartValue =
+                      typeof presetValues[0] === 'function' ? presetValues[0]() : presetValues[0];
+                    const presetEndValue =
+                      typeof presetValues[1] === 'function' ? presetValues[1]() : presetValues[1];
+
+                    if (presetStartValue && presetEndValue) {
+                      // 如果启用了isWholeDay，应用时间设置
+                      if (props.isWholeDay && props.showTime) {
+                        const startWithTime = props.generateConfig.setHour(
+                          props.generateConfig.setMinute(
+                            props.generateConfig.setSecond(presetStartValue, 0),
+                            0,
+                          ),
+                          0,
+                        );
+                        const endWithTime = props.generateConfig.setHour(
+                          props.generateConfig.setMinute(
+                            props.generateConfig.setSecond(presetEndValue, 59),
+                            59,
+                          ),
+                          23,
+                        );
+                        valuesToUse = [startWithTime, endWithTime];
+                      } else if (props.showTime) {
+                        // 如果未启用isWholeDay但启用了showTime，使用当前时间的时分秒
+                        const now = props.generateConfig.getNow();
+                        const currentHour = props.generateConfig.getHour(now);
+                        const currentMinute = props.generateConfig.getMinute(now);
+                        const currentSecond = props.generateConfig.getSecond(now);
+
+                        const startWithCurrentTime = props.generateConfig.setHour(
+                          props.generateConfig.setMinute(
+                            props.generateConfig.setSecond(presetStartValue, currentSecond),
+                            currentMinute,
+                          ),
+                          currentHour,
+                        );
+                        const endWithCurrentTime = props.generateConfig.setHour(
+                          props.generateConfig.setMinute(
+                            props.generateConfig.setSecond(presetEndValue, currentSecond),
+                            currentMinute,
+                          ),
+                          currentHour,
+                        );
+                        valuesToUse = [startWithCurrentTime, endWithCurrentTime];
+                      } else {
+                        // 如果没有启用showTime，保持preset的原始时间
+                        valuesToUse = [presetStartValue, presetEndValue];
+                      }
+                    }
+                  }
+                  triggerChange(valuesToUse, null, true);
                   triggerOpen(false, mergedActivePickerIndex.value);
                 }}
                 onHover={hoverValue => {

@@ -54,7 +54,7 @@ RangePicker supports two new features:
 </template>
 
 <script lang="ts" setup>
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 type RangeValue = [Dayjs, Dayjs];
 
@@ -84,7 +84,7 @@ const onWholeDayChange = (
   dateStrings: [string, string],
   currentPreset?: any,
 ) => {
-  if (values) {
+  if (values && values[0] && values[1]) {
     console.log(
       'Whole Day - From: ',
       values[0].format('YYYY-MM-DD HH:mm:ss'),
@@ -105,7 +105,7 @@ const onCombinedChange = (
   dateStrings: [string, string],
   currentPreset?: any,
 ) => {
-  if (values) {
+  if (values && values[0] && values[1]) {
     console.log(
       'Combined - From: ',
       values[0].format('YYYY-MM-DD HH:mm:ss'),

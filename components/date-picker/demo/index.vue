@@ -18,6 +18,7 @@
     <statusVue />
     <placementVue />
     <AutoFillWholeDay />
+    <PresetAutofill />
   </demo-sort>
 </template>
 <script>
@@ -38,6 +39,7 @@ import Bordered from './bordered.vue';
 import RangePicker from './range-picker.vue';
 import placementVue from './placement.vue';
 import AutoFillWholeDay from './auto-fill-whole-day.vue';
+import PresetAutofill from './preset-autofill.vue';
 import statusVue from './status.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -65,6 +67,7 @@ export default defineComponent({
     Bordered,
     RangePicker,
     AutoFillWholeDay,
+    PresetAutofill,
   },
 });
 </script>

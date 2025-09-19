@@ -529,7 +529,7 @@
 
 高级组件 Surely Vue 发布！！！
 
-官方站点 ： [https://surely.cool/](https://surely.cool/)
+官方站点 ： [https://surelyvue.com/](https://surelyvue.com/)
 
 Github：[https://github.com/surely-vue/table]
 

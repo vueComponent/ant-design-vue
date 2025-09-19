@@ -13,23 +13,12 @@
     <a-menu-item-group v-if="isZhCN" title="高级组件">
       <a-menu-item key="surely-table">
         <a
-          href="https://www.surely.cool"
+          href="https://www.surelyvue.com"
           target="_blank"
           rel="noopener noreferrer"
           style="position: relative"
         >
           Surely Table
-        </a>
-      </a-menu-item>
-      <a-menu-item key="surely-form">
-        <a
-          href="https://form.antdv.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="position: relative"
-        >
-          Surely Form
-          <a-badge color="red" style="position: absolute; top: -18px; right: -15px" />
         </a>
       </a-menu-item>
     </a-menu-item-group>

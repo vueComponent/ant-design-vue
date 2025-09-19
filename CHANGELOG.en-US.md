@@ -530,7 +530,7 @@
 
 Publish Performant advanced table component Surely Vue
 
-Official website ： [https://surely.cool/](https://surely.cool/)
+Official website ： [https://surelyvue.com/](https://surelyvue.com/)
 
 Github：[https://github.com/surely-vue/table]
 

@@ -16,12 +16,6 @@
 
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
     </div> -->
-    <div v-if="visibleAlertBanner && isZhCN" class="alert-banner">
-      Surely Form 2.0 发布，快速定制自己的问卷平台 &nbsp;&nbsp;
-      <a href="https://form.antdv.com">立即体验</a>
-
-      <CloseOutlined class="close-icon" @click="visibleAlertBanner = false" />
-    </div>
     <a-popover
       v-model:visible="menuVisible"
       overlay-class-name="popover-menu"

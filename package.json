@@ -33,7 +33,7 @@
     "precompile": "npm run version",
     "pretest": "npm run version",
     "predist": "npm run version",
-    "presite": "npm run version",
+    "prebuild": "npm run version",
     "dev": "npm run predev && npm run routes && vite serve site",
     "test": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
@@ -56,8 +56,7 @@
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
     "vue-tsc": "vue-tsc --noEmit",
-    "site": "npm run routes && ./node_modules/vite/bin/vite.js build site --base=https://3x.antdv.com/",
-    "pub:site": "npm run site && node site/scripts/pushToOSS.js",
+    "build": "npm run routes && ./node_modules/vite/bin/vite.js build site --base=/",
     "prepare": "husky install",
     "version": "node ./scripts/generate-version",
     "sort-api": "node antd-tools/cli/run.js sort-api-table"

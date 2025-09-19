@@ -9,7 +9,7 @@
       class="version"
       size="small"
       :dropdown-match-select-width="false"
-      :default-value="antdVersion"
+      :value="antdVersion"
     >
       <a-select-option :value="antdVersion">{{ antdVersion }}</a-select-option>
       <a-select-option value="2.x" @click="changeVersion('2x')">

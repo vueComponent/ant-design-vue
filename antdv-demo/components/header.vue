@@ -17,7 +17,7 @@ export default {
     return {
       visibleAdblockBanner: !!this.demoContext.blocked,
       value: null,
-      showTopBanner: !localStorage.getItem('notification-key-surelyform'),
+      showTopBanner: false,
     };
   },
   watch: {
@@ -87,22 +87,6 @@ export default {
               : 'You can add Ant Design Vue to the whitelist so that we can provide better services.'}
 
             <CloseOutlined class="close-icon" onClick={() => (this.visibleAdblockBanner = false)} />
-          </div>
-        )}
-        {isCN && this.showTopBanner && (
-          <div class="global-notification">
-            <span>
-              Surely Form 私有化部署专属的调研，投票、NPS、报名等系统，访问 &nbsp;&nbsp;
-              <a href="https://form.antdv.com/" target="_blank">
-                form.antdv.com
-              </a>
-              &nbsp;&nbsp;立即体验
-            </span>
-            <a-icon
-              type="close"
-              style="position: absolute;top: 13px;right: 15px;"
-              onClick={() => this.handleClose('surelyform')}
-            />
           </div>
         )}
         {/* {!isCN && this.showTopBanner && (
@@ -191,16 +175,6 @@ export default {
                     style="position: relative;"
                   >
                     Surely Table
-                  </a>
-                </a-menu-item>
-                <a-menu-item key="surely-form">
-                  <a
-                    href="https://form.antdv.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style="position: relative;"
-                  >
-                    Surely Form
                   </a>
                 </a-menu-item>
               </a-sub-menu>

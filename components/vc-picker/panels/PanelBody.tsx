@@ -49,7 +49,7 @@ function PanelBody<DateType>(_props: PanelBodyProps<DateType>) {
     titleCell,
     headerCells,
   } = useMergeProps(_props);
-  const { onDateMouseenter, onDateMouseleave, mode } = useInjectPanel();
+  const { onDateMouseenter, onDateMouseleave, mode, isDoubleClickRef } = useInjectPanel();
 
   const cellPrefixCls = `${prefixCls}-cell`;
 
@@ -96,6 +96,14 @@ function PanelBody<DateType>(_props: PanelBodyProps<DateType>) {
           onClick={e => {
             e.stopPropagation();
             if (!disabled) {
+              onSelect(currentDate);
+            }
+          }}
+          onDblclick={e => {
+            e.stopPropagation();
+            if (!disabled && isDoubleClickRef) {
+              // 设置双击状态
+              isDoubleClickRef.value = true;
               onSelect(currentDate);
             }
           }}

@@ -263,6 +263,8 @@ function RangerPicker<DateType>() {
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
+
+      const isDoubleClickRef = ref(false);
       const presets = computed(() => props.presets);
       const ranges = computed(() => props.ranges);
       const presetList = usePresets(presets, ranges);
@@ -970,10 +972,30 @@ function RangerPicker<DateType>() {
 
       const onContextSelect = (date: DateType, type: 'key' | 'mouse' | 'submit') => {
         const values = updateValues(selectedValue.value, date, mergedActivePickerIndex.value);
+        const currentIndex = mergedActivePickerIndex.value;
+        const isDoubleClick = isDoubleClickRef.value;
+        const shouldSwitch = type === 'mouse' && needConfirmButton.value && isDoubleClick;
 
-        if (type === 'submit' || (type !== 'key' && !needConfirmButton.value)) {
+        // Reset double click state
+        isDoubleClickRef.value = false;
+
+        if (type === 'submit' || (type !== 'key' && !needConfirmButton.value) || shouldSwitch) {
           // triggerChange will also update selected values
           triggerChange(values, mergedActivePickerIndex.value);
+
+          // If double click, switch to next input
+          // But check if both inputs are complete, if so don't switch to avoid animation before popup closes
+          if (shouldSwitch) {
+            const startValue = getValue(values, 0);
+            const endValue = getValue(values, 1);
+            const bothValuesComplete = startValue && endValue;
+
+            if (!bothValuesComplete) {
+              const nextIndex = ((currentIndex + 1) % 2) as 0 | 1;
+              setMergedActivePickerIndex(nextIndex);
+            }
+          }
+
           // clear hover value style
           if (mergedActivePickerIndex.value === 0) {
             onStartLeave();
@@ -993,6 +1015,7 @@ function RangerPicker<DateType>() {
         hideRanges: computed(() => true),
         onSelect: onContextSelect,
         open: mergedOpen,
+        isDoubleClickRef,
       });
 
       return () => {

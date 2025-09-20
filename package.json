@@ -253,7 +253,7 @@
     "unified": "9.2.2",
     "url-loader": "^3.0.0",
     "vanilla-jsoneditor": "^0.15.1",
-    "vite": "^3.0.0",
+    "vite": "^5.4.20",
     "vue": "^3.2.0",
     "vue-clipboard2": "0.3.3",
     "vue-drag-resize": "^2.0.3",

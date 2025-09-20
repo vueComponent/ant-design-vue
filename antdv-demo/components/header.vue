@@ -247,19 +247,6 @@ export default {
                   </a>
                 </a-menu-item>
 
-                <a-menu-item key="wechat">
-                  <a-popover placement="right">
-                    <template slot="content">
-                      <img
-                        width="160"
-                        height="160"
-                        alt="wechat"
-                        src="https://qn.antdv.com/wechat.jpeg"
-                      />
-                    </template>
-                    <a>{isCN ? '微信' : 'WeChat'}</a>
-                  </a-popover>
-                </a-menu-item>
                 <a-menu-item key="qq1">
                   <a>QQ 1群(217490093) 已满</a>
                 </a-menu-item>

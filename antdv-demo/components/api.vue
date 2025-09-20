@@ -1,6 +1,5 @@
 <template>
   <div class="markdown api-container">
-    <google-ads v-if="showAd" />
     <slot v-if="isZhCN" name="cn" />
     <slot v-else />
   </div>

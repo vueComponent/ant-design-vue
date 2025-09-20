@@ -13,7 +13,6 @@
       <template v-if="isCN">
         <WWAds :key="`WWAds_${$route.path}`" />
       </template>
-      <GoogleAdsTop v-else :key="`GoogleAdsTop_${$route.path}`" />
     </template>
   </div>
 </template>

@@ -22,6 +22,7 @@ export default function usePresets<T>(
         return {
           label,
           value: newValues,
+          key: label, // 添加 key 属性
         };
       });
     }

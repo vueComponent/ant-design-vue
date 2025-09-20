@@ -269,8 +269,13 @@ export interface RangePickerProps<DateType> {
   onChange?: (
     value: RangeValue<DateType> | RangeValue<string> | null,
     dateString: [string, string],
+    currentPreset?: any,
   ) => void;
   'onUpdate:value'?: (value: RangeValue<DateType> | RangeValue<string> | null) => void;
+  /** 双击日期时自动设置为开始和结束日期 */
+  autoFill?: boolean;
+  /** 在 showTime 模式下，是否设置为整天（开始时间 00:00:00，结束时间 23:59:59） */
+  isWholeDay?: boolean;
   onCalendarChange?: (
     values: RangeValue<DateType> | RangeValue<string>,
     formatString: [string, string],

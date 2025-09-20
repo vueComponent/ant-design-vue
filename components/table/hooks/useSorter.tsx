@@ -186,7 +186,7 @@ function injectSorter<RecordType>(
           const cell = (column.customHeaderCell && column.customHeaderCell(col)) || {};
           const originOnClick = cell.onClick;
           const originOKeyDown = cell.onKeydown;
-          cell.onClick = (event: MouseEvent) => {
+          cell.onClick = (event: PointerEvent) => {
             triggerSorter({
               column,
               key: columnKey,

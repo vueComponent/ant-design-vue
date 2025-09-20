@@ -38,12 +38,12 @@ exports[`renders ./antdv-demo/docs/image/demo/placeholder.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/image/demo/previewGroup.md correctly 1`] = `
-<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://qn.antdv.com/vue.png">
+<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://www.antdv.com/vue.png">
   <!---->
   <!---->
 </div>
 <!---->
-<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://qn.antdv.com/logo.png">
+<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://www.antdv.com/logo.png">
   <!---->
   <!---->
 </div>

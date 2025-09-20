@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.antdv.com/">
-    <img width="200" src="https://qn.antdv.com/logo.png">
+    <img width="200" src="https://www.antdv.com/logo.png">
   </a>
 </p>
 
@@ -73,7 +73,6 @@ ant-design-vue is an MIT-licensed open source project. In order to achieve bette
 - [Patreon](https://www.patreon.com/tangjinzhou)
 - [opencollective](https://opencollective.com/ant-design-vue)
 - [paypal](https://www.paypal.me/tangjinzhou)
-- [支付宝或微信](https://qn.antdv.com/alipay-and-wechat.png)
 
 ## Sponsors
 

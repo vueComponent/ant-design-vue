@@ -96,7 +96,7 @@ type BeforeUploadValueType = void | boolean | string | Blob | FileType;
 
 function uploadProps<T = any>() {
   return {
-    capture: someType<boolean | 'user' | 'environment'>([Boolean, String]),
+    capture: someType<boolean | 'user' | 'environment' | null>([Boolean, String]),
     type: stringType<UploadType>(),
     name: String,
     defaultFileList: arrayType<Array<UploadFile<T>>>(),

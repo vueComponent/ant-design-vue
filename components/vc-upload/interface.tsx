@@ -6,7 +6,7 @@ export type Action = string | ((file: RcFile) => string | PromiseLike<string>);
 
 export const uploadProps = () => {
   return {
-    capture: [Boolean, String] as PropType<boolean | 'user' | 'environment'>,
+    capture: [Boolean, String] as PropType<boolean | 'user' | 'environment' | null>,
     multipart: { type: Boolean, default: undefined },
     name: String,
     disabled: { type: Boolean, default: undefined },

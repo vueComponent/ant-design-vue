@@ -44,6 +44,9 @@ const SingleSelector = defineComponent<SelectorProps>({
   setup(props) {
     const inputChanged = shallowRef(false);
 
+    // 本地输入状态管理
+    const hasInput = shallowRef(false);
+
     const combobox = computed(() => props.mode === 'combobox');
     const inputEditable = computed(() => combobox.value || props.showSearch);
 
@@ -65,12 +68,38 @@ const SingleSelector = defineComponent<SelectorProps>({
       { immediate: true },
     );
 
-    // Not show text when closed expect combobox mode
-    const hasTextInput = computed(() =>
-      props.mode !== 'combobox' && !props.open && !props.showSearch
-        ? false
-        : !!inputValue.value || props.compositionStatus,
+    // 监听下拉框关闭（失焦）时重置输入状态
+    watch(
+      () => props.open,
+      newOpen => {
+        if (!newOpen) {
+          hasInput.value = false;
+        }
+      },
     );
+
+    // 监听选择完成（values变化）时重置输入状态
+    watch(
+      () => props.values,
+      () => {
+        if (props.values && props.values.length > 0) {
+          hasInput.value = false;
+        }
+      },
+      { deep: true },
+    );
+
+    // Not show text when closed expect combobox mode
+    const hasTextInput = computed(() => {
+      // 只有在本地输入状态为true时，才认为有文本输入
+      if (!hasInput.value) {
+        return false;
+      }
+
+      return props.mode !== 'combobox' && !props.open && !props.showSearch
+        ? false
+        : !!inputValue.value || props.compositionStatus;
+    });
 
     const title = computed(() => {
       const item = props.values[0];
@@ -92,6 +121,10 @@ const SingleSelector = defineComponent<SelectorProps>({
     };
     const handleInput = (e: Event) => {
       const composing = (e.target as any).composing;
+
+      // 用户输入时设置输入状态为true
+      hasInput.value = true;
+
       if (!composing) {
         inputChanged.value = true;
         props.onInputChange(e);
@@ -142,6 +175,7 @@ const SingleSelector = defineComponent<SelectorProps>({
       }
       return (
         <>
+          {hasTextInput.value ? '输入中' : '输入完成'}
           <span class={`${prefixCls}-selection-search`}>
             <Input
               inputRef={inputRef}

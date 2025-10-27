@@ -281,6 +281,14 @@ export default defineComponent({
     const selectorRef = shallowRef<RefSelectorProps>(null);
     const listRef = shallowRef<RefOptionListProps>(null);
     const blurRef = ref<boolean>(false);
+    const compositionStatus = ref<boolean>(false); // 基于BaseSelect定义当前是否处于输入法组合状态
+    const onCompositionStart = () => {
+      // 输入法组合开始时，设置compositionStatus为true
+      compositionStatus.value = true;
+    };
+    const onCompositionEnd = () => {
+      compositionStatus.value = false;
+    };
 
     /** Used for component focused management */
     const [mockFocused, setMockFocused, cancelSetMockFocused] = useDelayReset();
@@ -765,6 +773,7 @@ export default defineComponent({
       let clearNode: VueNode;
       const onClearMouseDown: MouseEventHandler = () => {
         onClear?.();
+        onCompositionEnd();
 
         onDisplayValuesChange([], {
           type: 'clear',
@@ -866,6 +875,9 @@ export default defineComponent({
                   onSearchSubmit={onInternalSearchSubmit}
                   onRemove={onSelectorRemove}
                   tokenWithEnter={tokenWithEnter.value}
+                  compositionStatus={compositionStatus.value}
+                  onCompositionStart={onCompositionStart}
+                  onCompositionEnd={onCompositionEnd}
                 />
               );
             },

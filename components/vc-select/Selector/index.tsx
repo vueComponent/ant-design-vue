@@ -15,7 +15,7 @@ import type { CustomTagProps, DisplayValueType, Mode, RenderNode } from '../Base
 import { isValidateOpenKey } from '../utils/keyUtil';
 import useLock from '../hooks/useLock';
 import type { PropType } from 'vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import createRef from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
@@ -60,6 +60,9 @@ export interface SelectorProps {
   onSearchSubmit: (searchText: string) => void;
   onRemove: (value: DisplayValueType) => void;
   onInputKeyDown?: (e: KeyboardEvent) => void;
+  compositionStatus?: boolean;
+  onCompositionStart?: () => void;
+  onCompositionEnd?: () => void;
 
   /**
    * @private get real dom for trigger align.
@@ -115,6 +118,9 @@ const Selector = defineComponent<SelectorProps>({
     onSearchSubmit: Function,
     onRemove: Function,
     onInputKeyDown: { type: Function as PropType<EventHandler> },
+    compositionStatus: { type: Boolean, default: false },
+    onCompositionStart: { type: Function as PropType<() => void> },
+    onCompositionEnd: { type: Function as PropType<() => void> },
 
     /**
      * @private get real dom for trigger align.
@@ -124,7 +130,7 @@ const Selector = defineComponent<SelectorProps>({
   } as any,
   setup(props, { expose }) {
     const inputRef = createRef();
-    const compositionStatus = ref(false);
+    const compositionStatus = computed(() => props.compositionStatus || false);
 
     // ====================== Input ======================
     const [getInputMouseDown, setInputMouseDown] = useLock(0);
@@ -174,11 +180,13 @@ const Selector = defineComponent<SelectorProps>({
     };
 
     const onInputCompositionStart = () => {
-      compositionStatus.value = true;
+      // compositionStatus.value = true;
+      props.onCompositionStart();
     };
 
     const onInputCompositionEnd = (e: InputEvent) => {
-      compositionStatus.value = false;
+      // compositionStatus.value = false;
+      props.onCompositionEnd();
       // Trigger search again to support `tokenSeparators` with typewriting
       if (props.mode !== 'combobox') {
         triggerOnSearch((e.target as HTMLInputElement).value);
@@ -244,6 +252,8 @@ const Selector = defineComponent<SelectorProps>({
         inputRef.current.focus();
       },
       blur: () => {
+        console.log('onBlurrrrrrrr1111111');
+        props.onCompositionEnd();
         inputRef.current.blur();
       },
     });

@@ -175,7 +175,6 @@ const SingleSelector = defineComponent<SelectorProps>({
       }
       return (
         <>
-          {hasTextInput.value ? '输入中' : '输入完成'}
           <span class={`${prefixCls}-selection-search`}>
             <Input
               inputRef={inputRef}

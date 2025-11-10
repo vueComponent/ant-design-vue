@@ -47,13 +47,13 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 
 ### TextArea
 
-| Property | Description | Type | Default | Version |  |
-| --- | --- | --- | --- | --- | --- |
-| allowClear | allow to remove input content with clear icon | boolean |  | 1.5.0 |  |
-| autosize | Height autosize feature, can be set to `true | false`or an object`{ minRows: 2, maxRows: 6 }` | boolean\|object | false |  |
-| defaultValue | The initial input content | string |  |  |  |
-| showCount | Whether show text count | boolean \| { formatter: (info: { value: string, count: number, maxLength?: number }) => string | false |  |  |
-| value(v-model) | The input content value | string |  |  |  |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| allowClear | allow to remove input content with clear icon | boolean |  | 1.5.0 |
+| autosize | Height autosize feature, can be set to `true \| false`or an object`{ minRows: 2, maxRows: 6 }` | boolean\|object | false |  |
+| defaultValue | The initial input content | string |  |  |
+| showCount | Whether show text count | boolean \| { formatter: (info: { value: string, count: number, maxLength?: number }) => string | false |  |
+| value(v-model) | The input content value | string |  |  |
 
 ### TextArea Events
 

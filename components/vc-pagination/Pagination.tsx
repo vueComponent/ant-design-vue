@@ -123,6 +123,7 @@ export default defineComponent({
         newState.stateCurrent = current;
       }
       this.setState(newState);
+      this.__emit('change', this.stateCurrent, this.statePageSize);
     },
   },
   methods: {

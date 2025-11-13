@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CheckboxGroup passes prefixCls down to checkbox 1`] = `<div class="my-checkbox-group"><label class="my-checkbox-wrapper my-checkbox-group-item"><span class="my-checkbox"><input type="checkbox" class="my-checkbox-input" value="Apple"><span class="my-checkbox-inner"></span></span><span>Apple</span></label><label class="my-checkbox-wrapper my-checkbox-group-item"><span class="my-checkbox"><input type="checkbox" class="my-checkbox-input" value="Orange"><span class="my-checkbox-inner"></span></span><span>Orange</span></label></div>`;

@@ -1,15 +1,10 @@
 {
-  "name": "@ant-design-vue/ant-design-vue",
+  "name": "ant-design-vue",
   "private": true,
   "version": "5.0.0-alpha.1",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation for Ant Design",
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "packages-*/*"
-  ],
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
@@ -20,9 +15,9 @@
     "coverage": "turbo test -- --coverage"
   },
   "devDependencies": {
-    "@ant-design-vue/eslint-config": "*",
-    "@ant-design-vue/prettier-config": "*",
-    "@ant-design-vue/typescript-config": "*",
+    "@ant-design-vue/eslint-config": "workspace:*",
+    "@ant-design-vue/prettier-config": "workspace:*",
+    "@ant-design-vue/typescript-config": "workspace:*",
     "@types/node": "^20.0.0",
     "eslint": "^8.56.0",
     "vitest": "^3.2.4",
@@ -31,8 +26,8 @@
     "turbo": "^2.4.4",
     "typescript": "^5.8.2"
   },
-  "packageManager": "npm@10.8.2",
+  "packageManager": "pnpm@10.21.0",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   }
 }

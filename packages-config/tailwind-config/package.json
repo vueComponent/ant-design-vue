@@ -6,8 +6,8 @@
     ".": {
       "default": "./tailwind.css"
     },
-    "./themes/*": {
-      "default": "./themes/*.css"
+    "./themes": {
+      "default": "./themes.css"
     }
   },
   "devDependencies": {

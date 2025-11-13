@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-const top = ref<number>(10)
+const top = ref<number>(100)
 const bottom = ref<number>(10)
 const onChange = (lastAffix: boolean) => {
   console.log('onChange', lastAffix)

@@ -5,7 +5,7 @@
         <li class="flex items-center">
           <template v-if="i > 0">
             <span
-              class="ml-2 mr-3 block size-1.5 rotate-45 transform border-r-[1px] border-t-[1px] border-base-content/70 bg-transparent"
+              class="ml-2 mr-3 block size-1.5 rotate-45 transform border-r border-base-content/70 bg-transparent"
             ></span>
           </template>
           <template v-if="item.path !== route.path">

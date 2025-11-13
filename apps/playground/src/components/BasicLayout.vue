@@ -1,7 +1,7 @@
 <template>
-  <div class="flex h-screen" :class="pageClass">
+  <div class="flex h-[calc(100vh-72px)] bg-base-100/90" :class="pageClass">
     <TheNavbar v-if="!hideNavbar" :items="navs"></TheNavbar>
-    <div class="flex-1 justify-center px-4 py-16" :class="contentClass">
+    <div class="flex-1 justify-center p-4 overflow-scroll" :class="contentClass">
       <RouterView></RouterView>
     </div>
   </div>

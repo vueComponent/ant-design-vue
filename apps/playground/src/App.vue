@@ -1,15 +1,10 @@
 <template>
-  <button @click="toggleTheme" class="fixed top-2 right-2">toggle {{ appearance }}</button>
+  <the-header /> 
   <a-theme :appearance="appearance">
     <RouterView />
   </a-theme>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const appearance = ref('light')
-
-const toggleTheme = () => {
-  appearance.value = appearance.value === 'light' ? 'dark' : 'light'
-}
+import TheHeader from '@/components/TheHeader.vue';
+import { appearance } from '@/composables/appearance';
 </script>

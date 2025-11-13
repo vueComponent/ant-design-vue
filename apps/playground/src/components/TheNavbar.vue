@@ -1,27 +1,25 @@
 <template>
-  <div class="bg-base-100/90 text-base-content border-base-content/10 border-r">
-    <div class="flex min-h-16 w-full items-center p-2">
+  <div class="text-base-content border-base-content/10 border-r">
+    <div class="flex min-h-16 w-full p-2 pr-0 h-[calc(100vh-72px)] overflow-scroll">
       <div class="justify-start">
         <div class="group relative inline-block">
           <ul
             tabindex="0"
-            class="bg-base-100 z-[1] mt-3 flex w-52 origin-top scale-95 flex-col flex-wrap rounded-lg p-2 text-sm capitalize"
+            class="z-1 mt-3 flex w-54 origin-top scale-95 flex-col rounded-lg p-2 text-sm capitalize"
           >
-            <li v-for="item in items" :key="item.name">
+            <li v-for="item in items" :key="item.name" class="mb-2">
               <RouterLink
                 :aria-disabled="item.path === route.path"
                 :to="item.path"
-                @click.stop="$event.currentTarget.blur()"
-                class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 transition duration-200"
+                class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 transition duration-200 font-semibold text-lg"
               >
-                {{ item.name }}
+                {{ item.name }} 
               </RouterLink>
               <ul v-if="item.children">
                 <li v-for="child in item.children" :key="child.name">
                   <RouterLink
                     :to="child.path"
-                    @click.stop="$event.currentTarget.blur()"
-                    class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 text-xs opacity-80 transition duration-200"
+                    class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 text-xs opacity-80 transition duration-200 text-[16px]"
                   >
                     {{ child.name }}
                   </RouterLink>

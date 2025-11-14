@@ -11,7 +11,6 @@
               <RouterLink
                 :aria-disabled="item.path === route.path"
                 :to="item.path"
-                @click.stop="$event.currentTarget.blur()"
                 class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 transition duration-200"
               >
                 {{ item.name }}
@@ -20,7 +19,6 @@
                 <li v-for="child in item.children" :key="child.name">
                   <RouterLink
                     :to="child.path"
-                    @click.stop="$event.currentTarget.blur()"
                     class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 text-xs opacity-80 transition duration-200"
                   >
                     {{ child.name }}

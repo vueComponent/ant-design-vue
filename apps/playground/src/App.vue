@@ -1,5 +1,5 @@
 <template>
-  <button @click="toggleTheme" class="fixed top-2 right-2">toggle {{ appearance }}</button>
+  <button class="fixed top-2 right-2" @click="toggleTheme">toggle {{ appearance }}</button>
   <a-theme :appearance="appearance">
     <RouterView />
   </a-theme>

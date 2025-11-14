@@ -1,4 +1,4 @@
-import { PropType, ExtractPublicPropTypes } from 'vue'
+import type { PropType, ExtractPublicPropTypes } from 'vue'
 
 export const defaultColor = '#1677FF'
 // Theme Props

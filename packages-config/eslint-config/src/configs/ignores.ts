@@ -1,9 +1,6 @@
-// @ts-check
+import { defineConfig } from 'eslint/config';
 
-/**
- * @type {Pick<import('eslint').Linter.Config, 'ignores'>}
- */
-export default {
+export const ignores= defineConfig({
   ignores: [
     '**/node_modules/',
     '**/dist/',
@@ -17,4 +14,6 @@ export default {
     '.vscode/',
     '**/.tsup/',
   ],
-}
+  name: '@ant-design-vue/ignores'
+})
+

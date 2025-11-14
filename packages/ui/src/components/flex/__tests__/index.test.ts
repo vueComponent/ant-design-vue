@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { Flex } from '@ant-design-vue/ui'
 import { mount } from '@vue/test-utils'
 

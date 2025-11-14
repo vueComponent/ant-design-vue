@@ -1,4 +1,4 @@
-import { CSSProperties } from "vue"
+import type { CSSProperties } from "vue"
 
 type SizeType = 'small' | 'middle' | 'large' | undefined
 

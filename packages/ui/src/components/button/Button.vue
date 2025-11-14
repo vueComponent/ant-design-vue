@@ -2,9 +2,9 @@
   <button
     ref="buttonRef"
     :class="rootClass"
-    @click="handleClick"
     :disabled="disabled"
     :style="cssVars"
+    @click="handleClick"
   >
     <Wave :target="buttonRef" />
     <slot name="loading">

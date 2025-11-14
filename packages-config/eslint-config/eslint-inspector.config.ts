@@ -1,4 +1,4 @@
-import antdv from "./packages-config/eslint-config/dist/index.mjs"
+import antdv from './src/index'
 
 export default antdv({
   vue: true,

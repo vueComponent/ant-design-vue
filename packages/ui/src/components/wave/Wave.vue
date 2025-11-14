@@ -3,9 +3,9 @@
     <Transition
       appear
       name="ant-wave-motion"
-      appearFromClass="ant-wave-motion-appear"
-      appearActiveClass="ant-wave-motion-appear"
-      appearToClass="ant-wave-motion-appear ant-wave-motion-appear-active"
+      appear-from-class="ant-wave-motion-appear"
+      appear-active-class="ant-wave-motion-appear"
+      appear-to-class="ant-wave-motion-appear ant-wave-motion-appear-active"
     >
       <div
         v-if="show"
@@ -25,7 +25,6 @@ import {
   onMounted,
   ref,
   shallowRef,
-  Transition,
   watch,
 } from 'vue'
 import { getTargetWaveColor } from './util'

@@ -6,7 +6,8 @@
     "rootDir": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./assets/*"]
+      "~/*": ["./assets/*"],
+      "@ant-design-vue/ui": ["./src/index.ts"]
     }
   }
 }

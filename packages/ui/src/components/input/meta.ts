@@ -1,4 +1,4 @@
-import { PropType, ExtractPublicPropTypes } from 'vue'
+import type { PropType, ExtractPublicPropTypes } from 'vue'
 
 // Input Props
 export const inputProps = {

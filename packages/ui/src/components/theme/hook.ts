@@ -1,5 +1,6 @@
-import { inject, InjectionKey, provide } from 'vue'
-import { ThemeProps } from './meta'
+import type { InjectionKey } from 'vue'
+import { inject, provide } from 'vue'
+import type { ThemeProps } from './meta'
 
 const ThemeSymbol: InjectionKey<ThemeProps> = Symbol('theme')
 

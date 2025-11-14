@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue'
+import type { App, Plugin } from 'vue'
 import Button from './Button.vue'
 import './style/index.css'
 

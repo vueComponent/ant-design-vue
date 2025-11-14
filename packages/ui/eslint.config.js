@@ -1,4 +1,3 @@
-// @ts-check
+import antdv from '@ant-design-vue/eslint-config'
 
-export { default } from '@ant-design-vue/eslint-config/vue';
-
+export default antdv()

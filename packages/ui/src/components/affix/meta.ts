@@ -1,4 +1,4 @@
-import { CSSProperties } from 'vue'
+import type { CSSProperties } from 'vue'
 
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null

@@ -3,9 +3,11 @@
   "include": ["src/**/*.ts", "src/**/*.vue", "src/**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "compilerOptions": {
+    "rootDir": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "~/*": ["./assets/*"]
+      "~/*": ["./assets/*"],
+      "@ant-design-vue/ui": ["./src/index.ts"]
     }
   }
 }

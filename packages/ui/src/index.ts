@@ -1,5 +1,5 @@
 import './style/tailwind.css'
-import { App } from 'vue'
+import type { App } from 'vue'
 
 import * as components from './components'
 export * from './components'

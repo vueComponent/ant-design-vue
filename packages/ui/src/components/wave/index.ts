@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue'
+import type { App, Plugin } from 'vue'
 import Wave from './Wave.vue'
 import './style/index.css'
 

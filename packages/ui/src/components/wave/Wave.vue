@@ -3,9 +3,9 @@
     <Transition
       appear
       name="ant-wave-motion"
-      appearFromClass="ant-wave-motion-appear"
-      appearActiveClass="ant-wave-motion-appear"
-      appearToClass="ant-wave-motion-appear ant-wave-motion-appear-active"
+      appear-from-class="ant-wave-motion-appear"
+      appear-active-class="ant-wave-motion-appear"
+      appear-to-class="ant-wave-motion-appear ant-wave-motion-appear-active"
     >
       <div
         v-if="show"
@@ -18,16 +18,7 @@
 </template>
 <script setup lang="ts">
 import wrapperRaf from '@/utils/raf'
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  shallowRef,
-  Transition,
-  watch,
-} from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import { getTargetWaveColor } from './util'
 import isVisible from '@/utils/isVisible'
 

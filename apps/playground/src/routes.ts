@@ -1,6 +1,7 @@
-import { RouteRecordRaw, RouterView } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
+import { RouterView } from 'vue-router'
 import BasicLayout from './components/BasicLayout.vue'
-import { Fragment, h } from 'vue'
+import { h } from 'vue'
 
 // /pages/button/basic.vue
 const items = import.meta.glob('./pages/*/*.vue', { import: 'default', eager: true })

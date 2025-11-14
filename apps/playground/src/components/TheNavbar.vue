@@ -11,7 +11,7 @@
               <RouterLink
                 :aria-disabled="item.path === route.path"
                 :to="item.path"
-                class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 transition duration-200 font-semibold text-lg"
+                class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 transition duration-200"
               >
                 {{ item.name }} 
               </RouterLink>
@@ -19,7 +19,7 @@
                 <li v-for="child in item.children" :key="child.name">
                   <RouterLink
                     :to="child.path"
-                    class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 text-xs opacity-80 transition duration-200 text-[16px]"
+                    class="hover:bg-base-content/10 flex cursor-pointer flex-col rounded-lg px-3 py-2 text-xs opacity-80 transition duration-200"
                   >
                     {{ child.name }}
                   </RouterLink>

@@ -36,7 +36,7 @@ const genClsWrap = (prefixCls: string, props: FlexProps) => {
   const wrapCls: Record<PropertyKey, boolean> = {}
   flexWrapValues.forEach(cssKey => {
     // Handle both boolean attribute (wrap="wrap") and string value (wrap="wrap")
-    const isMatch = props.wrap === true && cssKey === 'wrap' || props.wrap === cssKey
+    const isMatch = (props.wrap === true && cssKey === 'wrap') || props.wrap === cssKey
     wrapCls[`${prefixCls}-wrap-${cssKey}`] = isMatch
   })
   return wrapCls

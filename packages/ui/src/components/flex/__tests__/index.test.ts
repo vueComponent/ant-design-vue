@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { Flex } from '@ant-design-vue/ui'
 import { mount } from '@vue/test-utils'
 
@@ -8,21 +8,21 @@ describe('Flex', () => {
       slots: {
         default: `<div>test</div>`,
       },
-    });
+    })
 
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
   it('Flex', () => {
     const wrapper = mount(Flex, {
       props: {
-        justify: 'center'
+        justify: 'center',
       },
       slots: {
-        default: `<div>test</div>`
+        default: `<div>test</div>`,
       },
-    });
-    
+    })
+
     const wrapper3 = mount(Flex, {
       props: {
         flex: '0 1 auto',
@@ -30,13 +30,13 @@ describe('Flex', () => {
       slots: {
         default: `<div>test</div>`,
       },
-    });
+    })
 
-    expect(wrapper.classes('ant-flex')).toBeTruthy();
-    expect(wrapper.find('.ant-flex-justify-center')).toBeTruthy();
-    expect(wrapper3.classes('ant-flex')).toBeTruthy();
-    expect(wrapper3.element.style.flex).toBe('0 1 auto');
-  });
+    expect(wrapper.classes('ant-flex')).toBeTruthy()
+    expect(wrapper.find('.ant-flex-justify-center')).toBeTruthy()
+    expect(wrapper3.classes('ant-flex')).toBeTruthy()
+    expect(wrapper3.element.style.flex).toBe('0 1 auto')
+  })
 
   describe('Props: gap', () => {
     it('support string', () => {
@@ -47,10 +47,10 @@ describe('Flex', () => {
         slots: {
           default: `<div>test</div>`,
         },
-      });
-      expect(wrapper.classes('ant-flex')).toBeTruthy();
-      expect(wrapper.element.style.gap).toBe('inherit');
-    });
+      })
+      expect(wrapper.classes('ant-flex')).toBeTruthy()
+      expect(wrapper.element.style.gap).toBe('inherit')
+    })
 
     it('support number', () => {
       const wrapper = mount(Flex, {
@@ -60,10 +60,10 @@ describe('Flex', () => {
         slots: {
           default: `<div>test</div>`,
         },
-      });
-      expect(wrapper.classes('ant-flex')).toBeTruthy();
-      expect(wrapper.element.style.gap).toBe('100px');
-    });
+      })
+      expect(wrapper.classes('ant-flex')).toBeTruthy()
+      expect(wrapper.element.style.gap).toBe('100px')
+    })
 
     it('support preset size', () => {
       const wrapper = mount(Flex, {
@@ -73,42 +73,42 @@ describe('Flex', () => {
         slots: {
           default: `<div>test</div>`,
         },
-      });
+      })
 
-      expect(wrapper.classes('ant-flex')).toBeTruthy();
-      expect(wrapper.classes('ant-flex-gap-small')).toBeTruthy();
-    });
-  });
+      expect(wrapper.classes('ant-flex')).toBeTruthy()
+      expect(wrapper.classes('ant-flex-gap-small')).toBeTruthy()
+    })
+  })
 
   it('Component work', () => {
     const wrapper = mount(Flex, {
       slots: {
-        default: `<div>test</div>`
+        default: `<div>test</div>`,
       },
-    });
+    })
 
     const wrapper2 = mount(Flex, {
       props: {
-        componentTag: 'span'
+        componentTag: 'span',
       },
       slots: {
-        default: `<div>test</div>`
+        default: `<div>test</div>`,
       },
-    });
+    })
 
-    expect(wrapper.find('.ant-flex').element.tagName).toBe('DIV');
-    expect(wrapper2.find('.ant-flex').element.tagName).toBe('SPAN');
-  });
+    expect(wrapper.find('.ant-flex').element.tagName).toBe('DIV')
+    expect(wrapper2.find('.ant-flex').element.tagName).toBe('SPAN')
+  })
 
   it('when vertical=true should stretch work', () => {
     const wrapper = mount(Flex, {
       props: {
-        vertical: true
+        vertical: true,
       },
       slots: {
-        default: `<div>test</div>`
+        default: `<div>test</div>`,
       },
-    });
+    })
 
     const wrapper2 = mount(Flex, {
       props: {
@@ -118,11 +118,11 @@ describe('Flex', () => {
       slots: {
         default: `<div>test</div>`,
       },
-    });
+    })
 
-    expect(wrapper.find('.ant-flex-align-stretch')).toBeTruthy();
-    expect(wrapper2.find('.ant-flex-align-center')).toBeTruthy();
-  });
+    expect(wrapper.find('.ant-flex-align-stretch')).toBeTruthy()
+    expect(wrapper2.find('.ant-flex-align-center')).toBeTruthy()
+  })
 
   it('wrap prop shouled support boolean', () => {
     const wrapper = mount(Flex, {
@@ -132,7 +132,7 @@ describe('Flex', () => {
       slots: {
         default: `<div>test</div>`,
       },
-    });
+    })
 
     const wrapper2 = mount(Flex, {
       props: {
@@ -141,9 +141,9 @@ describe('Flex', () => {
       slots: {
         default: `<div>test</div>`,
       },
-    });
+    })
 
-    expect(wrapper.classes('ant-flex-wrap-wrap')).toBeTruthy();
-    expect(wrapper2.classes('ant-flex-wrap-wrap')).toBeTruthy();
+    expect(wrapper.classes('ant-flex-wrap-wrap')).toBeTruthy()
+    expect(wrapper2.classes('ant-flex-wrap-wrap')).toBeTruthy()
   })
 })

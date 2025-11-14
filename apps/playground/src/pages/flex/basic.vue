@@ -13,7 +13,7 @@
         :style="{ ...baseStyle, background: `${index % 2 ? '#1677ff' : '#1677ffbf'}` }"
       />
     </a-flex>
-    <hr/>
+    <hr />
     <label>
       Select justify:
       <select v-model="justify">
@@ -32,7 +32,7 @@
       <a-button variant="solid">Primary</a-button>
       <a-button variant="solid">Primary</a-button>
     </a-flex>
-    <hr/>
+    <hr />
     <a-flex gap="middle" vertical>
       <label>
         Select gap size:
@@ -47,10 +47,8 @@
         <a-button variant="link">Link</a-button>
       </a-flex>
     </a-flex>
-    <hr/>
-    <label>
-      Auto wrap:
-    </label>
+    <hr />
+    <label>Auto wrap:</label>
     <a-flex wrap="wrap" gap="small">
       <a-button v-for="item in new Array(24)" :key="item" variant="solid">Button</a-button>
     </a-flex>
@@ -58,36 +56,36 @@
 </template>
 
 <script setup lang="ts">
-  import type { CSSProperties } from 'vue';
-  import { ref, reactive } from 'vue';
+import type { CSSProperties } from 'vue'
+import { ref, reactive } from 'vue'
 
-  const baseStyle: CSSProperties = {
-    width: '25%',
-    height: '54px',
-  };
-  const boxStyle: CSSProperties = {
-    width: '100%',
-    height: '120px',
-    borderRadius: '6px',
-    border: '1px solid #40a9ff',
-  };
+const baseStyle: CSSProperties = {
+  width: '25%',
+  height: '54px',
+}
+const boxStyle: CSSProperties = {
+  width: '100%',
+  height: '120px',
+  borderRadius: '6px',
+  border: '1px solid #40a9ff',
+}
 
-  const axisOptions = reactive(['horizontal', 'vertical']);
-  const axis = ref(axisOptions[0]);
+const axisOptions = reactive(['horizontal', 'vertical'])
+const axis = ref(axisOptions[0])
 
-  const justifyOptions = reactive([
+const justifyOptions = reactive([
   'flex-start',
   'center',
   'flex-end',
   'space-between',
   'space-around',
   'space-evenly',
-  ]);
-  const justify = ref(justifyOptions[0]);
+])
+const justify = ref(justifyOptions[0])
 
-  const alignOptions = reactive(['flex-start', 'center', 'flex-end']);
-  const align = ref(alignOptions[0]);
+const alignOptions = reactive(['flex-start', 'center', 'flex-end'])
+const align = ref(alignOptions[0])
 
-  const gapSizeOptions = reactive(['small', 'middle', 'large']);
-  const gapSize = ref(gapSizeOptions[0]);
+const gapSizeOptions = reactive(['small', 'middle', 'large'])
+const gapSize = ref(gapSizeOptions[0])
 </script>

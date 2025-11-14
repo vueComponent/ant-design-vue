@@ -1,4 +1,4 @@
-import type { InjectionKey} from 'vue';
+import type { InjectionKey } from 'vue'
 import { inject, provide } from 'vue'
 import type { ThemeProps } from './meta'
 

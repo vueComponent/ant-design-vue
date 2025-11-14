@@ -1,3 +1,3 @@
 // @ts-check
 
-export { default } from "@ant-design-vue/prettier-config/tailwind";
+export { default } from '@ant-design-vue/prettier-config/tailwind'

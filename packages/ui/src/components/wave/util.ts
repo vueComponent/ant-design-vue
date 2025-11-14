@@ -1,10 +1,9 @@
 export function isNotGrey(color: string) {
-   
-  const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\d.]*)?\)/);
+  const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\d.]*)?\)/)
   if (match && match[1] && match[2] && match[3]) {
-    return !(match[1] === match[2] && match[2] === match[3]);
+    return !(match[1] === match[2] && match[2] === match[3])
   }
-  return true;
+  return true
 }
 
 export function isValidWaveColor(color: string) {
@@ -17,19 +16,19 @@ export function isValidWaveColor(color: string) {
     isNotGrey(color) &&
     !/rgba\((?:\d*, ){3}0\)/.test(color) && // any transparent rgba color
     color !== 'transparent'
-  );
+  )
 }
 
 export function getTargetWaveColor(node: HTMLElement) {
-  const { borderTopColor, borderColor, backgroundColor } = getComputedStyle(node);
+  const { borderTopColor, borderColor, backgroundColor } = getComputedStyle(node)
   if (isValidWaveColor(borderTopColor)) {
-    return borderTopColor;
+    return borderTopColor
   }
   if (isValidWaveColor(borderColor)) {
-    return borderColor;
+    return borderColor
   }
   if (isValidWaveColor(backgroundColor)) {
-    return backgroundColor;
+    return backgroundColor
   }
-  return null;
+  return null
 }

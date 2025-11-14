@@ -1,4 +1,4 @@
-import type { RouteRecordRaw} from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router'
 import { RouterView } from 'vue-router'
 import BasicLayout from './components/BasicLayout.vue'
 import { h } from 'vue'

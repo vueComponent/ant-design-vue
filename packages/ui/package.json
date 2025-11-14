@@ -21,6 +21,7 @@
     "build:dev": "vite build --mode development",
     "dev": "vite build --watch --mode development",
     "lint": "eslint . --fix",
+    "format": "prettier --write .",
     "tsc": "tsc --noEmit",
     "tsg": "tsc --declaration --declarationMap --emitDeclarationOnly --noEmit false --outDir dist/types",
     "test": "vitest"

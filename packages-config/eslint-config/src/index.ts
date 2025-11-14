@@ -11,10 +11,10 @@ import {
   typescript,
   vue,
 } from "./configs"
-import { Config } from './types';
+import type { Config } from './types';
 import { isPackageExists } from "local-pkg";
-import { Linter } from 'eslint';
-import { ConfigNames } from './typegen';
+import type { Linter } from 'eslint';
+import type { ConfigNames } from './typegen';
 
 interface Options {
   typescript?: boolean,

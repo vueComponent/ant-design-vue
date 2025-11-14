@@ -2,7 +2,6 @@ import type { App, Plugin } from 'vue'
 import Flex from './Flex.vue'
 import './style/index.css'
 
-
 export { default as Flex } from './Flex.vue'
 export * from './meta'
 

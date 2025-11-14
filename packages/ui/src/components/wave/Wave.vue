@@ -18,15 +18,7 @@
 </template>
 <script setup lang="ts">
 import wrapperRaf from '@/utils/raf'
-import {
-  computed,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  shallowRef,
-  watch,
-} from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import { getTargetWaveColor } from './util'
 import isVisible from '@/utils/isVisible'
 

@@ -207,7 +207,7 @@ export default defineComponent({
     // ========================= Wrap Value =========================
     const convert2LabelValues = (draftValues: DraftValueType) => {
       // Convert to array
-      const valueList = toArray(draftValues);
+      const valueList = draftValues !== '' ? toArray(draftValues) : [];
 
       // Convert to labelInValue type
       return valueList.map(val => {

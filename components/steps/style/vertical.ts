@@ -27,6 +27,7 @@ const genStepsVerticalStyle: GenerateStyle<StepsToken, CSSObject> = token => {
         },
         [`${componentCls}-item-title`]: {
           lineHeight: `${stepsIconSize}px`,
+          paddingInlineEnd: 0,
         },
         [`${componentCls}-item-description`]: {
           paddingBottom: token.paddingSM,

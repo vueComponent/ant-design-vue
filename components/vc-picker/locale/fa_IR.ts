@@ -27,6 +27,12 @@ const locale: Locale = {
   nextDecade: 'دهه بعد',
   previousCentury: 'قرن قبل',
   nextCentury: 'قرن بعد',
+  shortMonths: [
+    'فروردین', 'اردیبهشت', 'خرداد', 'تیر',
+    'مرداد', 'شهریور', 'مهر', 'آبان',
+    'آذر', 'دی', 'بهمن', 'اسفند'
+  ],
+  shortWeekDays: ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'],
 };
 
 export default locale;

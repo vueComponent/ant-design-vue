@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes, VNode } from 'vue';
 import { cloneVNode, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
@@ -16,11 +16,13 @@ export interface Route {
   children?: Omit<Route, 'children'>[];
 }
 
+export type SeparatorGeneratorFunc = (info: { prevItem: Route | VNode | null; index: number }) => string;
+
 export const breadcrumbProps = () => ({
   prefixCls: String,
   routes: { type: Array as PropType<Route[]> },
   params: PropTypes.any,
-  separator: PropTypes.any,
+  separator: [String, Function] as PropType<string | SeparatorGeneratorFunc>,
   itemRender: {
     type: Function as PropType<
       (opt: { route: Route; params: unknown; routes: Route[]; paths: string[] }) => VueNode
@@ -90,7 +92,7 @@ export default defineComponent({
       itemRender = defaultItemRender,
     }: any) => {
       const paths = [];
-      return routes.map((route: Route) => {
+      return routes.map((route: Route, index: number) => {
         const path = getPath(route.path, params);
 
         if (path) {
@@ -114,7 +116,9 @@ export default defineComponent({
             ></Menu>
           );
         }
-        const itemProps: BreadcrumbItemProps = { separator };
+        const prevItem = index > 0 ? routes[index - 1] : null;
+        const itemSeparator = separator(prevItem, index);
+        const itemProps: BreadcrumbItemProps = { separator: itemSeparator };
         if (overlay) {
           itemProps.overlay = overlay;
         }
@@ -131,7 +135,18 @@ export default defineComponent({
       const { routes, params = {} } = props;
 
       const children = flattenChildren(getPropsSlot(slots, props));
-      const separator = getPropsSlot(slots, props, 'separator') ?? '/';
+      const separatorProp = props.separator;
+      const isSeparatorGenerator = typeof separatorProp === 'function';
+      const separator = isSeparatorGenerator
+        ? separatorProp
+        : (getPropsSlot(slots, props, 'separator') ?? '/');
+
+      const getSeparator = (prevItem: Route | VNode | null, index: number) => {
+        if (isSeparatorGenerator) {
+          return (separator as SeparatorGeneratorFunc)({ prevItem, index });
+        }
+        return separator;
+      };
 
       const itemRender = props.itemRender || slots.itemRender || defaultItemRender;
       if (routes && routes.length > 0) {
@@ -139,7 +154,7 @@ export default defineComponent({
         crumbs = genForRoutes({
           routes,
           params,
-          separator,
+          separator: getSeparator,
           itemRender,
         });
       } else if (children.length) {
@@ -150,7 +165,9 @@ export default defineComponent({
             'Breadcrumb',
             "Only accepts Breadcrumb.Item and Breadcrumb.Separator as it's children",
           );
-          return cloneVNode(element, { separator, key: index });
+          const prevItem = index > 0 ? children[index - 1] : null;
+          const itemSeparator = getSeparator(prevItem, index);
+          return cloneVNode(element, { separator: itemSeparator, key: index });
         });
       }
 

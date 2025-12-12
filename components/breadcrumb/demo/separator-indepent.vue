@@ -28,6 +28,8 @@ You can also pass a generator function that receives the previous item and index
     <a-breadcrumb-item>An Application</a-breadcrumb-item>
   </a-breadcrumb>
 
+  <a-divider />
+
   <p style="margin: 16px 0">Using a separator generator function:</p>
 
   <a-breadcrumb :separator="separatorGenerator">

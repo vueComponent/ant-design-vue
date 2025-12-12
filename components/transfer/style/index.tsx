@@ -29,7 +29,7 @@ const genTransferCustomizeStyle: GenerateStyle<TransferToken> = (
     [`${componentCls}-customize-list`]: {
       [`${componentCls}-list`]: {
         flex: '1 1 50%',
-        width: 'auto',
+        width: '100%',
         height: 'auto',
         minHeight: listHeight,
       },

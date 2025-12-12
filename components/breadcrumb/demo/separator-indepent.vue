@@ -18,6 +18,8 @@ You can also pass a generator function that receives the previous item and index
 </docs>
 
 <template>
+  <p style="margin-bottom: 16px">Using Breadcrumb.Separator component for custom separators:</p>
+
   <a-breadcrumb separator="">
     <a-breadcrumb-item>Location</a-breadcrumb-item>
     <a-breadcrumb-separator>:</a-breadcrumb-separator>

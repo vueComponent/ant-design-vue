@@ -268,8 +268,8 @@ const ImageInternal = defineComponent({
                 : { onLoad, onError, src: imgSrc })}
               ref={img}
             />
-
-            {status.value === 'loading' && (
+            {/* Loading or Error Placeholder */}
+            {(status.value === 'loading' || status.value === 'error') && (
               <div aria-hidden="true" class={`${prefixCls}-placeholder`}>
                 {placeholder || (slots.placeholder && slots.placeholder())}
               </div>

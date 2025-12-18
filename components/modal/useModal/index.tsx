@@ -65,7 +65,7 @@ function useModal(): readonly [
   // =========================== Hook ===========================
   const getConfirmFunc = (withFunc: (config: ModalFuncProps) => ModalFuncProps) =>
     function hookConfirm(config: Ref<ModalFuncProps> | ModalFuncProps) {
-      uuid += 1;
+      const modalId = uuid++;
       const open = shallowRef(true);
       const modalRef = shallowRef<HookModalRef>(null);
       const configRef = shallowRef(unref(config));
@@ -91,7 +91,7 @@ function useModal(): readonly [
       let closeFunc: Function | undefined;
       const modal = () => (
         <HookModal
-          key={`modal-${uuid}`}
+          key={`modal-${modalId}`}
           config={withFunc(configRef.value)}
           ref={modalRef}
           open={open.value}

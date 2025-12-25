@@ -209,9 +209,14 @@ const SelectSelector = defineComponent<SelectorProps>({
 
     const handleInput = (e: Event) => {
       const composing = (e.target as any).composing;
-      targetValue.value = (e.target as any).value;
       if (!composing) {
+        // Process input first (may split tokenSeparators and clear searchValue)
         props.onInputChange(e);
+        // Sync with reactive inputValue to handle token splitting (searchValue becomes '')
+        targetValue.value = inputValue.value;
+      } else {
+        // During composition, sync directly from DOM
+        targetValue.value = (e.target as any).value;
       }
     };
 

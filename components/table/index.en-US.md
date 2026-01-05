@@ -105,7 +105,7 @@ Specify `dataSource` of Table as an array of data.
 | showHeader | Whether to show table header | boolean | `true` |  |
 | showSorterTooltip | The header show next sorter direction tooltip. It will be set as the property of Tooltip if its type is object | boolean \| [Tooltip props](/components/tooltip/#api) | true | 3.0 |
 | size | Size of table | `middle` \| `small` \| `large` | `large` |  |
-| sortDirections | Supported sort way, could be `ascend`, `descend` | Array | \[`ascend`, `descend`] | 3.0 |
+| sortDirections | Supported sort way, could be `ascend`, `descend`. Sorts are cycled through in the order of the array when the sort button is clicked. This applies to all columns when set on the table props. You can disable the sort reset to default state by setting it like `['ascend', 'descend', 'ascend']` | Array | \[`ascend`, `descend`] | 3.0 |
 | sticky | Set sticky header and scroll bar | boolean \| `{offsetHeader?: number, offsetScroll?: number, getContainer?: () => HTMLElement}` | - | 3.0 |
 | summary | Summary content | v-slot:summary | - | 3.0 |
 | tableLayout | [table-layout](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout) attribute of table element | - \| 'auto' \| 'fixed' | -<hr />`fixed` when header/columns are fixed, or using `column.ellipsis` | 1.5.0 |

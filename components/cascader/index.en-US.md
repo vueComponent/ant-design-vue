@@ -52,6 +52,7 @@ Cascade selection box.
 | suffixIcon | The custom suffix icon | string \| VNode \| slot | - |  |
 | showCheckedStrategy | The way show selected item in box. ** `SHOW_CHILD`: ** just show child treeNode. **`Cascader.SHOW_PARENT`:** just show parent treeNode (when all child treeNode under the parent treeNode are checked) | `Cascader.SHOW_PARENT` \| `Cascader.SHOW_CHILD` | `Cascader.SHOW_PARENT` | 3.3.0 |
 | tagRender | Customize tag render when `multiple` | slot | - | 3.0 |
+| dropdownRender | Customize dropdown content | slot | - | 4.2.7 |
 | value(v-model) | selected value | string\[] \| number\[] | - |  |
 
 ### showSearch

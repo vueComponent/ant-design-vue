@@ -334,6 +334,7 @@ const Cascader = defineComponent({
             showArrow={formItemInputContext.hasFeedback || props.showArrow}
             onChange={handleChange}
             onBlur={handleBlur}
+            dropdownRender={props.dropdownRender || slots.dropdownRender}
             v-slots={slots}
             ref={selectRef}
           />,

@@ -54,6 +54,7 @@ coverDark: https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*5-ArSLl5UBsAAA
 | size | 输入框大小 | `large` \| `default` \| `small` | `default` |  |
 | suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |  |
 | tagRender | 自定义 tag 内容，多选时生效 | slot | - | 3.0 |
+| dropdownRender | 自定义下拉框内容 | slot | - | 4.2.7 |
 | value(v-model) | 指定选中项 | string\[] \| number\[] | - |  |
 
 ### showSearch

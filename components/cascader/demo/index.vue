@@ -13,6 +13,7 @@
     <suffix />
     <multipleVue />
     <tagRender />
+    <dropdownRender />
   </demo-sort>
 </template>
 <script>
@@ -29,6 +30,7 @@ import FieldsName from './fields-name.vue';
 import Suffix from './suffix.vue';
 import multipleVue from './multiple.vue';
 import tagRender from './tagRender.vue';
+import dropdownRender from './dropdownRender.vue';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -50,6 +52,7 @@ export default defineComponent({
     Suffix,
     multipleVue,
     tagRender,
+    dropdownRender,
   },
 });
 </script>

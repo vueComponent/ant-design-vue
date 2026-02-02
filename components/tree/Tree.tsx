@@ -6,7 +6,7 @@ import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { DataNode, EventDataNode, FieldNames, Key, ScrollTo } from '../vc-tree/interface';
-import type { TreeNodeProps } from '../vc-tree/props';
+import type { TreeNodeProps, DraggableFn } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../config-provider/hooks/useConfigInject';
 import type { SwitcherIconProps } from './utils/iconUtil';
@@ -119,7 +119,7 @@ export const treeProps = () => {
     selectable: booleanType(),
 
     loadedKeys: arrayType<Key[]>(),
-    draggable: booleanType(),
+    draggable: someType<boolean | DraggableFn>([Boolean, Function]),
     showIcon: booleanType(),
     icon: functionType<(nodeProps: AntdTreeNodeAttribute) => any>(),
     switcherIcon: PropTypes.any,
@@ -217,12 +217,14 @@ export default defineComponent({
         blockNode,
         checkable,
         selectable,
+        draggable,
         fieldNames = props.replaceFields,
         motion = props.openAnimation,
         itemHeight = 28,
         onDoubleclick,
         onDblclick,
       } = props as TreeProps;
+
       const newProps = {
         ...attrs,
         ...omit(props, [
@@ -233,6 +235,7 @@ export default defineComponent({
         ]),
         showLine: Boolean(showLine),
         dropIndicatorRender,
+        draggable,
         fieldNames,
         icon,
         itemHeight,

@@ -205,7 +205,7 @@
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^8.0.4",
     "markdown-it-container": "^3.0.0",
-    "markdown-it-emoji": "^2.0.0",
+    "markdown-it-emoji": "^3.0.0",
     "markdown-it-table-of-contents": "^0.5.2",
     "marked": "0.3.18",
     "merge2": "^1.2.1",

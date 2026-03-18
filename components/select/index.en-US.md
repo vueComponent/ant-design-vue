@@ -46,7 +46,7 @@ Select component to select value from options.
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: vNodes, originLabel: any}`, originLabel (3.1) maintains the original type. If the node is constructed through a-select-option children, the value is a function (the default slot of a-select-option) | boolean | false |  |
 | listHeight | Config popup height | number | 256 |  |
 | loading | indicate loading state | boolean | false |  |
-| maxTagCount | Max tag count to show | number | - |  |
+| maxTagCount | Max tag count to show. `responsive` will cost render performance | number \| `responsive` | - |  |
 | maxTagPlaceholder | Placeholder for not showing tags | slot \| function(omittedValues) | - |  |
 | maxTagTextLength | Max text length to show | number | - |  |
 | menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - |  |

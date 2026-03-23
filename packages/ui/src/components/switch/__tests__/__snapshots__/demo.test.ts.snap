@@ -11,18 +11,18 @@ exports[`Switch demos > demo: Basic 1`] = `
 `;
 
 exports[`Switch demos > demo: Disabled 1`] = `
-"<div style="display: flex; flex-direction: column; gap: 16px;"><button type="button" role="switch" aria-checked="false" class="ant-switch ant-switch-disabled" disabled="">
+"<div style="display: flex; flex-direction: column; gap: 16px;"><button type="button" role="switch" aria-checked="false" aria-disabled="true" class="ant-switch ant-switch-disabled" disabled="">
     <div class="ant-switch-handle">
       <!--v-if-->
     </div><span class="ant-switch-inner"><span class="ant-switch-inner-unchecked"></span></span>
-  </button><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked ant-switch-disabled" disabled="">
+  </button><button type="button" role="switch" aria-checked="true" aria-disabled="true" class="ant-switch ant-switch-checked ant-switch-disabled" disabled="">
     <div class="ant-switch-handle">
       <!--v-if-->
     </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span></span>
   </button><button class="ant-btn ant-btn-solid ant-btn-sm" type="button">
     <!--v-if-->
     <!--v-if--><span class="ant-btn-content">Toggle disabled</span>
-  </button><button type="button" role="switch" aria-checked="false" class="ant-switch ant-switch-disabled" disabled="">
+  </button><button type="button" role="switch" aria-checked="false" aria-disabled="true" class="ant-switch ant-switch-disabled" disabled="">
     <div class="ant-switch-handle">
       <!--v-if-->
     </div><span class="ant-switch-inner"><span class="ant-switch-inner-unchecked"></span></span>
@@ -30,11 +30,11 @@ exports[`Switch demos > demo: Disabled 1`] = `
 `;
 
 exports[`Switch demos > demo: Loading 1`] = `
-"<div style="display: flex; flex-direction: column; gap: 16px;"><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked ant-switch-loading" disabled="">
+"<div style="display: flex; flex-direction: column; gap: 16px;"><button type="button" role="switch" aria-checked="true" aria-disabled="true" class="ant-switch ant-switch-checked ant-switch-loading" disabled="">
     <div class="ant-switch-handle"><span role="img" aria-label="loading" class="anticon anticon-loading ant-switch-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span></span>
-  </button><button type="button" role="switch" aria-checked="false" class="ant-switch ant-switch-loading" disabled="">
+  </button><button type="button" role="switch" aria-checked="false" aria-disabled="true" class="ant-switch ant-switch-loading" disabled="">
     <div class="ant-switch-handle"><span role="img" aria-label="loading" class="anticon anticon-loading ant-switch-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></div><span class="ant-switch-inner"><span class="ant-switch-inner-unchecked"></span></span>
-  </button><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked ant-switch-loading ant-switch-small" disabled="">
+  </button><button type="button" role="switch" aria-checked="true" aria-disabled="true" class="ant-switch ant-switch-checked ant-switch-loading ant-switch-small" disabled="">
     <div class="ant-switch-handle"><span role="img" aria-label="loading" class="anticon anticon-loading ant-switch-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span></span>
   </button></div>"
 `;

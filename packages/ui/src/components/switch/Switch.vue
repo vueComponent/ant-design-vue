@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
 import type { SwitchProps, SwitchEmits, SwitchSlots } from './types'
 import { switchDefaultProps } from './types'
@@ -11,16 +11,22 @@ defineSlots<SwitchSlots>()
 
 const buttonRef = ref<HTMLButtonElement | null>(null)
 
-// Internal state for uncontrolled mode
-const internalChecked = ref(props.checked ?? props.unCheckedValue)
+// Internal state shared by controlled and uncontrolled mode
+const internalChecked = ref<boolean | string | number>(
+  props.checked !== undefined ? props.checked : props.unCheckedValue!,
+)
 
-const mergedChecked = computed(() => {
-  return props.checked ?? internalChecked.value
-})
+// In controlled mode, keep internal state in sync with the prop
+watch(
+  () => props.checked,
+  (val) => {
+    if (val !== undefined) {
+      internalChecked.value = val
+    }
+  },
+)
 
-const isChecked = computed(() => {
-  return mergedChecked.value === props.checkedValue
-})
+const isChecked = computed(() => internalChecked.value === props.checkedValue)
 
 const classes = computed(() => ({
   'ant-switch': true,
@@ -41,9 +47,19 @@ function toggle(event: MouseEvent) {
 }
 
 function handleKeydown(event: KeyboardEvent) {
-  if (event.key === 'Enter' || event.key === ' ') {
+  if (props.disabled || props.loading) return
+  if (event.key === 'ArrowRight' && !isChecked.value) {
     event.preventDefault()
-    toggle(event as unknown as MouseEvent)
+    const newValue = props.checkedValue!
+    internalChecked.value = newValue
+    emit('update:checked', newValue)
+    emit('change', newValue, event)
+  } else if (event.key === 'ArrowLeft' && isChecked.value) {
+    event.preventDefault()
+    const newValue = props.unCheckedValue!
+    internalChecked.value = newValue
+    emit('update:checked', newValue)
+    emit('change', newValue, event)
   }
 }
 
@@ -71,8 +87,10 @@ defineExpose({ focus, blur })
     type="button"
     role="switch"
     :aria-checked="isChecked"
+    :aria-disabled="(disabled || loading) || undefined"
     :class="classes"
     :disabled="disabled || loading"
+    :tabindex="tabindex"
     @click="toggle"
     @keydown="handleKeydown"
   >

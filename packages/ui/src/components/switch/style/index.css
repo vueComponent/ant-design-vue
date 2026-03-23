@@ -96,11 +96,11 @@
 }
 
 :where(.ant-switch-checked) :where(.ant-switch-loading-icon) {
-  color: var(--color-accent, #1677ff);
+  color: #fff;
 }
 
 :where(.ant-switch):not(.ant-switch-checked) :where(.ant-switch-loading-icon) {
-  color: rgba(0, 0, 0, 0.65);
+  color: var(--color-neutral-secondary, rgba(0, 0, 0, 0.65));
 }
 
 :where(.ant-switch-loading-svg) {

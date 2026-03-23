@@ -17,6 +17,8 @@ export interface SwitchProps {
   autofocus?: boolean
   /** Element id */
   id?: string
+  /** Tab order of the switch */
+  tabindex?: number
 }
 
 export const switchDefaultProps = {

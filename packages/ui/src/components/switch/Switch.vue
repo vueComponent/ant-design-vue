@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
 import type { SwitchProps, SwitchEmits, SwitchSlots } from './types'
 import { switchDefaultProps } from './types'
@@ -8,25 +8,33 @@ defineOptions({ name: 'ASwitch' })
 const props = withDefaults(defineProps<SwitchProps>(), switchDefaultProps)
 const emit = defineEmits<SwitchEmits>()
 defineSlots<SwitchSlots>()
+const instance = getCurrentInstance()
 
 const buttonRef = ref<HTMLButtonElement | null>(null)
+const isControlled = computed(() => {
+  return Object.prototype.hasOwnProperty.call(instance?.vnode.props ?? {}, 'checked')
+})
 
-// Internal state shared by controlled and uncontrolled mode
+// Internal state for uncontrolled mode
 const internalChecked = ref<boolean | string | number>(
-  props.checked !== undefined ? props.checked : props.unCheckedValue!,
+  isControlled.value ? props.checked! : props.unCheckedValue!,
 )
 
 // In controlled mode, keep internal state in sync with the prop
 watch(
   () => props.checked,
   (val) => {
-    if (val !== undefined) {
+    if (isControlled.value) {
       internalChecked.value = val
     }
   },
 )
 
-const isChecked = computed(() => internalChecked.value === props.checkedValue)
+const mergedChecked = computed(() => {
+  return isControlled.value ? props.checked : internalChecked.value
+})
+
+const isChecked = computed(() => mergedChecked.value === props.checkedValue)
 
 const classes = computed(() => ({
   'ant-switch': true,
@@ -40,7 +48,9 @@ function toggle(event: MouseEvent) {
   if (props.disabled || props.loading) return
 
   const newValue = isChecked.value ? props.unCheckedValue! : props.checkedValue!
-  internalChecked.value = newValue
+  if (!isControlled.value) {
+    internalChecked.value = newValue
+  }
   emit('update:checked', newValue)
   emit('change', newValue, event)
   emit('click', newValue, event)
@@ -51,13 +61,17 @@ function handleKeydown(event: KeyboardEvent) {
   if (event.key === 'ArrowRight' && !isChecked.value) {
     event.preventDefault()
     const newValue = props.checkedValue!
-    internalChecked.value = newValue
+    if (!isControlled.value) {
+      internalChecked.value = newValue
+    }
     emit('update:checked', newValue)
     emit('change', newValue, event)
   } else if (event.key === 'ArrowLeft' && isChecked.value) {
     event.preventDefault()
     const newValue = props.unCheckedValue!
-    internalChecked.value = newValue
+    if (!isControlled.value) {
+      internalChecked.value = newValue
+    }
     emit('update:checked', newValue)
     emit('change', newValue, event)
   }

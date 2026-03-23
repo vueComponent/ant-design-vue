@@ -41,6 +41,16 @@ describe('Switch', () => {
       const wrapper = mount(Switch, { props: { checked: false } })
       expect(wrapper.classes()).not.toContain('ant-switch-checked')
     })
+
+    it('does not change visual state in controlled mode until checked prop updates', async () => {
+      const wrapper = mount(Switch, { props: { checked: false } })
+
+      await wrapper.trigger('click')
+
+      expect(wrapper.emitted('update:checked')![0]).toEqual([true])
+      expect(wrapper.classes()).not.toContain('ant-switch-checked')
+      expect(wrapper.attributes('aria-checked')).toBe('false')
+    })
   })
 
   describe('custom values', () => {

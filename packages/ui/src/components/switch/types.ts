@@ -18,7 +18,7 @@ export interface SwitchProps {
   /** Element id */
   id?: string
   /** Tab order of the switch */
-  tabindex?: number
+  tabindex?: string | number
 }
 
 export const switchDefaultProps = {
@@ -30,8 +30,12 @@ export const switchDefaultProps = {
 
 export interface SwitchEmits {
   (e: 'update:checked', value: boolean | string | number): void
-  (e: 'change', checked: boolean | string | number, event: Event): void
+  (e: 'change', checked: boolean | string | number, event: MouseEvent | KeyboardEvent): void
   (e: 'click', checked: boolean | string | number, event: MouseEvent): void
+  (e: 'keydown', event: KeyboardEvent): void
+  (e: 'mouseup', event: MouseEvent): void
+  (e: 'blur', event: FocusEvent): void
+  (e: 'focus', event: FocusEvent): void
 }
 
 export interface SwitchSlots {

@@ -39,6 +39,7 @@ const classes = computed(() => ({
 function toggle(event: MouseEvent) {
   if (props.disabled || props.loading) return
 
+  focus()
   const newValue = isChecked.value ? props.unCheckedValue! : props.checkedValue!
   internalChecked.value = newValue
   emit('update:checked', newValue)
@@ -61,6 +62,20 @@ function handleKeydown(event: KeyboardEvent) {
     emit('update:checked', newValue)
     emit('change', newValue, event)
   }
+  emit('keydown', event)
+}
+
+function handleMouseup(event: MouseEvent) {
+  blur()
+  emit('mouseup', event)
+}
+
+function handleFocus(event: FocusEvent) {
+  emit('focus', event)
+}
+
+function handleBlur(event: FocusEvent) {
+  emit('blur', event)
 }
 
 function focus() {
@@ -93,6 +108,9 @@ defineExpose({ focus, blur })
     :tabindex="tabindex"
     @click="toggle"
     @keydown="handleKeydown"
+    @mouseup="handleMouseup"
+    @focus="handleFocus"
+    @blur="handleBlur"
   >
     <div class="ant-switch-handle">
       <LoadingOutlined v-if="loading" class="ant-switch-loading-icon" />

@@ -291,14 +291,59 @@ describe('Switch', () => {
   })
 
   describe('tabindex prop', () => {
-    it('passes tabindex to button element', () => {
+    it('passes numeric tabindex to button element', () => {
       const wrapper = mount(Switch, { props: { tabindex: 3 } })
       expect(wrapper.attributes('tabindex')).toBe('3')
+    })
+
+    it('passes string tabindex to button element', () => {
+      const wrapper = mount(Switch, { props: { tabindex: '2' } })
+      expect(wrapper.attributes('tabindex')).toBe('2')
     })
 
     it('passes tabindex=-1 to exclude from tab order', () => {
       const wrapper = mount(Switch, { props: { tabindex: -1 } })
       expect(wrapper.attributes('tabindex')).toBe('-1')
+    })
+  })
+
+  describe('focus/blur/mouseup events', () => {
+    it('emits focus event', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('focus')
+      expect(wrapper.emitted('focus')).toBeTruthy()
+    })
+
+    it('emits blur event', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('blur')
+      expect(wrapper.emitted('blur')).toBeTruthy()
+    })
+
+    it('emits mouseup event', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('mouseup')
+      expect(wrapper.emitted('mouseup')).toBeTruthy()
+    })
+  })
+
+  describe('keydown event', () => {
+    it('emits keydown event on ArrowRight', async () => {
+      const wrapper = mount(Switch, { props: { checked: false } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('keydown')).toBeTruthy()
+    })
+
+    it('emits keydown event on other keys', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('keydown', { key: 'Tab' })
+      expect(wrapper.emitted('keydown')).toBeTruthy()
+    })
+
+    it('does not emit keydown when disabled', async () => {
+      const wrapper = mount(Switch, { props: { disabled: true } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('keydown')).toBeUndefined()
     })
   })
 

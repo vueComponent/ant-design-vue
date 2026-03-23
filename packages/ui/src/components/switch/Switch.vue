@@ -39,7 +39,6 @@ const classes = computed(() => ({
 function toggle(event: MouseEvent) {
   if (props.disabled || props.loading) return
 
-  focus()
   const newValue = isChecked.value ? props.unCheckedValue! : props.checkedValue!
   internalChecked.value = newValue
   emit('update:checked', newValue)

@@ -96,7 +96,7 @@
 }
 
 :where(.ant-switch-checked) :where(.ant-switch-loading-icon) {
-  color: #fff;
+  color: var(--color-accent-content, #fff);
 }
 
 :where(.ant-switch):not(.ant-switch-checked) :where(.ant-switch-loading-icon) {

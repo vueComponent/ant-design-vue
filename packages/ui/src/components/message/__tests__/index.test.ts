@@ -106,6 +106,21 @@ describe('message', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
+  it('calls onClick when message is clicked', async () => {
+    const onClick = vi.fn()
+    message.open({ content: 'Clickable', duration: 0, onClick })
+
+    await Promise.resolve()
+    const textNode = Array.from(document.querySelectorAll('.ant-message-text')).find(
+      (node) => node.textContent?.trim() === 'Clickable',
+    )
+    const notice = textNode?.closest('.ant-message-notice') as HTMLElement | null
+    expect(notice).not.toBeNull()
+
+    notice?.click()
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
   it('resolves then after actual close', async () => {
     const onResolved = vi.fn()
     const close = message.open({ content: 'Thenable', duration: 0 })

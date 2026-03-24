@@ -133,10 +133,10 @@ defineExpose({ focus, blur })
       </span>
     </div>
     <span class="ant-switch-inner">
-      <span v-if="isChecked" class="ant-switch-inner-checked">
+      <span class="ant-switch-inner-checked">
         <slot name="checkedChildren" />
       </span>
-      <span v-else class="ant-switch-inner-unchecked">
+      <span class="ant-switch-inner-unchecked">
         <slot name="unCheckedChildren" />
       </span>
     </span>

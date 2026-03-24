@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { notification } from '@ant-design-vue/ui'
-import type { NotificationType } from '@ant-design-vue/ui'
+import type { NotificationType } from '../types'
 
 function openNotificationWithIcon(type: NotificationType) {
   notification[type]({

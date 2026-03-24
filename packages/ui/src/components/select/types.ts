@@ -6,12 +6,14 @@ import type { Slot, ScopedSlot } from '@/utils/types'
 // ---------------------------------------------------------------------------
 
 export interface SelectOption {
-  value: string | number
+  value?: string | number
   label?: string | VNode
   disabled?: boolean
   title?: string
   /** Custom class for the option */
   class?: string
+  /** Allow arbitrary fields when using fieldNames */
+  [key: string]: any
 }
 
 export interface SelectOptGroup {

@@ -56,7 +56,7 @@ if (props.autoExpandParent && expandedKeys.value.length > 0) {
     }
   }
   if (parentKeys.size > 0) {
-    const merged = new Set([...expandedKeys.value, ...parentKeys])
+    const merged = new Set([...expandedKeys.value, ...Array.from(parentKeys)])
     internalExpanded.value = Array.from(merged)
   }
 }

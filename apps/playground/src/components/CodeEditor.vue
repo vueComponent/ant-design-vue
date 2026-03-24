@@ -6,7 +6,7 @@
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import { basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
-import { EditorView, keymap } from '@codemirror/view'
+import { EditorView } from '@codemirror/view'
 import { html } from '@codemirror/lang-html'
 import { oneDark } from '@codemirror/theme-one-dark'
 

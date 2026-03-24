@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import UI from '../../index'
+import UI from '../../../index'
 
 const demos = import.meta.glob('../demo/*.vue', { eager: true })
 

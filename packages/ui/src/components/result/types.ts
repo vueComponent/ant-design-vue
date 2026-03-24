@@ -1,6 +1,6 @@
 import type { Slot } from '@/utils/types'
 
-export type ResultStatus = 'success' | 'error' | 'info' | 'warning' | 403 | 404 | 500
+export type ResultStatus = 'success' | 'error' | 'info' | 'warning' | 403 | 404 | 500 | '403' | '404' | '500'
 
 export interface ResultProps {
   /** Result status, decides icon and color */

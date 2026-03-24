@@ -192,7 +192,7 @@ export function useCheckState(
     const halfCheckedSet = new Set<Key>()
 
     // Walk all keys with children to determine half-checked
-    for (const [parentKey, childKeys] of maps.keyToChildren) {
+    for (const [parentKey, childKeys] of Array.from(maps.keyToChildren)) {
       const node = maps.keyToNode.get(parentKey)
       if (node?.disabled || node?.disableCheckbox) continue
 

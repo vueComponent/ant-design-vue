@@ -91,7 +91,7 @@ describe('Image', () => {
       },
     })
     expect(wrapper.find('.ant-image').classes()).toContain('custom-wrapper')
-    expect(wrapper.find('.ant-image').element.style.border).toBe('1px solid red')
+    expect((wrapper.find('.ant-image').element as HTMLElement).style.border).toBe('1px solid red')
   })
 
   it('renders placeholder slot', () => {

@@ -28,7 +28,7 @@ function handleClick(e: MouseEvent) {
     :aria-checked="checked || false"
     tabindex="0"
     @click="handleClick"
-    @keydown.enter.space.prevent="handleClick"
+    @keydown.enter.space.prevent="handleClick($event as unknown as MouseEvent)"
   >
     <slot />
   </span>

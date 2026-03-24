@@ -43,11 +43,11 @@
   content: '';
   position: absolute;
   top: 0;
+  inset-inline-end: 0;
+  bottom: 0;
   inset-inline-start: 0;
-  width: 18px;
-  height: 18px;
   background-color: #fff;
-  border-radius: 50%;
+  border-radius: 9px;
   box-shadow: 0 2px 4px rgba(0, 35, 11, 0.2);
   transition: all var(--ant-motion-duration, 0.2s) ease-in-out;
 }
@@ -60,19 +60,81 @@
 :where(.ant-switch-inner) {
   display: block;
   overflow: hidden;
+  height: 100%;
+  padding-inline-start: 24px;
+  padding-inline-end: 9px;
   font-size: 12px;
   color: #fff;
   line-height: 22px;
+  transition:
+    padding-inline-start var(--ant-motion-duration, 0.2s) ease-in-out,
+    padding-inline-end var(--ant-motion-duration, 0.2s) ease-in-out;
+}
+
+:where(.ant-switch-inner-checked),
+:where(.ant-switch-inner-unchecked) {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+  transition:
+    margin-inline-start var(--ant-motion-duration, 0.2s) ease-in-out,
+    margin-inline-end var(--ant-motion-duration, 0.2s) ease-in-out;
+  pointer-events: none;
+}
+
+:where(.ant-switch-inner-checked) :where(.anticon),
+:where(.ant-switch-inner-unchecked) :where(.anticon) {
+  line-height: 0;
+  vertical-align: -1.5px;
 }
 
 :where(.ant-switch-inner-checked) {
-  margin-inline-start: 9px;
-  margin-inline-end: 24px;
+  margin-inline-start: calc(-100% + 22px - 48px);
+  margin-inline-end: calc(100% - 22px + 48px);
 }
 
 :where(.ant-switch-inner-unchecked) {
-  margin-inline-start: 24px;
-  margin-inline-end: 9px;
+  margin-top: -22px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+:where(.ant-switch-checked) :where(.ant-switch-inner) {
+  padding-inline-start: 9px;
+  padding-inline-end: 24px;
+}
+
+:where(.ant-switch-checked) :where(.ant-switch-inner-checked) {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+:where(.ant-switch-checked) :where(.ant-switch-inner-unchecked) {
+  margin-inline-start: calc(100% - 22px + 48px);
+  margin-inline-end: calc(-100% + 22px - 48px);
+}
+
+:where(.ant-switch):not(.ant-switch-disabled):not([disabled]):active :where(.ant-switch-handle)::before {
+  inset-inline-start: 0;
+  inset-inline-end: -30%;
+}
+
+:where(.ant-switch-checked):not(.ant-switch-disabled):not([disabled]):active
+  :where(.ant-switch-handle)::before {
+  inset-inline-start: -30%;
+  inset-inline-end: 0;
+}
+
+:where(.ant-switch):not(.ant-switch-disabled):not([disabled]):not(.ant-switch-checked):active
+  :where(.ant-switch-inner-unchecked) {
+  margin-inline-start: 4px;
+  margin-inline-end: -4px;
+}
+
+:where(.ant-switch-checked):not(.ant-switch-disabled):not([disabled]):active
+  :where(.ant-switch-inner-checked) {
+  margin-inline-start: -4px;
+  margin-inline-end: 4px;
 }
 
 /* ── Disabled State ── */
@@ -91,7 +153,16 @@
 :where(.ant-switch-loading-icon) {
   @apply absolute inset-0 flex items-center justify-center;
   color: var(--color-accent, #1677ff);
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+:where(.ant-switch-loading-icon) :where(.anticon) {
+  display: block;
+  width: 1em;
+  height: 1em;
+  color: inherit;
+  font-size: inherit;
   line-height: 1;
 }
 
@@ -100,7 +171,7 @@
 }
 
 :where(.ant-switch):not(.ant-switch-checked) :where(.ant-switch-loading-icon) {
-  color: rgba(0, 0, 0, 0.65);
+  color: var(--color-neutral-secondary, rgba(0, 0, 0, 0.65));
 }
 
 :where(.ant-switch-loading-svg) {
@@ -130,8 +201,8 @@
 }
 
 :where(.ant-switch-small) :where(.ant-switch-handle)::before {
-  width: 12px;
-  height: 12px;
+  inset-inline-end: 0;
+  bottom: 0;
 }
 
 :where(.ant-switch-small.ant-switch-checked) :where(.ant-switch-handle) {
@@ -141,16 +212,48 @@
 :where(.ant-switch-small) :where(.ant-switch-inner) {
   font-size: 12px;
   line-height: 16px;
+  padding-inline-start: 18px;
+  padding-inline-end: 6px;
 }
 
 :where(.ant-switch-small) :where(.ant-switch-inner-checked) {
-  margin-inline-start: 6px;
-  margin-inline-end: 18px;
+  min-height: 16px;
+  margin-inline-start: calc(-100% + 16px - 36px);
+  margin-inline-end: calc(100% - 16px + 36px);
 }
 
 :where(.ant-switch-small) :where(.ant-switch-inner-unchecked) {
-  margin-inline-start: 18px;
-  margin-inline-end: 6px;
+  min-height: 16px;
+  margin-top: -16px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+:where(.ant-switch-small.ant-switch-checked) :where(.ant-switch-inner) {
+  padding-inline-start: 6px;
+  padding-inline-end: 18px;
+}
+
+:where(.ant-switch-small.ant-switch-checked) :where(.ant-switch-inner-checked) {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+:where(.ant-switch-small.ant-switch-checked) :where(.ant-switch-inner-unchecked) {
+  margin-inline-start: calc(100% - 16px + 36px);
+  margin-inline-end: calc(-100% + 16px - 36px);
+}
+
+:where(.ant-switch-small):not(.ant-switch-disabled):not([disabled]):not(.ant-switch-checked):active
+  :where(.ant-switch-inner-unchecked) {
+  margin-inline-start: 2px;
+  margin-inline-end: -2px;
+}
+
+:where(.ant-switch-small.ant-switch-checked):not(.ant-switch-disabled):not([disabled]):active
+  :where(.ant-switch-inner-checked) {
+  margin-inline-start: -2px;
+  margin-inline-end: 2px;
 }
 
 :where(.ant-switch-small) :where(.ant-switch-loading-icon) {

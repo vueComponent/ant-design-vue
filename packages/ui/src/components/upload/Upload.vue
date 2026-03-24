@@ -8,7 +8,18 @@ import { defaultRequest } from './request'
 import UploadList from './UploadList.vue'
 
 defineOptions({ name: 'AUpload' })
-const props = withDefaults(defineProps<UploadProps>(), uploadDefaultProps)
+const props = withDefaults(defineProps<UploadProps>(), {
+  method: 'POST',
+  multiple: false,
+  listType: 'text',
+  showUploadList: undefined,
+  disabled: false,
+  name: 'file',
+  withCredentials: false,
+  openFileDialogOnClick: true,
+  directory: false,
+  drag: false,
+})
 const emit = defineEmits<UploadEmits>()
 defineSlots<UploadSlots>()
 

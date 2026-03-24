@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import { componentGroups } from '#/data/demos'
 import BrowseView from '#/views/BrowseView.vue'
 import EditorView from '#/views/EditorView.vue'

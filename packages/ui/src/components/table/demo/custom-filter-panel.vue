@@ -61,10 +61,10 @@ const data: DataType[] = [
   { key: '4', name: 'Jim Red', age: 32, address: 'London No. 2 Lake Park' },
 ]
 
-function handleSearch(selectedKeys: Key[], confirm: (params?: { closeDropdown?: boolean }) => void, dataIndex: string) {
+function handleSearch(selectedKeys: Key[], confirm: (params?: { closeDropdown?: boolean }) => void, dataIndex: string | number | (string | number)[]) {
   confirm()
   state.searchText = String(selectedKeys[0] ?? '')
-  state.searchedColumn = dataIndex
+  state.searchedColumn = String(dataIndex)
 }
 
 function handleReset(clearFilters?: (params?: { confirm?: boolean; closeDropdown?: boolean }) => void) {

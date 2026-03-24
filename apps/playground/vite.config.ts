@@ -1,8 +1,9 @@
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'node:path'
-import { readdirSync, statSync, readFileSync } from 'node:fs'
-import { defineConfig, Plugin } from 'vite'
+import { readdirSync, readFileSync } from 'node:fs'
+import type { Plugin } from 'vite';
+import { defineConfig } from 'vite'
 
 const uiSrc = resolve(__dirname, '../../packages/ui/src')
 const monorepoRoot = resolve(__dirname, '../..')
@@ -21,7 +22,7 @@ function demoGlobPlugin(): Plugin {
       try {
         const files = readdirSync(demoDir).filter(f => f.endsWith('.vue'))
         if (files.length) result[comp] = files.map(f => f.replace('.vue', ''))
-      } catch {}
+      } catch { /* no demo dir */ }
     }
     return result
   }
@@ -104,10 +105,12 @@ function oldDemoGlobPlugin(): Plugin {
           f => f.endsWith('.vue') && f !== 'index.vue',
         )
         if (files.length) result[comp] = files.map(f => f.replace('.vue', ''))
-      } catch {}
+      } catch { /* no demo dir */ }
     }
     return result
   }
+
+  const isBuild = process.env.NODE_ENV === 'production'
 
   return {
     name: 'old-demo-glob',
@@ -116,6 +119,8 @@ function oldDemoGlobPlugin(): Plugin {
     },
     load(id) {
       if (id !== RESOLVED_ID) return
+      // Skip old demos in production build — they have missing deps (e.g. vue-request)
+      if (isBuild) return 'export default []\n'
       const demos = scanDemos()
       // Use dynamic imports so demos with missing deps don't break the whole app
       const entries: string[] = []

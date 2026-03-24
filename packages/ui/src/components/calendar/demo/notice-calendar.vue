@@ -20,10 +20,11 @@
 import { ref } from 'vue'
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
+import type { PresetStatusColor } from '../../badge/types'
 
 const value = ref<Dayjs>(dayjs())
 
-function getListData(date: Dayjs) {
+function getListData(date: Dayjs): { type: PresetStatusColor; content: string }[] {
   switch (date.date()) {
     case 8:
       return [

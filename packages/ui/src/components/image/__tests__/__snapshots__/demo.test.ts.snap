@@ -82,14 +82,6 @@ exports[`Image demos > demo: PreviewGroup 1`] = `
       <!--v-if-->
     </div>
   </div>
-  <!--teleport start-->
-  <!-- Mask -->
-  <transition-stub name="ant-fade" appear="false" persisted="false" css="true">
-    <!--v-if-->
-  </transition-stub><!-- Preview wrap -->
-  <transition-stub name="ant-zoom" appear="false" persisted="false" css="true">
-    <!--v-if-->
-  </transition-stub>
-  <!--teleport end-->
+  <!--v-if-->
 </div>"
 `;

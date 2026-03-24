@@ -130,7 +130,7 @@ describe('Col', () => {
       components: { Row, Col },
     })
     const col = wrapper.find('.ant-col')
-    expect(col.element.style.paddingLeft).toBe('8px')
-    expect(col.element.style.paddingRight).toBe('8px')
+    expect((col.element as HTMLElement).style.paddingLeft).toBe('8px')
+    expect((col.element as HTMLElement).style.paddingRight).toBe('8px')
   })
 })

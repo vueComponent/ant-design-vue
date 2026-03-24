@@ -6,7 +6,9 @@ import { imageDefaultProps, IMAGE_GROUP_KEY } from './types'
 import ImagePreview from './ImagePreview.vue'
 
 defineOptions({ name: 'AImage' })
-const props = withDefaults(defineProps<ImageProps>(), imageDefaultProps)
+const props = withDefaults(defineProps<ImageProps>(), {
+  preview: undefined,
+})
 const emit = defineEmits<ImageEmits>()
 defineSlots<ImageSlots>()
 
@@ -33,7 +35,7 @@ const mergedSrc = computed(() => {
 
 const previewConfig = computed<ImagePreviewConfig | false>(() => {
   if (props.preview === false) return false
-  if (props.preview === true) return {}
+  if (props.preview === true || props.preview === undefined) return {}
   return props.preview
 })
 

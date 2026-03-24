@@ -42,7 +42,14 @@ import { popoverDefaultProps } from './types'
 
 defineOptions({ name: 'APopover' })
 
-const props = withDefaults(defineProps<PopoverProps>(), popoverDefaultProps)
+const props = withDefaults(defineProps<PopoverProps>(), {
+  trigger: 'hover',
+  placement: 'top',
+  mouseEnterDelay: 100,
+  mouseLeaveDelay: 100,
+  destroyTooltipOnHide: false,
+  autoAdjustOverflow: true,
+})
 const emit = defineEmits<PopoverEmits>()
 defineSlots<PopoverSlots>()
 const slots = useSlots()
@@ -78,7 +85,7 @@ const disabled = computed(() => !hasTitle.value && !hasContent.value)
 // --- Arrow ---
 const showArrow = computed(() => {
   if (typeof props.arrow === 'boolean') return props.arrow
-  return props.arrow !== false
+  return true
 })
 
 // --- Placement ---

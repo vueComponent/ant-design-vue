@@ -23,14 +23,6 @@ exports[`Image > should render correctly 1`] = `
 exports[`ImagePreviewGroup > should render correctly 1`] = `
 "<div class="ant-image-preview-group">
   <div class="child">Child</div>
-  <!--teleport start-->
-  <!-- Mask -->
-  <transition-stub name="ant-fade" appear="false" persisted="false" css="true">
-    <!--v-if-->
-  </transition-stub><!-- Preview wrap -->
-  <transition-stub name="ant-zoom" appear="false" persisted="false" css="true">
-    <!--v-if-->
-  </transition-stub>
-  <!--teleport end-->
+  <!--v-if-->
 </div>"
 `;

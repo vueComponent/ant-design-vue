@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { DrawerPlacement } from '../types'
 const open = ref(false)
-const placement = ref('right')
+const placement = ref<DrawerPlacement>('right')
 </script>

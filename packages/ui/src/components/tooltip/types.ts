@@ -123,7 +123,7 @@ export const tooltipDefaultProps = {
   mouseLeaveDelay: 100,
   destroyTooltipOnHide: false,
   autoAdjustOverflow: true,
-} as const
+}
 
 export interface TooltipEmits {
   (e: 'update:open', open: boolean): void

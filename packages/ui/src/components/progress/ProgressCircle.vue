@@ -6,7 +6,7 @@ const props = defineProps<{
   successPercent?: number
   strokeColor?: string | string[] | Record<string, string>
   trailColor?: string
-  strokeLinecap: string
+  strokeLinecap: 'butt' | 'square' | 'round'
   strokeWidth: number
   size: number
   gapDegree: number

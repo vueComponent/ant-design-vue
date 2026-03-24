@@ -65,7 +65,7 @@ describe('Divider', () => {
       slots: { default: 'Text' },
     })
     const inner = wrapper.find('.ant-divider-inner-text')
-    expect(inner.element.style.marginLeft).toBe('20px')
+    expect((inner.element as HTMLElement).style.marginLeft).toBe('20px')
   })
 
   it('applies orientationMargin for right orientation as number', () => {
@@ -74,7 +74,7 @@ describe('Divider', () => {
       slots: { default: 'Text' },
     })
     const inner = wrapper.find('.ant-divider-inner-text')
-    expect(inner.element.style.marginRight).toBe('30px')
+    expect((inner.element as HTMLElement).style.marginRight).toBe('30px')
   })
 
   it('does not apply orientationMargin for center orientation', () => {
@@ -83,8 +83,8 @@ describe('Divider', () => {
       slots: { default: 'Text' },
     })
     const inner = wrapper.find('.ant-divider-inner-text')
-    expect(inner.element.style.marginLeft).toBe('')
-    expect(inner.element.style.marginRight).toBe('')
+    expect((inner.element as HTMLElement).style.marginLeft).toBe('')
+    expect((inner.element as HTMLElement).style.marginRight).toBe('')
   })
 
   it('renders plain text style', () => {

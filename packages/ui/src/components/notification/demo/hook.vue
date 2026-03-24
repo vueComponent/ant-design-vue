@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { notification } from '@ant-design-vue/ui'
-import type { NotificationPlacement } from '@ant-design-vue/ui'
+import type { NotificationPlacement } from '../types'
 
 function open(placement: NotificationPlacement) {
   notification.info({

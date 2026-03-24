@@ -14,7 +14,7 @@
         <div class="compare-panel panel-new">
           <div class="panel-label">New</div>
           <div class="panel-content">
-            <component v-if="newDemos[demoName]" :is="newDemos[demoName]" />
+            <component :is="newDemos[demoName]" v-if="newDemos[demoName]" />
             <div v-else class="panel-missing">Demo not found in new components</div>
           </div>
         </div>
@@ -22,7 +22,7 @@
           <div class="panel-label">Old</div>
           <div class="panel-content">
             <ErrorBoundary>
-              <component v-if="oldDemos[demoName]" :is="oldDemos[demoName]" />
+              <component :is="oldDemos[demoName]" v-if="oldDemos[demoName]" />
               <div v-else class="panel-missing">Demo not found in old components</div>
             </ErrorBoundary>
           </div>

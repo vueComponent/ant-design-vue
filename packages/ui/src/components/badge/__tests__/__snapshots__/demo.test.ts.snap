@@ -25,9 +25,10 @@ exports[`Badge demos > demo: Change 1`] = `
   <div style="display: flex; gap: 24px; align-items: center;">
     <!-- Status badge or color badge (no children, dot + text) -->
     <!-- Badge with children or standalone count --><span class="ant-badge"><div style="width: 42px; height: 42px; background: rgb(235, 235, 235); border-radius: 6px;"></div><transition-stub name="ant-badge-zoom" appear="false" persisted="false" css="true"><sup class="ant-badge-dot"></sup></transition-stub></span><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked">
+      <wave-stub disabled="false"></wave-stub>
       <div class="ant-switch-handle">
         <!--v-if-->
-      </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span></span>
+      </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span><span class="ant-switch-inner-unchecked"></span></span>
     </button>
   </div>
 </div>"

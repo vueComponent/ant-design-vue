@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { PickerMode } from '../types'
 
-const type = ref<string>('date')
+const type = ref<PickerMode | 'time'>('date')
 </script>

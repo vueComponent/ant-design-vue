@@ -4,7 +4,7 @@ import type { Placement } from '@floating-ui/vue'
 import { Trigger } from '@/_internal/trigger'
 import { VirtualList } from '@/_internal/virtual-list'
 import { useConfigInject } from '@/hooks'
-import type { SelectProps, SelectEmits, SelectSlots, SelectOption, SelectOptGroup, SelectPlacement, LabeledValue } from './types'
+import type { SelectProps, SelectEmits, SelectSlots, SelectOption, SelectOptGroup, SelectOptionType, SelectPlacement, LabeledValue } from './types'
 import { selectDefaultProps, isOptGroup } from './types'
 
 defineOptions({ name: 'ASelect', inheritAttrs: false })
@@ -83,7 +83,8 @@ const flatOptions = computed<SelectOption[]>(() => {
   const fieldValue = props.fieldNames?.value ?? 'value'
   const fieldOptions = props.fieldNames?.options ?? 'options'
 
-  for (const opt of opts) {
+  for (const rawOpt of opts) {
+    const opt = rawOpt as SelectOptionType
     if (isOptGroup(opt) || (fieldOptions in (opt as any) && Array.isArray((opt as any)[fieldOptions]))) {
       const group = opt as SelectOptGroup
       const children = (group as any)[fieldOptions] ?? group.options ?? []
@@ -118,7 +119,8 @@ const groupedOptions = computed(() => {
   const fieldOptions = props.fieldNames?.options ?? 'options'
   const groups: { label?: string; isGroup: boolean; options: SelectOption[] }[] = []
 
-  for (const opt of opts) {
+  for (const rawOpt of opts) {
+    const opt = rawOpt as SelectOptionType
     if (isOptGroup(opt) || (fieldOptions in (opt as any) && Array.isArray((opt as any)[fieldOptions]))) {
       const group = opt as any
       const children = group[fieldOptions] ?? group.options ?? []

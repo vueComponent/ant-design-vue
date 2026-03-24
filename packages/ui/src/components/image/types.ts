@@ -32,8 +32,8 @@ export interface ImageProps {
 }
 
 export const imageDefaultProps = {
-  preview: true as const,
-} as const
+  preview: true,
+}
 
 export interface ImageEmits {
   (e: 'click', event: MouseEvent): void

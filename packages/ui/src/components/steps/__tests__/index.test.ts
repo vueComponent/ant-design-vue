@@ -3,12 +3,13 @@ import { mount } from '@vue/test-utils'
 import { h, nextTick } from 'vue'
 import Steps from '../Steps.vue'
 import Step from '../Step.vue'
+import type { StepStatus } from '../types'
 
 function createSteps(
   stepsProps: Record<string, any> = {},
-  stepItems: { title: string; description?: string; subTitle?: string; status?: string; disabled?: boolean }[] = [],
+  stepItems: { title: string; description?: string; subTitle?: string; status?: StepStatus; disabled?: boolean }[] = [],
 ) {
-  const defaultItems = [
+  const defaultItems: typeof stepItems = [
     { title: 'Step 1' },
     { title: 'Step 2' },
     { title: 'Step 3' },

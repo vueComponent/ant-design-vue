@@ -22,7 +22,7 @@
     "dev": "vite build --watch --mode development",
     "serve": "npm run dev --filter playground",
     "lint": "eslint . --fix",
-    "tsc": "tsc --noEmit",
+    "tsc": "vue-tsc --noEmit",
     "tsg": "tsc --declaration --declarationMap --emitDeclarationOnly --noEmit false --outDir dist/types",
     "test": "vitest"
   },

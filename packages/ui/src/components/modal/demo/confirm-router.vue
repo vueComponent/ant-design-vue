@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { Modal } from '@ui/components/modal'
+import { Modal } from '@ant-design-vue/ui'
 
 const showConfirm = () => {
   for (let i = 0; i < 3; i += 1) {

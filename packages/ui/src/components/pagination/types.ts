@@ -37,11 +37,11 @@ export const paginationDefaultProps = {
   disabled: false,
   hideOnSinglePage: false,
   showSizeChanger: false,
-  pageSizeOptions: [10, 20, 50, 100] as number[],
+  pageSizeOptions: () => [10, 20, 50, 100],
   showQuickJumper: false,
   simple: false,
   size: 'default' as const,
-} as const
+}
 
 export interface PaginationEmits {
   (e: 'update:current', page: number): void

@@ -195,7 +195,7 @@ describe('Badge', () => {
       props: { status: 'success', color: '#f50' },
     })
     const dot = wrapper.find('.ant-badge-status-dot')
-    expect(dot.element.style.backgroundColor).toBe('rgb(255, 85, 0)')
+    expect((dot.element as HTMLElement).style.backgroundColor).toBe('rgb(255, 85, 0)')
   })
 })
 
@@ -249,7 +249,7 @@ describe('Ribbon', () => {
       slots: { default: '<div>Content</div>' },
     })
     const ribbon = wrapper.find('.ant-ribbon')
-    expect(ribbon.element.style.backgroundColor).toBe('rgb(255, 85, 0)')
+    expect((ribbon.element as HTMLElement).style.backgroundColor).toBe('rgb(255, 85, 0)')
   })
 
   it('applies custom color to corner', () => {
@@ -258,7 +258,7 @@ describe('Ribbon', () => {
       slots: { default: '<div>Content</div>' },
     })
     const corner = wrapper.find('.ant-ribbon-corner')
-    expect(corner.element.style.color).toBe('rgb(255, 85, 0)')
+    expect((corner.element as HTMLElement).style.color).toBe('rgb(255, 85, 0)')
   })
 
   it('supports text slot', () => {

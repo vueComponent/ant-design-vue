@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import type { CSSProperties } from 'vue'
-import type { ColProps, ColSize } from './types'
+import type { ColProps, ColSize, ColSpanType } from './types'
 import { rowContextKey } from './types'
 import { useBreakpoint, responsiveArray } from '@/hooks'
 import type { Breakpoint } from '@/hooks'
@@ -12,7 +12,7 @@ const screens = useBreakpoint()
 const rowContext = inject(rowContextKey, null)
 
 /** Normalize responsive prop: number → { span: n }, object → as-is */
-function normalizeSize(val: ColProps[Breakpoint]): ColSize | undefined {
+function normalizeSize(val: ColSpanType | ColSize | undefined): ColSize | undefined {
   if (val == null) return undefined
   if (typeof val === 'object') return val
   return { span: val }

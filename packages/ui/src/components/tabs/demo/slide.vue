@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { TabPosition } from '@ui/components/tabs/types'
+import type { TabPosition } from '../types'
 
 const mode = ref<TabPosition>('top')
 const activeKey = ref(1)

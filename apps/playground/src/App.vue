@@ -5,7 +5,7 @@
       <main class="app-main">
         <RouterView />
       </main>
-      <button class="theme-toggle" @click="toggleTheme" :title="`Switch to ${appearance === 'light' ? 'dark' : 'light'}`">
+      <button class="theme-toggle" :title="`Switch to ${appearance === 'light' ? 'dark' : 'light'}`" @click="toggleTheme">
         {{ appearance === 'light' ? '☾' : '☀' }}
       </button>
     </div>

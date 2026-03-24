@@ -6,8 +6,15 @@ import Upload from './Upload.vue'
 
 defineOptions({ name: 'AUploadDragger' })
 const props = withDefaults(defineProps<UploadProps>(), {
-  ...uploadDefaultProps,
   drag: true,
+  method: 'POST',
+  multiple: false,
+  listType: 'text',
+  disabled: false,
+  name: 'file',
+  withCredentials: false,
+  openFileDialogOnClick: true,
+  directory: false,
 })
 const emit = defineEmits<UploadEmits>()
 defineSlots<UploadSlots>()
@@ -15,7 +22,7 @@ defineSlots<UploadSlots>()
 
 <template>
   <Upload
-    v-bind="{ ...props, drag: true }"
+    v-bind="({ ...props, drag: true } as any)"
     @update:file-list="(v) => emit('update:fileList', v)"
     @change="(v) => emit('change', v)"
     @drop="(v) => emit('drop', v)"

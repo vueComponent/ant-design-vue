@@ -19,6 +19,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { TabPosition } from '../types'
 const activeKey = ref('1')
-const tabPosition = ref('top')
+const tabPosition = ref<TabPosition>('top')
 </script>

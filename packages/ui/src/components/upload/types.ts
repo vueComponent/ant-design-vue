@@ -64,7 +64,7 @@ export interface UploadProps {
   /** Custom upload implementation */
   customRequest?: (options: UploadRequestOption) => void
   /** Pre-upload hook */
-  beforeUpload?: (file: File, fileList: File[]) => boolean | Promise<File | boolean | void>
+  beforeUpload?: (file: File, fileList: File[]) => boolean | Promise<File | Blob | boolean | void>
   /** Enable drag-and-drop upload */
   drag?: boolean
   /** Open file dialog on click */
@@ -75,14 +75,14 @@ export const uploadDefaultProps = {
   method: 'POST' as const,
   multiple: false,
   listType: 'text' as const,
-  showUploadList: true as boolean | ShowUploadListInterface,
+  showUploadList: true,
   disabled: false,
   name: 'file',
   withCredentials: false,
   openFileDialogOnClick: true,
   directory: false,
   drag: false,
-} as const
+}
 
 export interface UploadEmits {
   (e: 'update:fileList', fileList: UploadFile[]): void

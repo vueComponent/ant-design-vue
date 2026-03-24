@@ -42,7 +42,7 @@ function onContextMenuClick(treeKey: Key, menuKey: string | number) {
       <a-dropdown :trigger="['contextmenu']">
         <span>{{ title }}</span>
         <template #overlay>
-          <a-menu @click="({ key: menuKey }: { key: string }) => onContextMenuClick(treeKey, menuKey)">
+          <a-menu @click="({ key: menuKey }: { key: string | number }) => onContextMenuClick(treeKey, menuKey)">
             <a-menu-item key="1">1st menu item</a-menu-item>
             <a-menu-item key="2">2nd menu item</a-menu-item>
             <a-menu-item key="3">3rd menu item</a-menu-item>

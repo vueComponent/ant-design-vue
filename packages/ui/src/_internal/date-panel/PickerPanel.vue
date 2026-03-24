@@ -257,7 +257,7 @@ function handleOk() {
       <TimePanel
         v-if="showTimePanel"
         :value="value"
-        v-bind="timeProps"
+        v-bind="(timeProps as any)"
         @select="handleTimeSelect"
       />
 

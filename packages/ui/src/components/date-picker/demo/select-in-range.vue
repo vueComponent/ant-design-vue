@@ -1,7 +1,7 @@
 <template>
   <div style="max-width: 300px">
     <a-range-picker
-      :value="hackValue || value"
+      :value="displayValue"
       :disabled-date="disabledDate"
       @change="onChange"
       @openChange="onOpenChange"
@@ -11,14 +11,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { Dayjs } from 'dayjs'
+import type { RangeValue } from '../types'
 
-type RangeValue = [Dayjs, Dayjs]
-
-const dates = ref<RangeValue>()
+const dates = ref<Dayjs[]>([])
 const value = ref<RangeValue>()
 const hackValue = ref<RangeValue>()
+
+const displayValue = computed(() => hackValue.value || value.value)
 
 function disabledDate(current: Dayjs): boolean {
   if (!dates.value || dates.value.length === 0) {
@@ -31,8 +32,8 @@ function disabledDate(current: Dayjs): boolean {
 
 function onOpenChange(open: boolean) {
   if (open) {
-    dates.value = [] as unknown as RangeValue
-    hackValue.value = [] as unknown as RangeValue
+    dates.value = []
+    hackValue.value = undefined
   } else {
     hackValue.value = undefined
   }
@@ -42,7 +43,7 @@ function onChange(val: RangeValue) {
   value.value = val
 }
 
-function onCalendarChange(val: RangeValue) {
-  dates.value = val
+function onCalendarChange(val: [Dayjs | null, Dayjs | null]) {
+  dates.value = val.filter((d): d is Dayjs => d != null)
 }
 </script>

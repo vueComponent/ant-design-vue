@@ -43,7 +43,7 @@ export const skeletonDefaultProps = {
   paragraph: true,
   active: false,
   round: false,
-} as const
+}
 
 // Sub-component prop types for standalone elements
 export interface SkeletonButtonProps {

@@ -322,7 +322,7 @@ describe('AvatarGroup', () => {
       },
     })
     const restAvatar = wrapper.findAll('.ant-avatar').at(-1)!
-    expect(restAvatar.element.style.backgroundColor).toBeTruthy()
+    expect((restAvatar.element as HTMLElement).style.backgroundColor).toBeTruthy()
   })
 
   it('passes size to child avatars via context', () => {

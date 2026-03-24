@@ -5,7 +5,7 @@ import Descriptions from '../Descriptions.vue'
 import DescriptionsItem from '../DescriptionsItem.vue'
 
 function createDescriptions(props: Record<string, any> = {}, items: { label: string; content: string; span?: number }[] = []) {
-  const defaultItems = [
+  const defaultItems: typeof items = [
     { label: 'Name', content: 'John' },
     { label: 'Phone', content: '123456' },
     { label: 'Address', content: 'Some Place' },

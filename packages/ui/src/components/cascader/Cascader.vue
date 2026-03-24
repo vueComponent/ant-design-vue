@@ -497,7 +497,7 @@ defineExpose({
             />
           </span>
           <span v-if="showPlaceholder" class="ant-select-selection-placeholder">
-            <slot name="placeholder">{{ placeholder }}</slot>
+            {{ placeholder }}
           </span>
         </template>
 

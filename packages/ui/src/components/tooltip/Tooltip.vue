@@ -41,7 +41,14 @@ import {
 
 defineOptions({ name: 'ATooltip' })
 
-const props = withDefaults(defineProps<TooltipProps>(), tooltipDefaultProps)
+const props = withDefaults(defineProps<TooltipProps>(), {
+  trigger: 'hover',
+  placement: 'top',
+  mouseEnterDelay: 100,
+  mouseLeaveDelay: 100,
+  destroyTooltipOnHide: false,
+  autoAdjustOverflow: true,
+})
 const emit = defineEmits<TooltipEmits>()
 defineSlots<TooltipSlots>()
 const slots = useSlots()
@@ -76,7 +83,7 @@ const disabled = computed(() => {
 // --- Arrow config ---
 const showArrow = computed(() => {
   if (typeof props.arrow === 'boolean') return props.arrow
-  return props.arrow !== false
+  return true
 })
 
 // --- Placement ---

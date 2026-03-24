@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { Modal } from '@ui/components/modal'
+import { Modal } from '@ant-design-vue/ui'
 
 const info = () => {
   Modal.info({

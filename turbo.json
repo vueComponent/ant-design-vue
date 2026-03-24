@@ -25,7 +25,6 @@
       "outputs": ["dist/types/**"]
     },
     "test": {
-      "dependsOn": ["build:dev"],
       "cache": true
     },
     "dev": {

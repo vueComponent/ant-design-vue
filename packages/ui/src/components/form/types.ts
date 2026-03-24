@@ -41,6 +41,7 @@ export interface ColProps {
   offset?: number
   push?: number
   pull?: number
+  style?: Record<string, string> | string
 }
 
 export interface FormProps {

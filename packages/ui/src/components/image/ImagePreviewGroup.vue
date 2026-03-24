@@ -5,9 +5,7 @@ import { IMAGE_GROUP_KEY } from './types'
 import ImagePreview from './ImagePreview.vue'
 
 defineOptions({ name: 'AImagePreviewGroup' })
-const props = withDefaults(defineProps<ImagePreviewGroupProps>(), {
-  preview: true,
-})
+const props = defineProps<ImagePreviewGroupProps>()
 defineSlots<ImagePreviewGroupSlots>()
 
 // Map of id -> src for all registered images
@@ -19,7 +17,7 @@ const previewIndex = ref(0)
 
 const previewConfig = computed<ImagePreviewConfig | false>(() => {
   if (props.preview === false) return false
-  if (props.preview === true) return {}
+  if (props.preview === true || props.preview === undefined) return {}
   return props.preview
 })
 

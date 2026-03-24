@@ -45,12 +45,12 @@ export interface MentionsProps {
 }
 
 export const mentionsDefaultProps = {
-  prefix: '@' as string | string[],
+  prefix: '@',
   split: ' ',
   rows: 1,
   placement: 'bottom' as MentionsPlacement,
-  filterOption: true as boolean | ((inputValue: string, option: MentionOption) => boolean),
-} as const
+  filterOption: true,
+}
 
 export interface MentionsEmits {
   (e: 'update:value', value: string): void

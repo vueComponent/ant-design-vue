@@ -6,12 +6,14 @@ import type { Slot, ScopedSlot } from '@/utils/types'
 // ---------------------------------------------------------------------------
 
 export interface CascaderOption {
-  value: string | number
+  value?: string | number
   label?: string
   disabled?: boolean
   children?: CascaderOption[]
   isLeaf?: boolean
   loading?: boolean
+  /** Allow arbitrary fields when using fieldNames */
+  [key: string]: any
 }
 
 export interface CascaderFieldNames {

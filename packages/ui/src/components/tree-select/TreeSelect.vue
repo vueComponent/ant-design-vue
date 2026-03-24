@@ -663,7 +663,7 @@ defineExpose({
                 class="ant-tree-select-tree-node-content"
                 @click="flat.node.selectable !== false && selectNode(flat.node)"
               >
-                <slot name="title" :option="flat.node">
+                <slot name="title" v-bind="flat.node">
                   {{ flat.label }}
                 </slot>
               </span>

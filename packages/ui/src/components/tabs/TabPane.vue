@@ -36,7 +36,7 @@ const instance = getCurrentInstance()!
 
 // Derive key from the VNode key
 const paneKey = computed(() => {
-  return instance.vnode.key ?? ''
+  return (instance.vnode.key ?? '') as string | number
 })
 
 const isActive = computed(() => {

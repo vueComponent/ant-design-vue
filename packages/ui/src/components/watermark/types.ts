@@ -3,7 +3,7 @@ import type { Slot } from '@/utils/types'
 export interface WatermarkFont {
   color?: string
   fontSize?: number
-  fontWeight?: 'normal' | 'light' | 'weight' | number
+  fontWeight?: 'normal' | 'light' | 'bold' | number
   fontStyle?: 'none' | 'normal' | 'italic' | 'oblique'
   fontFamily?: string
 }

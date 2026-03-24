@@ -179,7 +179,7 @@ export interface TreeSelectEmits {
 
 export interface TreeSelectSlots {
   /** Custom tree node content */
-  title?: ScopedSlot<{ option: TreeSelectNode }>
+  title?: ScopedSlot<TreeSelectNode>
   /** Placeholder content */
   placeholder?: Slot
   /** Overflow tag placeholder */

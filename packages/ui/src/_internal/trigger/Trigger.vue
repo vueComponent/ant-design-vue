@@ -82,19 +82,19 @@ watch(mergedOpen, (val) => {
 const { floatingStyles, placement: actualPlacement, middlewareData, update } = useFloating(
   triggerRef,
   floatingRef,
-  computed(() => ({
-    placement: props.placement,
-    strategy: props.strategy,
-    middleware: [
+  {
+    placement: computed(() => props.placement),
+    strategy: computed(() => props.strategy),
+    middleware: computed(() => [
       offsetMiddleware(props.offset),
       ...(props.autoAdjustOverflow ? [flip(), shift({ padding: 8 })] : []),
       ...(props.arrow
         ? [arrowMiddleware({ element: arrowRef, padding: 4 })]
         : []),
-    ],
+    ]),
     whileElementsMounted: autoUpdate,
     transform: true,
-  })),
+  },
 )
 
 const arrowStyles = computed(() => {

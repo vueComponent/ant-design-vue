@@ -19,7 +19,7 @@ export interface TimeProps {
   minuteStep?: number
   secondStep?: number
   hideDisabledOptions?: boolean
-  defaultValue?: Dayjs
+  defaultValue?: Dayjs | [Dayjs, Dayjs]
   disabledTime?: (date: Dayjs | null) => DisabledTimes
 }
 

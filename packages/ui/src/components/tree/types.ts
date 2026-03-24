@@ -196,6 +196,8 @@ export interface TreeNodeSlotProps {
   disabled: boolean
   pos: string
   loading: boolean
+  /** Allow custom field names access */
+  [key: string]: any
 }
 
 export interface TreeSlots {

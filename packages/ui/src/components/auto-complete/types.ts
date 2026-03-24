@@ -82,7 +82,7 @@ export interface AutoCompleteSlots {
   /** Custom input element */
   default?: Slot
   /** Custom option rendering */
-  option?: ScopedSlot<{ value: string; label?: string; disabled?: boolean }>
+  option?: ScopedSlot<{ value: string; label?: string; disabled?: boolean; [key: string]: any }>
   /** Content when no options match */
   notFoundContent?: Slot
   /** Clear button icon */

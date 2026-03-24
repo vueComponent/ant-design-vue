@@ -74,7 +74,19 @@ import { popconfirmDefaultProps } from './types'
 
 defineOptions({ name: 'APopconfirm' })
 
-const props = withDefaults(defineProps<PopconfirmProps>(), popconfirmDefaultProps)
+const props = withDefaults(defineProps<PopconfirmProps>(), {
+  trigger: 'click',
+  placement: 'top',
+  mouseEnterDelay: 100,
+  mouseLeaveDelay: 100,
+  destroyTooltipOnHide: false,
+  autoAdjustOverflow: true,
+  disabled: false,
+  okType: 'primary',
+  showCancel: true,
+  okText: 'OK',
+  cancelText: 'Cancel',
+})
 const emit = defineEmits<PopconfirmEmits>()
 defineSlots<PopconfirmSlots>()
 const slots = useSlots()
@@ -108,7 +120,7 @@ const hasDescription = computed(() => {
 // --- Arrow ---
 const showArrow = computed(() => {
   if (typeof props.arrow === 'boolean') return props.arrow
-  return props.arrow !== false
+  return true
 })
 
 // --- Placement ---

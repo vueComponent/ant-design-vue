@@ -233,7 +233,7 @@ defineExpose({
     ref="triggerRef"
     :open="isOpen"
     trigger="click"
-    :placement="placement ?? 'bottomLeft'"
+    :placement="(placement ?? 'bottomLeft') as any"
     :get-popup-container="getPopupContainer ?? props.getPopupContainer"
     :popup-class-name="popupClassName"
     :destroy-on-hide="false"

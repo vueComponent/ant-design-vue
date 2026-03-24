@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { QRCodeErrorLevel } from '@ui/components/qrcode/types'
+import type { QRCodeErrorLevel } from '../types'
 
 const levels: QRCodeErrorLevel[] = ['L', 'M', 'Q', 'H']
 const level = ref<QRCodeErrorLevel>('L')

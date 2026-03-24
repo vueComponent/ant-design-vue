@@ -175,9 +175,10 @@ exports[`List demos > demo: Grid 1`] = `
 
 exports[`List demos > demo: Loading 1`] = `
 "<div style="display: flex; flex-direction: column; gap: 16px;"><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked">
+    <!--v-if-->
     <div class="ant-switch-handle">
       <!--v-if-->
-    </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span></span>
+    </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span><span class="ant-switch-inner-unchecked"></span></span>
   </button>
   <div class="ant-list ant-list-bordered ant-list-split ant-list-loading">
     <!--v-if-->

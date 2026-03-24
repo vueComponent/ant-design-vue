@@ -29,6 +29,12 @@ describe('Switch', () => {
       const wrapper = mount(Switch)
       expect(wrapper.attributes('type')).toBe('button')
     })
+
+    it('renders wave effect hook when interactive', () => {
+      const wrapper = mount(Switch, { global: { stubs: { Wave: true } } })
+      expect(wrapper.find('wave-stub').exists()).toBe(true)
+      expect(wrapper.find('wave-stub').attributes('disabled')).toBe('false')
+    })
   })
 
   describe('checked prop', () => {
@@ -40,6 +46,16 @@ describe('Switch', () => {
     it('does not apply checked class when unchecked', () => {
       const wrapper = mount(Switch, { props: { checked: false } })
       expect(wrapper.classes()).not.toContain('ant-switch-checked')
+    })
+
+    it('does not change visual state in controlled mode until checked prop updates', async () => {
+      const wrapper = mount(Switch, { props: { checked: false } })
+
+      await wrapper.trigger('click')
+
+      expect(wrapper.emitted('update:checked')![0]).toEqual([true])
+      expect(wrapper.classes()).not.toContain('ant-switch-checked')
+      expect(wrapper.attributes('aria-checked')).toBe('false')
     })
   })
 
@@ -224,6 +240,143 @@ describe('Switch', () => {
   describe('component name', () => {
     it('has correct name', () => {
       expect(Switch.name).toBe('ASwitch')
+    })
+  })
+
+  describe('uncontrolled mode', () => {
+    it('toggles state without checked prop', async () => {
+      const wrapper = mount(Switch)
+      expect(wrapper.classes()).not.toContain('ant-switch-checked')
+      await wrapper.trigger('click')
+      expect(wrapper.classes()).toContain('ant-switch-checked')
+    })
+
+    it('emits update:checked in uncontrolled mode', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('click')
+      expect(wrapper.emitted('update:checked')).toBeTruthy()
+      expect(wrapper.emitted('update:checked')![0]).toEqual([true])
+    })
+
+    it('toggles back to unchecked in uncontrolled mode', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('click')
+      await wrapper.trigger('click')
+      expect(wrapper.classes()).not.toContain('ant-switch-checked')
+    })
+  })
+
+  describe('keyboard navigation', () => {
+    it('checks with ArrowRight when unchecked', async () => {
+      const wrapper = mount(Switch, { props: { checked: false } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('update:checked')).toBeTruthy()
+      expect(wrapper.emitted('update:checked')![0]).toEqual([true])
+    })
+
+    it('unchecks with ArrowLeft when checked', async () => {
+      const wrapper = mount(Switch, { props: { checked: true } })
+      await wrapper.trigger('keydown', { key: 'ArrowLeft' })
+      expect(wrapper.emitted('update:checked')).toBeTruthy()
+      expect(wrapper.emitted('update:checked')![0]).toEqual([false])
+    })
+
+    it('does not toggle on ArrowRight when already checked', async () => {
+      const wrapper = mount(Switch, { props: { checked: true } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('update:checked')).toBeUndefined()
+    })
+
+    it('does not toggle on ArrowLeft when already unchecked', async () => {
+      const wrapper = mount(Switch, { props: { checked: false } })
+      await wrapper.trigger('keydown', { key: 'ArrowLeft' })
+      expect(wrapper.emitted('update:checked')).toBeUndefined()
+    })
+
+    it('does not respond to arrow keys when disabled', async () => {
+      const wrapper = mount(Switch, { props: { checked: false, disabled: true } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('update:checked')).toBeUndefined()
+    })
+
+    it('does not respond to arrow keys when loading', async () => {
+      const wrapper = mount(Switch, { props: { checked: false, loading: true } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('update:checked')).toBeUndefined()
+    })
+  })
+
+  describe('tabindex prop', () => {
+    it('passes numeric tabindex to button element', () => {
+      const wrapper = mount(Switch, { props: { tabindex: 3 } })
+      expect(wrapper.attributes('tabindex')).toBe('3')
+    })
+
+    it('passes string tabindex to button element', () => {
+      const wrapper = mount(Switch, { props: { tabindex: '2' } })
+      expect(wrapper.attributes('tabindex')).toBe('2')
+    })
+
+    it('passes tabindex=-1 to exclude from tab order', () => {
+      const wrapper = mount(Switch, { props: { tabindex: -1 } })
+      expect(wrapper.attributes('tabindex')).toBe('-1')
+    })
+  })
+
+  describe('focus/blur/mouseup events', () => {
+    it('emits focus event', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('focus')
+      expect(wrapper.emitted('focus')).toBeTruthy()
+    })
+
+    it('emits blur event', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('blur')
+      expect(wrapper.emitted('blur')).toBeTruthy()
+    })
+
+    it('emits mouseup event', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('mouseup')
+      expect(wrapper.emitted('mouseup')).toBeTruthy()
+    })
+  })
+
+  describe('keydown event', () => {
+    it('emits keydown event on ArrowRight', async () => {
+      const wrapper = mount(Switch, { props: { checked: false } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('keydown')).toBeTruthy()
+    })
+
+    it('emits keydown event on other keys', async () => {
+      const wrapper = mount(Switch)
+      await wrapper.trigger('keydown', { key: 'Tab' })
+      expect(wrapper.emitted('keydown')).toBeTruthy()
+    })
+
+    it('does not emit keydown when disabled', async () => {
+      const wrapper = mount(Switch, { props: { disabled: true } })
+      await wrapper.trigger('keydown', { key: 'ArrowRight' })
+      expect(wrapper.emitted('keydown')).toBeUndefined()
+    })
+  })
+
+  describe('aria-disabled', () => {
+    it('has aria-disabled when disabled', () => {
+      const wrapper = mount(Switch, { props: { disabled: true } })
+      expect(wrapper.attributes('aria-disabled')).toBe('true')
+    })
+
+    it('has aria-disabled when loading', () => {
+      const wrapper = mount(Switch, { props: { loading: true } })
+      expect(wrapper.attributes('aria-disabled')).toBe('true')
+    })
+
+    it('does not have aria-disabled when enabled', () => {
+      const wrapper = mount(Switch)
+      expect(wrapper.attributes('aria-disabled')).toBeUndefined()
     })
   })
 })

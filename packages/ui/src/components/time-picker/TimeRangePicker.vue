@@ -11,7 +11,7 @@ const props = withDefaults(
     format?: string
     disabled?: boolean
     bordered?: boolean
-    size?: string
+    size?: 'sm' | 'md' | 'lg'
     placement?: string
     allowClear?: boolean
     use12Hours?: boolean

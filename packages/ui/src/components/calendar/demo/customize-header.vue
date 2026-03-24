@@ -49,7 +49,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import dayjs from 'dayjs'
+import localeData from 'dayjs/plugin/localeData'
 import type { Dayjs } from 'dayjs'
+
+dayjs.extend(localeData)
 
 const value = ref<Dayjs>(dayjs())
 
@@ -61,7 +64,7 @@ function getMonths(val: Dayjs) {
   const localeData = val.localeData()
   const months: string[] = []
   for (let i = 0; i < 12; i++) {
-    months.push(localeData.monthsShort(val.month(i)))
+    months.push(localeData.monthsShort(val.month(i)) as unknown as string)
   }
   return months
 }

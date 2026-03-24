@@ -153,11 +153,11 @@ exports[`Calendar demos > demo: Basic 1`] = `
             <div class="ant-picker-calendar-date-value">22</div>
             <!--v-if-->
           </td>
-          <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
+          <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
             <div class="ant-picker-calendar-date-value">23</div>
             <!--v-if-->
           </td>
-          <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
+          <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
             <div class="ant-picker-calendar-date-value">24</div>
             <!--v-if-->
           </td>
@@ -398,11 +398,11 @@ exports[`Calendar demos > demo: Card 1`] = `
               <div class="ant-picker-calendar-date-value">22</div>
               <!--v-if-->
             </td>
-            <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
+            <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
               <div class="ant-picker-calendar-date-value">23</div>
               <!--v-if-->
             </td>
-            <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
+            <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
               <div class="ant-picker-calendar-date-value">24</div>
               <!--v-if-->
             </td>
@@ -656,11 +656,11 @@ exports[`Calendar demos > demo: Notice 1`] = `
               </ul>
             </div>
           </td>
-          <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
+          <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
             <div class="ant-picker-calendar-date-value">23</div>
             <div class="ant-picker-calendar-date-content"></div>
           </td>
-          <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
+          <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
             <div class="ant-picker-calendar-date-value">24</div>
             <div class="ant-picker-calendar-date-content"></div>
           </td>
@@ -757,7 +757,7 @@ exports[`Calendar demos > demo: Select 1`] = `
     <div class="ant-alert ant-alert-info ant-alert-no-icon" role="alert">
       <!--v-if-->
       <div class="ant-alert-content">
-        <div class="ant-alert-message"> Selected: 2026-03-23</div>
+        <div class="ant-alert-message"> Selected: 2026-03-24</div>
         <!--v-if-->
       </div>
       <!--v-if-->
@@ -917,11 +917,11 @@ exports[`Calendar demos > demo: Select 1`] = `
                 <div class="ant-picker-calendar-date-value">22</div>
                 <!--v-if-->
               </td>
-              <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
+              <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
                 <div class="ant-picker-calendar-date-value">23</div>
                 <!--v-if-->
               </td>
-              <td class="ant-picker-calendar-date ant-picker-calendar-date-in-view">
+              <td class="ant-picker-calendar-date ant-picker-calendar-date-today ant-picker-calendar-date-selected ant-picker-calendar-date-in-view">
                 <div class="ant-picker-calendar-date-value">24</div>
                 <!--v-if-->
               </td>

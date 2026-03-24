@@ -97,9 +97,10 @@ exports[`Skeleton demos > demo: Element 1`] = `
 exports[`Skeleton demos > demo: List 1`] = `
 "<div>
   <div style="margin-bottom: 16px;"><button type="button" role="switch" aria-checked="true" class="ant-switch ant-switch-checked">
+      <!--v-if-->
       <div class="ant-switch-handle">
         <!--v-if-->
-      </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span></span>
+      </div><span class="ant-switch-inner"><span class="ant-switch-inner-checked"></span><span class="ant-switch-inner-unchecked"></span></span>
     </button><span style="margin-left: 8px;">Loading</span></div>
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <div style="padding: 16px; border: 1px solid rgb(240, 240, 240); border-radius: 8px;">

@@ -68,8 +68,8 @@ export interface ColumnType<T = any> {
   fixed?: 'left' | 'right' | boolean
   /** Custom CSS class for column */
   className?: string
-  /** Custom cell HTML attributes */
-  customCell?: (record: T, index: number, column: ColumnType<T>) => HTMLAttributes
+  /** Custom cell HTML attributes (including colSpan/rowSpan for merge) */
+  customCell?: (record: T, index: number, column: ColumnType<T>) => HTMLAttributes & { colSpan?: number; rowSpan?: number }
   /** Custom header cell HTML attributes */
   customHeaderCell?: (column: ColumnType<T>) => HTMLAttributes
   /** Column colSpan */
@@ -163,8 +163,8 @@ export interface TableRowSelection<T = any> {
   onSelectMultiple?: (selected: boolean, selectedRows: T[], changeRows: T[]) => void
   /** Callback when select-none triggered */
   onSelectNone?: () => void
-  /** Selection menu (true = default menu, or custom items) */
-  selections?: boolean | SelectionItem[]
+  /** Selection menu (true = default menu, or custom items; use SELECTION_ALL, SELECTION_INVERT, SELECTION_NONE constants) */
+  selections?: boolean | (SelectionItem | typeof SELECTION_ALL | typeof SELECTION_INVERT | typeof SELECTION_NONE)[]
   /** Hide "select all" checkbox in header */
   hideSelectAll?: boolean
   /** Disable parent-child check association */

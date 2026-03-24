@@ -4,30 +4,40 @@ import type { SkeletonProps, SkeletonAvatarProps, SkeletonTitleProps, SkeletonPa
 import { skeletonDefaultProps } from './types'
 
 defineOptions({ name: 'ASkeleton' })
-const props = withDefaults(defineProps<SkeletonProps>(), skeletonDefaultProps)
+const props = withDefaults(defineProps<SkeletonProps>(), {
+  loading: true,
+  avatar: undefined,
+  title: undefined,
+  paragraph: undefined,
+  active: false,
+  round: false,
+})
 const slots = useSlots()
 
 const hasChildren = computed(() => !!slots.default)
 
-// Normalize avatar config
+// Normalize avatar config (default: false)
 const avatarConfig = computed<SkeletonAvatarProps | null>(() => {
-  if (!props.avatar) return null
-  if (props.avatar === true) return { size: 'default', shape: 'circle' }
-  return { size: 'default', shape: 'circle', ...props.avatar }
+  const avatar = props.avatar ?? false
+  if (!avatar) return null
+  if (avatar === true) return { size: 'default', shape: 'circle' }
+  return { size: 'default', shape: 'circle', ...avatar }
 })
 
-// Normalize title config
+// Normalize title config (default: true)
 const titleConfig = computed<SkeletonTitleProps | null>(() => {
-  if (!props.title) return null
-  if (props.title === true) return {}
-  return props.title
+  const title = props.title ?? true
+  if (!title) return null
+  if (title === true) return {}
+  return title
 })
 
-// Normalize paragraph config
+// Normalize paragraph config (default: true)
 const paragraphConfig = computed<SkeletonParagraphProps | null>(() => {
-  if (!props.paragraph) return null
-  if (props.paragraph === true) return { rows: props.avatar ? 2 : 3 }
-  return { rows: props.avatar ? 2 : 3, ...props.paragraph }
+  const paragraph = props.paragraph ?? true
+  if (!paragraph) return null
+  if (paragraph === true) return { rows: props.avatar ? 2 : 3 }
+  return { rows: props.avatar ? 2 : 3, ...paragraph }
 })
 
 const titleWidth = computed(() => {

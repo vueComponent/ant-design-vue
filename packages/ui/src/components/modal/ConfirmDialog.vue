@@ -32,7 +32,7 @@
                 <button
                   v-if="showCancel"
                   class="ant-btn ant-btn-outlined"
-                  v-bind="config.cancelButtonProps"
+                  v-bind="(config.cancelButtonProps as any)"
                   @click="onCancel"
                 >
                   {{ config.cancelText || 'Cancel' }}
@@ -41,7 +41,7 @@
                   ref="okBtnRef"
                   class="ant-btn ant-btn-solid"
                   :class="{ 'ant-btn-danger': config.type === 'error' }"
-                  v-bind="config.okButtonProps"
+                  v-bind="(config.okButtonProps as any)"
                   :disabled="loading"
                   @click="onOk"
                 >

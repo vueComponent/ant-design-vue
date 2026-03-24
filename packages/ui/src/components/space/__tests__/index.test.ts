@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { Space, SpaceCompact } from '@ant-design-vue/ui'
+import { h } from 'vue'
+import { Space, SpaceCompact, ConfigProvider } from '@ant-design-vue/ui'
 
 describe('Space', () => {
   it('renders with ant-space class', () => {
@@ -60,6 +61,15 @@ describe('Space', () => {
     expect(wrapper.element.style.rowGap).toBe('16px')
   })
 
+  it('supports size: 0 (no gap)', () => {
+    const wrapper = mount(Space, {
+      props: { size: 0 },
+      slots: { default: '<span>a</span>' },
+    })
+    expect(wrapper.element.style.columnGap).toBe('0px')
+    expect(wrapper.element.style.rowGap).toBe('0px')
+  })
+
   it('supports wrap prop', () => {
     const wrapper = mount(Space, {
       props: { wrap: true },
@@ -81,6 +91,36 @@ describe('Space', () => {
       slots: { default: '<span>a</span>' },
     })
     expect(wrapper.classes('ant-space-align-center')).toBe(true)
+  })
+
+  it('supports split slot', () => {
+    const wrapper = mount(Space, {
+      slots: {
+        default: '<span>a</span><span>b</span><span>c</span>',
+        split: '<span class="split">|</span>',
+      },
+    })
+    expect(wrapper.find('.ant-space-item-split').exists()).toBe(true)
+    expect(wrapper.findAll('.ant-space-item-split')).toHaveLength(2)
+  })
+
+  it('applies RTL class when direction is rtl', () => {
+    const wrapper = mount(ConfigProvider, {
+      props: { direction: 'rtl' },
+      slots: { default: () => h(Space, null, { default: () => [h('span', 'a')] }) },
+    })
+    const spaceEl = wrapper.find('.ant-space')
+    expect(spaceEl.classes('ant-space-rtl')).toBe(true)
+  })
+
+  it('inherits global size from ConfigProvider', () => {
+    const wrapper = mount(ConfigProvider, {
+      props: { size: 'lg' },
+      slots: { default: () => h(Space, null, { default: () => [h('span', 'a')] }) },
+    })
+    const spaceEl = wrapper.find<HTMLElement>('.ant-space')
+    const gap = spaceEl.element.style.columnGap
+    expect(['8px', '16px', '24px']).toContain(gap)
   })
 })
 
@@ -106,5 +146,35 @@ describe('SpaceCompact', () => {
       slots: { default: '<button>a</button>' },
     })
     expect(wrapper.classes('ant-space-compact-vertical')).toBe(true)
+  })
+
+  it('supports align prop', () => {
+    const wrapper = mount(SpaceCompact, {
+      props: { align: 'center' },
+      slots: { default: '<button>a</button>' },
+    })
+    expect(wrapper.classes('ant-space-compact-align-center')).toBe(true)
+  })
+
+  it('has role="group" for accessibility', () => {
+    const wrapper = mount(SpaceCompact, {
+      slots: { default: '<button>a</button>' },
+    })
+    expect(wrapper.attributes('role')).toBe('group')
+  })
+
+  it('applies RTL class when direction is rtl', () => {
+    const wrapper = mount(ConfigProvider, {
+      props: { direction: 'rtl' },
+      slots: { default: () => h(SpaceCompact, null, { default: () => [h('button', 'a')] }) },
+    })
+    const compactEl = wrapper.find('.ant-space-compact')
+    expect(compactEl.classes('ant-space-compact-rtl')).toBe(true)
+  })
+})
+
+describe('Space.Compact', () => {
+  it('exposes Compact as static property', () => {
+    expect(Space.Compact).toBe(SpaceCompact)
   })
 })

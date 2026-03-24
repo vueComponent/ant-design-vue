@@ -1,25 +1,52 @@
 <script setup lang="ts">
-import { computed, provide } from 'vue'
+import { computed, useSlots, useAttrs, provide, type VNode } from 'vue'
 import type { SpaceCompactProps } from './types'
-import { spaceCompactDefaultProps, spaceCompactContextKey } from './types'
+import { spaceCompactDefaultProps, filterEmpty, spaceCompactContextKey } from './types'
+import { useConfigInject } from '@/hooks'
+import CompactItem from './CompactItem.vue'
 
-defineOptions({ name: 'ASpaceCompact' })
+defineOptions({ name: 'ASpaceCompact', inheritAttrs: false })
 const props = withDefaults(defineProps<SpaceCompactProps>(), spaceCompactDefaultProps)
 
-provide(spaceCompactContextKey, {
-  compactSize: computed(() => props.size) as any,
-  compactDirection: computed(() => props.direction) as any,
-})
+const slots = useSlots()
+const attrs = useAttrs()
+
+// Provide context to mark we're inside a SpaceCompact (for nested detection)
+provide(spaceCompactContextKey, true)
+
+// Add RTL support
+const { direction: rtlDirection } = useConfigInject()
+const isRtl = computed(() => rtlDirection.value === 'rtl')
 
 const classes = computed(() => ({
   'ant-space-compact': true,
   [`ant-space-compact-${props.direction}`]: true,
   'ant-space-compact-block': props.block,
+  'ant-space-compact-rtl': isRtl.value,
+  [`ant-space-compact-align-${props.align}`]: !!props.align,
 }))
+
+// Get valid children and filter empty ones
+function getValidChildren(): VNode[] {
+  const children = slots.default?.() || []
+  return filterEmpty(children)
+}
+
+// Pre-compute children to avoid repeated calls in template
+const validChildren = computed(() => getValidChildren())
 </script>
 
 <template>
-  <div :class="classes" role="group">
-    <slot />
+  <div v-if="validChildren.length > 0" :class="[classes, attrs.class]" :style="attrs.style" role="group">
+    <CompactItem
+      v-for="(child, index) in validChildren"
+      :key="child.key ?? index"
+      :compact-size="props.size"
+      :compact-direction="props.direction"
+      :is-first-item="index === 0"
+      :is-last-item="index === validChildren.length - 1"
+    >
+      <component :is="child" />
+    </CompactItem>
   </div>
 </template>

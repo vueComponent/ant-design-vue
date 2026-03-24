@@ -25,6 +25,11 @@
   @apply items-baseline;
 }
 
+/* P1: RTL support */
+:where(.ant-space).ant-space-rtl {
+  direction: rtl;
+}
+
 /* Compact */
 :where(.ant-space-compact) {
   @apply inline-flex items-stretch;
@@ -38,47 +43,70 @@
   @apply flex-col;
 }
 
+/* P1: Compact align support */
+:where(.ant-space-compact).ant-space-compact-align-start {
+  @apply items-start;
+}
+
+:where(.ant-space-compact).ant-space-compact-align-end {
+  @apply items-end;
+}
+
+:where(.ant-space-compact).ant-space-compact-align-center {
+  @apply items-center;
+}
+
+:where(.ant-space-compact).ant-space-compact-align-baseline {
+  @apply items-baseline;
+}
+
+/* P1: Compact RTL support */
+:where(.ant-space-compact).ant-space-compact-rtl {
+  direction: rtl;
+}
+
 /* Compact children: merge borders */
-:where(.ant-space-compact):not(.ant-space-compact-vertical) > *:not(:first-child) {
+/* Note: CompactItem wraps each child, so we need deeper selectors */
+:where(.ant-space-compact):not(.ant-space-compact-vertical) .ant-space-compact-item:not(:first-child) {
   margin-inline-start: -1px;
 }
 
-:where(.ant-space-compact):not(.ant-space-compact-vertical) > *:first-child {
+:where(.ant-space-compact):not(.ant-space-compact-vertical) .ant-space-compact-item:first-child > * {
   border-start-end-radius: 0;
   border-end-end-radius: 0;
 }
 
-:where(.ant-space-compact):not(.ant-space-compact-vertical) > *:last-child {
+:where(.ant-space-compact):not(.ant-space-compact-vertical) .ant-space-compact-item:last-child > * {
   border-start-start-radius: 0;
   border-end-start-radius: 0;
 }
 
-:where(.ant-space-compact):not(.ant-space-compact-vertical) > *:not(:first-child):not(:last-child) {
+:where(.ant-space-compact):not(.ant-space-compact-vertical) .ant-space-compact-item:not(:first-child):not(:last-child) > * {
   border-radius: 0;
 }
 
 /* Vertical compact */
-:where(.ant-space-compact).ant-space-compact-vertical > *:not(:first-child) {
+:where(.ant-space-compact).ant-space-compact-vertical .ant-space-compact-item:not(:first-child) {
   margin-top: -1px;
 }
 
-:where(.ant-space-compact).ant-space-compact-vertical > *:first-child {
+:where(.ant-space-compact).ant-space-compact-vertical .ant-space-compact-item:first-child > * {
   border-end-start-radius: 0;
   border-end-end-radius: 0;
 }
 
-:where(.ant-space-compact).ant-space-compact-vertical > *:last-child {
+:where(.ant-space-compact).ant-space-compact-vertical .ant-space-compact-item:last-child > * {
   border-start-start-radius: 0;
   border-start-end-radius: 0;
 }
 
-:where(.ant-space-compact).ant-space-compact-vertical > *:not(:first-child):not(:last-child) {
+:where(.ant-space-compact).ant-space-compact-vertical .ant-space-compact-item:not(:first-child):not(:last-child) > * {
   border-radius: 0;
 }
 
 /* Hover z-index for compact items */
-:where(.ant-space-compact) > *:hover,
-:where(.ant-space-compact) > *:focus,
-:where(.ant-space-compact) > *:active {
+:where(.ant-space-compact) .ant-space-compact-item:hover,
+:where(.ant-space-compact) .ant-space-compact-item:focus,
+:where(.ant-space-compact) .ant-space-compact-item:active {
   z-index: 2;
 }

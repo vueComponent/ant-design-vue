@@ -84,7 +84,7 @@ onMounted(() => {
 })
 
 watch(
-  () => props.item.args.duration,
+  () => props.item.args,
   () => {
     clearTimer()
     startTimer()

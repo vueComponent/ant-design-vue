@@ -12,6 +12,10 @@
   gap: 8px;
 }
 
+:where(.ant-message.ant-message-rtl) {
+  direction: rtl;
+}
+
 /* Message notice */
 :where(.ant-message-notice) {
   @apply text-center;

@@ -22,11 +22,14 @@ const globalConfig: MessageConfigOptions = {
   duration: 3,
   maxCount: undefined,
 }
+const containerConfig = reactive<Pick<MessageConfigOptions, 'top' | 'rtl'>>({
+  top: globalConfig.top,
+  rtl: globalConfig.rtl,
+})
 
 let mounted = false
 let containerApp: ReturnType<typeof createApp> | null = null
 let containerEl: HTMLElement | null = null
-let messageRootEl: HTMLElement | null = null
 
 const closeResolvers = new Map<string, Array<() => void>>()
 
@@ -43,17 +46,6 @@ function flushCloseResolvers(id: string) {
   list.forEach((resolve) => resolve())
 }
 
-function syncContainerStyles() {
-  if (!messageRootEl) return
-
-  if (globalConfig.top != null) {
-    messageRootEl.style.top =
-      typeof globalConfig.top === 'number' ? `${globalConfig.top}px` : globalConfig.top
-  }
-
-  messageRootEl.classList.toggle('ant-message-rtl', globalConfig.rtl === true)
-}
-
 function ensureMounted() {
   if (mounted || typeof document === 'undefined') return
 
@@ -64,16 +56,13 @@ function ensureMounted() {
 
   containerApp = createApp(MessageContainer, {
     messages,
-    top: globalConfig.top,
-    rtl: globalConfig.rtl,
+    config: containerConfig,
     onClose: (id: string) => {
       removeMessage(id)
     },
   })
 
   containerApp.mount(container)
-  messageRootEl = container.querySelector('.ant-message') as HTMLElement | null
-  syncContainerStyles()
   mounted = true
 }
 
@@ -87,7 +76,7 @@ function removeMessage(id: string) {
 }
 
 function buildMessageReturn(id: string): MessageReturn {
-  const destroy = () => removeMessage(id)
+  const destroy = (() => removeMessage(id)) as MessageReturn
   destroy.then = (onfulfilled, onrejected) => {
     const closePromise = new Promise<void>((resolve) => {
       const exists = messages.some((m) => m.id === id)
@@ -100,7 +89,7 @@ function buildMessageReturn(id: string): MessageReturn {
 
     return closePromise.then(onfulfilled, onrejected)
   }
-  return destroy as MessageReturn
+  return destroy
 }
 
 function addMessage(args: MessageArgsProps): MessageReturn {
@@ -179,16 +168,21 @@ export const message: MessageInstance = {
     }
   },
   config: (options: MessageConfigOptions) => {
-    const moveContainer =
-      mounted && !!options.getContainer && containerEl && options.getContainer() !== containerEl.parentElement
+    let nextContainer: HTMLElement | null | undefined
+    let moveContainer = false
 
-    Object.assign(globalConfig, options)
-
-    if (moveContainer && containerEl) {
-      options.getContainer?.().appendChild(containerEl)
+    if (mounted && containerEl && options.getContainer) {
+      nextContainer = options.getContainer()
+      moveContainer = !!nextContainer && nextContainer !== containerEl.parentElement
     }
 
-    syncContainerStyles()
+    Object.assign(globalConfig, options)
+    containerConfig.top = globalConfig.top
+    containerConfig.rtl = globalConfig.rtl
+
+    if (moveContainer && containerEl && nextContainer) {
+      nextContainer.appendChild(containerEl)
+    }
   },
   useMessage: () => [message, () => null],
 }

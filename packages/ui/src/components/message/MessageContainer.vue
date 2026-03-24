@@ -1,5 +1,5 @@
 <template>
-  <div class="ant-message" :class="{ 'ant-message-rtl': rtl }" :style="containerStyle">
+  <div class="ant-message" :class="{ 'ant-message-rtl': rtl }" :style="containerStyle" :dir="rtl ? 'rtl' : undefined">
     <TransitionGroup name="ant-move-up" tag="div">
       <MessageItem
         v-for="item in messages"
@@ -18,8 +18,10 @@ import type { InternalMessageItem } from './types'
 
 const props = defineProps<{
   messages: InternalMessageItem[]
-  top?: number | string
-  rtl?: boolean
+  config: {
+    top?: number | string
+    rtl?: boolean
+  }
 }>()
 
 const emit = defineEmits<{
@@ -28,8 +30,8 @@ const emit = defineEmits<{
 
 const containerStyle = computed(() => {
   const style: Record<string, string> = {}
-  if (props.top != null) {
-    style.top = typeof props.top === 'number' ? `${props.top}px` : props.top
+  if (props.config.top != null) {
+    style.top = typeof props.config.top === 'number' ? `${props.config.top}px` : props.config.top
   }
   return style
 })
@@ -38,5 +40,5 @@ function onClose(id: string) {
   emit('close', id)
 }
 
-const rtl = computed(() => props.rtl === true)
+const rtl = computed(() => props.config.rtl === true)
 </script>

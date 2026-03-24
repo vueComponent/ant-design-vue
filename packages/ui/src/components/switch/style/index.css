@@ -73,7 +73,8 @@
 
 :where(.ant-switch-inner-checked),
 :where(.ant-switch-inner-unchecked) {
-  display: block;
+  display: flex;
+  align-items: center;
   min-height: 22px;
   transition:
     margin-inline-start var(--ant-motion-duration, 0.2s) ease-in-out,

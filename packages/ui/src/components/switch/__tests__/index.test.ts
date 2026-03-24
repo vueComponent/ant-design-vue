@@ -29,6 +29,12 @@ describe('Switch', () => {
       const wrapper = mount(Switch)
       expect(wrapper.attributes('type')).toBe('button')
     })
+
+    it('renders wave effect hook when interactive', () => {
+      const wrapper = mount(Switch, { global: { stubs: { Wave: true } } })
+      expect(wrapper.find('wave-stub').exists()).toBe(true)
+      expect(wrapper.find('wave-stub').attributes('disabled')).toBe('false')
+    })
   })
 
   describe('checked prop', () => {

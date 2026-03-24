@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined'
+import { Wave } from '../wave'
 import type { SwitchProps, SwitchEmits, SwitchSlots } from './types'
 import { switchDefaultProps } from './types'
 
@@ -125,6 +126,7 @@ defineExpose({ focus, blur })
     @focus="handleFocus"
     @blur="handleBlur"
   >
+    <Wave :target="buttonRef" :disabled="disabled || loading" />
     <div class="ant-switch-handle">
       <span v-if="loading" class="ant-switch-loading-icon">
         <LoadingOutlined />

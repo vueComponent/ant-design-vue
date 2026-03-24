@@ -107,11 +107,13 @@ function addMessage(args: MessageArgsProps): MessageReturn {
     }
   }
 
-  // Enforce maxCount
+  // Enforce maxCount with a fixed snapshot to avoid re-entrant infinite loops.
   if (globalConfig.maxCount && messages.length >= globalConfig.maxCount) {
-    while (messages.length >= globalConfig.maxCount) {
-      removeMessage(messages[0].id)
-    }
+    const removeCount = messages.length - globalConfig.maxCount + 1
+    const idsToRemove = messages.slice(0, removeCount).map((m) => m.id)
+    idsToRemove.forEach((id) => {
+      removeMessage(id)
+    })
   }
 
   const id = genId()

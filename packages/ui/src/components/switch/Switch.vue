@@ -126,7 +126,9 @@ defineExpose({ focus, blur })
     @blur="handleBlur"
   >
     <div class="ant-switch-handle">
-      <LoadingOutlined v-if="loading" class="ant-switch-loading-icon" />
+      <span v-if="loading" class="ant-switch-loading-icon">
+        <LoadingOutlined />
+      </span>
     </div>
     <span class="ant-switch-inner">
       <span v-if="isChecked" class="ant-switch-inner-checked">

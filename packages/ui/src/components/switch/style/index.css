@@ -91,12 +91,21 @@
 :where(.ant-switch-loading-icon) {
   @apply absolute inset-0 flex items-center justify-center;
   color: var(--color-accent, #1677ff);
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+:where(.ant-switch-loading-icon) :where(.anticon) {
+  display: block;
+  width: 1em;
+  height: 1em;
+  color: inherit;
+  font-size: inherit;
   line-height: 1;
 }
 
 :where(.ant-switch-checked) :where(.ant-switch-loading-icon) {
-  color: var(--color-accent-content, #fff);
+  color: var(--color-accent, #1677ff);
 }
 
 :where(.ant-switch):not(.ant-switch-checked) :where(.ant-switch-loading-icon) {

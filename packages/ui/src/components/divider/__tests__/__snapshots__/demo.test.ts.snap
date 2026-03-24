@@ -45,9 +45,9 @@ exports[`Divider demos > demo: Horizontal 1`] = `
 exports[`Divider demos > demo: OrientationMargin 1`] = `
 "<div>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator" aria-orientation="horizontal"><span class="ant-divider-inner-text" style="margin-left: 0px;"> Left with 0 margin </span></div>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left ant-divider-no-default-orientation-margin-left" role="separator" aria-orientation="horizontal"><span class="ant-divider-inner-text" style="margin-left: 0px;"> Left with 0 margin </span></div>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right" role="separator" aria-orientation="horizontal"><span class="ant-divider-inner-text" style="margin-right: 50px;"> Right with 50px margin </span></div>
+  <div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right ant-divider-no-default-orientation-margin-right" role="separator" aria-orientation="horizontal"><span class="ant-divider-inner-text" style="margin-right: 50px;"> Right with 50px margin </span></div>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 </div>"
 `;

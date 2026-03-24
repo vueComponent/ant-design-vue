@@ -64,6 +64,7 @@ describe('Divider', () => {
       props: { orientation: 'left', orientationMargin: '20px' },
       slots: { default: 'Text' },
     })
+    expect(wrapper.classes('ant-divider-no-default-orientation-margin-left')).toBe(true)
     const inner = wrapper.find('.ant-divider-inner-text')
     expect((inner.element as HTMLElement).style.marginLeft).toBe('20px')
   })
@@ -73,6 +74,7 @@ describe('Divider', () => {
       props: { orientation: 'right', orientationMargin: 30 },
       slots: { default: 'Text' },
     })
+    expect(wrapper.classes('ant-divider-no-default-orientation-margin-right')).toBe(true)
     const inner = wrapper.find('.ant-divider-inner-text')
     expect((inner.element as HTMLElement).style.marginRight).toBe('30px')
   })
@@ -83,8 +85,18 @@ describe('Divider', () => {
       slots: { default: 'Text' },
     })
     const inner = wrapper.find('.ant-divider-inner-text')
+    expect(wrapper.classes('ant-divider-no-default-orientation-margin-left')).toBe(false)
+    expect(wrapper.classes('ant-divider-no-default-orientation-margin-right')).toBe(false)
     expect((inner.element as HTMLElement).style.marginLeft).toBe('')
     expect((inner.element as HTMLElement).style.marginRight).toBe('')
+  })
+
+  it('does not apply orientationMargin classes without content', () => {
+    const wrapper = mount(Divider, {
+      props: { orientation: 'left', orientationMargin: '20px' },
+    })
+    expect(wrapper.classes('ant-divider-no-default-orientation-margin-left')).toBe(false)
+    expect(wrapper.classes('ant-divider-no-default-orientation-margin-right')).toBe(false)
   })
 
   it('renders plain text style', () => {

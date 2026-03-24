@@ -74,6 +74,34 @@
   @apply inline-block px-4 font-medium text-base;
 }
 
+:where(.ant-divider).ant-divider-horizontal.ant-divider-with-text-left.ant-divider-no-default-orientation-margin-left {
+  &::before {
+    width: 0;
+  }
+
+  &::after {
+    width: 100%;
+  }
+
+  .ant-divider-inner-text {
+    padding-left: 0;
+  }
+}
+
+:where(.ant-divider).ant-divider-horizontal.ant-divider-with-text-right.ant-divider-no-default-orientation-margin-right {
+  &::before {
+    width: 100%;
+  }
+
+  &::after {
+    width: 0;
+  }
+
+  .ant-divider-inner-text {
+    padding-right: 0;
+  }
+}
+
 :where(.ant-divider).ant-divider-plain .ant-divider-inner-text {
-  @apply font-normal;
+  @apply text-sm font-normal;
 }

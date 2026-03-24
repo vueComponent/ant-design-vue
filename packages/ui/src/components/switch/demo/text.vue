@@ -21,10 +21,10 @@ const checked3 = ref(true)
 
     <a-switch v-model:checked="checked3">
       <template #checkedChildren>
-        <CheckOutlined />
+        <check-outlined />
       </template>
       <template #unCheckedChildren>
-        <CloseOutlined />
+        <close-outlined />
       </template>
     </a-switch>
   </div>

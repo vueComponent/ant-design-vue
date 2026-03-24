@@ -1,7 +1,8 @@
-import { createApp, reactive, type VNode } from 'vue'
+import { createApp, reactive } from 'vue'
 import MessageContainer from './MessageContainer.vue'
 import type {
   MessageArgsProps,
+  MessageContent,
   MessageConfigOptions,
   MessageInstance,
   MessageReturn,
@@ -24,22 +25,55 @@ const globalConfig: MessageConfigOptions = {
 
 let mounted = false
 let containerApp: ReturnType<typeof createApp> | null = null
+let containerEl: HTMLElement | null = null
+let messageRootEl: HTMLElement | null = null
+
+const closeResolvers = new Map<string, Array<() => void>>()
+
+function addCloseResolver(id: string, resolve: () => void) {
+  const list = closeResolvers.get(id) ?? []
+  list.push(resolve)
+  closeResolvers.set(id, list)
+}
+
+function flushCloseResolvers(id: string) {
+  const list = closeResolvers.get(id)
+  if (!list?.length) return
+  closeResolvers.delete(id)
+  list.forEach((resolve) => resolve())
+}
+
+function syncContainerStyles() {
+  if (!messageRootEl) return
+
+  if (globalConfig.top != null) {
+    messageRootEl.style.top =
+      typeof globalConfig.top === 'number' ? `${globalConfig.top}px` : globalConfig.top
+  }
+
+  messageRootEl.classList.toggle('ant-message-rtl', globalConfig.rtl === true)
+}
 
 function ensureMounted() {
   if (mounted || typeof document === 'undefined') return
 
   const container = document.createElement('div')
-  document.body.appendChild(container)
+  const host = globalConfig.getContainer?.() ?? document.body
+  host.appendChild(container)
+  containerEl = container
 
   containerApp = createApp(MessageContainer, {
     messages,
     top: globalConfig.top,
+    rtl: globalConfig.rtl,
     onClose: (id: string) => {
       removeMessage(id)
     },
   })
 
   containerApp.mount(container)
+  messageRootEl = container.querySelector('.ant-message') as HTMLElement | null
+  syncContainerStyles()
   mounted = true
 }
 
@@ -48,7 +82,25 @@ function removeMessage(id: string) {
   if (idx > -1) {
     const [item] = messages.splice(idx, 1)
     item.args.onClose?.()
+    flushCloseResolvers(id)
   }
+}
+
+function buildMessageReturn(id: string): MessageReturn {
+  const destroy = () => removeMessage(id)
+  destroy.then = (onfulfilled, onrejected) => {
+    const closePromise = new Promise<void>((resolve) => {
+      const exists = messages.some((m) => m.id === id)
+      if (!exists) {
+        resolve()
+        return
+      }
+      addCloseResolver(id, resolve)
+    })
+
+    return closePromise.then(onfulfilled, onrejected)
+  }
+  return destroy as MessageReturn
 }
 
 function addMessage(args: MessageArgsProps): MessageReturn {
@@ -58,19 +110,19 @@ function addMessage(args: MessageArgsProps): MessageReturn {
   if (args.key != null) {
     const existing = messages.find((m) => m.args.key === args.key)
     if (existing) {
-      existing.args = { ...args }
-      const destroy = () => removeMessage(existing.id)
-      destroy.then = (resolve: () => void) => {
-        const duration = args.duration ?? globalConfig.duration ?? 3
-        setTimeout(resolve, duration * 1000)
+      existing.args = {
+        ...args,
+        duration: args.duration ?? globalConfig.duration ?? 3,
       }
-      return destroy as MessageReturn
+      return buildMessageReturn(existing.id)
     }
   }
 
   // Enforce maxCount
   if (globalConfig.maxCount && messages.length >= globalConfig.maxCount) {
-    messages.splice(0, messages.length - globalConfig.maxCount + 1)
+    while (messages.length >= globalConfig.maxCount) {
+      removeMessage(messages[0].id)
+    }
   }
 
   const id = genId()
@@ -84,21 +136,26 @@ function addMessage(args: MessageArgsProps): MessageReturn {
 
   messages.push(item)
 
-  const destroy = () => removeMessage(id)
-  destroy.then = (resolve: () => void) => {
-    const duration = item.args.duration ?? 3
-    setTimeout(resolve, duration * 1000)
-  }
+  return buildMessageReturn(id)
+}
 
-  return destroy as MessageReturn
+function isArgsProps(content: unknown): content is MessageArgsProps {
+  return !!content && typeof content === 'object' && 'content' in (content as MessageArgsProps)
 }
 
 function createTypeFn(type: MessageType) {
   return (
-    content: string | VNode | (() => VNode),
+    content: MessageContent | MessageArgsProps,
     duration?: number,
     onClose?: () => void,
   ): MessageReturn => {
+    if (isArgsProps(content)) {
+      return addMessage({
+        ...content,
+        type,
+      })
+    }
+
     return addMessage({ content, type, duration, onClose })
   }
 }
@@ -108,6 +165,7 @@ export const message: MessageInstance = {
   success: createTypeFn('success'),
   error: createTypeFn('error'),
   warning: createTypeFn('warning'),
+  warn: createTypeFn('warning'),
   loading: createTypeFn('loading'),
   open: (args: MessageArgsProps) => addMessage(args),
   destroy: (key?: string | number) => {
@@ -115,10 +173,22 @@ export const message: MessageInstance = {
       const item = messages.find((m) => m.args.key === key)
       if (item) removeMessage(item.id)
     } else {
-      messages.splice(0, messages.length)
+      while (messages.length) {
+        removeMessage(messages[0].id)
+      }
     }
   },
   config: (options: MessageConfigOptions) => {
+    const moveContainer =
+      mounted && !!options.getContainer && containerEl && options.getContainer() !== containerEl.parentElement
+
     Object.assign(globalConfig, options)
+
+    if (moveContainer && containerEl) {
+      options.getContainer?.().appendChild(containerEl)
+    }
+
+    syncContainerStyles()
   },
+  useMessage: () => [message, () => null],
 }

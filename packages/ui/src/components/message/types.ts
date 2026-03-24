@@ -2,16 +2,19 @@ import type { VNode, CSSProperties } from 'vue'
 import type { Slot } from '@/utils/types'
 
 export type MessageType = 'info' | 'success' | 'error' | 'warning' | 'loading'
+export type MessageContent = string | VNode | (() => VNode)
 
 export interface MessageArgsProps {
   /** Message content */
-  content: string | VNode | (() => VNode)
+  content: MessageContent
   /** Message type */
   type?: MessageType
   /** Duration in seconds (0 = never auto-close) */
   duration?: number
   /** Callback when message closes */
   onClose?: () => void
+  /** Click callback */
+  onClick?: (e: MouseEvent) => void
   /** Custom icon */
   icon?: VNode | (() => VNode)
   /** Unique key for update/destroy */
@@ -40,21 +43,25 @@ export interface MessageInstance {
   success: MessageFn
   error: MessageFn
   warning: MessageFn
+  warn: MessageFn
   loading: MessageFn
   open: (args: MessageArgsProps) => MessageReturn
   destroy: (key?: string | number) => void
   config: (options: MessageConfigOptions) => void
+  useMessage: () => readonly [MessageInstance, () => VNode | null]
 }
 
-export type MessageFn = (
-  content: string | VNode | (() => VNode),
-  duration?: number,
-  onClose?: () => void,
-) => MessageReturn
+export type MessageFn = {
+  (content: MessageContent, duration?: number, onClose?: () => void): MessageReturn
+  (args: MessageArgsProps): MessageReturn
+}
 
 export interface MessageReturn {
   (): void // call to destroy
-  then: (resolve: () => void) => void
+  then: <TResult1 = void, TResult2 = never>(
+    onfulfilled?: ((value: void) => TResult1 | PromiseLike<TResult1>) | null,
+    onrejected?: ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
+  ) => Promise<TResult1 | TResult2>
 }
 
 export interface InternalMessageItem {

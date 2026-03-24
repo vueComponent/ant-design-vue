@@ -1,5 +1,5 @@
 <template>
-  <div :class="itemClasses" :style="item.args.style">
+  <div :class="itemClasses" :style="item.args.style" @click="handleClick">
     <div class="ant-message-notice-content">
       <span v-if="iconNode" class="ant-message-icon">
         <component :is="iconNode" />
@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount, isVNode, type Component } from 'vue'
+import { computed, onMounted, onBeforeUnmount, watch, isVNode, type Component } from 'vue'
 import {
   InfoCircleFilled,
   CheckCircleFilled,
@@ -75,9 +75,21 @@ function clearTimer() {
   }
 }
 
+function handleClick(event: MouseEvent) {
+  props.item.args.onClick?.(event)
+}
+
 onMounted(() => {
   startTimer()
 })
+
+watch(
+  () => props.item.args.duration,
+  () => {
+    clearTimer()
+    startTimer()
+  },
+)
 
 onBeforeUnmount(() => {
   clearTimer()

@@ -11,8 +11,8 @@ const checked3 = ref(true)
 <template>
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <a-switch v-model:checked="checked1">
-      <template #checkedChildren>开启</template>
-      <template #unCheckedChildren>关闭</template>
+      <template #checkedChildren>ON</template>
+      <template #unCheckedChildren>OFF</template>
     </a-switch>
 
     <a-switch v-model:checked="checked2">

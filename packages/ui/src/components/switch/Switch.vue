@@ -45,15 +45,19 @@ const classes = computed(() => ({
   'ant-switch-small': props.size === 'small',
 }))
 
-function toggle(event: MouseEvent) {
-  if (props.disabled || props.loading) return
-
-  const newValue = isChecked.value ? props.unCheckedValue! : props.checkedValue!
+function setChecked(newValue: boolean | string | number, event: MouseEvent | KeyboardEvent) {
   if (!isControlled.value) {
     internalChecked.value = newValue
   }
   emit('update:checked', newValue)
   emit('change', newValue, event)
+}
+
+function toggle(event: MouseEvent) {
+  if (props.disabled || props.loading) return
+
+  const newValue = isChecked.value ? props.unCheckedValue! : props.checkedValue!
+  setChecked(newValue, event)
   emit('click', newValue, event)
 }
 
@@ -61,20 +65,10 @@ function handleKeydown(event: KeyboardEvent) {
   if (props.disabled || props.loading) return
   if (event.key === 'ArrowRight' && !isChecked.value) {
     event.preventDefault()
-    const newValue = props.checkedValue!
-    if (!isControlled.value) {
-      internalChecked.value = newValue
-    }
-    emit('update:checked', newValue)
-    emit('change', newValue, event)
+    setChecked(props.checkedValue!, event)
   } else if (event.key === 'ArrowLeft' && isChecked.value) {
     event.preventDefault()
-    const newValue = props.unCheckedValue!
-    if (!isControlled.value) {
-      internalChecked.value = newValue
-    }
-    emit('update:checked', newValue)
-    emit('change', newValue, event)
+    setChecked(props.unCheckedValue!, event)
   }
   emit('keydown', event)
 }

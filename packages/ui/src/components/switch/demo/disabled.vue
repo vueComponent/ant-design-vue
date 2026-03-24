@@ -12,6 +12,7 @@ function onToggle() {
 <template>
   <div style="display: flex; flex-direction: column; gap: 16px;">
     <a-switch v-model:checked="checked" :disabled="disabled" />
+    <a-switch :disabled="disabled" />
     <a-button type="primary" @click="onToggle">Toggle disabled</a-button>
   </div>
 </template>

@@ -71,7 +71,7 @@ const slotHasVisibleCloseText = computed(() => {
 
 // Only omit aria-label when closeText is confidently visible text
 const hasVisibleCloseText = computed(() => {
-  return closeTextRenderType.value === 'text' || slotHasVisibleCloseText.value
+  return hasVisibleText(closeTextContent.value) || slotHasVisibleCloseText.value
 })
 
 const hasDescription = computed(() => {

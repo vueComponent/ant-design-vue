@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useSlots } from 'vue'
+import { computed, isVNode, ref, useSlots } from 'vue'
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled'
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled'
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled'
@@ -30,22 +30,33 @@ const showIconComputed = computed(() => {
 
 const closableComputed = computed(() => {
   // When closeText prop is set, closable becomes true
-  if (props.closeText) return true
+  if (props.closeText !== undefined && props.closeText !== null && props.closeText !== false) return true
   return props.closable || !!slots.closeText || !!slots.closeIcon
 })
 
-// Calculate what closeText content to display (when closeText prop is a string)
+// Calculate what closeText content to display (string, VNode, or component)
 const closeTextContent = computed(() => {
-  // If closeText is a string, show it; if it's true, show nothing (just icon)
-  if (typeof props.closeText === 'string') {
-    return props.closeText
-  }
-  return null
+  // If closeText is true, show nothing (just icon)
+  if (props.closeText === true) return null
+  return props.closeText
+})
+
+const closeTextRenderType = computed(() => {
+  const value = closeTextContent.value
+  if (value === null || value === undefined || value === false || value === '') return 'none'
+  if (typeof value === 'string' || typeof value === 'number') return 'text'
+  if (typeof value === 'function') return 'function'
+  if (isVNode(value)) return 'vnode'
+  return 'component'
+})
+
+const hasCloseTextContent = computed(() => {
+  return closeTextRenderType.value !== 'none'
 })
 
 // Check if there's actual close content (slot or non-true prop)
 const hasCloseContent = computed(() => {
-  return !!slots.closeText || closeTextContent.value
+  return !!slots.closeText || !!hasCloseTextContent.value
 })
 
 const hasDescription = computed(() => {
@@ -107,8 +118,17 @@ function afterLeaveHandler() {
         @click="handleClose"
       >
         <slot name="closeText">
-          <template v-if="closeTextContent">
+          <template v-if="closeTextRenderType === 'text'">
             <span class="ant-alert-close-text">{{ closeTextContent }}</span>
+          </template>
+          <template v-else-if="closeTextRenderType === 'function'">
+            <component :is="closeTextContent" />
+          </template>
+          <template v-else-if="closeTextRenderType === 'vnode'">
+            <component :is="() => closeTextContent" />
+          </template>
+          <template v-else-if="closeTextRenderType === 'component'">
+            <component :is="closeTextContent" />
           </template>
           <template v-else>
             <slot name="closeIcon">

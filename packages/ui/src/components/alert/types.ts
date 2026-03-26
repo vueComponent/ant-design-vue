@@ -1,4 +1,5 @@
-import type { Slot } from '@/utils/types'
+import type { Component } from 'vue'
+import type { Slot, SlotReturnType } from '@/utils/types'
 
 export interface AlertProps {
   /** Alert type */
@@ -13,8 +14,8 @@ export interface AlertProps {
   showIcon?: boolean
   /** Display as banner (full-width, no border, no icon default) */
   banner?: boolean
-  /** Close text/node - any string, component or boolean (deprecated: use closeText slot instead) */
-  closeText?: any
+  /** Close text/node - any string, component or boolean */
+  closeText?: SlotReturnType | Component
   /** Callback after close animation finishes */
   afterClose?: () => void
 }

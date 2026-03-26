@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { Alert } from '@ant-design-vue/ui'
 import { mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 
 describe('Alert', () => {
   it('should render correctly', () => {
@@ -229,6 +229,17 @@ describe('Alert', () => {
     expect(wrapper.find('.ant-alert-close-icon').text()).toContain('Close Now')
   })
 
+  it('closeText empty string still makes alert closable and falls back to icon', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close me', closeText: '' },
+    })
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(true)
+    expect(wrapper.find('.ant-alert').classes()).toContain('ant-alert-closable')
+    expect(closeButton.attributes('aria-label')).toBe('Close')
+    expect(wrapper.find('.ant-alert-close-text').exists()).toBe(false)
+  })
+
   it('closeText prop overrides closeIcon when both exist', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Test', closeText: 'Close' },
@@ -239,6 +250,18 @@ describe('Alert', () => {
     expect(wrapper.find('.ant-alert-close-icon').text()).toContain('Close')
     // closeIcon slot should NOT be rendered when closeText is present
     expect(wrapper.find('.custom-close').exists()).toBe(false)
+  })
+
+  it('renders VNode closeText prop and omits aria-label', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        message: 'VNode closeText',
+        closeText: h('span', { class: 'vnode-close-text' }, 'Dismiss'),
+      },
+    })
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.find('.vnode-close-text').exists()).toBe(true)
+    expect(closeButton.attributes('aria-label')).toBeUndefined()
   })
 
   it('renders default slot as message content', () => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, isVNode, ref, useSlots } from 'vue'
+import { Comment, computed, Fragment, isVNode, ref, Text, useSlots } from 'vue'
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled'
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled'
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled'
@@ -49,9 +49,29 @@ const closeTextRenderType = computed(() => {
   return 'dynamic'
 })
 
+function hasVisibleText(value: unknown): boolean {
+  if (value === null || value === undefined || value === false) return false
+  if (typeof value === 'string' || typeof value === 'number') {
+    return String(value).trim().length > 0
+  }
+  if (Array.isArray(value)) return value.some(hasVisibleText)
+  if (!isVNode(value)) return false
+  const ariaHidden = (value.props as Record<string, unknown> | null | undefined)?.['aria-hidden']
+  if (ariaHidden === true || ariaHidden === 'true' || ariaHidden === '') return false
+  if (value.type === Comment) return false
+  if (value.type === Text || value.type === Fragment) {
+    return hasVisibleText(value.children)
+  }
+  return hasVisibleText(value.children)
+}
+
+const slotHasVisibleCloseText = computed(() => {
+  return hasVisibleText(slots.closeText?.())
+})
+
 // Only omit aria-label when closeText is confidently visible text
 const hasVisibleCloseText = computed(() => {
-  return closeTextRenderType.value === 'text'
+  return closeTextRenderType.value === 'text' || slotHasVisibleCloseText.value
 })
 
 const hasDescription = computed(() => {

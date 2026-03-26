@@ -208,6 +208,18 @@ describe('Alert', () => {
     const closeButton = wrapper.find('.ant-alert-close-icon')
     expect(closeButton.exists()).toBe(true)
     expect(closeButton.text()).toBe('Close Now')
+    expect(closeButton.attributes('aria-label')).toBeUndefined()
+  })
+
+  it('keeps aria-label when closeText slot is icon-only', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close icon text slot' },
+      slots: {
+        closeText: '<span class="slot-close-icon" aria-hidden="true">x</span>',
+      },
+    })
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.find('.slot-close-icon').exists()).toBe(true)
     expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 

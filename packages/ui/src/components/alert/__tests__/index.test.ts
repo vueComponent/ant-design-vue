@@ -268,6 +268,22 @@ describe('Alert', () => {
     expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 
+  it('renders VNode[] closeText prop and keeps aria-label', () => {
+    const wrapper = mount(Alert, {
+      props: {
+        message: 'VNode[] closeText',
+        closeText: [
+          h('span', { class: 'vnode-close-text-part1' }, 'Dis'),
+          h('span', { class: 'vnode-close-text-part2' }, 'miss'),
+        ],
+      },
+    })
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.find('.vnode-close-text-part1').exists()).toBe(true)
+    expect(closeButton.find('.vnode-close-text-part2').exists()).toBe(true)
+    expect(closeButton.attributes('aria-label')).toBe('Close')
+  })
+
   it('renders default slot as message content', () => {
     const wrapper = mount(Alert, {
       slots: {

@@ -46,6 +46,7 @@ const closeTextRenderType = computed(() => {
   if (value === null || value === undefined || value === false || value === '') return 'none'
   if (typeof value === 'string' || typeof value === 'number') return 'text'
   if (typeof value === 'function') return 'function'
+  if (Array.isArray(value)) return 'nodes'
   if (isVNode(value)) return 'vnode'
   return 'component'
 })
@@ -125,6 +126,9 @@ function afterLeaveHandler() {
             <component :is="closeTextContent" />
           </template>
           <template v-else-if="closeTextRenderType === 'vnode'">
+            <component :is="() => closeTextContent" />
+          </template>
+          <template v-else-if="closeTextRenderType === 'nodes'">
             <component :is="() => closeTextContent" />
           </template>
           <template v-else-if="closeTextRenderType === 'component'">

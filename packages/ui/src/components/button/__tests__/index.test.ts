@@ -60,9 +60,9 @@ describe('Button', () => {
       expect(wrapper.classes()).toContain(`ant-btn-${variant}`)
     })
 
-    it('defaults to solid', () => {
+    it('defaults to outlined when no variant or type is set', () => {
       const wrapper = mount(Button)
-      expect(wrapper.classes()).toContain('ant-btn-solid')
+      expect(wrapper.classes()).toContain('ant-btn-outlined')
     })
   })
 
@@ -166,13 +166,11 @@ describe('Button', () => {
       expect(onClick).not.toHaveBeenCalled()
     })
 
-    it('allows custom loading slot', () => {
+    it('shows default loading icon (no custom loading slot)', () => {
       const wrapper = mount(Button, {
         props: { loading: true },
-        slots: { loading: '<span class="custom-spinner" />' },
       })
-      expect(wrapper.find('.custom-spinner').exists()).toBe(true)
-      expect(wrapper.find('.ant-btn-loading-icon').exists()).toBe(false)
+      expect(wrapper.find('.ant-btn-loading-icon').exists()).toBe(true)
     })
   })
 
@@ -341,6 +339,114 @@ describe('Button', () => {
     })
   })
 
+  describe('href + disabled', () => {
+    it('does not render href when disabled', () => {
+      const wrapper = mount(Button, {
+        props: { href: 'https://example.com', disabled: true },
+      })
+      expect(wrapper.element.tagName).toBe('A')
+      expect(wrapper.attributes('href')).toBeUndefined()
+      expect(wrapper.attributes('aria-disabled')).toBe('true')
+    })
+
+    it('does not render target when disabled', () => {
+      const wrapper = mount(Button, {
+        props: { href: 'https://example.com', target: '_blank', disabled: true },
+      })
+      expect(wrapper.attributes('target')).toBeUndefined()
+    })
+
+    it('sets tabindex=-1 when href is disabled', () => {
+      const wrapper = mount(Button, {
+        props: { href: 'https://example.com', disabled: true },
+      })
+      expect(wrapper.attributes('tabindex')).toBe('-1')
+    })
+
+    it('sets role=link when href is disabled', () => {
+      const wrapper = mount(Button, {
+        props: { href: 'https://example.com', disabled: true },
+      })
+      expect(wrapper.attributes('role')).toBe('link')
+    })
+
+    it('prevents click when href is disabled', async () => {
+      const wrapper = mount(Button, {
+        props: { href: 'https://example.com', disabled: true },
+      })
+      await wrapper.trigger('click')
+      expect(wrapper.emitted('click')).toBeUndefined()
+    })
+  })
+
+  describe('loading state edge case', () => {
+    it('does not show loading icon when loading=false', () => {
+      const wrapper = mount(Button, {
+        props: { loading: false },
+      })
+      expect(wrapper.find('.ant-btn-loading-icon').exists()).toBe(false)
+    })
+  })
+
+  describe('type prop deprecation warning', () => {
+    it('warns when using deprecated type prop', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+      mount(Button, { props: { type: 'primary' } })
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('[antdv] Button'),
+      )
+      warnSpy.mockRestore()
+    })
+
+    it('warns for unknown type value', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+      mount(Button, { props: { type: 'ghost' as any } })
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('unknown type "ghost"'),
+      )
+      warnSpy.mockRestore()
+    })
+  })
+
+  describe('icon-only', () => {
+    it('applies icon-only class when only icon slot is provided', () => {
+      const wrapper = mount(Button, {
+        slots: { icon: '<span class="my-icon" />' },
+      })
+      expect(wrapper.classes()).toContain('ant-btn-icon-only')
+    })
+
+    it('does not apply icon-only class when default slot is provided', () => {
+      const wrapper = mount(Button, {
+        slots: {
+          icon: '<span class="my-icon" />',
+          default: 'Text',
+        },
+      })
+      expect(wrapper.classes()).not.toContain('ant-btn-icon-only')
+    })
+  })
+
+  describe('ghost + text/link warning', () => {
+    it('warns when ghost is used with text variant', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+      mount(Button, { props: { variant: 'text', ghost: true } })
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('`text` variant cannot be used with `ghost`'),
+      )
+      warnSpy.mockRestore()
+    })
+
+    it('warns when ghost is used with link variant', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+      mount(Button, { props: { variant: 'link', ghost: true } })
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('`link` variant cannot be used with `ghost`'),
+      )
+      warnSpy.mockRestore()
+    })
+  })
+
   describe('component name', () => {
     it('has correct name', () => {
       expect(Button.name).toBe('AButton')
@@ -379,5 +485,23 @@ describe('ButtonGroup', () => {
 
   it('has correct component name', () => {
     expect(ButtonGroup.name).toBe('AButtonGroup')
+  })
+
+  it('passes size to child buttons via provide/inject', () => {
+    const wrapper = mount(ButtonGroup, {
+      props: { size: 'lg' },
+      slots: { default: () => [h(Button, null, { default: () => 'A' })] },
+    })
+    const btn = wrapper.findComponent(Button)
+    expect(btn.classes()).toContain('ant-btn-lg')
+  })
+
+  it('child button local size overrides group size', () => {
+    const wrapper = mount(ButtonGroup, {
+      props: { size: 'lg' },
+      slots: { default: () => [h(Button, { size: 'sm' }, { default: () => 'A' })] },
+    })
+    const btn = wrapper.findComponent(Button)
+    expect(btn.classes()).toContain('ant-btn-sm')
   })
 })

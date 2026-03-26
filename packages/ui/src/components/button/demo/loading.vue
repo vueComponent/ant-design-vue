@@ -10,7 +10,7 @@
       </a-button>
       <a-button type="primary" :loading="iconLoading" @click="enterIconLoading">
         <template #icon><PoweroffOutlined /></template>
-        延迟1s
+        Delay 1s
       </a-button>
     </a-space>
     <a-space>
@@ -20,6 +20,7 @@
     </a-space>
   </a-space>
 </template>
+
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { PoweroffOutlined } from '@ant-design/icons-vue';

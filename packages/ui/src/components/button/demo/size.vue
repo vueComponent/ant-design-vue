@@ -43,9 +43,9 @@
     </a-space>
   </a-space>
 </template>
+
 <script lang="ts" setup>
 import { DownloadOutlined } from '@ant-design/icons-vue';
-import type { SizeType } from 'ant-design-vue/es/config-provider';
 import { ref } from 'vue';
-const size = ref<SizeType>('large');
+const size = ref<'large' | 'default' | 'small'>('large');
 </script>

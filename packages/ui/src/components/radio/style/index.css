@@ -170,6 +170,10 @@
   background-color: var(--color-accent, #1677ff);
 }
 
+:where(.ant-radio-button-wrapper-checked):first-child::before {
+  display: none;
+}
+
 /* ── Button Checked — Solid Style ── */
 :where(.ant-radio-group-solid) :where(.ant-radio-button-wrapper-checked) {
   color: #fff;

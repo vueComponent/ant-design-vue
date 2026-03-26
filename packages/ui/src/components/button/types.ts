@@ -1,3 +1,4 @@
+import type { InjectionKey, ComputedRef } from 'vue'
 import type { Slot } from '@/utils/types'
 
 export type ButtonVariant = 'solid' | 'outlined' | 'text' | 'link' | 'dashed' | 'filled'
@@ -6,7 +7,7 @@ export type ButtonShape = 'default' | 'circle' | 'round'
 export type ButtonHTMLType = 'submit' | 'button' | 'reset'
 
 /** @deprecated Use `variant` instead */
-export type ButtonLegacyType = 'primary' | 'default' | 'dashed' | 'text' | 'link'
+export type ButtonLegacyType = 'primary' | 'default' | 'dashed' | 'text' | 'link' | 'ghost'
 /** @deprecated Use 'sm' | 'md' | 'lg' instead */
 export type ButtonLegacySize = 'small' | 'middle' | 'large'
 
@@ -20,7 +21,7 @@ export interface ButtonProps {
   /** Button shape */
   shape?: ButtonShape
   /** Show loading spinner. Pass `{ delay: ms }` to delay the loading state */
-  loading?: boolean | { delay: number }
+  loading?: boolean | { delay?: number }
   /** Disabled state */
   disabled?: boolean
   /** Danger style */
@@ -37,6 +38,10 @@ export interface ButtonProps {
   target?: string
   /** HTML button type attribute */
   htmlType?: ButtonHTMLType
+  /** Icon component (VNode). Alternatively use #icon slot */
+  icon?: any
+  /** Title attribute */
+  title?: string
 }
 
 export const buttonDefaultProps = {
@@ -49,13 +54,13 @@ export const buttonDefaultProps = {
 } as const
 
 export interface ButtonEmits {
+  /** Explicitly emitted to gate loading/disabled state — not a passthrough of the native event */
   (e: 'click', event: MouseEvent): void
 }
 
 export interface ButtonSlots {
   default?: Slot
   icon?: Slot
-  loading?: Slot
 }
 
 // --- Legacy mapping helpers ---
@@ -71,13 +76,28 @@ const TYPE_VARIANT_MAP: Record<string, ButtonVariant> = {
 const SIZE_MAP: Record<string, ButtonSize> = {
   small: 'sm',
   middle: 'md',
+  default: 'md',
   large: 'lg',
 }
 
 export function resolveVariant(props: ButtonProps): ButtonVariant {
   if (props.variant) return props.variant
-  if (props.type) return TYPE_VARIANT_MAP[props.type] ?? 'solid'
-  return 'solid'
+  if (props.type) {
+    if (process.env.NODE_ENV !== 'production') {
+      const mapped = TYPE_VARIANT_MAP[props.type]
+      if (!mapped) {
+        console.warn(
+          `[antdv] Button: unknown type "${props.type}". Use \`variant\` prop instead.`,
+        )
+      } else {
+        console.warn(
+          `[antdv] Button: \`type="${props.type}"\` is deprecated. Use \`variant="${mapped}"\` instead.`,
+        )
+      }
+    }
+    return TYPE_VARIANT_MAP[props.type] ?? 'solid'
+  }
+  return 'outlined'
 }
 
 export function resolveSize(size: ButtonProps['size'] | undefined): ButtonSize {
@@ -86,6 +106,12 @@ export function resolveSize(size: ButtonProps['size'] | undefined): ButtonSize {
 }
 
 // --- ButtonGroup ---
+
+export interface ButtonGroupContext {
+  size: ComputedRef<ButtonSize | undefined>
+}
+
+export const BUTTON_GROUP_KEY: InjectionKey<ButtonGroupContext> = Symbol('AButtonGroup')
 
 export interface ButtonGroupProps {
   size?: ButtonSize | ButtonLegacySize

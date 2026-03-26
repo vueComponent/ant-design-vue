@@ -3,57 +3,87 @@
 exports[`Button demos > demo: Basic 1`] = `
 "<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px; flex-wrap: wrap;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Primary Button</span>
-  </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Primary Button</span>
+  </button><button class="ant-btn ant-btn-outlined ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Default Button</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Default Button</span>
   </button><button class="ant-btn ant-btn-dashed ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Dashed Button</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Dashed Button</span>
   </button><button class="ant-btn ant-btn-text ant-btn-md" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Text Button</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Text Button</span>
   </button><button class="ant-btn ant-btn-link ant-btn-md" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Link Button</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Link Button</span>
   </button></div>"
 `;
 
 exports[`Button demos > demo: Block 1`] = `
 "<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px; flex-wrap: wrap;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-block" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Primary</span>
-  </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-block" type="button">
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Primary</span>
+  </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-block" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Default</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Default</span>
   </button><button class="ant-btn ant-btn-dashed ant-btn-md ant-btn-block" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Dashed</span>
-  </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-block ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Dashed</span>
+  </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-danger ant-btn-block ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Danger</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Danger</span>
   </button><button class="ant-btn ant-btn-link ant-btn-md ant-btn-block" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Link</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Link</span>
   </button></div>"
 `;
 
 exports[`Button demos > demo: Danger 1`] = `
-"<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;" warp=""><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
+"<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px; flex-wrap: wrap;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Primary</span>
-  </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Primary</span>
+  </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Default</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Default</span>
   </button><button class="ant-btn ant-btn-dashed ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Dashed</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Dashed</span>
   </button><button class="ant-btn ant-btn-text ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Text</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Text</span>
   </button><button class="ant-btn ant-btn-link ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Link</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Link</span>
   </button></div>"
 `;
 
@@ -61,67 +91,103 @@ exports[`Button demos > demo: Disabled 1`] = `
 "<div class="ant-space ant-space-vertical" style="column-gap: 8px; row-gap: 8px;">
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Primary</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Primary</span>
     </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-disabled" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Primary(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Primary(disabled)</span>
     </button></div>
-  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-outlined ant-btn-md" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Default</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-disabled" disabled="" aria-disabled="true" type="button">
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Default</span>
+    </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-disabled" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Default(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Default(disabled)</span>
     </button></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-dashed ant-btn-md" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Dashed</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Dashed</span>
     </button><button class="ant-btn ant-btn-dashed ant-btn-md ant-btn-disabled" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Dashed(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Dashed(disabled)</span>
     </button></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-text ant-btn-md" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Text</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Text</span>
     </button><button class="ant-btn ant-btn-text ant-btn-md ant-btn-disabled" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Text(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Text(disabled)</span>
     </button></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-link ant-btn-md" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Link</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Link</span>
     </button><button class="ant-btn ant-btn-link ant-btn-md ant-btn-disabled" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Link(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Link(disabled)</span>
     </button></div>
-  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
+  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger Default</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-disabled ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" disabled="" aria-disabled="true" type="button">
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger Default</span>
+    </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-danger ant-btn-disabled ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger Default(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger Default(disabled)</span>
     </button></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-text ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger Text</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger Text</span>
     </button><button class="ant-btn ant-btn-text ant-btn-md ant-btn-danger ant-btn-disabled ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger Text(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger Text(disabled)</span>
     </button></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-link ant-btn-md ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger Link</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger Link</span>
     </button><button class="ant-btn ant-btn-link ant-btn-md ant-btn-danger ant-btn-disabled ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" disabled="" aria-disabled="true" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger Link(disabled)</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger Link(disabled)</span>
     </button></div>
   <div style="padding: 8px; background: rgb(190, 200, 200);">
-    <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-ghost" type="button">
+    <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-ghost" type="button">
         <wave-stub disabled="false"></wave-stub>
-        <!--v-if--><span class="ant-btn-content">Ghost</span>
-      </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-ghost ant-btn-disabled" disabled="" aria-disabled="true" type="button">
+        <transition-stub appear="false" persisted="false" css="true">
+          <!--v-if-->
+        </transition-stub><span class="ant-btn-content">Ghost</span>
+      </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-ghost ant-btn-disabled" disabled="" aria-disabled="true" type="button">
         <wave-stub disabled="true"></wave-stub>
-        <!--v-if--><span class="ant-btn-content">Ghost(disabled)</span>
+        <transition-stub appear="false" persisted="false" css="true">
+          <!--v-if-->
+        </transition-stub><span class="ant-btn-content">Ghost(disabled)</span>
       </button></div>
   </div>
 </div>"
@@ -131,72 +197,85 @@ exports[`Button demos > demo: Ghost 1`] = `
 "<div style="background: rgb(190, 200, 200); padding: 16px 16px;">
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-ghost" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Primary</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-ghost" type="button">
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Primary</span>
+    </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-ghost" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Default</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Default</span>
     </button><button class="ant-btn ant-btn-dashed ant-btn-md ant-btn-ghost" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Dashed</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Dashed</span>
     </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-danger ant-btn-ghost ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger</span>
     </button></div>
 </div>"
 `;
 
 exports[`Button demos > demo: Href 1`] = `
-"<div style="display: flex; flex-wrap: wrap; gap: 8px;"><a class="ant-btn ant-btn-solid ant-btn-md" href="https://vue.ant.design" target="_blank">
+"<div style="display: flex; flex-wrap: wrap; gap: 8px;"><a class="ant-btn ant-btn-outlined ant-btn-md" href="https://vue.ant.design" target="_blank">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Link Button</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Link Button</span>
   </a><a class="ant-btn ant-btn-solid ant-btn-md" href="https://vue.ant.design" target="_blank">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content"> Primary Link </span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content"> Primary Link </span>
   </a></div>"
 `;
 
 exports[`Button demos > demo: IconDemo 1`] = `
 "<div class="ant-space ant-space-vertical" style="column-gap: 8px; row-gap: 8px;">
-  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;" warp=""><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle" type="button" icon="[object Object]"><wave-stub disabled="false"></wave-stub><!--v-if--><!--v-if--></button></span>
+  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px; flex-wrap: wrap;"><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle ant-btn-icon-only" type="button"><wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span>
+    <!--v-if--></button></span>
     <!--teleport start-->
     <transition-stub name="ant-zoom-big-fast" appear="false" persisted="false" css="true">
       <!--v-if-->
     </transition-stub>
     <!--teleport end--><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">A</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button" icon="[object Object]">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Search</span>
-    </button><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle" type="button" icon="[object Object]"><wave-stub disabled="false"></wave-stub><!--v-if--><!--v-if--></button></span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">A</span>
+    </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span class="ant-btn-content"> Search </span>
+    </button><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-shape-circle ant-btn-icon-only" type="button"><wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span>
+    <!--v-if--></button></span>
     <!--teleport start-->
     <transition-stub name="ant-zoom-big-fast" appear="false" persisted="false" css="true">
       <!--v-if-->
     </transition-stub>
-    <!--teleport end--><button class="ant-btn ant-btn-solid ant-btn-md" type="button" icon="[object Object]">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Search</span>
+    <!--teleport end--><button class="ant-btn ant-btn-outlined ant-btn-md" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span class="ant-btn-content"> Search </span>
     </button>
   </div>
-  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;" warp=""><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle" type="button" icon="[object Object]"><wave-stub disabled="false"></wave-stub><!--v-if--><!--v-if--></button></span>
+  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px; flex-wrap: wrap;"><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-shape-circle ant-btn-icon-only" type="button"><wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span>
+    <!--v-if--></button></span>
     <!--teleport start-->
     <transition-stub name="ant-zoom-big-fast" appear="false" persisted="false" css="true">
       <!--v-if-->
     </transition-stub>
-    <!--teleport end--><button class="ant-btn ant-btn-solid ant-btn-md" type="button" icon="[object Object]">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Search</span>
-    </button><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-dashed ant-btn-md ant-btn-shape-circle" type="button" icon="[object Object]"><wave-stub disabled="false"></wave-stub><!--v-if--><!--v-if--></button></span>
+    <!--teleport end--><button class="ant-btn ant-btn-outlined ant-btn-md" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span class="ant-btn-content"> Search </span>
+    </button><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-dashed ant-btn-md ant-btn-shape-circle ant-btn-icon-only" type="button"><wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span>
+    <!--v-if--></button></span>
     <!--teleport start-->
     <transition-stub name="ant-zoom-big-fast" appear="false" persisted="false" css="true">
       <!--v-if-->
     </transition-stub>
-    <!--teleport end--><button class="ant-btn ant-btn-dashed ant-btn-md" type="button" icon="[object Object]">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Search</span>
-    </button><a class="ant-btn ant-btn-solid ant-btn-md" href="https://www.google.com" icon="[object Object]">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if-->
+    <!--teleport end--><button class="ant-btn ant-btn-dashed ant-btn-md" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span><span class="ant-btn-content"> Search </span>
+    </button><a class="ant-btn ant-btn-outlined ant-btn-md ant-btn-icon-only" href="https://www.google.com">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="search" class="anticon anticon-search"><svg focusable="false" class="" data-icon="search" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0011.6 0l43.6-43.5a8.2 8.2 0 000-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path></svg></span>
       <!--v-if-->
     </a>
   </div>
@@ -206,44 +285,60 @@ exports[`Button demos > demo: IconDemo 1`] = `
 exports[`Button demos > demo: LegacyType 1`] = `
 "<div style="display: flex; flex-wrap: wrap; gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Primary</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Primary</span>
   </button><button class="ant-btn ant-btn-outlined ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Default</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Default</span>
   </button><button class="ant-btn ant-btn-dashed ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Dashed</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Dashed</span>
   </button><button class="ant-btn ant-btn-text ant-btn-md" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Text</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Text</span>
   </button><button class="ant-btn ant-btn-link ant-btn-md" type="button">
     <wave-stub disabled="true"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Link</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Link</span>
   </button></div>"
 `;
 
 exports[`Button demos > demo: Loading 1`] = `
 "<div class="ant-space ant-space-vertical" style="column-gap: 8px; row-gap: 8px;">
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-loading" aria-busy="true" type="button">
-      <wave-stub disabled="true"></wave-stub><span role="img" aria-label="loading" class="anticon anticon-loading ant-btn-icon ant-btn-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span><span class="ant-btn-content">Loading</span>
+      <wave-stub disabled="true"></wave-stub>
+      <transition-stub appear="false" persisted="false" css="true"><span class="ant-btn-icon ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></transition-stub><span class="ant-btn-content">Loading</span>
     </button><button class="ant-btn ant-btn-solid ant-btn-sm ant-btn-loading" aria-busy="true" type="button">
-      <wave-stub disabled="true"></wave-stub><span role="img" aria-label="loading" class="anticon anticon-loading ant-btn-icon ant-btn-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span><span class="ant-btn-content">Loading</span>
+      <wave-stub disabled="true"></wave-stub>
+      <transition-stub appear="false" persisted="false" css="true"><span class="ant-btn-icon ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></transition-stub><span class="ant-btn-content">Loading</span>
     </button></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content"> mouseenter me! </span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content"> mouseenter me! </span>
     </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span role="img" aria-label="poweroff" class="anticon anticon-poweroff"><svg focusable="false" class="" data-icon="poweroff" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M705.6 124.9a8 8 0 00-11.6 7.2v64.2c0 5.5 2.9 10.6 7.5 13.6a352.2 352.2 0 0162.2 49.8c32.7 32.8 58.4 70.9 76.3 113.3a355 355 0 0127.9 138.7c0 48.1-9.4 94.8-27.9 138.7a355.92 355.92 0 01-76.3 113.3 353.06 353.06 0 01-113.2 76.4c-43.8 18.6-90.5 28-138.5 28s-94.7-9.4-138.5-28a353.06 353.06 0 01-113.2-76.4A355.92 355.92 0 01184 650.4a355 355 0 01-27.9-138.7c0-48.1 9.4-94.8 27.9-138.7 17.9-42.4 43.6-80.5 76.3-113.3 19-19 39.8-35.6 62.2-49.8 4.7-2.9 7.5-8.1 7.5-13.6V132c0-6-6.3-9.8-11.6-7.2C178.5 195.2 82 339.3 80 506.3 77.2 745.1 272.5 943.5 511.2 944c239 .5 432.8-193.3 432.8-432.4 0-169.2-97-315.7-238.4-386.7zM480 560h64c4.4 0 8-3.6 8-8V88c0-4.4-3.6-8-8-8h-64c-4.4 0-8 3.6-8 8v464c0 4.4 3.6 8 8 8z"></path></svg></span><span class="ant-btn-content"> 延迟1s </span>
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="poweroff" class="anticon anticon-poweroff"><svg focusable="false" class="" data-icon="poweroff" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M705.6 124.9a8 8 0 00-11.6 7.2v64.2c0 5.5 2.9 10.6 7.5 13.6a352.2 352.2 0 0162.2 49.8c32.7 32.8 58.4 70.9 76.3 113.3a355 355 0 0127.9 138.7c0 48.1-9.4 94.8-27.9 138.7a355.92 355.92 0 01-76.3 113.3 353.06 353.06 0 01-113.2 76.4c-43.8 18.6-90.5 28-138.5 28s-94.7-9.4-138.5-28a353.06 353.06 0 01-113.2-76.4A355.92 355.92 0 01184 650.4a355 355 0 01-27.9-138.7c0-48.1 9.4-94.8 27.9-138.7 17.9-42.4 43.6-80.5 76.3-113.3 19-19 39.8-35.6 62.2-49.8 4.7-2.9 7.5-8.1 7.5-13.6V132c0-6-6.3-9.8-11.6-7.2C178.5 195.2 82 339.3 80 506.3 77.2 745.1 272.5 943.5 511.2 944c239 .5 432.8-193.3 432.8-432.4 0-169.2-97-315.7-238.4-386.7zM480 560h64c4.4 0 8-3.6 8-8V88c0-4.4-3.6-8-8-8h-64c-4.4 0-8 3.6-8 8v464c0 4.4 3.6 8 8 8z"></path></svg></span><span class="ant-btn-content"> Delay 1s </span>
     </button></div>
-  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-loading" aria-busy="true" type="button">
-      <wave-stub disabled="true"></wave-stub><span role="img" aria-label="loading" class="anticon anticon-loading ant-btn-icon ant-btn-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span>
+  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-loading ant-btn-icon-only" aria-busy="true" type="button">
+      <wave-stub disabled="true"></wave-stub>
+      <transition-stub appear="false" persisted="false" css="true"><span class="ant-btn-icon ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></transition-stub>
       <!--v-if-->
-    </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle ant-btn-loading" aria-busy="true" type="button">
-      <wave-stub disabled="true"></wave-stub><span role="img" aria-label="loading" class="anticon anticon-loading ant-btn-icon ant-btn-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span>
+    </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle ant-btn-loading ant-btn-icon-only" aria-busy="true" type="button">
+      <wave-stub disabled="true"></wave-stub>
+      <transition-stub appear="false" persisted="false" css="true"><span class="ant-btn-icon ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></transition-stub>
       <!--v-if-->
-    </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-round ant-btn-danger ant-btn-loading ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" aria-busy="true" type="button">
-      <wave-stub disabled="true"></wave-stub><span role="img" aria-label="loading" class="anticon anticon-loading ant-btn-icon ant-btn-loading-icon"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span>
+    </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-shape-round ant-btn-danger ant-btn-loading ant-btn-custom-color ant-btn-icon-only" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" aria-busy="true" type="button">
+      <wave-stub disabled="true"></wave-stub>
+      <transition-stub appear="false" persisted="false" css="true"><span class="ant-btn-icon ant-btn-loading-icon"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></span></transition-stub>
       <!--v-if-->
     </button></div>
 </div>"
@@ -252,11 +347,15 @@ exports[`Button demos > demo: Loading 1`] = `
 exports[`Button demos > demo: Multiple 1`] = `
 "<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Primary</span>
-  </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Primary</span>
+  </button><button class="ant-btn ant-btn-outlined ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">secondary</span>
-  </button><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-solid ant-btn-md" type="button"><wave-stub disabled="false"></wave-stub><!--v-if--><span class="ant-btn-content"> Actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span></button></span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">secondary</span>
+  </button><span class="ant-trigger-wrapper"><button class="ant-btn ant-btn-outlined ant-btn-md" type="button"><wave-stub disabled="false"></wave-stub><transition-stub appear="false" persisted="false" css="true"><!--v-if--></transition-stub><span class="ant-btn-content"> Actions <span role="img" aria-label="down" class="anticon anticon-down"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span></button></span>
   <!--teleport start-->
   <transition-stub name="ant-slide-up" appear="false" persisted="false" css="true">
     <!--v-if-->
@@ -268,19 +367,29 @@ exports[`Button demos > demo: Multiple 1`] = `
 exports[`Button demos > demo: Shape 1`] = `
 "<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Default</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Default</span>
   </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-round" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Round</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Round</span>
   </button><button class="ant-btn ant-btn-solid ant-btn-md ant-btn-shape-circle" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">A</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">A</span>
   </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-shape-round" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">Round</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">Round</span>
   </button><button class="ant-btn ant-btn-outlined ant-btn-md ant-btn-shape-circle" type="button">
     <wave-stub disabled="false"></wave-stub>
-    <!--v-if--><span class="ant-btn-content">B</span>
+    <transition-stub appear="false" persisted="false" css="true">
+      <!--v-if-->
+    </transition-stub><span class="ant-btn-content">B</span>
   </button></div>"
 `;
 
@@ -289,38 +398,43 @@ exports[`Button demos > demo: Size 1`] = `
   <div class="ant-radio-group ant-radio-group-default ant-radio-group-outline" role="radiogroup"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><input type="radio" class="ant-radio-button-input" checked="" role="radio" aria-checked="true"><span class="ant-radio-button-inner">Large</span></label><label class="ant-radio-button-wrapper"><input type="radio" class="ant-radio-button-input" role="radio" aria-checked="false"><span class="ant-radio-button-inner">Default</span></label><label class="ant-radio-button-wrapper"><input type="radio" class="ant-radio-button-input" role="radio" aria-checked="false"><span class="ant-radio-button-inner">Small</span></label></div>
   <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-lg" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Primary</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-lg" type="button">
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Primary</span>
+    </button><button class="ant-btn ant-btn-outlined ant-btn-lg" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Normal</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Normal</span>
     </button><button class="ant-btn ant-btn-dashed ant-btn-lg" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Dashed</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Dashed</span>
+    </button><button class="ant-btn ant-btn-outlined ant-btn-lg ant-btn-danger ant-btn-custom-color" style="--color-accent-1: #fff1f0; --color-accent-2: #ffccc7; --color-accent-3: #ffa39e; --color-accent-4: #ff7875; --color-accent-5: #ff4d4f; --color-accent-6: #f5222d; --color-accent-7: #cf1322; --color-accent-8: #a8071a; --color-accent-9: #820014; --color-accent-10: #5c0011; --color-accent: #f5222d; --color-accent-hover: #ff4d4f; --color-accent-active: #cf1322; --color-accent-content: #ffffff; --color-error: #ff4d4f; --color-warning: #ffec3d; --color-success: #73d13d; --color-info: #4096ff; --color-neutral: #000000e0; --color-neutral-secondary: #000000a6; --color-neutral-disabled: #00000040; --color-neutral-disabled-bg: #0000000a; --color-neutral-border: #d9d9d9; --color-neutral-separator: #0505050f; --color-neutral-bg: #f5f5f5;" type="button">
       <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Danger</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Danger</span>
     </button><button class="ant-btn ant-btn-link ant-btn-lg" type="button">
       <wave-stub disabled="true"></wave-stub>
-      <!--v-if--><span class="ant-btn-content">Link</span>
+      <transition-stub appear="false" persisted="false" css="true">
+        <!--v-if-->
+      </transition-stub><span class="ant-btn-content">Link</span>
     </button></div>
-  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-lg" type="button">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span>
+  <div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 8px;"><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-icon-only" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span>
       <!--v-if-->
-    </button><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-shape-circle" type="button">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span>
+    </button><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-shape-circle ant-btn-icon-only" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span>
       <!--v-if-->
     </button><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-shape-round" type="button">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span class="ant-btn-content"> Download </span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-shape-round" type="button">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span>
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span class="ant-btn-content"> Download </span>
+    </button><button class="ant-btn ant-btn-solid ant-btn-lg ant-btn-shape-round ant-btn-icon-only" type="button">
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span>
       <!--v-if-->
     </button><button class="ant-btn ant-btn-solid ant-btn-lg" type="button">
-      <wave-stub disabled="false"></wave-stub>
-      <!--v-if--><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span class="ant-btn-content"> Download </span>
+      <wave-stub disabled="false"></wave-stub><span role="img" aria-label="download" class="anticon anticon-download"><svg focusable="false" class="" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span class="ant-btn-content"> Download </span>
     </button></div>
 </div>"
 `;

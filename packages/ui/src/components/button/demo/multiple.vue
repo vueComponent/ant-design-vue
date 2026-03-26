@@ -20,8 +20,7 @@
 
 <script lang="ts" setup>
 import { DownOutlined } from '@ant-design/icons-vue';
-import type { MenuProps } from 'ant-design-vue';
-const handleMenuClick: MenuProps['onClick'] = e => {
+const handleMenuClick = (e: { key: string }) => {
   console.log('click', e);
 };
 </script>

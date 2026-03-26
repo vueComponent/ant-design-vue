@@ -5,24 +5,70 @@
   @apply inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap;
   @apply border-1;
   font-size: var(--ant-font-size);
-  @apply box-border rounded-md px-4 transition-all select-none;
+  @apply box-border rounded-md select-none;
+  padding-inline: 15px;
+  font-weight: 400;
   width: fit-content;
-  transition-duration: var(--ant-motion-duration);
+  outline: none;
+  background-image: none;
+  transition: all var(--ant-motion-duration) var(--ant-motion-ease);
   font-family: var(--ant-font-family);
   line-height: var(--ant-line-height);
+
+  /* --- Focus visible --- */
+
+  &:where(:focus-visible:not(:disabled):not(.ant-btn-disabled)) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
 
   /* --- Variants --- */
 
   &:where(.ant-btn-solid:not(:disabled)) {
-    @apply bg-accent text-accent-content border-none;
-    @apply hover:bg-accent-hover active:bg-accent-active;
+    @apply bg-accent text-accent-content;
+    border-color: transparent;
+
+    &:hover {
+      background-color: var(--color-accent-hover);
+    }
+
+    &:active {
+      background-color: var(--color-accent-active);
+    }
   }
 
-  &:where(.ant-btn-outlined:not(:disabled)),
-  &:where(.ant-btn-dashed:not(:disabled)) {
-    @apply border-accent text-accent bg-transparent;
-    @apply hover:text-accent-hover hover:border-accent-hover;
-    @apply active:border-accent-active active:text-accent-active;
+  &:where(.ant-btn-outlined:not(.ant-btn-custom-color):not(:disabled)),
+  &:where(.ant-btn-dashed:not(.ant-btn-custom-color):not(:disabled)) {
+    border-color: var(--color-neutral-border);
+    color: var(--color-neutral);
+    background-color: transparent;
+
+    &:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    &:active {
+      color: var(--color-accent-active);
+      border-color: var(--color-accent-active);
+    }
+  }
+
+  &:where(.ant-btn-outlined.ant-btn-custom-color:not(:disabled)),
+  &:where(.ant-btn-dashed.ant-btn-custom-color:not(:disabled)) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background-color: transparent;
+
+    &:hover {
+      color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+    }
+
+    &:active {
+      color: var(--color-accent-active);
+      border-color: var(--color-accent-active);
+    }
   }
 
   &:where(.ant-btn-dashed) {
@@ -30,32 +76,128 @@
   }
 
   &:where(.ant-btn-filled:not(:disabled)) {
-    @apply text-accent bg-accent-1 border-none;
-    @apply hover:bg-accent-2 hover:text-accent-hover;
-    @apply active:bg-accent-3 active:text-accent-active;
+    color: var(--color-accent);
+    background-color: var(--color-accent-1);
+    border-color: transparent;
+
+    &:hover {
+      background-color: var(--color-accent-2);
+      color: var(--color-accent-hover);
+    }
+
+    &:active {
+      background-color: var(--color-accent-3);
+      color: var(--color-accent-active);
+    }
   }
 
   &:where(.ant-btn-text:not(.ant-btn-custom-color):not(:disabled)) {
-    @apply text-neutral border-none bg-transparent;
-    @apply hover:bg-neutral-disabled-bg;
+    color: var(--color-neutral);
+    border-color: transparent;
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.06);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
   }
 
   &:where(.ant-btn-text.ant-btn-custom-color:not(:disabled)) {
-    @apply text-accent border-none bg-transparent;
-    @apply hover:bg-accent-1 hover:text-accent-hover;
+    color: var(--color-accent);
+    border-color: transparent;
+    background-color: transparent;
+
+    &:hover {
+      color: var(--color-accent-hover);
+      background-color: var(--color-accent-1);
+    }
+
+    &:active {
+      color: var(--color-accent-active);
+      background-color: var(--color-accent-2);
+    }
   }
 
   &:where(.ant-btn-link:not(:disabled)) {
-    @apply text-accent border-none bg-transparent;
-    @apply hover:text-accent-hover;
+    color: var(--color-accent);
+    border-color: transparent;
+    background-color: transparent;
+
+    &:hover {
+      color: var(--color-accent-hover);
+    }
+
+    &:active {
+      color: var(--color-accent-active);
+    }
   }
 
   /* --- Ghost --- */
 
-  &:where(.ant-btn-ghost:not(:disabled)) {
-    @apply bg-transparent text-accent-content border-accent-content;
-    @apply hover:text-accent-hover hover:border-accent-hover;
-    @apply active:text-accent-active active:border-accent-active;
+  &:where(.ant-btn-ghost.ant-btn-solid:not(:disabled)) {
+    background-color: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+    }
+
+    &:active {
+      background-color: transparent;
+      color: var(--color-accent-active);
+      border-color: var(--color-accent-active);
+    }
+  }
+
+  &:where(.ant-btn-ghost.ant-btn-outlined:not(.ant-btn-custom-color):not(:disabled)),
+  &:where(.ant-btn-ghost.ant-btn-dashed:not(.ant-btn-custom-color):not(:disabled)) {
+    background-color: transparent;
+    color: var(--color-accent-content);
+    border-color: var(--color-accent-content);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+    }
+
+    &:active {
+      background-color: transparent;
+      color: var(--color-accent-active);
+      border-color: var(--color-accent-active);
+    }
+  }
+
+  &:where(.ant-btn-ghost.ant-btn-outlined.ant-btn-custom-color:not(:disabled)),
+  &:where(.ant-btn-ghost.ant-btn-dashed.ant-btn-custom-color:not(:disabled)) {
+    background-color: transparent;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+    }
+
+    &:active {
+      background-color: transparent;
+      color: var(--color-accent-active);
+      border-color: var(--color-accent-active);
+    }
+  }
+
+  &:where(.ant-btn-ghost.ant-btn-disabled),
+  &:where(.ant-btn-ghost:disabled) {
+    background-color: transparent;
+    color: var(--color-neutral-disabled);
+    border-color: var(--color-neutral-border);
   }
 
   /* --- Disabled --- */
@@ -64,6 +206,10 @@
   &:where(:disabled) {
     @apply cursor-not-allowed;
     @apply text-neutral-disabled bg-neutral-disabled-bg border-neutral-border;
+
+    > * {
+      pointer-events: none;
+    }
   }
 
   &:where(.ant-btn-disabled.ant-btn-text),
@@ -87,7 +233,8 @@
   /* --- Sizes --- */
 
   &:where(.ant-btn-sm) {
-    @apply h-6 px-2;
+    @apply h-6;
+    padding-inline: 7px;
     font-size: var(--ant-font-size-sm);
     border-radius: var(--ant-border-radius-sm);
   }
@@ -99,7 +246,8 @@
   }
 
   &:where(.ant-btn-lg) {
-    @apply h-10 px-5;
+    @apply h-10;
+    padding-inline: 15px;
     font-size: var(--ant-font-size-lg);
     border-radius: var(--ant-border-radius-lg);
   }
@@ -121,6 +269,49 @@
 
   &:where(.ant-btn-shape-round) {
     @apply rounded-full;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  &:where(.ant-btn-shape-round.ant-btn-sm) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  &:where(.ant-btn-shape-round.ant-btn-lg) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* --- Icon Only --- */
+
+  &:where(.ant-btn-icon-only) {
+    @apply px-0;
+    width: 2rem;
+  }
+
+  &:where(.ant-btn-icon-only.ant-btn-sm) {
+    width: 1.5rem;
+  }
+
+  &:where(.ant-btn-icon-only.ant-btn-lg) {
+    width: 2.5rem;
+  }
+
+  &:where(.ant-btn-icon-only.ant-btn-shape-round) {
+    width: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  &:where(.ant-btn-icon-only.ant-btn-shape-round.ant-btn-sm) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  &:where(.ant-btn-icon-only.ant-btn-shape-round.ant-btn-lg) {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   /* --- Block --- */
@@ -129,14 +320,41 @@
     @apply w-full;
   }
 
+  /* --- Two Chinese Characters --- */
+
+  &:where(.ant-btn-two-chinese-chars)::first-letter {
+    letter-spacing: 0.34em;
+  }
+
+  &:where(.ant-btn-two-chinese-chars) > *:not(.ant-btn-icon):not(.ant-btn-loading-icon) {
+    margin-inline-end: -0.34em;
+    letter-spacing: 0.34em;
+  }
+
+  /* --- RTL --- */
+
+  &:where(.ant-btn-rtl) {
+    direction: rtl;
+  }
+
   /* --- Icon & Content --- */
 
   .ant-btn-icon {
     @apply inline-flex items-center;
+    line-height: 0;
+  }
+
+  .ant-btn-content {
+    @apply inline-flex items-center gap-2;
   }
 
   .ant-btn-loading-icon {
-    @apply animate-spin;
+    transition: width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+
+    > svg {
+      @apply animate-spin;
+    }
   }
 }
 
@@ -146,7 +364,19 @@
   @apply inline-flex;
 
   > .ant-btn {
-    @apply rounded-none;
+    @apply relative rounded-none;
+    z-index: 1;
+
+    &:where(:hover),
+    &:where(:focus),
+    &:where(:active) {
+      z-index: 2;
+    }
+
+    &:where(:disabled),
+    &:where(.ant-btn-disabled) {
+      z-index: 0;
+    }
 
     &:first-child {
       border-start-start-radius: var(--ant-border-radius);
@@ -160,6 +390,38 @@
 
     &:not(:first-child) {
       @apply -ml-px;
+    }
+
+    &:where(.ant-btn-solid:not(:last-child):not(:disabled):not(.ant-btn-disabled)) {
+      border-inline-end-color: var(--color-accent-hover);
+    }
+
+    &:where(.ant-btn-solid:not(:first-child):not(:disabled):not(.ant-btn-disabled)) {
+      border-inline-start-color: var(--color-accent-hover);
+    }
+  }
+
+  &:where(.ant-btn-group-sm) > .ant-btn {
+    &:first-child {
+      border-start-start-radius: var(--ant-border-radius-sm);
+      border-end-start-radius: var(--ant-border-radius-sm);
+    }
+
+    &:last-child {
+      border-start-end-radius: var(--ant-border-radius-sm);
+      border-end-end-radius: var(--ant-border-radius-sm);
+    }
+  }
+
+  &:where(.ant-btn-group-lg) > .ant-btn {
+    &:first-child {
+      border-start-start-radius: var(--ant-border-radius-lg);
+      border-end-start-radius: var(--ant-border-radius-lg);
+    }
+
+    &:last-child {
+      border-start-end-radius: var(--ant-border-radius-lg);
+      border-end-end-radius: var(--ant-border-radius-lg);
     }
   }
 }

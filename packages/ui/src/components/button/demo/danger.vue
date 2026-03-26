@@ -1,5 +1,5 @@
 <template>
-  <a-space warp>
+  <a-space wrap>
     <a-button type="primary" danger>Primary</a-button>
     <a-button danger>Default</a-button>
     <a-button type="dashed" danger>Dashed</a-button>

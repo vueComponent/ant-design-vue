@@ -13,6 +13,8 @@ export interface AlertProps {
   showIcon?: boolean
   /** Display as banner (full-width, no border, no icon default) */
   banner?: boolean
+  /** Close text/node - any string, component or boolean (deprecated: use closeText slot instead) */
+  closeText?: any
   /** Callback after close animation finishes */
   afterClose?: () => void
 }

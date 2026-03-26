@@ -14,42 +14,38 @@
 
 /* ---- Type variants ---- */
 :where(.ant-alert).ant-alert-success {
-  background-color: #f6ffed;
-  border-color: #b7eb8f;
+  background-color: var(--color-success-bg, #f6ffed);
+  border-color: var(--color-success-border, #b7eb8f);
 }
 
-:where(.ant-alert).ant-alert-success .ant-alert-icon,
-:where(.ant-alert).ant-alert-success .ant-alert-message {
+:where(.ant-alert).ant-alert-success .ant-alert-icon {
   color: var(--color-success, #52c41a);
 }
 
 :where(.ant-alert).ant-alert-info {
-  background-color: #e6f4ff;
-  border-color: #91caff;
+  background-color: var(--color-info-bg, #e6f4ff);
+  border-color: var(--color-info-border, #91caff);
 }
 
-:where(.ant-alert).ant-alert-info .ant-alert-icon,
-:where(.ant-alert).ant-alert-info .ant-alert-message {
+:where(.ant-alert).ant-alert-info .ant-alert-icon {
   color: var(--color-info, #1677ff);
 }
 
 :where(.ant-alert).ant-alert-warning {
-  background-color: #fffbe6;
-  border-color: #ffe58f;
+  background-color: var(--color-warning-bg, #fffbe6);
+  border-color: var(--color-warning-border, #ffe58f);
 }
 
-:where(.ant-alert).ant-alert-warning .ant-alert-icon,
-:where(.ant-alert).ant-alert-warning .ant-alert-message {
+:where(.ant-alert).ant-alert-warning .ant-alert-icon {
   color: var(--color-warning, #faad14);
 }
 
 :where(.ant-alert).ant-alert-error {
-  background-color: #fff2f0;
-  border-color: #ffccc7;
+  background-color: var(--color-error-bg, #fff2f0);
+  border-color: var(--color-error-border, #ffccc7);
 }
 
-:where(.ant-alert).ant-alert-error .ant-alert-icon,
-:where(.ant-alert).ant-alert-error .ant-alert-message {
+:where(.ant-alert).ant-alert-error .ant-alert-icon {
   color: var(--color-error, #ff4d4f);
 }
 
@@ -81,23 +77,6 @@
 
 :where(.ant-alert) .ant-alert-message {
   @apply font-medium;
-  color: var(--color-neutral, rgba(0, 0, 0, 0.88));
-}
-
-/* When it's a type color variant, message inherits the type color */
-:where(.ant-alert).ant-alert-success .ant-alert-message {
-  color: var(--color-neutral, rgba(0, 0, 0, 0.88));
-}
-
-:where(.ant-alert).ant-alert-info .ant-alert-message {
-  color: var(--color-neutral, rgba(0, 0, 0, 0.88));
-}
-
-:where(.ant-alert).ant-alert-warning .ant-alert-message {
-  color: var(--color-neutral, rgba(0, 0, 0, 0.88));
-}
-
-:where(.ant-alert).ant-alert-error .ant-alert-message {
   color: var(--color-neutral, rgba(0, 0, 0, 0.88));
 }
 

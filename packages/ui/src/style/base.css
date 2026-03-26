@@ -27,9 +27,17 @@
 
   /* Semantic colors */
   --color-error: #ff4d4f;
+  --color-error-bg: #fff2f0;
+  --color-error-border: #ffccc7;
   --color-warning: #faad14;
+  --color-warning-bg: #fffbe6;
+  --color-warning-border: #ffe58f;
   --color-success: #52c41a;
+  --color-success-bg: #f6ffed;
+  --color-success-border: #b7eb8f;
   --color-info: #1677ff;
+  --color-info-bg: #e6f4ff;
+  --color-info-border: #91caff;
 
   /* Layout tokens */
   --ant-border-radius: 6px;

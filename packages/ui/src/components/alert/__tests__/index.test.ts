@@ -220,6 +220,27 @@ describe('Alert', () => {
     expect(wrapper.find('.custom-close').exists()).toBe(true)
   })
 
+  it('closeText prop makes alert closable', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close me', closeText: 'Close Now' },
+    })
+    expect(wrapper.find('.ant-alert-close-icon').exists()).toBe(true)
+    expect(wrapper.find('.ant-alert').classes()).toContain('ant-alert-closable')
+    expect(wrapper.find('.ant-alert-close-icon').text()).toContain('Close Now')
+  })
+
+  it('closeText prop overrides closeIcon when both exist', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Test', closeText: 'Close' },
+      slots: {
+        closeIcon: '<span class="custom-close">X</span>',
+      },
+    })
+    expect(wrapper.find('.ant-alert-close-icon').text()).toContain('Close')
+    // closeIcon slot should NOT be rendered when closeText is present
+    expect(wrapper.find('.custom-close').exists()).toBe(false)
+  })
+
   it('renders default slot as message content', () => {
     const wrapper = mount(Alert, {
       slots: {

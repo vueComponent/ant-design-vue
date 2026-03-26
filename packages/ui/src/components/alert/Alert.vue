@@ -29,7 +29,23 @@ const showIconComputed = computed(() => {
 })
 
 const closableComputed = computed(() => {
+  // When closeText prop is set, closable becomes true
+  if (props.closeText) return true
   return props.closable || !!slots.closeText || !!slots.closeIcon
+})
+
+// Calculate what closeText content to display (when closeText prop is a string)
+const closeTextContent = computed(() => {
+  // If closeText is a string, show it; if it's true, show nothing (just icon)
+  if (typeof props.closeText === 'string') {
+    return props.closeText
+  }
+  return null
+})
+
+// Check if there's actual close content (slot or non-true prop)
+const hasCloseContent = computed(() => {
+  return !!slots.closeText || closeTextContent.value
 })
 
 const hasDescription = computed(() => {
@@ -87,13 +103,18 @@ function afterLeaveHandler() {
         v-if="closableComputed"
         type="button"
         class="ant-alert-close-icon"
-        aria-label="Close"
+        :aria-label="!hasCloseContent ? 'Close' : undefined"
         @click="handleClose"
       >
         <slot name="closeText">
-          <slot name="closeIcon">
-            <CloseOutlined />
-          </slot>
+          <template v-if="closeTextContent">
+            <span class="ant-alert-close-text">{{ closeTextContent }}</span>
+          </template>
+          <template v-else>
+            <slot name="closeIcon">
+              <CloseOutlined />
+            </slot>
+          </template>
         </slot>
       </button>
     </div>

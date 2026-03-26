@@ -45,14 +45,8 @@ const closeTextRenderType = computed(() => {
   const value = closeTextContent.value
   if (value === null || value === undefined || value === false || value === '') return 'none'
   if (typeof value === 'string' || typeof value === 'number') return 'text'
-  if (typeof value === 'function') return 'function'
-  if (Array.isArray(value)) return 'nodes'
-  if (isVNode(value)) return 'vnode'
-  return 'component'
-})
-
-const hasCloseTextContent = computed(() => {
-  return closeTextRenderType.value !== 'none'
+  if (Array.isArray(value) || isVNode(value)) return 'nodes'
+  return 'dynamic'
 })
 
 // Only omit aria-label when closeText is confidently visible text
@@ -122,16 +116,10 @@ function afterLeaveHandler() {
           <template v-if="closeTextRenderType === 'text'">
             <span class="ant-alert-close-text">{{ closeTextContent }}</span>
           </template>
-          <template v-else-if="closeTextRenderType === 'function'">
-            <component :is="closeTextContent" />
-          </template>
-          <template v-else-if="closeTextRenderType === 'vnode'">
-            <component :is="() => closeTextContent" />
-          </template>
           <template v-else-if="closeTextRenderType === 'nodes'">
             <component :is="() => closeTextContent" />
           </template>
-          <template v-else-if="closeTextRenderType === 'component'">
+          <template v-else-if="closeTextRenderType === 'dynamic'">
             <component :is="closeTextContent" />
           </template>
           <template v-else>

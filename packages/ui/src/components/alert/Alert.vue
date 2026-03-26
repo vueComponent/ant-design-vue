@@ -7,6 +7,7 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled'
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined'
 import type { AlertProps, AlertEmits, AlertSlots } from './types'
 import { alertDefaultProps } from './types'
+import { isArray, isNumber, isString } from '@/utils/util'
 
 defineOptions({ name: 'AAlert' })
 const props = withDefaults(defineProps<AlertProps>(), alertDefaultProps)
@@ -44,17 +45,17 @@ const closeTextContent = computed(() => {
 const closeTextRenderType = computed(() => {
   const value = closeTextContent.value
   if (value === null || value === undefined || value === false || value === '') return 'none'
-  if (typeof value === 'string' || typeof value === 'number') return 'text'
-  if (Array.isArray(value) || isVNode(value)) return 'nodes'
+  if (isString(value) || isNumber(value)) return 'text'
+  if (isArray(value) || isVNode(value)) return 'nodes'
   return 'dynamic'
 })
 
 function hasVisibleText(value: unknown): boolean {
   if (value === null || value === undefined || value === false) return false
-  if (typeof value === 'string' || typeof value === 'number') {
+  if (isString(value) || isNumber(value)) {
     return String(value).trim().length > 0
   }
-  if (Array.isArray(value)) return value.some(hasVisibleText)
+  if (isArray(value)) return value.some(hasVisibleText)
   if (!isVNode(value)) return false
   const ariaHidden = (value.props as Record<string, unknown> | null | undefined)?.['aria-hidden']
   if (ariaHidden === true || ariaHidden === 'true' || ariaHidden === '') return false
@@ -65,13 +66,18 @@ function hasVisibleText(value: unknown): boolean {
   return hasVisibleText(value.children)
 }
 
-const slotHasVisibleCloseText = computed(() => {
-  return hasVisibleText(slots.closeText?.())
+const closeTextSlotMeta = computed(() => {
+  const content = slots.closeText?.()
+  return {
+    exists: !!slots.closeText,
+    content,
+    hasVisibleText: hasVisibleText(content),
+  }
 })
 
 // Only omit aria-label when closeText is confidently visible text
 const hasVisibleCloseText = computed(() => {
-  return hasVisibleText(closeTextContent.value) || slotHasVisibleCloseText.value
+  return hasVisibleText(closeTextContent.value) || closeTextSlotMeta.value.hasVisibleText
 })
 
 const hasDescription = computed(() => {
@@ -132,22 +138,23 @@ function afterLeaveHandler() {
         :aria-label="hasVisibleCloseText ? undefined : 'Close'"
         @click="handleClose"
       >
-        <slot name="closeText">
-          <template v-if="closeTextRenderType === 'text'">
-            <span class="ant-alert-close-text">{{ closeTextContent }}</span>
-          </template>
-          <template v-else-if="closeTextRenderType === 'nodes'">
-            <component :is="() => closeTextContent" />
-          </template>
-          <template v-else-if="closeTextRenderType === 'dynamic'">
-            <component :is="closeTextContent" />
-          </template>
-          <template v-else>
-            <slot name="closeIcon">
-              <CloseOutlined />
-            </slot>
-          </template>
-        </slot>
+        <template v-if="closeTextSlotMeta.exists">
+          <component :is="() => closeTextSlotMeta.content" />
+        </template>
+        <template v-else-if="closeTextRenderType === 'text'">
+          <span class="ant-alert-close-text">{{ closeTextContent }}</span>
+        </template>
+        <template v-else-if="closeTextRenderType === 'nodes'">
+          <component :is="() => closeTextContent" />
+        </template>
+        <template v-else-if="closeTextRenderType === 'dynamic'">
+          <component :is="closeTextContent" />
+        </template>
+        <template v-else>
+          <slot name="closeIcon">
+            <CloseOutlined />
+          </slot>
+        </template>
       </button>
     </div>
   </Transition>

@@ -268,7 +268,7 @@ describe('Alert', () => {
     expect(wrapper.find('.custom-close').exists()).toBe(false)
   })
 
-  it('renders VNode closeText prop and keeps aria-label', () => {
+  it('renders VNode closeText prop and omits aria-label', () => {
     const wrapper = mount(Alert, {
       props: {
         message: 'VNode closeText',
@@ -277,10 +277,10 @@ describe('Alert', () => {
     })
     const closeButton = wrapper.find('.ant-alert-close-icon')
     expect(closeButton.find('.vnode-close-text').exists()).toBe(true)
-    expect(closeButton.attributes('aria-label')).toBe('Close')
+    expect(closeButton.attributes('aria-label')).toBeUndefined()
   })
 
-  it('renders VNode[] closeText prop and keeps aria-label', () => {
+  it('renders VNode[] closeText prop and omits aria-label', () => {
     const wrapper = mount(Alert, {
       props: {
         message: 'VNode[] closeText',
@@ -293,7 +293,7 @@ describe('Alert', () => {
     const closeButton = wrapper.find('.ant-alert-close-icon')
     expect(closeButton.find('.vnode-close-text-part1').exists()).toBe(true)
     expect(closeButton.find('.vnode-close-text-part2').exists()).toBe(true)
-    expect(closeButton.attributes('aria-label')).toBe('Close')
+    expect(closeButton.attributes('aria-label')).toBeUndefined()
   })
 
   it('renders default slot as message content', () => {

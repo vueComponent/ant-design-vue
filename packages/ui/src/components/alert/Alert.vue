@@ -54,9 +54,9 @@ const hasCloseTextContent = computed(() => {
   return closeTextRenderType.value !== 'none'
 })
 
-// Check if there's actual close content (slot or non-true prop)
-const hasCloseContent = computed(() => {
-  return !!slots.closeText || !!hasCloseTextContent.value
+// Only omit aria-label when closeText is confidently visible text
+const hasVisibleCloseText = computed(() => {
+  return closeTextRenderType.value === 'text'
 })
 
 const hasDescription = computed(() => {
@@ -114,7 +114,7 @@ function afterLeaveHandler() {
         v-if="closableComputed"
         type="button"
         class="ant-alert-close-icon"
-        :aria-label="!hasCloseContent ? 'Close' : undefined"
+        :aria-label="hasVisibleCloseText ? undefined : 'Close'"
         @click="handleClose"
       >
         <slot name="closeText">

@@ -205,8 +205,10 @@ describe('Alert', () => {
         closeText: 'Close Now',
       },
     })
-    expect(wrapper.find('.ant-alert-close-icon').exists()).toBe(true)
-    expect(wrapper.find('.ant-alert-close-icon').text()).toBe('Close Now')
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(true)
+    expect(closeButton.text()).toBe('Close Now')
+    expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 
   it('renders closeIcon slot', () => {
@@ -224,9 +226,11 @@ describe('Alert', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Close me', closeText: 'Close Now' },
     })
-    expect(wrapper.find('.ant-alert-close-icon').exists()).toBe(true)
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(true)
     expect(wrapper.find('.ant-alert').classes()).toContain('ant-alert-closable')
-    expect(wrapper.find('.ant-alert-close-icon').text()).toContain('Close Now')
+    expect(closeButton.text()).toContain('Close Now')
+    expect(closeButton.attributes('aria-label')).toBeUndefined()
   })
 
   it('closeText empty string still makes alert closable and falls back to icon', () => {
@@ -252,7 +256,7 @@ describe('Alert', () => {
     expect(wrapper.find('.custom-close').exists()).toBe(false)
   })
 
-  it('renders VNode closeText prop and omits aria-label', () => {
+  it('renders VNode closeText prop and keeps aria-label', () => {
     const wrapper = mount(Alert, {
       props: {
         message: 'VNode closeText',
@@ -261,7 +265,7 @@ describe('Alert', () => {
     })
     const closeButton = wrapper.find('.ant-alert-close-icon')
     expect(closeButton.find('.vnode-close-text').exists()).toBe(true)
-    expect(closeButton.attributes('aria-label')).toBeUndefined()
+    expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 
   it('renders default slot as message content', () => {

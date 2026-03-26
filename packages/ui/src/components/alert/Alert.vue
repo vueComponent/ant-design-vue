@@ -66,11 +66,25 @@ function hasVisibleText(value: unknown): boolean {
   return hasVisibleText(value.children)
 }
 
+function hasRenderableContent(value: unknown): boolean {
+  if (value === null || value === undefined || value === false) return false
+  if (isString(value)) return value !== ''
+  if (isNumber(value)) return true
+  if (isArray(value)) return value.some(hasRenderableContent)
+  if (!isVNode(value)) return true
+  if (value.type === Comment) return false
+  if (value.type === Text || value.type === Fragment) {
+    return hasRenderableContent(value.children)
+  }
+  return true
+}
+
 const closeTextSlotMeta = computed(() => {
   const content = slots.closeText?.()
   return {
     exists: !!slots.closeText,
     content,
+    hasContent: hasRenderableContent(content),
     hasVisibleText: hasVisibleText(content),
   }
 })
@@ -138,7 +152,7 @@ function afterLeaveHandler() {
         :aria-label="hasVisibleCloseText ? undefined : 'Close'"
         @click="handleClose"
       >
-        <template v-if="closeTextSlotMeta.exists">
+        <template v-if="closeTextSlotMeta.exists && closeTextSlotMeta.hasContent">
           <component :is="() => closeTextSlotMeta.content" />
         </template>
         <template v-else-if="closeTextRenderType === 'text'">

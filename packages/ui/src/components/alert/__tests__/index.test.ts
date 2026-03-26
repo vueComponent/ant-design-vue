@@ -223,6 +223,19 @@ describe('Alert', () => {
     expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 
+  it('falls back to closeIcon when closeText slot returns empty content', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Empty closeText slot' },
+      slots: {
+        closeText: () => [],
+        closeIcon: '<span class="custom-close">X</span>',
+      },
+    })
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.find('.custom-close').exists()).toBe(true)
+    expect(closeButton.attributes('aria-label')).toBe('Close')
+  })
+
   it('renders closeIcon slot', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Close icon' },

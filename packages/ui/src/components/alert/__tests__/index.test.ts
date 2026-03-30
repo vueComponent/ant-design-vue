@@ -311,6 +311,20 @@ describe('Alert', () => {
     expect(closeButton.attributes('aria-label')).toBeUndefined()
   })
 
+  it('closeText true falls back to close icon', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close me', closeText: true },
+      slots: {
+        closeIcon: '<span class="custom-close">X</span>',
+      },
+    })
+
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(true)
+    expect(closeButton.find('.custom-close').exists()).toBe(true)
+    expect(closeButton.attributes('aria-label')).toBe('Close')
+  })
+
   it('closeText empty string does not make alert closable', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Close me', closeText: '' },
@@ -318,6 +332,34 @@ describe('Alert', () => {
     const closeButton = wrapper.find('.ant-alert-close-icon')
     expect(closeButton.exists()).toBe(false)
     expect(wrapper.find('.ant-alert').classes()).not.toContain('ant-alert-closable')
+  })
+
+  it('falls back to closeIcon when closeText prop content is an empty array', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close me', closeText: [] },
+      slots: {
+        closeIcon: '<span class="custom-close">X</span>',
+      },
+    })
+
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(true)
+    expect(closeButton.find('.custom-close').exists()).toBe(true)
+    expect(closeButton.attributes('aria-label')).toBe('Close')
+  })
+
+  it('falls back to closeIcon when closeText prop content is comment-only', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close me', closeText: [h(Comment)] },
+      slots: {
+        closeIcon: '<span class="custom-close">X</span>',
+      },
+    })
+
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(true)
+    expect(closeButton.find('.custom-close').exists()).toBe(true)
+    expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 
   it('closeText zero does not make alert closable', () => {

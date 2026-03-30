@@ -89,20 +89,6 @@ const closableComputed = computed(() => {
   return props.closable || !!slots.closeText
 })
 
-// Calculate what closeText content to display (string, VNode, or component)
-const closeTextContent = computed(() => {
-  return props.closeText
-})
-
-const closeTextRenderType = computed(() => {
-  const value = closeTextContent.value
-  if (value === null || value === undefined || value === false || value === '') return 'none'
-  if (isString(value) || isNumber(value)) return 'text'
-  if (value === true) return 'boolean'
-  if (isArray(value) || isVNode(value)) return 'nodes'
-  return 'dynamic'
-})
-
 function hasVisibleText(value: unknown): boolean {
   if (value === null || value === undefined || value === false) return false
   if (isString(value) || isNumber(value)) {
@@ -132,6 +118,28 @@ function hasRenderableContent(value: unknown): boolean {
   return true
 }
 
+const closeTextPropMeta = computed(() => {
+  const content = props.closeText === true ? null : props.closeText
+  return {
+    content,
+    hasContent: hasRenderableContent(content),
+    hasVisibleText: hasVisibleText(content),
+  }
+})
+
+// Calculate what closeText content to display (string, VNode, or component)
+const closeTextContent = computed(() => {
+  return closeTextPropMeta.value.content
+})
+
+const closeTextRenderType = computed(() => {
+  const value = closeTextContent.value
+  if (!closeTextPropMeta.value.hasContent) return 'none'
+  if (isString(value) || isNumber(value)) return 'text'
+  if (isArray(value) || isVNode(value)) return 'nodes'
+  return 'dynamic'
+})
+
 const closeTextSlotMeta = computed(() => {
   const content = slots.closeText?.()
   return {
@@ -144,7 +152,7 @@ const closeTextSlotMeta = computed(() => {
 
 // Only omit aria-label when closeText is confidently visible text
 const hasVisibleCloseText = computed(() => {
-  return hasVisibleText(closeTextContent.value) || closeTextSlotMeta.value.hasVisibleText
+  return closeTextPropMeta.value.hasVisibleText || closeTextSlotMeta.value.hasVisibleText
 })
 
 const hasDescription = computed(() => {
@@ -229,9 +237,6 @@ function afterLeaveHandler() {
         </template>
         <template v-else-if="closeTextRenderType === 'text'">
           <span class="ant-alert-close-text">{{ closeTextContent }}</span>
-        </template>
-        <template v-else-if="closeTextRenderType === 'boolean'">
-          <span class="ant-alert-close-text" />
         </template>
         <template v-else-if="closeTextRenderType === 'nodes'">
           <RenderContent :content="closeTextContent" />

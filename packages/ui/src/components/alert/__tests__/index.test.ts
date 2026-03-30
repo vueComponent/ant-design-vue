@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 import { Alert } from '@ant-design-vue/ui'
 import { mount } from '@vue/test-utils'
-import { Comment, defineComponent, h, nextTick } from 'vue'
+import { Comment, defineComponent, h, nextTick, onMounted, onUnmounted, ref } from 'vue'
 
 const ImmediateTransition = defineComponent({
   name: 'ImmediateTransition',
@@ -353,6 +353,50 @@ describe('Alert', () => {
     expect(closeButton.find('.vnode-close-text-part1').exists()).toBe(true)
     expect(closeButton.find('.vnode-close-text-part2').exists()).toBe(true)
     expect(closeButton.attributes('aria-label')).toBeUndefined()
+  })
+
+  it('keeps VNode closeText component mounted across alert updates', async () => {
+    const mounted = vi.fn()
+    const unmounted = vi.fn()
+
+    const StatefulCloseText = defineComponent({
+      name: 'StatefulCloseText',
+      setup() {
+        const clicks = ref(0)
+
+        onMounted(mounted)
+        onUnmounted(unmounted)
+
+        return () =>
+          h(
+            'span',
+            {
+              class: 'stateful-close-text',
+              onClick: (event: MouseEvent) => {
+                event.stopPropagation()
+                clicks.value += 1
+              },
+            },
+            `Dismiss ${clicks.value}`,
+          )
+      },
+    })
+
+    const wrapper = mount(Alert, {
+      props: {
+        message: 'VNode closeText stateful',
+        closeText: h(StatefulCloseText),
+      },
+    })
+
+    await wrapper.find('.stateful-close-text').trigger('click')
+    expect(wrapper.find('.stateful-close-text').text()).toBe('Dismiss 1')
+
+    await wrapper.setProps({ description: 'Updated description' })
+
+    expect(mounted).toHaveBeenCalledTimes(1)
+    expect(unmounted).not.toHaveBeenCalled()
+    expect(wrapper.find('.stateful-close-text').text()).toBe('Dismiss 1')
   })
 
   it('renders default slot as message content', () => {

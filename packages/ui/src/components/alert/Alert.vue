@@ -2,6 +2,7 @@
 import {
   Comment,
   computed,
+  defineComponent,
   Fragment,
   getCurrentInstance,
   isVNode,
@@ -32,6 +33,19 @@ const attrs = useAttrs()
 const instance = getCurrentInstance()
 
 const closed = ref(false)
+
+const RenderContent = defineComponent({
+  name: 'AlertRenderContent',
+  props: {
+    content: {
+      type: null,
+      required: true,
+    },
+  },
+  setup(renderProps) {
+    return () => renderProps.content as any
+  },
+})
 
 const filledIconMap: Record<NonNullable<AlertProps['type']>, Component> = {
   success: CheckCircleFilled,
@@ -218,13 +232,13 @@ function afterLeaveHandler() {
         @click="handleClose"
       >
         <template v-if="closeTextSlotMeta.exists && closeTextSlotMeta.hasContent">
-          <component :is="() => closeTextSlotMeta.content" />
+          <RenderContent :content="closeTextSlotMeta.content" />
         </template>
         <template v-else-if="closeTextRenderType === 'text'">
           <span class="ant-alert-close-text">{{ closeTextContent }}</span>
         </template>
         <template v-else-if="closeTextRenderType === 'nodes'">
-          <component :is="() => closeTextContent" />
+          <RenderContent :content="closeTextContent" />
         </template>
         <template v-else-if="closeTextRenderType === 'dynamic'">
           <component :is="closeTextContent" />

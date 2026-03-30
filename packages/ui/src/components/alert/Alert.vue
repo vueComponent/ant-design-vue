@@ -4,7 +4,6 @@ import {
   computed,
   defineComponent,
   Fragment,
-  getCurrentInstance,
   isVNode,
   ref,
   Text,
@@ -25,12 +24,15 @@ import type { AlertProps, AlertEmits, AlertSlots } from './types'
 import { isArray, isNumber, isString } from '@/utils/util'
 
 defineOptions({ name: 'AAlert', inheritAttrs: false })
-const props = defineProps<AlertProps>()
+const props = withDefaults(defineProps<AlertProps>(), {
+  closable: undefined,
+  showIcon: undefined,
+  banner: undefined,
+})
 const emit = defineEmits<AlertEmits>()
 defineSlots<AlertSlots>()
 const slots = useSlots()
 const attrs = useAttrs()
-const instance = getCurrentInstance()
 
 const closed = ref(false)
 
@@ -61,14 +63,6 @@ const outlinedIconMap: Record<NonNullable<AlertProps['type']>, Component> = {
   error: CloseCircleOutlined,
 }
 
-function hasVNodeProp(...names: string[]) {
-  const vnodeProps = instance?.vnode.props as Record<string, unknown> | null | undefined
-  if (!vnodeProps) return false
-  return names.some((name) => name in vnodeProps)
-}
-
-const showIconSpecified = computed(() => hasVNodeProp('showIcon', 'show-icon'))
-
 const rootAttrs = computed(() => {
   const { role: _role, ...rest } = attrs
   return rest
@@ -85,20 +79,18 @@ const resolvedType = computed(() => {
 
 // When banner=true, showIcon defaults to true
 const showIconComputed = computed(() => {
-  if (props.banner && !showIconSpecified.value) return true
+  if (props.banner && props.showIcon === undefined) return true
   return props.showIcon
 })
 
 const closableComputed = computed(() => {
-  // When closeText prop is set, closable becomes true
-  if (props.closeText !== undefined && props.closeText !== null && props.closeText !== false) return true
+  // When closeText prop is truthy, closable becomes true to match upstream behavior.
+  if (props.closeText) return true
   return props.closable || !!slots.closeText
 })
 
 // Calculate what closeText content to display (string, VNode, or component)
 const closeTextContent = computed(() => {
-  // If closeText is true, show nothing (just icon)
-  if (props.closeText === true) return null
   return props.closeText
 })
 
@@ -106,6 +98,7 @@ const closeTextRenderType = computed(() => {
   const value = closeTextContent.value
   if (value === null || value === undefined || value === false || value === '') return 'none'
   if (isString(value) || isNumber(value)) return 'text'
+  if (value === true) return 'boolean'
   if (isArray(value) || isVNode(value)) return 'nodes'
   return 'dynamic'
 })
@@ -236,6 +229,9 @@ function afterLeaveHandler() {
         </template>
         <template v-else-if="closeTextRenderType === 'text'">
           <span class="ant-alert-close-text">{{ closeTextContent }}</span>
+        </template>
+        <template v-else-if="closeTextRenderType === 'boolean'">
+          <span class="ant-alert-close-text" />
         </template>
         <template v-else-if="closeTextRenderType === 'nodes'">
           <RenderContent :content="closeTextContent" />

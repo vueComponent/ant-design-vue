@@ -185,6 +185,13 @@ describe('Alert', () => {
     expect(wrapper.find('.ant-alert-icon').exists()).toBe(true)
   })
 
+  it('banner mode still defaults icon when showIcon is explicitly undefined', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Banner', banner: true, showIcon: undefined },
+    })
+    expect(wrapper.find('.ant-alert-icon').exists()).toBe(true)
+  })
+
   it('banner mode respects explicitly disabled icon', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Banner', banner: true, showIcon: false },
@@ -304,15 +311,22 @@ describe('Alert', () => {
     expect(closeButton.attributes('aria-label')).toBeUndefined()
   })
 
-  it('closeText empty string still makes alert closable and falls back to icon', () => {
+  it('closeText empty string does not make alert closable', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Close me', closeText: '' },
     })
     const closeButton = wrapper.find('.ant-alert-close-icon')
-    expect(closeButton.exists()).toBe(true)
-    expect(wrapper.find('.ant-alert').classes()).toContain('ant-alert-closable')
-    expect(closeButton.attributes('aria-label')).toBe('Close')
-    expect(wrapper.find('.ant-alert-close-text').exists()).toBe(false)
+    expect(closeButton.exists()).toBe(false)
+    expect(wrapper.find('.ant-alert').classes()).not.toContain('ant-alert-closable')
+  })
+
+  it('closeText zero does not make alert closable', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close me', closeText: 0 },
+    })
+    const closeButton = wrapper.find('.ant-alert-close-icon')
+    expect(closeButton.exists()).toBe(false)
+    expect(wrapper.find('.ant-alert').classes()).not.toContain('ant-alert-closable')
   })
 
   it('closeText prop overrides closeIcon when both exist', () => {

@@ -1,4 +1,6 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
+import { mount } from '@vue/test-utils'
+import { defineComponent, h, nextTick } from 'vue'
 import { message } from '../index'
 
 describe('message', () => {
@@ -159,5 +161,93 @@ describe('message', () => {
     close()
 
     await expect(chained).resolves.toBe('step1-step2')
+  })
+
+  describe('useMessage', () => {
+    it('returns an instance and a context holder', () => {
+      const [api, contextHolder] = message.useMessage()
+      expect(typeof api.info).toBe('function')
+      expect(typeof api.success).toBe('function')
+      expect(typeof api.error).toBe('function')
+      expect(typeof api.warning).toBe('function')
+      expect(typeof api.warn).toBe('function')
+      expect(typeof api.loading).toBe('function')
+      expect(typeof api.open).toBe('function')
+      expect(typeof api.destroy).toBe('function')
+      expect(typeof api.config).toBe('function')
+      expect(typeof contextHolder).toBe('function')
+    })
+
+    it('renders messages inside the context holder', async () => {
+      const Wrapper = defineComponent({
+        setup() {
+          const [api, contextHolder] = message.useMessage()
+          return { api, contextHolder }
+        },
+        render() {
+          return h('div', [this.contextHolder()])
+        },
+      })
+
+      const wrapper = mount(Wrapper)
+      wrapper.vm.api.info('Hook message')
+
+      await nextTick()
+      expect(wrapper.find('.ant-message').exists()).toBe(true)
+      expect(wrapper.find('.ant-message-text').text()).toBe('Hook message')
+
+      wrapper.vm.api.destroy()
+      wrapper.unmount()
+    })
+
+    it('does not affect the global message singleton', async () => {
+      const Wrapper = defineComponent({
+        setup() {
+          const [api, contextHolder] = message.useMessage()
+          return { api, contextHolder }
+        },
+        render() {
+          return h('div', [this.contextHolder()])
+        },
+      })
+
+      const wrapper = mount(Wrapper)
+      wrapper.vm.api.info('Hook only')
+      message.info('Global only')
+
+      await nextTick()
+      // Hook holder should only contain its own message
+      const hookTexts = wrapper.findAll('.ant-message-text').map((w) => w.text())
+      expect(hookTexts).toContain('Hook only')
+      expect(hookTexts).not.toContain('Global only')
+
+      wrapper.vm.api.destroy()
+      message.destroy()
+      wrapper.unmount()
+    })
+
+    it('supports thenable on hook messages', async () => {
+      const Wrapper = defineComponent({
+        setup() {
+          const [api, contextHolder] = message.useMessage()
+          return { api, contextHolder }
+        },
+        render() {
+          return h('div', [this.contextHolder()])
+        },
+      })
+
+      const wrapper = mount(Wrapper)
+      const onResolved = vi.fn()
+      const close = wrapper.vm.api.open({ content: 'Thenable hook', duration: 0 })
+      close.then(onResolved)
+
+      expect(onResolved).not.toHaveBeenCalled()
+      close()
+      await Promise.resolve()
+      expect(onResolved).toHaveBeenCalledTimes(1)
+
+      wrapper.unmount()
+    })
   })
 })

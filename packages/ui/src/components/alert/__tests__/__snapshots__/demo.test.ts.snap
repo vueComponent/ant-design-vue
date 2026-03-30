@@ -15,7 +15,7 @@ exports[`Alert demos > demo: Action 1`] = `
     </div>
   </transition-stub>
   <transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
-    <div class="ant-alert ant-alert-error ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"></path></svg></span></span>
+    <div class="ant-alert ant-alert-error ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm0 76c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm128.01 198.83c.03 0 .05.01.09.06l45.02 45.01a.2.2 0 01.05.09.12.12 0 010 .07c0 .02-.01.04-.05.08L557.25 512l127.87 127.86a.27.27 0 01.05.06v.02a.12.12 0 010 .07c0 .03-.01.05-.05.09l-45.02 45.02a.2.2 0 01-.09.05.12.12 0 01-.07 0c-.02 0-.04-.01-.08-.05L512 557.25 384.14 685.12c-.04.04-.06.05-.08.05a.12.12 0 01-.07 0c-.03 0-.05-.01-.09-.05l-45.02-45.02a.2.2 0 01-.05-.09.12.12 0 010-.07c0-.02.01-.04.06-.08L466.75 512 338.88 384.14a.27.27 0 01-.05-.06l-.01-.02a.12.12 0 010-.07c0-.03.01-.05.05-.09l45.02-45.02a.2.2 0 01.09-.05.12.12 0 01.07 0c.02 0 .04.01.08.06L512 466.75l127.86-127.86c.04-.05.06-.06.08-.06a.12.12 0 01.07 0z"></path></svg></span></span>
       <div class="ant-alert-content">
         <div class="ant-alert-message">Error Text</div>
         <div class="ant-alert-description">Error Description Error Description Error Description Error Description</div>
@@ -85,7 +85,8 @@ exports[`Alert demos > demo: Banner 1`] = `
     </div>
   </transition-stub>
   <transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
-    <div class="ant-alert ant-alert-warning ant-alert-banner" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="exclamation-circle" class="anticon anticon-exclamation-circle"><svg focusable="false" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path></svg></span></span>
+    <div class="ant-alert ant-alert-warning ant-alert-banner ant-alert-no-icon" role="alert">
+      <!--v-if-->
       <div class="ant-alert-content">
         <div class="ant-alert-message">Warning text without icon</div>
         <!--v-if-->
@@ -147,15 +148,14 @@ exports[`Alert demos > demo: Closable 1`] = `
 `;
 
 exports[`Alert demos > demo: CloseText 1`] = `
-"<transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true" close-text="Close Now">
-  <div class="ant-alert ant-alert-info ant-alert-no-icon" role="alert">
+"<transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
+  <div class="ant-alert ant-alert-info ant-alert-closable ant-alert-no-icon" role="alert">
     <!--v-if-->
     <div class="ant-alert-content">
       <div class="ant-alert-message">Info Text</div>
       <!--v-if-->
     </div>
-    <!--v-if-->
-    <!--v-if-->
+    <!--v-if--><button type="button" class="ant-alert-close-icon"><span class="ant-alert-close-text">Close Now</span></button>
   </div>
 </transition-stub>"
 `;
@@ -350,7 +350,7 @@ exports[`Alert demos > demo: Icon 1`] = `
     </div>
   </transition-stub>
   <transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
-    <div class="ant-alert ant-alert-success ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path></svg></span></span>
+    <div class="ant-alert ant-alert-success ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="check-circle" class="anticon anticon-check-circle"><svg focusable="false" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0051.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span></span>
       <div class="ant-alert-content">
         <div class="ant-alert-message">Success Tips</div>
         <div class="ant-alert-description">Detailed description and advices about successful copywriting.</div>
@@ -360,7 +360,7 @@ exports[`Alert demos > demo: Icon 1`] = `
     </div>
   </transition-stub>
   <transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
-    <div class="ant-alert ant-alert-info ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="info-circle" class="anticon anticon-info-circle"><svg focusable="false" class="" data-icon="info-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path></svg></span></span>
+    <div class="ant-alert ant-alert-info ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="info-circle" class="anticon anticon-info-circle"><svg focusable="false" class="" data-icon="info-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 336a48 48 0 1096 0 48 48 0 10-96 0zm72 112h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V456c0-4.4-3.6-8-8-8z"></path></svg></span></span>
       <div class="ant-alert-content">
         <div class="ant-alert-message">Informational Notes</div>
         <div class="ant-alert-description">Additional description and informations about copywriting.</div>
@@ -370,7 +370,7 @@ exports[`Alert demos > demo: Icon 1`] = `
     </div>
   </transition-stub>
   <transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
-    <div class="ant-alert ant-alert-warning ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="exclamation-circle" class="anticon anticon-exclamation-circle"><svg focusable="false" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path></svg></span></span>
+    <div class="ant-alert ant-alert-warning ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="exclamation-circle" class="anticon anticon-exclamation-circle"><svg focusable="false" class="" data-icon="exclamation-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M464 688a48 48 0 1096 0 48 48 0 10-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z"></path></svg></span></span>
       <div class="ant-alert-content">
         <div class="ant-alert-message">Warning</div>
         <div class="ant-alert-description">This is a warning notice about copywriting.</div>
@@ -380,7 +380,7 @@ exports[`Alert demos > demo: Icon 1`] = `
     </div>
   </transition-stub>
   <transition-stub name="ant-alert-slide-up" appear="false" persisted="false" css="true">
-    <div class="ant-alert ant-alert-error ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm127.98 274.82h-.04l-.08.06L512 466.75 384.14 338.88c-.04-.05-.06-.06-.08-.06a.12.12 0 00-.07 0c-.03 0-.05.01-.09.05l-45.02 45.02a.2.2 0 00-.05.09.12.12 0 000 .07v.02a.27.27 0 00.06.06L466.75 512 338.88 639.86c-.05.04-.06.06-.06.08a.12.12 0 000 .07c0 .03.01.05.05.09l45.02 45.02a.2.2 0 00.09.05.12.12 0 00.07 0c.02 0 .04-.01.08-.05L512 557.25l127.86 127.87c.04.04.06.05.08.05a.12.12 0 00.07 0c.03 0 .05-.01.09-.05l45.02-45.02a.2.2 0 00.05-.09.12.12 0 000-.07v-.02a.27.27 0 00-.05-.06L557.25 512l127.87-127.86c.04-.04.05-.06.05-.08a.12.12 0 000-.07c0-.03-.01-.05-.05-.09l-45.02-45.02a.2.2 0 00-.09-.05.12.12 0 00-.07 0z"></path></svg></span></span>
+    <div class="ant-alert ant-alert-error ant-alert-with-description" role="alert"><span class="ant-alert-icon" aria-hidden="true"><span role="img" aria-label="close-circle" class="anticon anticon-close-circle"><svg focusable="false" class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" fill-rule="evenodd" viewBox="64 64 896 896"><path d="M512 64c247.4 0 448 200.6 448 448S759.4 960 512 960 64 759.4 64 512 264.6 64 512 64zm0 76c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm128.01 198.83c.03 0 .05.01.09.06l45.02 45.01a.2.2 0 01.05.09.12.12 0 010 .07c0 .02-.01.04-.05.08L557.25 512l127.87 127.86a.27.27 0 01.05.06v.02a.12.12 0 010 .07c0 .03-.01.05-.05.09l-45.02 45.02a.2.2 0 01-.09.05.12.12 0 01-.07 0c-.02 0-.04-.01-.08-.05L512 557.25 384.14 685.12c-.04.04-.06.05-.08.05a.12.12 0 01-.07 0c-.03 0-.05-.01-.09-.05l-45.02-45.02a.2.2 0 01-.05-.09.12.12 0 010-.07c0-.02.01-.04.06-.08L466.75 512 338.88 384.14a.27.27 0 01-.05-.06l-.01-.02a.12.12 0 010-.07c0-.03.01-.05.05-.09l45.02-45.02a.2.2 0 01.09-.05.12.12 0 01.07 0c.02 0 .04.01.08.06L512 466.75l127.86-127.86c.04-.05.06-.06.08-.06a.12.12 0 01.07 0z"></path></svg></span></span>
       <div class="ant-alert-content">
         <div class="ant-alert-message">Error</div>
         <div class="ant-alert-description">This is an error message about copywriting.</div>

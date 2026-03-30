@@ -140,7 +140,6 @@
     padding 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
     margin 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
     border 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-  max-height: 500px;
 }
 
 .ant-alert-slide-up-leave-to {

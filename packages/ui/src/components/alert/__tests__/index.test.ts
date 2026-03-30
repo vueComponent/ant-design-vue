@@ -1,7 +1,24 @@
 import { describe, expect, it, vi } from 'vitest'
 import { Alert } from '@ant-design-vue/ui'
 import { mount } from '@vue/test-utils'
-import { h, nextTick } from 'vue'
+import { Comment, defineComponent, h, nextTick } from 'vue'
+
+const ImmediateTransition = defineComponent({
+  name: 'ImmediateTransition',
+  props: {
+    onAfterLeave: Function,
+  },
+  setup(props, { slots }) {
+    return () => {
+      const children = slots.default?.()?.filter((child) => child.type !== Comment)
+      if (!children?.length) {
+        props.onAfterLeave?.()
+        return null
+      }
+      return children
+    }
+  },
+})
 
 describe('Alert', () => {
   it('should render correctly', () => {
@@ -119,13 +136,17 @@ describe('Alert', () => {
     const afterClose = vi.fn()
     const wrapper = mount(Alert, {
       props: { message: 'Close me', closable: true, afterClose },
+      global: {
+        stubs: {
+          transition: ImmediateTransition,
+        },
+      },
     })
 
     await wrapper.find('.ant-alert-close-icon').trigger('click')
     await nextTick()
 
-    // afterClose is called via Transition @after-leave, which may not fire in test env
-    // We verify the alert is removed from DOM
+    expect(afterClose).toHaveBeenCalledTimes(1)
     expect(wrapper.find('.ant-alert').exists()).toBe(false)
   })
 
@@ -150,11 +171,25 @@ describe('Alert', () => {
     expect(wrapper.find('.ant-alert').classes()).toContain('ant-alert-error')
   })
 
+  it('banner mode respects explicitly set info type', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Banner', banner: true, type: 'info' },
+    })
+    expect(wrapper.find('.ant-alert').classes()).toContain('ant-alert-info')
+  })
+
   it('banner mode shows icon by default', () => {
     const wrapper = mount(Alert, {
       props: { message: 'Banner', banner: true },
     })
     expect(wrapper.find('.ant-alert-icon').exists()).toBe(true)
+  })
+
+  it('banner mode respects explicitly disabled icon', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Banner', banner: true, showIcon: false },
+    })
+    expect(wrapper.find('.ant-alert-icon').exists()).toBe(false)
   })
 
   it('renders message slot', () => {
@@ -236,15 +271,26 @@ describe('Alert', () => {
     expect(closeButton.attributes('aria-label')).toBe('Close')
   })
 
-  it('renders closeIcon slot', () => {
+  it('renders closeIcon slot when closable', () => {
     const wrapper = mount(Alert, {
-      props: { message: 'Close icon' },
+      props: { message: 'Close icon', closable: true },
       slots: {
         closeIcon: '<span class="custom-close">X</span>',
       },
     })
     expect(wrapper.find('.ant-alert-close-icon').exists()).toBe(true)
     expect(wrapper.find('.custom-close').exists()).toBe(true)
+  })
+
+  it('does not become closable when only closeIcon slot is provided', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Close icon only' },
+      slots: {
+        closeIcon: '<span class="custom-close">X</span>',
+      },
+    })
+    expect(wrapper.find('.ant-alert-close-icon').exists()).toBe(false)
+    expect(wrapper.find('.custom-close').exists()).toBe(false)
   })
 
   it('closeText prop makes alert closable', () => {
@@ -316,5 +362,30 @@ describe('Alert', () => {
       },
     })
     expect(wrapper.find('.ant-alert-message').text()).toBe('Default slot message')
+  })
+
+  it('passes data and aria attributes to the alert root', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Attrs alert' },
+      attrs: {
+        'data-test': 'test-id',
+        'aria-describedby': 'some-label',
+      },
+    })
+
+    const alert = wrapper.find('.ant-alert')
+    expect(alert.attributes('data-test')).toBe('test-id')
+    expect(alert.attributes('aria-describedby')).toBe('some-label')
+  })
+
+  it('allows overriding the root role', () => {
+    const wrapper = mount(Alert, {
+      props: { message: 'Status alert' },
+      attrs: {
+        role: 'status',
+      },
+    })
+
+    expect(wrapper.find('.ant-alert').attributes('role')).toBe('status')
   })
 })

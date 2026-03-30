@@ -20,13 +20,6 @@ export interface AlertProps {
   afterClose?: () => void
 }
 
-export const alertDefaultProps = {
-  type: 'info',
-  closable: false,
-  showIcon: false,
-  banner: false,
-} as const
-
 export interface AlertEmits {
   (e: 'close', event: MouseEvent): void
 }

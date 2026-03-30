@@ -1,38 +1,84 @@
 <script setup lang="ts">
-import { Comment, computed, Fragment, isVNode, ref, Text, useSlots } from 'vue'
+import {
+  Comment,
+  computed,
+  Fragment,
+  getCurrentInstance,
+  isVNode,
+  ref,
+  Text,
+  type Component,
+  useAttrs,
+  useSlots,
+} from 'vue'
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled'
+import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined'
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled'
+import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined'
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled'
+import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined'
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled'
+import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined'
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined'
 import type { AlertProps, AlertEmits, AlertSlots } from './types'
-import { alertDefaultProps } from './types'
 import { isArray, isNumber, isString } from '@/utils/util'
 
-defineOptions({ name: 'AAlert' })
-const props = withDefaults(defineProps<AlertProps>(), alertDefaultProps)
+defineOptions({ name: 'AAlert', inheritAttrs: false })
+const props = defineProps<AlertProps>()
 const emit = defineEmits<AlertEmits>()
 defineSlots<AlertSlots>()
 const slots = useSlots()
+const attrs = useAttrs()
+const instance = getCurrentInstance()
 
 const closed = ref(false)
 
+const filledIconMap: Record<NonNullable<AlertProps['type']>, Component> = {
+  success: CheckCircleFilled,
+  info: InfoCircleFilled,
+  warning: ExclamationCircleFilled,
+  error: CloseCircleFilled,
+}
+
+const outlinedIconMap: Record<NonNullable<AlertProps['type']>, Component> = {
+  success: CheckCircleOutlined,
+  info: InfoCircleOutlined,
+  warning: ExclamationCircleOutlined,
+  error: CloseCircleOutlined,
+}
+
+function hasVNodeProp(...names: string[]) {
+  const vnodeProps = instance?.vnode.props as Record<string, unknown> | null | undefined
+  if (!vnodeProps) return false
+  return names.some((name) => name in vnodeProps)
+}
+
+const showIconSpecified = computed(() => hasVNodeProp('showIcon', 'show-icon'))
+
+const rootAttrs = computed(() => {
+  const { role: _role, ...rest } = attrs
+  return rest
+})
+
+const rootRole = computed(() => {
+  return typeof attrs.role === 'string' ? attrs.role : 'alert'
+})
+
 // When banner=true, type defaults to 'warning' if not explicitly set
 const resolvedType = computed(() => {
-  if (props.banner && props.type === 'info') return 'warning'
-  return props.type
+  return props.type ?? (props.banner ? 'warning' : 'info')
 })
 
 // When banner=true, showIcon defaults to true
 const showIconComputed = computed(() => {
-  if (props.banner) return true
+  if (props.banner && !showIconSpecified.value) return true
   return props.showIcon
 })
 
 const closableComputed = computed(() => {
   // When closeText prop is set, closable becomes true
   if (props.closeText !== undefined && props.closeText !== null && props.closeText !== false) return true
-  return props.closable || !!slots.closeText || !!slots.closeIcon
+  return props.closable || !!slots.closeText
 })
 
 // Calculate what closeText content to display (string, VNode, or component)
@@ -98,6 +144,11 @@ const hasDescription = computed(() => {
   return !!props.description || !!slots.description
 })
 
+const defaultIconComponent = computed(() => {
+  const iconMap = hasDescription.value ? outlinedIconMap : filledIconMap
+  return iconMap[resolvedType.value]
+})
+
 const hasMessage = computed(() => {
   return !!props.message || !!slots.message || !!slots.default
 })
@@ -116,20 +167,34 @@ function handleClose(event: MouseEvent) {
   closed.value = true
 }
 
+function beforeLeaveHandler(el: Element) {
+  if (el instanceof HTMLElement) {
+    el.style.maxHeight = `${el.offsetHeight}px`
+  }
+}
+
+function leaveHandler(el: Element) {
+  if (el instanceof HTMLElement) {
+    el.style.maxHeight = '0px'
+  }
+}
+
 function afterLeaveHandler() {
   props.afterClose?.()
 }
 </script>
 
 <template>
-  <Transition name="ant-alert-slide-up" @after-leave="afterLeaveHandler">
-    <div v-if="!closed" :class="classes" role="alert">
+  <Transition
+    name="ant-alert-slide-up"
+    @before-leave="beforeLeaveHandler"
+    @leave="leaveHandler"
+    @after-leave="afterLeaveHandler"
+  >
+    <div v-if="!closed" v-bind="rootAttrs" :class="classes" :role="rootRole">
       <span v-if="showIconComputed" class="ant-alert-icon" aria-hidden="true">
         <slot name="icon">
-          <CheckCircleFilled v-if="resolvedType === 'success'" />
-          <InfoCircleFilled v-else-if="resolvedType === 'info'" />
-          <ExclamationCircleFilled v-else-if="resolvedType === 'warning'" />
-          <CloseCircleFilled v-else-if="resolvedType === 'error'" />
+          <component :is="defaultIconComponent" />
         </slot>
       </span>
       <div class="ant-alert-content">

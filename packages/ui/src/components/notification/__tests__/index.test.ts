@@ -1,7 +1,9 @@
 import { h, nextTick } from 'vue'
+import { mount } from '@vue/test-utils'
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
 import { StepBackwardOutlined } from '@ant-design/icons-vue'
 import { notification } from '@ant-design-vue/ui'
+import NotificationItem from '../NotificationItem.vue'
 
 async function flushNotifications() {
   await nextTick()
@@ -250,28 +252,33 @@ describe('notification', () => {
     expect(bottomContainer?.style.bottom).toBe('36px')
   })
 
-  it('pauses auto close while hovered', async () => {
-    const onClose = vi.fn()
-
-    notification.open({
-      message: 'Notification',
-      duration: 1,
-      key: 'hover',
-      onClose,
+  it('pauses auto close on mouseenter and resumes on mouseleave', async () => {
+    const wrapper = mount(NotificationItem, {
+      attachTo: document.body,
+      props: {
+        item: {
+          id: 'hover',
+          updateMark: 0,
+          args: {
+            message: 'Notification',
+            duration: 1,
+          },
+        },
+      },
     })
 
-    await flushNotifications()
-
-    const notice = document.querySelector('.ant-notification-notice') as HTMLElement | null
-    expect(notice).not.toBeNull()
-
     await vi.advanceTimersByTimeAsync(500)
-    notice?.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))
+    await wrapper.trigger('mouseenter')
     await vi.advanceTimersByTimeAsync(600)
-    await flushNotifications()
 
-    expect(document.querySelectorAll('.ant-notification-notice')).toHaveLength(1)
-    expect(onClose).not.toHaveBeenCalled()
+    expect(wrapper.emitted('close')).toBeUndefined()
+
+    await wrapper.trigger('mouseleave')
+    await vi.advanceTimersByTimeAsync(1000)
+
+    expect(wrapper.emitted('close')).toEqual([['hover']])
+
+    wrapper.unmount()
   })
 
   it('restarts auto close timer when updating the same key', async () => {

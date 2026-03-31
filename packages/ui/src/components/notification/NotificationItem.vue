@@ -5,8 +5,6 @@
     @click="item.args.onClick?.()"
     @mouseenter="clearTimer"
     @mouseleave="startTimer"
-    @mouseover.self="clearTimer"
-    @mouseout.self="startTimer"
   >
     <div class="ant-notification-notice-content">
       <div :class="contentClasses" role="alert">

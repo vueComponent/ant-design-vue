@@ -30,6 +30,7 @@ function resetConfig() {
 
 describe('notification', () => {
   beforeEach(() => {
+    vi.useFakeTimers({ now: new Date('2025-03-25T08:00:00.000Z'), shouldAdvanceTime: true })
     document.body.innerHTML = ''
     resetConfig()
     notification.destroy()
@@ -39,6 +40,8 @@ describe('notification', () => {
     notification.destroy()
     resetConfig()
     document.body.innerHTML = ''
+    vi.clearAllTimers()
+    vi.useRealTimers()
   })
 
   it('has success method', () => {
@@ -357,6 +360,34 @@ describe('notification', () => {
     expect(document.querySelectorAll('.ant-notification-notice')).toHaveLength(1)
     expect(document.body.textContent).toContain('Notification 2')
 
+    await vi.advanceTimersByTimeAsync(500)
+    await flushExitTransitions()
+
+    expect(document.querySelectorAll('.ant-notification-notice')).toHaveLength(0)
+  })
+
+  it('updates notifications when the key is an empty string', async () => {
+    notification.open({
+      message: 'Notification 1',
+      duration: 1,
+      key: '',
+    })
+
+    await flushNotifications()
+    await vi.advanceTimersByTimeAsync(500)
+
+    notification.open({
+      message: 'Notification 2',
+      duration: 1,
+      key: '',
+    })
+
+    await flushNotifications()
+    await vi.advanceTimersByTimeAsync(600)
+    await flushNotifications()
+
+    expect(document.querySelectorAll('.ant-notification-notice')).toHaveLength(1)
+    expect(document.body.textContent).toContain('Notification 2')
     await vi.advanceTimersByTimeAsync(500)
     await flushExitTransitions()
 

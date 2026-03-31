@@ -141,7 +141,7 @@ function addNotification(args: NotificationArgsProps): void {
   const items = getPlacementItems(placementKey)
 
   // If key exists, update existing
-  if (args.key) {
+  if (args.key !== undefined) {
     const existing = items.find((n) => n.args.key === args.key)
     if (existing) {
       existing.args = normalizedArgs

@@ -17,7 +17,7 @@
         <div class="ant-notification-notice-message">
           <RenderNode :content="item.args.message" />
         </div>
-        <div class="ant-notification-notice-description">
+        <div v-if="item.args.description" class="ant-notification-notice-description">
           <RenderNode :content="item.args.description" />
         </div>
         <div v-if="item.args.btn" class="ant-notification-notice-btn">
@@ -52,10 +52,10 @@ import {
   watch,
 } from 'vue'
 import {
-  InfoCircleOutlined,
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  ExclamationCircleOutlined,
+  InfoCircleFilled,
+  CheckCircleFilled,
+  CloseCircleFilled,
+  ExclamationCircleFilled,
   CloseOutlined,
 } from '@ant-design/icons-vue'
 import type { InternalNotificationItem, NotificationType } from './types'
@@ -89,10 +89,10 @@ const emit = defineEmits<{
 }>()
 
 const typeIconMap: Record<NotificationType, Component> = {
-  info: InfoCircleOutlined,
-  success: CheckCircleOutlined,
-  error: CloseCircleOutlined,
-  warning: ExclamationCircleOutlined,
+  info: InfoCircleFilled,
+  success: CheckCircleFilled,
+  error: CloseCircleFilled,
+  warning: ExclamationCircleFilled,
 }
 
 const hasCustomIcon = computed(() => props.item.args.icon !== undefined)

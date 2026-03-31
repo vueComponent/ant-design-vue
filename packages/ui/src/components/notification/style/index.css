@@ -15,12 +15,12 @@
 /* Placement positions */
 :where(.ant-notification-topRight) {
   top: 24px;
-  right: 24px;
+  inset-inline-end: 24px;
 }
 
 :where(.ant-notification-topLeft) {
   top: 24px;
-  left: 24px;
+  inset-inline-start: 24px;
 }
 
 :where(.ant-notification-top) {
@@ -31,12 +31,12 @@
 
 :where(.ant-notification-bottomRight) {
   bottom: 24px;
-  right: 24px;
+  inset-inline-end: 24px;
 }
 
 :where(.ant-notification-bottomLeft) {
   bottom: 24px;
-  left: 24px;
+  inset-inline-start: 24px;
 }
 
 :where(.ant-notification-bottom) {

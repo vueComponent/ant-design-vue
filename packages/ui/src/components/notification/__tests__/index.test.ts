@@ -142,6 +142,17 @@ describe('notification', () => {
     expect(document.querySelectorAll('.ant-notification-notice-error')).toHaveLength(1)
   })
 
+  it('does not render an empty description block when description is absent', async () => {
+    notification.open({
+      message: 'Notification',
+      duration: 0,
+    })
+
+    await flushNotifications()
+
+    expect(document.querySelectorAll('.ant-notification-notice-description')).toHaveLength(0)
+  })
+
   it('supports closeIcon per notice', async () => {
     notification.open({
       message: 'Notification',

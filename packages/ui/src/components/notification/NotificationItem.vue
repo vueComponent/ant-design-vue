@@ -41,6 +41,7 @@
 
 <script setup lang="ts">
 import {
+  type Component,
   computed,
   defineComponent,
   isVNode,
@@ -87,7 +88,7 @@ const emit = defineEmits<{
   (e: 'close', id: string): void
 }>()
 
-const typeIconMap = {
+const typeIconMap: Record<NotificationType, Component> = {
   info: InfoCircleOutlined,
   success: CheckCircleOutlined,
   error: CloseCircleOutlined,

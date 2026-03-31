@@ -183,6 +183,23 @@ describe('notification', () => {
     expect(closeButton?.getAttribute('type')).toBe('button')
   })
 
+  it('applies rtl class to mounted container when configured', async () => {
+    notification.config({
+      rtl: true,
+    })
+
+    notification.open({
+      message: 'Notification',
+      duration: 0,
+    })
+
+    await flushNotifications()
+
+    const container = document.querySelector('.ant-notification')
+
+    expect(container?.classList.contains('ant-notification-rtl')).toBe(true)
+  })
+
   it('mounts into custom container', async () => {
     const container = document.createElement('div')
     document.body.appendChild(container)
@@ -196,6 +213,30 @@ describe('notification', () => {
     await flushNotifications()
 
     expect(container.querySelectorAll('.ant-notification')).toHaveLength(1)
+  })
+
+  it('applies per-notice top and bottom overrides to container style', async () => {
+    notification.open({
+      message: 'Top notification',
+      duration: 0,
+      placement: 'topRight',
+      top: 48,
+    })
+
+    notification.open({
+      message: 'Bottom notification',
+      duration: 0,
+      placement: 'bottomRight',
+      bottom: 36,
+    })
+
+    await flushNotifications()
+
+    const topContainer = document.querySelector('.ant-notification-topRight') as HTMLElement | null
+    const bottomContainer = document.querySelector('.ant-notification-bottomRight') as HTMLElement | null
+
+    expect(topContainer?.style.top).toBe('48px')
+    expect(bottomContainer?.style.bottom).toBe('36px')
   })
 
   it('pauses auto close while hovered', async () => {

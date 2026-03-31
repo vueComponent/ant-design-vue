@@ -237,6 +237,35 @@ describe('notification', () => {
     expect(container?.classList.contains('ant-notification-rtl')).toBe(true)
   })
 
+  it('reuses the same placement container when rtl changes', async () => {
+    notification.open({
+      message: 'Notification 1',
+      duration: 0,
+      placement: 'topRight',
+    })
+
+    await flushNotifications()
+
+    notification.config({
+      rtl: true,
+    })
+    await flushNotifications()
+
+    notification.open({
+      message: 'Notification 2',
+      duration: 0,
+      placement: 'topRight',
+    })
+
+    await flushNotifications()
+
+    const containers = document.querySelectorAll('.ant-notification-topRight')
+
+    expect(containers).toHaveLength(1)
+    expect(containers[0]?.classList.contains('ant-notification-rtl')).toBe(true)
+    expect(document.querySelectorAll('.ant-notification-notice')).toHaveLength(2)
+  })
+
   it('mounts into custom container', async () => {
     const container = document.createElement('div')
     document.body.appendChild(container)

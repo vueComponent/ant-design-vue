@@ -14,6 +14,15 @@ type MountedPlacement = {
   container: HTMLElement
 }
 
+type PlacementState = {
+  placement: NotificationPlacement
+  items: InternalNotificationItem[]
+  top?: number | string
+  bottom?: number | string
+  getContainer?: () => HTMLElement
+  rtl?: boolean
+}
+
 let seed = 0
 function genId() {
   return `ant-notification-${++seed}`
@@ -21,6 +30,7 @@ function genId() {
 
 // Group notifications by placement
 const placementMap = reactive<Record<string, InternalNotificationItem[]>>({})
+const placementStateMap = reactive<Record<string, PlacementState>>({})
 const mountedPlacements = new Map<string, MountedPlacement>()
 
 const globalConfig: NotificationConfigProps = {
@@ -31,7 +41,7 @@ const globalConfig: NotificationConfigProps = {
 }
 
 function getPlacementKey(placement: NotificationPlacement) {
-  return `${placement}-${globalConfig.rtl ? 'rtl' : 'ltr'}`
+  return placement
 }
 
 function getPlacementItems(placementKey: string): InternalNotificationItem[] {
@@ -39,6 +49,26 @@ function getPlacementItems(placementKey: string): InternalNotificationItem[] {
     placementMap[placementKey] = reactive<InternalNotificationItem[]>([])
   }
   return placementMap[placementKey]
+}
+
+function getPlacementState(
+  placement: NotificationPlacement,
+  args: Pick<NotificationArgsProps, 'top' | 'bottom' | 'getContainer'>,
+) {
+  const placementKey = getPlacementKey(placement)
+
+  if (!placementStateMap[placementKey]) {
+    placementStateMap[placementKey] = reactive({
+      placement,
+      items: getPlacementItems(placementKey),
+      top: args.top ?? globalConfig.top,
+      bottom: args.bottom ?? globalConfig.bottom,
+      getContainer: args.getContainer ?? globalConfig.getContainer,
+      rtl: globalConfig.rtl,
+    }) as PlacementState
+  }
+
+  return placementStateMap[placementKey]
 }
 
 function destroyPlacement(placementKey: string) {
@@ -50,6 +80,7 @@ function destroyPlacement(placementKey: string) {
   }
 
   delete placementMap[placementKey]
+  delete placementStateMap[placementKey]
 }
 
 function ensurePlacementMounted(
@@ -57,19 +88,17 @@ function ensurePlacementMounted(
   args: Pick<NotificationArgsProps, 'top' | 'bottom' | 'getContainer'>,
 ) {
   const placementKey = getPlacementKey(placement)
+  const placementState = getPlacementState(placement, args)
+  placementState.rtl = globalConfig.rtl
+
   if (mountedPlacements.has(placementKey) || typeof document === 'undefined') return placementKey
 
-  const items = getPlacementItems(placementKey)
   const container = document.createElement('div')
-  const mountTarget = args.getContainer?.() || globalConfig.getContainer?.() || document.body
+  const mountTarget = placementState.getContainer?.() || document.body
   mountTarget.appendChild(container)
 
   const app = createApp(NotificationContainer, {
-    items,
-    placement,
-    top: args.top ?? globalConfig.top,
-    bottom: args.bottom ?? globalConfig.bottom,
-    rtl: globalConfig.rtl,
+    state: placementState,
     onClose: (id: string) => {
       removeNotification(placementKey, id)
     },
@@ -169,5 +198,11 @@ export const notification: NotificationInstance = {
   },
   config: (options: NotificationConfigProps) => {
     Object.assign(globalConfig, options)
+
+    if (options.rtl !== undefined) {
+      for (const placementKey of Object.keys(placementStateMap)) {
+        placementStateMap[placementKey].rtl = globalConfig.rtl
+      }
+    }
   },
 }

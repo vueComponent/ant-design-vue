@@ -114,7 +114,7 @@ const RenderContent = defineComponent({
   name: 'ModalRenderContent',
   props: {
     value: {
-      type: [String, Number, Boolean, Object, Array, Function] as PropType<ModalRenderContent>,
+      type: null as unknown as PropType<ModalRenderContent>,
       default: undefined,
     },
   },

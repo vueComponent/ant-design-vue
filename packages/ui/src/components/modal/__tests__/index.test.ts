@@ -339,6 +339,29 @@ describe('Modal static methods', () => {
     expect(dialog?.querySelector('.ant-modal-confirm-content')).toBeNull()
   })
 
+  it('does not warn when closeIcon or footer is null', async () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
+
+    const wrapper = mount(ConfirmDialog, {
+      props: {
+        config: {
+          title: 'No warnings',
+          closeIcon: null,
+          footer: null,
+        },
+      },
+    })
+
+    await flushModalTicks()
+
+    expect(
+      warnSpy.mock.calls.some(([message]) => String(message).includes('Invalid prop')),
+    ).toBe(false)
+
+    wrapper.unmount()
+    warnSpy.mockRestore()
+  })
+
   it('supports function updater for static confirm', async () => {
     const modal = Modal.success({
       title: 'Before update',

@@ -21,6 +21,7 @@ const props = defineProps<{
   placement: NotificationPlacement
   top?: number | string
   bottom?: number | string
+  rtl?: boolean
 }>()
 
 defineEmits<{
@@ -30,6 +31,7 @@ defineEmits<{
 const containerClasses = computed(() => [
   'ant-notification',
   `ant-notification-${props.placement}`,
+  props.rtl ? 'ant-notification-rtl' : '',
 ])
 
 const transitionName = computed(() => {

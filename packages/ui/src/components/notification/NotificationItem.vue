@@ -1,47 +1,83 @@
 <template>
-  <div :class="itemClasses" :style="item.args.style" @click="item.args.onClick?.()">
+  <div
+    :class="itemClasses"
+    :style="item.args.style"
+    @click="item.args.onClick?.()"
+    @mouseenter="clearTimer"
+    @mouseleave="startTimer"
+    @mouseover.self="clearTimer"
+    @mouseout.self="startTimer"
+  >
     <div class="ant-notification-notice-content">
-      <div class="ant-notification-notice-with-icon">
-        <span v-if="iconNode" class="ant-notification-notice-icon">
-          <component :is="iconNode" />
+      <div :class="contentClasses" role="alert">
+        <span v-if="hasCustomIcon" class="ant-notification-notice-icon">
+          <RenderNode :content="item.args.icon" />
         </span>
+        <component :is="typeIconComponent" v-else-if="typeIconComponent" :class="iconClasses" />
         <div class="ant-notification-notice-message">
-          <component :is="item.args.message" v-if="typeof item.args.message === 'function'" />
-          <component :is="item.args.message" v-else-if="isVNode(item.args.message)" />
-          <template v-else>{{ item.args.message }}</template>
+          <RenderNode :content="item.args.message" />
         </div>
-        <div v-if="item.args.description" class="ant-notification-notice-description">
-          <component :is="item.args.description" v-if="typeof item.args.description === 'function'" />
-          <component :is="item.args.description" v-else-if="isVNode(item.args.description)" />
-          <template v-else>{{ item.args.description }}</template>
+        <div class="ant-notification-notice-description">
+          <RenderNode :content="item.args.description" />
         </div>
         <div v-if="item.args.btn" class="ant-notification-notice-btn">
-          <component :is="item.args.btn" v-if="typeof item.args.btn === 'function'" />
-          <component :is="item.args.btn" v-else />
+          <RenderNode :content="item.args.btn" />
         </div>
       </div>
     </div>
-    <button
-      type="button"
+    <a
+      tabindex="0"
       class="ant-notification-notice-close"
       aria-label="Close"
-      @click.stop="$emit('close', item.id)"
+      @click.stop.prevent="$emit('close', item.id)"
     >
-      <CloseOutlined />
-    </button>
+      <span class="ant-notification-close-x">
+        <RenderNode v-if="hasCustomCloseIcon" :content="item.args.closeIcon" />
+        <CloseOutlined v-else class="ant-notification-close-icon" />
+      </span>
+    </a>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onBeforeUnmount, isVNode, type Component } from 'vue'
 import {
-  InfoCircleFilled,
-  CheckCircleFilled,
-  CloseCircleFilled,
-  ExclamationCircleFilled,
+  computed,
+  defineComponent,
+  isVNode,
+  onBeforeUnmount,
+  onMounted,
+  type PropType,
+  type VNode,
+  watch,
+} from 'vue'
+import {
+  InfoCircleOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
   CloseOutlined,
 } from '@ant-design/icons-vue'
 import type { InternalNotificationItem, NotificationType } from './types'
+
+type RenderableContent = string | VNode | (() => VNode)
+
+const RenderNode = defineComponent({
+  name: 'NotificationRenderNode',
+  props: {
+    content: {
+      type: [String, Object, Function] as PropType<RenderableContent | undefined>,
+      default: undefined,
+    },
+  },
+  setup(renderProps) {
+    return () => {
+      if (typeof renderProps.content === 'function') {
+        return renderProps.content()
+      }
+      return isVNode(renderProps.content) ? renderProps.content : (renderProps.content ?? null)
+    }
+  },
+})
 
 const props = defineProps<{
   item: InternalNotificationItem
@@ -51,25 +87,36 @@ const emit = defineEmits<{
   (e: 'close', id: string): void
 }>()
 
-const typeIconMap: Record<NotificationType, Component> = {
-  info: InfoCircleFilled,
-  success: CheckCircleFilled,
-  error: CloseCircleFilled,
-  warning: ExclamationCircleFilled,
+const typeIconMap = {
+  info: InfoCircleOutlined,
+  success: CheckCircleOutlined,
+  error: CloseCircleOutlined,
+  warning: ExclamationCircleOutlined,
 }
 
-const iconNode = computed(() => {
-  if (props.item.args.icon) {
-    return typeof props.item.args.icon === 'function'
-      ? props.item.args.icon
-      : () => props.item.args.icon
-  }
-  if (!props.item.args.type) return null
+const hasCustomIcon = computed(() => props.item.args.icon !== undefined)
+
+const typeIconComponent = computed(() => {
+  if (hasCustomIcon.value || !props.item.args.type) return null
   return typeIconMap[props.item.args.type]
 })
 
+const hasIcon = computed(() => hasCustomIcon.value || Boolean(typeIconComponent.value))
+
+const contentClasses = computed(() => ({
+  'ant-notification-notice-with-icon': hasIcon.value,
+}))
+
+const iconClasses = computed(() => [
+  'ant-notification-notice-icon',
+  props.item.args.type ? `ant-notification-notice-icon-${props.item.args.type}` : '',
+])
+
+const hasCustomCloseIcon = computed(() => props.item.args.closeIcon !== undefined)
+
 const itemClasses = computed(() => [
   'ant-notification-notice',
+  'ant-notification-notice-closable',
   props.item.args.type ? `ant-notification-notice-${props.item.args.type}` : '',
   props.item.args.class,
 ])
@@ -78,6 +125,8 @@ const itemClasses = computed(() => [
 let timer: ReturnType<typeof setTimeout> | null = null
 
 function startTimer() {
+  clearTimer()
+
   const duration = props.item.args.duration
   // duration null means never auto-close
   if (duration === null) return
@@ -97,6 +146,10 @@ function clearTimer() {
 }
 
 onMounted(() => {
+  startTimer()
+})
+
+watch([() => props.item.updateMark, () => props.item.args.duration], () => {
   startTimer()
 })
 

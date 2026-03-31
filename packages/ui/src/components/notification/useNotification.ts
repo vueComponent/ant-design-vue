@@ -1,4 +1,4 @@
-import { createApp, reactive, type VNode } from 'vue'
+import { createApp, reactive, type App, type VNode } from 'vue'
 import NotificationContainer from './NotificationContainer.vue'
 import type {
   NotificationArgsProps,
@@ -9,6 +9,11 @@ import type {
   InternalNotificationItem,
 } from './types'
 
+type MountedPlacement = {
+  app: App
+  container: HTMLElement
+}
+
 let seed = 0
 function genId() {
   return `ant-notification-${++seed}`
@@ -16,7 +21,7 @@ function genId() {
 
 // Group notifications by placement
 const placementMap = reactive<Record<string, InternalNotificationItem[]>>({})
-const mountedPlacements = new Set<string>()
+const mountedPlacements = new Map<string, MountedPlacement>()
 
 const globalConfig: NotificationConfigProps = {
   top: 24,
@@ -25,36 +30,62 @@ const globalConfig: NotificationConfigProps = {
   placement: 'topRight',
 }
 
-function getPlacementItems(placement: NotificationPlacement): InternalNotificationItem[] {
-  if (!placementMap[placement]) {
-    placementMap[placement] = reactive<InternalNotificationItem[]>([])
-  }
-  return placementMap[placement]
+function getPlacementKey(placement: NotificationPlacement) {
+  return `${placement}-${globalConfig.rtl ? 'rtl' : 'ltr'}`
 }
 
-function ensurePlacementMounted(placement: NotificationPlacement) {
-  if (mountedPlacements.has(placement) || typeof document === 'undefined') return
+function getPlacementItems(placementKey: string): InternalNotificationItem[] {
+  if (!placementMap[placementKey]) {
+    placementMap[placementKey] = reactive<InternalNotificationItem[]>([])
+  }
+  return placementMap[placementKey]
+}
 
-  const items = getPlacementItems(placement)
+function destroyPlacement(placementKey: string) {
+  const mountedPlacement = mountedPlacements.get(placementKey)
+  if (mountedPlacement) {
+    mountedPlacement.app.unmount()
+    mountedPlacement.container.parentNode?.removeChild(mountedPlacement.container)
+    mountedPlacements.delete(placementKey)
+  }
+
+  delete placementMap[placementKey]
+}
+
+function ensurePlacementMounted(
+  placement: NotificationPlacement,
+  args: Pick<NotificationArgsProps, 'top' | 'bottom' | 'getContainer'>,
+) {
+  const placementKey = getPlacementKey(placement)
+  if (mountedPlacements.has(placementKey) || typeof document === 'undefined') return placementKey
+
+  const items = getPlacementItems(placementKey)
   const container = document.createElement('div')
-  document.body.appendChild(container)
+  const mountTarget = args.getContainer?.() || globalConfig.getContainer?.() || document.body
+  mountTarget.appendChild(container)
 
   const app = createApp(NotificationContainer, {
     items,
     placement,
-    top: globalConfig.top,
-    bottom: globalConfig.bottom,
+    top: args.top ?? globalConfig.top,
+    bottom: args.bottom ?? globalConfig.bottom,
+    rtl: globalConfig.rtl,
     onClose: (id: string) => {
-      removeNotification(placement, id)
+      removeNotification(placementKey, id)
     },
   })
 
   app.mount(container)
-  mountedPlacements.add(placement)
+  mountedPlacements.set(placementKey, {
+    app,
+    container,
+  })
+
+  return placementKey
 }
 
-function removeNotification(placement: NotificationPlacement, id: string) {
-  const items = getPlacementItems(placement)
+function removeNotification(placementKey: string, id: string) {
+  const items = getPlacementItems(placementKey)
   const idx = items.findIndex((n) => n.id === id)
   if (idx > -1) {
     const [item] = items.splice(idx, 1)
@@ -62,17 +93,30 @@ function removeNotification(placement: NotificationPlacement, id: string) {
   }
 }
 
+function normalizeArgs(args: NotificationArgsProps): NotificationArgsProps {
+  return {
+    ...args,
+    closeIcon: args.closeIcon !== undefined ? args.closeIcon : globalConfig.closeIcon,
+    duration: args.duration !== undefined ? args.duration : (globalConfig.duration ?? 4.5),
+  }
+}
+
 function addNotification(args: NotificationArgsProps): void {
   const placement = args.placement || globalConfig.placement || 'topRight'
-  ensurePlacementMounted(placement)
+  const placementKey = ensurePlacementMounted(placement, args)
+  const normalizedArgs = normalizeArgs({
+    ...args,
+    placement,
+  })
 
-  const items = getPlacementItems(placement)
+  const items = getPlacementItems(placementKey)
 
   // If key exists, update existing
   if (args.key) {
     const existing = items.find((n) => n.args.key === args.key)
     if (existing) {
-      existing.args = { ...args }
+      existing.args = normalizedArgs
+      existing.updateMark += 1
       return
     }
   }
@@ -85,10 +129,8 @@ function addNotification(args: NotificationArgsProps): void {
   const id = genId()
   items.push({
     id,
-    args: {
-      ...args,
-      duration: args.duration !== undefined ? args.duration : (globalConfig.duration ?? 4.5),
-    },
+    args: normalizedArgs,
+    updateMark: 0,
   })
 }
 
@@ -102,21 +144,22 @@ export const notification: NotificationInstance = {
   success: createTypeFn('success'),
   info: createTypeFn('info'),
   warning: createTypeFn('warning'),
+  warn: createTypeFn('warning'),
   error: createTypeFn('error'),
   open: (args: NotificationArgsProps) => addNotification(args),
   close: (key: string) => {
-    for (const placement of Object.keys(placementMap)) {
-      const items = placementMap[placement]
+    for (const placementKey of Object.keys(placementMap)) {
+      const items = placementMap[placementKey]
       const item = items.find((n) => n.args.key === key)
       if (item) {
-        removeNotification(placement as NotificationPlacement, item.id)
+        removeNotification(placementKey, item.id)
         return
       }
     }
   },
   destroy: () => {
-    for (const placement of Object.keys(placementMap)) {
-      placementMap[placement].splice(0, placementMap[placement].length)
+    for (const placementKey of [...mountedPlacements.keys()]) {
+      destroyPlacement(placementKey)
     }
   },
   config: (options: NotificationConfigProps) => {

@@ -31,6 +31,12 @@ export interface NotificationArgsProps {
   onClick?: () => void
   /** Placement position */
   placement?: NotificationPlacement
+  /** Distance from top of viewport for first mounted container */
+  top?: number | string
+  /** Distance from bottom of viewport for first mounted container */
+  bottom?: number | string
+  /** Container function for first mounted container */
+  getContainer?: () => HTMLElement
   /** Custom style */
   style?: CSSProperties
   /** Custom class */
@@ -62,6 +68,7 @@ export interface NotificationInstance {
   success: (args: NotificationArgsProps) => void
   info: (args: NotificationArgsProps) => void
   warning: (args: NotificationArgsProps) => void
+  warn: (args: NotificationArgsProps) => void
   error: (args: NotificationArgsProps) => void
   open: (args: NotificationArgsProps) => void
   close: (key: string) => void
@@ -72,4 +79,5 @@ export interface NotificationInstance {
 export interface InternalNotificationItem {
   id: string
   args: NotificationArgsProps
+  updateMark: number
 }

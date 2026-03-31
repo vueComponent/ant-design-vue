@@ -1,224 +1,252 @@
 <template>
-  <Portal :visible="open" :get-container="getContainer">
-    <div :class="wrapClasses" :style="wrapStyle" @click="onMaskClick" @keydown="onKeydown">
-      <Transition name="ant-zoom" @after-leave="onAfterLeave">
-        <div
-          v-if="open"
-          ref="dialogRef"
-          class="ant-modal ant-modal-confirm"
-          :class="confirmClasses"
-          :style="modalStyle"
-          role="dialog"
-          aria-modal="true"
-          tabindex="-1"
-          @click.stop
-        >
-          <div class="ant-modal-body">
-            <div class="ant-modal-confirm-body-wrapper">
-              <div class="ant-modal-confirm-body">
-                <span v-if="iconNode" class="ant-modal-confirm-icon">
-                  <component :is="iconNode" />
-                </span>
-                <span v-if="config.title" class="ant-modal-confirm-title">
-                  <component :is="config.title" v-if="typeof config.title === 'function'" />
-                  <template v-else>{{ config.title }}</template>
-                </span>
-                <div v-if="config.content" class="ant-modal-confirm-content">
-                  <component :is="config.content" v-if="typeof config.content === 'function'" />
-                  <template v-else>{{ config.content }}</template>
-                </div>
-              </div>
-              <div class="ant-modal-confirm-btns">
-                <button
-                  v-if="showCancel"
-                  class="ant-btn ant-btn-outlined"
-                  v-bind="(config.cancelButtonProps as any)"
-                  @click="onCancel"
-                >
-                  {{ config.cancelText || 'Cancel' }}
-                </button>
-                <button
-                  ref="okBtnRef"
-                  class="ant-btn ant-btn-solid"
-                  :class="{ 'ant-btn-danger': config.type === 'error' }"
-                  v-bind="(config.okButtonProps as any)"
-                  :disabled="loading"
-                  @click="onOk"
-                >
-                  <span v-if="loading" class="ant-btn-loading-icon">
-                    <LoadingOutlined />
-                  </span>
-                  {{ config.okText || 'OK' }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
-    </div>
+  <Modal
+    :open="open"
+    :width="config.width ?? 416"
+    :centered="config.centered"
+    :closable="config.closable ?? false"
+    :mask="config.mask ?? true"
+    :mask-closable="config.maskClosable ?? false"
+    :keyboard="config.keyboard ?? true"
+    :z-index="config.zIndex"
+    :body-style="config.bodyStyle"
+    :mask-style="config.maskStyle"
+    :wrap-class-name="config.wrapClassName"
+    :get-container="config.getContainer"
+    :footer="false"
+    :class="confirmClasses"
+    @cancel="onDialogCancel"
+    @after-close="onAfterLeave"
+  >
+    <template v-if="config.closeIcon !== undefined" #closeIcon>
+      <RenderContent :value="config.closeIcon" />
+    </template>
 
-    <Transition name="ant-fade">
-      <div v-if="open" class="ant-modal-mask" :style="maskStyle" />
-    </Transition>
-  </Portal>
+    <div class="ant-modal-confirm-body-wrapper">
+      <div class="ant-modal-confirm-body">
+        <span v-if="iconNode !== undefined && iconNode !== null" class="ant-modal-confirm-icon">
+          <RenderContent :value="iconNode" />
+        </span>
+        <span v-if="config.title !== undefined" class="ant-modal-confirm-title">
+          <RenderContent :value="config.title" />
+        </span>
+        <div v-if="config.content !== undefined" class="ant-modal-confirm-content">
+          <RenderContent :value="config.content" />
+        </div>
+      </div>
+
+      <RenderContent v-if="config.footer !== undefined" :value="config.footer" />
+      <div v-else class="ant-modal-confirm-btns">
+        <Button
+          v-if="showCancel"
+          ref="cancelBtnRef"
+          v-bind="cancelButtonAttrs"
+          @click="onCancel"
+        >
+          {{ config.cancelText || 'Cancel' }}
+        </Button>
+        <Button ref="okBtnRef" v-bind="okButtonAttrs" @click="onOk">
+          {{ config.okText || 'OK' }}
+        </Button>
+      </div>
+    </div>
+  </Modal>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick, type Component } from 'vue'
+import { computed, defineComponent, h, nextTick, onMounted, ref, toRef, type PropType } from 'vue'
 import {
   InfoCircleOutlined,
   CheckCircleOutlined,
   CloseCircleOutlined,
   ExclamationCircleOutlined,
-  LoadingOutlined,
 } from '@ant-design/icons-vue'
-import { Portal } from '@/_internal/portal'
-import type { ModalFuncProps, ModalType } from './types'
+import Button from '../button'
+import Modal from './Modal.vue'
+import type { ModalButtonType, ModalFuncProps, ModalRenderContent, ModalType } from './types'
+
+defineOptions({ name: 'AConfirmDialog' })
 
 const props = defineProps<{
   config: ModalFuncProps
 }>()
+const config = toRef(props, 'config')
 
 const emit = defineEmits<{
   (e: 'destroy'): void
 }>()
 
 const open = ref(true)
-const loading = ref(false)
+const okLoading = ref(false)
+const cancelLoading = ref(false)
+const okBtnRef = ref<{ focus: () => void } | null>(null)
+const cancelBtnRef = ref<{ focus: () => void } | null>(null)
 
-const dialogRef = ref<HTMLElement | null>(null)
-const okBtnRef = ref<HTMLElement | null>(null)
+function resolveOkTypeProps(okType?: ModalButtonType) {
+  if (!okType) return {}
+  if (okType === 'danger') return { danger: true }
+  if (okType === 'primary' || okType === 'default') return { type: okType }
+  return { variant: okType }
+}
+
+function renderSomeContent(content?: ModalRenderContent) {
+  if (typeof content === 'function') {
+    return content()
+  }
+  return content
+}
+
+function isThenable(value: unknown): value is PromiseLike<unknown> {
+  return !!value && typeof (value as PromiseLike<unknown>).then === 'function'
+}
+
+const RenderContent = defineComponent({
+  name: 'ModalRenderContent',
+  props: {
+    value: {
+      type: [String, Number, Boolean, Object, Array, Function] as PropType<ModalRenderContent>,
+      default: undefined,
+    },
+  },
+  setup(renderProps) {
+    return () => renderSomeContent(renderProps.value)
+  },
+})
 
 // Focus management
 onMounted(() => {
   nextTick(() => {
-    if (props.config.autoFocusButton === 'cancel') {
-      // focus cancel button if exists
-    } else if (props.config.autoFocusButton !== null) {
+    if (config.value.autoFocusButton === 'cancel') {
+      cancelBtnRef.value?.focus()
+    } else if (config.value.autoFocusButton !== null) {
       okBtnRef.value?.focus()
     }
   })
 })
 
 const showCancel = computed(() => {
-  if (props.config.okCancel !== undefined) return props.config.okCancel
-  return props.config.type === 'confirm'
+  if (config.value.okCancel !== undefined) return config.value.okCancel
+  return (config.value.type || 'confirm') === 'confirm'
 })
 
-const typeIconMap: Record<ModalType, Component> = {
-  info: InfoCircleOutlined,
-  success: CheckCircleOutlined,
-  error: CloseCircleOutlined,
-  warning: ExclamationCircleOutlined,
-  confirm: ExclamationCircleOutlined,
+const typeIconMap: Record<ModalType, ModalRenderContent> = {
+  info: () => h(InfoCircleOutlined),
+  success: () => h(CheckCircleOutlined),
+  error: () => h(CloseCircleOutlined),
+  warning: () => h(ExclamationCircleOutlined),
+  confirm: () => h(ExclamationCircleOutlined),
 }
 
 const iconNode = computed(() => {
-  if (props.config.icon) {
-    return typeof props.config.icon === 'function' ? props.config.icon : () => props.config.icon
+  if (Object.prototype.hasOwnProperty.call(config.value, 'icon')) {
+    return config.value.icon ?? null
   }
-  const type = props.config.type || 'confirm'
+  const type = config.value.type || 'confirm'
   return typeIconMap[type]
 })
 
 const confirmClasses = computed(() => {
-  const type = props.config.type || 'confirm'
-  return [
-    `ant-modal-confirm-${type}`,
-    props.config.class,
-    props.config.wrapClassName,
-  ]
+  const type = config.value.type || 'confirm'
+  return ['ant-modal-confirm', `ant-modal-confirm-${type}`, config.value.class]
 })
 
-const wrapClasses = computed(() => [
-  'ant-modal-wrap',
-  { 'ant-modal-centered': props.config.centered },
-])
+const okButtonAttrs = computed(() => ({
+  ...resolveOkTypeProps(config.value.okType),
+  loading: okLoading.value,
+  ...(config.value.okButtonProps ?? {}),
+}))
 
-const wrapStyle = computed(() => {
-  const style: Record<string, string> = {}
-  if (props.config.zIndex != null) {
-    style.zIndex = String(props.config.zIndex)
-  }
-  return style
-})
-
-const modalStyle = computed(() => {
-  const style: Record<string, string> = {}
-  const width = props.config.width ?? 416
-  if (typeof width === 'number') {
-    style.width = `${width}px`
-  } else {
-    style.width = width
-  }
-  return style
-})
-
-const maskStyle = computed(() => {
-  const style: Record<string, string> = {}
-  if (props.config.zIndex != null) {
-    style.zIndex = String(props.config.zIndex)
-  }
-  return style
-})
-
-const getContainer = computed(() => undefined)
+const cancelButtonAttrs = computed(() => ({
+  variant: 'outlined' as const,
+  loading: cancelLoading.value,
+  ...(config.value.cancelButtonProps ?? {}),
+}))
 
 async function onOk() {
-  if (props.config.onOk) {
-    const result = props.config.onOk()
-    if (result && typeof result === 'object' && 'then' in result) {
-      loading.value = true
-      try {
-        await result
-        close()
-      } catch {
-        loading.value = false
-      }
-      return
-    }
+  if (okLoading.value) return
+
+  const action = config.value.onOk
+  if (!action) {
+    close()
+    return
   }
-  close()
+
+  if (action.length) {
+    action(close)
+    return
+  }
+
+  const result = action()
+  if (!isThenable(result)) {
+    if (!result) {
+      close()
+    }
+    return
+  }
+
+  okLoading.value = true
+  try {
+    await result
+    close()
+  } catch {
+    okLoading.value = false
+  }
 }
 
 async function onCancel() {
-  if (props.config.onCancel) {
-    const result = props.config.onCancel()
-    if (result && typeof result === 'object' && 'then' in result) {
-      try {
-        await result
-      } catch {
-        return
+  if (cancelLoading.value) return
+
+  const action = config.value.onCancel
+  if (!action) {
+    close()
+    return
+  }
+
+  if (action.length) {
+    action(close)
+    return
+  }
+
+  try {
+    const result = action()
+    if (!isThenable(result)) {
+      if (!result) {
+        close()
       }
+      return
     }
+
+    cancelLoading.value = true
+    await result
+    close()
+  } catch {
+    cancelLoading.value = false
+    // Keep dialog open on rejected cancel promises.
+  }
+}
+
+function close() {
+  if (!open.value) return
+  okLoading.value = false
+  cancelLoading.value = false
+  open.value = false
+}
+
+function onDialogCancel(event: MouseEvent | KeyboardEvent) {
+  try {
+    config.value.onCancel?.(() => {}, event)
+  } catch {
+    // Follow legacy confirm behavior and close even if onCancel throws.
   }
   close()
 }
 
-function close() {
-  open.value = false
-}
-
-function onMaskClick() {
-  if (props.config.maskClosable) {
-    onCancel()
-  }
-}
-
-function onKeydown(e: KeyboardEvent) {
-  if (props.config.keyboard !== false && e.key === 'Escape') {
-    e.stopPropagation()
-    onCancel()
-  }
-}
-
 function onAfterLeave() {
-  props.config.afterClose?.()
+  config.value.afterClose?.()
   emit('destroy')
 }
 
 function update(newConfig: Partial<ModalFuncProps>) {
-  Object.assign(props.config, newConfig)
+  Object.assign(config.value, newConfig)
 }
 
 defineExpose({ close, update })

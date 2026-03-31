@@ -1,11 +1,16 @@
-import { defineComponent, ref, h, shallowReactive } from 'vue'
+import { defineComponent, shallowRef, h, shallowReactive } from 'vue'
 import ConfirmDialog from './ConfirmDialog.vue'
-import type { ModalFuncProps, ModalFuncReturn, ModalType } from './types'
+import type { ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType } from './types'
+
+type ConfirmDialogInstance = {
+  close: () => void
+  update: (newConfig: Partial<ModalFuncProps>) => void
+}
 
 interface ModalEntry {
   key: number
   config: ModalFuncProps
-  resolve: (() => void) | null
+  instance: ConfirmDialogInstance | null
 }
 
 export function useModal(): [
@@ -21,19 +26,30 @@ export function useModal(): [
   let nextKey = 0
   const entries = shallowReactive<ModalEntry[]>([])
 
+  function removeEntry(entry: ModalEntry) {
+    const idx = entries.indexOf(entry)
+    if (idx > -1) entries.splice(idx, 1)
+  }
+
   function open(config: ModalFuncProps): ModalFuncReturn {
     const key = nextKey++
-    const configRef = ref({ ...config })
-    const entry: ModalEntry = { key, config: configRef.value, resolve: null }
+    const configRef = shallowRef({ ...config })
+    const entry: ModalEntry = { key, config: configRef.value, instance: null }
     entries.push(entry)
 
     function destroy() {
-      const idx = entries.indexOf(entry)
-      if (idx > -1) entries.splice(idx, 1)
+      if (entry.instance) {
+        entry.instance.close()
+        return
+      }
+      removeEntry(entry)
     }
 
-    function update(newConfig: Partial<ModalFuncProps>) {
-      Object.assign(configRef.value, newConfig)
+    function update(newConfig: ModalFuncConfigUpdate) {
+      configRef.value =
+        typeof newConfig === 'function'
+          ? newConfig(configRef.value)
+          : { ...configRef.value, ...newConfig }
       entry.config = { ...configRef.value }
       // Trigger reactivity
       const idx = entries.indexOf(entry)
@@ -67,9 +83,11 @@ export function useModal(): [
           h(ConfirmDialog, {
             key: entry.key,
             config: entry.config,
+            ref: (el) => {
+              entry.instance = el as unknown as ConfirmDialogInstance | null
+            },
             onDestroy: () => {
-              const idx = entries.indexOf(entry)
-              if (idx > -1) entries.splice(idx, 1)
+              removeEntry(entry)
             },
           }),
         )

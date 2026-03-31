@@ -114,15 +114,15 @@
 
 :where(.ant-modal-confirm-body) {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 :where(.ant-modal-confirm-icon) {
   font-size: 22px;
   line-height: 1;
-  flex-shrink: 0;
-  margin-top: 1px;
+  flex: none;
+  margin-inline-end: 12px;
 }
 
 :where(.ant-modal-confirm-info) .ant-modal-confirm-icon {
@@ -147,6 +147,12 @@
   font-weight: 600;
   line-height: 1.5;
   color: var(--color-neutral);
+  display: block;
+  flex: 0 0 100%;
+  overflow: hidden;
+}
+
+:where(.ant-modal-confirm-icon + .ant-modal-confirm-title) {
   flex: 1;
 }
 
@@ -155,6 +161,13 @@
   font-size: var(--ant-font-size);
   color: var(--color-neutral-secondary);
   line-height: var(--ant-line-height);
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+:where(.ant-modal-confirm-icon + .ant-modal-confirm-title + .ant-modal-confirm-content) {
+  margin-inline-start: 34px;
+  max-width: calc(100% - 34px);
 }
 
 :where(.ant-modal-confirm-btns) {

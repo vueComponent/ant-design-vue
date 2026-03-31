@@ -1,27 +1,43 @@
-import { createApp, ref, h, type App } from 'vue'
+import { createApp, shallowRef, h, type App } from 'vue'
 import ConfirmDialog from './ConfirmDialog.vue'
-import type { ModalFuncProps, ModalFuncReturn, ModalType } from './types'
+import type { ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType } from './types'
 
 const openDialogs: Array<{ app: App; destroy: () => void }> = []
+type ConfirmDialogInstance = {
+  close: () => void
+  update: (newConfig: Partial<ModalFuncProps>) => void
+}
 
 export function confirm(config: ModalFuncProps): ModalFuncReturn {
   const container = document.createElement('div')
   document.body.appendChild(container)
 
-  const configRef = ref({ ...config })
+  const configRef = shallowRef({ ...config })
 
-  let dialogInstance: any = null
+  let dialogInstance: ConfirmDialogInstance | null = null
+  let cleanedUp = false
+  let closing = false
+
+  function cleanup() {
+    if (cleanedUp) return
+    cleanedUp = true
+    dialogInstance = null
+    app.unmount()
+    if (container.parentNode) {
+      container.parentNode.removeChild(container)
+    }
+    const idx = openDialogs.indexOf(entry)
+    if (idx > -1) openDialogs.splice(idx, 1)
+  }
 
   const app = createApp({
     setup() {
       return () =>
         h(ConfirmDialog, {
           config: configRef.value,
-          onDestroy: () => {
-            destroy()
-          },
-          ref: (el: any) => {
-            dialogInstance = el
+          onDestroy: cleanup,
+          ref: (el) => {
+            dialogInstance = el as unknown as ConfirmDialogInstance | null
           },
         })
     },
@@ -34,16 +50,20 @@ export function confirm(config: ModalFuncProps): ModalFuncReturn {
   openDialogs.push(entry)
 
   function destroy() {
-    app.unmount()
-    if (container.parentNode) {
-      container.parentNode.removeChild(container)
+    if (cleanedUp || closing) return
+    if (dialogInstance) {
+      closing = true
+      dialogInstance.close()
+      return
     }
-    const idx = openDialogs.indexOf(entry)
-    if (idx > -1) openDialogs.splice(idx, 1)
+    cleanup()
   }
 
-  function update(newConfig: Partial<ModalFuncProps>) {
-    configRef.value = { ...configRef.value, ...newConfig }
+  function update(newConfig: ModalFuncConfigUpdate) {
+    configRef.value =
+      typeof newConfig === 'function'
+        ? newConfig(configRef.value)
+        : { ...configRef.value, ...newConfig }
   }
 
   return { destroy, update }

@@ -1,8 +1,13 @@
-import type { CSSProperties, VNode } from 'vue'
-import type { Slot, ScopedSlot } from '@/utils/types'
+import type { CSSProperties } from 'vue'
+import type { Slot, SlotReturnType } from '@/utils/types'
 import type { ButtonProps } from '../button/types'
 
 export type ModalType = 'info' | 'success' | 'error' | 'warning' | 'confirm'
+export type ModalButtonType =
+  | NonNullable<ButtonProps['variant']>
+  | NonNullable<ButtonProps['type']>
+  | 'danger'
+export type ModalRenderContent = SlotReturnType | (() => SlotReturnType)
 
 export interface ModalProps {
   /** Whether the modal is visible (v-model:open) */
@@ -34,7 +39,7 @@ export interface ModalProps {
   /** Cancel button text */
   cancelText?: string
   /** OK button type */
-  okType?: ButtonProps['variant']
+  okType?: ModalButtonType
   /** OK button props */
   okButtonProps?: Partial<ButtonProps>
   /** Cancel button props */
@@ -90,12 +95,12 @@ export interface ModalSlots {
 
 export interface ModalFuncProps {
   type?: ModalType
-  title?: string | (() => VNode)
-  content?: string | (() => VNode)
-  icon?: VNode | (() => VNode)
+  title?: ModalRenderContent
+  content?: ModalRenderContent
+  icon?: ModalRenderContent
   okText?: string
   cancelText?: string
-  okType?: ButtonProps['variant']
+  okType?: ModalButtonType
   okButtonProps?: Partial<ButtonProps>
   cancelButtonProps?: Partial<ButtonProps>
   onOk?: (...args: any[]) => any | Promise<any>
@@ -107,13 +112,23 @@ export interface ModalFuncProps {
   maskClosable?: boolean
   keyboard?: boolean
   zIndex?: number
+  bodyStyle?: CSSProperties
+  maskStyle?: CSSProperties
+  getContainer?: () => HTMLElement
+  closable?: boolean
   class?: string
   wrapClassName?: string
+  footer?: ModalRenderContent
+  closeIcon?: ModalRenderContent
   autoFocusButton?: 'ok' | 'cancel' | null
   okCancel?: boolean
 }
 
+export type ModalFuncConfigUpdate =
+  | Partial<ModalFuncProps>
+  | ((prevConfig: ModalFuncProps) => ModalFuncProps)
+
 export interface ModalFuncReturn {
   destroy: () => void
-  update: (newConfig: Partial<ModalFuncProps>) => void
+  update: (newConfig: ModalFuncConfigUpdate) => void
 }

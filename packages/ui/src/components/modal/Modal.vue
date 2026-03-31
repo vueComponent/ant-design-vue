@@ -6,8 +6,9 @@
           v-if="shouldRender"
           v-show="mergedOpen"
           ref="modalRef"
+          v-bind="dialogAttrs"
           :class="modalClasses"
-          :style="modalStyle"
+          :style="[attrs.style, modalStyle]"
           role="dialog"
           aria-modal="true"
           :aria-labelledby="titleId"
@@ -42,24 +43,12 @@
           <!-- Footer -->
           <div v-if="showFooter" class="ant-modal-footer">
             <slot name="footer">
-              <button
-                class="ant-btn ant-btn-outlined"
-                v-bind="cancelBtnAttrs"
-                @click="onCancel"
-              >
+              <Button v-bind="cancelBtnAttrs" @click="onCancel">
                 {{ props.cancelText }}
-              </button>
-              <button
-                class="ant-btn ant-btn-solid"
-                v-bind="okBtnAttrs"
-                :disabled="props.confirmLoading"
-                @click="onOk"
-              >
-                <span v-if="props.confirmLoading" class="ant-btn-loading-icon">
-                  <LoadingOutlined />
-                </span>
+              </Button>
+              <Button v-bind="okBtnAttrs" @click="onOk">
                 {{ props.okText }}
-              </button>
+              </Button>
             </slot>
           </div>
         </div>
@@ -69,7 +58,7 @@
     <!-- Mask -->
     <Transition name="ant-fade">
       <div
-        v-if="shouldRender"
+        v-if="shouldRender && props.mask"
         v-show="mergedOpen"
         class="ant-modal-mask"
         :style="maskStyles"
@@ -79,27 +68,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, useSlots, onMounted, onBeforeUnmount, nextTick, getCurrentInstance } from 'vue'
-import { CloseOutlined, LoadingOutlined } from '@ant-design/icons-vue'
+import { ref, computed, watch, useSlots, useAttrs, onBeforeUnmount, nextTick, getCurrentInstance } from 'vue'
+import { CloseOutlined } from '@ant-design/icons-vue'
 import { Portal } from '@/_internal/portal'
-import type { ModalProps, ModalEmits, ModalSlots } from './types'
+import Button from '../button'
+import type { ModalButtonType, ModalProps, ModalEmits, ModalSlots } from './types'
 import { modalDefaultProps } from './types'
 
-defineOptions({ name: 'AModal' })
+defineOptions({ name: 'AModal', inheritAttrs: false })
 
 const props = withDefaults(defineProps<ModalProps>(), modalDefaultProps)
 const emit = defineEmits<ModalEmits>()
 defineSlots<ModalSlots>()
 const slots = useSlots()
+const attrs = useAttrs()
 
 const modalRef = ref<HTMLElement | null>(null)
 
-// --- Unique ID for aria-labelledby ---
-let _uid = 0
-const titleId = `ant-modal-title-${++_uid}`
-
 // --- Open state ---
 const instance = getCurrentInstance()!
+const titleId = `ant-modal-title-${instance.uid}`
 const isControlled = computed(() => {
   const rawProps = instance.vnode.props || {}
   return 'open' in rawProps || 'visible' in rawProps
@@ -178,20 +166,26 @@ const showFooter = computed(() => {
 })
 
 // --- Button attrs ---
+function resolveOkTypeProps(okType?: ModalButtonType) {
+  if (!okType) return {}
+  if (okType === 'danger') return { danger: true }
+  if (okType === 'primary' || okType === 'default') return { type: okType }
+  return { variant: okType }
+}
+
 const okBtnAttrs = computed(() => {
-  const attrs: Record<string, any> = {}
-  if (props.okButtonProps) {
-    Object.assign(attrs, props.okButtonProps)
+  return {
+    ...resolveOkTypeProps(props.okType),
+    loading: props.confirmLoading,
+    ...(props.okButtonProps ?? {}),
   }
-  return attrs
 })
 
 const cancelBtnAttrs = computed(() => {
-  const attrs: Record<string, any> = {}
-  if (props.cancelButtonProps) {
-    Object.assign(attrs, props.cancelButtonProps)
+  return {
+    variant: 'outlined' as const,
+    ...(props.cancelButtonProps ?? {}),
   }
-  return attrs
 })
 
 // --- Styles ---
@@ -220,7 +214,12 @@ const modalStyle = computed(() => {
   return style
 })
 
-const modalClasses = computed(() => ['ant-modal'])
+const dialogAttrs = computed(() => {
+  const { class: _class, style: _style, ...rest } = attrs
+  return rest
+})
+
+const modalClasses = computed(() => ['ant-modal', attrs.class])
 
 const maskStyles = computed(() => {
   const style: Record<string, string> = {}

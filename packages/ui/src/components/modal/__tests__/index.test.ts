@@ -366,6 +366,65 @@ describe('Modal static methods', () => {
 
     expect(cancelButton?.getAttribute('aria-busy')).toBe('true')
     expect(document.body.querySelector('.ant-btn-loading-icon')).not.toBeNull()
+    expect(document.body.querySelectorAll('.ant-modal-confirm-btns .ant-btn')[1]?.getAttribute('disabled')).toBe('')
+
+    wrapper.unmount()
+  })
+
+  it('keeps dialog open when close button cancel promise rejects', async () => {
+    const wrapper = mount(ConfirmDialog, {
+      props: {
+        config: {
+          type: 'confirm',
+          title: 'Reject close',
+          closable: true,
+          onCancel: () => Promise.reject(new Error('reject close')),
+        },
+      },
+    })
+
+    await flushModalTicks()
+
+    const closeButton = document.body.querySelector('.ant-modal-close') as HTMLButtonElement | null
+    expect(closeButton).not.toBeNull()
+
+    closeButton?.click()
+    await flushModalTicks()
+
+    expect(document.body.querySelector('.ant-modal-confirm')).not.toBeNull()
+
+    wrapper.unmount()
+  })
+
+  it('blocks cancel while async ok is pending', async () => {
+    const onCancel = vi.fn()
+    const wrapper = mount(ConfirmDialog, {
+      props: {
+        config: {
+          type: 'confirm',
+          title: 'Async ok',
+          onOk: () => new Promise(() => {}),
+          onCancel,
+        },
+      },
+    })
+
+    await flushModalTicks()
+
+    const buttons = document.body.querySelectorAll('.ant-modal-confirm-btns .ant-btn')
+    const okButton = buttons[1] as HTMLButtonElement | undefined
+    const cancelButtonNode = buttons[0] as HTMLButtonElement | undefined
+
+    okButton?.click()
+    await flushModalTicks()
+
+    expect(okButton?.getAttribute('aria-busy')).toBe('true')
+    expect(cancelButtonNode?.getAttribute('disabled')).toBe('')
+
+    cancelButtonNode?.click()
+    await flushModalTicks()
+
+    expect(onCancel).not.toHaveBeenCalled()
 
     wrapper.unmount()
   })

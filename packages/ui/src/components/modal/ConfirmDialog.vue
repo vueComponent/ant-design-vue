@@ -62,7 +62,13 @@ import {
 } from '@ant-design/icons-vue'
 import Button from '../button'
 import Modal from './Modal.vue'
-import type { ModalButtonType, ModalFuncProps, ModalRenderContent, ModalType } from './types'
+import type {
+  ModalButtonType,
+  ModalFuncConfigUpdate,
+  ModalFuncProps,
+  ModalRenderContent,
+  ModalType,
+} from './types'
 
 defineOptions({ name: 'AConfirmDialog' })
 
@@ -80,6 +86,7 @@ const okLoading = ref(false)
 const cancelLoading = ref(false)
 const okBtnRef = ref<{ focus: () => void } | null>(null)
 const cancelBtnRef = ref<{ focus: () => void } | null>(null)
+const isLoading = computed(() => okLoading.value || cancelLoading.value)
 
 function resolveOkTypeProps(okType?: ModalButtonType) {
   if (!okType) return {}
@@ -151,18 +158,20 @@ const confirmClasses = computed(() => {
 
 const okButtonAttrs = computed(() => ({
   ...resolveOkTypeProps(config.value.okType),
-  loading: okLoading.value,
   ...(config.value.okButtonProps ?? {}),
+  loading: okLoading.value || config.value.okButtonProps?.loading,
+  disabled: isLoading.value || config.value.okButtonProps?.disabled,
 }))
 
 const cancelButtonAttrs = computed(() => ({
   variant: 'outlined' as const,
-  loading: cancelLoading.value,
   ...(config.value.cancelButtonProps ?? {}),
+  loading: cancelLoading.value || config.value.cancelButtonProps?.loading,
+  disabled: isLoading.value || config.value.cancelButtonProps?.disabled,
 }))
 
 async function onOk() {
-  if (okLoading.value) return
+  if (isLoading.value) return
 
   const action = config.value.onOk
   if (!action) {
@@ -192,8 +201,8 @@ async function onOk() {
   }
 }
 
-async function onCancel() {
-  if (cancelLoading.value) return
+async function handleCancel(event?: MouseEvent | KeyboardEvent) {
+  if (isLoading.value) return
 
   const action = config.value.onCancel
   if (!action) {
@@ -202,12 +211,12 @@ async function onCancel() {
   }
 
   if (action.length) {
-    action(close)
+    action(close, event)
     return
   }
 
   try {
-    const result = action()
+    const result = event === undefined ? action() : action(event)
     if (!isThenable(result)) {
       if (!result) {
         close()
@@ -224,6 +233,10 @@ async function onCancel() {
   }
 }
 
+async function onCancel() {
+  await handleCancel()
+}
+
 function close() {
   if (!open.value) return
   okLoading.value = false
@@ -232,12 +245,7 @@ function close() {
 }
 
 function onDialogCancel(event: MouseEvent | KeyboardEvent) {
-  try {
-    config.value.onCancel?.(() => {}, event)
-  } catch {
-    // Follow legacy confirm behavior and close even if onCancel throws.
-  }
-  close()
+  void handleCancel(event)
 }
 
 function onAfterLeave() {
@@ -245,8 +253,11 @@ function onAfterLeave() {
   emit('destroy')
 }
 
-function update(newConfig: Partial<ModalFuncProps>) {
-  Object.assign(config.value, newConfig)
+function update(newConfig: ModalFuncConfigUpdate) {
+  Object.assign(
+    config.value,
+    typeof newConfig === 'function' ? newConfig(config.value) : newConfig,
+  )
 }
 
 defineExpose({ close, update })

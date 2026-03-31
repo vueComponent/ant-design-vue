@@ -2,7 +2,4 @@
 
 exports[`CheckableTag > should render correctly 1`] = `"<span class="ant-tag ant-tag-checkable" role="checkbox" aria-checked="false" tabindex="0">Checkable</span>"`;
 
-exports[`Tag > should render correctly 1`] = `
-"<span class="ant-tag"><span class="ant-tag-text">Tag 1</span>
-<!--v-if--></span>"
-`;
+exports[`Tag > should render correctly 1`] = `"<span class="ant-tag">Tag 1<!--v-if--></span>"`;

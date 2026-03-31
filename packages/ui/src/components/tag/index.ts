@@ -13,4 +13,9 @@ Tag.install = function (app: App) {
   return app
 }
 
-export default Tag as typeof Tag & Plugin
+;(Tag as any).CheckableTag = CheckableTag
+
+export default Tag as typeof Tag &
+  Plugin & {
+    readonly CheckableTag: typeof CheckableTag
+  }

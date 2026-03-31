@@ -24,16 +24,20 @@ export interface TagProps {
   closable?: boolean
   /** Whether tag has a visible border */
   bordered?: boolean
+  /** @deprecated Use `v-show` instead */
+  visible?: boolean
 }
 
 export const tagDefaultProps = {
   closable: false,
   bordered: true,
+  visible: undefined,
 } as const
 
 export interface TagEmits {
   (e: 'close', event: MouseEvent): void
   (e: 'click', event: MouseEvent): void
+  (e: 'update:visible', visible: boolean): void
 }
 
 export interface TagSlots {

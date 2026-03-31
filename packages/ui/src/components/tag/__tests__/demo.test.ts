@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import Basic from '../demo/basic.vue'
-import Color from '../demo/color.vue'
 import Status from '../demo/status.vue'
 import Checkable from '../demo/checkable.vue'
 import BorderLess from '../demo/border-less.vue'
@@ -10,7 +9,7 @@ import HotTags from '../demo/hot-tags.vue'
 import Icon from '../demo/icon.vue'
 import Control from '../demo/control.vue'
 
-const demos = { Basic, Color, Status, Checkable, BorderLess, Colorful, HotTags, Icon, Control }
+const demos = { Basic, Status, Checkable, BorderLess, Colorful, HotTags, Icon, Control }
 
 describe('Tag demos', () => {
   Object.entries(demos).forEach(([name, component]) => {

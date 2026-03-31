@@ -12,10 +12,7 @@
   font-family: var(--ant-font-family);
   font-size: var(--ant-font-size-sm);
   line-height: 20px;
-}
-
-:where(.ant-tag-text) {
-  display: inline-block;
+  margin-inline-end: 8px;
 }
 
 /* ── Hidden ── */
@@ -31,13 +28,19 @@
 /* ── Custom color ── */
 :where(.ant-tag-has-color) {
   border-color: transparent;
+  color: #fff;
 }
 
-:where(.ant-tag-has-color) :where(.ant-tag-close-x) {
-  color: rgba(255, 255, 255, 0.75);
+:where(.ant-tag-has-color) a,
+:where(.ant-tag-has-color) a:hover {
+  color: #fff;
 }
 
-:where(.ant-tag-has-color) :where(.ant-tag-close-icon):hover :where(.ant-tag-close-x) {
+:where(.ant-tag-has-color) :where(.ant-tag-close-icon) {
+  color: #fff;
+}
+
+:where(.ant-tag-has-color) :where(.ant-tag-close-icon):hover {
   color: #fff;
 }
 
@@ -59,9 +62,10 @@
   color: var(--color-neutral, rgba(0, 0, 0, 0.88));
 }
 
-:where(.ant-tag-close-x) {
-  font-size: 12px;
-  line-height: 1;
+/* ── Icon + text spacing ── */
+:where(.ant-tag) > :where(.anticon) + span,
+:where(.ant-tag) > span + :where(.anticon) {
+  margin-inline-start: 7px;
 }
 
 /* ── Preset Colors ── */
@@ -70,11 +74,17 @@
   background: #e6f4ff;
   border-color: #91caff;
 }
+:where(.ant-tag-blue):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 :where(.ant-tag-green) {
   color: #52c41a;
   background: #f6ffed;
   border-color: #b7eb8f;
+}
+:where(.ant-tag-green):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-red) {
@@ -82,11 +92,17 @@
   background: #fff2f0;
   border-color: #ffccc7;
 }
+:where(.ant-tag-red):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 :where(.ant-tag-orange) {
   color: #fa8c16;
   background: #fff7e6;
   border-color: #ffd591;
+}
+:where(.ant-tag-orange):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-yellow) {
@@ -94,17 +110,26 @@
   background: #fffbe6;
   border-color: #ffe58f;
 }
+:where(.ant-tag-yellow):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 :where(.ant-tag-cyan) {
   color: #13c2c2;
   background: #e6fffb;
   border-color: #87e8de;
 }
+:where(.ant-tag-cyan):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 :where(.ant-tag-purple) {
   color: #722ed1;
   background: #f9f0ff;
   border-color: #d3adf7;
+}
+:where(.ant-tag-purple):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-magenta),
@@ -113,11 +138,18 @@
   background: #fff0f6;
   border-color: #ffadd2;
 }
+:where(.ant-tag-magenta):where(.ant-tag-borderless),
+:where(.ant-tag-pink):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 :where(.ant-tag-gold) {
   color: #faad14;
   background: #fffbe6;
   border-color: #ffe58f;
+}
+:where(.ant-tag-gold):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-lime) {
@@ -125,11 +157,17 @@
   background: #fcffe6;
   border-color: #eaff8f;
 }
+:where(.ant-tag-lime):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 :where(.ant-tag-volcano) {
   color: #fa541c;
   background: #fff2e8;
   border-color: #ffbb96;
+}
+:where(.ant-tag-volcano):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-geekblue) {
@@ -137,69 +175,49 @@
   background: #f0f5ff;
   border-color: #adc6ff;
 }
+:where(.ant-tag-geekblue):where(.ant-tag-borderless) {
+  border-color: transparent;
+}
 
 /* ── Status Colors ── */
-:where(.ant-tag-success),
-:where(.ant-tag-processing),
-:where(.ant-tag-error),
-:where(.ant-tag-warning),
-:where(.ant-tag-default) {
-  @apply inline-flex items-center gap-1;
-  border-color: var(--color-neutral-border, #d9d9d9);
-  background: var(--color-neutral-bg-container, #fafafa);
-}
-
-:where(.ant-tag-success)::before,
-:where(.ant-tag-processing)::before,
-:where(.ant-tag-error)::before,
-:where(.ant-tag-warning)::before,
-:where(.ant-tag-default)::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
 :where(.ant-tag-success) {
   color: #52c41a;
+  background: #f6ffed;
+  border-color: #b7eb8f;
 }
-
-:where(.ant-tag-success)::before {
-  background: #52c41a;
+:where(.ant-tag-success):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-processing) {
   color: #1677ff;
+  background: #e6f4ff;
+  border-color: #91caff;
 }
-
-:where(.ant-tag-processing)::before {
-  background: #1677ff;
+:where(.ant-tag-processing):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-error) {
   color: #ff4d4f;
+  background: #fff2f0;
+  border-color: #ffccc7;
 }
-
-:where(.ant-tag-error)::before {
-  background: #ff4d4f;
+:where(.ant-tag-error):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-warning) {
   color: #faad14;
+  background: #fffbe6;
+  border-color: #ffe58f;
 }
-
-:where(.ant-tag-warning)::before {
-  background: #faad14;
+:where(.ant-tag-warning):where(.ant-tag-borderless) {
+  border-color: transparent;
 }
 
 :where(.ant-tag-default) {
   color: var(--color-neutral, rgba(0, 0, 0, 0.88));
-}
-
-:where(.ant-tag-default)::before {
-  background: var(--color-neutral-border, #d9d9d9);
 }
 
 /* ── Checkable Tag ── */
@@ -212,8 +230,14 @@
   transition: all 0.2s;
 }
 
-:where(.ant-tag-checkable):hover {
+:where(.ant-tag-checkable):not(:where(.ant-tag-checkable-checked)):hover {
   color: var(--color-accent, #1677ff);
+  background: var(--color-neutral-bg-hover, rgba(0, 0, 0, 0.06));
+}
+
+:where(.ant-tag-checkable):active {
+  background: var(--color-accent-active, #0958d9);
+  color: #fff;
 }
 
 :where(.ant-tag-checkable-checked) {

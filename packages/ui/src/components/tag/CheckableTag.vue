@@ -14,10 +14,10 @@ const classes = computed(() => ({
 }))
 
 function handleClick(e: MouseEvent) {
-  emit('click', e)
   const newChecked = !props.checked
   emit('update:checked', newChecked)
   emit('change', newChecked)
+  emit('click', e)
 }
 </script>
 

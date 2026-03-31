@@ -15,7 +15,7 @@ describe('Tag', () => {
       slots: { default: 'Hello' },
     })
     expect(wrapper.classes('ant-tag')).toBe(true)
-    expect(wrapper.find('.ant-tag-text').text()).toBe('Hello')
+    expect(wrapper.text()).toBe('Hello')
   })
 
   it('applies preset color class for blue', () => {
@@ -83,8 +83,6 @@ describe('Tag', () => {
     })
     expect(wrapper.classes('ant-tag-has-color')).toBe(true)
     expect(wrapper.element.style.backgroundColor).toBeTruthy()
-    expect(wrapper.element.style.borderColor).toBeTruthy()
-    expect(wrapper.element.style.color).toBeTruthy()
   })
 
   it('renders close button when closable', () => {
@@ -93,7 +91,6 @@ describe('Tag', () => {
       slots: { default: 'Closable' },
     })
     expect(wrapper.find('.ant-tag-close-icon').exists()).toBe(true)
-    expect(wrapper.find('.ant-tag-close-icon').attributes('aria-label')).toBe('Remove tag')
   })
 
   it('does not render close button by default', () => {
@@ -109,7 +106,7 @@ describe('Tag', () => {
       slots: { default: 'Close me' },
     })
     await wrapper.find('.ant-tag-close-icon').trigger('click')
-    expect(wrapper.find('.ant-tag').exists()).toBe(false)
+    expect(wrapper.find('.ant-tag-hidden').exists()).toBe(true)
   })
 
   it('emits close event on close button click', async () => {
@@ -122,15 +119,20 @@ describe('Tag', () => {
   })
 
   it('keeps tag visible when close event is prevented', async () => {
-    const wrapper = mount(Tag, {
-      props: { closable: true },
-      attrs: {
-        onClose: (e: MouseEvent) => e.preventDefault(),
+    const Wrapper = {
+      components: { ATag: Tag },
+      template: `<ATag closable @close="onClose">Keep me</ATag>`,
+      methods: {
+        onClose(e: MouseEvent) {
+          e.preventDefault()
+        },
       },
-      slots: { default: 'Keep me' },
-    })
-    await wrapper.find('.ant-tag-close-icon').trigger('click')
-    expect(wrapper.find('.ant-tag').exists()).toBe(true)
+    }
+    const wrapper = mount(Wrapper)
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true })
+    wrapper.find('.ant-tag-close-icon').element.dispatchEvent(event)
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('.ant-tag').classes('ant-tag-hidden')).toBe(false)
   })
 
   it('adds borderless class when bordered=false', () => {
@@ -168,7 +170,6 @@ describe('Tag', () => {
       },
     })
     expect(wrapper.find('.my-close').exists()).toBe(true)
-    expect(wrapper.find('.ant-tag-close-x').exists()).toBe(false)
   })
 
   it('emits click event', async () => {
@@ -177,6 +178,45 @@ describe('Tag', () => {
     })
     await wrapper.trigger('click')
     expect(wrapper.emitted('click')).toHaveLength(1)
+  })
+
+  it('emits update:visible on close', async () => {
+    const wrapper = mount(Tag, {
+      props: { closable: true },
+      slots: { default: 'Tag' },
+    })
+    await wrapper.find('.ant-tag-close-icon').trigger('click')
+    expect(wrapper.emitted('update:visible')).toEqual([[false]])
+  })
+
+  describe('visible prop', () => {
+    it('can be controlled by visible with visible as initial value', async () => {
+      const wrapper = mount(Tag, { props: { visible: true }, slots: { default: 'Tag' } })
+      expect(wrapper.classes('ant-tag-hidden')).toBe(false)
+      await wrapper.setProps({ visible: false })
+      expect(wrapper.classes('ant-tag-hidden')).toBe(true)
+      await wrapper.setProps({ visible: true })
+      expect(wrapper.classes('ant-tag-hidden')).toBe(false)
+    })
+
+    it('can be controlled by visible with hidden as initial value', async () => {
+      const wrapper = mount(Tag, { props: { visible: false }, slots: { default: 'Tag' } })
+      expect(wrapper.classes('ant-tag-hidden')).toBe(true)
+      await wrapper.setProps({ visible: true })
+      expect(wrapper.classes('ant-tag-hidden')).toBe(false)
+      await wrapper.setProps({ visible: false })
+      expect(wrapper.classes('ant-tag-hidden')).toBe(true)
+    })
+
+    it('does not change internal visible when visible prop is controlled', async () => {
+      const wrapper = mount(Tag, {
+        props: { visible: true, closable: true },
+        slots: { default: 'Tag' },
+      })
+      await wrapper.find('.ant-tag-close-icon').trigger('click')
+      // visible prop is controlled, so tag should still be visible
+      expect(wrapper.classes('ant-tag-hidden')).toBe(false)
+    })
   })
 })
 

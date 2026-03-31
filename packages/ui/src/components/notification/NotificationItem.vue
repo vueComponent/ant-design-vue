@@ -9,7 +9,7 @@
     <div class="ant-notification-notice-content">
       <div :class="contentClasses" role="alert">
         <span v-if="hasCustomIcon" class="ant-notification-notice-icon">
-          <RenderNode :content="item.args.icon" />
+          <RenderNode :content="resolvedCustomIcon" />
         </span>
         <component :is="typeIconComponent" v-else-if="typeIconComponent" :class="iconClasses" />
         <div class="ant-notification-notice-message">
@@ -30,7 +30,7 @@
       @click.stop="$emit('close', item.id)"
     >
       <span class="ant-notification-close-x">
-        <RenderNode v-if="hasCustomCloseIcon" :content="item.args.closeIcon" />
+        <RenderNode v-if="hasCustomCloseIcon" :content="resolvedCloseIcon" />
         <CloseOutlined v-else class="ant-notification-close-icon" />
       </span>
     </button>
@@ -59,6 +59,14 @@ import {
 import type { InternalNotificationItem, NotificationType } from './types'
 
 type RenderableContent = string | VNode | (() => VNode)
+
+function resolveContent(content?: RenderableContent | null) {
+  if (typeof content === 'function') {
+    return content()
+  }
+
+  return content ?? null
+}
 
 const RenderNode = defineComponent({
   name: 'NotificationRenderNode',
@@ -93,7 +101,9 @@ const typeIconMap: Record<NotificationType, Component> = {
   warning: ExclamationCircleFilled,
 }
 
-const hasCustomIcon = computed(() => props.item.args.icon !== undefined)
+const resolvedCustomIcon = computed(() => resolveContent(props.item.args.icon))
+
+const hasCustomIcon = computed(() => Boolean(resolvedCustomIcon.value))
 
 const typeIconComponent = computed(() => {
   if (hasCustomIcon.value || !props.item.args.type) return null
@@ -111,7 +121,9 @@ const iconClasses = computed(() => [
   props.item.args.type ? `ant-notification-notice-icon-${props.item.args.type}` : '',
 ])
 
-const hasCustomCloseIcon = computed(() => props.item.args.closeIcon !== undefined)
+const resolvedCloseIcon = computed(() => resolveContent(props.item.args.closeIcon))
+
+const hasCustomCloseIcon = computed(() => Boolean(resolvedCloseIcon.value))
 
 const itemClasses = computed(() => [
   'ant-notification-notice',

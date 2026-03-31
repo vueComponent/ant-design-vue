@@ -167,6 +167,18 @@ describe('notification', () => {
     expect(document.querySelectorAll('.anticon-step-backward')).toHaveLength(1)
   })
 
+  it('falls back to type icon when custom icon resolves to null', async () => {
+    notification.success({
+      message: 'Notification',
+      duration: 0,
+      icon: (() => null) as any,
+    })
+
+    await flushNotifications()
+
+    expect(document.querySelectorAll('.ant-notification-notice-icon-success')).toHaveLength(1)
+  })
+
   it('supports global closeIcon config', async () => {
     notification.config({
       closeIcon: () => h(StepBackwardOutlined),
@@ -180,6 +192,18 @@ describe('notification', () => {
     await flushNotifications()
 
     expect(document.querySelectorAll('.anticon-step-backward')).toHaveLength(1)
+  })
+
+  it('falls back to default close icon when custom closeIcon resolves to null', async () => {
+    notification.open({
+      message: 'Notification',
+      duration: 0,
+      closeIcon: (() => null) as any,
+    })
+
+    await flushNotifications()
+
+    expect(document.querySelectorAll('.ant-notification-close-icon')).toHaveLength(1)
   })
 
   it('renders close control as button', async () => {

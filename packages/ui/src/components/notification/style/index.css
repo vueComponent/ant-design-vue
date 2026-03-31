@@ -106,7 +106,7 @@
 }
 
 :where(.ant-notification-notice-closable) .ant-notification-notice-message {
-  padding-right: 24px;
+  padding-inline-end: 24px;
 }
 
 :where(.ant-notification-notice-with-icon) .ant-notification-notice-message {
@@ -143,7 +143,7 @@
 :where(.ant-notification-notice-close) {
   @apply absolute cursor-pointer border-none bg-transparent p-0;
   top: 16px;
-  right: 22px;
+  inset-inline-end: 22px;
   font-size: 14px;
   color: var(--color-neutral-secondary);
   display: flex;

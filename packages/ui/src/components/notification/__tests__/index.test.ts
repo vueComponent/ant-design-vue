@@ -169,6 +169,20 @@ describe('notification', () => {
     expect(document.querySelectorAll('.anticon-step-backward')).toHaveLength(1)
   })
 
+  it('renders close control as button', async () => {
+    notification.open({
+      message: 'Notification',
+      duration: 0,
+    })
+
+    await flushNotifications()
+
+    const closeButton = document.querySelector('.ant-notification-notice-close')
+
+    expect(closeButton?.tagName).toBe('BUTTON')
+    expect(closeButton?.getAttribute('type')).toBe('button')
+  })
+
   it('mounts into custom container', async () => {
     const container = document.createElement('div')
     document.body.appendChild(container)

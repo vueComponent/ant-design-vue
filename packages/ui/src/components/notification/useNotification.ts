@@ -1,4 +1,4 @@
-import { createApp, reactive, type App, type VNode } from 'vue'
+import { createApp, reactive, type App } from 'vue'
 import NotificationContainer from './NotificationContainer.vue'
 import type {
   NotificationArgsProps,
@@ -158,7 +158,12 @@ export const notification: NotificationInstance = {
     }
   },
   destroy: () => {
-    for (const placementKey of [...mountedPlacements.keys()]) {
+    const allPlacementKeys = new Set<string>([
+      ...Object.keys(placementMap),
+      ...mountedPlacements.keys(),
+    ])
+
+    for (const placementKey of allPlacementKeys) {
       destroyPlacement(placementKey)
     }
   },

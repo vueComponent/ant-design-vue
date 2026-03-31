@@ -25,17 +25,17 @@
         </div>
       </div>
     </div>
-    <a
-      tabindex="0"
+    <button
+      type="button"
       class="ant-notification-notice-close"
       aria-label="Close"
-      @click.stop.prevent="$emit('close', item.id)"
+      @click.stop="$emit('close', item.id)"
     >
       <span class="ant-notification-close-x">
         <RenderNode v-if="hasCustomCloseIcon" :content="item.args.closeIcon" />
         <CloseOutlined v-else class="ant-notification-close-icon" />
       </span>
-    </a>
+    </button>
   </div>
 </template>
 

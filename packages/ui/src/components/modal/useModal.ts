@@ -4,7 +4,7 @@ import type { ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType 
 
 type ConfirmDialogInstance = {
   close: () => void
-  update: (newConfig: Partial<ModalFuncProps>) => void
+  update: (newConfig: ModalFuncConfigUpdate) => void
 }
 
 interface ModalEntry {

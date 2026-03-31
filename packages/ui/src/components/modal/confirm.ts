@@ -5,7 +5,7 @@ import type { ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType 
 const openDialogs: Array<{ app: App; destroy: () => void }> = []
 type ConfirmDialogInstance = {
   close: () => void
-  update: (newConfig: Partial<ModalFuncProps>) => void
+  update: (newConfig: ModalFuncConfigUpdate) => void
 }
 
 export function confirm(config: ModalFuncProps): ModalFuncReturn {

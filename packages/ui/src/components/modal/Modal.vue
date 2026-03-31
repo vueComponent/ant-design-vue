@@ -176,8 +176,8 @@ function resolveOkTypeProps(okType?: ModalButtonType) {
 const okBtnAttrs = computed(() => {
   return {
     ...resolveOkTypeProps(props.okType),
-    loading: props.confirmLoading,
     ...(props.okButtonProps ?? {}),
+    loading: props.confirmLoading,
   }
 })
 

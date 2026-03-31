@@ -26,10 +26,10 @@
         <span v-if="iconNode !== undefined && iconNode !== null" class="ant-modal-confirm-icon">
           <RenderContent :value="iconNode" />
         </span>
-        <span v-if="config.title !== undefined" class="ant-modal-confirm-title">
+        <span v-if="config.title != null" class="ant-modal-confirm-title">
           <RenderContent :value="config.title" />
         </span>
-        <div v-if="config.content !== undefined" class="ant-modal-confirm-content">
+        <div v-if="config.content != null" class="ant-modal-confirm-content">
           <RenderContent :value="config.content" />
         </div>
       </div>
@@ -104,6 +104,10 @@ function renderSomeContent(content?: ModalRenderContent) {
 
 function isThenable(value: unknown): value is PromiseLike<unknown> {
   return !!value && typeof (value as PromiseLike<unknown>).then === 'function'
+}
+
+function shouldCloseOnSyncResult(result: unknown) {
+  return result !== false
 }
 
 const RenderContent = defineComponent({
@@ -186,7 +190,7 @@ async function onOk() {
 
   const result = action()
   if (!isThenable(result)) {
-    if (!result) {
+    if (shouldCloseOnSyncResult(result)) {
       close()
     }
     return
@@ -218,7 +222,7 @@ async function handleCancel(event?: MouseEvent | KeyboardEvent) {
   try {
     const result = event === undefined ? action() : action(event)
     if (!isThenable(result)) {
-      if (!result) {
+      if (shouldCloseOnSyncResult(result)) {
         close()
       }
       return

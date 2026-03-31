@@ -325,6 +325,20 @@ describe('Modal static methods', () => {
     expect(buttons?.[1].className).toContain('ant-btn-danger')
   })
 
+  it('hides title and content wrappers when set to null', async () => {
+    Modal.confirm({
+      title: null,
+      content: null,
+      icon: null,
+    })
+
+    await flushModalTicks()
+
+    const dialog = document.body.querySelector('.ant-modal-confirm')
+    expect(dialog?.querySelector('.ant-modal-confirm-title')).toBeNull()
+    expect(dialog?.querySelector('.ant-modal-confirm-content')).toBeNull()
+  })
+
   it('supports function updater for static confirm', async () => {
     const modal = Modal.success({
       title: 'Before update',
@@ -341,6 +355,78 @@ describe('Modal static methods', () => {
     expect(document.body.querySelector('.ant-modal-confirm-content')?.textContent).toContain(
       'new content',
     )
+  })
+
+  it('closes static confirm when sync onOk returns truthy', async () => {
+    Modal.confirm({
+      title: 'Truthy ok',
+      onOk: () => true,
+    })
+
+    await flushModalTicks()
+
+    const okButton = document.body.querySelectorAll('.ant-modal-confirm-btns .ant-btn')[1] as
+      | HTMLButtonElement
+      | undefined
+    okButton?.click()
+    await flushModalTicks()
+
+    expect(document.body.querySelector('.ant-modal-confirm')?.getAttribute('style')).toContain(
+      'display: none',
+    )
+  })
+
+  it('keeps static confirm open when sync onOk returns false', async () => {
+    Modal.confirm({
+      title: 'False ok',
+      onOk: () => false,
+    })
+
+    await flushModalTicks()
+
+    const okButton = document.body.querySelectorAll('.ant-modal-confirm-btns .ant-btn')[1] as
+      | HTMLButtonElement
+      | undefined
+    okButton?.click()
+    await flushModalTicks()
+
+    expect(document.body.querySelector('.ant-modal-confirm')).not.toBeNull()
+  })
+
+  it('closes static confirm when sync onCancel returns truthy', async () => {
+    Modal.confirm({
+      title: 'Truthy cancel',
+      onCancel: () => true,
+    })
+
+    await flushModalTicks()
+
+    const cancelButton = document.body.querySelector('.ant-modal-confirm-btns .ant-btn') as
+      | HTMLButtonElement
+      | null
+    cancelButton?.click()
+    await flushModalTicks()
+
+    expect(document.body.querySelector('.ant-modal-confirm')?.getAttribute('style')).toContain(
+      'display: none',
+    )
+  })
+
+  it('keeps static confirm open when sync onCancel returns false', async () => {
+    Modal.confirm({
+      title: 'False cancel',
+      onCancel: () => false,
+    })
+
+    await flushModalTicks()
+
+    const cancelButton = document.body.querySelector('.ant-modal-confirm-btns .ant-btn') as
+      | HTMLButtonElement
+      | null
+    cancelButton?.click()
+    await flushModalTicks()
+
+    expect(document.body.querySelector('.ant-modal-confirm')).not.toBeNull()
   })
 
   it('shows loading on async cancel', async () => {
@@ -369,6 +455,21 @@ describe('Modal static methods', () => {
     expect(document.body.querySelectorAll('.ant-modal-confirm-btns .ant-btn')[1]?.getAttribute('disabled')).toBe('')
 
     wrapper.unmount()
+  })
+
+  it('keeps confirmLoading as the source of truth for modal ok button loading', () => {
+    const wrapper = mount(Modal, {
+      props: {
+        open: true,
+        confirmLoading: true,
+        okButtonProps: { loading: false },
+      },
+      ...globalStubs,
+    })
+
+    const buttons = wrapper.findAll('.ant-modal-footer button')
+    expect(buttons[1].attributes('aria-busy')).toBe('true')
+    expect(wrapper.find('.ant-btn-loading-icon').exists()).toBe(true)
   })
 
   it('keeps dialog open when close button cancel promise rejects', async () => {

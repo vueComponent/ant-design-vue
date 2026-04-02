@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useSlots, useAttrs, type VNode, type CSSProperties } from 'vue'
+import { computed, useSlots, useAttrs, type CSSProperties } from 'vue'
 import type { SpaceProps, SpaceSlots, SpaceSize, SpaceSizePreset } from './types'
 import { spaceDefaultProps, SPACE_SIZE_MAP, GLOBAL_SIZE_MAP, filterEmpty } from './types'
 import { useConfigInject } from '@/hooks'
@@ -19,18 +19,13 @@ function resolveSize(size: SpaceSize | undefined): number {
   return typeof size === 'string' ? SPACE_SIZE_MAP[size as SpaceSizePreset] ?? 0 : size
 }
 
-// Convert ConfigProvider size (sm/md/lg) to Space size (small/middle/large)
-function normalizeGlobalSize(size: string): SpaceSizePreset {
-  return GLOBAL_SIZE_MAP[size] ?? 'small'
-}
-
 // Merge prop size with global size (prop takes precedence)
 const mergedSize = computed(() => {
   if (props.size !== undefined) return props.size
   const global = globalSize.value
-  // Handle ConfigProvider size format (sm/md/lg)
-  if (typeof global === 'string' && global in GLOBAL_SIZE_MAP) {
-    return normalizeGlobalSize(global)
+  // Only inherit non-default ConfigProvider size (default 'md' should not override Space's 'small' default)
+  if (typeof global === 'string' && global !== 'md' && global in GLOBAL_SIZE_MAP) {
+    return GLOBAL_SIZE_MAP[global]!
   }
   return 'small'
 })
@@ -66,10 +61,8 @@ const containerStyle = computed(() => {
     style.rowGap = `${v}px`
   }
 
-  // wrap 模式下添加负 marginBottom
   if (props.wrap) {
     style.flexWrap = 'wrap'
-    style.marginBottom = `${-v}px`
   }
 
   return style
@@ -83,18 +76,11 @@ const splitItemGap = computed(() => {
   }
   if (props.wrap) {
     style.flexWrap = 'wrap'
-    style.marginBottom = `${-v}px`
   }
   return style
 })
 
-// Filter empty children
-function getValidChildren(children: VNode[] | undefined): VNode[] {
-  return filterEmpty(children)
-}
-
-// Get valid children for rendering
-const validChildren = computed(() => getValidChildren(slots.default?.()))
+const validChildren = computed(() => filterEmpty(slots.default?.()))
 
 // Return null if no children
 const shouldRender = computed(() => validChildren.value.length > 0)

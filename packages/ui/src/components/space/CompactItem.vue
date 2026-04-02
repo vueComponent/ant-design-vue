@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, inject } from 'vue'
+import { provide, inject, computed } from 'vue'
 import { spaceCompactItemContextKey, spaceCompactContextKey } from './types'
 import type { SizeType, SpaceCompactItemContext } from './types'
 
@@ -17,8 +17,12 @@ const hasParentCompact = inject(spaceCompactContextKey, false)
 const parentContext = inject<SpaceCompactItemContext | undefined>(spaceCompactItemContextKey, undefined)
 
 // Use parent's isFirstItem/isLastItem if nested, otherwise use own props
-const resolvedIsFirstItem = hasParentCompact && parentContext ? parentContext.isFirstItem : props.isFirstItem
-const resolvedIsLastItem = hasParentCompact && parentContext ? parentContext.isLastItem : props.isLastItem
+const resolvedIsFirstItem = computed(() =>
+  hasParentCompact && parentContext ? parentContext.isFirstItem : props.isFirstItem,
+)
+const resolvedIsLastItem = computed(() =>
+  hasParentCompact && parentContext ? parentContext.isLastItem : props.isLastItem,
+)
 
 // Provide context for child components (Button, Input, Select etc.)
 provide(spaceCompactItemContextKey, {
@@ -29,10 +33,10 @@ provide(spaceCompactItemContextKey, {
     return props.compactDirection
   },
   get isFirstItem() {
-    return resolvedIsFirstItem
+    return resolvedIsFirstItem.value
   },
   get isLastItem() {
-    return resolvedIsLastItem
+    return resolvedIsLastItem.value
   },
 })
 </script>

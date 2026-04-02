@@ -549,7 +549,7 @@ exports[`Space demos > demo: Vertical 1`] = `
 `;
 
 exports[`Space demos > demo: Wrap 1`] = `
-"<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 16px; flex-wrap: wrap; margin-bottom: -16px;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+"<div class="ant-space ant-space-horizontal ant-space-align-center" style="column-gap: 8px; row-gap: 16px; flex-wrap: wrap;"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
     <wave-stub disabled="false"></wave-stub>
     <!--v-if--><span class="ant-btn-content">Button</span>
   </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button">

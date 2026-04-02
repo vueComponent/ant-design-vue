@@ -120,7 +120,7 @@ describe('Space', () => {
     })
     const spaceEl = wrapper.find<HTMLElement>('.ant-space')
     const gap = spaceEl.element.style.columnGap
-    expect(['8px', '16px', '24px']).toContain(gap)
+    expect(gap).toBe('24px')
   })
 })
 

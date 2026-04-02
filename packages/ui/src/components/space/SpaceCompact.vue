@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useSlots, useAttrs, provide, type VNode } from 'vue'
+import { computed, useSlots, useAttrs, provide } from 'vue'
 import type { SpaceCompactProps } from './types'
 import { spaceCompactDefaultProps, filterEmpty, spaceCompactContextKey } from './types'
 import { useConfigInject } from '@/hooks'
@@ -26,14 +26,7 @@ const classes = computed(() => ({
   [`ant-space-compact-align-${props.align}`]: !!props.align,
 }))
 
-// Get valid children and filter empty ones
-function getValidChildren(): VNode[] {
-  const children = slots.default?.() || []
-  return filterEmpty(children)
-}
-
-// Pre-compute children to avoid repeated calls in template
-const validChildren = computed(() => getValidChildren())
+const validChildren = computed(() => filterEmpty(slots.default?.() || []))
 </script>
 
 <template>

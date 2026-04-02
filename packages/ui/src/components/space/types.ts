@@ -19,7 +19,6 @@ export interface SpaceProps {
 }
 
 export const spaceDefaultProps = {
-  size: 'small' as SpaceSize,
   direction: 'horizontal',
 } as const
 
@@ -50,7 +49,7 @@ export const SPACE_SIZE_MAP: Record<SpaceSizePreset, number> = {
   large: 24,
 }
 
-// P1: Map ConfigProvider size (sm/md/lg) to Space size (small/middle/large)
+// Map ConfigProvider size (sm/md/lg) to Space size (small/middle/large)
 export const GLOBAL_SIZE_MAP: Record<string, SpaceSizePreset> = {
   sm: 'small',
   md: 'middle',

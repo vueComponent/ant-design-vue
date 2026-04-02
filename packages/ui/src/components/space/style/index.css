@@ -25,7 +25,7 @@
   @apply items-baseline;
 }
 
-/* P1: RTL support */
+/* RTL support */
 :where(.ant-space).ant-space-rtl {
   direction: rtl;
 }
@@ -43,7 +43,7 @@
   @apply flex-col;
 }
 
-/* P1: Compact align support */
+/* Compact align support */
 :where(.ant-space-compact).ant-space-compact-align-start {
   @apply items-start;
 }
@@ -60,7 +60,7 @@
   @apply items-baseline;
 }
 
-/* P1: Compact RTL support */
+/* Compact RTL support */
 :where(.ant-space-compact).ant-space-compact-rtl {
   direction: rtl;
 }

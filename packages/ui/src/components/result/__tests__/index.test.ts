@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { Result } from '@ant-design-vue/ui'
+import Result from '..'
+import UnauthorizedIcon from '../icons/UnauthorizedIcon.vue'
+import NotFoundIcon from '../icons/NotFoundIcon.vue'
+import ServerErrorIcon from '../icons/ServerErrorIcon.vue'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 
@@ -12,6 +15,10 @@ describe('Result', () => {
   it('renders with ant-result class', () => {
     const wrapper = mount(Result)
     expect(wrapper.classes('ant-result')).toBe(true)
+  })
+
+  it('exposes the expected component name', () => {
+    expect(Result.name).toBe('AResult')
   })
 
   it('renders info status by default', () => {
@@ -60,6 +67,14 @@ describe('Result', () => {
       props: { status: 500 },
     })
     expect(wrapper.classes('ant-result-500')).toBe(true)
+  })
+
+  it('renders string exception statuses', () => {
+    const wrapper = mount(Result, {
+      props: { status: '404' },
+    })
+    expect(wrapper.classes('ant-result-404')).toBe(true)
+    expect(wrapper.find('.ant-result-image').exists()).toBe(true)
   })
 
   it('shows title prop', () => {
@@ -129,7 +144,7 @@ describe('Result', () => {
     const wrapper = mount(Result, {
       props: { status: 403 },
     })
-    const icon = wrapper.find('.ant-result-icon')
+    const icon = wrapper.find('.ant-result-image')
     expect(icon.find('svg').exists()).toBe(true)
   })
 
@@ -137,7 +152,7 @@ describe('Result', () => {
     const wrapper = mount(Result, {
       props: { status: 404 },
     })
-    const icon = wrapper.find('.ant-result-icon')
+    const icon = wrapper.find('.ant-result-image')
     expect(icon.find('svg').exists()).toBe(true)
   })
 
@@ -145,8 +160,19 @@ describe('Result', () => {
     const wrapper = mount(Result, {
       props: { status: 500 },
     })
-    const icon = wrapper.find('.ant-result-icon')
+    const icon = wrapper.find('.ant-result-image')
     expect(icon.find('svg').exists()).toBe(true)
+  })
+
+  it('renders VNode title and subTitle props', () => {
+    const wrapper = mount(Result, {
+      props: {
+        title: h('span', { class: 'title-node' }, 'VNode Title'),
+        subTitle: h('span', { class: 'subtitle-node' }, 'VNode Subtitle'),
+      },
+    })
+    expect(wrapper.find('.title-node').text()).toBe('VNode Title')
+    expect(wrapper.find('.subtitle-node').text()).toBe('VNode Subtitle')
   })
 
   it('renders extra slot', () => {
@@ -160,6 +186,15 @@ describe('Result', () => {
     expect(extra.exists()).toBe(true)
     expect(extra.find('.action-btn').exists()).toBe(true)
     expect(extra.text()).toBe('Go Back')
+  })
+
+  it('renders extra prop content', () => {
+    const wrapper = mount(Result, {
+      props: {
+        extra: h('button', { class: 'extra-prop' }, 'From Prop'),
+      },
+    })
+    expect(wrapper.find('.ant-result-extra .extra-prop').exists()).toBe(true)
   })
 
   it('hides extra section when no extra slot', () => {
@@ -199,6 +234,21 @@ describe('Result', () => {
     const icon = wrapper.find('.ant-result-icon')
     expect(icon.find('.custom-icon').exists()).toBe(true)
     expect(icon.find('.custom-icon').text()).toBe('ICON')
+  })
+
+  it('renders custom icon prop', () => {
+    const wrapper = mount(Result, {
+      props: {
+        icon: h('span', { class: 'icon-prop' }, 'ICON PROP'),
+      },
+    })
+    expect(wrapper.find('.ant-result-icon .icon-prop').text()).toBe('ICON PROP')
+  })
+
+  it('preserves presented image convenience exports', () => {
+    expect((Result as any).PRESENTED_IMAGE_403).toBe(UnauthorizedIcon)
+    expect((Result as any).PRESENTED_IMAGE_404).toBe(NotFoundIcon)
+    expect((Result as any).PRESENTED_IMAGE_500).toBe(ServerErrorIcon)
   })
 
   it('renders all sections together', () => {

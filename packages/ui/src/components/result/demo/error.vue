@@ -10,27 +10,23 @@
     </template>
 
     <div class="desc">
-      <p style="font-size: 16px">
+      <p class="ant-result-demo-error-heading">
         <strong>The content you submitted has the following error:</strong>
       </p>
-      <p>
-        <close-circle-outlined :style="{ color: 'red' }" />
+      <p class="ant-result-demo-error-item">
+        <span class="ant-result-demo-error-icon" aria-hidden="true">!</span>
         Your account has been frozen
-        <a>Thaw immediately &gt;</a>
+        <a class="ant-result-demo-link" href="https://www.antdv.com/" target="_blank" rel="noreferrer">
+          Thaw immediately &gt;
+        </a>
       </p>
-      <p>
-        <close-circle-outlined :style="{ color: 'red' }" />
+      <p class="ant-result-demo-error-item">
+        <span class="ant-result-demo-error-icon" aria-hidden="true">!</span>
         Your account is not yet eligible to apply
-        <a>Apply Unlock &gt;</a>
+        <a class="ant-result-demo-link" href="https://www.antdv.com/" target="_blank" rel="noreferrer">
+          Apply Unlock &gt;
+        </a>
       </p>
     </div>
   </a-result>
 </template>
-<script lang="ts" setup>
-import { CloseCircleOutlined } from '@ant-design/icons-vue';
-</script>
-<style scoped>
-.desc p {
-  margin-bottom: 1em;
-}
-</style>

@@ -16,33 +16,33 @@
 
 :where(.ant-result).ant-result-success .ant-result-icon > svg,
 :where(.ant-result).ant-result-success .ant-result-icon > span {
-  color: var(--color-success, #52c41a);
+  color: var(--color-success);
 }
 
 :where(.ant-result).ant-result-error .ant-result-icon > svg,
 :where(.ant-result).ant-result-error .ant-result-icon > span {
-  color: var(--color-error, #ff4d4f);
+  color: var(--color-error);
 }
 
 :where(.ant-result).ant-result-info .ant-result-icon > svg,
 :where(.ant-result).ant-result-info .ant-result-icon > span {
-  color: var(--color-info, #1677ff);
+  color: var(--color-info);
 }
 
 :where(.ant-result).ant-result-warning .ant-result-icon > svg,
 :where(.ant-result).ant-result-warning .ant-result-icon > span {
-  color: var(--color-warning, #faad14);
+  color: var(--color-warning);
 }
 
 :where(.ant-result) .ant-result-title {
   @apply text-center text-2xl font-semibold;
-  color: var(--color-neutral, rgba(0, 0, 0, 0.88));
+  color: var(--color-neutral);
 }
 
 :where(.ant-result) .ant-result-subtitle {
   @apply text-center mt-2;
   font-size: var(--ant-font-size);
-  color: var(--color-neutral-secondary, rgba(0, 0, 0, 0.45));
+  color: var(--color-neutral-secondary);
 }
 
 :where(.ant-result) .ant-result-extra {
@@ -59,13 +59,40 @@
 
 :where(.ant-result) .ant-result-content {
   @apply mt-6 py-6 px-10;
-  background-color: var(--color-neutral-bg, #fafafa);
+  background-color: var(--color-neutral-bg);
   border-radius: var(--ant-border-radius, 6px);
 }
 
 /* Exception pages (403, 404, 500) */
-:where(.ant-result).ant-result-403 .ant-result-icon > svg,
-:where(.ant-result).ant-result-404 .ant-result-icon > svg,
-:where(.ant-result).ant-result-500 .ant-result-icon > svg {
+:where(.ant-result).ant-result-403 .ant-result-image > svg,
+:where(.ant-result).ant-result-404 .ant-result-image > svg,
+:where(.ant-result).ant-result-500 .ant-result-image > svg {
+  /* 295px/250px match the legacy exception illustration artboard ratio */
   @apply h-[295px] w-[250px] mx-auto text-7xl;
+}
+
+:where(.ant-result) .ant-result-demo-error-heading {
+  @apply mb-4;
+  font-size: 16px;
+}
+
+:where(.ant-result) .ant-result-demo-error-item {
+  @apply mb-4 flex items-center gap-2;
+}
+
+:where(.ant-result) .ant-result-demo-error-icon {
+  @apply inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-semibold;
+  color: var(--color-accent-content);
+  background-color: var(--color-error);
+}
+
+:where(.ant-result) .ant-result-demo-link {
+  color: var(--color-accent);
+}
+
+:where(.ant-result) .ant-result-demo-custom-icon {
+  @apply inline-flex h-18 w-18 items-center justify-center rounded-full text-2xl font-semibold;
+  color: var(--color-accent-content);
+  background:
+    radial-gradient(circle at top, var(--color-accent-hover), var(--color-accent));
 }

@@ -1,13 +1,10 @@
 <template>
   <a-result title="Great, we have done all the operations!">
     <template #icon>
-      <smile-twoTone />
+      <span class="ant-result-demo-custom-icon" aria-hidden="true">OK</span>
     </template>
     <template #extra>
       <a-button type="primary">Next</a-button>
     </template>
   </a-result>
 </template>
-<script lang="ts" setup>
-import { SmileTwoTone } from '@ant-design/icons-vue';
-</script>

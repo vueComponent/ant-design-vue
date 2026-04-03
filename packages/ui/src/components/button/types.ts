@@ -1,4 +1,4 @@
-import type { InjectionKey, ComputedRef } from 'vue'
+import type { Component, InjectionKey, ComputedRef } from 'vue'
 import type { Slot } from '@/utils/types'
 
 export type ButtonVariant = 'solid' | 'outlined' | 'text' | 'link' | 'dashed' | 'filled'
@@ -39,7 +39,7 @@ export interface ButtonProps {
   /** HTML button type attribute */
   htmlType?: ButtonHTMLType
   /** Icon component (VNode). Alternatively use #icon slot */
-  icon?: any
+  icon?: Component
   /** Title attribute */
   title?: string
 }

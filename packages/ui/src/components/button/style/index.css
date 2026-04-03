@@ -97,11 +97,11 @@
     background-color: transparent;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.06);
+      background-color: var(--color-neutral-bg-hover, rgba(0, 0, 0, 0.06));
     }
 
     &:active {
-      background-color: rgba(0, 0, 0, 0.15);
+      background-color: var(--color-neutral-bg-active, rgba(0, 0, 0, 0.15));
     }
   }
 
@@ -269,18 +269,18 @@
 
   &:where(.ant-btn-shape-round) {
     @apply rounded-full;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
   }
 
   &:where(.ant-btn-shape-round.ant-btn-sm) {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
   }
 
   &:where(.ant-btn-shape-round.ant-btn-lg) {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
   }
 
   /* --- Icon Only --- */
@@ -300,18 +300,18 @@
 
   &:where(.ant-btn-icon-only.ant-btn-shape-round) {
     width: auto;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
   }
 
   &:where(.ant-btn-icon-only.ant-btn-shape-round.ant-btn-sm) {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-inline-start: 12px;
+    padding-inline-end: 12px;
   }
 
   &:where(.ant-btn-icon-only.ant-btn-shape-round.ant-btn-lg) {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
   }
 
   /* --- Block --- */

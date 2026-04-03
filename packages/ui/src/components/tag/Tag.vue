@@ -37,10 +37,9 @@ const customStyle = computed(() => {
 })
 
 function handleClose(e: MouseEvent) {
-  e.stopPropagation()
-  emit('update:visible', false)
   emit('close', e)
   if (!e.defaultPrevented) {
+    emit('update:visible', false)
     if (props.visible === undefined) {
       visible.value = false
     }
@@ -57,10 +56,10 @@ function handleClick(e: MouseEvent) {
     <slot name="icon" />
     <span v-if="$slots.icon && $slots.default"><slot /></span>
     <template v-else><slot /></template>
-    <span v-if="closable" class="ant-tag-close-icon" @click="handleClose">
+    <button v-if="closable" type="button" class="ant-tag-close-icon" aria-label="Remove tag" @click.stop="handleClose">
       <slot name="closeIcon">
         <CloseOutlined />
       </slot>
-    </span>
+    </button>
   </span>
 </template>

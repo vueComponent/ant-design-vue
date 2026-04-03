@@ -179,6 +179,40 @@
   border-color: transparent;
 }
 
+/* ── Status Color Dots ── */
+:where(.ant-tag-success)::before,
+:where(.ant-tag-processing)::before,
+:where(.ant-tag-error)::before,
+:where(.ant-tag-warning)::before,
+:where(.ant-tag-default)::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-inline-end: 6px;
+}
+
+:where(.ant-tag-success)::before {
+  background-color: #52c41a;
+}
+
+:where(.ant-tag-processing)::before {
+  background-color: #1677ff;
+}
+
+:where(.ant-tag-error)::before {
+  background-color: #ff4d4f;
+}
+
+:where(.ant-tag-warning)::before {
+  background-color: #faad14;
+}
+
+:where(.ant-tag-default)::before {
+  background-color: var(--color-neutral-disabled, rgba(0, 0, 0, 0.25));
+}
+
 /* ── Status Colors ── */
 :where(.ant-tag-success) {
   color: #52c41a;

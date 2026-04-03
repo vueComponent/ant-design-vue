@@ -63,12 +63,12 @@ import {
 import Button from '../button'
 import Modal from './Modal.vue'
 import type {
-  ModalButtonType,
   ModalFuncConfigUpdate,
   ModalFuncProps,
   ModalRenderContent,
   ModalType,
 } from './types'
+import { resolveOkTypeProps } from './types'
 
 defineOptions({ name: 'AConfirmDialog' })
 
@@ -87,13 +87,6 @@ const cancelLoading = ref(false)
 const okBtnRef = ref<{ focus: () => void } | null>(null)
 const cancelBtnRef = ref<{ focus: () => void } | null>(null)
 const isLoading = computed(() => okLoading.value || cancelLoading.value)
-
-function resolveOkTypeProps(okType?: ModalButtonType) {
-  if (!okType) return {}
-  if (okType === 'danger') return { danger: true }
-  if (okType === 'primary' || okType === 'default') return { type: okType }
-  return { variant: okType }
-}
 
 function renderSomeContent(content?: ModalRenderContent) {
   if (typeof content === 'function') {

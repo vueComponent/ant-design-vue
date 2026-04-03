@@ -132,3 +132,15 @@ export interface ModalFuncReturn {
   destroy: () => void
   update: (newConfig: ModalFuncConfigUpdate) => void
 }
+
+export interface ConfirmDialogInstance {
+  close: () => void
+  update: (newConfig: ModalFuncConfigUpdate) => void
+}
+
+export function resolveOkTypeProps(okType?: ModalButtonType): Record<string, unknown> {
+  if (!okType) return {}
+  if (okType === 'danger') return { danger: true }
+  if (okType === 'primary' || okType === 'default') return { type: okType }
+  return { variant: okType }
+}

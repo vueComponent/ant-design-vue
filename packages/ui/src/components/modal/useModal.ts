@@ -1,11 +1,6 @@
 import { defineComponent, shallowRef, h, shallowReactive } from 'vue'
 import ConfirmDialog from './ConfirmDialog.vue'
-import type { ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType } from './types'
-
-type ConfirmDialogInstance = {
-  close: () => void
-  update: (newConfig: ModalFuncConfigUpdate) => void
-}
+import type { ConfirmDialogInstance, ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType } from './types'
 
 interface ModalEntry {
   key: number

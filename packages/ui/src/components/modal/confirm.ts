@@ -1,12 +1,8 @@
 import { createApp, shallowRef, h, type App } from 'vue'
 import ConfirmDialog from './ConfirmDialog.vue'
-import type { ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType } from './types'
+import type { ConfirmDialogInstance, ModalFuncConfigUpdate, ModalFuncProps, ModalFuncReturn, ModalType } from './types'
 
 const openDialogs: Array<{ app: App; destroy: () => void }> = []
-type ConfirmDialogInstance = {
-  close: () => void
-  update: (newConfig: ModalFuncConfigUpdate) => void
-}
 
 export function confirm(config: ModalFuncProps): ModalFuncReturn {
   const container = document.createElement('div')

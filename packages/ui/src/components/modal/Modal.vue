@@ -72,8 +72,8 @@ import { ref, computed, watch, useSlots, useAttrs, onBeforeUnmount, nextTick, ge
 import { CloseOutlined } from '@ant-design/icons-vue'
 import { Portal } from '@/_internal/portal'
 import Button from '../button'
-import type { ModalButtonType, ModalProps, ModalEmits, ModalSlots } from './types'
-import { modalDefaultProps } from './types'
+import type { ModalProps, ModalEmits, ModalSlots } from './types'
+import { modalDefaultProps, resolveOkTypeProps } from './types'
 
 defineOptions({ name: 'AModal', inheritAttrs: false })
 
@@ -166,12 +166,6 @@ const showFooter = computed(() => {
 })
 
 // --- Button attrs ---
-function resolveOkTypeProps(okType?: ModalButtonType) {
-  if (!okType) return {}
-  if (okType === 'danger') return { danger: true }
-  if (okType === 'primary' || okType === 'default') return { type: okType }
-  return { variant: okType }
-}
 
 const okBtnAttrs = computed(() => {
   return {

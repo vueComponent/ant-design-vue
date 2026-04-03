@@ -71,28 +71,3 @@
   @apply h-[295px] w-[250px] mx-auto text-7xl;
 }
 
-:where(.ant-result) .ant-result-demo-error-heading {
-  @apply mb-4;
-  font-size: 16px;
-}
-
-:where(.ant-result) .ant-result-demo-error-item {
-  @apply mb-4 flex items-center gap-2;
-}
-
-:where(.ant-result) .ant-result-demo-error-icon {
-  @apply inline-flex h-5 w-5 items-center justify-center rounded-full text-xs font-semibold;
-  color: var(--color-accent-content);
-  background-color: var(--color-error);
-}
-
-:where(.ant-result) .ant-result-demo-link {
-  color: var(--color-accent);
-}
-
-:where(.ant-result) .ant-result-demo-custom-icon {
-  @apply inline-flex h-18 w-18 items-center justify-center rounded-full text-2xl font-semibold;
-  color: var(--color-accent-content);
-  background:
-    radial-gradient(circle at top, var(--color-accent-hover), var(--color-accent));
-}

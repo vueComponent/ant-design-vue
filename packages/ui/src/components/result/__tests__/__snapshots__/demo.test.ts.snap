@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Result demos > demo: Basic 1`] = `
-"<div class="ant-result ant-result-success">
+"<div class="ant-result ant-result-success" role="status">
   <div class="ant-result-icon" aria-hidden="true"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
       <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path>
     </svg></div>
@@ -19,11 +19,11 @@ exports[`Result demos > demo: Basic 1`] = `
 `;
 
 exports[`Result demos > demo: CustomIcon 1`] = `
-"<div class="ant-result ant-result-info">
-  <div class="ant-result-icon" aria-hidden="true"><span class="ant-result-demo-custom-icon" aria-hidden="true">OK</span></div>
+"<div data-v-05e05b52="" class="ant-result ant-result-info" role="status">
+  <div class="ant-result-icon" aria-hidden="true"><span data-v-05e05b52="" class="ant-result-demo-custom-icon" aria-hidden="true">OK</span></div>
   <div class="ant-result-title">Great, we have done all the operations!</div>
   <!--v-if-->
-  <div class="ant-result-extra"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+  <div class="ant-result-extra"><button data-v-05e05b52="" class="ant-btn ant-btn-solid ant-btn-md" type="button">
       <!--v-if-->
       <!--v-if--><span class="ant-btn-content">Next</span>
     </button></div>
@@ -32,31 +32,31 @@ exports[`Result demos > demo: CustomIcon 1`] = `
 `;
 
 exports[`Result demos > demo: Error 1`] = `
-"<div class="ant-result ant-result-error">
+"<div data-v-0a752da5="" class="ant-result ant-result-error" role="status">
   <div class="ant-result-icon" aria-hidden="true"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
       <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path>
     </svg></div>
   <div class="ant-result-title">Submission Failed</div>
   <div class="ant-result-subtitle">Please check and modify the following information before resubmitting.</div>
-  <div class="ant-result-extra"><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+  <div class="ant-result-extra"><button data-v-0a752da5="" class="ant-btn ant-btn-solid ant-btn-md" type="button">
       <!--v-if-->
       <!--v-if--><span class="ant-btn-content">Go Console</span>
-    </button><button class="ant-btn ant-btn-solid ant-btn-md" type="button">
+    </button><button data-v-0a752da5="" class="ant-btn ant-btn-solid ant-btn-md" type="button">
       <!--v-if-->
       <!--v-if--><span class="ant-btn-content">Buy Again</span>
     </button></div>
   <div class="ant-result-content">
-    <div class="desc">
-      <p class="ant-result-demo-error-heading"><strong>The content you submitted has the following error:</strong></p>
-      <p class="ant-result-demo-error-item"><span class="ant-result-demo-error-icon" aria-hidden="true">!</span> Your account has been frozen <a class="ant-result-demo-link" href="https://www.antdv.com/" target="_blank" rel="noreferrer"> Thaw immediately &gt; </a></p>
-      <p class="ant-result-demo-error-item"><span class="ant-result-demo-error-icon" aria-hidden="true">!</span> Your account is not yet eligible to apply <a class="ant-result-demo-link" href="https://www.antdv.com/" target="_blank" rel="noreferrer"> Apply Unlock &gt; </a></p>
+    <div data-v-0a752da5="" class="desc">
+      <p data-v-0a752da5="" class="ant-result-demo-error-heading"><strong data-v-0a752da5="">The content you submitted has the following error:</strong></p>
+      <p data-v-0a752da5="" class="ant-result-demo-error-item"><span data-v-0a752da5="" class="ant-result-demo-error-icon" aria-hidden="true">!</span> Your account has been frozen <a data-v-0a752da5="" class="ant-result-demo-link" href="https://www.antdv.com/" target="_blank" rel="noreferrer"> Thaw immediately &gt; </a></p>
+      <p data-v-0a752da5="" class="ant-result-demo-error-item"><span data-v-0a752da5="" class="ant-result-demo-error-icon" aria-hidden="true">!</span> Your account is not yet eligible to apply <a data-v-0a752da5="" class="ant-result-demo-link" href="https://www.antdv.com/" target="_blank" rel="noreferrer"> Apply Unlock &gt; </a></p>
     </div>
   </div>
 </div>"
 `;
 
 exports[`Result demos > demo: Forbidden 1`] = `
-"<div class="ant-result ant-result-403">
+"<div class="ant-result ant-result-403" role="status">
   <div class="ant-result-icon ant-result-image" aria-hidden="true"><svg viewBox="0 0 251 294" width="250" height="294">
       <!-- 403 Unauthorized illustration -->
       <g fill="none" fill-rule="evenodd">
@@ -81,7 +81,7 @@ exports[`Result demos > demo: Forbidden 1`] = `
 `;
 
 exports[`Result demos > demo: Info 1`] = `
-"<div class="ant-result ant-result-info">
+"<div class="ant-result ant-result-info" role="status">
   <div class="ant-result-icon" aria-hidden="true"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
       <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path>
     </svg></div>
@@ -96,7 +96,7 @@ exports[`Result demos > demo: Info 1`] = `
 `;
 
 exports[`Result demos > demo: NotFound 1`] = `
-"<div class="ant-result ant-result-404">
+"<div class="ant-result ant-result-404" role="status">
   <div class="ant-result-icon ant-result-image" aria-hidden="true"><svg viewBox="0 0 252 294" width="250" height="294">
       <!-- 404 Not Found illustration -->
       <g fill="none" fill-rule="evenodd">
@@ -124,7 +124,7 @@ exports[`Result demos > demo: NotFound 1`] = `
 `;
 
 exports[`Result demos > demo: ServerError 1`] = `
-"<div class="ant-result ant-result-500">
+"<div class="ant-result ant-result-500" role="status">
   <div class="ant-result-icon ant-result-image" aria-hidden="true"><svg viewBox="0 0 252 294" width="250" height="294">
       <!-- 500 Server Error illustration -->
       <g fill="none" fill-rule="evenodd">
@@ -161,7 +161,7 @@ exports[`Result demos > demo: ServerError 1`] = `
 `;
 
 exports[`Result demos > demo: Success 1`] = `
-"<div class="ant-result ant-result-success">
+"<div class="ant-result ant-result-success" role="status">
   <div class="ant-result-icon" aria-hidden="true"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
       <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm193.5 301.7l-210.6 292a31.8 31.8 0 01-51.7 0L318.5 484.9c-3.8-5.3 0-12.7 6.5-12.7h46.9c10.2 0 19.9 4.9 25.9 13.3l71.2 98.8 157.2-218c6-8.3 15.6-13.3 25.9-13.3H699c6.5 0 10.3 7.4 6.5 12.7z"></path>
     </svg></div>
@@ -179,7 +179,7 @@ exports[`Result demos > demo: Success 1`] = `
 `;
 
 exports[`Result demos > demo: Warning 1`] = `
-"<div class="ant-result ant-result-warning">
+"<div class="ant-result ant-result-warning" role="status">
   <div class="ant-result-icon" aria-hidden="true"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor">
       <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm-32 232c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V296zm32 440a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"></path>
     </svg></div>

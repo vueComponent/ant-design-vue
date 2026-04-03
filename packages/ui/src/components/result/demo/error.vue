@@ -30,3 +30,31 @@
     </div>
   </a-result>
 </template>
+
+<style scoped>
+.ant-result-demo-error-heading {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+.ant-result-demo-error-item {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ant-result-demo-error-icon {
+  display: inline-flex;
+  height: 20px;
+  width: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  background-color: var(--color-error, #ff4d4f);
+}
+.ant-result-demo-link {
+  color: var(--color-accent, #1677ff);
+}
+</style>

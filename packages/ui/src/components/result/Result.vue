@@ -62,7 +62,7 @@ const iconClasses = computed(() => ({
 </script>
 
 <template>
-  <div :class="classes">
+  <div :class="classes" role="status">
     <div :class="iconClasses" aria-hidden="true">
       <template v-if="hasCustomIcon">
         <component :is="props.icon" v-if="typeof props.icon === 'function'" />

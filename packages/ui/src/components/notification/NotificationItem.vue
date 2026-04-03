@@ -41,11 +41,9 @@
 import {
   type Component,
   computed,
-  defineComponent,
   isVNode,
   onBeforeUnmount,
   onMounted,
-  type PropType,
   type VNode,
   watch,
 } from 'vue'
@@ -68,23 +66,10 @@ function resolveContent(content?: RenderableContent | null) {
   return content ?? null
 }
 
-const RenderNode = defineComponent({
-  name: 'NotificationRenderNode',
-  props: {
-    content: {
-      type: [String, Object, Function] as PropType<RenderableContent | undefined>,
-      default: undefined,
-    },
-  },
-  setup(renderProps) {
-    return () => {
-      if (typeof renderProps.content === 'function') {
-        return renderProps.content()
-      }
-      return isVNode(renderProps.content) ? renderProps.content : (renderProps.content ?? null)
-    }
-  },
-})
+const RenderNode = (props: { content?: RenderableContent | null }) => {
+  if (typeof props.content === 'function') return props.content()
+  return isVNode(props.content) ? props.content : (props.content ?? null)
+}
 
 const props = defineProps<{
   item: InternalNotificationItem

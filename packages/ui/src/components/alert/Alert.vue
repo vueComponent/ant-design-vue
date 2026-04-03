@@ -2,7 +2,6 @@
 import {
   Comment,
   computed,
-  defineComponent,
   Fragment,
   isVNode,
   ref,
@@ -36,18 +35,7 @@ const attrs = useAttrs()
 
 const closed = ref(false)
 
-const RenderContent = defineComponent({
-  name: 'AlertRenderContent',
-  props: {
-    content: {
-      type: null,
-      required: true,
-    },
-  },
-  setup(renderProps) {
-    return () => renderProps.content as any
-  },
-})
+const RenderContent = (renderProps: { content: unknown }) => renderProps.content
 
 const filledIconMap: Record<NonNullable<AlertProps['type']>, Component> = {
   success: CheckCircleFilled,

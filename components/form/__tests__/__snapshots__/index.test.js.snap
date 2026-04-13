@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form 基础渲染 渲染基础表单正确 1`] = `
+<form class="ant-form ant-form-horizontal">
+  <div class="ant-form-item">
+    <div class="ant-row ant-form-item-row">
+      <!---->
+      <div class="ant-col ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content"><input class="ant-input"></div>
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <!---->
+  </div>
+</form>
+`;

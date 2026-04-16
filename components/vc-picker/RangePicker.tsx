@@ -589,9 +589,13 @@ function RangerPicker<DateType>() {
           nextOpenIndex = 0;
         }
 
+        // Keep current side when both start & end are already valid,
+        // which aligns with antd behavior for typed range input blur.
+        const hasBothValues = !!getValue(values, 0) && !!getValue(values, 1);
         if (
           nextOpenIndex !== null &&
           nextOpenIndex !== mergedActivePickerIndex.value &&
+          !hasBothValues &&
           (!openRecordsRef.value[nextOpenIndex] || !getValue(values, nextOpenIndex)) &&
           getValue(values, sourceIndex)
         ) {

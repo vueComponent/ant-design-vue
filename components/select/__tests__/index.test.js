@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '../../../tests/utils';
+import { nextTick, ref } from 'vue';
 import Select from '..';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import focusTest from '../../../tests/shared/focusTest';
@@ -203,6 +204,34 @@ describe('Select', () => {
       const el = wrapper.find('.ant-select');
       expect(el.classes()).not.toContain('ant-select-focused');
     }, 200);
+  });
+
+  it('should use value as key when selected option is missing', async () => {
+    const wrapper = mount(
+      {
+        setup() {
+          const options = ref([]);
+          return { options };
+        },
+        render() {
+          return <Select mode="multiple" value={[1, 0]} options={this.options} />;
+        },
+      },
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
+    wrapper.vm.options = [
+      {
+        value: 1,
+        label: 'one',
+      },
+    ];
+    await nextTick();
+
+    const baseSelect = wrapper.findComponent({ name: 'BaseSelect' });
+    expect(baseSelect.props('displayValues').map(item => item.key)).toEqual([1, 0]);
   });
 
   describe('Select Custom Icons', () => {

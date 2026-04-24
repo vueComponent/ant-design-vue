@@ -168,9 +168,12 @@ const Selector = defineComponent<SelectorProps>({
     let pastedText = null;
 
     const triggerOnSearch = (value: string) => {
-      if (props.onSearch(value, true, compositionStatus.value) !== false) {
+      const ret = props.onSearch(value, true, compositionStatus.value);
+      if (ret !== false) {
         props.onToggleOpen(true);
       }
+
+      return ret;
     };
 
     const onInputCompositionStart = () => {
@@ -185,10 +188,9 @@ const Selector = defineComponent<SelectorProps>({
       }
     };
 
-    const onInputChange = (event: { target: { value: any } }) => {
-      let {
-        target: { value },
-      } = event;
+    const onInputChange = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      let { value } = target;
 
       // Pasted text should replace back to origin content
       if (props.tokenWithEnter && pastedText && /[\r\n]/.test(pastedText)) {
@@ -202,7 +204,12 @@ const Selector = defineComponent<SelectorProps>({
 
       pastedText = null;
 
-      triggerOnSearch(value);
+      const ret = triggerOnSearch(value);
+      if (ret === false) {
+        target.value = '';
+      }
+
+      return ret;
     };
 
     const onInputPaste = (e: ClipboardEvent) => {

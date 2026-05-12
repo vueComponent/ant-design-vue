@@ -84,7 +84,10 @@ const Space = defineComponent({
       }
       return {
         ...gapStyle,
-        ...(props.wrap && { flexWrap: 'wrap', marginBottom: `${-verticalSize.value}px` }),
+        ...(props.wrap && {
+          flexWrap: 'wrap',
+          ...(!supportFlexGap.value && { marginBottom: `${-verticalSize.value}px` }),
+        }),
       } as CSSProperties;
     });
     return () => {

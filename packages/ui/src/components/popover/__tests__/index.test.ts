@@ -164,6 +164,40 @@ describe('Popover', () => {
     expect(getPopup()?.textContent).toContain('Undefined Content')
   })
 
+  it('treats visible=null as uncontrolled and falls back to defaultOpen', async () => {
+    trackMount(mount(Popover, {
+      attachTo: document.body,
+      props: {
+        title: 'Visible Null Title',
+        content: 'Visible Null Content',
+        visible: null,
+        defaultOpen: true,
+      },
+      slots: { default: () => h('span', 'Trigger') },
+    }))
+
+    await flushPopup()
+    expect(getPopup()?.textContent).toContain('Visible Null Title')
+    expect(getPopup()?.textContent).toContain('Visible Null Content')
+  })
+
+  it('treats visible=undefined as uncontrolled and falls back to defaultOpen', async () => {
+    trackMount(mount(Popover, {
+      attachTo: document.body,
+      props: {
+        title: 'Visible Undefined Title',
+        content: 'Visible Undefined Content',
+        visible: undefined,
+        defaultOpen: true,
+      },
+      slots: { default: () => h('span', 'Trigger') },
+    }))
+
+    await flushPopup()
+    expect(getPopup()?.textContent).toContain('Visible Undefined Title')
+    expect(getPopup()?.textContent).toContain('Visible Undefined Content')
+  })
+
   it('shows the arrow by default', async () => {
     trackMount(mount(Popover, {
       attachTo: document.body,

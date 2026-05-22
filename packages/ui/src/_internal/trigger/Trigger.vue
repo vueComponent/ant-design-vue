@@ -46,7 +46,6 @@ import {
   TRIGGER_ARROW_EDGE_OFFSET,
   TRIGGER_ARROW_EDGE_OFFSET_VERTICAL,
   TRIGGER_ARROW_HORIZONTAL_CENTER_OFFSET,
-  TRIGGER_ARROW_VERTICAL_CENTER_INSET,
   TRIGGER_ARROW_VERTICAL_CENTER_OFFSET,
 } from './constants'
 import type { TriggerProps, TriggerEmits, TriggerSlots, TriggerType } from './types'
@@ -142,7 +141,6 @@ const popupStyles = computed(() => {
   const geometryCssVars = {
     '--ant-trigger-arrow-edge-offset': `${TRIGGER_ARROW_EDGE_OFFSET}px`,
     '--ant-trigger-arrow-edge-offset-vertical': `${TRIGGER_ARROW_EDGE_OFFSET_VERTICAL}px`,
-    '--ant-trigger-arrow-vertical-center-inset': `${TRIGGER_ARROW_VERTICAL_CENTER_INSET}px`,
   }
 
   if (props.zIndex == null && !props.popupStyle) {

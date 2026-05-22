@@ -7,6 +7,15 @@
   --popover-border-radius: var(--ant-border-radius-lg);
   --popover-max-width: 350px;
   font-family: var(--ant-font-family);
+  font-weight: 400;
+  white-space: normal;
+  text-align: start;
+  cursor: auto;
+  user-select: text;
+}
+
+:where(.ant-popover) .ant-popover-content {
+  position: relative;
 }
 
 :where(.ant-popover) .ant-popover-inner {
@@ -14,28 +23,30 @@
   max-width: var(--popover-max-width);
   color: var(--popover-color);
   background: var(--popover-bg);
+  background-clip: padding-box;
   border-radius: var(--popover-border-radius);
   box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.08),
     0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
   box-sizing: border-box;
+  padding: 12px;
 }
 
 :where(.ant-popover) .ant-popover-title {
-  @apply px-4 pt-3 pb-0 font-semibold;
   line-height: var(--ant-line-height);
   min-width: 177px;
-  border-bottom: none;
-}
-
-:where(.ant-popover) .ant-popover-title:not(:last-child) {
-  @apply pb-2;
-  border-bottom: 1px solid var(--color-neutral-separator);
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 :where(.ant-popover) .ant-popover-inner-content {
-  @apply px-4 py-3;
   color: var(--popover-color);
+  line-height: var(--ant-line-height);
+}
+
+:where(.ant-popover) .ant-popover-inner-content > p {
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 
 :where(.ant-popover) .ant-trigger-arrow {

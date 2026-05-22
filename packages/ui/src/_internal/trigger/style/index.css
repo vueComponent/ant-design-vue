@@ -5,6 +5,8 @@
 }
 
 :where(.ant-trigger-popup) {
+  --ant-trigger-arrow-edge-offset: 6px;
+  --ant-trigger-arrow-edge-offset-vertical: 6px;
   @apply absolute;
   z-index: 1070;
   box-sizing: border-box;
@@ -71,25 +73,81 @@
 :where(.ant-trigger-placement-top) .ant-trigger-arrow,
 :where(.ant-trigger-placement-top-start) .ant-trigger-arrow,
 :where(.ant-trigger-placement-top-end) .ant-trigger-arrow {
+  bottom: 0;
   transform: translateY(100%) rotate(180deg);
+}
+
+:where(.ant-trigger-placement-top) .ant-trigger-arrow {
+  left: 50%;
+  transform: translateX(-50%) translateY(100%) rotate(180deg);
+}
+
+:where(.ant-trigger-placement-top-start) .ant-trigger-arrow {
+  left: var(--ant-trigger-arrow-edge-offset);
+}
+
+:where(.ant-trigger-placement-top-end) .ant-trigger-arrow {
+  right: var(--ant-trigger-arrow-edge-offset);
 }
 
 :where(.ant-trigger-placement-bottom) .ant-trigger-arrow,
 :where(.ant-trigger-placement-bottom-start) .ant-trigger-arrow,
 :where(.ant-trigger-placement-bottom-end) .ant-trigger-arrow {
+  top: 0;
   transform: translateY(-100%);
+}
+
+:where(.ant-trigger-placement-bottom) .ant-trigger-arrow {
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+}
+
+:where(.ant-trigger-placement-bottom-start) .ant-trigger-arrow {
+  left: var(--ant-trigger-arrow-edge-offset);
+}
+
+:where(.ant-trigger-placement-bottom-end) .ant-trigger-arrow {
+  right: var(--ant-trigger-arrow-edge-offset);
 }
 
 :where(.ant-trigger-placement-left) .ant-trigger-arrow,
 :where(.ant-trigger-placement-left-start) .ant-trigger-arrow,
 :where(.ant-trigger-placement-left-end) .ant-trigger-arrow {
+  right: 0;
   transform: translateX(100%) rotate(90deg);
+}
+
+:where(.ant-trigger-placement-left) .ant-trigger-arrow {
+  top: 50%;
+  transform: translateY(-50%) translateX(100%) rotate(90deg);
+}
+
+:where(.ant-trigger-placement-left-start) .ant-trigger-arrow {
+  top: var(--ant-trigger-arrow-edge-offset-vertical);
+}
+
+:where(.ant-trigger-placement-left-end) .ant-trigger-arrow {
+  bottom: var(--ant-trigger-arrow-edge-offset-vertical);
 }
 
 :where(.ant-trigger-placement-right) .ant-trigger-arrow,
 :where(.ant-trigger-placement-right-start) .ant-trigger-arrow,
 :where(.ant-trigger-placement-right-end) .ant-trigger-arrow {
+  left: 0;
   transform: translateX(-100%) rotate(-90deg);
+}
+
+:where(.ant-trigger-placement-right) .ant-trigger-arrow {
+  top: 50%;
+  transform: translateY(-50%) translateX(-100%) rotate(-90deg);
+}
+
+:where(.ant-trigger-placement-right-start) .ant-trigger-arrow {
+  top: var(--ant-trigger-arrow-edge-offset-vertical);
+}
+
+:where(.ant-trigger-placement-right-end) .ant-trigger-arrow {
+  bottom: var(--ant-trigger-arrow-edge-offset-vertical);
 }
 
 /* Zoom-big-fast transition */

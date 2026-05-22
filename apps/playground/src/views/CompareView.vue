@@ -19,8 +19,10 @@
       <div class="compare-panels">
         <div class="compare-panel panel-new">
           <div class="panel-label">New</div>
-          <div class="panel-content">
-            <component :is="newDemos[demoName]" />
+          <div :ref="el => setNewPanelContentRef(demoName, el)" class="panel-content">
+            <ConfigProvider :get-popup-container="trigger => getNewPanelPopupContainer(demoName, trigger)">
+              <component :is="newDemos[demoName]" />
+            </ConfigProvider>
           </div>
         </div>
         <div class="compare-panel panel-old">
@@ -45,8 +47,10 @@
         <div class="compare-panels">
           <div class="compare-panel panel-new">
             <div class="panel-label">New</div>
-            <div class="panel-content">
-              <component :is="newDemos[demoName]" />
+            <div :ref="el => setNewPanelContentRef(`new-only:${demoName}`, el)" class="panel-content">
+              <ConfigProvider :get-popup-container="trigger => getNewPanelPopupContainer(`new-only:${demoName}`, trigger)">
+                <component :is="newDemos[demoName]" />
+              </ConfigProvider>
             </div>
           </div>
           <div class="compare-panel panel-placeholder">
@@ -95,6 +99,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { ConfigProvider } from '@ant-design-vue/ui'
 import { useRoute } from 'vue-router'
 import { findComponent } from '#/data/demos'
 import { findOldComponent } from '#/data/old-demos'
@@ -136,6 +141,21 @@ const newOnlyDemos = computed(() =>
 const oldOnlyDemos = computed(() =>
   [...oldNames.value].filter(n => !newNames.value.has(n)).sort(),
 )
+
+const newPanelContentRefs = new Map<string, HTMLElement>()
+
+function setNewPanelContentRef(key: string, el: Element | null) {
+  if (el instanceof HTMLElement) {
+    newPanelContentRefs.set(key, el)
+    return
+  }
+
+  newPanelContentRefs.delete(key)
+}
+
+function getNewPanelPopupContainer(key: string, triggerNode?: HTMLElement) {
+  return newPanelContentRefs.get(key) ?? triggerNode?.closest('.panel-content') ?? document.body
+}
 
 function oldDemoUrl(demoName: string) {
   return `/old-demo.html?component=${encodeURIComponent(componentName.value)}&demo=${encodeURIComponent(demoName)}`
@@ -250,6 +270,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
 }
 
 .panel-content {
+  position: relative;
   padding: 16px;
 }
 

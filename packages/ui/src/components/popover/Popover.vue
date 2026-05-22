@@ -1,7 +1,7 @@
 <template>
   <Trigger
     ref="triggerRef"
-    v-bind="openProps"
+    v-bind="triggerProps"
     :trigger="props.trigger"
     :placement="floatingPlacement"
     :mouse-enter-delay="props.mouseEnterDelay"
@@ -20,12 +20,14 @@
   >
     <slot />
     <template #popup>
-      <div class="ant-popover-inner" :style="props.overlayInnerStyle">
-        <div v-if="hasTitle" class="ant-popover-title">
-          <slot name="title">{{ props.title }}</slot>
-        </div>
-        <div class="ant-popover-inner-content">
-          <slot name="content">{{ props.content }}</slot>
+      <div class="ant-popover-content">
+        <div class="ant-popover-inner" :style="props.overlayInnerStyle">
+          <div v-if="hasTitle" class="ant-popover-title">
+            <slot name="title">{{ props.title }}</slot>
+          </div>
+          <div class="ant-popover-inner-content">
+            <slot name="content">{{ props.content }}</slot>
+          </div>
         </div>
       </div>
     </template>
@@ -33,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, shallowRef, useSlots, getCurrentInstance } from 'vue'
+import { computed, getCurrentInstance, onBeforeUpdate, shallowRef, useSlots } from 'vue'
 import { Trigger } from '@/_internal/trigger'
 import { useConfigInject } from '@/hooks'
 import { resolveFloatingPlacement } from '../tooltip/types'
@@ -42,14 +44,7 @@ import { popoverDefaultProps } from './types'
 
 defineOptions({ name: 'APopover' })
 
-const props = withDefaults(defineProps<PopoverProps>(), {
-  trigger: 'hover',
-  placement: 'top',
-  mouseEnterDelay: 100,
-  mouseLeaveDelay: 100,
-  destroyTooltipOnHide: false,
-  autoAdjustOverflow: true,
-})
+const props = withDefaults(defineProps<PopoverProps>(), popoverDefaultProps)
 const emit = defineEmits<PopoverEmits>()
 defineSlots<PopoverSlots>()
 const slots = useSlots()
@@ -60,15 +55,32 @@ const triggerRef = shallowRef<InstanceType<typeof Trigger> | null>(null)
 
 // --- Resolve open state ---
 const instance = getCurrentInstance()!
+const rawProps = shallowRef<Record<string, unknown>>((instance.vnode.props || {}) as Record<string, unknown>)
+
+function syncRawProps() {
+  rawProps.value = (instance.vnode.props || {}) as Record<string, unknown>
+}
+
+onBeforeUpdate(syncRawProps)
+
+function hasExplicitProp(propName: string) {
+  return propName in rawProps.value
+}
+
 const isUserControlled = computed(() => {
-  const rawProps = instance.vnode.props || {}
-  return 'open' in rawProps || 'visible' in rawProps
+  return (hasExplicitProp('open') && props.open !== null) || hasExplicitProp('visible')
 })
 
 const openProps = computed(() => {
-  if (!isUserControlled.value) return {}
-  const open = props.open ?? props.visible ?? false
-  return { open }
+  if (isUserControlled.value) {
+    return { open: props.open ?? props.visible ?? false }
+  }
+
+  if (props.defaultOpen !== undefined) {
+    return { defaultOpen: props.defaultOpen }
+  }
+
+  return {}
 })
 
 // --- Check for content ---
@@ -86,6 +98,21 @@ const disabled = computed(() => !hasTitle.value && !hasContent.value)
 const showArrow = computed(() => {
   if (typeof props.arrow === 'boolean') return props.arrow
   return true
+})
+
+const triggerArrowProps = computed(() => {
+  if (typeof props.arrow === 'object') {
+    return { arrowPointAtCenter: !!props.arrow.pointAtCenter }
+  }
+
+  return {}
+})
+
+const triggerProps = computed(() => {
+  return {
+    ...openProps.value,
+    ...triggerArrowProps.value,
+  }
 })
 
 // --- Placement ---

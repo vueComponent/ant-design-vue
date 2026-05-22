@@ -58,13 +58,6 @@ const arrowRef = shallowRef<HTMLElement | null>(null)
 
 const internalOpen = ref(props.defaultOpen ?? false)
 
-const STATIC_SIDE_MAP = {
-  top: 'bottom',
-  right: 'left',
-  bottom: 'top',
-  left: 'right',
-} as const
-
 // Detect controlled mode: check if parent passed the `open` prop in vnode.props
 // (Vue boolean casting makes props.open always false when absent, so we can't check that)
 const instance = getCurrentInstance()!
@@ -86,6 +79,32 @@ watch(mergedOpen, (val) => {
   if (val) hasBeenOpened.value = true
 })
 
+function getPointAtCenterCrossAxisOffset(
+  placement: string,
+  referenceRect: { width: number; height: number },
+) {
+  if (!props.arrowPointAtCenter) {
+    return 0
+  }
+
+  const [side, align] = placement.split('-')
+  if (!align) {
+    return 0
+  }
+
+  if (side === 'top' || side === 'bottom') {
+    const halfWidth = referenceRect.width / 2
+    return align === 'start' ? halfWidth - 20 : -halfWidth + 20
+  }
+
+  if (side === 'left' || side === 'right') {
+    const halfHeight = referenceRect.height / 2
+    return align === 'start' ? halfHeight - 12 : -halfHeight + 12
+  }
+
+  return 0
+}
+
 // --- Floating UI ---
 const { floatingStyles, placement: actualPlacement, middlewareData, update } = useFloating(
   triggerRef,
@@ -94,8 +113,11 @@ const { floatingStyles, placement: actualPlacement, middlewareData, update } = u
     placement: computed(() => props.placement),
     strategy: computed(() => props.strategy),
     middleware: computed(() => [
-      offsetMiddleware(props.offset),
-      ...(props.autoAdjustOverflow ? [flip(), shift({ padding: 8 })] : []),
+      offsetMiddleware(({ placement, rects }) => ({
+        mainAxis: props.offset,
+        crossAxis: getPointAtCenterCrossAxisOffset(placement, rects.reference),
+      })),
+      ...(props.autoAdjustOverflow ? [flip(), shift()] : []),
       ...(props.arrow
         ? [arrowMiddleware({ element: arrowRef, padding: 4 })]
         : []),
@@ -119,18 +141,11 @@ const popupStyles = computed(() => {
 
 const arrowStyles = computed(() => {
   const arrowData = middlewareData.value?.arrow
-  if (!arrowData) return {}
-
-  const { x, y } = arrowData
-  const side = actualPlacement.value.split('-')[0] as keyof typeof STATIC_SIDE_MAP
-
-  return {
-    left: x != null ? `${x}px` : '',
-    top: y != null ? `${y}px` : '',
-    right: '',
-    bottom: '',
-    [STATIC_SIDE_MAP[side]]: '0px',
+  if (!arrowData) {
+    return {}
   }
+
+  return {}
 })
 
 // --- Timer management ---

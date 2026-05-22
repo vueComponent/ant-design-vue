@@ -42,6 +42,13 @@ import {
   arrow as arrowMiddleware,
 } from '@floating-ui/vue'
 import { Portal } from '../portal'
+import {
+  TRIGGER_ARROW_EDGE_OFFSET,
+  TRIGGER_ARROW_EDGE_OFFSET_VERTICAL,
+  TRIGGER_ARROW_HORIZONTAL_CENTER_OFFSET,
+  TRIGGER_ARROW_VERTICAL_CENTER_INSET,
+  TRIGGER_ARROW_VERTICAL_CENTER_OFFSET,
+} from './constants'
 import type { TriggerProps, TriggerEmits, TriggerSlots, TriggerType } from './types'
 import { triggerDefaultProps } from './types'
 
@@ -57,15 +64,6 @@ const floatingRef = shallowRef<HTMLElement | null>(null)
 const arrowRef = shallowRef<HTMLElement | null>(null)
 
 const internalOpen = ref(props.defaultOpen ?? false)
-
-const TRIGGER_ARROW_EDGE_OFFSET = 6
-const TRIGGER_ARROW_EDGE_OFFSET_VERTICAL = 6
-const TRIGGER_ARROW_BOX_HALF_SIZE = 8
-const TRIGGER_ARROW_VERTICAL_CENTER_INSET = 6
-const TRIGGER_ARROW_HORIZONTAL_CENTER_OFFSET =
-  TRIGGER_ARROW_EDGE_OFFSET + TRIGGER_ARROW_BOX_HALF_SIZE
-const TRIGGER_ARROW_VERTICAL_CENTER_OFFSET =
-  TRIGGER_ARROW_EDGE_OFFSET_VERTICAL + TRIGGER_ARROW_VERTICAL_CENTER_INSET
 
 // Detect controlled mode: check if parent passed the `open` prop in vnode.props
 // (Vue boolean casting makes props.open always false when absent, so we can't check that)
@@ -141,12 +139,22 @@ const { floatingStyles, placement: actualPlacement, middlewareData, update } = u
 )
 
 const popupStyles = computed(() => {
+  const geometryCssVars = {
+    '--ant-trigger-arrow-edge-offset': `${TRIGGER_ARROW_EDGE_OFFSET}px`,
+    '--ant-trigger-arrow-edge-offset-vertical': `${TRIGGER_ARROW_EDGE_OFFSET_VERTICAL}px`,
+    '--ant-trigger-arrow-vertical-center-inset': `${TRIGGER_ARROW_VERTICAL_CENTER_INSET}px`,
+  }
+
   if (props.zIndex == null && !props.popupStyle) {
-    return floatingStyles.value
+    return {
+      ...floatingStyles.value,
+      ...geometryCssVars,
+    }
   }
 
   return {
     ...floatingStyles.value,
+    ...geometryCssVars,
     ...(props.zIndex != null ? { zIndex: props.zIndex } : {}),
     ...(props.popupStyle ?? {}),
   }

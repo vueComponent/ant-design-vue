@@ -99,6 +99,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
 import { ConfigProvider } from '@ant-design-vue/ui'
 import { useRoute } from 'vue-router'
 import { findComponent } from '#/data/demos'
@@ -144,7 +145,10 @@ const oldOnlyDemos = computed(() =>
 
 const newPanelContentRefs = new Map<string, HTMLElement>()
 
-function setNewPanelContentRef(key: string, el: Element | null) {
+function setNewPanelContentRef(
+  key: string,
+  el: Element | ComponentPublicInstance | null,
+) {
   if (el instanceof HTMLElement) {
     newPanelContentRefs.set(key, el)
     return
@@ -154,7 +158,12 @@ function setNewPanelContentRef(key: string, el: Element | null) {
 }
 
 function getNewPanelPopupContainer(key: string, triggerNode?: HTMLElement) {
-  return newPanelContentRefs.get(key) ?? triggerNode?.closest('.panel-content') ?? document.body
+  const closestPanelContent = triggerNode?.closest('.panel-content')
+
+  return (
+    newPanelContentRefs.get(key) ??
+    (closestPanelContent instanceof HTMLElement ? closestPanelContent : document.body)
+  )
 }
 
 function oldDemoUrl(demoName: string) {

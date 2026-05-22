@@ -5,8 +5,6 @@
 }
 
 :where(.ant-trigger-popup) {
-  --ant-trigger-arrow-edge-offset: 6px;
-  --ant-trigger-arrow-edge-offset-vertical: 6px;
   @apply absolute;
   z-index: 1070;
   box-sizing: border-box;
@@ -20,7 +18,7 @@
    * The rounded clip-path matches the legacy Trigger arrow silhouette.
    */
   --ant-trigger-arrow-size: 16px;
-  --ant-trigger-arrow-half-size: 8px;
+  --ant-trigger-arrow-half-size: calc(var(--ant-trigger-arrow-size) / 2);
   --ant-trigger-arrow-shadow-size: 8.9705627485px;
   --ant-trigger-arrow-corner-inset: 1.6568542495px;
   --ant-trigger-arrow-shadow-blur: 7px;

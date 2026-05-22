@@ -49,6 +49,10 @@
   margin-bottom: 1em;
 }
 
+:where(.ant-popover) .ant-popover-inner-content > p:last-child {
+  margin-bottom: 0;
+}
+
 :where(.ant-popover) .ant-trigger-arrow {
   --ant-trigger-arrow-background: var(--popover-bg);
 }

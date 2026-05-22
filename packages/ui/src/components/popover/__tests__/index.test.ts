@@ -147,6 +147,23 @@ describe('Popover', () => {
     expect(getPopup()?.textContent).toContain('Fallback Content')
   })
 
+  it('treats open=undefined as uncontrolled and falls back to defaultOpen', async () => {
+    trackMount(mount(Popover, {
+      attachTo: document.body,
+      props: {
+        title: 'Undefined Title',
+        content: 'Undefined Content',
+        open: undefined,
+        defaultOpen: true,
+      },
+      slots: { default: () => h('span', 'Trigger') },
+    }))
+
+    await flushPopup()
+    expect(getPopup()?.textContent).toContain('Undefined Title')
+    expect(getPopup()?.textContent).toContain('Undefined Content')
+  })
+
   it('shows the arrow by default', async () => {
     trackMount(mount(Popover, {
       attachTo: document.body,

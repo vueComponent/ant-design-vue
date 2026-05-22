@@ -68,7 +68,7 @@ function hasExplicitProp(propName: string) {
 }
 
 const isUserControlled = computed(() => {
-  return (hasExplicitProp('open') && props.open !== null) || hasExplicitProp('visible')
+  return (hasExplicitProp('open') && props.open != null) || hasExplicitProp('visible')
 })
 
 const openProps = computed(() => {

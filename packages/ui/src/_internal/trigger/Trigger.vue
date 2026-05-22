@@ -58,6 +58,15 @@ const arrowRef = shallowRef<HTMLElement | null>(null)
 
 const internalOpen = ref(props.defaultOpen ?? false)
 
+const TRIGGER_ARROW_EDGE_OFFSET = 6
+const TRIGGER_ARROW_EDGE_OFFSET_VERTICAL = 6
+const TRIGGER_ARROW_BOX_HALF_SIZE = 8
+const TRIGGER_ARROW_VERTICAL_CENTER_INSET = 6
+const TRIGGER_ARROW_HORIZONTAL_CENTER_OFFSET =
+  TRIGGER_ARROW_EDGE_OFFSET + TRIGGER_ARROW_BOX_HALF_SIZE
+const TRIGGER_ARROW_VERTICAL_CENTER_OFFSET =
+  TRIGGER_ARROW_EDGE_OFFSET_VERTICAL + TRIGGER_ARROW_VERTICAL_CENTER_INSET
+
 // Detect controlled mode: check if parent passed the `open` prop in vnode.props
 // (Vue boolean casting makes props.open always false when absent, so we can't check that)
 const instance = getCurrentInstance()!
@@ -94,12 +103,16 @@ function getPointAtCenterCrossAxisOffset(
 
   if (side === 'top' || side === 'bottom') {
     const halfWidth = referenceRect.width / 2
-    return align === 'start' ? halfWidth - 20 : -halfWidth + 20
+    return align === 'start'
+      ? halfWidth - TRIGGER_ARROW_HORIZONTAL_CENTER_OFFSET
+      : -halfWidth + TRIGGER_ARROW_HORIZONTAL_CENTER_OFFSET
   }
 
   if (side === 'left' || side === 'right') {
     const halfHeight = referenceRect.height / 2
-    return align === 'start' ? halfHeight - 12 : -halfHeight + 12
+    return align === 'start'
+      ? halfHeight - TRIGGER_ARROW_VERTICAL_CENTER_OFFSET
+      : -halfHeight + TRIGGER_ARROW_VERTICAL_CENTER_OFFSET
   }
 
   return 0
@@ -143,6 +156,22 @@ const arrowStyles = computed(() => {
   const arrowData = middlewareData.value?.arrow
   if (!arrowData) {
     return {}
+  }
+
+  const side = (actualPlacement.value || props.placement).split('-')[0]
+
+  if ((side === 'top' || side === 'bottom') && arrowData.x != null) {
+    return {
+      left: `${arrowData.x}px`,
+      right: 'auto',
+    }
+  }
+
+  if ((side === 'left' || side === 'right') && arrowData.y != null) {
+    return {
+      top: `${arrowData.y}px`,
+      bottom: 'auto',
+    }
   }
 
   return {}

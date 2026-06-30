@@ -99,6 +99,11 @@ export default defineComponent({
       } else if (which === KeyCode.ESC) {
         stopMeasure();
       } else if (which === KeyCode.ENTER) {
+        // Ignore the Enter that only confirms an IME composition, the same case
+        // `onKeyUp` and vc-select's Selector already guard against.
+        if ((event.target as any).composing) {
+          return;
+        }
         // Measure hit
         event.preventDefault();
         if (!options.value.length) {

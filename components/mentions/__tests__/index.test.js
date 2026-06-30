@@ -100,4 +100,47 @@ describe('Mentions', () => {
 
     expect(wrapper.find('textarea').element.value).toBe('@notExist');
   });
+
+  it('does not select the active option when Enter only confirms an IME composition', async () => {
+    jest.useRealTimers();
+    const onSelect = jest.fn();
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Mentions onSelect={onSelect}>
+              <Option value="bamboo">Bamboo</Option>
+              <Option value="cat">Cat</Option>
+            </Mentions>
+          );
+        },
+      },
+      { sync: false, attachTo: 'body' },
+    );
+    await sleep();
+    triggerInput(wrapper, '@');
+    await sleep();
+
+    const textarea = wrapper.find('textarea').element;
+    // BaseInput flags the element as composing on compositionstart. Some browsers
+    // (e.g. Safari) still report `which === ENTER` for the keydown that confirms it.
+    textarea.composing = true;
+    const composingEnter = new KeyboardEvent('keydown', { bubbles: true, cancelable: true });
+    Object.defineProperty(composingEnter, 'which', { get: () => KeyCode.ENTER });
+    textarea.dispatchEvent(composingEnter);
+    await sleep();
+
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(wrapper.find('textarea').element.value).toBe('@');
+
+    // A normal Enter still selects the active option.
+    textarea.composing = false;
+    const normalEnter = new KeyboardEvent('keydown', { bubbles: true, cancelable: true });
+    Object.defineProperty(normalEnter, 'which', { get: () => KeyCode.ENTER });
+    textarea.dispatchEvent(normalEnter);
+    await sleep();
+
+    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('textarea').element.value).toBe('@bamboo ');
+  });
 });

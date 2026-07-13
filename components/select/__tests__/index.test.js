@@ -205,6 +205,51 @@ describe('Select', () => {
     }, 200);
   });
 
+  it('should clear pasted token text after tokenizing tags', async () => {
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Select
+              mode="tags"
+              tokenSeparators={[',']}
+              options={[{ value: 'a1', label: 'a1' }]}
+              allowClear
+            />
+          );
+        },
+      },
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
+
+    const input = wrapper.find('.ant-select-selection-search-input');
+    input.element.value = 'Lucy,Jack';
+
+    await input.trigger('paste', {
+      clipboardData: {
+        getData: () => 'Lucy,Jack',
+      },
+    });
+    await input.trigger('input');
+
+    await asyncExpect(() => {
+      expect(
+        wrapper.findAll('.ant-select-selection-item-content').map(item => item.text()),
+      ).toEqual(['Lucy', 'Jack']);
+      expect(wrapper.find('.ant-select-selection-search-input').element.value).toBe('');
+    });
+
+    await wrapper.find('.ant-select-clear').trigger('mousedown');
+
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-select-selection-item-content')).toHaveLength(0);
+      expect(wrapper.find('.ant-select-selection-search-input').element.value).toBe('');
+    });
+  });
+
   describe('Select Custom Icons', () => {
     it('should support customized icons', () => {
       const wrapper = mount({

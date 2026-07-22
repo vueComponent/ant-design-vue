@@ -15,9 +15,22 @@
 <div align="center">
   <sup><strong>赞助商</strong></sup>
   <br>
-  <a href="https://mentorbook.ai/" target="_blank">
-    <img src="/site/public/mentorbook_banner_zh.svg" alt="Mentorbook.AI - 你的 AI 导师，你的学习之旅" />
-  </a>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://mentorbook.ai/" target="_blank">
+          <img src="/site/public/mentorbook_banner_zh.svg" alt="Mentorbook.AI - 你的 AI 导师，你的学习之旅" width="480" />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/pireel/pireel" target="_blank">
+          <strong>Pireel</strong>
+          <br>
+          <sub>开源 AI 视频剪辑智能体</sub>
+        </a>
+      </td>
+    </tr>
+  </table>
 </div>
 
 [English](./README.md) | 简体中文

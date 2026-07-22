@@ -14,6 +14,27 @@
         style="width: 152px; display: block; margin-top: 16px"
       />
     </a>
+    <a class="pireel-card" href="https://github.com/pireel/pireel" target="_blank" rel="noopener">
+      <span class="pireel-logo">
+        <span class="pireel-play" />
+        Pireel
+      </span>
+      <span class="pireel-desc">
+        {{ isZhCN ? '开源 AI 视频剪辑智能体' : 'Open-source AI video editing agent' }}
+      </span>
+      <span class="pireel-timeline">
+        <span class="pireel-track">
+          <i class="pireel-clip-amber" />
+          <i class="pireel-clip-teal" />
+          <i class="pireel-clip-coral" />
+        </span>
+        <span class="pireel-track">
+          <i class="pireel-clip-dim-long" />
+          <i class="pireel-clip-dim-short" />
+        </span>
+        <span class="pireel-marker" />
+      </span>
+    </a>
   </div>
   <div class="main-wrapper">
     <a-row>
@@ -295,6 +316,154 @@ export default defineComponent({
 .toc-affix {
   background-color: rgba(0, 0, 0, 0);
   backdrop-filter: blur(10px);
+}
+
+.toc-affix .pireel-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 16px;
+  padding: 12px 12px 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: #fff;
+  background: radial-gradient(130% 100% at 100% 0%, rgba(255, 178, 36, 0.24), transparent 55%),
+    radial-gradient(120% 120% at 0% 100%, rgba(45, 212, 191, 0.2), transparent 55%), #0d0f15;
+  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.55);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 178, 36, 0.55);
+    box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.65);
+    color: #fff;
+  }
+
+  .pireel-logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .pireel-play {
+    flex: none;
+    position: relative;
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #ffb224, #ff6b6b);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      border: 5px solid transparent;
+      border-left: 8px solid #fff;
+      border-right: none;
+    }
+  }
+
+  .pireel-desc {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .pireel-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.14);
+  }
+
+  .pireel-track {
+    display: flex;
+    gap: 4px;
+
+    i {
+      height: 8px;
+      border-radius: 2px;
+    }
+  }
+
+  .pireel-clip-amber {
+    width: 44px;
+    background: #ffb224;
+  }
+
+  .pireel-clip-teal {
+    width: 26px;
+    background: #2dd4bf;
+  }
+
+  .pireel-clip-coral {
+    width: 38px;
+    background: #ff6b6b;
+  }
+
+  .pireel-clip-dim-long {
+    width: 58px;
+    background: rgba(45, 212, 191, 0.35);
+  }
+
+  .pireel-clip-dim-short {
+    width: 30px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .pireel-marker {
+    position: absolute;
+    top: 6px;
+    bottom: -2px;
+    left: 2%;
+    width: 2px;
+    border-radius: 1px;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+    animation: pireel-sweep 4.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -2px;
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      background: #fff;
+    }
+  }
+}
+
+@keyframes pireel-sweep {
+  0% {
+    left: 2%;
+  }
+  50% {
+    left: 96%;
+  }
+  100% {
+    left: 2%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-affix .pireel-card .pireel-marker {
+    animation: none;
+    left: 40%;
+  }
 }
 
 .toc-affix :deep(.ant-anchor) {

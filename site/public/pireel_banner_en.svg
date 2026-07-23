@@ -1,0 +1,42 @@
+<svg width="1200" height="280" viewBox="0 0 1200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glowAmber" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1200 0) rotate(135) scale(700 500)">
+      <stop stop-color="#FFB224" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#FFB224" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowTeal" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0 280) rotate(-45) scale(650 480)">
+      <stop stop-color="#2DD4BF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#2DD4BF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="playGrad" x1="70" y1="84" x2="134" y2="148" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFB224"/>
+      <stop offset="1" stop-color="#FF6B6B"/>
+    </linearGradient>
+    <clipPath id="cardClip">
+      <rect width="1200" height="280" rx="24"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#cardClip)">
+    <rect width="1200" height="280" rx="24" fill="#0D0F15"/>
+    <rect width="1200" height="280" fill="url(#glowAmber)"/>
+    <rect width="1200" height="280" fill="url(#glowTeal)"/>
+    <rect x="70" y="62" width="64" height="64" rx="18" fill="url(#playGrad)"/>
+    <path d="M94 79 L120 94 L94 109 Z" fill="#FFFFFF"/>
+    <text x="152" y="116" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="54" font-weight="800" letter-spacing="0.5" fill="#FFFFFF">Pireel</text>
+    <text x="72" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="27" font-weight="500" fill="#FFFFFF" fill-opacity="0.72">Open-source AI video editing agent</text>
+    <line x1="70" y1="200" x2="1130" y2="200" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="6 8"/>
+    <rect x="70" y="214" width="170" height="16" rx="4" fill="#FFB224"/>
+    <rect x="252" y="214" width="96" height="16" rx="4" fill="#2DD4BF"/>
+    <rect x="360" y="214" width="140" height="16" rx="4" fill="#FF6B6B"/>
+    <rect x="512" y="214" width="220" height="16" rx="4" fill="#2DD4BF" fill-opacity="0.35"/>
+    <rect x="744" y="214" width="120" height="16" rx="4" fill="#FFFFFF" fill-opacity="0.22"/>
+    <rect x="876" y="214" width="180" height="16" rx="4" fill="#FFB224" fill-opacity="0.35"/>
+    <rect x="70" y="240" width="260" height="12" rx="4" fill="#FFFFFF" fill-opacity="0.14"/>
+    <rect x="342" y="240" width="150" height="12" rx="4" fill="#2DD4BF" fill-opacity="0.25"/>
+    <rect x="504" y="240" width="200" height="12" rx="4" fill="#FFFFFF" fill-opacity="0.1"/>
+    <rect x="595" y="204" width="14" height="60" rx="4" fill="#FFFFFF" fill-opacity="0.12"/>
+    <rect x="600" y="204" width="4" height="60" rx="2" fill="#FFFFFF"/>
+    <rect x="596" y="198" width="12" height="12" rx="3" fill="#FFFFFF"/>
+    <rect x="1" y="1" width="1198" height="278" rx="23" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="2"/>
+  </g>
+</svg>

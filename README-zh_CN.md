@@ -19,14 +19,12 @@
     <tr>
       <td align="center">
         <a href="https://mentorbook.ai/" target="_blank">
-          <img src="/site/public/mentorbook_banner_zh.svg" alt="Mentorbook.AI - 你的 AI 导师，你的学习之旅" width="480" />
+          <img src="/site/public/mentorbook_banner_zh.svg" alt="Mentorbook.AI - 你的 AI 导师，你的学习之旅" width="420" />
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/pireel/pireel" target="_blank">
-          <strong>Pireel</strong>
-          <br>
-          <sub>开源 AI 视频剪辑智能体</sub>
+          <img src="/site/public/pireel_banner_zh.svg" alt="Pireel - 开源 AI 视频剪辑智能体" width="420" />
         </a>
       </td>
     </tr>

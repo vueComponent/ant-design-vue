@@ -25,14 +25,12 @@ An enterprise-class UI components based on Ant Design and Vue.
     <tr>
       <td align="center">
         <a href="https://mentorbook.ai/" target="_blank">
-          <img src="/site/public/mentorbook_banner_en.svg" alt="Mentorbook.AI - Your AI Mentor, Your Learning Journey" width="480" />
+          <img src="/site/public/mentorbook_banner_en.svg" alt="Mentorbook.AI - Your AI Mentor, Your Learning Journey" width="420" />
         </a>
       </td>
       <td align="center">
         <a href="https://github.com/pireel/pireel" target="_blank">
-          <strong>Pireel</strong>
-          <br>
-          <sub>Open-source AI video editing agent</sub>
+          <img src="/site/public/pireel_banner_en.svg" alt="Pireel - Open-source AI video editing agent" width="420" />
         </a>
       </td>
     </tr>

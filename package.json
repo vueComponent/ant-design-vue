@@ -116,7 +116,7 @@
     "@types/compression": "^1.7.0",
     "@types/fs-extra": "^9.0.8",
     "@types/jest": "^28.1.4",
-    "@types/koa": "^2.11.6",
+    "@types/koa": "^3.0.0",
     "@types/lodash-es": "^4.17.3",
     "@types/lru-cache": "^5.1.0",
     "@types/markdown-it": "^10.0.2",

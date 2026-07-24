@@ -88,9 +88,19 @@
               <span>{{ isCN ? '友情链接' : 'Links' }}</span>
             </h2>
             <div>
-              <a href="https://www.demoget.com?atp=tangjinzhou" target="_blank">DemoGet</a>
+              <a href="https://mentorbook.ai" target="_blank" rel="noopener">MentorBook</a>
               <span>-</span>
-              <span>{{ isCN ? '好看好用的录屏工具' : 'Beautiful Screen Recordings' }}</span>
+              <span>{{ isCN ? 'AI 个性化学习平台' : 'AI Learning Platform & Mentor' }}</span>
+            </div>
+            <div>
+              <a href="https://pireel.com" target="_blank" rel="noopener">Pireel</a>
+              <span>-</span>
+              <span>{{ isCN ? 'AI 视频剪辑工具' : 'The AI Video Editor' }}</span>
+            </div>
+            <div>
+              <a href="https://songdio.ai" target="_blank" rel="noopener">Songdio</a>
+              <span>-</span>
+              <span>{{ isCN ? 'AI 音乐生成器' : 'AI Music Generator' }}</span>
             </div>
           </div>
         </a-col>

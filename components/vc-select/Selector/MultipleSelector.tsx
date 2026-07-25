@@ -211,7 +211,11 @@ const SelectSelector = defineComponent<SelectorProps>({
       const composing = (e.target as any).composing;
       targetValue.value = (e.target as any).value;
       if (!composing) {
-        props.onInputChange(e);
+        const ret = props.onInputChange(e);
+
+        if (ret === false) {
+          targetValue.value = inputValue.value;
+        }
       }
     };
 

@@ -168,9 +168,13 @@ const Selector = defineComponent<SelectorProps>({
     let pastedText = null;
 
     const triggerOnSearch = (value: string) => {
-      if (props.onSearch(value, true, compositionStatus.value) !== false) {
+      const ret = props.onSearch(value, true, compositionStatus.value);
+
+      if (ret !== false) {
         props.onToggleOpen(true);
       }
+
+      return ret;
     };
 
     const onInputCompositionStart = () => {
@@ -202,7 +206,7 @@ const Selector = defineComponent<SelectorProps>({
 
       pastedText = null;
 
-      triggerOnSearch(value);
+      return triggerOnSearch(value);
     };
 
     const onInputPaste = (e: ClipboardEvent) => {

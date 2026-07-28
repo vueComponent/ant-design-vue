@@ -1,4 +1,4 @@
-import { shallowRef, computed, defineComponent } from 'vue';
+import { shallowRef, computed, defineComponent, watch } from 'vue';
 import { useNotification as useVcNotification } from '../vc-notification';
 import type { NotificationAPI } from '../vc-notification';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
@@ -117,6 +117,9 @@ export function useInternalMessage(
 ): readonly [MessageInstance, () => VNode] {
   const holderRef = shallowRef<HolderRef>(null);
   const holderKey = Symbol('messageHolderKey');
+  // Store notice configs to refresh when theme changes (hashId update)
+  const noticeConfigs = new Map<Key, ArgsProps>();
+
   // ================================ API ================================
 
   // Wrap with notification content
@@ -143,6 +146,9 @@ export function useInternalMessage(
       mergedKey = `antd-message-${keyIndex}`;
     }
 
+    // Store config for theme-change refresh
+    noticeConfigs.set(mergedKey, { ...config, key: mergedKey });
+
     return wrapPromiseFn(resolve => {
       originOpen({
         ...restConfig,
@@ -160,6 +166,7 @@ export function useInternalMessage(
         // @ts-ignore
         class: classNames(type && `${noticePrefixCls}-${type}`, hashId, className),
         onClose: () => {
+          noticeConfigs.delete(mergedKey);
           onClose?.();
           resolve();
         },
@@ -175,8 +182,10 @@ export function useInternalMessage(
   // >>> destroy
   const destroy = (key?: Key) => {
     if (key !== undefined) {
+      noticeConfigs.delete(key);
       close(key);
     } else {
+      noticeConfigs.clear();
       holderRef.value?.destroy();
     }
   };
@@ -220,6 +229,20 @@ export function useInternalMessage(
 
     wrapAPI[type] = typeOpen;
   });
+
+  // Watch for theme changes (hashId changes) and refresh all notices
+  watch(
+    () => holderRef.value?.hashId,
+    (newHashId, oldHashId) => {
+      if (oldHashId && newHashId !== oldHashId) {
+        const entries = Array.from(noticeConfigs.entries());
+        entries.forEach(([, config]) => {
+          // Re-open with same config to get new hashId
+          open(config);
+        });
+      }
+    },
+  );
 
   // ============================== Return ===============================
   return [wrapAPI, () => <Holder key={holderKey} {...messageConfig} ref={holderRef} />] as const;

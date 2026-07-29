@@ -4,6 +4,7 @@ import Select from '..';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import focusTest from '../../../tests/shared/focusTest';
 import mountTest from '../../../tests/shared/mountTest';
+import KeyCode from '../../_util/KeyCode';
 function $$(className) {
   return document.body.querySelectorAll(className);
 }
@@ -203,6 +204,44 @@ describe('Select', () => {
       const el = wrapper.find('.ant-select');
       expect(el.classes()).not.toContain('ant-select-focused');
     }, 200);
+  });
+
+  it('should clear tokenized search text after split', async () => {
+    const wrapper = mount(
+      {
+        render() {
+          return <Select mode="tags" tokenSeparators={[',']} />;
+        },
+      },
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
+    const input = wrapper.find('input');
+
+    input.element.value = 'Lucy,Jack,';
+    await input.trigger('input');
+
+    await asyncExpect(() => {
+      expect(input.element.value).toBe('');
+      expect(wrapper.findAll('.ant-select-selection-item').length).toBe(2);
+    });
+
+    const backspaceEvent = new KeyboardEvent('keydown', {
+      bubbles: true,
+      cancelable: true,
+      key: 'Backspace',
+    });
+    Object.defineProperty(backspaceEvent, 'which', { get: () => KeyCode.BACKSPACE });
+    Object.defineProperty(backspaceEvent, 'keyCode', { get: () => KeyCode.BACKSPACE });
+    input.element.dispatchEvent(backspaceEvent);
+
+    await asyncExpect(() => {
+      const items = wrapper.findAll('.ant-select-selection-item');
+      expect(items.length).toBe(1);
+      expect(items[0].text()).toBe('Lucy');
+    });
   });
 
   describe('Select Custom Icons', () => {

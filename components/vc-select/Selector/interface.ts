@@ -21,7 +21,7 @@ export interface InnerSelectorProps {
   tabindex?: number | string;
   onInputKeyDown: EventHandler;
   onInputMouseDown: EventHandler;
-  onInputChange: EventHandler;
+  onInputChange: (event: Event) => boolean | void;
   onInputPaste: EventHandler;
   onInputCompositionStart: EventHandler;
   onInputCompositionEnd: EventHandler;

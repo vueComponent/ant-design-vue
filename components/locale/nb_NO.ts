@@ -21,8 +21,12 @@ const localeValues: Locale = {
     filterConfirm: 'OK',
     filterReset: 'Nullstill',
     filterEmptyText: 'Ingen filtre',
+    filterCheckall: 'Velg alle elementer',
+    filterSearchPlaceholder: 'Søk i filtre',
+    emptyText: 'Ingen data',
     selectAll: 'Velg alle',
     selectInvert: 'Inverter gjeldende side',
+    selectNone: 'Fjern all data',
     selectionAll: 'Velg all data',
     sortTitle: 'Sorter',
     expand: 'Utvid rad',
@@ -30,6 +34,11 @@ const localeValues: Locale = {
     triggerDesc: 'Sorter data i synkende rekkefølge',
     triggerAsc: 'Sorterer data i stigende rekkefølge',
     cancelSort: 'Klikk for å avbryte sorteringen',
+  },
+  Tour: {
+    Next: 'Neste',
+    Previous: 'Forrige',
+    Finish: 'Fullfør',
   },
   Modal: {
     okText: 'OK',
@@ -75,6 +84,7 @@ const localeValues: Locale = {
     back: 'Tilbake',
   },
   Form: {
+    optional: '(valgfritt)',
     defaultValidateMessages: {
       default: 'Feltvalideringsfeil ${label}',
       required: 'Vennligst skriv inn ${label}',
@@ -122,6 +132,14 @@ const localeValues: Locale = {
         mismatch: '${label} stemmer ikke overens med mønsteret ${pattern}',
       },
     },
+  },
+  Image: {
+    preview: 'Forhåndsvisning',
+  },
+  QRCode: {
+    expired: 'QR-koden er utløpt',
+    refresh: 'Oppdater',
+    scanned: 'Skannet',
   },
 };
 

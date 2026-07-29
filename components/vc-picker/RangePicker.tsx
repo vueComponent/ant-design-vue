@@ -489,7 +489,12 @@ function RangerPicker<DateType>() {
         }, 0);
       }
 
-      function triggerChange(newValue: RangeValue<DateType>, sourceIndex: 0 | 1) {
+      function triggerChange(
+        newValue: RangeValue<DateType>,
+        sourceIndex: 0 | 1,
+        /** When true (input submit only): skip auto-switch if both ends are valid; panel select omits or passes false */
+        fromInput?: boolean,
+      ) {
         let values = newValue;
         let startValue = getValue(values, 0);
         let endValue = getValue(values, 1);
@@ -589,9 +594,13 @@ function RangerPicker<DateType>() {
           nextOpenIndex = 0;
         }
 
+        // Input submit: do not auto-switch when both ends are valid; panel select always auto-switches like antd.
+        const skipSwitchForFilledRange =
+          !!fromInput && !!getValue(values, 0) && !!getValue(values, 1);
         if (
           nextOpenIndex !== null &&
           nextOpenIndex !== mergedActivePickerIndex.value &&
+          !skipSwitchForFilledRange &&
           (!openRecordsRef.value[nextOpenIndex] || !getValue(values, nextOpenIndex)) &&
           getValue(values, sourceIndex)
         ) {
@@ -718,7 +727,7 @@ function RangerPicker<DateType>() {
           ) {
             return false;
           }
-          triggerChange(selectedValue.value, index);
+          triggerChange(selectedValue.value, index, true);
           resetText();
         },
         onCancel: () => {

@@ -162,7 +162,9 @@ export default function usePickerInput({
           raf(() => {
             preventBlurRef.value = false;
           });
-        } else if (!focused.value || clickedOutside) {
+        } else if (!focused.value) {
+          // Keep popup open while input is still focused.
+          // Let blur handler decide submit/cancel for outside clicks.
           triggerOpen(false);
         }
       }

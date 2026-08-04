@@ -21,16 +21,7 @@ import statisticToken, { merge as mergeToken, statistic } from './util/statistic
 import type { VueNode } from '../_util/type';
 import { objectType } from '../_util/type';
 import type { ComputedRef, InjectionKey, Ref } from 'vue';
-import {
-  triggerRef,
-  unref,
-  defineComponent,
-  provide,
-  computed,
-  inject,
-  watch,
-  shallowRef,
-} from 'vue';
+import { defineComponent, provide, computed, inject, shallowRef } from 'vue';
 
 const defaultTheme = createTheme(defaultDerivative);
 
@@ -76,14 +67,6 @@ export const globalDesignTokenApi = shallowRef<DesignTokenContext>();
 
 export const useDesignTokenProvider = (value: ComputedRef<DesignTokenContext>) => {
   provide(DesignTokenContextKey, value);
-  watch(
-    value,
-    () => {
-      globalDesignTokenApi.value = unref(value);
-      triggerRef(globalDesignTokenApi);
-    },
-    { immediate: true, deep: true },
-  );
 };
 
 export const useDesignTokenInject = () => {

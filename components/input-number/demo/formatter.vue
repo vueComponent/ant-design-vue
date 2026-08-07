@@ -20,7 +20,7 @@ Display value within it's situation with `formatter`, and we usually use `parser
   <a-space>
     <a-input-number
       v-model:value="value1"
-      :formatter="value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+      :formatter="formatter"
       :parser="value => value.replace(/\$\s?|(,*)/g, '')"
     />
     <a-input-number
@@ -36,4 +36,9 @@ Display value within it's situation with `formatter`, and we usually use `parser
 import { ref } from 'vue';
 const value1 = ref<number>(1000);
 const value2 = ref<number>(100);
+const formatter = (value: number | string | undefined) => {
+  const [int, decimal] = `${value}`.split('.');
+  const groupedInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return `$ ${decimal ? `${groupedInt}.${decimal}` : groupedInt}`;
+};
 </script>

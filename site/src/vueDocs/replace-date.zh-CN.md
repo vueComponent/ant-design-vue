@@ -16,7 +16,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import antd from 'ant-design-vue';
 const app = createApp(App);
-app.use(DatePicker).use(TimePicker).use(Calendar).use(antd).mount('#app');
+app.use(antd).use(DatePicker).use(TimePicker).use(Calendar).mount('#app');
 ```
 
-> 注意: 如果你需要全局注册 ant-design-vue 组件库，那么 `use(DatePicker)` `use(TimePicker)` `use(Calendar)` 必须在 `use(antd)` 之前执行，否则无法覆盖默认的 dayjs 版本。
+> 注意: 如果你需要全局注册 ant-design-vue 组件库，那么 `use(DatePicker)` `use(TimePicker)` `use(Calendar)` 必须在 `use(antd)` 之后执行，才能覆盖默认的 dayjs 版本。

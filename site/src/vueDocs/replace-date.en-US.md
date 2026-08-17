@@ -16,7 +16,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import antd from 'ant-design-vue';
 const app = createApp(App);
-app.use(DatePicker).use(TimePicker).use(Calendar).use(antd).mount('#app');
+app.use(antd).use(DatePicker).use(TimePicker).use(Calendar).mount('#app');
 ```
 
-> Note: If you need to register the ant-design-vue component library globally, then `use(DatePicker)` `use(TimePicker)` `use(Calendar)` must be executed before `use(antd)`, otherwise the default cannot be overridden dayjs version.
+> Note: If you need to register the ant-design-vue component library globally, `use(DatePicker)`, `use(TimePicker)`, and `use(Calendar)` must be executed after `use(antd)` to override the default dayjs-based components.

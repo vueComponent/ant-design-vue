@@ -139,7 +139,7 @@
     "ali-oss": "^6.16.0",
     "autoprefixer": "^10.2.0",
     "axios": "^0.22.0",
-    "babel-eslint": "^10.0.1",
+    "@babel/eslint-parser": "^7.11.0",
     "babel-jest": "^28.1.2",
     "babel-loader": "^8.0.0",
     "babel-plugin-import": "^1.1.1",

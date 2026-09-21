@@ -519,6 +519,9 @@ export default defineComponent({
           scrollBodySizeInfo.value.scrollWidth !== scrollWidth ||
           scrollBodySizeInfo.value.clientWidth !== clientWidth
         ) {
+          // Re-measure ping state when scroll size changed,
+          // e.g. `scroll` prop update, empty data or container resize
+          triggerOnScroll();
           scrollBodySizeInfo.value = {
             scrollWidth,
             clientWidth,

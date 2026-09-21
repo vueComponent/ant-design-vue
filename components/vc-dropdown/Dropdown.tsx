@@ -7,6 +7,14 @@ import { cloneElement } from '../_util/vnode';
 import classNames from '../_util/classNames';
 import { skipFlattenKey } from '../_util/props-util';
 
+const Overlay = defineComponent({
+  name: 'DropdownOverlay',
+  props: { render: Function },
+  setup(props) {
+    return () => props.render?.();
+  },
+});
+
 export default defineComponent({
   compatConfig: { MODE: 3 },
   props: {
@@ -115,6 +123,8 @@ export default defineComponent({
         overlayClassName,
         ...otherProps
       } = props;
+      // Keep popup alignment and motion updates from re-rendering the overlay slot.
+      const overlay = <Overlay render={() => getMenuElement()} />;
       return (
         <Trigger
           {...otherProps}
@@ -136,7 +146,7 @@ export default defineComponent({
           stretch={minOverlayWidthMatchTrigger.value ? 'minWidth' : ''}
           onPopupVisibleChange={onVisibleChange}
           getPopupContainer={getPopupContainer}
-          v-slots={{ popup: getMenuElement, default: renderChildren }}
+          v-slots={{ popup: () => overlay, default: renderChildren }}
         ></Trigger>
       );
     };

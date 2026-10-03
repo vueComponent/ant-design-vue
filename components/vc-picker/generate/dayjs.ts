@@ -89,6 +89,7 @@ const localeMap: IlocaleMapObject = {
   // ta_IN:
   // th_TH:
   // tr_TR:
+  ug_CN: 'ug-cn',
   // uk_UA:
   // ur_PK:
   // vi_VN:

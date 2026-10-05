@@ -147,7 +147,7 @@
     "babel-plugin-istanbul": "^6.0.0",
     "babel-plugin-transform-require-context": "^0.1.1",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
-    "chalk": "^4.1.1",
+    "chalk": "^6.0.0",
     "codecov": "^3.0.0",
     "codesandbox": "^2.2.3",
     "colorful": "^2.1.0",

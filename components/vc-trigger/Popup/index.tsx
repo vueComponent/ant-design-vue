@@ -33,7 +33,8 @@ export default defineComponent({
       },
     });
     return () => {
-      const cloneProps = { ...props, ...attrs, visible: innerVisible.value };
+      const { inert, ...innerProps } = props;
+      const cloneProps = { ...innerProps, ...attrs, visible: innerVisible.value };
       const popupNode = inMobile.value ? (
         <MobilePopupInner
           {...cloneProps}
@@ -46,7 +47,7 @@ export default defineComponent({
       );
 
       return (
-        <div ref={rootRef}>
+        <div ref={rootRef} inert={inert || undefined}>
           <Mask {...cloneProps} />
           {popupNode}
         </div>

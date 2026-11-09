@@ -87,6 +87,7 @@ export interface MobileConfig {
   popupMotion?: TransitionProps;
   popupClassName?: string;
   popupStyle?: CSSProperties;
+  popupInert?: boolean;
   popupRender?: (originNode: VueNode) => VueNode;
 }
 
@@ -113,6 +114,7 @@ export const triggerProps = () => ({
   popup: PropTypes.any,
   arrow: PropTypes.bool.def(true),
   popupStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  popupInert: Boolean,
   prefixCls: PropTypes.string.def('rc-trigger-popup'),
   popupClassName: PropTypes.string.def(''),
   popupPlacement: String,

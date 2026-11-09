@@ -48,6 +48,7 @@ export type MobilePopupProps = Partial<ExtractPropTypes<typeof mobileProps>> & {
 
 export const popupProps = {
   ...innerProps,
+  inert: Boolean,
   mask: Boolean,
   mobile: { type: Object as PropType<MobileConfig> },
   maskAnimation: String,

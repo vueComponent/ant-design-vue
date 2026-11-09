@@ -12,6 +12,7 @@ export default defineComponent({
   props: {
     minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
     arrow: { type: Boolean, default: false },
+    disabled: Boolean,
     prefixCls: PropTypes.string.def('rc-dropdown'),
     transitionName: String,
     overlayClassName: PropTypes.string.def(''),
@@ -104,6 +105,7 @@ export default defineComponent({
       const {
         prefixCls,
         arrow,
+        disabled,
         showAction,
         overlayStyle,
         trigger,
@@ -124,6 +126,7 @@ export default defineComponent({
             [`${prefixCls}-show-arrow`]: arrow,
           })}
           popupStyle={overlayStyle}
+          popupInert={disabled}
           builtinPlacements={placements}
           action={trigger}
           showAction={showAction}

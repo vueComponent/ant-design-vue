@@ -133,7 +133,7 @@ export default defineComponent<BodyRowProps<unknown>>({
           {flattenColumns.map((column, colIndex) => {
             const { customRender, dataIndex, className: columnClassName } = column;
 
-            const key = columnsKey[colIndex];
+            const key = columnsKey.value[colIndex];
             const fixedInfo = fixedInfoList[colIndex];
 
             let additionalCellProps;

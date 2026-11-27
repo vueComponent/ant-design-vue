@@ -211,7 +211,7 @@
     "merge2": "^1.2.1",
     "mini-css-extract-plugin": "^2.4.5",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^3.0.0",
     "mockdate": "^2.0.2",
     "moment": "^2.29.1",
     "nprogress": "^0.2.0",
